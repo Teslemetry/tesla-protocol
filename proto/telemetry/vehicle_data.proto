@@ -1,7 +1,9 @@
 // UPSTREAM-SOURCE: teslamotors/fleet-telemetry
 // UPSTREAM-PATH:   protos/vehicle_data.proto
 // UPSTREAM-COMMIT: see upstream.json
-// This file tracks upstream verbatim; no Teslemetry extensions.
+// This file tracks upstream verbatim, plus marked Teslemetry extensions
+// (TESLEMETRY-EXT); reserved numbers annotated "expected" are not-yet-
+// confirmed candidates and are not active members.
 syntax = "proto3";
 
 package telemetry.vehicle_data;
@@ -309,6 +311,7 @@ enum DetailedChargeStateValue {
     DetailedChargeStateCharging = 4;
     DetailedChargeStateComplete = 5;
     DetailedChargeStateStopped = 6;
+    DetailedChargeStateCalibrating = 7;  // TESLEMETRY-EXT (teslamotors/vehicle-command ChargeState.ChargingState.Calibrating=8, offset -1 to match this enum's established numbering)
 }
 
 // ShiftState are the gear options
@@ -607,6 +610,8 @@ enum PowershareStopReasonStatus {
   PowershareStopReasonStatusUser = 5;
   PowershareStopReasonStatusReconnecting = 6;
   PowershareStopReasonStatusAuthentication = 7;
+
+  reserved 8, 9; // expected: AdapterUpdating=8, AdapterInitializationFailed=9 - not yet confirmed by observation, do not rely on the name or value
 }
 
 enum PowershareTypeStatus {
@@ -614,6 +619,8 @@ enum PowershareTypeStatus {
   PowershareTypeStatusNone = 1;
   PowershareTypeStatusLoad = 2;
   PowershareTypeStatusHome = 3;
+
+  reserved 4; // expected: Grid=4 - not yet confirmed by observation, do not rely on the name or value
 }
 
 enum DisplayState {

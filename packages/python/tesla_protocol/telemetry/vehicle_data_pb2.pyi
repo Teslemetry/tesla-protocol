@@ -290,6 +290,7 @@ class DetailedChargeStateValue(int, metaclass=_enum_type_wrapper.EnumTypeWrapper
     DetailedChargeStateCharging: _ClassVar[DetailedChargeStateValue]
     DetailedChargeStateComplete: _ClassVar[DetailedChargeStateValue]
     DetailedChargeStateStopped: _ClassVar[DetailedChargeStateValue]
+    DetailedChargeStateCalibrating: _ClassVar[DetailedChargeStateValue]
 
 class ShiftState(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -914,6 +915,7 @@ DetailedChargeStateStarting: DetailedChargeStateValue
 DetailedChargeStateCharging: DetailedChargeStateValue
 DetailedChargeStateComplete: DetailedChargeStateValue
 DetailedChargeStateStopped: DetailedChargeStateValue
+DetailedChargeStateCalibrating: DetailedChargeStateValue
 ShiftStateUnknown: ShiftState
 ShiftStateInvalid: ShiftState
 ShiftStateP: ShiftState
