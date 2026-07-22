@@ -498,19 +498,21 @@ class EraseUserDataAction(_message.Message):
         ...
 
 class Response(_message.Message):
-    __slots__ = ('actionStatus', 'vehicleData', 'getSessionInfoResponse', 'getNearbyChargingSites', 'ping')
+    __slots__ = ('actionStatus', 'vehicleData', 'getSessionInfoResponse', 'getNearbyChargingSites', 'ping', 'getChargeOnSolarFeatureResponse')
     ACTIONSTATUS_FIELD_NUMBER: _ClassVar[int]
     VEHICLEDATA_FIELD_NUMBER: _ClassVar[int]
     GETSESSIONINFORESPONSE_FIELD_NUMBER: _ClassVar[int]
     GETNEARBYCHARGINGSITES_FIELD_NUMBER: _ClassVar[int]
     PING_FIELD_NUMBER: _ClassVar[int]
+    GETCHARGEONSOLARFEATURERESPONSE_FIELD_NUMBER: _ClassVar[int]
     actionStatus: ActionStatus
     vehicleData: _vehicle_pb2.VehicleData
     getSessionInfoResponse: _signatures_pb2.SessionInfo
     getNearbyChargingSites: NearbyChargingSites
     ping: Ping
+    getChargeOnSolarFeatureResponse: GetChargeOnSolarFeatureResponse
 
-    def __init__(self, actionStatus: _Optional[_Union[ActionStatus, _Mapping]]=..., vehicleData: _Optional[_Union[_vehicle_pb2.VehicleData, _Mapping]]=..., getSessionInfoResponse: _Optional[_Union[_signatures_pb2.SessionInfo, _Mapping]]=..., getNearbyChargingSites: _Optional[_Union[NearbyChargingSites, _Mapping]]=..., ping: _Optional[_Union[Ping, _Mapping]]=...) -> None:
+    def __init__(self, actionStatus: _Optional[_Union[ActionStatus, _Mapping]]=..., vehicleData: _Optional[_Union[_vehicle_pb2.VehicleData, _Mapping]]=..., getSessionInfoResponse: _Optional[_Union[_signatures_pb2.SessionInfo, _Mapping]]=..., getNearbyChargingSites: _Optional[_Union[NearbyChargingSites, _Mapping]]=..., ping: _Optional[_Union[Ping, _Mapping]]=..., getChargeOnSolarFeatureResponse: _Optional[_Union[GetChargeOnSolarFeatureResponse, _Mapping]]=...) -> None:
         ...
 
 class ActionStatus(_message.Message):
@@ -1636,6 +1638,14 @@ class GetChargeOnSolarFeatureRequest(_message.Message):
     __slots__ = ()
 
     def __init__(self) -> None:
+        ...
+
+class GetChargeOnSolarFeatureResponse(_message.Message):
+    __slots__ = ('charge_on_solar',)
+    CHARGE_ON_SOLAR_FIELD_NUMBER: _ClassVar[int]
+    charge_on_solar: ChargeOnSolarFeature
+
+    def __init__(self, charge_on_solar: _Optional[_Union[ChargeOnSolarFeature, _Mapping]]=...) -> None:
         ...
 
 class ChargeOnSolarFeature(_message.Message):

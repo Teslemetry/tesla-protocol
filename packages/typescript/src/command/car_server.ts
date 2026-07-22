@@ -580,7 +580,11 @@ export interface Response {
   vehicleData?: VehicleData | undefined;
   getSessionInfoResponse?: SessionInfo | undefined;
   getNearbyChargingSites?: NearbyChargingSites | undefined;
-  ping?: Ping | undefined;
+  ping?:
+    | Ping
+    | undefined;
+  /** TESLEMETRY-EXT (app-4.58.6) */
+  getChargeOnSolarFeatureResponse?: GetChargeOnSolarFeatureResponse | undefined;
 }
 
 export interface ActionStatus {
@@ -1464,6 +1468,11 @@ export interface UpdateChargeOnSolarFeatureRequest {
 }
 
 export interface GetChargeOnSolarFeatureRequest {
+}
+
+export interface GetChargeOnSolarFeatureResponse {
+  /** Field with JSON name "chargeOnSolar" */
+  chargeOnSolar: ChargeOnSolarFeature | undefined;
 }
 
 export interface ChargeOnSolarFeature {
@@ -6946,6 +6955,7 @@ function createBaseResponse(): Response {
     getSessionInfoResponse: undefined,
     getNearbyChargingSites: undefined,
     ping: undefined,
+    getChargeOnSolarFeatureResponse: undefined,
   };
 }
 
@@ -6965,6 +6975,9 @@ export const Response: MessageFns<Response> = {
     }
     if (message.ping !== undefined) {
       Ping.encode(message.ping, writer.uint32(74).fork()).join();
+    }
+    if (message.getChargeOnSolarFeatureResponse !== undefined) {
+      GetChargeOnSolarFeatureResponse.encode(message.getChargeOnSolarFeatureResponse, writer.uint32(122).fork()).join();
     }
     return writer;
   },
@@ -7016,6 +7029,14 @@ export const Response: MessageFns<Response> = {
           message.ping = Ping.decode(reader, reader.uint32());
           continue;
         }
+        case 15: {
+          if (tag !== 122) {
+            break;
+          }
+
+          message.getChargeOnSolarFeatureResponse = GetChargeOnSolarFeatureResponse.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -7036,6 +7057,9 @@ export const Response: MessageFns<Response> = {
         ? NearbyChargingSites.fromJSON(object.getNearbyChargingSites)
         : undefined,
       ping: isSet(object.ping) ? Ping.fromJSON(object.ping) : undefined,
+      getChargeOnSolarFeatureResponse: isSet(object.getChargeOnSolarFeatureResponse)
+        ? GetChargeOnSolarFeatureResponse.fromJSON(object.getChargeOnSolarFeatureResponse)
+        : undefined,
     };
   },
 
@@ -7055,6 +7079,11 @@ export const Response: MessageFns<Response> = {
     }
     if (message.ping !== undefined) {
       obj.ping = Ping.toJSON(message.ping);
+    }
+    if (message.getChargeOnSolarFeatureResponse !== undefined) {
+      obj.getChargeOnSolarFeatureResponse = GetChargeOnSolarFeatureResponse.toJSON(
+        message.getChargeOnSolarFeatureResponse,
+      );
     }
     return obj;
   },
@@ -7079,6 +7108,10 @@ export const Response: MessageFns<Response> = {
         ? NearbyChargingSites.fromPartial(object.getNearbyChargingSites)
         : undefined;
     message.ping = (object.ping !== undefined && object.ping !== null) ? Ping.fromPartial(object.ping) : undefined;
+    message.getChargeOnSolarFeatureResponse =
+      (object.getChargeOnSolarFeatureResponse !== undefined && object.getChargeOnSolarFeatureResponse !== null)
+        ? GetChargeOnSolarFeatureResponse.fromPartial(object.getChargeOnSolarFeatureResponse)
+        : undefined;
     return message;
   },
 };
@@ -15508,6 +15541,70 @@ export const GetChargeOnSolarFeatureRequest: MessageFns<GetChargeOnSolarFeatureR
   },
   fromPartial<I extends Exact<DeepPartial<GetChargeOnSolarFeatureRequest>, I>>(_: I): GetChargeOnSolarFeatureRequest {
     const message = createBaseGetChargeOnSolarFeatureRequest();
+    return message;
+  },
+};
+
+function createBaseGetChargeOnSolarFeatureResponse(): GetChargeOnSolarFeatureResponse {
+  return { chargeOnSolar: undefined };
+}
+
+export const GetChargeOnSolarFeatureResponse: MessageFns<GetChargeOnSolarFeatureResponse> = {
+  encode(message: GetChargeOnSolarFeatureResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.chargeOnSolar !== undefined) {
+      ChargeOnSolarFeature.encode(message.chargeOnSolar, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GetChargeOnSolarFeatureResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetChargeOnSolarFeatureResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.chargeOnSolar = ChargeOnSolarFeature.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetChargeOnSolarFeatureResponse {
+    return {
+      chargeOnSolar: isSet(object.chargeOnSolar) ? ChargeOnSolarFeature.fromJSON(object.chargeOnSolar) : undefined,
+    };
+  },
+
+  toJSON(message: GetChargeOnSolarFeatureResponse): unknown {
+    const obj: any = {};
+    if (message.chargeOnSolar !== undefined) {
+      obj.chargeOnSolar = ChargeOnSolarFeature.toJSON(message.chargeOnSolar);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetChargeOnSolarFeatureResponse>, I>>(base?: I): GetChargeOnSolarFeatureResponse {
+    return GetChargeOnSolarFeatureResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetChargeOnSolarFeatureResponse>, I>>(
+    object: I,
+  ): GetChargeOnSolarFeatureResponse {
+    const message = createBaseGetChargeOnSolarFeatureResponse();
+    message.chargeOnSolar = (object.chargeOnSolar !== undefined && object.chargeOnSolar !== null)
+      ? ChargeOnSolarFeature.fromPartial(object.chargeOnSolar)
+      : undefined;
     return message;
   },
 };
