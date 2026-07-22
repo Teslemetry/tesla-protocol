@@ -606,6 +606,10 @@ export interface Response {
     | PseudonymSyncResponse
     | undefined;
   /** TESLEMETRY-EXT */
+  getRateTariffResponse?:
+    | GetRateTariffResponse
+    | undefined;
+  /** TESLEMETRY-EXT */
   navigationRouteResponse?:
     | NavigationRouteResponse
     | undefined;
@@ -773,6 +777,16 @@ export interface KeysInfoResponse {
 export interface BandwidthTestResponse {
   data: Uint8Array;
   requestedSize: number;
+}
+
+/**
+ * Answers GetRateTariffRequest with the same tariff document SetRateTariffRequest
+ * writes (VehicleAction tag 55); only the parts of that document we have observed
+ * and documented are declared here.
+ */
+export interface GetRateTariffResponse {
+  seasons: SetRateTariffRequest_Seasons | undefined;
+  tariff: SetRateTariffRequest_Tariff | undefined;
 }
 
 export interface ActionStatus {
@@ -7148,6 +7162,7 @@ function createBaseResponse(): Response {
     ping: undefined,
     piiKeyResponse: undefined,
     pseudonymSyncResponse: undefined,
+    getRateTariffResponse: undefined,
     navigationRouteResponse: undefined,
     getManagedChargingSitesResponse: undefined,
     getChargeOnSolarFeatureResponse: undefined,
@@ -7190,6 +7205,9 @@ export const Response: MessageFns<Response> = {
     }
     if (message.pseudonymSyncResponse !== undefined) {
       PseudonymSyncResponse.encode(message.pseudonymSyncResponse, writer.uint32(90).fork()).join();
+    }
+    if (message.getRateTariffResponse !== undefined) {
+      GetRateTariffResponse.encode(message.getRateTariffResponse, writer.uint32(98).fork()).join();
     }
     if (message.navigationRouteResponse !== undefined) {
       NavigationRouteResponse.encode(message.navigationRouteResponse, writer.uint32(106).fork()).join();
@@ -7305,6 +7323,14 @@ export const Response: MessageFns<Response> = {
           message.pseudonymSyncResponse = PseudonymSyncResponse.decode(reader, reader.uint32());
           continue;
         }
+        case 12: {
+          if (tag !== 98) {
+            break;
+          }
+
+          message.getRateTariffResponse = GetRateTariffResponse.decode(reader, reader.uint32());
+          continue;
+        }
         case 13: {
           if (tag !== 106) {
             break;
@@ -7400,6 +7426,9 @@ export const Response: MessageFns<Response> = {
       pseudonymSyncResponse: isSet(object.pseudonymSyncResponse)
         ? PseudonymSyncResponse.fromJSON(object.pseudonymSyncResponse)
         : undefined,
+      getRateTariffResponse: isSet(object.getRateTariffResponse)
+        ? GetRateTariffResponse.fromJSON(object.getRateTariffResponse)
+        : undefined,
       navigationRouteResponse: isSet(object.navigationRouteResponse)
         ? NavigationRouteResponse.fromJSON(object.navigationRouteResponse)
         : undefined,
@@ -7458,6 +7487,9 @@ export const Response: MessageFns<Response> = {
     }
     if (message.pseudonymSyncResponse !== undefined) {
       obj.pseudonymSyncResponse = PseudonymSyncResponse.toJSON(message.pseudonymSyncResponse);
+    }
+    if (message.getRateTariffResponse !== undefined) {
+      obj.getRateTariffResponse = GetRateTariffResponse.toJSON(message.getRateTariffResponse);
     }
     if (message.navigationRouteResponse !== undefined) {
       obj.navigationRouteResponse = NavigationRouteResponse.toJSON(message.navigationRouteResponse);
@@ -7529,6 +7561,10 @@ export const Response: MessageFns<Response> = {
     message.pseudonymSyncResponse =
       (object.pseudonymSyncResponse !== undefined && object.pseudonymSyncResponse !== null)
         ? PseudonymSyncResponse.fromPartial(object.pseudonymSyncResponse)
+        : undefined;
+    message.getRateTariffResponse =
+      (object.getRateTariffResponse !== undefined && object.getRateTariffResponse !== null)
+        ? GetRateTariffResponse.fromPartial(object.getRateTariffResponse)
         : undefined;
     message.navigationRouteResponse =
       (object.navigationRouteResponse !== undefined && object.navigationRouteResponse !== null)
@@ -8904,6 +8940,86 @@ export const BandwidthTestResponse: MessageFns<BandwidthTestResponse> = {
     const message = createBaseBandwidthTestResponse();
     message.data = object.data ?? new Uint8Array(0);
     message.requestedSize = object.requestedSize ?? 0;
+    return message;
+  },
+};
+
+function createBaseGetRateTariffResponse(): GetRateTariffResponse {
+  return { seasons: undefined, tariff: undefined };
+}
+
+export const GetRateTariffResponse: MessageFns<GetRateTariffResponse> = {
+  encode(message: GetRateTariffResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.seasons !== undefined) {
+      SetRateTariffRequest_Seasons.encode(message.seasons, writer.uint32(106).fork()).join();
+    }
+    if (message.tariff !== undefined) {
+      SetRateTariffRequest_Tariff.encode(message.tariff, writer.uint32(114).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GetRateTariffResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetRateTariffResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 13: {
+          if (tag !== 106) {
+            break;
+          }
+
+          message.seasons = SetRateTariffRequest_Seasons.decode(reader, reader.uint32());
+          continue;
+        }
+        case 14: {
+          if (tag !== 114) {
+            break;
+          }
+
+          message.tariff = SetRateTariffRequest_Tariff.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetRateTariffResponse {
+    return {
+      seasons: isSet(object.seasons) ? SetRateTariffRequest_Seasons.fromJSON(object.seasons) : undefined,
+      tariff: isSet(object.tariff) ? SetRateTariffRequest_Tariff.fromJSON(object.tariff) : undefined,
+    };
+  },
+
+  toJSON(message: GetRateTariffResponse): unknown {
+    const obj: any = {};
+    if (message.seasons !== undefined) {
+      obj.seasons = SetRateTariffRequest_Seasons.toJSON(message.seasons);
+    }
+    if (message.tariff !== undefined) {
+      obj.tariff = SetRateTariffRequest_Tariff.toJSON(message.tariff);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetRateTariffResponse>, I>>(base?: I): GetRateTariffResponse {
+    return GetRateTariffResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetRateTariffResponse>, I>>(object: I): GetRateTariffResponse {
+    const message = createBaseGetRateTariffResponse();
+    message.seasons = (object.seasons !== undefined && object.seasons !== null)
+      ? SetRateTariffRequest_Seasons.fromPartial(object.seasons)
+      : undefined;
+    message.tariff = (object.tariff !== undefined && object.tariff !== null)
+      ? SetRateTariffRequest_Tariff.fromPartial(object.tariff)
+      : undefined;
     return message;
   },
 };
