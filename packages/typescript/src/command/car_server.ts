@@ -583,7 +583,7 @@ export interface Response {
   ping?:
     | Ping
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getChargeOnSolarFeatureResponse?: GetChargeOnSolarFeatureResponse | undefined;
 }
 

@@ -256,7 +256,7 @@ message Response {
     Signatures.SessionInfo getSessionInfoResponse = 3;
     NearbyChargingSites getNearbyChargingSites = 5;
     Ping ping = 9;
-    GetChargeOnSolarFeatureResponse getChargeOnSolarFeatureResponse = 15;  // TESLEMETRY-EXT (app-4.58.6)
+    GetChargeOnSolarFeatureResponse getChargeOnSolarFeatureResponse = 15;  // TESLEMETRY-EXT
   }
 }
 
