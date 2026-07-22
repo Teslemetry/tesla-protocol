@@ -1,6 +1,6 @@
 import datetime
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
-import authorization_types_pb2 as _authorization_types_pb2
+from . import authorization_types_pb2 as _authorization_types_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message

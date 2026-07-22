@@ -49,6 +49,12 @@ for group in $GROUPS_LIST; do
     --exclude-imports-glob 'google/rpc/*' \
     protoc --protoc-path="$PROTOC" \
     --proto-path="proto/$group" proto/"$group"/*.proto
+
+  # protol's rewriter matches whole import statements including the alias,
+  # and protoc's pyi generator aliases same-package imports differently than
+  # its .py generator, so protol leaves those .pyi imports bare. Patch them
+  # up separately so the checked-in stubs are import-resolvable too.
+  "$VENV/bin/python" scripts/fix_pyi_imports.py "$PY_PKG/$group"
 done
 
 echo "generate: OK"

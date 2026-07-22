@@ -1,10 +1,10 @@
 import datetime
-import common_pb2 as _common_pb2
+from . import common_pb2 as _common_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
-import keys_pb2 as _keys_pb2
-import signatures_pb2 as _signatures_pb2
-import vcsec_pb2 as _vcsec_pb2
-import vehicle_pb2 as _vehicle_pb2
+from . import keys_pb2 as _keys_pb2
+from . import signatures_pb2 as _signatures_pb2
+from . import vcsec_pb2 as _vcsec_pb2
+from . import vehicle_pb2 as _vehicle_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor

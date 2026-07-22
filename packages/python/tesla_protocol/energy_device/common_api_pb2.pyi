@@ -1,7 +1,7 @@
-import networking_pb2 as _networking_pb2
-import device_pb2 as _device_pb2
-import update_pb2 as _update_pb2
-import error_pb2 as _error_pb2
+from . import networking_pb2 as _networking_pb2
+from . import device_pb2 as _device_pb2
+from . import update_pb2 as _update_pb2
+from . import error_pb2 as _error_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message

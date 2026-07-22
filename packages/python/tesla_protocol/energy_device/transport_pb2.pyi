@@ -1,7 +1,7 @@
-import authorization_types_pb2 as _authorization_types_pb2
-import authorization_api_pb2 as _authorization_api_pb2
-import common_api_pb2 as _common_api_pb2
-import teg_api_pb2 as _teg_api_pb2
+from . import authorization_types_pb2 as _authorization_types_pb2
+from . import authorization_api_pb2 as _authorization_api_pb2
+from . import common_api_pb2 as _common_api_pb2
+from . import teg_api_pb2 as _teg_api_pb2
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
