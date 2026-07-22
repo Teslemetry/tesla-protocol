@@ -49,6 +49,11 @@ for group in $GROUPS_LIST; do
     --exclude-imports-glob 'google/rpc/*' \
     protoc --protoc-path="$PROTOC" \
     --proto-path="proto/$group" proto/"$group"/*.proto
+  # protoletariat only recognizes protoc's "import x_pb2 as x__pb2" alias
+  # convention; the pyi-stub generator emits "import x_pb2 as _x_pb2"
+  # instead, so protoletariat silently skips rewriting .pyi cross-file
+  # imports to relative form. Cover that convention here.
+  "$VENV/bin/python" scripts/fix_pyi_relative_imports.py "$PY_PKG/$group"
 done
 
 echo "generate: OK"
