@@ -20,7 +20,7 @@
     "lint": "buf lint",
     "changeset": "changeset",
     "version": "changeset version && node scripts/sync-python-version.mjs",
-    "ci:publish": "changeset publish --provenance"
+    "ci:publish": "changeset publish"
   },
   "packageManager": "pnpm@10.30.3",
   "devDependencies": {
