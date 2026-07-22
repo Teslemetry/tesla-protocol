@@ -1,0 +1,122 @@
+// TESLEMETRY SOURCE-OF-RECORD - no upstream.
+// Provenance: Tesla Energy gateway (TEG) local API, from our own
+// observations and contributions from the community
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "Networking";
+
+import "google/protobuf/wrappers.proto";
+
+enum WifiNetworkSecurityType {
+  WIFI_NETWORK_SECURITY_TYPE_INVALID         = 0;
+  WIFI_NETWORK_SECURITY_TYPE_NONE            = 1;
+  WIFI_NETWORK_SECURITY_TYPE_DYNAMIC_WEP     = 2;
+  WIFI_NETWORK_SECURITY_TYPE_WPA2_PERSONAL   = 3;
+  WIFI_NETWORK_SECURITY_TYPE_WPA2_ENTERPRISE = 4;
+}
+
+enum WifiConfigureResult {
+  WIFI_CONFIGURE_RESULT_INVALID                    = 0;
+  WIFI_CONFIGURE_RESULT_SUCCESS                    = 1;
+  WIFI_CONFIGURE_RESULT_FAILURE_GENERIC            = 2;
+  WIFI_CONFIGURE_RESULT_FAILED_WITH_INVALID_CONFIG = 3;
+  WIFI_CONFIGURE_RESULT_FAILED_TO_CONNECT          = 4;
+}
+
+enum CellularProfileType {
+  CELLULAR_PROFILE_TYPE_INVALID    = 0;
+  CELLULAR_PROFILE_TYPE_TWILIO     = 1;
+  CELLULAR_PROFILE_TYPE_ATT        = 2;
+  CELLULAR_PROFILE_TYPE_KPN        = 3;
+  CELLULAR_PROFILE_TYPE_TELEFONICA = 4;
+  CELLULAR_PROFILE_TYPE_TELSTRA    = 5;
+  CELLULAR_PROFILE_TYPE_TELUS      = 6;
+  CELLULAR_PROFILE_TYPE_DOCOMO     = 7;
+  CELLULAR_PROFILE_TYPE_UNICOM     = 8;
+}
+
+message Rssi {
+  sint32 value                                        = 1;
+  google.protobuf.UInt32Value signal_strength_percent = 2;
+}
+
+message WifiPassword {
+  string value = 1;
+}
+
+message WifiConfig {
+  string ssid                           = 1;
+  WifiPassword password                 = 2;
+  WifiNetworkSecurityType security_type = 3;
+}
+
+message WifiNetwork {
+  string ssid                          = 1;
+  sint32 rssiValue                     = 2;
+  Rssi rssi                            = 3;
+  WifiNetworkSecurityType securityType = 4;
+}
+
+message NetworkInterfaceIPv4Config {
+  reserved 1;
+  bool dhcp_enabled    = 2;
+  fixed32 address      = 3;
+  fixed32 subnet_mask  = 4;
+  fixed32 gateway      = 5;
+  repeated fixed32 dns = 6;
+}
+
+message NetworkConnectivityStatus {
+  bool connected_physical        = 1;
+  bool connected_internet        = 2;
+  bool connected_tesla           = 3;
+  Rssi rssi                      = 4;
+  google.protobuf.Int32Value snr = 5;
+}
+
+message NetworkInterface {
+  bytes mac_address                             = 1;
+  bool enabled                                  = 2;
+  bool active_route                             = 3;
+  NetworkInterfaceIPv4Config ipv4_config        = 4;
+  NetworkConnectivityStatus connectivity_status = 5;
+}
+
+message CellularEID {
+  string value = 1;
+}
+
+enum NetworkDeviceState {
+  NETWORK_DEVICE_STATE_INVALID       = 0;
+  NETWORK_DEVICE_STATE_UNMANAGED     = 1;
+  NETWORK_DEVICE_STATE_UNAVAILABLE   = 2;
+  NETWORK_DEVICE_STATE_IDLE          = 3;
+  NETWORK_DEVICE_STATE_ASSOCIATION   = 4;
+  NETWORK_DEVICE_STATE_CONFIGURATION = 5;
+  NETWORK_DEVICE_STATE_READY         = 6;
+  NETWORK_DEVICE_STATE_DISCONNECT    = 7;
+  NETWORK_DEVICE_STATE_FAILURE       = 8;
+}
+
+enum NetworkDeviceStateReason {
+  NETWORK_DEVICE_STATE_REASON_INVALID                = 0;
+  NETWORK_DEVICE_STATE_REASON_NONE                   = 1;
+  NETWORK_DEVICE_STATE_REASON_CONFIG_FAILED          = 2;
+  NETWORK_DEVICE_STATE_REASON_DHCP_FAILED            = 3;
+  NETWORK_DEVICE_STATE_REASON_IP_ADDRESS_DUPLICATE   = 4;
+  NETWORK_DEVICE_STATE_REASON_IP_CONFIG_EXPIRED      = 5;
+  NETWORK_DEVICE_STATE_REASON_IP_CONFIG_UNAVAILABLE  = 6;
+  NETWORK_DEVICE_STATE_REASON_IP_METHOD_UNSUPPORTED  = 7;
+  NETWORK_DEVICE_STATE_REASON_NEW_ACTIVATION         = 8;
+  NETWORK_DEVICE_STATE_REASON_NO_SECRETS             = 9;
+  NETWORK_DEVICE_STATE_REASON_PPP_FAILED             = 10;
+  NETWORK_DEVICE_STATE_REASON_SSID_NOT_FOUND         = 11;
+  NETWORK_DEVICE_STATE_REASON_SIM_PIN_INCORRECT      = 12;
+  NETWORK_DEVICE_STATE_REASON_SUPPLICANT_FAILED      = 13;
+  NETWORK_DEVICE_STATE_REASON_REMOVED                = 14;
+  NETWORK_DEVICE_STATE_REASON_MODEM_FAILED           = 15;
+}

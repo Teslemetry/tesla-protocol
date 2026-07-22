@@ -1,0 +1,8 @@
+node_modules/
+.venv/
+dist/
+*.egg-info/
+__pycache__/
+packages/python/build/
+*.tsbuildinfo
+.upstream-cache/

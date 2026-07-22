@@ -1,0 +1,13 @@
+// TESLEMETRY SOURCE-OF-RECORD - no upstream.
+// Provenance: Teslemetry session persistence (session store for signed command state)
+syntax = "proto3";
+import "google/protobuf/timestamp.proto";
+
+package Session;
+
+message SessionStore {
+    bytes   public_key  = 1;
+    bytes   epoch       = 2;
+    uint32  delta       = 3;
+    optional google.protobuf.Timestamp lock = 4;
+}

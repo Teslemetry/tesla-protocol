@@ -1,0 +1,18 @@
+// TESLEMETRY SOURCE-OF-RECORD - no upstream.
+// Provenance: Tesla Energy gateway (TEG) local API, from our own
+// observations and contributions from the community
+syntax = "proto3";
+
+package tesla.proto.energy.command.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energy/command/v1";
+option java_package = "com.tesla.generated.energy.command.v1";
+option java_outer_classname = "IdentifierType";
+
+enum IdentifierType {
+  IDENTIFIER_TYPE_INVALID             = 0;
+  IDENTIFIER_TYPE_GATEWAY_DIN         = 1;
+  IDENTIFIER_TYPE_SITE_UUID           = 2;
+  IDENTIFIER_TYPE_SOLAR_INVERTER_DIN  = 3;
+  IDENTIFIER_TYPE_WALL_CONNECTOR_DIN  = 4;
+}

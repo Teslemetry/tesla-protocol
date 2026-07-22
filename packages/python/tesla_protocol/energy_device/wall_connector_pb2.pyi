@@ -1,0 +1,229 @@
+from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
+from google.protobuf import descriptor as _descriptor
+from google.protobuf import message as _message
+from typing import ClassVar as _ClassVar
+DESCRIPTOR: _descriptor.FileDescriptor
+
+class WCChargeScheduleChargingStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WC_CHARGE_SCHEDULE_CHARGING_STATUS_INVALID: _ClassVar[WCChargeScheduleChargingStatus]
+    WC_CHARGE_SCHEDULE_CHARGING_STATUS_UNCONFIGURED_DISABLED: _ClassVar[WCChargeScheduleChargingStatus]
+    WC_CHARGE_SCHEDULE_CHARGING_STATUS_CHARGE_BLOCKED: _ClassVar[WCChargeScheduleChargingStatus]
+    WC_CHARGE_SCHEDULE_CHARGING_STATUS_DELAYED_CHARGE_BLOCKED: _ClassVar[WCChargeScheduleChargingStatus]
+    WC_CHARGE_SCHEDULE_CHARGING_STATUS_CHARGE_ALLOWED: _ClassVar[WCChargeScheduleChargingStatus]
+    WC_CHARGE_SCHEDULE_CHARGING_STATUS_DELAYED_CHARGE_ALLOWED: _ClassVar[WCChargeScheduleChargingStatus]
+    WC_CHARGE_SCHEDULE_CHARGING_STATUS_VEHICLE_OVERRIDDEN: _ClassVar[WCChargeScheduleChargingStatus]
+
+class WCChargeScheduleConfigError(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WC_CHARGE_SCHEDULE_CONFIG_ERROR_INVALID: _ClassVar[WCChargeScheduleConfigError]
+    WC_CHARGE_SCHEDULE_CONFIG_ERROR_NONE: _ClassVar[WCChargeScheduleConfigError]
+    WC_CHARGE_SCHEDULE_CONFIG_ERROR_NO_SITE_WIFI: _ClassVar[WCChargeScheduleConfigError]
+    WC_CHARGE_SCHEDULE_CONFIG_ERROR_NO_INTERNET: _ClassVar[WCChargeScheduleConfigError]
+    WC_CHARGE_SCHEDULE_CONFIG_ERROR_INVALID_PARAMETERS: _ClassVar[WCChargeScheduleConfigError]
+    WC_CHARGE_SCHEDULE_CONFIG_ERROR_INTERNAL_ERROR: _ClassVar[WCChargeScheduleConfigError]
+
+class WCChargeScheduleDay(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WC_CHARGE_SCHEDULE_DAY_INVALID: _ClassVar[WCChargeScheduleDay]
+    WC_CHARGE_SCHEDULE_DAY_SUNDAY: _ClassVar[WCChargeScheduleDay]
+    WC_CHARGE_SCHEDULE_DAY_MONDAY: _ClassVar[WCChargeScheduleDay]
+    WC_CHARGE_SCHEDULE_DAY_TUESDAY: _ClassVar[WCChargeScheduleDay]
+    WC_CHARGE_SCHEDULE_DAY_WEDNESDAY: _ClassVar[WCChargeScheduleDay]
+    WC_CHARGE_SCHEDULE_DAY_THURSDAY: _ClassVar[WCChargeScheduleDay]
+    WC_CHARGE_SCHEDULE_DAY_FRIDAY: _ClassVar[WCChargeScheduleDay]
+    WC_CHARGE_SCHEDULE_DAY_SATURDAY: _ClassVar[WCChargeScheduleDay]
+
+class WCChargeScheduleError(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WC_CHARGE_SCHEDULE_ERROR_INVALID: _ClassVar[WCChargeScheduleError]
+    WC_CHARGE_SCHEDULE_ERROR_NONE: _ClassVar[WCChargeScheduleError]
+    WC_CHARGE_SCHEDULE_ERROR_NO_INTERNET: _ClassVar[WCChargeScheduleError]
+    WC_CHARGE_SCHEDULE_ERROR_NON_VOLATILE_DATA_READ_WRITE_FAIL: _ClassVar[WCChargeScheduleError]
+    WC_CHARGE_SCHEDULE_ERROR_INTERNAL: _ClassVar[WCChargeScheduleError]
+
+class WCConfigureAccessControlOperation(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WC_CONFIGURE_ACCESS_CONTROL_OPERATION_INVALID: _ClassVar[WCConfigureAccessControlOperation]
+    WC_CONFIGURE_ACCESS_CONTROL_OPERATION_ADD: _ClassVar[WCConfigureAccessControlOperation]
+    WC_CONFIGURE_ACCESS_CONTROL_OPERATION_REMOVE: _ClassVar[WCConfigureAccessControlOperation]
+    WC_CONFIGURE_ACCESS_CONTROL_OPERATION_CLEAR_ALL: _ClassVar[WCConfigureAccessControlOperation]
+    WC_CONFIGURE_ACCESS_CONTROL_OPERATION_RENAME: _ClassVar[WCConfigureAccessControlOperation]
+
+class WCFaultStatusState(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WC_FAULT_STATUS_STATE_INVALID: _ClassVar[WCFaultStatusState]
+    WC_FAULT_STATUS_STATE_STARTUP: _ClassVar[WCFaultStatusState]
+    WC_FAULT_STATUS_STATE_READY: _ClassVar[WCFaultStatusState]
+    WC_FAULT_STATUS_STATE_CRITICAL_FAULT: _ClassVar[WCFaultStatusState]
+    WC_FAULT_STATUS_STATE_NON_CRITICAL_FAULT: _ClassVar[WCFaultStatusState]
+    WC_FAULT_STATUS_STATE_RETRY_PENDING: _ClassVar[WCFaultStatusState]
+    WC_FAULT_STATUS_STATE_LOCKOUT: _ClassVar[WCFaultStatusState]
+    WC_FAULT_STATUS_STATE_FOLDBACK: _ClassVar[WCFaultStatusState]
+    WC_FAULT_STATUS_STATE_CHARGING: _ClassVar[WCFaultStatusState]
+    WC_FAULT_STATUS_STATE_CONFIGURATION_REQUIRED: _ClassVar[WCFaultStatusState]
+
+class WCGroundMonitorMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WC_GROUND_MONITOR_MODE_INVALID: _ClassVar[WCGroundMonitorMode]
+    WC_GROUND_MONITOR_MODE_DISABLED: _ClassVar[WCGroundMonitorMode]
+    WC_GROUND_MONITOR_MODE_INFORMATIONAL: _ClassVar[WCGroundMonitorMode]
+    WC_GROUND_MONITOR_MODE_ENABLED: _ClassVar[WCGroundMonitorMode]
+
+class WCLoadSharingNetworkChargingInhibitor(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WC_LOAD_SHARING_NETWORK_CHARGING_INHIBITOR_INVALID: _ClassVar[WCLoadSharingNetworkChargingInhibitor]
+    WC_LOAD_SHARING_NETWORK_CHARGING_INHIBITOR_INSUFFICIENT_CURRENT: _ClassVar[WCLoadSharingNetworkChargingInhibitor]
+    WC_LOAD_SHARING_NETWORK_CHARGING_INHIBITOR_INSUFFICIENT_DEVICES: _ClassVar[WCLoadSharingNetworkChargingInhibitor]
+    WC_LOAD_SHARING_NETWORK_CHARGING_INHIBITOR_DEVICES_MIA: _ClassVar[WCLoadSharingNetworkChargingInhibitor]
+
+class WCPpuSessionReportingMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WC_PPU_SESSION_REPORTING_MODE_INVALID: _ClassVar[WCPpuSessionReportingMode]
+    WC_PPU_SESSION_REPORTING_MODE_NONE: _ClassVar[WCPpuSessionReportingMode]
+    WC_PPU_SESSION_REPORTING_MODE_ALL_INFO: _ClassVar[WCPpuSessionReportingMode]
+
+class WCTeslaVehicleDriveType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WC_TESLA_VEHICLE_DRIVE_TYPE_INVALID: _ClassVar[WCTeslaVehicleDriveType]
+    WC_TESLA_VEHICLE_DRIVE_TYPE_SINGLE_MOTOR_STANDARD: _ClassVar[WCTeslaVehicleDriveType]
+    WC_TESLA_VEHICLE_DRIVE_TYPE_SINGLE_MOTOR_PERFORMANCE: _ClassVar[WCTeslaVehicleDriveType]
+    WC_TESLA_VEHICLE_DRIVE_TYPE_DUAL_MOTOR_STANDARD: _ClassVar[WCTeslaVehicleDriveType]
+    WC_TESLA_VEHICLE_DRIVE_TYPE_DUAL_MOTOR_PERFORMANCE: _ClassVar[WCTeslaVehicleDriveType]
+
+class WCTeslaVehicleModel(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WC_TESLA_VEHICLE_MODEL_INVALID: _ClassVar[WCTeslaVehicleModel]
+    WC_TESLA_VEHICLE_MODEL_S: _ClassVar[WCTeslaVehicleModel]
+    WC_TESLA_VEHICLE_MODEL_X: _ClassVar[WCTeslaVehicleModel]
+    WC_TESLA_VEHICLE_MODEL_3: _ClassVar[WCTeslaVehicleModel]
+    WC_TESLA_VEHICLE_MODEL_Y: _ClassVar[WCTeslaVehicleModel]
+
+class WCThirdPartyVehicleMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WC_THIRD_PARTY_VEHICLE_MODE_INVALID: _ClassVar[WCThirdPartyVehicleMode]
+    WC_THIRD_PARTY_VEHICLE_MODE_ENABLED: _ClassVar[WCThirdPartyVehicleMode]
+    WC_THIRD_PARTY_VEHICLE_MODE_DISABLED: _ClassVar[WCThirdPartyVehicleMode]
+    WC_THIRD_PARTY_VEHICLE_MODE_DISABLED_NO_ROADSTER: _ClassVar[WCThirdPartyVehicleMode]
+    WC_THIRD_PARTY_VEHICLE_MODE_VIN_ALLOW_LIST: _ClassVar[WCThirdPartyVehicleMode]
+
+class WCEvseNotReadyReason(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WC_EVSE_NOT_READY_REASON_INVALID: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_COLD_LOAD_PICKUP: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_HANDLE_BUTTON: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_SESSION_AUTH: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_FAULT_NO_CHARGE: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_FAULT_STARTUP: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_GMI_NO_CHARGE: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_PILOT_NOT_CONN: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_CONFIG_NOT_RECV: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_LOAD_SHARE_NO_CHARGE: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_OCPP_NO_CHARGE: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_ACCESS_CONTROL_LIST: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_PAY_PER_USE: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_THIRD_PARTY_VEHICLE: _ClassVar[WCEvseNotReadyReason]
+
+class WCOcppStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WC_OCPP_STATUS_INVALID: _ClassVar[WCOcppStatus]
+    WC_OCPP_STATUS_UNCONFIGURED: _ClassVar[WCOcppStatus]
+    WC_OCPP_STATUS_INCOMPLETE_CONFIGURATION: _ClassVar[WCOcppStatus]
+    WC_OCPP_STATUS_CONFIGURED_DISABLED: _ClassVar[WCOcppStatus]
+    WC_OCPP_STATUS_CONFIGURED_ENABLED: _ClassVar[WCOcppStatus]
+    WC_OCPP_STATUS_CONFIGURED_ENABLED_CONNECTED: _ClassVar[WCOcppStatus]
+    WC_OCPP_STATUS_CONFIGURED_ENABLED_INVALID_CONFIGURATION: _ClassVar[WCOcppStatus]
+WC_CHARGE_SCHEDULE_CHARGING_STATUS_INVALID: WCChargeScheduleChargingStatus
+WC_CHARGE_SCHEDULE_CHARGING_STATUS_UNCONFIGURED_DISABLED: WCChargeScheduleChargingStatus
+WC_CHARGE_SCHEDULE_CHARGING_STATUS_CHARGE_BLOCKED: WCChargeScheduleChargingStatus
+WC_CHARGE_SCHEDULE_CHARGING_STATUS_DELAYED_CHARGE_BLOCKED: WCChargeScheduleChargingStatus
+WC_CHARGE_SCHEDULE_CHARGING_STATUS_CHARGE_ALLOWED: WCChargeScheduleChargingStatus
+WC_CHARGE_SCHEDULE_CHARGING_STATUS_DELAYED_CHARGE_ALLOWED: WCChargeScheduleChargingStatus
+WC_CHARGE_SCHEDULE_CHARGING_STATUS_VEHICLE_OVERRIDDEN: WCChargeScheduleChargingStatus
+WC_CHARGE_SCHEDULE_CONFIG_ERROR_INVALID: WCChargeScheduleConfigError
+WC_CHARGE_SCHEDULE_CONFIG_ERROR_NONE: WCChargeScheduleConfigError
+WC_CHARGE_SCHEDULE_CONFIG_ERROR_NO_SITE_WIFI: WCChargeScheduleConfigError
+WC_CHARGE_SCHEDULE_CONFIG_ERROR_NO_INTERNET: WCChargeScheduleConfigError
+WC_CHARGE_SCHEDULE_CONFIG_ERROR_INVALID_PARAMETERS: WCChargeScheduleConfigError
+WC_CHARGE_SCHEDULE_CONFIG_ERROR_INTERNAL_ERROR: WCChargeScheduleConfigError
+WC_CHARGE_SCHEDULE_DAY_INVALID: WCChargeScheduleDay
+WC_CHARGE_SCHEDULE_DAY_SUNDAY: WCChargeScheduleDay
+WC_CHARGE_SCHEDULE_DAY_MONDAY: WCChargeScheduleDay
+WC_CHARGE_SCHEDULE_DAY_TUESDAY: WCChargeScheduleDay
+WC_CHARGE_SCHEDULE_DAY_WEDNESDAY: WCChargeScheduleDay
+WC_CHARGE_SCHEDULE_DAY_THURSDAY: WCChargeScheduleDay
+WC_CHARGE_SCHEDULE_DAY_FRIDAY: WCChargeScheduleDay
+WC_CHARGE_SCHEDULE_DAY_SATURDAY: WCChargeScheduleDay
+WC_CHARGE_SCHEDULE_ERROR_INVALID: WCChargeScheduleError
+WC_CHARGE_SCHEDULE_ERROR_NONE: WCChargeScheduleError
+WC_CHARGE_SCHEDULE_ERROR_NO_INTERNET: WCChargeScheduleError
+WC_CHARGE_SCHEDULE_ERROR_NON_VOLATILE_DATA_READ_WRITE_FAIL: WCChargeScheduleError
+WC_CHARGE_SCHEDULE_ERROR_INTERNAL: WCChargeScheduleError
+WC_CONFIGURE_ACCESS_CONTROL_OPERATION_INVALID: WCConfigureAccessControlOperation
+WC_CONFIGURE_ACCESS_CONTROL_OPERATION_ADD: WCConfigureAccessControlOperation
+WC_CONFIGURE_ACCESS_CONTROL_OPERATION_REMOVE: WCConfigureAccessControlOperation
+WC_CONFIGURE_ACCESS_CONTROL_OPERATION_CLEAR_ALL: WCConfigureAccessControlOperation
+WC_CONFIGURE_ACCESS_CONTROL_OPERATION_RENAME: WCConfigureAccessControlOperation
+WC_FAULT_STATUS_STATE_INVALID: WCFaultStatusState
+WC_FAULT_STATUS_STATE_STARTUP: WCFaultStatusState
+WC_FAULT_STATUS_STATE_READY: WCFaultStatusState
+WC_FAULT_STATUS_STATE_CRITICAL_FAULT: WCFaultStatusState
+WC_FAULT_STATUS_STATE_NON_CRITICAL_FAULT: WCFaultStatusState
+WC_FAULT_STATUS_STATE_RETRY_PENDING: WCFaultStatusState
+WC_FAULT_STATUS_STATE_LOCKOUT: WCFaultStatusState
+WC_FAULT_STATUS_STATE_FOLDBACK: WCFaultStatusState
+WC_FAULT_STATUS_STATE_CHARGING: WCFaultStatusState
+WC_FAULT_STATUS_STATE_CONFIGURATION_REQUIRED: WCFaultStatusState
+WC_GROUND_MONITOR_MODE_INVALID: WCGroundMonitorMode
+WC_GROUND_MONITOR_MODE_DISABLED: WCGroundMonitorMode
+WC_GROUND_MONITOR_MODE_INFORMATIONAL: WCGroundMonitorMode
+WC_GROUND_MONITOR_MODE_ENABLED: WCGroundMonitorMode
+WC_LOAD_SHARING_NETWORK_CHARGING_INHIBITOR_INVALID: WCLoadSharingNetworkChargingInhibitor
+WC_LOAD_SHARING_NETWORK_CHARGING_INHIBITOR_INSUFFICIENT_CURRENT: WCLoadSharingNetworkChargingInhibitor
+WC_LOAD_SHARING_NETWORK_CHARGING_INHIBITOR_INSUFFICIENT_DEVICES: WCLoadSharingNetworkChargingInhibitor
+WC_LOAD_SHARING_NETWORK_CHARGING_INHIBITOR_DEVICES_MIA: WCLoadSharingNetworkChargingInhibitor
+WC_PPU_SESSION_REPORTING_MODE_INVALID: WCPpuSessionReportingMode
+WC_PPU_SESSION_REPORTING_MODE_NONE: WCPpuSessionReportingMode
+WC_PPU_SESSION_REPORTING_MODE_ALL_INFO: WCPpuSessionReportingMode
+WC_TESLA_VEHICLE_DRIVE_TYPE_INVALID: WCTeslaVehicleDriveType
+WC_TESLA_VEHICLE_DRIVE_TYPE_SINGLE_MOTOR_STANDARD: WCTeslaVehicleDriveType
+WC_TESLA_VEHICLE_DRIVE_TYPE_SINGLE_MOTOR_PERFORMANCE: WCTeslaVehicleDriveType
+WC_TESLA_VEHICLE_DRIVE_TYPE_DUAL_MOTOR_STANDARD: WCTeslaVehicleDriveType
+WC_TESLA_VEHICLE_DRIVE_TYPE_DUAL_MOTOR_PERFORMANCE: WCTeslaVehicleDriveType
+WC_TESLA_VEHICLE_MODEL_INVALID: WCTeslaVehicleModel
+WC_TESLA_VEHICLE_MODEL_S: WCTeslaVehicleModel
+WC_TESLA_VEHICLE_MODEL_X: WCTeslaVehicleModel
+WC_TESLA_VEHICLE_MODEL_3: WCTeslaVehicleModel
+WC_TESLA_VEHICLE_MODEL_Y: WCTeslaVehicleModel
+WC_THIRD_PARTY_VEHICLE_MODE_INVALID: WCThirdPartyVehicleMode
+WC_THIRD_PARTY_VEHICLE_MODE_ENABLED: WCThirdPartyVehicleMode
+WC_THIRD_PARTY_VEHICLE_MODE_DISABLED: WCThirdPartyVehicleMode
+WC_THIRD_PARTY_VEHICLE_MODE_DISABLED_NO_ROADSTER: WCThirdPartyVehicleMode
+WC_THIRD_PARTY_VEHICLE_MODE_VIN_ALLOW_LIST: WCThirdPartyVehicleMode
+WC_EVSE_NOT_READY_REASON_INVALID: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_COLD_LOAD_PICKUP: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_HANDLE_BUTTON: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_SESSION_AUTH: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_FAULT_NO_CHARGE: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_FAULT_STARTUP: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_GMI_NO_CHARGE: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_PILOT_NOT_CONN: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_CONFIG_NOT_RECV: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_LOAD_SHARE_NO_CHARGE: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_OCPP_NO_CHARGE: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_ACCESS_CONTROL_LIST: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_PAY_PER_USE: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_THIRD_PARTY_VEHICLE: WCEvseNotReadyReason
+WC_OCPP_STATUS_INVALID: WCOcppStatus
+WC_OCPP_STATUS_UNCONFIGURED: WCOcppStatus
+WC_OCPP_STATUS_INCOMPLETE_CONFIGURATION: WCOcppStatus
+WC_OCPP_STATUS_CONFIGURED_DISABLED: WCOcppStatus
+WC_OCPP_STATUS_CONFIGURED_ENABLED: WCOcppStatus
+WC_OCPP_STATUS_CONFIGURED_ENABLED_CONNECTED: WCOcppStatus
+WC_OCPP_STATUS_CONFIGURED_ENABLED_INVALID_CONFIGURATION: WCOcppStatus
+
+class WCMessages(_message.Message):
+    __slots__ = ()
+
+    def __init__(self) -> None:
+        ...

@@ -1,0 +1,59 @@
+// TESLEMETRY SOURCE-OF-RECORD - no upstream.
+// Provenance: Tesla Energy gateway (TEG) local API, from our own
+// observations and contributions from the community
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "Energy";
+
+import "google/protobuf/wrappers.proto";
+
+enum EnergyAccumulationType {
+  ENERGY_ACCUMULATION_TYPE_INVALID  = 0;
+  ENERGY_ACCUMULATION_TYPE_LIFETIME = 1;
+  ENERGY_ACCUMULATION_TYPE_TODAY    = 2;
+  ENERGY_ACCUMULATION_TYPE_SESSION  = 3;
+}
+
+enum GridState {
+  GRID_STATE_INVALID     = 0;
+  GRID_STATE_UNCOMPLIANT = 1;
+  GRID_STATE_QUALIFYING  = 2;
+  GRID_STATE_COMPLIANT   = 3;
+}
+
+message AccumulatedEnergy {
+  float energy_wh                          = 1; // Energy Wh.
+  EnergyAccumulationType accumulation_type = 2;
+  google.protobuf.UInt64Value period_s     = 3;
+}
+
+message GridComplianceStatus {
+  GridState grid_state                                    = 1;
+  google.protobuf.FloatValue qualifiying_time_remaining_s = 2;
+}
+
+message InstACMeasurement {
+  float voltage_vrms                            = 1; // Voltage (Vrms)
+  float frequency_hz                            = 2; // Frequency (Hz)
+  google.protobuf.FloatValue current_arms       = 3; // Current (Arms)
+  google.protobuf.FloatValue real_power_w       = 4; // Real power (W)
+  google.protobuf.FloatValue reactive_power_var = 5; // Reactive Power (Var)
+  google.protobuf.FloatValue apparent_power_va  = 6; // Apparent Power (Va)
+}
+
+message InstDCMeasurement {
+  float voltage_v                      = 1; // Voltage (V)
+  google.protobuf.FloatValue current_a = 2; // Current (A)
+}
+
+message AlertLog {
+  optional uint64 data = 1;
+}
+
+message AlertMatrix {
+  optional uint64 data = 1;
+}

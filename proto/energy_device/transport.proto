@@ -1,0 +1,83 @@
+// TESLEMETRY SOURCE-OF-RECORD - no upstream.
+// Provenance: Tesla Energy gateway (TEG) local API, from our own
+// observations and contributions from the community
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "Transport";
+
+import "authorization_types.proto";
+import "authorization_api.proto";
+import "common_api.proto";
+import "teg_api.proto";
+
+enum DeliveryChannel {
+  DELIVERY_CHANNEL_INVALID        = 0;
+  DELIVERY_CHANNEL_LOCAL_HTTPS    = 1;
+  DELIVERY_CHANNEL_HERMES_COMMAND = 2;
+  DELIVERY_CHANNEL_BLE            = 3;
+}
+
+enum TeslaService {
+  TESLA_SERVICE_INVALID = 0;
+  TESLA_SERVICE_COMMAND = 1;
+}
+
+enum LocalParticipant {
+  LOCAL_PARTICIPANT_INVALID   = 0;
+  LOCAL_PARTICIPANT_INSTALLER = 1;
+  LOCAL_PARTICIPANT_CUSTOMER  = 2;
+}
+
+enum ExternalAuthType {
+  EXTERNAL_AUTH_TYPE_INVALID        = 0;
+  EXTERNAL_AUTH_TYPE_PRESENCE       = 1;
+  EXTERNAL_AUTH_TYPE_MTLS           = 2;
+  EXTERNAL_AUTH_TYPE_HERMES_COMMAND = 4;
+}
+
+message ExternalAuth {
+  ExternalAuthType type = 1;
+}
+
+message AuthEnvelope {
+  bytes payload = 1;
+
+  oneof auth {
+    ExternalAuth external_auth = 2;
+  }
+}
+
+message Participant {
+  oneof id {
+    string din                             = 1; // Device Identification Number (DIN)
+    TeslaService tesla_service             = 2;
+    LocalParticipant local                 = 3;
+    AuthorizedClientType authorized_client = 4;
+  }
+}
+
+message RegistrationPayload {
+  bytes customer_registration_info = 1;
+  bytes nonce                      = 2;
+}
+
+message MessageEnvelope {
+  DeliveryChannel delivery_channel       = 1;
+  Participant sender                     = 2;
+  Participant recipient                  = 3;
+  reserved 7;
+  oneof payload {
+    CommonMessages common                = 4;
+    TEGMessages teg                      = 5;
+    //WCMessages wc                       = 6;
+    //NeurioMeterMessages neuriometer     = 9;
+    //EnergySiteNetMessages energysitenet = 10;
+    AuthorizationMessages authorization = 12;
+    //FileStoreMessages filestore         = 15;
+    //GraphQLMessages graphql             = 16;
+  }
+}

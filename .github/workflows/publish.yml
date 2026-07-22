@@ -1,0 +1,78 @@
+name: Publish
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: write # version PR commits + git tags
+      pull-requests: write # the Version PR
+      id-token: write # npm OIDC trusted publishing
+    outputs:
+      published: ${{ steps.changesets.outputs.published }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Upgrade npm for OIDC support
+        run: npm install -g npm@latest # trusted publishing needs npm >= 11.5.1
+
+      - name: Generated code is fresh
+        run: pnpm run generate && git diff --exit-code
+
+      - name: Build
+        run: pnpm run build
+
+      - name: Create Version PR or publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: pnpm run version # changeset version + pyproject.toml sync
+          publish: pnpm run ci:publish
+          commit: "chore: version packages"
+          title: "chore: version packages"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish-pypi:
+    name: Publish to PyPI
+    needs: release
+    if: needs.release.outputs.published == 'true'
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      id-token: write # PyPI OIDC trusted publishing - the only permission
+    steps:
+      - uses: actions/checkout@v4 # same merge SHA: versions already bumped
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Build distribution
+        run: |
+          python -m pip install build
+          python -m build --outdir packages/python/dist packages/python
+
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: packages/python/dist
+          skip-existing: true # idempotent re-runs / partial-failure recovery

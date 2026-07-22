@@ -1,0 +1,84 @@
+name: Upstream drift
+
+on:
+  schedule:
+    - cron: "17 6 * * 1" # weekly, Monday 06:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install codegen toolchain
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install --quiet -r scripts/requirements.txt
+
+      - name: Compare against upstream HEAD
+        id: drift
+        run: |
+          set +e
+          .venv/bin/python scripts/upstream_coverage.py --mode head --report drift-report.md
+          echo "drifted=$?" >> "$GITHUB_OUTPUT"
+
+      - name: Open or update drift issue
+        if: steps.drift.outputs.drifted != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create upstream-drift --force --color D93F0B \
+            --description "Tesla upstream moved ahead of our reconciled pin"
+          existing=$(gh issue list --label upstream-drift --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue edit "$existing" --body-file drift-report.md
+          else
+            gh issue create --title "Upstream drift: Tesla protos moved ahead of our pin" \
+              --label upstream-drift --body-file drift-report.md
+          fi
+
+      - name: Push reconcile branch and draft PR
+        if: steps.drift.outputs.drifted != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git checkout -B upstream-reconcile
+          .venv/bin/python scripts/update_upstream_pin.py
+          if git diff --quiet upstream.json; then
+            echo "pin unchanged (drift without pin movement) - no PR"
+            exit 1
+          fi
+          git add upstream.json
+          git commit -m "chore: advance upstream pin"
+          git push --force origin upstream-reconcile
+          {
+            echo "Advances \`upstream.json\` to upstream HEAD. CI's pinned coverage gate"
+            echo "now fails on exactly the symbols that must be merged into \`proto/\`;"
+            echo "make it green, add a changeset, then mark ready for review."
+            echo
+            cat drift-report.md
+          } > pr-body.md
+          existing=$(gh pr list --head upstream-reconcile --state open --json number --jq '.[0].number')
+          if [ -n "$existing" ]; then
+            gh pr edit "$existing" --body-file pr-body.md
+          else
+            gh pr create --draft --title "chore: reconcile with upstream Tesla protos" \
+              --body-file pr-body.md
+          fi
+          exit 1 # keep the scheduled run red while drift is unresolved
+
+      - name: No drift
+        if: steps.drift.outputs.drifted == '0'
+        run: echo "Coverage complete at upstream HEAD."

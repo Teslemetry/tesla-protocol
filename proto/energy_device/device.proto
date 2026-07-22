@@ -1,0 +1,78 @@
+// TESLEMETRY SOURCE-OF-RECORD - no upstream.
+// Provenance: Tesla Energy gateway (TEG) local API, from our own
+// observations and contributions from the community
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "Device";
+
+enum DeviceType {
+  DEVICE_TYPE_INVALID        = 0;
+  DEVICE_TYPE_GEN3WC         = 1;
+  DEVICE_TYPE_PVCOM          = 2;
+  DEVICE_TYPE_MSA            = 3;
+  DEVICE_TYPE_SITECONTROLLER = 4;
+  DEVICE_TYPE_MEGAPUTER      = 5;
+  DEVICE_TYPE_IPM            = 6;
+}
+
+enum DeviceCertFormat {
+  DEVICE_CERT_FORMAT_INVALID = 0;
+  DEVICE_CERT_FORMAT_DER     = 1;
+  DEVICE_CERT_FORMAT_PEM     = 2;
+}
+
+enum DeviceSignatureType {
+  DEVICE_SIGNATURE_TYPE_INVALID           = 0;
+  DEVICE_SIGNATURE_TYPE_SHA256_ECDSA_ASN1 = 1;
+}
+
+enum Cipher {
+  CIPHER_INVALID         = 0;
+  CIPHER_RSA_OAEP_SHA256 = 2;
+}
+
+enum TEGDeviceType {
+  TEG_DEVICE_TYPE_INVALID          = 0;
+  TEG_DEVICE_TYPE_SMC              = 1;
+  TEG_DEVICE_TYPE_HEC_GATEWAY1     = 2;
+  TEG_DEVICE_TYPE_TEG_GATEWAY2     = 3;
+  TEG_DEVICE_TYPE_TEG_POWERWALLPLUS = 4;
+  TEG_DEVICE_TYPE_TEG_MP1          = 5;
+  TEG_DEVICE_TYPE_TEG_SUPERCHARGER = 6;
+  TEG_DEVICE_TYPE_TACO_POWERWALL3  = 7;
+  TEG_DEVICE_TYPE_TEG_PVI          = 8;
+  TEG_DEVICE_TYPE_TACO_GATEWAY3V   = 9;
+  TEG_DEVICE_TYPE_TACO_WALLBOX     = 10;
+}
+
+enum iPMDeviceType {
+  IPM_DEVICE_TYPE_INVALID       = 0;
+  IPM_DEVICE_TYPE_POWERPACK3    = 1;
+  IPM_DEVICE_TYPE_SUPERCHARGER4 = 2;
+}
+
+message Din {
+  string value = 1;
+}
+
+message EcuId {
+  string part_number   = 1;
+  string serial_number = 2;
+}
+
+message DeviceSignedPayload {
+  bytes payload                             = 1;
+  DeviceSignatureType device_signature_type = 2;
+  bytes signature                           = 3;
+  DeviceCertFormat device_cert_format       = 4;
+  bytes device_cert                         = 5;
+}
+
+message EncryptedMessage {
+  Cipher cipher     = 1;
+  bytes cipher_text = 2;
+}

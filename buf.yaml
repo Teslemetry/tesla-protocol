@@ -1,0 +1,18 @@
+version: v2
+modules:
+  - path: proto/command
+  - path: proto/telemetry
+  - path: proto/energy_device
+  - path: proto/energy_command
+  - path: proto/teslapower
+lint:
+  # Tesla's upstream style (package CarServer, enum value SpeedLimit, file-level
+  # layout) violates buf's naming rules; we inherit their style, we don't fix it.
+  use:
+    - MINIMAL
+  except:
+    - DIRECTORY_SAME_PACKAGE
+    - PACKAGE_DIRECTORY_MATCH
+breaking:
+  use:
+    - WIRE_JSON

@@ -1,0 +1,31 @@
+{
+  "name": "@teslemetry/tesla-protocol-root",
+  "private": true,
+  "version": "0.0.0",
+  "author": {
+    "name": "Teslemetry",
+    "email": "hello@teslemetry.com",
+    "url": "https://teslemetry.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Teslemetry/tesla-protocol"
+  },
+  "bugs": "https://github.com/Teslemetry/tesla-protocol/issues",
+  "license": "Apache-2.0",
+  "scripts": {
+    "generate": "./scripts/generate.sh",
+    "build": "pnpm -r build",
+    "tsc": "pnpm -r tsc",
+    "lint": "buf lint",
+    "changeset": "changeset",
+    "version": "changeset version && node scripts/sync-python-version.mjs",
+    "ci:publish": "changeset publish --provenance"
+  },
+  "packageManager": "pnpm@10.30.3",
+  "devDependencies": {
+    "@bufbuild/buf": "^1.57.2",
+    "@changesets/cli": "^2.29.7",
+    "ts-proto": "2.7.7"
+  }
+}

@@ -1,0 +1,30 @@
+[build-system]
+build-backend = "setuptools.build_meta"
+requires = ["setuptools>=77.0"]
+
+[project]
+name = "tesla-protocol"
+version = "0.1.0"
+license = "Apache-2.0"
+description = "Tesla vehicle-command, fleet-telemetry and energy protobuf bindings for Python"
+readme = "README.md"
+authors = [{ name = "Teslemetry", email = "hello@teslemetry.com" }]
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "protobuf>=6.32.0,<7",
+    "googleapis-common-protos>=1.60",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/Teslemetry/tesla-protocol"
+
+[tool.setuptools.packages.find]
+include = ["tesla_protocol*"]
+
+[tool.setuptools.package-data]
+tesla_protocol = ["py.typed", "*.pyi", "*/*.pyi"]

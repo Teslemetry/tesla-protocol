@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # buf breaking compares against main
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: "pnpm"
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Regenerate code (pinned toolchain)
+        run: pnpm run generate
+
+      - name: Generated code is committed and fresh
+        run: git diff --exit-code
+
+      - name: buf lint
+        run: pnpm exec buf lint
+
+      - name: buf breaking (against main)
+        if: github.event_name == 'pull_request'
+        run: |
+          if git cat-file -e origin/main:buf.yaml 2>/dev/null; then
+            pnpm exec buf breaking --against '.git#branch=origin/main'
+          else
+            echo "no buf.yaml on main yet - skipping"
+          fi
+
+      - name: Cache pinned upstream protos
+        uses: actions/cache@v4
+        with:
+          path: .upstream-cache
+          key: upstream-${{ hashFiles('upstream.json') }}
+
+      - name: Upstream coverage gate (pinned)
+        run: .venv/bin/python scripts/upstream_coverage.py --mode pinned --cache-dir .upstream-cache
+
+      - name: Build TypeScript package
+        run: pnpm run build
+
+      - name: Typecheck
+        run: pnpm run tsc
+
+      - name: Build Python distribution
+        run: .venv/bin/python -m build --outdir packages/python/dist packages/python
+
+      - name: twine check
+        run: .venv/bin/twine check packages/python/dist/*

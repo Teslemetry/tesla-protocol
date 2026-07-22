@@ -1,0 +1,53 @@
+{
+  "name": "@teslemetry/tesla-protocol",
+  "version": "0.1.0",
+  "description": "Tesla vehicle-command, fleet-telemetry and energy protobuf types for TypeScript, generated with ts-proto",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Teslemetry",
+    "email": "hello@teslemetry.com",
+    "url": "https://teslemetry.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Teslemetry/tesla-protocol",
+    "directory": "packages/typescript"
+  },
+  "bugs": "https://github.com/Teslemetry/tesla-protocol/issues",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "exports": {
+    "./*": {
+      "types": {
+        "import": "./dist/*.d.mts",
+        "require": "./dist/*.d.cts"
+      },
+      "import": "./dist/*.mjs",
+      "require": "./dist/*.cjs"
+    }
+  },
+  "scripts": {
+    "build": "tsdown",
+    "tsc": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "keywords": [
+    "tesla",
+    "protobuf",
+    "vehicle-command",
+    "fleet-telemetry",
+    "teslemetry"
+  ],
+  "dependencies": {
+    "@bufbuild/protobuf": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "tsdown": "^0.22.2",
+    "typescript": "^5.9.2"
+  }
+}

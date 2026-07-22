@@ -1,0 +1,15 @@
+// Vendored from googleapis/googleapis google/rpc/status.proto (Apache-2.0).
+// Required by energy_device/error.proto; not part of the published surface.
+syntax = "proto3";
+
+package google.rpc;
+
+option go_package = "google.golang.org/genproto/googleapis/rpc/status;status";
+option java_multiple_files = true;
+option java_outer_classname = "StatusProto";
+option java_package = "com.google.rpc";
+
+message Status {
+  int32 code = 1;
+  string message = 2;
+}

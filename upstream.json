@@ -1,0 +1,37 @@
+{
+  "$comment": "Pinned upstream state this repo is reconciled against. Updated only by the upstream-drift workflow's reconcile PRs.",
+  "upstreams": {
+    "vehicle-command": {
+      "repo": "teslamotors/vehicle-command",
+      "commit": "4c2143a5def65f6499b9048045581c56904901c6",
+      "fetched": "2026-07-22",
+      "pathPrefix": "pkg/protocol/protobuf",
+      "localDir": "proto/command",
+      "files": {
+        "car_server.proto": "c4c7815da826bb7b6139b5bc19ebecf927e216b44ed3cdee1e2a5b9923ca2dcb",
+        "common.proto": "b4f2c4eef5344bd620e2e6185e71ca8dff2eba195fda97f5eda0b263029c23ca",
+        "errors.proto": "2fb79b0867c9e3b33b55879478741561ddc9de030c68bdb075206f2ee443d932",
+        "keys.proto": "1628c14e1779cd6cf6a87dcceb79f4f7152ec5067d402fbc4990c45b78241b80",
+        "managed_charging.proto": "87c96a0dbff365e516a00c03f2f523c03e69bec5e15d6d62add350d590e1fa05",
+        "signatures.proto": "84b16dc0ea5e4334ae4387e6aaadf443dc39005ec702a920976e2e95a914dcab",
+        "universal_message.proto": "110ac4372e3ebdfe94191de857832302d75717fc105820b9f391dbc68e31979f",
+        "vcsec.proto": "3825cd6a149880ef3d833e928c5efced93e62a98a788773cfc5a51bb7feaf323",
+        "vehicle.proto": "dd9d05478495af3fa4810e57c80c4236dbe8e45ba3e051d8716f1a3fd3fad9a8"
+      }
+    },
+    "fleet-telemetry": {
+      "repo": "teslamotors/fleet-telemetry",
+      "commit": "4767414c1297c8db37a082561c2b761ce8613590",
+      "fetched": "2026-07-22",
+      "pathPrefix": "protos",
+      "localDir": "proto/telemetry",
+      "files": {
+        "vehicle_alert.proto": "3599c68b5f8f19805fe89a4a0f4a6dca754e87600eb614577ec01cbd8b0b2cde",
+        "vehicle_connectivity.proto": "c961a3c529d640c4ccd1709630c2647bc2b13e63eba33fd2077ef555eed49f0d",
+        "vehicle_data.proto": "4596eba1d26b72eb69bbf747831bf0eb2eec106a54048d9bc7d6de765446697c",
+        "vehicle_error.proto": "11704aa26e79ad99262b1f2bf351924efb60dcf43e3a7fa4a3f4392289e3f842",
+        "vehicle_metric.proto": "785b815519e135f3fa79ff4a9713cc40a3c7f71bec10fa05d67f6ad8a85b9f8b"
+      }
+    }
+  }
+}
