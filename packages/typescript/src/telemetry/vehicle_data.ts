@@ -14,7 +14,9 @@ export const protobufPackage = "telemetry.vehicle_data";
  * UPSTREAM-SOURCE: teslamotors/fleet-telemetry
  * UPSTREAM-PATH:   protos/vehicle_data.proto
  * UPSTREAM-COMMIT: see upstream.json
- * This file tracks upstream verbatim; no Teslemetry extensions.
+ * This file tracks upstream verbatim, plus marked Teslemetry extensions
+ * (TESLEMETRY-EXT); reserved numbers annotated "expected" are not-yet-
+ * confirmed candidates and are not active members.
  */
 
 export enum Field {
@@ -1689,6 +1691,8 @@ export enum DetailedChargeStateValue {
   DetailedChargeStateCharging = 4,
   DetailedChargeStateComplete = 5,
   DetailedChargeStateStopped = 6,
+  /** DetailedChargeStateCalibrating - TESLEMETRY-EXT (teslamotors/vehicle-command ChargeState.ChargingState.Calibrating=8, offset -1 to match this enum's established numbering) */
+  DetailedChargeStateCalibrating = 7,
   UNRECOGNIZED = -1,
 }
 
@@ -1715,6 +1719,9 @@ export function detailedChargeStateValueFromJSON(object: any): DetailedChargeSta
     case 6:
     case "DetailedChargeStateStopped":
       return DetailedChargeStateValue.DetailedChargeStateStopped;
+    case 7:
+    case "DetailedChargeStateCalibrating":
+      return DetailedChargeStateValue.DetailedChargeStateCalibrating;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -1738,6 +1745,8 @@ export function detailedChargeStateValueToJSON(object: DetailedChargeStateValue)
       return "DetailedChargeStateComplete";
     case DetailedChargeStateValue.DetailedChargeStateStopped:
       return "DetailedChargeStateStopped";
+    case DetailedChargeStateValue.DetailedChargeStateCalibrating:
+      return "DetailedChargeStateCalibrating";
     case DetailedChargeStateValue.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

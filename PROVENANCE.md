@@ -10,7 +10,7 @@ directories no public upstream exists and this repo is the source of record.
 | Directory | Class | Primary source |
 | --- | --- | --- |
 | `proto/command/` (except `session.proto`) | upstream-tracked + extensions | [`teslamotors/vehicle-command`](https://github.com/teslamotors/vehicle-command) `pkg/protocol/protobuf/` |
-| `proto/telemetry/` | upstream-tracked, verbatim | [`teslamotors/fleet-telemetry`](https://github.com/teslamotors/fleet-telemetry) `protos/` |
+| `proto/telemetry/` | upstream-tracked, verbatim except marked extensions | [`teslamotors/fleet-telemetry`](https://github.com/teslamotors/fleet-telemetry) `protos/` |
 | `proto/command/session.proto` | Teslemetry source-of-record | no upstream (Teslemetry session persistence) |
 | `proto/energy_device/`, `proto/energy_command/` | Teslemetry source-of-record | no upstream (TEG gateway local API, from our own observations and contributions from the community) |
 | `proto/teslapower/` | Teslemetry source-of-record | no upstream (Powerwall local API, from our own observations and contributions from the community, credit @brianhealey) |
