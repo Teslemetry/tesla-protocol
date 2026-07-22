@@ -256,6 +256,7 @@ message Response {
     Signatures.SessionInfo getSessionInfoResponse = 3;
     NearbyChargingSites getNearbyChargingSites = 5;
     Ping ping = 9;
+    GetChargeOnSolarFeatureResponse getChargeOnSolarFeatureResponse = 15;  // TESLEMETRY-EXT
   }
 }
 
@@ -854,6 +855,10 @@ message UpdateChargeOnSolarFeatureRequest {
 }
 
 message GetChargeOnSolarFeatureRequest {}
+
+message GetChargeOnSolarFeatureResponse {
+  ChargeOnSolarFeature charge_on_solar = 1; // Field with JSON name "chargeOnSolar"
+}
 
 message ChargeOnSolarFeature {
   bool enabled = 1;
