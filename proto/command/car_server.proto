@@ -8,7 +8,9 @@ package CarServer;
 
 import "common.proto";
 import "google/protobuf/timestamp.proto";
+import "keys.proto";
 import "signatures.proto";
+import "vcsec.proto";
 import "vehicle.proto";
 
 option go_package = "github.com/teslamotors/vehicle-command/pkg/protocol/protobuf/carserver";
@@ -254,11 +256,115 @@ message Response {
   oneof response_msg {
     VehicleData vehicleData = 2;
     Signatures.SessionInfo getSessionInfoResponse = 3;
+    StreamMessage streamMessage = 4;  // TESLEMETRY-EXT
     NearbyChargingSites getNearbyChargingSites = 5;
+    VehicleDataSubscriptionResponse vehicleDataSubscriptionResponse = 6;  // TESLEMETRY-EXT
+    VitalsSubscriptionResponse vitalsSubscriptionResponse = 8;  // TESLEMETRY-EXT
     Ping ping = 9;
+    PiiKeyResponse piiKeyResponse = 10;  // TESLEMETRY-EXT
+    PseudonymSyncResponse pseudonymSyncResponse = 11;  // TESLEMETRY-EXT
+    NavigationRouteResponse navigationRouteResponse = 13;  // TESLEMETRY-EXT
+    GetManagedChargingSitesResponse getManagedChargingSitesResponse = 14;  // TESLEMETRY-EXT
     GetChargeOnSolarFeatureResponse getChargeOnSolarFeatureResponse = 15;  // TESLEMETRY-EXT
+    AddManagedChargingSiteResponse addManagedChargingSiteResponse = 16;  // TESLEMETRY-EXT
+    GetMessagesResponse getMessagesResponse = 18;  // TESLEMETRY-EXT
+    GetLocalProfilesResponse getLocalProfilesResponse = 20;  // TESLEMETRY-EXT
+    KeysInfoResponse keysInfoResponse = 24;  // TESLEMETRY-EXT
+    BandwidthTestResponse bandwidthTestResponse = 25;  // TESLEMETRY-EXT
   }
 }
+
+// ===== TESLEMETRY-EXT BEGIN =====
+message VehicleDataSubscriptionResponse {
+  string unknown = 3;
+  PiiKeyResponse pii_key_response = 4;
+}
+
+message VitalsSubscriptionResponse {
+  int32 session_id = 1;
+  string unknown = 2;
+}
+
+message PiiKeyResponse {
+  bytes encrypted_pii_key = 2;
+  google.protobuf.Timestamp pii_key_expiration = 3;
+  google.protobuf.Timestamp subscriber_public_key_expiration = 4;
+}
+
+message PseudonymSyncResponse {
+  string unknown = 1;
+}
+
+message NavigationRouteResponse {
+  enum TrafficStatus {
+    TS_NO_DATA = 0;
+    TS_LIGHT = 1;
+    TS_MODERATE = 2;
+    TS_CONGESTION = 3;
+    TS_SEVERE_CONGESTION = 4;
+  }
+  message TrafficDetail {
+    float offset_to_dest = 1;
+    NavigationRouteResponse.TrafficStatus traffic_status = 2;
+  }
+  string unknown = 1;
+  repeated TrafficDetail traffic_detail = 2;
+}
+
+message GetManagedChargingSitesResponse {
+  repeated ManagedChargingSite sites = 1;
+}
+
+message ManagedChargingSiteAddedOrUpdated {}
+
+message ExistingManagedChargingSiteNearby {}
+
+message AddManagedChargingSiteResponse {
+  ManagedChargingSiteAddedOrUpdated added_or_updated = 1;
+  ExistingManagedChargingSiteNearby existing_site_nearby = 2;
+}
+
+message RequestTeslaAuthCommand {
+  string client_id = 1;
+  string unknown = 2;
+  bool return_scoped_token = 3;
+}
+
+message MobileAppMessage {
+  RequestTeslaAuthCommand request_tesla_auth_command = 1;
+}
+
+message GetMessagesResponse {
+  repeated MobileAppMessage mobile_app_messages = 1;
+}
+
+message Profile {
+  string unknown_1 = 1;
+  string unknown_2 = 2;
+}
+
+message GetLocalProfilesResponse {
+  repeated Profile profiles = 1;
+}
+
+message KeyInfo {
+  string unknown_1 = 1;
+  string unknown_2 = 2;
+  bytes public_key = 3;
+  google.protobuf.Timestamp last_seen = 4;
+  Keys.Role role = 5;
+  VCSEC.KeyFormFactor form_factor = 6;
+}
+
+message KeysInfoResponse {
+  repeated KeyInfo keys_info = 1;
+}
+
+message BandwidthTestResponse {
+  bytes data = 1;
+  uint32 requested_size = 2;
+}
+// ===== TESLEMETRY-EXT END =====
 
 message ActionStatus {
   OperationStatus_E result = 1;
