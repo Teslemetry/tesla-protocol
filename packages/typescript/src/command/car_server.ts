@@ -18,7 +18,9 @@ import {
   Void,
 } from "./common.js";
 import { Timestamp } from "./google/protobuf/timestamp.js";
+import { Role, roleFromJSON, roleToJSON } from "./keys.js";
 import { SessionInfo } from "./signatures.js";
+import { KeyFormFactor, keyFormFactorFromJSON, keyFormFactorToJSON } from "./vcsec.js";
 import {
   ClimateState_CopActivationTemp,
   climateState_CopActivationTempFromJSON,
@@ -578,13 +580,199 @@ export interface EraseUserDataAction {
 export interface Response {
   actionStatus: ActionStatus | undefined;
   vehicleData?: VehicleData | undefined;
-  getSessionInfoResponse?: SessionInfo | undefined;
-  getNearbyChargingSites?: NearbyChargingSites | undefined;
+  getSessionInfoResponse?:
+    | SessionInfo
+    | undefined;
+  /** TESLEMETRY-EXT */
+  streamMessage?: StreamMessage | undefined;
+  getNearbyChargingSites?:
+    | NearbyChargingSites
+    | undefined;
+  /** TESLEMETRY-EXT */
+  vehicleDataSubscriptionResponse?:
+    | VehicleDataSubscriptionResponse
+    | undefined;
+  /** TESLEMETRY-EXT */
+  vitalsSubscriptionResponse?: VitalsSubscriptionResponse | undefined;
   ping?:
     | Ping
     | undefined;
   /** TESLEMETRY-EXT */
-  getChargeOnSolarFeatureResponse?: GetChargeOnSolarFeatureResponse | undefined;
+  piiKeyResponse?:
+    | PiiKeyResponse
+    | undefined;
+  /** TESLEMETRY-EXT */
+  pseudonymSyncResponse?:
+    | PseudonymSyncResponse
+    | undefined;
+  /** TESLEMETRY-EXT */
+  navigationRouteResponse?:
+    | NavigationRouteResponse
+    | undefined;
+  /** TESLEMETRY-EXT */
+  getManagedChargingSitesResponse?:
+    | GetManagedChargingSitesResponse
+    | undefined;
+  /** TESLEMETRY-EXT */
+  getChargeOnSolarFeatureResponse?:
+    | GetChargeOnSolarFeatureResponse
+    | undefined;
+  /** TESLEMETRY-EXT */
+  addManagedChargingSiteResponse?:
+    | AddManagedChargingSiteResponse
+    | undefined;
+  /** TESLEMETRY-EXT */
+  getMessagesResponse?:
+    | GetMessagesResponse
+    | undefined;
+  /** TESLEMETRY-EXT */
+  getLocalProfilesResponse?:
+    | GetLocalProfilesResponse
+    | undefined;
+  /** TESLEMETRY-EXT */
+  keysInfoResponse?:
+    | KeysInfoResponse
+    | undefined;
+  /** TESLEMETRY-EXT */
+  bandwidthTestResponse?: BandwidthTestResponse | undefined;
+}
+
+/** ===== TESLEMETRY-EXT BEGIN ===== */
+export interface VehicleDataSubscriptionResponse {
+  unknown: string;
+  piiKeyResponse: PiiKeyResponse | undefined;
+}
+
+export interface VitalsSubscriptionResponse {
+  sessionId: number;
+  unknown: string;
+}
+
+export interface PiiKeyResponse {
+  encryptedPiiKey: Uint8Array;
+  piiKeyExpiration: Date | undefined;
+  subscriberPublicKeyExpiration: Date | undefined;
+}
+
+export interface PseudonymSyncResponse {
+  unknown: string;
+}
+
+export interface NavigationRouteResponse {
+  unknown: string;
+  trafficDetail: NavigationRouteResponse_TrafficDetail[];
+}
+
+export enum NavigationRouteResponse_TrafficStatus {
+  TS_NO_DATA = 0,
+  TS_LIGHT = 1,
+  TS_MODERATE = 2,
+  TS_CONGESTION = 3,
+  TS_SEVERE_CONGESTION = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function navigationRouteResponse_TrafficStatusFromJSON(object: any): NavigationRouteResponse_TrafficStatus {
+  switch (object) {
+    case 0:
+    case "TS_NO_DATA":
+      return NavigationRouteResponse_TrafficStatus.TS_NO_DATA;
+    case 1:
+    case "TS_LIGHT":
+      return NavigationRouteResponse_TrafficStatus.TS_LIGHT;
+    case 2:
+    case "TS_MODERATE":
+      return NavigationRouteResponse_TrafficStatus.TS_MODERATE;
+    case 3:
+    case "TS_CONGESTION":
+      return NavigationRouteResponse_TrafficStatus.TS_CONGESTION;
+    case 4:
+    case "TS_SEVERE_CONGESTION":
+      return NavigationRouteResponse_TrafficStatus.TS_SEVERE_CONGESTION;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return NavigationRouteResponse_TrafficStatus.UNRECOGNIZED;
+  }
+}
+
+export function navigationRouteResponse_TrafficStatusToJSON(object: NavigationRouteResponse_TrafficStatus): string {
+  switch (object) {
+    case NavigationRouteResponse_TrafficStatus.TS_NO_DATA:
+      return "TS_NO_DATA";
+    case NavigationRouteResponse_TrafficStatus.TS_LIGHT:
+      return "TS_LIGHT";
+    case NavigationRouteResponse_TrafficStatus.TS_MODERATE:
+      return "TS_MODERATE";
+    case NavigationRouteResponse_TrafficStatus.TS_CONGESTION:
+      return "TS_CONGESTION";
+    case NavigationRouteResponse_TrafficStatus.TS_SEVERE_CONGESTION:
+      return "TS_SEVERE_CONGESTION";
+    case NavigationRouteResponse_TrafficStatus.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export interface NavigationRouteResponse_TrafficDetail {
+  offsetToDest: number;
+  trafficStatus: NavigationRouteResponse_TrafficStatus;
+}
+
+export interface GetManagedChargingSitesResponse {
+  sites: ManagedChargingSite[];
+}
+
+export interface ManagedChargingSiteAddedOrUpdated {
+}
+
+export interface ExistingManagedChargingSiteNearby {
+}
+
+export interface AddManagedChargingSiteResponse {
+  addedOrUpdated: ManagedChargingSiteAddedOrUpdated | undefined;
+  existingSiteNearby: ExistingManagedChargingSiteNearby | undefined;
+}
+
+export interface RequestTeslaAuthCommand {
+  clientId: string;
+  unknown: string;
+  returnScopedToken: boolean;
+}
+
+export interface MobileAppMessage {
+  requestTeslaAuthCommand: RequestTeslaAuthCommand | undefined;
+}
+
+export interface GetMessagesResponse {
+  mobileAppMessages: MobileAppMessage[];
+}
+
+export interface Profile {
+  unknown1: string;
+  unknown2: string;
+}
+
+export interface GetLocalProfilesResponse {
+  profiles: Profile[];
+}
+
+export interface KeyInfo {
+  unknown1: string;
+  unknown2: string;
+  publicKey: Uint8Array;
+  lastSeen: Date | undefined;
+  role: Role;
+  formFactor: KeyFormFactor;
+}
+
+export interface KeysInfoResponse {
+  keysInfo: KeyInfo[];
+}
+
+export interface BandwidthTestResponse {
+  data: Uint8Array;
+  requestedSize: number;
 }
 
 export interface ActionStatus {
@@ -6953,9 +7141,21 @@ function createBaseResponse(): Response {
     actionStatus: undefined,
     vehicleData: undefined,
     getSessionInfoResponse: undefined,
+    streamMessage: undefined,
     getNearbyChargingSites: undefined,
+    vehicleDataSubscriptionResponse: undefined,
+    vitalsSubscriptionResponse: undefined,
     ping: undefined,
+    piiKeyResponse: undefined,
+    pseudonymSyncResponse: undefined,
+    navigationRouteResponse: undefined,
+    getManagedChargingSitesResponse: undefined,
     getChargeOnSolarFeatureResponse: undefined,
+    addManagedChargingSiteResponse: undefined,
+    getMessagesResponse: undefined,
+    getLocalProfilesResponse: undefined,
+    keysInfoResponse: undefined,
+    bandwidthTestResponse: undefined,
   };
 }
 
@@ -6970,14 +7170,50 @@ export const Response: MessageFns<Response> = {
     if (message.getSessionInfoResponse !== undefined) {
       SessionInfo.encode(message.getSessionInfoResponse, writer.uint32(26).fork()).join();
     }
+    if (message.streamMessage !== undefined) {
+      StreamMessage.encode(message.streamMessage, writer.uint32(34).fork()).join();
+    }
     if (message.getNearbyChargingSites !== undefined) {
       NearbyChargingSites.encode(message.getNearbyChargingSites, writer.uint32(42).fork()).join();
+    }
+    if (message.vehicleDataSubscriptionResponse !== undefined) {
+      VehicleDataSubscriptionResponse.encode(message.vehicleDataSubscriptionResponse, writer.uint32(50).fork()).join();
+    }
+    if (message.vitalsSubscriptionResponse !== undefined) {
+      VitalsSubscriptionResponse.encode(message.vitalsSubscriptionResponse, writer.uint32(66).fork()).join();
     }
     if (message.ping !== undefined) {
       Ping.encode(message.ping, writer.uint32(74).fork()).join();
     }
+    if (message.piiKeyResponse !== undefined) {
+      PiiKeyResponse.encode(message.piiKeyResponse, writer.uint32(82).fork()).join();
+    }
+    if (message.pseudonymSyncResponse !== undefined) {
+      PseudonymSyncResponse.encode(message.pseudonymSyncResponse, writer.uint32(90).fork()).join();
+    }
+    if (message.navigationRouteResponse !== undefined) {
+      NavigationRouteResponse.encode(message.navigationRouteResponse, writer.uint32(106).fork()).join();
+    }
+    if (message.getManagedChargingSitesResponse !== undefined) {
+      GetManagedChargingSitesResponse.encode(message.getManagedChargingSitesResponse, writer.uint32(114).fork()).join();
+    }
     if (message.getChargeOnSolarFeatureResponse !== undefined) {
       GetChargeOnSolarFeatureResponse.encode(message.getChargeOnSolarFeatureResponse, writer.uint32(122).fork()).join();
+    }
+    if (message.addManagedChargingSiteResponse !== undefined) {
+      AddManagedChargingSiteResponse.encode(message.addManagedChargingSiteResponse, writer.uint32(130).fork()).join();
+    }
+    if (message.getMessagesResponse !== undefined) {
+      GetMessagesResponse.encode(message.getMessagesResponse, writer.uint32(146).fork()).join();
+    }
+    if (message.getLocalProfilesResponse !== undefined) {
+      GetLocalProfilesResponse.encode(message.getLocalProfilesResponse, writer.uint32(162).fork()).join();
+    }
+    if (message.keysInfoResponse !== undefined) {
+      KeysInfoResponse.encode(message.keysInfoResponse, writer.uint32(194).fork()).join();
+    }
+    if (message.bandwidthTestResponse !== undefined) {
+      BandwidthTestResponse.encode(message.bandwidthTestResponse, writer.uint32(202).fork()).join();
     }
     return writer;
   },
@@ -7013,12 +7249,36 @@ export const Response: MessageFns<Response> = {
           message.getSessionInfoResponse = SessionInfo.decode(reader, reader.uint32());
           continue;
         }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.streamMessage = StreamMessage.decode(reader, reader.uint32());
+          continue;
+        }
         case 5: {
           if (tag !== 42) {
             break;
           }
 
           message.getNearbyChargingSites = NearbyChargingSites.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.vehicleDataSubscriptionResponse = VehicleDataSubscriptionResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.vitalsSubscriptionResponse = VitalsSubscriptionResponse.decode(reader, reader.uint32());
           continue;
         }
         case 9: {
@@ -7029,12 +7289,84 @@ export const Response: MessageFns<Response> = {
           message.ping = Ping.decode(reader, reader.uint32());
           continue;
         }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.piiKeyResponse = PiiKeyResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.pseudonymSyncResponse = PseudonymSyncResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 13: {
+          if (tag !== 106) {
+            break;
+          }
+
+          message.navigationRouteResponse = NavigationRouteResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 14: {
+          if (tag !== 114) {
+            break;
+          }
+
+          message.getManagedChargingSitesResponse = GetManagedChargingSitesResponse.decode(reader, reader.uint32());
+          continue;
+        }
         case 15: {
           if (tag !== 122) {
             break;
           }
 
           message.getChargeOnSolarFeatureResponse = GetChargeOnSolarFeatureResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 16: {
+          if (tag !== 130) {
+            break;
+          }
+
+          message.addManagedChargingSiteResponse = AddManagedChargingSiteResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 18: {
+          if (tag !== 146) {
+            break;
+          }
+
+          message.getMessagesResponse = GetMessagesResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 20: {
+          if (tag !== 162) {
+            break;
+          }
+
+          message.getLocalProfilesResponse = GetLocalProfilesResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 24: {
+          if (tag !== 194) {
+            break;
+          }
+
+          message.keysInfoResponse = KeysInfoResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 25: {
+          if (tag !== 202) {
+            break;
+          }
+
+          message.bandwidthTestResponse = BandwidthTestResponse.decode(reader, reader.uint32());
           continue;
         }
       }
@@ -7053,12 +7385,42 @@ export const Response: MessageFns<Response> = {
       getSessionInfoResponse: isSet(object.getSessionInfoResponse)
         ? SessionInfo.fromJSON(object.getSessionInfoResponse)
         : undefined,
+      streamMessage: isSet(object.streamMessage) ? StreamMessage.fromJSON(object.streamMessage) : undefined,
       getNearbyChargingSites: isSet(object.getNearbyChargingSites)
         ? NearbyChargingSites.fromJSON(object.getNearbyChargingSites)
         : undefined,
+      vehicleDataSubscriptionResponse: isSet(object.vehicleDataSubscriptionResponse)
+        ? VehicleDataSubscriptionResponse.fromJSON(object.vehicleDataSubscriptionResponse)
+        : undefined,
+      vitalsSubscriptionResponse: isSet(object.vitalsSubscriptionResponse)
+        ? VitalsSubscriptionResponse.fromJSON(object.vitalsSubscriptionResponse)
+        : undefined,
       ping: isSet(object.ping) ? Ping.fromJSON(object.ping) : undefined,
+      piiKeyResponse: isSet(object.piiKeyResponse) ? PiiKeyResponse.fromJSON(object.piiKeyResponse) : undefined,
+      pseudonymSyncResponse: isSet(object.pseudonymSyncResponse)
+        ? PseudonymSyncResponse.fromJSON(object.pseudonymSyncResponse)
+        : undefined,
+      navigationRouteResponse: isSet(object.navigationRouteResponse)
+        ? NavigationRouteResponse.fromJSON(object.navigationRouteResponse)
+        : undefined,
+      getManagedChargingSitesResponse: isSet(object.getManagedChargingSitesResponse)
+        ? GetManagedChargingSitesResponse.fromJSON(object.getManagedChargingSitesResponse)
+        : undefined,
       getChargeOnSolarFeatureResponse: isSet(object.getChargeOnSolarFeatureResponse)
         ? GetChargeOnSolarFeatureResponse.fromJSON(object.getChargeOnSolarFeatureResponse)
+        : undefined,
+      addManagedChargingSiteResponse: isSet(object.addManagedChargingSiteResponse)
+        ? AddManagedChargingSiteResponse.fromJSON(object.addManagedChargingSiteResponse)
+        : undefined,
+      getMessagesResponse: isSet(object.getMessagesResponse)
+        ? GetMessagesResponse.fromJSON(object.getMessagesResponse)
+        : undefined,
+      getLocalProfilesResponse: isSet(object.getLocalProfilesResponse)
+        ? GetLocalProfilesResponse.fromJSON(object.getLocalProfilesResponse)
+        : undefined,
+      keysInfoResponse: isSet(object.keysInfoResponse) ? KeysInfoResponse.fromJSON(object.keysInfoResponse) : undefined,
+      bandwidthTestResponse: isSet(object.bandwidthTestResponse)
+        ? BandwidthTestResponse.fromJSON(object.bandwidthTestResponse)
         : undefined,
     };
   },
@@ -7074,16 +7436,58 @@ export const Response: MessageFns<Response> = {
     if (message.getSessionInfoResponse !== undefined) {
       obj.getSessionInfoResponse = SessionInfo.toJSON(message.getSessionInfoResponse);
     }
+    if (message.streamMessage !== undefined) {
+      obj.streamMessage = StreamMessage.toJSON(message.streamMessage);
+    }
     if (message.getNearbyChargingSites !== undefined) {
       obj.getNearbyChargingSites = NearbyChargingSites.toJSON(message.getNearbyChargingSites);
     }
+    if (message.vehicleDataSubscriptionResponse !== undefined) {
+      obj.vehicleDataSubscriptionResponse = VehicleDataSubscriptionResponse.toJSON(
+        message.vehicleDataSubscriptionResponse,
+      );
+    }
+    if (message.vitalsSubscriptionResponse !== undefined) {
+      obj.vitalsSubscriptionResponse = VitalsSubscriptionResponse.toJSON(message.vitalsSubscriptionResponse);
+    }
     if (message.ping !== undefined) {
       obj.ping = Ping.toJSON(message.ping);
+    }
+    if (message.piiKeyResponse !== undefined) {
+      obj.piiKeyResponse = PiiKeyResponse.toJSON(message.piiKeyResponse);
+    }
+    if (message.pseudonymSyncResponse !== undefined) {
+      obj.pseudonymSyncResponse = PseudonymSyncResponse.toJSON(message.pseudonymSyncResponse);
+    }
+    if (message.navigationRouteResponse !== undefined) {
+      obj.navigationRouteResponse = NavigationRouteResponse.toJSON(message.navigationRouteResponse);
+    }
+    if (message.getManagedChargingSitesResponse !== undefined) {
+      obj.getManagedChargingSitesResponse = GetManagedChargingSitesResponse.toJSON(
+        message.getManagedChargingSitesResponse,
+      );
     }
     if (message.getChargeOnSolarFeatureResponse !== undefined) {
       obj.getChargeOnSolarFeatureResponse = GetChargeOnSolarFeatureResponse.toJSON(
         message.getChargeOnSolarFeatureResponse,
       );
+    }
+    if (message.addManagedChargingSiteResponse !== undefined) {
+      obj.addManagedChargingSiteResponse = AddManagedChargingSiteResponse.toJSON(
+        message.addManagedChargingSiteResponse,
+      );
+    }
+    if (message.getMessagesResponse !== undefined) {
+      obj.getMessagesResponse = GetMessagesResponse.toJSON(message.getMessagesResponse);
+    }
+    if (message.getLocalProfilesResponse !== undefined) {
+      obj.getLocalProfilesResponse = GetLocalProfilesResponse.toJSON(message.getLocalProfilesResponse);
+    }
+    if (message.keysInfoResponse !== undefined) {
+      obj.keysInfoResponse = KeysInfoResponse.toJSON(message.keysInfoResponse);
+    }
+    if (message.bandwidthTestResponse !== undefined) {
+      obj.bandwidthTestResponse = BandwidthTestResponse.toJSON(message.bandwidthTestResponse);
     }
     return obj;
   },
@@ -7103,15 +7507,1403 @@ export const Response: MessageFns<Response> = {
       (object.getSessionInfoResponse !== undefined && object.getSessionInfoResponse !== null)
         ? SessionInfo.fromPartial(object.getSessionInfoResponse)
         : undefined;
+    message.streamMessage = (object.streamMessage !== undefined && object.streamMessage !== null)
+      ? StreamMessage.fromPartial(object.streamMessage)
+      : undefined;
     message.getNearbyChargingSites =
       (object.getNearbyChargingSites !== undefined && object.getNearbyChargingSites !== null)
         ? NearbyChargingSites.fromPartial(object.getNearbyChargingSites)
         : undefined;
+    message.vehicleDataSubscriptionResponse =
+      (object.vehicleDataSubscriptionResponse !== undefined && object.vehicleDataSubscriptionResponse !== null)
+        ? VehicleDataSubscriptionResponse.fromPartial(object.vehicleDataSubscriptionResponse)
+        : undefined;
+    message.vitalsSubscriptionResponse =
+      (object.vitalsSubscriptionResponse !== undefined && object.vitalsSubscriptionResponse !== null)
+        ? VitalsSubscriptionResponse.fromPartial(object.vitalsSubscriptionResponse)
+        : undefined;
     message.ping = (object.ping !== undefined && object.ping !== null) ? Ping.fromPartial(object.ping) : undefined;
+    message.piiKeyResponse = (object.piiKeyResponse !== undefined && object.piiKeyResponse !== null)
+      ? PiiKeyResponse.fromPartial(object.piiKeyResponse)
+      : undefined;
+    message.pseudonymSyncResponse =
+      (object.pseudonymSyncResponse !== undefined && object.pseudonymSyncResponse !== null)
+        ? PseudonymSyncResponse.fromPartial(object.pseudonymSyncResponse)
+        : undefined;
+    message.navigationRouteResponse =
+      (object.navigationRouteResponse !== undefined && object.navigationRouteResponse !== null)
+        ? NavigationRouteResponse.fromPartial(object.navigationRouteResponse)
+        : undefined;
+    message.getManagedChargingSitesResponse =
+      (object.getManagedChargingSitesResponse !== undefined && object.getManagedChargingSitesResponse !== null)
+        ? GetManagedChargingSitesResponse.fromPartial(object.getManagedChargingSitesResponse)
+        : undefined;
     message.getChargeOnSolarFeatureResponse =
       (object.getChargeOnSolarFeatureResponse !== undefined && object.getChargeOnSolarFeatureResponse !== null)
         ? GetChargeOnSolarFeatureResponse.fromPartial(object.getChargeOnSolarFeatureResponse)
         : undefined;
+    message.addManagedChargingSiteResponse =
+      (object.addManagedChargingSiteResponse !== undefined && object.addManagedChargingSiteResponse !== null)
+        ? AddManagedChargingSiteResponse.fromPartial(object.addManagedChargingSiteResponse)
+        : undefined;
+    message.getMessagesResponse = (object.getMessagesResponse !== undefined && object.getMessagesResponse !== null)
+      ? GetMessagesResponse.fromPartial(object.getMessagesResponse)
+      : undefined;
+    message.getLocalProfilesResponse =
+      (object.getLocalProfilesResponse !== undefined && object.getLocalProfilesResponse !== null)
+        ? GetLocalProfilesResponse.fromPartial(object.getLocalProfilesResponse)
+        : undefined;
+    message.keysInfoResponse = (object.keysInfoResponse !== undefined && object.keysInfoResponse !== null)
+      ? KeysInfoResponse.fromPartial(object.keysInfoResponse)
+      : undefined;
+    message.bandwidthTestResponse =
+      (object.bandwidthTestResponse !== undefined && object.bandwidthTestResponse !== null)
+        ? BandwidthTestResponse.fromPartial(object.bandwidthTestResponse)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseVehicleDataSubscriptionResponse(): VehicleDataSubscriptionResponse {
+  return { unknown: "", piiKeyResponse: undefined };
+}
+
+export const VehicleDataSubscriptionResponse: MessageFns<VehicleDataSubscriptionResponse> = {
+  encode(message: VehicleDataSubscriptionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.unknown !== "") {
+      writer.uint32(26).string(message.unknown);
+    }
+    if (message.piiKeyResponse !== undefined) {
+      PiiKeyResponse.encode(message.piiKeyResponse, writer.uint32(34).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): VehicleDataSubscriptionResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVehicleDataSubscriptionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.unknown = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.piiKeyResponse = PiiKeyResponse.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): VehicleDataSubscriptionResponse {
+    return {
+      unknown: isSet(object.unknown) ? globalThis.String(object.unknown) : "",
+      piiKeyResponse: isSet(object.piiKeyResponse) ? PiiKeyResponse.fromJSON(object.piiKeyResponse) : undefined,
+    };
+  },
+
+  toJSON(message: VehicleDataSubscriptionResponse): unknown {
+    const obj: any = {};
+    if (message.unknown !== undefined) {
+      obj.unknown = message.unknown;
+    }
+    if (message.piiKeyResponse !== undefined) {
+      obj.piiKeyResponse = PiiKeyResponse.toJSON(message.piiKeyResponse);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<VehicleDataSubscriptionResponse>, I>>(base?: I): VehicleDataSubscriptionResponse {
+    return VehicleDataSubscriptionResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<VehicleDataSubscriptionResponse>, I>>(
+    object: I,
+  ): VehicleDataSubscriptionResponse {
+    const message = createBaseVehicleDataSubscriptionResponse();
+    message.unknown = object.unknown ?? "";
+    message.piiKeyResponse = (object.piiKeyResponse !== undefined && object.piiKeyResponse !== null)
+      ? PiiKeyResponse.fromPartial(object.piiKeyResponse)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseVitalsSubscriptionResponse(): VitalsSubscriptionResponse {
+  return { sessionId: 0, unknown: "" };
+}
+
+export const VitalsSubscriptionResponse: MessageFns<VitalsSubscriptionResponse> = {
+  encode(message: VitalsSubscriptionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.sessionId !== 0) {
+      writer.uint32(8).int32(message.sessionId);
+    }
+    if (message.unknown !== "") {
+      writer.uint32(18).string(message.unknown);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): VitalsSubscriptionResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVitalsSubscriptionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.sessionId = reader.int32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.unknown = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): VitalsSubscriptionResponse {
+    return {
+      sessionId: isSet(object.sessionId) ? globalThis.Number(object.sessionId) : 0,
+      unknown: isSet(object.unknown) ? globalThis.String(object.unknown) : "",
+    };
+  },
+
+  toJSON(message: VitalsSubscriptionResponse): unknown {
+    const obj: any = {};
+    if (message.sessionId !== undefined) {
+      obj.sessionId = Math.round(message.sessionId);
+    }
+    if (message.unknown !== undefined) {
+      obj.unknown = message.unknown;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<VitalsSubscriptionResponse>, I>>(base?: I): VitalsSubscriptionResponse {
+    return VitalsSubscriptionResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<VitalsSubscriptionResponse>, I>>(object: I): VitalsSubscriptionResponse {
+    const message = createBaseVitalsSubscriptionResponse();
+    message.sessionId = object.sessionId ?? 0;
+    message.unknown = object.unknown ?? "";
+    return message;
+  },
+};
+
+function createBasePiiKeyResponse(): PiiKeyResponse {
+  return { encryptedPiiKey: new Uint8Array(0), piiKeyExpiration: undefined, subscriberPublicKeyExpiration: undefined };
+}
+
+export const PiiKeyResponse: MessageFns<PiiKeyResponse> = {
+  encode(message: PiiKeyResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.encryptedPiiKey.length !== 0) {
+      writer.uint32(18).bytes(message.encryptedPiiKey);
+    }
+    if (message.piiKeyExpiration !== undefined) {
+      Timestamp.encode(toTimestamp(message.piiKeyExpiration), writer.uint32(26).fork()).join();
+    }
+    if (message.subscriberPublicKeyExpiration !== undefined) {
+      Timestamp.encode(toTimestamp(message.subscriberPublicKeyExpiration), writer.uint32(34).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PiiKeyResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePiiKeyResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.encryptedPiiKey = reader.bytes();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.piiKeyExpiration = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.subscriberPublicKeyExpiration = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PiiKeyResponse {
+    return {
+      encryptedPiiKey: isSet(object.encryptedPiiKey) ? bytesFromBase64(object.encryptedPiiKey) : new Uint8Array(0),
+      piiKeyExpiration: isSet(object.piiKeyExpiration) ? fromJsonTimestamp(object.piiKeyExpiration) : undefined,
+      subscriberPublicKeyExpiration: isSet(object.subscriberPublicKeyExpiration)
+        ? fromJsonTimestamp(object.subscriberPublicKeyExpiration)
+        : undefined,
+    };
+  },
+
+  toJSON(message: PiiKeyResponse): unknown {
+    const obj: any = {};
+    if (message.encryptedPiiKey !== undefined) {
+      obj.encryptedPiiKey = base64FromBytes(message.encryptedPiiKey);
+    }
+    if (message.piiKeyExpiration !== undefined) {
+      obj.piiKeyExpiration = message.piiKeyExpiration.toISOString();
+    }
+    if (message.subscriberPublicKeyExpiration !== undefined) {
+      obj.subscriberPublicKeyExpiration = message.subscriberPublicKeyExpiration.toISOString();
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<PiiKeyResponse>, I>>(base?: I): PiiKeyResponse {
+    return PiiKeyResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<PiiKeyResponse>, I>>(object: I): PiiKeyResponse {
+    const message = createBasePiiKeyResponse();
+    message.encryptedPiiKey = object.encryptedPiiKey ?? new Uint8Array(0);
+    message.piiKeyExpiration = object.piiKeyExpiration ?? undefined;
+    message.subscriberPublicKeyExpiration = object.subscriberPublicKeyExpiration ?? undefined;
+    return message;
+  },
+};
+
+function createBasePseudonymSyncResponse(): PseudonymSyncResponse {
+  return { unknown: "" };
+}
+
+export const PseudonymSyncResponse: MessageFns<PseudonymSyncResponse> = {
+  encode(message: PseudonymSyncResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.unknown !== "") {
+      writer.uint32(10).string(message.unknown);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PseudonymSyncResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePseudonymSyncResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.unknown = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PseudonymSyncResponse {
+    return { unknown: isSet(object.unknown) ? globalThis.String(object.unknown) : "" };
+  },
+
+  toJSON(message: PseudonymSyncResponse): unknown {
+    const obj: any = {};
+    if (message.unknown !== undefined) {
+      obj.unknown = message.unknown;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<PseudonymSyncResponse>, I>>(base?: I): PseudonymSyncResponse {
+    return PseudonymSyncResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<PseudonymSyncResponse>, I>>(object: I): PseudonymSyncResponse {
+    const message = createBasePseudonymSyncResponse();
+    message.unknown = object.unknown ?? "";
+    return message;
+  },
+};
+
+function createBaseNavigationRouteResponse(): NavigationRouteResponse {
+  return { unknown: "", trafficDetail: [] };
+}
+
+export const NavigationRouteResponse: MessageFns<NavigationRouteResponse> = {
+  encode(message: NavigationRouteResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.unknown !== "") {
+      writer.uint32(10).string(message.unknown);
+    }
+    for (const v of message.trafficDetail) {
+      NavigationRouteResponse_TrafficDetail.encode(v!, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): NavigationRouteResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseNavigationRouteResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.unknown = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.trafficDetail.push(NavigationRouteResponse_TrafficDetail.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): NavigationRouteResponse {
+    return {
+      unknown: isSet(object.unknown) ? globalThis.String(object.unknown) : "",
+      trafficDetail: globalThis.Array.isArray(object?.trafficDetail)
+        ? object.trafficDetail.map((e: any) => NavigationRouteResponse_TrafficDetail.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: NavigationRouteResponse): unknown {
+    const obj: any = {};
+    if (message.unknown !== undefined) {
+      obj.unknown = message.unknown;
+    }
+    if (message.trafficDetail?.length) {
+      obj.trafficDetail = message.trafficDetail.map((e) => NavigationRouteResponse_TrafficDetail.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<NavigationRouteResponse>, I>>(base?: I): NavigationRouteResponse {
+    return NavigationRouteResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<NavigationRouteResponse>, I>>(object: I): NavigationRouteResponse {
+    const message = createBaseNavigationRouteResponse();
+    message.unknown = object.unknown ?? "";
+    message.trafficDetail = object.trafficDetail?.map((e) => NavigationRouteResponse_TrafficDetail.fromPartial(e)) ||
+      [];
+    return message;
+  },
+};
+
+function createBaseNavigationRouteResponse_TrafficDetail(): NavigationRouteResponse_TrafficDetail {
+  return { offsetToDest: 0, trafficStatus: 0 };
+}
+
+export const NavigationRouteResponse_TrafficDetail: MessageFns<NavigationRouteResponse_TrafficDetail> = {
+  encode(message: NavigationRouteResponse_TrafficDetail, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.offsetToDest !== 0) {
+      writer.uint32(13).float(message.offsetToDest);
+    }
+    if (message.trafficStatus !== 0) {
+      writer.uint32(16).int32(message.trafficStatus);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): NavigationRouteResponse_TrafficDetail {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseNavigationRouteResponse_TrafficDetail();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 13) {
+            break;
+          }
+
+          message.offsetToDest = reader.float();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.trafficStatus = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): NavigationRouteResponse_TrafficDetail {
+    return {
+      offsetToDest: isSet(object.offsetToDest) ? globalThis.Number(object.offsetToDest) : 0,
+      trafficStatus: isSet(object.trafficStatus)
+        ? navigationRouteResponse_TrafficStatusFromJSON(object.trafficStatus)
+        : 0,
+    };
+  },
+
+  toJSON(message: NavigationRouteResponse_TrafficDetail): unknown {
+    const obj: any = {};
+    if (message.offsetToDest !== undefined) {
+      obj.offsetToDest = message.offsetToDest;
+    }
+    if (message.trafficStatus !== undefined) {
+      obj.trafficStatus = navigationRouteResponse_TrafficStatusToJSON(message.trafficStatus);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<NavigationRouteResponse_TrafficDetail>, I>>(
+    base?: I,
+  ): NavigationRouteResponse_TrafficDetail {
+    return NavigationRouteResponse_TrafficDetail.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<NavigationRouteResponse_TrafficDetail>, I>>(
+    object: I,
+  ): NavigationRouteResponse_TrafficDetail {
+    const message = createBaseNavigationRouteResponse_TrafficDetail();
+    message.offsetToDest = object.offsetToDest ?? 0;
+    message.trafficStatus = object.trafficStatus ?? 0;
+    return message;
+  },
+};
+
+function createBaseGetManagedChargingSitesResponse(): GetManagedChargingSitesResponse {
+  return { sites: [] };
+}
+
+export const GetManagedChargingSitesResponse: MessageFns<GetManagedChargingSitesResponse> = {
+  encode(message: GetManagedChargingSitesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.sites) {
+      ManagedChargingSite.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GetManagedChargingSitesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetManagedChargingSitesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.sites.push(ManagedChargingSite.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetManagedChargingSitesResponse {
+    return {
+      sites: globalThis.Array.isArray(object?.sites)
+        ? object.sites.map((e: any) => ManagedChargingSite.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: GetManagedChargingSitesResponse): unknown {
+    const obj: any = {};
+    if (message.sites?.length) {
+      obj.sites = message.sites.map((e) => ManagedChargingSite.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetManagedChargingSitesResponse>, I>>(base?: I): GetManagedChargingSitesResponse {
+    return GetManagedChargingSitesResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetManagedChargingSitesResponse>, I>>(
+    object: I,
+  ): GetManagedChargingSitesResponse {
+    const message = createBaseGetManagedChargingSitesResponse();
+    message.sites = object.sites?.map((e) => ManagedChargingSite.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseManagedChargingSiteAddedOrUpdated(): ManagedChargingSiteAddedOrUpdated {
+  return {};
+}
+
+export const ManagedChargingSiteAddedOrUpdated: MessageFns<ManagedChargingSiteAddedOrUpdated> = {
+  encode(_: ManagedChargingSiteAddedOrUpdated, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ManagedChargingSiteAddedOrUpdated {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseManagedChargingSiteAddedOrUpdated();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): ManagedChargingSiteAddedOrUpdated {
+    return {};
+  },
+
+  toJSON(_: ManagedChargingSiteAddedOrUpdated): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ManagedChargingSiteAddedOrUpdated>, I>>(
+    base?: I,
+  ): ManagedChargingSiteAddedOrUpdated {
+    return ManagedChargingSiteAddedOrUpdated.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ManagedChargingSiteAddedOrUpdated>, I>>(
+    _: I,
+  ): ManagedChargingSiteAddedOrUpdated {
+    const message = createBaseManagedChargingSiteAddedOrUpdated();
+    return message;
+  },
+};
+
+function createBaseExistingManagedChargingSiteNearby(): ExistingManagedChargingSiteNearby {
+  return {};
+}
+
+export const ExistingManagedChargingSiteNearby: MessageFns<ExistingManagedChargingSiteNearby> = {
+  encode(_: ExistingManagedChargingSiteNearby, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ExistingManagedChargingSiteNearby {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseExistingManagedChargingSiteNearby();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): ExistingManagedChargingSiteNearby {
+    return {};
+  },
+
+  toJSON(_: ExistingManagedChargingSiteNearby): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ExistingManagedChargingSiteNearby>, I>>(
+    base?: I,
+  ): ExistingManagedChargingSiteNearby {
+    return ExistingManagedChargingSiteNearby.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ExistingManagedChargingSiteNearby>, I>>(
+    _: I,
+  ): ExistingManagedChargingSiteNearby {
+    const message = createBaseExistingManagedChargingSiteNearby();
+    return message;
+  },
+};
+
+function createBaseAddManagedChargingSiteResponse(): AddManagedChargingSiteResponse {
+  return { addedOrUpdated: undefined, existingSiteNearby: undefined };
+}
+
+export const AddManagedChargingSiteResponse: MessageFns<AddManagedChargingSiteResponse> = {
+  encode(message: AddManagedChargingSiteResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.addedOrUpdated !== undefined) {
+      ManagedChargingSiteAddedOrUpdated.encode(message.addedOrUpdated, writer.uint32(10).fork()).join();
+    }
+    if (message.existingSiteNearby !== undefined) {
+      ExistingManagedChargingSiteNearby.encode(message.existingSiteNearby, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AddManagedChargingSiteResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAddManagedChargingSiteResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.addedOrUpdated = ManagedChargingSiteAddedOrUpdated.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.existingSiteNearby = ExistingManagedChargingSiteNearby.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AddManagedChargingSiteResponse {
+    return {
+      addedOrUpdated: isSet(object.addedOrUpdated)
+        ? ManagedChargingSiteAddedOrUpdated.fromJSON(object.addedOrUpdated)
+        : undefined,
+      existingSiteNearby: isSet(object.existingSiteNearby)
+        ? ExistingManagedChargingSiteNearby.fromJSON(object.existingSiteNearby)
+        : undefined,
+    };
+  },
+
+  toJSON(message: AddManagedChargingSiteResponse): unknown {
+    const obj: any = {};
+    if (message.addedOrUpdated !== undefined) {
+      obj.addedOrUpdated = ManagedChargingSiteAddedOrUpdated.toJSON(message.addedOrUpdated);
+    }
+    if (message.existingSiteNearby !== undefined) {
+      obj.existingSiteNearby = ExistingManagedChargingSiteNearby.toJSON(message.existingSiteNearby);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AddManagedChargingSiteResponse>, I>>(base?: I): AddManagedChargingSiteResponse {
+    return AddManagedChargingSiteResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AddManagedChargingSiteResponse>, I>>(
+    object: I,
+  ): AddManagedChargingSiteResponse {
+    const message = createBaseAddManagedChargingSiteResponse();
+    message.addedOrUpdated = (object.addedOrUpdated !== undefined && object.addedOrUpdated !== null)
+      ? ManagedChargingSiteAddedOrUpdated.fromPartial(object.addedOrUpdated)
+      : undefined;
+    message.existingSiteNearby = (object.existingSiteNearby !== undefined && object.existingSiteNearby !== null)
+      ? ExistingManagedChargingSiteNearby.fromPartial(object.existingSiteNearby)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseRequestTeslaAuthCommand(): RequestTeslaAuthCommand {
+  return { clientId: "", unknown: "", returnScopedToken: false };
+}
+
+export const RequestTeslaAuthCommand: MessageFns<RequestTeslaAuthCommand> = {
+  encode(message: RequestTeslaAuthCommand, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.clientId !== "") {
+      writer.uint32(10).string(message.clientId);
+    }
+    if (message.unknown !== "") {
+      writer.uint32(18).string(message.unknown);
+    }
+    if (message.returnScopedToken !== false) {
+      writer.uint32(24).bool(message.returnScopedToken);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): RequestTeslaAuthCommand {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRequestTeslaAuthCommand();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.clientId = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.unknown = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.returnScopedToken = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): RequestTeslaAuthCommand {
+    return {
+      clientId: isSet(object.clientId) ? globalThis.String(object.clientId) : "",
+      unknown: isSet(object.unknown) ? globalThis.String(object.unknown) : "",
+      returnScopedToken: isSet(object.returnScopedToken) ? globalThis.Boolean(object.returnScopedToken) : false,
+    };
+  },
+
+  toJSON(message: RequestTeslaAuthCommand): unknown {
+    const obj: any = {};
+    if (message.clientId !== undefined) {
+      obj.clientId = message.clientId;
+    }
+    if (message.unknown !== undefined) {
+      obj.unknown = message.unknown;
+    }
+    if (message.returnScopedToken !== undefined) {
+      obj.returnScopedToken = message.returnScopedToken;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<RequestTeslaAuthCommand>, I>>(base?: I): RequestTeslaAuthCommand {
+    return RequestTeslaAuthCommand.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<RequestTeslaAuthCommand>, I>>(object: I): RequestTeslaAuthCommand {
+    const message = createBaseRequestTeslaAuthCommand();
+    message.clientId = object.clientId ?? "";
+    message.unknown = object.unknown ?? "";
+    message.returnScopedToken = object.returnScopedToken ?? false;
+    return message;
+  },
+};
+
+function createBaseMobileAppMessage(): MobileAppMessage {
+  return { requestTeslaAuthCommand: undefined };
+}
+
+export const MobileAppMessage: MessageFns<MobileAppMessage> = {
+  encode(message: MobileAppMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.requestTeslaAuthCommand !== undefined) {
+      RequestTeslaAuthCommand.encode(message.requestTeslaAuthCommand, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): MobileAppMessage {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMobileAppMessage();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.requestTeslaAuthCommand = RequestTeslaAuthCommand.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MobileAppMessage {
+    return {
+      requestTeslaAuthCommand: isSet(object.requestTeslaAuthCommand)
+        ? RequestTeslaAuthCommand.fromJSON(object.requestTeslaAuthCommand)
+        : undefined,
+    };
+  },
+
+  toJSON(message: MobileAppMessage): unknown {
+    const obj: any = {};
+    if (message.requestTeslaAuthCommand !== undefined) {
+      obj.requestTeslaAuthCommand = RequestTeslaAuthCommand.toJSON(message.requestTeslaAuthCommand);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MobileAppMessage>, I>>(base?: I): MobileAppMessage {
+    return MobileAppMessage.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<MobileAppMessage>, I>>(object: I): MobileAppMessage {
+    const message = createBaseMobileAppMessage();
+    message.requestTeslaAuthCommand =
+      (object.requestTeslaAuthCommand !== undefined && object.requestTeslaAuthCommand !== null)
+        ? RequestTeslaAuthCommand.fromPartial(object.requestTeslaAuthCommand)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseGetMessagesResponse(): GetMessagesResponse {
+  return { mobileAppMessages: [] };
+}
+
+export const GetMessagesResponse: MessageFns<GetMessagesResponse> = {
+  encode(message: GetMessagesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.mobileAppMessages) {
+      MobileAppMessage.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GetMessagesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetMessagesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.mobileAppMessages.push(MobileAppMessage.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetMessagesResponse {
+    return {
+      mobileAppMessages: globalThis.Array.isArray(object?.mobileAppMessages)
+        ? object.mobileAppMessages.map((e: any) => MobileAppMessage.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: GetMessagesResponse): unknown {
+    const obj: any = {};
+    if (message.mobileAppMessages?.length) {
+      obj.mobileAppMessages = message.mobileAppMessages.map((e) => MobileAppMessage.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetMessagesResponse>, I>>(base?: I): GetMessagesResponse {
+    return GetMessagesResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetMessagesResponse>, I>>(object: I): GetMessagesResponse {
+    const message = createBaseGetMessagesResponse();
+    message.mobileAppMessages = object.mobileAppMessages?.map((e) => MobileAppMessage.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseProfile(): Profile {
+  return { unknown1: "", unknown2: "" };
+}
+
+export const Profile: MessageFns<Profile> = {
+  encode(message: Profile, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.unknown1 !== "") {
+      writer.uint32(10).string(message.unknown1);
+    }
+    if (message.unknown2 !== "") {
+      writer.uint32(18).string(message.unknown2);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): Profile {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseProfile();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.unknown1 = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.unknown2 = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Profile {
+    return {
+      unknown1: isSet(object.unknown1) ? globalThis.String(object.unknown1) : "",
+      unknown2: isSet(object.unknown2) ? globalThis.String(object.unknown2) : "",
+    };
+  },
+
+  toJSON(message: Profile): unknown {
+    const obj: any = {};
+    if (message.unknown1 !== undefined) {
+      obj.unknown1 = message.unknown1;
+    }
+    if (message.unknown2 !== undefined) {
+      obj.unknown2 = message.unknown2;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Profile>, I>>(base?: I): Profile {
+    return Profile.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Profile>, I>>(object: I): Profile {
+    const message = createBaseProfile();
+    message.unknown1 = object.unknown1 ?? "";
+    message.unknown2 = object.unknown2 ?? "";
+    return message;
+  },
+};
+
+function createBaseGetLocalProfilesResponse(): GetLocalProfilesResponse {
+  return { profiles: [] };
+}
+
+export const GetLocalProfilesResponse: MessageFns<GetLocalProfilesResponse> = {
+  encode(message: GetLocalProfilesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.profiles) {
+      Profile.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GetLocalProfilesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetLocalProfilesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.profiles.push(Profile.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetLocalProfilesResponse {
+    return {
+      profiles: globalThis.Array.isArray(object?.profiles) ? object.profiles.map((e: any) => Profile.fromJSON(e)) : [],
+    };
+  },
+
+  toJSON(message: GetLocalProfilesResponse): unknown {
+    const obj: any = {};
+    if (message.profiles?.length) {
+      obj.profiles = message.profiles.map((e) => Profile.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetLocalProfilesResponse>, I>>(base?: I): GetLocalProfilesResponse {
+    return GetLocalProfilesResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetLocalProfilesResponse>, I>>(object: I): GetLocalProfilesResponse {
+    const message = createBaseGetLocalProfilesResponse();
+    message.profiles = object.profiles?.map((e) => Profile.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseKeyInfo(): KeyInfo {
+  return { unknown1: "", unknown2: "", publicKey: new Uint8Array(0), lastSeen: undefined, role: 0, formFactor: 0 };
+}
+
+export const KeyInfo: MessageFns<KeyInfo> = {
+  encode(message: KeyInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.unknown1 !== "") {
+      writer.uint32(10).string(message.unknown1);
+    }
+    if (message.unknown2 !== "") {
+      writer.uint32(18).string(message.unknown2);
+    }
+    if (message.publicKey.length !== 0) {
+      writer.uint32(26).bytes(message.publicKey);
+    }
+    if (message.lastSeen !== undefined) {
+      Timestamp.encode(toTimestamp(message.lastSeen), writer.uint32(34).fork()).join();
+    }
+    if (message.role !== 0) {
+      writer.uint32(40).int32(message.role);
+    }
+    if (message.formFactor !== 0) {
+      writer.uint32(48).int32(message.formFactor);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): KeyInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseKeyInfo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.unknown1 = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.unknown2 = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.publicKey = reader.bytes();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.lastSeen = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.role = reader.int32() as any;
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.formFactor = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): KeyInfo {
+    return {
+      unknown1: isSet(object.unknown1) ? globalThis.String(object.unknown1) : "",
+      unknown2: isSet(object.unknown2) ? globalThis.String(object.unknown2) : "",
+      publicKey: isSet(object.publicKey) ? bytesFromBase64(object.publicKey) : new Uint8Array(0),
+      lastSeen: isSet(object.lastSeen) ? fromJsonTimestamp(object.lastSeen) : undefined,
+      role: isSet(object.role) ? roleFromJSON(object.role) : 0,
+      formFactor: isSet(object.formFactor) ? keyFormFactorFromJSON(object.formFactor) : 0,
+    };
+  },
+
+  toJSON(message: KeyInfo): unknown {
+    const obj: any = {};
+    if (message.unknown1 !== undefined) {
+      obj.unknown1 = message.unknown1;
+    }
+    if (message.unknown2 !== undefined) {
+      obj.unknown2 = message.unknown2;
+    }
+    if (message.publicKey !== undefined) {
+      obj.publicKey = base64FromBytes(message.publicKey);
+    }
+    if (message.lastSeen !== undefined) {
+      obj.lastSeen = message.lastSeen.toISOString();
+    }
+    if (message.role !== undefined) {
+      obj.role = roleToJSON(message.role);
+    }
+    if (message.formFactor !== undefined) {
+      obj.formFactor = keyFormFactorToJSON(message.formFactor);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<KeyInfo>, I>>(base?: I): KeyInfo {
+    return KeyInfo.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<KeyInfo>, I>>(object: I): KeyInfo {
+    const message = createBaseKeyInfo();
+    message.unknown1 = object.unknown1 ?? "";
+    message.unknown2 = object.unknown2 ?? "";
+    message.publicKey = object.publicKey ?? new Uint8Array(0);
+    message.lastSeen = object.lastSeen ?? undefined;
+    message.role = object.role ?? 0;
+    message.formFactor = object.formFactor ?? 0;
+    return message;
+  },
+};
+
+function createBaseKeysInfoResponse(): KeysInfoResponse {
+  return { keysInfo: [] };
+}
+
+export const KeysInfoResponse: MessageFns<KeysInfoResponse> = {
+  encode(message: KeysInfoResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.keysInfo) {
+      KeyInfo.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): KeysInfoResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseKeysInfoResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.keysInfo.push(KeyInfo.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): KeysInfoResponse {
+    return {
+      keysInfo: globalThis.Array.isArray(object?.keysInfo) ? object.keysInfo.map((e: any) => KeyInfo.fromJSON(e)) : [],
+    };
+  },
+
+  toJSON(message: KeysInfoResponse): unknown {
+    const obj: any = {};
+    if (message.keysInfo?.length) {
+      obj.keysInfo = message.keysInfo.map((e) => KeyInfo.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<KeysInfoResponse>, I>>(base?: I): KeysInfoResponse {
+    return KeysInfoResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<KeysInfoResponse>, I>>(object: I): KeysInfoResponse {
+    const message = createBaseKeysInfoResponse();
+    message.keysInfo = object.keysInfo?.map((e) => KeyInfo.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseBandwidthTestResponse(): BandwidthTestResponse {
+  return { data: new Uint8Array(0), requestedSize: 0 };
+}
+
+export const BandwidthTestResponse: MessageFns<BandwidthTestResponse> = {
+  encode(message: BandwidthTestResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.data.length !== 0) {
+      writer.uint32(10).bytes(message.data);
+    }
+    if (message.requestedSize !== 0) {
+      writer.uint32(16).uint32(message.requestedSize);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): BandwidthTestResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseBandwidthTestResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.data = reader.bytes();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.requestedSize = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): BandwidthTestResponse {
+    return {
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
+      requestedSize: isSet(object.requestedSize) ? globalThis.Number(object.requestedSize) : 0,
+    };
+  },
+
+  toJSON(message: BandwidthTestResponse): unknown {
+    const obj: any = {};
+    if (message.data !== undefined) {
+      obj.data = base64FromBytes(message.data);
+    }
+    if (message.requestedSize !== undefined) {
+      obj.requestedSize = Math.round(message.requestedSize);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<BandwidthTestResponse>, I>>(base?: I): BandwidthTestResponse {
+    return BandwidthTestResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<BandwidthTestResponse>, I>>(object: I): BandwidthTestResponse {
+    const message = createBaseBandwidthTestResponse();
+    message.data = object.data ?? new Uint8Array(0);
+    message.requestedSize = object.requestedSize ?? 0;
     return message;
   },
 };

@@ -1,7 +1,9 @@
 import datetime
 import common_pb2 as _common_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
+import keys_pb2 as _keys_pb2
 import signatures_pb2 as _signatures_pb2
+import vcsec_pb2 as _vcsec_pb2
 import vehicle_pb2 as _vehicle_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
@@ -498,21 +500,230 @@ class EraseUserDataAction(_message.Message):
         ...
 
 class Response(_message.Message):
-    __slots__ = ('actionStatus', 'vehicleData', 'getSessionInfoResponse', 'getNearbyChargingSites', 'ping', 'getChargeOnSolarFeatureResponse')
+    __slots__ = ('actionStatus', 'vehicleData', 'getSessionInfoResponse', 'streamMessage', 'getNearbyChargingSites', 'vehicleDataSubscriptionResponse', 'vitalsSubscriptionResponse', 'ping', 'piiKeyResponse', 'pseudonymSyncResponse', 'navigationRouteResponse', 'getManagedChargingSitesResponse', 'getChargeOnSolarFeatureResponse', 'addManagedChargingSiteResponse', 'getMessagesResponse', 'getLocalProfilesResponse', 'keysInfoResponse', 'bandwidthTestResponse')
     ACTIONSTATUS_FIELD_NUMBER: _ClassVar[int]
     VEHICLEDATA_FIELD_NUMBER: _ClassVar[int]
     GETSESSIONINFORESPONSE_FIELD_NUMBER: _ClassVar[int]
+    STREAMMESSAGE_FIELD_NUMBER: _ClassVar[int]
     GETNEARBYCHARGINGSITES_FIELD_NUMBER: _ClassVar[int]
+    VEHICLEDATASUBSCRIPTIONRESPONSE_FIELD_NUMBER: _ClassVar[int]
+    VITALSSUBSCRIPTIONRESPONSE_FIELD_NUMBER: _ClassVar[int]
     PING_FIELD_NUMBER: _ClassVar[int]
+    PIIKEYRESPONSE_FIELD_NUMBER: _ClassVar[int]
+    PSEUDONYMSYNCRESPONSE_FIELD_NUMBER: _ClassVar[int]
+    NAVIGATIONROUTERESPONSE_FIELD_NUMBER: _ClassVar[int]
+    GETMANAGEDCHARGINGSITESRESPONSE_FIELD_NUMBER: _ClassVar[int]
     GETCHARGEONSOLARFEATURERESPONSE_FIELD_NUMBER: _ClassVar[int]
+    ADDMANAGEDCHARGINGSITERESPONSE_FIELD_NUMBER: _ClassVar[int]
+    GETMESSAGESRESPONSE_FIELD_NUMBER: _ClassVar[int]
+    GETLOCALPROFILESRESPONSE_FIELD_NUMBER: _ClassVar[int]
+    KEYSINFORESPONSE_FIELD_NUMBER: _ClassVar[int]
+    BANDWIDTHTESTRESPONSE_FIELD_NUMBER: _ClassVar[int]
     actionStatus: ActionStatus
     vehicleData: _vehicle_pb2.VehicleData
     getSessionInfoResponse: _signatures_pb2.SessionInfo
+    streamMessage: StreamMessage
     getNearbyChargingSites: NearbyChargingSites
+    vehicleDataSubscriptionResponse: VehicleDataSubscriptionResponse
+    vitalsSubscriptionResponse: VitalsSubscriptionResponse
     ping: Ping
+    piiKeyResponse: PiiKeyResponse
+    pseudonymSyncResponse: PseudonymSyncResponse
+    navigationRouteResponse: NavigationRouteResponse
+    getManagedChargingSitesResponse: GetManagedChargingSitesResponse
     getChargeOnSolarFeatureResponse: GetChargeOnSolarFeatureResponse
+    addManagedChargingSiteResponse: AddManagedChargingSiteResponse
+    getMessagesResponse: GetMessagesResponse
+    getLocalProfilesResponse: GetLocalProfilesResponse
+    keysInfoResponse: KeysInfoResponse
+    bandwidthTestResponse: BandwidthTestResponse
 
-    def __init__(self, actionStatus: _Optional[_Union[ActionStatus, _Mapping]]=..., vehicleData: _Optional[_Union[_vehicle_pb2.VehicleData, _Mapping]]=..., getSessionInfoResponse: _Optional[_Union[_signatures_pb2.SessionInfo, _Mapping]]=..., getNearbyChargingSites: _Optional[_Union[NearbyChargingSites, _Mapping]]=..., ping: _Optional[_Union[Ping, _Mapping]]=..., getChargeOnSolarFeatureResponse: _Optional[_Union[GetChargeOnSolarFeatureResponse, _Mapping]]=...) -> None:
+    def __init__(self, actionStatus: _Optional[_Union[ActionStatus, _Mapping]]=..., vehicleData: _Optional[_Union[_vehicle_pb2.VehicleData, _Mapping]]=..., getSessionInfoResponse: _Optional[_Union[_signatures_pb2.SessionInfo, _Mapping]]=..., streamMessage: _Optional[_Union[StreamMessage, _Mapping]]=..., getNearbyChargingSites: _Optional[_Union[NearbyChargingSites, _Mapping]]=..., vehicleDataSubscriptionResponse: _Optional[_Union[VehicleDataSubscriptionResponse, _Mapping]]=..., vitalsSubscriptionResponse: _Optional[_Union[VitalsSubscriptionResponse, _Mapping]]=..., ping: _Optional[_Union[Ping, _Mapping]]=..., piiKeyResponse: _Optional[_Union[PiiKeyResponse, _Mapping]]=..., pseudonymSyncResponse: _Optional[_Union[PseudonymSyncResponse, _Mapping]]=..., navigationRouteResponse: _Optional[_Union[NavigationRouteResponse, _Mapping]]=..., getManagedChargingSitesResponse: _Optional[_Union[GetManagedChargingSitesResponse, _Mapping]]=..., getChargeOnSolarFeatureResponse: _Optional[_Union[GetChargeOnSolarFeatureResponse, _Mapping]]=..., addManagedChargingSiteResponse: _Optional[_Union[AddManagedChargingSiteResponse, _Mapping]]=..., getMessagesResponse: _Optional[_Union[GetMessagesResponse, _Mapping]]=..., getLocalProfilesResponse: _Optional[_Union[GetLocalProfilesResponse, _Mapping]]=..., keysInfoResponse: _Optional[_Union[KeysInfoResponse, _Mapping]]=..., bandwidthTestResponse: _Optional[_Union[BandwidthTestResponse, _Mapping]]=...) -> None:
+        ...
+
+class VehicleDataSubscriptionResponse(_message.Message):
+    __slots__ = ('unknown', 'pii_key_response')
+    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    PII_KEY_RESPONSE_FIELD_NUMBER: _ClassVar[int]
+    unknown: str
+    pii_key_response: PiiKeyResponse
+
+    def __init__(self, unknown: _Optional[str]=..., pii_key_response: _Optional[_Union[PiiKeyResponse, _Mapping]]=...) -> None:
+        ...
+
+class VitalsSubscriptionResponse(_message.Message):
+    __slots__ = ('session_id', 'unknown')
+    SESSION_ID_FIELD_NUMBER: _ClassVar[int]
+    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    session_id: int
+    unknown: str
+
+    def __init__(self, session_id: _Optional[int]=..., unknown: _Optional[str]=...) -> None:
+        ...
+
+class PiiKeyResponse(_message.Message):
+    __slots__ = ('encrypted_pii_key', 'pii_key_expiration', 'subscriber_public_key_expiration')
+    ENCRYPTED_PII_KEY_FIELD_NUMBER: _ClassVar[int]
+    PII_KEY_EXPIRATION_FIELD_NUMBER: _ClassVar[int]
+    SUBSCRIBER_PUBLIC_KEY_EXPIRATION_FIELD_NUMBER: _ClassVar[int]
+    encrypted_pii_key: bytes
+    pii_key_expiration: _timestamp_pb2.Timestamp
+    subscriber_public_key_expiration: _timestamp_pb2.Timestamp
+
+    def __init__(self, encrypted_pii_key: _Optional[bytes]=..., pii_key_expiration: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., subscriber_public_key_expiration: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=...) -> None:
+        ...
+
+class PseudonymSyncResponse(_message.Message):
+    __slots__ = ('unknown',)
+    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    unknown: str
+
+    def __init__(self, unknown: _Optional[str]=...) -> None:
+        ...
+
+class NavigationRouteResponse(_message.Message):
+    __slots__ = ('unknown', 'traffic_detail')
+
+    class TrafficStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+        __slots__ = ()
+        TS_NO_DATA: _ClassVar[NavigationRouteResponse.TrafficStatus]
+        TS_LIGHT: _ClassVar[NavigationRouteResponse.TrafficStatus]
+        TS_MODERATE: _ClassVar[NavigationRouteResponse.TrafficStatus]
+        TS_CONGESTION: _ClassVar[NavigationRouteResponse.TrafficStatus]
+        TS_SEVERE_CONGESTION: _ClassVar[NavigationRouteResponse.TrafficStatus]
+    TS_NO_DATA: NavigationRouteResponse.TrafficStatus
+    TS_LIGHT: NavigationRouteResponse.TrafficStatus
+    TS_MODERATE: NavigationRouteResponse.TrafficStatus
+    TS_CONGESTION: NavigationRouteResponse.TrafficStatus
+    TS_SEVERE_CONGESTION: NavigationRouteResponse.TrafficStatus
+
+    class TrafficDetail(_message.Message):
+        __slots__ = ('offset_to_dest', 'traffic_status')
+        OFFSET_TO_DEST_FIELD_NUMBER: _ClassVar[int]
+        TRAFFIC_STATUS_FIELD_NUMBER: _ClassVar[int]
+        offset_to_dest: float
+        traffic_status: NavigationRouteResponse.TrafficStatus
+
+        def __init__(self, offset_to_dest: _Optional[float]=..., traffic_status: _Optional[_Union[NavigationRouteResponse.TrafficStatus, str]]=...) -> None:
+            ...
+    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    TRAFFIC_DETAIL_FIELD_NUMBER: _ClassVar[int]
+    unknown: str
+    traffic_detail: _containers.RepeatedCompositeFieldContainer[NavigationRouteResponse.TrafficDetail]
+
+    def __init__(self, unknown: _Optional[str]=..., traffic_detail: _Optional[_Iterable[_Union[NavigationRouteResponse.TrafficDetail, _Mapping]]]=...) -> None:
+        ...
+
+class GetManagedChargingSitesResponse(_message.Message):
+    __slots__ = ('sites',)
+    SITES_FIELD_NUMBER: _ClassVar[int]
+    sites: _containers.RepeatedCompositeFieldContainer[ManagedChargingSite]
+
+    def __init__(self, sites: _Optional[_Iterable[_Union[ManagedChargingSite, _Mapping]]]=...) -> None:
+        ...
+
+class ManagedChargingSiteAddedOrUpdated(_message.Message):
+    __slots__ = ()
+
+    def __init__(self) -> None:
+        ...
+
+class ExistingManagedChargingSiteNearby(_message.Message):
+    __slots__ = ()
+
+    def __init__(self) -> None:
+        ...
+
+class AddManagedChargingSiteResponse(_message.Message):
+    __slots__ = ('added_or_updated', 'existing_site_nearby')
+    ADDED_OR_UPDATED_FIELD_NUMBER: _ClassVar[int]
+    EXISTING_SITE_NEARBY_FIELD_NUMBER: _ClassVar[int]
+    added_or_updated: ManagedChargingSiteAddedOrUpdated
+    existing_site_nearby: ExistingManagedChargingSiteNearby
+
+    def __init__(self, added_or_updated: _Optional[_Union[ManagedChargingSiteAddedOrUpdated, _Mapping]]=..., existing_site_nearby: _Optional[_Union[ExistingManagedChargingSiteNearby, _Mapping]]=...) -> None:
+        ...
+
+class RequestTeslaAuthCommand(_message.Message):
+    __slots__ = ('client_id', 'unknown', 'return_scoped_token')
+    CLIENT_ID_FIELD_NUMBER: _ClassVar[int]
+    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    RETURN_SCOPED_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    client_id: str
+    unknown: str
+    return_scoped_token: bool
+
+    def __init__(self, client_id: _Optional[str]=..., unknown: _Optional[str]=..., return_scoped_token: bool=...) -> None:
+        ...
+
+class MobileAppMessage(_message.Message):
+    __slots__ = ('request_tesla_auth_command',)
+    REQUEST_TESLA_AUTH_COMMAND_FIELD_NUMBER: _ClassVar[int]
+    request_tesla_auth_command: RequestTeslaAuthCommand
+
+    def __init__(self, request_tesla_auth_command: _Optional[_Union[RequestTeslaAuthCommand, _Mapping]]=...) -> None:
+        ...
+
+class GetMessagesResponse(_message.Message):
+    __slots__ = ('mobile_app_messages',)
+    MOBILE_APP_MESSAGES_FIELD_NUMBER: _ClassVar[int]
+    mobile_app_messages: _containers.RepeatedCompositeFieldContainer[MobileAppMessage]
+
+    def __init__(self, mobile_app_messages: _Optional[_Iterable[_Union[MobileAppMessage, _Mapping]]]=...) -> None:
+        ...
+
+class Profile(_message.Message):
+    __slots__ = ('unknown_1', 'unknown_2')
+    UNKNOWN_1_FIELD_NUMBER: _ClassVar[int]
+    UNKNOWN_2_FIELD_NUMBER: _ClassVar[int]
+    unknown_1: str
+    unknown_2: str
+
+    def __init__(self, unknown_1: _Optional[str]=..., unknown_2: _Optional[str]=...) -> None:
+        ...
+
+class GetLocalProfilesResponse(_message.Message):
+    __slots__ = ('profiles',)
+    PROFILES_FIELD_NUMBER: _ClassVar[int]
+    profiles: _containers.RepeatedCompositeFieldContainer[Profile]
+
+    def __init__(self, profiles: _Optional[_Iterable[_Union[Profile, _Mapping]]]=...) -> None:
+        ...
+
+class KeyInfo(_message.Message):
+    __slots__ = ('unknown_1', 'unknown_2', 'public_key', 'last_seen', 'role', 'form_factor')
+    UNKNOWN_1_FIELD_NUMBER: _ClassVar[int]
+    UNKNOWN_2_FIELD_NUMBER: _ClassVar[int]
+    PUBLIC_KEY_FIELD_NUMBER: _ClassVar[int]
+    LAST_SEEN_FIELD_NUMBER: _ClassVar[int]
+    ROLE_FIELD_NUMBER: _ClassVar[int]
+    FORM_FACTOR_FIELD_NUMBER: _ClassVar[int]
+    unknown_1: str
+    unknown_2: str
+    public_key: bytes
+    last_seen: _timestamp_pb2.Timestamp
+    role: _keys_pb2.Role
+    form_factor: _vcsec_pb2.KeyFormFactor
+
+    def __init__(self, unknown_1: _Optional[str]=..., unknown_2: _Optional[str]=..., public_key: _Optional[bytes]=..., last_seen: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., role: _Optional[_Union[_keys_pb2.Role, str]]=..., form_factor: _Optional[_Union[_vcsec_pb2.KeyFormFactor, str]]=...) -> None:
+        ...
+
+class KeysInfoResponse(_message.Message):
+    __slots__ = ('keys_info',)
+    KEYS_INFO_FIELD_NUMBER: _ClassVar[int]
+    keys_info: _containers.RepeatedCompositeFieldContainer[KeyInfo]
+
+    def __init__(self, keys_info: _Optional[_Iterable[_Union[KeyInfo, _Mapping]]]=...) -> None:
+        ...
+
+class BandwidthTestResponse(_message.Message):
+    __slots__ = ('data', 'requested_size')
+    DATA_FIELD_NUMBER: _ClassVar[int]
+    REQUESTED_SIZE_FIELD_NUMBER: _ClassVar[int]
+    data: bytes
+    requested_size: int
+
+    def __init__(self, data: _Optional[bytes]=..., requested_size: _Optional[int]=...) -> None:
         ...
 
 class ActionStatus(_message.Message):
