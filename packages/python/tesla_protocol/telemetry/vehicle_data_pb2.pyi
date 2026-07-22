@@ -394,6 +394,7 @@ class BuckleStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     BuckleStatusUnlatched: _ClassVar[BuckleStatus]
     BuckleStatusLatched: _ClassVar[BuckleStatus]
     BuckleStatusFaulted: _ClassVar[BuckleStatus]
+    BuckleStatusSNA: _ClassVar[BuckleStatus]
 
 class CarTypeValue(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -989,6 +990,7 @@ BuckleStatusUnknown: BuckleStatus
 BuckleStatusUnlatched: BuckleStatus
 BuckleStatusLatched: BuckleStatus
 BuckleStatusFaulted: BuckleStatus
+BuckleStatusSNA: BuckleStatus
 CarTypeUnknown: CarTypeValue
 CarTypeModelS: CarTypeValue
 CarTypeModelX: CarTypeValue

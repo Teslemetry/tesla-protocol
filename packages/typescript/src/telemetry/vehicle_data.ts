@@ -2362,6 +2362,8 @@ export enum BuckleStatus {
   BuckleStatusUnlatched = 1,
   BuckleStatusLatched = 2,
   BuckleStatusFaulted = 3,
+  /** BuckleStatusSNA - TESLEMETRY-EXT (from our own observations and contributions from the community) */
+  BuckleStatusSNA = 4,
   UNRECOGNIZED = -1,
 }
 
@@ -2379,6 +2381,9 @@ export function buckleStatusFromJSON(object: any): BuckleStatus {
     case 3:
     case "BuckleStatusFaulted":
       return BuckleStatus.BuckleStatusFaulted;
+    case 4:
+    case "BuckleStatusSNA":
+      return BuckleStatus.BuckleStatusSNA;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -2396,6 +2401,8 @@ export function buckleStatusToJSON(object: BuckleStatus): string {
       return "BuckleStatusLatched";
     case BuckleStatus.BuckleStatusFaulted:
       return "BuckleStatusFaulted";
+    case BuckleStatus.BuckleStatusSNA:
+      return "BuckleStatusSNA";
     case BuckleStatus.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
