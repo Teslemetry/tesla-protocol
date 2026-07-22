@@ -253,7 +253,6 @@ message EraseUserDataAction {
 
 message Response {
   ActionStatus actionStatus = 1;
-  reserved 12; // GetRateTariffResponse - payload is app-only namespace com.tesla.proto.energy.rate_tariff.v1, deferred pending a namespace-publish decision
   reserved 17, 19; // centerdisplay.server / webrtc_comms replies - app-only namespaces, intentionally excluded
   oneof response_msg {
     VehicleData vehicleData = 2;
@@ -265,6 +264,7 @@ message Response {
     Ping ping = 9;
     PiiKeyResponse piiKeyResponse = 10;  // TESLEMETRY-EXT
     PseudonymSyncResponse pseudonymSyncResponse = 11;  // TESLEMETRY-EXT
+    GetRateTariffResponse getRateTariffResponse = 12;  // TESLEMETRY-EXT
     NavigationRouteResponse navigationRouteResponse = 13;  // TESLEMETRY-EXT
     GetManagedChargingSitesResponse getManagedChargingSitesResponse = 14;  // TESLEMETRY-EXT
     GetChargeOnSolarFeatureResponse getChargeOnSolarFeatureResponse = 15;  // TESLEMETRY-EXT
@@ -365,6 +365,14 @@ message KeysInfoResponse {
 message BandwidthTestResponse {
   bytes data = 1;
   uint32 requested_size = 2;
+}
+
+// Answers GetRateTariffRequest with the same tariff document SetRateTariffRequest
+// writes (VehicleAction tag 55); only the parts of that document we have observed
+// and documented are declared here.
+message GetRateTariffResponse {
+  SetRateTariffRequest.Seasons seasons = 13;
+  SetRateTariffRequest.Tariff tariff = 14;
 }
 // ===== TESLEMETRY-EXT END =====
 

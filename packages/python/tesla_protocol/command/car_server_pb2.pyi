@@ -500,7 +500,7 @@ class EraseUserDataAction(_message.Message):
         ...
 
 class Response(_message.Message):
-    __slots__ = ('actionStatus', 'vehicleData', 'getSessionInfoResponse', 'streamMessage', 'getNearbyChargingSites', 'vehicleDataSubscriptionResponse', 'vitalsSubscriptionResponse', 'ping', 'piiKeyResponse', 'pseudonymSyncResponse', 'navigationRouteResponse', 'getManagedChargingSitesResponse', 'getChargeOnSolarFeatureResponse', 'addManagedChargingSiteResponse', 'getMessagesResponse', 'getLocalProfilesResponse', 'keysInfoResponse', 'bandwidthTestResponse')
+    __slots__ = ('actionStatus', 'vehicleData', 'getSessionInfoResponse', 'streamMessage', 'getNearbyChargingSites', 'vehicleDataSubscriptionResponse', 'vitalsSubscriptionResponse', 'ping', 'piiKeyResponse', 'pseudonymSyncResponse', 'getRateTariffResponse', 'navigationRouteResponse', 'getManagedChargingSitesResponse', 'getChargeOnSolarFeatureResponse', 'addManagedChargingSiteResponse', 'getMessagesResponse', 'getLocalProfilesResponse', 'keysInfoResponse', 'bandwidthTestResponse')
     ACTIONSTATUS_FIELD_NUMBER: _ClassVar[int]
     VEHICLEDATA_FIELD_NUMBER: _ClassVar[int]
     GETSESSIONINFORESPONSE_FIELD_NUMBER: _ClassVar[int]
@@ -511,6 +511,7 @@ class Response(_message.Message):
     PING_FIELD_NUMBER: _ClassVar[int]
     PIIKEYRESPONSE_FIELD_NUMBER: _ClassVar[int]
     PSEUDONYMSYNCRESPONSE_FIELD_NUMBER: _ClassVar[int]
+    GETRATETARIFFRESPONSE_FIELD_NUMBER: _ClassVar[int]
     NAVIGATIONROUTERESPONSE_FIELD_NUMBER: _ClassVar[int]
     GETMANAGEDCHARGINGSITESRESPONSE_FIELD_NUMBER: _ClassVar[int]
     GETCHARGEONSOLARFEATURERESPONSE_FIELD_NUMBER: _ClassVar[int]
@@ -529,6 +530,7 @@ class Response(_message.Message):
     ping: Ping
     piiKeyResponse: PiiKeyResponse
     pseudonymSyncResponse: PseudonymSyncResponse
+    getRateTariffResponse: GetRateTariffResponse
     navigationRouteResponse: NavigationRouteResponse
     getManagedChargingSitesResponse: GetManagedChargingSitesResponse
     getChargeOnSolarFeatureResponse: GetChargeOnSolarFeatureResponse
@@ -538,7 +540,7 @@ class Response(_message.Message):
     keysInfoResponse: KeysInfoResponse
     bandwidthTestResponse: BandwidthTestResponse
 
-    def __init__(self, actionStatus: _Optional[_Union[ActionStatus, _Mapping]]=..., vehicleData: _Optional[_Union[_vehicle_pb2.VehicleData, _Mapping]]=..., getSessionInfoResponse: _Optional[_Union[_signatures_pb2.SessionInfo, _Mapping]]=..., streamMessage: _Optional[_Union[StreamMessage, _Mapping]]=..., getNearbyChargingSites: _Optional[_Union[NearbyChargingSites, _Mapping]]=..., vehicleDataSubscriptionResponse: _Optional[_Union[VehicleDataSubscriptionResponse, _Mapping]]=..., vitalsSubscriptionResponse: _Optional[_Union[VitalsSubscriptionResponse, _Mapping]]=..., ping: _Optional[_Union[Ping, _Mapping]]=..., piiKeyResponse: _Optional[_Union[PiiKeyResponse, _Mapping]]=..., pseudonymSyncResponse: _Optional[_Union[PseudonymSyncResponse, _Mapping]]=..., navigationRouteResponse: _Optional[_Union[NavigationRouteResponse, _Mapping]]=..., getManagedChargingSitesResponse: _Optional[_Union[GetManagedChargingSitesResponse, _Mapping]]=..., getChargeOnSolarFeatureResponse: _Optional[_Union[GetChargeOnSolarFeatureResponse, _Mapping]]=..., addManagedChargingSiteResponse: _Optional[_Union[AddManagedChargingSiteResponse, _Mapping]]=..., getMessagesResponse: _Optional[_Union[GetMessagesResponse, _Mapping]]=..., getLocalProfilesResponse: _Optional[_Union[GetLocalProfilesResponse, _Mapping]]=..., keysInfoResponse: _Optional[_Union[KeysInfoResponse, _Mapping]]=..., bandwidthTestResponse: _Optional[_Union[BandwidthTestResponse, _Mapping]]=...) -> None:
+    def __init__(self, actionStatus: _Optional[_Union[ActionStatus, _Mapping]]=..., vehicleData: _Optional[_Union[_vehicle_pb2.VehicleData, _Mapping]]=..., getSessionInfoResponse: _Optional[_Union[_signatures_pb2.SessionInfo, _Mapping]]=..., streamMessage: _Optional[_Union[StreamMessage, _Mapping]]=..., getNearbyChargingSites: _Optional[_Union[NearbyChargingSites, _Mapping]]=..., vehicleDataSubscriptionResponse: _Optional[_Union[VehicleDataSubscriptionResponse, _Mapping]]=..., vitalsSubscriptionResponse: _Optional[_Union[VitalsSubscriptionResponse, _Mapping]]=..., ping: _Optional[_Union[Ping, _Mapping]]=..., piiKeyResponse: _Optional[_Union[PiiKeyResponse, _Mapping]]=..., pseudonymSyncResponse: _Optional[_Union[PseudonymSyncResponse, _Mapping]]=..., getRateTariffResponse: _Optional[_Union[GetRateTariffResponse, _Mapping]]=..., navigationRouteResponse: _Optional[_Union[NavigationRouteResponse, _Mapping]]=..., getManagedChargingSitesResponse: _Optional[_Union[GetManagedChargingSitesResponse, _Mapping]]=..., getChargeOnSolarFeatureResponse: _Optional[_Union[GetChargeOnSolarFeatureResponse, _Mapping]]=..., addManagedChargingSiteResponse: _Optional[_Union[AddManagedChargingSiteResponse, _Mapping]]=..., getMessagesResponse: _Optional[_Union[GetMessagesResponse, _Mapping]]=..., getLocalProfilesResponse: _Optional[_Union[GetLocalProfilesResponse, _Mapping]]=..., keysInfoResponse: _Optional[_Union[KeysInfoResponse, _Mapping]]=..., bandwidthTestResponse: _Optional[_Union[BandwidthTestResponse, _Mapping]]=...) -> None:
         ...
 
 class VehicleDataSubscriptionResponse(_message.Message):
@@ -724,6 +726,16 @@ class BandwidthTestResponse(_message.Message):
     requested_size: int
 
     def __init__(self, data: _Optional[bytes]=..., requested_size: _Optional[int]=...) -> None:
+        ...
+
+class GetRateTariffResponse(_message.Message):
+    __slots__ = ('seasons', 'tariff')
+    SEASONS_FIELD_NUMBER: _ClassVar[int]
+    TARIFF_FIELD_NUMBER: _ClassVar[int]
+    seasons: SetRateTariffRequest.Seasons
+    tariff: SetRateTariffRequest.Tariff
+
+    def __init__(self, seasons: _Optional[_Union[SetRateTariffRequest.Seasons, _Mapping]]=..., tariff: _Optional[_Union[SetRateTariffRequest.Tariff, _Mapping]]=...) -> None:
         ...
 
 class ActionStatus(_message.Message):

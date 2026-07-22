@@ -16,3 +16,9 @@ lint:
 breaking:
   use:
     - WIRE_JSON
+  # This repo deliberately reserves a field with a reason comment while its
+  # payload type isn't yet published, then later un-reserves and models it
+  # (see AGENTS.md). That's a wire-compatible addition, not tag reuse, but it
+  # trips this rule every time, so it's excepted repo-wide rather than per-PR.
+  except:
+    - RESERVED_MESSAGE_NO_DELETE
