@@ -253,6 +253,8 @@ message EraseUserDataAction {
 
 message Response {
   ActionStatus actionStatus = 1;
+  reserved 12; // GetRateTariffResponse - payload is app-only namespace com.tesla.proto.energy.rate_tariff.v1, deferred pending a namespace-publish decision
+  reserved 17, 19; // centerdisplay.server / webrtc_comms replies - app-only namespaces, intentionally excluded
   oneof response_msg {
     VehicleData vehicleData = 2;
     Signatures.SessionInfo getSessionInfoResponse = 3;
