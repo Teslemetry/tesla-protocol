@@ -55,6 +55,9 @@ jobs:
       - name: Upstream coverage gate (pinned)
         run: .venv/bin/python scripts/upstream_coverage.py --mode pinned --cache-dir .upstream-cache
 
+      - name: Reply coverage gate (CarServer.Response)
+        run: .venv/bin/python scripts/check_reply_coverage.py
+
       - name: Build TypeScript package
         run: pnpm run build
 
