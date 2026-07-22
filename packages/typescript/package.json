@@ -1,6 +1,6 @@
 {
   "name": "@teslemetry/tesla-protocol",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Tesla vehicle-command, fleet-telemetry and energy protobuf types for TypeScript, generated with ts-proto",
   "license": "Apache-2.0",
   "author": {
