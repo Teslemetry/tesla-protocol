@@ -422,6 +422,7 @@ enum BuckleStatus {
     BuckleStatusUnlatched = 1;
     BuckleStatusLatched = 2;
     BuckleStatusFaulted = 3;
+    BuckleStatusSNA = 4;  // TESLEMETRY-EXT (from our own observations and contributions from the community)
 }
 
 enum CarTypeValue {
