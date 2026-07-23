@@ -200,7 +200,7 @@ APVIZ_WRAP: VehicleImageStateType
 APVIZ_LICENSE_PLATE: VehicleImageStateType
 
 class VehicleData(_message.Message):
-    __slots__ = ('gui_settings', 'charge_state', 'climate_state', 'drive_state', 'legacy_vehicle_state', 'vehicle_config', 'location_state', 'closures_state', 'proto_json_version', 'upload_reason', 'parked_accessory_state', 'charge_schedule_state', 'preconditioning_schedule_state', 'soh_state', 'tire_pressure_state', 'media_state', 'media_detail_state', 'vehicle_detail_state', 'software_update_state', 'parental_controls_state', 'alert_state', 'light_show_state', 'vehicle_image_state', 'suspension_state', 'child_presence_detection_state', 'supports_optional_fields')
+    __slots__ = ('gui_settings', 'charge_state', 'climate_state', 'drive_state', 'legacy_vehicle_state', 'vehicle_config', 'location_state', 'closures_state', 'proto_json_version', 'upload_reason', 'parked_accessory_state', 'charge_schedule_state', 'preconditioning_schedule_state', 'soh_state', 'unknown', 'tire_pressure_state', 'media_state', 'media_detail_state', 'vehicle_detail_state', 'software_update_state', 'parental_controls_state', 'alert_state', 'light_show_state', 'vehicle_image_state', 'suspension_state', 'child_presence_detection_state', 'supports_optional_fields')
     GUI_SETTINGS_FIELD_NUMBER: _ClassVar[int]
     CHARGE_STATE_FIELD_NUMBER: _ClassVar[int]
     CLIMATE_STATE_FIELD_NUMBER: _ClassVar[int]
@@ -215,6 +215,7 @@ class VehicleData(_message.Message):
     CHARGE_SCHEDULE_STATE_FIELD_NUMBER: _ClassVar[int]
     PRECONDITIONING_SCHEDULE_STATE_FIELD_NUMBER: _ClassVar[int]
     SOH_STATE_FIELD_NUMBER: _ClassVar[int]
+    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
     TIRE_PRESSURE_STATE_FIELD_NUMBER: _ClassVar[int]
     MEDIA_STATE_FIELD_NUMBER: _ClassVar[int]
     MEDIA_DETAIL_STATE_FIELD_NUMBER: _ClassVar[int]
@@ -241,6 +242,7 @@ class VehicleData(_message.Message):
     charge_schedule_state: ChargeScheduleState
     preconditioning_schedule_state: PreconditioningScheduleState
     soh_state: SohState
+    unknown: bytes
     tire_pressure_state: TirePressureState
     media_state: MediaState
     media_detail_state: MediaDetailState
@@ -254,7 +256,7 @@ class VehicleData(_message.Message):
     child_presence_detection_state: ChildPresenceDetectionState
     supports_optional_fields: bool
 
-    def __init__(self, gui_settings: _Optional[_Union[GuiSettings, _Mapping]]=..., charge_state: _Optional[_Union[ChargeState, _Mapping]]=..., climate_state: _Optional[_Union[ClimateState, _Mapping]]=..., drive_state: _Optional[_Union[DriveState, _Mapping]]=..., legacy_vehicle_state: _Optional[_Union[VehicleState, _Mapping]]=..., vehicle_config: _Optional[_Union[VehicleConfig, _Mapping]]=..., location_state: _Optional[_Union[LocationState, _Mapping]]=..., closures_state: _Optional[_Union[ClosuresState, _Mapping]]=..., proto_json_version: _Optional[int]=..., upload_reason: _Optional[str]=..., parked_accessory_state: _Optional[_Union[ParkedAccessoryState, _Mapping]]=..., charge_schedule_state: _Optional[_Union[ChargeScheduleState, _Mapping]]=..., preconditioning_schedule_state: _Optional[_Union[PreconditioningScheduleState, _Mapping]]=..., soh_state: _Optional[_Union[SohState, _Mapping]]=..., tire_pressure_state: _Optional[_Union[TirePressureState, _Mapping]]=..., media_state: _Optional[_Union[MediaState, _Mapping]]=..., media_detail_state: _Optional[_Union[MediaDetailState, _Mapping]]=..., vehicle_detail_state: _Optional[_Union[VehicleDetailState, _Mapping]]=..., software_update_state: _Optional[_Union[SoftwareUpdateState, _Mapping]]=..., parental_controls_state: _Optional[_Union[ParentalControlsState, _Mapping]]=..., alert_state: _Optional[_Union[AlertState, _Mapping]]=..., light_show_state: _Optional[_Union[LightShowState, _Mapping]]=..., vehicle_image_state: _Optional[_Union[VehicleImageState, _Mapping]]=..., suspension_state: _Optional[_Union[SuspensionState, _Mapping]]=..., child_presence_detection_state: _Optional[_Union[ChildPresenceDetectionState, _Mapping]]=..., supports_optional_fields: bool=...) -> None:
+    def __init__(self, gui_settings: _Optional[_Union[GuiSettings, _Mapping]]=..., charge_state: _Optional[_Union[ChargeState, _Mapping]]=..., climate_state: _Optional[_Union[ClimateState, _Mapping]]=..., drive_state: _Optional[_Union[DriveState, _Mapping]]=..., legacy_vehicle_state: _Optional[_Union[VehicleState, _Mapping]]=..., vehicle_config: _Optional[_Union[VehicleConfig, _Mapping]]=..., location_state: _Optional[_Union[LocationState, _Mapping]]=..., closures_state: _Optional[_Union[ClosuresState, _Mapping]]=..., proto_json_version: _Optional[int]=..., upload_reason: _Optional[str]=..., parked_accessory_state: _Optional[_Union[ParkedAccessoryState, _Mapping]]=..., charge_schedule_state: _Optional[_Union[ChargeScheduleState, _Mapping]]=..., preconditioning_schedule_state: _Optional[_Union[PreconditioningScheduleState, _Mapping]]=..., soh_state: _Optional[_Union[SohState, _Mapping]]=..., unknown: _Optional[bytes]=..., tire_pressure_state: _Optional[_Union[TirePressureState, _Mapping]]=..., media_state: _Optional[_Union[MediaState, _Mapping]]=..., media_detail_state: _Optional[_Union[MediaDetailState, _Mapping]]=..., vehicle_detail_state: _Optional[_Union[VehicleDetailState, _Mapping]]=..., software_update_state: _Optional[_Union[SoftwareUpdateState, _Mapping]]=..., parental_controls_state: _Optional[_Union[ParentalControlsState, _Mapping]]=..., alert_state: _Optional[_Union[AlertState, _Mapping]]=..., light_show_state: _Optional[_Union[LightShowState, _Mapping]]=..., vehicle_image_state: _Optional[_Union[VehicleImageState, _Mapping]]=..., suspension_state: _Optional[_Union[SuspensionState, _Mapping]]=..., child_presence_detection_state: _Optional[_Union[ChildPresenceDetectionState, _Mapping]]=..., supports_optional_fields: bool=...) -> None:
         ...
 
 class ClosuresState(_message.Message):
