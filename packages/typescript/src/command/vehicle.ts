@@ -742,7 +742,11 @@ export interface VehicleData {
     | PreconditioningScheduleState
     | undefined;
   /** TESLEMETRY-EXT (app-4.58.6) */
-  sohState: SohState | undefined;
+  sohState:
+    | SohState
+    | undefined;
+  /** opaque, undecoded payload observed on live vehicleDataSubscription pushes  // TESLEMETRY-EXT (from our own observations and contributions from the community) */
+  unknown: Uint8Array;
   tirePressureState: TirePressureState | undefined;
   mediaState: MediaState | undefined;
   mediaDetailState:
@@ -3123,6 +3127,7 @@ function createBaseVehicleData(): VehicleData {
     chargeScheduleState: undefined,
     preconditioningScheduleState: undefined,
     sohState: undefined,
+    unknown: new Uint8Array(0),
     tirePressureState: undefined,
     mediaState: undefined,
     mediaDetailState: undefined,
@@ -3181,6 +3186,9 @@ export const VehicleData: MessageFns<VehicleData> = {
     }
     if (message.sohState !== undefined) {
       SohState.encode(message.sohState, writer.uint32(138).fork()).join();
+    }
+    if (message.unknown.length !== 0) {
+      writer.uint32(146).bytes(message.unknown);
     }
     if (message.tirePressureState !== undefined) {
       TirePressureState.encode(message.tirePressureState, writer.uint32(154).fork()).join();
@@ -3340,6 +3348,14 @@ export const VehicleData: MessageFns<VehicleData> = {
           message.sohState = SohState.decode(reader, reader.uint32());
           continue;
         }
+        case 18: {
+          if (tag !== 146) {
+            break;
+          }
+
+          message.unknown = reader.bytes();
+          continue;
+        }
         case 19: {
           if (tag !== 154) {
             break;
@@ -3469,6 +3485,7 @@ export const VehicleData: MessageFns<VehicleData> = {
         ? PreconditioningScheduleState.fromJSON(object.preconditioningScheduleState)
         : undefined,
       sohState: isSet(object.sohState) ? SohState.fromJSON(object.sohState) : undefined,
+      unknown: isSet(object.unknown) ? bytesFromBase64(object.unknown) : new Uint8Array(0),
       tirePressureState: isSet(object.tirePressureState)
         ? TirePressureState.fromJSON(object.tirePressureState)
         : undefined,
@@ -3541,6 +3558,9 @@ export const VehicleData: MessageFns<VehicleData> = {
     }
     if (message.sohState !== undefined) {
       obj.sohState = SohState.toJSON(message.sohState);
+    }
+    if (message.unknown !== undefined) {
+      obj.unknown = base64FromBytes(message.unknown);
     }
     if (message.tirePressureState !== undefined) {
       obj.tirePressureState = TirePressureState.toJSON(message.tirePressureState);
@@ -3625,6 +3645,7 @@ export const VehicleData: MessageFns<VehicleData> = {
     message.sohState = (object.sohState !== undefined && object.sohState !== null)
       ? SohState.fromPartial(object.sohState)
       : undefined;
+    message.unknown = object.unknown ?? new Uint8Array(0);
     message.tirePressureState = (object.tirePressureState !== undefined && object.tirePressureState !== null)
       ? TirePressureState.fromPartial(object.tirePressureState)
       : undefined;
