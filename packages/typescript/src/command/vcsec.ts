@@ -1253,11 +1253,24 @@ export interface CommandStatus {
   whitelistOperationStatus?: WhitelistOperationStatus | undefined;
 }
 
+/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+export interface AutonomyCommand {
+  pullOverCommand?: AutonomyCommand_PullOverCommand | undefined;
+}
+
+/** Remote "pull over" request for a vehicle driving under autonomy - a trigger, no parameters. */
+export interface AutonomyCommand_PullOverCommand {
+}
+
 export interface UnsignedMessage {
   InformationRequest?: InformationRequest | undefined;
   RKEAction?: RKEActionE | undefined;
   closureMoveRequest?: ClosureMoveRequest | undefined;
-  WhitelistOperation?: WhitelistOperation | undefined;
+  WhitelistOperation?:
+    | WhitelistOperation
+    | undefined;
+  /** TESLEMETRY-EXT (app-4.58.6) */
+  autonomyCommand?: AutonomyCommand | undefined;
 }
 
 export interface ClosureStatuses {
@@ -2904,12 +2917,120 @@ export const CommandStatus: MessageFns<CommandStatus> = {
   },
 };
 
+function createBaseAutonomyCommand(): AutonomyCommand {
+  return { pullOverCommand: undefined };
+}
+
+export const AutonomyCommand: MessageFns<AutonomyCommand> = {
+  encode(message: AutonomyCommand, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.pullOverCommand !== undefined) {
+      AutonomyCommand_PullOverCommand.encode(message.pullOverCommand, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AutonomyCommand {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAutonomyCommand();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.pullOverCommand = AutonomyCommand_PullOverCommand.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AutonomyCommand {
+    return {
+      pullOverCommand: isSet(object.pullOverCommand)
+        ? AutonomyCommand_PullOverCommand.fromJSON(object.pullOverCommand)
+        : undefined,
+    };
+  },
+
+  toJSON(message: AutonomyCommand): unknown {
+    const obj: any = {};
+    if (message.pullOverCommand !== undefined) {
+      obj.pullOverCommand = AutonomyCommand_PullOverCommand.toJSON(message.pullOverCommand);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AutonomyCommand>, I>>(base?: I): AutonomyCommand {
+    return AutonomyCommand.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AutonomyCommand>, I>>(object: I): AutonomyCommand {
+    const message = createBaseAutonomyCommand();
+    message.pullOverCommand = (object.pullOverCommand !== undefined && object.pullOverCommand !== null)
+      ? AutonomyCommand_PullOverCommand.fromPartial(object.pullOverCommand)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseAutonomyCommand_PullOverCommand(): AutonomyCommand_PullOverCommand {
+  return {};
+}
+
+export const AutonomyCommand_PullOverCommand: MessageFns<AutonomyCommand_PullOverCommand> = {
+  encode(_: AutonomyCommand_PullOverCommand, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AutonomyCommand_PullOverCommand {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAutonomyCommand_PullOverCommand();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): AutonomyCommand_PullOverCommand {
+    return {};
+  },
+
+  toJSON(_: AutonomyCommand_PullOverCommand): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AutonomyCommand_PullOverCommand>, I>>(base?: I): AutonomyCommand_PullOverCommand {
+    return AutonomyCommand_PullOverCommand.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AutonomyCommand_PullOverCommand>, I>>(_: I): AutonomyCommand_PullOverCommand {
+    const message = createBaseAutonomyCommand_PullOverCommand();
+    return message;
+  },
+};
+
 function createBaseUnsignedMessage(): UnsignedMessage {
   return {
     InformationRequest: undefined,
     RKEAction: undefined,
     closureMoveRequest: undefined,
     WhitelistOperation: undefined,
+    autonomyCommand: undefined,
   };
 }
 
@@ -2926,6 +3047,9 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
     }
     if (message.WhitelistOperation !== undefined) {
       WhitelistOperation.encode(message.WhitelistOperation, writer.uint32(130).fork()).join();
+    }
+    if (message.autonomyCommand !== undefined) {
+      AutonomyCommand.encode(message.autonomyCommand, writer.uint32(530).fork()).join();
     }
     return writer;
   },
@@ -2969,6 +3093,14 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
           message.WhitelistOperation = WhitelistOperation.decode(reader, reader.uint32());
           continue;
         }
+        case 66: {
+          if (tag !== 530) {
+            break;
+          }
+
+          message.autonomyCommand = AutonomyCommand.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2990,6 +3122,7 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
       WhitelistOperation: isSet(object.WhitelistOperation)
         ? WhitelistOperation.fromJSON(object.WhitelistOperation)
         : undefined,
+      autonomyCommand: isSet(object.autonomyCommand) ? AutonomyCommand.fromJSON(object.autonomyCommand) : undefined,
     };
   },
 
@@ -3006,6 +3139,9 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
     }
     if (message.WhitelistOperation !== undefined) {
       obj.WhitelistOperation = WhitelistOperation.toJSON(message.WhitelistOperation);
+    }
+    if (message.autonomyCommand !== undefined) {
+      obj.autonomyCommand = AutonomyCommand.toJSON(message.autonomyCommand);
     }
     return obj;
   },
@@ -3024,6 +3160,9 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
       : undefined;
     message.WhitelistOperation = (object.WhitelistOperation !== undefined && object.WhitelistOperation !== null)
       ? WhitelistOperation.fromPartial(object.WhitelistOperation)
+      : undefined;
+    message.autonomyCommand = (object.autonomyCommand !== undefined && object.autonomyCommand !== null)
+      ? AutonomyCommand.fromPartial(object.autonomyCommand)
       : undefined;
     return message;
   },

@@ -21,6 +21,8 @@ export enum Domain {
   DOMAIN_BROADCAST = 0,
   DOMAIN_VEHICLE_SECURITY = 2,
   DOMAIN_INFOTAINMENT = 3,
+  /** DOMAIN_AUTOPILOT - TESLEMETRY-EXT (app-4.58.6) */
+  DOMAIN_AUTOPILOT = 4,
   /** DOMAIN_AUTHD - TESLEMETRY-EXT (app-4.58.6) */
   DOMAIN_AUTHD = 5,
   /** DOMAIN_ENERGY_DEVICE - TESLEMETRY-EXT (app-4.58.6) */
@@ -41,6 +43,9 @@ export function domainFromJSON(object: any): Domain {
     case 3:
     case "DOMAIN_INFOTAINMENT":
       return Domain.DOMAIN_INFOTAINMENT;
+    case 4:
+    case "DOMAIN_AUTOPILOT":
+      return Domain.DOMAIN_AUTOPILOT;
     case 5:
     case "DOMAIN_AUTHD":
       return Domain.DOMAIN_AUTHD;
@@ -65,6 +70,8 @@ export function domainToJSON(object: Domain): string {
       return "DOMAIN_VEHICLE_SECURITY";
     case Domain.DOMAIN_INFOTAINMENT:
       return "DOMAIN_INFOTAINMENT";
+    case Domain.DOMAIN_AUTOPILOT:
+      return "DOMAIN_AUTOPILOT";
     case Domain.DOMAIN_AUTHD:
       return "DOMAIN_AUTHD";
     case Domain.DOMAIN_ENERGY_DEVICE:

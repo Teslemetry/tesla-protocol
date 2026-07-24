@@ -261,6 +261,17 @@ message CommandStatus
     }
 }
 
+// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+message AutonomyCommand {
+    // Remote "pull over" request for a vehicle driving under autonomy - a trigger, no parameters.
+    message PullOverCommand {}
+
+    oneof sub_message {
+        PullOverCommand pullOverCommand = 1;
+    }
+}
+// ===== TESLEMETRY-EXT END =====
+
 message UnsignedMessage {
     reserved 6,7,10,12,13;
     oneof sub_message {
@@ -268,6 +279,7 @@ message UnsignedMessage {
         RKEAction_E                  RKEAction = 2;
         ClosureMoveRequest           closureMoveRequest = 4;
         WhitelistOperation           WhitelistOperation = 16;
+        AutonomyCommand              autonomyCommand = 66;  // TESLEMETRY-EXT (app-4.58.6)
     }
 }
 

@@ -641,6 +641,9 @@ message VehicleState {
     google.protobuf.Timestamp tpms_last_seen_pressure_time_rl = 60;  // TESLEMETRY-EXT (app-4.58.6)
     google.protobuf.Timestamp tpms_last_seen_pressure_time_rr = 61;  // TESLEMETRY-EXT (app-4.58.6)
 
+    oneof optional_deck_lights_on { bool deck_lights_on = 67; }  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_hazards_on { bool hazards_on = 68; }  // TESLEMETRY-EXT (app-4.58.6)
+
     LegacyMediaInfo legacy_media_info = 72;  // TESLEMETRY-EXT (app-4.58.6)
     oneof optional_allow_authorized_mobile_devices_only { bool allow_authorized_mobile_devices_only = 73; }  // TESLEMETRY-EXT (app-4.58.6)
     GuestMode guestMode = 74;
