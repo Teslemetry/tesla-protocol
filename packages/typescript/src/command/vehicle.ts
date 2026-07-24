@@ -745,7 +745,7 @@ export interface VehicleData {
   sohState:
     | SohState
     | undefined;
-  /** opaque, undecoded payload observed on live vehicleDataSubscription pushes  // TESLEMETRY-EXT (from our own observations and contributions from the community) */
+  /** opaque, undecoded payload observed on live vehicleDataSubscription pushes  // TESLEMETRY-EXT */
   unknown: Uint8Array;
   tirePressureState: TirePressureState | undefined;
   mediaState: MediaState | undefined;
@@ -1732,8 +1732,10 @@ export interface VehicleState {
     | Date
     | undefined;
   /** TESLEMETRY-EXT (app-4.58.6) */
-  tpmsLastSeenPressureTimeRr:
-    | Date
+  tpmsLastSeenPressureTimeRr: Date | undefined;
+  deckLightsOn?: boolean | undefined;
+  hazardsOn?:
+    | boolean
     | undefined;
   /** TESLEMETRY-EXT (app-4.58.6) */
   legacyMediaInfo: LegacyMediaInfo | undefined;
@@ -10285,6 +10287,8 @@ function createBaseVehicleState(): VehicleState {
     tpmsLastSeenPressureTimeFr: undefined,
     tpmsLastSeenPressureTimeRl: undefined,
     tpmsLastSeenPressureTimeRr: undefined,
+    deckLightsOn: undefined,
+    hazardsOn: undefined,
     legacyMediaInfo: undefined,
     allowAuthorizedMobileDevicesOnly: undefined,
     guestMode: undefined,
@@ -10382,6 +10386,12 @@ export const VehicleState: MessageFns<VehicleState> = {
     }
     if (message.tpmsLastSeenPressureTimeRr !== undefined) {
       Timestamp.encode(toTimestamp(message.tpmsLastSeenPressureTimeRr), writer.uint32(490).fork()).join();
+    }
+    if (message.deckLightsOn !== undefined) {
+      writer.uint32(536).bool(message.deckLightsOn);
+    }
+    if (message.hazardsOn !== undefined) {
+      writer.uint32(544).bool(message.hazardsOn);
     }
     if (message.legacyMediaInfo !== undefined) {
       LegacyMediaInfo.encode(message.legacyMediaInfo, writer.uint32(578).fork()).join();
@@ -10666,6 +10676,22 @@ export const VehicleState: MessageFns<VehicleState> = {
           }
 
           message.tpmsLastSeenPressureTimeRr = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 67: {
+          if (tag !== 536) {
+            break;
+          }
+
+          message.deckLightsOn = reader.bool();
+          continue;
+        }
+        case 68: {
+          if (tag !== 544) {
+            break;
+          }
+
+          message.hazardsOn = reader.bool();
           continue;
         }
         case 72: {
@@ -11235,6 +11261,8 @@ export const VehicleState: MessageFns<VehicleState> = {
       tpmsLastSeenPressureTimeRr: isSet(object.tpmsLastSeenPressureTimeRr)
         ? fromJsonTimestamp(object.tpmsLastSeenPressureTimeRr)
         : undefined,
+      deckLightsOn: isSet(object.deckLightsOn) ? globalThis.Boolean(object.deckLightsOn) : undefined,
+      hazardsOn: isSet(object.hazardsOn) ? globalThis.Boolean(object.hazardsOn) : undefined,
       legacyMediaInfo: isSet(object.legacyMediaInfo) ? LegacyMediaInfo.fromJSON(object.legacyMediaInfo) : undefined,
       allowAuthorizedMobileDevicesOnly: isSet(object.allowAuthorizedMobileDevicesOnly)
         ? globalThis.Boolean(object.allowAuthorizedMobileDevicesOnly)
@@ -11376,6 +11404,12 @@ export const VehicleState: MessageFns<VehicleState> = {
     }
     if (message.tpmsLastSeenPressureTimeRr !== undefined) {
       obj.tpmsLastSeenPressureTimeRr = message.tpmsLastSeenPressureTimeRr.toISOString();
+    }
+    if (message.deckLightsOn !== undefined) {
+      obj.deckLightsOn = message.deckLightsOn;
+    }
+    if (message.hazardsOn !== undefined) {
+      obj.hazardsOn = message.hazardsOn;
     }
     if (message.legacyMediaInfo !== undefined) {
       obj.legacyMediaInfo = LegacyMediaInfo.toJSON(message.legacyMediaInfo);
@@ -11598,6 +11632,8 @@ export const VehicleState: MessageFns<VehicleState> = {
     message.tpmsLastSeenPressureTimeFr = object.tpmsLastSeenPressureTimeFr ?? undefined;
     message.tpmsLastSeenPressureTimeRl = object.tpmsLastSeenPressureTimeRl ?? undefined;
     message.tpmsLastSeenPressureTimeRr = object.tpmsLastSeenPressureTimeRr ?? undefined;
+    message.deckLightsOn = object.deckLightsOn ?? undefined;
+    message.hazardsOn = object.hazardsOn ?? undefined;
     message.legacyMediaInfo = (object.legacyMediaInfo !== undefined && object.legacyMediaInfo !== null)
       ? LegacyMediaInfo.fromPartial(object.legacyMediaInfo)
       : undefined;

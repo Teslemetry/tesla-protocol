@@ -11,6 +11,7 @@ class Domain(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     DOMAIN_BROADCAST: _ClassVar[Domain]
     DOMAIN_VEHICLE_SECURITY: _ClassVar[Domain]
     DOMAIN_INFOTAINMENT: _ClassVar[Domain]
+    DOMAIN_AUTOPILOT: _ClassVar[Domain]
     DOMAIN_AUTHD: _ClassVar[Domain]
     DOMAIN_ENERGY_DEVICE: _ClassVar[Domain]
     DOMAIN_ENERGY_DEVICE_AUTH: _ClassVar[Domain]
@@ -60,6 +61,7 @@ class Flags(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
 DOMAIN_BROADCAST: Domain
 DOMAIN_VEHICLE_SECURITY: Domain
 DOMAIN_INFOTAINMENT: Domain
+DOMAIN_AUTOPILOT: Domain
 DOMAIN_AUTHD: Domain
 DOMAIN_ENERGY_DEVICE: Domain
 DOMAIN_ENERGY_DEVICE_AUTH: Domain

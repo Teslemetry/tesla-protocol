@@ -510,18 +510,34 @@ class CommandStatus(_message.Message):
     def __init__(self, operationStatus: _Optional[_Union[OperationStatus_E, str]]=..., signedMessageStatus: _Optional[_Union[SignedMessage_status, _Mapping]]=..., whitelistOperationStatus: _Optional[_Union[WhitelistOperation_status, _Mapping]]=...) -> None:
         ...
 
+class AutonomyCommand(_message.Message):
+    __slots__ = ('pullOverCommand',)
+
+    class PullOverCommand(_message.Message):
+        __slots__ = ()
+
+        def __init__(self) -> None:
+            ...
+    PULLOVERCOMMAND_FIELD_NUMBER: _ClassVar[int]
+    pullOverCommand: AutonomyCommand.PullOverCommand
+
+    def __init__(self, pullOverCommand: _Optional[_Union[AutonomyCommand.PullOverCommand, _Mapping]]=...) -> None:
+        ...
+
 class UnsignedMessage(_message.Message):
-    __slots__ = ('InformationRequest', 'RKEAction', 'closureMoveRequest', 'WhitelistOperation')
+    __slots__ = ('InformationRequest', 'RKEAction', 'closureMoveRequest', 'WhitelistOperation', 'autonomyCommand')
     INFORMATIONREQUEST_FIELD_NUMBER: _ClassVar[int]
     RKEACTION_FIELD_NUMBER: _ClassVar[int]
     CLOSUREMOVEREQUEST_FIELD_NUMBER: _ClassVar[int]
     WHITELISTOPERATION_FIELD_NUMBER: _ClassVar[int]
+    AUTONOMYCOMMAND_FIELD_NUMBER: _ClassVar[int]
     InformationRequest: InformationRequest
     RKEAction: RKEAction_E
     closureMoveRequest: ClosureMoveRequest
     WhitelistOperation: WhitelistOperation
+    autonomyCommand: AutonomyCommand
 
-    def __init__(self, InformationRequest: _Optional[_Union[InformationRequest, _Mapping]]=..., RKEAction: _Optional[_Union[RKEAction_E, str]]=..., closureMoveRequest: _Optional[_Union[ClosureMoveRequest, _Mapping]]=..., WhitelistOperation: _Optional[_Union[WhitelistOperation, _Mapping]]=...) -> None:
+    def __init__(self, InformationRequest: _Optional[_Union[InformationRequest, _Mapping]]=..., RKEAction: _Optional[_Union[RKEAction_E, str]]=..., closureMoveRequest: _Optional[_Union[ClosureMoveRequest, _Mapping]]=..., WhitelistOperation: _Optional[_Union[WhitelistOperation, _Mapping]]=..., autonomyCommand: _Optional[_Union[AutonomyCommand, _Mapping]]=...) -> None:
         ...
 
 class ClosureStatuses(_message.Message):
