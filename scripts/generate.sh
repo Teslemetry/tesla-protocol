@@ -23,7 +23,7 @@ TS_OPTS="emitDefaultValues=json-methods,importSuffix=.js"
 TS_OUT=packages/typescript/src
 PY_PKG=packages/python/tesla_protocol
 
-GROUPS_LIST="command telemetry energy_device energy_command teslapower"
+GROUPS_LIST="command telemetry energy_device energy_command teslapower charging"
 
 rm -rf "$TS_OUT"
 for group in $GROUPS_LIST; do
