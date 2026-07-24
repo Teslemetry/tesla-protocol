@@ -1,0 +1,44 @@
+// TESLEMETRY SOURCE-OF-RECORD - no upstream.
+// Provenance: Tesla dashcam/Sentry video SEI metadata, from our own
+// observations and contributions from the community
+
+syntax = "proto3";
+
+package DashcamSei;
+
+// SeiMetadata is the per-frame vehicle telemetry carried in the SEI (supplemental
+// enhancement information) payload embedded in TeslaCam / Sentry / live-camera
+// H.264 video, synchronized to the frame it accompanies.
+message SeiMetadata {
+  enum Gear {
+    GEAR_PARK = 0;
+    GEAR_DRIVE = 1;
+    GEAR_REVERSE = 2;
+    GEAR_NEUTRAL = 3;
+  }
+
+  enum AutopilotState {
+    NONE = 0;
+    SELF_DRIVING = 1;
+    AUTOSTEER = 2;
+    TACC = 3;
+  }
+
+  // Schema/frame-type version byte; meaning beyond that is not confirmed.
+  uint32 field_1 = 1;
+  Gear gearState = 2;
+  uint64 frameSeqNo = 3;
+  float vehicleSpeedMps = 4;
+  float acceleratorPedalPosition = 5;
+  float steeringWheelAngle = 6;
+  bool blinkerOnLeft = 7;
+  bool blinkerOnRight = 8;
+  bool brakeApplied = 9;
+  AutopilotState autopilotState = 10;
+  double latitudeDeg = 11;
+  double longitudeDeg = 12;
+  double headingDeg = 13;
+  double linearAccelerationMps2X = 14;
+  double linearAccelerationMps2Y = 15;
+  double linearAccelerationMps2Z = 16;
+}
