@@ -10,12 +10,6 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 export const protobufPackage = "com.tesla.proto.charging.v1";
 
 /**
- * TESLEMETRY SOURCE-OF-RECORD - no upstream.
- * Provenance: Tesla EV charge-session energy metering / billing ("STEM")
- * schema, from our own observations and contributions from the community.
- */
-
-/**
  * Split integer energy representation: whole watt-hours plus a
  * sub-watt-hour remainder in milli-watt-hours.
  */
