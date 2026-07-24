@@ -1,7 +1,3 @@
-// TESLEMETRY SOURCE-OF-RECORD - no upstream.
-// Provenance: Tesla dashcam/Sentry video SEI metadata, from our own
-// observations and contributions from the community
-
 syntax = "proto3";
 
 package DashcamSei;
