@@ -43,7 +43,8 @@ proto/                  source of truth (the only hand-edited artifacts)
 ├── telemetry/          fleet-telemetry protos (upstream verbatim)
 ├── energy_device/      TEG gateway local-API protos
 ├── energy_command/     energy command identifiers
-└── teslapower/         Powerwall local-API proto
+├── teslapower/         Powerwall local-API proto
+└── charging/           EV charge-session metering/billing ("STEM") protos
 packages/typescript/    @teslemetry/tesla-protocol (generated, committed)
 packages/python/        tesla-protocol (generated, committed)
 ```

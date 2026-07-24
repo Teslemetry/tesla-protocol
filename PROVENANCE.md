@@ -14,6 +14,7 @@ directories no public upstream exists and this repo is the source of record.
 | `proto/command/session.proto` | Teslemetry source-of-record | no upstream (Teslemetry session persistence) |
 | `proto/energy_device/`, `proto/energy_command/` | Teslemetry source-of-record | no upstream (TEG gateway local API, from our own observations and contributions from the community) |
 | `proto/teslapower/` | Teslemetry source-of-record | no upstream (Powerwall local API, from our own observations and contributions from the community, credit @brianhealey) |
+| `proto/charging/` | Teslemetry source-of-record | no upstream (EV charge-session energy metering / billing schema, from our own observations and contributions from the community) |
 
 ## How the boundary is kept visible
 
@@ -52,4 +53,9 @@ policed for marker presence.
 - Wire-compatible additions = minor; field/enum renames = major; tag
   renumbering = forbidden (`buf breaking` gate).
 - Tesla's internal app-only schema namespaces are deliberately NOT published
-  here; only consumer-needed command/telemetry/energy surfaces are.
+  here; only consumer-needed command/telemetry/energy surfaces are. `proto/charging/`
+  is a deliberate, narrow exception: it models the vehicle-charging product
+  domain even though no BLE or Fleet API surface exposes it as protobuf today
+  (the public Fleet API charging endpoints return JSON), because the schema
+  itself is a genuine, self-contained description of Tesla's charge-session
+  metering/billing data.

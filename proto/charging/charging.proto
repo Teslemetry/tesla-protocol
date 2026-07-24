@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package com.tesla.proto.charging.v1;
+
+// Split integer energy representation: whole watt-hours plus a
+// sub-watt-hour remainder in milli-watt-hours.
+message Energy {
+  uint32 watt_hours = 1;
+  uint32 milli_watt_hours = 2;
+}
+
+// Identity and firmware of the metering device that recorded a charge session.
+message StemInfo {
+  bytes fw_githash = 1;
+  string serial_number = 2;
+  string part_number = 3;
+  string meter_id = 4;
+}
+
+// Validity flags for a charge-session metering record.
+message StemEventInfo {
+  bool event_occurred = 1;
+  bool invalidated = 2;
+  bool time_synchronized = 3;
+}
+
+// Bucketed energy vended (delivered) over a charge session.
+message ChargeSessionTimeSeries {
+  uint64 start_time_epoch_s = 1;
+  uint64 end_time_epoch_s = 2;
+  uint32 total_energy_vended_wh = 3;
+  uint32 bucket_duration_s = 4;
+  uint32 first_bucket_duration_s = 5;
+  repeated uint32 bucket_energy_vended_wh = 6;
+  Energy total_energy_vended = 7;
+  repeated Energy bucket_energy_vended = 8;
+}
+
+// UI-facing summary of a live or recently completed charge session.
+message StemUi {
+  StemInfo stem_info = 1;
+  uint32 session_id = 2;
+  uint64 system_time_epoch_s = 3;
+  uint32 idle_time_s = 4;
+  uint64 start_time_epoch_s = 5;
+  StemEventInfo stem_event_info = 6;
+  float session_energy_kwh = 7;
+}
+
+// Billing record for a completed charge session.
+message StemBilling {
+  StemInfo stem_info = 1;
+  uint32 session_id = 2;
+  StemEventInfo stem_event_info = 3;
+  float lifetime_energy_start_kwh = 4;
+  float lifetime_energy_end_kwh = 5;
+  uint32 idle_time_s = 6;
+  ChargeSessionTimeSeries charge_session_time_series = 7;
+}
