@@ -1,5 +1,18 @@
 # @teslemetry/tesla-protocol
 
+## 0.6.0
+
+### Minor Changes
+
+- b755065: Add a new `charging` source-of-record module modelling `com.tesla.proto.charging.v1`, the EV charge-session energy metering and per-session billing schema (`Energy`, `StemInfo`, `StemEventInfo`, `ChargeSessionTimeSeries`, `StemUi`, `StemBilling`) - based on our own observations and contributions from the community.
+- 15b0027: Model the remaining autonomy/autopilot surface and vehicle lighting fields observed in the current app: `UniversalMessage.Domain.DOMAIN_AUTOPILOT`, VCSEC's `AutonomyCommand` (wrapping the `PullOverCommand` trigger, wired into `UnsignedMessage` field 66), and `VehicleState.deck_lights_on` / `hazards_on` - based on our own observations and contributions from the community.
+- a777637: Model `DashcamSei.SeiMetadata`, the per-frame vehicle telemetry (speed, gear, steering, GPS, heading, linear acceleration, autopilot state, blinkers, brake) carried in the SEI payload embedded in TeslaCam/Sentry/live-camera video - based on our own observations and contributions from the community.
+- 82f65ef: Add `VehicleData.unknown` (field 18), an opaque `bytes` payload observed on live `vehicleDataSubscription` pushes but not yet decoded.
+
+### Patch Changes
+
+- cf9d721: Regenerate `packages/typescript/src/charging/charging.ts` from `proto/charging/charging.proto` to drop a stale source-of-record comment block that was removed from the proto source but never re-synced into the generated output.
+
 ## 0.5.0
 
 ### Minor Changes
