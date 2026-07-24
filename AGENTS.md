@@ -11,6 +11,7 @@ This file is the project's committed home for project-intrinsic agent knowledge:
 - Un-reserving a field to model it (as field 12 above did) trips buf's `RESERVED_MESSAGE_NO_DELETE` breaking check even though it's a wire-compatible addition; `buf.yaml` excepts that rule repo-wide for this reason, so the same move for fields 17/19 later won't need a fresh exception.
 - The committed `proto/command/` baseline already reflects one specific Tesla app build reconstructed via cross-version protobuf diffing (`app-4.58.6`, see `TESLEMETRY-EXT` markers). A later app-version-diff pass will find most candidate fields already modelled here - check the current `.proto` files for the exact field/tag before assuming it needs adding, and only model the genuine delta.
 - `proto/charging/` is a documented exception to the "app-only namespaces are not published" policy (`PROVENANCE.md`): it has no BLE or Fleet API wire path today, but was published because it describes the vehicle-charging product domain. Any future app-only module wanting the same exception should be argued explicitly, not assumed from this precedent.
+- Adding a wholly new proto directory (a source with no upstream) needs registering in three places: the `buf.yaml` module list, `GROUPS_LIST` in `scripts/generate.sh`, and the layout table + provenance table in `README.md`/`PROVENANCE.md`. TypeScript/Python package exports are wildcarded, so no per-group registration is needed there.
 
 ## Maintaining this file
 

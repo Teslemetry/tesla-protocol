@@ -15,6 +15,7 @@ directories no public upstream exists and this repo is the source of record.
 | `proto/energy_device/`, `proto/energy_command/` | Teslemetry source-of-record | no upstream (TEG gateway local API, from our own observations and contributions from the community) |
 | `proto/teslapower/` | Teslemetry source-of-record | no upstream (Powerwall local API, from our own observations and contributions from the community, credit @brianhealey) |
 | `proto/charging/` | Teslemetry source-of-record | no upstream (EV charge-session energy metering / billing schema, from our own observations and contributions from the community) |
+| `proto/dashcam/` | Teslemetry source-of-record | no upstream (TeslaCam/Sentry video SEI metadata, from our own observations and contributions from the community) |
 
 ## How the boundary is kept visible
 

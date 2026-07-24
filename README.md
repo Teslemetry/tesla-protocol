@@ -44,7 +44,8 @@ proto/                  source of truth (the only hand-edited artifacts)
 ├── energy_device/      TEG gateway local-API protos
 ├── energy_command/     energy command identifiers
 ├── teslapower/         Powerwall local-API proto
-└── charging/           EV charge-session metering/billing ("STEM") protos
+├── charging/           EV charge-session metering/billing ("STEM") protos
+└── dashcam/            TeslaCam/Sentry video SEI metadata proto
 packages/typescript/    @teslemetry/tesla-protocol (generated, committed)
 packages/python/        tesla-protocol (generated, committed)
 ```
