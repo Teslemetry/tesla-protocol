@@ -96,6 +96,30 @@ class EcuId(_message.Message):
     def __init__(self, part_number: _Optional[str]=..., serial_number: _Optional[str]=...) -> None:
         ...
 
+class VIN(_message.Message):
+    __slots__ = ('value',)
+    VALUE_FIELD_NUMBER: _ClassVar[int]
+    value: str
+
+    def __init__(self, value: _Optional[str]=...) -> None:
+        ...
+
+class UUIDv4Bytes(_message.Message):
+    __slots__ = ('value',)
+    VALUE_FIELD_NUMBER: _ClassVar[int]
+    value: bytes
+
+    def __init__(self, value: _Optional[bytes]=...) -> None:
+        ...
+
+class UUIDv4(_message.Message):
+    __slots__ = ('text',)
+    TEXT_FIELD_NUMBER: _ClassVar[int]
+    text: str
+
+    def __init__(self, text: _Optional[str]=...) -> None:
+        ...
+
 class DeviceSignedPayload(_message.Message):
     __slots__ = ('payload', 'device_signature_type', 'signature', 'device_cert_format', 'device_cert')
     PAYLOAD_FIELD_NUMBER: _ClassVar[int]

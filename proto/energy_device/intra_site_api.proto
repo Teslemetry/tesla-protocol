@@ -1,0 +1,210 @@
+// TESLEMETRY SOURCE-OF-RECORD - no upstream.
+// Provenance: Tesla Energy gateway (TEG) local API, from our own
+// observations and contributions from the community
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "IntraSiteApi";
+
+import "networking.proto";
+import "energy_site_net.proto";
+
+enum IntraSiteBackhaulInterfaceType {
+  INTRA_SITE_BACKHAUL_INTERFACE_TYPE_INVALID = 0;
+  INTRA_SITE_BACKHAUL_INTERFACE_TYPE_WIFI    = 1;
+  INTRA_SITE_BACKHAUL_INTERFACE_TYPE_CELL    = 2;
+}
+
+enum IntraSiteBackhaulStatus {
+  INTRA_SITE_BACKHAUL_STATUS_INVALID = 0;
+  INTRA_SITE_BACKHAUL_STATUS_OFFLINE = 1;
+  INTRA_SITE_BACKHAUL_STATUS_ONLINE  = 2;
+}
+
+enum IntraSiteLeaderStatus {
+  INTRA_SITE_LEADER_STATUS_INVALID             = 0;
+  INTRA_SITE_LEADER_STATUS_TEMPORARILY_OFFLINE = 1;
+  INTRA_SITE_LEADER_STATUS_ONLINE              = 2;
+}
+
+enum IntraSiteJoinNetworkResult {
+  INTRA_SITE_JOIN_NETWORK_RESULT_INVALID                 = 0;
+  INTRA_SITE_JOIN_NETWORK_RESULT_ACCEPTED                = 1;
+  INTRA_SITE_JOIN_NETWORK_RESULT_REJECTED_ALREADY_JOINED = 2;
+  INTRA_SITE_JOIN_NETWORK_RESULT_REJECTED_INCOMPATIBLE   = 3;
+  INTRA_SITE_JOIN_NETWORK_RESULT_REJECTED_INTERNAL_ERROR = 4;
+}
+
+enum IntraSitePairResult {
+  INTRA_SITE_PAIR_RESULT_INVALID                                   = 0;
+  INTRA_SITE_PAIR_RESULT_ACCEPTED                                  = 1;
+  INTRA_SITE_PAIR_RESULT_REJECTED_DIFFERENT_NETWORK_ALREADY_JOINED = 2;
+  INTRA_SITE_PAIR_RESULT_REJECTED_INTERNAL_ERROR                   = 3;
+  INTRA_SITE_PAIR_RESULT_REJECTED_UNSUPPORTED_SERVICE_TYPES        = 4;
+  INTRA_SITE_PAIR_RESULT_REJECTED_UNSUPPORTED_LAN_TYPE             = 5;
+  INTRA_SITE_PAIR_RESULT_REJECTED_NO_PROOF_OF_PRESENCE             = 6;
+}
+
+enum IntraSiteUnpairResult {
+  INTRA_SITE_UNPAIR_RESULT_INVALID                                  = 0;
+  INTRA_SITE_UNPAIR_RESULT_ACCEPTED                                 = 1;
+  INTRA_SITE_UNPAIR_RESULT_REJECTED_NETWORK_LED_BY_DIFFERENT_LEADER = 2;
+  INTRA_SITE_UNPAIR_RESULT_REJECTED_DEVICE_IS_LEADER                = 3;
+  INTRA_SITE_UNPAIR_RESULT_REJECTED_UNSUPPORTED_OPERATION           = 4;
+}
+
+enum IntraSiteCompleteUpdateResult {
+  INTRA_SITE_COMPLETE_UPDATE_RESULT_INVALID           = 0;
+  INTRA_SITE_COMPLETE_UPDATE_RESULT_FIRMWARE_MATCHES  = 1;
+  INTRA_SITE_COMPLETE_UPDATE_RESULT_TERMINATE_SUCCESS = 2;
+  INTRA_SITE_COMPLETE_UPDATE_RESULT_TERMINATE_FAILURE = 3;
+  INTRA_SITE_COMPLETE_UPDATE_RESULT_HANDSHAKE_FAILURE = 4;
+  INTRA_SITE_COMPLETE_UPDATE_RESULT_UNKNOWN_FAILURE   = 5;
+}
+
+enum IntraSiteHeartbeatResult {
+  INTRA_SITE_HEARTBEAT_RESULT_INVALID         = 0;
+  INTRA_SITE_HEARTBEAT_RESULT_ACCEPTED        = 1;
+  INTRA_SITE_HEARTBEAT_RESULT_NOT_ON_MANIFEST = 2;
+}
+
+enum IntraSiteLanType {
+  INTRA_SITE_LAN_TYPE_INVALID     = 0;
+  INTRA_SITE_LAN_TYPE_SOFT_AP     = 1;
+  INTRA_SITE_LAN_TYPE_PRE_DEFINED = 2;
+}
+
+message IntraSiteConfig {
+  uint64 last_changed_timestamp                          = 1;
+  EnergySiteNetConfig site_config                        = 2;
+  IntraSiteBackhaulInterfaceType backhaul_interface_type = 3;
+  WifiConfig site_wifi                                   = 4;
+  EnergySiteNetDevice leader                             = 5;
+  reserved 6;
+  repeated IntraSiteServiceType service_types            = 7;
+  IntraSiteLanType lan_type                              = 8;
+}
+
+message IntraSiteAPIPairRequest {
+  IntraSiteConfig site = 1;
+}
+
+message IntraSiteAPIPairResponse {
+  IntraSitePairResult result = 1;
+}
+
+message IntraSiteAPIUnpairRequest {
+}
+
+message IntraSiteAPIUnpairResponse {
+  IntraSiteUnpairResult result = 1;
+}
+
+message IntraSiteAPIJoinNetworkRequest {
+  IntraSiteConfig site = 1;
+}
+
+message IntraSiteAPIJoinNetworkResponse {
+  IntraSiteJoinNetworkResult result = 1;
+}
+
+message IntraSiteAPIAddDeviceRequest {
+  EnergySiteNetDevice device = 1;
+  IntraSiteConfig site       = 2;
+}
+
+message IntraSiteAPIAddDeviceResponse {
+  EnergySiteNetAdditionStatus result = 1;
+}
+
+message IntraSiteAPIPushAddDeviceResultRequest {
+  EnergySiteNetDevice device         = 1;
+  EnergySiteNetAdditionStatus result = 2;
+}
+
+message IntraSiteAPIPushAddDeviceResultResponse {
+}
+
+message IntraSiteAPILeaveNetworkRequest {
+}
+
+message IntraSiteAPILeaveNetworkResponse {
+}
+
+message IntraSiteAPIPushHeartbeatRequest {
+}
+
+message IntraSiteAPIPushHeartbeatResponse {
+  IntraSiteHeartbeatResult result = 1;
+}
+
+message IntraSiteAPIPushConfigRequest {
+  IntraSiteConfig site = 1;
+}
+
+message IntraSiteAPIPushConfigResponse {
+}
+
+message IntraSiteAPIPushBackhaulStatusRequest {
+  IntraSiteBackhaulInterfaceType backhaul_interface_type = 1;
+  IntraSiteBackhaulStatus backhaul_status                = 2;
+}
+
+message IntraSiteAPIPushBackhaulStatusResponse {
+}
+
+message IntraSiteAPIPushLeaderStatusRequest {
+  IntraSiteLeaderStatus status = 1;
+  uint32 expected_duration_s   = 2;
+}
+
+message IntraSiteAPIPushLeaderStatusResponse {
+}
+
+message IntraSiteAPIRequestUpdateRequest {
+  string din = 1;
+}
+
+message IntraSiteAPIRequestUpdateResponse {
+  string signature = 1;
+}
+
+message IntraSiteAPICompleteUpdateRequest {
+  string din                           = 1;
+  IntraSiteCompleteUpdateResult result = 2;
+}
+
+message IntraSiteAPICompleteUpdateResponse {
+}
+
+message IntraSiteMessages {
+  oneof message {
+    IntraSiteAPIJoinNetworkRequest join_network_request                       = 1;
+    IntraSiteAPIJoinNetworkResponse join_network_response                     = 2;
+    IntraSiteAPIAddDeviceRequest add_device_request                           = 3;
+    IntraSiteAPIAddDeviceResponse add_device_response                         = 4;
+    IntraSiteAPIPushAddDeviceResultRequest push_add_device_result_request     = 5;
+    IntraSiteAPIPushAddDeviceResultResponse push_add_device_result_response   = 6;
+    IntraSiteAPILeaveNetworkRequest leave_network_request                     = 7;
+    IntraSiteAPILeaveNetworkResponse leave_network_response                   = 8;
+    IntraSiteAPIPushHeartbeatRequest push_heartbeat_request                   = 9;
+    IntraSiteAPIPushHeartbeatResponse push_heartbeat_response                 = 10;
+    IntraSiteAPIPushConfigRequest push_config_request                         = 11;
+    IntraSiteAPIPushConfigResponse push_config_response                       = 12;
+    IntraSiteAPIPushBackhaulStatusRequest push_backhaul_status_request        = 13;
+    IntraSiteAPIPushBackhaulStatusResponse push_backhaul_status_response      = 14;
+    IntraSiteAPIPushLeaderStatusRequest push_leader_status_request           = 15;
+    IntraSiteAPIPushLeaderStatusResponse push_leader_status_response         = 16;
+    IntraSiteAPIRequestUpdateRequest request_update_request                   = 17;
+    IntraSiteAPIRequestUpdateResponse request_update_response                 = 18;
+    IntraSiteAPICompleteUpdateRequest complete_update_request                 = 19;
+    IntraSiteAPICompleteUpdateResponse complete_update_response               = 20;
+    IntraSiteAPIPairRequest pair_request                                      = 21;
+    IntraSiteAPIPairResponse pair_response                                    = 22;
+    IntraSiteAPIUnpairRequest unpair_request                                  = 23;
+    IntraSiteAPIUnpairResponse unpair_response                                = 24;
+  }
+}

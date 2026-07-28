@@ -84,6 +84,8 @@ message NetworkInterface {
   bool active_route                             = 3;
   NetworkInterfaceIPv4Config ipv4_config        = 4;
   NetworkConnectivityStatus connectivity_status = 5;
+  NetworkDeviceState device_state               = 6;
+  NetworkDeviceStateReason device_state_reason  = 7;
 }
 
 message CellularEID {

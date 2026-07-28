@@ -9,6 +9,13 @@ option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/
 option java_package = "com.tesla.generated.energy_device.v1";
 option java_outer_classname = "WallConnector";
 
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "device.proto";
+import "networking.proto";
+import "energy.proto";
+import "neurio_meter_api.proto";
+
 enum WCChargeScheduleChargingStatus {
   WC_CHARGE_SCHEDULE_CHARGING_STATUS_INVALID                = 0;
   WC_CHARGE_SCHEDULE_CHARGING_STATUS_UNCONFIGURED_DISABLED  = 1;
@@ -139,5 +146,692 @@ enum WCOcppStatus {
   WC_OCPP_STATUS_CONFIGURED_ENABLED_INVALID_CONFIGURATION = 6;
 }
 
+enum WCDryContactControlState {
+  WC_DRY_CONTACT_CONTROL_STATE_INVALID  = 0;
+  WC_DRY_CONTACT_CONTROL_STATE_INACTIVE = 1;
+  WC_DRY_CONTACT_CONTROL_STATE_ACTIVE   = 2;
+}
+
+enum WCDryContactDefaultState {
+  WC_DRY_CONTACT_DEFAULT_STATE_INVALID         = 0;
+  WC_DRY_CONTACT_DEFAULT_STATE_NORMALLY_OPEN   = 1;
+  WC_DRY_CONTACT_DEFAULT_STATE_NORMALLY_CLOSED = 2;
+}
+
+enum WCTimeSource {
+  WC_TIME_SOURCE_INVALID = 0;
+  WC_TIME_SOURCE_BUILD   = 1;
+  WC_TIME_SOURCE_SAVED   = 2;
+  WC_TIME_SOURCE_STALE   = 3;
+  WC_TIME_SOURCE_SYNCED  = 4;
+}
+
+enum WCOperationalMode {
+  WC_OPERATIONAL_MODE_INVALID                                    = 0;
+  WC_OPERATIONAL_MODE_COMMERCIAL_PAY_PER_USE                     = 1;
+  WC_OPERATIONAL_MODE_COMMERCIAL_NOT_PAY_PER_USE                 = 2;
+  WC_OPERATIONAL_MODE_NOT_COMMERCIAL                             = 3;
+  WC_OPERATIONAL_MODE_COMMERCIAL_PAY_PER_USE_WITH_ACCESS_CONTROL = 4;
+  WC_OPERATIONAL_MODE_COMMERCIAL_WITH_ACCESS_CONTROL             = 5;
+}
+
+enum WCOcppSecurityParameterType {
+  WC_OCPP_SECURITY_PARAMETER_TYPE_INVALID              = 0;
+  WC_OCPP_SECURITY_PARAMETER_TYPE_CP_AUTH_KEY          = 1;
+  WC_OCPP_SECURITY_PARAMETER_TYPE_CS_CA_CERT           = 2;
+  WC_OCPP_SECURITY_PARAMETER_TYPE_CP_CERT              = 3;
+  WC_OCPP_SECURITY_PARAMETER_TYPE_ALTERNATE_CS_CA_CERT = 4;
+}
+
+enum WCOcppVersion {
+  WC_OCPP_VERSION_INVALID = 0;
+  WC_OCPP_VERSION_1_6     = 1;
+  WC_OCPP_VERSION_2_0_1   = 2;
+}
+
+enum WCOcppSecurityProfile {
+  WC_OCPP_SECURITY_PROFILE_INVALID              = 0;
+  WC_OCPP_SECURITY_PROFILE_UNSECURED_BASIC_AUTH = 1;
+  WC_OCPP_SECURITY_PROFILE_TLS_BASIC_AUTH       = 2;
+  WC_OCPP_SECURITY_PROFILE_TLS_CLIENT_CERTS     = 3;
+}
+
+enum WCOcppScope {
+  WC_OCPP_SCOPE_INVALID       = 0;
+  WC_OCPP_SCOPE_REIMBURSEMENT = 1;
+  WC_OCPP_SCOPE_FULL          = 2;
+}
+
+enum WCSmartChargingReason {
+  WC_SMART_CHARGING_REASON_INVALID                                   = 0;
+  WC_SMART_CHARGING_REASON_DISABLED_BY_SCHEDULE                      = 1;
+  WC_SMART_CHARGING_REASON_ENABLED_BY_SCHEDULE                       = 2;
+  WC_SMART_CHARGING_REASON_EXPLICITLY_STOPPED                        = 3;
+  WC_SMART_CHARGING_REASON_EXPLICITLY_STARTED                        = 4;
+  WC_SMART_CHARGING_REASON_SMART_CHARGING_ALLOWED                    = 5;
+  WC_SMART_CHARGING_REASON_SMART_CHARGING_DISALLOWED                 = 6;
+  WC_SMART_CHARGING_REASON_SMART_CHARGING_TARGET_POWER               = 7;
+  WC_SMART_CHARGING_REASON_SMART_CHARGING_LOW_VOLTAGE                = 8;
+  WC_SMART_CHARGING_REASON_SMART_CHARGING_TARGET_POWER_BELOW_MINIMUM = 9;
+}
+
+enum WCPowershareSessionState {
+  WC_POWERSHARE_SESSION_STATE_INVALID     = 0;
+  WC_POWERSHARE_SESSION_STATE_NONE        = 1;
+  WC_POWERSHARE_SESSION_STATE_IN_PROGRESS = 2;
+}
+
+enum WCChargingCommand {
+  WC_CHARGING_COMMAND_INVALID = 0;
+  WC_CHARGING_COMMAND_START   = 1;
+  WC_CHARGING_COMMAND_STOP    = 2;
+}
+
+message WCFaultStatusLatchedAlert {
+  uint32 alert_id                           = 1;
+  google.protobuf.Timestamp alert_timestamp = 2;
+}
+
+message WCVitals {
+  uint32 uptime_s                                                       = 1;
+  repeated uint32 alerts                                                = 2;
+  bool contactor_closed                                                 = 3;
+  bool vehicle_connected                                                = 4;
+  float pcba_temp_c                                                     = 5;
+  float handle_temp_c                                                   = 6;
+  float mcu_temp_c                                                      = 7;
+  float input_thermopile_v                                              = 8;
+  float prox_v                                                          = 9;
+  float pilot_high_v                                                    = 10;
+  float pilot_low_v                                                     = 11;
+  uint32 session_duration_s                                             = 12;
+  AccumulatedEnergy session_energy                                      = 13;
+  InstACMeasurement ac_measurement_grid                                 = 14;
+  InstACMeasurement ac_measurement_vehicle                              = 15;
+  float ground_resistance_ohms                                          = 16;
+  float line1_earth_vrms                                                = 17;
+  float neutral_earth_vrms                                              = 18;
+  WCFaultStatusState fault_status                                       = 19;
+  repeated WCFaultStatusLatchedAlert recent_fault_status_latched_alerts = 20;
+  VIN vin                                                               = 21;
+  google.protobuf.FloatValue instantaneous_power_watts                  = 22;
+  WCChargeScheduleChargingStatus scheduled_charging_status              = 23;
+  google.protobuf.FloatValue instantaneous_line_current                 = 24;
+  WCOcppStatus ocpp_status                                              = 25;
+  repeated WCEvseNotReadyReason evse_not_ready_reasons                  = 26;
+  WCPowershareSessionState powershare_session_state                     = 27;
+  WCDryContactControlState dry_contact_control_state                   = 28;
+  WCSmartChargingReason smart_charging_reason                          = 29;
+}
+
+message WCLifetimeStats {
+  reserved 1, 2;
+  uint64 uptime_s                   = 3;
+  uint32 alert_count                = 4;
+  uint32 contactor_cycles           = 5;
+  uint32 contactor_cycles_loaded    = 6;
+  uint32 connector_cycles           = 7;
+  uint32 thermal_foldbacks          = 8;
+  float avg_startup_temp_c          = 9;
+  uint32 charge_starts              = 10;
+  uint64 charging_time_s            = 11;
+  AccumulatedEnergy charging_energy = 12;
+}
+
+message WCLoadSharingFixedLimitConfig {
+  uint32 network_limit_amps = 1;
+}
+
+message WCLoadSharingConductorLimitConfig {
+  uint32 conductor_limit_amps = 1;
+}
+
+message WCLoadSharingSettings {
+  WCLoadSharingFixedLimitConfig fixed_limit         = 1;
+  WCLoadSharingConductorLimitConfig conductor_limit = 2;
+}
+
+message WCLoadSharingLimits {
+  uint32 max_participants = 1;
+}
+
+message WCLoadSharingNetworkStatus {
+  repeated WCLoadSharingNetworkChargingInhibitor network_charging_inhibitors = 1;
+}
+
+message WCLoadSharingConfig {
+  uint32 version                            = 1;
+  repeated Din participant_dins             = 2;
+  WCLoadSharingFixedLimitConfig fixed_limit = 3;
+  WCLoadSharingSettings settings            = 4;
+  bool charging_enabled                     = 5;
+}
+
+message WCPpuConfig {
+  WCPpuSessionReportingMode session_reporting_mode = 1;
+}
+
+message WCOperationalSettingsConfig {
+  WCOperationalMode operational_mode = 1;
+  bool emit_increased_telemetry      = 2;
+}
+
+message WCMeterInterface {
+  NeurioMeterInterface neurio = 1;
+}
+
+message WCDryContactConfig {
+  bool enabled                           = 1;
+  WCDryContactDefaultState default_state = 2;
+  bool disable_charging                  = 3;
+  uint32 max_current_amps                = 4;
+  bool germany_14a                       = 5;
+}
+
+message WCTimeZoneTransition {
+  google.protobuf.Timestamp timestamp = 1;
+  int32 local_time_utc_offset         = 2;
+}
+
+message WCTimeZoneInfo {
+  repeated WCTimeZoneTransition transitions = 1;
+}
+
+message WCTimeZone {
+  string time_zone_id           = 1;
+  WCTimeZoneInfo time_zone_info = 2;
+}
+
+message WCMIDConfig {
+  bool enabled         = 1;
+  WCTimeZone time_zone = 2;
+}
+
+message WCSettings {
+  int32 max_output_current_amps                    = 1;
+  WCGroundMonitorMode gmi_mode                     = 2;
+  string country                                   = 3;
+  WCThirdPartyVehicleMode third_party_vehicle_mode = 4;
+  WCLoadSharingConfig load_sharing_config          = 5;
+  WCDryContactConfig dry_contact                   = 6;
+  WCMIDConfig mid_config                           = 7;
+}
+
+message WCGenealogy {
+  uint32 region            = 1;
+  uint32 handle_type       = 2;
+  uint32 hardware_features = 3;
+  uint32 sub_usage_id      = 4;
+}
+
+message ComplianceCRC32 {
+  string name  = 1;
+  uint32 crc32 = 2;
+}
+
+message WCLoadSharingFollowerState {
+  uint32 version                       = 1;
+  bool charge_request                  = 2;
+  float load_current_amps              = 3;
+  bool vehicle_connected               = 4;
+  uint32 alert_count                   = 5;
+  bool contactor_closed                = 6;
+  reserved 7;
+  uint32 pilot_current_amps            = 8;
+  uint32 individual_pilot_current_amps = 9;
+}
+
+message WCLoadSharingLeaderCommand {
+  bool charge_allowed       = 1;
+  uint32 pilot_current_amps = 2;
+}
+
+message WCLoadSharingLeaderState {
+  uint32 version                    = 1;
+  uint32 network_current_limit_amps = 2;
+  uint32 fallback_current_amps      = 3;
+  uint32 round_robin_index          = 4;
+  bool charging_enabled             = 5;
+  uint32 active_unit_count          = 6;
+}
+
+message WCLoadSharingDeviceEntry {
+  Din din                                   = 1;
+  WCLoadSharingLeaderCommand leader_command = 2;
+  WCLoadSharingFollowerState follower_state = 3;
+  bool mia                                  = 4;
+}
+
+message WCLoadSharingNetworkState {
+  repeated WCLoadSharingDeviceEntry devices = 1;
+  WCLoadSharingLeaderState leader_state     = 2;
+  WCLoadSharingSettings settings            = 3;
+  WCLoadSharingNetworkStatus status         = 4;
+  WCLoadSharingLimits limits                = 5;
+}
+
+message WCProvisionalOperationalParams {
+  uint32 limit_current_max_amps = 1;
+  uint32 limit_timeout_s        = 2;
+  bool inhibit_charging         = 3;
+}
+
+message WCAccessControlEntry {
+  VIN vin                            = 1;
+  string name                        = 2;
+  WCTeslaVehicleModel model          = 3;
+  uint32 model_year                  = 4;
+  WCTeslaVehicleDriveType drive_type = 5;
+}
+
+message WCChargeScheduleTimePeriod {
+  uint32 start_seconds = 1;
+  uint32 end_seconds   = 2;
+}
+
+message WCChargeScheduleDayTimePeriods {
+  repeated WCChargeScheduleTimePeriod time_periods = 1;
+  uint32 day_bitmask                               = 2; // bitmask of WCChargeScheduleDay values
+}
+
+message WCChargeSchedule {
+  repeated WCChargeScheduleDayTimePeriods day_time_periods = 1;
+}
+
+message WCChargeScheduleDelay {
+  uint32 max_delay_seconds = 1;
+}
+
+message WCChargeScheduleConfig {
+  bool enable_schedule        = 1;
+  WCChargeSchedule schedule   = 2;
+  WCChargeScheduleDelay delay = 3;
+}
+
+message WCChargeScheduleConfigStatus {
+  WCChargeScheduleConfig config     = 1;
+  WCChargeScheduleConfigError error = 2;
+}
+
+message WCChargeCommand {
+  WCChargingCommand charging_command = 1;
+}
+
+message WCOcppSettings {
+  string connection_url             = 1;
+  string chargepoint_id             = 2;
+  WCOcppVersion version              = 3;
+  WCOcppSecurityProfile security_profile = 4;
+  bool enable                       = 5;
+  string provider_name              = 6;
+  WCOcppScope scope                  = 7;
+}
+
+message WCOcppAuthorizationData {
+  string id_tag = 1;
+}
+
+message WCOcppAuthorizationList {
+  repeated WCOcppAuthorizationData auth_data = 1;
+}
+
+message WCVehicleToHomeConfig {
+  Din site_controller_din = 1;
+  uint32 modbus_node_id   = 2;
+}
+
+message WCAPIGetVitalsRequest {
+}
+
+message WCAPIGetVitalsResponse {
+  WCVitals vitals = 1;
+}
+
+message WCAPIGetLifetimeStatsRequest {
+}
+
+message WCAPIGetLifetimeStatsResponse {
+  reserved 1, 2;
+  WCLifetimeStats lifetime_stats = 3;
+}
+
+message WCAPIGetConfigRequest {
+}
+
+message WCAPIGetConfigResponse {
+  WCSettings settings                    = 1;
+  WifiConfig wifi_config                 = 2;
+  NetworkInterface wifi                  = 3;
+  repeated WCMeterInterface meters       = 4;
+  WCChargeScheduleConfig charge_schedule = 5;
+  WCOcppSettings ocpp_settings           = 6;
+  WCVehicleToHomeConfig vehicle_to_home  = 7;
+  WCTimeSource time_source               = 8;
+}
+
+message WCAPIConfigureSettingsRequest {
+  WCSettings settings = 1;
+}
+
+message WCAPIConfigureSettingsResponse {
+  WCSettings settings = 1;
+}
+
+message WCAPIGetSystemInfoRequest {
+}
+
+message WCAPIGetSystemInfoResponse {
+  WCGenealogy genealogy                    = 1;
+  repeated ComplianceCRC32 compliance_crcs = 2;
+}
+
+message WCAPIGetLoadSharingNetworkStateRequest {
+}
+
+message WCAPIGetLoadSharingNetworkStateResponse {
+  WCLoadSharingNetworkState network_state = 1;
+}
+
+message WCAPIPushLoadSharingFollowerStateRequest {
+  WCLoadSharingFollowerState follower_state = 1;
+}
+
+message WCAPIPushLoadSharingFollowerStateResponse {
+  WCLoadSharingLeaderState leader_state     = 1;
+  WCLoadSharingLeaderCommand leader_command = 2;
+}
+
+message WCAPIPushLoadSharingLeaderCommandRequest {
+  WCLoadSharingLeaderState leader_state     = 1;
+  WCLoadSharingLeaderCommand leader_command = 2;
+}
+
+message WCAPIPushLoadSharingLeaderCommandResponse {
+  WCLoadSharingFollowerState follower_state = 1;
+}
+
+message WCAPISetLoadSharingNetworkOperationRequest {
+  bool charging_enabled = 1;
+}
+
+message WCAPISetLoadSharingNetworkOperationResponse {
+}
+
+message WCAPIConfigureLoadSharingSettingsRequest {
+  WCLoadSharingSettings settings = 1;
+}
+
+message WCAPIConfigureLoadSharingSettingsResponse {
+  WCLoadSharingSettings settings = 1;
+}
+
+message WCAPIPushLoadSharingConfigRequest {
+  WCLoadSharingConfig load_sharing_config = 1;
+}
+
+message WCAPIPushLoadSharingConfigResponse {
+}
+
+message WCAPIConfigurePpuSettingsRequest {
+  WCPpuConfig ppu_config = 1;
+}
+
+message WCAPIConfigurePpuSettingsResponse {
+  WCPpuConfig ppu_config = 1;
+}
+
+message WCAPIGetPpuSettingsRequest {
+}
+
+message WCAPIGetPpuSettingsResponse {
+  WCPpuConfig ppu_config = 1;
+}
+
+message WCAPIConfigureOperationalSettingsRequest {
+  WCOperationalSettingsConfig operational_settings_config = 1;
+}
+
+message WCAPIConfigureOperationalSettingsResponse {
+  WCOperationalSettingsConfig operational_settings_config = 1;
+}
+
+message WCAPIGetOperationalSettingsRequest {
+}
+
+message WCAPIGetOperationalSettingsResponse {
+  WCOperationalSettingsConfig operational_settings_config = 1;
+}
+
+message WCAPISetProvisionalOperationalParamsRequest {
+  WCProvisionalOperationalParams prov_op_params = 1;
+}
+
+message WCAPISetProvisionalOperationalParamsResponse {
+}
+
+message WCAPIGetProvisionalOperationalParamsRequest {
+}
+
+message WCAPIGetProvisionalOperationalParamsResponse {
+  WCProvisionalOperationalParams prov_op_params = 1;
+  uint32 configured_current_limit_amps          = 2;
+}
+
+message WCAPIGetAccessControlSettingsRequest {
+}
+
+message WCAPIGetAccessControlSettingsResponse {
+  repeated WCAccessControlEntry entries = 1;
+}
+
+message WCAPIConfigureAccessControlSettingsRequest {
+  WCConfigureAccessControlOperation operation = 1;
+  VIN vin                                     = 2;
+  string name                                 = 3;
+}
+
+message WCAPIConfigureAccessControlSettingsResponse {
+  repeated WCAccessControlEntry entries = 1;
+}
+
+message WCAPIGetRecentVehiclesRequest {
+}
+
+message WCAPIGetRecentVehiclesResponse {
+  repeated string recent_vehicles = 1;
+}
+
+message WCAPIPushPpuAuthorizationStateRequest {
+  bool authorized       = 1;
+  UUIDv4Bytes auth_uuid = 2;
+}
+
+message WCAPIPushPpuAuthorizationStateResponse {
+}
+
+message WCAPIConfigureChargeScheduleRequest {
+  WCChargeScheduleConfig config = 1;
+  WCTimeZone time_zone          = 2;
+}
+
+message WCAPIConfigureChargeScheduleResponse {
+  WCChargeScheduleError error = 1;
+}
+
+message WCAPIConfigureThirdPartyVehicleModeRequest {
+  WCThirdPartyVehicleMode third_party_vehicle_mode = 1;
+}
+
+message WCAPIConfigureThirdPartyVehicleModeResponse {
+}
+
+message WCAPIPushChargeCommandRequest {
+  WCChargeCommand charge_command = 1;
+}
+
+message WCAPIPushChargeCommandResponse {
+}
+
+message WCAPIConfigureHomeSiteControllerRequest {
+  Din din                      = 1;
+  uint32 modbus_node_id        = 2;
+  WCVehicleToHomeConfig config = 3;
+}
+
+message WCAPIConfigureHomeSiteControllerResponse {
+  WCVehicleToHomeConfig config = 1;
+}
+
+message WCAPIConfigureOcppSettingsRequest {
+  WCOcppSettings settings = 1;
+}
+
+message WCAPIConfigureOcppSettingsResponse {
+  WCOcppSettings settings = 1;
+  WCOcppStatus status     = 2;
+}
+
+message WCAPISetOcppSecurityParameterRequest {
+  WCOcppSecurityParameterType security_parameter_type = 1;
+  bytes security_parameter                            = 2;
+}
+
+message WCAPISetOcppSecurityParameterResponse {
+  WCOcppStatus status = 1;
+}
+
+message WCAPIGetOcppSecurityParameterRequest {
+  WCOcppSecurityParameterType security_parameter_type = 1;
+}
+
+message WCAPIGetOcppSecurityParameterResponse {
+  WCOcppSecurityParameterType security_parameter_type = 1;
+  bytes security_parameter                            = 2;
+}
+
+message WCAPIGetOcppLocalAuthListRequest {
+}
+
+message WCAPIGetOcppLocalAuthListResponse {
+  WCOcppAuthorizationList auth_list = 1;
+}
+
+message WCAPIConfigureCountryCodeSettingsRequest {
+  string country = 1;
+}
+
+message WCAPIConfigureCountryCodeSettingsResponse {
+}
+
+message WCTargetChargePowerParams {
+  float target_charge_power_w                   = 1;
+  google.protobuf.FloatValue max_charge_power_w = 2;
+  uint32 max_charge_current_a                   = 3;
+}
+
+message WCSmartChargingCommand {
+  uint32 ttl_seconds                                   = 1;
+  bool charge_disallowed                               = 2;
+  WCTargetChargePowerParams target_charge_power_params = 3;
+}
+
+message WCAPIPushSmartChargingCommandRequest {
+  WCSmartChargingCommand command = 1;
+}
+
+message WCAPIPushSmartChargingCommandResponse {
+}
+
+message WCAPIRegisterCommercialRequest {
+  // Field 1 (request) is a type from a separate, not-yet-modeled proto
+  // package; left unmodeled here.
+}
+
+message WCAPIRegisterCommercialResponse {
+  int32 failure = 1;
+  // Field 2 (response) is a type from a separate, not-yet-modeled proto
+  // package; left unmodeled here.
+}
+
+message WCAPIPushPowershareCommandRequest {
+  bytes site_vehicle_request = 1;
+  bytes site_evse_request    = 2;
+  bytes inverter_config      = 3;
+  uint32 ttl_seconds         = 4;
+}
+
+message WCAPIPushPowershareCommandResponse {
+  bytes site_vehicle_response = 1;
+  bytes site_evse_response    = 2;
+}
+
 message WCMessages {
+  oneof message {
+    WCAPIGetVitalsRequest get_vitals_request                                                     = 1;
+    WCAPIGetVitalsResponse get_vitals_response                                                   = 2;
+    WCAPIGetLifetimeStatsRequest get_lifetime_stats_request                                      = 3;
+    WCAPIGetLifetimeStatsResponse get_lifetime_stats_response                                    = 4;
+    WCAPIGetConfigRequest get_config_request                                                     = 5;
+    WCAPIGetConfigResponse get_config_response                                                   = 6;
+    WCAPIConfigureSettingsRequest configure_settings_request                                     = 7;
+    WCAPIConfigureSettingsResponse configure_settings_response                                   = 8;
+    WCAPIGetSystemInfoRequest get_system_info_request                                            = 9;
+    WCAPIGetSystemInfoResponse get_system_info_response                                          = 10;
+    WCAPIGetLoadSharingNetworkStateRequest get_load_sharing_network_state_request                = 11;
+    WCAPIGetLoadSharingNetworkStateResponse get_load_sharing_network_state_response              = 12;
+    WCAPIPushLoadSharingFollowerStateRequest push_load_sharing_follower_state_request             = 13;
+    WCAPIPushLoadSharingFollowerStateResponse push_load_sharing_follower_state_response           = 14;
+    WCAPIPushLoadSharingLeaderCommandRequest push_load_sharing_leader_command_request             = 15;
+    WCAPIPushLoadSharingLeaderCommandResponse push_load_sharing_leader_command_response           = 16;
+    WCAPISetLoadSharingNetworkOperationRequest set_load_sharing_network_operation_request         = 17;
+    WCAPISetLoadSharingNetworkOperationResponse set_load_sharing_network_operation_response       = 18;
+    WCAPIConfigureLoadSharingSettingsRequest configure_load_sharing_settings_request              = 19;
+    WCAPIConfigureLoadSharingSettingsResponse configure_load_sharing_settings_response            = 20;
+    WCAPIConfigurePpuSettingsRequest configure_ppu_settings_request                               = 21;
+    WCAPIConfigurePpuSettingsResponse configure_ppu_settings_response                             = 22;
+    WCAPIGetPpuSettingsRequest get_ppu_settings_request                                           = 23;
+    WCAPIGetPpuSettingsResponse get_ppu_settings_response                                         = 24;
+    WCAPISetProvisionalOperationalParamsRequest set_provisional_operational_params_request        = 25;
+    WCAPISetProvisionalOperationalParamsResponse set_provisional_operational_params_response      = 26;
+    WCAPIGetProvisionalOperationalParamsRequest get_provisional_operational_params_request        = 27;
+    WCAPIGetProvisionalOperationalParamsResponse get_provisional_operational_params_response      = 28;
+    WCAPIGetAccessControlSettingsRequest get_access_control_settings_request                      = 29;
+    WCAPIGetAccessControlSettingsResponse get_access_control_settings_response                    = 30;
+    WCAPIConfigureAccessControlSettingsRequest configure_access_control_settings_request          = 31;
+    WCAPIConfigureAccessControlSettingsResponse configure_access_control_settings_response        = 32;
+    WCAPIGetRecentVehiclesRequest get_recent_vehicles_request                                     = 33;
+    WCAPIGetRecentVehiclesResponse get_recent_vehicles_response                                   = 34;
+    WCAPIPushPpuAuthorizationStateRequest push_ppu_authorization_state_request                    = 35;
+    WCAPIPushPpuAuthorizationStateResponse push_ppu_authorization_state_response                  = 36;
+    WCAPIConfigureChargeScheduleRequest configure_charge_schedule_request                         = 37;
+    WCAPIConfigureChargeScheduleResponse configure_charge_schedule_response                       = 38;
+    WCAPIPushChargeCommandRequest push_charge_command_request                                     = 39;
+    WCAPIPushChargeCommandResponse push_charge_command_response                                   = 40;
+    WCAPIConfigureThirdPartyVehicleModeRequest configure_third_party_vehicle_mode_request         = 41;
+    WCAPIConfigureThirdPartyVehicleModeResponse configure_third_party_vehicle_mode_response       = 42;
+    WCAPIConfigureHomeSiteControllerRequest configure_home_site_controller_request               = 43;
+    WCAPIConfigureHomeSiteControllerResponse configure_home_site_controller_response              = 44;
+    WCAPIConfigureOcppSettingsRequest configure_ocpp_settings_request                             = 45;
+    WCAPIConfigureOcppSettingsResponse configure_ocpp_settings_response                           = 46;
+    WCAPISetOcppSecurityParameterRequest set_ocpp_security_parameter_request                      = 47;
+    WCAPISetOcppSecurityParameterResponse set_ocpp_security_parameter_response                    = 48;
+    WCAPIGetOcppSecurityParameterRequest get_ocpp_security_parameter_request                      = 49;
+    WCAPIGetOcppSecurityParameterResponse get_ocpp_security_parameter_response                    = 50;
+    WCAPIConfigureOperationalSettingsRequest configure_operational_settings_request               = 51;
+    WCAPIConfigureOperationalSettingsResponse configure_operational_settings_response             = 52;
+    WCAPIGetOperationalSettingsRequest get_operational_settings_request                           = 53;
+    WCAPIGetOperationalSettingsResponse get_operational_settings_response                         = 54;
+    WCAPIConfigureCountryCodeSettingsRequest configure_country_code_settings_request              = 55;
+    WCAPIConfigureCountryCodeSettingsResponse configure_country_code_settings_response            = 56;
+    WCAPIPushLoadSharingConfigRequest push_load_sharing_config_request                            = 57;
+    WCAPIPushLoadSharingConfigResponse push_load_sharing_config_response                          = 58;
+    WCAPIPushSmartChargingCommandRequest push_smart_charging_command_request                      = 59;
+    WCAPIPushSmartChargingCommandResponse push_smart_charging_command_response                    = 60;
+    WCAPIRegisterCommercialRequest register_commercial_request                                    = 61;
+    WCAPIRegisterCommercialResponse register_commercial_response                                  = 62;
+    WCAPIGetOcppLocalAuthListRequest get_ocpp_local_auth_list_request                             = 63;
+    WCAPIGetOcppLocalAuthListResponse get_ocpp_local_auth_list_response                           = 64;
+    WCAPIPushPowershareCommandRequest push_powershare_command_request                             = 65;
+    WCAPIPushPowershareCommandResponse push_powershare_command_response                           = 66;
+  }
 }

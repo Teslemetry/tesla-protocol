@@ -1,0 +1,65 @@
+// TESLEMETRY SOURCE-OF-RECORD - no upstream.
+// Provenance: Tesla Energy gateway (TEG) local API, from our own
+// observations and contributions from the community
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "LocalAuthApi";
+
+import "networking.proto";
+
+enum LocalAuthResult {
+  LOCAL_AUTH_RESULT_INVALID                  = 0;
+  LOCAL_AUTH_RESULT_SUCCESS                  = 1;
+  LOCAL_AUTH_RESULT_INVALID_PARAMETERS       = 2;
+  LOCAL_AUTH_RESULT_INVALID_PASSWORD         = 3;
+  LOCAL_AUTH_RESULT_PRESENCE_PROOF_REQUIRED  = 4;
+  LOCAL_AUTH_RESULT_PRESENCE_PROOF_TIMED_OUT = 5;
+}
+
+message LocalAuthAPIRequiredFactorsRequest {
+}
+
+message LocalAuthAPIRequiredFactorsResponse {
+  bool password = 1;
+  bool presence = 2;
+}
+
+message LocalAuthAPILoginRequest {
+  int32 participant     = 1; // enum-valued; kept scalar to avoid an import cycle
+  string email          = 2;
+  WifiPassword password = 3;
+}
+
+message LocalAuthAPILoginResponse {
+  LocalAuthResult result = 1;
+}
+
+message LocalAuthAPILogoutRequest {
+}
+
+message LocalAuthAPILogoutResponse {
+}
+
+message LocalAuthAPICheckAuthStatusRequest {
+}
+
+message LocalAuthAPICheckAuthStatusResponse {
+  LocalAuthResult result = 1;
+}
+
+message LocalAuthMessages {
+  oneof message {
+    LocalAuthAPIRequiredFactorsRequest required_factors_request     = 1;
+    LocalAuthAPIRequiredFactorsResponse required_factors_response   = 2;
+    LocalAuthAPILoginRequest login_request                          = 3;
+    LocalAuthAPILoginResponse login_response                        = 4;
+    LocalAuthAPILogoutRequest logout_request                        = 5;
+    LocalAuthAPILogoutResponse logout_response                      = 6;
+    LocalAuthAPICheckAuthStatusRequest check_auth_status_request    = 7;
+    LocalAuthAPICheckAuthStatusResponse check_auth_status_response  = 8;
+  }
+}

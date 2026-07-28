@@ -6,6 +6,12 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import { Din, UUIDv4Bytes, VIN } from "./device.js";
+import { AccumulatedEnergy, InstACMeasurement } from "./energy.js";
+import { Timestamp } from "./google/protobuf/timestamp.js";
+import { FloatValue } from "./google/protobuf/wrappers.js";
+import { NetworkInterface, WifiConfig } from "./networking.js";
+import { NeurioMeterInterface } from "./neurio_meter_api.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
@@ -837,22 +843,5221 @@ export function wCOcppStatusToJSON(object: WCOcppStatus): string {
   }
 }
 
+export enum WCDryContactControlState {
+  WC_DRY_CONTACT_CONTROL_STATE_INVALID = 0,
+  WC_DRY_CONTACT_CONTROL_STATE_INACTIVE = 1,
+  WC_DRY_CONTACT_CONTROL_STATE_ACTIVE = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function wCDryContactControlStateFromJSON(object: any): WCDryContactControlState {
+  switch (object) {
+    case 0:
+    case "WC_DRY_CONTACT_CONTROL_STATE_INVALID":
+      return WCDryContactControlState.WC_DRY_CONTACT_CONTROL_STATE_INVALID;
+    case 1:
+    case "WC_DRY_CONTACT_CONTROL_STATE_INACTIVE":
+      return WCDryContactControlState.WC_DRY_CONTACT_CONTROL_STATE_INACTIVE;
+    case 2:
+    case "WC_DRY_CONTACT_CONTROL_STATE_ACTIVE":
+      return WCDryContactControlState.WC_DRY_CONTACT_CONTROL_STATE_ACTIVE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return WCDryContactControlState.UNRECOGNIZED;
+  }
+}
+
+export function wCDryContactControlStateToJSON(object: WCDryContactControlState): string {
+  switch (object) {
+    case WCDryContactControlState.WC_DRY_CONTACT_CONTROL_STATE_INVALID:
+      return "WC_DRY_CONTACT_CONTROL_STATE_INVALID";
+    case WCDryContactControlState.WC_DRY_CONTACT_CONTROL_STATE_INACTIVE:
+      return "WC_DRY_CONTACT_CONTROL_STATE_INACTIVE";
+    case WCDryContactControlState.WC_DRY_CONTACT_CONTROL_STATE_ACTIVE:
+      return "WC_DRY_CONTACT_CONTROL_STATE_ACTIVE";
+    case WCDryContactControlState.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum WCDryContactDefaultState {
+  WC_DRY_CONTACT_DEFAULT_STATE_INVALID = 0,
+  WC_DRY_CONTACT_DEFAULT_STATE_NORMALLY_OPEN = 1,
+  WC_DRY_CONTACT_DEFAULT_STATE_NORMALLY_CLOSED = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function wCDryContactDefaultStateFromJSON(object: any): WCDryContactDefaultState {
+  switch (object) {
+    case 0:
+    case "WC_DRY_CONTACT_DEFAULT_STATE_INVALID":
+      return WCDryContactDefaultState.WC_DRY_CONTACT_DEFAULT_STATE_INVALID;
+    case 1:
+    case "WC_DRY_CONTACT_DEFAULT_STATE_NORMALLY_OPEN":
+      return WCDryContactDefaultState.WC_DRY_CONTACT_DEFAULT_STATE_NORMALLY_OPEN;
+    case 2:
+    case "WC_DRY_CONTACT_DEFAULT_STATE_NORMALLY_CLOSED":
+      return WCDryContactDefaultState.WC_DRY_CONTACT_DEFAULT_STATE_NORMALLY_CLOSED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return WCDryContactDefaultState.UNRECOGNIZED;
+  }
+}
+
+export function wCDryContactDefaultStateToJSON(object: WCDryContactDefaultState): string {
+  switch (object) {
+    case WCDryContactDefaultState.WC_DRY_CONTACT_DEFAULT_STATE_INVALID:
+      return "WC_DRY_CONTACT_DEFAULT_STATE_INVALID";
+    case WCDryContactDefaultState.WC_DRY_CONTACT_DEFAULT_STATE_NORMALLY_OPEN:
+      return "WC_DRY_CONTACT_DEFAULT_STATE_NORMALLY_OPEN";
+    case WCDryContactDefaultState.WC_DRY_CONTACT_DEFAULT_STATE_NORMALLY_CLOSED:
+      return "WC_DRY_CONTACT_DEFAULT_STATE_NORMALLY_CLOSED";
+    case WCDryContactDefaultState.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum WCTimeSource {
+  WC_TIME_SOURCE_INVALID = 0,
+  WC_TIME_SOURCE_BUILD = 1,
+  WC_TIME_SOURCE_SAVED = 2,
+  WC_TIME_SOURCE_STALE = 3,
+  WC_TIME_SOURCE_SYNCED = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function wCTimeSourceFromJSON(object: any): WCTimeSource {
+  switch (object) {
+    case 0:
+    case "WC_TIME_SOURCE_INVALID":
+      return WCTimeSource.WC_TIME_SOURCE_INVALID;
+    case 1:
+    case "WC_TIME_SOURCE_BUILD":
+      return WCTimeSource.WC_TIME_SOURCE_BUILD;
+    case 2:
+    case "WC_TIME_SOURCE_SAVED":
+      return WCTimeSource.WC_TIME_SOURCE_SAVED;
+    case 3:
+    case "WC_TIME_SOURCE_STALE":
+      return WCTimeSource.WC_TIME_SOURCE_STALE;
+    case 4:
+    case "WC_TIME_SOURCE_SYNCED":
+      return WCTimeSource.WC_TIME_SOURCE_SYNCED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return WCTimeSource.UNRECOGNIZED;
+  }
+}
+
+export function wCTimeSourceToJSON(object: WCTimeSource): string {
+  switch (object) {
+    case WCTimeSource.WC_TIME_SOURCE_INVALID:
+      return "WC_TIME_SOURCE_INVALID";
+    case WCTimeSource.WC_TIME_SOURCE_BUILD:
+      return "WC_TIME_SOURCE_BUILD";
+    case WCTimeSource.WC_TIME_SOURCE_SAVED:
+      return "WC_TIME_SOURCE_SAVED";
+    case WCTimeSource.WC_TIME_SOURCE_STALE:
+      return "WC_TIME_SOURCE_STALE";
+    case WCTimeSource.WC_TIME_SOURCE_SYNCED:
+      return "WC_TIME_SOURCE_SYNCED";
+    case WCTimeSource.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum WCOperationalMode {
+  WC_OPERATIONAL_MODE_INVALID = 0,
+  WC_OPERATIONAL_MODE_COMMERCIAL_PAY_PER_USE = 1,
+  WC_OPERATIONAL_MODE_COMMERCIAL_NOT_PAY_PER_USE = 2,
+  WC_OPERATIONAL_MODE_NOT_COMMERCIAL = 3,
+  WC_OPERATIONAL_MODE_COMMERCIAL_PAY_PER_USE_WITH_ACCESS_CONTROL = 4,
+  WC_OPERATIONAL_MODE_COMMERCIAL_WITH_ACCESS_CONTROL = 5,
+  UNRECOGNIZED = -1,
+}
+
+export function wCOperationalModeFromJSON(object: any): WCOperationalMode {
+  switch (object) {
+    case 0:
+    case "WC_OPERATIONAL_MODE_INVALID":
+      return WCOperationalMode.WC_OPERATIONAL_MODE_INVALID;
+    case 1:
+    case "WC_OPERATIONAL_MODE_COMMERCIAL_PAY_PER_USE":
+      return WCOperationalMode.WC_OPERATIONAL_MODE_COMMERCIAL_PAY_PER_USE;
+    case 2:
+    case "WC_OPERATIONAL_MODE_COMMERCIAL_NOT_PAY_PER_USE":
+      return WCOperationalMode.WC_OPERATIONAL_MODE_COMMERCIAL_NOT_PAY_PER_USE;
+    case 3:
+    case "WC_OPERATIONAL_MODE_NOT_COMMERCIAL":
+      return WCOperationalMode.WC_OPERATIONAL_MODE_NOT_COMMERCIAL;
+    case 4:
+    case "WC_OPERATIONAL_MODE_COMMERCIAL_PAY_PER_USE_WITH_ACCESS_CONTROL":
+      return WCOperationalMode.WC_OPERATIONAL_MODE_COMMERCIAL_PAY_PER_USE_WITH_ACCESS_CONTROL;
+    case 5:
+    case "WC_OPERATIONAL_MODE_COMMERCIAL_WITH_ACCESS_CONTROL":
+      return WCOperationalMode.WC_OPERATIONAL_MODE_COMMERCIAL_WITH_ACCESS_CONTROL;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return WCOperationalMode.UNRECOGNIZED;
+  }
+}
+
+export function wCOperationalModeToJSON(object: WCOperationalMode): string {
+  switch (object) {
+    case WCOperationalMode.WC_OPERATIONAL_MODE_INVALID:
+      return "WC_OPERATIONAL_MODE_INVALID";
+    case WCOperationalMode.WC_OPERATIONAL_MODE_COMMERCIAL_PAY_PER_USE:
+      return "WC_OPERATIONAL_MODE_COMMERCIAL_PAY_PER_USE";
+    case WCOperationalMode.WC_OPERATIONAL_MODE_COMMERCIAL_NOT_PAY_PER_USE:
+      return "WC_OPERATIONAL_MODE_COMMERCIAL_NOT_PAY_PER_USE";
+    case WCOperationalMode.WC_OPERATIONAL_MODE_NOT_COMMERCIAL:
+      return "WC_OPERATIONAL_MODE_NOT_COMMERCIAL";
+    case WCOperationalMode.WC_OPERATIONAL_MODE_COMMERCIAL_PAY_PER_USE_WITH_ACCESS_CONTROL:
+      return "WC_OPERATIONAL_MODE_COMMERCIAL_PAY_PER_USE_WITH_ACCESS_CONTROL";
+    case WCOperationalMode.WC_OPERATIONAL_MODE_COMMERCIAL_WITH_ACCESS_CONTROL:
+      return "WC_OPERATIONAL_MODE_COMMERCIAL_WITH_ACCESS_CONTROL";
+    case WCOperationalMode.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum WCOcppSecurityParameterType {
+  WC_OCPP_SECURITY_PARAMETER_TYPE_INVALID = 0,
+  WC_OCPP_SECURITY_PARAMETER_TYPE_CP_AUTH_KEY = 1,
+  WC_OCPP_SECURITY_PARAMETER_TYPE_CS_CA_CERT = 2,
+  WC_OCPP_SECURITY_PARAMETER_TYPE_CP_CERT = 3,
+  WC_OCPP_SECURITY_PARAMETER_TYPE_ALTERNATE_CS_CA_CERT = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function wCOcppSecurityParameterTypeFromJSON(object: any): WCOcppSecurityParameterType {
+  switch (object) {
+    case 0:
+    case "WC_OCPP_SECURITY_PARAMETER_TYPE_INVALID":
+      return WCOcppSecurityParameterType.WC_OCPP_SECURITY_PARAMETER_TYPE_INVALID;
+    case 1:
+    case "WC_OCPP_SECURITY_PARAMETER_TYPE_CP_AUTH_KEY":
+      return WCOcppSecurityParameterType.WC_OCPP_SECURITY_PARAMETER_TYPE_CP_AUTH_KEY;
+    case 2:
+    case "WC_OCPP_SECURITY_PARAMETER_TYPE_CS_CA_CERT":
+      return WCOcppSecurityParameterType.WC_OCPP_SECURITY_PARAMETER_TYPE_CS_CA_CERT;
+    case 3:
+    case "WC_OCPP_SECURITY_PARAMETER_TYPE_CP_CERT":
+      return WCOcppSecurityParameterType.WC_OCPP_SECURITY_PARAMETER_TYPE_CP_CERT;
+    case 4:
+    case "WC_OCPP_SECURITY_PARAMETER_TYPE_ALTERNATE_CS_CA_CERT":
+      return WCOcppSecurityParameterType.WC_OCPP_SECURITY_PARAMETER_TYPE_ALTERNATE_CS_CA_CERT;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return WCOcppSecurityParameterType.UNRECOGNIZED;
+  }
+}
+
+export function wCOcppSecurityParameterTypeToJSON(object: WCOcppSecurityParameterType): string {
+  switch (object) {
+    case WCOcppSecurityParameterType.WC_OCPP_SECURITY_PARAMETER_TYPE_INVALID:
+      return "WC_OCPP_SECURITY_PARAMETER_TYPE_INVALID";
+    case WCOcppSecurityParameterType.WC_OCPP_SECURITY_PARAMETER_TYPE_CP_AUTH_KEY:
+      return "WC_OCPP_SECURITY_PARAMETER_TYPE_CP_AUTH_KEY";
+    case WCOcppSecurityParameterType.WC_OCPP_SECURITY_PARAMETER_TYPE_CS_CA_CERT:
+      return "WC_OCPP_SECURITY_PARAMETER_TYPE_CS_CA_CERT";
+    case WCOcppSecurityParameterType.WC_OCPP_SECURITY_PARAMETER_TYPE_CP_CERT:
+      return "WC_OCPP_SECURITY_PARAMETER_TYPE_CP_CERT";
+    case WCOcppSecurityParameterType.WC_OCPP_SECURITY_PARAMETER_TYPE_ALTERNATE_CS_CA_CERT:
+      return "WC_OCPP_SECURITY_PARAMETER_TYPE_ALTERNATE_CS_CA_CERT";
+    case WCOcppSecurityParameterType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum WCOcppVersion {
+  WC_OCPP_VERSION_INVALID = 0,
+  WC_OCPP_VERSION_1_6 = 1,
+  WC_OCPP_VERSION_2_0_1 = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function wCOcppVersionFromJSON(object: any): WCOcppVersion {
+  switch (object) {
+    case 0:
+    case "WC_OCPP_VERSION_INVALID":
+      return WCOcppVersion.WC_OCPP_VERSION_INVALID;
+    case 1:
+    case "WC_OCPP_VERSION_1_6":
+      return WCOcppVersion.WC_OCPP_VERSION_1_6;
+    case 2:
+    case "WC_OCPP_VERSION_2_0_1":
+      return WCOcppVersion.WC_OCPP_VERSION_2_0_1;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return WCOcppVersion.UNRECOGNIZED;
+  }
+}
+
+export function wCOcppVersionToJSON(object: WCOcppVersion): string {
+  switch (object) {
+    case WCOcppVersion.WC_OCPP_VERSION_INVALID:
+      return "WC_OCPP_VERSION_INVALID";
+    case WCOcppVersion.WC_OCPP_VERSION_1_6:
+      return "WC_OCPP_VERSION_1_6";
+    case WCOcppVersion.WC_OCPP_VERSION_2_0_1:
+      return "WC_OCPP_VERSION_2_0_1";
+    case WCOcppVersion.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum WCOcppSecurityProfile {
+  WC_OCPP_SECURITY_PROFILE_INVALID = 0,
+  WC_OCPP_SECURITY_PROFILE_UNSECURED_BASIC_AUTH = 1,
+  WC_OCPP_SECURITY_PROFILE_TLS_BASIC_AUTH = 2,
+  WC_OCPP_SECURITY_PROFILE_TLS_CLIENT_CERTS = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function wCOcppSecurityProfileFromJSON(object: any): WCOcppSecurityProfile {
+  switch (object) {
+    case 0:
+    case "WC_OCPP_SECURITY_PROFILE_INVALID":
+      return WCOcppSecurityProfile.WC_OCPP_SECURITY_PROFILE_INVALID;
+    case 1:
+    case "WC_OCPP_SECURITY_PROFILE_UNSECURED_BASIC_AUTH":
+      return WCOcppSecurityProfile.WC_OCPP_SECURITY_PROFILE_UNSECURED_BASIC_AUTH;
+    case 2:
+    case "WC_OCPP_SECURITY_PROFILE_TLS_BASIC_AUTH":
+      return WCOcppSecurityProfile.WC_OCPP_SECURITY_PROFILE_TLS_BASIC_AUTH;
+    case 3:
+    case "WC_OCPP_SECURITY_PROFILE_TLS_CLIENT_CERTS":
+      return WCOcppSecurityProfile.WC_OCPP_SECURITY_PROFILE_TLS_CLIENT_CERTS;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return WCOcppSecurityProfile.UNRECOGNIZED;
+  }
+}
+
+export function wCOcppSecurityProfileToJSON(object: WCOcppSecurityProfile): string {
+  switch (object) {
+    case WCOcppSecurityProfile.WC_OCPP_SECURITY_PROFILE_INVALID:
+      return "WC_OCPP_SECURITY_PROFILE_INVALID";
+    case WCOcppSecurityProfile.WC_OCPP_SECURITY_PROFILE_UNSECURED_BASIC_AUTH:
+      return "WC_OCPP_SECURITY_PROFILE_UNSECURED_BASIC_AUTH";
+    case WCOcppSecurityProfile.WC_OCPP_SECURITY_PROFILE_TLS_BASIC_AUTH:
+      return "WC_OCPP_SECURITY_PROFILE_TLS_BASIC_AUTH";
+    case WCOcppSecurityProfile.WC_OCPP_SECURITY_PROFILE_TLS_CLIENT_CERTS:
+      return "WC_OCPP_SECURITY_PROFILE_TLS_CLIENT_CERTS";
+    case WCOcppSecurityProfile.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum WCOcppScope {
+  WC_OCPP_SCOPE_INVALID = 0,
+  WC_OCPP_SCOPE_REIMBURSEMENT = 1,
+  WC_OCPP_SCOPE_FULL = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function wCOcppScopeFromJSON(object: any): WCOcppScope {
+  switch (object) {
+    case 0:
+    case "WC_OCPP_SCOPE_INVALID":
+      return WCOcppScope.WC_OCPP_SCOPE_INVALID;
+    case 1:
+    case "WC_OCPP_SCOPE_REIMBURSEMENT":
+      return WCOcppScope.WC_OCPP_SCOPE_REIMBURSEMENT;
+    case 2:
+    case "WC_OCPP_SCOPE_FULL":
+      return WCOcppScope.WC_OCPP_SCOPE_FULL;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return WCOcppScope.UNRECOGNIZED;
+  }
+}
+
+export function wCOcppScopeToJSON(object: WCOcppScope): string {
+  switch (object) {
+    case WCOcppScope.WC_OCPP_SCOPE_INVALID:
+      return "WC_OCPP_SCOPE_INVALID";
+    case WCOcppScope.WC_OCPP_SCOPE_REIMBURSEMENT:
+      return "WC_OCPP_SCOPE_REIMBURSEMENT";
+    case WCOcppScope.WC_OCPP_SCOPE_FULL:
+      return "WC_OCPP_SCOPE_FULL";
+    case WCOcppScope.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum WCSmartChargingReason {
+  WC_SMART_CHARGING_REASON_INVALID = 0,
+  WC_SMART_CHARGING_REASON_DISABLED_BY_SCHEDULE = 1,
+  WC_SMART_CHARGING_REASON_ENABLED_BY_SCHEDULE = 2,
+  WC_SMART_CHARGING_REASON_EXPLICITLY_STOPPED = 3,
+  WC_SMART_CHARGING_REASON_EXPLICITLY_STARTED = 4,
+  WC_SMART_CHARGING_REASON_SMART_CHARGING_ALLOWED = 5,
+  WC_SMART_CHARGING_REASON_SMART_CHARGING_DISALLOWED = 6,
+  WC_SMART_CHARGING_REASON_SMART_CHARGING_TARGET_POWER = 7,
+  WC_SMART_CHARGING_REASON_SMART_CHARGING_LOW_VOLTAGE = 8,
+  WC_SMART_CHARGING_REASON_SMART_CHARGING_TARGET_POWER_BELOW_MINIMUM = 9,
+  UNRECOGNIZED = -1,
+}
+
+export function wCSmartChargingReasonFromJSON(object: any): WCSmartChargingReason {
+  switch (object) {
+    case 0:
+    case "WC_SMART_CHARGING_REASON_INVALID":
+      return WCSmartChargingReason.WC_SMART_CHARGING_REASON_INVALID;
+    case 1:
+    case "WC_SMART_CHARGING_REASON_DISABLED_BY_SCHEDULE":
+      return WCSmartChargingReason.WC_SMART_CHARGING_REASON_DISABLED_BY_SCHEDULE;
+    case 2:
+    case "WC_SMART_CHARGING_REASON_ENABLED_BY_SCHEDULE":
+      return WCSmartChargingReason.WC_SMART_CHARGING_REASON_ENABLED_BY_SCHEDULE;
+    case 3:
+    case "WC_SMART_CHARGING_REASON_EXPLICITLY_STOPPED":
+      return WCSmartChargingReason.WC_SMART_CHARGING_REASON_EXPLICITLY_STOPPED;
+    case 4:
+    case "WC_SMART_CHARGING_REASON_EXPLICITLY_STARTED":
+      return WCSmartChargingReason.WC_SMART_CHARGING_REASON_EXPLICITLY_STARTED;
+    case 5:
+    case "WC_SMART_CHARGING_REASON_SMART_CHARGING_ALLOWED":
+      return WCSmartChargingReason.WC_SMART_CHARGING_REASON_SMART_CHARGING_ALLOWED;
+    case 6:
+    case "WC_SMART_CHARGING_REASON_SMART_CHARGING_DISALLOWED":
+      return WCSmartChargingReason.WC_SMART_CHARGING_REASON_SMART_CHARGING_DISALLOWED;
+    case 7:
+    case "WC_SMART_CHARGING_REASON_SMART_CHARGING_TARGET_POWER":
+      return WCSmartChargingReason.WC_SMART_CHARGING_REASON_SMART_CHARGING_TARGET_POWER;
+    case 8:
+    case "WC_SMART_CHARGING_REASON_SMART_CHARGING_LOW_VOLTAGE":
+      return WCSmartChargingReason.WC_SMART_CHARGING_REASON_SMART_CHARGING_LOW_VOLTAGE;
+    case 9:
+    case "WC_SMART_CHARGING_REASON_SMART_CHARGING_TARGET_POWER_BELOW_MINIMUM":
+      return WCSmartChargingReason.WC_SMART_CHARGING_REASON_SMART_CHARGING_TARGET_POWER_BELOW_MINIMUM;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return WCSmartChargingReason.UNRECOGNIZED;
+  }
+}
+
+export function wCSmartChargingReasonToJSON(object: WCSmartChargingReason): string {
+  switch (object) {
+    case WCSmartChargingReason.WC_SMART_CHARGING_REASON_INVALID:
+      return "WC_SMART_CHARGING_REASON_INVALID";
+    case WCSmartChargingReason.WC_SMART_CHARGING_REASON_DISABLED_BY_SCHEDULE:
+      return "WC_SMART_CHARGING_REASON_DISABLED_BY_SCHEDULE";
+    case WCSmartChargingReason.WC_SMART_CHARGING_REASON_ENABLED_BY_SCHEDULE:
+      return "WC_SMART_CHARGING_REASON_ENABLED_BY_SCHEDULE";
+    case WCSmartChargingReason.WC_SMART_CHARGING_REASON_EXPLICITLY_STOPPED:
+      return "WC_SMART_CHARGING_REASON_EXPLICITLY_STOPPED";
+    case WCSmartChargingReason.WC_SMART_CHARGING_REASON_EXPLICITLY_STARTED:
+      return "WC_SMART_CHARGING_REASON_EXPLICITLY_STARTED";
+    case WCSmartChargingReason.WC_SMART_CHARGING_REASON_SMART_CHARGING_ALLOWED:
+      return "WC_SMART_CHARGING_REASON_SMART_CHARGING_ALLOWED";
+    case WCSmartChargingReason.WC_SMART_CHARGING_REASON_SMART_CHARGING_DISALLOWED:
+      return "WC_SMART_CHARGING_REASON_SMART_CHARGING_DISALLOWED";
+    case WCSmartChargingReason.WC_SMART_CHARGING_REASON_SMART_CHARGING_TARGET_POWER:
+      return "WC_SMART_CHARGING_REASON_SMART_CHARGING_TARGET_POWER";
+    case WCSmartChargingReason.WC_SMART_CHARGING_REASON_SMART_CHARGING_LOW_VOLTAGE:
+      return "WC_SMART_CHARGING_REASON_SMART_CHARGING_LOW_VOLTAGE";
+    case WCSmartChargingReason.WC_SMART_CHARGING_REASON_SMART_CHARGING_TARGET_POWER_BELOW_MINIMUM:
+      return "WC_SMART_CHARGING_REASON_SMART_CHARGING_TARGET_POWER_BELOW_MINIMUM";
+    case WCSmartChargingReason.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum WCPowershareSessionState {
+  WC_POWERSHARE_SESSION_STATE_INVALID = 0,
+  WC_POWERSHARE_SESSION_STATE_NONE = 1,
+  WC_POWERSHARE_SESSION_STATE_IN_PROGRESS = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function wCPowershareSessionStateFromJSON(object: any): WCPowershareSessionState {
+  switch (object) {
+    case 0:
+    case "WC_POWERSHARE_SESSION_STATE_INVALID":
+      return WCPowershareSessionState.WC_POWERSHARE_SESSION_STATE_INVALID;
+    case 1:
+    case "WC_POWERSHARE_SESSION_STATE_NONE":
+      return WCPowershareSessionState.WC_POWERSHARE_SESSION_STATE_NONE;
+    case 2:
+    case "WC_POWERSHARE_SESSION_STATE_IN_PROGRESS":
+      return WCPowershareSessionState.WC_POWERSHARE_SESSION_STATE_IN_PROGRESS;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return WCPowershareSessionState.UNRECOGNIZED;
+  }
+}
+
+export function wCPowershareSessionStateToJSON(object: WCPowershareSessionState): string {
+  switch (object) {
+    case WCPowershareSessionState.WC_POWERSHARE_SESSION_STATE_INVALID:
+      return "WC_POWERSHARE_SESSION_STATE_INVALID";
+    case WCPowershareSessionState.WC_POWERSHARE_SESSION_STATE_NONE:
+      return "WC_POWERSHARE_SESSION_STATE_NONE";
+    case WCPowershareSessionState.WC_POWERSHARE_SESSION_STATE_IN_PROGRESS:
+      return "WC_POWERSHARE_SESSION_STATE_IN_PROGRESS";
+    case WCPowershareSessionState.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum WCChargingCommand {
+  WC_CHARGING_COMMAND_INVALID = 0,
+  WC_CHARGING_COMMAND_START = 1,
+  WC_CHARGING_COMMAND_STOP = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function wCChargingCommandFromJSON(object: any): WCChargingCommand {
+  switch (object) {
+    case 0:
+    case "WC_CHARGING_COMMAND_INVALID":
+      return WCChargingCommand.WC_CHARGING_COMMAND_INVALID;
+    case 1:
+    case "WC_CHARGING_COMMAND_START":
+      return WCChargingCommand.WC_CHARGING_COMMAND_START;
+    case 2:
+    case "WC_CHARGING_COMMAND_STOP":
+      return WCChargingCommand.WC_CHARGING_COMMAND_STOP;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return WCChargingCommand.UNRECOGNIZED;
+  }
+}
+
+export function wCChargingCommandToJSON(object: WCChargingCommand): string {
+  switch (object) {
+    case WCChargingCommand.WC_CHARGING_COMMAND_INVALID:
+      return "WC_CHARGING_COMMAND_INVALID";
+    case WCChargingCommand.WC_CHARGING_COMMAND_START:
+      return "WC_CHARGING_COMMAND_START";
+    case WCChargingCommand.WC_CHARGING_COMMAND_STOP:
+      return "WC_CHARGING_COMMAND_STOP";
+    case WCChargingCommand.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export interface WCFaultStatusLatchedAlert {
+  alertId: number;
+  alertTimestamp: Date | undefined;
+}
+
+export interface WCVitals {
+  uptimeS: number;
+  alerts: number[];
+  contactorClosed: boolean;
+  vehicleConnected: boolean;
+  pcbaTempC: number;
+  handleTempC: number;
+  mcuTempC: number;
+  inputThermopileV: number;
+  proxV: number;
+  pilotHighV: number;
+  pilotLowV: number;
+  sessionDurationS: number;
+  sessionEnergy: AccumulatedEnergy | undefined;
+  acMeasurementGrid: InstACMeasurement | undefined;
+  acMeasurementVehicle: InstACMeasurement | undefined;
+  groundResistanceOhms: number;
+  line1EarthVrms: number;
+  neutralEarthVrms: number;
+  faultStatus: WCFaultStatusState;
+  recentFaultStatusLatchedAlerts: WCFaultStatusLatchedAlert[];
+  vin: VIN | undefined;
+  instantaneousPowerWatts: number | undefined;
+  scheduledChargingStatus: WCChargeScheduleChargingStatus;
+  instantaneousLineCurrent: number | undefined;
+  ocppStatus: WCOcppStatus;
+  evseNotReadyReasons: WCEvseNotReadyReason[];
+  powershareSessionState: WCPowershareSessionState;
+  dryContactControlState: WCDryContactControlState;
+  smartChargingReason: WCSmartChargingReason;
+}
+
+export interface WCLifetimeStats {
+  uptimeS: number;
+  alertCount: number;
+  contactorCycles: number;
+  contactorCyclesLoaded: number;
+  connectorCycles: number;
+  thermalFoldbacks: number;
+  avgStartupTempC: number;
+  chargeStarts: number;
+  chargingTimeS: number;
+  chargingEnergy: AccumulatedEnergy | undefined;
+}
+
+export interface WCLoadSharingFixedLimitConfig {
+  networkLimitAmps: number;
+}
+
+export interface WCLoadSharingConductorLimitConfig {
+  conductorLimitAmps: number;
+}
+
+export interface WCLoadSharingSettings {
+  fixedLimit: WCLoadSharingFixedLimitConfig | undefined;
+  conductorLimit: WCLoadSharingConductorLimitConfig | undefined;
+}
+
+export interface WCLoadSharingLimits {
+  maxParticipants: number;
+}
+
+export interface WCLoadSharingNetworkStatus {
+  networkChargingInhibitors: WCLoadSharingNetworkChargingInhibitor[];
+}
+
+export interface WCLoadSharingConfig {
+  version: number;
+  participantDins: Din[];
+  fixedLimit: WCLoadSharingFixedLimitConfig | undefined;
+  settings: WCLoadSharingSettings | undefined;
+  chargingEnabled: boolean;
+}
+
+export interface WCPpuConfig {
+  sessionReportingMode: WCPpuSessionReportingMode;
+}
+
+export interface WCOperationalSettingsConfig {
+  operationalMode: WCOperationalMode;
+  emitIncreasedTelemetry: boolean;
+}
+
+export interface WCMeterInterface {
+  neurio: NeurioMeterInterface | undefined;
+}
+
+export interface WCDryContactConfig {
+  enabled: boolean;
+  defaultState: WCDryContactDefaultState;
+  disableCharging: boolean;
+  maxCurrentAmps: number;
+  germany14a: boolean;
+}
+
+export interface WCTimeZoneTransition {
+  timestamp: Date | undefined;
+  localTimeUtcOffset: number;
+}
+
+export interface WCTimeZoneInfo {
+  transitions: WCTimeZoneTransition[];
+}
+
+export interface WCTimeZone {
+  timeZoneId: string;
+  timeZoneInfo: WCTimeZoneInfo | undefined;
+}
+
+export interface WCMIDConfig {
+  enabled: boolean;
+  timeZone: WCTimeZone | undefined;
+}
+
+export interface WCSettings {
+  maxOutputCurrentAmps: number;
+  gmiMode: WCGroundMonitorMode;
+  country: string;
+  thirdPartyVehicleMode: WCThirdPartyVehicleMode;
+  loadSharingConfig: WCLoadSharingConfig | undefined;
+  dryContact: WCDryContactConfig | undefined;
+  midConfig: WCMIDConfig | undefined;
+}
+
+export interface WCGenealogy {
+  region: number;
+  handleType: number;
+  hardwareFeatures: number;
+  subUsageId: number;
+}
+
+export interface ComplianceCRC32 {
+  name: string;
+  crc32: number;
+}
+
+export interface WCLoadSharingFollowerState {
+  version: number;
+  chargeRequest: boolean;
+  loadCurrentAmps: number;
+  vehicleConnected: boolean;
+  alertCount: number;
+  contactorClosed: boolean;
+  pilotCurrentAmps: number;
+  individualPilotCurrentAmps: number;
+}
+
+export interface WCLoadSharingLeaderCommand {
+  chargeAllowed: boolean;
+  pilotCurrentAmps: number;
+}
+
+export interface WCLoadSharingLeaderState {
+  version: number;
+  networkCurrentLimitAmps: number;
+  fallbackCurrentAmps: number;
+  roundRobinIndex: number;
+  chargingEnabled: boolean;
+  activeUnitCount: number;
+}
+
+export interface WCLoadSharingDeviceEntry {
+  din: Din | undefined;
+  leaderCommand: WCLoadSharingLeaderCommand | undefined;
+  followerState: WCLoadSharingFollowerState | undefined;
+  mia: boolean;
+}
+
+export interface WCLoadSharingNetworkState {
+  devices: WCLoadSharingDeviceEntry[];
+  leaderState: WCLoadSharingLeaderState | undefined;
+  settings: WCLoadSharingSettings | undefined;
+  status: WCLoadSharingNetworkStatus | undefined;
+  limits: WCLoadSharingLimits | undefined;
+}
+
+export interface WCProvisionalOperationalParams {
+  limitCurrentMaxAmps: number;
+  limitTimeoutS: number;
+  inhibitCharging: boolean;
+}
+
+export interface WCAccessControlEntry {
+  vin: VIN | undefined;
+  name: string;
+  model: WCTeslaVehicleModel;
+  modelYear: number;
+  driveType: WCTeslaVehicleDriveType;
+}
+
+export interface WCChargeScheduleTimePeriod {
+  startSeconds: number;
+  endSeconds: number;
+}
+
+export interface WCChargeScheduleDayTimePeriods {
+  timePeriods: WCChargeScheduleTimePeriod[];
+  /** bitmask of WCChargeScheduleDay values */
+  dayBitmask: number;
+}
+
+export interface WCChargeSchedule {
+  dayTimePeriods: WCChargeScheduleDayTimePeriods[];
+}
+
+export interface WCChargeScheduleDelay {
+  maxDelaySeconds: number;
+}
+
+export interface WCChargeScheduleConfig {
+  enableSchedule: boolean;
+  schedule: WCChargeSchedule | undefined;
+  delay: WCChargeScheduleDelay | undefined;
+}
+
+export interface WCChargeScheduleConfigStatus {
+  config: WCChargeScheduleConfig | undefined;
+  error: WCChargeScheduleConfigError;
+}
+
+export interface WCChargeCommand {
+  chargingCommand: WCChargingCommand;
+}
+
+export interface WCOcppSettings {
+  connectionUrl: string;
+  chargepointId: string;
+  version: WCOcppVersion;
+  securityProfile: WCOcppSecurityProfile;
+  enable: boolean;
+  providerName: string;
+  scope: WCOcppScope;
+}
+
+export interface WCOcppAuthorizationData {
+  idTag: string;
+}
+
+export interface WCOcppAuthorizationList {
+  authData: WCOcppAuthorizationData[];
+}
+
+export interface WCVehicleToHomeConfig {
+  siteControllerDin: Din | undefined;
+  modbusNodeId: number;
+}
+
+export interface WCAPIGetVitalsRequest {
+}
+
+export interface WCAPIGetVitalsResponse {
+  vitals: WCVitals | undefined;
+}
+
+export interface WCAPIGetLifetimeStatsRequest {
+}
+
+export interface WCAPIGetLifetimeStatsResponse {
+  lifetimeStats: WCLifetimeStats | undefined;
+}
+
+export interface WCAPIGetConfigRequest {
+}
+
+export interface WCAPIGetConfigResponse {
+  settings: WCSettings | undefined;
+  wifiConfig: WifiConfig | undefined;
+  wifi: NetworkInterface | undefined;
+  meters: WCMeterInterface[];
+  chargeSchedule: WCChargeScheduleConfig | undefined;
+  ocppSettings: WCOcppSettings | undefined;
+  vehicleToHome: WCVehicleToHomeConfig | undefined;
+  timeSource: WCTimeSource;
+}
+
+export interface WCAPIConfigureSettingsRequest {
+  settings: WCSettings | undefined;
+}
+
+export interface WCAPIConfigureSettingsResponse {
+  settings: WCSettings | undefined;
+}
+
+export interface WCAPIGetSystemInfoRequest {
+}
+
+export interface WCAPIGetSystemInfoResponse {
+  genealogy: WCGenealogy | undefined;
+  complianceCrcs: ComplianceCRC32[];
+}
+
+export interface WCAPIGetLoadSharingNetworkStateRequest {
+}
+
+export interface WCAPIGetLoadSharingNetworkStateResponse {
+  networkState: WCLoadSharingNetworkState | undefined;
+}
+
+export interface WCAPIPushLoadSharingFollowerStateRequest {
+  followerState: WCLoadSharingFollowerState | undefined;
+}
+
+export interface WCAPIPushLoadSharingFollowerStateResponse {
+  leaderState: WCLoadSharingLeaderState | undefined;
+  leaderCommand: WCLoadSharingLeaderCommand | undefined;
+}
+
+export interface WCAPIPushLoadSharingLeaderCommandRequest {
+  leaderState: WCLoadSharingLeaderState | undefined;
+  leaderCommand: WCLoadSharingLeaderCommand | undefined;
+}
+
+export interface WCAPIPushLoadSharingLeaderCommandResponse {
+  followerState: WCLoadSharingFollowerState | undefined;
+}
+
+export interface WCAPISetLoadSharingNetworkOperationRequest {
+  chargingEnabled: boolean;
+}
+
+export interface WCAPISetLoadSharingNetworkOperationResponse {
+}
+
+export interface WCAPIConfigureLoadSharingSettingsRequest {
+  settings: WCLoadSharingSettings | undefined;
+}
+
+export interface WCAPIConfigureLoadSharingSettingsResponse {
+  settings: WCLoadSharingSettings | undefined;
+}
+
+export interface WCAPIPushLoadSharingConfigRequest {
+  loadSharingConfig: WCLoadSharingConfig | undefined;
+}
+
+export interface WCAPIPushLoadSharingConfigResponse {
+}
+
+export interface WCAPIConfigurePpuSettingsRequest {
+  ppuConfig: WCPpuConfig | undefined;
+}
+
+export interface WCAPIConfigurePpuSettingsResponse {
+  ppuConfig: WCPpuConfig | undefined;
+}
+
+export interface WCAPIGetPpuSettingsRequest {
+}
+
+export interface WCAPIGetPpuSettingsResponse {
+  ppuConfig: WCPpuConfig | undefined;
+}
+
+export interface WCAPIConfigureOperationalSettingsRequest {
+  operationalSettingsConfig: WCOperationalSettingsConfig | undefined;
+}
+
+export interface WCAPIConfigureOperationalSettingsResponse {
+  operationalSettingsConfig: WCOperationalSettingsConfig | undefined;
+}
+
+export interface WCAPIGetOperationalSettingsRequest {
+}
+
+export interface WCAPIGetOperationalSettingsResponse {
+  operationalSettingsConfig: WCOperationalSettingsConfig | undefined;
+}
+
+export interface WCAPISetProvisionalOperationalParamsRequest {
+  provOpParams: WCProvisionalOperationalParams | undefined;
+}
+
+export interface WCAPISetProvisionalOperationalParamsResponse {
+}
+
+export interface WCAPIGetProvisionalOperationalParamsRequest {
+}
+
+export interface WCAPIGetProvisionalOperationalParamsResponse {
+  provOpParams: WCProvisionalOperationalParams | undefined;
+  configuredCurrentLimitAmps: number;
+}
+
+export interface WCAPIGetAccessControlSettingsRequest {
+}
+
+export interface WCAPIGetAccessControlSettingsResponse {
+  entries: WCAccessControlEntry[];
+}
+
+export interface WCAPIConfigureAccessControlSettingsRequest {
+  operation: WCConfigureAccessControlOperation;
+  vin: VIN | undefined;
+  name: string;
+}
+
+export interface WCAPIConfigureAccessControlSettingsResponse {
+  entries: WCAccessControlEntry[];
+}
+
+export interface WCAPIGetRecentVehiclesRequest {
+}
+
+export interface WCAPIGetRecentVehiclesResponse {
+  recentVehicles: string[];
+}
+
+export interface WCAPIPushPpuAuthorizationStateRequest {
+  authorized: boolean;
+  authUuid: UUIDv4Bytes | undefined;
+}
+
+export interface WCAPIPushPpuAuthorizationStateResponse {
+}
+
+export interface WCAPIConfigureChargeScheduleRequest {
+  config: WCChargeScheduleConfig | undefined;
+  timeZone: WCTimeZone | undefined;
+}
+
+export interface WCAPIConfigureChargeScheduleResponse {
+  error: WCChargeScheduleError;
+}
+
+export interface WCAPIConfigureThirdPartyVehicleModeRequest {
+  thirdPartyVehicleMode: WCThirdPartyVehicleMode;
+}
+
+export interface WCAPIConfigureThirdPartyVehicleModeResponse {
+}
+
+export interface WCAPIPushChargeCommandRequest {
+  chargeCommand: WCChargeCommand | undefined;
+}
+
+export interface WCAPIPushChargeCommandResponse {
+}
+
+export interface WCAPIConfigureHomeSiteControllerRequest {
+  din: Din | undefined;
+  modbusNodeId: number;
+  config: WCVehicleToHomeConfig | undefined;
+}
+
+export interface WCAPIConfigureHomeSiteControllerResponse {
+  config: WCVehicleToHomeConfig | undefined;
+}
+
+export interface WCAPIConfigureOcppSettingsRequest {
+  settings: WCOcppSettings | undefined;
+}
+
+export interface WCAPIConfigureOcppSettingsResponse {
+  settings: WCOcppSettings | undefined;
+  status: WCOcppStatus;
+}
+
+export interface WCAPISetOcppSecurityParameterRequest {
+  securityParameterType: WCOcppSecurityParameterType;
+  securityParameter: Uint8Array;
+}
+
+export interface WCAPISetOcppSecurityParameterResponse {
+  status: WCOcppStatus;
+}
+
+export interface WCAPIGetOcppSecurityParameterRequest {
+  securityParameterType: WCOcppSecurityParameterType;
+}
+
+export interface WCAPIGetOcppSecurityParameterResponse {
+  securityParameterType: WCOcppSecurityParameterType;
+  securityParameter: Uint8Array;
+}
+
+export interface WCAPIGetOcppLocalAuthListRequest {
+}
+
+export interface WCAPIGetOcppLocalAuthListResponse {
+  authList: WCOcppAuthorizationList | undefined;
+}
+
+export interface WCAPIConfigureCountryCodeSettingsRequest {
+  country: string;
+}
+
+export interface WCAPIConfigureCountryCodeSettingsResponse {
+}
+
+export interface WCTargetChargePowerParams {
+  targetChargePowerW: number;
+  maxChargePowerW: number | undefined;
+  maxChargeCurrentA: number;
+}
+
+export interface WCSmartChargingCommand {
+  ttlSeconds: number;
+  chargeDisallowed: boolean;
+  targetChargePowerParams: WCTargetChargePowerParams | undefined;
+}
+
+export interface WCAPIPushSmartChargingCommandRequest {
+  command: WCSmartChargingCommand | undefined;
+}
+
+export interface WCAPIPushSmartChargingCommandResponse {
+}
+
+/**
+ * Field 1 (request) is a type from a separate, not-yet-modeled proto
+ * package; left unmodeled here.
+ */
+export interface WCAPIRegisterCommercialRequest {
+}
+
+export interface WCAPIRegisterCommercialResponse {
+  /**
+   * Field 2 (response) is a type from a separate, not-yet-modeled proto
+   * package; left unmodeled here.
+   */
+  failure: number;
+}
+
+export interface WCAPIPushPowershareCommandRequest {
+  siteVehicleRequest: Uint8Array;
+  siteEvseRequest: Uint8Array;
+  inverterConfig: Uint8Array;
+  ttlSeconds: number;
+}
+
+export interface WCAPIPushPowershareCommandResponse {
+  siteVehicleResponse: Uint8Array;
+  siteEvseResponse: Uint8Array;
+}
+
 export interface WCMessages {
+  getVitalsRequest?: WCAPIGetVitalsRequest | undefined;
+  getVitalsResponse?: WCAPIGetVitalsResponse | undefined;
+  getLifetimeStatsRequest?: WCAPIGetLifetimeStatsRequest | undefined;
+  getLifetimeStatsResponse?: WCAPIGetLifetimeStatsResponse | undefined;
+  getConfigRequest?: WCAPIGetConfigRequest | undefined;
+  getConfigResponse?: WCAPIGetConfigResponse | undefined;
+  configureSettingsRequest?: WCAPIConfigureSettingsRequest | undefined;
+  configureSettingsResponse?: WCAPIConfigureSettingsResponse | undefined;
+  getSystemInfoRequest?: WCAPIGetSystemInfoRequest | undefined;
+  getSystemInfoResponse?: WCAPIGetSystemInfoResponse | undefined;
+  getLoadSharingNetworkStateRequest?: WCAPIGetLoadSharingNetworkStateRequest | undefined;
+  getLoadSharingNetworkStateResponse?: WCAPIGetLoadSharingNetworkStateResponse | undefined;
+  pushLoadSharingFollowerStateRequest?: WCAPIPushLoadSharingFollowerStateRequest | undefined;
+  pushLoadSharingFollowerStateResponse?: WCAPIPushLoadSharingFollowerStateResponse | undefined;
+  pushLoadSharingLeaderCommandRequest?: WCAPIPushLoadSharingLeaderCommandRequest | undefined;
+  pushLoadSharingLeaderCommandResponse?: WCAPIPushLoadSharingLeaderCommandResponse | undefined;
+  setLoadSharingNetworkOperationRequest?: WCAPISetLoadSharingNetworkOperationRequest | undefined;
+  setLoadSharingNetworkOperationResponse?: WCAPISetLoadSharingNetworkOperationResponse | undefined;
+  configureLoadSharingSettingsRequest?: WCAPIConfigureLoadSharingSettingsRequest | undefined;
+  configureLoadSharingSettingsResponse?: WCAPIConfigureLoadSharingSettingsResponse | undefined;
+  configurePpuSettingsRequest?: WCAPIConfigurePpuSettingsRequest | undefined;
+  configurePpuSettingsResponse?: WCAPIConfigurePpuSettingsResponse | undefined;
+  getPpuSettingsRequest?: WCAPIGetPpuSettingsRequest | undefined;
+  getPpuSettingsResponse?: WCAPIGetPpuSettingsResponse | undefined;
+  setProvisionalOperationalParamsRequest?: WCAPISetProvisionalOperationalParamsRequest | undefined;
+  setProvisionalOperationalParamsResponse?: WCAPISetProvisionalOperationalParamsResponse | undefined;
+  getProvisionalOperationalParamsRequest?: WCAPIGetProvisionalOperationalParamsRequest | undefined;
+  getProvisionalOperationalParamsResponse?: WCAPIGetProvisionalOperationalParamsResponse | undefined;
+  getAccessControlSettingsRequest?: WCAPIGetAccessControlSettingsRequest | undefined;
+  getAccessControlSettingsResponse?: WCAPIGetAccessControlSettingsResponse | undefined;
+  configureAccessControlSettingsRequest?: WCAPIConfigureAccessControlSettingsRequest | undefined;
+  configureAccessControlSettingsResponse?: WCAPIConfigureAccessControlSettingsResponse | undefined;
+  getRecentVehiclesRequest?: WCAPIGetRecentVehiclesRequest | undefined;
+  getRecentVehiclesResponse?: WCAPIGetRecentVehiclesResponse | undefined;
+  pushPpuAuthorizationStateRequest?: WCAPIPushPpuAuthorizationStateRequest | undefined;
+  pushPpuAuthorizationStateResponse?: WCAPIPushPpuAuthorizationStateResponse | undefined;
+  configureChargeScheduleRequest?: WCAPIConfigureChargeScheduleRequest | undefined;
+  configureChargeScheduleResponse?: WCAPIConfigureChargeScheduleResponse | undefined;
+  pushChargeCommandRequest?: WCAPIPushChargeCommandRequest | undefined;
+  pushChargeCommandResponse?: WCAPIPushChargeCommandResponse | undefined;
+  configureThirdPartyVehicleModeRequest?: WCAPIConfigureThirdPartyVehicleModeRequest | undefined;
+  configureThirdPartyVehicleModeResponse?: WCAPIConfigureThirdPartyVehicleModeResponse | undefined;
+  configureHomeSiteControllerRequest?: WCAPIConfigureHomeSiteControllerRequest | undefined;
+  configureHomeSiteControllerResponse?: WCAPIConfigureHomeSiteControllerResponse | undefined;
+  configureOcppSettingsRequest?: WCAPIConfigureOcppSettingsRequest | undefined;
+  configureOcppSettingsResponse?: WCAPIConfigureOcppSettingsResponse | undefined;
+  setOcppSecurityParameterRequest?: WCAPISetOcppSecurityParameterRequest | undefined;
+  setOcppSecurityParameterResponse?: WCAPISetOcppSecurityParameterResponse | undefined;
+  getOcppSecurityParameterRequest?: WCAPIGetOcppSecurityParameterRequest | undefined;
+  getOcppSecurityParameterResponse?: WCAPIGetOcppSecurityParameterResponse | undefined;
+  configureOperationalSettingsRequest?: WCAPIConfigureOperationalSettingsRequest | undefined;
+  configureOperationalSettingsResponse?: WCAPIConfigureOperationalSettingsResponse | undefined;
+  getOperationalSettingsRequest?: WCAPIGetOperationalSettingsRequest | undefined;
+  getOperationalSettingsResponse?: WCAPIGetOperationalSettingsResponse | undefined;
+  configureCountryCodeSettingsRequest?: WCAPIConfigureCountryCodeSettingsRequest | undefined;
+  configureCountryCodeSettingsResponse?: WCAPIConfigureCountryCodeSettingsResponse | undefined;
+  pushLoadSharingConfigRequest?: WCAPIPushLoadSharingConfigRequest | undefined;
+  pushLoadSharingConfigResponse?: WCAPIPushLoadSharingConfigResponse | undefined;
+  pushSmartChargingCommandRequest?: WCAPIPushSmartChargingCommandRequest | undefined;
+  pushSmartChargingCommandResponse?: WCAPIPushSmartChargingCommandResponse | undefined;
+  registerCommercialRequest?: WCAPIRegisterCommercialRequest | undefined;
+  registerCommercialResponse?: WCAPIRegisterCommercialResponse | undefined;
+  getOcppLocalAuthListRequest?: WCAPIGetOcppLocalAuthListRequest | undefined;
+  getOcppLocalAuthListResponse?: WCAPIGetOcppLocalAuthListResponse | undefined;
+  pushPowershareCommandRequest?: WCAPIPushPowershareCommandRequest | undefined;
+  pushPowershareCommandResponse?: WCAPIPushPowershareCommandResponse | undefined;
 }
 
-function createBaseWCMessages(): WCMessages {
-  return {};
+function createBaseWCFaultStatusLatchedAlert(): WCFaultStatusLatchedAlert {
+  return { alertId: 0, alertTimestamp: undefined };
 }
 
-export const WCMessages: MessageFns<WCMessages> = {
-  encode(_: WCMessages, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+export const WCFaultStatusLatchedAlert: MessageFns<WCFaultStatusLatchedAlert> = {
+  encode(message: WCFaultStatusLatchedAlert, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.alertId !== 0) {
+      writer.uint32(8).uint32(message.alertId);
+    }
+    if (message.alertTimestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.alertTimestamp), writer.uint32(18).fork()).join();
+    }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): WCMessages {
+  decode(input: BinaryReader | Uint8Array, length?: number): WCFaultStatusLatchedAlert {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseWCMessages();
+    const message = createBaseWCFaultStatusLatchedAlert();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.alertId = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.alertTimestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCFaultStatusLatchedAlert {
+    return {
+      alertId: isSet(object.alertId) ? globalThis.Number(object.alertId) : 0,
+      alertTimestamp: isSet(object.alertTimestamp) ? fromJsonTimestamp(object.alertTimestamp) : undefined,
+    };
+  },
+
+  toJSON(message: WCFaultStatusLatchedAlert): unknown {
+    const obj: any = {};
+    if (message.alertId !== undefined) {
+      obj.alertId = Math.round(message.alertId);
+    }
+    if (message.alertTimestamp !== undefined) {
+      obj.alertTimestamp = message.alertTimestamp.toISOString();
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCFaultStatusLatchedAlert>, I>>(base?: I): WCFaultStatusLatchedAlert {
+    return WCFaultStatusLatchedAlert.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCFaultStatusLatchedAlert>, I>>(object: I): WCFaultStatusLatchedAlert {
+    const message = createBaseWCFaultStatusLatchedAlert();
+    message.alertId = object.alertId ?? 0;
+    message.alertTimestamp = object.alertTimestamp ?? undefined;
+    return message;
+  },
+};
+
+function createBaseWCVitals(): WCVitals {
+  return {
+    uptimeS: 0,
+    alerts: [],
+    contactorClosed: false,
+    vehicleConnected: false,
+    pcbaTempC: 0,
+    handleTempC: 0,
+    mcuTempC: 0,
+    inputThermopileV: 0,
+    proxV: 0,
+    pilotHighV: 0,
+    pilotLowV: 0,
+    sessionDurationS: 0,
+    sessionEnergy: undefined,
+    acMeasurementGrid: undefined,
+    acMeasurementVehicle: undefined,
+    groundResistanceOhms: 0,
+    line1EarthVrms: 0,
+    neutralEarthVrms: 0,
+    faultStatus: 0,
+    recentFaultStatusLatchedAlerts: [],
+    vin: undefined,
+    instantaneousPowerWatts: undefined,
+    scheduledChargingStatus: 0,
+    instantaneousLineCurrent: undefined,
+    ocppStatus: 0,
+    evseNotReadyReasons: [],
+    powershareSessionState: 0,
+    dryContactControlState: 0,
+    smartChargingReason: 0,
+  };
+}
+
+export const WCVitals: MessageFns<WCVitals> = {
+  encode(message: WCVitals, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.uptimeS !== 0) {
+      writer.uint32(8).uint32(message.uptimeS);
+    }
+    writer.uint32(18).fork();
+    for (const v of message.alerts) {
+      writer.uint32(v);
+    }
+    writer.join();
+    if (message.contactorClosed !== false) {
+      writer.uint32(24).bool(message.contactorClosed);
+    }
+    if (message.vehicleConnected !== false) {
+      writer.uint32(32).bool(message.vehicleConnected);
+    }
+    if (message.pcbaTempC !== 0) {
+      writer.uint32(45).float(message.pcbaTempC);
+    }
+    if (message.handleTempC !== 0) {
+      writer.uint32(53).float(message.handleTempC);
+    }
+    if (message.mcuTempC !== 0) {
+      writer.uint32(61).float(message.mcuTempC);
+    }
+    if (message.inputThermopileV !== 0) {
+      writer.uint32(69).float(message.inputThermopileV);
+    }
+    if (message.proxV !== 0) {
+      writer.uint32(77).float(message.proxV);
+    }
+    if (message.pilotHighV !== 0) {
+      writer.uint32(85).float(message.pilotHighV);
+    }
+    if (message.pilotLowV !== 0) {
+      writer.uint32(93).float(message.pilotLowV);
+    }
+    if (message.sessionDurationS !== 0) {
+      writer.uint32(96).uint32(message.sessionDurationS);
+    }
+    if (message.sessionEnergy !== undefined) {
+      AccumulatedEnergy.encode(message.sessionEnergy, writer.uint32(106).fork()).join();
+    }
+    if (message.acMeasurementGrid !== undefined) {
+      InstACMeasurement.encode(message.acMeasurementGrid, writer.uint32(114).fork()).join();
+    }
+    if (message.acMeasurementVehicle !== undefined) {
+      InstACMeasurement.encode(message.acMeasurementVehicle, writer.uint32(122).fork()).join();
+    }
+    if (message.groundResistanceOhms !== 0) {
+      writer.uint32(133).float(message.groundResistanceOhms);
+    }
+    if (message.line1EarthVrms !== 0) {
+      writer.uint32(141).float(message.line1EarthVrms);
+    }
+    if (message.neutralEarthVrms !== 0) {
+      writer.uint32(149).float(message.neutralEarthVrms);
+    }
+    if (message.faultStatus !== 0) {
+      writer.uint32(152).int32(message.faultStatus);
+    }
+    for (const v of message.recentFaultStatusLatchedAlerts) {
+      WCFaultStatusLatchedAlert.encode(v!, writer.uint32(162).fork()).join();
+    }
+    if (message.vin !== undefined) {
+      VIN.encode(message.vin, writer.uint32(170).fork()).join();
+    }
+    if (message.instantaneousPowerWatts !== undefined) {
+      FloatValue.encode({ value: message.instantaneousPowerWatts! }, writer.uint32(178).fork()).join();
+    }
+    if (message.scheduledChargingStatus !== 0) {
+      writer.uint32(184).int32(message.scheduledChargingStatus);
+    }
+    if (message.instantaneousLineCurrent !== undefined) {
+      FloatValue.encode({ value: message.instantaneousLineCurrent! }, writer.uint32(194).fork()).join();
+    }
+    if (message.ocppStatus !== 0) {
+      writer.uint32(200).int32(message.ocppStatus);
+    }
+    writer.uint32(210).fork();
+    for (const v of message.evseNotReadyReasons) {
+      writer.int32(v);
+    }
+    writer.join();
+    if (message.powershareSessionState !== 0) {
+      writer.uint32(216).int32(message.powershareSessionState);
+    }
+    if (message.dryContactControlState !== 0) {
+      writer.uint32(224).int32(message.dryContactControlState);
+    }
+    if (message.smartChargingReason !== 0) {
+      writer.uint32(232).int32(message.smartChargingReason);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCVitals {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCVitals();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.uptimeS = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag === 16) {
+            message.alerts.push(reader.uint32());
+
+            continue;
+          }
+
+          if (tag === 18) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.alerts.push(reader.uint32());
+            }
+
+            continue;
+          }
+
+          break;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.contactorClosed = reader.bool();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.vehicleConnected = reader.bool();
+          continue;
+        }
+        case 5: {
+          if (tag !== 45) {
+            break;
+          }
+
+          message.pcbaTempC = reader.float();
+          continue;
+        }
+        case 6: {
+          if (tag !== 53) {
+            break;
+          }
+
+          message.handleTempC = reader.float();
+          continue;
+        }
+        case 7: {
+          if (tag !== 61) {
+            break;
+          }
+
+          message.mcuTempC = reader.float();
+          continue;
+        }
+        case 8: {
+          if (tag !== 69) {
+            break;
+          }
+
+          message.inputThermopileV = reader.float();
+          continue;
+        }
+        case 9: {
+          if (tag !== 77) {
+            break;
+          }
+
+          message.proxV = reader.float();
+          continue;
+        }
+        case 10: {
+          if (tag !== 85) {
+            break;
+          }
+
+          message.pilotHighV = reader.float();
+          continue;
+        }
+        case 11: {
+          if (tag !== 93) {
+            break;
+          }
+
+          message.pilotLowV = reader.float();
+          continue;
+        }
+        case 12: {
+          if (tag !== 96) {
+            break;
+          }
+
+          message.sessionDurationS = reader.uint32();
+          continue;
+        }
+        case 13: {
+          if (tag !== 106) {
+            break;
+          }
+
+          message.sessionEnergy = AccumulatedEnergy.decode(reader, reader.uint32());
+          continue;
+        }
+        case 14: {
+          if (tag !== 114) {
+            break;
+          }
+
+          message.acMeasurementGrid = InstACMeasurement.decode(reader, reader.uint32());
+          continue;
+        }
+        case 15: {
+          if (tag !== 122) {
+            break;
+          }
+
+          message.acMeasurementVehicle = InstACMeasurement.decode(reader, reader.uint32());
+          continue;
+        }
+        case 16: {
+          if (tag !== 133) {
+            break;
+          }
+
+          message.groundResistanceOhms = reader.float();
+          continue;
+        }
+        case 17: {
+          if (tag !== 141) {
+            break;
+          }
+
+          message.line1EarthVrms = reader.float();
+          continue;
+        }
+        case 18: {
+          if (tag !== 149) {
+            break;
+          }
+
+          message.neutralEarthVrms = reader.float();
+          continue;
+        }
+        case 19: {
+          if (tag !== 152) {
+            break;
+          }
+
+          message.faultStatus = reader.int32() as any;
+          continue;
+        }
+        case 20: {
+          if (tag !== 162) {
+            break;
+          }
+
+          message.recentFaultStatusLatchedAlerts.push(WCFaultStatusLatchedAlert.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 21: {
+          if (tag !== 170) {
+            break;
+          }
+
+          message.vin = VIN.decode(reader, reader.uint32());
+          continue;
+        }
+        case 22: {
+          if (tag !== 178) {
+            break;
+          }
+
+          message.instantaneousPowerWatts = FloatValue.decode(reader, reader.uint32()).value;
+          continue;
+        }
+        case 23: {
+          if (tag !== 184) {
+            break;
+          }
+
+          message.scheduledChargingStatus = reader.int32() as any;
+          continue;
+        }
+        case 24: {
+          if (tag !== 194) {
+            break;
+          }
+
+          message.instantaneousLineCurrent = FloatValue.decode(reader, reader.uint32()).value;
+          continue;
+        }
+        case 25: {
+          if (tag !== 200) {
+            break;
+          }
+
+          message.ocppStatus = reader.int32() as any;
+          continue;
+        }
+        case 26: {
+          if (tag === 208) {
+            message.evseNotReadyReasons.push(reader.int32() as any);
+
+            continue;
+          }
+
+          if (tag === 210) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.evseNotReadyReasons.push(reader.int32() as any);
+            }
+
+            continue;
+          }
+
+          break;
+        }
+        case 27: {
+          if (tag !== 216) {
+            break;
+          }
+
+          message.powershareSessionState = reader.int32() as any;
+          continue;
+        }
+        case 28: {
+          if (tag !== 224) {
+            break;
+          }
+
+          message.dryContactControlState = reader.int32() as any;
+          continue;
+        }
+        case 29: {
+          if (tag !== 232) {
+            break;
+          }
+
+          message.smartChargingReason = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCVitals {
+    return {
+      uptimeS: isSet(object.uptimeS) ? globalThis.Number(object.uptimeS) : 0,
+      alerts: globalThis.Array.isArray(object?.alerts) ? object.alerts.map((e: any) => globalThis.Number(e)) : [],
+      contactorClosed: isSet(object.contactorClosed) ? globalThis.Boolean(object.contactorClosed) : false,
+      vehicleConnected: isSet(object.vehicleConnected) ? globalThis.Boolean(object.vehicleConnected) : false,
+      pcbaTempC: isSet(object.pcbaTempC) ? globalThis.Number(object.pcbaTempC) : 0,
+      handleTempC: isSet(object.handleTempC) ? globalThis.Number(object.handleTempC) : 0,
+      mcuTempC: isSet(object.mcuTempC) ? globalThis.Number(object.mcuTempC) : 0,
+      inputThermopileV: isSet(object.inputThermopileV) ? globalThis.Number(object.inputThermopileV) : 0,
+      proxV: isSet(object.proxV) ? globalThis.Number(object.proxV) : 0,
+      pilotHighV: isSet(object.pilotHighV) ? globalThis.Number(object.pilotHighV) : 0,
+      pilotLowV: isSet(object.pilotLowV) ? globalThis.Number(object.pilotLowV) : 0,
+      sessionDurationS: isSet(object.sessionDurationS) ? globalThis.Number(object.sessionDurationS) : 0,
+      sessionEnergy: isSet(object.sessionEnergy) ? AccumulatedEnergy.fromJSON(object.sessionEnergy) : undefined,
+      acMeasurementGrid: isSet(object.acMeasurementGrid)
+        ? InstACMeasurement.fromJSON(object.acMeasurementGrid)
+        : undefined,
+      acMeasurementVehicle: isSet(object.acMeasurementVehicle)
+        ? InstACMeasurement.fromJSON(object.acMeasurementVehicle)
+        : undefined,
+      groundResistanceOhms: isSet(object.groundResistanceOhms) ? globalThis.Number(object.groundResistanceOhms) : 0,
+      line1EarthVrms: isSet(object.line1EarthVrms) ? globalThis.Number(object.line1EarthVrms) : 0,
+      neutralEarthVrms: isSet(object.neutralEarthVrms) ? globalThis.Number(object.neutralEarthVrms) : 0,
+      faultStatus: isSet(object.faultStatus) ? wCFaultStatusStateFromJSON(object.faultStatus) : 0,
+      recentFaultStatusLatchedAlerts: globalThis.Array.isArray(object?.recentFaultStatusLatchedAlerts)
+        ? object.recentFaultStatusLatchedAlerts.map((e: any) => WCFaultStatusLatchedAlert.fromJSON(e))
+        : [],
+      vin: isSet(object.vin) ? VIN.fromJSON(object.vin) : undefined,
+      instantaneousPowerWatts: isSet(object.instantaneousPowerWatts)
+        ? Number(object.instantaneousPowerWatts)
+        : undefined,
+      scheduledChargingStatus: isSet(object.scheduledChargingStatus)
+        ? wCChargeScheduleChargingStatusFromJSON(object.scheduledChargingStatus)
+        : 0,
+      instantaneousLineCurrent: isSet(object.instantaneousLineCurrent)
+        ? Number(object.instantaneousLineCurrent)
+        : undefined,
+      ocppStatus: isSet(object.ocppStatus) ? wCOcppStatusFromJSON(object.ocppStatus) : 0,
+      evseNotReadyReasons: globalThis.Array.isArray(object?.evseNotReadyReasons)
+        ? object.evseNotReadyReasons.map((e: any) => wCEvseNotReadyReasonFromJSON(e))
+        : [],
+      powershareSessionState: isSet(object.powershareSessionState)
+        ? wCPowershareSessionStateFromJSON(object.powershareSessionState)
+        : 0,
+      dryContactControlState: isSet(object.dryContactControlState)
+        ? wCDryContactControlStateFromJSON(object.dryContactControlState)
+        : 0,
+      smartChargingReason: isSet(object.smartChargingReason)
+        ? wCSmartChargingReasonFromJSON(object.smartChargingReason)
+        : 0,
+    };
+  },
+
+  toJSON(message: WCVitals): unknown {
+    const obj: any = {};
+    if (message.uptimeS !== undefined) {
+      obj.uptimeS = Math.round(message.uptimeS);
+    }
+    if (message.alerts?.length) {
+      obj.alerts = message.alerts.map((e) => Math.round(e));
+    }
+    if (message.contactorClosed !== undefined) {
+      obj.contactorClosed = message.contactorClosed;
+    }
+    if (message.vehicleConnected !== undefined) {
+      obj.vehicleConnected = message.vehicleConnected;
+    }
+    if (message.pcbaTempC !== undefined) {
+      obj.pcbaTempC = message.pcbaTempC;
+    }
+    if (message.handleTempC !== undefined) {
+      obj.handleTempC = message.handleTempC;
+    }
+    if (message.mcuTempC !== undefined) {
+      obj.mcuTempC = message.mcuTempC;
+    }
+    if (message.inputThermopileV !== undefined) {
+      obj.inputThermopileV = message.inputThermopileV;
+    }
+    if (message.proxV !== undefined) {
+      obj.proxV = message.proxV;
+    }
+    if (message.pilotHighV !== undefined) {
+      obj.pilotHighV = message.pilotHighV;
+    }
+    if (message.pilotLowV !== undefined) {
+      obj.pilotLowV = message.pilotLowV;
+    }
+    if (message.sessionDurationS !== undefined) {
+      obj.sessionDurationS = Math.round(message.sessionDurationS);
+    }
+    if (message.sessionEnergy !== undefined) {
+      obj.sessionEnergy = AccumulatedEnergy.toJSON(message.sessionEnergy);
+    }
+    if (message.acMeasurementGrid !== undefined) {
+      obj.acMeasurementGrid = InstACMeasurement.toJSON(message.acMeasurementGrid);
+    }
+    if (message.acMeasurementVehicle !== undefined) {
+      obj.acMeasurementVehicle = InstACMeasurement.toJSON(message.acMeasurementVehicle);
+    }
+    if (message.groundResistanceOhms !== undefined) {
+      obj.groundResistanceOhms = message.groundResistanceOhms;
+    }
+    if (message.line1EarthVrms !== undefined) {
+      obj.line1EarthVrms = message.line1EarthVrms;
+    }
+    if (message.neutralEarthVrms !== undefined) {
+      obj.neutralEarthVrms = message.neutralEarthVrms;
+    }
+    if (message.faultStatus !== undefined) {
+      obj.faultStatus = wCFaultStatusStateToJSON(message.faultStatus);
+    }
+    if (message.recentFaultStatusLatchedAlerts?.length) {
+      obj.recentFaultStatusLatchedAlerts = message.recentFaultStatusLatchedAlerts.map((e) =>
+        WCFaultStatusLatchedAlert.toJSON(e)
+      );
+    }
+    if (message.vin !== undefined) {
+      obj.vin = VIN.toJSON(message.vin);
+    }
+    if (message.instantaneousPowerWatts !== undefined) {
+      obj.instantaneousPowerWatts = message.instantaneousPowerWatts;
+    }
+    if (message.scheduledChargingStatus !== undefined) {
+      obj.scheduledChargingStatus = wCChargeScheduleChargingStatusToJSON(message.scheduledChargingStatus);
+    }
+    if (message.instantaneousLineCurrent !== undefined) {
+      obj.instantaneousLineCurrent = message.instantaneousLineCurrent;
+    }
+    if (message.ocppStatus !== undefined) {
+      obj.ocppStatus = wCOcppStatusToJSON(message.ocppStatus);
+    }
+    if (message.evseNotReadyReasons?.length) {
+      obj.evseNotReadyReasons = message.evseNotReadyReasons.map((e) => wCEvseNotReadyReasonToJSON(e));
+    }
+    if (message.powershareSessionState !== undefined) {
+      obj.powershareSessionState = wCPowershareSessionStateToJSON(message.powershareSessionState);
+    }
+    if (message.dryContactControlState !== undefined) {
+      obj.dryContactControlState = wCDryContactControlStateToJSON(message.dryContactControlState);
+    }
+    if (message.smartChargingReason !== undefined) {
+      obj.smartChargingReason = wCSmartChargingReasonToJSON(message.smartChargingReason);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCVitals>, I>>(base?: I): WCVitals {
+    return WCVitals.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCVitals>, I>>(object: I): WCVitals {
+    const message = createBaseWCVitals();
+    message.uptimeS = object.uptimeS ?? 0;
+    message.alerts = object.alerts?.map((e) => e) || [];
+    message.contactorClosed = object.contactorClosed ?? false;
+    message.vehicleConnected = object.vehicleConnected ?? false;
+    message.pcbaTempC = object.pcbaTempC ?? 0;
+    message.handleTempC = object.handleTempC ?? 0;
+    message.mcuTempC = object.mcuTempC ?? 0;
+    message.inputThermopileV = object.inputThermopileV ?? 0;
+    message.proxV = object.proxV ?? 0;
+    message.pilotHighV = object.pilotHighV ?? 0;
+    message.pilotLowV = object.pilotLowV ?? 0;
+    message.sessionDurationS = object.sessionDurationS ?? 0;
+    message.sessionEnergy = (object.sessionEnergy !== undefined && object.sessionEnergy !== null)
+      ? AccumulatedEnergy.fromPartial(object.sessionEnergy)
+      : undefined;
+    message.acMeasurementGrid = (object.acMeasurementGrid !== undefined && object.acMeasurementGrid !== null)
+      ? InstACMeasurement.fromPartial(object.acMeasurementGrid)
+      : undefined;
+    message.acMeasurementVehicle = (object.acMeasurementVehicle !== undefined && object.acMeasurementVehicle !== null)
+      ? InstACMeasurement.fromPartial(object.acMeasurementVehicle)
+      : undefined;
+    message.groundResistanceOhms = object.groundResistanceOhms ?? 0;
+    message.line1EarthVrms = object.line1EarthVrms ?? 0;
+    message.neutralEarthVrms = object.neutralEarthVrms ?? 0;
+    message.faultStatus = object.faultStatus ?? 0;
+    message.recentFaultStatusLatchedAlerts =
+      object.recentFaultStatusLatchedAlerts?.map((e) => WCFaultStatusLatchedAlert.fromPartial(e)) || [];
+    message.vin = (object.vin !== undefined && object.vin !== null) ? VIN.fromPartial(object.vin) : undefined;
+    message.instantaneousPowerWatts = object.instantaneousPowerWatts ?? undefined;
+    message.scheduledChargingStatus = object.scheduledChargingStatus ?? 0;
+    message.instantaneousLineCurrent = object.instantaneousLineCurrent ?? undefined;
+    message.ocppStatus = object.ocppStatus ?? 0;
+    message.evseNotReadyReasons = object.evseNotReadyReasons?.map((e) => e) || [];
+    message.powershareSessionState = object.powershareSessionState ?? 0;
+    message.dryContactControlState = object.dryContactControlState ?? 0;
+    message.smartChargingReason = object.smartChargingReason ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCLifetimeStats(): WCLifetimeStats {
+  return {
+    uptimeS: 0,
+    alertCount: 0,
+    contactorCycles: 0,
+    contactorCyclesLoaded: 0,
+    connectorCycles: 0,
+    thermalFoldbacks: 0,
+    avgStartupTempC: 0,
+    chargeStarts: 0,
+    chargingTimeS: 0,
+    chargingEnergy: undefined,
+  };
+}
+
+export const WCLifetimeStats: MessageFns<WCLifetimeStats> = {
+  encode(message: WCLifetimeStats, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.uptimeS !== 0) {
+      writer.uint32(24).uint64(message.uptimeS);
+    }
+    if (message.alertCount !== 0) {
+      writer.uint32(32).uint32(message.alertCount);
+    }
+    if (message.contactorCycles !== 0) {
+      writer.uint32(40).uint32(message.contactorCycles);
+    }
+    if (message.contactorCyclesLoaded !== 0) {
+      writer.uint32(48).uint32(message.contactorCyclesLoaded);
+    }
+    if (message.connectorCycles !== 0) {
+      writer.uint32(56).uint32(message.connectorCycles);
+    }
+    if (message.thermalFoldbacks !== 0) {
+      writer.uint32(64).uint32(message.thermalFoldbacks);
+    }
+    if (message.avgStartupTempC !== 0) {
+      writer.uint32(77).float(message.avgStartupTempC);
+    }
+    if (message.chargeStarts !== 0) {
+      writer.uint32(80).uint32(message.chargeStarts);
+    }
+    if (message.chargingTimeS !== 0) {
+      writer.uint32(88).uint64(message.chargingTimeS);
+    }
+    if (message.chargingEnergy !== undefined) {
+      AccumulatedEnergy.encode(message.chargingEnergy, writer.uint32(98).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCLifetimeStats {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCLifetimeStats();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.uptimeS = longToNumber(reader.uint64());
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.alertCount = reader.uint32();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.contactorCycles = reader.uint32();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.contactorCyclesLoaded = reader.uint32();
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.connectorCycles = reader.uint32();
+          continue;
+        }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.thermalFoldbacks = reader.uint32();
+          continue;
+        }
+        case 9: {
+          if (tag !== 77) {
+            break;
+          }
+
+          message.avgStartupTempC = reader.float();
+          continue;
+        }
+        case 10: {
+          if (tag !== 80) {
+            break;
+          }
+
+          message.chargeStarts = reader.uint32();
+          continue;
+        }
+        case 11: {
+          if (tag !== 88) {
+            break;
+          }
+
+          message.chargingTimeS = longToNumber(reader.uint64());
+          continue;
+        }
+        case 12: {
+          if (tag !== 98) {
+            break;
+          }
+
+          message.chargingEnergy = AccumulatedEnergy.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCLifetimeStats {
+    return {
+      uptimeS: isSet(object.uptimeS) ? globalThis.Number(object.uptimeS) : 0,
+      alertCount: isSet(object.alertCount) ? globalThis.Number(object.alertCount) : 0,
+      contactorCycles: isSet(object.contactorCycles) ? globalThis.Number(object.contactorCycles) : 0,
+      contactorCyclesLoaded: isSet(object.contactorCyclesLoaded) ? globalThis.Number(object.contactorCyclesLoaded) : 0,
+      connectorCycles: isSet(object.connectorCycles) ? globalThis.Number(object.connectorCycles) : 0,
+      thermalFoldbacks: isSet(object.thermalFoldbacks) ? globalThis.Number(object.thermalFoldbacks) : 0,
+      avgStartupTempC: isSet(object.avgStartupTempC) ? globalThis.Number(object.avgStartupTempC) : 0,
+      chargeStarts: isSet(object.chargeStarts) ? globalThis.Number(object.chargeStarts) : 0,
+      chargingTimeS: isSet(object.chargingTimeS) ? globalThis.Number(object.chargingTimeS) : 0,
+      chargingEnergy: isSet(object.chargingEnergy) ? AccumulatedEnergy.fromJSON(object.chargingEnergy) : undefined,
+    };
+  },
+
+  toJSON(message: WCLifetimeStats): unknown {
+    const obj: any = {};
+    if (message.uptimeS !== undefined) {
+      obj.uptimeS = Math.round(message.uptimeS);
+    }
+    if (message.alertCount !== undefined) {
+      obj.alertCount = Math.round(message.alertCount);
+    }
+    if (message.contactorCycles !== undefined) {
+      obj.contactorCycles = Math.round(message.contactorCycles);
+    }
+    if (message.contactorCyclesLoaded !== undefined) {
+      obj.contactorCyclesLoaded = Math.round(message.contactorCyclesLoaded);
+    }
+    if (message.connectorCycles !== undefined) {
+      obj.connectorCycles = Math.round(message.connectorCycles);
+    }
+    if (message.thermalFoldbacks !== undefined) {
+      obj.thermalFoldbacks = Math.round(message.thermalFoldbacks);
+    }
+    if (message.avgStartupTempC !== undefined) {
+      obj.avgStartupTempC = message.avgStartupTempC;
+    }
+    if (message.chargeStarts !== undefined) {
+      obj.chargeStarts = Math.round(message.chargeStarts);
+    }
+    if (message.chargingTimeS !== undefined) {
+      obj.chargingTimeS = Math.round(message.chargingTimeS);
+    }
+    if (message.chargingEnergy !== undefined) {
+      obj.chargingEnergy = AccumulatedEnergy.toJSON(message.chargingEnergy);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCLifetimeStats>, I>>(base?: I): WCLifetimeStats {
+    return WCLifetimeStats.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCLifetimeStats>, I>>(object: I): WCLifetimeStats {
+    const message = createBaseWCLifetimeStats();
+    message.uptimeS = object.uptimeS ?? 0;
+    message.alertCount = object.alertCount ?? 0;
+    message.contactorCycles = object.contactorCycles ?? 0;
+    message.contactorCyclesLoaded = object.contactorCyclesLoaded ?? 0;
+    message.connectorCycles = object.connectorCycles ?? 0;
+    message.thermalFoldbacks = object.thermalFoldbacks ?? 0;
+    message.avgStartupTempC = object.avgStartupTempC ?? 0;
+    message.chargeStarts = object.chargeStarts ?? 0;
+    message.chargingTimeS = object.chargingTimeS ?? 0;
+    message.chargingEnergy = (object.chargingEnergy !== undefined && object.chargingEnergy !== null)
+      ? AccumulatedEnergy.fromPartial(object.chargingEnergy)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCLoadSharingFixedLimitConfig(): WCLoadSharingFixedLimitConfig {
+  return { networkLimitAmps: 0 };
+}
+
+export const WCLoadSharingFixedLimitConfig: MessageFns<WCLoadSharingFixedLimitConfig> = {
+  encode(message: WCLoadSharingFixedLimitConfig, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.networkLimitAmps !== 0) {
+      writer.uint32(8).uint32(message.networkLimitAmps);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCLoadSharingFixedLimitConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCLoadSharingFixedLimitConfig();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.networkLimitAmps = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCLoadSharingFixedLimitConfig {
+    return { networkLimitAmps: isSet(object.networkLimitAmps) ? globalThis.Number(object.networkLimitAmps) : 0 };
+  },
+
+  toJSON(message: WCLoadSharingFixedLimitConfig): unknown {
+    const obj: any = {};
+    if (message.networkLimitAmps !== undefined) {
+      obj.networkLimitAmps = Math.round(message.networkLimitAmps);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCLoadSharingFixedLimitConfig>, I>>(base?: I): WCLoadSharingFixedLimitConfig {
+    return WCLoadSharingFixedLimitConfig.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCLoadSharingFixedLimitConfig>, I>>(
+    object: I,
+  ): WCLoadSharingFixedLimitConfig {
+    const message = createBaseWCLoadSharingFixedLimitConfig();
+    message.networkLimitAmps = object.networkLimitAmps ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCLoadSharingConductorLimitConfig(): WCLoadSharingConductorLimitConfig {
+  return { conductorLimitAmps: 0 };
+}
+
+export const WCLoadSharingConductorLimitConfig: MessageFns<WCLoadSharingConductorLimitConfig> = {
+  encode(message: WCLoadSharingConductorLimitConfig, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.conductorLimitAmps !== 0) {
+      writer.uint32(8).uint32(message.conductorLimitAmps);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCLoadSharingConductorLimitConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCLoadSharingConductorLimitConfig();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.conductorLimitAmps = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCLoadSharingConductorLimitConfig {
+    return { conductorLimitAmps: isSet(object.conductorLimitAmps) ? globalThis.Number(object.conductorLimitAmps) : 0 };
+  },
+
+  toJSON(message: WCLoadSharingConductorLimitConfig): unknown {
+    const obj: any = {};
+    if (message.conductorLimitAmps !== undefined) {
+      obj.conductorLimitAmps = Math.round(message.conductorLimitAmps);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCLoadSharingConductorLimitConfig>, I>>(
+    base?: I,
+  ): WCLoadSharingConductorLimitConfig {
+    return WCLoadSharingConductorLimitConfig.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCLoadSharingConductorLimitConfig>, I>>(
+    object: I,
+  ): WCLoadSharingConductorLimitConfig {
+    const message = createBaseWCLoadSharingConductorLimitConfig();
+    message.conductorLimitAmps = object.conductorLimitAmps ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCLoadSharingSettings(): WCLoadSharingSettings {
+  return { fixedLimit: undefined, conductorLimit: undefined };
+}
+
+export const WCLoadSharingSettings: MessageFns<WCLoadSharingSettings> = {
+  encode(message: WCLoadSharingSettings, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.fixedLimit !== undefined) {
+      WCLoadSharingFixedLimitConfig.encode(message.fixedLimit, writer.uint32(10).fork()).join();
+    }
+    if (message.conductorLimit !== undefined) {
+      WCLoadSharingConductorLimitConfig.encode(message.conductorLimit, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCLoadSharingSettings {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCLoadSharingSettings();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.fixedLimit = WCLoadSharingFixedLimitConfig.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.conductorLimit = WCLoadSharingConductorLimitConfig.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCLoadSharingSettings {
+    return {
+      fixedLimit: isSet(object.fixedLimit) ? WCLoadSharingFixedLimitConfig.fromJSON(object.fixedLimit) : undefined,
+      conductorLimit: isSet(object.conductorLimit)
+        ? WCLoadSharingConductorLimitConfig.fromJSON(object.conductorLimit)
+        : undefined,
+    };
+  },
+
+  toJSON(message: WCLoadSharingSettings): unknown {
+    const obj: any = {};
+    if (message.fixedLimit !== undefined) {
+      obj.fixedLimit = WCLoadSharingFixedLimitConfig.toJSON(message.fixedLimit);
+    }
+    if (message.conductorLimit !== undefined) {
+      obj.conductorLimit = WCLoadSharingConductorLimitConfig.toJSON(message.conductorLimit);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCLoadSharingSettings>, I>>(base?: I): WCLoadSharingSettings {
+    return WCLoadSharingSettings.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCLoadSharingSettings>, I>>(object: I): WCLoadSharingSettings {
+    const message = createBaseWCLoadSharingSettings();
+    message.fixedLimit = (object.fixedLimit !== undefined && object.fixedLimit !== null)
+      ? WCLoadSharingFixedLimitConfig.fromPartial(object.fixedLimit)
+      : undefined;
+    message.conductorLimit = (object.conductorLimit !== undefined && object.conductorLimit !== null)
+      ? WCLoadSharingConductorLimitConfig.fromPartial(object.conductorLimit)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCLoadSharingLimits(): WCLoadSharingLimits {
+  return { maxParticipants: 0 };
+}
+
+export const WCLoadSharingLimits: MessageFns<WCLoadSharingLimits> = {
+  encode(message: WCLoadSharingLimits, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.maxParticipants !== 0) {
+      writer.uint32(8).uint32(message.maxParticipants);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCLoadSharingLimits {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCLoadSharingLimits();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.maxParticipants = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCLoadSharingLimits {
+    return { maxParticipants: isSet(object.maxParticipants) ? globalThis.Number(object.maxParticipants) : 0 };
+  },
+
+  toJSON(message: WCLoadSharingLimits): unknown {
+    const obj: any = {};
+    if (message.maxParticipants !== undefined) {
+      obj.maxParticipants = Math.round(message.maxParticipants);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCLoadSharingLimits>, I>>(base?: I): WCLoadSharingLimits {
+    return WCLoadSharingLimits.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCLoadSharingLimits>, I>>(object: I): WCLoadSharingLimits {
+    const message = createBaseWCLoadSharingLimits();
+    message.maxParticipants = object.maxParticipants ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCLoadSharingNetworkStatus(): WCLoadSharingNetworkStatus {
+  return { networkChargingInhibitors: [] };
+}
+
+export const WCLoadSharingNetworkStatus: MessageFns<WCLoadSharingNetworkStatus> = {
+  encode(message: WCLoadSharingNetworkStatus, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    writer.uint32(10).fork();
+    for (const v of message.networkChargingInhibitors) {
+      writer.int32(v);
+    }
+    writer.join();
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCLoadSharingNetworkStatus {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCLoadSharingNetworkStatus();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag === 8) {
+            message.networkChargingInhibitors.push(reader.int32() as any);
+
+            continue;
+          }
+
+          if (tag === 10) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.networkChargingInhibitors.push(reader.int32() as any);
+            }
+
+            continue;
+          }
+
+          break;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCLoadSharingNetworkStatus {
+    return {
+      networkChargingInhibitors: globalThis.Array.isArray(object?.networkChargingInhibitors)
+        ? object.networkChargingInhibitors.map((e: any) => wCLoadSharingNetworkChargingInhibitorFromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: WCLoadSharingNetworkStatus): unknown {
+    const obj: any = {};
+    if (message.networkChargingInhibitors?.length) {
+      obj.networkChargingInhibitors = message.networkChargingInhibitors.map((e) =>
+        wCLoadSharingNetworkChargingInhibitorToJSON(e)
+      );
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCLoadSharingNetworkStatus>, I>>(base?: I): WCLoadSharingNetworkStatus {
+    return WCLoadSharingNetworkStatus.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCLoadSharingNetworkStatus>, I>>(object: I): WCLoadSharingNetworkStatus {
+    const message = createBaseWCLoadSharingNetworkStatus();
+    message.networkChargingInhibitors = object.networkChargingInhibitors?.map((e) => e) || [];
+    return message;
+  },
+};
+
+function createBaseWCLoadSharingConfig(): WCLoadSharingConfig {
+  return { version: 0, participantDins: [], fixedLimit: undefined, settings: undefined, chargingEnabled: false };
+}
+
+export const WCLoadSharingConfig: MessageFns<WCLoadSharingConfig> = {
+  encode(message: WCLoadSharingConfig, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.version !== 0) {
+      writer.uint32(8).uint32(message.version);
+    }
+    for (const v of message.participantDins) {
+      Din.encode(v!, writer.uint32(18).fork()).join();
+    }
+    if (message.fixedLimit !== undefined) {
+      WCLoadSharingFixedLimitConfig.encode(message.fixedLimit, writer.uint32(26).fork()).join();
+    }
+    if (message.settings !== undefined) {
+      WCLoadSharingSettings.encode(message.settings, writer.uint32(34).fork()).join();
+    }
+    if (message.chargingEnabled !== false) {
+      writer.uint32(40).bool(message.chargingEnabled);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCLoadSharingConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCLoadSharingConfig();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.version = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.participantDins.push(Din.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.fixedLimit = WCLoadSharingFixedLimitConfig.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.settings = WCLoadSharingSettings.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.chargingEnabled = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCLoadSharingConfig {
+    return {
+      version: isSet(object.version) ? globalThis.Number(object.version) : 0,
+      participantDins: globalThis.Array.isArray(object?.participantDins)
+        ? object.participantDins.map((e: any) => Din.fromJSON(e))
+        : [],
+      fixedLimit: isSet(object.fixedLimit) ? WCLoadSharingFixedLimitConfig.fromJSON(object.fixedLimit) : undefined,
+      settings: isSet(object.settings) ? WCLoadSharingSettings.fromJSON(object.settings) : undefined,
+      chargingEnabled: isSet(object.chargingEnabled) ? globalThis.Boolean(object.chargingEnabled) : false,
+    };
+  },
+
+  toJSON(message: WCLoadSharingConfig): unknown {
+    const obj: any = {};
+    if (message.version !== undefined) {
+      obj.version = Math.round(message.version);
+    }
+    if (message.participantDins?.length) {
+      obj.participantDins = message.participantDins.map((e) => Din.toJSON(e));
+    }
+    if (message.fixedLimit !== undefined) {
+      obj.fixedLimit = WCLoadSharingFixedLimitConfig.toJSON(message.fixedLimit);
+    }
+    if (message.settings !== undefined) {
+      obj.settings = WCLoadSharingSettings.toJSON(message.settings);
+    }
+    if (message.chargingEnabled !== undefined) {
+      obj.chargingEnabled = message.chargingEnabled;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCLoadSharingConfig>, I>>(base?: I): WCLoadSharingConfig {
+    return WCLoadSharingConfig.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCLoadSharingConfig>, I>>(object: I): WCLoadSharingConfig {
+    const message = createBaseWCLoadSharingConfig();
+    message.version = object.version ?? 0;
+    message.participantDins = object.participantDins?.map((e) => Din.fromPartial(e)) || [];
+    message.fixedLimit = (object.fixedLimit !== undefined && object.fixedLimit !== null)
+      ? WCLoadSharingFixedLimitConfig.fromPartial(object.fixedLimit)
+      : undefined;
+    message.settings = (object.settings !== undefined && object.settings !== null)
+      ? WCLoadSharingSettings.fromPartial(object.settings)
+      : undefined;
+    message.chargingEnabled = object.chargingEnabled ?? false;
+    return message;
+  },
+};
+
+function createBaseWCPpuConfig(): WCPpuConfig {
+  return { sessionReportingMode: 0 };
+}
+
+export const WCPpuConfig: MessageFns<WCPpuConfig> = {
+  encode(message: WCPpuConfig, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.sessionReportingMode !== 0) {
+      writer.uint32(8).int32(message.sessionReportingMode);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCPpuConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCPpuConfig();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.sessionReportingMode = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCPpuConfig {
+    return {
+      sessionReportingMode: isSet(object.sessionReportingMode)
+        ? wCPpuSessionReportingModeFromJSON(object.sessionReportingMode)
+        : 0,
+    };
+  },
+
+  toJSON(message: WCPpuConfig): unknown {
+    const obj: any = {};
+    if (message.sessionReportingMode !== undefined) {
+      obj.sessionReportingMode = wCPpuSessionReportingModeToJSON(message.sessionReportingMode);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCPpuConfig>, I>>(base?: I): WCPpuConfig {
+    return WCPpuConfig.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCPpuConfig>, I>>(object: I): WCPpuConfig {
+    const message = createBaseWCPpuConfig();
+    message.sessionReportingMode = object.sessionReportingMode ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCOperationalSettingsConfig(): WCOperationalSettingsConfig {
+  return { operationalMode: 0, emitIncreasedTelemetry: false };
+}
+
+export const WCOperationalSettingsConfig: MessageFns<WCOperationalSettingsConfig> = {
+  encode(message: WCOperationalSettingsConfig, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.operationalMode !== 0) {
+      writer.uint32(8).int32(message.operationalMode);
+    }
+    if (message.emitIncreasedTelemetry !== false) {
+      writer.uint32(16).bool(message.emitIncreasedTelemetry);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCOperationalSettingsConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCOperationalSettingsConfig();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.operationalMode = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.emitIncreasedTelemetry = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCOperationalSettingsConfig {
+    return {
+      operationalMode: isSet(object.operationalMode) ? wCOperationalModeFromJSON(object.operationalMode) : 0,
+      emitIncreasedTelemetry: isSet(object.emitIncreasedTelemetry)
+        ? globalThis.Boolean(object.emitIncreasedTelemetry)
+        : false,
+    };
+  },
+
+  toJSON(message: WCOperationalSettingsConfig): unknown {
+    const obj: any = {};
+    if (message.operationalMode !== undefined) {
+      obj.operationalMode = wCOperationalModeToJSON(message.operationalMode);
+    }
+    if (message.emitIncreasedTelemetry !== undefined) {
+      obj.emitIncreasedTelemetry = message.emitIncreasedTelemetry;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCOperationalSettingsConfig>, I>>(base?: I): WCOperationalSettingsConfig {
+    return WCOperationalSettingsConfig.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCOperationalSettingsConfig>, I>>(object: I): WCOperationalSettingsConfig {
+    const message = createBaseWCOperationalSettingsConfig();
+    message.operationalMode = object.operationalMode ?? 0;
+    message.emitIncreasedTelemetry = object.emitIncreasedTelemetry ?? false;
+    return message;
+  },
+};
+
+function createBaseWCMeterInterface(): WCMeterInterface {
+  return { neurio: undefined };
+}
+
+export const WCMeterInterface: MessageFns<WCMeterInterface> = {
+  encode(message: WCMeterInterface, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.neurio !== undefined) {
+      NeurioMeterInterface.encode(message.neurio, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCMeterInterface {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCMeterInterface();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.neurio = NeurioMeterInterface.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCMeterInterface {
+    return { neurio: isSet(object.neurio) ? NeurioMeterInterface.fromJSON(object.neurio) : undefined };
+  },
+
+  toJSON(message: WCMeterInterface): unknown {
+    const obj: any = {};
+    if (message.neurio !== undefined) {
+      obj.neurio = NeurioMeterInterface.toJSON(message.neurio);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCMeterInterface>, I>>(base?: I): WCMeterInterface {
+    return WCMeterInterface.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCMeterInterface>, I>>(object: I): WCMeterInterface {
+    const message = createBaseWCMeterInterface();
+    message.neurio = (object.neurio !== undefined && object.neurio !== null)
+      ? NeurioMeterInterface.fromPartial(object.neurio)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCDryContactConfig(): WCDryContactConfig {
+  return { enabled: false, defaultState: 0, disableCharging: false, maxCurrentAmps: 0, germany14a: false };
+}
+
+export const WCDryContactConfig: MessageFns<WCDryContactConfig> = {
+  encode(message: WCDryContactConfig, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.enabled !== false) {
+      writer.uint32(8).bool(message.enabled);
+    }
+    if (message.defaultState !== 0) {
+      writer.uint32(16).int32(message.defaultState);
+    }
+    if (message.disableCharging !== false) {
+      writer.uint32(24).bool(message.disableCharging);
+    }
+    if (message.maxCurrentAmps !== 0) {
+      writer.uint32(32).uint32(message.maxCurrentAmps);
+    }
+    if (message.germany14a !== false) {
+      writer.uint32(40).bool(message.germany14a);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCDryContactConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCDryContactConfig();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.enabled = reader.bool();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.defaultState = reader.int32() as any;
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.disableCharging = reader.bool();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.maxCurrentAmps = reader.uint32();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.germany14a = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCDryContactConfig {
+    return {
+      enabled: isSet(object.enabled) ? globalThis.Boolean(object.enabled) : false,
+      defaultState: isSet(object.defaultState) ? wCDryContactDefaultStateFromJSON(object.defaultState) : 0,
+      disableCharging: isSet(object.disableCharging) ? globalThis.Boolean(object.disableCharging) : false,
+      maxCurrentAmps: isSet(object.maxCurrentAmps) ? globalThis.Number(object.maxCurrentAmps) : 0,
+      germany14a: isSet(object.germany14a) ? globalThis.Boolean(object.germany14a) : false,
+    };
+  },
+
+  toJSON(message: WCDryContactConfig): unknown {
+    const obj: any = {};
+    if (message.enabled !== undefined) {
+      obj.enabled = message.enabled;
+    }
+    if (message.defaultState !== undefined) {
+      obj.defaultState = wCDryContactDefaultStateToJSON(message.defaultState);
+    }
+    if (message.disableCharging !== undefined) {
+      obj.disableCharging = message.disableCharging;
+    }
+    if (message.maxCurrentAmps !== undefined) {
+      obj.maxCurrentAmps = Math.round(message.maxCurrentAmps);
+    }
+    if (message.germany14a !== undefined) {
+      obj.germany14a = message.germany14a;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCDryContactConfig>, I>>(base?: I): WCDryContactConfig {
+    return WCDryContactConfig.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCDryContactConfig>, I>>(object: I): WCDryContactConfig {
+    const message = createBaseWCDryContactConfig();
+    message.enabled = object.enabled ?? false;
+    message.defaultState = object.defaultState ?? 0;
+    message.disableCharging = object.disableCharging ?? false;
+    message.maxCurrentAmps = object.maxCurrentAmps ?? 0;
+    message.germany14a = object.germany14a ?? false;
+    return message;
+  },
+};
+
+function createBaseWCTimeZoneTransition(): WCTimeZoneTransition {
+  return { timestamp: undefined, localTimeUtcOffset: 0 };
+}
+
+export const WCTimeZoneTransition: MessageFns<WCTimeZoneTransition> = {
+  encode(message: WCTimeZoneTransition, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(10).fork()).join();
+    }
+    if (message.localTimeUtcOffset !== 0) {
+      writer.uint32(16).int32(message.localTimeUtcOffset);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCTimeZoneTransition {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCTimeZoneTransition();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.localTimeUtcOffset = reader.int32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCTimeZoneTransition {
+    return {
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      localTimeUtcOffset: isSet(object.localTimeUtcOffset) ? globalThis.Number(object.localTimeUtcOffset) : 0,
+    };
+  },
+
+  toJSON(message: WCTimeZoneTransition): unknown {
+    const obj: any = {};
+    if (message.timestamp !== undefined) {
+      obj.timestamp = message.timestamp.toISOString();
+    }
+    if (message.localTimeUtcOffset !== undefined) {
+      obj.localTimeUtcOffset = Math.round(message.localTimeUtcOffset);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCTimeZoneTransition>, I>>(base?: I): WCTimeZoneTransition {
+    return WCTimeZoneTransition.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCTimeZoneTransition>, I>>(object: I): WCTimeZoneTransition {
+    const message = createBaseWCTimeZoneTransition();
+    message.timestamp = object.timestamp ?? undefined;
+    message.localTimeUtcOffset = object.localTimeUtcOffset ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCTimeZoneInfo(): WCTimeZoneInfo {
+  return { transitions: [] };
+}
+
+export const WCTimeZoneInfo: MessageFns<WCTimeZoneInfo> = {
+  encode(message: WCTimeZoneInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.transitions) {
+      WCTimeZoneTransition.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCTimeZoneInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCTimeZoneInfo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.transitions.push(WCTimeZoneTransition.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCTimeZoneInfo {
+    return {
+      transitions: globalThis.Array.isArray(object?.transitions)
+        ? object.transitions.map((e: any) => WCTimeZoneTransition.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: WCTimeZoneInfo): unknown {
+    const obj: any = {};
+    if (message.transitions?.length) {
+      obj.transitions = message.transitions.map((e) => WCTimeZoneTransition.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCTimeZoneInfo>, I>>(base?: I): WCTimeZoneInfo {
+    return WCTimeZoneInfo.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCTimeZoneInfo>, I>>(object: I): WCTimeZoneInfo {
+    const message = createBaseWCTimeZoneInfo();
+    message.transitions = object.transitions?.map((e) => WCTimeZoneTransition.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseWCTimeZone(): WCTimeZone {
+  return { timeZoneId: "", timeZoneInfo: undefined };
+}
+
+export const WCTimeZone: MessageFns<WCTimeZone> = {
+  encode(message: WCTimeZone, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.timeZoneId !== "") {
+      writer.uint32(10).string(message.timeZoneId);
+    }
+    if (message.timeZoneInfo !== undefined) {
+      WCTimeZoneInfo.encode(message.timeZoneInfo, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCTimeZone {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCTimeZone();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.timeZoneId = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.timeZoneInfo = WCTimeZoneInfo.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCTimeZone {
+    return {
+      timeZoneId: isSet(object.timeZoneId) ? globalThis.String(object.timeZoneId) : "",
+      timeZoneInfo: isSet(object.timeZoneInfo) ? WCTimeZoneInfo.fromJSON(object.timeZoneInfo) : undefined,
+    };
+  },
+
+  toJSON(message: WCTimeZone): unknown {
+    const obj: any = {};
+    if (message.timeZoneId !== undefined) {
+      obj.timeZoneId = message.timeZoneId;
+    }
+    if (message.timeZoneInfo !== undefined) {
+      obj.timeZoneInfo = WCTimeZoneInfo.toJSON(message.timeZoneInfo);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCTimeZone>, I>>(base?: I): WCTimeZone {
+    return WCTimeZone.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCTimeZone>, I>>(object: I): WCTimeZone {
+    const message = createBaseWCTimeZone();
+    message.timeZoneId = object.timeZoneId ?? "";
+    message.timeZoneInfo = (object.timeZoneInfo !== undefined && object.timeZoneInfo !== null)
+      ? WCTimeZoneInfo.fromPartial(object.timeZoneInfo)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCMIDConfig(): WCMIDConfig {
+  return { enabled: false, timeZone: undefined };
+}
+
+export const WCMIDConfig: MessageFns<WCMIDConfig> = {
+  encode(message: WCMIDConfig, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.enabled !== false) {
+      writer.uint32(8).bool(message.enabled);
+    }
+    if (message.timeZone !== undefined) {
+      WCTimeZone.encode(message.timeZone, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCMIDConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCMIDConfig();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.enabled = reader.bool();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.timeZone = WCTimeZone.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCMIDConfig {
+    return {
+      enabled: isSet(object.enabled) ? globalThis.Boolean(object.enabled) : false,
+      timeZone: isSet(object.timeZone) ? WCTimeZone.fromJSON(object.timeZone) : undefined,
+    };
+  },
+
+  toJSON(message: WCMIDConfig): unknown {
+    const obj: any = {};
+    if (message.enabled !== undefined) {
+      obj.enabled = message.enabled;
+    }
+    if (message.timeZone !== undefined) {
+      obj.timeZone = WCTimeZone.toJSON(message.timeZone);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCMIDConfig>, I>>(base?: I): WCMIDConfig {
+    return WCMIDConfig.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCMIDConfig>, I>>(object: I): WCMIDConfig {
+    const message = createBaseWCMIDConfig();
+    message.enabled = object.enabled ?? false;
+    message.timeZone = (object.timeZone !== undefined && object.timeZone !== null)
+      ? WCTimeZone.fromPartial(object.timeZone)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCSettings(): WCSettings {
+  return {
+    maxOutputCurrentAmps: 0,
+    gmiMode: 0,
+    country: "",
+    thirdPartyVehicleMode: 0,
+    loadSharingConfig: undefined,
+    dryContact: undefined,
+    midConfig: undefined,
+  };
+}
+
+export const WCSettings: MessageFns<WCSettings> = {
+  encode(message: WCSettings, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.maxOutputCurrentAmps !== 0) {
+      writer.uint32(8).int32(message.maxOutputCurrentAmps);
+    }
+    if (message.gmiMode !== 0) {
+      writer.uint32(16).int32(message.gmiMode);
+    }
+    if (message.country !== "") {
+      writer.uint32(26).string(message.country);
+    }
+    if (message.thirdPartyVehicleMode !== 0) {
+      writer.uint32(32).int32(message.thirdPartyVehicleMode);
+    }
+    if (message.loadSharingConfig !== undefined) {
+      WCLoadSharingConfig.encode(message.loadSharingConfig, writer.uint32(42).fork()).join();
+    }
+    if (message.dryContact !== undefined) {
+      WCDryContactConfig.encode(message.dryContact, writer.uint32(50).fork()).join();
+    }
+    if (message.midConfig !== undefined) {
+      WCMIDConfig.encode(message.midConfig, writer.uint32(58).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCSettings {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCSettings();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.maxOutputCurrentAmps = reader.int32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.gmiMode = reader.int32() as any;
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.country = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.thirdPartyVehicleMode = reader.int32() as any;
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.loadSharingConfig = WCLoadSharingConfig.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.dryContact = WCDryContactConfig.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.midConfig = WCMIDConfig.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCSettings {
+    return {
+      maxOutputCurrentAmps: isSet(object.maxOutputCurrentAmps) ? globalThis.Number(object.maxOutputCurrentAmps) : 0,
+      gmiMode: isSet(object.gmiMode) ? wCGroundMonitorModeFromJSON(object.gmiMode) : 0,
+      country: isSet(object.country) ? globalThis.String(object.country) : "",
+      thirdPartyVehicleMode: isSet(object.thirdPartyVehicleMode)
+        ? wCThirdPartyVehicleModeFromJSON(object.thirdPartyVehicleMode)
+        : 0,
+      loadSharingConfig: isSet(object.loadSharingConfig)
+        ? WCLoadSharingConfig.fromJSON(object.loadSharingConfig)
+        : undefined,
+      dryContact: isSet(object.dryContact) ? WCDryContactConfig.fromJSON(object.dryContact) : undefined,
+      midConfig: isSet(object.midConfig) ? WCMIDConfig.fromJSON(object.midConfig) : undefined,
+    };
+  },
+
+  toJSON(message: WCSettings): unknown {
+    const obj: any = {};
+    if (message.maxOutputCurrentAmps !== undefined) {
+      obj.maxOutputCurrentAmps = Math.round(message.maxOutputCurrentAmps);
+    }
+    if (message.gmiMode !== undefined) {
+      obj.gmiMode = wCGroundMonitorModeToJSON(message.gmiMode);
+    }
+    if (message.country !== undefined) {
+      obj.country = message.country;
+    }
+    if (message.thirdPartyVehicleMode !== undefined) {
+      obj.thirdPartyVehicleMode = wCThirdPartyVehicleModeToJSON(message.thirdPartyVehicleMode);
+    }
+    if (message.loadSharingConfig !== undefined) {
+      obj.loadSharingConfig = WCLoadSharingConfig.toJSON(message.loadSharingConfig);
+    }
+    if (message.dryContact !== undefined) {
+      obj.dryContact = WCDryContactConfig.toJSON(message.dryContact);
+    }
+    if (message.midConfig !== undefined) {
+      obj.midConfig = WCMIDConfig.toJSON(message.midConfig);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCSettings>, I>>(base?: I): WCSettings {
+    return WCSettings.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCSettings>, I>>(object: I): WCSettings {
+    const message = createBaseWCSettings();
+    message.maxOutputCurrentAmps = object.maxOutputCurrentAmps ?? 0;
+    message.gmiMode = object.gmiMode ?? 0;
+    message.country = object.country ?? "";
+    message.thirdPartyVehicleMode = object.thirdPartyVehicleMode ?? 0;
+    message.loadSharingConfig = (object.loadSharingConfig !== undefined && object.loadSharingConfig !== null)
+      ? WCLoadSharingConfig.fromPartial(object.loadSharingConfig)
+      : undefined;
+    message.dryContact = (object.dryContact !== undefined && object.dryContact !== null)
+      ? WCDryContactConfig.fromPartial(object.dryContact)
+      : undefined;
+    message.midConfig = (object.midConfig !== undefined && object.midConfig !== null)
+      ? WCMIDConfig.fromPartial(object.midConfig)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCGenealogy(): WCGenealogy {
+  return { region: 0, handleType: 0, hardwareFeatures: 0, subUsageId: 0 };
+}
+
+export const WCGenealogy: MessageFns<WCGenealogy> = {
+  encode(message: WCGenealogy, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.region !== 0) {
+      writer.uint32(8).uint32(message.region);
+    }
+    if (message.handleType !== 0) {
+      writer.uint32(16).uint32(message.handleType);
+    }
+    if (message.hardwareFeatures !== 0) {
+      writer.uint32(24).uint32(message.hardwareFeatures);
+    }
+    if (message.subUsageId !== 0) {
+      writer.uint32(32).uint32(message.subUsageId);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCGenealogy {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCGenealogy();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.region = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.handleType = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.hardwareFeatures = reader.uint32();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.subUsageId = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCGenealogy {
+    return {
+      region: isSet(object.region) ? globalThis.Number(object.region) : 0,
+      handleType: isSet(object.handleType) ? globalThis.Number(object.handleType) : 0,
+      hardwareFeatures: isSet(object.hardwareFeatures) ? globalThis.Number(object.hardwareFeatures) : 0,
+      subUsageId: isSet(object.subUsageId) ? globalThis.Number(object.subUsageId) : 0,
+    };
+  },
+
+  toJSON(message: WCGenealogy): unknown {
+    const obj: any = {};
+    if (message.region !== undefined) {
+      obj.region = Math.round(message.region);
+    }
+    if (message.handleType !== undefined) {
+      obj.handleType = Math.round(message.handleType);
+    }
+    if (message.hardwareFeatures !== undefined) {
+      obj.hardwareFeatures = Math.round(message.hardwareFeatures);
+    }
+    if (message.subUsageId !== undefined) {
+      obj.subUsageId = Math.round(message.subUsageId);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCGenealogy>, I>>(base?: I): WCGenealogy {
+    return WCGenealogy.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCGenealogy>, I>>(object: I): WCGenealogy {
+    const message = createBaseWCGenealogy();
+    message.region = object.region ?? 0;
+    message.handleType = object.handleType ?? 0;
+    message.hardwareFeatures = object.hardwareFeatures ?? 0;
+    message.subUsageId = object.subUsageId ?? 0;
+    return message;
+  },
+};
+
+function createBaseComplianceCRC32(): ComplianceCRC32 {
+  return { name: "", crc32: 0 };
+}
+
+export const ComplianceCRC32: MessageFns<ComplianceCRC32> = {
+  encode(message: ComplianceCRC32, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.name !== "") {
+      writer.uint32(10).string(message.name);
+    }
+    if (message.crc32 !== 0) {
+      writer.uint32(16).uint32(message.crc32);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ComplianceCRC32 {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseComplianceCRC32();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.crc32 = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ComplianceCRC32 {
+    return {
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      crc32: isSet(object.crc32) ? globalThis.Number(object.crc32) : 0,
+    };
+  },
+
+  toJSON(message: ComplianceCRC32): unknown {
+    const obj: any = {};
+    if (message.name !== undefined) {
+      obj.name = message.name;
+    }
+    if (message.crc32 !== undefined) {
+      obj.crc32 = Math.round(message.crc32);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ComplianceCRC32>, I>>(base?: I): ComplianceCRC32 {
+    return ComplianceCRC32.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ComplianceCRC32>, I>>(object: I): ComplianceCRC32 {
+    const message = createBaseComplianceCRC32();
+    message.name = object.name ?? "";
+    message.crc32 = object.crc32 ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCLoadSharingFollowerState(): WCLoadSharingFollowerState {
+  return {
+    version: 0,
+    chargeRequest: false,
+    loadCurrentAmps: 0,
+    vehicleConnected: false,
+    alertCount: 0,
+    contactorClosed: false,
+    pilotCurrentAmps: 0,
+    individualPilotCurrentAmps: 0,
+  };
+}
+
+export const WCLoadSharingFollowerState: MessageFns<WCLoadSharingFollowerState> = {
+  encode(message: WCLoadSharingFollowerState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.version !== 0) {
+      writer.uint32(8).uint32(message.version);
+    }
+    if (message.chargeRequest !== false) {
+      writer.uint32(16).bool(message.chargeRequest);
+    }
+    if (message.loadCurrentAmps !== 0) {
+      writer.uint32(29).float(message.loadCurrentAmps);
+    }
+    if (message.vehicleConnected !== false) {
+      writer.uint32(32).bool(message.vehicleConnected);
+    }
+    if (message.alertCount !== 0) {
+      writer.uint32(40).uint32(message.alertCount);
+    }
+    if (message.contactorClosed !== false) {
+      writer.uint32(48).bool(message.contactorClosed);
+    }
+    if (message.pilotCurrentAmps !== 0) {
+      writer.uint32(64).uint32(message.pilotCurrentAmps);
+    }
+    if (message.individualPilotCurrentAmps !== 0) {
+      writer.uint32(72).uint32(message.individualPilotCurrentAmps);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCLoadSharingFollowerState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCLoadSharingFollowerState();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.version = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.chargeRequest = reader.bool();
+          continue;
+        }
+        case 3: {
+          if (tag !== 29) {
+            break;
+          }
+
+          message.loadCurrentAmps = reader.float();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.vehicleConnected = reader.bool();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.alertCount = reader.uint32();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.contactorClosed = reader.bool();
+          continue;
+        }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.pilotCurrentAmps = reader.uint32();
+          continue;
+        }
+        case 9: {
+          if (tag !== 72) {
+            break;
+          }
+
+          message.individualPilotCurrentAmps = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCLoadSharingFollowerState {
+    return {
+      version: isSet(object.version) ? globalThis.Number(object.version) : 0,
+      chargeRequest: isSet(object.chargeRequest) ? globalThis.Boolean(object.chargeRequest) : false,
+      loadCurrentAmps: isSet(object.loadCurrentAmps) ? globalThis.Number(object.loadCurrentAmps) : 0,
+      vehicleConnected: isSet(object.vehicleConnected) ? globalThis.Boolean(object.vehicleConnected) : false,
+      alertCount: isSet(object.alertCount) ? globalThis.Number(object.alertCount) : 0,
+      contactorClosed: isSet(object.contactorClosed) ? globalThis.Boolean(object.contactorClosed) : false,
+      pilotCurrentAmps: isSet(object.pilotCurrentAmps) ? globalThis.Number(object.pilotCurrentAmps) : 0,
+      individualPilotCurrentAmps: isSet(object.individualPilotCurrentAmps)
+        ? globalThis.Number(object.individualPilotCurrentAmps)
+        : 0,
+    };
+  },
+
+  toJSON(message: WCLoadSharingFollowerState): unknown {
+    const obj: any = {};
+    if (message.version !== undefined) {
+      obj.version = Math.round(message.version);
+    }
+    if (message.chargeRequest !== undefined) {
+      obj.chargeRequest = message.chargeRequest;
+    }
+    if (message.loadCurrentAmps !== undefined) {
+      obj.loadCurrentAmps = message.loadCurrentAmps;
+    }
+    if (message.vehicleConnected !== undefined) {
+      obj.vehicleConnected = message.vehicleConnected;
+    }
+    if (message.alertCount !== undefined) {
+      obj.alertCount = Math.round(message.alertCount);
+    }
+    if (message.contactorClosed !== undefined) {
+      obj.contactorClosed = message.contactorClosed;
+    }
+    if (message.pilotCurrentAmps !== undefined) {
+      obj.pilotCurrentAmps = Math.round(message.pilotCurrentAmps);
+    }
+    if (message.individualPilotCurrentAmps !== undefined) {
+      obj.individualPilotCurrentAmps = Math.round(message.individualPilotCurrentAmps);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCLoadSharingFollowerState>, I>>(base?: I): WCLoadSharingFollowerState {
+    return WCLoadSharingFollowerState.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCLoadSharingFollowerState>, I>>(object: I): WCLoadSharingFollowerState {
+    const message = createBaseWCLoadSharingFollowerState();
+    message.version = object.version ?? 0;
+    message.chargeRequest = object.chargeRequest ?? false;
+    message.loadCurrentAmps = object.loadCurrentAmps ?? 0;
+    message.vehicleConnected = object.vehicleConnected ?? false;
+    message.alertCount = object.alertCount ?? 0;
+    message.contactorClosed = object.contactorClosed ?? false;
+    message.pilotCurrentAmps = object.pilotCurrentAmps ?? 0;
+    message.individualPilotCurrentAmps = object.individualPilotCurrentAmps ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCLoadSharingLeaderCommand(): WCLoadSharingLeaderCommand {
+  return { chargeAllowed: false, pilotCurrentAmps: 0 };
+}
+
+export const WCLoadSharingLeaderCommand: MessageFns<WCLoadSharingLeaderCommand> = {
+  encode(message: WCLoadSharingLeaderCommand, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.chargeAllowed !== false) {
+      writer.uint32(8).bool(message.chargeAllowed);
+    }
+    if (message.pilotCurrentAmps !== 0) {
+      writer.uint32(16).uint32(message.pilotCurrentAmps);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCLoadSharingLeaderCommand {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCLoadSharingLeaderCommand();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.chargeAllowed = reader.bool();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.pilotCurrentAmps = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCLoadSharingLeaderCommand {
+    return {
+      chargeAllowed: isSet(object.chargeAllowed) ? globalThis.Boolean(object.chargeAllowed) : false,
+      pilotCurrentAmps: isSet(object.pilotCurrentAmps) ? globalThis.Number(object.pilotCurrentAmps) : 0,
+    };
+  },
+
+  toJSON(message: WCLoadSharingLeaderCommand): unknown {
+    const obj: any = {};
+    if (message.chargeAllowed !== undefined) {
+      obj.chargeAllowed = message.chargeAllowed;
+    }
+    if (message.pilotCurrentAmps !== undefined) {
+      obj.pilotCurrentAmps = Math.round(message.pilotCurrentAmps);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCLoadSharingLeaderCommand>, I>>(base?: I): WCLoadSharingLeaderCommand {
+    return WCLoadSharingLeaderCommand.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCLoadSharingLeaderCommand>, I>>(object: I): WCLoadSharingLeaderCommand {
+    const message = createBaseWCLoadSharingLeaderCommand();
+    message.chargeAllowed = object.chargeAllowed ?? false;
+    message.pilotCurrentAmps = object.pilotCurrentAmps ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCLoadSharingLeaderState(): WCLoadSharingLeaderState {
+  return {
+    version: 0,
+    networkCurrentLimitAmps: 0,
+    fallbackCurrentAmps: 0,
+    roundRobinIndex: 0,
+    chargingEnabled: false,
+    activeUnitCount: 0,
+  };
+}
+
+export const WCLoadSharingLeaderState: MessageFns<WCLoadSharingLeaderState> = {
+  encode(message: WCLoadSharingLeaderState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.version !== 0) {
+      writer.uint32(8).uint32(message.version);
+    }
+    if (message.networkCurrentLimitAmps !== 0) {
+      writer.uint32(16).uint32(message.networkCurrentLimitAmps);
+    }
+    if (message.fallbackCurrentAmps !== 0) {
+      writer.uint32(24).uint32(message.fallbackCurrentAmps);
+    }
+    if (message.roundRobinIndex !== 0) {
+      writer.uint32(32).uint32(message.roundRobinIndex);
+    }
+    if (message.chargingEnabled !== false) {
+      writer.uint32(40).bool(message.chargingEnabled);
+    }
+    if (message.activeUnitCount !== 0) {
+      writer.uint32(48).uint32(message.activeUnitCount);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCLoadSharingLeaderState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCLoadSharingLeaderState();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.version = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.networkCurrentLimitAmps = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.fallbackCurrentAmps = reader.uint32();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.roundRobinIndex = reader.uint32();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.chargingEnabled = reader.bool();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.activeUnitCount = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCLoadSharingLeaderState {
+    return {
+      version: isSet(object.version) ? globalThis.Number(object.version) : 0,
+      networkCurrentLimitAmps: isSet(object.networkCurrentLimitAmps)
+        ? globalThis.Number(object.networkCurrentLimitAmps)
+        : 0,
+      fallbackCurrentAmps: isSet(object.fallbackCurrentAmps) ? globalThis.Number(object.fallbackCurrentAmps) : 0,
+      roundRobinIndex: isSet(object.roundRobinIndex) ? globalThis.Number(object.roundRobinIndex) : 0,
+      chargingEnabled: isSet(object.chargingEnabled) ? globalThis.Boolean(object.chargingEnabled) : false,
+      activeUnitCount: isSet(object.activeUnitCount) ? globalThis.Number(object.activeUnitCount) : 0,
+    };
+  },
+
+  toJSON(message: WCLoadSharingLeaderState): unknown {
+    const obj: any = {};
+    if (message.version !== undefined) {
+      obj.version = Math.round(message.version);
+    }
+    if (message.networkCurrentLimitAmps !== undefined) {
+      obj.networkCurrentLimitAmps = Math.round(message.networkCurrentLimitAmps);
+    }
+    if (message.fallbackCurrentAmps !== undefined) {
+      obj.fallbackCurrentAmps = Math.round(message.fallbackCurrentAmps);
+    }
+    if (message.roundRobinIndex !== undefined) {
+      obj.roundRobinIndex = Math.round(message.roundRobinIndex);
+    }
+    if (message.chargingEnabled !== undefined) {
+      obj.chargingEnabled = message.chargingEnabled;
+    }
+    if (message.activeUnitCount !== undefined) {
+      obj.activeUnitCount = Math.round(message.activeUnitCount);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCLoadSharingLeaderState>, I>>(base?: I): WCLoadSharingLeaderState {
+    return WCLoadSharingLeaderState.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCLoadSharingLeaderState>, I>>(object: I): WCLoadSharingLeaderState {
+    const message = createBaseWCLoadSharingLeaderState();
+    message.version = object.version ?? 0;
+    message.networkCurrentLimitAmps = object.networkCurrentLimitAmps ?? 0;
+    message.fallbackCurrentAmps = object.fallbackCurrentAmps ?? 0;
+    message.roundRobinIndex = object.roundRobinIndex ?? 0;
+    message.chargingEnabled = object.chargingEnabled ?? false;
+    message.activeUnitCount = object.activeUnitCount ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCLoadSharingDeviceEntry(): WCLoadSharingDeviceEntry {
+  return { din: undefined, leaderCommand: undefined, followerState: undefined, mia: false };
+}
+
+export const WCLoadSharingDeviceEntry: MessageFns<WCLoadSharingDeviceEntry> = {
+  encode(message: WCLoadSharingDeviceEntry, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.din !== undefined) {
+      Din.encode(message.din, writer.uint32(10).fork()).join();
+    }
+    if (message.leaderCommand !== undefined) {
+      WCLoadSharingLeaderCommand.encode(message.leaderCommand, writer.uint32(18).fork()).join();
+    }
+    if (message.followerState !== undefined) {
+      WCLoadSharingFollowerState.encode(message.followerState, writer.uint32(26).fork()).join();
+    }
+    if (message.mia !== false) {
+      writer.uint32(32).bool(message.mia);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCLoadSharingDeviceEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCLoadSharingDeviceEntry();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.din = Din.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.leaderCommand = WCLoadSharingLeaderCommand.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.followerState = WCLoadSharingFollowerState.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.mia = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCLoadSharingDeviceEntry {
+    return {
+      din: isSet(object.din) ? Din.fromJSON(object.din) : undefined,
+      leaderCommand: isSet(object.leaderCommand)
+        ? WCLoadSharingLeaderCommand.fromJSON(object.leaderCommand)
+        : undefined,
+      followerState: isSet(object.followerState)
+        ? WCLoadSharingFollowerState.fromJSON(object.followerState)
+        : undefined,
+      mia: isSet(object.mia) ? globalThis.Boolean(object.mia) : false,
+    };
+  },
+
+  toJSON(message: WCLoadSharingDeviceEntry): unknown {
+    const obj: any = {};
+    if (message.din !== undefined) {
+      obj.din = Din.toJSON(message.din);
+    }
+    if (message.leaderCommand !== undefined) {
+      obj.leaderCommand = WCLoadSharingLeaderCommand.toJSON(message.leaderCommand);
+    }
+    if (message.followerState !== undefined) {
+      obj.followerState = WCLoadSharingFollowerState.toJSON(message.followerState);
+    }
+    if (message.mia !== undefined) {
+      obj.mia = message.mia;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCLoadSharingDeviceEntry>, I>>(base?: I): WCLoadSharingDeviceEntry {
+    return WCLoadSharingDeviceEntry.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCLoadSharingDeviceEntry>, I>>(object: I): WCLoadSharingDeviceEntry {
+    const message = createBaseWCLoadSharingDeviceEntry();
+    message.din = (object.din !== undefined && object.din !== null) ? Din.fromPartial(object.din) : undefined;
+    message.leaderCommand = (object.leaderCommand !== undefined && object.leaderCommand !== null)
+      ? WCLoadSharingLeaderCommand.fromPartial(object.leaderCommand)
+      : undefined;
+    message.followerState = (object.followerState !== undefined && object.followerState !== null)
+      ? WCLoadSharingFollowerState.fromPartial(object.followerState)
+      : undefined;
+    message.mia = object.mia ?? false;
+    return message;
+  },
+};
+
+function createBaseWCLoadSharingNetworkState(): WCLoadSharingNetworkState {
+  return { devices: [], leaderState: undefined, settings: undefined, status: undefined, limits: undefined };
+}
+
+export const WCLoadSharingNetworkState: MessageFns<WCLoadSharingNetworkState> = {
+  encode(message: WCLoadSharingNetworkState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.devices) {
+      WCLoadSharingDeviceEntry.encode(v!, writer.uint32(10).fork()).join();
+    }
+    if (message.leaderState !== undefined) {
+      WCLoadSharingLeaderState.encode(message.leaderState, writer.uint32(18).fork()).join();
+    }
+    if (message.settings !== undefined) {
+      WCLoadSharingSettings.encode(message.settings, writer.uint32(26).fork()).join();
+    }
+    if (message.status !== undefined) {
+      WCLoadSharingNetworkStatus.encode(message.status, writer.uint32(34).fork()).join();
+    }
+    if (message.limits !== undefined) {
+      WCLoadSharingLimits.encode(message.limits, writer.uint32(42).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCLoadSharingNetworkState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCLoadSharingNetworkState();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.devices.push(WCLoadSharingDeviceEntry.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.leaderState = WCLoadSharingLeaderState.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.settings = WCLoadSharingSettings.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.status = WCLoadSharingNetworkStatus.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.limits = WCLoadSharingLimits.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCLoadSharingNetworkState {
+    return {
+      devices: globalThis.Array.isArray(object?.devices)
+        ? object.devices.map((e: any) => WCLoadSharingDeviceEntry.fromJSON(e))
+        : [],
+      leaderState: isSet(object.leaderState) ? WCLoadSharingLeaderState.fromJSON(object.leaderState) : undefined,
+      settings: isSet(object.settings) ? WCLoadSharingSettings.fromJSON(object.settings) : undefined,
+      status: isSet(object.status) ? WCLoadSharingNetworkStatus.fromJSON(object.status) : undefined,
+      limits: isSet(object.limits) ? WCLoadSharingLimits.fromJSON(object.limits) : undefined,
+    };
+  },
+
+  toJSON(message: WCLoadSharingNetworkState): unknown {
+    const obj: any = {};
+    if (message.devices?.length) {
+      obj.devices = message.devices.map((e) => WCLoadSharingDeviceEntry.toJSON(e));
+    }
+    if (message.leaderState !== undefined) {
+      obj.leaderState = WCLoadSharingLeaderState.toJSON(message.leaderState);
+    }
+    if (message.settings !== undefined) {
+      obj.settings = WCLoadSharingSettings.toJSON(message.settings);
+    }
+    if (message.status !== undefined) {
+      obj.status = WCLoadSharingNetworkStatus.toJSON(message.status);
+    }
+    if (message.limits !== undefined) {
+      obj.limits = WCLoadSharingLimits.toJSON(message.limits);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCLoadSharingNetworkState>, I>>(base?: I): WCLoadSharingNetworkState {
+    return WCLoadSharingNetworkState.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCLoadSharingNetworkState>, I>>(object: I): WCLoadSharingNetworkState {
+    const message = createBaseWCLoadSharingNetworkState();
+    message.devices = object.devices?.map((e) => WCLoadSharingDeviceEntry.fromPartial(e)) || [];
+    message.leaderState = (object.leaderState !== undefined && object.leaderState !== null)
+      ? WCLoadSharingLeaderState.fromPartial(object.leaderState)
+      : undefined;
+    message.settings = (object.settings !== undefined && object.settings !== null)
+      ? WCLoadSharingSettings.fromPartial(object.settings)
+      : undefined;
+    message.status = (object.status !== undefined && object.status !== null)
+      ? WCLoadSharingNetworkStatus.fromPartial(object.status)
+      : undefined;
+    message.limits = (object.limits !== undefined && object.limits !== null)
+      ? WCLoadSharingLimits.fromPartial(object.limits)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCProvisionalOperationalParams(): WCProvisionalOperationalParams {
+  return { limitCurrentMaxAmps: 0, limitTimeoutS: 0, inhibitCharging: false };
+}
+
+export const WCProvisionalOperationalParams: MessageFns<WCProvisionalOperationalParams> = {
+  encode(message: WCProvisionalOperationalParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.limitCurrentMaxAmps !== 0) {
+      writer.uint32(8).uint32(message.limitCurrentMaxAmps);
+    }
+    if (message.limitTimeoutS !== 0) {
+      writer.uint32(16).uint32(message.limitTimeoutS);
+    }
+    if (message.inhibitCharging !== false) {
+      writer.uint32(24).bool(message.inhibitCharging);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCProvisionalOperationalParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCProvisionalOperationalParams();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.limitCurrentMaxAmps = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.limitTimeoutS = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.inhibitCharging = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCProvisionalOperationalParams {
+    return {
+      limitCurrentMaxAmps: isSet(object.limitCurrentMaxAmps) ? globalThis.Number(object.limitCurrentMaxAmps) : 0,
+      limitTimeoutS: isSet(object.limitTimeoutS) ? globalThis.Number(object.limitTimeoutS) : 0,
+      inhibitCharging: isSet(object.inhibitCharging) ? globalThis.Boolean(object.inhibitCharging) : false,
+    };
+  },
+
+  toJSON(message: WCProvisionalOperationalParams): unknown {
+    const obj: any = {};
+    if (message.limitCurrentMaxAmps !== undefined) {
+      obj.limitCurrentMaxAmps = Math.round(message.limitCurrentMaxAmps);
+    }
+    if (message.limitTimeoutS !== undefined) {
+      obj.limitTimeoutS = Math.round(message.limitTimeoutS);
+    }
+    if (message.inhibitCharging !== undefined) {
+      obj.inhibitCharging = message.inhibitCharging;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCProvisionalOperationalParams>, I>>(base?: I): WCProvisionalOperationalParams {
+    return WCProvisionalOperationalParams.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCProvisionalOperationalParams>, I>>(
+    object: I,
+  ): WCProvisionalOperationalParams {
+    const message = createBaseWCProvisionalOperationalParams();
+    message.limitCurrentMaxAmps = object.limitCurrentMaxAmps ?? 0;
+    message.limitTimeoutS = object.limitTimeoutS ?? 0;
+    message.inhibitCharging = object.inhibitCharging ?? false;
+    return message;
+  },
+};
+
+function createBaseWCAccessControlEntry(): WCAccessControlEntry {
+  return { vin: undefined, name: "", model: 0, modelYear: 0, driveType: 0 };
+}
+
+export const WCAccessControlEntry: MessageFns<WCAccessControlEntry> = {
+  encode(message: WCAccessControlEntry, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.vin !== undefined) {
+      VIN.encode(message.vin, writer.uint32(10).fork()).join();
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    if (message.model !== 0) {
+      writer.uint32(24).int32(message.model);
+    }
+    if (message.modelYear !== 0) {
+      writer.uint32(32).uint32(message.modelYear);
+    }
+    if (message.driveType !== 0) {
+      writer.uint32(40).int32(message.driveType);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAccessControlEntry {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAccessControlEntry();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.vin = VIN.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.model = reader.int32() as any;
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.modelYear = reader.uint32();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.driveType = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAccessControlEntry {
+    return {
+      vin: isSet(object.vin) ? VIN.fromJSON(object.vin) : undefined,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      model: isSet(object.model) ? wCTeslaVehicleModelFromJSON(object.model) : 0,
+      modelYear: isSet(object.modelYear) ? globalThis.Number(object.modelYear) : 0,
+      driveType: isSet(object.driveType) ? wCTeslaVehicleDriveTypeFromJSON(object.driveType) : 0,
+    };
+  },
+
+  toJSON(message: WCAccessControlEntry): unknown {
+    const obj: any = {};
+    if (message.vin !== undefined) {
+      obj.vin = VIN.toJSON(message.vin);
+    }
+    if (message.name !== undefined) {
+      obj.name = message.name;
+    }
+    if (message.model !== undefined) {
+      obj.model = wCTeslaVehicleModelToJSON(message.model);
+    }
+    if (message.modelYear !== undefined) {
+      obj.modelYear = Math.round(message.modelYear);
+    }
+    if (message.driveType !== undefined) {
+      obj.driveType = wCTeslaVehicleDriveTypeToJSON(message.driveType);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAccessControlEntry>, I>>(base?: I): WCAccessControlEntry {
+    return WCAccessControlEntry.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAccessControlEntry>, I>>(object: I): WCAccessControlEntry {
+    const message = createBaseWCAccessControlEntry();
+    message.vin = (object.vin !== undefined && object.vin !== null) ? VIN.fromPartial(object.vin) : undefined;
+    message.name = object.name ?? "";
+    message.model = object.model ?? 0;
+    message.modelYear = object.modelYear ?? 0;
+    message.driveType = object.driveType ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCChargeScheduleTimePeriod(): WCChargeScheduleTimePeriod {
+  return { startSeconds: 0, endSeconds: 0 };
+}
+
+export const WCChargeScheduleTimePeriod: MessageFns<WCChargeScheduleTimePeriod> = {
+  encode(message: WCChargeScheduleTimePeriod, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.startSeconds !== 0) {
+      writer.uint32(8).uint32(message.startSeconds);
+    }
+    if (message.endSeconds !== 0) {
+      writer.uint32(16).uint32(message.endSeconds);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCChargeScheduleTimePeriod {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCChargeScheduleTimePeriod();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.startSeconds = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.endSeconds = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCChargeScheduleTimePeriod {
+    return {
+      startSeconds: isSet(object.startSeconds) ? globalThis.Number(object.startSeconds) : 0,
+      endSeconds: isSet(object.endSeconds) ? globalThis.Number(object.endSeconds) : 0,
+    };
+  },
+
+  toJSON(message: WCChargeScheduleTimePeriod): unknown {
+    const obj: any = {};
+    if (message.startSeconds !== undefined) {
+      obj.startSeconds = Math.round(message.startSeconds);
+    }
+    if (message.endSeconds !== undefined) {
+      obj.endSeconds = Math.round(message.endSeconds);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCChargeScheduleTimePeriod>, I>>(base?: I): WCChargeScheduleTimePeriod {
+    return WCChargeScheduleTimePeriod.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCChargeScheduleTimePeriod>, I>>(object: I): WCChargeScheduleTimePeriod {
+    const message = createBaseWCChargeScheduleTimePeriod();
+    message.startSeconds = object.startSeconds ?? 0;
+    message.endSeconds = object.endSeconds ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCChargeScheduleDayTimePeriods(): WCChargeScheduleDayTimePeriods {
+  return { timePeriods: [], dayBitmask: 0 };
+}
+
+export const WCChargeScheduleDayTimePeriods: MessageFns<WCChargeScheduleDayTimePeriods> = {
+  encode(message: WCChargeScheduleDayTimePeriods, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.timePeriods) {
+      WCChargeScheduleTimePeriod.encode(v!, writer.uint32(10).fork()).join();
+    }
+    if (message.dayBitmask !== 0) {
+      writer.uint32(16).uint32(message.dayBitmask);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCChargeScheduleDayTimePeriods {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCChargeScheduleDayTimePeriods();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.timePeriods.push(WCChargeScheduleTimePeriod.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.dayBitmask = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCChargeScheduleDayTimePeriods {
+    return {
+      timePeriods: globalThis.Array.isArray(object?.timePeriods)
+        ? object.timePeriods.map((e: any) => WCChargeScheduleTimePeriod.fromJSON(e))
+        : [],
+      dayBitmask: isSet(object.dayBitmask) ? globalThis.Number(object.dayBitmask) : 0,
+    };
+  },
+
+  toJSON(message: WCChargeScheduleDayTimePeriods): unknown {
+    const obj: any = {};
+    if (message.timePeriods?.length) {
+      obj.timePeriods = message.timePeriods.map((e) => WCChargeScheduleTimePeriod.toJSON(e));
+    }
+    if (message.dayBitmask !== undefined) {
+      obj.dayBitmask = Math.round(message.dayBitmask);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCChargeScheduleDayTimePeriods>, I>>(base?: I): WCChargeScheduleDayTimePeriods {
+    return WCChargeScheduleDayTimePeriods.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCChargeScheduleDayTimePeriods>, I>>(
+    object: I,
+  ): WCChargeScheduleDayTimePeriods {
+    const message = createBaseWCChargeScheduleDayTimePeriods();
+    message.timePeriods = object.timePeriods?.map((e) => WCChargeScheduleTimePeriod.fromPartial(e)) || [];
+    message.dayBitmask = object.dayBitmask ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCChargeSchedule(): WCChargeSchedule {
+  return { dayTimePeriods: [] };
+}
+
+export const WCChargeSchedule: MessageFns<WCChargeSchedule> = {
+  encode(message: WCChargeSchedule, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.dayTimePeriods) {
+      WCChargeScheduleDayTimePeriods.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCChargeSchedule {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCChargeSchedule();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.dayTimePeriods.push(WCChargeScheduleDayTimePeriods.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCChargeSchedule {
+    return {
+      dayTimePeriods: globalThis.Array.isArray(object?.dayTimePeriods)
+        ? object.dayTimePeriods.map((e: any) => WCChargeScheduleDayTimePeriods.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: WCChargeSchedule): unknown {
+    const obj: any = {};
+    if (message.dayTimePeriods?.length) {
+      obj.dayTimePeriods = message.dayTimePeriods.map((e) => WCChargeScheduleDayTimePeriods.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCChargeSchedule>, I>>(base?: I): WCChargeSchedule {
+    return WCChargeSchedule.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCChargeSchedule>, I>>(object: I): WCChargeSchedule {
+    const message = createBaseWCChargeSchedule();
+    message.dayTimePeriods = object.dayTimePeriods?.map((e) => WCChargeScheduleDayTimePeriods.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseWCChargeScheduleDelay(): WCChargeScheduleDelay {
+  return { maxDelaySeconds: 0 };
+}
+
+export const WCChargeScheduleDelay: MessageFns<WCChargeScheduleDelay> = {
+  encode(message: WCChargeScheduleDelay, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.maxDelaySeconds !== 0) {
+      writer.uint32(8).uint32(message.maxDelaySeconds);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCChargeScheduleDelay {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCChargeScheduleDelay();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.maxDelaySeconds = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCChargeScheduleDelay {
+    return { maxDelaySeconds: isSet(object.maxDelaySeconds) ? globalThis.Number(object.maxDelaySeconds) : 0 };
+  },
+
+  toJSON(message: WCChargeScheduleDelay): unknown {
+    const obj: any = {};
+    if (message.maxDelaySeconds !== undefined) {
+      obj.maxDelaySeconds = Math.round(message.maxDelaySeconds);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCChargeScheduleDelay>, I>>(base?: I): WCChargeScheduleDelay {
+    return WCChargeScheduleDelay.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCChargeScheduleDelay>, I>>(object: I): WCChargeScheduleDelay {
+    const message = createBaseWCChargeScheduleDelay();
+    message.maxDelaySeconds = object.maxDelaySeconds ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCChargeScheduleConfig(): WCChargeScheduleConfig {
+  return { enableSchedule: false, schedule: undefined, delay: undefined };
+}
+
+export const WCChargeScheduleConfig: MessageFns<WCChargeScheduleConfig> = {
+  encode(message: WCChargeScheduleConfig, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.enableSchedule !== false) {
+      writer.uint32(8).bool(message.enableSchedule);
+    }
+    if (message.schedule !== undefined) {
+      WCChargeSchedule.encode(message.schedule, writer.uint32(18).fork()).join();
+    }
+    if (message.delay !== undefined) {
+      WCChargeScheduleDelay.encode(message.delay, writer.uint32(26).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCChargeScheduleConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCChargeScheduleConfig();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.enableSchedule = reader.bool();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.schedule = WCChargeSchedule.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.delay = WCChargeScheduleDelay.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCChargeScheduleConfig {
+    return {
+      enableSchedule: isSet(object.enableSchedule) ? globalThis.Boolean(object.enableSchedule) : false,
+      schedule: isSet(object.schedule) ? WCChargeSchedule.fromJSON(object.schedule) : undefined,
+      delay: isSet(object.delay) ? WCChargeScheduleDelay.fromJSON(object.delay) : undefined,
+    };
+  },
+
+  toJSON(message: WCChargeScheduleConfig): unknown {
+    const obj: any = {};
+    if (message.enableSchedule !== undefined) {
+      obj.enableSchedule = message.enableSchedule;
+    }
+    if (message.schedule !== undefined) {
+      obj.schedule = WCChargeSchedule.toJSON(message.schedule);
+    }
+    if (message.delay !== undefined) {
+      obj.delay = WCChargeScheduleDelay.toJSON(message.delay);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCChargeScheduleConfig>, I>>(base?: I): WCChargeScheduleConfig {
+    return WCChargeScheduleConfig.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCChargeScheduleConfig>, I>>(object: I): WCChargeScheduleConfig {
+    const message = createBaseWCChargeScheduleConfig();
+    message.enableSchedule = object.enableSchedule ?? false;
+    message.schedule = (object.schedule !== undefined && object.schedule !== null)
+      ? WCChargeSchedule.fromPartial(object.schedule)
+      : undefined;
+    message.delay = (object.delay !== undefined && object.delay !== null)
+      ? WCChargeScheduleDelay.fromPartial(object.delay)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCChargeScheduleConfigStatus(): WCChargeScheduleConfigStatus {
+  return { config: undefined, error: 0 };
+}
+
+export const WCChargeScheduleConfigStatus: MessageFns<WCChargeScheduleConfigStatus> = {
+  encode(message: WCChargeScheduleConfigStatus, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.config !== undefined) {
+      WCChargeScheduleConfig.encode(message.config, writer.uint32(10).fork()).join();
+    }
+    if (message.error !== 0) {
+      writer.uint32(16).int32(message.error);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCChargeScheduleConfigStatus {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCChargeScheduleConfigStatus();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.config = WCChargeScheduleConfig.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.error = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCChargeScheduleConfigStatus {
+    return {
+      config: isSet(object.config) ? WCChargeScheduleConfig.fromJSON(object.config) : undefined,
+      error: isSet(object.error) ? wCChargeScheduleConfigErrorFromJSON(object.error) : 0,
+    };
+  },
+
+  toJSON(message: WCChargeScheduleConfigStatus): unknown {
+    const obj: any = {};
+    if (message.config !== undefined) {
+      obj.config = WCChargeScheduleConfig.toJSON(message.config);
+    }
+    if (message.error !== undefined) {
+      obj.error = wCChargeScheduleConfigErrorToJSON(message.error);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCChargeScheduleConfigStatus>, I>>(base?: I): WCChargeScheduleConfigStatus {
+    return WCChargeScheduleConfigStatus.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCChargeScheduleConfigStatus>, I>>(object: I): WCChargeScheduleConfigStatus {
+    const message = createBaseWCChargeScheduleConfigStatus();
+    message.config = (object.config !== undefined && object.config !== null)
+      ? WCChargeScheduleConfig.fromPartial(object.config)
+      : undefined;
+    message.error = object.error ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCChargeCommand(): WCChargeCommand {
+  return { chargingCommand: 0 };
+}
+
+export const WCChargeCommand: MessageFns<WCChargeCommand> = {
+  encode(message: WCChargeCommand, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.chargingCommand !== 0) {
+      writer.uint32(8).int32(message.chargingCommand);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCChargeCommand {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCChargeCommand();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.chargingCommand = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCChargeCommand {
+    return { chargingCommand: isSet(object.chargingCommand) ? wCChargingCommandFromJSON(object.chargingCommand) : 0 };
+  },
+
+  toJSON(message: WCChargeCommand): unknown {
+    const obj: any = {};
+    if (message.chargingCommand !== undefined) {
+      obj.chargingCommand = wCChargingCommandToJSON(message.chargingCommand);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCChargeCommand>, I>>(base?: I): WCChargeCommand {
+    return WCChargeCommand.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCChargeCommand>, I>>(object: I): WCChargeCommand {
+    const message = createBaseWCChargeCommand();
+    message.chargingCommand = object.chargingCommand ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCOcppSettings(): WCOcppSettings {
+  return {
+    connectionUrl: "",
+    chargepointId: "",
+    version: 0,
+    securityProfile: 0,
+    enable: false,
+    providerName: "",
+    scope: 0,
+  };
+}
+
+export const WCOcppSettings: MessageFns<WCOcppSettings> = {
+  encode(message: WCOcppSettings, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.connectionUrl !== "") {
+      writer.uint32(10).string(message.connectionUrl);
+    }
+    if (message.chargepointId !== "") {
+      writer.uint32(18).string(message.chargepointId);
+    }
+    if (message.version !== 0) {
+      writer.uint32(24).int32(message.version);
+    }
+    if (message.securityProfile !== 0) {
+      writer.uint32(32).int32(message.securityProfile);
+    }
+    if (message.enable !== false) {
+      writer.uint32(40).bool(message.enable);
+    }
+    if (message.providerName !== "") {
+      writer.uint32(50).string(message.providerName);
+    }
+    if (message.scope !== 0) {
+      writer.uint32(56).int32(message.scope);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCOcppSettings {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCOcppSettings();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.connectionUrl = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.chargepointId = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.version = reader.int32() as any;
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.securityProfile = reader.int32() as any;
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.enable = reader.bool();
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.providerName = reader.string();
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.scope = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCOcppSettings {
+    return {
+      connectionUrl: isSet(object.connectionUrl) ? globalThis.String(object.connectionUrl) : "",
+      chargepointId: isSet(object.chargepointId) ? globalThis.String(object.chargepointId) : "",
+      version: isSet(object.version) ? wCOcppVersionFromJSON(object.version) : 0,
+      securityProfile: isSet(object.securityProfile) ? wCOcppSecurityProfileFromJSON(object.securityProfile) : 0,
+      enable: isSet(object.enable) ? globalThis.Boolean(object.enable) : false,
+      providerName: isSet(object.providerName) ? globalThis.String(object.providerName) : "",
+      scope: isSet(object.scope) ? wCOcppScopeFromJSON(object.scope) : 0,
+    };
+  },
+
+  toJSON(message: WCOcppSettings): unknown {
+    const obj: any = {};
+    if (message.connectionUrl !== undefined) {
+      obj.connectionUrl = message.connectionUrl;
+    }
+    if (message.chargepointId !== undefined) {
+      obj.chargepointId = message.chargepointId;
+    }
+    if (message.version !== undefined) {
+      obj.version = wCOcppVersionToJSON(message.version);
+    }
+    if (message.securityProfile !== undefined) {
+      obj.securityProfile = wCOcppSecurityProfileToJSON(message.securityProfile);
+    }
+    if (message.enable !== undefined) {
+      obj.enable = message.enable;
+    }
+    if (message.providerName !== undefined) {
+      obj.providerName = message.providerName;
+    }
+    if (message.scope !== undefined) {
+      obj.scope = wCOcppScopeToJSON(message.scope);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCOcppSettings>, I>>(base?: I): WCOcppSettings {
+    return WCOcppSettings.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCOcppSettings>, I>>(object: I): WCOcppSettings {
+    const message = createBaseWCOcppSettings();
+    message.connectionUrl = object.connectionUrl ?? "";
+    message.chargepointId = object.chargepointId ?? "";
+    message.version = object.version ?? 0;
+    message.securityProfile = object.securityProfile ?? 0;
+    message.enable = object.enable ?? false;
+    message.providerName = object.providerName ?? "";
+    message.scope = object.scope ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCOcppAuthorizationData(): WCOcppAuthorizationData {
+  return { idTag: "" };
+}
+
+export const WCOcppAuthorizationData: MessageFns<WCOcppAuthorizationData> = {
+  encode(message: WCOcppAuthorizationData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.idTag !== "") {
+      writer.uint32(10).string(message.idTag);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCOcppAuthorizationData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCOcppAuthorizationData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.idTag = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCOcppAuthorizationData {
+    return { idTag: isSet(object.idTag) ? globalThis.String(object.idTag) : "" };
+  },
+
+  toJSON(message: WCOcppAuthorizationData): unknown {
+    const obj: any = {};
+    if (message.idTag !== undefined) {
+      obj.idTag = message.idTag;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCOcppAuthorizationData>, I>>(base?: I): WCOcppAuthorizationData {
+    return WCOcppAuthorizationData.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCOcppAuthorizationData>, I>>(object: I): WCOcppAuthorizationData {
+    const message = createBaseWCOcppAuthorizationData();
+    message.idTag = object.idTag ?? "";
+    return message;
+  },
+};
+
+function createBaseWCOcppAuthorizationList(): WCOcppAuthorizationList {
+  return { authData: [] };
+}
+
+export const WCOcppAuthorizationList: MessageFns<WCOcppAuthorizationList> = {
+  encode(message: WCOcppAuthorizationList, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.authData) {
+      WCOcppAuthorizationData.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCOcppAuthorizationList {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCOcppAuthorizationList();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.authData.push(WCOcppAuthorizationData.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCOcppAuthorizationList {
+    return {
+      authData: globalThis.Array.isArray(object?.authData)
+        ? object.authData.map((e: any) => WCOcppAuthorizationData.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: WCOcppAuthorizationList): unknown {
+    const obj: any = {};
+    if (message.authData?.length) {
+      obj.authData = message.authData.map((e) => WCOcppAuthorizationData.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCOcppAuthorizationList>, I>>(base?: I): WCOcppAuthorizationList {
+    return WCOcppAuthorizationList.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCOcppAuthorizationList>, I>>(object: I): WCOcppAuthorizationList {
+    const message = createBaseWCOcppAuthorizationList();
+    message.authData = object.authData?.map((e) => WCOcppAuthorizationData.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseWCVehicleToHomeConfig(): WCVehicleToHomeConfig {
+  return { siteControllerDin: undefined, modbusNodeId: 0 };
+}
+
+export const WCVehicleToHomeConfig: MessageFns<WCVehicleToHomeConfig> = {
+  encode(message: WCVehicleToHomeConfig, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.siteControllerDin !== undefined) {
+      Din.encode(message.siteControllerDin, writer.uint32(10).fork()).join();
+    }
+    if (message.modbusNodeId !== 0) {
+      writer.uint32(16).uint32(message.modbusNodeId);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCVehicleToHomeConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCVehicleToHomeConfig();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.siteControllerDin = Din.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.modbusNodeId = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCVehicleToHomeConfig {
+    return {
+      siteControllerDin: isSet(object.siteControllerDin) ? Din.fromJSON(object.siteControllerDin) : undefined,
+      modbusNodeId: isSet(object.modbusNodeId) ? globalThis.Number(object.modbusNodeId) : 0,
+    };
+  },
+
+  toJSON(message: WCVehicleToHomeConfig): unknown {
+    const obj: any = {};
+    if (message.siteControllerDin !== undefined) {
+      obj.siteControllerDin = Din.toJSON(message.siteControllerDin);
+    }
+    if (message.modbusNodeId !== undefined) {
+      obj.modbusNodeId = Math.round(message.modbusNodeId);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCVehicleToHomeConfig>, I>>(base?: I): WCVehicleToHomeConfig {
+    return WCVehicleToHomeConfig.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCVehicleToHomeConfig>, I>>(object: I): WCVehicleToHomeConfig {
+    const message = createBaseWCVehicleToHomeConfig();
+    message.siteControllerDin = (object.siteControllerDin !== undefined && object.siteControllerDin !== null)
+      ? Din.fromPartial(object.siteControllerDin)
+      : undefined;
+    message.modbusNodeId = object.modbusNodeId ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCAPIGetVitalsRequest(): WCAPIGetVitalsRequest {
+  return {};
+}
+
+export const WCAPIGetVitalsRequest: MessageFns<WCAPIGetVitalsRequest> = {
+  encode(_: WCAPIGetVitalsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetVitalsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetVitalsRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -865,23 +6070,6299 @@ export const WCMessages: MessageFns<WCMessages> = {
     return message;
   },
 
-  fromJSON(_: any): WCMessages {
+  fromJSON(_: any): WCAPIGetVitalsRequest {
     return {};
   },
 
-  toJSON(_: WCMessages): unknown {
+  toJSON(_: WCAPIGetVitalsRequest): unknown {
     const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetVitalsRequest>, I>>(base?: I): WCAPIGetVitalsRequest {
+    return WCAPIGetVitalsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetVitalsRequest>, I>>(_: I): WCAPIGetVitalsRequest {
+    const message = createBaseWCAPIGetVitalsRequest();
+    return message;
+  },
+};
+
+function createBaseWCAPIGetVitalsResponse(): WCAPIGetVitalsResponse {
+  return { vitals: undefined };
+}
+
+export const WCAPIGetVitalsResponse: MessageFns<WCAPIGetVitalsResponse> = {
+  encode(message: WCAPIGetVitalsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.vitals !== undefined) {
+      WCVitals.encode(message.vitals, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetVitalsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetVitalsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.vitals = WCVitals.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIGetVitalsResponse {
+    return { vitals: isSet(object.vitals) ? WCVitals.fromJSON(object.vitals) : undefined };
+  },
+
+  toJSON(message: WCAPIGetVitalsResponse): unknown {
+    const obj: any = {};
+    if (message.vitals !== undefined) {
+      obj.vitals = WCVitals.toJSON(message.vitals);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetVitalsResponse>, I>>(base?: I): WCAPIGetVitalsResponse {
+    return WCAPIGetVitalsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetVitalsResponse>, I>>(object: I): WCAPIGetVitalsResponse {
+    const message = createBaseWCAPIGetVitalsResponse();
+    message.vitals = (object.vitals !== undefined && object.vitals !== null)
+      ? WCVitals.fromPartial(object.vitals)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIGetLifetimeStatsRequest(): WCAPIGetLifetimeStatsRequest {
+  return {};
+}
+
+export const WCAPIGetLifetimeStatsRequest: MessageFns<WCAPIGetLifetimeStatsRequest> = {
+  encode(_: WCAPIGetLifetimeStatsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetLifetimeStatsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetLifetimeStatsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIGetLifetimeStatsRequest {
+    return {};
+  },
+
+  toJSON(_: WCAPIGetLifetimeStatsRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetLifetimeStatsRequest>, I>>(base?: I): WCAPIGetLifetimeStatsRequest {
+    return WCAPIGetLifetimeStatsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetLifetimeStatsRequest>, I>>(_: I): WCAPIGetLifetimeStatsRequest {
+    const message = createBaseWCAPIGetLifetimeStatsRequest();
+    return message;
+  },
+};
+
+function createBaseWCAPIGetLifetimeStatsResponse(): WCAPIGetLifetimeStatsResponse {
+  return { lifetimeStats: undefined };
+}
+
+export const WCAPIGetLifetimeStatsResponse: MessageFns<WCAPIGetLifetimeStatsResponse> = {
+  encode(message: WCAPIGetLifetimeStatsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.lifetimeStats !== undefined) {
+      WCLifetimeStats.encode(message.lifetimeStats, writer.uint32(26).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetLifetimeStatsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetLifetimeStatsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.lifetimeStats = WCLifetimeStats.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIGetLifetimeStatsResponse {
+    return { lifetimeStats: isSet(object.lifetimeStats) ? WCLifetimeStats.fromJSON(object.lifetimeStats) : undefined };
+  },
+
+  toJSON(message: WCAPIGetLifetimeStatsResponse): unknown {
+    const obj: any = {};
+    if (message.lifetimeStats !== undefined) {
+      obj.lifetimeStats = WCLifetimeStats.toJSON(message.lifetimeStats);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetLifetimeStatsResponse>, I>>(base?: I): WCAPIGetLifetimeStatsResponse {
+    return WCAPIGetLifetimeStatsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetLifetimeStatsResponse>, I>>(
+    object: I,
+  ): WCAPIGetLifetimeStatsResponse {
+    const message = createBaseWCAPIGetLifetimeStatsResponse();
+    message.lifetimeStats = (object.lifetimeStats !== undefined && object.lifetimeStats !== null)
+      ? WCLifetimeStats.fromPartial(object.lifetimeStats)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIGetConfigRequest(): WCAPIGetConfigRequest {
+  return {};
+}
+
+export const WCAPIGetConfigRequest: MessageFns<WCAPIGetConfigRequest> = {
+  encode(_: WCAPIGetConfigRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetConfigRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetConfigRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIGetConfigRequest {
+    return {};
+  },
+
+  toJSON(_: WCAPIGetConfigRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetConfigRequest>, I>>(base?: I): WCAPIGetConfigRequest {
+    return WCAPIGetConfigRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetConfigRequest>, I>>(_: I): WCAPIGetConfigRequest {
+    const message = createBaseWCAPIGetConfigRequest();
+    return message;
+  },
+};
+
+function createBaseWCAPIGetConfigResponse(): WCAPIGetConfigResponse {
+  return {
+    settings: undefined,
+    wifiConfig: undefined,
+    wifi: undefined,
+    meters: [],
+    chargeSchedule: undefined,
+    ocppSettings: undefined,
+    vehicleToHome: undefined,
+    timeSource: 0,
+  };
+}
+
+export const WCAPIGetConfigResponse: MessageFns<WCAPIGetConfigResponse> = {
+  encode(message: WCAPIGetConfigResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.settings !== undefined) {
+      WCSettings.encode(message.settings, writer.uint32(10).fork()).join();
+    }
+    if (message.wifiConfig !== undefined) {
+      WifiConfig.encode(message.wifiConfig, writer.uint32(18).fork()).join();
+    }
+    if (message.wifi !== undefined) {
+      NetworkInterface.encode(message.wifi, writer.uint32(26).fork()).join();
+    }
+    for (const v of message.meters) {
+      WCMeterInterface.encode(v!, writer.uint32(34).fork()).join();
+    }
+    if (message.chargeSchedule !== undefined) {
+      WCChargeScheduleConfig.encode(message.chargeSchedule, writer.uint32(42).fork()).join();
+    }
+    if (message.ocppSettings !== undefined) {
+      WCOcppSettings.encode(message.ocppSettings, writer.uint32(50).fork()).join();
+    }
+    if (message.vehicleToHome !== undefined) {
+      WCVehicleToHomeConfig.encode(message.vehicleToHome, writer.uint32(58).fork()).join();
+    }
+    if (message.timeSource !== 0) {
+      writer.uint32(64).int32(message.timeSource);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetConfigResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetConfigResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.settings = WCSettings.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.wifiConfig = WifiConfig.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.wifi = NetworkInterface.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.meters.push(WCMeterInterface.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.chargeSchedule = WCChargeScheduleConfig.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.ocppSettings = WCOcppSettings.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.vehicleToHome = WCVehicleToHomeConfig.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.timeSource = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIGetConfigResponse {
+    return {
+      settings: isSet(object.settings) ? WCSettings.fromJSON(object.settings) : undefined,
+      wifiConfig: isSet(object.wifiConfig) ? WifiConfig.fromJSON(object.wifiConfig) : undefined,
+      wifi: isSet(object.wifi) ? NetworkInterface.fromJSON(object.wifi) : undefined,
+      meters: globalThis.Array.isArray(object?.meters)
+        ? object.meters.map((e: any) => WCMeterInterface.fromJSON(e))
+        : [],
+      chargeSchedule: isSet(object.chargeSchedule) ? WCChargeScheduleConfig.fromJSON(object.chargeSchedule) : undefined,
+      ocppSettings: isSet(object.ocppSettings) ? WCOcppSettings.fromJSON(object.ocppSettings) : undefined,
+      vehicleToHome: isSet(object.vehicleToHome) ? WCVehicleToHomeConfig.fromJSON(object.vehicleToHome) : undefined,
+      timeSource: isSet(object.timeSource) ? wCTimeSourceFromJSON(object.timeSource) : 0,
+    };
+  },
+
+  toJSON(message: WCAPIGetConfigResponse): unknown {
+    const obj: any = {};
+    if (message.settings !== undefined) {
+      obj.settings = WCSettings.toJSON(message.settings);
+    }
+    if (message.wifiConfig !== undefined) {
+      obj.wifiConfig = WifiConfig.toJSON(message.wifiConfig);
+    }
+    if (message.wifi !== undefined) {
+      obj.wifi = NetworkInterface.toJSON(message.wifi);
+    }
+    if (message.meters?.length) {
+      obj.meters = message.meters.map((e) => WCMeterInterface.toJSON(e));
+    }
+    if (message.chargeSchedule !== undefined) {
+      obj.chargeSchedule = WCChargeScheduleConfig.toJSON(message.chargeSchedule);
+    }
+    if (message.ocppSettings !== undefined) {
+      obj.ocppSettings = WCOcppSettings.toJSON(message.ocppSettings);
+    }
+    if (message.vehicleToHome !== undefined) {
+      obj.vehicleToHome = WCVehicleToHomeConfig.toJSON(message.vehicleToHome);
+    }
+    if (message.timeSource !== undefined) {
+      obj.timeSource = wCTimeSourceToJSON(message.timeSource);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetConfigResponse>, I>>(base?: I): WCAPIGetConfigResponse {
+    return WCAPIGetConfigResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetConfigResponse>, I>>(object: I): WCAPIGetConfigResponse {
+    const message = createBaseWCAPIGetConfigResponse();
+    message.settings = (object.settings !== undefined && object.settings !== null)
+      ? WCSettings.fromPartial(object.settings)
+      : undefined;
+    message.wifiConfig = (object.wifiConfig !== undefined && object.wifiConfig !== null)
+      ? WifiConfig.fromPartial(object.wifiConfig)
+      : undefined;
+    message.wifi = (object.wifi !== undefined && object.wifi !== null)
+      ? NetworkInterface.fromPartial(object.wifi)
+      : undefined;
+    message.meters = object.meters?.map((e) => WCMeterInterface.fromPartial(e)) || [];
+    message.chargeSchedule = (object.chargeSchedule !== undefined && object.chargeSchedule !== null)
+      ? WCChargeScheduleConfig.fromPartial(object.chargeSchedule)
+      : undefined;
+    message.ocppSettings = (object.ocppSettings !== undefined && object.ocppSettings !== null)
+      ? WCOcppSettings.fromPartial(object.ocppSettings)
+      : undefined;
+    message.vehicleToHome = (object.vehicleToHome !== undefined && object.vehicleToHome !== null)
+      ? WCVehicleToHomeConfig.fromPartial(object.vehicleToHome)
+      : undefined;
+    message.timeSource = object.timeSource ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureSettingsRequest(): WCAPIConfigureSettingsRequest {
+  return { settings: undefined };
+}
+
+export const WCAPIConfigureSettingsRequest: MessageFns<WCAPIConfigureSettingsRequest> = {
+  encode(message: WCAPIConfigureSettingsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.settings !== undefined) {
+      WCSettings.encode(message.settings, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureSettingsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureSettingsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.settings = WCSettings.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureSettingsRequest {
+    return { settings: isSet(object.settings) ? WCSettings.fromJSON(object.settings) : undefined };
+  },
+
+  toJSON(message: WCAPIConfigureSettingsRequest): unknown {
+    const obj: any = {};
+    if (message.settings !== undefined) {
+      obj.settings = WCSettings.toJSON(message.settings);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureSettingsRequest>, I>>(base?: I): WCAPIConfigureSettingsRequest {
+    return WCAPIConfigureSettingsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureSettingsRequest>, I>>(
+    object: I,
+  ): WCAPIConfigureSettingsRequest {
+    const message = createBaseWCAPIConfigureSettingsRequest();
+    message.settings = (object.settings !== undefined && object.settings !== null)
+      ? WCSettings.fromPartial(object.settings)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureSettingsResponse(): WCAPIConfigureSettingsResponse {
+  return { settings: undefined };
+}
+
+export const WCAPIConfigureSettingsResponse: MessageFns<WCAPIConfigureSettingsResponse> = {
+  encode(message: WCAPIConfigureSettingsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.settings !== undefined) {
+      WCSettings.encode(message.settings, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureSettingsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureSettingsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.settings = WCSettings.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureSettingsResponse {
+    return { settings: isSet(object.settings) ? WCSettings.fromJSON(object.settings) : undefined };
+  },
+
+  toJSON(message: WCAPIConfigureSettingsResponse): unknown {
+    const obj: any = {};
+    if (message.settings !== undefined) {
+      obj.settings = WCSettings.toJSON(message.settings);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureSettingsResponse>, I>>(base?: I): WCAPIConfigureSettingsResponse {
+    return WCAPIConfigureSettingsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureSettingsResponse>, I>>(
+    object: I,
+  ): WCAPIConfigureSettingsResponse {
+    const message = createBaseWCAPIConfigureSettingsResponse();
+    message.settings = (object.settings !== undefined && object.settings !== null)
+      ? WCSettings.fromPartial(object.settings)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIGetSystemInfoRequest(): WCAPIGetSystemInfoRequest {
+  return {};
+}
+
+export const WCAPIGetSystemInfoRequest: MessageFns<WCAPIGetSystemInfoRequest> = {
+  encode(_: WCAPIGetSystemInfoRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetSystemInfoRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetSystemInfoRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIGetSystemInfoRequest {
+    return {};
+  },
+
+  toJSON(_: WCAPIGetSystemInfoRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetSystemInfoRequest>, I>>(base?: I): WCAPIGetSystemInfoRequest {
+    return WCAPIGetSystemInfoRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetSystemInfoRequest>, I>>(_: I): WCAPIGetSystemInfoRequest {
+    const message = createBaseWCAPIGetSystemInfoRequest();
+    return message;
+  },
+};
+
+function createBaseWCAPIGetSystemInfoResponse(): WCAPIGetSystemInfoResponse {
+  return { genealogy: undefined, complianceCrcs: [] };
+}
+
+export const WCAPIGetSystemInfoResponse: MessageFns<WCAPIGetSystemInfoResponse> = {
+  encode(message: WCAPIGetSystemInfoResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.genealogy !== undefined) {
+      WCGenealogy.encode(message.genealogy, writer.uint32(10).fork()).join();
+    }
+    for (const v of message.complianceCrcs) {
+      ComplianceCRC32.encode(v!, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetSystemInfoResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetSystemInfoResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.genealogy = WCGenealogy.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.complianceCrcs.push(ComplianceCRC32.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIGetSystemInfoResponse {
+    return {
+      genealogy: isSet(object.genealogy) ? WCGenealogy.fromJSON(object.genealogy) : undefined,
+      complianceCrcs: globalThis.Array.isArray(object?.complianceCrcs)
+        ? object.complianceCrcs.map((e: any) => ComplianceCRC32.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: WCAPIGetSystemInfoResponse): unknown {
+    const obj: any = {};
+    if (message.genealogy !== undefined) {
+      obj.genealogy = WCGenealogy.toJSON(message.genealogy);
+    }
+    if (message.complianceCrcs?.length) {
+      obj.complianceCrcs = message.complianceCrcs.map((e) => ComplianceCRC32.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetSystemInfoResponse>, I>>(base?: I): WCAPIGetSystemInfoResponse {
+    return WCAPIGetSystemInfoResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetSystemInfoResponse>, I>>(object: I): WCAPIGetSystemInfoResponse {
+    const message = createBaseWCAPIGetSystemInfoResponse();
+    message.genealogy = (object.genealogy !== undefined && object.genealogy !== null)
+      ? WCGenealogy.fromPartial(object.genealogy)
+      : undefined;
+    message.complianceCrcs = object.complianceCrcs?.map((e) => ComplianceCRC32.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseWCAPIGetLoadSharingNetworkStateRequest(): WCAPIGetLoadSharingNetworkStateRequest {
+  return {};
+}
+
+export const WCAPIGetLoadSharingNetworkStateRequest: MessageFns<WCAPIGetLoadSharingNetworkStateRequest> = {
+  encode(_: WCAPIGetLoadSharingNetworkStateRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetLoadSharingNetworkStateRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetLoadSharingNetworkStateRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIGetLoadSharingNetworkStateRequest {
+    return {};
+  },
+
+  toJSON(_: WCAPIGetLoadSharingNetworkStateRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetLoadSharingNetworkStateRequest>, I>>(
+    base?: I,
+  ): WCAPIGetLoadSharingNetworkStateRequest {
+    return WCAPIGetLoadSharingNetworkStateRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetLoadSharingNetworkStateRequest>, I>>(
+    _: I,
+  ): WCAPIGetLoadSharingNetworkStateRequest {
+    const message = createBaseWCAPIGetLoadSharingNetworkStateRequest();
+    return message;
+  },
+};
+
+function createBaseWCAPIGetLoadSharingNetworkStateResponse(): WCAPIGetLoadSharingNetworkStateResponse {
+  return { networkState: undefined };
+}
+
+export const WCAPIGetLoadSharingNetworkStateResponse: MessageFns<WCAPIGetLoadSharingNetworkStateResponse> = {
+  encode(message: WCAPIGetLoadSharingNetworkStateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.networkState !== undefined) {
+      WCLoadSharingNetworkState.encode(message.networkState, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetLoadSharingNetworkStateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetLoadSharingNetworkStateResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.networkState = WCLoadSharingNetworkState.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIGetLoadSharingNetworkStateResponse {
+    return {
+      networkState: isSet(object.networkState) ? WCLoadSharingNetworkState.fromJSON(object.networkState) : undefined,
+    };
+  },
+
+  toJSON(message: WCAPIGetLoadSharingNetworkStateResponse): unknown {
+    const obj: any = {};
+    if (message.networkState !== undefined) {
+      obj.networkState = WCLoadSharingNetworkState.toJSON(message.networkState);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetLoadSharingNetworkStateResponse>, I>>(
+    base?: I,
+  ): WCAPIGetLoadSharingNetworkStateResponse {
+    return WCAPIGetLoadSharingNetworkStateResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetLoadSharingNetworkStateResponse>, I>>(
+    object: I,
+  ): WCAPIGetLoadSharingNetworkStateResponse {
+    const message = createBaseWCAPIGetLoadSharingNetworkStateResponse();
+    message.networkState = (object.networkState !== undefined && object.networkState !== null)
+      ? WCLoadSharingNetworkState.fromPartial(object.networkState)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIPushLoadSharingFollowerStateRequest(): WCAPIPushLoadSharingFollowerStateRequest {
+  return { followerState: undefined };
+}
+
+export const WCAPIPushLoadSharingFollowerStateRequest: MessageFns<WCAPIPushLoadSharingFollowerStateRequest> = {
+  encode(message: WCAPIPushLoadSharingFollowerStateRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.followerState !== undefined) {
+      WCLoadSharingFollowerState.encode(message.followerState, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIPushLoadSharingFollowerStateRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIPushLoadSharingFollowerStateRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.followerState = WCLoadSharingFollowerState.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIPushLoadSharingFollowerStateRequest {
+    return {
+      followerState: isSet(object.followerState)
+        ? WCLoadSharingFollowerState.fromJSON(object.followerState)
+        : undefined,
+    };
+  },
+
+  toJSON(message: WCAPIPushLoadSharingFollowerStateRequest): unknown {
+    const obj: any = {};
+    if (message.followerState !== undefined) {
+      obj.followerState = WCLoadSharingFollowerState.toJSON(message.followerState);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIPushLoadSharingFollowerStateRequest>, I>>(
+    base?: I,
+  ): WCAPIPushLoadSharingFollowerStateRequest {
+    return WCAPIPushLoadSharingFollowerStateRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIPushLoadSharingFollowerStateRequest>, I>>(
+    object: I,
+  ): WCAPIPushLoadSharingFollowerStateRequest {
+    const message = createBaseWCAPIPushLoadSharingFollowerStateRequest();
+    message.followerState = (object.followerState !== undefined && object.followerState !== null)
+      ? WCLoadSharingFollowerState.fromPartial(object.followerState)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIPushLoadSharingFollowerStateResponse(): WCAPIPushLoadSharingFollowerStateResponse {
+  return { leaderState: undefined, leaderCommand: undefined };
+}
+
+export const WCAPIPushLoadSharingFollowerStateResponse: MessageFns<WCAPIPushLoadSharingFollowerStateResponse> = {
+  encode(message: WCAPIPushLoadSharingFollowerStateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.leaderState !== undefined) {
+      WCLoadSharingLeaderState.encode(message.leaderState, writer.uint32(10).fork()).join();
+    }
+    if (message.leaderCommand !== undefined) {
+      WCLoadSharingLeaderCommand.encode(message.leaderCommand, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIPushLoadSharingFollowerStateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIPushLoadSharingFollowerStateResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.leaderState = WCLoadSharingLeaderState.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.leaderCommand = WCLoadSharingLeaderCommand.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIPushLoadSharingFollowerStateResponse {
+    return {
+      leaderState: isSet(object.leaderState) ? WCLoadSharingLeaderState.fromJSON(object.leaderState) : undefined,
+      leaderCommand: isSet(object.leaderCommand)
+        ? WCLoadSharingLeaderCommand.fromJSON(object.leaderCommand)
+        : undefined,
+    };
+  },
+
+  toJSON(message: WCAPIPushLoadSharingFollowerStateResponse): unknown {
+    const obj: any = {};
+    if (message.leaderState !== undefined) {
+      obj.leaderState = WCLoadSharingLeaderState.toJSON(message.leaderState);
+    }
+    if (message.leaderCommand !== undefined) {
+      obj.leaderCommand = WCLoadSharingLeaderCommand.toJSON(message.leaderCommand);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIPushLoadSharingFollowerStateResponse>, I>>(
+    base?: I,
+  ): WCAPIPushLoadSharingFollowerStateResponse {
+    return WCAPIPushLoadSharingFollowerStateResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIPushLoadSharingFollowerStateResponse>, I>>(
+    object: I,
+  ): WCAPIPushLoadSharingFollowerStateResponse {
+    const message = createBaseWCAPIPushLoadSharingFollowerStateResponse();
+    message.leaderState = (object.leaderState !== undefined && object.leaderState !== null)
+      ? WCLoadSharingLeaderState.fromPartial(object.leaderState)
+      : undefined;
+    message.leaderCommand = (object.leaderCommand !== undefined && object.leaderCommand !== null)
+      ? WCLoadSharingLeaderCommand.fromPartial(object.leaderCommand)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIPushLoadSharingLeaderCommandRequest(): WCAPIPushLoadSharingLeaderCommandRequest {
+  return { leaderState: undefined, leaderCommand: undefined };
+}
+
+export const WCAPIPushLoadSharingLeaderCommandRequest: MessageFns<WCAPIPushLoadSharingLeaderCommandRequest> = {
+  encode(message: WCAPIPushLoadSharingLeaderCommandRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.leaderState !== undefined) {
+      WCLoadSharingLeaderState.encode(message.leaderState, writer.uint32(10).fork()).join();
+    }
+    if (message.leaderCommand !== undefined) {
+      WCLoadSharingLeaderCommand.encode(message.leaderCommand, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIPushLoadSharingLeaderCommandRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIPushLoadSharingLeaderCommandRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.leaderState = WCLoadSharingLeaderState.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.leaderCommand = WCLoadSharingLeaderCommand.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIPushLoadSharingLeaderCommandRequest {
+    return {
+      leaderState: isSet(object.leaderState) ? WCLoadSharingLeaderState.fromJSON(object.leaderState) : undefined,
+      leaderCommand: isSet(object.leaderCommand)
+        ? WCLoadSharingLeaderCommand.fromJSON(object.leaderCommand)
+        : undefined,
+    };
+  },
+
+  toJSON(message: WCAPIPushLoadSharingLeaderCommandRequest): unknown {
+    const obj: any = {};
+    if (message.leaderState !== undefined) {
+      obj.leaderState = WCLoadSharingLeaderState.toJSON(message.leaderState);
+    }
+    if (message.leaderCommand !== undefined) {
+      obj.leaderCommand = WCLoadSharingLeaderCommand.toJSON(message.leaderCommand);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIPushLoadSharingLeaderCommandRequest>, I>>(
+    base?: I,
+  ): WCAPIPushLoadSharingLeaderCommandRequest {
+    return WCAPIPushLoadSharingLeaderCommandRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIPushLoadSharingLeaderCommandRequest>, I>>(
+    object: I,
+  ): WCAPIPushLoadSharingLeaderCommandRequest {
+    const message = createBaseWCAPIPushLoadSharingLeaderCommandRequest();
+    message.leaderState = (object.leaderState !== undefined && object.leaderState !== null)
+      ? WCLoadSharingLeaderState.fromPartial(object.leaderState)
+      : undefined;
+    message.leaderCommand = (object.leaderCommand !== undefined && object.leaderCommand !== null)
+      ? WCLoadSharingLeaderCommand.fromPartial(object.leaderCommand)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIPushLoadSharingLeaderCommandResponse(): WCAPIPushLoadSharingLeaderCommandResponse {
+  return { followerState: undefined };
+}
+
+export const WCAPIPushLoadSharingLeaderCommandResponse: MessageFns<WCAPIPushLoadSharingLeaderCommandResponse> = {
+  encode(message: WCAPIPushLoadSharingLeaderCommandResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.followerState !== undefined) {
+      WCLoadSharingFollowerState.encode(message.followerState, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIPushLoadSharingLeaderCommandResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIPushLoadSharingLeaderCommandResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.followerState = WCLoadSharingFollowerState.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIPushLoadSharingLeaderCommandResponse {
+    return {
+      followerState: isSet(object.followerState)
+        ? WCLoadSharingFollowerState.fromJSON(object.followerState)
+        : undefined,
+    };
+  },
+
+  toJSON(message: WCAPIPushLoadSharingLeaderCommandResponse): unknown {
+    const obj: any = {};
+    if (message.followerState !== undefined) {
+      obj.followerState = WCLoadSharingFollowerState.toJSON(message.followerState);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIPushLoadSharingLeaderCommandResponse>, I>>(
+    base?: I,
+  ): WCAPIPushLoadSharingLeaderCommandResponse {
+    return WCAPIPushLoadSharingLeaderCommandResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIPushLoadSharingLeaderCommandResponse>, I>>(
+    object: I,
+  ): WCAPIPushLoadSharingLeaderCommandResponse {
+    const message = createBaseWCAPIPushLoadSharingLeaderCommandResponse();
+    message.followerState = (object.followerState !== undefined && object.followerState !== null)
+      ? WCLoadSharingFollowerState.fromPartial(object.followerState)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPISetLoadSharingNetworkOperationRequest(): WCAPISetLoadSharingNetworkOperationRequest {
+  return { chargingEnabled: false };
+}
+
+export const WCAPISetLoadSharingNetworkOperationRequest: MessageFns<WCAPISetLoadSharingNetworkOperationRequest> = {
+  encode(message: WCAPISetLoadSharingNetworkOperationRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.chargingEnabled !== false) {
+      writer.uint32(8).bool(message.chargingEnabled);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPISetLoadSharingNetworkOperationRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPISetLoadSharingNetworkOperationRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.chargingEnabled = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPISetLoadSharingNetworkOperationRequest {
+    return { chargingEnabled: isSet(object.chargingEnabled) ? globalThis.Boolean(object.chargingEnabled) : false };
+  },
+
+  toJSON(message: WCAPISetLoadSharingNetworkOperationRequest): unknown {
+    const obj: any = {};
+    if (message.chargingEnabled !== undefined) {
+      obj.chargingEnabled = message.chargingEnabled;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPISetLoadSharingNetworkOperationRequest>, I>>(
+    base?: I,
+  ): WCAPISetLoadSharingNetworkOperationRequest {
+    return WCAPISetLoadSharingNetworkOperationRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPISetLoadSharingNetworkOperationRequest>, I>>(
+    object: I,
+  ): WCAPISetLoadSharingNetworkOperationRequest {
+    const message = createBaseWCAPISetLoadSharingNetworkOperationRequest();
+    message.chargingEnabled = object.chargingEnabled ?? false;
+    return message;
+  },
+};
+
+function createBaseWCAPISetLoadSharingNetworkOperationResponse(): WCAPISetLoadSharingNetworkOperationResponse {
+  return {};
+}
+
+export const WCAPISetLoadSharingNetworkOperationResponse: MessageFns<WCAPISetLoadSharingNetworkOperationResponse> = {
+  encode(_: WCAPISetLoadSharingNetworkOperationResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPISetLoadSharingNetworkOperationResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPISetLoadSharingNetworkOperationResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPISetLoadSharingNetworkOperationResponse {
+    return {};
+  },
+
+  toJSON(_: WCAPISetLoadSharingNetworkOperationResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPISetLoadSharingNetworkOperationResponse>, I>>(
+    base?: I,
+  ): WCAPISetLoadSharingNetworkOperationResponse {
+    return WCAPISetLoadSharingNetworkOperationResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPISetLoadSharingNetworkOperationResponse>, I>>(
+    _: I,
+  ): WCAPISetLoadSharingNetworkOperationResponse {
+    const message = createBaseWCAPISetLoadSharingNetworkOperationResponse();
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureLoadSharingSettingsRequest(): WCAPIConfigureLoadSharingSettingsRequest {
+  return { settings: undefined };
+}
+
+export const WCAPIConfigureLoadSharingSettingsRequest: MessageFns<WCAPIConfigureLoadSharingSettingsRequest> = {
+  encode(message: WCAPIConfigureLoadSharingSettingsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.settings !== undefined) {
+      WCLoadSharingSettings.encode(message.settings, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureLoadSharingSettingsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureLoadSharingSettingsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.settings = WCLoadSharingSettings.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureLoadSharingSettingsRequest {
+    return { settings: isSet(object.settings) ? WCLoadSharingSettings.fromJSON(object.settings) : undefined };
+  },
+
+  toJSON(message: WCAPIConfigureLoadSharingSettingsRequest): unknown {
+    const obj: any = {};
+    if (message.settings !== undefined) {
+      obj.settings = WCLoadSharingSettings.toJSON(message.settings);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureLoadSharingSettingsRequest>, I>>(
+    base?: I,
+  ): WCAPIConfigureLoadSharingSettingsRequest {
+    return WCAPIConfigureLoadSharingSettingsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureLoadSharingSettingsRequest>, I>>(
+    object: I,
+  ): WCAPIConfigureLoadSharingSettingsRequest {
+    const message = createBaseWCAPIConfigureLoadSharingSettingsRequest();
+    message.settings = (object.settings !== undefined && object.settings !== null)
+      ? WCLoadSharingSettings.fromPartial(object.settings)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureLoadSharingSettingsResponse(): WCAPIConfigureLoadSharingSettingsResponse {
+  return { settings: undefined };
+}
+
+export const WCAPIConfigureLoadSharingSettingsResponse: MessageFns<WCAPIConfigureLoadSharingSettingsResponse> = {
+  encode(message: WCAPIConfigureLoadSharingSettingsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.settings !== undefined) {
+      WCLoadSharingSettings.encode(message.settings, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureLoadSharingSettingsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureLoadSharingSettingsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.settings = WCLoadSharingSettings.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureLoadSharingSettingsResponse {
+    return { settings: isSet(object.settings) ? WCLoadSharingSettings.fromJSON(object.settings) : undefined };
+  },
+
+  toJSON(message: WCAPIConfigureLoadSharingSettingsResponse): unknown {
+    const obj: any = {};
+    if (message.settings !== undefined) {
+      obj.settings = WCLoadSharingSettings.toJSON(message.settings);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureLoadSharingSettingsResponse>, I>>(
+    base?: I,
+  ): WCAPIConfigureLoadSharingSettingsResponse {
+    return WCAPIConfigureLoadSharingSettingsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureLoadSharingSettingsResponse>, I>>(
+    object: I,
+  ): WCAPIConfigureLoadSharingSettingsResponse {
+    const message = createBaseWCAPIConfigureLoadSharingSettingsResponse();
+    message.settings = (object.settings !== undefined && object.settings !== null)
+      ? WCLoadSharingSettings.fromPartial(object.settings)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIPushLoadSharingConfigRequest(): WCAPIPushLoadSharingConfigRequest {
+  return { loadSharingConfig: undefined };
+}
+
+export const WCAPIPushLoadSharingConfigRequest: MessageFns<WCAPIPushLoadSharingConfigRequest> = {
+  encode(message: WCAPIPushLoadSharingConfigRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.loadSharingConfig !== undefined) {
+      WCLoadSharingConfig.encode(message.loadSharingConfig, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIPushLoadSharingConfigRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIPushLoadSharingConfigRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.loadSharingConfig = WCLoadSharingConfig.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIPushLoadSharingConfigRequest {
+    return {
+      loadSharingConfig: isSet(object.loadSharingConfig)
+        ? WCLoadSharingConfig.fromJSON(object.loadSharingConfig)
+        : undefined,
+    };
+  },
+
+  toJSON(message: WCAPIPushLoadSharingConfigRequest): unknown {
+    const obj: any = {};
+    if (message.loadSharingConfig !== undefined) {
+      obj.loadSharingConfig = WCLoadSharingConfig.toJSON(message.loadSharingConfig);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIPushLoadSharingConfigRequest>, I>>(
+    base?: I,
+  ): WCAPIPushLoadSharingConfigRequest {
+    return WCAPIPushLoadSharingConfigRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIPushLoadSharingConfigRequest>, I>>(
+    object: I,
+  ): WCAPIPushLoadSharingConfigRequest {
+    const message = createBaseWCAPIPushLoadSharingConfigRequest();
+    message.loadSharingConfig = (object.loadSharingConfig !== undefined && object.loadSharingConfig !== null)
+      ? WCLoadSharingConfig.fromPartial(object.loadSharingConfig)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIPushLoadSharingConfigResponse(): WCAPIPushLoadSharingConfigResponse {
+  return {};
+}
+
+export const WCAPIPushLoadSharingConfigResponse: MessageFns<WCAPIPushLoadSharingConfigResponse> = {
+  encode(_: WCAPIPushLoadSharingConfigResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIPushLoadSharingConfigResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIPushLoadSharingConfigResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIPushLoadSharingConfigResponse {
+    return {};
+  },
+
+  toJSON(_: WCAPIPushLoadSharingConfigResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIPushLoadSharingConfigResponse>, I>>(
+    base?: I,
+  ): WCAPIPushLoadSharingConfigResponse {
+    return WCAPIPushLoadSharingConfigResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIPushLoadSharingConfigResponse>, I>>(
+    _: I,
+  ): WCAPIPushLoadSharingConfigResponse {
+    const message = createBaseWCAPIPushLoadSharingConfigResponse();
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigurePpuSettingsRequest(): WCAPIConfigurePpuSettingsRequest {
+  return { ppuConfig: undefined };
+}
+
+export const WCAPIConfigurePpuSettingsRequest: MessageFns<WCAPIConfigurePpuSettingsRequest> = {
+  encode(message: WCAPIConfigurePpuSettingsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.ppuConfig !== undefined) {
+      WCPpuConfig.encode(message.ppuConfig, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigurePpuSettingsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigurePpuSettingsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.ppuConfig = WCPpuConfig.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigurePpuSettingsRequest {
+    return { ppuConfig: isSet(object.ppuConfig) ? WCPpuConfig.fromJSON(object.ppuConfig) : undefined };
+  },
+
+  toJSON(message: WCAPIConfigurePpuSettingsRequest): unknown {
+    const obj: any = {};
+    if (message.ppuConfig !== undefined) {
+      obj.ppuConfig = WCPpuConfig.toJSON(message.ppuConfig);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigurePpuSettingsRequest>, I>>(
+    base?: I,
+  ): WCAPIConfigurePpuSettingsRequest {
+    return WCAPIConfigurePpuSettingsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigurePpuSettingsRequest>, I>>(
+    object: I,
+  ): WCAPIConfigurePpuSettingsRequest {
+    const message = createBaseWCAPIConfigurePpuSettingsRequest();
+    message.ppuConfig = (object.ppuConfig !== undefined && object.ppuConfig !== null)
+      ? WCPpuConfig.fromPartial(object.ppuConfig)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigurePpuSettingsResponse(): WCAPIConfigurePpuSettingsResponse {
+  return { ppuConfig: undefined };
+}
+
+export const WCAPIConfigurePpuSettingsResponse: MessageFns<WCAPIConfigurePpuSettingsResponse> = {
+  encode(message: WCAPIConfigurePpuSettingsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.ppuConfig !== undefined) {
+      WCPpuConfig.encode(message.ppuConfig, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigurePpuSettingsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigurePpuSettingsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.ppuConfig = WCPpuConfig.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigurePpuSettingsResponse {
+    return { ppuConfig: isSet(object.ppuConfig) ? WCPpuConfig.fromJSON(object.ppuConfig) : undefined };
+  },
+
+  toJSON(message: WCAPIConfigurePpuSettingsResponse): unknown {
+    const obj: any = {};
+    if (message.ppuConfig !== undefined) {
+      obj.ppuConfig = WCPpuConfig.toJSON(message.ppuConfig);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigurePpuSettingsResponse>, I>>(
+    base?: I,
+  ): WCAPIConfigurePpuSettingsResponse {
+    return WCAPIConfigurePpuSettingsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigurePpuSettingsResponse>, I>>(
+    object: I,
+  ): WCAPIConfigurePpuSettingsResponse {
+    const message = createBaseWCAPIConfigurePpuSettingsResponse();
+    message.ppuConfig = (object.ppuConfig !== undefined && object.ppuConfig !== null)
+      ? WCPpuConfig.fromPartial(object.ppuConfig)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIGetPpuSettingsRequest(): WCAPIGetPpuSettingsRequest {
+  return {};
+}
+
+export const WCAPIGetPpuSettingsRequest: MessageFns<WCAPIGetPpuSettingsRequest> = {
+  encode(_: WCAPIGetPpuSettingsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetPpuSettingsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetPpuSettingsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIGetPpuSettingsRequest {
+    return {};
+  },
+
+  toJSON(_: WCAPIGetPpuSettingsRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetPpuSettingsRequest>, I>>(base?: I): WCAPIGetPpuSettingsRequest {
+    return WCAPIGetPpuSettingsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetPpuSettingsRequest>, I>>(_: I): WCAPIGetPpuSettingsRequest {
+    const message = createBaseWCAPIGetPpuSettingsRequest();
+    return message;
+  },
+};
+
+function createBaseWCAPIGetPpuSettingsResponse(): WCAPIGetPpuSettingsResponse {
+  return { ppuConfig: undefined };
+}
+
+export const WCAPIGetPpuSettingsResponse: MessageFns<WCAPIGetPpuSettingsResponse> = {
+  encode(message: WCAPIGetPpuSettingsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.ppuConfig !== undefined) {
+      WCPpuConfig.encode(message.ppuConfig, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetPpuSettingsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetPpuSettingsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.ppuConfig = WCPpuConfig.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIGetPpuSettingsResponse {
+    return { ppuConfig: isSet(object.ppuConfig) ? WCPpuConfig.fromJSON(object.ppuConfig) : undefined };
+  },
+
+  toJSON(message: WCAPIGetPpuSettingsResponse): unknown {
+    const obj: any = {};
+    if (message.ppuConfig !== undefined) {
+      obj.ppuConfig = WCPpuConfig.toJSON(message.ppuConfig);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetPpuSettingsResponse>, I>>(base?: I): WCAPIGetPpuSettingsResponse {
+    return WCAPIGetPpuSettingsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetPpuSettingsResponse>, I>>(object: I): WCAPIGetPpuSettingsResponse {
+    const message = createBaseWCAPIGetPpuSettingsResponse();
+    message.ppuConfig = (object.ppuConfig !== undefined && object.ppuConfig !== null)
+      ? WCPpuConfig.fromPartial(object.ppuConfig)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureOperationalSettingsRequest(): WCAPIConfigureOperationalSettingsRequest {
+  return { operationalSettingsConfig: undefined };
+}
+
+export const WCAPIConfigureOperationalSettingsRequest: MessageFns<WCAPIConfigureOperationalSettingsRequest> = {
+  encode(message: WCAPIConfigureOperationalSettingsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.operationalSettingsConfig !== undefined) {
+      WCOperationalSettingsConfig.encode(message.operationalSettingsConfig, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureOperationalSettingsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureOperationalSettingsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.operationalSettingsConfig = WCOperationalSettingsConfig.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureOperationalSettingsRequest {
+    return {
+      operationalSettingsConfig: isSet(object.operationalSettingsConfig)
+        ? WCOperationalSettingsConfig.fromJSON(object.operationalSettingsConfig)
+        : undefined,
+    };
+  },
+
+  toJSON(message: WCAPIConfigureOperationalSettingsRequest): unknown {
+    const obj: any = {};
+    if (message.operationalSettingsConfig !== undefined) {
+      obj.operationalSettingsConfig = WCOperationalSettingsConfig.toJSON(message.operationalSettingsConfig);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureOperationalSettingsRequest>, I>>(
+    base?: I,
+  ): WCAPIConfigureOperationalSettingsRequest {
+    return WCAPIConfigureOperationalSettingsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureOperationalSettingsRequest>, I>>(
+    object: I,
+  ): WCAPIConfigureOperationalSettingsRequest {
+    const message = createBaseWCAPIConfigureOperationalSettingsRequest();
+    message.operationalSettingsConfig =
+      (object.operationalSettingsConfig !== undefined && object.operationalSettingsConfig !== null)
+        ? WCOperationalSettingsConfig.fromPartial(object.operationalSettingsConfig)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureOperationalSettingsResponse(): WCAPIConfigureOperationalSettingsResponse {
+  return { operationalSettingsConfig: undefined };
+}
+
+export const WCAPIConfigureOperationalSettingsResponse: MessageFns<WCAPIConfigureOperationalSettingsResponse> = {
+  encode(message: WCAPIConfigureOperationalSettingsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.operationalSettingsConfig !== undefined) {
+      WCOperationalSettingsConfig.encode(message.operationalSettingsConfig, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureOperationalSettingsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureOperationalSettingsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.operationalSettingsConfig = WCOperationalSettingsConfig.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureOperationalSettingsResponse {
+    return {
+      operationalSettingsConfig: isSet(object.operationalSettingsConfig)
+        ? WCOperationalSettingsConfig.fromJSON(object.operationalSettingsConfig)
+        : undefined,
+    };
+  },
+
+  toJSON(message: WCAPIConfigureOperationalSettingsResponse): unknown {
+    const obj: any = {};
+    if (message.operationalSettingsConfig !== undefined) {
+      obj.operationalSettingsConfig = WCOperationalSettingsConfig.toJSON(message.operationalSettingsConfig);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureOperationalSettingsResponse>, I>>(
+    base?: I,
+  ): WCAPIConfigureOperationalSettingsResponse {
+    return WCAPIConfigureOperationalSettingsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureOperationalSettingsResponse>, I>>(
+    object: I,
+  ): WCAPIConfigureOperationalSettingsResponse {
+    const message = createBaseWCAPIConfigureOperationalSettingsResponse();
+    message.operationalSettingsConfig =
+      (object.operationalSettingsConfig !== undefined && object.operationalSettingsConfig !== null)
+        ? WCOperationalSettingsConfig.fromPartial(object.operationalSettingsConfig)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIGetOperationalSettingsRequest(): WCAPIGetOperationalSettingsRequest {
+  return {};
+}
+
+export const WCAPIGetOperationalSettingsRequest: MessageFns<WCAPIGetOperationalSettingsRequest> = {
+  encode(_: WCAPIGetOperationalSettingsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetOperationalSettingsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetOperationalSettingsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIGetOperationalSettingsRequest {
+    return {};
+  },
+
+  toJSON(_: WCAPIGetOperationalSettingsRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetOperationalSettingsRequest>, I>>(
+    base?: I,
+  ): WCAPIGetOperationalSettingsRequest {
+    return WCAPIGetOperationalSettingsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetOperationalSettingsRequest>, I>>(
+    _: I,
+  ): WCAPIGetOperationalSettingsRequest {
+    const message = createBaseWCAPIGetOperationalSettingsRequest();
+    return message;
+  },
+};
+
+function createBaseWCAPIGetOperationalSettingsResponse(): WCAPIGetOperationalSettingsResponse {
+  return { operationalSettingsConfig: undefined };
+}
+
+export const WCAPIGetOperationalSettingsResponse: MessageFns<WCAPIGetOperationalSettingsResponse> = {
+  encode(message: WCAPIGetOperationalSettingsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.operationalSettingsConfig !== undefined) {
+      WCOperationalSettingsConfig.encode(message.operationalSettingsConfig, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetOperationalSettingsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetOperationalSettingsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.operationalSettingsConfig = WCOperationalSettingsConfig.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIGetOperationalSettingsResponse {
+    return {
+      operationalSettingsConfig: isSet(object.operationalSettingsConfig)
+        ? WCOperationalSettingsConfig.fromJSON(object.operationalSettingsConfig)
+        : undefined,
+    };
+  },
+
+  toJSON(message: WCAPIGetOperationalSettingsResponse): unknown {
+    const obj: any = {};
+    if (message.operationalSettingsConfig !== undefined) {
+      obj.operationalSettingsConfig = WCOperationalSettingsConfig.toJSON(message.operationalSettingsConfig);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetOperationalSettingsResponse>, I>>(
+    base?: I,
+  ): WCAPIGetOperationalSettingsResponse {
+    return WCAPIGetOperationalSettingsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetOperationalSettingsResponse>, I>>(
+    object: I,
+  ): WCAPIGetOperationalSettingsResponse {
+    const message = createBaseWCAPIGetOperationalSettingsResponse();
+    message.operationalSettingsConfig =
+      (object.operationalSettingsConfig !== undefined && object.operationalSettingsConfig !== null)
+        ? WCOperationalSettingsConfig.fromPartial(object.operationalSettingsConfig)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPISetProvisionalOperationalParamsRequest(): WCAPISetProvisionalOperationalParamsRequest {
+  return { provOpParams: undefined };
+}
+
+export const WCAPISetProvisionalOperationalParamsRequest: MessageFns<WCAPISetProvisionalOperationalParamsRequest> = {
+  encode(
+    message: WCAPISetProvisionalOperationalParamsRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.provOpParams !== undefined) {
+      WCProvisionalOperationalParams.encode(message.provOpParams, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPISetProvisionalOperationalParamsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPISetProvisionalOperationalParamsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.provOpParams = WCProvisionalOperationalParams.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPISetProvisionalOperationalParamsRequest {
+    return {
+      provOpParams: isSet(object.provOpParams)
+        ? WCProvisionalOperationalParams.fromJSON(object.provOpParams)
+        : undefined,
+    };
+  },
+
+  toJSON(message: WCAPISetProvisionalOperationalParamsRequest): unknown {
+    const obj: any = {};
+    if (message.provOpParams !== undefined) {
+      obj.provOpParams = WCProvisionalOperationalParams.toJSON(message.provOpParams);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPISetProvisionalOperationalParamsRequest>, I>>(
+    base?: I,
+  ): WCAPISetProvisionalOperationalParamsRequest {
+    return WCAPISetProvisionalOperationalParamsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPISetProvisionalOperationalParamsRequest>, I>>(
+    object: I,
+  ): WCAPISetProvisionalOperationalParamsRequest {
+    const message = createBaseWCAPISetProvisionalOperationalParamsRequest();
+    message.provOpParams = (object.provOpParams !== undefined && object.provOpParams !== null)
+      ? WCProvisionalOperationalParams.fromPartial(object.provOpParams)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPISetProvisionalOperationalParamsResponse(): WCAPISetProvisionalOperationalParamsResponse {
+  return {};
+}
+
+export const WCAPISetProvisionalOperationalParamsResponse: MessageFns<WCAPISetProvisionalOperationalParamsResponse> = {
+  encode(_: WCAPISetProvisionalOperationalParamsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPISetProvisionalOperationalParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPISetProvisionalOperationalParamsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPISetProvisionalOperationalParamsResponse {
+    return {};
+  },
+
+  toJSON(_: WCAPISetProvisionalOperationalParamsResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPISetProvisionalOperationalParamsResponse>, I>>(
+    base?: I,
+  ): WCAPISetProvisionalOperationalParamsResponse {
+    return WCAPISetProvisionalOperationalParamsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPISetProvisionalOperationalParamsResponse>, I>>(
+    _: I,
+  ): WCAPISetProvisionalOperationalParamsResponse {
+    const message = createBaseWCAPISetProvisionalOperationalParamsResponse();
+    return message;
+  },
+};
+
+function createBaseWCAPIGetProvisionalOperationalParamsRequest(): WCAPIGetProvisionalOperationalParamsRequest {
+  return {};
+}
+
+export const WCAPIGetProvisionalOperationalParamsRequest: MessageFns<WCAPIGetProvisionalOperationalParamsRequest> = {
+  encode(_: WCAPIGetProvisionalOperationalParamsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetProvisionalOperationalParamsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetProvisionalOperationalParamsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIGetProvisionalOperationalParamsRequest {
+    return {};
+  },
+
+  toJSON(_: WCAPIGetProvisionalOperationalParamsRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetProvisionalOperationalParamsRequest>, I>>(
+    base?: I,
+  ): WCAPIGetProvisionalOperationalParamsRequest {
+    return WCAPIGetProvisionalOperationalParamsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetProvisionalOperationalParamsRequest>, I>>(
+    _: I,
+  ): WCAPIGetProvisionalOperationalParamsRequest {
+    const message = createBaseWCAPIGetProvisionalOperationalParamsRequest();
+    return message;
+  },
+};
+
+function createBaseWCAPIGetProvisionalOperationalParamsResponse(): WCAPIGetProvisionalOperationalParamsResponse {
+  return { provOpParams: undefined, configuredCurrentLimitAmps: 0 };
+}
+
+export const WCAPIGetProvisionalOperationalParamsResponse: MessageFns<WCAPIGetProvisionalOperationalParamsResponse> = {
+  encode(
+    message: WCAPIGetProvisionalOperationalParamsResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.provOpParams !== undefined) {
+      WCProvisionalOperationalParams.encode(message.provOpParams, writer.uint32(10).fork()).join();
+    }
+    if (message.configuredCurrentLimitAmps !== 0) {
+      writer.uint32(16).uint32(message.configuredCurrentLimitAmps);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetProvisionalOperationalParamsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetProvisionalOperationalParamsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.provOpParams = WCProvisionalOperationalParams.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.configuredCurrentLimitAmps = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIGetProvisionalOperationalParamsResponse {
+    return {
+      provOpParams: isSet(object.provOpParams)
+        ? WCProvisionalOperationalParams.fromJSON(object.provOpParams)
+        : undefined,
+      configuredCurrentLimitAmps: isSet(object.configuredCurrentLimitAmps)
+        ? globalThis.Number(object.configuredCurrentLimitAmps)
+        : 0,
+    };
+  },
+
+  toJSON(message: WCAPIGetProvisionalOperationalParamsResponse): unknown {
+    const obj: any = {};
+    if (message.provOpParams !== undefined) {
+      obj.provOpParams = WCProvisionalOperationalParams.toJSON(message.provOpParams);
+    }
+    if (message.configuredCurrentLimitAmps !== undefined) {
+      obj.configuredCurrentLimitAmps = Math.round(message.configuredCurrentLimitAmps);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetProvisionalOperationalParamsResponse>, I>>(
+    base?: I,
+  ): WCAPIGetProvisionalOperationalParamsResponse {
+    return WCAPIGetProvisionalOperationalParamsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetProvisionalOperationalParamsResponse>, I>>(
+    object: I,
+  ): WCAPIGetProvisionalOperationalParamsResponse {
+    const message = createBaseWCAPIGetProvisionalOperationalParamsResponse();
+    message.provOpParams = (object.provOpParams !== undefined && object.provOpParams !== null)
+      ? WCProvisionalOperationalParams.fromPartial(object.provOpParams)
+      : undefined;
+    message.configuredCurrentLimitAmps = object.configuredCurrentLimitAmps ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCAPIGetAccessControlSettingsRequest(): WCAPIGetAccessControlSettingsRequest {
+  return {};
+}
+
+export const WCAPIGetAccessControlSettingsRequest: MessageFns<WCAPIGetAccessControlSettingsRequest> = {
+  encode(_: WCAPIGetAccessControlSettingsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetAccessControlSettingsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetAccessControlSettingsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIGetAccessControlSettingsRequest {
+    return {};
+  },
+
+  toJSON(_: WCAPIGetAccessControlSettingsRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetAccessControlSettingsRequest>, I>>(
+    base?: I,
+  ): WCAPIGetAccessControlSettingsRequest {
+    return WCAPIGetAccessControlSettingsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetAccessControlSettingsRequest>, I>>(
+    _: I,
+  ): WCAPIGetAccessControlSettingsRequest {
+    const message = createBaseWCAPIGetAccessControlSettingsRequest();
+    return message;
+  },
+};
+
+function createBaseWCAPIGetAccessControlSettingsResponse(): WCAPIGetAccessControlSettingsResponse {
+  return { entries: [] };
+}
+
+export const WCAPIGetAccessControlSettingsResponse: MessageFns<WCAPIGetAccessControlSettingsResponse> = {
+  encode(message: WCAPIGetAccessControlSettingsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.entries) {
+      WCAccessControlEntry.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetAccessControlSettingsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetAccessControlSettingsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.entries.push(WCAccessControlEntry.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIGetAccessControlSettingsResponse {
+    return {
+      entries: globalThis.Array.isArray(object?.entries)
+        ? object.entries.map((e: any) => WCAccessControlEntry.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: WCAPIGetAccessControlSettingsResponse): unknown {
+    const obj: any = {};
+    if (message.entries?.length) {
+      obj.entries = message.entries.map((e) => WCAccessControlEntry.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetAccessControlSettingsResponse>, I>>(
+    base?: I,
+  ): WCAPIGetAccessControlSettingsResponse {
+    return WCAPIGetAccessControlSettingsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetAccessControlSettingsResponse>, I>>(
+    object: I,
+  ): WCAPIGetAccessControlSettingsResponse {
+    const message = createBaseWCAPIGetAccessControlSettingsResponse();
+    message.entries = object.entries?.map((e) => WCAccessControlEntry.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureAccessControlSettingsRequest(): WCAPIConfigureAccessControlSettingsRequest {
+  return { operation: 0, vin: undefined, name: "" };
+}
+
+export const WCAPIConfigureAccessControlSettingsRequest: MessageFns<WCAPIConfigureAccessControlSettingsRequest> = {
+  encode(message: WCAPIConfigureAccessControlSettingsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.operation !== 0) {
+      writer.uint32(8).int32(message.operation);
+    }
+    if (message.vin !== undefined) {
+      VIN.encode(message.vin, writer.uint32(18).fork()).join();
+    }
+    if (message.name !== "") {
+      writer.uint32(26).string(message.name);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureAccessControlSettingsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureAccessControlSettingsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.operation = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.vin = VIN.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureAccessControlSettingsRequest {
+    return {
+      operation: isSet(object.operation) ? wCConfigureAccessControlOperationFromJSON(object.operation) : 0,
+      vin: isSet(object.vin) ? VIN.fromJSON(object.vin) : undefined,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+    };
+  },
+
+  toJSON(message: WCAPIConfigureAccessControlSettingsRequest): unknown {
+    const obj: any = {};
+    if (message.operation !== undefined) {
+      obj.operation = wCConfigureAccessControlOperationToJSON(message.operation);
+    }
+    if (message.vin !== undefined) {
+      obj.vin = VIN.toJSON(message.vin);
+    }
+    if (message.name !== undefined) {
+      obj.name = message.name;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureAccessControlSettingsRequest>, I>>(
+    base?: I,
+  ): WCAPIConfigureAccessControlSettingsRequest {
+    return WCAPIConfigureAccessControlSettingsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureAccessControlSettingsRequest>, I>>(
+    object: I,
+  ): WCAPIConfigureAccessControlSettingsRequest {
+    const message = createBaseWCAPIConfigureAccessControlSettingsRequest();
+    message.operation = object.operation ?? 0;
+    message.vin = (object.vin !== undefined && object.vin !== null) ? VIN.fromPartial(object.vin) : undefined;
+    message.name = object.name ?? "";
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureAccessControlSettingsResponse(): WCAPIConfigureAccessControlSettingsResponse {
+  return { entries: [] };
+}
+
+export const WCAPIConfigureAccessControlSettingsResponse: MessageFns<WCAPIConfigureAccessControlSettingsResponse> = {
+  encode(
+    message: WCAPIConfigureAccessControlSettingsResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    for (const v of message.entries) {
+      WCAccessControlEntry.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureAccessControlSettingsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureAccessControlSettingsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.entries.push(WCAccessControlEntry.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureAccessControlSettingsResponse {
+    return {
+      entries: globalThis.Array.isArray(object?.entries)
+        ? object.entries.map((e: any) => WCAccessControlEntry.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: WCAPIConfigureAccessControlSettingsResponse): unknown {
+    const obj: any = {};
+    if (message.entries?.length) {
+      obj.entries = message.entries.map((e) => WCAccessControlEntry.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureAccessControlSettingsResponse>, I>>(
+    base?: I,
+  ): WCAPIConfigureAccessControlSettingsResponse {
+    return WCAPIConfigureAccessControlSettingsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureAccessControlSettingsResponse>, I>>(
+    object: I,
+  ): WCAPIConfigureAccessControlSettingsResponse {
+    const message = createBaseWCAPIConfigureAccessControlSettingsResponse();
+    message.entries = object.entries?.map((e) => WCAccessControlEntry.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseWCAPIGetRecentVehiclesRequest(): WCAPIGetRecentVehiclesRequest {
+  return {};
+}
+
+export const WCAPIGetRecentVehiclesRequest: MessageFns<WCAPIGetRecentVehiclesRequest> = {
+  encode(_: WCAPIGetRecentVehiclesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetRecentVehiclesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetRecentVehiclesRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIGetRecentVehiclesRequest {
+    return {};
+  },
+
+  toJSON(_: WCAPIGetRecentVehiclesRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetRecentVehiclesRequest>, I>>(base?: I): WCAPIGetRecentVehiclesRequest {
+    return WCAPIGetRecentVehiclesRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetRecentVehiclesRequest>, I>>(_: I): WCAPIGetRecentVehiclesRequest {
+    const message = createBaseWCAPIGetRecentVehiclesRequest();
+    return message;
+  },
+};
+
+function createBaseWCAPIGetRecentVehiclesResponse(): WCAPIGetRecentVehiclesResponse {
+  return { recentVehicles: [] };
+}
+
+export const WCAPIGetRecentVehiclesResponse: MessageFns<WCAPIGetRecentVehiclesResponse> = {
+  encode(message: WCAPIGetRecentVehiclesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.recentVehicles) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetRecentVehiclesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetRecentVehiclesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.recentVehicles.push(reader.string());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIGetRecentVehiclesResponse {
+    return {
+      recentVehicles: globalThis.Array.isArray(object?.recentVehicles)
+        ? object.recentVehicles.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: WCAPIGetRecentVehiclesResponse): unknown {
+    const obj: any = {};
+    if (message.recentVehicles?.length) {
+      obj.recentVehicles = message.recentVehicles;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetRecentVehiclesResponse>, I>>(base?: I): WCAPIGetRecentVehiclesResponse {
+    return WCAPIGetRecentVehiclesResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetRecentVehiclesResponse>, I>>(
+    object: I,
+  ): WCAPIGetRecentVehiclesResponse {
+    const message = createBaseWCAPIGetRecentVehiclesResponse();
+    message.recentVehicles = object.recentVehicles?.map((e) => e) || [];
+    return message;
+  },
+};
+
+function createBaseWCAPIPushPpuAuthorizationStateRequest(): WCAPIPushPpuAuthorizationStateRequest {
+  return { authorized: false, authUuid: undefined };
+}
+
+export const WCAPIPushPpuAuthorizationStateRequest: MessageFns<WCAPIPushPpuAuthorizationStateRequest> = {
+  encode(message: WCAPIPushPpuAuthorizationStateRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.authorized !== false) {
+      writer.uint32(8).bool(message.authorized);
+    }
+    if (message.authUuid !== undefined) {
+      UUIDv4Bytes.encode(message.authUuid, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIPushPpuAuthorizationStateRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIPushPpuAuthorizationStateRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.authorized = reader.bool();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.authUuid = UUIDv4Bytes.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIPushPpuAuthorizationStateRequest {
+    return {
+      authorized: isSet(object.authorized) ? globalThis.Boolean(object.authorized) : false,
+      authUuid: isSet(object.authUuid) ? UUIDv4Bytes.fromJSON(object.authUuid) : undefined,
+    };
+  },
+
+  toJSON(message: WCAPIPushPpuAuthorizationStateRequest): unknown {
+    const obj: any = {};
+    if (message.authorized !== undefined) {
+      obj.authorized = message.authorized;
+    }
+    if (message.authUuid !== undefined) {
+      obj.authUuid = UUIDv4Bytes.toJSON(message.authUuid);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIPushPpuAuthorizationStateRequest>, I>>(
+    base?: I,
+  ): WCAPIPushPpuAuthorizationStateRequest {
+    return WCAPIPushPpuAuthorizationStateRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIPushPpuAuthorizationStateRequest>, I>>(
+    object: I,
+  ): WCAPIPushPpuAuthorizationStateRequest {
+    const message = createBaseWCAPIPushPpuAuthorizationStateRequest();
+    message.authorized = object.authorized ?? false;
+    message.authUuid = (object.authUuid !== undefined && object.authUuid !== null)
+      ? UUIDv4Bytes.fromPartial(object.authUuid)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIPushPpuAuthorizationStateResponse(): WCAPIPushPpuAuthorizationStateResponse {
+  return {};
+}
+
+export const WCAPIPushPpuAuthorizationStateResponse: MessageFns<WCAPIPushPpuAuthorizationStateResponse> = {
+  encode(_: WCAPIPushPpuAuthorizationStateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIPushPpuAuthorizationStateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIPushPpuAuthorizationStateResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIPushPpuAuthorizationStateResponse {
+    return {};
+  },
+
+  toJSON(_: WCAPIPushPpuAuthorizationStateResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIPushPpuAuthorizationStateResponse>, I>>(
+    base?: I,
+  ): WCAPIPushPpuAuthorizationStateResponse {
+    return WCAPIPushPpuAuthorizationStateResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIPushPpuAuthorizationStateResponse>, I>>(
+    _: I,
+  ): WCAPIPushPpuAuthorizationStateResponse {
+    const message = createBaseWCAPIPushPpuAuthorizationStateResponse();
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureChargeScheduleRequest(): WCAPIConfigureChargeScheduleRequest {
+  return { config: undefined, timeZone: undefined };
+}
+
+export const WCAPIConfigureChargeScheduleRequest: MessageFns<WCAPIConfigureChargeScheduleRequest> = {
+  encode(message: WCAPIConfigureChargeScheduleRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.config !== undefined) {
+      WCChargeScheduleConfig.encode(message.config, writer.uint32(10).fork()).join();
+    }
+    if (message.timeZone !== undefined) {
+      WCTimeZone.encode(message.timeZone, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureChargeScheduleRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureChargeScheduleRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.config = WCChargeScheduleConfig.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.timeZone = WCTimeZone.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureChargeScheduleRequest {
+    return {
+      config: isSet(object.config) ? WCChargeScheduleConfig.fromJSON(object.config) : undefined,
+      timeZone: isSet(object.timeZone) ? WCTimeZone.fromJSON(object.timeZone) : undefined,
+    };
+  },
+
+  toJSON(message: WCAPIConfigureChargeScheduleRequest): unknown {
+    const obj: any = {};
+    if (message.config !== undefined) {
+      obj.config = WCChargeScheduleConfig.toJSON(message.config);
+    }
+    if (message.timeZone !== undefined) {
+      obj.timeZone = WCTimeZone.toJSON(message.timeZone);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureChargeScheduleRequest>, I>>(
+    base?: I,
+  ): WCAPIConfigureChargeScheduleRequest {
+    return WCAPIConfigureChargeScheduleRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureChargeScheduleRequest>, I>>(
+    object: I,
+  ): WCAPIConfigureChargeScheduleRequest {
+    const message = createBaseWCAPIConfigureChargeScheduleRequest();
+    message.config = (object.config !== undefined && object.config !== null)
+      ? WCChargeScheduleConfig.fromPartial(object.config)
+      : undefined;
+    message.timeZone = (object.timeZone !== undefined && object.timeZone !== null)
+      ? WCTimeZone.fromPartial(object.timeZone)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureChargeScheduleResponse(): WCAPIConfigureChargeScheduleResponse {
+  return { error: 0 };
+}
+
+export const WCAPIConfigureChargeScheduleResponse: MessageFns<WCAPIConfigureChargeScheduleResponse> = {
+  encode(message: WCAPIConfigureChargeScheduleResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.error !== 0) {
+      writer.uint32(8).int32(message.error);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureChargeScheduleResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureChargeScheduleResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.error = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureChargeScheduleResponse {
+    return { error: isSet(object.error) ? wCChargeScheduleErrorFromJSON(object.error) : 0 };
+  },
+
+  toJSON(message: WCAPIConfigureChargeScheduleResponse): unknown {
+    const obj: any = {};
+    if (message.error !== undefined) {
+      obj.error = wCChargeScheduleErrorToJSON(message.error);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureChargeScheduleResponse>, I>>(
+    base?: I,
+  ): WCAPIConfigureChargeScheduleResponse {
+    return WCAPIConfigureChargeScheduleResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureChargeScheduleResponse>, I>>(
+    object: I,
+  ): WCAPIConfigureChargeScheduleResponse {
+    const message = createBaseWCAPIConfigureChargeScheduleResponse();
+    message.error = object.error ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureThirdPartyVehicleModeRequest(): WCAPIConfigureThirdPartyVehicleModeRequest {
+  return { thirdPartyVehicleMode: 0 };
+}
+
+export const WCAPIConfigureThirdPartyVehicleModeRequest: MessageFns<WCAPIConfigureThirdPartyVehicleModeRequest> = {
+  encode(message: WCAPIConfigureThirdPartyVehicleModeRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.thirdPartyVehicleMode !== 0) {
+      writer.uint32(8).int32(message.thirdPartyVehicleMode);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureThirdPartyVehicleModeRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureThirdPartyVehicleModeRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.thirdPartyVehicleMode = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureThirdPartyVehicleModeRequest {
+    return {
+      thirdPartyVehicleMode: isSet(object.thirdPartyVehicleMode)
+        ? wCThirdPartyVehicleModeFromJSON(object.thirdPartyVehicleMode)
+        : 0,
+    };
+  },
+
+  toJSON(message: WCAPIConfigureThirdPartyVehicleModeRequest): unknown {
+    const obj: any = {};
+    if (message.thirdPartyVehicleMode !== undefined) {
+      obj.thirdPartyVehicleMode = wCThirdPartyVehicleModeToJSON(message.thirdPartyVehicleMode);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureThirdPartyVehicleModeRequest>, I>>(
+    base?: I,
+  ): WCAPIConfigureThirdPartyVehicleModeRequest {
+    return WCAPIConfigureThirdPartyVehicleModeRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureThirdPartyVehicleModeRequest>, I>>(
+    object: I,
+  ): WCAPIConfigureThirdPartyVehicleModeRequest {
+    const message = createBaseWCAPIConfigureThirdPartyVehicleModeRequest();
+    message.thirdPartyVehicleMode = object.thirdPartyVehicleMode ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureThirdPartyVehicleModeResponse(): WCAPIConfigureThirdPartyVehicleModeResponse {
+  return {};
+}
+
+export const WCAPIConfigureThirdPartyVehicleModeResponse: MessageFns<WCAPIConfigureThirdPartyVehicleModeResponse> = {
+  encode(_: WCAPIConfigureThirdPartyVehicleModeResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureThirdPartyVehicleModeResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureThirdPartyVehicleModeResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIConfigureThirdPartyVehicleModeResponse {
+    return {};
+  },
+
+  toJSON(_: WCAPIConfigureThirdPartyVehicleModeResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureThirdPartyVehicleModeResponse>, I>>(
+    base?: I,
+  ): WCAPIConfigureThirdPartyVehicleModeResponse {
+    return WCAPIConfigureThirdPartyVehicleModeResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureThirdPartyVehicleModeResponse>, I>>(
+    _: I,
+  ): WCAPIConfigureThirdPartyVehicleModeResponse {
+    const message = createBaseWCAPIConfigureThirdPartyVehicleModeResponse();
+    return message;
+  },
+};
+
+function createBaseWCAPIPushChargeCommandRequest(): WCAPIPushChargeCommandRequest {
+  return { chargeCommand: undefined };
+}
+
+export const WCAPIPushChargeCommandRequest: MessageFns<WCAPIPushChargeCommandRequest> = {
+  encode(message: WCAPIPushChargeCommandRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.chargeCommand !== undefined) {
+      WCChargeCommand.encode(message.chargeCommand, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIPushChargeCommandRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIPushChargeCommandRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.chargeCommand = WCChargeCommand.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIPushChargeCommandRequest {
+    return { chargeCommand: isSet(object.chargeCommand) ? WCChargeCommand.fromJSON(object.chargeCommand) : undefined };
+  },
+
+  toJSON(message: WCAPIPushChargeCommandRequest): unknown {
+    const obj: any = {};
+    if (message.chargeCommand !== undefined) {
+      obj.chargeCommand = WCChargeCommand.toJSON(message.chargeCommand);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIPushChargeCommandRequest>, I>>(base?: I): WCAPIPushChargeCommandRequest {
+    return WCAPIPushChargeCommandRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIPushChargeCommandRequest>, I>>(
+    object: I,
+  ): WCAPIPushChargeCommandRequest {
+    const message = createBaseWCAPIPushChargeCommandRequest();
+    message.chargeCommand = (object.chargeCommand !== undefined && object.chargeCommand !== null)
+      ? WCChargeCommand.fromPartial(object.chargeCommand)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIPushChargeCommandResponse(): WCAPIPushChargeCommandResponse {
+  return {};
+}
+
+export const WCAPIPushChargeCommandResponse: MessageFns<WCAPIPushChargeCommandResponse> = {
+  encode(_: WCAPIPushChargeCommandResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIPushChargeCommandResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIPushChargeCommandResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIPushChargeCommandResponse {
+    return {};
+  },
+
+  toJSON(_: WCAPIPushChargeCommandResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIPushChargeCommandResponse>, I>>(base?: I): WCAPIPushChargeCommandResponse {
+    return WCAPIPushChargeCommandResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIPushChargeCommandResponse>, I>>(_: I): WCAPIPushChargeCommandResponse {
+    const message = createBaseWCAPIPushChargeCommandResponse();
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureHomeSiteControllerRequest(): WCAPIConfigureHomeSiteControllerRequest {
+  return { din: undefined, modbusNodeId: 0, config: undefined };
+}
+
+export const WCAPIConfigureHomeSiteControllerRequest: MessageFns<WCAPIConfigureHomeSiteControllerRequest> = {
+  encode(message: WCAPIConfigureHomeSiteControllerRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.din !== undefined) {
+      Din.encode(message.din, writer.uint32(10).fork()).join();
+    }
+    if (message.modbusNodeId !== 0) {
+      writer.uint32(16).uint32(message.modbusNodeId);
+    }
+    if (message.config !== undefined) {
+      WCVehicleToHomeConfig.encode(message.config, writer.uint32(26).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureHomeSiteControllerRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureHomeSiteControllerRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.din = Din.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.modbusNodeId = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.config = WCVehicleToHomeConfig.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureHomeSiteControllerRequest {
+    return {
+      din: isSet(object.din) ? Din.fromJSON(object.din) : undefined,
+      modbusNodeId: isSet(object.modbusNodeId) ? globalThis.Number(object.modbusNodeId) : 0,
+      config: isSet(object.config) ? WCVehicleToHomeConfig.fromJSON(object.config) : undefined,
+    };
+  },
+
+  toJSON(message: WCAPIConfigureHomeSiteControllerRequest): unknown {
+    const obj: any = {};
+    if (message.din !== undefined) {
+      obj.din = Din.toJSON(message.din);
+    }
+    if (message.modbusNodeId !== undefined) {
+      obj.modbusNodeId = Math.round(message.modbusNodeId);
+    }
+    if (message.config !== undefined) {
+      obj.config = WCVehicleToHomeConfig.toJSON(message.config);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureHomeSiteControllerRequest>, I>>(
+    base?: I,
+  ): WCAPIConfigureHomeSiteControllerRequest {
+    return WCAPIConfigureHomeSiteControllerRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureHomeSiteControllerRequest>, I>>(
+    object: I,
+  ): WCAPIConfigureHomeSiteControllerRequest {
+    const message = createBaseWCAPIConfigureHomeSiteControllerRequest();
+    message.din = (object.din !== undefined && object.din !== null) ? Din.fromPartial(object.din) : undefined;
+    message.modbusNodeId = object.modbusNodeId ?? 0;
+    message.config = (object.config !== undefined && object.config !== null)
+      ? WCVehicleToHomeConfig.fromPartial(object.config)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureHomeSiteControllerResponse(): WCAPIConfigureHomeSiteControllerResponse {
+  return { config: undefined };
+}
+
+export const WCAPIConfigureHomeSiteControllerResponse: MessageFns<WCAPIConfigureHomeSiteControllerResponse> = {
+  encode(message: WCAPIConfigureHomeSiteControllerResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.config !== undefined) {
+      WCVehicleToHomeConfig.encode(message.config, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureHomeSiteControllerResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureHomeSiteControllerResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.config = WCVehicleToHomeConfig.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureHomeSiteControllerResponse {
+    return { config: isSet(object.config) ? WCVehicleToHomeConfig.fromJSON(object.config) : undefined };
+  },
+
+  toJSON(message: WCAPIConfigureHomeSiteControllerResponse): unknown {
+    const obj: any = {};
+    if (message.config !== undefined) {
+      obj.config = WCVehicleToHomeConfig.toJSON(message.config);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureHomeSiteControllerResponse>, I>>(
+    base?: I,
+  ): WCAPIConfigureHomeSiteControllerResponse {
+    return WCAPIConfigureHomeSiteControllerResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureHomeSiteControllerResponse>, I>>(
+    object: I,
+  ): WCAPIConfigureHomeSiteControllerResponse {
+    const message = createBaseWCAPIConfigureHomeSiteControllerResponse();
+    message.config = (object.config !== undefined && object.config !== null)
+      ? WCVehicleToHomeConfig.fromPartial(object.config)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureOcppSettingsRequest(): WCAPIConfigureOcppSettingsRequest {
+  return { settings: undefined };
+}
+
+export const WCAPIConfigureOcppSettingsRequest: MessageFns<WCAPIConfigureOcppSettingsRequest> = {
+  encode(message: WCAPIConfigureOcppSettingsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.settings !== undefined) {
+      WCOcppSettings.encode(message.settings, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureOcppSettingsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureOcppSettingsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.settings = WCOcppSettings.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureOcppSettingsRequest {
+    return { settings: isSet(object.settings) ? WCOcppSettings.fromJSON(object.settings) : undefined };
+  },
+
+  toJSON(message: WCAPIConfigureOcppSettingsRequest): unknown {
+    const obj: any = {};
+    if (message.settings !== undefined) {
+      obj.settings = WCOcppSettings.toJSON(message.settings);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureOcppSettingsRequest>, I>>(
+    base?: I,
+  ): WCAPIConfigureOcppSettingsRequest {
+    return WCAPIConfigureOcppSettingsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureOcppSettingsRequest>, I>>(
+    object: I,
+  ): WCAPIConfigureOcppSettingsRequest {
+    const message = createBaseWCAPIConfigureOcppSettingsRequest();
+    message.settings = (object.settings !== undefined && object.settings !== null)
+      ? WCOcppSettings.fromPartial(object.settings)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureOcppSettingsResponse(): WCAPIConfigureOcppSettingsResponse {
+  return { settings: undefined, status: 0 };
+}
+
+export const WCAPIConfigureOcppSettingsResponse: MessageFns<WCAPIConfigureOcppSettingsResponse> = {
+  encode(message: WCAPIConfigureOcppSettingsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.settings !== undefined) {
+      WCOcppSettings.encode(message.settings, writer.uint32(10).fork()).join();
+    }
+    if (message.status !== 0) {
+      writer.uint32(16).int32(message.status);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureOcppSettingsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureOcppSettingsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.settings = WCOcppSettings.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.status = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureOcppSettingsResponse {
+    return {
+      settings: isSet(object.settings) ? WCOcppSettings.fromJSON(object.settings) : undefined,
+      status: isSet(object.status) ? wCOcppStatusFromJSON(object.status) : 0,
+    };
+  },
+
+  toJSON(message: WCAPIConfigureOcppSettingsResponse): unknown {
+    const obj: any = {};
+    if (message.settings !== undefined) {
+      obj.settings = WCOcppSettings.toJSON(message.settings);
+    }
+    if (message.status !== undefined) {
+      obj.status = wCOcppStatusToJSON(message.status);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureOcppSettingsResponse>, I>>(
+    base?: I,
+  ): WCAPIConfigureOcppSettingsResponse {
+    return WCAPIConfigureOcppSettingsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureOcppSettingsResponse>, I>>(
+    object: I,
+  ): WCAPIConfigureOcppSettingsResponse {
+    const message = createBaseWCAPIConfigureOcppSettingsResponse();
+    message.settings = (object.settings !== undefined && object.settings !== null)
+      ? WCOcppSettings.fromPartial(object.settings)
+      : undefined;
+    message.status = object.status ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCAPISetOcppSecurityParameterRequest(): WCAPISetOcppSecurityParameterRequest {
+  return { securityParameterType: 0, securityParameter: new Uint8Array(0) };
+}
+
+export const WCAPISetOcppSecurityParameterRequest: MessageFns<WCAPISetOcppSecurityParameterRequest> = {
+  encode(message: WCAPISetOcppSecurityParameterRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.securityParameterType !== 0) {
+      writer.uint32(8).int32(message.securityParameterType);
+    }
+    if (message.securityParameter.length !== 0) {
+      writer.uint32(18).bytes(message.securityParameter);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPISetOcppSecurityParameterRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPISetOcppSecurityParameterRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.securityParameterType = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.securityParameter = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPISetOcppSecurityParameterRequest {
+    return {
+      securityParameterType: isSet(object.securityParameterType)
+        ? wCOcppSecurityParameterTypeFromJSON(object.securityParameterType)
+        : 0,
+      securityParameter: isSet(object.securityParameter)
+        ? bytesFromBase64(object.securityParameter)
+        : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: WCAPISetOcppSecurityParameterRequest): unknown {
+    const obj: any = {};
+    if (message.securityParameterType !== undefined) {
+      obj.securityParameterType = wCOcppSecurityParameterTypeToJSON(message.securityParameterType);
+    }
+    if (message.securityParameter !== undefined) {
+      obj.securityParameter = base64FromBytes(message.securityParameter);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPISetOcppSecurityParameterRequest>, I>>(
+    base?: I,
+  ): WCAPISetOcppSecurityParameterRequest {
+    return WCAPISetOcppSecurityParameterRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPISetOcppSecurityParameterRequest>, I>>(
+    object: I,
+  ): WCAPISetOcppSecurityParameterRequest {
+    const message = createBaseWCAPISetOcppSecurityParameterRequest();
+    message.securityParameterType = object.securityParameterType ?? 0;
+    message.securityParameter = object.securityParameter ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseWCAPISetOcppSecurityParameterResponse(): WCAPISetOcppSecurityParameterResponse {
+  return { status: 0 };
+}
+
+export const WCAPISetOcppSecurityParameterResponse: MessageFns<WCAPISetOcppSecurityParameterResponse> = {
+  encode(message: WCAPISetOcppSecurityParameterResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.status !== 0) {
+      writer.uint32(8).int32(message.status);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPISetOcppSecurityParameterResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPISetOcppSecurityParameterResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.status = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPISetOcppSecurityParameterResponse {
+    return { status: isSet(object.status) ? wCOcppStatusFromJSON(object.status) : 0 };
+  },
+
+  toJSON(message: WCAPISetOcppSecurityParameterResponse): unknown {
+    const obj: any = {};
+    if (message.status !== undefined) {
+      obj.status = wCOcppStatusToJSON(message.status);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPISetOcppSecurityParameterResponse>, I>>(
+    base?: I,
+  ): WCAPISetOcppSecurityParameterResponse {
+    return WCAPISetOcppSecurityParameterResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPISetOcppSecurityParameterResponse>, I>>(
+    object: I,
+  ): WCAPISetOcppSecurityParameterResponse {
+    const message = createBaseWCAPISetOcppSecurityParameterResponse();
+    message.status = object.status ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCAPIGetOcppSecurityParameterRequest(): WCAPIGetOcppSecurityParameterRequest {
+  return { securityParameterType: 0 };
+}
+
+export const WCAPIGetOcppSecurityParameterRequest: MessageFns<WCAPIGetOcppSecurityParameterRequest> = {
+  encode(message: WCAPIGetOcppSecurityParameterRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.securityParameterType !== 0) {
+      writer.uint32(8).int32(message.securityParameterType);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetOcppSecurityParameterRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetOcppSecurityParameterRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.securityParameterType = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIGetOcppSecurityParameterRequest {
+    return {
+      securityParameterType: isSet(object.securityParameterType)
+        ? wCOcppSecurityParameterTypeFromJSON(object.securityParameterType)
+        : 0,
+    };
+  },
+
+  toJSON(message: WCAPIGetOcppSecurityParameterRequest): unknown {
+    const obj: any = {};
+    if (message.securityParameterType !== undefined) {
+      obj.securityParameterType = wCOcppSecurityParameterTypeToJSON(message.securityParameterType);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetOcppSecurityParameterRequest>, I>>(
+    base?: I,
+  ): WCAPIGetOcppSecurityParameterRequest {
+    return WCAPIGetOcppSecurityParameterRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetOcppSecurityParameterRequest>, I>>(
+    object: I,
+  ): WCAPIGetOcppSecurityParameterRequest {
+    const message = createBaseWCAPIGetOcppSecurityParameterRequest();
+    message.securityParameterType = object.securityParameterType ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCAPIGetOcppSecurityParameterResponse(): WCAPIGetOcppSecurityParameterResponse {
+  return { securityParameterType: 0, securityParameter: new Uint8Array(0) };
+}
+
+export const WCAPIGetOcppSecurityParameterResponse: MessageFns<WCAPIGetOcppSecurityParameterResponse> = {
+  encode(message: WCAPIGetOcppSecurityParameterResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.securityParameterType !== 0) {
+      writer.uint32(8).int32(message.securityParameterType);
+    }
+    if (message.securityParameter.length !== 0) {
+      writer.uint32(18).bytes(message.securityParameter);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetOcppSecurityParameterResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetOcppSecurityParameterResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.securityParameterType = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.securityParameter = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIGetOcppSecurityParameterResponse {
+    return {
+      securityParameterType: isSet(object.securityParameterType)
+        ? wCOcppSecurityParameterTypeFromJSON(object.securityParameterType)
+        : 0,
+      securityParameter: isSet(object.securityParameter)
+        ? bytesFromBase64(object.securityParameter)
+        : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: WCAPIGetOcppSecurityParameterResponse): unknown {
+    const obj: any = {};
+    if (message.securityParameterType !== undefined) {
+      obj.securityParameterType = wCOcppSecurityParameterTypeToJSON(message.securityParameterType);
+    }
+    if (message.securityParameter !== undefined) {
+      obj.securityParameter = base64FromBytes(message.securityParameter);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetOcppSecurityParameterResponse>, I>>(
+    base?: I,
+  ): WCAPIGetOcppSecurityParameterResponse {
+    return WCAPIGetOcppSecurityParameterResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetOcppSecurityParameterResponse>, I>>(
+    object: I,
+  ): WCAPIGetOcppSecurityParameterResponse {
+    const message = createBaseWCAPIGetOcppSecurityParameterResponse();
+    message.securityParameterType = object.securityParameterType ?? 0;
+    message.securityParameter = object.securityParameter ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseWCAPIGetOcppLocalAuthListRequest(): WCAPIGetOcppLocalAuthListRequest {
+  return {};
+}
+
+export const WCAPIGetOcppLocalAuthListRequest: MessageFns<WCAPIGetOcppLocalAuthListRequest> = {
+  encode(_: WCAPIGetOcppLocalAuthListRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetOcppLocalAuthListRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetOcppLocalAuthListRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIGetOcppLocalAuthListRequest {
+    return {};
+  },
+
+  toJSON(_: WCAPIGetOcppLocalAuthListRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetOcppLocalAuthListRequest>, I>>(
+    base?: I,
+  ): WCAPIGetOcppLocalAuthListRequest {
+    return WCAPIGetOcppLocalAuthListRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetOcppLocalAuthListRequest>, I>>(
+    _: I,
+  ): WCAPIGetOcppLocalAuthListRequest {
+    const message = createBaseWCAPIGetOcppLocalAuthListRequest();
+    return message;
+  },
+};
+
+function createBaseWCAPIGetOcppLocalAuthListResponse(): WCAPIGetOcppLocalAuthListResponse {
+  return { authList: undefined };
+}
+
+export const WCAPIGetOcppLocalAuthListResponse: MessageFns<WCAPIGetOcppLocalAuthListResponse> = {
+  encode(message: WCAPIGetOcppLocalAuthListResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.authList !== undefined) {
+      WCOcppAuthorizationList.encode(message.authList, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIGetOcppLocalAuthListResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIGetOcppLocalAuthListResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.authList = WCOcppAuthorizationList.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIGetOcppLocalAuthListResponse {
+    return { authList: isSet(object.authList) ? WCOcppAuthorizationList.fromJSON(object.authList) : undefined };
+  },
+
+  toJSON(message: WCAPIGetOcppLocalAuthListResponse): unknown {
+    const obj: any = {};
+    if (message.authList !== undefined) {
+      obj.authList = WCOcppAuthorizationList.toJSON(message.authList);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIGetOcppLocalAuthListResponse>, I>>(
+    base?: I,
+  ): WCAPIGetOcppLocalAuthListResponse {
+    return WCAPIGetOcppLocalAuthListResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIGetOcppLocalAuthListResponse>, I>>(
+    object: I,
+  ): WCAPIGetOcppLocalAuthListResponse {
+    const message = createBaseWCAPIGetOcppLocalAuthListResponse();
+    message.authList = (object.authList !== undefined && object.authList !== null)
+      ? WCOcppAuthorizationList.fromPartial(object.authList)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureCountryCodeSettingsRequest(): WCAPIConfigureCountryCodeSettingsRequest {
+  return { country: "" };
+}
+
+export const WCAPIConfigureCountryCodeSettingsRequest: MessageFns<WCAPIConfigureCountryCodeSettingsRequest> = {
+  encode(message: WCAPIConfigureCountryCodeSettingsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.country !== "") {
+      writer.uint32(10).string(message.country);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureCountryCodeSettingsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureCountryCodeSettingsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.country = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIConfigureCountryCodeSettingsRequest {
+    return { country: isSet(object.country) ? globalThis.String(object.country) : "" };
+  },
+
+  toJSON(message: WCAPIConfigureCountryCodeSettingsRequest): unknown {
+    const obj: any = {};
+    if (message.country !== undefined) {
+      obj.country = message.country;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureCountryCodeSettingsRequest>, I>>(
+    base?: I,
+  ): WCAPIConfigureCountryCodeSettingsRequest {
+    return WCAPIConfigureCountryCodeSettingsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureCountryCodeSettingsRequest>, I>>(
+    object: I,
+  ): WCAPIConfigureCountryCodeSettingsRequest {
+    const message = createBaseWCAPIConfigureCountryCodeSettingsRequest();
+    message.country = object.country ?? "";
+    return message;
+  },
+};
+
+function createBaseWCAPIConfigureCountryCodeSettingsResponse(): WCAPIConfigureCountryCodeSettingsResponse {
+  return {};
+}
+
+export const WCAPIConfigureCountryCodeSettingsResponse: MessageFns<WCAPIConfigureCountryCodeSettingsResponse> = {
+  encode(_: WCAPIConfigureCountryCodeSettingsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIConfigureCountryCodeSettingsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIConfigureCountryCodeSettingsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIConfigureCountryCodeSettingsResponse {
+    return {};
+  },
+
+  toJSON(_: WCAPIConfigureCountryCodeSettingsResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIConfigureCountryCodeSettingsResponse>, I>>(
+    base?: I,
+  ): WCAPIConfigureCountryCodeSettingsResponse {
+    return WCAPIConfigureCountryCodeSettingsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIConfigureCountryCodeSettingsResponse>, I>>(
+    _: I,
+  ): WCAPIConfigureCountryCodeSettingsResponse {
+    const message = createBaseWCAPIConfigureCountryCodeSettingsResponse();
+    return message;
+  },
+};
+
+function createBaseWCTargetChargePowerParams(): WCTargetChargePowerParams {
+  return { targetChargePowerW: 0, maxChargePowerW: undefined, maxChargeCurrentA: 0 };
+}
+
+export const WCTargetChargePowerParams: MessageFns<WCTargetChargePowerParams> = {
+  encode(message: WCTargetChargePowerParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.targetChargePowerW !== 0) {
+      writer.uint32(13).float(message.targetChargePowerW);
+    }
+    if (message.maxChargePowerW !== undefined) {
+      FloatValue.encode({ value: message.maxChargePowerW! }, writer.uint32(18).fork()).join();
+    }
+    if (message.maxChargeCurrentA !== 0) {
+      writer.uint32(24).uint32(message.maxChargeCurrentA);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCTargetChargePowerParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCTargetChargePowerParams();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 13) {
+            break;
+          }
+
+          message.targetChargePowerW = reader.float();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.maxChargePowerW = FloatValue.decode(reader, reader.uint32()).value;
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.maxChargeCurrentA = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCTargetChargePowerParams {
+    return {
+      targetChargePowerW: isSet(object.targetChargePowerW) ? globalThis.Number(object.targetChargePowerW) : 0,
+      maxChargePowerW: isSet(object.maxChargePowerW) ? Number(object.maxChargePowerW) : undefined,
+      maxChargeCurrentA: isSet(object.maxChargeCurrentA) ? globalThis.Number(object.maxChargeCurrentA) : 0,
+    };
+  },
+
+  toJSON(message: WCTargetChargePowerParams): unknown {
+    const obj: any = {};
+    if (message.targetChargePowerW !== undefined) {
+      obj.targetChargePowerW = message.targetChargePowerW;
+    }
+    if (message.maxChargePowerW !== undefined) {
+      obj.maxChargePowerW = message.maxChargePowerW;
+    }
+    if (message.maxChargeCurrentA !== undefined) {
+      obj.maxChargeCurrentA = Math.round(message.maxChargeCurrentA);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCTargetChargePowerParams>, I>>(base?: I): WCTargetChargePowerParams {
+    return WCTargetChargePowerParams.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCTargetChargePowerParams>, I>>(object: I): WCTargetChargePowerParams {
+    const message = createBaseWCTargetChargePowerParams();
+    message.targetChargePowerW = object.targetChargePowerW ?? 0;
+    message.maxChargePowerW = object.maxChargePowerW ?? undefined;
+    message.maxChargeCurrentA = object.maxChargeCurrentA ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCSmartChargingCommand(): WCSmartChargingCommand {
+  return { ttlSeconds: 0, chargeDisallowed: false, targetChargePowerParams: undefined };
+}
+
+export const WCSmartChargingCommand: MessageFns<WCSmartChargingCommand> = {
+  encode(message: WCSmartChargingCommand, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.ttlSeconds !== 0) {
+      writer.uint32(8).uint32(message.ttlSeconds);
+    }
+    if (message.chargeDisallowed !== false) {
+      writer.uint32(16).bool(message.chargeDisallowed);
+    }
+    if (message.targetChargePowerParams !== undefined) {
+      WCTargetChargePowerParams.encode(message.targetChargePowerParams, writer.uint32(26).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCSmartChargingCommand {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCSmartChargingCommand();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.ttlSeconds = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.chargeDisallowed = reader.bool();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.targetChargePowerParams = WCTargetChargePowerParams.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCSmartChargingCommand {
+    return {
+      ttlSeconds: isSet(object.ttlSeconds) ? globalThis.Number(object.ttlSeconds) : 0,
+      chargeDisallowed: isSet(object.chargeDisallowed) ? globalThis.Boolean(object.chargeDisallowed) : false,
+      targetChargePowerParams: isSet(object.targetChargePowerParams)
+        ? WCTargetChargePowerParams.fromJSON(object.targetChargePowerParams)
+        : undefined,
+    };
+  },
+
+  toJSON(message: WCSmartChargingCommand): unknown {
+    const obj: any = {};
+    if (message.ttlSeconds !== undefined) {
+      obj.ttlSeconds = Math.round(message.ttlSeconds);
+    }
+    if (message.chargeDisallowed !== undefined) {
+      obj.chargeDisallowed = message.chargeDisallowed;
+    }
+    if (message.targetChargePowerParams !== undefined) {
+      obj.targetChargePowerParams = WCTargetChargePowerParams.toJSON(message.targetChargePowerParams);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCSmartChargingCommand>, I>>(base?: I): WCSmartChargingCommand {
+    return WCSmartChargingCommand.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCSmartChargingCommand>, I>>(object: I): WCSmartChargingCommand {
+    const message = createBaseWCSmartChargingCommand();
+    message.ttlSeconds = object.ttlSeconds ?? 0;
+    message.chargeDisallowed = object.chargeDisallowed ?? false;
+    message.targetChargePowerParams =
+      (object.targetChargePowerParams !== undefined && object.targetChargePowerParams !== null)
+        ? WCTargetChargePowerParams.fromPartial(object.targetChargePowerParams)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIPushSmartChargingCommandRequest(): WCAPIPushSmartChargingCommandRequest {
+  return { command: undefined };
+}
+
+export const WCAPIPushSmartChargingCommandRequest: MessageFns<WCAPIPushSmartChargingCommandRequest> = {
+  encode(message: WCAPIPushSmartChargingCommandRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.command !== undefined) {
+      WCSmartChargingCommand.encode(message.command, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIPushSmartChargingCommandRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIPushSmartChargingCommandRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.command = WCSmartChargingCommand.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIPushSmartChargingCommandRequest {
+    return { command: isSet(object.command) ? WCSmartChargingCommand.fromJSON(object.command) : undefined };
+  },
+
+  toJSON(message: WCAPIPushSmartChargingCommandRequest): unknown {
+    const obj: any = {};
+    if (message.command !== undefined) {
+      obj.command = WCSmartChargingCommand.toJSON(message.command);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIPushSmartChargingCommandRequest>, I>>(
+    base?: I,
+  ): WCAPIPushSmartChargingCommandRequest {
+    return WCAPIPushSmartChargingCommandRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIPushSmartChargingCommandRequest>, I>>(
+    object: I,
+  ): WCAPIPushSmartChargingCommandRequest {
+    const message = createBaseWCAPIPushSmartChargingCommandRequest();
+    message.command = (object.command !== undefined && object.command !== null)
+      ? WCSmartChargingCommand.fromPartial(object.command)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseWCAPIPushSmartChargingCommandResponse(): WCAPIPushSmartChargingCommandResponse {
+  return {};
+}
+
+export const WCAPIPushSmartChargingCommandResponse: MessageFns<WCAPIPushSmartChargingCommandResponse> = {
+  encode(_: WCAPIPushSmartChargingCommandResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIPushSmartChargingCommandResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIPushSmartChargingCommandResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIPushSmartChargingCommandResponse {
+    return {};
+  },
+
+  toJSON(_: WCAPIPushSmartChargingCommandResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIPushSmartChargingCommandResponse>, I>>(
+    base?: I,
+  ): WCAPIPushSmartChargingCommandResponse {
+    return WCAPIPushSmartChargingCommandResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIPushSmartChargingCommandResponse>, I>>(
+    _: I,
+  ): WCAPIPushSmartChargingCommandResponse {
+    const message = createBaseWCAPIPushSmartChargingCommandResponse();
+    return message;
+  },
+};
+
+function createBaseWCAPIRegisterCommercialRequest(): WCAPIRegisterCommercialRequest {
+  return {};
+}
+
+export const WCAPIRegisterCommercialRequest: MessageFns<WCAPIRegisterCommercialRequest> = {
+  encode(_: WCAPIRegisterCommercialRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIRegisterCommercialRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIRegisterCommercialRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): WCAPIRegisterCommercialRequest {
+    return {};
+  },
+
+  toJSON(_: WCAPIRegisterCommercialRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIRegisterCommercialRequest>, I>>(base?: I): WCAPIRegisterCommercialRequest {
+    return WCAPIRegisterCommercialRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIRegisterCommercialRequest>, I>>(_: I): WCAPIRegisterCommercialRequest {
+    const message = createBaseWCAPIRegisterCommercialRequest();
+    return message;
+  },
+};
+
+function createBaseWCAPIRegisterCommercialResponse(): WCAPIRegisterCommercialResponse {
+  return { failure: 0 };
+}
+
+export const WCAPIRegisterCommercialResponse: MessageFns<WCAPIRegisterCommercialResponse> = {
+  encode(message: WCAPIRegisterCommercialResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.failure !== 0) {
+      writer.uint32(8).int32(message.failure);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIRegisterCommercialResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIRegisterCommercialResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.failure = reader.int32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIRegisterCommercialResponse {
+    return { failure: isSet(object.failure) ? globalThis.Number(object.failure) : 0 };
+  },
+
+  toJSON(message: WCAPIRegisterCommercialResponse): unknown {
+    const obj: any = {};
+    if (message.failure !== undefined) {
+      obj.failure = Math.round(message.failure);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIRegisterCommercialResponse>, I>>(base?: I): WCAPIRegisterCommercialResponse {
+    return WCAPIRegisterCommercialResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIRegisterCommercialResponse>, I>>(
+    object: I,
+  ): WCAPIRegisterCommercialResponse {
+    const message = createBaseWCAPIRegisterCommercialResponse();
+    message.failure = object.failure ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCAPIPushPowershareCommandRequest(): WCAPIPushPowershareCommandRequest {
+  return {
+    siteVehicleRequest: new Uint8Array(0),
+    siteEvseRequest: new Uint8Array(0),
+    inverterConfig: new Uint8Array(0),
+    ttlSeconds: 0,
+  };
+}
+
+export const WCAPIPushPowershareCommandRequest: MessageFns<WCAPIPushPowershareCommandRequest> = {
+  encode(message: WCAPIPushPowershareCommandRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.siteVehicleRequest.length !== 0) {
+      writer.uint32(10).bytes(message.siteVehicleRequest);
+    }
+    if (message.siteEvseRequest.length !== 0) {
+      writer.uint32(18).bytes(message.siteEvseRequest);
+    }
+    if (message.inverterConfig.length !== 0) {
+      writer.uint32(26).bytes(message.inverterConfig);
+    }
+    if (message.ttlSeconds !== 0) {
+      writer.uint32(32).uint32(message.ttlSeconds);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIPushPowershareCommandRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIPushPowershareCommandRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.siteVehicleRequest = reader.bytes();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.siteEvseRequest = reader.bytes();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.inverterConfig = reader.bytes();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.ttlSeconds = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIPushPowershareCommandRequest {
+    return {
+      siteVehicleRequest: isSet(object.siteVehicleRequest)
+        ? bytesFromBase64(object.siteVehicleRequest)
+        : new Uint8Array(0),
+      siteEvseRequest: isSet(object.siteEvseRequest) ? bytesFromBase64(object.siteEvseRequest) : new Uint8Array(0),
+      inverterConfig: isSet(object.inverterConfig) ? bytesFromBase64(object.inverterConfig) : new Uint8Array(0),
+      ttlSeconds: isSet(object.ttlSeconds) ? globalThis.Number(object.ttlSeconds) : 0,
+    };
+  },
+
+  toJSON(message: WCAPIPushPowershareCommandRequest): unknown {
+    const obj: any = {};
+    if (message.siteVehicleRequest !== undefined) {
+      obj.siteVehicleRequest = base64FromBytes(message.siteVehicleRequest);
+    }
+    if (message.siteEvseRequest !== undefined) {
+      obj.siteEvseRequest = base64FromBytes(message.siteEvseRequest);
+    }
+    if (message.inverterConfig !== undefined) {
+      obj.inverterConfig = base64FromBytes(message.inverterConfig);
+    }
+    if (message.ttlSeconds !== undefined) {
+      obj.ttlSeconds = Math.round(message.ttlSeconds);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIPushPowershareCommandRequest>, I>>(
+    base?: I,
+  ): WCAPIPushPowershareCommandRequest {
+    return WCAPIPushPowershareCommandRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIPushPowershareCommandRequest>, I>>(
+    object: I,
+  ): WCAPIPushPowershareCommandRequest {
+    const message = createBaseWCAPIPushPowershareCommandRequest();
+    message.siteVehicleRequest = object.siteVehicleRequest ?? new Uint8Array(0);
+    message.siteEvseRequest = object.siteEvseRequest ?? new Uint8Array(0);
+    message.inverterConfig = object.inverterConfig ?? new Uint8Array(0);
+    message.ttlSeconds = object.ttlSeconds ?? 0;
+    return message;
+  },
+};
+
+function createBaseWCAPIPushPowershareCommandResponse(): WCAPIPushPowershareCommandResponse {
+  return { siteVehicleResponse: new Uint8Array(0), siteEvseResponse: new Uint8Array(0) };
+}
+
+export const WCAPIPushPowershareCommandResponse: MessageFns<WCAPIPushPowershareCommandResponse> = {
+  encode(message: WCAPIPushPowershareCommandResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.siteVehicleResponse.length !== 0) {
+      writer.uint32(10).bytes(message.siteVehicleResponse);
+    }
+    if (message.siteEvseResponse.length !== 0) {
+      writer.uint32(18).bytes(message.siteEvseResponse);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCAPIPushPowershareCommandResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCAPIPushPowershareCommandResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.siteVehicleResponse = reader.bytes();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.siteEvseResponse = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCAPIPushPowershareCommandResponse {
+    return {
+      siteVehicleResponse: isSet(object.siteVehicleResponse)
+        ? bytesFromBase64(object.siteVehicleResponse)
+        : new Uint8Array(0),
+      siteEvseResponse: isSet(object.siteEvseResponse) ? bytesFromBase64(object.siteEvseResponse) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: WCAPIPushPowershareCommandResponse): unknown {
+    const obj: any = {};
+    if (message.siteVehicleResponse !== undefined) {
+      obj.siteVehicleResponse = base64FromBytes(message.siteVehicleResponse);
+    }
+    if (message.siteEvseResponse !== undefined) {
+      obj.siteEvseResponse = base64FromBytes(message.siteEvseResponse);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCAPIPushPowershareCommandResponse>, I>>(
+    base?: I,
+  ): WCAPIPushPowershareCommandResponse {
+    return WCAPIPushPowershareCommandResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCAPIPushPowershareCommandResponse>, I>>(
+    object: I,
+  ): WCAPIPushPowershareCommandResponse {
+    const message = createBaseWCAPIPushPowershareCommandResponse();
+    message.siteVehicleResponse = object.siteVehicleResponse ?? new Uint8Array(0);
+    message.siteEvseResponse = object.siteEvseResponse ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseWCMessages(): WCMessages {
+  return {
+    getVitalsRequest: undefined,
+    getVitalsResponse: undefined,
+    getLifetimeStatsRequest: undefined,
+    getLifetimeStatsResponse: undefined,
+    getConfigRequest: undefined,
+    getConfigResponse: undefined,
+    configureSettingsRequest: undefined,
+    configureSettingsResponse: undefined,
+    getSystemInfoRequest: undefined,
+    getSystemInfoResponse: undefined,
+    getLoadSharingNetworkStateRequest: undefined,
+    getLoadSharingNetworkStateResponse: undefined,
+    pushLoadSharingFollowerStateRequest: undefined,
+    pushLoadSharingFollowerStateResponse: undefined,
+    pushLoadSharingLeaderCommandRequest: undefined,
+    pushLoadSharingLeaderCommandResponse: undefined,
+    setLoadSharingNetworkOperationRequest: undefined,
+    setLoadSharingNetworkOperationResponse: undefined,
+    configureLoadSharingSettingsRequest: undefined,
+    configureLoadSharingSettingsResponse: undefined,
+    configurePpuSettingsRequest: undefined,
+    configurePpuSettingsResponse: undefined,
+    getPpuSettingsRequest: undefined,
+    getPpuSettingsResponse: undefined,
+    setProvisionalOperationalParamsRequest: undefined,
+    setProvisionalOperationalParamsResponse: undefined,
+    getProvisionalOperationalParamsRequest: undefined,
+    getProvisionalOperationalParamsResponse: undefined,
+    getAccessControlSettingsRequest: undefined,
+    getAccessControlSettingsResponse: undefined,
+    configureAccessControlSettingsRequest: undefined,
+    configureAccessControlSettingsResponse: undefined,
+    getRecentVehiclesRequest: undefined,
+    getRecentVehiclesResponse: undefined,
+    pushPpuAuthorizationStateRequest: undefined,
+    pushPpuAuthorizationStateResponse: undefined,
+    configureChargeScheduleRequest: undefined,
+    configureChargeScheduleResponse: undefined,
+    pushChargeCommandRequest: undefined,
+    pushChargeCommandResponse: undefined,
+    configureThirdPartyVehicleModeRequest: undefined,
+    configureThirdPartyVehicleModeResponse: undefined,
+    configureHomeSiteControllerRequest: undefined,
+    configureHomeSiteControllerResponse: undefined,
+    configureOcppSettingsRequest: undefined,
+    configureOcppSettingsResponse: undefined,
+    setOcppSecurityParameterRequest: undefined,
+    setOcppSecurityParameterResponse: undefined,
+    getOcppSecurityParameterRequest: undefined,
+    getOcppSecurityParameterResponse: undefined,
+    configureOperationalSettingsRequest: undefined,
+    configureOperationalSettingsResponse: undefined,
+    getOperationalSettingsRequest: undefined,
+    getOperationalSettingsResponse: undefined,
+    configureCountryCodeSettingsRequest: undefined,
+    configureCountryCodeSettingsResponse: undefined,
+    pushLoadSharingConfigRequest: undefined,
+    pushLoadSharingConfigResponse: undefined,
+    pushSmartChargingCommandRequest: undefined,
+    pushSmartChargingCommandResponse: undefined,
+    registerCommercialRequest: undefined,
+    registerCommercialResponse: undefined,
+    getOcppLocalAuthListRequest: undefined,
+    getOcppLocalAuthListResponse: undefined,
+    pushPowershareCommandRequest: undefined,
+    pushPowershareCommandResponse: undefined,
+  };
+}
+
+export const WCMessages: MessageFns<WCMessages> = {
+  encode(message: WCMessages, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.getVitalsRequest !== undefined) {
+      WCAPIGetVitalsRequest.encode(message.getVitalsRequest, writer.uint32(10).fork()).join();
+    }
+    if (message.getVitalsResponse !== undefined) {
+      WCAPIGetVitalsResponse.encode(message.getVitalsResponse, writer.uint32(18).fork()).join();
+    }
+    if (message.getLifetimeStatsRequest !== undefined) {
+      WCAPIGetLifetimeStatsRequest.encode(message.getLifetimeStatsRequest, writer.uint32(26).fork()).join();
+    }
+    if (message.getLifetimeStatsResponse !== undefined) {
+      WCAPIGetLifetimeStatsResponse.encode(message.getLifetimeStatsResponse, writer.uint32(34).fork()).join();
+    }
+    if (message.getConfigRequest !== undefined) {
+      WCAPIGetConfigRequest.encode(message.getConfigRequest, writer.uint32(42).fork()).join();
+    }
+    if (message.getConfigResponse !== undefined) {
+      WCAPIGetConfigResponse.encode(message.getConfigResponse, writer.uint32(50).fork()).join();
+    }
+    if (message.configureSettingsRequest !== undefined) {
+      WCAPIConfigureSettingsRequest.encode(message.configureSettingsRequest, writer.uint32(58).fork()).join();
+    }
+    if (message.configureSettingsResponse !== undefined) {
+      WCAPIConfigureSettingsResponse.encode(message.configureSettingsResponse, writer.uint32(66).fork()).join();
+    }
+    if (message.getSystemInfoRequest !== undefined) {
+      WCAPIGetSystemInfoRequest.encode(message.getSystemInfoRequest, writer.uint32(74).fork()).join();
+    }
+    if (message.getSystemInfoResponse !== undefined) {
+      WCAPIGetSystemInfoResponse.encode(message.getSystemInfoResponse, writer.uint32(82).fork()).join();
+    }
+    if (message.getLoadSharingNetworkStateRequest !== undefined) {
+      WCAPIGetLoadSharingNetworkStateRequest.encode(message.getLoadSharingNetworkStateRequest, writer.uint32(90).fork())
+        .join();
+    }
+    if (message.getLoadSharingNetworkStateResponse !== undefined) {
+      WCAPIGetLoadSharingNetworkStateResponse.encode(
+        message.getLoadSharingNetworkStateResponse,
+        writer.uint32(98).fork(),
+      ).join();
+    }
+    if (message.pushLoadSharingFollowerStateRequest !== undefined) {
+      WCAPIPushLoadSharingFollowerStateRequest.encode(
+        message.pushLoadSharingFollowerStateRequest,
+        writer.uint32(106).fork(),
+      ).join();
+    }
+    if (message.pushLoadSharingFollowerStateResponse !== undefined) {
+      WCAPIPushLoadSharingFollowerStateResponse.encode(
+        message.pushLoadSharingFollowerStateResponse,
+        writer.uint32(114).fork(),
+      ).join();
+    }
+    if (message.pushLoadSharingLeaderCommandRequest !== undefined) {
+      WCAPIPushLoadSharingLeaderCommandRequest.encode(
+        message.pushLoadSharingLeaderCommandRequest,
+        writer.uint32(122).fork(),
+      ).join();
+    }
+    if (message.pushLoadSharingLeaderCommandResponse !== undefined) {
+      WCAPIPushLoadSharingLeaderCommandResponse.encode(
+        message.pushLoadSharingLeaderCommandResponse,
+        writer.uint32(130).fork(),
+      ).join();
+    }
+    if (message.setLoadSharingNetworkOperationRequest !== undefined) {
+      WCAPISetLoadSharingNetworkOperationRequest.encode(
+        message.setLoadSharingNetworkOperationRequest,
+        writer.uint32(138).fork(),
+      ).join();
+    }
+    if (message.setLoadSharingNetworkOperationResponse !== undefined) {
+      WCAPISetLoadSharingNetworkOperationResponse.encode(
+        message.setLoadSharingNetworkOperationResponse,
+        writer.uint32(146).fork(),
+      ).join();
+    }
+    if (message.configureLoadSharingSettingsRequest !== undefined) {
+      WCAPIConfigureLoadSharingSettingsRequest.encode(
+        message.configureLoadSharingSettingsRequest,
+        writer.uint32(154).fork(),
+      ).join();
+    }
+    if (message.configureLoadSharingSettingsResponse !== undefined) {
+      WCAPIConfigureLoadSharingSettingsResponse.encode(
+        message.configureLoadSharingSettingsResponse,
+        writer.uint32(162).fork(),
+      ).join();
+    }
+    if (message.configurePpuSettingsRequest !== undefined) {
+      WCAPIConfigurePpuSettingsRequest.encode(message.configurePpuSettingsRequest, writer.uint32(170).fork()).join();
+    }
+    if (message.configurePpuSettingsResponse !== undefined) {
+      WCAPIConfigurePpuSettingsResponse.encode(message.configurePpuSettingsResponse, writer.uint32(178).fork()).join();
+    }
+    if (message.getPpuSettingsRequest !== undefined) {
+      WCAPIGetPpuSettingsRequest.encode(message.getPpuSettingsRequest, writer.uint32(186).fork()).join();
+    }
+    if (message.getPpuSettingsResponse !== undefined) {
+      WCAPIGetPpuSettingsResponse.encode(message.getPpuSettingsResponse, writer.uint32(194).fork()).join();
+    }
+    if (message.setProvisionalOperationalParamsRequest !== undefined) {
+      WCAPISetProvisionalOperationalParamsRequest.encode(
+        message.setProvisionalOperationalParamsRequest,
+        writer.uint32(202).fork(),
+      ).join();
+    }
+    if (message.setProvisionalOperationalParamsResponse !== undefined) {
+      WCAPISetProvisionalOperationalParamsResponse.encode(
+        message.setProvisionalOperationalParamsResponse,
+        writer.uint32(210).fork(),
+      ).join();
+    }
+    if (message.getProvisionalOperationalParamsRequest !== undefined) {
+      WCAPIGetProvisionalOperationalParamsRequest.encode(
+        message.getProvisionalOperationalParamsRequest,
+        writer.uint32(218).fork(),
+      ).join();
+    }
+    if (message.getProvisionalOperationalParamsResponse !== undefined) {
+      WCAPIGetProvisionalOperationalParamsResponse.encode(
+        message.getProvisionalOperationalParamsResponse,
+        writer.uint32(226).fork(),
+      ).join();
+    }
+    if (message.getAccessControlSettingsRequest !== undefined) {
+      WCAPIGetAccessControlSettingsRequest.encode(message.getAccessControlSettingsRequest, writer.uint32(234).fork())
+        .join();
+    }
+    if (message.getAccessControlSettingsResponse !== undefined) {
+      WCAPIGetAccessControlSettingsResponse.encode(message.getAccessControlSettingsResponse, writer.uint32(242).fork())
+        .join();
+    }
+    if (message.configureAccessControlSettingsRequest !== undefined) {
+      WCAPIConfigureAccessControlSettingsRequest.encode(
+        message.configureAccessControlSettingsRequest,
+        writer.uint32(250).fork(),
+      ).join();
+    }
+    if (message.configureAccessControlSettingsResponse !== undefined) {
+      WCAPIConfigureAccessControlSettingsResponse.encode(
+        message.configureAccessControlSettingsResponse,
+        writer.uint32(258).fork(),
+      ).join();
+    }
+    if (message.getRecentVehiclesRequest !== undefined) {
+      WCAPIGetRecentVehiclesRequest.encode(message.getRecentVehiclesRequest, writer.uint32(266).fork()).join();
+    }
+    if (message.getRecentVehiclesResponse !== undefined) {
+      WCAPIGetRecentVehiclesResponse.encode(message.getRecentVehiclesResponse, writer.uint32(274).fork()).join();
+    }
+    if (message.pushPpuAuthorizationStateRequest !== undefined) {
+      WCAPIPushPpuAuthorizationStateRequest.encode(message.pushPpuAuthorizationStateRequest, writer.uint32(282).fork())
+        .join();
+    }
+    if (message.pushPpuAuthorizationStateResponse !== undefined) {
+      WCAPIPushPpuAuthorizationStateResponse.encode(
+        message.pushPpuAuthorizationStateResponse,
+        writer.uint32(290).fork(),
+      ).join();
+    }
+    if (message.configureChargeScheduleRequest !== undefined) {
+      WCAPIConfigureChargeScheduleRequest.encode(message.configureChargeScheduleRequest, writer.uint32(298).fork())
+        .join();
+    }
+    if (message.configureChargeScheduleResponse !== undefined) {
+      WCAPIConfigureChargeScheduleResponse.encode(message.configureChargeScheduleResponse, writer.uint32(306).fork())
+        .join();
+    }
+    if (message.pushChargeCommandRequest !== undefined) {
+      WCAPIPushChargeCommandRequest.encode(message.pushChargeCommandRequest, writer.uint32(314).fork()).join();
+    }
+    if (message.pushChargeCommandResponse !== undefined) {
+      WCAPIPushChargeCommandResponse.encode(message.pushChargeCommandResponse, writer.uint32(322).fork()).join();
+    }
+    if (message.configureThirdPartyVehicleModeRequest !== undefined) {
+      WCAPIConfigureThirdPartyVehicleModeRequest.encode(
+        message.configureThirdPartyVehicleModeRequest,
+        writer.uint32(330).fork(),
+      ).join();
+    }
+    if (message.configureThirdPartyVehicleModeResponse !== undefined) {
+      WCAPIConfigureThirdPartyVehicleModeResponse.encode(
+        message.configureThirdPartyVehicleModeResponse,
+        writer.uint32(338).fork(),
+      ).join();
+    }
+    if (message.configureHomeSiteControllerRequest !== undefined) {
+      WCAPIConfigureHomeSiteControllerRequest.encode(
+        message.configureHomeSiteControllerRequest,
+        writer.uint32(346).fork(),
+      ).join();
+    }
+    if (message.configureHomeSiteControllerResponse !== undefined) {
+      WCAPIConfigureHomeSiteControllerResponse.encode(
+        message.configureHomeSiteControllerResponse,
+        writer.uint32(354).fork(),
+      ).join();
+    }
+    if (message.configureOcppSettingsRequest !== undefined) {
+      WCAPIConfigureOcppSettingsRequest.encode(message.configureOcppSettingsRequest, writer.uint32(362).fork()).join();
+    }
+    if (message.configureOcppSettingsResponse !== undefined) {
+      WCAPIConfigureOcppSettingsResponse.encode(message.configureOcppSettingsResponse, writer.uint32(370).fork())
+        .join();
+    }
+    if (message.setOcppSecurityParameterRequest !== undefined) {
+      WCAPISetOcppSecurityParameterRequest.encode(message.setOcppSecurityParameterRequest, writer.uint32(378).fork())
+        .join();
+    }
+    if (message.setOcppSecurityParameterResponse !== undefined) {
+      WCAPISetOcppSecurityParameterResponse.encode(message.setOcppSecurityParameterResponse, writer.uint32(386).fork())
+        .join();
+    }
+    if (message.getOcppSecurityParameterRequest !== undefined) {
+      WCAPIGetOcppSecurityParameterRequest.encode(message.getOcppSecurityParameterRequest, writer.uint32(394).fork())
+        .join();
+    }
+    if (message.getOcppSecurityParameterResponse !== undefined) {
+      WCAPIGetOcppSecurityParameterResponse.encode(message.getOcppSecurityParameterResponse, writer.uint32(402).fork())
+        .join();
+    }
+    if (message.configureOperationalSettingsRequest !== undefined) {
+      WCAPIConfigureOperationalSettingsRequest.encode(
+        message.configureOperationalSettingsRequest,
+        writer.uint32(410).fork(),
+      ).join();
+    }
+    if (message.configureOperationalSettingsResponse !== undefined) {
+      WCAPIConfigureOperationalSettingsResponse.encode(
+        message.configureOperationalSettingsResponse,
+        writer.uint32(418).fork(),
+      ).join();
+    }
+    if (message.getOperationalSettingsRequest !== undefined) {
+      WCAPIGetOperationalSettingsRequest.encode(message.getOperationalSettingsRequest, writer.uint32(426).fork())
+        .join();
+    }
+    if (message.getOperationalSettingsResponse !== undefined) {
+      WCAPIGetOperationalSettingsResponse.encode(message.getOperationalSettingsResponse, writer.uint32(434).fork())
+        .join();
+    }
+    if (message.configureCountryCodeSettingsRequest !== undefined) {
+      WCAPIConfigureCountryCodeSettingsRequest.encode(
+        message.configureCountryCodeSettingsRequest,
+        writer.uint32(442).fork(),
+      ).join();
+    }
+    if (message.configureCountryCodeSettingsResponse !== undefined) {
+      WCAPIConfigureCountryCodeSettingsResponse.encode(
+        message.configureCountryCodeSettingsResponse,
+        writer.uint32(450).fork(),
+      ).join();
+    }
+    if (message.pushLoadSharingConfigRequest !== undefined) {
+      WCAPIPushLoadSharingConfigRequest.encode(message.pushLoadSharingConfigRequest, writer.uint32(458).fork()).join();
+    }
+    if (message.pushLoadSharingConfigResponse !== undefined) {
+      WCAPIPushLoadSharingConfigResponse.encode(message.pushLoadSharingConfigResponse, writer.uint32(466).fork())
+        .join();
+    }
+    if (message.pushSmartChargingCommandRequest !== undefined) {
+      WCAPIPushSmartChargingCommandRequest.encode(message.pushSmartChargingCommandRequest, writer.uint32(474).fork())
+        .join();
+    }
+    if (message.pushSmartChargingCommandResponse !== undefined) {
+      WCAPIPushSmartChargingCommandResponse.encode(message.pushSmartChargingCommandResponse, writer.uint32(482).fork())
+        .join();
+    }
+    if (message.registerCommercialRequest !== undefined) {
+      WCAPIRegisterCommercialRequest.encode(message.registerCommercialRequest, writer.uint32(490).fork()).join();
+    }
+    if (message.registerCommercialResponse !== undefined) {
+      WCAPIRegisterCommercialResponse.encode(message.registerCommercialResponse, writer.uint32(498).fork()).join();
+    }
+    if (message.getOcppLocalAuthListRequest !== undefined) {
+      WCAPIGetOcppLocalAuthListRequest.encode(message.getOcppLocalAuthListRequest, writer.uint32(506).fork()).join();
+    }
+    if (message.getOcppLocalAuthListResponse !== undefined) {
+      WCAPIGetOcppLocalAuthListResponse.encode(message.getOcppLocalAuthListResponse, writer.uint32(514).fork()).join();
+    }
+    if (message.pushPowershareCommandRequest !== undefined) {
+      WCAPIPushPowershareCommandRequest.encode(message.pushPowershareCommandRequest, writer.uint32(522).fork()).join();
+    }
+    if (message.pushPowershareCommandResponse !== undefined) {
+      WCAPIPushPowershareCommandResponse.encode(message.pushPowershareCommandResponse, writer.uint32(530).fork())
+        .join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCMessages {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCMessages();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.getVitalsRequest = WCAPIGetVitalsRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.getVitalsResponse = WCAPIGetVitalsResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.getLifetimeStatsRequest = WCAPIGetLifetimeStatsRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.getLifetimeStatsResponse = WCAPIGetLifetimeStatsResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.getConfigRequest = WCAPIGetConfigRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.getConfigResponse = WCAPIGetConfigResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.configureSettingsRequest = WCAPIConfigureSettingsRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.configureSettingsResponse = WCAPIConfigureSettingsResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.getSystemInfoRequest = WCAPIGetSystemInfoRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.getSystemInfoResponse = WCAPIGetSystemInfoResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.getLoadSharingNetworkStateRequest = WCAPIGetLoadSharingNetworkStateRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 12: {
+          if (tag !== 98) {
+            break;
+          }
+
+          message.getLoadSharingNetworkStateResponse = WCAPIGetLoadSharingNetworkStateResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 13: {
+          if (tag !== 106) {
+            break;
+          }
+
+          message.pushLoadSharingFollowerStateRequest = WCAPIPushLoadSharingFollowerStateRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 14: {
+          if (tag !== 114) {
+            break;
+          }
+
+          message.pushLoadSharingFollowerStateResponse = WCAPIPushLoadSharingFollowerStateResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 15: {
+          if (tag !== 122) {
+            break;
+          }
+
+          message.pushLoadSharingLeaderCommandRequest = WCAPIPushLoadSharingLeaderCommandRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 16: {
+          if (tag !== 130) {
+            break;
+          }
+
+          message.pushLoadSharingLeaderCommandResponse = WCAPIPushLoadSharingLeaderCommandResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 17: {
+          if (tag !== 138) {
+            break;
+          }
+
+          message.setLoadSharingNetworkOperationRequest = WCAPISetLoadSharingNetworkOperationRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 18: {
+          if (tag !== 146) {
+            break;
+          }
+
+          message.setLoadSharingNetworkOperationResponse = WCAPISetLoadSharingNetworkOperationResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 19: {
+          if (tag !== 154) {
+            break;
+          }
+
+          message.configureLoadSharingSettingsRequest = WCAPIConfigureLoadSharingSettingsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 20: {
+          if (tag !== 162) {
+            break;
+          }
+
+          message.configureLoadSharingSettingsResponse = WCAPIConfigureLoadSharingSettingsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 21: {
+          if (tag !== 170) {
+            break;
+          }
+
+          message.configurePpuSettingsRequest = WCAPIConfigurePpuSettingsRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 22: {
+          if (tag !== 178) {
+            break;
+          }
+
+          message.configurePpuSettingsResponse = WCAPIConfigurePpuSettingsResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 23: {
+          if (tag !== 186) {
+            break;
+          }
+
+          message.getPpuSettingsRequest = WCAPIGetPpuSettingsRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 24: {
+          if (tag !== 194) {
+            break;
+          }
+
+          message.getPpuSettingsResponse = WCAPIGetPpuSettingsResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 25: {
+          if (tag !== 202) {
+            break;
+          }
+
+          message.setProvisionalOperationalParamsRequest = WCAPISetProvisionalOperationalParamsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 26: {
+          if (tag !== 210) {
+            break;
+          }
+
+          message.setProvisionalOperationalParamsResponse = WCAPISetProvisionalOperationalParamsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 27: {
+          if (tag !== 218) {
+            break;
+          }
+
+          message.getProvisionalOperationalParamsRequest = WCAPIGetProvisionalOperationalParamsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 28: {
+          if (tag !== 226) {
+            break;
+          }
+
+          message.getProvisionalOperationalParamsResponse = WCAPIGetProvisionalOperationalParamsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 29: {
+          if (tag !== 234) {
+            break;
+          }
+
+          message.getAccessControlSettingsRequest = WCAPIGetAccessControlSettingsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 30: {
+          if (tag !== 242) {
+            break;
+          }
+
+          message.getAccessControlSettingsResponse = WCAPIGetAccessControlSettingsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 31: {
+          if (tag !== 250) {
+            break;
+          }
+
+          message.configureAccessControlSettingsRequest = WCAPIConfigureAccessControlSettingsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 32: {
+          if (tag !== 258) {
+            break;
+          }
+
+          message.configureAccessControlSettingsResponse = WCAPIConfigureAccessControlSettingsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 33: {
+          if (tag !== 266) {
+            break;
+          }
+
+          message.getRecentVehiclesRequest = WCAPIGetRecentVehiclesRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 34: {
+          if (tag !== 274) {
+            break;
+          }
+
+          message.getRecentVehiclesResponse = WCAPIGetRecentVehiclesResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 35: {
+          if (tag !== 282) {
+            break;
+          }
+
+          message.pushPpuAuthorizationStateRequest = WCAPIPushPpuAuthorizationStateRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 36: {
+          if (tag !== 290) {
+            break;
+          }
+
+          message.pushPpuAuthorizationStateResponse = WCAPIPushPpuAuthorizationStateResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 37: {
+          if (tag !== 298) {
+            break;
+          }
+
+          message.configureChargeScheduleRequest = WCAPIConfigureChargeScheduleRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 38: {
+          if (tag !== 306) {
+            break;
+          }
+
+          message.configureChargeScheduleResponse = WCAPIConfigureChargeScheduleResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 39: {
+          if (tag !== 314) {
+            break;
+          }
+
+          message.pushChargeCommandRequest = WCAPIPushChargeCommandRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 40: {
+          if (tag !== 322) {
+            break;
+          }
+
+          message.pushChargeCommandResponse = WCAPIPushChargeCommandResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 41: {
+          if (tag !== 330) {
+            break;
+          }
+
+          message.configureThirdPartyVehicleModeRequest = WCAPIConfigureThirdPartyVehicleModeRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 42: {
+          if (tag !== 338) {
+            break;
+          }
+
+          message.configureThirdPartyVehicleModeResponse = WCAPIConfigureThirdPartyVehicleModeResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 43: {
+          if (tag !== 346) {
+            break;
+          }
+
+          message.configureHomeSiteControllerRequest = WCAPIConfigureHomeSiteControllerRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 44: {
+          if (tag !== 354) {
+            break;
+          }
+
+          message.configureHomeSiteControllerResponse = WCAPIConfigureHomeSiteControllerResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 45: {
+          if (tag !== 362) {
+            break;
+          }
+
+          message.configureOcppSettingsRequest = WCAPIConfigureOcppSettingsRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 46: {
+          if (tag !== 370) {
+            break;
+          }
+
+          message.configureOcppSettingsResponse = WCAPIConfigureOcppSettingsResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 47: {
+          if (tag !== 378) {
+            break;
+          }
+
+          message.setOcppSecurityParameterRequest = WCAPISetOcppSecurityParameterRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 48: {
+          if (tag !== 386) {
+            break;
+          }
+
+          message.setOcppSecurityParameterResponse = WCAPISetOcppSecurityParameterResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 49: {
+          if (tag !== 394) {
+            break;
+          }
+
+          message.getOcppSecurityParameterRequest = WCAPIGetOcppSecurityParameterRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 50: {
+          if (tag !== 402) {
+            break;
+          }
+
+          message.getOcppSecurityParameterResponse = WCAPIGetOcppSecurityParameterResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 51: {
+          if (tag !== 410) {
+            break;
+          }
+
+          message.configureOperationalSettingsRequest = WCAPIConfigureOperationalSettingsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 52: {
+          if (tag !== 418) {
+            break;
+          }
+
+          message.configureOperationalSettingsResponse = WCAPIConfigureOperationalSettingsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 53: {
+          if (tag !== 426) {
+            break;
+          }
+
+          message.getOperationalSettingsRequest = WCAPIGetOperationalSettingsRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 54: {
+          if (tag !== 434) {
+            break;
+          }
+
+          message.getOperationalSettingsResponse = WCAPIGetOperationalSettingsResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 55: {
+          if (tag !== 442) {
+            break;
+          }
+
+          message.configureCountryCodeSettingsRequest = WCAPIConfigureCountryCodeSettingsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 56: {
+          if (tag !== 450) {
+            break;
+          }
+
+          message.configureCountryCodeSettingsResponse = WCAPIConfigureCountryCodeSettingsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 57: {
+          if (tag !== 458) {
+            break;
+          }
+
+          message.pushLoadSharingConfigRequest = WCAPIPushLoadSharingConfigRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 58: {
+          if (tag !== 466) {
+            break;
+          }
+
+          message.pushLoadSharingConfigResponse = WCAPIPushLoadSharingConfigResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 59: {
+          if (tag !== 474) {
+            break;
+          }
+
+          message.pushSmartChargingCommandRequest = WCAPIPushSmartChargingCommandRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 60: {
+          if (tag !== 482) {
+            break;
+          }
+
+          message.pushSmartChargingCommandResponse = WCAPIPushSmartChargingCommandResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 61: {
+          if (tag !== 490) {
+            break;
+          }
+
+          message.registerCommercialRequest = WCAPIRegisterCommercialRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 62: {
+          if (tag !== 498) {
+            break;
+          }
+
+          message.registerCommercialResponse = WCAPIRegisterCommercialResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 63: {
+          if (tag !== 506) {
+            break;
+          }
+
+          message.getOcppLocalAuthListRequest = WCAPIGetOcppLocalAuthListRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 64: {
+          if (tag !== 514) {
+            break;
+          }
+
+          message.getOcppLocalAuthListResponse = WCAPIGetOcppLocalAuthListResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 65: {
+          if (tag !== 522) {
+            break;
+          }
+
+          message.pushPowershareCommandRequest = WCAPIPushPowershareCommandRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 66: {
+          if (tag !== 530) {
+            break;
+          }
+
+          message.pushPowershareCommandResponse = WCAPIPushPowershareCommandResponse.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCMessages {
+    return {
+      getVitalsRequest: isSet(object.getVitalsRequest)
+        ? WCAPIGetVitalsRequest.fromJSON(object.getVitalsRequest)
+        : undefined,
+      getVitalsResponse: isSet(object.getVitalsResponse)
+        ? WCAPIGetVitalsResponse.fromJSON(object.getVitalsResponse)
+        : undefined,
+      getLifetimeStatsRequest: isSet(object.getLifetimeStatsRequest)
+        ? WCAPIGetLifetimeStatsRequest.fromJSON(object.getLifetimeStatsRequest)
+        : undefined,
+      getLifetimeStatsResponse: isSet(object.getLifetimeStatsResponse)
+        ? WCAPIGetLifetimeStatsResponse.fromJSON(object.getLifetimeStatsResponse)
+        : undefined,
+      getConfigRequest: isSet(object.getConfigRequest)
+        ? WCAPIGetConfigRequest.fromJSON(object.getConfigRequest)
+        : undefined,
+      getConfigResponse: isSet(object.getConfigResponse)
+        ? WCAPIGetConfigResponse.fromJSON(object.getConfigResponse)
+        : undefined,
+      configureSettingsRequest: isSet(object.configureSettingsRequest)
+        ? WCAPIConfigureSettingsRequest.fromJSON(object.configureSettingsRequest)
+        : undefined,
+      configureSettingsResponse: isSet(object.configureSettingsResponse)
+        ? WCAPIConfigureSettingsResponse.fromJSON(object.configureSettingsResponse)
+        : undefined,
+      getSystemInfoRequest: isSet(object.getSystemInfoRequest)
+        ? WCAPIGetSystemInfoRequest.fromJSON(object.getSystemInfoRequest)
+        : undefined,
+      getSystemInfoResponse: isSet(object.getSystemInfoResponse)
+        ? WCAPIGetSystemInfoResponse.fromJSON(object.getSystemInfoResponse)
+        : undefined,
+      getLoadSharingNetworkStateRequest: isSet(object.getLoadSharingNetworkStateRequest)
+        ? WCAPIGetLoadSharingNetworkStateRequest.fromJSON(object.getLoadSharingNetworkStateRequest)
+        : undefined,
+      getLoadSharingNetworkStateResponse: isSet(object.getLoadSharingNetworkStateResponse)
+        ? WCAPIGetLoadSharingNetworkStateResponse.fromJSON(object.getLoadSharingNetworkStateResponse)
+        : undefined,
+      pushLoadSharingFollowerStateRequest: isSet(object.pushLoadSharingFollowerStateRequest)
+        ? WCAPIPushLoadSharingFollowerStateRequest.fromJSON(object.pushLoadSharingFollowerStateRequest)
+        : undefined,
+      pushLoadSharingFollowerStateResponse: isSet(object.pushLoadSharingFollowerStateResponse)
+        ? WCAPIPushLoadSharingFollowerStateResponse.fromJSON(object.pushLoadSharingFollowerStateResponse)
+        : undefined,
+      pushLoadSharingLeaderCommandRequest: isSet(object.pushLoadSharingLeaderCommandRequest)
+        ? WCAPIPushLoadSharingLeaderCommandRequest.fromJSON(object.pushLoadSharingLeaderCommandRequest)
+        : undefined,
+      pushLoadSharingLeaderCommandResponse: isSet(object.pushLoadSharingLeaderCommandResponse)
+        ? WCAPIPushLoadSharingLeaderCommandResponse.fromJSON(object.pushLoadSharingLeaderCommandResponse)
+        : undefined,
+      setLoadSharingNetworkOperationRequest: isSet(object.setLoadSharingNetworkOperationRequest)
+        ? WCAPISetLoadSharingNetworkOperationRequest.fromJSON(object.setLoadSharingNetworkOperationRequest)
+        : undefined,
+      setLoadSharingNetworkOperationResponse: isSet(object.setLoadSharingNetworkOperationResponse)
+        ? WCAPISetLoadSharingNetworkOperationResponse.fromJSON(object.setLoadSharingNetworkOperationResponse)
+        : undefined,
+      configureLoadSharingSettingsRequest: isSet(object.configureLoadSharingSettingsRequest)
+        ? WCAPIConfigureLoadSharingSettingsRequest.fromJSON(object.configureLoadSharingSettingsRequest)
+        : undefined,
+      configureLoadSharingSettingsResponse: isSet(object.configureLoadSharingSettingsResponse)
+        ? WCAPIConfigureLoadSharingSettingsResponse.fromJSON(object.configureLoadSharingSettingsResponse)
+        : undefined,
+      configurePpuSettingsRequest: isSet(object.configurePpuSettingsRequest)
+        ? WCAPIConfigurePpuSettingsRequest.fromJSON(object.configurePpuSettingsRequest)
+        : undefined,
+      configurePpuSettingsResponse: isSet(object.configurePpuSettingsResponse)
+        ? WCAPIConfigurePpuSettingsResponse.fromJSON(object.configurePpuSettingsResponse)
+        : undefined,
+      getPpuSettingsRequest: isSet(object.getPpuSettingsRequest)
+        ? WCAPIGetPpuSettingsRequest.fromJSON(object.getPpuSettingsRequest)
+        : undefined,
+      getPpuSettingsResponse: isSet(object.getPpuSettingsResponse)
+        ? WCAPIGetPpuSettingsResponse.fromJSON(object.getPpuSettingsResponse)
+        : undefined,
+      setProvisionalOperationalParamsRequest: isSet(object.setProvisionalOperationalParamsRequest)
+        ? WCAPISetProvisionalOperationalParamsRequest.fromJSON(object.setProvisionalOperationalParamsRequest)
+        : undefined,
+      setProvisionalOperationalParamsResponse: isSet(object.setProvisionalOperationalParamsResponse)
+        ? WCAPISetProvisionalOperationalParamsResponse.fromJSON(object.setProvisionalOperationalParamsResponse)
+        : undefined,
+      getProvisionalOperationalParamsRequest: isSet(object.getProvisionalOperationalParamsRequest)
+        ? WCAPIGetProvisionalOperationalParamsRequest.fromJSON(object.getProvisionalOperationalParamsRequest)
+        : undefined,
+      getProvisionalOperationalParamsResponse: isSet(object.getProvisionalOperationalParamsResponse)
+        ? WCAPIGetProvisionalOperationalParamsResponse.fromJSON(object.getProvisionalOperationalParamsResponse)
+        : undefined,
+      getAccessControlSettingsRequest: isSet(object.getAccessControlSettingsRequest)
+        ? WCAPIGetAccessControlSettingsRequest.fromJSON(object.getAccessControlSettingsRequest)
+        : undefined,
+      getAccessControlSettingsResponse: isSet(object.getAccessControlSettingsResponse)
+        ? WCAPIGetAccessControlSettingsResponse.fromJSON(object.getAccessControlSettingsResponse)
+        : undefined,
+      configureAccessControlSettingsRequest: isSet(object.configureAccessControlSettingsRequest)
+        ? WCAPIConfigureAccessControlSettingsRequest.fromJSON(object.configureAccessControlSettingsRequest)
+        : undefined,
+      configureAccessControlSettingsResponse: isSet(object.configureAccessControlSettingsResponse)
+        ? WCAPIConfigureAccessControlSettingsResponse.fromJSON(object.configureAccessControlSettingsResponse)
+        : undefined,
+      getRecentVehiclesRequest: isSet(object.getRecentVehiclesRequest)
+        ? WCAPIGetRecentVehiclesRequest.fromJSON(object.getRecentVehiclesRequest)
+        : undefined,
+      getRecentVehiclesResponse: isSet(object.getRecentVehiclesResponse)
+        ? WCAPIGetRecentVehiclesResponse.fromJSON(object.getRecentVehiclesResponse)
+        : undefined,
+      pushPpuAuthorizationStateRequest: isSet(object.pushPpuAuthorizationStateRequest)
+        ? WCAPIPushPpuAuthorizationStateRequest.fromJSON(object.pushPpuAuthorizationStateRequest)
+        : undefined,
+      pushPpuAuthorizationStateResponse: isSet(object.pushPpuAuthorizationStateResponse)
+        ? WCAPIPushPpuAuthorizationStateResponse.fromJSON(object.pushPpuAuthorizationStateResponse)
+        : undefined,
+      configureChargeScheduleRequest: isSet(object.configureChargeScheduleRequest)
+        ? WCAPIConfigureChargeScheduleRequest.fromJSON(object.configureChargeScheduleRequest)
+        : undefined,
+      configureChargeScheduleResponse: isSet(object.configureChargeScheduleResponse)
+        ? WCAPIConfigureChargeScheduleResponse.fromJSON(object.configureChargeScheduleResponse)
+        : undefined,
+      pushChargeCommandRequest: isSet(object.pushChargeCommandRequest)
+        ? WCAPIPushChargeCommandRequest.fromJSON(object.pushChargeCommandRequest)
+        : undefined,
+      pushChargeCommandResponse: isSet(object.pushChargeCommandResponse)
+        ? WCAPIPushChargeCommandResponse.fromJSON(object.pushChargeCommandResponse)
+        : undefined,
+      configureThirdPartyVehicleModeRequest: isSet(object.configureThirdPartyVehicleModeRequest)
+        ? WCAPIConfigureThirdPartyVehicleModeRequest.fromJSON(object.configureThirdPartyVehicleModeRequest)
+        : undefined,
+      configureThirdPartyVehicleModeResponse: isSet(object.configureThirdPartyVehicleModeResponse)
+        ? WCAPIConfigureThirdPartyVehicleModeResponse.fromJSON(object.configureThirdPartyVehicleModeResponse)
+        : undefined,
+      configureHomeSiteControllerRequest: isSet(object.configureHomeSiteControllerRequest)
+        ? WCAPIConfigureHomeSiteControllerRequest.fromJSON(object.configureHomeSiteControllerRequest)
+        : undefined,
+      configureHomeSiteControllerResponse: isSet(object.configureHomeSiteControllerResponse)
+        ? WCAPIConfigureHomeSiteControllerResponse.fromJSON(object.configureHomeSiteControllerResponse)
+        : undefined,
+      configureOcppSettingsRequest: isSet(object.configureOcppSettingsRequest)
+        ? WCAPIConfigureOcppSettingsRequest.fromJSON(object.configureOcppSettingsRequest)
+        : undefined,
+      configureOcppSettingsResponse: isSet(object.configureOcppSettingsResponse)
+        ? WCAPIConfigureOcppSettingsResponse.fromJSON(object.configureOcppSettingsResponse)
+        : undefined,
+      setOcppSecurityParameterRequest: isSet(object.setOcppSecurityParameterRequest)
+        ? WCAPISetOcppSecurityParameterRequest.fromJSON(object.setOcppSecurityParameterRequest)
+        : undefined,
+      setOcppSecurityParameterResponse: isSet(object.setOcppSecurityParameterResponse)
+        ? WCAPISetOcppSecurityParameterResponse.fromJSON(object.setOcppSecurityParameterResponse)
+        : undefined,
+      getOcppSecurityParameterRequest: isSet(object.getOcppSecurityParameterRequest)
+        ? WCAPIGetOcppSecurityParameterRequest.fromJSON(object.getOcppSecurityParameterRequest)
+        : undefined,
+      getOcppSecurityParameterResponse: isSet(object.getOcppSecurityParameterResponse)
+        ? WCAPIGetOcppSecurityParameterResponse.fromJSON(object.getOcppSecurityParameterResponse)
+        : undefined,
+      configureOperationalSettingsRequest: isSet(object.configureOperationalSettingsRequest)
+        ? WCAPIConfigureOperationalSettingsRequest.fromJSON(object.configureOperationalSettingsRequest)
+        : undefined,
+      configureOperationalSettingsResponse: isSet(object.configureOperationalSettingsResponse)
+        ? WCAPIConfigureOperationalSettingsResponse.fromJSON(object.configureOperationalSettingsResponse)
+        : undefined,
+      getOperationalSettingsRequest: isSet(object.getOperationalSettingsRequest)
+        ? WCAPIGetOperationalSettingsRequest.fromJSON(object.getOperationalSettingsRequest)
+        : undefined,
+      getOperationalSettingsResponse: isSet(object.getOperationalSettingsResponse)
+        ? WCAPIGetOperationalSettingsResponse.fromJSON(object.getOperationalSettingsResponse)
+        : undefined,
+      configureCountryCodeSettingsRequest: isSet(object.configureCountryCodeSettingsRequest)
+        ? WCAPIConfigureCountryCodeSettingsRequest.fromJSON(object.configureCountryCodeSettingsRequest)
+        : undefined,
+      configureCountryCodeSettingsResponse: isSet(object.configureCountryCodeSettingsResponse)
+        ? WCAPIConfigureCountryCodeSettingsResponse.fromJSON(object.configureCountryCodeSettingsResponse)
+        : undefined,
+      pushLoadSharingConfigRequest: isSet(object.pushLoadSharingConfigRequest)
+        ? WCAPIPushLoadSharingConfigRequest.fromJSON(object.pushLoadSharingConfigRequest)
+        : undefined,
+      pushLoadSharingConfigResponse: isSet(object.pushLoadSharingConfigResponse)
+        ? WCAPIPushLoadSharingConfigResponse.fromJSON(object.pushLoadSharingConfigResponse)
+        : undefined,
+      pushSmartChargingCommandRequest: isSet(object.pushSmartChargingCommandRequest)
+        ? WCAPIPushSmartChargingCommandRequest.fromJSON(object.pushSmartChargingCommandRequest)
+        : undefined,
+      pushSmartChargingCommandResponse: isSet(object.pushSmartChargingCommandResponse)
+        ? WCAPIPushSmartChargingCommandResponse.fromJSON(object.pushSmartChargingCommandResponse)
+        : undefined,
+      registerCommercialRequest: isSet(object.registerCommercialRequest)
+        ? WCAPIRegisterCommercialRequest.fromJSON(object.registerCommercialRequest)
+        : undefined,
+      registerCommercialResponse: isSet(object.registerCommercialResponse)
+        ? WCAPIRegisterCommercialResponse.fromJSON(object.registerCommercialResponse)
+        : undefined,
+      getOcppLocalAuthListRequest: isSet(object.getOcppLocalAuthListRequest)
+        ? WCAPIGetOcppLocalAuthListRequest.fromJSON(object.getOcppLocalAuthListRequest)
+        : undefined,
+      getOcppLocalAuthListResponse: isSet(object.getOcppLocalAuthListResponse)
+        ? WCAPIGetOcppLocalAuthListResponse.fromJSON(object.getOcppLocalAuthListResponse)
+        : undefined,
+      pushPowershareCommandRequest: isSet(object.pushPowershareCommandRequest)
+        ? WCAPIPushPowershareCommandRequest.fromJSON(object.pushPowershareCommandRequest)
+        : undefined,
+      pushPowershareCommandResponse: isSet(object.pushPowershareCommandResponse)
+        ? WCAPIPushPowershareCommandResponse.fromJSON(object.pushPowershareCommandResponse)
+        : undefined,
+    };
+  },
+
+  toJSON(message: WCMessages): unknown {
+    const obj: any = {};
+    if (message.getVitalsRequest !== undefined) {
+      obj.getVitalsRequest = WCAPIGetVitalsRequest.toJSON(message.getVitalsRequest);
+    }
+    if (message.getVitalsResponse !== undefined) {
+      obj.getVitalsResponse = WCAPIGetVitalsResponse.toJSON(message.getVitalsResponse);
+    }
+    if (message.getLifetimeStatsRequest !== undefined) {
+      obj.getLifetimeStatsRequest = WCAPIGetLifetimeStatsRequest.toJSON(message.getLifetimeStatsRequest);
+    }
+    if (message.getLifetimeStatsResponse !== undefined) {
+      obj.getLifetimeStatsResponse = WCAPIGetLifetimeStatsResponse.toJSON(message.getLifetimeStatsResponse);
+    }
+    if (message.getConfigRequest !== undefined) {
+      obj.getConfigRequest = WCAPIGetConfigRequest.toJSON(message.getConfigRequest);
+    }
+    if (message.getConfigResponse !== undefined) {
+      obj.getConfigResponse = WCAPIGetConfigResponse.toJSON(message.getConfigResponse);
+    }
+    if (message.configureSettingsRequest !== undefined) {
+      obj.configureSettingsRequest = WCAPIConfigureSettingsRequest.toJSON(message.configureSettingsRequest);
+    }
+    if (message.configureSettingsResponse !== undefined) {
+      obj.configureSettingsResponse = WCAPIConfigureSettingsResponse.toJSON(message.configureSettingsResponse);
+    }
+    if (message.getSystemInfoRequest !== undefined) {
+      obj.getSystemInfoRequest = WCAPIGetSystemInfoRequest.toJSON(message.getSystemInfoRequest);
+    }
+    if (message.getSystemInfoResponse !== undefined) {
+      obj.getSystemInfoResponse = WCAPIGetSystemInfoResponse.toJSON(message.getSystemInfoResponse);
+    }
+    if (message.getLoadSharingNetworkStateRequest !== undefined) {
+      obj.getLoadSharingNetworkStateRequest = WCAPIGetLoadSharingNetworkStateRequest.toJSON(
+        message.getLoadSharingNetworkStateRequest,
+      );
+    }
+    if (message.getLoadSharingNetworkStateResponse !== undefined) {
+      obj.getLoadSharingNetworkStateResponse = WCAPIGetLoadSharingNetworkStateResponse.toJSON(
+        message.getLoadSharingNetworkStateResponse,
+      );
+    }
+    if (message.pushLoadSharingFollowerStateRequest !== undefined) {
+      obj.pushLoadSharingFollowerStateRequest = WCAPIPushLoadSharingFollowerStateRequest.toJSON(
+        message.pushLoadSharingFollowerStateRequest,
+      );
+    }
+    if (message.pushLoadSharingFollowerStateResponse !== undefined) {
+      obj.pushLoadSharingFollowerStateResponse = WCAPIPushLoadSharingFollowerStateResponse.toJSON(
+        message.pushLoadSharingFollowerStateResponse,
+      );
+    }
+    if (message.pushLoadSharingLeaderCommandRequest !== undefined) {
+      obj.pushLoadSharingLeaderCommandRequest = WCAPIPushLoadSharingLeaderCommandRequest.toJSON(
+        message.pushLoadSharingLeaderCommandRequest,
+      );
+    }
+    if (message.pushLoadSharingLeaderCommandResponse !== undefined) {
+      obj.pushLoadSharingLeaderCommandResponse = WCAPIPushLoadSharingLeaderCommandResponse.toJSON(
+        message.pushLoadSharingLeaderCommandResponse,
+      );
+    }
+    if (message.setLoadSharingNetworkOperationRequest !== undefined) {
+      obj.setLoadSharingNetworkOperationRequest = WCAPISetLoadSharingNetworkOperationRequest.toJSON(
+        message.setLoadSharingNetworkOperationRequest,
+      );
+    }
+    if (message.setLoadSharingNetworkOperationResponse !== undefined) {
+      obj.setLoadSharingNetworkOperationResponse = WCAPISetLoadSharingNetworkOperationResponse.toJSON(
+        message.setLoadSharingNetworkOperationResponse,
+      );
+    }
+    if (message.configureLoadSharingSettingsRequest !== undefined) {
+      obj.configureLoadSharingSettingsRequest = WCAPIConfigureLoadSharingSettingsRequest.toJSON(
+        message.configureLoadSharingSettingsRequest,
+      );
+    }
+    if (message.configureLoadSharingSettingsResponse !== undefined) {
+      obj.configureLoadSharingSettingsResponse = WCAPIConfigureLoadSharingSettingsResponse.toJSON(
+        message.configureLoadSharingSettingsResponse,
+      );
+    }
+    if (message.configurePpuSettingsRequest !== undefined) {
+      obj.configurePpuSettingsRequest = WCAPIConfigurePpuSettingsRequest.toJSON(message.configurePpuSettingsRequest);
+    }
+    if (message.configurePpuSettingsResponse !== undefined) {
+      obj.configurePpuSettingsResponse = WCAPIConfigurePpuSettingsResponse.toJSON(message.configurePpuSettingsResponse);
+    }
+    if (message.getPpuSettingsRequest !== undefined) {
+      obj.getPpuSettingsRequest = WCAPIGetPpuSettingsRequest.toJSON(message.getPpuSettingsRequest);
+    }
+    if (message.getPpuSettingsResponse !== undefined) {
+      obj.getPpuSettingsResponse = WCAPIGetPpuSettingsResponse.toJSON(message.getPpuSettingsResponse);
+    }
+    if (message.setProvisionalOperationalParamsRequest !== undefined) {
+      obj.setProvisionalOperationalParamsRequest = WCAPISetProvisionalOperationalParamsRequest.toJSON(
+        message.setProvisionalOperationalParamsRequest,
+      );
+    }
+    if (message.setProvisionalOperationalParamsResponse !== undefined) {
+      obj.setProvisionalOperationalParamsResponse = WCAPISetProvisionalOperationalParamsResponse.toJSON(
+        message.setProvisionalOperationalParamsResponse,
+      );
+    }
+    if (message.getProvisionalOperationalParamsRequest !== undefined) {
+      obj.getProvisionalOperationalParamsRequest = WCAPIGetProvisionalOperationalParamsRequest.toJSON(
+        message.getProvisionalOperationalParamsRequest,
+      );
+    }
+    if (message.getProvisionalOperationalParamsResponse !== undefined) {
+      obj.getProvisionalOperationalParamsResponse = WCAPIGetProvisionalOperationalParamsResponse.toJSON(
+        message.getProvisionalOperationalParamsResponse,
+      );
+    }
+    if (message.getAccessControlSettingsRequest !== undefined) {
+      obj.getAccessControlSettingsRequest = WCAPIGetAccessControlSettingsRequest.toJSON(
+        message.getAccessControlSettingsRequest,
+      );
+    }
+    if (message.getAccessControlSettingsResponse !== undefined) {
+      obj.getAccessControlSettingsResponse = WCAPIGetAccessControlSettingsResponse.toJSON(
+        message.getAccessControlSettingsResponse,
+      );
+    }
+    if (message.configureAccessControlSettingsRequest !== undefined) {
+      obj.configureAccessControlSettingsRequest = WCAPIConfigureAccessControlSettingsRequest.toJSON(
+        message.configureAccessControlSettingsRequest,
+      );
+    }
+    if (message.configureAccessControlSettingsResponse !== undefined) {
+      obj.configureAccessControlSettingsResponse = WCAPIConfigureAccessControlSettingsResponse.toJSON(
+        message.configureAccessControlSettingsResponse,
+      );
+    }
+    if (message.getRecentVehiclesRequest !== undefined) {
+      obj.getRecentVehiclesRequest = WCAPIGetRecentVehiclesRequest.toJSON(message.getRecentVehiclesRequest);
+    }
+    if (message.getRecentVehiclesResponse !== undefined) {
+      obj.getRecentVehiclesResponse = WCAPIGetRecentVehiclesResponse.toJSON(message.getRecentVehiclesResponse);
+    }
+    if (message.pushPpuAuthorizationStateRequest !== undefined) {
+      obj.pushPpuAuthorizationStateRequest = WCAPIPushPpuAuthorizationStateRequest.toJSON(
+        message.pushPpuAuthorizationStateRequest,
+      );
+    }
+    if (message.pushPpuAuthorizationStateResponse !== undefined) {
+      obj.pushPpuAuthorizationStateResponse = WCAPIPushPpuAuthorizationStateResponse.toJSON(
+        message.pushPpuAuthorizationStateResponse,
+      );
+    }
+    if (message.configureChargeScheduleRequest !== undefined) {
+      obj.configureChargeScheduleRequest = WCAPIConfigureChargeScheduleRequest.toJSON(
+        message.configureChargeScheduleRequest,
+      );
+    }
+    if (message.configureChargeScheduleResponse !== undefined) {
+      obj.configureChargeScheduleResponse = WCAPIConfigureChargeScheduleResponse.toJSON(
+        message.configureChargeScheduleResponse,
+      );
+    }
+    if (message.pushChargeCommandRequest !== undefined) {
+      obj.pushChargeCommandRequest = WCAPIPushChargeCommandRequest.toJSON(message.pushChargeCommandRequest);
+    }
+    if (message.pushChargeCommandResponse !== undefined) {
+      obj.pushChargeCommandResponse = WCAPIPushChargeCommandResponse.toJSON(message.pushChargeCommandResponse);
+    }
+    if (message.configureThirdPartyVehicleModeRequest !== undefined) {
+      obj.configureThirdPartyVehicleModeRequest = WCAPIConfigureThirdPartyVehicleModeRequest.toJSON(
+        message.configureThirdPartyVehicleModeRequest,
+      );
+    }
+    if (message.configureThirdPartyVehicleModeResponse !== undefined) {
+      obj.configureThirdPartyVehicleModeResponse = WCAPIConfigureThirdPartyVehicleModeResponse.toJSON(
+        message.configureThirdPartyVehicleModeResponse,
+      );
+    }
+    if (message.configureHomeSiteControllerRequest !== undefined) {
+      obj.configureHomeSiteControllerRequest = WCAPIConfigureHomeSiteControllerRequest.toJSON(
+        message.configureHomeSiteControllerRequest,
+      );
+    }
+    if (message.configureHomeSiteControllerResponse !== undefined) {
+      obj.configureHomeSiteControllerResponse = WCAPIConfigureHomeSiteControllerResponse.toJSON(
+        message.configureHomeSiteControllerResponse,
+      );
+    }
+    if (message.configureOcppSettingsRequest !== undefined) {
+      obj.configureOcppSettingsRequest = WCAPIConfigureOcppSettingsRequest.toJSON(message.configureOcppSettingsRequest);
+    }
+    if (message.configureOcppSettingsResponse !== undefined) {
+      obj.configureOcppSettingsResponse = WCAPIConfigureOcppSettingsResponse.toJSON(
+        message.configureOcppSettingsResponse,
+      );
+    }
+    if (message.setOcppSecurityParameterRequest !== undefined) {
+      obj.setOcppSecurityParameterRequest = WCAPISetOcppSecurityParameterRequest.toJSON(
+        message.setOcppSecurityParameterRequest,
+      );
+    }
+    if (message.setOcppSecurityParameterResponse !== undefined) {
+      obj.setOcppSecurityParameterResponse = WCAPISetOcppSecurityParameterResponse.toJSON(
+        message.setOcppSecurityParameterResponse,
+      );
+    }
+    if (message.getOcppSecurityParameterRequest !== undefined) {
+      obj.getOcppSecurityParameterRequest = WCAPIGetOcppSecurityParameterRequest.toJSON(
+        message.getOcppSecurityParameterRequest,
+      );
+    }
+    if (message.getOcppSecurityParameterResponse !== undefined) {
+      obj.getOcppSecurityParameterResponse = WCAPIGetOcppSecurityParameterResponse.toJSON(
+        message.getOcppSecurityParameterResponse,
+      );
+    }
+    if (message.configureOperationalSettingsRequest !== undefined) {
+      obj.configureOperationalSettingsRequest = WCAPIConfigureOperationalSettingsRequest.toJSON(
+        message.configureOperationalSettingsRequest,
+      );
+    }
+    if (message.configureOperationalSettingsResponse !== undefined) {
+      obj.configureOperationalSettingsResponse = WCAPIConfigureOperationalSettingsResponse.toJSON(
+        message.configureOperationalSettingsResponse,
+      );
+    }
+    if (message.getOperationalSettingsRequest !== undefined) {
+      obj.getOperationalSettingsRequest = WCAPIGetOperationalSettingsRequest.toJSON(
+        message.getOperationalSettingsRequest,
+      );
+    }
+    if (message.getOperationalSettingsResponse !== undefined) {
+      obj.getOperationalSettingsResponse = WCAPIGetOperationalSettingsResponse.toJSON(
+        message.getOperationalSettingsResponse,
+      );
+    }
+    if (message.configureCountryCodeSettingsRequest !== undefined) {
+      obj.configureCountryCodeSettingsRequest = WCAPIConfigureCountryCodeSettingsRequest.toJSON(
+        message.configureCountryCodeSettingsRequest,
+      );
+    }
+    if (message.configureCountryCodeSettingsResponse !== undefined) {
+      obj.configureCountryCodeSettingsResponse = WCAPIConfigureCountryCodeSettingsResponse.toJSON(
+        message.configureCountryCodeSettingsResponse,
+      );
+    }
+    if (message.pushLoadSharingConfigRequest !== undefined) {
+      obj.pushLoadSharingConfigRequest = WCAPIPushLoadSharingConfigRequest.toJSON(message.pushLoadSharingConfigRequest);
+    }
+    if (message.pushLoadSharingConfigResponse !== undefined) {
+      obj.pushLoadSharingConfigResponse = WCAPIPushLoadSharingConfigResponse.toJSON(
+        message.pushLoadSharingConfigResponse,
+      );
+    }
+    if (message.pushSmartChargingCommandRequest !== undefined) {
+      obj.pushSmartChargingCommandRequest = WCAPIPushSmartChargingCommandRequest.toJSON(
+        message.pushSmartChargingCommandRequest,
+      );
+    }
+    if (message.pushSmartChargingCommandResponse !== undefined) {
+      obj.pushSmartChargingCommandResponse = WCAPIPushSmartChargingCommandResponse.toJSON(
+        message.pushSmartChargingCommandResponse,
+      );
+    }
+    if (message.registerCommercialRequest !== undefined) {
+      obj.registerCommercialRequest = WCAPIRegisterCommercialRequest.toJSON(message.registerCommercialRequest);
+    }
+    if (message.registerCommercialResponse !== undefined) {
+      obj.registerCommercialResponse = WCAPIRegisterCommercialResponse.toJSON(message.registerCommercialResponse);
+    }
+    if (message.getOcppLocalAuthListRequest !== undefined) {
+      obj.getOcppLocalAuthListRequest = WCAPIGetOcppLocalAuthListRequest.toJSON(message.getOcppLocalAuthListRequest);
+    }
+    if (message.getOcppLocalAuthListResponse !== undefined) {
+      obj.getOcppLocalAuthListResponse = WCAPIGetOcppLocalAuthListResponse.toJSON(message.getOcppLocalAuthListResponse);
+    }
+    if (message.pushPowershareCommandRequest !== undefined) {
+      obj.pushPowershareCommandRequest = WCAPIPushPowershareCommandRequest.toJSON(message.pushPowershareCommandRequest);
+    }
+    if (message.pushPowershareCommandResponse !== undefined) {
+      obj.pushPowershareCommandResponse = WCAPIPushPowershareCommandResponse.toJSON(
+        message.pushPowershareCommandResponse,
+      );
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<WCMessages>, I>>(base?: I): WCMessages {
     return WCMessages.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<WCMessages>, I>>(_: I): WCMessages {
+  fromPartial<I extends Exact<DeepPartial<WCMessages>, I>>(object: I): WCMessages {
     const message = createBaseWCMessages();
+    message.getVitalsRequest = (object.getVitalsRequest !== undefined && object.getVitalsRequest !== null)
+      ? WCAPIGetVitalsRequest.fromPartial(object.getVitalsRequest)
+      : undefined;
+    message.getVitalsResponse = (object.getVitalsResponse !== undefined && object.getVitalsResponse !== null)
+      ? WCAPIGetVitalsResponse.fromPartial(object.getVitalsResponse)
+      : undefined;
+    message.getLifetimeStatsRequest =
+      (object.getLifetimeStatsRequest !== undefined && object.getLifetimeStatsRequest !== null)
+        ? WCAPIGetLifetimeStatsRequest.fromPartial(object.getLifetimeStatsRequest)
+        : undefined;
+    message.getLifetimeStatsResponse =
+      (object.getLifetimeStatsResponse !== undefined && object.getLifetimeStatsResponse !== null)
+        ? WCAPIGetLifetimeStatsResponse.fromPartial(object.getLifetimeStatsResponse)
+        : undefined;
+    message.getConfigRequest = (object.getConfigRequest !== undefined && object.getConfigRequest !== null)
+      ? WCAPIGetConfigRequest.fromPartial(object.getConfigRequest)
+      : undefined;
+    message.getConfigResponse = (object.getConfigResponse !== undefined && object.getConfigResponse !== null)
+      ? WCAPIGetConfigResponse.fromPartial(object.getConfigResponse)
+      : undefined;
+    message.configureSettingsRequest =
+      (object.configureSettingsRequest !== undefined && object.configureSettingsRequest !== null)
+        ? WCAPIConfigureSettingsRequest.fromPartial(object.configureSettingsRequest)
+        : undefined;
+    message.configureSettingsResponse =
+      (object.configureSettingsResponse !== undefined && object.configureSettingsResponse !== null)
+        ? WCAPIConfigureSettingsResponse.fromPartial(object.configureSettingsResponse)
+        : undefined;
+    message.getSystemInfoRequest = (object.getSystemInfoRequest !== undefined && object.getSystemInfoRequest !== null)
+      ? WCAPIGetSystemInfoRequest.fromPartial(object.getSystemInfoRequest)
+      : undefined;
+    message.getSystemInfoResponse =
+      (object.getSystemInfoResponse !== undefined && object.getSystemInfoResponse !== null)
+        ? WCAPIGetSystemInfoResponse.fromPartial(object.getSystemInfoResponse)
+        : undefined;
+    message.getLoadSharingNetworkStateRequest =
+      (object.getLoadSharingNetworkStateRequest !== undefined && object.getLoadSharingNetworkStateRequest !== null)
+        ? WCAPIGetLoadSharingNetworkStateRequest.fromPartial(object.getLoadSharingNetworkStateRequest)
+        : undefined;
+    message.getLoadSharingNetworkStateResponse =
+      (object.getLoadSharingNetworkStateResponse !== undefined && object.getLoadSharingNetworkStateResponse !== null)
+        ? WCAPIGetLoadSharingNetworkStateResponse.fromPartial(object.getLoadSharingNetworkStateResponse)
+        : undefined;
+    message.pushLoadSharingFollowerStateRequest =
+      (object.pushLoadSharingFollowerStateRequest !== undefined && object.pushLoadSharingFollowerStateRequest !== null)
+        ? WCAPIPushLoadSharingFollowerStateRequest.fromPartial(object.pushLoadSharingFollowerStateRequest)
+        : undefined;
+    message.pushLoadSharingFollowerStateResponse =
+      (object.pushLoadSharingFollowerStateResponse !== undefined &&
+          object.pushLoadSharingFollowerStateResponse !== null)
+        ? WCAPIPushLoadSharingFollowerStateResponse.fromPartial(object.pushLoadSharingFollowerStateResponse)
+        : undefined;
+    message.pushLoadSharingLeaderCommandRequest =
+      (object.pushLoadSharingLeaderCommandRequest !== undefined && object.pushLoadSharingLeaderCommandRequest !== null)
+        ? WCAPIPushLoadSharingLeaderCommandRequest.fromPartial(object.pushLoadSharingLeaderCommandRequest)
+        : undefined;
+    message.pushLoadSharingLeaderCommandResponse =
+      (object.pushLoadSharingLeaderCommandResponse !== undefined &&
+          object.pushLoadSharingLeaderCommandResponse !== null)
+        ? WCAPIPushLoadSharingLeaderCommandResponse.fromPartial(object.pushLoadSharingLeaderCommandResponse)
+        : undefined;
+    message.setLoadSharingNetworkOperationRequest =
+      (object.setLoadSharingNetworkOperationRequest !== undefined &&
+          object.setLoadSharingNetworkOperationRequest !== null)
+        ? WCAPISetLoadSharingNetworkOperationRequest.fromPartial(object.setLoadSharingNetworkOperationRequest)
+        : undefined;
+    message.setLoadSharingNetworkOperationResponse =
+      (object.setLoadSharingNetworkOperationResponse !== undefined &&
+          object.setLoadSharingNetworkOperationResponse !== null)
+        ? WCAPISetLoadSharingNetworkOperationResponse.fromPartial(object.setLoadSharingNetworkOperationResponse)
+        : undefined;
+    message.configureLoadSharingSettingsRequest =
+      (object.configureLoadSharingSettingsRequest !== undefined && object.configureLoadSharingSettingsRequest !== null)
+        ? WCAPIConfigureLoadSharingSettingsRequest.fromPartial(object.configureLoadSharingSettingsRequest)
+        : undefined;
+    message.configureLoadSharingSettingsResponse =
+      (object.configureLoadSharingSettingsResponse !== undefined &&
+          object.configureLoadSharingSettingsResponse !== null)
+        ? WCAPIConfigureLoadSharingSettingsResponse.fromPartial(object.configureLoadSharingSettingsResponse)
+        : undefined;
+    message.configurePpuSettingsRequest =
+      (object.configurePpuSettingsRequest !== undefined && object.configurePpuSettingsRequest !== null)
+        ? WCAPIConfigurePpuSettingsRequest.fromPartial(object.configurePpuSettingsRequest)
+        : undefined;
+    message.configurePpuSettingsResponse =
+      (object.configurePpuSettingsResponse !== undefined && object.configurePpuSettingsResponse !== null)
+        ? WCAPIConfigurePpuSettingsResponse.fromPartial(object.configurePpuSettingsResponse)
+        : undefined;
+    message.getPpuSettingsRequest =
+      (object.getPpuSettingsRequest !== undefined && object.getPpuSettingsRequest !== null)
+        ? WCAPIGetPpuSettingsRequest.fromPartial(object.getPpuSettingsRequest)
+        : undefined;
+    message.getPpuSettingsResponse =
+      (object.getPpuSettingsResponse !== undefined && object.getPpuSettingsResponse !== null)
+        ? WCAPIGetPpuSettingsResponse.fromPartial(object.getPpuSettingsResponse)
+        : undefined;
+    message.setProvisionalOperationalParamsRequest =
+      (object.setProvisionalOperationalParamsRequest !== undefined &&
+          object.setProvisionalOperationalParamsRequest !== null)
+        ? WCAPISetProvisionalOperationalParamsRequest.fromPartial(object.setProvisionalOperationalParamsRequest)
+        : undefined;
+    message.setProvisionalOperationalParamsResponse =
+      (object.setProvisionalOperationalParamsResponse !== undefined &&
+          object.setProvisionalOperationalParamsResponse !== null)
+        ? WCAPISetProvisionalOperationalParamsResponse.fromPartial(object.setProvisionalOperationalParamsResponse)
+        : undefined;
+    message.getProvisionalOperationalParamsRequest =
+      (object.getProvisionalOperationalParamsRequest !== undefined &&
+          object.getProvisionalOperationalParamsRequest !== null)
+        ? WCAPIGetProvisionalOperationalParamsRequest.fromPartial(object.getProvisionalOperationalParamsRequest)
+        : undefined;
+    message.getProvisionalOperationalParamsResponse =
+      (object.getProvisionalOperationalParamsResponse !== undefined &&
+          object.getProvisionalOperationalParamsResponse !== null)
+        ? WCAPIGetProvisionalOperationalParamsResponse.fromPartial(object.getProvisionalOperationalParamsResponse)
+        : undefined;
+    message.getAccessControlSettingsRequest =
+      (object.getAccessControlSettingsRequest !== undefined && object.getAccessControlSettingsRequest !== null)
+        ? WCAPIGetAccessControlSettingsRequest.fromPartial(object.getAccessControlSettingsRequest)
+        : undefined;
+    message.getAccessControlSettingsResponse =
+      (object.getAccessControlSettingsResponse !== undefined && object.getAccessControlSettingsResponse !== null)
+        ? WCAPIGetAccessControlSettingsResponse.fromPartial(object.getAccessControlSettingsResponse)
+        : undefined;
+    message.configureAccessControlSettingsRequest =
+      (object.configureAccessControlSettingsRequest !== undefined &&
+          object.configureAccessControlSettingsRequest !== null)
+        ? WCAPIConfigureAccessControlSettingsRequest.fromPartial(object.configureAccessControlSettingsRequest)
+        : undefined;
+    message.configureAccessControlSettingsResponse =
+      (object.configureAccessControlSettingsResponse !== undefined &&
+          object.configureAccessControlSettingsResponse !== null)
+        ? WCAPIConfigureAccessControlSettingsResponse.fromPartial(object.configureAccessControlSettingsResponse)
+        : undefined;
+    message.getRecentVehiclesRequest =
+      (object.getRecentVehiclesRequest !== undefined && object.getRecentVehiclesRequest !== null)
+        ? WCAPIGetRecentVehiclesRequest.fromPartial(object.getRecentVehiclesRequest)
+        : undefined;
+    message.getRecentVehiclesResponse =
+      (object.getRecentVehiclesResponse !== undefined && object.getRecentVehiclesResponse !== null)
+        ? WCAPIGetRecentVehiclesResponse.fromPartial(object.getRecentVehiclesResponse)
+        : undefined;
+    message.pushPpuAuthorizationStateRequest =
+      (object.pushPpuAuthorizationStateRequest !== undefined && object.pushPpuAuthorizationStateRequest !== null)
+        ? WCAPIPushPpuAuthorizationStateRequest.fromPartial(object.pushPpuAuthorizationStateRequest)
+        : undefined;
+    message.pushPpuAuthorizationStateResponse =
+      (object.pushPpuAuthorizationStateResponse !== undefined && object.pushPpuAuthorizationStateResponse !== null)
+        ? WCAPIPushPpuAuthorizationStateResponse.fromPartial(object.pushPpuAuthorizationStateResponse)
+        : undefined;
+    message.configureChargeScheduleRequest =
+      (object.configureChargeScheduleRequest !== undefined && object.configureChargeScheduleRequest !== null)
+        ? WCAPIConfigureChargeScheduleRequest.fromPartial(object.configureChargeScheduleRequest)
+        : undefined;
+    message.configureChargeScheduleResponse =
+      (object.configureChargeScheduleResponse !== undefined && object.configureChargeScheduleResponse !== null)
+        ? WCAPIConfigureChargeScheduleResponse.fromPartial(object.configureChargeScheduleResponse)
+        : undefined;
+    message.pushChargeCommandRequest =
+      (object.pushChargeCommandRequest !== undefined && object.pushChargeCommandRequest !== null)
+        ? WCAPIPushChargeCommandRequest.fromPartial(object.pushChargeCommandRequest)
+        : undefined;
+    message.pushChargeCommandResponse =
+      (object.pushChargeCommandResponse !== undefined && object.pushChargeCommandResponse !== null)
+        ? WCAPIPushChargeCommandResponse.fromPartial(object.pushChargeCommandResponse)
+        : undefined;
+    message.configureThirdPartyVehicleModeRequest =
+      (object.configureThirdPartyVehicleModeRequest !== undefined &&
+          object.configureThirdPartyVehicleModeRequest !== null)
+        ? WCAPIConfigureThirdPartyVehicleModeRequest.fromPartial(object.configureThirdPartyVehicleModeRequest)
+        : undefined;
+    message.configureThirdPartyVehicleModeResponse =
+      (object.configureThirdPartyVehicleModeResponse !== undefined &&
+          object.configureThirdPartyVehicleModeResponse !== null)
+        ? WCAPIConfigureThirdPartyVehicleModeResponse.fromPartial(object.configureThirdPartyVehicleModeResponse)
+        : undefined;
+    message.configureHomeSiteControllerRequest =
+      (object.configureHomeSiteControllerRequest !== undefined && object.configureHomeSiteControllerRequest !== null)
+        ? WCAPIConfigureHomeSiteControllerRequest.fromPartial(object.configureHomeSiteControllerRequest)
+        : undefined;
+    message.configureHomeSiteControllerResponse =
+      (object.configureHomeSiteControllerResponse !== undefined && object.configureHomeSiteControllerResponse !== null)
+        ? WCAPIConfigureHomeSiteControllerResponse.fromPartial(object.configureHomeSiteControllerResponse)
+        : undefined;
+    message.configureOcppSettingsRequest =
+      (object.configureOcppSettingsRequest !== undefined && object.configureOcppSettingsRequest !== null)
+        ? WCAPIConfigureOcppSettingsRequest.fromPartial(object.configureOcppSettingsRequest)
+        : undefined;
+    message.configureOcppSettingsResponse =
+      (object.configureOcppSettingsResponse !== undefined && object.configureOcppSettingsResponse !== null)
+        ? WCAPIConfigureOcppSettingsResponse.fromPartial(object.configureOcppSettingsResponse)
+        : undefined;
+    message.setOcppSecurityParameterRequest =
+      (object.setOcppSecurityParameterRequest !== undefined && object.setOcppSecurityParameterRequest !== null)
+        ? WCAPISetOcppSecurityParameterRequest.fromPartial(object.setOcppSecurityParameterRequest)
+        : undefined;
+    message.setOcppSecurityParameterResponse =
+      (object.setOcppSecurityParameterResponse !== undefined && object.setOcppSecurityParameterResponse !== null)
+        ? WCAPISetOcppSecurityParameterResponse.fromPartial(object.setOcppSecurityParameterResponse)
+        : undefined;
+    message.getOcppSecurityParameterRequest =
+      (object.getOcppSecurityParameterRequest !== undefined && object.getOcppSecurityParameterRequest !== null)
+        ? WCAPIGetOcppSecurityParameterRequest.fromPartial(object.getOcppSecurityParameterRequest)
+        : undefined;
+    message.getOcppSecurityParameterResponse =
+      (object.getOcppSecurityParameterResponse !== undefined && object.getOcppSecurityParameterResponse !== null)
+        ? WCAPIGetOcppSecurityParameterResponse.fromPartial(object.getOcppSecurityParameterResponse)
+        : undefined;
+    message.configureOperationalSettingsRequest =
+      (object.configureOperationalSettingsRequest !== undefined && object.configureOperationalSettingsRequest !== null)
+        ? WCAPIConfigureOperationalSettingsRequest.fromPartial(object.configureOperationalSettingsRequest)
+        : undefined;
+    message.configureOperationalSettingsResponse =
+      (object.configureOperationalSettingsResponse !== undefined &&
+          object.configureOperationalSettingsResponse !== null)
+        ? WCAPIConfigureOperationalSettingsResponse.fromPartial(object.configureOperationalSettingsResponse)
+        : undefined;
+    message.getOperationalSettingsRequest =
+      (object.getOperationalSettingsRequest !== undefined && object.getOperationalSettingsRequest !== null)
+        ? WCAPIGetOperationalSettingsRequest.fromPartial(object.getOperationalSettingsRequest)
+        : undefined;
+    message.getOperationalSettingsResponse =
+      (object.getOperationalSettingsResponse !== undefined && object.getOperationalSettingsResponse !== null)
+        ? WCAPIGetOperationalSettingsResponse.fromPartial(object.getOperationalSettingsResponse)
+        : undefined;
+    message.configureCountryCodeSettingsRequest =
+      (object.configureCountryCodeSettingsRequest !== undefined && object.configureCountryCodeSettingsRequest !== null)
+        ? WCAPIConfigureCountryCodeSettingsRequest.fromPartial(object.configureCountryCodeSettingsRequest)
+        : undefined;
+    message.configureCountryCodeSettingsResponse =
+      (object.configureCountryCodeSettingsResponse !== undefined &&
+          object.configureCountryCodeSettingsResponse !== null)
+        ? WCAPIConfigureCountryCodeSettingsResponse.fromPartial(object.configureCountryCodeSettingsResponse)
+        : undefined;
+    message.pushLoadSharingConfigRequest =
+      (object.pushLoadSharingConfigRequest !== undefined && object.pushLoadSharingConfigRequest !== null)
+        ? WCAPIPushLoadSharingConfigRequest.fromPartial(object.pushLoadSharingConfigRequest)
+        : undefined;
+    message.pushLoadSharingConfigResponse =
+      (object.pushLoadSharingConfigResponse !== undefined && object.pushLoadSharingConfigResponse !== null)
+        ? WCAPIPushLoadSharingConfigResponse.fromPartial(object.pushLoadSharingConfigResponse)
+        : undefined;
+    message.pushSmartChargingCommandRequest =
+      (object.pushSmartChargingCommandRequest !== undefined && object.pushSmartChargingCommandRequest !== null)
+        ? WCAPIPushSmartChargingCommandRequest.fromPartial(object.pushSmartChargingCommandRequest)
+        : undefined;
+    message.pushSmartChargingCommandResponse =
+      (object.pushSmartChargingCommandResponse !== undefined && object.pushSmartChargingCommandResponse !== null)
+        ? WCAPIPushSmartChargingCommandResponse.fromPartial(object.pushSmartChargingCommandResponse)
+        : undefined;
+    message.registerCommercialRequest =
+      (object.registerCommercialRequest !== undefined && object.registerCommercialRequest !== null)
+        ? WCAPIRegisterCommercialRequest.fromPartial(object.registerCommercialRequest)
+        : undefined;
+    message.registerCommercialResponse =
+      (object.registerCommercialResponse !== undefined && object.registerCommercialResponse !== null)
+        ? WCAPIRegisterCommercialResponse.fromPartial(object.registerCommercialResponse)
+        : undefined;
+    message.getOcppLocalAuthListRequest =
+      (object.getOcppLocalAuthListRequest !== undefined && object.getOcppLocalAuthListRequest !== null)
+        ? WCAPIGetOcppLocalAuthListRequest.fromPartial(object.getOcppLocalAuthListRequest)
+        : undefined;
+    message.getOcppLocalAuthListResponse =
+      (object.getOcppLocalAuthListResponse !== undefined && object.getOcppLocalAuthListResponse !== null)
+        ? WCAPIGetOcppLocalAuthListResponse.fromPartial(object.getOcppLocalAuthListResponse)
+        : undefined;
+    message.pushPowershareCommandRequest =
+      (object.pushPowershareCommandRequest !== undefined && object.pushPowershareCommandRequest !== null)
+        ? WCAPIPushPowershareCommandRequest.fromPartial(object.pushPowershareCommandRequest)
+        : undefined;
+    message.pushPowershareCommandResponse =
+      (object.pushPowershareCommandResponse !== undefined && object.pushPowershareCommandResponse !== null)
+        ? WCAPIPushPowershareCommandResponse.fromPartial(object.pushPowershareCommandResponse)
+        : undefined;
     return message;
   },
 };
+
+function bytesFromBase64(b64: string): Uint8Array {
+  if ((globalThis as any).Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = globalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
+  }
+}
+
+function base64FromBytes(arr: Uint8Array): string {
+  if ((globalThis as any).Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(globalThis.String.fromCharCode(byte));
+    });
+    return globalThis.btoa(bin.join(""));
+  }
+}
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 
@@ -894,6 +12375,43 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function toTimestamp(date: Date): Timestamp {
+  const seconds = Math.trunc(date.getTime() / 1_000);
+  const nanos = (date.getTime() % 1_000) * 1_000_000;
+  return { seconds, nanos };
+}
+
+function fromTimestamp(t: Timestamp): Date {
+  let millis = (t.seconds || 0) * 1_000;
+  millis += (t.nanos || 0) / 1_000_000;
+  return new globalThis.Date(millis);
+}
+
+function fromJsonTimestamp(o: any): Date {
+  if (o instanceof globalThis.Date) {
+    return o;
+  } else if (typeof o === "string") {
+    return new globalThis.Date(o);
+  } else {
+    return fromTimestamp(Timestamp.fromJSON(o));
+  }
+}
+
+function longToNumber(int64: { toString(): string }): number {
+  const num = globalThis.Number(int64.toString());
+  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+  }
+  return num;
+}
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}
 
 export interface MessageFns<T> {
   encode(message: T, writer?: BinaryWriter): BinaryWriter;

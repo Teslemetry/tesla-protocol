@@ -9,6 +9,9 @@ option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/
 option java_package = "com.tesla.generated.energy_device.v1";
 option java_outer_classname = "EnergySiteNet";
 
+import "device.proto";
+import "networking.proto";
+
 enum EnergySiteNetAdditionStatus {
   ENERGY_SITE_NET_ADDITION_STATUS_INVALID                  = 0;
   ENERGY_SITE_NET_ADDITION_STATUS_IN_PROGRESS              = 1;
@@ -57,4 +60,74 @@ enum IntraSiteServiceType {
   INTRA_SITE_SERVICE_TYPE_MULTI_PW3_FOLLOWER       = 1;
   INTRA_SITE_SERVICE_TYPE_WC_LOAD_SHARING_FOLLOWER = 2;
   INTRA_SITE_SERVICE_TYPE_WC_CURRENT_CONTROL       = 3;
+}
+
+message EnergySiteNetDevice {
+  Din din                                     = 1;
+  WifiConfig wifi_ap_config                   = 2;
+  repeated IntraSiteServiceType service_types = 3;
+}
+
+message EnergySiteNetRecentlyAddedDevice {
+  Din din                            = 1;
+  EnergySiteNetAdditionStatus status = 2;
+}
+
+message EnergySiteNetRecentlyRemovedDevice {
+  Din din                           = 1;
+  EnergySiteNetRemovalStatus status = 2;
+}
+
+message EnergySiteNetUnpairedDevice {
+  Din din                             = 1;
+  EnergySiteNetPairStatus pair_status = 2;
+  string firmware_version             = 3;
+  DeviceType device_type              = 4;
+  TEGDeviceType teg_device_type       = 100;
+}
+
+message EnergySiteNetConfig {
+  repeated EnergySiteNetDevice devices                  = 1;
+  EnergySiteNetRecentlyAddedDevice recently_added       = 2;
+  EnergySiteNetRecentlyRemovedDevice recently_removed   = 3;
+  repeated EnergySiteNetUnpairedDevice unpaired_devices = 4;
+}
+
+message EnergySiteNetAPIAddDeviceRequest {
+  EnergySiteNetDevice device            = 1;
+  EnergySiteNetNetworkType network_type = 2;
+}
+
+message EnergySiteNetAPIAddDeviceResponse {
+  EnergySiteNetRecentlyAddedDevice recently_added = 1;
+}
+
+message EnergySiteNetAPIRemoveDeviceRequest {
+  Din din                               = 1;
+  EnergySiteNetNetworkType network_type = 2;
+  IntraSiteServiceType service_type     = 3;
+}
+
+message EnergySiteNetAPIRemoveDeviceResponse {
+  EnergySiteNetRecentlyRemovedDevice recently_removed = 1;
+}
+
+message EnergySiteNetAPIGetConfigRequest {
+  EnergySiteNetNetworkType network_type = 1;
+}
+
+message EnergySiteNetAPIGetConfigResponse {
+  EnergySiteNetConfig config            = 1;
+  EnergySiteNetNetworkType network_type = 2;
+}
+
+message EnergySiteNetMessages {
+  oneof message {
+    EnergySiteNetAPIAddDeviceRequest add_device_request       = 1;
+    EnergySiteNetAPIAddDeviceResponse add_device_response     = 2;
+    EnergySiteNetAPIRemoveDeviceRequest remove_device_request = 3;
+    EnergySiteNetAPIRemoveDeviceResponse remove_device_response = 4;
+    EnergySiteNetAPIGetConfigRequest get_config_request       = 5;
+    EnergySiteNetAPIGetConfigResponse get_config_response     = 6;
+  }
 }

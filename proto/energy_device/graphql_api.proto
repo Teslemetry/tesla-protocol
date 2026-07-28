@@ -1,0 +1,64 @@
+// TESLEMETRY SOURCE-OF-RECORD - no upstream.
+// Provenance: Tesla Energy gateway (TEG) local API, from our own
+// observations and contributions from the community
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "GraphQLApi";
+
+import "google/protobuf/wrappers.proto";
+
+enum GraphQLQueryFormat {
+  GRAPH_QL_QUERY_FORMAT_INVALID                  = 0;
+  GRAPH_QL_QUERY_FORMAT_RAW                      = 1;
+  GRAPH_QL_QUERY_FORMAT_SIGNED_SHA256_ECDSA_ASN1 = 2;
+}
+
+enum GraphQLStatus {
+  GRAPH_QL_STATUS_INVALID       = 0;
+  GRAPH_QL_STATUS_SUCCESS       = 1;
+  GRAPH_QL_STATUS_ERROR_PARTIAL = 2;
+  GRAPH_QL_STATUS_ERROR_FULL    = 3;
+}
+
+enum GraphQLErrorCode {
+  GRAPH_QL_ERROR_CODE_INVALID                       = 0;
+  GRAPH_QL_ERROR_CODE_FIELD_NOT_FOUND               = 1;
+  GRAPH_QL_ERROR_CODE_UNAUTHORIZED                  = 2;
+  GRAPH_QL_ERROR_CODE_RESOLVER_PROCESS_UNRESPONSIVE = 3;
+  GRAPH_QL_ERROR_CODE_RESPONSE_TOO_BIG              = 4;
+}
+
+message SignedGraphQLQuery {
+  uint32 version = 1;
+  bytes query    = 2;
+}
+
+message GraphQLError {
+  repeated string path  = 1;
+  GraphQLErrorCode code = 2;
+  string message        = 3;
+}
+
+message GraphQLAPIQueryRequest {
+  GraphQLQueryFormat format                  = 1;
+  bytes query                                = 2;
+  bytes signature                            = 3;
+  google.protobuf.StringValue variables_json = 4;
+}
+
+message GraphQLAPIQueryResponse {
+  GraphQLStatus status         = 1;
+  string data                  = 2;
+  repeated GraphQLError errors = 3;
+}
+
+message GraphQLMessages {
+  oneof message {
+    GraphQLAPIQueryRequest query_request   = 1;
+    GraphQLAPIQueryResponse query_response = 2;
+  }
+}

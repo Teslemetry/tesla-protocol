@@ -1,0 +1,313 @@
+// TESLEMETRY SOURCE-OF-RECORD - no upstream.
+// Provenance: Tesla Energy gateway (TEG) local API, from our own
+// observations and contributions from the community
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "PviApi";
+
+import "google/protobuf/wrappers.proto";
+import "device.proto";
+import "networking.proto";
+import "update.proto";
+import "energy.proto";
+import "neurio_meter_api.proto";
+
+enum PVInverterSolarInstallationType {
+  PV_INVERTER_SOLAR_INSTALLATION_TYPE_INVALID    = 0;
+  PV_INVERTER_SOLAR_INSTALLATION_TYPE_PV_PANEL   = 1;
+  PV_INVERTER_SOLAR_INSTALLATION_TYPE_SOLARGLASS = 2;
+}
+
+enum PVInverterPowerStatus {
+  PV_INVERTER_POWER_STATUS_INVALID      = 0;
+  PV_INVERTER_POWER_STATUS_OFF          = 1;
+  PV_INVERTER_POWER_STATUS_DC_CONNECTED = 2;
+  PV_INVERTER_POWER_STATUS_AC_PRODUCING = 3;
+}
+
+enum PVInverterEcuResetStatus {
+  PV_INVERTER_ECU_RESET_STATUS_INVALID         = 0;
+  PV_INVERTER_ECU_RESET_STATUS_NONE            = 1;
+  PV_INVERTER_ECU_RESET_STATUS_SUCCESS         = 2;
+  PV_INVERTER_ECU_RESET_STATUS_PROCESSING      = 3;
+  PV_INVERTER_ECU_RESET_STATUS_UNKNOWN_FAILURE = 4;
+}
+
+enum PVInverterEcu {
+  PV_INVERTER_ECU_INVALID = 0;
+  PV_INVERTER_ECU_PVCOM   = 1;
+  PV_INVERTER_ECU_PVAC    = 2;
+  PV_INVERTER_ECU_PVS     = 3;
+}
+
+enum PVInverterClearLogsStatus {
+  PV_INVERTER_CLEAR_LOGS_STATUS_INVALID   = 0;
+  PV_INVERTER_CLEAR_LOGS_STATUS_NONE      = 1;
+  PV_INVERTER_CLEAR_LOGS_STATUS_FAILURE   = 2;
+  PV_INVERTER_CLEAR_LOGS_STATUS_SUCCESS   = 3;
+  PV_INVERTER_CLEAR_LOGS_STATUS_ATTEMPTED = 4;
+}
+
+message PVStringVitals {
+  InstDCMeasurement dc_measurement = 1;
+  uint32 string_id                 = 2;
+  bool connected                   = 3;
+  bool locked_out                  = 4;
+}
+
+message PVInverterVitals {
+  uint32 uptime_s                             = 1;
+  repeated uint32 pvac_faults                 = 2;
+  repeated uint32 pvs_faults                  = 3;
+  InstACMeasurement ac_measurement_pvac       = 4;
+  bool site_shutdown_switch_open              = 5;
+  AccumulatedEnergy energy_today              = 6;
+  repeated PVStringVitals pv_string_vitals    = 7;
+  InstACMeasurement ac_measurement_site       = 8;
+  uint32 pvac_inv_state                       = 9;
+  uint32 pvac_state                           = 10;
+  GridComplianceStatus grid_compliance_status = 11;
+  repeated uint32 pvac_warnings               = 12;
+  repeated uint32 pvs_warnings                = 13;
+  uint32 pvs_state                            = 14;
+  InstACMeasurement ac_measurement_solar_rgm  = 15;
+}
+
+message PVInverterLifetimeStats {
+  uint64 uptime_s                   = 1;
+  uint32 alert_count                = 2;
+  AccumulatedEnergy energy_lifetime = 3;
+}
+
+message PVMeterInterface {
+  NeurioMeterInterface neurio = 1;
+}
+
+message PVGridCodeConfig {
+  string grid_code   = 1;
+  string region_info = 2;
+}
+
+message PVInverterSettings {
+  PVGridCodeConfig grid_code                              = 1;
+  repeated PVMeterInterface meters                        = 2;
+  PVInverterSolarInstallationType solar_installation_type = 3;
+  google.protobuf.FloatValue current_rating_override_a    = 4;
+}
+
+message PVInverterCanMessage {
+  uint32 can_id     = 1;
+  bytes can_payload = 2;
+}
+
+message PVIAPIGetSystemInfoRequest {
+}
+
+message PVIAPIGetSystemInfoResponse {
+  EcuId pvcom_id                   = 1;
+  EcuId pvac_id                    = 2;
+  EcuId pvs_id                     = 3;
+  FirmwareVersion firmware_version = 4;
+  float nominal_current_amps       = 5;
+  float nominal_apparent_power_va  = 6;
+}
+
+message PVIAPIGetVitalsRequest {
+}
+
+message PVIAPIGetVitalsResponse {
+  PVInverterVitals vitals = 1;
+}
+
+message PVIAPIGetLifetimeStatsRequest {
+}
+
+message PVIAPIGetLifetimeStatsResponse {
+  PVInverterLifetimeStats lifetime_stats = 1;
+}
+
+message PVIAPIGetConfigRequest {
+}
+
+message PVIAPIGetConfigResponse {
+  PVInverterSettings settings        = 1;
+  WifiConfig wifi_config             = 2;
+  NetworkInterface wifi              = 3;
+  NetworkInterface eth               = 4;
+  NetworkInterface gsm               = 5;
+  PVInverterPowerStatus power_status = 6;
+}
+
+message PVIAPIConfigureSettingsRequest {
+  PVInverterSettings settings = 1;
+}
+
+message PVIAPIConfigureSettingsResponse {
+  PVInverterSettings settings = 1;
+}
+
+message PVIAPIConfigureEthernetRequest {
+  NetworkInterfaceIPv4Config ip4_config = 1;
+}
+
+message PVIAPIConfigureEthernetResponse {
+  NetworkInterface eth = 1;
+}
+
+message PVIAPIConfigureGsmRequest {
+  bool enabled = 1;
+}
+
+message PVIAPIConfigureGsmResponse {
+  NetworkInterface gsm = 1;
+}
+
+message PVIAPIInverterResetRequest {
+  bool reset_pvcom = 1;
+  bool reset_pvac  = 2;
+  bool reset_pvs   = 3;
+}
+
+message PVIAPIInverterResetResponse {
+  PVInverterEcuResetStatus pvcom_status = 1;
+  PVInverterEcuResetStatus pvac_status  = 2;
+  PVInverterEcuResetStatus pvs_status   = 3;
+}
+
+message PVIAPISetOperationParamsRequest {
+  PVInverterPowerStatus power_status              = 1;
+  google.protobuf.FloatValue active_power_limit_w = 2;
+}
+
+message PVIAPISetOperationParamsResponse {
+  PVInverterPowerStatus power_status              = 1;
+  google.protobuf.FloatValue active_power_limit_w = 2;
+}
+
+message PVIAPISendCanMessageRequest {
+  PVInverterCanMessage can_message = 1;
+}
+
+message PVIAPISendCanMessageResponse {
+}
+
+message PVIAPIUdsWriteDataByIdentifierRequest {
+  PVInverterEcu ecu = 1;
+  uint32 did        = 2;
+  bytes payload     = 3;
+}
+
+message PVIAPIUdsWriteDataByIdentifierResponse {
+}
+
+message PVIAPICheckInternetRequest {
+}
+
+message PVIAPICheckInternetResponse {
+  NetworkInterface wifi = 1;
+  NetworkInterface eth  = 2;
+  NetworkInterface gsm  = 3;
+}
+
+message PVIAPIConfigureGridCodeRequest {
+  PVGridCodeConfig grid_code = 1;
+}
+
+message PVIAPIConfigureGridCodeResponse {
+  PVGridCodeConfig grid_code = 1;
+}
+
+message PVIAPIClearAlertsRequest {
+}
+
+message PVIAPIClearAlertsResponse {
+}
+
+message PVIAPITriggerDrLogRequest {
+  bool pvac = 1;
+  bool pvs  = 2;
+}
+
+message PVIAPITriggerDrLogResponse {
+}
+
+message PVIAPIClearLogsRequest {
+  bool telemetry = 1;
+  bool alerts    = 2;
+  bool drlog     = 3;
+}
+
+message PVIAPIClearLogsResponse {
+  PVInverterClearLogsStatus telemetry = 1;
+  PVInverterClearLogsStatus alerts    = 2;
+  PVInverterClearLogsStatus drlog     = 3;
+}
+
+message PVIAPIConfigureSolarInstallationTypeRequest {
+  PVInverterSolarInstallationType solar_installation_type = 1;
+}
+
+message PVIAPIConfigureSolarInstallationTypeResponse {
+  PVInverterSolarInstallationType solar_installation_type = 1;
+}
+
+message PVIAPIConfigureCurrentRatingOverrideRequest {
+  float current_rating_override_a = 1;
+}
+
+message PVIAPIConfigureCurrentRatingOverrideResponse {
+  float current_rating_override_a = 1;
+}
+
+message PVIAPIRemoveCurrentRatingOverrideRequest {
+}
+
+message PVIAPIRemoveCurrentRatingOverrideResponse {
+}
+
+message PVIMessages {
+  oneof message {
+    PVIAPIGetSystemInfoRequest get_system_info_request                                 = 1;
+    PVIAPIGetSystemInfoResponse get_system_info_response                               = 2;
+    PVIAPIGetVitalsRequest get_vitals_request                                          = 3;
+    PVIAPIGetVitalsResponse get_vitals_response                                        = 4;
+    PVIAPIGetLifetimeStatsRequest get_lifetime_stats_request                           = 5;
+    PVIAPIGetLifetimeStatsResponse get_lifetime_stats_response                         = 6;
+    PVIAPIGetConfigRequest get_config_request                                          = 7;
+    PVIAPIGetConfigResponse get_config_response                                        = 8;
+    PVIAPIConfigureSettingsRequest configure_settings_request                          = 9;
+    PVIAPIConfigureSettingsResponse configure_settings_response                        = 10;
+    PVIAPIConfigureEthernetRequest configure_ethernet_request                          = 11;
+    PVIAPIConfigureEthernetResponse configure_ethernet_response                        = 12;
+    PVIAPIConfigureGsmRequest configure_gsm_request                                    = 13;
+    PVIAPIConfigureGsmResponse configure_gsm_response                                  = 14;
+    PVIAPIInverterResetRequest inverter_reset_request                                  = 15;
+    PVIAPIInverterResetResponse inverter_reset_response                                = 16;
+    PVIAPISetOperationParamsRequest set_operation_params_request                       = 17;
+    PVIAPISetOperationParamsResponse set_operation_params_response                     = 18;
+    PVIAPISendCanMessageRequest send_can_message_request                               = 19;
+    PVIAPISendCanMessageResponse send_can_message_response                             = 20;
+    PVIAPIUdsWriteDataByIdentifierRequest uds_write_data_by_identifier_request         = 21;
+    PVIAPIUdsWriteDataByIdentifierResponse uds_write_data_by_identifier_response       = 22;
+    PVIAPICheckInternetRequest check_internet_request                                  = 23;
+    PVIAPICheckInternetResponse check_internet_response                                = 24;
+    PVIAPIConfigureGridCodeRequest configure_grid_code_request                         = 25;
+    PVIAPIConfigureGridCodeResponse configure_grid_code_response                       = 26;
+    PVIAPIClearAlertsRequest clear_alerts_request                                      = 27;
+    PVIAPIClearAlertsResponse clear_alerts_response                                    = 28;
+    PVIAPITriggerDrLogRequest trigger_dr_log_request                                   = 29;
+    PVIAPITriggerDrLogResponse trigger_dr_log_response                                 = 30;
+    PVIAPIClearLogsRequest clear_logs_request                                          = 31;
+    PVIAPIClearLogsResponse clear_logs_response                                        = 32;
+    PVIAPIConfigureSolarInstallationTypeRequest configure_solar_installation_type_request     = 33;
+    PVIAPIConfigureSolarInstallationTypeResponse configure_solar_installation_type_response   = 34;
+    PVIAPIConfigureCurrentRatingOverrideRequest configure_current_rating_override_request     = 35;
+    PVIAPIConfigureCurrentRatingOverrideResponse configure_current_rating_override_response   = 36;
+    PVIAPIRemoveCurrentRatingOverrideRequest remove_current_rating_override_request           = 37;
+    PVIAPIRemoveCurrentRatingOverrideResponse remove_current_rating_override_response         = 38;
+  }
+}

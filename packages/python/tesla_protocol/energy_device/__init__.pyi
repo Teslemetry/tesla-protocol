@@ -5,7 +5,13 @@ from . import device_pb2
 from . import energy_pb2
 from . import energy_site_net_pb2
 from . import error_pb2
+from . import filestore_api_pb2
+from . import graphql_api_pb2
+from . import intra_site_api_pb2
+from . import local_auth_api_pb2
 from . import networking_pb2
+from . import neurio_meter_api_pb2
+from . import pvi_api_pb2
 from . import teg_api_pb2
 from . import transport_pb2
 from . import update_pb2

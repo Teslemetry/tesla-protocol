@@ -64,6 +64,18 @@ message EcuId {
   string serial_number = 2;
 }
 
+message VIN {
+  string value = 1;
+}
+
+message UUIDv4Bytes {
+  bytes value = 1;
+}
+
+message UUIDv4 {
+  string text = 1;
+}
+
 message DeviceSignedPayload {
   bytes payload                             = 1;
   DeviceSignatureType device_signature_type = 2;
