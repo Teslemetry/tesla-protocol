@@ -1,0 +1,183 @@
+// TESLEMETRY SOURCE-OF-RECORD - no upstream.
+// Provenance: Tesla Energy gateway (TEG) local API, from our own
+// observations and contributions from the community
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "NeurioMeterApi";
+
+import "networking.proto";
+
+enum PowerType {
+  POWER_TYPE_INVALID    = 0;
+  POWER_TYPE_AC_1_PHASE = 1;
+  POWER_TYPE_AC_3_PHASE = 2;
+  POWER_TYPE_DC         = 3;
+}
+
+enum ConnectorType {
+  CONNECTOR_TYPE_INVALID                       = 0;
+  CONNECTOR_TYPE_CCS1                          = 1;
+  CONNECTOR_TYPE_CCS2                          = 2;
+  CONNECTOR_TYPE_GB                            = 3;
+  CONNECTOR_TYPE_NA                            = 4;
+  CONNECTOR_TYPE_TYPE_2                        = 5;
+  CONNECTOR_TYPE_J1772                         = 6;
+  CONNECTOR_TYPE_INDISTINGUISHABLE_DUAL_HANDLE = 7;
+  CONNECTOR_TYPE_UNKNOWN                       = 8;
+  CONNECTOR_TYPE_MCS                           = 9;
+}
+
+enum NeurioConnectionStatus {
+  NEURIO_CONNECTION_STATUS_INVALID                = 0;
+  NEURIO_CONNECTION_STATUS_NO_COMMS               = 1;
+  NEURIO_CONNECTION_STATUS_PAIRING                = 2;
+  NEURIO_CONNECTION_STATUS_CONNECTED              = 3;
+  NEURIO_CONNECTION_STATUS_CONFIG_CHANGE_UNDERWAY = 4;
+}
+
+enum NeurioConnectionError {
+  NEURIO_CONNECTION_ERROR_INVALID         = 0;
+  NEURIO_CONNECTION_ERROR_NONE            = 1;
+  NEURIO_CONNECTION_ERROR_UNKNOWN         = 2;
+  NEURIO_CONNECTION_ERROR_WIFI_AP         = 3;
+  NEURIO_CONNECTION_ERROR_PAIRING_COMMAND = 4;
+  NEURIO_CONNECTION_ERROR_REBOOT_COMMAND  = 5;
+}
+
+enum NeurioCtType {
+  NEURIO_CT_TYPE_INVALID   = 0;
+  NEURIO_CT_TYPE_MISSING   = 1;
+  NEURIO_CT_TYPE_200A      = 2;
+  NEURIO_CT_TYPE_800A      = 3;
+  NEURIO_CT_TYPE_UNIVERSAL = 4;
+}
+
+enum NeurioCtConfigRequestStatus {
+  NEURIO_CT_CONFIG_REQUEST_STATUS_INVALID        = 0;
+  NEURIO_CT_CONFIG_REQUEST_STATUS_SUCCESS        = 1;
+  NEURIO_CT_CONFIG_REQUEST_STATUS_FAILED_NETWORK = 2;
+  NEURIO_CT_CONFIG_REQUEST_STATUS_FAILED_HTTP    = 3;
+}
+
+enum NeurioCompatibleMeterType {
+  NEURIO_COMPATIBLE_METER_TYPE_INVALID = 0;
+  NEURIO_COMPATIBLE_METER_TYPE_NEURIO  = 1;
+  NEURIO_COMPATIBLE_METER_TYPE_TRM     = 2;
+}
+
+message NeurioCTConfig {
+  int32 location                = 1;
+  float real_power_scale_factor = 2;
+}
+
+message NeurioCTReading {
+  float real_power_w        = 1;
+  float scaled_real_power_w = 2;
+  float current_amps        = 3;
+}
+
+message NeurioMeterReadings {
+  repeated NeurioCTReading ct_readings = 1;
+}
+
+message NeurioMeterConnection {
+  NeurioConnectionStatus connection_status = 1;
+  NeurioConnectionError connection_error   = 2;
+  Rssi rssi                                = 3;
+  string firmware_version                  = 4;
+  NeurioMeterReadings meter_readings       = 5;
+}
+
+message NeurioMeterConfig {
+  string short_id                      = 1;
+  string serial                        = 2;
+  repeated NeurioCTConfig ct_config    = 3;
+  NeurioCompatibleMeterType meter_type = 4;
+}
+
+message NeurioMeterInterface {
+  NeurioMeterConfig config         = 1;
+  NeurioMeterConnection connection = 2;
+}
+
+message NeurioMeterAPIAddMeterRequest {
+  NeurioMeterConfig config = 1;
+}
+
+message NeurioMeterAPIAddMeterResponse {
+  NeurioMeterConfig config = 1;
+}
+
+message NeurioMeterAPIRemoveMeterRequest {
+  string serial = 1;
+}
+
+message NeurioMeterAPIRemoveMeterResponse {
+}
+
+message NeurioMeterAPIConfigureCtsRequest {
+  string serial                     = 1;
+  repeated NeurioCTConfig ct_config = 2;
+}
+
+message NeurioMeterAPIConfigureCtsResponse {
+  repeated NeurioCTConfig ct_config = 1;
+}
+
+message NeurioMeterAPIDetectWiredRequest {
+}
+
+message NeurioMeterAPIDetectWiredResponse {
+}
+
+message NeurioMeterAPIGetNeurioCtTypeRequest {
+  string serial = 1;
+}
+
+message NeurioMeterAPIGetNeurioCtTypeResponse {
+  string serial                      = 1;
+  NeurioCtConfigRequestStatus status = 2;
+  NeurioCtType ct1_type              = 3;
+  NeurioCtType ct2_type              = 4;
+  NeurioCtType ct3_type              = 5;
+  NeurioCtType ct4_type              = 6;
+}
+
+message NeurioMeterAPISetNeurioCtTypeRequest {
+  string serial         = 1;
+  reserved 2;
+  NeurioCtType ct1_type = 3;
+  NeurioCtType ct2_type = 4;
+  NeurioCtType ct3_type = 5;
+  NeurioCtType ct4_type = 6;
+}
+
+message NeurioMeterAPISetNeurioCtTypeResponse {
+  string serial                      = 1;
+  NeurioCtConfigRequestStatus status = 2;
+  NeurioCtType ct1_type              = 3;
+  NeurioCtType ct2_type              = 4;
+  NeurioCtType ct3_type              = 5;
+  NeurioCtType ct4_type              = 6;
+}
+
+message NeurioMeterMessages {
+  oneof message {
+    NeurioMeterAPIAddMeterRequest add_meter_request               = 1;
+    NeurioMeterAPIAddMeterResponse add_meter_response             = 2;
+    NeurioMeterAPIRemoveMeterRequest remove_meter_request         = 3;
+    NeurioMeterAPIRemoveMeterResponse remove_meter_response       = 4;
+    NeurioMeterAPIConfigureCtsRequest configure_cts_request       = 5;
+    NeurioMeterAPIConfigureCtsResponse configure_cts_response     = 6;
+    NeurioMeterAPIDetectWiredRequest detect_wired_request         = 7;
+    NeurioMeterAPIDetectWiredResponse detect_wired_response       = 8;
+    NeurioMeterAPIGetNeurioCtTypeRequest get_neurio_ct_type_request     = 9;
+    NeurioMeterAPIGetNeurioCtTypeResponse get_neurio_ct_type_response   = 10;
+    NeurioMeterAPISetNeurioCtTypeRequest set_neurio_ct_type_request     = 11;
+    NeurioMeterAPISetNeurioCtTypeResponse set_neurio_ct_type_response   = 12;
+  }
+}

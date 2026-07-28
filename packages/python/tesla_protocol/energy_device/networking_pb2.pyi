@@ -187,19 +187,23 @@ class NetworkConnectivityStatus(_message.Message):
         ...
 
 class NetworkInterface(_message.Message):
-    __slots__ = ('mac_address', 'enabled', 'active_route', 'ipv4_config', 'connectivity_status')
+    __slots__ = ('mac_address', 'enabled', 'active_route', 'ipv4_config', 'connectivity_status', 'device_state', 'device_state_reason')
     MAC_ADDRESS_FIELD_NUMBER: _ClassVar[int]
     ENABLED_FIELD_NUMBER: _ClassVar[int]
     ACTIVE_ROUTE_FIELD_NUMBER: _ClassVar[int]
     IPV4_CONFIG_FIELD_NUMBER: _ClassVar[int]
     CONNECTIVITY_STATUS_FIELD_NUMBER: _ClassVar[int]
+    DEVICE_STATE_FIELD_NUMBER: _ClassVar[int]
+    DEVICE_STATE_REASON_FIELD_NUMBER: _ClassVar[int]
     mac_address: bytes
     enabled: bool
     active_route: bool
     ipv4_config: NetworkInterfaceIPv4Config
     connectivity_status: NetworkConnectivityStatus
+    device_state: NetworkDeviceState
+    device_state_reason: NetworkDeviceStateReason
 
-    def __init__(self, mac_address: _Optional[bytes]=..., enabled: bool=..., active_route: bool=..., ipv4_config: _Optional[_Union[NetworkInterfaceIPv4Config, _Mapping]]=..., connectivity_status: _Optional[_Union[NetworkConnectivityStatus, _Mapping]]=...) -> None:
+    def __init__(self, mac_address: _Optional[bytes]=..., enabled: bool=..., active_route: bool=..., ipv4_config: _Optional[_Union[NetworkInterfaceIPv4Config, _Mapping]]=..., connectivity_status: _Optional[_Union[NetworkConnectivityStatus, _Mapping]]=..., device_state: _Optional[_Union[NetworkDeviceState, str]]=..., device_state_reason: _Optional[_Union[NetworkDeviceStateReason, str]]=...) -> None:
         ...
 
 class CellularEID(_message.Message):

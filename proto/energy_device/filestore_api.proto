@@ -1,0 +1,69 @@
+// TESLEMETRY SOURCE-OF-RECORD - no upstream.
+// Provenance: Tesla Energy gateway (TEG) local API, from our own
+// observations and contributions from the community
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "FileStoreApi";
+
+enum FileStoreAPIDomain {
+  FILE_STORE_API_DOMAIN_INVALID                  = 0;
+  FILE_STORE_API_DOMAIN_CONFIG_JSON              = 1;
+  FILE_STORE_API_DOMAIN_GRID_CODE_REGIONS_CSV    = 2;
+  FILE_STORE_API_DOMAIN_CERTIFIED_INSTALLERS_CSV = 3;
+  FILE_STORE_API_DOMAIN_SUPERCHARGER_FILES       = 4;
+  FILE_STORE_API_DOMAIN_OPTICASTER_FILES         = 5;
+  FILE_STORE_API_DOMAIN_WALLBOX_CONFIG           = 6;
+  FILE_STORE_API_DOMAIN_OCPP_CSMS_ROOT_CA        = 7;
+  FILE_STORE_API_DOMAIN_OPTIMUS_CHARGER_CONFIG   = 9;
+}
+
+message FileStoreAPIFile {
+  string name = 1;
+  bytes blob  = 100;
+}
+
+message FileStoreAPIForceWriteFileRequest {
+  FileStoreAPIDomain domain = 1;
+  FileStoreAPIFile file     = 2;
+}
+
+message FileStoreAPIForceWriteFileResponse {
+  bytes hash = 1;
+}
+
+message FileStoreAPIUpdateFileRequest {
+  FileStoreAPIDomain domain = 1;
+  FileStoreAPIFile file     = 2;
+  bytes hash                = 3;
+}
+
+message FileStoreAPIUpdateFileResponse {
+  FileStoreAPIFile file = 1;
+  bytes hash            = 2;
+}
+
+message FileStoreAPIReadFileRequest {
+  FileStoreAPIDomain domain = 1;
+  string name               = 2;
+  bytes if_different_hash   = 3;
+}
+
+message FileStoreAPIReadFileResponse {
+  FileStoreAPIFile file = 1;
+  bytes hash            = 2;
+}
+
+message FileStoreMessages {
+  oneof message {
+    FileStoreAPIReadFileRequest read_file_request               = 1;
+    FileStoreAPIReadFileResponse read_file_response             = 2;
+    FileStoreAPIForceWriteFileRequest force_write_file_request   = 3;
+    FileStoreAPIForceWriteFileResponse force_write_file_response = 4;
+    FileStoreAPIUpdateFileRequest update_file_request           = 5;
+    FileStoreAPIUpdateFileResponse update_file_response         = 6;
+  }
+}

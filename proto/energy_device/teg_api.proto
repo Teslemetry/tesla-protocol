@@ -10,6 +10,228 @@ option java_package = "com.tesla.generated.energy_device.v1";
 option java_outer_classname = "TegApi";
 
 import "google/protobuf/timestamp.proto";
+import "device.proto";
+import "networking.proto";
+import "common_api.proto";
+
+message TEGSettings {
+}
+
+message Powerwall2PhaseDetectionParameters {
+  string din = 1;
+}
+
+message TEGAPIGetConfigRequest {
+}
+
+message TEGAPIGetConfigResponse {
+  TEGSettings settings   = 1;
+  WifiConfig wifi_config = 2;
+  NetworkInterface wifi  = 3;
+  NetworkInterface eth   = 4;
+  NetworkInterface gsm   = 5;
+  DeviceType device_type = 6;
+}
+
+enum TEGIslandMode {
+  TEG_ISLAND_MODE_INVALID                             = 0;
+  TEG_ISLAND_MODE_AUTO_ACTIVE                         = 1;
+  TEG_ISLAND_MODE_READY                               = 2;
+  TEG_ISLAND_MODE_INTENTIONAL                         = 3;
+  TEG_ISLAND_MODE_PQ                                  = 4;
+  TEG_ISLAND_MODE_OFF                                 = 5;
+  TEG_ISLAND_MODE_INTENTIONAL_WITH_RECONNECT_FAILSAFE = 6;
+}
+
+enum TEGSetIslandModeResult {
+  TEG_SET_ISLAND_MODE_RESULT_INVALID                          = 0;
+  TEG_SET_ISLAND_MODE_RESULT_ACCEPTED                         = 1;
+  TEG_SET_ISLAND_MODE_RESULT_REJECTED_NOT_READY_FOR_ISLANDING = 2;
+  TEG_SET_ISLAND_MODE_RESULT_REJECTED_LOAD_DROP_EXPECTED      = 3;
+  TEG_SET_ISLAND_MODE_RESULT_REJECTED_LOW_ENERGY              = 4;
+  TEG_SET_ISLAND_MODE_RESULT_REJECTED_EXCESSIVE_SOLAR         = 5;
+}
+
+message TEGAPISetIslandModeRequest {
+  TEGIslandMode mode = 1;
+  bool force         = 2;
+}
+
+message TEGAPISetIslandModeResponse {
+  TEGSetIslandModeResult result = 1;
+}
+
+message TEGAPITriggerIslandingBlackStartRequest {
+}
+
+message TEGAPITriggerIslandingBlackStartResponse {
+}
+
+message TEGAPITriggerAssetManifestUploadRequest {
+}
+
+message TEGAPITriggerAssetManifestUploadResponse {
+}
+
+message TEGAPITriggerPowerwall2EnumerationRequest {
+}
+
+message TEGAPITriggerPowerwall2EnumerationResponse {
+}
+
+message TEGAPITriggerEsCanFirmwareUpdateRequest {
+}
+
+message TEGAPITriggerEsCanFirmwareUpdateResponse {
+}
+
+message TEGAPITriggerPW3CanFirmwareUpdateRequest {
+}
+
+message TEGAPITriggerPW3CanFirmwareUpdateResponse {
+}
+
+message TEGAPITriggerPowerwall3EnumerationRequest {
+}
+
+message TEGAPITriggerPowerwall3EnumerationResponse {
+}
+
+message TEGAPIDispatchBatteryPowerRequest_ResumeDeviceOperatingMode {
+}
+
+message TEGAPIDispatchBatteryPowerRequest_RealPowerCommand {
+  double power_watts      = 1;
+  uint32 duration_seconds = 2;
+}
+
+message TEGAPIDispatchBatteryPowerRequest {
+  TEGAPIDispatchBatteryPowerRequest_ResumeDeviceOperatingMode resume_device_mode = 1;
+  TEGAPIDispatchBatteryPowerRequest_RealPowerCommand real_power                  = 2;
+}
+
+message TEGAPIDispatchBatteryPowerResponse {
+}
+
+message TEGAPIDetectWiredMetersRequest {
+}
+
+message TEGAPIDetectWiredMetersResponse {
+}
+
+message TEGAPIRegisterRequest {
+  // Field 1 (registration_request) is a type from a separate, not-yet-modeled
+  // proto package; left unmodeled here.
+}
+
+message TEGAPIRegisterResponse {
+  int32 failure = 1;
+  // Field 2 (registration_response) is a type from a separate, not-yet-modeled
+  // proto package; left unmodeled here.
+}
+
+message TEGAPITriggerPowerwall2PhaseDetectionRequest {
+  repeated Powerwall2PhaseDetectionParameters powerwalls = 1;
+}
+
+message TEGAPITriggerPowerwall2PhaseDetectionResponse {
+}
+
+message TEGAPIResetPowerwall2PhaseDetectionRequest {
+}
+
+message TEGAPIResetPowerwall2PhaseDetectionResponse {
+}
+
+message TEGAPIForceWifiScanRequest {
+}
+
+message TEGAPIForceWifiScanResponse {
+}
+
+message TEGAPIStartPowerwall2InverterSelfTestsRequest {
+}
+
+message TEGAPIStartPowerwall2InverterSelfTestsResponse {
+}
+
+message TEGAPIStopPowerwall2InverterSelfTestsRequest {
+}
+
+message TEGAPIStopPowerwall2InverterSelfTestsResponse {
+}
+
+message TEGAPIStartPowerwall2BubbleShedRequest {
+}
+
+message TEGAPIStartPowerwall2BubbleShedResponse {
+}
+
+message TEGAPIClearSolarInverterAlertsRequest {
+  string din = 1;
+}
+
+message TEGAPIClearSolarInverterAlertsResponse {
+}
+
+message TEGAPIGetWifiConfigWithCredentialsRequest {
+}
+
+message TEGAPIGetWifiConfigWithCredentialsResponse {
+  WifiConfig wifi_config = 1;
+}
+
+message TEGAPIDisableBatteriesRequest_BatteryDisableRequest {
+  string din   = 1;
+  bool disable = 2;
+}
+
+message TEGAPIDisableBatteriesRequest {
+  repeated TEGAPIDisableBatteriesRequest_BatteryDisableRequest battery_disable_requests = 1;
+}
+
+message TEGAPIDisableBatteriesResponse {
+}
+
+message TEGAPIBypassBatterySoeAdjustmentConstraintsRequest {
+  bool enable           = 1;
+  uint32 duration_hours = 2;
+}
+
+message TEGAPIBypassBatterySoeAdjustmentConstraintsResponse {
+}
+
+message TEGAPIEnsureCertificateRequest_CSIPSouthAustraliaPowerNetworks {
+}
+
+message TEGAPIEnsureCertificateRequest_CSIPCitiPowerPowercorUnited {
+}
+
+message TEGAPIEnsureCertificateRequest_CSIPAusNet {
+}
+
+message TEGAPIEnsureCertificateRequest_CSIPJemena {
+}
+
+message TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLD {
+}
+
+message TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy {
+}
+
+message TEGAPIEnsureCertificateRequest {
+  bool force_renew                                                                                  = 1;
+  TEGAPIEnsureCertificateRequest_CSIPSouthAustraliaPowerNetworks csip_south_australia_power_networks = 2;
+  TEGAPIEnsureCertificateRequest_CSIPCitiPowerPowercorUnited csip_citipower_powercor_united          = 3;
+  TEGAPIEnsureCertificateRequest_CSIPAusNet csip_ausnet                                              = 4;
+  TEGAPIEnsureCertificateRequest_CSIPJemena csip_jemena                                              = 5;
+  TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLD csip_energex_ergon_energy_qld             = 6;
+  TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy csip_western_power_synergy                  = 7;
+}
+
+message TEGAPIEnsureCertificateResponse {
+  bool certificate_exists = 1;
+}
 
 message ControlEventSchedulingInfo {
   google.protobuf.Timestamp start_time = 1;
@@ -48,87 +270,313 @@ message TEGAPIGetBackupEventsResponse {
   repeated BackupEvent backup_events    = 2;
 }
 
-message TEGAPIRegisterRequest {
+message CsmsPropertiesRequest {
 }
 
-message TEGAPIRegisterResponse {
+enum CanvasSiteStatus {
+  CANVAS_SITE_STATUS_INVALID    = 0;
+  CANVAS_SITE_STATUS_IS_CANVAS  = 1;
+  CANVAS_SITE_STATUS_NOT_CANVAS = 2;
+  CANVAS_SITE_STATUS_NOT_FOUND  = 3;
+}
+
+message CsmsProperties {
+  bytes csms_root_ca           = 1;
+  string csms_url              = 2;
+  string charge_point_operator = 3;
+}
+
+message CsmsPropertiesResponse {
+  CanvasSiteStatus canvas_site_status = 1;
+  CsmsProperties csms_properties      = 2;
+}
+
+message TEGAPIGetCsmsPropertiesRequest {
+  CsmsPropertiesRequest request = 1;
+}
+
+message TEGAPIGetCsmsPropertiesResponse {
+  CsmsPropertiesResponse response = 1;
+}
+
+message TEGAPIConfigureOcppRequest {
+  string csms_base_url = 1;
+}
+
+message TEGAPIConfigureOcppResponse {
+}
+
+message TEGAPIStartProtectionTripSelfTestRequest {
+  repeated string tests_to_run               = 1;
+  bool disable_field_limits                  = 2;
+  bool disable_disconnect_on_failure         = 3;
+  bool disable_abort_on_failure              = 4;
+  uint32 fast_forward_to_step_before_nominal = 5;
+  uint32 repetitions                         = 6;
+  bool disable_inverter_fast_trips           = 7;
+}
+
+message TEGAPIStartProtectionTripSelfTestResponse {
+}
+
+message TEGAPIStopProtectionTripSelfTestRequest {
+}
+
+message TEGAPIStopProtectionTripSelfTestResponse {
+}
+
+message TEGAPIProvisionEatonSmartBreakerRequest {
+  string device_id                  = 1;
+  bytes broadcast_primary_udp_key   = 2;
+  bytes broadcast_secondary_udp_key = 3;
+  bytes unicast_primary_udp_key     = 4;
+  bytes unicast_secondary_udp_key   = 5;
+}
+
+message TEGAPIProvisionEatonSmartBreakerResponse {
+}
+
+message TEGAPIIdentifyEatonSmartBreakerRequest {
+  string device_id = 1;
+}
+
+message TEGAPIIdentifyEatonSmartBreakerResponse {
+}
+
+message TEGAPITriggerPvacFanSelfTestRequest {
+  uint32 beid = 1;
+}
+
+message TEGAPITriggerPvacFanSelfTestResponse {
+}
+
+message TEGAPIProxyPrepareRegistrationPayloadRequest {
+  CommonAPIPrepareRegistrationPayloadRequest request = 1;
+  Din target_din                                     = 2;
+}
+
+message TEGAPIProxyPrepareRegistrationPayloadResponse {
+  CommonAPIPrepareRegistrationPayloadResponse response = 1;
+}
+
+message TEGAPITriggerWallboxVehicleAbsentSelfTestRequest {
+}
+
+message TEGAPITriggerWallboxVehicleAbsentSelfTestResponse {
+}
+
+message TEGAPICustomerResetRequest {
+}
+
+message TEGAPICustomerResetResponse {
+}
+
+message TEGAPIDelayBatteryCalibrationRequest {
+  uint32 delay_hours = 1;
+}
+
+message TEGAPIDelayBatteryCalibrationResponse {
+}
+
+message TEGAPIGetDelayBatteryCalibrationStatusRequest {
+}
+
+message TEGAPIGetDelayBatteryCalibrationStatusResponse {
+  uint32 calibration_delays_left             = 1;
+  uint32 calibration_delay_remaining_seconds = 2;
+  uint32 max_calibration_delays              = 3;
+}
+
+message ControllableDeviceProgram_Key {
+  enum Priority {
+    PRIORITY_INVALID            = 0;
+    PRIORITY_CUSTOMER_DEFAULT   = 5000;
+    PRIORITY_CUSTOMER_AUTOMATIC = 10000;
+    PRIORITY_CUSTOMER_OVERRIDE  = 20000;
+  }
+  string device_id  = 1;
+  Priority priority = 2;
+}
+
+message ControllableDeviceProgram_Settings {
+  enum ContactorState {
+    CONTACTOR_STATE_INVALID = 0;
+    CONTACTOR_STATE_OPEN    = 1;
+    CONTACTOR_STATE_CLOSED  = 2;
+  }
+  ContactorState contactor_state = 1;
+}
+
+message ControllableDeviceProgram_Schedule_Boundary {
+  enum StaticCondition {
+    STATIC_CONDITION_INVALID = 0;
+    STATIC_CONDITION_ALWAYS  = 1;
+    STATIC_CONDITION_NEVER   = 2;
+  }
+  enum IslandingState {
+    ISLANDING_STATE_INVALID  = 0;
+    ISLANDING_STATE_ON_GRID  = 1;
+    ISLANDING_STATE_OFF_GRID = 2;
+  }
+  enum StateOfEnergy {
+    STATE_OF_ENERGY_INVALID              = 0;
+    STATE_OF_ENERGY_ABOVE_BACKUP_RESERVE = 1;
+    STATE_OF_ENERGY_BELOW_BACKUP_RESERVE = 2;
+  }
+  StaticCondition static_condition    = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  IslandingState islanding_state      = 3;
+  StateOfEnergy state_of_energy       = 4;
+}
+
+message ControllableDeviceProgram_Schedule {
+  google.protobuf.Timestamp start  = 1;
+  google.protobuf.Timestamp end    = 2;
+  google.protobuf.Timestamp expiry = 3;
+}
+
+message ControllableDeviceProgram {
+  ControllableDeviceProgram_Key key           = 1;
+  ControllableDeviceProgram_Settings settings = 2;
+  ControllableDeviceProgram_Schedule schedule = 3;
+}
+
+message TEGAPIGetControllableDeviceProgramsRequest {
+  repeated string device_ids = 1;
+}
+
+message TEGAPIGetControllableDeviceProgramsResponse {
+  repeated ControllableDeviceProgram active_programs   = 1;
+  repeated ControllableDeviceProgram inactive_programs = 2;
+}
+
+message TEGAPIUpdateControllableDeviceProgramsRequest {
+  repeated ControllableDeviceProgram updated_programs = 1;
+}
+
+message TEGAPIUpdateControllableDeviceProgramsResponse {
+}
+
+message TEGAPIDeleteControllableDeviceProgramsRequest {
+  reserved 1;
+  repeated string deletion_keys = 2;
+}
+
+message TEGAPIDeleteControllableDeviceProgramsResponse {
+}
+
+message TEGAPIClearPowerwall3LockoutAlertsRequest {
+  string din = 1;
+}
+
+message TEGAPIClearPowerwall3LockoutAlertsResponse {
+}
+
+message TEGAPIRetrieveSiteUuidRequest {
+}
+
+message TEGAPIRetrieveSiteUuidResponse {
+  // Field 1 (response) is a type from a separate, not-yet-modeled proto
+  // package; left unmodeled here.
+}
+
+message TEGAPIRetrieveSiteSuggestionRequest {
+  // Field 1 (request) is a type from a separate, not-yet-modeled proto
+  // package; left unmodeled here.
+}
+
+message TEGAPIRetrieveSiteSuggestionResponse {
+  // Field 1 (response) is a type from a separate, not-yet-modeled proto
+  // package; left unmodeled here.
 }
 
 message TEGMessages {
   oneof message {
-    //TEGAPIGetConfigRequest get_config_request                                                              = 1;
-    //TEGAPIGetConfigResponse get_config_response                                                            = 2;
-    //TEGAPISetIslandModeRequest set_island_mode_request                                                     = 3;
-    //TEGAPISetIslandModeResponse set_island_mode_response                                                   = 4;
-    //TEGAPITriggerIslandingBlackStartRequest trigger_islanding_black_start_request                          = 5;
-    //TEGAPITriggerIslandingBlackStartResponse trigger_islanding_black_start_response                        = 6;
-    //TEGAPITriggerAssetManifestUploadRequest trigger_asset_manifest_upload_request                          = 7;
-    //TEGAPITriggerAssetManifestUploadResponse trigger_asset_manifest_upload_response                        = 8;
-    //TEGAPITriggerPowerwall2EnumerationRequest trigger_powerwall2_enumeration_request                       = 9;
-    //TEGAPITriggerPowerwall2EnumerationResponse trigger_powerwall2_enumeration_response                     = 10;
-    //TEGAPITriggerEsCanFirmwareUpdateRequest trigger_es_can_firmware_update_request                         = 11;
-    //TEGAPITriggerEsCanFirmwareUpdateResponse trigger_es_can_firmware_update_response                       = 12;
-    //TEGAPIRegisterRequest register_request                                                                 = 13;
-    //TEGAPIRegisterResponse register_response                                                               = 14;
-    //TEGAPITriggerPowerwall2PhaseDetectionRequest trigger_powerwall2_phase_detection_request                = 15;
-    //TEGAPITriggerPowerwall2PhaseDetectionResponse trigger_powerwall2_phase_detection_response              = 16;
-    //TEGAPIResetPowerwall2PhaseDetectionRequest reset_powerwall2_phase_detection_request                    = 17;
-    //TEGAPIResetPowerwall2PhaseDetectionResponse reset_powerwall2_phase_detection_response                  = 18;
-    //TEGAPIForceWifiScanRequest force_wifi_scan_request                                                     = 19;
-    //TEGAPIForceWifiScanResponse force_wifi_scan_response                                                   = 20;
-    //TEGAPIStartPowerwall2InverterSelfTestsRequest start_powerwall2_inverter_self_tests_request             = 21;
-    //TEGAPIStartPowerwall2InverterSelfTestsResponse start_powerwall2_inverter_self_tests_response           = 22;
-    //TEGAPIStopPowerwall2InverterSelfTestsRequest stop_powerwall2_inverter_self_tests_request               = 23;
-    //TEGAPIStopPowerwall2InverterSelfTestsResponse stop_powerwall2_inverter_self_tests_response             = 24;
-    //TEGAPIStartPowerwall2BubbleShedRequest start_powerwall2_bubble_shed_request                            = 25;
-    //TEGAPIStartPowerwall2BubbleShedResponse start_powerwall2_bubble_shed_response                          = 26;
-    //TEGAPIClearSolarInverterAlertsRequest clear_solar_inverter_alerts_request                              = 27;
-    //TEGAPIClearSolarInverterAlertsResponse clear_solar_inverter_alerts_response                            = 28;
-    //TEGAPIGetWifiConfigWithCredentialsRequest get_wifi_config_with_credentials_request                     = 29;
-    //TEGAPIGetWifiConfigWithCredentialsResponse get_wifi_config_with_credentials_response                   = 30;
-    //TEGAPIDisableBatteriesRequest disable_batteries_request                                                = 31;
-    //TEGAPIDisableBatteriesResponse disable_batteries_response                                              = 32;
-    //TEGAPITriggerPW3CanFirmwareUpdateRequest trigger_p_w3_can_firmware_update_request                      = 33;
-    //TEGAPITriggerPW3CanFirmwareUpdateResponse trigger_p_w3_can_firmware_update_response                    = 34;
-    //TEGAPITriggerPowerwall3EnumerationRequest trigger_powerwall3_enumeration_request                       = 35;
-    //TEGAPITriggerPowerwall3EnumerationResponse trigger_powerwall3_enumeration_response                     = 36;
-    //TEGAPIDispatchBatteryPowerRequest dispatch_battery_power_request                                       = 37;
-    //TEGAPIDispatchBatteryPowerResponse dispatch_battery_power_response                                     = 38;
-    //TEGAPIDetectWiredMetersRequest detect_wired_meters_request                                             = 39;
-    //TEGAPIDetectWiredMetersResponse detect_wired_meters_response                                           = 40;
-    //TEGAPIBypassBatterySoeAdjustmentConstraintsRequest bypass_battery_soe_adjustment_constraints_request   = 41;
-    //TEGAPIBypassBatterySoeAdjustmentConstraintsResponse bypass_battery_soe_adjustment_constraints_response = 42;
-    //TEGAPIEnsureCertificateRequest ensure_certificate_request                                              = 43;
-    //TEGAPIEnsureCertificateResponse ensure_certificate_response                                            = 44;
-    TEGAPIScheduleManualBackupEventRequest schedule_manual_backup_event_request                              = 45;
-    TEGAPIScheduleManualBackupEventResponse schedule_manual_backup_event_response                            = 46;
-    TEGAPICancelManualBackupEventRequest cancel_manual_backup_event_request                                  = 47;
-    TEGAPICancelManualBackupEventResponse cancel_manual_backup_event_response                                = 48;
-    TEGAPIGetBackupEventsRequest get_backup_events_request                                                   = 49;
-    TEGAPIGetBackupEventsResponse get_backup_events_response                                                 = 50;
-    //TEGAPIGetCsmsPropertiesRequest get_csms_properties_request                                             = 51;
-    //TEGAPIGetCsmsPropertiesResponse get_csms_properties_response                                           = 52;
-    //TEGAPIConfigureOcppRequest configure_ocpp_request                                                      = 53;
-    //TEGAPIConfigureOcppResponse configure_ocpp_response                                                    = 54;
-    //TEGAPIRetrieveSiteUuidRequest retrieve_site_uuid_request                                               = 55;
-    //TEGAPIRetrieveSiteUuidResponse retrieve_site_uuid_response                                             = 56;
-    //TEGAPIRetrieveSiteSuggestionRequest retrieve_site_suggestion_request                                   = 57;
-    //TEGAPIRetrieveSiteSuggestionResponse retrieve_site_suggestion_response                                 = 58;
-    //TEGAPIStartProtectionTripSelfTestRequest start_protection_trip_self_test_request                       = 59;
-    //TEGAPIStartProtectionTripSelfTestResponse start_protection_trip_self_test_response                     = 60;
-    //TEGAPIStopProtectionTripSelfTestRequest stop_protection_trip_self_test_request                         = 61;
-    //TEGAPIStopProtectionTripSelfTestResponse stop_protection_trip_self_test_response                       = 62;
-    //TEGAPIProvisionEatonSmartBreakerRequest provision_eaton_smart_breaker_request                          = 63;
-    //TEGAPIProvisionEatonSmartBreakerResponse provision_eaton_smart_breaker_response                        = 64;
-    //TEGAPIIdentifyEatonSmartBreakerRequest identify_eaton_smart_breaker_request                            = 65;
-    //TEGAPIIdentifyEatonSmartBreakerResponse identify_eaton_smart_breaker_response                          = 66;
-    //TEGAPITriggerPvacFanSelfTestRequest trigger_pvac_fan_self_test_request                                 = 67;
-    //TEGAPITriggerPvacFanSelfTestResponse trigger_pvac_fan_self_test_response                               = 68;
-    //TEGAPIProxyPrepareRegistrationPayloadRequest proxy_prepare_registration_payload_request                = 69;
-    //TEGAPIProxyPrepareRegistrationPayloadResponse proxy_prepare_registration_payload_response              = 70;
-    //TEGAPITriggerWallboxVehicleAbsentSelfTestRequest trigger_wallbox_vehicle_absent_self_test_request      = 71;
-    //TEGAPITriggerWallboxVehicleAbsentSelfTestResponse trigger_wallbox_vehicle_absent_self_test_response    = 72;
-    //TEGAPICustomerResetRequest customer_reset_request                                                      = 73;
-    //TEGAPICustomerResetResponse customer_reset_response                                                    = 74;
+    TEGAPIGetConfigRequest get_config_request                                                              = 1;
+    TEGAPIGetConfigResponse get_config_response                                                            = 2;
+    TEGAPISetIslandModeRequest set_island_mode_request                                                     = 3;
+    TEGAPISetIslandModeResponse set_island_mode_response                                                   = 4;
+    TEGAPITriggerIslandingBlackStartRequest trigger_islanding_black_start_request                          = 5;
+    TEGAPITriggerIslandingBlackStartResponse trigger_islanding_black_start_response                        = 6;
+    TEGAPITriggerAssetManifestUploadRequest trigger_asset_manifest_upload_request                          = 7;
+    TEGAPITriggerAssetManifestUploadResponse trigger_asset_manifest_upload_response                        = 8;
+    TEGAPITriggerPowerwall2EnumerationRequest trigger_powerwall2_enumeration_request                       = 9;
+    TEGAPITriggerPowerwall2EnumerationResponse trigger_powerwall2_enumeration_response                     = 10;
+    TEGAPITriggerEsCanFirmwareUpdateRequest trigger_es_can_firmware_update_request                         = 11;
+    TEGAPITriggerEsCanFirmwareUpdateResponse trigger_es_can_firmware_update_response                       = 12;
+    TEGAPIRegisterRequest register_request                                                                 = 13;
+    TEGAPIRegisterResponse register_response                                                               = 14;
+    TEGAPITriggerPowerwall2PhaseDetectionRequest trigger_powerwall2_phase_detection_request                = 15;
+    TEGAPITriggerPowerwall2PhaseDetectionResponse trigger_powerwall2_phase_detection_response              = 16;
+    TEGAPIResetPowerwall2PhaseDetectionRequest reset_powerwall2_phase_detection_request                    = 17;
+    TEGAPIResetPowerwall2PhaseDetectionResponse reset_powerwall2_phase_detection_response                  = 18;
+    TEGAPIForceWifiScanRequest force_wifi_scan_request                                                     = 19;
+    TEGAPIForceWifiScanResponse force_wifi_scan_response                                                   = 20;
+    TEGAPIStartPowerwall2InverterSelfTestsRequest start_powerwall2_inverter_self_tests_request             = 21;
+    TEGAPIStartPowerwall2InverterSelfTestsResponse start_powerwall2_inverter_self_tests_response           = 22;
+    TEGAPIStopPowerwall2InverterSelfTestsRequest stop_powerwall2_inverter_self_tests_request               = 23;
+    TEGAPIStopPowerwall2InverterSelfTestsResponse stop_powerwall2_inverter_self_tests_response             = 24;
+    TEGAPIStartPowerwall2BubbleShedRequest start_powerwall2_bubble_shed_request                            = 25;
+    TEGAPIStartPowerwall2BubbleShedResponse start_powerwall2_bubble_shed_response                          = 26;
+    TEGAPIClearSolarInverterAlertsRequest clear_solar_inverter_alerts_request                              = 27;
+    TEGAPIClearSolarInverterAlertsResponse clear_solar_inverter_alerts_response                            = 28;
+    TEGAPIGetWifiConfigWithCredentialsRequest get_wifi_config_with_credentials_request                     = 29;
+    TEGAPIGetWifiConfigWithCredentialsResponse get_wifi_config_with_credentials_response                   = 30;
+    TEGAPIDisableBatteriesRequest disable_batteries_request                                                = 31;
+    TEGAPIDisableBatteriesResponse disable_batteries_response                                              = 32;
+    TEGAPITriggerPW3CanFirmwareUpdateRequest trigger_p_w3_can_firmware_update_request                      = 33;
+    TEGAPITriggerPW3CanFirmwareUpdateResponse trigger_p_w3_can_firmware_update_response                    = 34;
+    TEGAPITriggerPowerwall3EnumerationRequest trigger_powerwall3_enumeration_request                       = 35;
+    TEGAPITriggerPowerwall3EnumerationResponse trigger_powerwall3_enumeration_response                     = 36;
+    TEGAPIDispatchBatteryPowerRequest dispatch_battery_power_request                                       = 37;
+    TEGAPIDispatchBatteryPowerResponse dispatch_battery_power_response                                     = 38;
+    TEGAPIDetectWiredMetersRequest detect_wired_meters_request                                             = 39;
+    TEGAPIDetectWiredMetersResponse detect_wired_meters_response                                           = 40;
+    TEGAPIBypassBatterySoeAdjustmentConstraintsRequest bypass_battery_soe_adjustment_constraints_request   = 41;
+    TEGAPIBypassBatterySoeAdjustmentConstraintsResponse bypass_battery_soe_adjustment_constraints_response = 42;
+    TEGAPIEnsureCertificateRequest ensure_certificate_request                                              = 43;
+    TEGAPIEnsureCertificateResponse ensure_certificate_response                                            = 44;
+    TEGAPIScheduleManualBackupEventRequest schedule_manual_backup_event_request                            = 45;
+    TEGAPIScheduleManualBackupEventResponse schedule_manual_backup_event_response                          = 46;
+    TEGAPICancelManualBackupEventRequest cancel_manual_backup_event_request                                = 47;
+    TEGAPICancelManualBackupEventResponse cancel_manual_backup_event_response                               = 48;
+    TEGAPIGetBackupEventsRequest get_backup_events_request                                                 = 49;
+    TEGAPIGetBackupEventsResponse get_backup_events_response                                               = 50;
+    TEGAPIGetCsmsPropertiesRequest get_csms_properties_request                                             = 51;
+    TEGAPIGetCsmsPropertiesResponse get_csms_properties_response                                           = 52;
+    TEGAPIConfigureOcppRequest configure_ocpp_request                                                      = 53;
+    TEGAPIConfigureOcppResponse configure_ocpp_response                                                    = 54;
+    TEGAPIRetrieveSiteUuidRequest retrieve_site_uuid_request                                                = 55;
+    TEGAPIRetrieveSiteUuidResponse retrieve_site_uuid_response                                              = 56;
+    TEGAPIRetrieveSiteSuggestionRequest retrieve_site_suggestion_request                                    = 57;
+    TEGAPIRetrieveSiteSuggestionResponse retrieve_site_suggestion_response                                  = 58;
+    TEGAPIStartProtectionTripSelfTestRequest start_protection_trip_self_test_request                       = 59;
+    TEGAPIStartProtectionTripSelfTestResponse start_protection_trip_self_test_response                     = 60;
+    TEGAPIStopProtectionTripSelfTestRequest stop_protection_trip_self_test_request                         = 61;
+    TEGAPIStopProtectionTripSelfTestResponse stop_protection_trip_self_test_response                       = 62;
+    TEGAPIProvisionEatonSmartBreakerRequest provision_eaton_smart_breaker_request                           = 63;
+    TEGAPIProvisionEatonSmartBreakerResponse provision_eaton_smart_breaker_response                         = 64;
+    TEGAPIIdentifyEatonSmartBreakerRequest identify_eaton_smart_breaker_request                             = 65;
+    TEGAPIIdentifyEatonSmartBreakerResponse identify_eaton_smart_breaker_response                           = 66;
+    TEGAPITriggerPvacFanSelfTestRequest trigger_pvac_fan_self_test_request                                  = 67;
+    TEGAPITriggerPvacFanSelfTestResponse trigger_pvac_fan_self_test_response                                = 68;
+    TEGAPIProxyPrepareRegistrationPayloadRequest proxy_prepare_registration_payload_request                 = 69;
+    TEGAPIProxyPrepareRegistrationPayloadResponse proxy_prepare_registration_payload_response               = 70;
+    TEGAPITriggerWallboxVehicleAbsentSelfTestRequest trigger_wallbox_vehicle_absent_self_test_request       = 71;
+    TEGAPITriggerWallboxVehicleAbsentSelfTestResponse trigger_wallbox_vehicle_absent_self_test_response     = 72;
+    TEGAPICustomerResetRequest customer_reset_request                                                       = 73;
+    TEGAPICustomerResetResponse customer_reset_response                                                     = 74;
+    TEGAPIDelayBatteryCalibrationRequest delay_battery_calibration_request                                  = 75;
+    TEGAPIDelayBatteryCalibrationResponse delay_battery_calibration_response                                = 76;
+    TEGAPIGetDelayBatteryCalibrationStatusRequest get_delay_battery_calibration_status_request              = 77;
+    TEGAPIGetDelayBatteryCalibrationStatusResponse get_delay_battery_calibration_status_response            = 78;
+    TEGAPIGetControllableDeviceProgramsRequest get_controllable_device_programs_request                    = 79;
+    TEGAPIGetControllableDeviceProgramsResponse get_controllable_device_programs_response                  = 80;
+    TEGAPIUpdateControllableDeviceProgramsRequest update_controllable_device_programs_request              = 81;
+    TEGAPIUpdateControllableDeviceProgramsResponse update_controllable_device_programs_response            = 82;
+    TEGAPIDeleteControllableDeviceProgramsRequest delete_controllable_device_programs_request              = 83;
+    TEGAPIDeleteControllableDeviceProgramsResponse delete_controllable_device_programs_response            = 84;
+    TEGAPIClearPowerwall3LockoutAlertsRequest clear_powerwall3_lockout_alerts_request                       = 85;
+    TEGAPIClearPowerwall3LockoutAlertsResponse clear_powerwall3_lockout_alerts_response                     = 86;
   }
 }

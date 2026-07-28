@@ -19,6 +19,8 @@ import {
   EncryptedMessage,
 } from "./device.js";
 import { ErrorResponse } from "./error.js";
+import { Duration } from "./google/protobuf/duration.js";
+import { StringValue } from "./google/protobuf/wrappers.js";
 import {
   CellularEID,
   NetworkInterface,
@@ -40,6 +42,17 @@ export const protobufPackage = "tesla.proto.energy_device.v1";
  */
 
 export interface CommonAPIGetSystemInfoRequest {
+}
+
+export interface RadioLegalInformation {
+  manufacturer: string | undefined;
+  model: string | undefined;
+  fccId: string | undefined;
+  icId: string | undefined;
+}
+
+export interface ComplianceInformation {
+  radioLegalInformation: RadioLegalInformation[];
 }
 
 export interface CommonAPIGetSystemInfoResponse {
@@ -101,6 +114,7 @@ export interface CommonAPIConfigureWifiWithEncryptedPasswordResponse {
 }
 
 export interface CommonAPICheckForUpdateRequest {
+  downloadIfAvailable: boolean;
 }
 
 export interface CommonAPICheckForUpdateResponse {
@@ -192,6 +206,44 @@ export interface CommonAPIPrepareRegistrationPayloadResponse {
   signedRegistrationPayload: DeviceSignedPayload | undefined;
 }
 
+export interface TcpdumpInfo {
+  path: string;
+  pid: number;
+  interface: string;
+  expression: string;
+  duration: Duration | undefined;
+  maxDuration: Duration | undefined;
+  size: number;
+  maxSize: number;
+}
+
+export interface CommonAPIStartTcpdumpRequest {
+  name: string;
+  interface: string;
+  expression: string;
+  maxDuration: Duration | undefined;
+  maxSize: number;
+}
+
+export interface CommonAPIStartTcpdumpResponse {
+}
+
+export interface CommonAPIStopTcpdumpRequest {
+  name: string;
+  remove: boolean;
+}
+
+export interface CommonAPIStopTcpdumpResponse {
+}
+
+export interface CommonAPIGetTcpdumpInfoRequest {
+}
+
+export interface CommonAPIGetTcpdumpInfoResponse {
+  list: TcpdumpInfo[];
+  diskQuota: number;
+}
+
 export interface CommonMessages {
   errorResponse: ErrorResponse | undefined;
   getSystemInfoRequest?: CommonAPIGetSystemInfoRequest | undefined;
@@ -237,7 +289,12 @@ export interface CommonMessages {
   performUpdateFromLocallyAvailablePackagesRequest?:
     | CommonAPIPerformUpdateFromLocallyAvailablePackagesRequest
     | undefined;
+  performUpdateFromLocallyAvailablePackagesResponse?:
+    | CommonAPIPerformUpdateFromLocallyAvailablePackagesResponse
+    | undefined;
   /**
+   * Tags 40-45 carry request/response payloads whose bodies are types from a
+   * separate, not-yet-modeled proto package; left unmodeled here.
    * CommonAPIRegisterRequest registration_request                                                                          = 40;
    * CommonAPIRegisterResponse registration_response                                                                        = 41;
    * CommonAPIRetrieveSiteUuidRequest retrieve_site_uuid_request                                                            = 42;
@@ -245,9 +302,12 @@ export interface CommonMessages {
    * CommonAPIRetrieveSiteSuggestionRequest retrieve_site_suggestion_request                                                = 44;
    * CommonAPIRetrieveSiteSuggestionResponse retrieve_site_suggestion_response                                              = 45;
    */
-  performUpdateFromLocallyAvailablePackagesResponse?:
-    | CommonAPIPerformUpdateFromLocallyAvailablePackagesResponse
-    | undefined;
+  startTcpdumpRequest?: CommonAPIStartTcpdumpRequest | undefined;
+  startTcpdumpResponse?: CommonAPIStartTcpdumpResponse | undefined;
+  stopTcpdumpRequest?: CommonAPIStopTcpdumpRequest | undefined;
+  stopTcpdumpResponse?: CommonAPIStopTcpdumpResponse | undefined;
+  getTcpdumpInfoRequest?: CommonAPIGetTcpdumpInfoRequest | undefined;
+  getTcpdumpInfoResponse?: CommonAPIGetTcpdumpInfoResponse | undefined;
 }
 
 function createBaseCommonAPIGetSystemInfoRequest(): CommonAPIGetSystemInfoRequest {
@@ -289,6 +349,177 @@ export const CommonAPIGetSystemInfoRequest: MessageFns<CommonAPIGetSystemInfoReq
   },
   fromPartial<I extends Exact<DeepPartial<CommonAPIGetSystemInfoRequest>, I>>(_: I): CommonAPIGetSystemInfoRequest {
     const message = createBaseCommonAPIGetSystemInfoRequest();
+    return message;
+  },
+};
+
+function createBaseRadioLegalInformation(): RadioLegalInformation {
+  return { manufacturer: undefined, model: undefined, fccId: undefined, icId: undefined };
+}
+
+export const RadioLegalInformation: MessageFns<RadioLegalInformation> = {
+  encode(message: RadioLegalInformation, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.manufacturer !== undefined) {
+      StringValue.encode({ value: message.manufacturer! }, writer.uint32(10).fork()).join();
+    }
+    if (message.model !== undefined) {
+      StringValue.encode({ value: message.model! }, writer.uint32(18).fork()).join();
+    }
+    if (message.fccId !== undefined) {
+      StringValue.encode({ value: message.fccId! }, writer.uint32(26).fork()).join();
+    }
+    if (message.icId !== undefined) {
+      StringValue.encode({ value: message.icId! }, writer.uint32(34).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): RadioLegalInformation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRadioLegalInformation();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.manufacturer = StringValue.decode(reader, reader.uint32()).value;
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.model = StringValue.decode(reader, reader.uint32()).value;
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.fccId = StringValue.decode(reader, reader.uint32()).value;
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.icId = StringValue.decode(reader, reader.uint32()).value;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): RadioLegalInformation {
+    return {
+      manufacturer: isSet(object.manufacturer) ? String(object.manufacturer) : undefined,
+      model: isSet(object.model) ? String(object.model) : undefined,
+      fccId: isSet(object.fccId) ? String(object.fccId) : undefined,
+      icId: isSet(object.icId) ? String(object.icId) : undefined,
+    };
+  },
+
+  toJSON(message: RadioLegalInformation): unknown {
+    const obj: any = {};
+    if (message.manufacturer !== undefined) {
+      obj.manufacturer = message.manufacturer;
+    }
+    if (message.model !== undefined) {
+      obj.model = message.model;
+    }
+    if (message.fccId !== undefined) {
+      obj.fccId = message.fccId;
+    }
+    if (message.icId !== undefined) {
+      obj.icId = message.icId;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<RadioLegalInformation>, I>>(base?: I): RadioLegalInformation {
+    return RadioLegalInformation.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<RadioLegalInformation>, I>>(object: I): RadioLegalInformation {
+    const message = createBaseRadioLegalInformation();
+    message.manufacturer = object.manufacturer ?? undefined;
+    message.model = object.model ?? undefined;
+    message.fccId = object.fccId ?? undefined;
+    message.icId = object.icId ?? undefined;
+    return message;
+  },
+};
+
+function createBaseComplianceInformation(): ComplianceInformation {
+  return { radioLegalInformation: [] };
+}
+
+export const ComplianceInformation: MessageFns<ComplianceInformation> = {
+  encode(message: ComplianceInformation, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.radioLegalInformation) {
+      RadioLegalInformation.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ComplianceInformation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseComplianceInformation();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.radioLegalInformation.push(RadioLegalInformation.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ComplianceInformation {
+    return {
+      radioLegalInformation: globalThis.Array.isArray(object?.radioLegalInformation)
+        ? object.radioLegalInformation.map((e: any) => RadioLegalInformation.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: ComplianceInformation): unknown {
+    const obj: any = {};
+    if (message.radioLegalInformation?.length) {
+      obj.radioLegalInformation = message.radioLegalInformation.map((e) => RadioLegalInformation.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ComplianceInformation>, I>>(base?: I): ComplianceInformation {
+    return ComplianceInformation.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ComplianceInformation>, I>>(object: I): ComplianceInformation {
+    const message = createBaseComplianceInformation();
+    message.radioLegalInformation = object.radioLegalInformation?.map((e) => RadioLegalInformation.fromPartial(e)) ||
+      [];
     return message;
   },
 };
@@ -1234,11 +1465,14 @@ export const CommonAPIConfigureWifiWithEncryptedPasswordResponse: MessageFns<
 };
 
 function createBaseCommonAPICheckForUpdateRequest(): CommonAPICheckForUpdateRequest {
-  return {};
+  return { downloadIfAvailable: false };
 }
 
 export const CommonAPICheckForUpdateRequest: MessageFns<CommonAPICheckForUpdateRequest> = {
-  encode(_: CommonAPICheckForUpdateRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: CommonAPICheckForUpdateRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.downloadIfAvailable !== false) {
+      writer.uint32(8).bool(message.downloadIfAvailable);
+    }
     return writer;
   },
 
@@ -1249,6 +1483,14 @@ export const CommonAPICheckForUpdateRequest: MessageFns<CommonAPICheckForUpdateR
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.downloadIfAvailable = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1258,20 +1500,28 @@ export const CommonAPICheckForUpdateRequest: MessageFns<CommonAPICheckForUpdateR
     return message;
   },
 
-  fromJSON(_: any): CommonAPICheckForUpdateRequest {
-    return {};
+  fromJSON(object: any): CommonAPICheckForUpdateRequest {
+    return {
+      downloadIfAvailable: isSet(object.downloadIfAvailable) ? globalThis.Boolean(object.downloadIfAvailable) : false,
+    };
   },
 
-  toJSON(_: CommonAPICheckForUpdateRequest): unknown {
+  toJSON(message: CommonAPICheckForUpdateRequest): unknown {
     const obj: any = {};
+    if (message.downloadIfAvailable !== undefined) {
+      obj.downloadIfAvailable = message.downloadIfAvailable;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<CommonAPICheckForUpdateRequest>, I>>(base?: I): CommonAPICheckForUpdateRequest {
     return CommonAPICheckForUpdateRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<CommonAPICheckForUpdateRequest>, I>>(_: I): CommonAPICheckForUpdateRequest {
+  fromPartial<I extends Exact<DeepPartial<CommonAPICheckForUpdateRequest>, I>>(
+    object: I,
+  ): CommonAPICheckForUpdateRequest {
     const message = createBaseCommonAPICheckForUpdateRequest();
+    message.downloadIfAvailable = object.downloadIfAvailable ?? false;
     return message;
   },
 };
@@ -2737,6 +2987,600 @@ export const CommonAPIPrepareRegistrationPayloadResponse: MessageFns<CommonAPIPr
   },
 };
 
+function createBaseTcpdumpInfo(): TcpdumpInfo {
+  return {
+    path: "",
+    pid: 0,
+    interface: "",
+    expression: "",
+    duration: undefined,
+    maxDuration: undefined,
+    size: 0,
+    maxSize: 0,
+  };
+}
+
+export const TcpdumpInfo: MessageFns<TcpdumpInfo> = {
+  encode(message: TcpdumpInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.path !== "") {
+      writer.uint32(10).string(message.path);
+    }
+    if (message.pid !== 0) {
+      writer.uint32(16).int64(message.pid);
+    }
+    if (message.interface !== "") {
+      writer.uint32(26).string(message.interface);
+    }
+    if (message.expression !== "") {
+      writer.uint32(34).string(message.expression);
+    }
+    if (message.duration !== undefined) {
+      Duration.encode(message.duration, writer.uint32(42).fork()).join();
+    }
+    if (message.maxDuration !== undefined) {
+      Duration.encode(message.maxDuration, writer.uint32(50).fork()).join();
+    }
+    if (message.size !== 0) {
+      writer.uint32(56).uint64(message.size);
+    }
+    if (message.maxSize !== 0) {
+      writer.uint32(64).uint64(message.maxSize);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TcpdumpInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTcpdumpInfo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.path = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.pid = longToNumber(reader.int64());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.interface = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.expression = reader.string();
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.duration = Duration.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.maxDuration = Duration.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.size = longToNumber(reader.uint64());
+          continue;
+        }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.maxSize = longToNumber(reader.uint64());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TcpdumpInfo {
+    return {
+      path: isSet(object.path) ? globalThis.String(object.path) : "",
+      pid: isSet(object.pid) ? globalThis.Number(object.pid) : 0,
+      interface: isSet(object.interface) ? globalThis.String(object.interface) : "",
+      expression: isSet(object.expression) ? globalThis.String(object.expression) : "",
+      duration: isSet(object.duration) ? Duration.fromJSON(object.duration) : undefined,
+      maxDuration: isSet(object.maxDuration) ? Duration.fromJSON(object.maxDuration) : undefined,
+      size: isSet(object.size) ? globalThis.Number(object.size) : 0,
+      maxSize: isSet(object.maxSize) ? globalThis.Number(object.maxSize) : 0,
+    };
+  },
+
+  toJSON(message: TcpdumpInfo): unknown {
+    const obj: any = {};
+    if (message.path !== undefined) {
+      obj.path = message.path;
+    }
+    if (message.pid !== undefined) {
+      obj.pid = Math.round(message.pid);
+    }
+    if (message.interface !== undefined) {
+      obj.interface = message.interface;
+    }
+    if (message.expression !== undefined) {
+      obj.expression = message.expression;
+    }
+    if (message.duration !== undefined) {
+      obj.duration = Duration.toJSON(message.duration);
+    }
+    if (message.maxDuration !== undefined) {
+      obj.maxDuration = Duration.toJSON(message.maxDuration);
+    }
+    if (message.size !== undefined) {
+      obj.size = Math.round(message.size);
+    }
+    if (message.maxSize !== undefined) {
+      obj.maxSize = Math.round(message.maxSize);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TcpdumpInfo>, I>>(base?: I): TcpdumpInfo {
+    return TcpdumpInfo.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TcpdumpInfo>, I>>(object: I): TcpdumpInfo {
+    const message = createBaseTcpdumpInfo();
+    message.path = object.path ?? "";
+    message.pid = object.pid ?? 0;
+    message.interface = object.interface ?? "";
+    message.expression = object.expression ?? "";
+    message.duration = (object.duration !== undefined && object.duration !== null)
+      ? Duration.fromPartial(object.duration)
+      : undefined;
+    message.maxDuration = (object.maxDuration !== undefined && object.maxDuration !== null)
+      ? Duration.fromPartial(object.maxDuration)
+      : undefined;
+    message.size = object.size ?? 0;
+    message.maxSize = object.maxSize ?? 0;
+    return message;
+  },
+};
+
+function createBaseCommonAPIStartTcpdumpRequest(): CommonAPIStartTcpdumpRequest {
+  return { name: "", interface: "", expression: "", maxDuration: undefined, maxSize: 0 };
+}
+
+export const CommonAPIStartTcpdumpRequest: MessageFns<CommonAPIStartTcpdumpRequest> = {
+  encode(message: CommonAPIStartTcpdumpRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.name !== "") {
+      writer.uint32(10).string(message.name);
+    }
+    if (message.interface !== "") {
+      writer.uint32(18).string(message.interface);
+    }
+    if (message.expression !== "") {
+      writer.uint32(26).string(message.expression);
+    }
+    if (message.maxDuration !== undefined) {
+      Duration.encode(message.maxDuration, writer.uint32(34).fork()).join();
+    }
+    if (message.maxSize !== 0) {
+      writer.uint32(40).uint64(message.maxSize);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CommonAPIStartTcpdumpRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCommonAPIStartTcpdumpRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.interface = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.expression = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.maxDuration = Duration.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.maxSize = longToNumber(reader.uint64());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CommonAPIStartTcpdumpRequest {
+    return {
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      interface: isSet(object.interface) ? globalThis.String(object.interface) : "",
+      expression: isSet(object.expression) ? globalThis.String(object.expression) : "",
+      maxDuration: isSet(object.maxDuration) ? Duration.fromJSON(object.maxDuration) : undefined,
+      maxSize: isSet(object.maxSize) ? globalThis.Number(object.maxSize) : 0,
+    };
+  },
+
+  toJSON(message: CommonAPIStartTcpdumpRequest): unknown {
+    const obj: any = {};
+    if (message.name !== undefined) {
+      obj.name = message.name;
+    }
+    if (message.interface !== undefined) {
+      obj.interface = message.interface;
+    }
+    if (message.expression !== undefined) {
+      obj.expression = message.expression;
+    }
+    if (message.maxDuration !== undefined) {
+      obj.maxDuration = Duration.toJSON(message.maxDuration);
+    }
+    if (message.maxSize !== undefined) {
+      obj.maxSize = Math.round(message.maxSize);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CommonAPIStartTcpdumpRequest>, I>>(base?: I): CommonAPIStartTcpdumpRequest {
+    return CommonAPIStartTcpdumpRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CommonAPIStartTcpdumpRequest>, I>>(object: I): CommonAPIStartTcpdumpRequest {
+    const message = createBaseCommonAPIStartTcpdumpRequest();
+    message.name = object.name ?? "";
+    message.interface = object.interface ?? "";
+    message.expression = object.expression ?? "";
+    message.maxDuration = (object.maxDuration !== undefined && object.maxDuration !== null)
+      ? Duration.fromPartial(object.maxDuration)
+      : undefined;
+    message.maxSize = object.maxSize ?? 0;
+    return message;
+  },
+};
+
+function createBaseCommonAPIStartTcpdumpResponse(): CommonAPIStartTcpdumpResponse {
+  return {};
+}
+
+export const CommonAPIStartTcpdumpResponse: MessageFns<CommonAPIStartTcpdumpResponse> = {
+  encode(_: CommonAPIStartTcpdumpResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CommonAPIStartTcpdumpResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCommonAPIStartTcpdumpResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): CommonAPIStartTcpdumpResponse {
+    return {};
+  },
+
+  toJSON(_: CommonAPIStartTcpdumpResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CommonAPIStartTcpdumpResponse>, I>>(base?: I): CommonAPIStartTcpdumpResponse {
+    return CommonAPIStartTcpdumpResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CommonAPIStartTcpdumpResponse>, I>>(_: I): CommonAPIStartTcpdumpResponse {
+    const message = createBaseCommonAPIStartTcpdumpResponse();
+    return message;
+  },
+};
+
+function createBaseCommonAPIStopTcpdumpRequest(): CommonAPIStopTcpdumpRequest {
+  return { name: "", remove: false };
+}
+
+export const CommonAPIStopTcpdumpRequest: MessageFns<CommonAPIStopTcpdumpRequest> = {
+  encode(message: CommonAPIStopTcpdumpRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.name !== "") {
+      writer.uint32(10).string(message.name);
+    }
+    if (message.remove !== false) {
+      writer.uint32(16).bool(message.remove);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CommonAPIStopTcpdumpRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCommonAPIStopTcpdumpRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.remove = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CommonAPIStopTcpdumpRequest {
+    return {
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      remove: isSet(object.remove) ? globalThis.Boolean(object.remove) : false,
+    };
+  },
+
+  toJSON(message: CommonAPIStopTcpdumpRequest): unknown {
+    const obj: any = {};
+    if (message.name !== undefined) {
+      obj.name = message.name;
+    }
+    if (message.remove !== undefined) {
+      obj.remove = message.remove;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CommonAPIStopTcpdumpRequest>, I>>(base?: I): CommonAPIStopTcpdumpRequest {
+    return CommonAPIStopTcpdumpRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CommonAPIStopTcpdumpRequest>, I>>(object: I): CommonAPIStopTcpdumpRequest {
+    const message = createBaseCommonAPIStopTcpdumpRequest();
+    message.name = object.name ?? "";
+    message.remove = object.remove ?? false;
+    return message;
+  },
+};
+
+function createBaseCommonAPIStopTcpdumpResponse(): CommonAPIStopTcpdumpResponse {
+  return {};
+}
+
+export const CommonAPIStopTcpdumpResponse: MessageFns<CommonAPIStopTcpdumpResponse> = {
+  encode(_: CommonAPIStopTcpdumpResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CommonAPIStopTcpdumpResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCommonAPIStopTcpdumpResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): CommonAPIStopTcpdumpResponse {
+    return {};
+  },
+
+  toJSON(_: CommonAPIStopTcpdumpResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CommonAPIStopTcpdumpResponse>, I>>(base?: I): CommonAPIStopTcpdumpResponse {
+    return CommonAPIStopTcpdumpResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CommonAPIStopTcpdumpResponse>, I>>(_: I): CommonAPIStopTcpdumpResponse {
+    const message = createBaseCommonAPIStopTcpdumpResponse();
+    return message;
+  },
+};
+
+function createBaseCommonAPIGetTcpdumpInfoRequest(): CommonAPIGetTcpdumpInfoRequest {
+  return {};
+}
+
+export const CommonAPIGetTcpdumpInfoRequest: MessageFns<CommonAPIGetTcpdumpInfoRequest> = {
+  encode(_: CommonAPIGetTcpdumpInfoRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CommonAPIGetTcpdumpInfoRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCommonAPIGetTcpdumpInfoRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): CommonAPIGetTcpdumpInfoRequest {
+    return {};
+  },
+
+  toJSON(_: CommonAPIGetTcpdumpInfoRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CommonAPIGetTcpdumpInfoRequest>, I>>(base?: I): CommonAPIGetTcpdumpInfoRequest {
+    return CommonAPIGetTcpdumpInfoRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CommonAPIGetTcpdumpInfoRequest>, I>>(_: I): CommonAPIGetTcpdumpInfoRequest {
+    const message = createBaseCommonAPIGetTcpdumpInfoRequest();
+    return message;
+  },
+};
+
+function createBaseCommonAPIGetTcpdumpInfoResponse(): CommonAPIGetTcpdumpInfoResponse {
+  return { list: [], diskQuota: 0 };
+}
+
+export const CommonAPIGetTcpdumpInfoResponse: MessageFns<CommonAPIGetTcpdumpInfoResponse> = {
+  encode(message: CommonAPIGetTcpdumpInfoResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.list) {
+      TcpdumpInfo.encode(v!, writer.uint32(10).fork()).join();
+    }
+    if (message.diskQuota !== 0) {
+      writer.uint32(16).int64(message.diskQuota);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CommonAPIGetTcpdumpInfoResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCommonAPIGetTcpdumpInfoResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.list.push(TcpdumpInfo.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.diskQuota = longToNumber(reader.int64());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CommonAPIGetTcpdumpInfoResponse {
+    return {
+      list: globalThis.Array.isArray(object?.list) ? object.list.map((e: any) => TcpdumpInfo.fromJSON(e)) : [],
+      diskQuota: isSet(object.diskQuota) ? globalThis.Number(object.diskQuota) : 0,
+    };
+  },
+
+  toJSON(message: CommonAPIGetTcpdumpInfoResponse): unknown {
+    const obj: any = {};
+    if (message.list?.length) {
+      obj.list = message.list.map((e) => TcpdumpInfo.toJSON(e));
+    }
+    if (message.diskQuota !== undefined) {
+      obj.diskQuota = Math.round(message.diskQuota);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CommonAPIGetTcpdumpInfoResponse>, I>>(base?: I): CommonAPIGetTcpdumpInfoResponse {
+    return CommonAPIGetTcpdumpInfoResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CommonAPIGetTcpdumpInfoResponse>, I>>(
+    object: I,
+  ): CommonAPIGetTcpdumpInfoResponse {
+    const message = createBaseCommonAPIGetTcpdumpInfoResponse();
+    message.list = object.list?.map((e) => TcpdumpInfo.fromPartial(e)) || [];
+    message.diskQuota = object.diskQuota ?? 0;
+    return message;
+  },
+};
+
 function createBaseCommonMessages(): CommonMessages {
   return {
     errorResponse: undefined,
@@ -2778,6 +3622,12 @@ function createBaseCommonMessages(): CommonMessages {
     prepareRegistrationPayloadResponse: undefined,
     performUpdateFromLocallyAvailablePackagesRequest: undefined,
     performUpdateFromLocallyAvailablePackagesResponse: undefined,
+    startTcpdumpRequest: undefined,
+    startTcpdumpResponse: undefined,
+    stopTcpdumpRequest: undefined,
+    stopTcpdumpResponse: undefined,
+    getTcpdumpInfoRequest: undefined,
+    getTcpdumpInfoResponse: undefined,
   };
 }
 
@@ -2926,6 +3776,24 @@ export const CommonMessages: MessageFns<CommonMessages> = {
         message.performUpdateFromLocallyAvailablePackagesResponse,
         writer.uint32(314).fork(),
       ).join();
+    }
+    if (message.startTcpdumpRequest !== undefined) {
+      CommonAPIStartTcpdumpRequest.encode(message.startTcpdumpRequest, writer.uint32(370).fork()).join();
+    }
+    if (message.startTcpdumpResponse !== undefined) {
+      CommonAPIStartTcpdumpResponse.encode(message.startTcpdumpResponse, writer.uint32(378).fork()).join();
+    }
+    if (message.stopTcpdumpRequest !== undefined) {
+      CommonAPIStopTcpdumpRequest.encode(message.stopTcpdumpRequest, writer.uint32(386).fork()).join();
+    }
+    if (message.stopTcpdumpResponse !== undefined) {
+      CommonAPIStopTcpdumpResponse.encode(message.stopTcpdumpResponse, writer.uint32(394).fork()).join();
+    }
+    if (message.getTcpdumpInfoRequest !== undefined) {
+      CommonAPIGetTcpdumpInfoRequest.encode(message.getTcpdumpInfoRequest, writer.uint32(402).fork()).join();
+    }
+    if (message.getTcpdumpInfoResponse !== undefined) {
+      CommonAPIGetTcpdumpInfoResponse.encode(message.getTcpdumpInfoResponse, writer.uint32(410).fork()).join();
     }
     return writer;
   },
@@ -3266,6 +4134,54 @@ export const CommonMessages: MessageFns<CommonMessages> = {
             CommonAPIPerformUpdateFromLocallyAvailablePackagesResponse.decode(reader, reader.uint32());
           continue;
         }
+        case 46: {
+          if (tag !== 370) {
+            break;
+          }
+
+          message.startTcpdumpRequest = CommonAPIStartTcpdumpRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 47: {
+          if (tag !== 378) {
+            break;
+          }
+
+          message.startTcpdumpResponse = CommonAPIStartTcpdumpResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 48: {
+          if (tag !== 386) {
+            break;
+          }
+
+          message.stopTcpdumpRequest = CommonAPIStopTcpdumpRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 49: {
+          if (tag !== 394) {
+            break;
+          }
+
+          message.stopTcpdumpResponse = CommonAPIStopTcpdumpResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 50: {
+          if (tag !== 402) {
+            break;
+          }
+
+          message.getTcpdumpInfoRequest = CommonAPIGetTcpdumpInfoRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 51: {
+          if (tag !== 410) {
+            break;
+          }
+
+          message.getTcpdumpInfoResponse = CommonAPIGetTcpdumpInfoResponse.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -3403,6 +4319,24 @@ export const CommonMessages: MessageFns<CommonMessages> = {
         ? CommonAPIPerformUpdateFromLocallyAvailablePackagesResponse.fromJSON(
           object.performUpdateFromLocallyAvailablePackagesResponse,
         )
+        : undefined,
+      startTcpdumpRequest: isSet(object.startTcpdumpRequest)
+        ? CommonAPIStartTcpdumpRequest.fromJSON(object.startTcpdumpRequest)
+        : undefined,
+      startTcpdumpResponse: isSet(object.startTcpdumpResponse)
+        ? CommonAPIStartTcpdumpResponse.fromJSON(object.startTcpdumpResponse)
+        : undefined,
+      stopTcpdumpRequest: isSet(object.stopTcpdumpRequest)
+        ? CommonAPIStopTcpdumpRequest.fromJSON(object.stopTcpdumpRequest)
+        : undefined,
+      stopTcpdumpResponse: isSet(object.stopTcpdumpResponse)
+        ? CommonAPIStopTcpdumpResponse.fromJSON(object.stopTcpdumpResponse)
+        : undefined,
+      getTcpdumpInfoRequest: isSet(object.getTcpdumpInfoRequest)
+        ? CommonAPIGetTcpdumpInfoRequest.fromJSON(object.getTcpdumpInfoRequest)
+        : undefined,
+      getTcpdumpInfoResponse: isSet(object.getTcpdumpInfoResponse)
+        ? CommonAPIGetTcpdumpInfoResponse.fromJSON(object.getTcpdumpInfoResponse)
         : undefined,
     };
   },
@@ -3547,6 +4481,24 @@ export const CommonMessages: MessageFns<CommonMessages> = {
     if (message.performUpdateFromLocallyAvailablePackagesResponse !== undefined) {
       obj.performUpdateFromLocallyAvailablePackagesResponse = CommonAPIPerformUpdateFromLocallyAvailablePackagesResponse
         .toJSON(message.performUpdateFromLocallyAvailablePackagesResponse);
+    }
+    if (message.startTcpdumpRequest !== undefined) {
+      obj.startTcpdumpRequest = CommonAPIStartTcpdumpRequest.toJSON(message.startTcpdumpRequest);
+    }
+    if (message.startTcpdumpResponse !== undefined) {
+      obj.startTcpdumpResponse = CommonAPIStartTcpdumpResponse.toJSON(message.startTcpdumpResponse);
+    }
+    if (message.stopTcpdumpRequest !== undefined) {
+      obj.stopTcpdumpRequest = CommonAPIStopTcpdumpRequest.toJSON(message.stopTcpdumpRequest);
+    }
+    if (message.stopTcpdumpResponse !== undefined) {
+      obj.stopTcpdumpResponse = CommonAPIStopTcpdumpResponse.toJSON(message.stopTcpdumpResponse);
+    }
+    if (message.getTcpdumpInfoRequest !== undefined) {
+      obj.getTcpdumpInfoRequest = CommonAPIGetTcpdumpInfoRequest.toJSON(message.getTcpdumpInfoRequest);
+    }
+    if (message.getTcpdumpInfoResponse !== undefined) {
+      obj.getTcpdumpInfoResponse = CommonAPIGetTcpdumpInfoResponse.toJSON(message.getTcpdumpInfoResponse);
     }
     return obj;
   },
@@ -3717,6 +4669,26 @@ export const CommonMessages: MessageFns<CommonMessages> = {
           object.performUpdateFromLocallyAvailablePackagesResponse,
         )
         : undefined;
+    message.startTcpdumpRequest = (object.startTcpdumpRequest !== undefined && object.startTcpdumpRequest !== null)
+      ? CommonAPIStartTcpdumpRequest.fromPartial(object.startTcpdumpRequest)
+      : undefined;
+    message.startTcpdumpResponse = (object.startTcpdumpResponse !== undefined && object.startTcpdumpResponse !== null)
+      ? CommonAPIStartTcpdumpResponse.fromPartial(object.startTcpdumpResponse)
+      : undefined;
+    message.stopTcpdumpRequest = (object.stopTcpdumpRequest !== undefined && object.stopTcpdumpRequest !== null)
+      ? CommonAPIStopTcpdumpRequest.fromPartial(object.stopTcpdumpRequest)
+      : undefined;
+    message.stopTcpdumpResponse = (object.stopTcpdumpResponse !== undefined && object.stopTcpdumpResponse !== null)
+      ? CommonAPIStopTcpdumpResponse.fromPartial(object.stopTcpdumpResponse)
+      : undefined;
+    message.getTcpdumpInfoRequest =
+      (object.getTcpdumpInfoRequest !== undefined && object.getTcpdumpInfoRequest !== null)
+        ? CommonAPIGetTcpdumpInfoRequest.fromPartial(object.getTcpdumpInfoRequest)
+        : undefined;
+    message.getTcpdumpInfoResponse =
+      (object.getTcpdumpInfoResponse !== undefined && object.getTcpdumpInfoResponse !== null)
+        ? CommonAPIGetTcpdumpInfoResponse.fromPartial(object.getTcpdumpInfoResponse)
+        : undefined;
     return message;
   },
 };
@@ -3757,6 +4729,17 @@ export type DeepPartial<T> = T extends Builtin ? T
 type KeysOfUnion<T> = T extends T ? keyof T : never;
 export type Exact<P, I extends P> = P extends Builtin ? P
   : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function longToNumber(int64: { toString(): string }): number {
+  const num = globalThis.Number(int64.toString());
+  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
+    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
+  }
+  return num;
+}
 
 function isSet(value: any): boolean {
   return value !== null && value !== undefined;

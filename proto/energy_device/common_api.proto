@@ -9,12 +9,25 @@ option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/
 option java_package = "com.tesla.generated.energy_device.v1";
 option java_outer_classname = "CommonApi";
 
+import "google/protobuf/duration.proto";
+import "google/protobuf/wrappers.proto";
 import "networking.proto";
 import "device.proto";
 import "update.proto";
 import "error.proto";
 
 message CommonAPIGetSystemInfoRequest {
+}
+
+message RadioLegalInformation {
+  google.protobuf.StringValue manufacturer = 1;
+  google.protobuf.StringValue model        = 2;
+  google.protobuf.StringValue fcc_id       = 3;
+  google.protobuf.StringValue ic_id        = 4;
+}
+
+message ComplianceInformation {
+  repeated RadioLegalInformation radio_legal_information = 1;
 }
 
 message CommonAPIGetSystemInfoResponse {
@@ -76,6 +89,7 @@ message CommonAPIConfigureWifiWithEncryptedPasswordResponse {
 }
 
 message CommonAPICheckForUpdateRequest {
+  bool download_if_available = 1;
 }
 
 message CommonAPICheckForUpdateResponse {
@@ -167,6 +181,44 @@ message CommonAPIPrepareRegistrationPayloadResponse {
   DeviceSignedPayload signed_registration_payload = 1;
 }
 
+message TcpdumpInfo {
+  string path                           = 1;
+  int64 pid                             = 2;
+  string interface                      = 3;
+  string expression                     = 4;
+  google.protobuf.Duration duration     = 5;
+  google.protobuf.Duration max_duration = 6;
+  uint64 size                           = 7;
+  uint64 max_size                       = 8;
+}
+
+message CommonAPIStartTcpdumpRequest {
+  string name                           = 1;
+  string interface                      = 2;
+  string expression                     = 3;
+  google.protobuf.Duration max_duration = 4;
+  uint64 max_size                       = 5;
+}
+
+message CommonAPIStartTcpdumpResponse {
+}
+
+message CommonAPIStopTcpdumpRequest {
+  string name = 1;
+  bool remove = 2;
+}
+
+message CommonAPIStopTcpdumpResponse {
+}
+
+message CommonAPIGetTcpdumpInfoRequest {
+}
+
+message CommonAPIGetTcpdumpInfoResponse {
+  repeated TcpdumpInfo list = 1;
+  int64 disk_quota          = 2;
+}
+
 message CommonMessages {
   ErrorResponse error_response                                                                                             = 1;
   oneof message {
@@ -208,11 +260,19 @@ message CommonMessages {
     CommonAPIPrepareRegistrationPayloadResponse prepare_registration_payload_response                                      = 37;
     CommonAPIPerformUpdateFromLocallyAvailablePackagesRequest perform_update_from_locally_available_packages_request       = 38;
     CommonAPIPerformUpdateFromLocallyAvailablePackagesResponse perform_update_from_locally_available_packages_response     = 39;
+    // Tags 40-45 carry request/response payloads whose bodies are types from a
+    // separate, not-yet-modeled proto package; left unmodeled here.
     //CommonAPIRegisterRequest registration_request                                                                          = 40;
     //CommonAPIRegisterResponse registration_response                                                                        = 41;
     //CommonAPIRetrieveSiteUuidRequest retrieve_site_uuid_request                                                            = 42;
     //CommonAPIRetrieveSiteUuidResponse retrieve_site_uuid_response                                                          = 43;
     //CommonAPIRetrieveSiteSuggestionRequest retrieve_site_suggestion_request                                                = 44;
     //CommonAPIRetrieveSiteSuggestionResponse retrieve_site_suggestion_response                                              = 45;
+    CommonAPIStartTcpdumpRequest start_tcpdump_request                                                                      = 46;
+    CommonAPIStartTcpdumpResponse start_tcpdump_response                                                                    = 47;
+    CommonAPIStopTcpdumpRequest stop_tcpdump_request                                                                        = 48;
+    CommonAPIStopTcpdumpResponse stop_tcpdump_response                                                                      = 49;
+    CommonAPIGetTcpdumpInfoRequest get_tcpdump_info_request                                                                 = 50;
+    CommonAPIGetTcpdumpInfoResponse get_tcpdump_info_response                                                               = 51;
   }
 }

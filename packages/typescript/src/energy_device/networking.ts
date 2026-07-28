@@ -429,6 +429,8 @@ export interface NetworkInterface {
   activeRoute: boolean;
   ipv4Config: NetworkInterfaceIPv4Config | undefined;
   connectivityStatus: NetworkConnectivityStatus | undefined;
+  deviceState: NetworkDeviceState;
+  deviceStateReason: NetworkDeviceStateReason;
 }
 
 export interface CellularEID {
@@ -1038,6 +1040,8 @@ function createBaseNetworkInterface(): NetworkInterface {
     activeRoute: false,
     ipv4Config: undefined,
     connectivityStatus: undefined,
+    deviceState: 0,
+    deviceStateReason: 0,
   };
 }
 
@@ -1057,6 +1061,12 @@ export const NetworkInterface: MessageFns<NetworkInterface> = {
     }
     if (message.connectivityStatus !== undefined) {
       NetworkConnectivityStatus.encode(message.connectivityStatus, writer.uint32(42).fork()).join();
+    }
+    if (message.deviceState !== 0) {
+      writer.uint32(48).int32(message.deviceState);
+    }
+    if (message.deviceStateReason !== 0) {
+      writer.uint32(56).int32(message.deviceStateReason);
     }
     return writer;
   },
@@ -1108,6 +1118,22 @@ export const NetworkInterface: MessageFns<NetworkInterface> = {
           message.connectivityStatus = NetworkConnectivityStatus.decode(reader, reader.uint32());
           continue;
         }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.deviceState = reader.int32() as any;
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.deviceStateReason = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1126,6 +1152,10 @@ export const NetworkInterface: MessageFns<NetworkInterface> = {
       connectivityStatus: isSet(object.connectivityStatus)
         ? NetworkConnectivityStatus.fromJSON(object.connectivityStatus)
         : undefined,
+      deviceState: isSet(object.deviceState) ? networkDeviceStateFromJSON(object.deviceState) : 0,
+      deviceStateReason: isSet(object.deviceStateReason)
+        ? networkDeviceStateReasonFromJSON(object.deviceStateReason)
+        : 0,
     };
   },
 
@@ -1146,6 +1176,12 @@ export const NetworkInterface: MessageFns<NetworkInterface> = {
     if (message.connectivityStatus !== undefined) {
       obj.connectivityStatus = NetworkConnectivityStatus.toJSON(message.connectivityStatus);
     }
+    if (message.deviceState !== undefined) {
+      obj.deviceState = networkDeviceStateToJSON(message.deviceState);
+    }
+    if (message.deviceStateReason !== undefined) {
+      obj.deviceStateReason = networkDeviceStateReasonToJSON(message.deviceStateReason);
+    }
     return obj;
   },
 
@@ -1163,6 +1199,8 @@ export const NetworkInterface: MessageFns<NetworkInterface> = {
     message.connectivityStatus = (object.connectivityStatus !== undefined && object.connectivityStatus !== null)
       ? NetworkConnectivityStatus.fromPartial(object.connectivityStatus)
       : undefined;
+    message.deviceState = object.deviceState ?? 0;
+    message.deviceStateReason = object.deviceStateReason ?? 0;
     return message;
   },
 };

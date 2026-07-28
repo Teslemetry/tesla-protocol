@@ -13,7 +13,15 @@ import {
   authorizedClientTypeToJSON,
 } from "./authorization_types.js";
 import { CommonMessages } from "./common_api.js";
+import { EnergySiteNetMessages } from "./energy_site_net.js";
+import { FileStoreMessages } from "./filestore_api.js";
+import { GraphQLMessages } from "./graphql_api.js";
+import { IntraSiteMessages } from "./intra_site_api.js";
+import { LocalAuthMessages } from "./local_auth_api.js";
+import { NeurioMeterMessages } from "./neurio_meter_api.js";
+import { PVIMessages } from "./pvi_api.js";
 import { TEGMessages } from "./teg_api.js";
+import { WCMessages } from "./wall_connector.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
@@ -212,15 +220,16 @@ export interface MessageEnvelope {
   sender: Participant | undefined;
   recipient: Participant | undefined;
   common?: CommonMessages | undefined;
-  teg?:
-    | TEGMessages
-    | undefined;
-  /**
-   * WCMessages wc                       = 6;
-   * NeurioMeterMessages neuriometer     = 9;
-   * EnergySiteNetMessages energysitenet = 10;
-   */
+  teg?: TEGMessages | undefined;
+  wc?: WCMessages | undefined;
+  pvi?: PVIMessages | undefined;
+  localauth?: LocalAuthMessages | undefined;
+  neuriometer?: NeurioMeterMessages | undefined;
+  energysitenet?: EnergySiteNetMessages | undefined;
+  intrasite?: IntraSiteMessages | undefined;
   authorization?: AuthorizationMessages | undefined;
+  filestore?: FileStoreMessages | undefined;
+  graphql?: GraphQLMessages | undefined;
 }
 
 function createBaseExternalAuth(): ExternalAuth {
@@ -554,7 +563,15 @@ function createBaseMessageEnvelope(): MessageEnvelope {
     recipient: undefined,
     common: undefined,
     teg: undefined,
+    wc: undefined,
+    pvi: undefined,
+    localauth: undefined,
+    neuriometer: undefined,
+    energysitenet: undefined,
+    intrasite: undefined,
     authorization: undefined,
+    filestore: undefined,
+    graphql: undefined,
   };
 }
 
@@ -575,8 +592,32 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
     if (message.teg !== undefined) {
       TEGMessages.encode(message.teg, writer.uint32(42).fork()).join();
     }
+    if (message.wc !== undefined) {
+      WCMessages.encode(message.wc, writer.uint32(50).fork()).join();
+    }
+    if (message.pvi !== undefined) {
+      PVIMessages.encode(message.pvi, writer.uint32(58).fork()).join();
+    }
+    if (message.localauth !== undefined) {
+      LocalAuthMessages.encode(message.localauth, writer.uint32(66).fork()).join();
+    }
+    if (message.neuriometer !== undefined) {
+      NeurioMeterMessages.encode(message.neuriometer, writer.uint32(74).fork()).join();
+    }
+    if (message.energysitenet !== undefined) {
+      EnergySiteNetMessages.encode(message.energysitenet, writer.uint32(82).fork()).join();
+    }
+    if (message.intrasite !== undefined) {
+      IntraSiteMessages.encode(message.intrasite, writer.uint32(90).fork()).join();
+    }
     if (message.authorization !== undefined) {
       AuthorizationMessages.encode(message.authorization, writer.uint32(98).fork()).join();
+    }
+    if (message.filestore !== undefined) {
+      FileStoreMessages.encode(message.filestore, writer.uint32(122).fork()).join();
+    }
+    if (message.graphql !== undefined) {
+      GraphQLMessages.encode(message.graphql, writer.uint32(130).fork()).join();
     }
     return writer;
   },
@@ -628,12 +669,76 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
           message.teg = TEGMessages.decode(reader, reader.uint32());
           continue;
         }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.wc = WCMessages.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.pvi = PVIMessages.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.localauth = LocalAuthMessages.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.neuriometer = NeurioMeterMessages.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.energysitenet = EnergySiteNetMessages.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.intrasite = IntraSiteMessages.decode(reader, reader.uint32());
+          continue;
+        }
         case 12: {
           if (tag !== 98) {
             break;
           }
 
           message.authorization = AuthorizationMessages.decode(reader, reader.uint32());
+          continue;
+        }
+        case 15: {
+          if (tag !== 122) {
+            break;
+          }
+
+          message.filestore = FileStoreMessages.decode(reader, reader.uint32());
+          continue;
+        }
+        case 16: {
+          if (tag !== 130) {
+            break;
+          }
+
+          message.graphql = GraphQLMessages.decode(reader, reader.uint32());
           continue;
         }
       }
@@ -652,7 +757,15 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
       recipient: isSet(object.recipient) ? Participant.fromJSON(object.recipient) : undefined,
       common: isSet(object.common) ? CommonMessages.fromJSON(object.common) : undefined,
       teg: isSet(object.teg) ? TEGMessages.fromJSON(object.teg) : undefined,
+      wc: isSet(object.wc) ? WCMessages.fromJSON(object.wc) : undefined,
+      pvi: isSet(object.pvi) ? PVIMessages.fromJSON(object.pvi) : undefined,
+      localauth: isSet(object.localauth) ? LocalAuthMessages.fromJSON(object.localauth) : undefined,
+      neuriometer: isSet(object.neuriometer) ? NeurioMeterMessages.fromJSON(object.neuriometer) : undefined,
+      energysitenet: isSet(object.energysitenet) ? EnergySiteNetMessages.fromJSON(object.energysitenet) : undefined,
+      intrasite: isSet(object.intrasite) ? IntraSiteMessages.fromJSON(object.intrasite) : undefined,
       authorization: isSet(object.authorization) ? AuthorizationMessages.fromJSON(object.authorization) : undefined,
+      filestore: isSet(object.filestore) ? FileStoreMessages.fromJSON(object.filestore) : undefined,
+      graphql: isSet(object.graphql) ? GraphQLMessages.fromJSON(object.graphql) : undefined,
     };
   },
 
@@ -673,8 +786,32 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
     if (message.teg !== undefined) {
       obj.teg = TEGMessages.toJSON(message.teg);
     }
+    if (message.wc !== undefined) {
+      obj.wc = WCMessages.toJSON(message.wc);
+    }
+    if (message.pvi !== undefined) {
+      obj.pvi = PVIMessages.toJSON(message.pvi);
+    }
+    if (message.localauth !== undefined) {
+      obj.localauth = LocalAuthMessages.toJSON(message.localauth);
+    }
+    if (message.neuriometer !== undefined) {
+      obj.neuriometer = NeurioMeterMessages.toJSON(message.neuriometer);
+    }
+    if (message.energysitenet !== undefined) {
+      obj.energysitenet = EnergySiteNetMessages.toJSON(message.energysitenet);
+    }
+    if (message.intrasite !== undefined) {
+      obj.intrasite = IntraSiteMessages.toJSON(message.intrasite);
+    }
     if (message.authorization !== undefined) {
       obj.authorization = AuthorizationMessages.toJSON(message.authorization);
+    }
+    if (message.filestore !== undefined) {
+      obj.filestore = FileStoreMessages.toJSON(message.filestore);
+    }
+    if (message.graphql !== undefined) {
+      obj.graphql = GraphQLMessages.toJSON(message.graphql);
     }
     return obj;
   },
@@ -695,8 +832,28 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
       ? CommonMessages.fromPartial(object.common)
       : undefined;
     message.teg = (object.teg !== undefined && object.teg !== null) ? TEGMessages.fromPartial(object.teg) : undefined;
+    message.wc = (object.wc !== undefined && object.wc !== null) ? WCMessages.fromPartial(object.wc) : undefined;
+    message.pvi = (object.pvi !== undefined && object.pvi !== null) ? PVIMessages.fromPartial(object.pvi) : undefined;
+    message.localauth = (object.localauth !== undefined && object.localauth !== null)
+      ? LocalAuthMessages.fromPartial(object.localauth)
+      : undefined;
+    message.neuriometer = (object.neuriometer !== undefined && object.neuriometer !== null)
+      ? NeurioMeterMessages.fromPartial(object.neuriometer)
+      : undefined;
+    message.energysitenet = (object.energysitenet !== undefined && object.energysitenet !== null)
+      ? EnergySiteNetMessages.fromPartial(object.energysitenet)
+      : undefined;
+    message.intrasite = (object.intrasite !== undefined && object.intrasite !== null)
+      ? IntraSiteMessages.fromPartial(object.intrasite)
+      : undefined;
     message.authorization = (object.authorization !== undefined && object.authorization !== null)
       ? AuthorizationMessages.fromPartial(object.authorization)
+      : undefined;
+    message.filestore = (object.filestore !== undefined && object.filestore !== null)
+      ? FileStoreMessages.fromPartial(object.filestore)
+      : undefined;
+    message.graphql = (object.graphql !== undefined && object.graphql !== null)
+      ? GraphQLMessages.fromPartial(object.graphql)
       : undefined;
     return message;
   },

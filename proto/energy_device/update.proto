@@ -53,16 +53,19 @@ message SystemUpdate {
   uint64 last_handshake_timestamp                     = 7;
   int32 last_update_result                            = 8;
   repeated ServerStagedPackage server_staged_packages = 9;
+  bool is_sideloading                                 = 10;
 }
 
 message AcceptedPackage {
-  uint64 package_id       = 1;
-  bytes package_signature = 2;
-  string upload_endpoint  = 3;
+  uint64 package_id           = 1;
+  bytes package_signature     = 2;
+  string upload_endpoint      = 3;
+  bool will_attempt_download = 4;
 }
 
 message LocallyAvailablePackage {
   uint64 package_id       = 1;
   bytes package_signature = 2;
   uint64 file_size_bytes  = 3;
+  string download_url     = 4;
 }

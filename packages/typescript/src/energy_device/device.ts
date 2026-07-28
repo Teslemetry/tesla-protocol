@@ -318,6 +318,18 @@ export interface EcuId {
   serialNumber: string;
 }
 
+export interface VIN {
+  value: string;
+}
+
+export interface UUIDv4Bytes {
+  value: Uint8Array;
+}
+
+export interface UUIDv4 {
+  text: string;
+}
+
 export interface DeviceSignedPayload {
   payload: Uint8Array;
   deviceSignatureType: DeviceSignatureType;
@@ -461,6 +473,180 @@ export const EcuId: MessageFns<EcuId> = {
     const message = createBaseEcuId();
     message.partNumber = object.partNumber ?? "";
     message.serialNumber = object.serialNumber ?? "";
+    return message;
+  },
+};
+
+function createBaseVIN(): VIN {
+  return { value: "" };
+}
+
+export const VIN: MessageFns<VIN> = {
+  encode(message: VIN, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.value !== "") {
+      writer.uint32(10).string(message.value);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): VIN {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVIN();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.value = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): VIN {
+    return { value: isSet(object.value) ? globalThis.String(object.value) : "" };
+  },
+
+  toJSON(message: VIN): unknown {
+    const obj: any = {};
+    if (message.value !== undefined) {
+      obj.value = message.value;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<VIN>, I>>(base?: I): VIN {
+    return VIN.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<VIN>, I>>(object: I): VIN {
+    const message = createBaseVIN();
+    message.value = object.value ?? "";
+    return message;
+  },
+};
+
+function createBaseUUIDv4Bytes(): UUIDv4Bytes {
+  return { value: new Uint8Array(0) };
+}
+
+export const UUIDv4Bytes: MessageFns<UUIDv4Bytes> = {
+  encode(message: UUIDv4Bytes, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.value.length !== 0) {
+      writer.uint32(10).bytes(message.value);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UUIDv4Bytes {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUUIDv4Bytes();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.value = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UUIDv4Bytes {
+    return { value: isSet(object.value) ? bytesFromBase64(object.value) : new Uint8Array(0) };
+  },
+
+  toJSON(message: UUIDv4Bytes): unknown {
+    const obj: any = {};
+    if (message.value !== undefined) {
+      obj.value = base64FromBytes(message.value);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UUIDv4Bytes>, I>>(base?: I): UUIDv4Bytes {
+    return UUIDv4Bytes.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UUIDv4Bytes>, I>>(object: I): UUIDv4Bytes {
+    const message = createBaseUUIDv4Bytes();
+    message.value = object.value ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseUUIDv4(): UUIDv4 {
+  return { text: "" };
+}
+
+export const UUIDv4: MessageFns<UUIDv4> = {
+  encode(message: UUIDv4, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.text !== "") {
+      writer.uint32(10).string(message.text);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UUIDv4 {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUUIDv4();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.text = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UUIDv4 {
+    return { text: isSet(object.text) ? globalThis.String(object.text) : "" };
+  },
+
+  toJSON(message: UUIDv4): unknown {
+    const obj: any = {};
+    if (message.text !== undefined) {
+      obj.text = message.text;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UUIDv4>, I>>(base?: I): UUIDv4 {
+    return UUIDv4.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UUIDv4>, I>>(object: I): UUIDv4 {
+    const message = createBaseUUIDv4();
+    message.text = object.text ?? "";
     return message;
   },
 };

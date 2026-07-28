@@ -13,6 +13,14 @@ import "authorization_types.proto";
 import "authorization_api.proto";
 import "common_api.proto";
 import "teg_api.proto";
+import "wall_connector.proto";
+import "pvi_api.proto";
+import "local_auth_api.proto";
+import "neurio_meter_api.proto";
+import "energy_site_net.proto";
+import "intra_site_api.proto";
+import "filestore_api.proto";
+import "graphql_api.proto";
 
 enum DeliveryChannel {
   DELIVERY_CHANNEL_INVALID        = 0;
@@ -66,18 +74,21 @@ message RegistrationPayload {
 }
 
 message MessageEnvelope {
-  DeliveryChannel delivery_channel       = 1;
-  Participant sender                     = 2;
-  Participant recipient                  = 3;
-  reserved 7;
+  DeliveryChannel delivery_channel = 1;
+  Participant sender               = 2;
+  Participant recipient            = 3;
+  reserved 13, 14;
   oneof payload {
-    CommonMessages common                = 4;
-    TEGMessages teg                      = 5;
-    //WCMessages wc                       = 6;
-    //NeurioMeterMessages neuriometer     = 9;
-    //EnergySiteNetMessages energysitenet = 10;
+    CommonMessages common               = 4;
+    TEGMessages teg                     = 5;
+    WCMessages wc                       = 6;
+    PVIMessages pvi                     = 7;
+    LocalAuthMessages localauth         = 8;
+    NeurioMeterMessages neuriometer     = 9;
+    EnergySiteNetMessages energysitenet = 10;
+    IntraSiteMessages intrasite         = 11;
     AuthorizationMessages authorization = 12;
-    //FileStoreMessages filestore         = 15;
-    //GraphQLMessages graphql             = 16;
+    FileStoreMessages filestore         = 15;
+    GraphQLMessages graphql             = 16;
   }
 }

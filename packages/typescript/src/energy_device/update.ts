@@ -178,18 +178,21 @@ export interface SystemUpdate {
   lastHandshakeTimestamp: number;
   lastUpdateResult: number;
   serverStagedPackages: ServerStagedPackage[];
+  isSideloading: boolean;
 }
 
 export interface AcceptedPackage {
   packageId: number;
   packageSignature: Uint8Array;
   uploadEndpoint: string;
+  willAttemptDownload: boolean;
 }
 
 export interface LocallyAvailablePackage {
   packageId: number;
   packageSignature: Uint8Array;
   fileSizeBytes: number;
+  downloadUrl: string;
 }
 
 function createBaseFirmwareVersion(): FirmwareVersion {
@@ -391,6 +394,7 @@ function createBaseSystemUpdate(): SystemUpdate {
     lastHandshakeTimestamp: 0,
     lastUpdateResult: 0,
     serverStagedPackages: [],
+    isSideloading: false,
   };
 }
 
@@ -422,6 +426,9 @@ export const SystemUpdate: MessageFns<SystemUpdate> = {
     }
     for (const v of message.serverStagedPackages) {
       ServerStagedPackage.encode(v!, writer.uint32(74).fork()).join();
+    }
+    if (message.isSideloading !== false) {
+      writer.uint32(80).bool(message.isSideloading);
     }
     return writer;
   },
@@ -505,6 +512,14 @@ export const SystemUpdate: MessageFns<SystemUpdate> = {
           message.serverStagedPackages.push(ServerStagedPackage.decode(reader, reader.uint32()));
           continue;
         }
+        case 10: {
+          if (tag !== 80) {
+            break;
+          }
+
+          message.isSideloading = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -533,6 +548,7 @@ export const SystemUpdate: MessageFns<SystemUpdate> = {
       serverStagedPackages: globalThis.Array.isArray(object?.serverStagedPackages)
         ? object.serverStagedPackages.map((e: any) => ServerStagedPackage.fromJSON(e))
         : [],
+      isSideloading: isSet(object.isSideloading) ? globalThis.Boolean(object.isSideloading) : false,
     };
   },
 
@@ -565,6 +581,9 @@ export const SystemUpdate: MessageFns<SystemUpdate> = {
     if (message.serverStagedPackages?.length) {
       obj.serverStagedPackages = message.serverStagedPackages.map((e) => ServerStagedPackage.toJSON(e));
     }
+    if (message.isSideloading !== undefined) {
+      obj.isSideloading = message.isSideloading;
+    }
     return obj;
   },
 
@@ -584,12 +603,13 @@ export const SystemUpdate: MessageFns<SystemUpdate> = {
     message.lastHandshakeTimestamp = object.lastHandshakeTimestamp ?? 0;
     message.lastUpdateResult = object.lastUpdateResult ?? 0;
     message.serverStagedPackages = object.serverStagedPackages?.map((e) => ServerStagedPackage.fromPartial(e)) || [];
+    message.isSideloading = object.isSideloading ?? false;
     return message;
   },
 };
 
 function createBaseAcceptedPackage(): AcceptedPackage {
-  return { packageId: 0, packageSignature: new Uint8Array(0), uploadEndpoint: "" };
+  return { packageId: 0, packageSignature: new Uint8Array(0), uploadEndpoint: "", willAttemptDownload: false };
 }
 
 export const AcceptedPackage: MessageFns<AcceptedPackage> = {
@@ -602,6 +622,9 @@ export const AcceptedPackage: MessageFns<AcceptedPackage> = {
     }
     if (message.uploadEndpoint !== "") {
       writer.uint32(26).string(message.uploadEndpoint);
+    }
+    if (message.willAttemptDownload !== false) {
+      writer.uint32(32).bool(message.willAttemptDownload);
     }
     return writer;
   },
@@ -637,6 +660,14 @@ export const AcceptedPackage: MessageFns<AcceptedPackage> = {
           message.uploadEndpoint = reader.string();
           continue;
         }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.willAttemptDownload = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -651,6 +682,7 @@ export const AcceptedPackage: MessageFns<AcceptedPackage> = {
       packageId: isSet(object.packageId) ? globalThis.Number(object.packageId) : 0,
       packageSignature: isSet(object.packageSignature) ? bytesFromBase64(object.packageSignature) : new Uint8Array(0),
       uploadEndpoint: isSet(object.uploadEndpoint) ? globalThis.String(object.uploadEndpoint) : "",
+      willAttemptDownload: isSet(object.willAttemptDownload) ? globalThis.Boolean(object.willAttemptDownload) : false,
     };
   },
 
@@ -665,6 +697,9 @@ export const AcceptedPackage: MessageFns<AcceptedPackage> = {
     if (message.uploadEndpoint !== undefined) {
       obj.uploadEndpoint = message.uploadEndpoint;
     }
+    if (message.willAttemptDownload !== undefined) {
+      obj.willAttemptDownload = message.willAttemptDownload;
+    }
     return obj;
   },
 
@@ -676,12 +711,13 @@ export const AcceptedPackage: MessageFns<AcceptedPackage> = {
     message.packageId = object.packageId ?? 0;
     message.packageSignature = object.packageSignature ?? new Uint8Array(0);
     message.uploadEndpoint = object.uploadEndpoint ?? "";
+    message.willAttemptDownload = object.willAttemptDownload ?? false;
     return message;
   },
 };
 
 function createBaseLocallyAvailablePackage(): LocallyAvailablePackage {
-  return { packageId: 0, packageSignature: new Uint8Array(0), fileSizeBytes: 0 };
+  return { packageId: 0, packageSignature: new Uint8Array(0), fileSizeBytes: 0, downloadUrl: "" };
 }
 
 export const LocallyAvailablePackage: MessageFns<LocallyAvailablePackage> = {
@@ -694,6 +730,9 @@ export const LocallyAvailablePackage: MessageFns<LocallyAvailablePackage> = {
     }
     if (message.fileSizeBytes !== 0) {
       writer.uint32(24).uint64(message.fileSizeBytes);
+    }
+    if (message.downloadUrl !== "") {
+      writer.uint32(34).string(message.downloadUrl);
     }
     return writer;
   },
@@ -729,6 +768,14 @@ export const LocallyAvailablePackage: MessageFns<LocallyAvailablePackage> = {
           message.fileSizeBytes = longToNumber(reader.uint64());
           continue;
         }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.downloadUrl = reader.string();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -743,6 +790,7 @@ export const LocallyAvailablePackage: MessageFns<LocallyAvailablePackage> = {
       packageId: isSet(object.packageId) ? globalThis.Number(object.packageId) : 0,
       packageSignature: isSet(object.packageSignature) ? bytesFromBase64(object.packageSignature) : new Uint8Array(0),
       fileSizeBytes: isSet(object.fileSizeBytes) ? globalThis.Number(object.fileSizeBytes) : 0,
+      downloadUrl: isSet(object.downloadUrl) ? globalThis.String(object.downloadUrl) : "",
     };
   },
 
@@ -757,6 +805,9 @@ export const LocallyAvailablePackage: MessageFns<LocallyAvailablePackage> = {
     if (message.fileSizeBytes !== undefined) {
       obj.fileSizeBytes = Math.round(message.fileSizeBytes);
     }
+    if (message.downloadUrl !== undefined) {
+      obj.downloadUrl = message.downloadUrl;
+    }
     return obj;
   },
 
@@ -768,6 +819,7 @@ export const LocallyAvailablePackage: MessageFns<LocallyAvailablePackage> = {
     message.packageId = object.packageId ?? 0;
     message.packageSignature = object.packageSignature ?? new Uint8Array(0);
     message.fileSizeBytes = object.fileSizeBytes ?? 0;
+    message.downloadUrl = object.downloadUrl ?? "";
     return message;
   },
 };

@@ -6,7 +6,13 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import {
+  CommonAPIPrepareRegistrationPayloadRequest,
+  CommonAPIPrepareRegistrationPayloadResponse,
+} from "./common_api.js";
+import { DeviceType, deviceTypeFromJSON, deviceTypeToJSON, Din } from "./device.js";
 import { Timestamp } from "./google/protobuf/timestamp.js";
+import { NetworkInterface, WifiConfig } from "./networking.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
@@ -15,6 +21,375 @@ export const protobufPackage = "tesla.proto.energy_device.v1";
  * Provenance: Tesla Energy gateway (TEG) local API, from our own
  * observations and contributions from the community
  */
+
+export enum TEGIslandMode {
+  TEG_ISLAND_MODE_INVALID = 0,
+  TEG_ISLAND_MODE_AUTO_ACTIVE = 1,
+  TEG_ISLAND_MODE_READY = 2,
+  TEG_ISLAND_MODE_INTENTIONAL = 3,
+  TEG_ISLAND_MODE_PQ = 4,
+  TEG_ISLAND_MODE_OFF = 5,
+  TEG_ISLAND_MODE_INTENTIONAL_WITH_RECONNECT_FAILSAFE = 6,
+  UNRECOGNIZED = -1,
+}
+
+export function tEGIslandModeFromJSON(object: any): TEGIslandMode {
+  switch (object) {
+    case 0:
+    case "TEG_ISLAND_MODE_INVALID":
+      return TEGIslandMode.TEG_ISLAND_MODE_INVALID;
+    case 1:
+    case "TEG_ISLAND_MODE_AUTO_ACTIVE":
+      return TEGIslandMode.TEG_ISLAND_MODE_AUTO_ACTIVE;
+    case 2:
+    case "TEG_ISLAND_MODE_READY":
+      return TEGIslandMode.TEG_ISLAND_MODE_READY;
+    case 3:
+    case "TEG_ISLAND_MODE_INTENTIONAL":
+      return TEGIslandMode.TEG_ISLAND_MODE_INTENTIONAL;
+    case 4:
+    case "TEG_ISLAND_MODE_PQ":
+      return TEGIslandMode.TEG_ISLAND_MODE_PQ;
+    case 5:
+    case "TEG_ISLAND_MODE_OFF":
+      return TEGIslandMode.TEG_ISLAND_MODE_OFF;
+    case 6:
+    case "TEG_ISLAND_MODE_INTENTIONAL_WITH_RECONNECT_FAILSAFE":
+      return TEGIslandMode.TEG_ISLAND_MODE_INTENTIONAL_WITH_RECONNECT_FAILSAFE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return TEGIslandMode.UNRECOGNIZED;
+  }
+}
+
+export function tEGIslandModeToJSON(object: TEGIslandMode): string {
+  switch (object) {
+    case TEGIslandMode.TEG_ISLAND_MODE_INVALID:
+      return "TEG_ISLAND_MODE_INVALID";
+    case TEGIslandMode.TEG_ISLAND_MODE_AUTO_ACTIVE:
+      return "TEG_ISLAND_MODE_AUTO_ACTIVE";
+    case TEGIslandMode.TEG_ISLAND_MODE_READY:
+      return "TEG_ISLAND_MODE_READY";
+    case TEGIslandMode.TEG_ISLAND_MODE_INTENTIONAL:
+      return "TEG_ISLAND_MODE_INTENTIONAL";
+    case TEGIslandMode.TEG_ISLAND_MODE_PQ:
+      return "TEG_ISLAND_MODE_PQ";
+    case TEGIslandMode.TEG_ISLAND_MODE_OFF:
+      return "TEG_ISLAND_MODE_OFF";
+    case TEGIslandMode.TEG_ISLAND_MODE_INTENTIONAL_WITH_RECONNECT_FAILSAFE:
+      return "TEG_ISLAND_MODE_INTENTIONAL_WITH_RECONNECT_FAILSAFE";
+    case TEGIslandMode.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum TEGSetIslandModeResult {
+  TEG_SET_ISLAND_MODE_RESULT_INVALID = 0,
+  TEG_SET_ISLAND_MODE_RESULT_ACCEPTED = 1,
+  TEG_SET_ISLAND_MODE_RESULT_REJECTED_NOT_READY_FOR_ISLANDING = 2,
+  TEG_SET_ISLAND_MODE_RESULT_REJECTED_LOAD_DROP_EXPECTED = 3,
+  TEG_SET_ISLAND_MODE_RESULT_REJECTED_LOW_ENERGY = 4,
+  TEG_SET_ISLAND_MODE_RESULT_REJECTED_EXCESSIVE_SOLAR = 5,
+  UNRECOGNIZED = -1,
+}
+
+export function tEGSetIslandModeResultFromJSON(object: any): TEGSetIslandModeResult {
+  switch (object) {
+    case 0:
+    case "TEG_SET_ISLAND_MODE_RESULT_INVALID":
+      return TEGSetIslandModeResult.TEG_SET_ISLAND_MODE_RESULT_INVALID;
+    case 1:
+    case "TEG_SET_ISLAND_MODE_RESULT_ACCEPTED":
+      return TEGSetIslandModeResult.TEG_SET_ISLAND_MODE_RESULT_ACCEPTED;
+    case 2:
+    case "TEG_SET_ISLAND_MODE_RESULT_REJECTED_NOT_READY_FOR_ISLANDING":
+      return TEGSetIslandModeResult.TEG_SET_ISLAND_MODE_RESULT_REJECTED_NOT_READY_FOR_ISLANDING;
+    case 3:
+    case "TEG_SET_ISLAND_MODE_RESULT_REJECTED_LOAD_DROP_EXPECTED":
+      return TEGSetIslandModeResult.TEG_SET_ISLAND_MODE_RESULT_REJECTED_LOAD_DROP_EXPECTED;
+    case 4:
+    case "TEG_SET_ISLAND_MODE_RESULT_REJECTED_LOW_ENERGY":
+      return TEGSetIslandModeResult.TEG_SET_ISLAND_MODE_RESULT_REJECTED_LOW_ENERGY;
+    case 5:
+    case "TEG_SET_ISLAND_MODE_RESULT_REJECTED_EXCESSIVE_SOLAR":
+      return TEGSetIslandModeResult.TEG_SET_ISLAND_MODE_RESULT_REJECTED_EXCESSIVE_SOLAR;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return TEGSetIslandModeResult.UNRECOGNIZED;
+  }
+}
+
+export function tEGSetIslandModeResultToJSON(object: TEGSetIslandModeResult): string {
+  switch (object) {
+    case TEGSetIslandModeResult.TEG_SET_ISLAND_MODE_RESULT_INVALID:
+      return "TEG_SET_ISLAND_MODE_RESULT_INVALID";
+    case TEGSetIslandModeResult.TEG_SET_ISLAND_MODE_RESULT_ACCEPTED:
+      return "TEG_SET_ISLAND_MODE_RESULT_ACCEPTED";
+    case TEGSetIslandModeResult.TEG_SET_ISLAND_MODE_RESULT_REJECTED_NOT_READY_FOR_ISLANDING:
+      return "TEG_SET_ISLAND_MODE_RESULT_REJECTED_NOT_READY_FOR_ISLANDING";
+    case TEGSetIslandModeResult.TEG_SET_ISLAND_MODE_RESULT_REJECTED_LOAD_DROP_EXPECTED:
+      return "TEG_SET_ISLAND_MODE_RESULT_REJECTED_LOAD_DROP_EXPECTED";
+    case TEGSetIslandModeResult.TEG_SET_ISLAND_MODE_RESULT_REJECTED_LOW_ENERGY:
+      return "TEG_SET_ISLAND_MODE_RESULT_REJECTED_LOW_ENERGY";
+    case TEGSetIslandModeResult.TEG_SET_ISLAND_MODE_RESULT_REJECTED_EXCESSIVE_SOLAR:
+      return "TEG_SET_ISLAND_MODE_RESULT_REJECTED_EXCESSIVE_SOLAR";
+    case TEGSetIslandModeResult.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum CanvasSiteStatus {
+  CANVAS_SITE_STATUS_INVALID = 0,
+  CANVAS_SITE_STATUS_IS_CANVAS = 1,
+  CANVAS_SITE_STATUS_NOT_CANVAS = 2,
+  CANVAS_SITE_STATUS_NOT_FOUND = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function canvasSiteStatusFromJSON(object: any): CanvasSiteStatus {
+  switch (object) {
+    case 0:
+    case "CANVAS_SITE_STATUS_INVALID":
+      return CanvasSiteStatus.CANVAS_SITE_STATUS_INVALID;
+    case 1:
+    case "CANVAS_SITE_STATUS_IS_CANVAS":
+      return CanvasSiteStatus.CANVAS_SITE_STATUS_IS_CANVAS;
+    case 2:
+    case "CANVAS_SITE_STATUS_NOT_CANVAS":
+      return CanvasSiteStatus.CANVAS_SITE_STATUS_NOT_CANVAS;
+    case 3:
+    case "CANVAS_SITE_STATUS_NOT_FOUND":
+      return CanvasSiteStatus.CANVAS_SITE_STATUS_NOT_FOUND;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return CanvasSiteStatus.UNRECOGNIZED;
+  }
+}
+
+export function canvasSiteStatusToJSON(object: CanvasSiteStatus): string {
+  switch (object) {
+    case CanvasSiteStatus.CANVAS_SITE_STATUS_INVALID:
+      return "CANVAS_SITE_STATUS_INVALID";
+    case CanvasSiteStatus.CANVAS_SITE_STATUS_IS_CANVAS:
+      return "CANVAS_SITE_STATUS_IS_CANVAS";
+    case CanvasSiteStatus.CANVAS_SITE_STATUS_NOT_CANVAS:
+      return "CANVAS_SITE_STATUS_NOT_CANVAS";
+    case CanvasSiteStatus.CANVAS_SITE_STATUS_NOT_FOUND:
+      return "CANVAS_SITE_STATUS_NOT_FOUND";
+    case CanvasSiteStatus.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export interface TEGSettings {
+}
+
+export interface Powerwall2PhaseDetectionParameters {
+  din: string;
+}
+
+export interface TEGAPIGetConfigRequest {
+}
+
+export interface TEGAPIGetConfigResponse {
+  settings: TEGSettings | undefined;
+  wifiConfig: WifiConfig | undefined;
+  wifi: NetworkInterface | undefined;
+  eth: NetworkInterface | undefined;
+  gsm: NetworkInterface | undefined;
+  deviceType: DeviceType;
+}
+
+export interface TEGAPISetIslandModeRequest {
+  mode: TEGIslandMode;
+  force: boolean;
+}
+
+export interface TEGAPISetIslandModeResponse {
+  result: TEGSetIslandModeResult;
+}
+
+export interface TEGAPITriggerIslandingBlackStartRequest {
+}
+
+export interface TEGAPITriggerIslandingBlackStartResponse {
+}
+
+export interface TEGAPITriggerAssetManifestUploadRequest {
+}
+
+export interface TEGAPITriggerAssetManifestUploadResponse {
+}
+
+export interface TEGAPITriggerPowerwall2EnumerationRequest {
+}
+
+export interface TEGAPITriggerPowerwall2EnumerationResponse {
+}
+
+export interface TEGAPITriggerEsCanFirmwareUpdateRequest {
+}
+
+export interface TEGAPITriggerEsCanFirmwareUpdateResponse {
+}
+
+export interface TEGAPITriggerPW3CanFirmwareUpdateRequest {
+}
+
+export interface TEGAPITriggerPW3CanFirmwareUpdateResponse {
+}
+
+export interface TEGAPITriggerPowerwall3EnumerationRequest {
+}
+
+export interface TEGAPITriggerPowerwall3EnumerationResponse {
+}
+
+export interface TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode {
+}
+
+export interface TEGAPIDispatchBatteryPowerRequestRealPowerCommand {
+  powerWatts: number;
+  durationSeconds: number;
+}
+
+export interface TEGAPIDispatchBatteryPowerRequest {
+  resumeDeviceMode: TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode | undefined;
+  realPower: TEGAPIDispatchBatteryPowerRequestRealPowerCommand | undefined;
+}
+
+export interface TEGAPIDispatchBatteryPowerResponse {
+}
+
+export interface TEGAPIDetectWiredMetersRequest {
+}
+
+export interface TEGAPIDetectWiredMetersResponse {
+}
+
+/**
+ * Field 1 (registration_request) is a type from a separate, not-yet-modeled
+ * proto package; left unmodeled here.
+ */
+export interface TEGAPIRegisterRequest {
+}
+
+export interface TEGAPIRegisterResponse {
+  /**
+   * Field 2 (registration_response) is a type from a separate, not-yet-modeled
+   * proto package; left unmodeled here.
+   */
+  failure: number;
+}
+
+export interface TEGAPITriggerPowerwall2PhaseDetectionRequest {
+  powerwalls: Powerwall2PhaseDetectionParameters[];
+}
+
+export interface TEGAPITriggerPowerwall2PhaseDetectionResponse {
+}
+
+export interface TEGAPIResetPowerwall2PhaseDetectionRequest {
+}
+
+export interface TEGAPIResetPowerwall2PhaseDetectionResponse {
+}
+
+export interface TEGAPIForceWifiScanRequest {
+}
+
+export interface TEGAPIForceWifiScanResponse {
+}
+
+export interface TEGAPIStartPowerwall2InverterSelfTestsRequest {
+}
+
+export interface TEGAPIStartPowerwall2InverterSelfTestsResponse {
+}
+
+export interface TEGAPIStopPowerwall2InverterSelfTestsRequest {
+}
+
+export interface TEGAPIStopPowerwall2InverterSelfTestsResponse {
+}
+
+export interface TEGAPIStartPowerwall2BubbleShedRequest {
+}
+
+export interface TEGAPIStartPowerwall2BubbleShedResponse {
+}
+
+export interface TEGAPIClearSolarInverterAlertsRequest {
+  din: string;
+}
+
+export interface TEGAPIClearSolarInverterAlertsResponse {
+}
+
+export interface TEGAPIGetWifiConfigWithCredentialsRequest {
+}
+
+export interface TEGAPIGetWifiConfigWithCredentialsResponse {
+  wifiConfig: WifiConfig | undefined;
+}
+
+export interface TEGAPIDisableBatteriesRequestBatteryDisableRequest {
+  din: string;
+  disable: boolean;
+}
+
+export interface TEGAPIDisableBatteriesRequest {
+  batteryDisableRequests: TEGAPIDisableBatteriesRequestBatteryDisableRequest[];
+}
+
+export interface TEGAPIDisableBatteriesResponse {
+}
+
+export interface TEGAPIBypassBatterySoeAdjustmentConstraintsRequest {
+  enable: boolean;
+  durationHours: number;
+}
+
+export interface TEGAPIBypassBatterySoeAdjustmentConstraintsResponse {
+}
+
+export interface TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks {
+}
+
+export interface TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited {
+}
+
+export interface TEGAPIEnsureCertificateRequestCSIPAusNet {
+}
+
+export interface TEGAPIEnsureCertificateRequestCSIPJemena {
+}
+
+export interface TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD {
+}
+
+export interface TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy {
+}
+
+export interface TEGAPIEnsureCertificateRequest {
+  forceRenew: boolean;
+  csipSouthAustraliaPowerNetworks: TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks | undefined;
+  csipCitipowerPowercorUnited: TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited | undefined;
+  csipAusnet: TEGAPIEnsureCertificateRequestCSIPAusNet | undefined;
+  csipJemena: TEGAPIEnsureCertificateRequestCSIPJemena | undefined;
+  csipEnergexErgonEnergyQld: TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD | undefined;
+  csipWesternPowerSynergy: TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy | undefined;
+}
+
+export interface TEGAPIEnsureCertificateResponse {
+  certificateExists: boolean;
+}
 
 export interface ControlEventSchedulingInfo {
   startTime: Date | undefined;
@@ -53,94 +428,3700 @@ export interface TEGAPIGetBackupEventsResponse {
   backupEvents: BackupEvent[];
 }
 
-export interface TEGAPIRegisterRequest {
+export interface CsmsPropertiesRequest {
 }
 
-export interface TEGAPIRegisterResponse {
+export interface CsmsProperties {
+  csmsRootCa: Uint8Array;
+  csmsUrl: string;
+  chargePointOperator: string;
+}
+
+export interface CsmsPropertiesResponse {
+  canvasSiteStatus: CanvasSiteStatus;
+  csmsProperties: CsmsProperties | undefined;
+}
+
+export interface TEGAPIGetCsmsPropertiesRequest {
+  request: CsmsPropertiesRequest | undefined;
+}
+
+export interface TEGAPIGetCsmsPropertiesResponse {
+  response: CsmsPropertiesResponse | undefined;
+}
+
+export interface TEGAPIConfigureOcppRequest {
+  csmsBaseUrl: string;
+}
+
+export interface TEGAPIConfigureOcppResponse {
+}
+
+export interface TEGAPIStartProtectionTripSelfTestRequest {
+  testsToRun: string[];
+  disableFieldLimits: boolean;
+  disableDisconnectOnFailure: boolean;
+  disableAbortOnFailure: boolean;
+  fastForwardToStepBeforeNominal: number;
+  repetitions: number;
+  disableInverterFastTrips: boolean;
+}
+
+export interface TEGAPIStartProtectionTripSelfTestResponse {
+}
+
+export interface TEGAPIStopProtectionTripSelfTestRequest {
+}
+
+export interface TEGAPIStopProtectionTripSelfTestResponse {
+}
+
+export interface TEGAPIProvisionEatonSmartBreakerRequest {
+  deviceId: string;
+  broadcastPrimaryUdpKey: Uint8Array;
+  broadcastSecondaryUdpKey: Uint8Array;
+  unicastPrimaryUdpKey: Uint8Array;
+  unicastSecondaryUdpKey: Uint8Array;
+}
+
+export interface TEGAPIProvisionEatonSmartBreakerResponse {
+}
+
+export interface TEGAPIIdentifyEatonSmartBreakerRequest {
+  deviceId: string;
+}
+
+export interface TEGAPIIdentifyEatonSmartBreakerResponse {
+}
+
+export interface TEGAPITriggerPvacFanSelfTestRequest {
+  beid: number;
+}
+
+export interface TEGAPITriggerPvacFanSelfTestResponse {
+}
+
+export interface TEGAPIProxyPrepareRegistrationPayloadRequest {
+  request: CommonAPIPrepareRegistrationPayloadRequest | undefined;
+  targetDin: Din | undefined;
+}
+
+export interface TEGAPIProxyPrepareRegistrationPayloadResponse {
+  response: CommonAPIPrepareRegistrationPayloadResponse | undefined;
+}
+
+export interface TEGAPITriggerWallboxVehicleAbsentSelfTestRequest {
+}
+
+export interface TEGAPITriggerWallboxVehicleAbsentSelfTestResponse {
+}
+
+export interface TEGAPICustomerResetRequest {
+}
+
+export interface TEGAPICustomerResetResponse {
+}
+
+export interface TEGAPIDelayBatteryCalibrationRequest {
+  delayHours: number;
+}
+
+export interface TEGAPIDelayBatteryCalibrationResponse {
+}
+
+export interface TEGAPIGetDelayBatteryCalibrationStatusRequest {
+}
+
+export interface TEGAPIGetDelayBatteryCalibrationStatusResponse {
+  calibrationDelaysLeft: number;
+  calibrationDelayRemainingSeconds: number;
+  maxCalibrationDelays: number;
+}
+
+export interface ControllableDeviceProgramKey {
+  deviceId: string;
+  priority: ControllableDeviceProgramKey_Priority;
+}
+
+export enum ControllableDeviceProgramKey_Priority {
+  PRIORITY_INVALID = 0,
+  PRIORITY_CUSTOMER_DEFAULT = 5000,
+  PRIORITY_CUSTOMER_AUTOMATIC = 10000,
+  PRIORITY_CUSTOMER_OVERRIDE = 20000,
+  UNRECOGNIZED = -1,
+}
+
+export function controllableDeviceProgramKey_PriorityFromJSON(object: any): ControllableDeviceProgramKey_Priority {
+  switch (object) {
+    case 0:
+    case "PRIORITY_INVALID":
+      return ControllableDeviceProgramKey_Priority.PRIORITY_INVALID;
+    case 5000:
+    case "PRIORITY_CUSTOMER_DEFAULT":
+      return ControllableDeviceProgramKey_Priority.PRIORITY_CUSTOMER_DEFAULT;
+    case 10000:
+    case "PRIORITY_CUSTOMER_AUTOMATIC":
+      return ControllableDeviceProgramKey_Priority.PRIORITY_CUSTOMER_AUTOMATIC;
+    case 20000:
+    case "PRIORITY_CUSTOMER_OVERRIDE":
+      return ControllableDeviceProgramKey_Priority.PRIORITY_CUSTOMER_OVERRIDE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ControllableDeviceProgramKey_Priority.UNRECOGNIZED;
+  }
+}
+
+export function controllableDeviceProgramKey_PriorityToJSON(object: ControllableDeviceProgramKey_Priority): string {
+  switch (object) {
+    case ControllableDeviceProgramKey_Priority.PRIORITY_INVALID:
+      return "PRIORITY_INVALID";
+    case ControllableDeviceProgramKey_Priority.PRIORITY_CUSTOMER_DEFAULT:
+      return "PRIORITY_CUSTOMER_DEFAULT";
+    case ControllableDeviceProgramKey_Priority.PRIORITY_CUSTOMER_AUTOMATIC:
+      return "PRIORITY_CUSTOMER_AUTOMATIC";
+    case ControllableDeviceProgramKey_Priority.PRIORITY_CUSTOMER_OVERRIDE:
+      return "PRIORITY_CUSTOMER_OVERRIDE";
+    case ControllableDeviceProgramKey_Priority.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export interface ControllableDeviceProgramSettings {
+  contactorState: ControllableDeviceProgramSettings_ContactorState;
+}
+
+export enum ControllableDeviceProgramSettings_ContactorState {
+  CONTACTOR_STATE_INVALID = 0,
+  CONTACTOR_STATE_OPEN = 1,
+  CONTACTOR_STATE_CLOSED = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function controllableDeviceProgramSettings_ContactorStateFromJSON(
+  object: any,
+): ControllableDeviceProgramSettings_ContactorState {
+  switch (object) {
+    case 0:
+    case "CONTACTOR_STATE_INVALID":
+      return ControllableDeviceProgramSettings_ContactorState.CONTACTOR_STATE_INVALID;
+    case 1:
+    case "CONTACTOR_STATE_OPEN":
+      return ControllableDeviceProgramSettings_ContactorState.CONTACTOR_STATE_OPEN;
+    case 2:
+    case "CONTACTOR_STATE_CLOSED":
+      return ControllableDeviceProgramSettings_ContactorState.CONTACTOR_STATE_CLOSED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ControllableDeviceProgramSettings_ContactorState.UNRECOGNIZED;
+  }
+}
+
+export function controllableDeviceProgramSettings_ContactorStateToJSON(
+  object: ControllableDeviceProgramSettings_ContactorState,
+): string {
+  switch (object) {
+    case ControllableDeviceProgramSettings_ContactorState.CONTACTOR_STATE_INVALID:
+      return "CONTACTOR_STATE_INVALID";
+    case ControllableDeviceProgramSettings_ContactorState.CONTACTOR_STATE_OPEN:
+      return "CONTACTOR_STATE_OPEN";
+    case ControllableDeviceProgramSettings_ContactorState.CONTACTOR_STATE_CLOSED:
+      return "CONTACTOR_STATE_CLOSED";
+    case ControllableDeviceProgramSettings_ContactorState.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export interface ControllableDeviceProgramScheduleBoundary {
+  staticCondition: ControllableDeviceProgramScheduleBoundary_StaticCondition;
+  timestamp: Date | undefined;
+  islandingState: ControllableDeviceProgramScheduleBoundary_IslandingState;
+  stateOfEnergy: ControllableDeviceProgramScheduleBoundary_StateOfEnergy;
+}
+
+export enum ControllableDeviceProgramScheduleBoundary_StaticCondition {
+  STATIC_CONDITION_INVALID = 0,
+  STATIC_CONDITION_ALWAYS = 1,
+  STATIC_CONDITION_NEVER = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function controllableDeviceProgramScheduleBoundary_StaticConditionFromJSON(
+  object: any,
+): ControllableDeviceProgramScheduleBoundary_StaticCondition {
+  switch (object) {
+    case 0:
+    case "STATIC_CONDITION_INVALID":
+      return ControllableDeviceProgramScheduleBoundary_StaticCondition.STATIC_CONDITION_INVALID;
+    case 1:
+    case "STATIC_CONDITION_ALWAYS":
+      return ControllableDeviceProgramScheduleBoundary_StaticCondition.STATIC_CONDITION_ALWAYS;
+    case 2:
+    case "STATIC_CONDITION_NEVER":
+      return ControllableDeviceProgramScheduleBoundary_StaticCondition.STATIC_CONDITION_NEVER;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ControllableDeviceProgramScheduleBoundary_StaticCondition.UNRECOGNIZED;
+  }
+}
+
+export function controllableDeviceProgramScheduleBoundary_StaticConditionToJSON(
+  object: ControllableDeviceProgramScheduleBoundary_StaticCondition,
+): string {
+  switch (object) {
+    case ControllableDeviceProgramScheduleBoundary_StaticCondition.STATIC_CONDITION_INVALID:
+      return "STATIC_CONDITION_INVALID";
+    case ControllableDeviceProgramScheduleBoundary_StaticCondition.STATIC_CONDITION_ALWAYS:
+      return "STATIC_CONDITION_ALWAYS";
+    case ControllableDeviceProgramScheduleBoundary_StaticCondition.STATIC_CONDITION_NEVER:
+      return "STATIC_CONDITION_NEVER";
+    case ControllableDeviceProgramScheduleBoundary_StaticCondition.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum ControllableDeviceProgramScheduleBoundary_IslandingState {
+  ISLANDING_STATE_INVALID = 0,
+  ISLANDING_STATE_ON_GRID = 1,
+  ISLANDING_STATE_OFF_GRID = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function controllableDeviceProgramScheduleBoundary_IslandingStateFromJSON(
+  object: any,
+): ControllableDeviceProgramScheduleBoundary_IslandingState {
+  switch (object) {
+    case 0:
+    case "ISLANDING_STATE_INVALID":
+      return ControllableDeviceProgramScheduleBoundary_IslandingState.ISLANDING_STATE_INVALID;
+    case 1:
+    case "ISLANDING_STATE_ON_GRID":
+      return ControllableDeviceProgramScheduleBoundary_IslandingState.ISLANDING_STATE_ON_GRID;
+    case 2:
+    case "ISLANDING_STATE_OFF_GRID":
+      return ControllableDeviceProgramScheduleBoundary_IslandingState.ISLANDING_STATE_OFF_GRID;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ControllableDeviceProgramScheduleBoundary_IslandingState.UNRECOGNIZED;
+  }
+}
+
+export function controllableDeviceProgramScheduleBoundary_IslandingStateToJSON(
+  object: ControllableDeviceProgramScheduleBoundary_IslandingState,
+): string {
+  switch (object) {
+    case ControllableDeviceProgramScheduleBoundary_IslandingState.ISLANDING_STATE_INVALID:
+      return "ISLANDING_STATE_INVALID";
+    case ControllableDeviceProgramScheduleBoundary_IslandingState.ISLANDING_STATE_ON_GRID:
+      return "ISLANDING_STATE_ON_GRID";
+    case ControllableDeviceProgramScheduleBoundary_IslandingState.ISLANDING_STATE_OFF_GRID:
+      return "ISLANDING_STATE_OFF_GRID";
+    case ControllableDeviceProgramScheduleBoundary_IslandingState.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum ControllableDeviceProgramScheduleBoundary_StateOfEnergy {
+  STATE_OF_ENERGY_INVALID = 0,
+  STATE_OF_ENERGY_ABOVE_BACKUP_RESERVE = 1,
+  STATE_OF_ENERGY_BELOW_BACKUP_RESERVE = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function controllableDeviceProgramScheduleBoundary_StateOfEnergyFromJSON(
+  object: any,
+): ControllableDeviceProgramScheduleBoundary_StateOfEnergy {
+  switch (object) {
+    case 0:
+    case "STATE_OF_ENERGY_INVALID":
+      return ControllableDeviceProgramScheduleBoundary_StateOfEnergy.STATE_OF_ENERGY_INVALID;
+    case 1:
+    case "STATE_OF_ENERGY_ABOVE_BACKUP_RESERVE":
+      return ControllableDeviceProgramScheduleBoundary_StateOfEnergy.STATE_OF_ENERGY_ABOVE_BACKUP_RESERVE;
+    case 2:
+    case "STATE_OF_ENERGY_BELOW_BACKUP_RESERVE":
+      return ControllableDeviceProgramScheduleBoundary_StateOfEnergy.STATE_OF_ENERGY_BELOW_BACKUP_RESERVE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ControllableDeviceProgramScheduleBoundary_StateOfEnergy.UNRECOGNIZED;
+  }
+}
+
+export function controllableDeviceProgramScheduleBoundary_StateOfEnergyToJSON(
+  object: ControllableDeviceProgramScheduleBoundary_StateOfEnergy,
+): string {
+  switch (object) {
+    case ControllableDeviceProgramScheduleBoundary_StateOfEnergy.STATE_OF_ENERGY_INVALID:
+      return "STATE_OF_ENERGY_INVALID";
+    case ControllableDeviceProgramScheduleBoundary_StateOfEnergy.STATE_OF_ENERGY_ABOVE_BACKUP_RESERVE:
+      return "STATE_OF_ENERGY_ABOVE_BACKUP_RESERVE";
+    case ControllableDeviceProgramScheduleBoundary_StateOfEnergy.STATE_OF_ENERGY_BELOW_BACKUP_RESERVE:
+      return "STATE_OF_ENERGY_BELOW_BACKUP_RESERVE";
+    case ControllableDeviceProgramScheduleBoundary_StateOfEnergy.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export interface ControllableDeviceProgramSchedule {
+  start: Date | undefined;
+  end: Date | undefined;
+  expiry: Date | undefined;
+}
+
+export interface ControllableDeviceProgram {
+  key: ControllableDeviceProgramKey | undefined;
+  settings: ControllableDeviceProgramSettings | undefined;
+  schedule: ControllableDeviceProgramSchedule | undefined;
+}
+
+export interface TEGAPIGetControllableDeviceProgramsRequest {
+  deviceIds: string[];
+}
+
+export interface TEGAPIGetControllableDeviceProgramsResponse {
+  activePrograms: ControllableDeviceProgram[];
+  inactivePrograms: ControllableDeviceProgram[];
+}
+
+export interface TEGAPIUpdateControllableDeviceProgramsRequest {
+  updatedPrograms: ControllableDeviceProgram[];
+}
+
+export interface TEGAPIUpdateControllableDeviceProgramsResponse {
+}
+
+export interface TEGAPIDeleteControllableDeviceProgramsRequest {
+  deletionKeys: string[];
+}
+
+export interface TEGAPIDeleteControllableDeviceProgramsResponse {
+}
+
+export interface TEGAPIClearPowerwall3LockoutAlertsRequest {
+  din: string;
+}
+
+export interface TEGAPIClearPowerwall3LockoutAlertsResponse {
+}
+
+export interface TEGAPIRetrieveSiteUuidRequest {
+}
+
+/**
+ * Field 1 (response) is a type from a separate, not-yet-modeled proto
+ * package; left unmodeled here.
+ */
+export interface TEGAPIRetrieveSiteUuidResponse {
+}
+
+/**
+ * Field 1 (request) is a type from a separate, not-yet-modeled proto
+ * package; left unmodeled here.
+ */
+export interface TEGAPIRetrieveSiteSuggestionRequest {
+}
+
+/**
+ * Field 1 (response) is a type from a separate, not-yet-modeled proto
+ * package; left unmodeled here.
+ */
+export interface TEGAPIRetrieveSiteSuggestionResponse {
 }
 
 export interface TEGMessages {
-  /**
-   * TEGAPIGetConfigRequest get_config_request                                                              = 1;
-   * TEGAPIGetConfigResponse get_config_response                                                            = 2;
-   * TEGAPISetIslandModeRequest set_island_mode_request                                                     = 3;
-   * TEGAPISetIslandModeResponse set_island_mode_response                                                   = 4;
-   * TEGAPITriggerIslandingBlackStartRequest trigger_islanding_black_start_request                          = 5;
-   * TEGAPITriggerIslandingBlackStartResponse trigger_islanding_black_start_response                        = 6;
-   * TEGAPITriggerAssetManifestUploadRequest trigger_asset_manifest_upload_request                          = 7;
-   * TEGAPITriggerAssetManifestUploadResponse trigger_asset_manifest_upload_response                        = 8;
-   * TEGAPITriggerPowerwall2EnumerationRequest trigger_powerwall2_enumeration_request                       = 9;
-   * TEGAPITriggerPowerwall2EnumerationResponse trigger_powerwall2_enumeration_response                     = 10;
-   * TEGAPITriggerEsCanFirmwareUpdateRequest trigger_es_can_firmware_update_request                         = 11;
-   * TEGAPITriggerEsCanFirmwareUpdateResponse trigger_es_can_firmware_update_response                       = 12;
-   * TEGAPIRegisterRequest register_request                                                                 = 13;
-   * TEGAPIRegisterResponse register_response                                                               = 14;
-   * TEGAPITriggerPowerwall2PhaseDetectionRequest trigger_powerwall2_phase_detection_request                = 15;
-   * TEGAPITriggerPowerwall2PhaseDetectionResponse trigger_powerwall2_phase_detection_response              = 16;
-   * TEGAPIResetPowerwall2PhaseDetectionRequest reset_powerwall2_phase_detection_request                    = 17;
-   * TEGAPIResetPowerwall2PhaseDetectionResponse reset_powerwall2_phase_detection_response                  = 18;
-   * TEGAPIForceWifiScanRequest force_wifi_scan_request                                                     = 19;
-   * TEGAPIForceWifiScanResponse force_wifi_scan_response                                                   = 20;
-   * TEGAPIStartPowerwall2InverterSelfTestsRequest start_powerwall2_inverter_self_tests_request             = 21;
-   * TEGAPIStartPowerwall2InverterSelfTestsResponse start_powerwall2_inverter_self_tests_response           = 22;
-   * TEGAPIStopPowerwall2InverterSelfTestsRequest stop_powerwall2_inverter_self_tests_request               = 23;
-   * TEGAPIStopPowerwall2InverterSelfTestsResponse stop_powerwall2_inverter_self_tests_response             = 24;
-   * TEGAPIStartPowerwall2BubbleShedRequest start_powerwall2_bubble_shed_request                            = 25;
-   * TEGAPIStartPowerwall2BubbleShedResponse start_powerwall2_bubble_shed_response                          = 26;
-   * TEGAPIClearSolarInverterAlertsRequest clear_solar_inverter_alerts_request                              = 27;
-   * TEGAPIClearSolarInverterAlertsResponse clear_solar_inverter_alerts_response                            = 28;
-   * TEGAPIGetWifiConfigWithCredentialsRequest get_wifi_config_with_credentials_request                     = 29;
-   * TEGAPIGetWifiConfigWithCredentialsResponse get_wifi_config_with_credentials_response                   = 30;
-   * TEGAPIDisableBatteriesRequest disable_batteries_request                                                = 31;
-   * TEGAPIDisableBatteriesResponse disable_batteries_response                                              = 32;
-   * TEGAPITriggerPW3CanFirmwareUpdateRequest trigger_p_w3_can_firmware_update_request                      = 33;
-   * TEGAPITriggerPW3CanFirmwareUpdateResponse trigger_p_w3_can_firmware_update_response                    = 34;
-   * TEGAPITriggerPowerwall3EnumerationRequest trigger_powerwall3_enumeration_request                       = 35;
-   * TEGAPITriggerPowerwall3EnumerationResponse trigger_powerwall3_enumeration_response                     = 36;
-   * TEGAPIDispatchBatteryPowerRequest dispatch_battery_power_request                                       = 37;
-   * TEGAPIDispatchBatteryPowerResponse dispatch_battery_power_response                                     = 38;
-   * TEGAPIDetectWiredMetersRequest detect_wired_meters_request                                             = 39;
-   * TEGAPIDetectWiredMetersResponse detect_wired_meters_response                                           = 40;
-   * TEGAPIBypassBatterySoeAdjustmentConstraintsRequest bypass_battery_soe_adjustment_constraints_request   = 41;
-   * TEGAPIBypassBatterySoeAdjustmentConstraintsResponse bypass_battery_soe_adjustment_constraints_response = 42;
-   * TEGAPIEnsureCertificateRequest ensure_certificate_request                                              = 43;
-   * TEGAPIEnsureCertificateResponse ensure_certificate_response                                            = 44;
-   */
+  getConfigRequest?: TEGAPIGetConfigRequest | undefined;
+  getConfigResponse?: TEGAPIGetConfigResponse | undefined;
+  setIslandModeRequest?: TEGAPISetIslandModeRequest | undefined;
+  setIslandModeResponse?: TEGAPISetIslandModeResponse | undefined;
+  triggerIslandingBlackStartRequest?: TEGAPITriggerIslandingBlackStartRequest | undefined;
+  triggerIslandingBlackStartResponse?: TEGAPITriggerIslandingBlackStartResponse | undefined;
+  triggerAssetManifestUploadRequest?: TEGAPITriggerAssetManifestUploadRequest | undefined;
+  triggerAssetManifestUploadResponse?: TEGAPITriggerAssetManifestUploadResponse | undefined;
+  triggerPowerwall2EnumerationRequest?: TEGAPITriggerPowerwall2EnumerationRequest | undefined;
+  triggerPowerwall2EnumerationResponse?: TEGAPITriggerPowerwall2EnumerationResponse | undefined;
+  triggerEsCanFirmwareUpdateRequest?: TEGAPITriggerEsCanFirmwareUpdateRequest | undefined;
+  triggerEsCanFirmwareUpdateResponse?: TEGAPITriggerEsCanFirmwareUpdateResponse | undefined;
+  registerRequest?: TEGAPIRegisterRequest | undefined;
+  registerResponse?: TEGAPIRegisterResponse | undefined;
+  triggerPowerwall2PhaseDetectionRequest?: TEGAPITriggerPowerwall2PhaseDetectionRequest | undefined;
+  triggerPowerwall2PhaseDetectionResponse?: TEGAPITriggerPowerwall2PhaseDetectionResponse | undefined;
+  resetPowerwall2PhaseDetectionRequest?: TEGAPIResetPowerwall2PhaseDetectionRequest | undefined;
+  resetPowerwall2PhaseDetectionResponse?: TEGAPIResetPowerwall2PhaseDetectionResponse | undefined;
+  forceWifiScanRequest?: TEGAPIForceWifiScanRequest | undefined;
+  forceWifiScanResponse?: TEGAPIForceWifiScanResponse | undefined;
+  startPowerwall2InverterSelfTestsRequest?: TEGAPIStartPowerwall2InverterSelfTestsRequest | undefined;
+  startPowerwall2InverterSelfTestsResponse?: TEGAPIStartPowerwall2InverterSelfTestsResponse | undefined;
+  stopPowerwall2InverterSelfTestsRequest?: TEGAPIStopPowerwall2InverterSelfTestsRequest | undefined;
+  stopPowerwall2InverterSelfTestsResponse?: TEGAPIStopPowerwall2InverterSelfTestsResponse | undefined;
+  startPowerwall2BubbleShedRequest?: TEGAPIStartPowerwall2BubbleShedRequest | undefined;
+  startPowerwall2BubbleShedResponse?: TEGAPIStartPowerwall2BubbleShedResponse | undefined;
+  clearSolarInverterAlertsRequest?: TEGAPIClearSolarInverterAlertsRequest | undefined;
+  clearSolarInverterAlertsResponse?: TEGAPIClearSolarInverterAlertsResponse | undefined;
+  getWifiConfigWithCredentialsRequest?: TEGAPIGetWifiConfigWithCredentialsRequest | undefined;
+  getWifiConfigWithCredentialsResponse?: TEGAPIGetWifiConfigWithCredentialsResponse | undefined;
+  disableBatteriesRequest?: TEGAPIDisableBatteriesRequest | undefined;
+  disableBatteriesResponse?: TEGAPIDisableBatteriesResponse | undefined;
+  triggerPW3CanFirmwareUpdateRequest?: TEGAPITriggerPW3CanFirmwareUpdateRequest | undefined;
+  triggerPW3CanFirmwareUpdateResponse?: TEGAPITriggerPW3CanFirmwareUpdateResponse | undefined;
+  triggerPowerwall3EnumerationRequest?: TEGAPITriggerPowerwall3EnumerationRequest | undefined;
+  triggerPowerwall3EnumerationResponse?: TEGAPITriggerPowerwall3EnumerationResponse | undefined;
+  dispatchBatteryPowerRequest?: TEGAPIDispatchBatteryPowerRequest | undefined;
+  dispatchBatteryPowerResponse?: TEGAPIDispatchBatteryPowerResponse | undefined;
+  detectWiredMetersRequest?: TEGAPIDetectWiredMetersRequest | undefined;
+  detectWiredMetersResponse?: TEGAPIDetectWiredMetersResponse | undefined;
+  bypassBatterySoeAdjustmentConstraintsRequest?: TEGAPIBypassBatterySoeAdjustmentConstraintsRequest | undefined;
+  bypassBatterySoeAdjustmentConstraintsResponse?: TEGAPIBypassBatterySoeAdjustmentConstraintsResponse | undefined;
+  ensureCertificateRequest?: TEGAPIEnsureCertificateRequest | undefined;
+  ensureCertificateResponse?: TEGAPIEnsureCertificateResponse | undefined;
   scheduleManualBackupEventRequest?: TEGAPIScheduleManualBackupEventRequest | undefined;
   scheduleManualBackupEventResponse?: TEGAPIScheduleManualBackupEventResponse | undefined;
   cancelManualBackupEventRequest?: TEGAPICancelManualBackupEventRequest | undefined;
   cancelManualBackupEventResponse?: TEGAPICancelManualBackupEventResponse | undefined;
-  getBackupEventsRequest?:
-    | TEGAPIGetBackupEventsRequest
-    | undefined;
-  /**
-   * TEGAPIGetCsmsPropertiesRequest get_csms_properties_request                                             = 51;
-   * TEGAPIGetCsmsPropertiesResponse get_csms_properties_response                                           = 52;
-   * TEGAPIConfigureOcppRequest configure_ocpp_request                                                      = 53;
-   * TEGAPIConfigureOcppResponse configure_ocpp_response                                                    = 54;
-   * TEGAPIRetrieveSiteUuidRequest retrieve_site_uuid_request                                               = 55;
-   * TEGAPIRetrieveSiteUuidResponse retrieve_site_uuid_response                                             = 56;
-   * TEGAPIRetrieveSiteSuggestionRequest retrieve_site_suggestion_request                                   = 57;
-   * TEGAPIRetrieveSiteSuggestionResponse retrieve_site_suggestion_response                                 = 58;
-   * TEGAPIStartProtectionTripSelfTestRequest start_protection_trip_self_test_request                       = 59;
-   * TEGAPIStartProtectionTripSelfTestResponse start_protection_trip_self_test_response                     = 60;
-   * TEGAPIStopProtectionTripSelfTestRequest stop_protection_trip_self_test_request                         = 61;
-   * TEGAPIStopProtectionTripSelfTestResponse stop_protection_trip_self_test_response                       = 62;
-   * TEGAPIProvisionEatonSmartBreakerRequest provision_eaton_smart_breaker_request                          = 63;
-   * TEGAPIProvisionEatonSmartBreakerResponse provision_eaton_smart_breaker_response                        = 64;
-   * TEGAPIIdentifyEatonSmartBreakerRequest identify_eaton_smart_breaker_request                            = 65;
-   * TEGAPIIdentifyEatonSmartBreakerResponse identify_eaton_smart_breaker_response                          = 66;
-   * TEGAPITriggerPvacFanSelfTestRequest trigger_pvac_fan_self_test_request                                 = 67;
-   * TEGAPITriggerPvacFanSelfTestResponse trigger_pvac_fan_self_test_response                               = 68;
-   * TEGAPIProxyPrepareRegistrationPayloadRequest proxy_prepare_registration_payload_request                = 69;
-   * TEGAPIProxyPrepareRegistrationPayloadResponse proxy_prepare_registration_payload_response              = 70;
-   * TEGAPITriggerWallboxVehicleAbsentSelfTestRequest trigger_wallbox_vehicle_absent_self_test_request      = 71;
-   * TEGAPITriggerWallboxVehicleAbsentSelfTestResponse trigger_wallbox_vehicle_absent_self_test_response    = 72;
-   * TEGAPICustomerResetRequest customer_reset_request                                                      = 73;
-   * TEGAPICustomerResetResponse customer_reset_response                                                    = 74;
-   */
+  getBackupEventsRequest?: TEGAPIGetBackupEventsRequest | undefined;
   getBackupEventsResponse?: TEGAPIGetBackupEventsResponse | undefined;
+  getCsmsPropertiesRequest?: TEGAPIGetCsmsPropertiesRequest | undefined;
+  getCsmsPropertiesResponse?: TEGAPIGetCsmsPropertiesResponse | undefined;
+  configureOcppRequest?: TEGAPIConfigureOcppRequest | undefined;
+  configureOcppResponse?: TEGAPIConfigureOcppResponse | undefined;
+  retrieveSiteUuidRequest?: TEGAPIRetrieveSiteUuidRequest | undefined;
+  retrieveSiteUuidResponse?: TEGAPIRetrieveSiteUuidResponse | undefined;
+  retrieveSiteSuggestionRequest?: TEGAPIRetrieveSiteSuggestionRequest | undefined;
+  retrieveSiteSuggestionResponse?: TEGAPIRetrieveSiteSuggestionResponse | undefined;
+  startProtectionTripSelfTestRequest?: TEGAPIStartProtectionTripSelfTestRequest | undefined;
+  startProtectionTripSelfTestResponse?: TEGAPIStartProtectionTripSelfTestResponse | undefined;
+  stopProtectionTripSelfTestRequest?: TEGAPIStopProtectionTripSelfTestRequest | undefined;
+  stopProtectionTripSelfTestResponse?: TEGAPIStopProtectionTripSelfTestResponse | undefined;
+  provisionEatonSmartBreakerRequest?: TEGAPIProvisionEatonSmartBreakerRequest | undefined;
+  provisionEatonSmartBreakerResponse?: TEGAPIProvisionEatonSmartBreakerResponse | undefined;
+  identifyEatonSmartBreakerRequest?: TEGAPIIdentifyEatonSmartBreakerRequest | undefined;
+  identifyEatonSmartBreakerResponse?: TEGAPIIdentifyEatonSmartBreakerResponse | undefined;
+  triggerPvacFanSelfTestRequest?: TEGAPITriggerPvacFanSelfTestRequest | undefined;
+  triggerPvacFanSelfTestResponse?: TEGAPITriggerPvacFanSelfTestResponse | undefined;
+  proxyPrepareRegistrationPayloadRequest?: TEGAPIProxyPrepareRegistrationPayloadRequest | undefined;
+  proxyPrepareRegistrationPayloadResponse?: TEGAPIProxyPrepareRegistrationPayloadResponse | undefined;
+  triggerWallboxVehicleAbsentSelfTestRequest?: TEGAPITriggerWallboxVehicleAbsentSelfTestRequest | undefined;
+  triggerWallboxVehicleAbsentSelfTestResponse?: TEGAPITriggerWallboxVehicleAbsentSelfTestResponse | undefined;
+  customerResetRequest?: TEGAPICustomerResetRequest | undefined;
+  customerResetResponse?: TEGAPICustomerResetResponse | undefined;
+  delayBatteryCalibrationRequest?: TEGAPIDelayBatteryCalibrationRequest | undefined;
+  delayBatteryCalibrationResponse?: TEGAPIDelayBatteryCalibrationResponse | undefined;
+  getDelayBatteryCalibrationStatusRequest?: TEGAPIGetDelayBatteryCalibrationStatusRequest | undefined;
+  getDelayBatteryCalibrationStatusResponse?: TEGAPIGetDelayBatteryCalibrationStatusResponse | undefined;
+  getControllableDeviceProgramsRequest?: TEGAPIGetControllableDeviceProgramsRequest | undefined;
+  getControllableDeviceProgramsResponse?: TEGAPIGetControllableDeviceProgramsResponse | undefined;
+  updateControllableDeviceProgramsRequest?: TEGAPIUpdateControllableDeviceProgramsRequest | undefined;
+  updateControllableDeviceProgramsResponse?: TEGAPIUpdateControllableDeviceProgramsResponse | undefined;
+  deleteControllableDeviceProgramsRequest?: TEGAPIDeleteControllableDeviceProgramsRequest | undefined;
+  deleteControllableDeviceProgramsResponse?: TEGAPIDeleteControllableDeviceProgramsResponse | undefined;
+  clearPowerwall3LockoutAlertsRequest?: TEGAPIClearPowerwall3LockoutAlertsRequest | undefined;
+  clearPowerwall3LockoutAlertsResponse?: TEGAPIClearPowerwall3LockoutAlertsResponse | undefined;
 }
+
+function createBaseTEGSettings(): TEGSettings {
+  return {};
+}
+
+export const TEGSettings: MessageFns<TEGSettings> = {
+  encode(_: TEGSettings, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGSettings {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGSettings();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGSettings {
+    return {};
+  },
+
+  toJSON(_: TEGSettings): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGSettings>, I>>(base?: I): TEGSettings {
+    return TEGSettings.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGSettings>, I>>(_: I): TEGSettings {
+    const message = createBaseTEGSettings();
+    return message;
+  },
+};
+
+function createBasePowerwall2PhaseDetectionParameters(): Powerwall2PhaseDetectionParameters {
+  return { din: "" };
+}
+
+export const Powerwall2PhaseDetectionParameters: MessageFns<Powerwall2PhaseDetectionParameters> = {
+  encode(message: Powerwall2PhaseDetectionParameters, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.din !== "") {
+      writer.uint32(10).string(message.din);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): Powerwall2PhaseDetectionParameters {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePowerwall2PhaseDetectionParameters();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.din = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Powerwall2PhaseDetectionParameters {
+    return { din: isSet(object.din) ? globalThis.String(object.din) : "" };
+  },
+
+  toJSON(message: Powerwall2PhaseDetectionParameters): unknown {
+    const obj: any = {};
+    if (message.din !== undefined) {
+      obj.din = message.din;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Powerwall2PhaseDetectionParameters>, I>>(
+    base?: I,
+  ): Powerwall2PhaseDetectionParameters {
+    return Powerwall2PhaseDetectionParameters.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Powerwall2PhaseDetectionParameters>, I>>(
+    object: I,
+  ): Powerwall2PhaseDetectionParameters {
+    const message = createBasePowerwall2PhaseDetectionParameters();
+    message.din = object.din ?? "";
+    return message;
+  },
+};
+
+function createBaseTEGAPIGetConfigRequest(): TEGAPIGetConfigRequest {
+  return {};
+}
+
+export const TEGAPIGetConfigRequest: MessageFns<TEGAPIGetConfigRequest> = {
+  encode(_: TEGAPIGetConfigRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIGetConfigRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIGetConfigRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIGetConfigRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPIGetConfigRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIGetConfigRequest>, I>>(base?: I): TEGAPIGetConfigRequest {
+    return TEGAPIGetConfigRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIGetConfigRequest>, I>>(_: I): TEGAPIGetConfigRequest {
+    const message = createBaseTEGAPIGetConfigRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPIGetConfigResponse(): TEGAPIGetConfigResponse {
+  return { settings: undefined, wifiConfig: undefined, wifi: undefined, eth: undefined, gsm: undefined, deviceType: 0 };
+}
+
+export const TEGAPIGetConfigResponse: MessageFns<TEGAPIGetConfigResponse> = {
+  encode(message: TEGAPIGetConfigResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.settings !== undefined) {
+      TEGSettings.encode(message.settings, writer.uint32(10).fork()).join();
+    }
+    if (message.wifiConfig !== undefined) {
+      WifiConfig.encode(message.wifiConfig, writer.uint32(18).fork()).join();
+    }
+    if (message.wifi !== undefined) {
+      NetworkInterface.encode(message.wifi, writer.uint32(26).fork()).join();
+    }
+    if (message.eth !== undefined) {
+      NetworkInterface.encode(message.eth, writer.uint32(34).fork()).join();
+    }
+    if (message.gsm !== undefined) {
+      NetworkInterface.encode(message.gsm, writer.uint32(42).fork()).join();
+    }
+    if (message.deviceType !== 0) {
+      writer.uint32(48).int32(message.deviceType);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIGetConfigResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIGetConfigResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.settings = TEGSettings.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.wifiConfig = WifiConfig.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.wifi = NetworkInterface.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.eth = NetworkInterface.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.gsm = NetworkInterface.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.deviceType = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIGetConfigResponse {
+    return {
+      settings: isSet(object.settings) ? TEGSettings.fromJSON(object.settings) : undefined,
+      wifiConfig: isSet(object.wifiConfig) ? WifiConfig.fromJSON(object.wifiConfig) : undefined,
+      wifi: isSet(object.wifi) ? NetworkInterface.fromJSON(object.wifi) : undefined,
+      eth: isSet(object.eth) ? NetworkInterface.fromJSON(object.eth) : undefined,
+      gsm: isSet(object.gsm) ? NetworkInterface.fromJSON(object.gsm) : undefined,
+      deviceType: isSet(object.deviceType) ? deviceTypeFromJSON(object.deviceType) : 0,
+    };
+  },
+
+  toJSON(message: TEGAPIGetConfigResponse): unknown {
+    const obj: any = {};
+    if (message.settings !== undefined) {
+      obj.settings = TEGSettings.toJSON(message.settings);
+    }
+    if (message.wifiConfig !== undefined) {
+      obj.wifiConfig = WifiConfig.toJSON(message.wifiConfig);
+    }
+    if (message.wifi !== undefined) {
+      obj.wifi = NetworkInterface.toJSON(message.wifi);
+    }
+    if (message.eth !== undefined) {
+      obj.eth = NetworkInterface.toJSON(message.eth);
+    }
+    if (message.gsm !== undefined) {
+      obj.gsm = NetworkInterface.toJSON(message.gsm);
+    }
+    if (message.deviceType !== undefined) {
+      obj.deviceType = deviceTypeToJSON(message.deviceType);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIGetConfigResponse>, I>>(base?: I): TEGAPIGetConfigResponse {
+    return TEGAPIGetConfigResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIGetConfigResponse>, I>>(object: I): TEGAPIGetConfigResponse {
+    const message = createBaseTEGAPIGetConfigResponse();
+    message.settings = (object.settings !== undefined && object.settings !== null)
+      ? TEGSettings.fromPartial(object.settings)
+      : undefined;
+    message.wifiConfig = (object.wifiConfig !== undefined && object.wifiConfig !== null)
+      ? WifiConfig.fromPartial(object.wifiConfig)
+      : undefined;
+    message.wifi = (object.wifi !== undefined && object.wifi !== null)
+      ? NetworkInterface.fromPartial(object.wifi)
+      : undefined;
+    message.eth = (object.eth !== undefined && object.eth !== null)
+      ? NetworkInterface.fromPartial(object.eth)
+      : undefined;
+    message.gsm = (object.gsm !== undefined && object.gsm !== null)
+      ? NetworkInterface.fromPartial(object.gsm)
+      : undefined;
+    message.deviceType = object.deviceType ?? 0;
+    return message;
+  },
+};
+
+function createBaseTEGAPISetIslandModeRequest(): TEGAPISetIslandModeRequest {
+  return { mode: 0, force: false };
+}
+
+export const TEGAPISetIslandModeRequest: MessageFns<TEGAPISetIslandModeRequest> = {
+  encode(message: TEGAPISetIslandModeRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.mode !== 0) {
+      writer.uint32(8).int32(message.mode);
+    }
+    if (message.force !== false) {
+      writer.uint32(16).bool(message.force);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPISetIslandModeRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPISetIslandModeRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.mode = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.force = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPISetIslandModeRequest {
+    return {
+      mode: isSet(object.mode) ? tEGIslandModeFromJSON(object.mode) : 0,
+      force: isSet(object.force) ? globalThis.Boolean(object.force) : false,
+    };
+  },
+
+  toJSON(message: TEGAPISetIslandModeRequest): unknown {
+    const obj: any = {};
+    if (message.mode !== undefined) {
+      obj.mode = tEGIslandModeToJSON(message.mode);
+    }
+    if (message.force !== undefined) {
+      obj.force = message.force;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPISetIslandModeRequest>, I>>(base?: I): TEGAPISetIslandModeRequest {
+    return TEGAPISetIslandModeRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPISetIslandModeRequest>, I>>(object: I): TEGAPISetIslandModeRequest {
+    const message = createBaseTEGAPISetIslandModeRequest();
+    message.mode = object.mode ?? 0;
+    message.force = object.force ?? false;
+    return message;
+  },
+};
+
+function createBaseTEGAPISetIslandModeResponse(): TEGAPISetIslandModeResponse {
+  return { result: 0 };
+}
+
+export const TEGAPISetIslandModeResponse: MessageFns<TEGAPISetIslandModeResponse> = {
+  encode(message: TEGAPISetIslandModeResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.result !== 0) {
+      writer.uint32(8).int32(message.result);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPISetIslandModeResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPISetIslandModeResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.result = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPISetIslandModeResponse {
+    return { result: isSet(object.result) ? tEGSetIslandModeResultFromJSON(object.result) : 0 };
+  },
+
+  toJSON(message: TEGAPISetIslandModeResponse): unknown {
+    const obj: any = {};
+    if (message.result !== undefined) {
+      obj.result = tEGSetIslandModeResultToJSON(message.result);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPISetIslandModeResponse>, I>>(base?: I): TEGAPISetIslandModeResponse {
+    return TEGAPISetIslandModeResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPISetIslandModeResponse>, I>>(object: I): TEGAPISetIslandModeResponse {
+    const message = createBaseTEGAPISetIslandModeResponse();
+    message.result = object.result ?? 0;
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerIslandingBlackStartRequest(): TEGAPITriggerIslandingBlackStartRequest {
+  return {};
+}
+
+export const TEGAPITriggerIslandingBlackStartRequest: MessageFns<TEGAPITriggerIslandingBlackStartRequest> = {
+  encode(_: TEGAPITriggerIslandingBlackStartRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerIslandingBlackStartRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerIslandingBlackStartRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerIslandingBlackStartRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerIslandingBlackStartRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerIslandingBlackStartRequest>, I>>(
+    base?: I,
+  ): TEGAPITriggerIslandingBlackStartRequest {
+    return TEGAPITriggerIslandingBlackStartRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerIslandingBlackStartRequest>, I>>(
+    _: I,
+  ): TEGAPITriggerIslandingBlackStartRequest {
+    const message = createBaseTEGAPITriggerIslandingBlackStartRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerIslandingBlackStartResponse(): TEGAPITriggerIslandingBlackStartResponse {
+  return {};
+}
+
+export const TEGAPITriggerIslandingBlackStartResponse: MessageFns<TEGAPITriggerIslandingBlackStartResponse> = {
+  encode(_: TEGAPITriggerIslandingBlackStartResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerIslandingBlackStartResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerIslandingBlackStartResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerIslandingBlackStartResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerIslandingBlackStartResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerIslandingBlackStartResponse>, I>>(
+    base?: I,
+  ): TEGAPITriggerIslandingBlackStartResponse {
+    return TEGAPITriggerIslandingBlackStartResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerIslandingBlackStartResponse>, I>>(
+    _: I,
+  ): TEGAPITriggerIslandingBlackStartResponse {
+    const message = createBaseTEGAPITriggerIslandingBlackStartResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerAssetManifestUploadRequest(): TEGAPITriggerAssetManifestUploadRequest {
+  return {};
+}
+
+export const TEGAPITriggerAssetManifestUploadRequest: MessageFns<TEGAPITriggerAssetManifestUploadRequest> = {
+  encode(_: TEGAPITriggerAssetManifestUploadRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerAssetManifestUploadRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerAssetManifestUploadRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerAssetManifestUploadRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerAssetManifestUploadRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerAssetManifestUploadRequest>, I>>(
+    base?: I,
+  ): TEGAPITriggerAssetManifestUploadRequest {
+    return TEGAPITriggerAssetManifestUploadRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerAssetManifestUploadRequest>, I>>(
+    _: I,
+  ): TEGAPITriggerAssetManifestUploadRequest {
+    const message = createBaseTEGAPITriggerAssetManifestUploadRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerAssetManifestUploadResponse(): TEGAPITriggerAssetManifestUploadResponse {
+  return {};
+}
+
+export const TEGAPITriggerAssetManifestUploadResponse: MessageFns<TEGAPITriggerAssetManifestUploadResponse> = {
+  encode(_: TEGAPITriggerAssetManifestUploadResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerAssetManifestUploadResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerAssetManifestUploadResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerAssetManifestUploadResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerAssetManifestUploadResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerAssetManifestUploadResponse>, I>>(
+    base?: I,
+  ): TEGAPITriggerAssetManifestUploadResponse {
+    return TEGAPITriggerAssetManifestUploadResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerAssetManifestUploadResponse>, I>>(
+    _: I,
+  ): TEGAPITriggerAssetManifestUploadResponse {
+    const message = createBaseTEGAPITriggerAssetManifestUploadResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerPowerwall2EnumerationRequest(): TEGAPITriggerPowerwall2EnumerationRequest {
+  return {};
+}
+
+export const TEGAPITriggerPowerwall2EnumerationRequest: MessageFns<TEGAPITriggerPowerwall2EnumerationRequest> = {
+  encode(_: TEGAPITriggerPowerwall2EnumerationRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerPowerwall2EnumerationRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerPowerwall2EnumerationRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerPowerwall2EnumerationRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerPowerwall2EnumerationRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerPowerwall2EnumerationRequest>, I>>(
+    base?: I,
+  ): TEGAPITriggerPowerwall2EnumerationRequest {
+    return TEGAPITriggerPowerwall2EnumerationRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerPowerwall2EnumerationRequest>, I>>(
+    _: I,
+  ): TEGAPITriggerPowerwall2EnumerationRequest {
+    const message = createBaseTEGAPITriggerPowerwall2EnumerationRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerPowerwall2EnumerationResponse(): TEGAPITriggerPowerwall2EnumerationResponse {
+  return {};
+}
+
+export const TEGAPITriggerPowerwall2EnumerationResponse: MessageFns<TEGAPITriggerPowerwall2EnumerationResponse> = {
+  encode(_: TEGAPITriggerPowerwall2EnumerationResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerPowerwall2EnumerationResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerPowerwall2EnumerationResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerPowerwall2EnumerationResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerPowerwall2EnumerationResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerPowerwall2EnumerationResponse>, I>>(
+    base?: I,
+  ): TEGAPITriggerPowerwall2EnumerationResponse {
+    return TEGAPITriggerPowerwall2EnumerationResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerPowerwall2EnumerationResponse>, I>>(
+    _: I,
+  ): TEGAPITriggerPowerwall2EnumerationResponse {
+    const message = createBaseTEGAPITriggerPowerwall2EnumerationResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerEsCanFirmwareUpdateRequest(): TEGAPITriggerEsCanFirmwareUpdateRequest {
+  return {};
+}
+
+export const TEGAPITriggerEsCanFirmwareUpdateRequest: MessageFns<TEGAPITriggerEsCanFirmwareUpdateRequest> = {
+  encode(_: TEGAPITriggerEsCanFirmwareUpdateRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerEsCanFirmwareUpdateRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerEsCanFirmwareUpdateRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerEsCanFirmwareUpdateRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerEsCanFirmwareUpdateRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerEsCanFirmwareUpdateRequest>, I>>(
+    base?: I,
+  ): TEGAPITriggerEsCanFirmwareUpdateRequest {
+    return TEGAPITriggerEsCanFirmwareUpdateRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerEsCanFirmwareUpdateRequest>, I>>(
+    _: I,
+  ): TEGAPITriggerEsCanFirmwareUpdateRequest {
+    const message = createBaseTEGAPITriggerEsCanFirmwareUpdateRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerEsCanFirmwareUpdateResponse(): TEGAPITriggerEsCanFirmwareUpdateResponse {
+  return {};
+}
+
+export const TEGAPITriggerEsCanFirmwareUpdateResponse: MessageFns<TEGAPITriggerEsCanFirmwareUpdateResponse> = {
+  encode(_: TEGAPITriggerEsCanFirmwareUpdateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerEsCanFirmwareUpdateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerEsCanFirmwareUpdateResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerEsCanFirmwareUpdateResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerEsCanFirmwareUpdateResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerEsCanFirmwareUpdateResponse>, I>>(
+    base?: I,
+  ): TEGAPITriggerEsCanFirmwareUpdateResponse {
+    return TEGAPITriggerEsCanFirmwareUpdateResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerEsCanFirmwareUpdateResponse>, I>>(
+    _: I,
+  ): TEGAPITriggerEsCanFirmwareUpdateResponse {
+    const message = createBaseTEGAPITriggerEsCanFirmwareUpdateResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerPW3CanFirmwareUpdateRequest(): TEGAPITriggerPW3CanFirmwareUpdateRequest {
+  return {};
+}
+
+export const TEGAPITriggerPW3CanFirmwareUpdateRequest: MessageFns<TEGAPITriggerPW3CanFirmwareUpdateRequest> = {
+  encode(_: TEGAPITriggerPW3CanFirmwareUpdateRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerPW3CanFirmwareUpdateRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerPW3CanFirmwareUpdateRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerPW3CanFirmwareUpdateRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerPW3CanFirmwareUpdateRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerPW3CanFirmwareUpdateRequest>, I>>(
+    base?: I,
+  ): TEGAPITriggerPW3CanFirmwareUpdateRequest {
+    return TEGAPITriggerPW3CanFirmwareUpdateRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerPW3CanFirmwareUpdateRequest>, I>>(
+    _: I,
+  ): TEGAPITriggerPW3CanFirmwareUpdateRequest {
+    const message = createBaseTEGAPITriggerPW3CanFirmwareUpdateRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerPW3CanFirmwareUpdateResponse(): TEGAPITriggerPW3CanFirmwareUpdateResponse {
+  return {};
+}
+
+export const TEGAPITriggerPW3CanFirmwareUpdateResponse: MessageFns<TEGAPITriggerPW3CanFirmwareUpdateResponse> = {
+  encode(_: TEGAPITriggerPW3CanFirmwareUpdateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerPW3CanFirmwareUpdateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerPW3CanFirmwareUpdateResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerPW3CanFirmwareUpdateResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerPW3CanFirmwareUpdateResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerPW3CanFirmwareUpdateResponse>, I>>(
+    base?: I,
+  ): TEGAPITriggerPW3CanFirmwareUpdateResponse {
+    return TEGAPITriggerPW3CanFirmwareUpdateResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerPW3CanFirmwareUpdateResponse>, I>>(
+    _: I,
+  ): TEGAPITriggerPW3CanFirmwareUpdateResponse {
+    const message = createBaseTEGAPITriggerPW3CanFirmwareUpdateResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerPowerwall3EnumerationRequest(): TEGAPITriggerPowerwall3EnumerationRequest {
+  return {};
+}
+
+export const TEGAPITriggerPowerwall3EnumerationRequest: MessageFns<TEGAPITriggerPowerwall3EnumerationRequest> = {
+  encode(_: TEGAPITriggerPowerwall3EnumerationRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerPowerwall3EnumerationRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerPowerwall3EnumerationRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerPowerwall3EnumerationRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerPowerwall3EnumerationRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerPowerwall3EnumerationRequest>, I>>(
+    base?: I,
+  ): TEGAPITriggerPowerwall3EnumerationRequest {
+    return TEGAPITriggerPowerwall3EnumerationRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerPowerwall3EnumerationRequest>, I>>(
+    _: I,
+  ): TEGAPITriggerPowerwall3EnumerationRequest {
+    const message = createBaseTEGAPITriggerPowerwall3EnumerationRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerPowerwall3EnumerationResponse(): TEGAPITriggerPowerwall3EnumerationResponse {
+  return {};
+}
+
+export const TEGAPITriggerPowerwall3EnumerationResponse: MessageFns<TEGAPITriggerPowerwall3EnumerationResponse> = {
+  encode(_: TEGAPITriggerPowerwall3EnumerationResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerPowerwall3EnumerationResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerPowerwall3EnumerationResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerPowerwall3EnumerationResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerPowerwall3EnumerationResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerPowerwall3EnumerationResponse>, I>>(
+    base?: I,
+  ): TEGAPITriggerPowerwall3EnumerationResponse {
+    return TEGAPITriggerPowerwall3EnumerationResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerPowerwall3EnumerationResponse>, I>>(
+    _: I,
+  ): TEGAPITriggerPowerwall3EnumerationResponse {
+    const message = createBaseTEGAPITriggerPowerwall3EnumerationResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode(): TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode {
+  return {};
+}
+
+export const TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode: MessageFns<
+  TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode
+> = {
+  encode(
+    _: TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode {
+    return {};
+  },
+
+  toJSON(_: TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode>, I>>(
+    base?: I,
+  ): TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode {
+    return TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode>, I>>(
+    _: I,
+  ): TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode {
+    const message = createBaseTEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode();
+    return message;
+  },
+};
+
+function createBaseTEGAPIDispatchBatteryPowerRequestRealPowerCommand(): TEGAPIDispatchBatteryPowerRequestRealPowerCommand {
+  return { powerWatts: 0, durationSeconds: 0 };
+}
+
+export const TEGAPIDispatchBatteryPowerRequestRealPowerCommand: MessageFns<
+  TEGAPIDispatchBatteryPowerRequestRealPowerCommand
+> = {
+  encode(
+    message: TEGAPIDispatchBatteryPowerRequestRealPowerCommand,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.powerWatts !== 0) {
+      writer.uint32(9).double(message.powerWatts);
+    }
+    if (message.durationSeconds !== 0) {
+      writer.uint32(16).uint32(message.durationSeconds);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIDispatchBatteryPowerRequestRealPowerCommand {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIDispatchBatteryPowerRequestRealPowerCommand();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 9) {
+            break;
+          }
+
+          message.powerWatts = reader.double();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.durationSeconds = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIDispatchBatteryPowerRequestRealPowerCommand {
+    return {
+      powerWatts: isSet(object.powerWatts) ? globalThis.Number(object.powerWatts) : 0,
+      durationSeconds: isSet(object.durationSeconds) ? globalThis.Number(object.durationSeconds) : 0,
+    };
+  },
+
+  toJSON(message: TEGAPIDispatchBatteryPowerRequestRealPowerCommand): unknown {
+    const obj: any = {};
+    if (message.powerWatts !== undefined) {
+      obj.powerWatts = message.powerWatts;
+    }
+    if (message.durationSeconds !== undefined) {
+      obj.durationSeconds = Math.round(message.durationSeconds);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIDispatchBatteryPowerRequestRealPowerCommand>, I>>(
+    base?: I,
+  ): TEGAPIDispatchBatteryPowerRequestRealPowerCommand {
+    return TEGAPIDispatchBatteryPowerRequestRealPowerCommand.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIDispatchBatteryPowerRequestRealPowerCommand>, I>>(
+    object: I,
+  ): TEGAPIDispatchBatteryPowerRequestRealPowerCommand {
+    const message = createBaseTEGAPIDispatchBatteryPowerRequestRealPowerCommand();
+    message.powerWatts = object.powerWatts ?? 0;
+    message.durationSeconds = object.durationSeconds ?? 0;
+    return message;
+  },
+};
+
+function createBaseTEGAPIDispatchBatteryPowerRequest(): TEGAPIDispatchBatteryPowerRequest {
+  return { resumeDeviceMode: undefined, realPower: undefined };
+}
+
+export const TEGAPIDispatchBatteryPowerRequest: MessageFns<TEGAPIDispatchBatteryPowerRequest> = {
+  encode(message: TEGAPIDispatchBatteryPowerRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.resumeDeviceMode !== undefined) {
+      TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode.encode(
+        message.resumeDeviceMode,
+        writer.uint32(10).fork(),
+      ).join();
+    }
+    if (message.realPower !== undefined) {
+      TEGAPIDispatchBatteryPowerRequestRealPowerCommand.encode(message.realPower, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIDispatchBatteryPowerRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIDispatchBatteryPowerRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.resumeDeviceMode = TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.realPower = TEGAPIDispatchBatteryPowerRequestRealPowerCommand.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIDispatchBatteryPowerRequest {
+    return {
+      resumeDeviceMode: isSet(object.resumeDeviceMode)
+        ? TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode.fromJSON(object.resumeDeviceMode)
+        : undefined,
+      realPower: isSet(object.realPower)
+        ? TEGAPIDispatchBatteryPowerRequestRealPowerCommand.fromJSON(object.realPower)
+        : undefined,
+    };
+  },
+
+  toJSON(message: TEGAPIDispatchBatteryPowerRequest): unknown {
+    const obj: any = {};
+    if (message.resumeDeviceMode !== undefined) {
+      obj.resumeDeviceMode = TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode.toJSON(
+        message.resumeDeviceMode,
+      );
+    }
+    if (message.realPower !== undefined) {
+      obj.realPower = TEGAPIDispatchBatteryPowerRequestRealPowerCommand.toJSON(message.realPower);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIDispatchBatteryPowerRequest>, I>>(
+    base?: I,
+  ): TEGAPIDispatchBatteryPowerRequest {
+    return TEGAPIDispatchBatteryPowerRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIDispatchBatteryPowerRequest>, I>>(
+    object: I,
+  ): TEGAPIDispatchBatteryPowerRequest {
+    const message = createBaseTEGAPIDispatchBatteryPowerRequest();
+    message.resumeDeviceMode = (object.resumeDeviceMode !== undefined && object.resumeDeviceMode !== null)
+      ? TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode.fromPartial(object.resumeDeviceMode)
+      : undefined;
+    message.realPower = (object.realPower !== undefined && object.realPower !== null)
+      ? TEGAPIDispatchBatteryPowerRequestRealPowerCommand.fromPartial(object.realPower)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseTEGAPIDispatchBatteryPowerResponse(): TEGAPIDispatchBatteryPowerResponse {
+  return {};
+}
+
+export const TEGAPIDispatchBatteryPowerResponse: MessageFns<TEGAPIDispatchBatteryPowerResponse> = {
+  encode(_: TEGAPIDispatchBatteryPowerResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIDispatchBatteryPowerResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIDispatchBatteryPowerResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIDispatchBatteryPowerResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIDispatchBatteryPowerResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIDispatchBatteryPowerResponse>, I>>(
+    base?: I,
+  ): TEGAPIDispatchBatteryPowerResponse {
+    return TEGAPIDispatchBatteryPowerResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIDispatchBatteryPowerResponse>, I>>(
+    _: I,
+  ): TEGAPIDispatchBatteryPowerResponse {
+    const message = createBaseTEGAPIDispatchBatteryPowerResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIDetectWiredMetersRequest(): TEGAPIDetectWiredMetersRequest {
+  return {};
+}
+
+export const TEGAPIDetectWiredMetersRequest: MessageFns<TEGAPIDetectWiredMetersRequest> = {
+  encode(_: TEGAPIDetectWiredMetersRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIDetectWiredMetersRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIDetectWiredMetersRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIDetectWiredMetersRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPIDetectWiredMetersRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIDetectWiredMetersRequest>, I>>(base?: I): TEGAPIDetectWiredMetersRequest {
+    return TEGAPIDetectWiredMetersRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIDetectWiredMetersRequest>, I>>(_: I): TEGAPIDetectWiredMetersRequest {
+    const message = createBaseTEGAPIDetectWiredMetersRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPIDetectWiredMetersResponse(): TEGAPIDetectWiredMetersResponse {
+  return {};
+}
+
+export const TEGAPIDetectWiredMetersResponse: MessageFns<TEGAPIDetectWiredMetersResponse> = {
+  encode(_: TEGAPIDetectWiredMetersResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIDetectWiredMetersResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIDetectWiredMetersResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIDetectWiredMetersResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIDetectWiredMetersResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIDetectWiredMetersResponse>, I>>(base?: I): TEGAPIDetectWiredMetersResponse {
+    return TEGAPIDetectWiredMetersResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIDetectWiredMetersResponse>, I>>(_: I): TEGAPIDetectWiredMetersResponse {
+    const message = createBaseTEGAPIDetectWiredMetersResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIRegisterRequest(): TEGAPIRegisterRequest {
+  return {};
+}
+
+export const TEGAPIRegisterRequest: MessageFns<TEGAPIRegisterRequest> = {
+  encode(_: TEGAPIRegisterRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIRegisterRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIRegisterRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIRegisterRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPIRegisterRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIRegisterRequest>, I>>(base?: I): TEGAPIRegisterRequest {
+    return TEGAPIRegisterRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIRegisterRequest>, I>>(_: I): TEGAPIRegisterRequest {
+    const message = createBaseTEGAPIRegisterRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPIRegisterResponse(): TEGAPIRegisterResponse {
+  return { failure: 0 };
+}
+
+export const TEGAPIRegisterResponse: MessageFns<TEGAPIRegisterResponse> = {
+  encode(message: TEGAPIRegisterResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.failure !== 0) {
+      writer.uint32(8).int32(message.failure);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIRegisterResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIRegisterResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.failure = reader.int32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIRegisterResponse {
+    return { failure: isSet(object.failure) ? globalThis.Number(object.failure) : 0 };
+  },
+
+  toJSON(message: TEGAPIRegisterResponse): unknown {
+    const obj: any = {};
+    if (message.failure !== undefined) {
+      obj.failure = Math.round(message.failure);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIRegisterResponse>, I>>(base?: I): TEGAPIRegisterResponse {
+    return TEGAPIRegisterResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIRegisterResponse>, I>>(object: I): TEGAPIRegisterResponse {
+    const message = createBaseTEGAPIRegisterResponse();
+    message.failure = object.failure ?? 0;
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerPowerwall2PhaseDetectionRequest(): TEGAPITriggerPowerwall2PhaseDetectionRequest {
+  return { powerwalls: [] };
+}
+
+export const TEGAPITriggerPowerwall2PhaseDetectionRequest: MessageFns<TEGAPITriggerPowerwall2PhaseDetectionRequest> = {
+  encode(
+    message: TEGAPITriggerPowerwall2PhaseDetectionRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    for (const v of message.powerwalls) {
+      Powerwall2PhaseDetectionParameters.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerPowerwall2PhaseDetectionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerPowerwall2PhaseDetectionRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.powerwalls.push(Powerwall2PhaseDetectionParameters.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPITriggerPowerwall2PhaseDetectionRequest {
+    return {
+      powerwalls: globalThis.Array.isArray(object?.powerwalls)
+        ? object.powerwalls.map((e: any) => Powerwall2PhaseDetectionParameters.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: TEGAPITriggerPowerwall2PhaseDetectionRequest): unknown {
+    const obj: any = {};
+    if (message.powerwalls?.length) {
+      obj.powerwalls = message.powerwalls.map((e) => Powerwall2PhaseDetectionParameters.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerPowerwall2PhaseDetectionRequest>, I>>(
+    base?: I,
+  ): TEGAPITriggerPowerwall2PhaseDetectionRequest {
+    return TEGAPITriggerPowerwall2PhaseDetectionRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerPowerwall2PhaseDetectionRequest>, I>>(
+    object: I,
+  ): TEGAPITriggerPowerwall2PhaseDetectionRequest {
+    const message = createBaseTEGAPITriggerPowerwall2PhaseDetectionRequest();
+    message.powerwalls = object.powerwalls?.map((e) => Powerwall2PhaseDetectionParameters.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerPowerwall2PhaseDetectionResponse(): TEGAPITriggerPowerwall2PhaseDetectionResponse {
+  return {};
+}
+
+export const TEGAPITriggerPowerwall2PhaseDetectionResponse: MessageFns<TEGAPITriggerPowerwall2PhaseDetectionResponse> =
+  {
+    encode(_: TEGAPITriggerPowerwall2PhaseDetectionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+      return writer;
+    },
+
+    decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerPowerwall2PhaseDetectionResponse {
+      const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseTEGAPITriggerPowerwall2PhaseDetectionResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(_: any): TEGAPITriggerPowerwall2PhaseDetectionResponse {
+      return {};
+    },
+
+    toJSON(_: TEGAPITriggerPowerwall2PhaseDetectionResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<TEGAPITriggerPowerwall2PhaseDetectionResponse>, I>>(
+      base?: I,
+    ): TEGAPITriggerPowerwall2PhaseDetectionResponse {
+      return TEGAPITriggerPowerwall2PhaseDetectionResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<TEGAPITriggerPowerwall2PhaseDetectionResponse>, I>>(
+      _: I,
+    ): TEGAPITriggerPowerwall2PhaseDetectionResponse {
+      const message = createBaseTEGAPITriggerPowerwall2PhaseDetectionResponse();
+      return message;
+    },
+  };
+
+function createBaseTEGAPIResetPowerwall2PhaseDetectionRequest(): TEGAPIResetPowerwall2PhaseDetectionRequest {
+  return {};
+}
+
+export const TEGAPIResetPowerwall2PhaseDetectionRequest: MessageFns<TEGAPIResetPowerwall2PhaseDetectionRequest> = {
+  encode(_: TEGAPIResetPowerwall2PhaseDetectionRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIResetPowerwall2PhaseDetectionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIResetPowerwall2PhaseDetectionRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIResetPowerwall2PhaseDetectionRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPIResetPowerwall2PhaseDetectionRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIResetPowerwall2PhaseDetectionRequest>, I>>(
+    base?: I,
+  ): TEGAPIResetPowerwall2PhaseDetectionRequest {
+    return TEGAPIResetPowerwall2PhaseDetectionRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIResetPowerwall2PhaseDetectionRequest>, I>>(
+    _: I,
+  ): TEGAPIResetPowerwall2PhaseDetectionRequest {
+    const message = createBaseTEGAPIResetPowerwall2PhaseDetectionRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPIResetPowerwall2PhaseDetectionResponse(): TEGAPIResetPowerwall2PhaseDetectionResponse {
+  return {};
+}
+
+export const TEGAPIResetPowerwall2PhaseDetectionResponse: MessageFns<TEGAPIResetPowerwall2PhaseDetectionResponse> = {
+  encode(_: TEGAPIResetPowerwall2PhaseDetectionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIResetPowerwall2PhaseDetectionResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIResetPowerwall2PhaseDetectionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIResetPowerwall2PhaseDetectionResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIResetPowerwall2PhaseDetectionResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIResetPowerwall2PhaseDetectionResponse>, I>>(
+    base?: I,
+  ): TEGAPIResetPowerwall2PhaseDetectionResponse {
+    return TEGAPIResetPowerwall2PhaseDetectionResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIResetPowerwall2PhaseDetectionResponse>, I>>(
+    _: I,
+  ): TEGAPIResetPowerwall2PhaseDetectionResponse {
+    const message = createBaseTEGAPIResetPowerwall2PhaseDetectionResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIForceWifiScanRequest(): TEGAPIForceWifiScanRequest {
+  return {};
+}
+
+export const TEGAPIForceWifiScanRequest: MessageFns<TEGAPIForceWifiScanRequest> = {
+  encode(_: TEGAPIForceWifiScanRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIForceWifiScanRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIForceWifiScanRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIForceWifiScanRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPIForceWifiScanRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIForceWifiScanRequest>, I>>(base?: I): TEGAPIForceWifiScanRequest {
+    return TEGAPIForceWifiScanRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIForceWifiScanRequest>, I>>(_: I): TEGAPIForceWifiScanRequest {
+    const message = createBaseTEGAPIForceWifiScanRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPIForceWifiScanResponse(): TEGAPIForceWifiScanResponse {
+  return {};
+}
+
+export const TEGAPIForceWifiScanResponse: MessageFns<TEGAPIForceWifiScanResponse> = {
+  encode(_: TEGAPIForceWifiScanResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIForceWifiScanResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIForceWifiScanResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIForceWifiScanResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIForceWifiScanResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIForceWifiScanResponse>, I>>(base?: I): TEGAPIForceWifiScanResponse {
+    return TEGAPIForceWifiScanResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIForceWifiScanResponse>, I>>(_: I): TEGAPIForceWifiScanResponse {
+    const message = createBaseTEGAPIForceWifiScanResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIStartPowerwall2InverterSelfTestsRequest(): TEGAPIStartPowerwall2InverterSelfTestsRequest {
+  return {};
+}
+
+export const TEGAPIStartPowerwall2InverterSelfTestsRequest: MessageFns<TEGAPIStartPowerwall2InverterSelfTestsRequest> =
+  {
+    encode(_: TEGAPIStartPowerwall2InverterSelfTestsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+      return writer;
+    },
+
+    decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIStartPowerwall2InverterSelfTestsRequest {
+      const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseTEGAPIStartPowerwall2InverterSelfTestsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(_: any): TEGAPIStartPowerwall2InverterSelfTestsRequest {
+      return {};
+    },
+
+    toJSON(_: TEGAPIStartPowerwall2InverterSelfTestsRequest): unknown {
+      const obj: any = {};
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<TEGAPIStartPowerwall2InverterSelfTestsRequest>, I>>(
+      base?: I,
+    ): TEGAPIStartPowerwall2InverterSelfTestsRequest {
+      return TEGAPIStartPowerwall2InverterSelfTestsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<TEGAPIStartPowerwall2InverterSelfTestsRequest>, I>>(
+      _: I,
+    ): TEGAPIStartPowerwall2InverterSelfTestsRequest {
+      const message = createBaseTEGAPIStartPowerwall2InverterSelfTestsRequest();
+      return message;
+    },
+  };
+
+function createBaseTEGAPIStartPowerwall2InverterSelfTestsResponse(): TEGAPIStartPowerwall2InverterSelfTestsResponse {
+  return {};
+}
+
+export const TEGAPIStartPowerwall2InverterSelfTestsResponse: MessageFns<
+  TEGAPIStartPowerwall2InverterSelfTestsResponse
+> = {
+  encode(_: TEGAPIStartPowerwall2InverterSelfTestsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIStartPowerwall2InverterSelfTestsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIStartPowerwall2InverterSelfTestsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIStartPowerwall2InverterSelfTestsResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIStartPowerwall2InverterSelfTestsResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIStartPowerwall2InverterSelfTestsResponse>, I>>(
+    base?: I,
+  ): TEGAPIStartPowerwall2InverterSelfTestsResponse {
+    return TEGAPIStartPowerwall2InverterSelfTestsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIStartPowerwall2InverterSelfTestsResponse>, I>>(
+    _: I,
+  ): TEGAPIStartPowerwall2InverterSelfTestsResponse {
+    const message = createBaseTEGAPIStartPowerwall2InverterSelfTestsResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIStopPowerwall2InverterSelfTestsRequest(): TEGAPIStopPowerwall2InverterSelfTestsRequest {
+  return {};
+}
+
+export const TEGAPIStopPowerwall2InverterSelfTestsRequest: MessageFns<TEGAPIStopPowerwall2InverterSelfTestsRequest> = {
+  encode(_: TEGAPIStopPowerwall2InverterSelfTestsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIStopPowerwall2InverterSelfTestsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIStopPowerwall2InverterSelfTestsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIStopPowerwall2InverterSelfTestsRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPIStopPowerwall2InverterSelfTestsRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIStopPowerwall2InverterSelfTestsRequest>, I>>(
+    base?: I,
+  ): TEGAPIStopPowerwall2InverterSelfTestsRequest {
+    return TEGAPIStopPowerwall2InverterSelfTestsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIStopPowerwall2InverterSelfTestsRequest>, I>>(
+    _: I,
+  ): TEGAPIStopPowerwall2InverterSelfTestsRequest {
+    const message = createBaseTEGAPIStopPowerwall2InverterSelfTestsRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPIStopPowerwall2InverterSelfTestsResponse(): TEGAPIStopPowerwall2InverterSelfTestsResponse {
+  return {};
+}
+
+export const TEGAPIStopPowerwall2InverterSelfTestsResponse: MessageFns<TEGAPIStopPowerwall2InverterSelfTestsResponse> =
+  {
+    encode(_: TEGAPIStopPowerwall2InverterSelfTestsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+      return writer;
+    },
+
+    decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIStopPowerwall2InverterSelfTestsResponse {
+      const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseTEGAPIStopPowerwall2InverterSelfTestsResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(_: any): TEGAPIStopPowerwall2InverterSelfTestsResponse {
+      return {};
+    },
+
+    toJSON(_: TEGAPIStopPowerwall2InverterSelfTestsResponse): unknown {
+      const obj: any = {};
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<TEGAPIStopPowerwall2InverterSelfTestsResponse>, I>>(
+      base?: I,
+    ): TEGAPIStopPowerwall2InverterSelfTestsResponse {
+      return TEGAPIStopPowerwall2InverterSelfTestsResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<TEGAPIStopPowerwall2InverterSelfTestsResponse>, I>>(
+      _: I,
+    ): TEGAPIStopPowerwall2InverterSelfTestsResponse {
+      const message = createBaseTEGAPIStopPowerwall2InverterSelfTestsResponse();
+      return message;
+    },
+  };
+
+function createBaseTEGAPIStartPowerwall2BubbleShedRequest(): TEGAPIStartPowerwall2BubbleShedRequest {
+  return {};
+}
+
+export const TEGAPIStartPowerwall2BubbleShedRequest: MessageFns<TEGAPIStartPowerwall2BubbleShedRequest> = {
+  encode(_: TEGAPIStartPowerwall2BubbleShedRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIStartPowerwall2BubbleShedRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIStartPowerwall2BubbleShedRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIStartPowerwall2BubbleShedRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPIStartPowerwall2BubbleShedRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIStartPowerwall2BubbleShedRequest>, I>>(
+    base?: I,
+  ): TEGAPIStartPowerwall2BubbleShedRequest {
+    return TEGAPIStartPowerwall2BubbleShedRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIStartPowerwall2BubbleShedRequest>, I>>(
+    _: I,
+  ): TEGAPIStartPowerwall2BubbleShedRequest {
+    const message = createBaseTEGAPIStartPowerwall2BubbleShedRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPIStartPowerwall2BubbleShedResponse(): TEGAPIStartPowerwall2BubbleShedResponse {
+  return {};
+}
+
+export const TEGAPIStartPowerwall2BubbleShedResponse: MessageFns<TEGAPIStartPowerwall2BubbleShedResponse> = {
+  encode(_: TEGAPIStartPowerwall2BubbleShedResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIStartPowerwall2BubbleShedResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIStartPowerwall2BubbleShedResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIStartPowerwall2BubbleShedResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIStartPowerwall2BubbleShedResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIStartPowerwall2BubbleShedResponse>, I>>(
+    base?: I,
+  ): TEGAPIStartPowerwall2BubbleShedResponse {
+    return TEGAPIStartPowerwall2BubbleShedResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIStartPowerwall2BubbleShedResponse>, I>>(
+    _: I,
+  ): TEGAPIStartPowerwall2BubbleShedResponse {
+    const message = createBaseTEGAPIStartPowerwall2BubbleShedResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIClearSolarInverterAlertsRequest(): TEGAPIClearSolarInverterAlertsRequest {
+  return { din: "" };
+}
+
+export const TEGAPIClearSolarInverterAlertsRequest: MessageFns<TEGAPIClearSolarInverterAlertsRequest> = {
+  encode(message: TEGAPIClearSolarInverterAlertsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.din !== "") {
+      writer.uint32(10).string(message.din);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIClearSolarInverterAlertsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIClearSolarInverterAlertsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.din = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIClearSolarInverterAlertsRequest {
+    return { din: isSet(object.din) ? globalThis.String(object.din) : "" };
+  },
+
+  toJSON(message: TEGAPIClearSolarInverterAlertsRequest): unknown {
+    const obj: any = {};
+    if (message.din !== undefined) {
+      obj.din = message.din;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIClearSolarInverterAlertsRequest>, I>>(
+    base?: I,
+  ): TEGAPIClearSolarInverterAlertsRequest {
+    return TEGAPIClearSolarInverterAlertsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIClearSolarInverterAlertsRequest>, I>>(
+    object: I,
+  ): TEGAPIClearSolarInverterAlertsRequest {
+    const message = createBaseTEGAPIClearSolarInverterAlertsRequest();
+    message.din = object.din ?? "";
+    return message;
+  },
+};
+
+function createBaseTEGAPIClearSolarInverterAlertsResponse(): TEGAPIClearSolarInverterAlertsResponse {
+  return {};
+}
+
+export const TEGAPIClearSolarInverterAlertsResponse: MessageFns<TEGAPIClearSolarInverterAlertsResponse> = {
+  encode(_: TEGAPIClearSolarInverterAlertsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIClearSolarInverterAlertsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIClearSolarInverterAlertsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIClearSolarInverterAlertsResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIClearSolarInverterAlertsResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIClearSolarInverterAlertsResponse>, I>>(
+    base?: I,
+  ): TEGAPIClearSolarInverterAlertsResponse {
+    return TEGAPIClearSolarInverterAlertsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIClearSolarInverterAlertsResponse>, I>>(
+    _: I,
+  ): TEGAPIClearSolarInverterAlertsResponse {
+    const message = createBaseTEGAPIClearSolarInverterAlertsResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIGetWifiConfigWithCredentialsRequest(): TEGAPIGetWifiConfigWithCredentialsRequest {
+  return {};
+}
+
+export const TEGAPIGetWifiConfigWithCredentialsRequest: MessageFns<TEGAPIGetWifiConfigWithCredentialsRequest> = {
+  encode(_: TEGAPIGetWifiConfigWithCredentialsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIGetWifiConfigWithCredentialsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIGetWifiConfigWithCredentialsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIGetWifiConfigWithCredentialsRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPIGetWifiConfigWithCredentialsRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIGetWifiConfigWithCredentialsRequest>, I>>(
+    base?: I,
+  ): TEGAPIGetWifiConfigWithCredentialsRequest {
+    return TEGAPIGetWifiConfigWithCredentialsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIGetWifiConfigWithCredentialsRequest>, I>>(
+    _: I,
+  ): TEGAPIGetWifiConfigWithCredentialsRequest {
+    const message = createBaseTEGAPIGetWifiConfigWithCredentialsRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPIGetWifiConfigWithCredentialsResponse(): TEGAPIGetWifiConfigWithCredentialsResponse {
+  return { wifiConfig: undefined };
+}
+
+export const TEGAPIGetWifiConfigWithCredentialsResponse: MessageFns<TEGAPIGetWifiConfigWithCredentialsResponse> = {
+  encode(message: TEGAPIGetWifiConfigWithCredentialsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.wifiConfig !== undefined) {
+      WifiConfig.encode(message.wifiConfig, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIGetWifiConfigWithCredentialsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIGetWifiConfigWithCredentialsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.wifiConfig = WifiConfig.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIGetWifiConfigWithCredentialsResponse {
+    return { wifiConfig: isSet(object.wifiConfig) ? WifiConfig.fromJSON(object.wifiConfig) : undefined };
+  },
+
+  toJSON(message: TEGAPIGetWifiConfigWithCredentialsResponse): unknown {
+    const obj: any = {};
+    if (message.wifiConfig !== undefined) {
+      obj.wifiConfig = WifiConfig.toJSON(message.wifiConfig);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIGetWifiConfigWithCredentialsResponse>, I>>(
+    base?: I,
+  ): TEGAPIGetWifiConfigWithCredentialsResponse {
+    return TEGAPIGetWifiConfigWithCredentialsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIGetWifiConfigWithCredentialsResponse>, I>>(
+    object: I,
+  ): TEGAPIGetWifiConfigWithCredentialsResponse {
+    const message = createBaseTEGAPIGetWifiConfigWithCredentialsResponse();
+    message.wifiConfig = (object.wifiConfig !== undefined && object.wifiConfig !== null)
+      ? WifiConfig.fromPartial(object.wifiConfig)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseTEGAPIDisableBatteriesRequestBatteryDisableRequest(): TEGAPIDisableBatteriesRequestBatteryDisableRequest {
+  return { din: "", disable: false };
+}
+
+export const TEGAPIDisableBatteriesRequestBatteryDisableRequest: MessageFns<
+  TEGAPIDisableBatteriesRequestBatteryDisableRequest
+> = {
+  encode(
+    message: TEGAPIDisableBatteriesRequestBatteryDisableRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.din !== "") {
+      writer.uint32(10).string(message.din);
+    }
+    if (message.disable !== false) {
+      writer.uint32(16).bool(message.disable);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIDisableBatteriesRequestBatteryDisableRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIDisableBatteriesRequestBatteryDisableRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.din = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.disable = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIDisableBatteriesRequestBatteryDisableRequest {
+    return {
+      din: isSet(object.din) ? globalThis.String(object.din) : "",
+      disable: isSet(object.disable) ? globalThis.Boolean(object.disable) : false,
+    };
+  },
+
+  toJSON(message: TEGAPIDisableBatteriesRequestBatteryDisableRequest): unknown {
+    const obj: any = {};
+    if (message.din !== undefined) {
+      obj.din = message.din;
+    }
+    if (message.disable !== undefined) {
+      obj.disable = message.disable;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIDisableBatteriesRequestBatteryDisableRequest>, I>>(
+    base?: I,
+  ): TEGAPIDisableBatteriesRequestBatteryDisableRequest {
+    return TEGAPIDisableBatteriesRequestBatteryDisableRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIDisableBatteriesRequestBatteryDisableRequest>, I>>(
+    object: I,
+  ): TEGAPIDisableBatteriesRequestBatteryDisableRequest {
+    const message = createBaseTEGAPIDisableBatteriesRequestBatteryDisableRequest();
+    message.din = object.din ?? "";
+    message.disable = object.disable ?? false;
+    return message;
+  },
+};
+
+function createBaseTEGAPIDisableBatteriesRequest(): TEGAPIDisableBatteriesRequest {
+  return { batteryDisableRequests: [] };
+}
+
+export const TEGAPIDisableBatteriesRequest: MessageFns<TEGAPIDisableBatteriesRequest> = {
+  encode(message: TEGAPIDisableBatteriesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.batteryDisableRequests) {
+      TEGAPIDisableBatteriesRequestBatteryDisableRequest.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIDisableBatteriesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIDisableBatteriesRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.batteryDisableRequests.push(
+            TEGAPIDisableBatteriesRequestBatteryDisableRequest.decode(reader, reader.uint32()),
+          );
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIDisableBatteriesRequest {
+    return {
+      batteryDisableRequests: globalThis.Array.isArray(object?.batteryDisableRequests)
+        ? object.batteryDisableRequests.map((e: any) => TEGAPIDisableBatteriesRequestBatteryDisableRequest.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: TEGAPIDisableBatteriesRequest): unknown {
+    const obj: any = {};
+    if (message.batteryDisableRequests?.length) {
+      obj.batteryDisableRequests = message.batteryDisableRequests.map((e) =>
+        TEGAPIDisableBatteriesRequestBatteryDisableRequest.toJSON(e)
+      );
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIDisableBatteriesRequest>, I>>(base?: I): TEGAPIDisableBatteriesRequest {
+    return TEGAPIDisableBatteriesRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIDisableBatteriesRequest>, I>>(
+    object: I,
+  ): TEGAPIDisableBatteriesRequest {
+    const message = createBaseTEGAPIDisableBatteriesRequest();
+    message.batteryDisableRequests =
+      object.batteryDisableRequests?.map((e) => TEGAPIDisableBatteriesRequestBatteryDisableRequest.fromPartial(e)) ||
+      [];
+    return message;
+  },
+};
+
+function createBaseTEGAPIDisableBatteriesResponse(): TEGAPIDisableBatteriesResponse {
+  return {};
+}
+
+export const TEGAPIDisableBatteriesResponse: MessageFns<TEGAPIDisableBatteriesResponse> = {
+  encode(_: TEGAPIDisableBatteriesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIDisableBatteriesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIDisableBatteriesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIDisableBatteriesResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIDisableBatteriesResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIDisableBatteriesResponse>, I>>(base?: I): TEGAPIDisableBatteriesResponse {
+    return TEGAPIDisableBatteriesResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIDisableBatteriesResponse>, I>>(_: I): TEGAPIDisableBatteriesResponse {
+    const message = createBaseTEGAPIDisableBatteriesResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIBypassBatterySoeAdjustmentConstraintsRequest(): TEGAPIBypassBatterySoeAdjustmentConstraintsRequest {
+  return { enable: false, durationHours: 0 };
+}
+
+export const TEGAPIBypassBatterySoeAdjustmentConstraintsRequest: MessageFns<
+  TEGAPIBypassBatterySoeAdjustmentConstraintsRequest
+> = {
+  encode(
+    message: TEGAPIBypassBatterySoeAdjustmentConstraintsRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.enable !== false) {
+      writer.uint32(8).bool(message.enable);
+    }
+    if (message.durationHours !== 0) {
+      writer.uint32(16).uint32(message.durationHours);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIBypassBatterySoeAdjustmentConstraintsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIBypassBatterySoeAdjustmentConstraintsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.enable = reader.bool();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.durationHours = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIBypassBatterySoeAdjustmentConstraintsRequest {
+    return {
+      enable: isSet(object.enable) ? globalThis.Boolean(object.enable) : false,
+      durationHours: isSet(object.durationHours) ? globalThis.Number(object.durationHours) : 0,
+    };
+  },
+
+  toJSON(message: TEGAPIBypassBatterySoeAdjustmentConstraintsRequest): unknown {
+    const obj: any = {};
+    if (message.enable !== undefined) {
+      obj.enable = message.enable;
+    }
+    if (message.durationHours !== undefined) {
+      obj.durationHours = Math.round(message.durationHours);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIBypassBatterySoeAdjustmentConstraintsRequest>, I>>(
+    base?: I,
+  ): TEGAPIBypassBatterySoeAdjustmentConstraintsRequest {
+    return TEGAPIBypassBatterySoeAdjustmentConstraintsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIBypassBatterySoeAdjustmentConstraintsRequest>, I>>(
+    object: I,
+  ): TEGAPIBypassBatterySoeAdjustmentConstraintsRequest {
+    const message = createBaseTEGAPIBypassBatterySoeAdjustmentConstraintsRequest();
+    message.enable = object.enable ?? false;
+    message.durationHours = object.durationHours ?? 0;
+    return message;
+  },
+};
+
+function createBaseTEGAPIBypassBatterySoeAdjustmentConstraintsResponse(): TEGAPIBypassBatterySoeAdjustmentConstraintsResponse {
+  return {};
+}
+
+export const TEGAPIBypassBatterySoeAdjustmentConstraintsResponse: MessageFns<
+  TEGAPIBypassBatterySoeAdjustmentConstraintsResponse
+> = {
+  encode(
+    _: TEGAPIBypassBatterySoeAdjustmentConstraintsResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIBypassBatterySoeAdjustmentConstraintsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIBypassBatterySoeAdjustmentConstraintsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIBypassBatterySoeAdjustmentConstraintsResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIBypassBatterySoeAdjustmentConstraintsResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIBypassBatterySoeAdjustmentConstraintsResponse>, I>>(
+    base?: I,
+  ): TEGAPIBypassBatterySoeAdjustmentConstraintsResponse {
+    return TEGAPIBypassBatterySoeAdjustmentConstraintsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIBypassBatterySoeAdjustmentConstraintsResponse>, I>>(
+    _: I,
+  ): TEGAPIBypassBatterySoeAdjustmentConstraintsResponse {
+    const message = createBaseTEGAPIBypassBatterySoeAdjustmentConstraintsResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks(): TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks {
+  return {};
+}
+
+export const TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks: MessageFns<
+  TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks
+> = {
+  encode(
+    _: TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    return writer;
+  },
+
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number,
+  ): TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks {
+    return {};
+  },
+
+  toJSON(_: TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks>, I>>(
+    base?: I,
+  ): TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks {
+    return TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks>, I>>(
+    _: I,
+  ): TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks {
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks();
+    return message;
+  },
+};
+
+function createBaseTEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited(): TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited {
+  return {};
+}
+
+export const TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited: MessageFns<
+  TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited
+> = {
+  encode(
+    _: TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited {
+    return {};
+  },
+
+  toJSON(_: TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited>, I>>(
+    base?: I,
+  ): TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited {
+    return TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited>, I>>(
+    _: I,
+  ): TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited {
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited();
+    return message;
+  },
+};
+
+function createBaseTEGAPIEnsureCertificateRequestCSIPAusNet(): TEGAPIEnsureCertificateRequestCSIPAusNet {
+  return {};
+}
+
+export const TEGAPIEnsureCertificateRequestCSIPAusNet: MessageFns<TEGAPIEnsureCertificateRequestCSIPAusNet> = {
+  encode(_: TEGAPIEnsureCertificateRequestCSIPAusNet, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIEnsureCertificateRequestCSIPAusNet {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPAusNet();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIEnsureCertificateRequestCSIPAusNet {
+    return {};
+  },
+
+  toJSON(_: TEGAPIEnsureCertificateRequestCSIPAusNet): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPAusNet>, I>>(
+    base?: I,
+  ): TEGAPIEnsureCertificateRequestCSIPAusNet {
+    return TEGAPIEnsureCertificateRequestCSIPAusNet.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPAusNet>, I>>(
+    _: I,
+  ): TEGAPIEnsureCertificateRequestCSIPAusNet {
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPAusNet();
+    return message;
+  },
+};
+
+function createBaseTEGAPIEnsureCertificateRequestCSIPJemena(): TEGAPIEnsureCertificateRequestCSIPJemena {
+  return {};
+}
+
+export const TEGAPIEnsureCertificateRequestCSIPJemena: MessageFns<TEGAPIEnsureCertificateRequestCSIPJemena> = {
+  encode(_: TEGAPIEnsureCertificateRequestCSIPJemena, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIEnsureCertificateRequestCSIPJemena {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPJemena();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIEnsureCertificateRequestCSIPJemena {
+    return {};
+  },
+
+  toJSON(_: TEGAPIEnsureCertificateRequestCSIPJemena): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPJemena>, I>>(
+    base?: I,
+  ): TEGAPIEnsureCertificateRequestCSIPJemena {
+    return TEGAPIEnsureCertificateRequestCSIPJemena.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPJemena>, I>>(
+    _: I,
+  ): TEGAPIEnsureCertificateRequestCSIPJemena {
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPJemena();
+    return message;
+  },
+};
+
+function createBaseTEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD(): TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD {
+  return {};
+}
+
+export const TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD: MessageFns<
+  TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD
+> = {
+  encode(
+    _: TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD {
+    return {};
+  },
+
+  toJSON(_: TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD>, I>>(
+    base?: I,
+  ): TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD {
+    return TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD>, I>>(
+    _: I,
+  ): TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD {
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD();
+    return message;
+  },
+};
+
+function createBaseTEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy(): TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy {
+  return {};
+}
+
+export const TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy: MessageFns<
+  TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy
+> = {
+  encode(
+    _: TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy {
+    return {};
+  },
+
+  toJSON(_: TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy>, I>>(
+    base?: I,
+  ): TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy {
+    return TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy>, I>>(
+    _: I,
+  ): TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy {
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy();
+    return message;
+  },
+};
+
+function createBaseTEGAPIEnsureCertificateRequest(): TEGAPIEnsureCertificateRequest {
+  return {
+    forceRenew: false,
+    csipSouthAustraliaPowerNetworks: undefined,
+    csipCitipowerPowercorUnited: undefined,
+    csipAusnet: undefined,
+    csipJemena: undefined,
+    csipEnergexErgonEnergyQld: undefined,
+    csipWesternPowerSynergy: undefined,
+  };
+}
+
+export const TEGAPIEnsureCertificateRequest: MessageFns<TEGAPIEnsureCertificateRequest> = {
+  encode(message: TEGAPIEnsureCertificateRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.forceRenew !== false) {
+      writer.uint32(8).bool(message.forceRenew);
+    }
+    if (message.csipSouthAustraliaPowerNetworks !== undefined) {
+      TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks.encode(
+        message.csipSouthAustraliaPowerNetworks,
+        writer.uint32(18).fork(),
+      ).join();
+    }
+    if (message.csipCitipowerPowercorUnited !== undefined) {
+      TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited.encode(
+        message.csipCitipowerPowercorUnited,
+        writer.uint32(26).fork(),
+      ).join();
+    }
+    if (message.csipAusnet !== undefined) {
+      TEGAPIEnsureCertificateRequestCSIPAusNet.encode(message.csipAusnet, writer.uint32(34).fork()).join();
+    }
+    if (message.csipJemena !== undefined) {
+      TEGAPIEnsureCertificateRequestCSIPJemena.encode(message.csipJemena, writer.uint32(42).fork()).join();
+    }
+    if (message.csipEnergexErgonEnergyQld !== undefined) {
+      TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD.encode(
+        message.csipEnergexErgonEnergyQld,
+        writer.uint32(50).fork(),
+      ).join();
+    }
+    if (message.csipWesternPowerSynergy !== undefined) {
+      TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy.encode(
+        message.csipWesternPowerSynergy,
+        writer.uint32(58).fork(),
+      ).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIEnsureCertificateRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIEnsureCertificateRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.forceRenew = reader.bool();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.csipSouthAustraliaPowerNetworks = TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks
+            .decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.csipCitipowerPowercorUnited = TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.csipAusnet = TEGAPIEnsureCertificateRequestCSIPAusNet.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.csipJemena = TEGAPIEnsureCertificateRequestCSIPJemena.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.csipEnergexErgonEnergyQld = TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.csipWesternPowerSynergy = TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIEnsureCertificateRequest {
+    return {
+      forceRenew: isSet(object.forceRenew) ? globalThis.Boolean(object.forceRenew) : false,
+      csipSouthAustraliaPowerNetworks: isSet(object.csipSouthAustraliaPowerNetworks)
+        ? TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks.fromJSON(object.csipSouthAustraliaPowerNetworks)
+        : undefined,
+      csipCitipowerPowercorUnited: isSet(object.csipCitipowerPowercorUnited)
+        ? TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited.fromJSON(object.csipCitipowerPowercorUnited)
+        : undefined,
+      csipAusnet: isSet(object.csipAusnet)
+        ? TEGAPIEnsureCertificateRequestCSIPAusNet.fromJSON(object.csipAusnet)
+        : undefined,
+      csipJemena: isSet(object.csipJemena)
+        ? TEGAPIEnsureCertificateRequestCSIPJemena.fromJSON(object.csipJemena)
+        : undefined,
+      csipEnergexErgonEnergyQld: isSet(object.csipEnergexErgonEnergyQld)
+        ? TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD.fromJSON(object.csipEnergexErgonEnergyQld)
+        : undefined,
+      csipWesternPowerSynergy: isSet(object.csipWesternPowerSynergy)
+        ? TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy.fromJSON(object.csipWesternPowerSynergy)
+        : undefined,
+    };
+  },
+
+  toJSON(message: TEGAPIEnsureCertificateRequest): unknown {
+    const obj: any = {};
+    if (message.forceRenew !== undefined) {
+      obj.forceRenew = message.forceRenew;
+    }
+    if (message.csipSouthAustraliaPowerNetworks !== undefined) {
+      obj.csipSouthAustraliaPowerNetworks = TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks.toJSON(
+        message.csipSouthAustraliaPowerNetworks,
+      );
+    }
+    if (message.csipCitipowerPowercorUnited !== undefined) {
+      obj.csipCitipowerPowercorUnited = TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited.toJSON(
+        message.csipCitipowerPowercorUnited,
+      );
+    }
+    if (message.csipAusnet !== undefined) {
+      obj.csipAusnet = TEGAPIEnsureCertificateRequestCSIPAusNet.toJSON(message.csipAusnet);
+    }
+    if (message.csipJemena !== undefined) {
+      obj.csipJemena = TEGAPIEnsureCertificateRequestCSIPJemena.toJSON(message.csipJemena);
+    }
+    if (message.csipEnergexErgonEnergyQld !== undefined) {
+      obj.csipEnergexErgonEnergyQld = TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD.toJSON(
+        message.csipEnergexErgonEnergyQld,
+      );
+    }
+    if (message.csipWesternPowerSynergy !== undefined) {
+      obj.csipWesternPowerSynergy = TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy.toJSON(
+        message.csipWesternPowerSynergy,
+      );
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequest>, I>>(base?: I): TEGAPIEnsureCertificateRequest {
+    return TEGAPIEnsureCertificateRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequest>, I>>(
+    object: I,
+  ): TEGAPIEnsureCertificateRequest {
+    const message = createBaseTEGAPIEnsureCertificateRequest();
+    message.forceRenew = object.forceRenew ?? false;
+    message.csipSouthAustraliaPowerNetworks =
+      (object.csipSouthAustraliaPowerNetworks !== undefined && object.csipSouthAustraliaPowerNetworks !== null)
+        ? TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks.fromPartial(
+          object.csipSouthAustraliaPowerNetworks,
+        )
+        : undefined;
+    message.csipCitipowerPowercorUnited =
+      (object.csipCitipowerPowercorUnited !== undefined && object.csipCitipowerPowercorUnited !== null)
+        ? TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited.fromPartial(object.csipCitipowerPowercorUnited)
+        : undefined;
+    message.csipAusnet = (object.csipAusnet !== undefined && object.csipAusnet !== null)
+      ? TEGAPIEnsureCertificateRequestCSIPAusNet.fromPartial(object.csipAusnet)
+      : undefined;
+    message.csipJemena = (object.csipJemena !== undefined && object.csipJemena !== null)
+      ? TEGAPIEnsureCertificateRequestCSIPJemena.fromPartial(object.csipJemena)
+      : undefined;
+    message.csipEnergexErgonEnergyQld =
+      (object.csipEnergexErgonEnergyQld !== undefined && object.csipEnergexErgonEnergyQld !== null)
+        ? TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD.fromPartial(object.csipEnergexErgonEnergyQld)
+        : undefined;
+    message.csipWesternPowerSynergy =
+      (object.csipWesternPowerSynergy !== undefined && object.csipWesternPowerSynergy !== null)
+        ? TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy.fromPartial(object.csipWesternPowerSynergy)
+        : undefined;
+    return message;
+  },
+};
+
+function createBaseTEGAPIEnsureCertificateResponse(): TEGAPIEnsureCertificateResponse {
+  return { certificateExists: false };
+}
+
+export const TEGAPIEnsureCertificateResponse: MessageFns<TEGAPIEnsureCertificateResponse> = {
+  encode(message: TEGAPIEnsureCertificateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.certificateExists !== false) {
+      writer.uint32(8).bool(message.certificateExists);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIEnsureCertificateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIEnsureCertificateResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.certificateExists = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIEnsureCertificateResponse {
+    return {
+      certificateExists: isSet(object.certificateExists) ? globalThis.Boolean(object.certificateExists) : false,
+    };
+  },
+
+  toJSON(message: TEGAPIEnsureCertificateResponse): unknown {
+    const obj: any = {};
+    if (message.certificateExists !== undefined) {
+      obj.certificateExists = message.certificateExists;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIEnsureCertificateResponse>, I>>(base?: I): TEGAPIEnsureCertificateResponse {
+    return TEGAPIEnsureCertificateResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIEnsureCertificateResponse>, I>>(
+    object: I,
+  ): TEGAPIEnsureCertificateResponse {
+    const message = createBaseTEGAPIEnsureCertificateResponse();
+    message.certificateExists = object.certificateExists ?? false;
+    return message;
+  },
+};
 
 function createBaseControlEventSchedulingInfo(): ControlEventSchedulingInfo {
   return { startTime: undefined, durationSeconds: 0, priority: 0 };
@@ -730,19 +4711,19 @@ export const TEGAPIGetBackupEventsResponse: MessageFns<TEGAPIGetBackupEventsResp
   },
 };
 
-function createBaseTEGAPIRegisterRequest(): TEGAPIRegisterRequest {
+function createBaseCsmsPropertiesRequest(): CsmsPropertiesRequest {
   return {};
 }
 
-export const TEGAPIRegisterRequest: MessageFns<TEGAPIRegisterRequest> = {
-  encode(_: TEGAPIRegisterRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+export const CsmsPropertiesRequest: MessageFns<CsmsPropertiesRequest> = {
+  encode(_: CsmsPropertiesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIRegisterRequest {
+  decode(input: BinaryReader | Uint8Array, length?: number): CsmsPropertiesRequest {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTEGAPIRegisterRequest();
+    const message = createBaseCsmsPropertiesRequest();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -755,37 +4736,389 @@ export const TEGAPIRegisterRequest: MessageFns<TEGAPIRegisterRequest> = {
     return message;
   },
 
-  fromJSON(_: any): TEGAPIRegisterRequest {
+  fromJSON(_: any): CsmsPropertiesRequest {
     return {};
   },
 
-  toJSON(_: TEGAPIRegisterRequest): unknown {
+  toJSON(_: CsmsPropertiesRequest): unknown {
     const obj: any = {};
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TEGAPIRegisterRequest>, I>>(base?: I): TEGAPIRegisterRequest {
-    return TEGAPIRegisterRequest.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<CsmsPropertiesRequest>, I>>(base?: I): CsmsPropertiesRequest {
+    return CsmsPropertiesRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TEGAPIRegisterRequest>, I>>(_: I): TEGAPIRegisterRequest {
-    const message = createBaseTEGAPIRegisterRequest();
+  fromPartial<I extends Exact<DeepPartial<CsmsPropertiesRequest>, I>>(_: I): CsmsPropertiesRequest {
+    const message = createBaseCsmsPropertiesRequest();
     return message;
   },
 };
 
-function createBaseTEGAPIRegisterResponse(): TEGAPIRegisterResponse {
-  return {};
+function createBaseCsmsProperties(): CsmsProperties {
+  return { csmsRootCa: new Uint8Array(0), csmsUrl: "", chargePointOperator: "" };
 }
 
-export const TEGAPIRegisterResponse: MessageFns<TEGAPIRegisterResponse> = {
-  encode(_: TEGAPIRegisterResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+export const CsmsProperties: MessageFns<CsmsProperties> = {
+  encode(message: CsmsProperties, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.csmsRootCa.length !== 0) {
+      writer.uint32(10).bytes(message.csmsRootCa);
+    }
+    if (message.csmsUrl !== "") {
+      writer.uint32(18).string(message.csmsUrl);
+    }
+    if (message.chargePointOperator !== "") {
+      writer.uint32(26).string(message.chargePointOperator);
+    }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIRegisterResponse {
+  decode(input: BinaryReader | Uint8Array, length?: number): CsmsProperties {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseTEGAPIRegisterResponse();
+    const message = createBaseCsmsProperties();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.csmsRootCa = reader.bytes();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.csmsUrl = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.chargePointOperator = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CsmsProperties {
+    return {
+      csmsRootCa: isSet(object.csmsRootCa) ? bytesFromBase64(object.csmsRootCa) : new Uint8Array(0),
+      csmsUrl: isSet(object.csmsUrl) ? globalThis.String(object.csmsUrl) : "",
+      chargePointOperator: isSet(object.chargePointOperator) ? globalThis.String(object.chargePointOperator) : "",
+    };
+  },
+
+  toJSON(message: CsmsProperties): unknown {
+    const obj: any = {};
+    if (message.csmsRootCa !== undefined) {
+      obj.csmsRootCa = base64FromBytes(message.csmsRootCa);
+    }
+    if (message.csmsUrl !== undefined) {
+      obj.csmsUrl = message.csmsUrl;
+    }
+    if (message.chargePointOperator !== undefined) {
+      obj.chargePointOperator = message.chargePointOperator;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CsmsProperties>, I>>(base?: I): CsmsProperties {
+    return CsmsProperties.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CsmsProperties>, I>>(object: I): CsmsProperties {
+    const message = createBaseCsmsProperties();
+    message.csmsRootCa = object.csmsRootCa ?? new Uint8Array(0);
+    message.csmsUrl = object.csmsUrl ?? "";
+    message.chargePointOperator = object.chargePointOperator ?? "";
+    return message;
+  },
+};
+
+function createBaseCsmsPropertiesResponse(): CsmsPropertiesResponse {
+  return { canvasSiteStatus: 0, csmsProperties: undefined };
+}
+
+export const CsmsPropertiesResponse: MessageFns<CsmsPropertiesResponse> = {
+  encode(message: CsmsPropertiesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.canvasSiteStatus !== 0) {
+      writer.uint32(8).int32(message.canvasSiteStatus);
+    }
+    if (message.csmsProperties !== undefined) {
+      CsmsProperties.encode(message.csmsProperties, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CsmsPropertiesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCsmsPropertiesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.canvasSiteStatus = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.csmsProperties = CsmsProperties.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CsmsPropertiesResponse {
+    return {
+      canvasSiteStatus: isSet(object.canvasSiteStatus) ? canvasSiteStatusFromJSON(object.canvasSiteStatus) : 0,
+      csmsProperties: isSet(object.csmsProperties) ? CsmsProperties.fromJSON(object.csmsProperties) : undefined,
+    };
+  },
+
+  toJSON(message: CsmsPropertiesResponse): unknown {
+    const obj: any = {};
+    if (message.canvasSiteStatus !== undefined) {
+      obj.canvasSiteStatus = canvasSiteStatusToJSON(message.canvasSiteStatus);
+    }
+    if (message.csmsProperties !== undefined) {
+      obj.csmsProperties = CsmsProperties.toJSON(message.csmsProperties);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CsmsPropertiesResponse>, I>>(base?: I): CsmsPropertiesResponse {
+    return CsmsPropertiesResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CsmsPropertiesResponse>, I>>(object: I): CsmsPropertiesResponse {
+    const message = createBaseCsmsPropertiesResponse();
+    message.canvasSiteStatus = object.canvasSiteStatus ?? 0;
+    message.csmsProperties = (object.csmsProperties !== undefined && object.csmsProperties !== null)
+      ? CsmsProperties.fromPartial(object.csmsProperties)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseTEGAPIGetCsmsPropertiesRequest(): TEGAPIGetCsmsPropertiesRequest {
+  return { request: undefined };
+}
+
+export const TEGAPIGetCsmsPropertiesRequest: MessageFns<TEGAPIGetCsmsPropertiesRequest> = {
+  encode(message: TEGAPIGetCsmsPropertiesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.request !== undefined) {
+      CsmsPropertiesRequest.encode(message.request, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIGetCsmsPropertiesRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIGetCsmsPropertiesRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.request = CsmsPropertiesRequest.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIGetCsmsPropertiesRequest {
+    return { request: isSet(object.request) ? CsmsPropertiesRequest.fromJSON(object.request) : undefined };
+  },
+
+  toJSON(message: TEGAPIGetCsmsPropertiesRequest): unknown {
+    const obj: any = {};
+    if (message.request !== undefined) {
+      obj.request = CsmsPropertiesRequest.toJSON(message.request);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIGetCsmsPropertiesRequest>, I>>(base?: I): TEGAPIGetCsmsPropertiesRequest {
+    return TEGAPIGetCsmsPropertiesRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIGetCsmsPropertiesRequest>, I>>(
+    object: I,
+  ): TEGAPIGetCsmsPropertiesRequest {
+    const message = createBaseTEGAPIGetCsmsPropertiesRequest();
+    message.request = (object.request !== undefined && object.request !== null)
+      ? CsmsPropertiesRequest.fromPartial(object.request)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseTEGAPIGetCsmsPropertiesResponse(): TEGAPIGetCsmsPropertiesResponse {
+  return { response: undefined };
+}
+
+export const TEGAPIGetCsmsPropertiesResponse: MessageFns<TEGAPIGetCsmsPropertiesResponse> = {
+  encode(message: TEGAPIGetCsmsPropertiesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.response !== undefined) {
+      CsmsPropertiesResponse.encode(message.response, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIGetCsmsPropertiesResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIGetCsmsPropertiesResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.response = CsmsPropertiesResponse.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIGetCsmsPropertiesResponse {
+    return { response: isSet(object.response) ? CsmsPropertiesResponse.fromJSON(object.response) : undefined };
+  },
+
+  toJSON(message: TEGAPIGetCsmsPropertiesResponse): unknown {
+    const obj: any = {};
+    if (message.response !== undefined) {
+      obj.response = CsmsPropertiesResponse.toJSON(message.response);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIGetCsmsPropertiesResponse>, I>>(base?: I): TEGAPIGetCsmsPropertiesResponse {
+    return TEGAPIGetCsmsPropertiesResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIGetCsmsPropertiesResponse>, I>>(
+    object: I,
+  ): TEGAPIGetCsmsPropertiesResponse {
+    const message = createBaseTEGAPIGetCsmsPropertiesResponse();
+    message.response = (object.response !== undefined && object.response !== null)
+      ? CsmsPropertiesResponse.fromPartial(object.response)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseTEGAPIConfigureOcppRequest(): TEGAPIConfigureOcppRequest {
+  return { csmsBaseUrl: "" };
+}
+
+export const TEGAPIConfigureOcppRequest: MessageFns<TEGAPIConfigureOcppRequest> = {
+  encode(message: TEGAPIConfigureOcppRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.csmsBaseUrl !== "") {
+      writer.uint32(10).string(message.csmsBaseUrl);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIConfigureOcppRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIConfigureOcppRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.csmsBaseUrl = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIConfigureOcppRequest {
+    return { csmsBaseUrl: isSet(object.csmsBaseUrl) ? globalThis.String(object.csmsBaseUrl) : "" };
+  },
+
+  toJSON(message: TEGAPIConfigureOcppRequest): unknown {
+    const obj: any = {};
+    if (message.csmsBaseUrl !== undefined) {
+      obj.csmsBaseUrl = message.csmsBaseUrl;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIConfigureOcppRequest>, I>>(base?: I): TEGAPIConfigureOcppRequest {
+    return TEGAPIConfigureOcppRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIConfigureOcppRequest>, I>>(object: I): TEGAPIConfigureOcppRequest {
+    const message = createBaseTEGAPIConfigureOcppRequest();
+    message.csmsBaseUrl = object.csmsBaseUrl ?? "";
+    return message;
+  },
+};
+
+function createBaseTEGAPIConfigureOcppResponse(): TEGAPIConfigureOcppResponse {
+  return {};
+}
+
+export const TEGAPIConfigureOcppResponse: MessageFns<TEGAPIConfigureOcppResponse> = {
+  encode(_: TEGAPIConfigureOcppResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIConfigureOcppResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIConfigureOcppResponse();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -798,37 +5131,2793 @@ export const TEGAPIRegisterResponse: MessageFns<TEGAPIRegisterResponse> = {
     return message;
   },
 
-  fromJSON(_: any): TEGAPIRegisterResponse {
+  fromJSON(_: any): TEGAPIConfigureOcppResponse {
     return {};
   },
 
-  toJSON(_: TEGAPIRegisterResponse): unknown {
+  toJSON(_: TEGAPIConfigureOcppResponse): unknown {
     const obj: any = {};
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<TEGAPIRegisterResponse>, I>>(base?: I): TEGAPIRegisterResponse {
-    return TEGAPIRegisterResponse.fromPartial(base ?? ({} as any));
+  create<I extends Exact<DeepPartial<TEGAPIConfigureOcppResponse>, I>>(base?: I): TEGAPIConfigureOcppResponse {
+    return TEGAPIConfigureOcppResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TEGAPIRegisterResponse>, I>>(_: I): TEGAPIRegisterResponse {
-    const message = createBaseTEGAPIRegisterResponse();
+  fromPartial<I extends Exact<DeepPartial<TEGAPIConfigureOcppResponse>, I>>(_: I): TEGAPIConfigureOcppResponse {
+    const message = createBaseTEGAPIConfigureOcppResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIStartProtectionTripSelfTestRequest(): TEGAPIStartProtectionTripSelfTestRequest {
+  return {
+    testsToRun: [],
+    disableFieldLimits: false,
+    disableDisconnectOnFailure: false,
+    disableAbortOnFailure: false,
+    fastForwardToStepBeforeNominal: 0,
+    repetitions: 0,
+    disableInverterFastTrips: false,
+  };
+}
+
+export const TEGAPIStartProtectionTripSelfTestRequest: MessageFns<TEGAPIStartProtectionTripSelfTestRequest> = {
+  encode(message: TEGAPIStartProtectionTripSelfTestRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.testsToRun) {
+      writer.uint32(10).string(v!);
+    }
+    if (message.disableFieldLimits !== false) {
+      writer.uint32(16).bool(message.disableFieldLimits);
+    }
+    if (message.disableDisconnectOnFailure !== false) {
+      writer.uint32(24).bool(message.disableDisconnectOnFailure);
+    }
+    if (message.disableAbortOnFailure !== false) {
+      writer.uint32(32).bool(message.disableAbortOnFailure);
+    }
+    if (message.fastForwardToStepBeforeNominal !== 0) {
+      writer.uint32(40).uint32(message.fastForwardToStepBeforeNominal);
+    }
+    if (message.repetitions !== 0) {
+      writer.uint32(48).uint32(message.repetitions);
+    }
+    if (message.disableInverterFastTrips !== false) {
+      writer.uint32(56).bool(message.disableInverterFastTrips);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIStartProtectionTripSelfTestRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIStartProtectionTripSelfTestRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.testsToRun.push(reader.string());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.disableFieldLimits = reader.bool();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.disableDisconnectOnFailure = reader.bool();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.disableAbortOnFailure = reader.bool();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.fastForwardToStepBeforeNominal = reader.uint32();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.repetitions = reader.uint32();
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.disableInverterFastTrips = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIStartProtectionTripSelfTestRequest {
+    return {
+      testsToRun: globalThis.Array.isArray(object?.testsToRun)
+        ? object.testsToRun.map((e: any) => globalThis.String(e))
+        : [],
+      disableFieldLimits: isSet(object.disableFieldLimits) ? globalThis.Boolean(object.disableFieldLimits) : false,
+      disableDisconnectOnFailure: isSet(object.disableDisconnectOnFailure)
+        ? globalThis.Boolean(object.disableDisconnectOnFailure)
+        : false,
+      disableAbortOnFailure: isSet(object.disableAbortOnFailure)
+        ? globalThis.Boolean(object.disableAbortOnFailure)
+        : false,
+      fastForwardToStepBeforeNominal: isSet(object.fastForwardToStepBeforeNominal)
+        ? globalThis.Number(object.fastForwardToStepBeforeNominal)
+        : 0,
+      repetitions: isSet(object.repetitions) ? globalThis.Number(object.repetitions) : 0,
+      disableInverterFastTrips: isSet(object.disableInverterFastTrips)
+        ? globalThis.Boolean(object.disableInverterFastTrips)
+        : false,
+    };
+  },
+
+  toJSON(message: TEGAPIStartProtectionTripSelfTestRequest): unknown {
+    const obj: any = {};
+    if (message.testsToRun?.length) {
+      obj.testsToRun = message.testsToRun;
+    }
+    if (message.disableFieldLimits !== undefined) {
+      obj.disableFieldLimits = message.disableFieldLimits;
+    }
+    if (message.disableDisconnectOnFailure !== undefined) {
+      obj.disableDisconnectOnFailure = message.disableDisconnectOnFailure;
+    }
+    if (message.disableAbortOnFailure !== undefined) {
+      obj.disableAbortOnFailure = message.disableAbortOnFailure;
+    }
+    if (message.fastForwardToStepBeforeNominal !== undefined) {
+      obj.fastForwardToStepBeforeNominal = Math.round(message.fastForwardToStepBeforeNominal);
+    }
+    if (message.repetitions !== undefined) {
+      obj.repetitions = Math.round(message.repetitions);
+    }
+    if (message.disableInverterFastTrips !== undefined) {
+      obj.disableInverterFastTrips = message.disableInverterFastTrips;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIStartProtectionTripSelfTestRequest>, I>>(
+    base?: I,
+  ): TEGAPIStartProtectionTripSelfTestRequest {
+    return TEGAPIStartProtectionTripSelfTestRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIStartProtectionTripSelfTestRequest>, I>>(
+    object: I,
+  ): TEGAPIStartProtectionTripSelfTestRequest {
+    const message = createBaseTEGAPIStartProtectionTripSelfTestRequest();
+    message.testsToRun = object.testsToRun?.map((e) => e) || [];
+    message.disableFieldLimits = object.disableFieldLimits ?? false;
+    message.disableDisconnectOnFailure = object.disableDisconnectOnFailure ?? false;
+    message.disableAbortOnFailure = object.disableAbortOnFailure ?? false;
+    message.fastForwardToStepBeforeNominal = object.fastForwardToStepBeforeNominal ?? 0;
+    message.repetitions = object.repetitions ?? 0;
+    message.disableInverterFastTrips = object.disableInverterFastTrips ?? false;
+    return message;
+  },
+};
+
+function createBaseTEGAPIStartProtectionTripSelfTestResponse(): TEGAPIStartProtectionTripSelfTestResponse {
+  return {};
+}
+
+export const TEGAPIStartProtectionTripSelfTestResponse: MessageFns<TEGAPIStartProtectionTripSelfTestResponse> = {
+  encode(_: TEGAPIStartProtectionTripSelfTestResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIStartProtectionTripSelfTestResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIStartProtectionTripSelfTestResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIStartProtectionTripSelfTestResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIStartProtectionTripSelfTestResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIStartProtectionTripSelfTestResponse>, I>>(
+    base?: I,
+  ): TEGAPIStartProtectionTripSelfTestResponse {
+    return TEGAPIStartProtectionTripSelfTestResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIStartProtectionTripSelfTestResponse>, I>>(
+    _: I,
+  ): TEGAPIStartProtectionTripSelfTestResponse {
+    const message = createBaseTEGAPIStartProtectionTripSelfTestResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIStopProtectionTripSelfTestRequest(): TEGAPIStopProtectionTripSelfTestRequest {
+  return {};
+}
+
+export const TEGAPIStopProtectionTripSelfTestRequest: MessageFns<TEGAPIStopProtectionTripSelfTestRequest> = {
+  encode(_: TEGAPIStopProtectionTripSelfTestRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIStopProtectionTripSelfTestRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIStopProtectionTripSelfTestRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIStopProtectionTripSelfTestRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPIStopProtectionTripSelfTestRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIStopProtectionTripSelfTestRequest>, I>>(
+    base?: I,
+  ): TEGAPIStopProtectionTripSelfTestRequest {
+    return TEGAPIStopProtectionTripSelfTestRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIStopProtectionTripSelfTestRequest>, I>>(
+    _: I,
+  ): TEGAPIStopProtectionTripSelfTestRequest {
+    const message = createBaseTEGAPIStopProtectionTripSelfTestRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPIStopProtectionTripSelfTestResponse(): TEGAPIStopProtectionTripSelfTestResponse {
+  return {};
+}
+
+export const TEGAPIStopProtectionTripSelfTestResponse: MessageFns<TEGAPIStopProtectionTripSelfTestResponse> = {
+  encode(_: TEGAPIStopProtectionTripSelfTestResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIStopProtectionTripSelfTestResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIStopProtectionTripSelfTestResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIStopProtectionTripSelfTestResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIStopProtectionTripSelfTestResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIStopProtectionTripSelfTestResponse>, I>>(
+    base?: I,
+  ): TEGAPIStopProtectionTripSelfTestResponse {
+    return TEGAPIStopProtectionTripSelfTestResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIStopProtectionTripSelfTestResponse>, I>>(
+    _: I,
+  ): TEGAPIStopProtectionTripSelfTestResponse {
+    const message = createBaseTEGAPIStopProtectionTripSelfTestResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIProvisionEatonSmartBreakerRequest(): TEGAPIProvisionEatonSmartBreakerRequest {
+  return {
+    deviceId: "",
+    broadcastPrimaryUdpKey: new Uint8Array(0),
+    broadcastSecondaryUdpKey: new Uint8Array(0),
+    unicastPrimaryUdpKey: new Uint8Array(0),
+    unicastSecondaryUdpKey: new Uint8Array(0),
+  };
+}
+
+export const TEGAPIProvisionEatonSmartBreakerRequest: MessageFns<TEGAPIProvisionEatonSmartBreakerRequest> = {
+  encode(message: TEGAPIProvisionEatonSmartBreakerRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.deviceId !== "") {
+      writer.uint32(10).string(message.deviceId);
+    }
+    if (message.broadcastPrimaryUdpKey.length !== 0) {
+      writer.uint32(18).bytes(message.broadcastPrimaryUdpKey);
+    }
+    if (message.broadcastSecondaryUdpKey.length !== 0) {
+      writer.uint32(26).bytes(message.broadcastSecondaryUdpKey);
+    }
+    if (message.unicastPrimaryUdpKey.length !== 0) {
+      writer.uint32(34).bytes(message.unicastPrimaryUdpKey);
+    }
+    if (message.unicastSecondaryUdpKey.length !== 0) {
+      writer.uint32(42).bytes(message.unicastSecondaryUdpKey);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIProvisionEatonSmartBreakerRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIProvisionEatonSmartBreakerRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.deviceId = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.broadcastPrimaryUdpKey = reader.bytes();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.broadcastSecondaryUdpKey = reader.bytes();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.unicastPrimaryUdpKey = reader.bytes();
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.unicastSecondaryUdpKey = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIProvisionEatonSmartBreakerRequest {
+    return {
+      deviceId: isSet(object.deviceId) ? globalThis.String(object.deviceId) : "",
+      broadcastPrimaryUdpKey: isSet(object.broadcastPrimaryUdpKey)
+        ? bytesFromBase64(object.broadcastPrimaryUdpKey)
+        : new Uint8Array(0),
+      broadcastSecondaryUdpKey: isSet(object.broadcastSecondaryUdpKey)
+        ? bytesFromBase64(object.broadcastSecondaryUdpKey)
+        : new Uint8Array(0),
+      unicastPrimaryUdpKey: isSet(object.unicastPrimaryUdpKey)
+        ? bytesFromBase64(object.unicastPrimaryUdpKey)
+        : new Uint8Array(0),
+      unicastSecondaryUdpKey: isSet(object.unicastSecondaryUdpKey)
+        ? bytesFromBase64(object.unicastSecondaryUdpKey)
+        : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: TEGAPIProvisionEatonSmartBreakerRequest): unknown {
+    const obj: any = {};
+    if (message.deviceId !== undefined) {
+      obj.deviceId = message.deviceId;
+    }
+    if (message.broadcastPrimaryUdpKey !== undefined) {
+      obj.broadcastPrimaryUdpKey = base64FromBytes(message.broadcastPrimaryUdpKey);
+    }
+    if (message.broadcastSecondaryUdpKey !== undefined) {
+      obj.broadcastSecondaryUdpKey = base64FromBytes(message.broadcastSecondaryUdpKey);
+    }
+    if (message.unicastPrimaryUdpKey !== undefined) {
+      obj.unicastPrimaryUdpKey = base64FromBytes(message.unicastPrimaryUdpKey);
+    }
+    if (message.unicastSecondaryUdpKey !== undefined) {
+      obj.unicastSecondaryUdpKey = base64FromBytes(message.unicastSecondaryUdpKey);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIProvisionEatonSmartBreakerRequest>, I>>(
+    base?: I,
+  ): TEGAPIProvisionEatonSmartBreakerRequest {
+    return TEGAPIProvisionEatonSmartBreakerRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIProvisionEatonSmartBreakerRequest>, I>>(
+    object: I,
+  ): TEGAPIProvisionEatonSmartBreakerRequest {
+    const message = createBaseTEGAPIProvisionEatonSmartBreakerRequest();
+    message.deviceId = object.deviceId ?? "";
+    message.broadcastPrimaryUdpKey = object.broadcastPrimaryUdpKey ?? new Uint8Array(0);
+    message.broadcastSecondaryUdpKey = object.broadcastSecondaryUdpKey ?? new Uint8Array(0);
+    message.unicastPrimaryUdpKey = object.unicastPrimaryUdpKey ?? new Uint8Array(0);
+    message.unicastSecondaryUdpKey = object.unicastSecondaryUdpKey ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseTEGAPIProvisionEatonSmartBreakerResponse(): TEGAPIProvisionEatonSmartBreakerResponse {
+  return {};
+}
+
+export const TEGAPIProvisionEatonSmartBreakerResponse: MessageFns<TEGAPIProvisionEatonSmartBreakerResponse> = {
+  encode(_: TEGAPIProvisionEatonSmartBreakerResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIProvisionEatonSmartBreakerResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIProvisionEatonSmartBreakerResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIProvisionEatonSmartBreakerResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIProvisionEatonSmartBreakerResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIProvisionEatonSmartBreakerResponse>, I>>(
+    base?: I,
+  ): TEGAPIProvisionEatonSmartBreakerResponse {
+    return TEGAPIProvisionEatonSmartBreakerResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIProvisionEatonSmartBreakerResponse>, I>>(
+    _: I,
+  ): TEGAPIProvisionEatonSmartBreakerResponse {
+    const message = createBaseTEGAPIProvisionEatonSmartBreakerResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIIdentifyEatonSmartBreakerRequest(): TEGAPIIdentifyEatonSmartBreakerRequest {
+  return { deviceId: "" };
+}
+
+export const TEGAPIIdentifyEatonSmartBreakerRequest: MessageFns<TEGAPIIdentifyEatonSmartBreakerRequest> = {
+  encode(message: TEGAPIIdentifyEatonSmartBreakerRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.deviceId !== "") {
+      writer.uint32(10).string(message.deviceId);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIIdentifyEatonSmartBreakerRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIIdentifyEatonSmartBreakerRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.deviceId = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIIdentifyEatonSmartBreakerRequest {
+    return { deviceId: isSet(object.deviceId) ? globalThis.String(object.deviceId) : "" };
+  },
+
+  toJSON(message: TEGAPIIdentifyEatonSmartBreakerRequest): unknown {
+    const obj: any = {};
+    if (message.deviceId !== undefined) {
+      obj.deviceId = message.deviceId;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIIdentifyEatonSmartBreakerRequest>, I>>(
+    base?: I,
+  ): TEGAPIIdentifyEatonSmartBreakerRequest {
+    return TEGAPIIdentifyEatonSmartBreakerRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIIdentifyEatonSmartBreakerRequest>, I>>(
+    object: I,
+  ): TEGAPIIdentifyEatonSmartBreakerRequest {
+    const message = createBaseTEGAPIIdentifyEatonSmartBreakerRequest();
+    message.deviceId = object.deviceId ?? "";
+    return message;
+  },
+};
+
+function createBaseTEGAPIIdentifyEatonSmartBreakerResponse(): TEGAPIIdentifyEatonSmartBreakerResponse {
+  return {};
+}
+
+export const TEGAPIIdentifyEatonSmartBreakerResponse: MessageFns<TEGAPIIdentifyEatonSmartBreakerResponse> = {
+  encode(_: TEGAPIIdentifyEatonSmartBreakerResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIIdentifyEatonSmartBreakerResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIIdentifyEatonSmartBreakerResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIIdentifyEatonSmartBreakerResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIIdentifyEatonSmartBreakerResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIIdentifyEatonSmartBreakerResponse>, I>>(
+    base?: I,
+  ): TEGAPIIdentifyEatonSmartBreakerResponse {
+    return TEGAPIIdentifyEatonSmartBreakerResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIIdentifyEatonSmartBreakerResponse>, I>>(
+    _: I,
+  ): TEGAPIIdentifyEatonSmartBreakerResponse {
+    const message = createBaseTEGAPIIdentifyEatonSmartBreakerResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerPvacFanSelfTestRequest(): TEGAPITriggerPvacFanSelfTestRequest {
+  return { beid: 0 };
+}
+
+export const TEGAPITriggerPvacFanSelfTestRequest: MessageFns<TEGAPITriggerPvacFanSelfTestRequest> = {
+  encode(message: TEGAPITriggerPvacFanSelfTestRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.beid !== 0) {
+      writer.uint32(8).uint32(message.beid);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerPvacFanSelfTestRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerPvacFanSelfTestRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.beid = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPITriggerPvacFanSelfTestRequest {
+    return { beid: isSet(object.beid) ? globalThis.Number(object.beid) : 0 };
+  },
+
+  toJSON(message: TEGAPITriggerPvacFanSelfTestRequest): unknown {
+    const obj: any = {};
+    if (message.beid !== undefined) {
+      obj.beid = Math.round(message.beid);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerPvacFanSelfTestRequest>, I>>(
+    base?: I,
+  ): TEGAPITriggerPvacFanSelfTestRequest {
+    return TEGAPITriggerPvacFanSelfTestRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerPvacFanSelfTestRequest>, I>>(
+    object: I,
+  ): TEGAPITriggerPvacFanSelfTestRequest {
+    const message = createBaseTEGAPITriggerPvacFanSelfTestRequest();
+    message.beid = object.beid ?? 0;
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerPvacFanSelfTestResponse(): TEGAPITriggerPvacFanSelfTestResponse {
+  return {};
+}
+
+export const TEGAPITriggerPvacFanSelfTestResponse: MessageFns<TEGAPITriggerPvacFanSelfTestResponse> = {
+  encode(_: TEGAPITriggerPvacFanSelfTestResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerPvacFanSelfTestResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerPvacFanSelfTestResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerPvacFanSelfTestResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerPvacFanSelfTestResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerPvacFanSelfTestResponse>, I>>(
+    base?: I,
+  ): TEGAPITriggerPvacFanSelfTestResponse {
+    return TEGAPITriggerPvacFanSelfTestResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerPvacFanSelfTestResponse>, I>>(
+    _: I,
+  ): TEGAPITriggerPvacFanSelfTestResponse {
+    const message = createBaseTEGAPITriggerPvacFanSelfTestResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIProxyPrepareRegistrationPayloadRequest(): TEGAPIProxyPrepareRegistrationPayloadRequest {
+  return { request: undefined, targetDin: undefined };
+}
+
+export const TEGAPIProxyPrepareRegistrationPayloadRequest: MessageFns<TEGAPIProxyPrepareRegistrationPayloadRequest> = {
+  encode(
+    message: TEGAPIProxyPrepareRegistrationPayloadRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.request !== undefined) {
+      CommonAPIPrepareRegistrationPayloadRequest.encode(message.request, writer.uint32(10).fork()).join();
+    }
+    if (message.targetDin !== undefined) {
+      Din.encode(message.targetDin, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIProxyPrepareRegistrationPayloadRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIProxyPrepareRegistrationPayloadRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.request = CommonAPIPrepareRegistrationPayloadRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.targetDin = Din.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIProxyPrepareRegistrationPayloadRequest {
+    return {
+      request: isSet(object.request) ? CommonAPIPrepareRegistrationPayloadRequest.fromJSON(object.request) : undefined,
+      targetDin: isSet(object.targetDin) ? Din.fromJSON(object.targetDin) : undefined,
+    };
+  },
+
+  toJSON(message: TEGAPIProxyPrepareRegistrationPayloadRequest): unknown {
+    const obj: any = {};
+    if (message.request !== undefined) {
+      obj.request = CommonAPIPrepareRegistrationPayloadRequest.toJSON(message.request);
+    }
+    if (message.targetDin !== undefined) {
+      obj.targetDin = Din.toJSON(message.targetDin);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIProxyPrepareRegistrationPayloadRequest>, I>>(
+    base?: I,
+  ): TEGAPIProxyPrepareRegistrationPayloadRequest {
+    return TEGAPIProxyPrepareRegistrationPayloadRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIProxyPrepareRegistrationPayloadRequest>, I>>(
+    object: I,
+  ): TEGAPIProxyPrepareRegistrationPayloadRequest {
+    const message = createBaseTEGAPIProxyPrepareRegistrationPayloadRequest();
+    message.request = (object.request !== undefined && object.request !== null)
+      ? CommonAPIPrepareRegistrationPayloadRequest.fromPartial(object.request)
+      : undefined;
+    message.targetDin = (object.targetDin !== undefined && object.targetDin !== null)
+      ? Din.fromPartial(object.targetDin)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseTEGAPIProxyPrepareRegistrationPayloadResponse(): TEGAPIProxyPrepareRegistrationPayloadResponse {
+  return { response: undefined };
+}
+
+export const TEGAPIProxyPrepareRegistrationPayloadResponse: MessageFns<TEGAPIProxyPrepareRegistrationPayloadResponse> =
+  {
+    encode(
+      message: TEGAPIProxyPrepareRegistrationPayloadResponse,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.response !== undefined) {
+        CommonAPIPrepareRegistrationPayloadResponse.encode(message.response, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
+
+    decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIProxyPrepareRegistrationPayloadResponse {
+      const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseTEGAPIProxyPrepareRegistrationPayloadResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.response = CommonAPIPrepareRegistrationPayloadResponse.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): TEGAPIProxyPrepareRegistrationPayloadResponse {
+      return {
+        response: isSet(object.response)
+          ? CommonAPIPrepareRegistrationPayloadResponse.fromJSON(object.response)
+          : undefined,
+      };
+    },
+
+    toJSON(message: TEGAPIProxyPrepareRegistrationPayloadResponse): unknown {
+      const obj: any = {};
+      if (message.response !== undefined) {
+        obj.response = CommonAPIPrepareRegistrationPayloadResponse.toJSON(message.response);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<TEGAPIProxyPrepareRegistrationPayloadResponse>, I>>(
+      base?: I,
+    ): TEGAPIProxyPrepareRegistrationPayloadResponse {
+      return TEGAPIProxyPrepareRegistrationPayloadResponse.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<TEGAPIProxyPrepareRegistrationPayloadResponse>, I>>(
+      object: I,
+    ): TEGAPIProxyPrepareRegistrationPayloadResponse {
+      const message = createBaseTEGAPIProxyPrepareRegistrationPayloadResponse();
+      message.response = (object.response !== undefined && object.response !== null)
+        ? CommonAPIPrepareRegistrationPayloadResponse.fromPartial(object.response)
+        : undefined;
+      return message;
+    },
+  };
+
+function createBaseTEGAPITriggerWallboxVehicleAbsentSelfTestRequest(): TEGAPITriggerWallboxVehicleAbsentSelfTestRequest {
+  return {};
+}
+
+export const TEGAPITriggerWallboxVehicleAbsentSelfTestRequest: MessageFns<
+  TEGAPITriggerWallboxVehicleAbsentSelfTestRequest
+> = {
+  encode(_: TEGAPITriggerWallboxVehicleAbsentSelfTestRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerWallboxVehicleAbsentSelfTestRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerWallboxVehicleAbsentSelfTestRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerWallboxVehicleAbsentSelfTestRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerWallboxVehicleAbsentSelfTestRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerWallboxVehicleAbsentSelfTestRequest>, I>>(
+    base?: I,
+  ): TEGAPITriggerWallboxVehicleAbsentSelfTestRequest {
+    return TEGAPITriggerWallboxVehicleAbsentSelfTestRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerWallboxVehicleAbsentSelfTestRequest>, I>>(
+    _: I,
+  ): TEGAPITriggerWallboxVehicleAbsentSelfTestRequest {
+    const message = createBaseTEGAPITriggerWallboxVehicleAbsentSelfTestRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPITriggerWallboxVehicleAbsentSelfTestResponse(): TEGAPITriggerWallboxVehicleAbsentSelfTestResponse {
+  return {};
+}
+
+export const TEGAPITriggerWallboxVehicleAbsentSelfTestResponse: MessageFns<
+  TEGAPITriggerWallboxVehicleAbsentSelfTestResponse
+> = {
+  encode(
+    _: TEGAPITriggerWallboxVehicleAbsentSelfTestResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPITriggerWallboxVehicleAbsentSelfTestResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPITriggerWallboxVehicleAbsentSelfTestResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPITriggerWallboxVehicleAbsentSelfTestResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPITriggerWallboxVehicleAbsentSelfTestResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPITriggerWallboxVehicleAbsentSelfTestResponse>, I>>(
+    base?: I,
+  ): TEGAPITriggerWallboxVehicleAbsentSelfTestResponse {
+    return TEGAPITriggerWallboxVehicleAbsentSelfTestResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPITriggerWallboxVehicleAbsentSelfTestResponse>, I>>(
+    _: I,
+  ): TEGAPITriggerWallboxVehicleAbsentSelfTestResponse {
+    const message = createBaseTEGAPITriggerWallboxVehicleAbsentSelfTestResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPICustomerResetRequest(): TEGAPICustomerResetRequest {
+  return {};
+}
+
+export const TEGAPICustomerResetRequest: MessageFns<TEGAPICustomerResetRequest> = {
+  encode(_: TEGAPICustomerResetRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPICustomerResetRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPICustomerResetRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPICustomerResetRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPICustomerResetRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPICustomerResetRequest>, I>>(base?: I): TEGAPICustomerResetRequest {
+    return TEGAPICustomerResetRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPICustomerResetRequest>, I>>(_: I): TEGAPICustomerResetRequest {
+    const message = createBaseTEGAPICustomerResetRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPICustomerResetResponse(): TEGAPICustomerResetResponse {
+  return {};
+}
+
+export const TEGAPICustomerResetResponse: MessageFns<TEGAPICustomerResetResponse> = {
+  encode(_: TEGAPICustomerResetResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPICustomerResetResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPICustomerResetResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPICustomerResetResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPICustomerResetResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPICustomerResetResponse>, I>>(base?: I): TEGAPICustomerResetResponse {
+    return TEGAPICustomerResetResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPICustomerResetResponse>, I>>(_: I): TEGAPICustomerResetResponse {
+    const message = createBaseTEGAPICustomerResetResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIDelayBatteryCalibrationRequest(): TEGAPIDelayBatteryCalibrationRequest {
+  return { delayHours: 0 };
+}
+
+export const TEGAPIDelayBatteryCalibrationRequest: MessageFns<TEGAPIDelayBatteryCalibrationRequest> = {
+  encode(message: TEGAPIDelayBatteryCalibrationRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.delayHours !== 0) {
+      writer.uint32(8).uint32(message.delayHours);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIDelayBatteryCalibrationRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIDelayBatteryCalibrationRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.delayHours = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIDelayBatteryCalibrationRequest {
+    return { delayHours: isSet(object.delayHours) ? globalThis.Number(object.delayHours) : 0 };
+  },
+
+  toJSON(message: TEGAPIDelayBatteryCalibrationRequest): unknown {
+    const obj: any = {};
+    if (message.delayHours !== undefined) {
+      obj.delayHours = Math.round(message.delayHours);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIDelayBatteryCalibrationRequest>, I>>(
+    base?: I,
+  ): TEGAPIDelayBatteryCalibrationRequest {
+    return TEGAPIDelayBatteryCalibrationRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIDelayBatteryCalibrationRequest>, I>>(
+    object: I,
+  ): TEGAPIDelayBatteryCalibrationRequest {
+    const message = createBaseTEGAPIDelayBatteryCalibrationRequest();
+    message.delayHours = object.delayHours ?? 0;
+    return message;
+  },
+};
+
+function createBaseTEGAPIDelayBatteryCalibrationResponse(): TEGAPIDelayBatteryCalibrationResponse {
+  return {};
+}
+
+export const TEGAPIDelayBatteryCalibrationResponse: MessageFns<TEGAPIDelayBatteryCalibrationResponse> = {
+  encode(_: TEGAPIDelayBatteryCalibrationResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIDelayBatteryCalibrationResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIDelayBatteryCalibrationResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIDelayBatteryCalibrationResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIDelayBatteryCalibrationResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIDelayBatteryCalibrationResponse>, I>>(
+    base?: I,
+  ): TEGAPIDelayBatteryCalibrationResponse {
+    return TEGAPIDelayBatteryCalibrationResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIDelayBatteryCalibrationResponse>, I>>(
+    _: I,
+  ): TEGAPIDelayBatteryCalibrationResponse {
+    const message = createBaseTEGAPIDelayBatteryCalibrationResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIGetDelayBatteryCalibrationStatusRequest(): TEGAPIGetDelayBatteryCalibrationStatusRequest {
+  return {};
+}
+
+export const TEGAPIGetDelayBatteryCalibrationStatusRequest: MessageFns<TEGAPIGetDelayBatteryCalibrationStatusRequest> =
+  {
+    encode(_: TEGAPIGetDelayBatteryCalibrationStatusRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+      return writer;
+    },
+
+    decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIGetDelayBatteryCalibrationStatusRequest {
+      const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseTEGAPIGetDelayBatteryCalibrationStatusRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(_: any): TEGAPIGetDelayBatteryCalibrationStatusRequest {
+      return {};
+    },
+
+    toJSON(_: TEGAPIGetDelayBatteryCalibrationStatusRequest): unknown {
+      const obj: any = {};
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<TEGAPIGetDelayBatteryCalibrationStatusRequest>, I>>(
+      base?: I,
+    ): TEGAPIGetDelayBatteryCalibrationStatusRequest {
+      return TEGAPIGetDelayBatteryCalibrationStatusRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<TEGAPIGetDelayBatteryCalibrationStatusRequest>, I>>(
+      _: I,
+    ): TEGAPIGetDelayBatteryCalibrationStatusRequest {
+      const message = createBaseTEGAPIGetDelayBatteryCalibrationStatusRequest();
+      return message;
+    },
+  };
+
+function createBaseTEGAPIGetDelayBatteryCalibrationStatusResponse(): TEGAPIGetDelayBatteryCalibrationStatusResponse {
+  return { calibrationDelaysLeft: 0, calibrationDelayRemainingSeconds: 0, maxCalibrationDelays: 0 };
+}
+
+export const TEGAPIGetDelayBatteryCalibrationStatusResponse: MessageFns<
+  TEGAPIGetDelayBatteryCalibrationStatusResponse
+> = {
+  encode(
+    message: TEGAPIGetDelayBatteryCalibrationStatusResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.calibrationDelaysLeft !== 0) {
+      writer.uint32(8).uint32(message.calibrationDelaysLeft);
+    }
+    if (message.calibrationDelayRemainingSeconds !== 0) {
+      writer.uint32(16).uint32(message.calibrationDelayRemainingSeconds);
+    }
+    if (message.maxCalibrationDelays !== 0) {
+      writer.uint32(24).uint32(message.maxCalibrationDelays);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIGetDelayBatteryCalibrationStatusResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIGetDelayBatteryCalibrationStatusResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.calibrationDelaysLeft = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.calibrationDelayRemainingSeconds = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.maxCalibrationDelays = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIGetDelayBatteryCalibrationStatusResponse {
+    return {
+      calibrationDelaysLeft: isSet(object.calibrationDelaysLeft) ? globalThis.Number(object.calibrationDelaysLeft) : 0,
+      calibrationDelayRemainingSeconds: isSet(object.calibrationDelayRemainingSeconds)
+        ? globalThis.Number(object.calibrationDelayRemainingSeconds)
+        : 0,
+      maxCalibrationDelays: isSet(object.maxCalibrationDelays) ? globalThis.Number(object.maxCalibrationDelays) : 0,
+    };
+  },
+
+  toJSON(message: TEGAPIGetDelayBatteryCalibrationStatusResponse): unknown {
+    const obj: any = {};
+    if (message.calibrationDelaysLeft !== undefined) {
+      obj.calibrationDelaysLeft = Math.round(message.calibrationDelaysLeft);
+    }
+    if (message.calibrationDelayRemainingSeconds !== undefined) {
+      obj.calibrationDelayRemainingSeconds = Math.round(message.calibrationDelayRemainingSeconds);
+    }
+    if (message.maxCalibrationDelays !== undefined) {
+      obj.maxCalibrationDelays = Math.round(message.maxCalibrationDelays);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIGetDelayBatteryCalibrationStatusResponse>, I>>(
+    base?: I,
+  ): TEGAPIGetDelayBatteryCalibrationStatusResponse {
+    return TEGAPIGetDelayBatteryCalibrationStatusResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIGetDelayBatteryCalibrationStatusResponse>, I>>(
+    object: I,
+  ): TEGAPIGetDelayBatteryCalibrationStatusResponse {
+    const message = createBaseTEGAPIGetDelayBatteryCalibrationStatusResponse();
+    message.calibrationDelaysLeft = object.calibrationDelaysLeft ?? 0;
+    message.calibrationDelayRemainingSeconds = object.calibrationDelayRemainingSeconds ?? 0;
+    message.maxCalibrationDelays = object.maxCalibrationDelays ?? 0;
+    return message;
+  },
+};
+
+function createBaseControllableDeviceProgramKey(): ControllableDeviceProgramKey {
+  return { deviceId: "", priority: 0 };
+}
+
+export const ControllableDeviceProgramKey: MessageFns<ControllableDeviceProgramKey> = {
+  encode(message: ControllableDeviceProgramKey, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.deviceId !== "") {
+      writer.uint32(10).string(message.deviceId);
+    }
+    if (message.priority !== 0) {
+      writer.uint32(16).int32(message.priority);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ControllableDeviceProgramKey {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseControllableDeviceProgramKey();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.deviceId = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.priority = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ControllableDeviceProgramKey {
+    return {
+      deviceId: isSet(object.deviceId) ? globalThis.String(object.deviceId) : "",
+      priority: isSet(object.priority) ? controllableDeviceProgramKey_PriorityFromJSON(object.priority) : 0,
+    };
+  },
+
+  toJSON(message: ControllableDeviceProgramKey): unknown {
+    const obj: any = {};
+    if (message.deviceId !== undefined) {
+      obj.deviceId = message.deviceId;
+    }
+    if (message.priority !== undefined) {
+      obj.priority = controllableDeviceProgramKey_PriorityToJSON(message.priority);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ControllableDeviceProgramKey>, I>>(base?: I): ControllableDeviceProgramKey {
+    return ControllableDeviceProgramKey.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ControllableDeviceProgramKey>, I>>(object: I): ControllableDeviceProgramKey {
+    const message = createBaseControllableDeviceProgramKey();
+    message.deviceId = object.deviceId ?? "";
+    message.priority = object.priority ?? 0;
+    return message;
+  },
+};
+
+function createBaseControllableDeviceProgramSettings(): ControllableDeviceProgramSettings {
+  return { contactorState: 0 };
+}
+
+export const ControllableDeviceProgramSettings: MessageFns<ControllableDeviceProgramSettings> = {
+  encode(message: ControllableDeviceProgramSettings, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.contactorState !== 0) {
+      writer.uint32(8).int32(message.contactorState);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ControllableDeviceProgramSettings {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseControllableDeviceProgramSettings();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.contactorState = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ControllableDeviceProgramSettings {
+    return {
+      contactorState: isSet(object.contactorState)
+        ? controllableDeviceProgramSettings_ContactorStateFromJSON(object.contactorState)
+        : 0,
+    };
+  },
+
+  toJSON(message: ControllableDeviceProgramSettings): unknown {
+    const obj: any = {};
+    if (message.contactorState !== undefined) {
+      obj.contactorState = controllableDeviceProgramSettings_ContactorStateToJSON(message.contactorState);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ControllableDeviceProgramSettings>, I>>(
+    base?: I,
+  ): ControllableDeviceProgramSettings {
+    return ControllableDeviceProgramSettings.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ControllableDeviceProgramSettings>, I>>(
+    object: I,
+  ): ControllableDeviceProgramSettings {
+    const message = createBaseControllableDeviceProgramSettings();
+    message.contactorState = object.contactorState ?? 0;
+    return message;
+  },
+};
+
+function createBaseControllableDeviceProgramScheduleBoundary(): ControllableDeviceProgramScheduleBoundary {
+  return { staticCondition: 0, timestamp: undefined, islandingState: 0, stateOfEnergy: 0 };
+}
+
+export const ControllableDeviceProgramScheduleBoundary: MessageFns<ControllableDeviceProgramScheduleBoundary> = {
+  encode(message: ControllableDeviceProgramScheduleBoundary, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.staticCondition !== 0) {
+      writer.uint32(8).int32(message.staticCondition);
+    }
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(18).fork()).join();
+    }
+    if (message.islandingState !== 0) {
+      writer.uint32(24).int32(message.islandingState);
+    }
+    if (message.stateOfEnergy !== 0) {
+      writer.uint32(32).int32(message.stateOfEnergy);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ControllableDeviceProgramScheduleBoundary {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseControllableDeviceProgramScheduleBoundary();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.staticCondition = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.islandingState = reader.int32() as any;
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.stateOfEnergy = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ControllableDeviceProgramScheduleBoundary {
+    return {
+      staticCondition: isSet(object.staticCondition)
+        ? controllableDeviceProgramScheduleBoundary_StaticConditionFromJSON(object.staticCondition)
+        : 0,
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      islandingState: isSet(object.islandingState)
+        ? controllableDeviceProgramScheduleBoundary_IslandingStateFromJSON(object.islandingState)
+        : 0,
+      stateOfEnergy: isSet(object.stateOfEnergy)
+        ? controllableDeviceProgramScheduleBoundary_StateOfEnergyFromJSON(object.stateOfEnergy)
+        : 0,
+    };
+  },
+
+  toJSON(message: ControllableDeviceProgramScheduleBoundary): unknown {
+    const obj: any = {};
+    if (message.staticCondition !== undefined) {
+      obj.staticCondition = controllableDeviceProgramScheduleBoundary_StaticConditionToJSON(message.staticCondition);
+    }
+    if (message.timestamp !== undefined) {
+      obj.timestamp = message.timestamp.toISOString();
+    }
+    if (message.islandingState !== undefined) {
+      obj.islandingState = controllableDeviceProgramScheduleBoundary_IslandingStateToJSON(message.islandingState);
+    }
+    if (message.stateOfEnergy !== undefined) {
+      obj.stateOfEnergy = controllableDeviceProgramScheduleBoundary_StateOfEnergyToJSON(message.stateOfEnergy);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ControllableDeviceProgramScheduleBoundary>, I>>(
+    base?: I,
+  ): ControllableDeviceProgramScheduleBoundary {
+    return ControllableDeviceProgramScheduleBoundary.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ControllableDeviceProgramScheduleBoundary>, I>>(
+    object: I,
+  ): ControllableDeviceProgramScheduleBoundary {
+    const message = createBaseControllableDeviceProgramScheduleBoundary();
+    message.staticCondition = object.staticCondition ?? 0;
+    message.timestamp = object.timestamp ?? undefined;
+    message.islandingState = object.islandingState ?? 0;
+    message.stateOfEnergy = object.stateOfEnergy ?? 0;
+    return message;
+  },
+};
+
+function createBaseControllableDeviceProgramSchedule(): ControllableDeviceProgramSchedule {
+  return { start: undefined, end: undefined, expiry: undefined };
+}
+
+export const ControllableDeviceProgramSchedule: MessageFns<ControllableDeviceProgramSchedule> = {
+  encode(message: ControllableDeviceProgramSchedule, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.start !== undefined) {
+      Timestamp.encode(toTimestamp(message.start), writer.uint32(10).fork()).join();
+    }
+    if (message.end !== undefined) {
+      Timestamp.encode(toTimestamp(message.end), writer.uint32(18).fork()).join();
+    }
+    if (message.expiry !== undefined) {
+      Timestamp.encode(toTimestamp(message.expiry), writer.uint32(26).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ControllableDeviceProgramSchedule {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseControllableDeviceProgramSchedule();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.start = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.end = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.expiry = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ControllableDeviceProgramSchedule {
+    return {
+      start: isSet(object.start) ? fromJsonTimestamp(object.start) : undefined,
+      end: isSet(object.end) ? fromJsonTimestamp(object.end) : undefined,
+      expiry: isSet(object.expiry) ? fromJsonTimestamp(object.expiry) : undefined,
+    };
+  },
+
+  toJSON(message: ControllableDeviceProgramSchedule): unknown {
+    const obj: any = {};
+    if (message.start !== undefined) {
+      obj.start = message.start.toISOString();
+    }
+    if (message.end !== undefined) {
+      obj.end = message.end.toISOString();
+    }
+    if (message.expiry !== undefined) {
+      obj.expiry = message.expiry.toISOString();
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ControllableDeviceProgramSchedule>, I>>(
+    base?: I,
+  ): ControllableDeviceProgramSchedule {
+    return ControllableDeviceProgramSchedule.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ControllableDeviceProgramSchedule>, I>>(
+    object: I,
+  ): ControllableDeviceProgramSchedule {
+    const message = createBaseControllableDeviceProgramSchedule();
+    message.start = object.start ?? undefined;
+    message.end = object.end ?? undefined;
+    message.expiry = object.expiry ?? undefined;
+    return message;
+  },
+};
+
+function createBaseControllableDeviceProgram(): ControllableDeviceProgram {
+  return { key: undefined, settings: undefined, schedule: undefined };
+}
+
+export const ControllableDeviceProgram: MessageFns<ControllableDeviceProgram> = {
+  encode(message: ControllableDeviceProgram, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.key !== undefined) {
+      ControllableDeviceProgramKey.encode(message.key, writer.uint32(10).fork()).join();
+    }
+    if (message.settings !== undefined) {
+      ControllableDeviceProgramSettings.encode(message.settings, writer.uint32(18).fork()).join();
+    }
+    if (message.schedule !== undefined) {
+      ControllableDeviceProgramSchedule.encode(message.schedule, writer.uint32(26).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ControllableDeviceProgram {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseControllableDeviceProgram();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.key = ControllableDeviceProgramKey.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.settings = ControllableDeviceProgramSettings.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.schedule = ControllableDeviceProgramSchedule.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ControllableDeviceProgram {
+    return {
+      key: isSet(object.key) ? ControllableDeviceProgramKey.fromJSON(object.key) : undefined,
+      settings: isSet(object.settings) ? ControllableDeviceProgramSettings.fromJSON(object.settings) : undefined,
+      schedule: isSet(object.schedule) ? ControllableDeviceProgramSchedule.fromJSON(object.schedule) : undefined,
+    };
+  },
+
+  toJSON(message: ControllableDeviceProgram): unknown {
+    const obj: any = {};
+    if (message.key !== undefined) {
+      obj.key = ControllableDeviceProgramKey.toJSON(message.key);
+    }
+    if (message.settings !== undefined) {
+      obj.settings = ControllableDeviceProgramSettings.toJSON(message.settings);
+    }
+    if (message.schedule !== undefined) {
+      obj.schedule = ControllableDeviceProgramSchedule.toJSON(message.schedule);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ControllableDeviceProgram>, I>>(base?: I): ControllableDeviceProgram {
+    return ControllableDeviceProgram.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ControllableDeviceProgram>, I>>(object: I): ControllableDeviceProgram {
+    const message = createBaseControllableDeviceProgram();
+    message.key = (object.key !== undefined && object.key !== null)
+      ? ControllableDeviceProgramKey.fromPartial(object.key)
+      : undefined;
+    message.settings = (object.settings !== undefined && object.settings !== null)
+      ? ControllableDeviceProgramSettings.fromPartial(object.settings)
+      : undefined;
+    message.schedule = (object.schedule !== undefined && object.schedule !== null)
+      ? ControllableDeviceProgramSchedule.fromPartial(object.schedule)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseTEGAPIGetControllableDeviceProgramsRequest(): TEGAPIGetControllableDeviceProgramsRequest {
+  return { deviceIds: [] };
+}
+
+export const TEGAPIGetControllableDeviceProgramsRequest: MessageFns<TEGAPIGetControllableDeviceProgramsRequest> = {
+  encode(message: TEGAPIGetControllableDeviceProgramsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.deviceIds) {
+      writer.uint32(10).string(v!);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIGetControllableDeviceProgramsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIGetControllableDeviceProgramsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.deviceIds.push(reader.string());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIGetControllableDeviceProgramsRequest {
+    return {
+      deviceIds: globalThis.Array.isArray(object?.deviceIds)
+        ? object.deviceIds.map((e: any) => globalThis.String(e))
+        : [],
+    };
+  },
+
+  toJSON(message: TEGAPIGetControllableDeviceProgramsRequest): unknown {
+    const obj: any = {};
+    if (message.deviceIds?.length) {
+      obj.deviceIds = message.deviceIds;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIGetControllableDeviceProgramsRequest>, I>>(
+    base?: I,
+  ): TEGAPIGetControllableDeviceProgramsRequest {
+    return TEGAPIGetControllableDeviceProgramsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIGetControllableDeviceProgramsRequest>, I>>(
+    object: I,
+  ): TEGAPIGetControllableDeviceProgramsRequest {
+    const message = createBaseTEGAPIGetControllableDeviceProgramsRequest();
+    message.deviceIds = object.deviceIds?.map((e) => e) || [];
+    return message;
+  },
+};
+
+function createBaseTEGAPIGetControllableDeviceProgramsResponse(): TEGAPIGetControllableDeviceProgramsResponse {
+  return { activePrograms: [], inactivePrograms: [] };
+}
+
+export const TEGAPIGetControllableDeviceProgramsResponse: MessageFns<TEGAPIGetControllableDeviceProgramsResponse> = {
+  encode(
+    message: TEGAPIGetControllableDeviceProgramsResponse,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    for (const v of message.activePrograms) {
+      ControllableDeviceProgram.encode(v!, writer.uint32(10).fork()).join();
+    }
+    for (const v of message.inactivePrograms) {
+      ControllableDeviceProgram.encode(v!, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIGetControllableDeviceProgramsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIGetControllableDeviceProgramsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.activePrograms.push(ControllableDeviceProgram.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.inactivePrograms.push(ControllableDeviceProgram.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIGetControllableDeviceProgramsResponse {
+    return {
+      activePrograms: globalThis.Array.isArray(object?.activePrograms)
+        ? object.activePrograms.map((e: any) => ControllableDeviceProgram.fromJSON(e))
+        : [],
+      inactivePrograms: globalThis.Array.isArray(object?.inactivePrograms)
+        ? object.inactivePrograms.map((e: any) => ControllableDeviceProgram.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: TEGAPIGetControllableDeviceProgramsResponse): unknown {
+    const obj: any = {};
+    if (message.activePrograms?.length) {
+      obj.activePrograms = message.activePrograms.map((e) => ControllableDeviceProgram.toJSON(e));
+    }
+    if (message.inactivePrograms?.length) {
+      obj.inactivePrograms = message.inactivePrograms.map((e) => ControllableDeviceProgram.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIGetControllableDeviceProgramsResponse>, I>>(
+    base?: I,
+  ): TEGAPIGetControllableDeviceProgramsResponse {
+    return TEGAPIGetControllableDeviceProgramsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIGetControllableDeviceProgramsResponse>, I>>(
+    object: I,
+  ): TEGAPIGetControllableDeviceProgramsResponse {
+    const message = createBaseTEGAPIGetControllableDeviceProgramsResponse();
+    message.activePrograms = object.activePrograms?.map((e) => ControllableDeviceProgram.fromPartial(e)) || [];
+    message.inactivePrograms = object.inactivePrograms?.map((e) => ControllableDeviceProgram.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseTEGAPIUpdateControllableDeviceProgramsRequest(): TEGAPIUpdateControllableDeviceProgramsRequest {
+  return { updatedPrograms: [] };
+}
+
+export const TEGAPIUpdateControllableDeviceProgramsRequest: MessageFns<TEGAPIUpdateControllableDeviceProgramsRequest> =
+  {
+    encode(
+      message: TEGAPIUpdateControllableDeviceProgramsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.updatedPrograms) {
+        ControllableDeviceProgram.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
+
+    decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIUpdateControllableDeviceProgramsRequest {
+      const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseTEGAPIUpdateControllableDeviceProgramsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.updatedPrograms.push(ControllableDeviceProgram.decode(reader, reader.uint32()));
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): TEGAPIUpdateControllableDeviceProgramsRequest {
+      return {
+        updatedPrograms: globalThis.Array.isArray(object?.updatedPrograms)
+          ? object.updatedPrograms.map((e: any) => ControllableDeviceProgram.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: TEGAPIUpdateControllableDeviceProgramsRequest): unknown {
+      const obj: any = {};
+      if (message.updatedPrograms?.length) {
+        obj.updatedPrograms = message.updatedPrograms.map((e) => ControllableDeviceProgram.toJSON(e));
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<TEGAPIUpdateControllableDeviceProgramsRequest>, I>>(
+      base?: I,
+    ): TEGAPIUpdateControllableDeviceProgramsRequest {
+      return TEGAPIUpdateControllableDeviceProgramsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<TEGAPIUpdateControllableDeviceProgramsRequest>, I>>(
+      object: I,
+    ): TEGAPIUpdateControllableDeviceProgramsRequest {
+      const message = createBaseTEGAPIUpdateControllableDeviceProgramsRequest();
+      message.updatedPrograms = object.updatedPrograms?.map((e) => ControllableDeviceProgram.fromPartial(e)) || [];
+      return message;
+    },
+  };
+
+function createBaseTEGAPIUpdateControllableDeviceProgramsResponse(): TEGAPIUpdateControllableDeviceProgramsResponse {
+  return {};
+}
+
+export const TEGAPIUpdateControllableDeviceProgramsResponse: MessageFns<
+  TEGAPIUpdateControllableDeviceProgramsResponse
+> = {
+  encode(_: TEGAPIUpdateControllableDeviceProgramsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIUpdateControllableDeviceProgramsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIUpdateControllableDeviceProgramsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIUpdateControllableDeviceProgramsResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIUpdateControllableDeviceProgramsResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIUpdateControllableDeviceProgramsResponse>, I>>(
+    base?: I,
+  ): TEGAPIUpdateControllableDeviceProgramsResponse {
+    return TEGAPIUpdateControllableDeviceProgramsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIUpdateControllableDeviceProgramsResponse>, I>>(
+    _: I,
+  ): TEGAPIUpdateControllableDeviceProgramsResponse {
+    const message = createBaseTEGAPIUpdateControllableDeviceProgramsResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIDeleteControllableDeviceProgramsRequest(): TEGAPIDeleteControllableDeviceProgramsRequest {
+  return { deletionKeys: [] };
+}
+
+export const TEGAPIDeleteControllableDeviceProgramsRequest: MessageFns<TEGAPIDeleteControllableDeviceProgramsRequest> =
+  {
+    encode(
+      message: TEGAPIDeleteControllableDeviceProgramsRequest,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      for (const v of message.deletionKeys) {
+        writer.uint32(18).string(v!);
+      }
+      return writer;
+    },
+
+    decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIDeleteControllableDeviceProgramsRequest {
+      const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseTEGAPIDeleteControllableDeviceProgramsRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
+
+            message.deletionKeys.push(reader.string());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): TEGAPIDeleteControllableDeviceProgramsRequest {
+      return {
+        deletionKeys: globalThis.Array.isArray(object?.deletionKeys)
+          ? object.deletionKeys.map((e: any) => globalThis.String(e))
+          : [],
+      };
+    },
+
+    toJSON(message: TEGAPIDeleteControllableDeviceProgramsRequest): unknown {
+      const obj: any = {};
+      if (message.deletionKeys?.length) {
+        obj.deletionKeys = message.deletionKeys;
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<TEGAPIDeleteControllableDeviceProgramsRequest>, I>>(
+      base?: I,
+    ): TEGAPIDeleteControllableDeviceProgramsRequest {
+      return TEGAPIDeleteControllableDeviceProgramsRequest.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<TEGAPIDeleteControllableDeviceProgramsRequest>, I>>(
+      object: I,
+    ): TEGAPIDeleteControllableDeviceProgramsRequest {
+      const message = createBaseTEGAPIDeleteControllableDeviceProgramsRequest();
+      message.deletionKeys = object.deletionKeys?.map((e) => e) || [];
+      return message;
+    },
+  };
+
+function createBaseTEGAPIDeleteControllableDeviceProgramsResponse(): TEGAPIDeleteControllableDeviceProgramsResponse {
+  return {};
+}
+
+export const TEGAPIDeleteControllableDeviceProgramsResponse: MessageFns<
+  TEGAPIDeleteControllableDeviceProgramsResponse
+> = {
+  encode(_: TEGAPIDeleteControllableDeviceProgramsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIDeleteControllableDeviceProgramsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIDeleteControllableDeviceProgramsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIDeleteControllableDeviceProgramsResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIDeleteControllableDeviceProgramsResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIDeleteControllableDeviceProgramsResponse>, I>>(
+    base?: I,
+  ): TEGAPIDeleteControllableDeviceProgramsResponse {
+    return TEGAPIDeleteControllableDeviceProgramsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIDeleteControllableDeviceProgramsResponse>, I>>(
+    _: I,
+  ): TEGAPIDeleteControllableDeviceProgramsResponse {
+    const message = createBaseTEGAPIDeleteControllableDeviceProgramsResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIClearPowerwall3LockoutAlertsRequest(): TEGAPIClearPowerwall3LockoutAlertsRequest {
+  return { din: "" };
+}
+
+export const TEGAPIClearPowerwall3LockoutAlertsRequest: MessageFns<TEGAPIClearPowerwall3LockoutAlertsRequest> = {
+  encode(message: TEGAPIClearPowerwall3LockoutAlertsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.din !== "") {
+      writer.uint32(10).string(message.din);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIClearPowerwall3LockoutAlertsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIClearPowerwall3LockoutAlertsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.din = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): TEGAPIClearPowerwall3LockoutAlertsRequest {
+    return { din: isSet(object.din) ? globalThis.String(object.din) : "" };
+  },
+
+  toJSON(message: TEGAPIClearPowerwall3LockoutAlertsRequest): unknown {
+    const obj: any = {};
+    if (message.din !== undefined) {
+      obj.din = message.din;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIClearPowerwall3LockoutAlertsRequest>, I>>(
+    base?: I,
+  ): TEGAPIClearPowerwall3LockoutAlertsRequest {
+    return TEGAPIClearPowerwall3LockoutAlertsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIClearPowerwall3LockoutAlertsRequest>, I>>(
+    object: I,
+  ): TEGAPIClearPowerwall3LockoutAlertsRequest {
+    const message = createBaseTEGAPIClearPowerwall3LockoutAlertsRequest();
+    message.din = object.din ?? "";
+    return message;
+  },
+};
+
+function createBaseTEGAPIClearPowerwall3LockoutAlertsResponse(): TEGAPIClearPowerwall3LockoutAlertsResponse {
+  return {};
+}
+
+export const TEGAPIClearPowerwall3LockoutAlertsResponse: MessageFns<TEGAPIClearPowerwall3LockoutAlertsResponse> = {
+  encode(_: TEGAPIClearPowerwall3LockoutAlertsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIClearPowerwall3LockoutAlertsResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIClearPowerwall3LockoutAlertsResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIClearPowerwall3LockoutAlertsResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIClearPowerwall3LockoutAlertsResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIClearPowerwall3LockoutAlertsResponse>, I>>(
+    base?: I,
+  ): TEGAPIClearPowerwall3LockoutAlertsResponse {
+    return TEGAPIClearPowerwall3LockoutAlertsResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIClearPowerwall3LockoutAlertsResponse>, I>>(
+    _: I,
+  ): TEGAPIClearPowerwall3LockoutAlertsResponse {
+    const message = createBaseTEGAPIClearPowerwall3LockoutAlertsResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIRetrieveSiteUuidRequest(): TEGAPIRetrieveSiteUuidRequest {
+  return {};
+}
+
+export const TEGAPIRetrieveSiteUuidRequest: MessageFns<TEGAPIRetrieveSiteUuidRequest> = {
+  encode(_: TEGAPIRetrieveSiteUuidRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIRetrieveSiteUuidRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIRetrieveSiteUuidRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIRetrieveSiteUuidRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPIRetrieveSiteUuidRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIRetrieveSiteUuidRequest>, I>>(base?: I): TEGAPIRetrieveSiteUuidRequest {
+    return TEGAPIRetrieveSiteUuidRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIRetrieveSiteUuidRequest>, I>>(_: I): TEGAPIRetrieveSiteUuidRequest {
+    const message = createBaseTEGAPIRetrieveSiteUuidRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPIRetrieveSiteUuidResponse(): TEGAPIRetrieveSiteUuidResponse {
+  return {};
+}
+
+export const TEGAPIRetrieveSiteUuidResponse: MessageFns<TEGAPIRetrieveSiteUuidResponse> = {
+  encode(_: TEGAPIRetrieveSiteUuidResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIRetrieveSiteUuidResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIRetrieveSiteUuidResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIRetrieveSiteUuidResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIRetrieveSiteUuidResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIRetrieveSiteUuidResponse>, I>>(base?: I): TEGAPIRetrieveSiteUuidResponse {
+    return TEGAPIRetrieveSiteUuidResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIRetrieveSiteUuidResponse>, I>>(_: I): TEGAPIRetrieveSiteUuidResponse {
+    const message = createBaseTEGAPIRetrieveSiteUuidResponse();
+    return message;
+  },
+};
+
+function createBaseTEGAPIRetrieveSiteSuggestionRequest(): TEGAPIRetrieveSiteSuggestionRequest {
+  return {};
+}
+
+export const TEGAPIRetrieveSiteSuggestionRequest: MessageFns<TEGAPIRetrieveSiteSuggestionRequest> = {
+  encode(_: TEGAPIRetrieveSiteSuggestionRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIRetrieveSiteSuggestionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIRetrieveSiteSuggestionRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIRetrieveSiteSuggestionRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPIRetrieveSiteSuggestionRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIRetrieveSiteSuggestionRequest>, I>>(
+    base?: I,
+  ): TEGAPIRetrieveSiteSuggestionRequest {
+    return TEGAPIRetrieveSiteSuggestionRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIRetrieveSiteSuggestionRequest>, I>>(
+    _: I,
+  ): TEGAPIRetrieveSiteSuggestionRequest {
+    const message = createBaseTEGAPIRetrieveSiteSuggestionRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPIRetrieveSiteSuggestionResponse(): TEGAPIRetrieveSiteSuggestionResponse {
+  return {};
+}
+
+export const TEGAPIRetrieveSiteSuggestionResponse: MessageFns<TEGAPIRetrieveSiteSuggestionResponse> = {
+  encode(_: TEGAPIRetrieveSiteSuggestionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIRetrieveSiteSuggestionResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIRetrieveSiteSuggestionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIRetrieveSiteSuggestionResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIRetrieveSiteSuggestionResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIRetrieveSiteSuggestionResponse>, I>>(
+    base?: I,
+  ): TEGAPIRetrieveSiteSuggestionResponse {
+    return TEGAPIRetrieveSiteSuggestionResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIRetrieveSiteSuggestionResponse>, I>>(
+    _: I,
+  ): TEGAPIRetrieveSiteSuggestionResponse {
+    const message = createBaseTEGAPIRetrieveSiteSuggestionResponse();
     return message;
   },
 };
 
 function createBaseTEGMessages(): TEGMessages {
   return {
+    getConfigRequest: undefined,
+    getConfigResponse: undefined,
+    setIslandModeRequest: undefined,
+    setIslandModeResponse: undefined,
+    triggerIslandingBlackStartRequest: undefined,
+    triggerIslandingBlackStartResponse: undefined,
+    triggerAssetManifestUploadRequest: undefined,
+    triggerAssetManifestUploadResponse: undefined,
+    triggerPowerwall2EnumerationRequest: undefined,
+    triggerPowerwall2EnumerationResponse: undefined,
+    triggerEsCanFirmwareUpdateRequest: undefined,
+    triggerEsCanFirmwareUpdateResponse: undefined,
+    registerRequest: undefined,
+    registerResponse: undefined,
+    triggerPowerwall2PhaseDetectionRequest: undefined,
+    triggerPowerwall2PhaseDetectionResponse: undefined,
+    resetPowerwall2PhaseDetectionRequest: undefined,
+    resetPowerwall2PhaseDetectionResponse: undefined,
+    forceWifiScanRequest: undefined,
+    forceWifiScanResponse: undefined,
+    startPowerwall2InverterSelfTestsRequest: undefined,
+    startPowerwall2InverterSelfTestsResponse: undefined,
+    stopPowerwall2InverterSelfTestsRequest: undefined,
+    stopPowerwall2InverterSelfTestsResponse: undefined,
+    startPowerwall2BubbleShedRequest: undefined,
+    startPowerwall2BubbleShedResponse: undefined,
+    clearSolarInverterAlertsRequest: undefined,
+    clearSolarInverterAlertsResponse: undefined,
+    getWifiConfigWithCredentialsRequest: undefined,
+    getWifiConfigWithCredentialsResponse: undefined,
+    disableBatteriesRequest: undefined,
+    disableBatteriesResponse: undefined,
+    triggerPW3CanFirmwareUpdateRequest: undefined,
+    triggerPW3CanFirmwareUpdateResponse: undefined,
+    triggerPowerwall3EnumerationRequest: undefined,
+    triggerPowerwall3EnumerationResponse: undefined,
+    dispatchBatteryPowerRequest: undefined,
+    dispatchBatteryPowerResponse: undefined,
+    detectWiredMetersRequest: undefined,
+    detectWiredMetersResponse: undefined,
+    bypassBatterySoeAdjustmentConstraintsRequest: undefined,
+    bypassBatterySoeAdjustmentConstraintsResponse: undefined,
+    ensureCertificateRequest: undefined,
+    ensureCertificateResponse: undefined,
     scheduleManualBackupEventRequest: undefined,
     scheduleManualBackupEventResponse: undefined,
     cancelManualBackupEventRequest: undefined,
     cancelManualBackupEventResponse: undefined,
     getBackupEventsRequest: undefined,
     getBackupEventsResponse: undefined,
+    getCsmsPropertiesRequest: undefined,
+    getCsmsPropertiesResponse: undefined,
+    configureOcppRequest: undefined,
+    configureOcppResponse: undefined,
+    retrieveSiteUuidRequest: undefined,
+    retrieveSiteUuidResponse: undefined,
+    retrieveSiteSuggestionRequest: undefined,
+    retrieveSiteSuggestionResponse: undefined,
+    startProtectionTripSelfTestRequest: undefined,
+    startProtectionTripSelfTestResponse: undefined,
+    stopProtectionTripSelfTestRequest: undefined,
+    stopProtectionTripSelfTestResponse: undefined,
+    provisionEatonSmartBreakerRequest: undefined,
+    provisionEatonSmartBreakerResponse: undefined,
+    identifyEatonSmartBreakerRequest: undefined,
+    identifyEatonSmartBreakerResponse: undefined,
+    triggerPvacFanSelfTestRequest: undefined,
+    triggerPvacFanSelfTestResponse: undefined,
+    proxyPrepareRegistrationPayloadRequest: undefined,
+    proxyPrepareRegistrationPayloadResponse: undefined,
+    triggerWallboxVehicleAbsentSelfTestRequest: undefined,
+    triggerWallboxVehicleAbsentSelfTestResponse: undefined,
+    customerResetRequest: undefined,
+    customerResetResponse: undefined,
+    delayBatteryCalibrationRequest: undefined,
+    delayBatteryCalibrationResponse: undefined,
+    getDelayBatteryCalibrationStatusRequest: undefined,
+    getDelayBatteryCalibrationStatusResponse: undefined,
+    getControllableDeviceProgramsRequest: undefined,
+    getControllableDeviceProgramsResponse: undefined,
+    updateControllableDeviceProgramsRequest: undefined,
+    updateControllableDeviceProgramsResponse: undefined,
+    deleteControllableDeviceProgramsRequest: undefined,
+    deleteControllableDeviceProgramsResponse: undefined,
+    clearPowerwall3LockoutAlertsRequest: undefined,
+    clearPowerwall3LockoutAlertsResponse: undefined,
   };
 }
 
 export const TEGMessages: MessageFns<TEGMessages> = {
   encode(message: TEGMessages, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.getConfigRequest !== undefined) {
+      TEGAPIGetConfigRequest.encode(message.getConfigRequest, writer.uint32(10).fork()).join();
+    }
+    if (message.getConfigResponse !== undefined) {
+      TEGAPIGetConfigResponse.encode(message.getConfigResponse, writer.uint32(18).fork()).join();
+    }
+    if (message.setIslandModeRequest !== undefined) {
+      TEGAPISetIslandModeRequest.encode(message.setIslandModeRequest, writer.uint32(26).fork()).join();
+    }
+    if (message.setIslandModeResponse !== undefined) {
+      TEGAPISetIslandModeResponse.encode(message.setIslandModeResponse, writer.uint32(34).fork()).join();
+    }
+    if (message.triggerIslandingBlackStartRequest !== undefined) {
+      TEGAPITriggerIslandingBlackStartRequest.encode(
+        message.triggerIslandingBlackStartRequest,
+        writer.uint32(42).fork(),
+      ).join();
+    }
+    if (message.triggerIslandingBlackStartResponse !== undefined) {
+      TEGAPITriggerIslandingBlackStartResponse.encode(
+        message.triggerIslandingBlackStartResponse,
+        writer.uint32(50).fork(),
+      ).join();
+    }
+    if (message.triggerAssetManifestUploadRequest !== undefined) {
+      TEGAPITriggerAssetManifestUploadRequest.encode(
+        message.triggerAssetManifestUploadRequest,
+        writer.uint32(58).fork(),
+      ).join();
+    }
+    if (message.triggerAssetManifestUploadResponse !== undefined) {
+      TEGAPITriggerAssetManifestUploadResponse.encode(
+        message.triggerAssetManifestUploadResponse,
+        writer.uint32(66).fork(),
+      ).join();
+    }
+    if (message.triggerPowerwall2EnumerationRequest !== undefined) {
+      TEGAPITriggerPowerwall2EnumerationRequest.encode(
+        message.triggerPowerwall2EnumerationRequest,
+        writer.uint32(74).fork(),
+      ).join();
+    }
+    if (message.triggerPowerwall2EnumerationResponse !== undefined) {
+      TEGAPITriggerPowerwall2EnumerationResponse.encode(
+        message.triggerPowerwall2EnumerationResponse,
+        writer.uint32(82).fork(),
+      ).join();
+    }
+    if (message.triggerEsCanFirmwareUpdateRequest !== undefined) {
+      TEGAPITriggerEsCanFirmwareUpdateRequest.encode(
+        message.triggerEsCanFirmwareUpdateRequest,
+        writer.uint32(90).fork(),
+      ).join();
+    }
+    if (message.triggerEsCanFirmwareUpdateResponse !== undefined) {
+      TEGAPITriggerEsCanFirmwareUpdateResponse.encode(
+        message.triggerEsCanFirmwareUpdateResponse,
+        writer.uint32(98).fork(),
+      ).join();
+    }
+    if (message.registerRequest !== undefined) {
+      TEGAPIRegisterRequest.encode(message.registerRequest, writer.uint32(106).fork()).join();
+    }
+    if (message.registerResponse !== undefined) {
+      TEGAPIRegisterResponse.encode(message.registerResponse, writer.uint32(114).fork()).join();
+    }
+    if (message.triggerPowerwall2PhaseDetectionRequest !== undefined) {
+      TEGAPITriggerPowerwall2PhaseDetectionRequest.encode(
+        message.triggerPowerwall2PhaseDetectionRequest,
+        writer.uint32(122).fork(),
+      ).join();
+    }
+    if (message.triggerPowerwall2PhaseDetectionResponse !== undefined) {
+      TEGAPITriggerPowerwall2PhaseDetectionResponse.encode(
+        message.triggerPowerwall2PhaseDetectionResponse,
+        writer.uint32(130).fork(),
+      ).join();
+    }
+    if (message.resetPowerwall2PhaseDetectionRequest !== undefined) {
+      TEGAPIResetPowerwall2PhaseDetectionRequest.encode(
+        message.resetPowerwall2PhaseDetectionRequest,
+        writer.uint32(138).fork(),
+      ).join();
+    }
+    if (message.resetPowerwall2PhaseDetectionResponse !== undefined) {
+      TEGAPIResetPowerwall2PhaseDetectionResponse.encode(
+        message.resetPowerwall2PhaseDetectionResponse,
+        writer.uint32(146).fork(),
+      ).join();
+    }
+    if (message.forceWifiScanRequest !== undefined) {
+      TEGAPIForceWifiScanRequest.encode(message.forceWifiScanRequest, writer.uint32(154).fork()).join();
+    }
+    if (message.forceWifiScanResponse !== undefined) {
+      TEGAPIForceWifiScanResponse.encode(message.forceWifiScanResponse, writer.uint32(162).fork()).join();
+    }
+    if (message.startPowerwall2InverterSelfTestsRequest !== undefined) {
+      TEGAPIStartPowerwall2InverterSelfTestsRequest.encode(
+        message.startPowerwall2InverterSelfTestsRequest,
+        writer.uint32(170).fork(),
+      ).join();
+    }
+    if (message.startPowerwall2InverterSelfTestsResponse !== undefined) {
+      TEGAPIStartPowerwall2InverterSelfTestsResponse.encode(
+        message.startPowerwall2InverterSelfTestsResponse,
+        writer.uint32(178).fork(),
+      ).join();
+    }
+    if (message.stopPowerwall2InverterSelfTestsRequest !== undefined) {
+      TEGAPIStopPowerwall2InverterSelfTestsRequest.encode(
+        message.stopPowerwall2InverterSelfTestsRequest,
+        writer.uint32(186).fork(),
+      ).join();
+    }
+    if (message.stopPowerwall2InverterSelfTestsResponse !== undefined) {
+      TEGAPIStopPowerwall2InverterSelfTestsResponse.encode(
+        message.stopPowerwall2InverterSelfTestsResponse,
+        writer.uint32(194).fork(),
+      ).join();
+    }
+    if (message.startPowerwall2BubbleShedRequest !== undefined) {
+      TEGAPIStartPowerwall2BubbleShedRequest.encode(message.startPowerwall2BubbleShedRequest, writer.uint32(202).fork())
+        .join();
+    }
+    if (message.startPowerwall2BubbleShedResponse !== undefined) {
+      TEGAPIStartPowerwall2BubbleShedResponse.encode(
+        message.startPowerwall2BubbleShedResponse,
+        writer.uint32(210).fork(),
+      ).join();
+    }
+    if (message.clearSolarInverterAlertsRequest !== undefined) {
+      TEGAPIClearSolarInverterAlertsRequest.encode(message.clearSolarInverterAlertsRequest, writer.uint32(218).fork())
+        .join();
+    }
+    if (message.clearSolarInverterAlertsResponse !== undefined) {
+      TEGAPIClearSolarInverterAlertsResponse.encode(message.clearSolarInverterAlertsResponse, writer.uint32(226).fork())
+        .join();
+    }
+    if (message.getWifiConfigWithCredentialsRequest !== undefined) {
+      TEGAPIGetWifiConfigWithCredentialsRequest.encode(
+        message.getWifiConfigWithCredentialsRequest,
+        writer.uint32(234).fork(),
+      ).join();
+    }
+    if (message.getWifiConfigWithCredentialsResponse !== undefined) {
+      TEGAPIGetWifiConfigWithCredentialsResponse.encode(
+        message.getWifiConfigWithCredentialsResponse,
+        writer.uint32(242).fork(),
+      ).join();
+    }
+    if (message.disableBatteriesRequest !== undefined) {
+      TEGAPIDisableBatteriesRequest.encode(message.disableBatteriesRequest, writer.uint32(250).fork()).join();
+    }
+    if (message.disableBatteriesResponse !== undefined) {
+      TEGAPIDisableBatteriesResponse.encode(message.disableBatteriesResponse, writer.uint32(258).fork()).join();
+    }
+    if (message.triggerPW3CanFirmwareUpdateRequest !== undefined) {
+      TEGAPITriggerPW3CanFirmwareUpdateRequest.encode(
+        message.triggerPW3CanFirmwareUpdateRequest,
+        writer.uint32(266).fork(),
+      ).join();
+    }
+    if (message.triggerPW3CanFirmwareUpdateResponse !== undefined) {
+      TEGAPITriggerPW3CanFirmwareUpdateResponse.encode(
+        message.triggerPW3CanFirmwareUpdateResponse,
+        writer.uint32(274).fork(),
+      ).join();
+    }
+    if (message.triggerPowerwall3EnumerationRequest !== undefined) {
+      TEGAPITriggerPowerwall3EnumerationRequest.encode(
+        message.triggerPowerwall3EnumerationRequest,
+        writer.uint32(282).fork(),
+      ).join();
+    }
+    if (message.triggerPowerwall3EnumerationResponse !== undefined) {
+      TEGAPITriggerPowerwall3EnumerationResponse.encode(
+        message.triggerPowerwall3EnumerationResponse,
+        writer.uint32(290).fork(),
+      ).join();
+    }
+    if (message.dispatchBatteryPowerRequest !== undefined) {
+      TEGAPIDispatchBatteryPowerRequest.encode(message.dispatchBatteryPowerRequest, writer.uint32(298).fork()).join();
+    }
+    if (message.dispatchBatteryPowerResponse !== undefined) {
+      TEGAPIDispatchBatteryPowerResponse.encode(message.dispatchBatteryPowerResponse, writer.uint32(306).fork()).join();
+    }
+    if (message.detectWiredMetersRequest !== undefined) {
+      TEGAPIDetectWiredMetersRequest.encode(message.detectWiredMetersRequest, writer.uint32(314).fork()).join();
+    }
+    if (message.detectWiredMetersResponse !== undefined) {
+      TEGAPIDetectWiredMetersResponse.encode(message.detectWiredMetersResponse, writer.uint32(322).fork()).join();
+    }
+    if (message.bypassBatterySoeAdjustmentConstraintsRequest !== undefined) {
+      TEGAPIBypassBatterySoeAdjustmentConstraintsRequest.encode(
+        message.bypassBatterySoeAdjustmentConstraintsRequest,
+        writer.uint32(330).fork(),
+      ).join();
+    }
+    if (message.bypassBatterySoeAdjustmentConstraintsResponse !== undefined) {
+      TEGAPIBypassBatterySoeAdjustmentConstraintsResponse.encode(
+        message.bypassBatterySoeAdjustmentConstraintsResponse,
+        writer.uint32(338).fork(),
+      ).join();
+    }
+    if (message.ensureCertificateRequest !== undefined) {
+      TEGAPIEnsureCertificateRequest.encode(message.ensureCertificateRequest, writer.uint32(346).fork()).join();
+    }
+    if (message.ensureCertificateResponse !== undefined) {
+      TEGAPIEnsureCertificateResponse.encode(message.ensureCertificateResponse, writer.uint32(354).fork()).join();
+    }
     if (message.scheduleManualBackupEventRequest !== undefined) {
       TEGAPIScheduleManualBackupEventRequest.encode(message.scheduleManualBackupEventRequest, writer.uint32(362).fork())
         .join();
@@ -853,6 +7942,184 @@ export const TEGMessages: MessageFns<TEGMessages> = {
     if (message.getBackupEventsResponse !== undefined) {
       TEGAPIGetBackupEventsResponse.encode(message.getBackupEventsResponse, writer.uint32(402).fork()).join();
     }
+    if (message.getCsmsPropertiesRequest !== undefined) {
+      TEGAPIGetCsmsPropertiesRequest.encode(message.getCsmsPropertiesRequest, writer.uint32(410).fork()).join();
+    }
+    if (message.getCsmsPropertiesResponse !== undefined) {
+      TEGAPIGetCsmsPropertiesResponse.encode(message.getCsmsPropertiesResponse, writer.uint32(418).fork()).join();
+    }
+    if (message.configureOcppRequest !== undefined) {
+      TEGAPIConfigureOcppRequest.encode(message.configureOcppRequest, writer.uint32(426).fork()).join();
+    }
+    if (message.configureOcppResponse !== undefined) {
+      TEGAPIConfigureOcppResponse.encode(message.configureOcppResponse, writer.uint32(434).fork()).join();
+    }
+    if (message.retrieveSiteUuidRequest !== undefined) {
+      TEGAPIRetrieveSiteUuidRequest.encode(message.retrieveSiteUuidRequest, writer.uint32(442).fork()).join();
+    }
+    if (message.retrieveSiteUuidResponse !== undefined) {
+      TEGAPIRetrieveSiteUuidResponse.encode(message.retrieveSiteUuidResponse, writer.uint32(450).fork()).join();
+    }
+    if (message.retrieveSiteSuggestionRequest !== undefined) {
+      TEGAPIRetrieveSiteSuggestionRequest.encode(message.retrieveSiteSuggestionRequest, writer.uint32(458).fork())
+        .join();
+    }
+    if (message.retrieveSiteSuggestionResponse !== undefined) {
+      TEGAPIRetrieveSiteSuggestionResponse.encode(message.retrieveSiteSuggestionResponse, writer.uint32(466).fork())
+        .join();
+    }
+    if (message.startProtectionTripSelfTestRequest !== undefined) {
+      TEGAPIStartProtectionTripSelfTestRequest.encode(
+        message.startProtectionTripSelfTestRequest,
+        writer.uint32(474).fork(),
+      ).join();
+    }
+    if (message.startProtectionTripSelfTestResponse !== undefined) {
+      TEGAPIStartProtectionTripSelfTestResponse.encode(
+        message.startProtectionTripSelfTestResponse,
+        writer.uint32(482).fork(),
+      ).join();
+    }
+    if (message.stopProtectionTripSelfTestRequest !== undefined) {
+      TEGAPIStopProtectionTripSelfTestRequest.encode(
+        message.stopProtectionTripSelfTestRequest,
+        writer.uint32(490).fork(),
+      ).join();
+    }
+    if (message.stopProtectionTripSelfTestResponse !== undefined) {
+      TEGAPIStopProtectionTripSelfTestResponse.encode(
+        message.stopProtectionTripSelfTestResponse,
+        writer.uint32(498).fork(),
+      ).join();
+    }
+    if (message.provisionEatonSmartBreakerRequest !== undefined) {
+      TEGAPIProvisionEatonSmartBreakerRequest.encode(
+        message.provisionEatonSmartBreakerRequest,
+        writer.uint32(506).fork(),
+      ).join();
+    }
+    if (message.provisionEatonSmartBreakerResponse !== undefined) {
+      TEGAPIProvisionEatonSmartBreakerResponse.encode(
+        message.provisionEatonSmartBreakerResponse,
+        writer.uint32(514).fork(),
+      ).join();
+    }
+    if (message.identifyEatonSmartBreakerRequest !== undefined) {
+      TEGAPIIdentifyEatonSmartBreakerRequest.encode(message.identifyEatonSmartBreakerRequest, writer.uint32(522).fork())
+        .join();
+    }
+    if (message.identifyEatonSmartBreakerResponse !== undefined) {
+      TEGAPIIdentifyEatonSmartBreakerResponse.encode(
+        message.identifyEatonSmartBreakerResponse,
+        writer.uint32(530).fork(),
+      ).join();
+    }
+    if (message.triggerPvacFanSelfTestRequest !== undefined) {
+      TEGAPITriggerPvacFanSelfTestRequest.encode(message.triggerPvacFanSelfTestRequest, writer.uint32(538).fork())
+        .join();
+    }
+    if (message.triggerPvacFanSelfTestResponse !== undefined) {
+      TEGAPITriggerPvacFanSelfTestResponse.encode(message.triggerPvacFanSelfTestResponse, writer.uint32(546).fork())
+        .join();
+    }
+    if (message.proxyPrepareRegistrationPayloadRequest !== undefined) {
+      TEGAPIProxyPrepareRegistrationPayloadRequest.encode(
+        message.proxyPrepareRegistrationPayloadRequest,
+        writer.uint32(554).fork(),
+      ).join();
+    }
+    if (message.proxyPrepareRegistrationPayloadResponse !== undefined) {
+      TEGAPIProxyPrepareRegistrationPayloadResponse.encode(
+        message.proxyPrepareRegistrationPayloadResponse,
+        writer.uint32(562).fork(),
+      ).join();
+    }
+    if (message.triggerWallboxVehicleAbsentSelfTestRequest !== undefined) {
+      TEGAPITriggerWallboxVehicleAbsentSelfTestRequest.encode(
+        message.triggerWallboxVehicleAbsentSelfTestRequest,
+        writer.uint32(570).fork(),
+      ).join();
+    }
+    if (message.triggerWallboxVehicleAbsentSelfTestResponse !== undefined) {
+      TEGAPITriggerWallboxVehicleAbsentSelfTestResponse.encode(
+        message.triggerWallboxVehicleAbsentSelfTestResponse,
+        writer.uint32(578).fork(),
+      ).join();
+    }
+    if (message.customerResetRequest !== undefined) {
+      TEGAPICustomerResetRequest.encode(message.customerResetRequest, writer.uint32(586).fork()).join();
+    }
+    if (message.customerResetResponse !== undefined) {
+      TEGAPICustomerResetResponse.encode(message.customerResetResponse, writer.uint32(594).fork()).join();
+    }
+    if (message.delayBatteryCalibrationRequest !== undefined) {
+      TEGAPIDelayBatteryCalibrationRequest.encode(message.delayBatteryCalibrationRequest, writer.uint32(602).fork())
+        .join();
+    }
+    if (message.delayBatteryCalibrationResponse !== undefined) {
+      TEGAPIDelayBatteryCalibrationResponse.encode(message.delayBatteryCalibrationResponse, writer.uint32(610).fork())
+        .join();
+    }
+    if (message.getDelayBatteryCalibrationStatusRequest !== undefined) {
+      TEGAPIGetDelayBatteryCalibrationStatusRequest.encode(
+        message.getDelayBatteryCalibrationStatusRequest,
+        writer.uint32(618).fork(),
+      ).join();
+    }
+    if (message.getDelayBatteryCalibrationStatusResponse !== undefined) {
+      TEGAPIGetDelayBatteryCalibrationStatusResponse.encode(
+        message.getDelayBatteryCalibrationStatusResponse,
+        writer.uint32(626).fork(),
+      ).join();
+    }
+    if (message.getControllableDeviceProgramsRequest !== undefined) {
+      TEGAPIGetControllableDeviceProgramsRequest.encode(
+        message.getControllableDeviceProgramsRequest,
+        writer.uint32(634).fork(),
+      ).join();
+    }
+    if (message.getControllableDeviceProgramsResponse !== undefined) {
+      TEGAPIGetControllableDeviceProgramsResponse.encode(
+        message.getControllableDeviceProgramsResponse,
+        writer.uint32(642).fork(),
+      ).join();
+    }
+    if (message.updateControllableDeviceProgramsRequest !== undefined) {
+      TEGAPIUpdateControllableDeviceProgramsRequest.encode(
+        message.updateControllableDeviceProgramsRequest,
+        writer.uint32(650).fork(),
+      ).join();
+    }
+    if (message.updateControllableDeviceProgramsResponse !== undefined) {
+      TEGAPIUpdateControllableDeviceProgramsResponse.encode(
+        message.updateControllableDeviceProgramsResponse,
+        writer.uint32(658).fork(),
+      ).join();
+    }
+    if (message.deleteControllableDeviceProgramsRequest !== undefined) {
+      TEGAPIDeleteControllableDeviceProgramsRequest.encode(
+        message.deleteControllableDeviceProgramsRequest,
+        writer.uint32(666).fork(),
+      ).join();
+    }
+    if (message.deleteControllableDeviceProgramsResponse !== undefined) {
+      TEGAPIDeleteControllableDeviceProgramsResponse.encode(
+        message.deleteControllableDeviceProgramsResponse,
+        writer.uint32(674).fork(),
+      ).join();
+    }
+    if (message.clearPowerwall3LockoutAlertsRequest !== undefined) {
+      TEGAPIClearPowerwall3LockoutAlertsRequest.encode(
+        message.clearPowerwall3LockoutAlertsRequest,
+        writer.uint32(682).fork(),
+      ).join();
+    }
+    if (message.clearPowerwall3LockoutAlertsResponse !== undefined) {
+      TEGAPIClearPowerwall3LockoutAlertsResponse.encode(
+        message.clearPowerwall3LockoutAlertsResponse,
+        writer.uint32(690).fork(),
+      ).join();
+    }
     return writer;
   },
 
@@ -863,6 +8130,438 @@ export const TEGMessages: MessageFns<TEGMessages> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.getConfigRequest = TEGAPIGetConfigRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.getConfigResponse = TEGAPIGetConfigResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.setIslandModeRequest = TEGAPISetIslandModeRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.setIslandModeResponse = TEGAPISetIslandModeResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.triggerIslandingBlackStartRequest = TEGAPITriggerIslandingBlackStartRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.triggerIslandingBlackStartResponse = TEGAPITriggerIslandingBlackStartResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.triggerAssetManifestUploadRequest = TEGAPITriggerAssetManifestUploadRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.triggerAssetManifestUploadResponse = TEGAPITriggerAssetManifestUploadResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.triggerPowerwall2EnumerationRequest = TEGAPITriggerPowerwall2EnumerationRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.triggerPowerwall2EnumerationResponse = TEGAPITriggerPowerwall2EnumerationResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.triggerEsCanFirmwareUpdateRequest = TEGAPITriggerEsCanFirmwareUpdateRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 12: {
+          if (tag !== 98) {
+            break;
+          }
+
+          message.triggerEsCanFirmwareUpdateResponse = TEGAPITriggerEsCanFirmwareUpdateResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 13: {
+          if (tag !== 106) {
+            break;
+          }
+
+          message.registerRequest = TEGAPIRegisterRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 14: {
+          if (tag !== 114) {
+            break;
+          }
+
+          message.registerResponse = TEGAPIRegisterResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 15: {
+          if (tag !== 122) {
+            break;
+          }
+
+          message.triggerPowerwall2PhaseDetectionRequest = TEGAPITriggerPowerwall2PhaseDetectionRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 16: {
+          if (tag !== 130) {
+            break;
+          }
+
+          message.triggerPowerwall2PhaseDetectionResponse = TEGAPITriggerPowerwall2PhaseDetectionResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 17: {
+          if (tag !== 138) {
+            break;
+          }
+
+          message.resetPowerwall2PhaseDetectionRequest = TEGAPIResetPowerwall2PhaseDetectionRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 18: {
+          if (tag !== 146) {
+            break;
+          }
+
+          message.resetPowerwall2PhaseDetectionResponse = TEGAPIResetPowerwall2PhaseDetectionResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 19: {
+          if (tag !== 154) {
+            break;
+          }
+
+          message.forceWifiScanRequest = TEGAPIForceWifiScanRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 20: {
+          if (tag !== 162) {
+            break;
+          }
+
+          message.forceWifiScanResponse = TEGAPIForceWifiScanResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 21: {
+          if (tag !== 170) {
+            break;
+          }
+
+          message.startPowerwall2InverterSelfTestsRequest = TEGAPIStartPowerwall2InverterSelfTestsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 22: {
+          if (tag !== 178) {
+            break;
+          }
+
+          message.startPowerwall2InverterSelfTestsResponse = TEGAPIStartPowerwall2InverterSelfTestsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 23: {
+          if (tag !== 186) {
+            break;
+          }
+
+          message.stopPowerwall2InverterSelfTestsRequest = TEGAPIStopPowerwall2InverterSelfTestsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 24: {
+          if (tag !== 194) {
+            break;
+          }
+
+          message.stopPowerwall2InverterSelfTestsResponse = TEGAPIStopPowerwall2InverterSelfTestsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 25: {
+          if (tag !== 202) {
+            break;
+          }
+
+          message.startPowerwall2BubbleShedRequest = TEGAPIStartPowerwall2BubbleShedRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 26: {
+          if (tag !== 210) {
+            break;
+          }
+
+          message.startPowerwall2BubbleShedResponse = TEGAPIStartPowerwall2BubbleShedResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 27: {
+          if (tag !== 218) {
+            break;
+          }
+
+          message.clearSolarInverterAlertsRequest = TEGAPIClearSolarInverterAlertsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 28: {
+          if (tag !== 226) {
+            break;
+          }
+
+          message.clearSolarInverterAlertsResponse = TEGAPIClearSolarInverterAlertsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 29: {
+          if (tag !== 234) {
+            break;
+          }
+
+          message.getWifiConfigWithCredentialsRequest = TEGAPIGetWifiConfigWithCredentialsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 30: {
+          if (tag !== 242) {
+            break;
+          }
+
+          message.getWifiConfigWithCredentialsResponse = TEGAPIGetWifiConfigWithCredentialsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 31: {
+          if (tag !== 250) {
+            break;
+          }
+
+          message.disableBatteriesRequest = TEGAPIDisableBatteriesRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 32: {
+          if (tag !== 258) {
+            break;
+          }
+
+          message.disableBatteriesResponse = TEGAPIDisableBatteriesResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 33: {
+          if (tag !== 266) {
+            break;
+          }
+
+          message.triggerPW3CanFirmwareUpdateRequest = TEGAPITriggerPW3CanFirmwareUpdateRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 34: {
+          if (tag !== 274) {
+            break;
+          }
+
+          message.triggerPW3CanFirmwareUpdateResponse = TEGAPITriggerPW3CanFirmwareUpdateResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 35: {
+          if (tag !== 282) {
+            break;
+          }
+
+          message.triggerPowerwall3EnumerationRequest = TEGAPITriggerPowerwall3EnumerationRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 36: {
+          if (tag !== 290) {
+            break;
+          }
+
+          message.triggerPowerwall3EnumerationResponse = TEGAPITriggerPowerwall3EnumerationResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 37: {
+          if (tag !== 298) {
+            break;
+          }
+
+          message.dispatchBatteryPowerRequest = TEGAPIDispatchBatteryPowerRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 38: {
+          if (tag !== 306) {
+            break;
+          }
+
+          message.dispatchBatteryPowerResponse = TEGAPIDispatchBatteryPowerResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 39: {
+          if (tag !== 314) {
+            break;
+          }
+
+          message.detectWiredMetersRequest = TEGAPIDetectWiredMetersRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 40: {
+          if (tag !== 322) {
+            break;
+          }
+
+          message.detectWiredMetersResponse = TEGAPIDetectWiredMetersResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 41: {
+          if (tag !== 330) {
+            break;
+          }
+
+          message.bypassBatterySoeAdjustmentConstraintsRequest = TEGAPIBypassBatterySoeAdjustmentConstraintsRequest
+            .decode(reader, reader.uint32());
+          continue;
+        }
+        case 42: {
+          if (tag !== 338) {
+            break;
+          }
+
+          message.bypassBatterySoeAdjustmentConstraintsResponse = TEGAPIBypassBatterySoeAdjustmentConstraintsResponse
+            .decode(reader, reader.uint32());
+          continue;
+        }
+        case 43: {
+          if (tag !== 346) {
+            break;
+          }
+
+          message.ensureCertificateRequest = TEGAPIEnsureCertificateRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 44: {
+          if (tag !== 354) {
+            break;
+          }
+
+          message.ensureCertificateResponse = TEGAPIEnsureCertificateResponse.decode(reader, reader.uint32());
+          continue;
+        }
         case 45: {
           if (tag !== 362) {
             break;
@@ -920,6 +8619,361 @@ export const TEGMessages: MessageFns<TEGMessages> = {
           message.getBackupEventsResponse = TEGAPIGetBackupEventsResponse.decode(reader, reader.uint32());
           continue;
         }
+        case 51: {
+          if (tag !== 410) {
+            break;
+          }
+
+          message.getCsmsPropertiesRequest = TEGAPIGetCsmsPropertiesRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 52: {
+          if (tag !== 418) {
+            break;
+          }
+
+          message.getCsmsPropertiesResponse = TEGAPIGetCsmsPropertiesResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 53: {
+          if (tag !== 426) {
+            break;
+          }
+
+          message.configureOcppRequest = TEGAPIConfigureOcppRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 54: {
+          if (tag !== 434) {
+            break;
+          }
+
+          message.configureOcppResponse = TEGAPIConfigureOcppResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 55: {
+          if (tag !== 442) {
+            break;
+          }
+
+          message.retrieveSiteUuidRequest = TEGAPIRetrieveSiteUuidRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 56: {
+          if (tag !== 450) {
+            break;
+          }
+
+          message.retrieveSiteUuidResponse = TEGAPIRetrieveSiteUuidResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 57: {
+          if (tag !== 458) {
+            break;
+          }
+
+          message.retrieveSiteSuggestionRequest = TEGAPIRetrieveSiteSuggestionRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 58: {
+          if (tag !== 466) {
+            break;
+          }
+
+          message.retrieveSiteSuggestionResponse = TEGAPIRetrieveSiteSuggestionResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 59: {
+          if (tag !== 474) {
+            break;
+          }
+
+          message.startProtectionTripSelfTestRequest = TEGAPIStartProtectionTripSelfTestRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 60: {
+          if (tag !== 482) {
+            break;
+          }
+
+          message.startProtectionTripSelfTestResponse = TEGAPIStartProtectionTripSelfTestResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 61: {
+          if (tag !== 490) {
+            break;
+          }
+
+          message.stopProtectionTripSelfTestRequest = TEGAPIStopProtectionTripSelfTestRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 62: {
+          if (tag !== 498) {
+            break;
+          }
+
+          message.stopProtectionTripSelfTestResponse = TEGAPIStopProtectionTripSelfTestResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 63: {
+          if (tag !== 506) {
+            break;
+          }
+
+          message.provisionEatonSmartBreakerRequest = TEGAPIProvisionEatonSmartBreakerRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 64: {
+          if (tag !== 514) {
+            break;
+          }
+
+          message.provisionEatonSmartBreakerResponse = TEGAPIProvisionEatonSmartBreakerResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 65: {
+          if (tag !== 522) {
+            break;
+          }
+
+          message.identifyEatonSmartBreakerRequest = TEGAPIIdentifyEatonSmartBreakerRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 66: {
+          if (tag !== 530) {
+            break;
+          }
+
+          message.identifyEatonSmartBreakerResponse = TEGAPIIdentifyEatonSmartBreakerResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 67: {
+          if (tag !== 538) {
+            break;
+          }
+
+          message.triggerPvacFanSelfTestRequest = TEGAPITriggerPvacFanSelfTestRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 68: {
+          if (tag !== 546) {
+            break;
+          }
+
+          message.triggerPvacFanSelfTestResponse = TEGAPITriggerPvacFanSelfTestResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 69: {
+          if (tag !== 554) {
+            break;
+          }
+
+          message.proxyPrepareRegistrationPayloadRequest = TEGAPIProxyPrepareRegistrationPayloadRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 70: {
+          if (tag !== 562) {
+            break;
+          }
+
+          message.proxyPrepareRegistrationPayloadResponse = TEGAPIProxyPrepareRegistrationPayloadResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 71: {
+          if (tag !== 570) {
+            break;
+          }
+
+          message.triggerWallboxVehicleAbsentSelfTestRequest = TEGAPITriggerWallboxVehicleAbsentSelfTestRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 72: {
+          if (tag !== 578) {
+            break;
+          }
+
+          message.triggerWallboxVehicleAbsentSelfTestResponse = TEGAPITriggerWallboxVehicleAbsentSelfTestResponse
+            .decode(reader, reader.uint32());
+          continue;
+        }
+        case 73: {
+          if (tag !== 586) {
+            break;
+          }
+
+          message.customerResetRequest = TEGAPICustomerResetRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 74: {
+          if (tag !== 594) {
+            break;
+          }
+
+          message.customerResetResponse = TEGAPICustomerResetResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 75: {
+          if (tag !== 602) {
+            break;
+          }
+
+          message.delayBatteryCalibrationRequest = TEGAPIDelayBatteryCalibrationRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 76: {
+          if (tag !== 610) {
+            break;
+          }
+
+          message.delayBatteryCalibrationResponse = TEGAPIDelayBatteryCalibrationResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 77: {
+          if (tag !== 618) {
+            break;
+          }
+
+          message.getDelayBatteryCalibrationStatusRequest = TEGAPIGetDelayBatteryCalibrationStatusRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 78: {
+          if (tag !== 626) {
+            break;
+          }
+
+          message.getDelayBatteryCalibrationStatusResponse = TEGAPIGetDelayBatteryCalibrationStatusResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 79: {
+          if (tag !== 634) {
+            break;
+          }
+
+          message.getControllableDeviceProgramsRequest = TEGAPIGetControllableDeviceProgramsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 80: {
+          if (tag !== 642) {
+            break;
+          }
+
+          message.getControllableDeviceProgramsResponse = TEGAPIGetControllableDeviceProgramsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 81: {
+          if (tag !== 650) {
+            break;
+          }
+
+          message.updateControllableDeviceProgramsRequest = TEGAPIUpdateControllableDeviceProgramsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 82: {
+          if (tag !== 658) {
+            break;
+          }
+
+          message.updateControllableDeviceProgramsResponse = TEGAPIUpdateControllableDeviceProgramsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 83: {
+          if (tag !== 666) {
+            break;
+          }
+
+          message.deleteControllableDeviceProgramsRequest = TEGAPIDeleteControllableDeviceProgramsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 84: {
+          if (tag !== 674) {
+            break;
+          }
+
+          message.deleteControllableDeviceProgramsResponse = TEGAPIDeleteControllableDeviceProgramsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 85: {
+          if (tag !== 682) {
+            break;
+          }
+
+          message.clearPowerwall3LockoutAlertsRequest = TEGAPIClearPowerwall3LockoutAlertsRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 86: {
+          if (tag !== 690) {
+            break;
+          }
+
+          message.clearPowerwall3LockoutAlertsResponse = TEGAPIClearPowerwall3LockoutAlertsResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -931,6 +8985,142 @@ export const TEGMessages: MessageFns<TEGMessages> = {
 
   fromJSON(object: any): TEGMessages {
     return {
+      getConfigRequest: isSet(object.getConfigRequest)
+        ? TEGAPIGetConfigRequest.fromJSON(object.getConfigRequest)
+        : undefined,
+      getConfigResponse: isSet(object.getConfigResponse)
+        ? TEGAPIGetConfigResponse.fromJSON(object.getConfigResponse)
+        : undefined,
+      setIslandModeRequest: isSet(object.setIslandModeRequest)
+        ? TEGAPISetIslandModeRequest.fromJSON(object.setIslandModeRequest)
+        : undefined,
+      setIslandModeResponse: isSet(object.setIslandModeResponse)
+        ? TEGAPISetIslandModeResponse.fromJSON(object.setIslandModeResponse)
+        : undefined,
+      triggerIslandingBlackStartRequest: isSet(object.triggerIslandingBlackStartRequest)
+        ? TEGAPITriggerIslandingBlackStartRequest.fromJSON(object.triggerIslandingBlackStartRequest)
+        : undefined,
+      triggerIslandingBlackStartResponse: isSet(object.triggerIslandingBlackStartResponse)
+        ? TEGAPITriggerIslandingBlackStartResponse.fromJSON(object.triggerIslandingBlackStartResponse)
+        : undefined,
+      triggerAssetManifestUploadRequest: isSet(object.triggerAssetManifestUploadRequest)
+        ? TEGAPITriggerAssetManifestUploadRequest.fromJSON(object.triggerAssetManifestUploadRequest)
+        : undefined,
+      triggerAssetManifestUploadResponse: isSet(object.triggerAssetManifestUploadResponse)
+        ? TEGAPITriggerAssetManifestUploadResponse.fromJSON(object.triggerAssetManifestUploadResponse)
+        : undefined,
+      triggerPowerwall2EnumerationRequest: isSet(object.triggerPowerwall2EnumerationRequest)
+        ? TEGAPITriggerPowerwall2EnumerationRequest.fromJSON(object.triggerPowerwall2EnumerationRequest)
+        : undefined,
+      triggerPowerwall2EnumerationResponse: isSet(object.triggerPowerwall2EnumerationResponse)
+        ? TEGAPITriggerPowerwall2EnumerationResponse.fromJSON(object.triggerPowerwall2EnumerationResponse)
+        : undefined,
+      triggerEsCanFirmwareUpdateRequest: isSet(object.triggerEsCanFirmwareUpdateRequest)
+        ? TEGAPITriggerEsCanFirmwareUpdateRequest.fromJSON(object.triggerEsCanFirmwareUpdateRequest)
+        : undefined,
+      triggerEsCanFirmwareUpdateResponse: isSet(object.triggerEsCanFirmwareUpdateResponse)
+        ? TEGAPITriggerEsCanFirmwareUpdateResponse.fromJSON(object.triggerEsCanFirmwareUpdateResponse)
+        : undefined,
+      registerRequest: isSet(object.registerRequest)
+        ? TEGAPIRegisterRequest.fromJSON(object.registerRequest)
+        : undefined,
+      registerResponse: isSet(object.registerResponse)
+        ? TEGAPIRegisterResponse.fromJSON(object.registerResponse)
+        : undefined,
+      triggerPowerwall2PhaseDetectionRequest: isSet(object.triggerPowerwall2PhaseDetectionRequest)
+        ? TEGAPITriggerPowerwall2PhaseDetectionRequest.fromJSON(object.triggerPowerwall2PhaseDetectionRequest)
+        : undefined,
+      triggerPowerwall2PhaseDetectionResponse: isSet(object.triggerPowerwall2PhaseDetectionResponse)
+        ? TEGAPITriggerPowerwall2PhaseDetectionResponse.fromJSON(object.triggerPowerwall2PhaseDetectionResponse)
+        : undefined,
+      resetPowerwall2PhaseDetectionRequest: isSet(object.resetPowerwall2PhaseDetectionRequest)
+        ? TEGAPIResetPowerwall2PhaseDetectionRequest.fromJSON(object.resetPowerwall2PhaseDetectionRequest)
+        : undefined,
+      resetPowerwall2PhaseDetectionResponse: isSet(object.resetPowerwall2PhaseDetectionResponse)
+        ? TEGAPIResetPowerwall2PhaseDetectionResponse.fromJSON(object.resetPowerwall2PhaseDetectionResponse)
+        : undefined,
+      forceWifiScanRequest: isSet(object.forceWifiScanRequest)
+        ? TEGAPIForceWifiScanRequest.fromJSON(object.forceWifiScanRequest)
+        : undefined,
+      forceWifiScanResponse: isSet(object.forceWifiScanResponse)
+        ? TEGAPIForceWifiScanResponse.fromJSON(object.forceWifiScanResponse)
+        : undefined,
+      startPowerwall2InverterSelfTestsRequest: isSet(object.startPowerwall2InverterSelfTestsRequest)
+        ? TEGAPIStartPowerwall2InverterSelfTestsRequest.fromJSON(object.startPowerwall2InverterSelfTestsRequest)
+        : undefined,
+      startPowerwall2InverterSelfTestsResponse: isSet(object.startPowerwall2InverterSelfTestsResponse)
+        ? TEGAPIStartPowerwall2InverterSelfTestsResponse.fromJSON(object.startPowerwall2InverterSelfTestsResponse)
+        : undefined,
+      stopPowerwall2InverterSelfTestsRequest: isSet(object.stopPowerwall2InverterSelfTestsRequest)
+        ? TEGAPIStopPowerwall2InverterSelfTestsRequest.fromJSON(object.stopPowerwall2InverterSelfTestsRequest)
+        : undefined,
+      stopPowerwall2InverterSelfTestsResponse: isSet(object.stopPowerwall2InverterSelfTestsResponse)
+        ? TEGAPIStopPowerwall2InverterSelfTestsResponse.fromJSON(object.stopPowerwall2InverterSelfTestsResponse)
+        : undefined,
+      startPowerwall2BubbleShedRequest: isSet(object.startPowerwall2BubbleShedRequest)
+        ? TEGAPIStartPowerwall2BubbleShedRequest.fromJSON(object.startPowerwall2BubbleShedRequest)
+        : undefined,
+      startPowerwall2BubbleShedResponse: isSet(object.startPowerwall2BubbleShedResponse)
+        ? TEGAPIStartPowerwall2BubbleShedResponse.fromJSON(object.startPowerwall2BubbleShedResponse)
+        : undefined,
+      clearSolarInverterAlertsRequest: isSet(object.clearSolarInverterAlertsRequest)
+        ? TEGAPIClearSolarInverterAlertsRequest.fromJSON(object.clearSolarInverterAlertsRequest)
+        : undefined,
+      clearSolarInverterAlertsResponse: isSet(object.clearSolarInverterAlertsResponse)
+        ? TEGAPIClearSolarInverterAlertsResponse.fromJSON(object.clearSolarInverterAlertsResponse)
+        : undefined,
+      getWifiConfigWithCredentialsRequest: isSet(object.getWifiConfigWithCredentialsRequest)
+        ? TEGAPIGetWifiConfigWithCredentialsRequest.fromJSON(object.getWifiConfigWithCredentialsRequest)
+        : undefined,
+      getWifiConfigWithCredentialsResponse: isSet(object.getWifiConfigWithCredentialsResponse)
+        ? TEGAPIGetWifiConfigWithCredentialsResponse.fromJSON(object.getWifiConfigWithCredentialsResponse)
+        : undefined,
+      disableBatteriesRequest: isSet(object.disableBatteriesRequest)
+        ? TEGAPIDisableBatteriesRequest.fromJSON(object.disableBatteriesRequest)
+        : undefined,
+      disableBatteriesResponse: isSet(object.disableBatteriesResponse)
+        ? TEGAPIDisableBatteriesResponse.fromJSON(object.disableBatteriesResponse)
+        : undefined,
+      triggerPW3CanFirmwareUpdateRequest: isSet(object.triggerPW3CanFirmwareUpdateRequest)
+        ? TEGAPITriggerPW3CanFirmwareUpdateRequest.fromJSON(object.triggerPW3CanFirmwareUpdateRequest)
+        : undefined,
+      triggerPW3CanFirmwareUpdateResponse: isSet(object.triggerPW3CanFirmwareUpdateResponse)
+        ? TEGAPITriggerPW3CanFirmwareUpdateResponse.fromJSON(object.triggerPW3CanFirmwareUpdateResponse)
+        : undefined,
+      triggerPowerwall3EnumerationRequest: isSet(object.triggerPowerwall3EnumerationRequest)
+        ? TEGAPITriggerPowerwall3EnumerationRequest.fromJSON(object.triggerPowerwall3EnumerationRequest)
+        : undefined,
+      triggerPowerwall3EnumerationResponse: isSet(object.triggerPowerwall3EnumerationResponse)
+        ? TEGAPITriggerPowerwall3EnumerationResponse.fromJSON(object.triggerPowerwall3EnumerationResponse)
+        : undefined,
+      dispatchBatteryPowerRequest: isSet(object.dispatchBatteryPowerRequest)
+        ? TEGAPIDispatchBatteryPowerRequest.fromJSON(object.dispatchBatteryPowerRequest)
+        : undefined,
+      dispatchBatteryPowerResponse: isSet(object.dispatchBatteryPowerResponse)
+        ? TEGAPIDispatchBatteryPowerResponse.fromJSON(object.dispatchBatteryPowerResponse)
+        : undefined,
+      detectWiredMetersRequest: isSet(object.detectWiredMetersRequest)
+        ? TEGAPIDetectWiredMetersRequest.fromJSON(object.detectWiredMetersRequest)
+        : undefined,
+      detectWiredMetersResponse: isSet(object.detectWiredMetersResponse)
+        ? TEGAPIDetectWiredMetersResponse.fromJSON(object.detectWiredMetersResponse)
+        : undefined,
+      bypassBatterySoeAdjustmentConstraintsRequest: isSet(object.bypassBatterySoeAdjustmentConstraintsRequest)
+        ? TEGAPIBypassBatterySoeAdjustmentConstraintsRequest.fromJSON(
+          object.bypassBatterySoeAdjustmentConstraintsRequest,
+        )
+        : undefined,
+      bypassBatterySoeAdjustmentConstraintsResponse: isSet(object.bypassBatterySoeAdjustmentConstraintsResponse)
+        ? TEGAPIBypassBatterySoeAdjustmentConstraintsResponse.fromJSON(
+          object.bypassBatterySoeAdjustmentConstraintsResponse,
+        )
+        : undefined,
+      ensureCertificateRequest: isSet(object.ensureCertificateRequest)
+        ? TEGAPIEnsureCertificateRequest.fromJSON(object.ensureCertificateRequest)
+        : undefined,
+      ensureCertificateResponse: isSet(object.ensureCertificateResponse)
+        ? TEGAPIEnsureCertificateResponse.fromJSON(object.ensureCertificateResponse)
+        : undefined,
       scheduleManualBackupEventRequest: isSet(object.scheduleManualBackupEventRequest)
         ? TEGAPIScheduleManualBackupEventRequest.fromJSON(object.scheduleManualBackupEventRequest)
         : undefined,
@@ -949,11 +9139,309 @@ export const TEGMessages: MessageFns<TEGMessages> = {
       getBackupEventsResponse: isSet(object.getBackupEventsResponse)
         ? TEGAPIGetBackupEventsResponse.fromJSON(object.getBackupEventsResponse)
         : undefined,
+      getCsmsPropertiesRequest: isSet(object.getCsmsPropertiesRequest)
+        ? TEGAPIGetCsmsPropertiesRequest.fromJSON(object.getCsmsPropertiesRequest)
+        : undefined,
+      getCsmsPropertiesResponse: isSet(object.getCsmsPropertiesResponse)
+        ? TEGAPIGetCsmsPropertiesResponse.fromJSON(object.getCsmsPropertiesResponse)
+        : undefined,
+      configureOcppRequest: isSet(object.configureOcppRequest)
+        ? TEGAPIConfigureOcppRequest.fromJSON(object.configureOcppRequest)
+        : undefined,
+      configureOcppResponse: isSet(object.configureOcppResponse)
+        ? TEGAPIConfigureOcppResponse.fromJSON(object.configureOcppResponse)
+        : undefined,
+      retrieveSiteUuidRequest: isSet(object.retrieveSiteUuidRequest)
+        ? TEGAPIRetrieveSiteUuidRequest.fromJSON(object.retrieveSiteUuidRequest)
+        : undefined,
+      retrieveSiteUuidResponse: isSet(object.retrieveSiteUuidResponse)
+        ? TEGAPIRetrieveSiteUuidResponse.fromJSON(object.retrieveSiteUuidResponse)
+        : undefined,
+      retrieveSiteSuggestionRequest: isSet(object.retrieveSiteSuggestionRequest)
+        ? TEGAPIRetrieveSiteSuggestionRequest.fromJSON(object.retrieveSiteSuggestionRequest)
+        : undefined,
+      retrieveSiteSuggestionResponse: isSet(object.retrieveSiteSuggestionResponse)
+        ? TEGAPIRetrieveSiteSuggestionResponse.fromJSON(object.retrieveSiteSuggestionResponse)
+        : undefined,
+      startProtectionTripSelfTestRequest: isSet(object.startProtectionTripSelfTestRequest)
+        ? TEGAPIStartProtectionTripSelfTestRequest.fromJSON(object.startProtectionTripSelfTestRequest)
+        : undefined,
+      startProtectionTripSelfTestResponse: isSet(object.startProtectionTripSelfTestResponse)
+        ? TEGAPIStartProtectionTripSelfTestResponse.fromJSON(object.startProtectionTripSelfTestResponse)
+        : undefined,
+      stopProtectionTripSelfTestRequest: isSet(object.stopProtectionTripSelfTestRequest)
+        ? TEGAPIStopProtectionTripSelfTestRequest.fromJSON(object.stopProtectionTripSelfTestRequest)
+        : undefined,
+      stopProtectionTripSelfTestResponse: isSet(object.stopProtectionTripSelfTestResponse)
+        ? TEGAPIStopProtectionTripSelfTestResponse.fromJSON(object.stopProtectionTripSelfTestResponse)
+        : undefined,
+      provisionEatonSmartBreakerRequest: isSet(object.provisionEatonSmartBreakerRequest)
+        ? TEGAPIProvisionEatonSmartBreakerRequest.fromJSON(object.provisionEatonSmartBreakerRequest)
+        : undefined,
+      provisionEatonSmartBreakerResponse: isSet(object.provisionEatonSmartBreakerResponse)
+        ? TEGAPIProvisionEatonSmartBreakerResponse.fromJSON(object.provisionEatonSmartBreakerResponse)
+        : undefined,
+      identifyEatonSmartBreakerRequest: isSet(object.identifyEatonSmartBreakerRequest)
+        ? TEGAPIIdentifyEatonSmartBreakerRequest.fromJSON(object.identifyEatonSmartBreakerRequest)
+        : undefined,
+      identifyEatonSmartBreakerResponse: isSet(object.identifyEatonSmartBreakerResponse)
+        ? TEGAPIIdentifyEatonSmartBreakerResponse.fromJSON(object.identifyEatonSmartBreakerResponse)
+        : undefined,
+      triggerPvacFanSelfTestRequest: isSet(object.triggerPvacFanSelfTestRequest)
+        ? TEGAPITriggerPvacFanSelfTestRequest.fromJSON(object.triggerPvacFanSelfTestRequest)
+        : undefined,
+      triggerPvacFanSelfTestResponse: isSet(object.triggerPvacFanSelfTestResponse)
+        ? TEGAPITriggerPvacFanSelfTestResponse.fromJSON(object.triggerPvacFanSelfTestResponse)
+        : undefined,
+      proxyPrepareRegistrationPayloadRequest: isSet(object.proxyPrepareRegistrationPayloadRequest)
+        ? TEGAPIProxyPrepareRegistrationPayloadRequest.fromJSON(object.proxyPrepareRegistrationPayloadRequest)
+        : undefined,
+      proxyPrepareRegistrationPayloadResponse: isSet(object.proxyPrepareRegistrationPayloadResponse)
+        ? TEGAPIProxyPrepareRegistrationPayloadResponse.fromJSON(object.proxyPrepareRegistrationPayloadResponse)
+        : undefined,
+      triggerWallboxVehicleAbsentSelfTestRequest: isSet(object.triggerWallboxVehicleAbsentSelfTestRequest)
+        ? TEGAPITriggerWallboxVehicleAbsentSelfTestRequest.fromJSON(object.triggerWallboxVehicleAbsentSelfTestRequest)
+        : undefined,
+      triggerWallboxVehicleAbsentSelfTestResponse: isSet(object.triggerWallboxVehicleAbsentSelfTestResponse)
+        ? TEGAPITriggerWallboxVehicleAbsentSelfTestResponse.fromJSON(object.triggerWallboxVehicleAbsentSelfTestResponse)
+        : undefined,
+      customerResetRequest: isSet(object.customerResetRequest)
+        ? TEGAPICustomerResetRequest.fromJSON(object.customerResetRequest)
+        : undefined,
+      customerResetResponse: isSet(object.customerResetResponse)
+        ? TEGAPICustomerResetResponse.fromJSON(object.customerResetResponse)
+        : undefined,
+      delayBatteryCalibrationRequest: isSet(object.delayBatteryCalibrationRequest)
+        ? TEGAPIDelayBatteryCalibrationRequest.fromJSON(object.delayBatteryCalibrationRequest)
+        : undefined,
+      delayBatteryCalibrationResponse: isSet(object.delayBatteryCalibrationResponse)
+        ? TEGAPIDelayBatteryCalibrationResponse.fromJSON(object.delayBatteryCalibrationResponse)
+        : undefined,
+      getDelayBatteryCalibrationStatusRequest: isSet(object.getDelayBatteryCalibrationStatusRequest)
+        ? TEGAPIGetDelayBatteryCalibrationStatusRequest.fromJSON(object.getDelayBatteryCalibrationStatusRequest)
+        : undefined,
+      getDelayBatteryCalibrationStatusResponse: isSet(object.getDelayBatteryCalibrationStatusResponse)
+        ? TEGAPIGetDelayBatteryCalibrationStatusResponse.fromJSON(object.getDelayBatteryCalibrationStatusResponse)
+        : undefined,
+      getControllableDeviceProgramsRequest: isSet(object.getControllableDeviceProgramsRequest)
+        ? TEGAPIGetControllableDeviceProgramsRequest.fromJSON(object.getControllableDeviceProgramsRequest)
+        : undefined,
+      getControllableDeviceProgramsResponse: isSet(object.getControllableDeviceProgramsResponse)
+        ? TEGAPIGetControllableDeviceProgramsResponse.fromJSON(object.getControllableDeviceProgramsResponse)
+        : undefined,
+      updateControllableDeviceProgramsRequest: isSet(object.updateControllableDeviceProgramsRequest)
+        ? TEGAPIUpdateControllableDeviceProgramsRequest.fromJSON(object.updateControllableDeviceProgramsRequest)
+        : undefined,
+      updateControllableDeviceProgramsResponse: isSet(object.updateControllableDeviceProgramsResponse)
+        ? TEGAPIUpdateControllableDeviceProgramsResponse.fromJSON(object.updateControllableDeviceProgramsResponse)
+        : undefined,
+      deleteControllableDeviceProgramsRequest: isSet(object.deleteControllableDeviceProgramsRequest)
+        ? TEGAPIDeleteControllableDeviceProgramsRequest.fromJSON(object.deleteControllableDeviceProgramsRequest)
+        : undefined,
+      deleteControllableDeviceProgramsResponse: isSet(object.deleteControllableDeviceProgramsResponse)
+        ? TEGAPIDeleteControllableDeviceProgramsResponse.fromJSON(object.deleteControllableDeviceProgramsResponse)
+        : undefined,
+      clearPowerwall3LockoutAlertsRequest: isSet(object.clearPowerwall3LockoutAlertsRequest)
+        ? TEGAPIClearPowerwall3LockoutAlertsRequest.fromJSON(object.clearPowerwall3LockoutAlertsRequest)
+        : undefined,
+      clearPowerwall3LockoutAlertsResponse: isSet(object.clearPowerwall3LockoutAlertsResponse)
+        ? TEGAPIClearPowerwall3LockoutAlertsResponse.fromJSON(object.clearPowerwall3LockoutAlertsResponse)
+        : undefined,
     };
   },
 
   toJSON(message: TEGMessages): unknown {
     const obj: any = {};
+    if (message.getConfigRequest !== undefined) {
+      obj.getConfigRequest = TEGAPIGetConfigRequest.toJSON(message.getConfigRequest);
+    }
+    if (message.getConfigResponse !== undefined) {
+      obj.getConfigResponse = TEGAPIGetConfigResponse.toJSON(message.getConfigResponse);
+    }
+    if (message.setIslandModeRequest !== undefined) {
+      obj.setIslandModeRequest = TEGAPISetIslandModeRequest.toJSON(message.setIslandModeRequest);
+    }
+    if (message.setIslandModeResponse !== undefined) {
+      obj.setIslandModeResponse = TEGAPISetIslandModeResponse.toJSON(message.setIslandModeResponse);
+    }
+    if (message.triggerIslandingBlackStartRequest !== undefined) {
+      obj.triggerIslandingBlackStartRequest = TEGAPITriggerIslandingBlackStartRequest.toJSON(
+        message.triggerIslandingBlackStartRequest,
+      );
+    }
+    if (message.triggerIslandingBlackStartResponse !== undefined) {
+      obj.triggerIslandingBlackStartResponse = TEGAPITriggerIslandingBlackStartResponse.toJSON(
+        message.triggerIslandingBlackStartResponse,
+      );
+    }
+    if (message.triggerAssetManifestUploadRequest !== undefined) {
+      obj.triggerAssetManifestUploadRequest = TEGAPITriggerAssetManifestUploadRequest.toJSON(
+        message.triggerAssetManifestUploadRequest,
+      );
+    }
+    if (message.triggerAssetManifestUploadResponse !== undefined) {
+      obj.triggerAssetManifestUploadResponse = TEGAPITriggerAssetManifestUploadResponse.toJSON(
+        message.triggerAssetManifestUploadResponse,
+      );
+    }
+    if (message.triggerPowerwall2EnumerationRequest !== undefined) {
+      obj.triggerPowerwall2EnumerationRequest = TEGAPITriggerPowerwall2EnumerationRequest.toJSON(
+        message.triggerPowerwall2EnumerationRequest,
+      );
+    }
+    if (message.triggerPowerwall2EnumerationResponse !== undefined) {
+      obj.triggerPowerwall2EnumerationResponse = TEGAPITriggerPowerwall2EnumerationResponse.toJSON(
+        message.triggerPowerwall2EnumerationResponse,
+      );
+    }
+    if (message.triggerEsCanFirmwareUpdateRequest !== undefined) {
+      obj.triggerEsCanFirmwareUpdateRequest = TEGAPITriggerEsCanFirmwareUpdateRequest.toJSON(
+        message.triggerEsCanFirmwareUpdateRequest,
+      );
+    }
+    if (message.triggerEsCanFirmwareUpdateResponse !== undefined) {
+      obj.triggerEsCanFirmwareUpdateResponse = TEGAPITriggerEsCanFirmwareUpdateResponse.toJSON(
+        message.triggerEsCanFirmwareUpdateResponse,
+      );
+    }
+    if (message.registerRequest !== undefined) {
+      obj.registerRequest = TEGAPIRegisterRequest.toJSON(message.registerRequest);
+    }
+    if (message.registerResponse !== undefined) {
+      obj.registerResponse = TEGAPIRegisterResponse.toJSON(message.registerResponse);
+    }
+    if (message.triggerPowerwall2PhaseDetectionRequest !== undefined) {
+      obj.triggerPowerwall2PhaseDetectionRequest = TEGAPITriggerPowerwall2PhaseDetectionRequest.toJSON(
+        message.triggerPowerwall2PhaseDetectionRequest,
+      );
+    }
+    if (message.triggerPowerwall2PhaseDetectionResponse !== undefined) {
+      obj.triggerPowerwall2PhaseDetectionResponse = TEGAPITriggerPowerwall2PhaseDetectionResponse.toJSON(
+        message.triggerPowerwall2PhaseDetectionResponse,
+      );
+    }
+    if (message.resetPowerwall2PhaseDetectionRequest !== undefined) {
+      obj.resetPowerwall2PhaseDetectionRequest = TEGAPIResetPowerwall2PhaseDetectionRequest.toJSON(
+        message.resetPowerwall2PhaseDetectionRequest,
+      );
+    }
+    if (message.resetPowerwall2PhaseDetectionResponse !== undefined) {
+      obj.resetPowerwall2PhaseDetectionResponse = TEGAPIResetPowerwall2PhaseDetectionResponse.toJSON(
+        message.resetPowerwall2PhaseDetectionResponse,
+      );
+    }
+    if (message.forceWifiScanRequest !== undefined) {
+      obj.forceWifiScanRequest = TEGAPIForceWifiScanRequest.toJSON(message.forceWifiScanRequest);
+    }
+    if (message.forceWifiScanResponse !== undefined) {
+      obj.forceWifiScanResponse = TEGAPIForceWifiScanResponse.toJSON(message.forceWifiScanResponse);
+    }
+    if (message.startPowerwall2InverterSelfTestsRequest !== undefined) {
+      obj.startPowerwall2InverterSelfTestsRequest = TEGAPIStartPowerwall2InverterSelfTestsRequest.toJSON(
+        message.startPowerwall2InverterSelfTestsRequest,
+      );
+    }
+    if (message.startPowerwall2InverterSelfTestsResponse !== undefined) {
+      obj.startPowerwall2InverterSelfTestsResponse = TEGAPIStartPowerwall2InverterSelfTestsResponse.toJSON(
+        message.startPowerwall2InverterSelfTestsResponse,
+      );
+    }
+    if (message.stopPowerwall2InverterSelfTestsRequest !== undefined) {
+      obj.stopPowerwall2InverterSelfTestsRequest = TEGAPIStopPowerwall2InverterSelfTestsRequest.toJSON(
+        message.stopPowerwall2InverterSelfTestsRequest,
+      );
+    }
+    if (message.stopPowerwall2InverterSelfTestsResponse !== undefined) {
+      obj.stopPowerwall2InverterSelfTestsResponse = TEGAPIStopPowerwall2InverterSelfTestsResponse.toJSON(
+        message.stopPowerwall2InverterSelfTestsResponse,
+      );
+    }
+    if (message.startPowerwall2BubbleShedRequest !== undefined) {
+      obj.startPowerwall2BubbleShedRequest = TEGAPIStartPowerwall2BubbleShedRequest.toJSON(
+        message.startPowerwall2BubbleShedRequest,
+      );
+    }
+    if (message.startPowerwall2BubbleShedResponse !== undefined) {
+      obj.startPowerwall2BubbleShedResponse = TEGAPIStartPowerwall2BubbleShedResponse.toJSON(
+        message.startPowerwall2BubbleShedResponse,
+      );
+    }
+    if (message.clearSolarInverterAlertsRequest !== undefined) {
+      obj.clearSolarInverterAlertsRequest = TEGAPIClearSolarInverterAlertsRequest.toJSON(
+        message.clearSolarInverterAlertsRequest,
+      );
+    }
+    if (message.clearSolarInverterAlertsResponse !== undefined) {
+      obj.clearSolarInverterAlertsResponse = TEGAPIClearSolarInverterAlertsResponse.toJSON(
+        message.clearSolarInverterAlertsResponse,
+      );
+    }
+    if (message.getWifiConfigWithCredentialsRequest !== undefined) {
+      obj.getWifiConfigWithCredentialsRequest = TEGAPIGetWifiConfigWithCredentialsRequest.toJSON(
+        message.getWifiConfigWithCredentialsRequest,
+      );
+    }
+    if (message.getWifiConfigWithCredentialsResponse !== undefined) {
+      obj.getWifiConfigWithCredentialsResponse = TEGAPIGetWifiConfigWithCredentialsResponse.toJSON(
+        message.getWifiConfigWithCredentialsResponse,
+      );
+    }
+    if (message.disableBatteriesRequest !== undefined) {
+      obj.disableBatteriesRequest = TEGAPIDisableBatteriesRequest.toJSON(message.disableBatteriesRequest);
+    }
+    if (message.disableBatteriesResponse !== undefined) {
+      obj.disableBatteriesResponse = TEGAPIDisableBatteriesResponse.toJSON(message.disableBatteriesResponse);
+    }
+    if (message.triggerPW3CanFirmwareUpdateRequest !== undefined) {
+      obj.triggerPW3CanFirmwareUpdateRequest = TEGAPITriggerPW3CanFirmwareUpdateRequest.toJSON(
+        message.triggerPW3CanFirmwareUpdateRequest,
+      );
+    }
+    if (message.triggerPW3CanFirmwareUpdateResponse !== undefined) {
+      obj.triggerPW3CanFirmwareUpdateResponse = TEGAPITriggerPW3CanFirmwareUpdateResponse.toJSON(
+        message.triggerPW3CanFirmwareUpdateResponse,
+      );
+    }
+    if (message.triggerPowerwall3EnumerationRequest !== undefined) {
+      obj.triggerPowerwall3EnumerationRequest = TEGAPITriggerPowerwall3EnumerationRequest.toJSON(
+        message.triggerPowerwall3EnumerationRequest,
+      );
+    }
+    if (message.triggerPowerwall3EnumerationResponse !== undefined) {
+      obj.triggerPowerwall3EnumerationResponse = TEGAPITriggerPowerwall3EnumerationResponse.toJSON(
+        message.triggerPowerwall3EnumerationResponse,
+      );
+    }
+    if (message.dispatchBatteryPowerRequest !== undefined) {
+      obj.dispatchBatteryPowerRequest = TEGAPIDispatchBatteryPowerRequest.toJSON(message.dispatchBatteryPowerRequest);
+    }
+    if (message.dispatchBatteryPowerResponse !== undefined) {
+      obj.dispatchBatteryPowerResponse = TEGAPIDispatchBatteryPowerResponse.toJSON(
+        message.dispatchBatteryPowerResponse,
+      );
+    }
+    if (message.detectWiredMetersRequest !== undefined) {
+      obj.detectWiredMetersRequest = TEGAPIDetectWiredMetersRequest.toJSON(message.detectWiredMetersRequest);
+    }
+    if (message.detectWiredMetersResponse !== undefined) {
+      obj.detectWiredMetersResponse = TEGAPIDetectWiredMetersResponse.toJSON(message.detectWiredMetersResponse);
+    }
+    if (message.bypassBatterySoeAdjustmentConstraintsRequest !== undefined) {
+      obj.bypassBatterySoeAdjustmentConstraintsRequest = TEGAPIBypassBatterySoeAdjustmentConstraintsRequest.toJSON(
+        message.bypassBatterySoeAdjustmentConstraintsRequest,
+      );
+    }
+    if (message.bypassBatterySoeAdjustmentConstraintsResponse !== undefined) {
+      obj.bypassBatterySoeAdjustmentConstraintsResponse = TEGAPIBypassBatterySoeAdjustmentConstraintsResponse.toJSON(
+        message.bypassBatterySoeAdjustmentConstraintsResponse,
+      );
+    }
+    if (message.ensureCertificateRequest !== undefined) {
+      obj.ensureCertificateRequest = TEGAPIEnsureCertificateRequest.toJSON(message.ensureCertificateRequest);
+    }
+    if (message.ensureCertificateResponse !== undefined) {
+      obj.ensureCertificateResponse = TEGAPIEnsureCertificateResponse.toJSON(message.ensureCertificateResponse);
+    }
     if (message.scheduleManualBackupEventRequest !== undefined) {
       obj.scheduleManualBackupEventRequest = TEGAPIScheduleManualBackupEventRequest.toJSON(
         message.scheduleManualBackupEventRequest,
@@ -980,6 +9468,170 @@ export const TEGMessages: MessageFns<TEGMessages> = {
     if (message.getBackupEventsResponse !== undefined) {
       obj.getBackupEventsResponse = TEGAPIGetBackupEventsResponse.toJSON(message.getBackupEventsResponse);
     }
+    if (message.getCsmsPropertiesRequest !== undefined) {
+      obj.getCsmsPropertiesRequest = TEGAPIGetCsmsPropertiesRequest.toJSON(message.getCsmsPropertiesRequest);
+    }
+    if (message.getCsmsPropertiesResponse !== undefined) {
+      obj.getCsmsPropertiesResponse = TEGAPIGetCsmsPropertiesResponse.toJSON(message.getCsmsPropertiesResponse);
+    }
+    if (message.configureOcppRequest !== undefined) {
+      obj.configureOcppRequest = TEGAPIConfigureOcppRequest.toJSON(message.configureOcppRequest);
+    }
+    if (message.configureOcppResponse !== undefined) {
+      obj.configureOcppResponse = TEGAPIConfigureOcppResponse.toJSON(message.configureOcppResponse);
+    }
+    if (message.retrieveSiteUuidRequest !== undefined) {
+      obj.retrieveSiteUuidRequest = TEGAPIRetrieveSiteUuidRequest.toJSON(message.retrieveSiteUuidRequest);
+    }
+    if (message.retrieveSiteUuidResponse !== undefined) {
+      obj.retrieveSiteUuidResponse = TEGAPIRetrieveSiteUuidResponse.toJSON(message.retrieveSiteUuidResponse);
+    }
+    if (message.retrieveSiteSuggestionRequest !== undefined) {
+      obj.retrieveSiteSuggestionRequest = TEGAPIRetrieveSiteSuggestionRequest.toJSON(
+        message.retrieveSiteSuggestionRequest,
+      );
+    }
+    if (message.retrieveSiteSuggestionResponse !== undefined) {
+      obj.retrieveSiteSuggestionResponse = TEGAPIRetrieveSiteSuggestionResponse.toJSON(
+        message.retrieveSiteSuggestionResponse,
+      );
+    }
+    if (message.startProtectionTripSelfTestRequest !== undefined) {
+      obj.startProtectionTripSelfTestRequest = TEGAPIStartProtectionTripSelfTestRequest.toJSON(
+        message.startProtectionTripSelfTestRequest,
+      );
+    }
+    if (message.startProtectionTripSelfTestResponse !== undefined) {
+      obj.startProtectionTripSelfTestResponse = TEGAPIStartProtectionTripSelfTestResponse.toJSON(
+        message.startProtectionTripSelfTestResponse,
+      );
+    }
+    if (message.stopProtectionTripSelfTestRequest !== undefined) {
+      obj.stopProtectionTripSelfTestRequest = TEGAPIStopProtectionTripSelfTestRequest.toJSON(
+        message.stopProtectionTripSelfTestRequest,
+      );
+    }
+    if (message.stopProtectionTripSelfTestResponse !== undefined) {
+      obj.stopProtectionTripSelfTestResponse = TEGAPIStopProtectionTripSelfTestResponse.toJSON(
+        message.stopProtectionTripSelfTestResponse,
+      );
+    }
+    if (message.provisionEatonSmartBreakerRequest !== undefined) {
+      obj.provisionEatonSmartBreakerRequest = TEGAPIProvisionEatonSmartBreakerRequest.toJSON(
+        message.provisionEatonSmartBreakerRequest,
+      );
+    }
+    if (message.provisionEatonSmartBreakerResponse !== undefined) {
+      obj.provisionEatonSmartBreakerResponse = TEGAPIProvisionEatonSmartBreakerResponse.toJSON(
+        message.provisionEatonSmartBreakerResponse,
+      );
+    }
+    if (message.identifyEatonSmartBreakerRequest !== undefined) {
+      obj.identifyEatonSmartBreakerRequest = TEGAPIIdentifyEatonSmartBreakerRequest.toJSON(
+        message.identifyEatonSmartBreakerRequest,
+      );
+    }
+    if (message.identifyEatonSmartBreakerResponse !== undefined) {
+      obj.identifyEatonSmartBreakerResponse = TEGAPIIdentifyEatonSmartBreakerResponse.toJSON(
+        message.identifyEatonSmartBreakerResponse,
+      );
+    }
+    if (message.triggerPvacFanSelfTestRequest !== undefined) {
+      obj.triggerPvacFanSelfTestRequest = TEGAPITriggerPvacFanSelfTestRequest.toJSON(
+        message.triggerPvacFanSelfTestRequest,
+      );
+    }
+    if (message.triggerPvacFanSelfTestResponse !== undefined) {
+      obj.triggerPvacFanSelfTestResponse = TEGAPITriggerPvacFanSelfTestResponse.toJSON(
+        message.triggerPvacFanSelfTestResponse,
+      );
+    }
+    if (message.proxyPrepareRegistrationPayloadRequest !== undefined) {
+      obj.proxyPrepareRegistrationPayloadRequest = TEGAPIProxyPrepareRegistrationPayloadRequest.toJSON(
+        message.proxyPrepareRegistrationPayloadRequest,
+      );
+    }
+    if (message.proxyPrepareRegistrationPayloadResponse !== undefined) {
+      obj.proxyPrepareRegistrationPayloadResponse = TEGAPIProxyPrepareRegistrationPayloadResponse.toJSON(
+        message.proxyPrepareRegistrationPayloadResponse,
+      );
+    }
+    if (message.triggerWallboxVehicleAbsentSelfTestRequest !== undefined) {
+      obj.triggerWallboxVehicleAbsentSelfTestRequest = TEGAPITriggerWallboxVehicleAbsentSelfTestRequest.toJSON(
+        message.triggerWallboxVehicleAbsentSelfTestRequest,
+      );
+    }
+    if (message.triggerWallboxVehicleAbsentSelfTestResponse !== undefined) {
+      obj.triggerWallboxVehicleAbsentSelfTestResponse = TEGAPITriggerWallboxVehicleAbsentSelfTestResponse.toJSON(
+        message.triggerWallboxVehicleAbsentSelfTestResponse,
+      );
+    }
+    if (message.customerResetRequest !== undefined) {
+      obj.customerResetRequest = TEGAPICustomerResetRequest.toJSON(message.customerResetRequest);
+    }
+    if (message.customerResetResponse !== undefined) {
+      obj.customerResetResponse = TEGAPICustomerResetResponse.toJSON(message.customerResetResponse);
+    }
+    if (message.delayBatteryCalibrationRequest !== undefined) {
+      obj.delayBatteryCalibrationRequest = TEGAPIDelayBatteryCalibrationRequest.toJSON(
+        message.delayBatteryCalibrationRequest,
+      );
+    }
+    if (message.delayBatteryCalibrationResponse !== undefined) {
+      obj.delayBatteryCalibrationResponse = TEGAPIDelayBatteryCalibrationResponse.toJSON(
+        message.delayBatteryCalibrationResponse,
+      );
+    }
+    if (message.getDelayBatteryCalibrationStatusRequest !== undefined) {
+      obj.getDelayBatteryCalibrationStatusRequest = TEGAPIGetDelayBatteryCalibrationStatusRequest.toJSON(
+        message.getDelayBatteryCalibrationStatusRequest,
+      );
+    }
+    if (message.getDelayBatteryCalibrationStatusResponse !== undefined) {
+      obj.getDelayBatteryCalibrationStatusResponse = TEGAPIGetDelayBatteryCalibrationStatusResponse.toJSON(
+        message.getDelayBatteryCalibrationStatusResponse,
+      );
+    }
+    if (message.getControllableDeviceProgramsRequest !== undefined) {
+      obj.getControllableDeviceProgramsRequest = TEGAPIGetControllableDeviceProgramsRequest.toJSON(
+        message.getControllableDeviceProgramsRequest,
+      );
+    }
+    if (message.getControllableDeviceProgramsResponse !== undefined) {
+      obj.getControllableDeviceProgramsResponse = TEGAPIGetControllableDeviceProgramsResponse.toJSON(
+        message.getControllableDeviceProgramsResponse,
+      );
+    }
+    if (message.updateControllableDeviceProgramsRequest !== undefined) {
+      obj.updateControllableDeviceProgramsRequest = TEGAPIUpdateControllableDeviceProgramsRequest.toJSON(
+        message.updateControllableDeviceProgramsRequest,
+      );
+    }
+    if (message.updateControllableDeviceProgramsResponse !== undefined) {
+      obj.updateControllableDeviceProgramsResponse = TEGAPIUpdateControllableDeviceProgramsResponse.toJSON(
+        message.updateControllableDeviceProgramsResponse,
+      );
+    }
+    if (message.deleteControllableDeviceProgramsRequest !== undefined) {
+      obj.deleteControllableDeviceProgramsRequest = TEGAPIDeleteControllableDeviceProgramsRequest.toJSON(
+        message.deleteControllableDeviceProgramsRequest,
+      );
+    }
+    if (message.deleteControllableDeviceProgramsResponse !== undefined) {
+      obj.deleteControllableDeviceProgramsResponse = TEGAPIDeleteControllableDeviceProgramsResponse.toJSON(
+        message.deleteControllableDeviceProgramsResponse,
+      );
+    }
+    if (message.clearPowerwall3LockoutAlertsRequest !== undefined) {
+      obj.clearPowerwall3LockoutAlertsRequest = TEGAPIClearPowerwall3LockoutAlertsRequest.toJSON(
+        message.clearPowerwall3LockoutAlertsRequest,
+      );
+    }
+    if (message.clearPowerwall3LockoutAlertsResponse !== undefined) {
+      obj.clearPowerwall3LockoutAlertsResponse = TEGAPIClearPowerwall3LockoutAlertsResponse.toJSON(
+        message.clearPowerwall3LockoutAlertsResponse,
+      );
+    }
     return obj;
   },
 
@@ -988,6 +9640,193 @@ export const TEGMessages: MessageFns<TEGMessages> = {
   },
   fromPartial<I extends Exact<DeepPartial<TEGMessages>, I>>(object: I): TEGMessages {
     const message = createBaseTEGMessages();
+    message.getConfigRequest = (object.getConfigRequest !== undefined && object.getConfigRequest !== null)
+      ? TEGAPIGetConfigRequest.fromPartial(object.getConfigRequest)
+      : undefined;
+    message.getConfigResponse = (object.getConfigResponse !== undefined && object.getConfigResponse !== null)
+      ? TEGAPIGetConfigResponse.fromPartial(object.getConfigResponse)
+      : undefined;
+    message.setIslandModeRequest = (object.setIslandModeRequest !== undefined && object.setIslandModeRequest !== null)
+      ? TEGAPISetIslandModeRequest.fromPartial(object.setIslandModeRequest)
+      : undefined;
+    message.setIslandModeResponse =
+      (object.setIslandModeResponse !== undefined && object.setIslandModeResponse !== null)
+        ? TEGAPISetIslandModeResponse.fromPartial(object.setIslandModeResponse)
+        : undefined;
+    message.triggerIslandingBlackStartRequest =
+      (object.triggerIslandingBlackStartRequest !== undefined && object.triggerIslandingBlackStartRequest !== null)
+        ? TEGAPITriggerIslandingBlackStartRequest.fromPartial(object.triggerIslandingBlackStartRequest)
+        : undefined;
+    message.triggerIslandingBlackStartResponse =
+      (object.triggerIslandingBlackStartResponse !== undefined && object.triggerIslandingBlackStartResponse !== null)
+        ? TEGAPITriggerIslandingBlackStartResponse.fromPartial(object.triggerIslandingBlackStartResponse)
+        : undefined;
+    message.triggerAssetManifestUploadRequest =
+      (object.triggerAssetManifestUploadRequest !== undefined && object.triggerAssetManifestUploadRequest !== null)
+        ? TEGAPITriggerAssetManifestUploadRequest.fromPartial(object.triggerAssetManifestUploadRequest)
+        : undefined;
+    message.triggerAssetManifestUploadResponse =
+      (object.triggerAssetManifestUploadResponse !== undefined && object.triggerAssetManifestUploadResponse !== null)
+        ? TEGAPITriggerAssetManifestUploadResponse.fromPartial(object.triggerAssetManifestUploadResponse)
+        : undefined;
+    message.triggerPowerwall2EnumerationRequest =
+      (object.triggerPowerwall2EnumerationRequest !== undefined && object.triggerPowerwall2EnumerationRequest !== null)
+        ? TEGAPITriggerPowerwall2EnumerationRequest.fromPartial(object.triggerPowerwall2EnumerationRequest)
+        : undefined;
+    message.triggerPowerwall2EnumerationResponse =
+      (object.triggerPowerwall2EnumerationResponse !== undefined &&
+          object.triggerPowerwall2EnumerationResponse !== null)
+        ? TEGAPITriggerPowerwall2EnumerationResponse.fromPartial(object.triggerPowerwall2EnumerationResponse)
+        : undefined;
+    message.triggerEsCanFirmwareUpdateRequest =
+      (object.triggerEsCanFirmwareUpdateRequest !== undefined && object.triggerEsCanFirmwareUpdateRequest !== null)
+        ? TEGAPITriggerEsCanFirmwareUpdateRequest.fromPartial(object.triggerEsCanFirmwareUpdateRequest)
+        : undefined;
+    message.triggerEsCanFirmwareUpdateResponse =
+      (object.triggerEsCanFirmwareUpdateResponse !== undefined && object.triggerEsCanFirmwareUpdateResponse !== null)
+        ? TEGAPITriggerEsCanFirmwareUpdateResponse.fromPartial(object.triggerEsCanFirmwareUpdateResponse)
+        : undefined;
+    message.registerRequest = (object.registerRequest !== undefined && object.registerRequest !== null)
+      ? TEGAPIRegisterRequest.fromPartial(object.registerRequest)
+      : undefined;
+    message.registerResponse = (object.registerResponse !== undefined && object.registerResponse !== null)
+      ? TEGAPIRegisterResponse.fromPartial(object.registerResponse)
+      : undefined;
+    message.triggerPowerwall2PhaseDetectionRequest =
+      (object.triggerPowerwall2PhaseDetectionRequest !== undefined &&
+          object.triggerPowerwall2PhaseDetectionRequest !== null)
+        ? TEGAPITriggerPowerwall2PhaseDetectionRequest.fromPartial(object.triggerPowerwall2PhaseDetectionRequest)
+        : undefined;
+    message.triggerPowerwall2PhaseDetectionResponse =
+      (object.triggerPowerwall2PhaseDetectionResponse !== undefined &&
+          object.triggerPowerwall2PhaseDetectionResponse !== null)
+        ? TEGAPITriggerPowerwall2PhaseDetectionResponse.fromPartial(object.triggerPowerwall2PhaseDetectionResponse)
+        : undefined;
+    message.resetPowerwall2PhaseDetectionRequest =
+      (object.resetPowerwall2PhaseDetectionRequest !== undefined &&
+          object.resetPowerwall2PhaseDetectionRequest !== null)
+        ? TEGAPIResetPowerwall2PhaseDetectionRequest.fromPartial(object.resetPowerwall2PhaseDetectionRequest)
+        : undefined;
+    message.resetPowerwall2PhaseDetectionResponse =
+      (object.resetPowerwall2PhaseDetectionResponse !== undefined &&
+          object.resetPowerwall2PhaseDetectionResponse !== null)
+        ? TEGAPIResetPowerwall2PhaseDetectionResponse.fromPartial(object.resetPowerwall2PhaseDetectionResponse)
+        : undefined;
+    message.forceWifiScanRequest = (object.forceWifiScanRequest !== undefined && object.forceWifiScanRequest !== null)
+      ? TEGAPIForceWifiScanRequest.fromPartial(object.forceWifiScanRequest)
+      : undefined;
+    message.forceWifiScanResponse =
+      (object.forceWifiScanResponse !== undefined && object.forceWifiScanResponse !== null)
+        ? TEGAPIForceWifiScanResponse.fromPartial(object.forceWifiScanResponse)
+        : undefined;
+    message.startPowerwall2InverterSelfTestsRequest =
+      (object.startPowerwall2InverterSelfTestsRequest !== undefined &&
+          object.startPowerwall2InverterSelfTestsRequest !== null)
+        ? TEGAPIStartPowerwall2InverterSelfTestsRequest.fromPartial(object.startPowerwall2InverterSelfTestsRequest)
+        : undefined;
+    message.startPowerwall2InverterSelfTestsResponse =
+      (object.startPowerwall2InverterSelfTestsResponse !== undefined &&
+          object.startPowerwall2InverterSelfTestsResponse !== null)
+        ? TEGAPIStartPowerwall2InverterSelfTestsResponse.fromPartial(object.startPowerwall2InverterSelfTestsResponse)
+        : undefined;
+    message.stopPowerwall2InverterSelfTestsRequest =
+      (object.stopPowerwall2InverterSelfTestsRequest !== undefined &&
+          object.stopPowerwall2InverterSelfTestsRequest !== null)
+        ? TEGAPIStopPowerwall2InverterSelfTestsRequest.fromPartial(object.stopPowerwall2InverterSelfTestsRequest)
+        : undefined;
+    message.stopPowerwall2InverterSelfTestsResponse =
+      (object.stopPowerwall2InverterSelfTestsResponse !== undefined &&
+          object.stopPowerwall2InverterSelfTestsResponse !== null)
+        ? TEGAPIStopPowerwall2InverterSelfTestsResponse.fromPartial(object.stopPowerwall2InverterSelfTestsResponse)
+        : undefined;
+    message.startPowerwall2BubbleShedRequest =
+      (object.startPowerwall2BubbleShedRequest !== undefined && object.startPowerwall2BubbleShedRequest !== null)
+        ? TEGAPIStartPowerwall2BubbleShedRequest.fromPartial(object.startPowerwall2BubbleShedRequest)
+        : undefined;
+    message.startPowerwall2BubbleShedResponse =
+      (object.startPowerwall2BubbleShedResponse !== undefined && object.startPowerwall2BubbleShedResponse !== null)
+        ? TEGAPIStartPowerwall2BubbleShedResponse.fromPartial(object.startPowerwall2BubbleShedResponse)
+        : undefined;
+    message.clearSolarInverterAlertsRequest =
+      (object.clearSolarInverterAlertsRequest !== undefined && object.clearSolarInverterAlertsRequest !== null)
+        ? TEGAPIClearSolarInverterAlertsRequest.fromPartial(object.clearSolarInverterAlertsRequest)
+        : undefined;
+    message.clearSolarInverterAlertsResponse =
+      (object.clearSolarInverterAlertsResponse !== undefined && object.clearSolarInverterAlertsResponse !== null)
+        ? TEGAPIClearSolarInverterAlertsResponse.fromPartial(object.clearSolarInverterAlertsResponse)
+        : undefined;
+    message.getWifiConfigWithCredentialsRequest =
+      (object.getWifiConfigWithCredentialsRequest !== undefined && object.getWifiConfigWithCredentialsRequest !== null)
+        ? TEGAPIGetWifiConfigWithCredentialsRequest.fromPartial(object.getWifiConfigWithCredentialsRequest)
+        : undefined;
+    message.getWifiConfigWithCredentialsResponse =
+      (object.getWifiConfigWithCredentialsResponse !== undefined &&
+          object.getWifiConfigWithCredentialsResponse !== null)
+        ? TEGAPIGetWifiConfigWithCredentialsResponse.fromPartial(object.getWifiConfigWithCredentialsResponse)
+        : undefined;
+    message.disableBatteriesRequest =
+      (object.disableBatteriesRequest !== undefined && object.disableBatteriesRequest !== null)
+        ? TEGAPIDisableBatteriesRequest.fromPartial(object.disableBatteriesRequest)
+        : undefined;
+    message.disableBatteriesResponse =
+      (object.disableBatteriesResponse !== undefined && object.disableBatteriesResponse !== null)
+        ? TEGAPIDisableBatteriesResponse.fromPartial(object.disableBatteriesResponse)
+        : undefined;
+    message.triggerPW3CanFirmwareUpdateRequest =
+      (object.triggerPW3CanFirmwareUpdateRequest !== undefined && object.triggerPW3CanFirmwareUpdateRequest !== null)
+        ? TEGAPITriggerPW3CanFirmwareUpdateRequest.fromPartial(object.triggerPW3CanFirmwareUpdateRequest)
+        : undefined;
+    message.triggerPW3CanFirmwareUpdateResponse =
+      (object.triggerPW3CanFirmwareUpdateResponse !== undefined && object.triggerPW3CanFirmwareUpdateResponse !== null)
+        ? TEGAPITriggerPW3CanFirmwareUpdateResponse.fromPartial(object.triggerPW3CanFirmwareUpdateResponse)
+        : undefined;
+    message.triggerPowerwall3EnumerationRequest =
+      (object.triggerPowerwall3EnumerationRequest !== undefined && object.triggerPowerwall3EnumerationRequest !== null)
+        ? TEGAPITriggerPowerwall3EnumerationRequest.fromPartial(object.triggerPowerwall3EnumerationRequest)
+        : undefined;
+    message.triggerPowerwall3EnumerationResponse =
+      (object.triggerPowerwall3EnumerationResponse !== undefined &&
+          object.triggerPowerwall3EnumerationResponse !== null)
+        ? TEGAPITriggerPowerwall3EnumerationResponse.fromPartial(object.triggerPowerwall3EnumerationResponse)
+        : undefined;
+    message.dispatchBatteryPowerRequest =
+      (object.dispatchBatteryPowerRequest !== undefined && object.dispatchBatteryPowerRequest !== null)
+        ? TEGAPIDispatchBatteryPowerRequest.fromPartial(object.dispatchBatteryPowerRequest)
+        : undefined;
+    message.dispatchBatteryPowerResponse =
+      (object.dispatchBatteryPowerResponse !== undefined && object.dispatchBatteryPowerResponse !== null)
+        ? TEGAPIDispatchBatteryPowerResponse.fromPartial(object.dispatchBatteryPowerResponse)
+        : undefined;
+    message.detectWiredMetersRequest =
+      (object.detectWiredMetersRequest !== undefined && object.detectWiredMetersRequest !== null)
+        ? TEGAPIDetectWiredMetersRequest.fromPartial(object.detectWiredMetersRequest)
+        : undefined;
+    message.detectWiredMetersResponse =
+      (object.detectWiredMetersResponse !== undefined && object.detectWiredMetersResponse !== null)
+        ? TEGAPIDetectWiredMetersResponse.fromPartial(object.detectWiredMetersResponse)
+        : undefined;
+    message.bypassBatterySoeAdjustmentConstraintsRequest =
+      (object.bypassBatterySoeAdjustmentConstraintsRequest !== undefined &&
+          object.bypassBatterySoeAdjustmentConstraintsRequest !== null)
+        ? TEGAPIBypassBatterySoeAdjustmentConstraintsRequest.fromPartial(
+          object.bypassBatterySoeAdjustmentConstraintsRequest,
+        )
+        : undefined;
+    message.bypassBatterySoeAdjustmentConstraintsResponse =
+      (object.bypassBatterySoeAdjustmentConstraintsResponse !== undefined &&
+          object.bypassBatterySoeAdjustmentConstraintsResponse !== null)
+        ? TEGAPIBypassBatterySoeAdjustmentConstraintsResponse.fromPartial(
+          object.bypassBatterySoeAdjustmentConstraintsResponse,
+        )
+        : undefined;
+    message.ensureCertificateRequest =
+      (object.ensureCertificateRequest !== undefined && object.ensureCertificateRequest !== null)
+        ? TEGAPIEnsureCertificateRequest.fromPartial(object.ensureCertificateRequest)
+        : undefined;
+    message.ensureCertificateResponse =
+      (object.ensureCertificateResponse !== undefined && object.ensureCertificateResponse !== null)
+        ? TEGAPIEnsureCertificateResponse.fromPartial(object.ensureCertificateResponse)
+        : undefined;
     message.scheduleManualBackupEventRequest =
       (object.scheduleManualBackupEventRequest !== undefined && object.scheduleManualBackupEventRequest !== null)
         ? TEGAPIScheduleManualBackupEventRequest.fromPartial(object.scheduleManualBackupEventRequest)
@@ -1012,9 +9851,193 @@ export const TEGMessages: MessageFns<TEGMessages> = {
       (object.getBackupEventsResponse !== undefined && object.getBackupEventsResponse !== null)
         ? TEGAPIGetBackupEventsResponse.fromPartial(object.getBackupEventsResponse)
         : undefined;
+    message.getCsmsPropertiesRequest =
+      (object.getCsmsPropertiesRequest !== undefined && object.getCsmsPropertiesRequest !== null)
+        ? TEGAPIGetCsmsPropertiesRequest.fromPartial(object.getCsmsPropertiesRequest)
+        : undefined;
+    message.getCsmsPropertiesResponse =
+      (object.getCsmsPropertiesResponse !== undefined && object.getCsmsPropertiesResponse !== null)
+        ? TEGAPIGetCsmsPropertiesResponse.fromPartial(object.getCsmsPropertiesResponse)
+        : undefined;
+    message.configureOcppRequest = (object.configureOcppRequest !== undefined && object.configureOcppRequest !== null)
+      ? TEGAPIConfigureOcppRequest.fromPartial(object.configureOcppRequest)
+      : undefined;
+    message.configureOcppResponse =
+      (object.configureOcppResponse !== undefined && object.configureOcppResponse !== null)
+        ? TEGAPIConfigureOcppResponse.fromPartial(object.configureOcppResponse)
+        : undefined;
+    message.retrieveSiteUuidRequest =
+      (object.retrieveSiteUuidRequest !== undefined && object.retrieveSiteUuidRequest !== null)
+        ? TEGAPIRetrieveSiteUuidRequest.fromPartial(object.retrieveSiteUuidRequest)
+        : undefined;
+    message.retrieveSiteUuidResponse =
+      (object.retrieveSiteUuidResponse !== undefined && object.retrieveSiteUuidResponse !== null)
+        ? TEGAPIRetrieveSiteUuidResponse.fromPartial(object.retrieveSiteUuidResponse)
+        : undefined;
+    message.retrieveSiteSuggestionRequest =
+      (object.retrieveSiteSuggestionRequest !== undefined && object.retrieveSiteSuggestionRequest !== null)
+        ? TEGAPIRetrieveSiteSuggestionRequest.fromPartial(object.retrieveSiteSuggestionRequest)
+        : undefined;
+    message.retrieveSiteSuggestionResponse =
+      (object.retrieveSiteSuggestionResponse !== undefined && object.retrieveSiteSuggestionResponse !== null)
+        ? TEGAPIRetrieveSiteSuggestionResponse.fromPartial(object.retrieveSiteSuggestionResponse)
+        : undefined;
+    message.startProtectionTripSelfTestRequest =
+      (object.startProtectionTripSelfTestRequest !== undefined && object.startProtectionTripSelfTestRequest !== null)
+        ? TEGAPIStartProtectionTripSelfTestRequest.fromPartial(object.startProtectionTripSelfTestRequest)
+        : undefined;
+    message.startProtectionTripSelfTestResponse =
+      (object.startProtectionTripSelfTestResponse !== undefined && object.startProtectionTripSelfTestResponse !== null)
+        ? TEGAPIStartProtectionTripSelfTestResponse.fromPartial(object.startProtectionTripSelfTestResponse)
+        : undefined;
+    message.stopProtectionTripSelfTestRequest =
+      (object.stopProtectionTripSelfTestRequest !== undefined && object.stopProtectionTripSelfTestRequest !== null)
+        ? TEGAPIStopProtectionTripSelfTestRequest.fromPartial(object.stopProtectionTripSelfTestRequest)
+        : undefined;
+    message.stopProtectionTripSelfTestResponse =
+      (object.stopProtectionTripSelfTestResponse !== undefined && object.stopProtectionTripSelfTestResponse !== null)
+        ? TEGAPIStopProtectionTripSelfTestResponse.fromPartial(object.stopProtectionTripSelfTestResponse)
+        : undefined;
+    message.provisionEatonSmartBreakerRequest =
+      (object.provisionEatonSmartBreakerRequest !== undefined && object.provisionEatonSmartBreakerRequest !== null)
+        ? TEGAPIProvisionEatonSmartBreakerRequest.fromPartial(object.provisionEatonSmartBreakerRequest)
+        : undefined;
+    message.provisionEatonSmartBreakerResponse =
+      (object.provisionEatonSmartBreakerResponse !== undefined && object.provisionEatonSmartBreakerResponse !== null)
+        ? TEGAPIProvisionEatonSmartBreakerResponse.fromPartial(object.provisionEatonSmartBreakerResponse)
+        : undefined;
+    message.identifyEatonSmartBreakerRequest =
+      (object.identifyEatonSmartBreakerRequest !== undefined && object.identifyEatonSmartBreakerRequest !== null)
+        ? TEGAPIIdentifyEatonSmartBreakerRequest.fromPartial(object.identifyEatonSmartBreakerRequest)
+        : undefined;
+    message.identifyEatonSmartBreakerResponse =
+      (object.identifyEatonSmartBreakerResponse !== undefined && object.identifyEatonSmartBreakerResponse !== null)
+        ? TEGAPIIdentifyEatonSmartBreakerResponse.fromPartial(object.identifyEatonSmartBreakerResponse)
+        : undefined;
+    message.triggerPvacFanSelfTestRequest =
+      (object.triggerPvacFanSelfTestRequest !== undefined && object.triggerPvacFanSelfTestRequest !== null)
+        ? TEGAPITriggerPvacFanSelfTestRequest.fromPartial(object.triggerPvacFanSelfTestRequest)
+        : undefined;
+    message.triggerPvacFanSelfTestResponse =
+      (object.triggerPvacFanSelfTestResponse !== undefined && object.triggerPvacFanSelfTestResponse !== null)
+        ? TEGAPITriggerPvacFanSelfTestResponse.fromPartial(object.triggerPvacFanSelfTestResponse)
+        : undefined;
+    message.proxyPrepareRegistrationPayloadRequest =
+      (object.proxyPrepareRegistrationPayloadRequest !== undefined &&
+          object.proxyPrepareRegistrationPayloadRequest !== null)
+        ? TEGAPIProxyPrepareRegistrationPayloadRequest.fromPartial(object.proxyPrepareRegistrationPayloadRequest)
+        : undefined;
+    message.proxyPrepareRegistrationPayloadResponse =
+      (object.proxyPrepareRegistrationPayloadResponse !== undefined &&
+          object.proxyPrepareRegistrationPayloadResponse !== null)
+        ? TEGAPIProxyPrepareRegistrationPayloadResponse.fromPartial(object.proxyPrepareRegistrationPayloadResponse)
+        : undefined;
+    message.triggerWallboxVehicleAbsentSelfTestRequest =
+      (object.triggerWallboxVehicleAbsentSelfTestRequest !== undefined &&
+          object.triggerWallboxVehicleAbsentSelfTestRequest !== null)
+        ? TEGAPITriggerWallboxVehicleAbsentSelfTestRequest.fromPartial(
+          object.triggerWallboxVehicleAbsentSelfTestRequest,
+        )
+        : undefined;
+    message.triggerWallboxVehicleAbsentSelfTestResponse =
+      (object.triggerWallboxVehicleAbsentSelfTestResponse !== undefined &&
+          object.triggerWallboxVehicleAbsentSelfTestResponse !== null)
+        ? TEGAPITriggerWallboxVehicleAbsentSelfTestResponse.fromPartial(
+          object.triggerWallboxVehicleAbsentSelfTestResponse,
+        )
+        : undefined;
+    message.customerResetRequest = (object.customerResetRequest !== undefined && object.customerResetRequest !== null)
+      ? TEGAPICustomerResetRequest.fromPartial(object.customerResetRequest)
+      : undefined;
+    message.customerResetResponse =
+      (object.customerResetResponse !== undefined && object.customerResetResponse !== null)
+        ? TEGAPICustomerResetResponse.fromPartial(object.customerResetResponse)
+        : undefined;
+    message.delayBatteryCalibrationRequest =
+      (object.delayBatteryCalibrationRequest !== undefined && object.delayBatteryCalibrationRequest !== null)
+        ? TEGAPIDelayBatteryCalibrationRequest.fromPartial(object.delayBatteryCalibrationRequest)
+        : undefined;
+    message.delayBatteryCalibrationResponse =
+      (object.delayBatteryCalibrationResponse !== undefined && object.delayBatteryCalibrationResponse !== null)
+        ? TEGAPIDelayBatteryCalibrationResponse.fromPartial(object.delayBatteryCalibrationResponse)
+        : undefined;
+    message.getDelayBatteryCalibrationStatusRequest =
+      (object.getDelayBatteryCalibrationStatusRequest !== undefined &&
+          object.getDelayBatteryCalibrationStatusRequest !== null)
+        ? TEGAPIGetDelayBatteryCalibrationStatusRequest.fromPartial(object.getDelayBatteryCalibrationStatusRequest)
+        : undefined;
+    message.getDelayBatteryCalibrationStatusResponse =
+      (object.getDelayBatteryCalibrationStatusResponse !== undefined &&
+          object.getDelayBatteryCalibrationStatusResponse !== null)
+        ? TEGAPIGetDelayBatteryCalibrationStatusResponse.fromPartial(object.getDelayBatteryCalibrationStatusResponse)
+        : undefined;
+    message.getControllableDeviceProgramsRequest =
+      (object.getControllableDeviceProgramsRequest !== undefined &&
+          object.getControllableDeviceProgramsRequest !== null)
+        ? TEGAPIGetControllableDeviceProgramsRequest.fromPartial(object.getControllableDeviceProgramsRequest)
+        : undefined;
+    message.getControllableDeviceProgramsResponse =
+      (object.getControllableDeviceProgramsResponse !== undefined &&
+          object.getControllableDeviceProgramsResponse !== null)
+        ? TEGAPIGetControllableDeviceProgramsResponse.fromPartial(object.getControllableDeviceProgramsResponse)
+        : undefined;
+    message.updateControllableDeviceProgramsRequest =
+      (object.updateControllableDeviceProgramsRequest !== undefined &&
+          object.updateControllableDeviceProgramsRequest !== null)
+        ? TEGAPIUpdateControllableDeviceProgramsRequest.fromPartial(object.updateControllableDeviceProgramsRequest)
+        : undefined;
+    message.updateControllableDeviceProgramsResponse =
+      (object.updateControllableDeviceProgramsResponse !== undefined &&
+          object.updateControllableDeviceProgramsResponse !== null)
+        ? TEGAPIUpdateControllableDeviceProgramsResponse.fromPartial(object.updateControllableDeviceProgramsResponse)
+        : undefined;
+    message.deleteControllableDeviceProgramsRequest =
+      (object.deleteControllableDeviceProgramsRequest !== undefined &&
+          object.deleteControllableDeviceProgramsRequest !== null)
+        ? TEGAPIDeleteControllableDeviceProgramsRequest.fromPartial(object.deleteControllableDeviceProgramsRequest)
+        : undefined;
+    message.deleteControllableDeviceProgramsResponse =
+      (object.deleteControllableDeviceProgramsResponse !== undefined &&
+          object.deleteControllableDeviceProgramsResponse !== null)
+        ? TEGAPIDeleteControllableDeviceProgramsResponse.fromPartial(object.deleteControllableDeviceProgramsResponse)
+        : undefined;
+    message.clearPowerwall3LockoutAlertsRequest =
+      (object.clearPowerwall3LockoutAlertsRequest !== undefined && object.clearPowerwall3LockoutAlertsRequest !== null)
+        ? TEGAPIClearPowerwall3LockoutAlertsRequest.fromPartial(object.clearPowerwall3LockoutAlertsRequest)
+        : undefined;
+    message.clearPowerwall3LockoutAlertsResponse =
+      (object.clearPowerwall3LockoutAlertsResponse !== undefined &&
+          object.clearPowerwall3LockoutAlertsResponse !== null)
+        ? TEGAPIClearPowerwall3LockoutAlertsResponse.fromPartial(object.clearPowerwall3LockoutAlertsResponse)
+        : undefined;
     return message;
   },
 };
+
+function bytesFromBase64(b64: string): Uint8Array {
+  if ((globalThis as any).Buffer) {
+    return Uint8Array.from(globalThis.Buffer.from(b64, "base64"));
+  } else {
+    const bin = globalThis.atob(b64);
+    const arr = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; ++i) {
+      arr[i] = bin.charCodeAt(i);
+    }
+    return arr;
+  }
+}
+
+function base64FromBytes(arr: Uint8Array): string {
+  if ((globalThis as any).Buffer) {
+    return globalThis.Buffer.from(arr).toString("base64");
+  } else {
+    const bin: string[] = [];
+    arr.forEach((byte) => {
+      bin.push(globalThis.String.fromCharCode(byte));
+    });
+    return globalThis.btoa(bin.join(""));
+  }
+}
 
 type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
 

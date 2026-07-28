@@ -5,6 +5,17 @@
 // source: energy_site_net.proto
 
 /* eslint-disable */
+import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
+import {
+  DeviceType,
+  deviceTypeFromJSON,
+  deviceTypeToJSON,
+  Din,
+  TEGDeviceType,
+  tEGDeviceTypeFromJSON,
+  tEGDeviceTypeToJSON,
+} from "./device.js";
+import { WifiConfig } from "./networking.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
@@ -327,4 +338,1238 @@ export function intraSiteServiceTypeToJSON(object: IntraSiteServiceType): string
     default:
       return "UNRECOGNIZED";
   }
+}
+
+export interface EnergySiteNetDevice {
+  din: Din | undefined;
+  wifiApConfig: WifiConfig | undefined;
+  serviceTypes: IntraSiteServiceType[];
+}
+
+export interface EnergySiteNetRecentlyAddedDevice {
+  din: Din | undefined;
+  status: EnergySiteNetAdditionStatus;
+}
+
+export interface EnergySiteNetRecentlyRemovedDevice {
+  din: Din | undefined;
+  status: EnergySiteNetRemovalStatus;
+}
+
+export interface EnergySiteNetUnpairedDevice {
+  din: Din | undefined;
+  pairStatus: EnergySiteNetPairStatus;
+  firmwareVersion: string;
+  deviceType: DeviceType;
+  tegDeviceType: TEGDeviceType;
+}
+
+export interface EnergySiteNetConfig {
+  devices: EnergySiteNetDevice[];
+  recentlyAdded: EnergySiteNetRecentlyAddedDevice | undefined;
+  recentlyRemoved: EnergySiteNetRecentlyRemovedDevice | undefined;
+  unpairedDevices: EnergySiteNetUnpairedDevice[];
+}
+
+export interface EnergySiteNetAPIAddDeviceRequest {
+  device: EnergySiteNetDevice | undefined;
+  networkType: EnergySiteNetNetworkType;
+}
+
+export interface EnergySiteNetAPIAddDeviceResponse {
+  recentlyAdded: EnergySiteNetRecentlyAddedDevice | undefined;
+}
+
+export interface EnergySiteNetAPIRemoveDeviceRequest {
+  din: Din | undefined;
+  networkType: EnergySiteNetNetworkType;
+  serviceType: IntraSiteServiceType;
+}
+
+export interface EnergySiteNetAPIRemoveDeviceResponse {
+  recentlyRemoved: EnergySiteNetRecentlyRemovedDevice | undefined;
+}
+
+export interface EnergySiteNetAPIGetConfigRequest {
+  networkType: EnergySiteNetNetworkType;
+}
+
+export interface EnergySiteNetAPIGetConfigResponse {
+  config: EnergySiteNetConfig | undefined;
+  networkType: EnergySiteNetNetworkType;
+}
+
+export interface EnergySiteNetMessages {
+  addDeviceRequest?: EnergySiteNetAPIAddDeviceRequest | undefined;
+  addDeviceResponse?: EnergySiteNetAPIAddDeviceResponse | undefined;
+  removeDeviceRequest?: EnergySiteNetAPIRemoveDeviceRequest | undefined;
+  removeDeviceResponse?: EnergySiteNetAPIRemoveDeviceResponse | undefined;
+  getConfigRequest?: EnergySiteNetAPIGetConfigRequest | undefined;
+  getConfigResponse?: EnergySiteNetAPIGetConfigResponse | undefined;
+}
+
+function createBaseEnergySiteNetDevice(): EnergySiteNetDevice {
+  return { din: undefined, wifiApConfig: undefined, serviceTypes: [] };
+}
+
+export const EnergySiteNetDevice: MessageFns<EnergySiteNetDevice> = {
+  encode(message: EnergySiteNetDevice, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.din !== undefined) {
+      Din.encode(message.din, writer.uint32(10).fork()).join();
+    }
+    if (message.wifiApConfig !== undefined) {
+      WifiConfig.encode(message.wifiApConfig, writer.uint32(18).fork()).join();
+    }
+    writer.uint32(26).fork();
+    for (const v of message.serviceTypes) {
+      writer.int32(v);
+    }
+    writer.join();
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EnergySiteNetDevice {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEnergySiteNetDevice();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.din = Din.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.wifiApConfig = WifiConfig.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag === 24) {
+            message.serviceTypes.push(reader.int32() as any);
+
+            continue;
+          }
+
+          if (tag === 26) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.serviceTypes.push(reader.int32() as any);
+            }
+
+            continue;
+          }
+
+          break;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EnergySiteNetDevice {
+    return {
+      din: isSet(object.din) ? Din.fromJSON(object.din) : undefined,
+      wifiApConfig: isSet(object.wifiApConfig) ? WifiConfig.fromJSON(object.wifiApConfig) : undefined,
+      serviceTypes: globalThis.Array.isArray(object?.serviceTypes)
+        ? object.serviceTypes.map((e: any) => intraSiteServiceTypeFromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: EnergySiteNetDevice): unknown {
+    const obj: any = {};
+    if (message.din !== undefined) {
+      obj.din = Din.toJSON(message.din);
+    }
+    if (message.wifiApConfig !== undefined) {
+      obj.wifiApConfig = WifiConfig.toJSON(message.wifiApConfig);
+    }
+    if (message.serviceTypes?.length) {
+      obj.serviceTypes = message.serviceTypes.map((e) => intraSiteServiceTypeToJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EnergySiteNetDevice>, I>>(base?: I): EnergySiteNetDevice {
+    return EnergySiteNetDevice.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EnergySiteNetDevice>, I>>(object: I): EnergySiteNetDevice {
+    const message = createBaseEnergySiteNetDevice();
+    message.din = (object.din !== undefined && object.din !== null) ? Din.fromPartial(object.din) : undefined;
+    message.wifiApConfig = (object.wifiApConfig !== undefined && object.wifiApConfig !== null)
+      ? WifiConfig.fromPartial(object.wifiApConfig)
+      : undefined;
+    message.serviceTypes = object.serviceTypes?.map((e) => e) || [];
+    return message;
+  },
+};
+
+function createBaseEnergySiteNetRecentlyAddedDevice(): EnergySiteNetRecentlyAddedDevice {
+  return { din: undefined, status: 0 };
+}
+
+export const EnergySiteNetRecentlyAddedDevice: MessageFns<EnergySiteNetRecentlyAddedDevice> = {
+  encode(message: EnergySiteNetRecentlyAddedDevice, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.din !== undefined) {
+      Din.encode(message.din, writer.uint32(10).fork()).join();
+    }
+    if (message.status !== 0) {
+      writer.uint32(16).int32(message.status);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EnergySiteNetRecentlyAddedDevice {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEnergySiteNetRecentlyAddedDevice();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.din = Din.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.status = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EnergySiteNetRecentlyAddedDevice {
+    return {
+      din: isSet(object.din) ? Din.fromJSON(object.din) : undefined,
+      status: isSet(object.status) ? energySiteNetAdditionStatusFromJSON(object.status) : 0,
+    };
+  },
+
+  toJSON(message: EnergySiteNetRecentlyAddedDevice): unknown {
+    const obj: any = {};
+    if (message.din !== undefined) {
+      obj.din = Din.toJSON(message.din);
+    }
+    if (message.status !== undefined) {
+      obj.status = energySiteNetAdditionStatusToJSON(message.status);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EnergySiteNetRecentlyAddedDevice>, I>>(
+    base?: I,
+  ): EnergySiteNetRecentlyAddedDevice {
+    return EnergySiteNetRecentlyAddedDevice.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EnergySiteNetRecentlyAddedDevice>, I>>(
+    object: I,
+  ): EnergySiteNetRecentlyAddedDevice {
+    const message = createBaseEnergySiteNetRecentlyAddedDevice();
+    message.din = (object.din !== undefined && object.din !== null) ? Din.fromPartial(object.din) : undefined;
+    message.status = object.status ?? 0;
+    return message;
+  },
+};
+
+function createBaseEnergySiteNetRecentlyRemovedDevice(): EnergySiteNetRecentlyRemovedDevice {
+  return { din: undefined, status: 0 };
+}
+
+export const EnergySiteNetRecentlyRemovedDevice: MessageFns<EnergySiteNetRecentlyRemovedDevice> = {
+  encode(message: EnergySiteNetRecentlyRemovedDevice, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.din !== undefined) {
+      Din.encode(message.din, writer.uint32(10).fork()).join();
+    }
+    if (message.status !== 0) {
+      writer.uint32(16).int32(message.status);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EnergySiteNetRecentlyRemovedDevice {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEnergySiteNetRecentlyRemovedDevice();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.din = Din.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.status = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EnergySiteNetRecentlyRemovedDevice {
+    return {
+      din: isSet(object.din) ? Din.fromJSON(object.din) : undefined,
+      status: isSet(object.status) ? energySiteNetRemovalStatusFromJSON(object.status) : 0,
+    };
+  },
+
+  toJSON(message: EnergySiteNetRecentlyRemovedDevice): unknown {
+    const obj: any = {};
+    if (message.din !== undefined) {
+      obj.din = Din.toJSON(message.din);
+    }
+    if (message.status !== undefined) {
+      obj.status = energySiteNetRemovalStatusToJSON(message.status);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EnergySiteNetRecentlyRemovedDevice>, I>>(
+    base?: I,
+  ): EnergySiteNetRecentlyRemovedDevice {
+    return EnergySiteNetRecentlyRemovedDevice.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EnergySiteNetRecentlyRemovedDevice>, I>>(
+    object: I,
+  ): EnergySiteNetRecentlyRemovedDevice {
+    const message = createBaseEnergySiteNetRecentlyRemovedDevice();
+    message.din = (object.din !== undefined && object.din !== null) ? Din.fromPartial(object.din) : undefined;
+    message.status = object.status ?? 0;
+    return message;
+  },
+};
+
+function createBaseEnergySiteNetUnpairedDevice(): EnergySiteNetUnpairedDevice {
+  return { din: undefined, pairStatus: 0, firmwareVersion: "", deviceType: 0, tegDeviceType: 0 };
+}
+
+export const EnergySiteNetUnpairedDevice: MessageFns<EnergySiteNetUnpairedDevice> = {
+  encode(message: EnergySiteNetUnpairedDevice, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.din !== undefined) {
+      Din.encode(message.din, writer.uint32(10).fork()).join();
+    }
+    if (message.pairStatus !== 0) {
+      writer.uint32(16).int32(message.pairStatus);
+    }
+    if (message.firmwareVersion !== "") {
+      writer.uint32(26).string(message.firmwareVersion);
+    }
+    if (message.deviceType !== 0) {
+      writer.uint32(32).int32(message.deviceType);
+    }
+    if (message.tegDeviceType !== 0) {
+      writer.uint32(800).int32(message.tegDeviceType);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EnergySiteNetUnpairedDevice {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEnergySiteNetUnpairedDevice();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.din = Din.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.pairStatus = reader.int32() as any;
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.firmwareVersion = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.deviceType = reader.int32() as any;
+          continue;
+        }
+        case 100: {
+          if (tag !== 800) {
+            break;
+          }
+
+          message.tegDeviceType = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EnergySiteNetUnpairedDevice {
+    return {
+      din: isSet(object.din) ? Din.fromJSON(object.din) : undefined,
+      pairStatus: isSet(object.pairStatus) ? energySiteNetPairStatusFromJSON(object.pairStatus) : 0,
+      firmwareVersion: isSet(object.firmwareVersion) ? globalThis.String(object.firmwareVersion) : "",
+      deviceType: isSet(object.deviceType) ? deviceTypeFromJSON(object.deviceType) : 0,
+      tegDeviceType: isSet(object.tegDeviceType) ? tEGDeviceTypeFromJSON(object.tegDeviceType) : 0,
+    };
+  },
+
+  toJSON(message: EnergySiteNetUnpairedDevice): unknown {
+    const obj: any = {};
+    if (message.din !== undefined) {
+      obj.din = Din.toJSON(message.din);
+    }
+    if (message.pairStatus !== undefined) {
+      obj.pairStatus = energySiteNetPairStatusToJSON(message.pairStatus);
+    }
+    if (message.firmwareVersion !== undefined) {
+      obj.firmwareVersion = message.firmwareVersion;
+    }
+    if (message.deviceType !== undefined) {
+      obj.deviceType = deviceTypeToJSON(message.deviceType);
+    }
+    if (message.tegDeviceType !== undefined) {
+      obj.tegDeviceType = tEGDeviceTypeToJSON(message.tegDeviceType);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EnergySiteNetUnpairedDevice>, I>>(base?: I): EnergySiteNetUnpairedDevice {
+    return EnergySiteNetUnpairedDevice.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EnergySiteNetUnpairedDevice>, I>>(object: I): EnergySiteNetUnpairedDevice {
+    const message = createBaseEnergySiteNetUnpairedDevice();
+    message.din = (object.din !== undefined && object.din !== null) ? Din.fromPartial(object.din) : undefined;
+    message.pairStatus = object.pairStatus ?? 0;
+    message.firmwareVersion = object.firmwareVersion ?? "";
+    message.deviceType = object.deviceType ?? 0;
+    message.tegDeviceType = object.tegDeviceType ?? 0;
+    return message;
+  },
+};
+
+function createBaseEnergySiteNetConfig(): EnergySiteNetConfig {
+  return { devices: [], recentlyAdded: undefined, recentlyRemoved: undefined, unpairedDevices: [] };
+}
+
+export const EnergySiteNetConfig: MessageFns<EnergySiteNetConfig> = {
+  encode(message: EnergySiteNetConfig, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.devices) {
+      EnergySiteNetDevice.encode(v!, writer.uint32(10).fork()).join();
+    }
+    if (message.recentlyAdded !== undefined) {
+      EnergySiteNetRecentlyAddedDevice.encode(message.recentlyAdded, writer.uint32(18).fork()).join();
+    }
+    if (message.recentlyRemoved !== undefined) {
+      EnergySiteNetRecentlyRemovedDevice.encode(message.recentlyRemoved, writer.uint32(26).fork()).join();
+    }
+    for (const v of message.unpairedDevices) {
+      EnergySiteNetUnpairedDevice.encode(v!, writer.uint32(34).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EnergySiteNetConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEnergySiteNetConfig();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.devices.push(EnergySiteNetDevice.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.recentlyAdded = EnergySiteNetRecentlyAddedDevice.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.recentlyRemoved = EnergySiteNetRecentlyRemovedDevice.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.unpairedDevices.push(EnergySiteNetUnpairedDevice.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EnergySiteNetConfig {
+    return {
+      devices: globalThis.Array.isArray(object?.devices)
+        ? object.devices.map((e: any) => EnergySiteNetDevice.fromJSON(e))
+        : [],
+      recentlyAdded: isSet(object.recentlyAdded)
+        ? EnergySiteNetRecentlyAddedDevice.fromJSON(object.recentlyAdded)
+        : undefined,
+      recentlyRemoved: isSet(object.recentlyRemoved)
+        ? EnergySiteNetRecentlyRemovedDevice.fromJSON(object.recentlyRemoved)
+        : undefined,
+      unpairedDevices: globalThis.Array.isArray(object?.unpairedDevices)
+        ? object.unpairedDevices.map((e: any) => EnergySiteNetUnpairedDevice.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: EnergySiteNetConfig): unknown {
+    const obj: any = {};
+    if (message.devices?.length) {
+      obj.devices = message.devices.map((e) => EnergySiteNetDevice.toJSON(e));
+    }
+    if (message.recentlyAdded !== undefined) {
+      obj.recentlyAdded = EnergySiteNetRecentlyAddedDevice.toJSON(message.recentlyAdded);
+    }
+    if (message.recentlyRemoved !== undefined) {
+      obj.recentlyRemoved = EnergySiteNetRecentlyRemovedDevice.toJSON(message.recentlyRemoved);
+    }
+    if (message.unpairedDevices?.length) {
+      obj.unpairedDevices = message.unpairedDevices.map((e) => EnergySiteNetUnpairedDevice.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EnergySiteNetConfig>, I>>(base?: I): EnergySiteNetConfig {
+    return EnergySiteNetConfig.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EnergySiteNetConfig>, I>>(object: I): EnergySiteNetConfig {
+    const message = createBaseEnergySiteNetConfig();
+    message.devices = object.devices?.map((e) => EnergySiteNetDevice.fromPartial(e)) || [];
+    message.recentlyAdded = (object.recentlyAdded !== undefined && object.recentlyAdded !== null)
+      ? EnergySiteNetRecentlyAddedDevice.fromPartial(object.recentlyAdded)
+      : undefined;
+    message.recentlyRemoved = (object.recentlyRemoved !== undefined && object.recentlyRemoved !== null)
+      ? EnergySiteNetRecentlyRemovedDevice.fromPartial(object.recentlyRemoved)
+      : undefined;
+    message.unpairedDevices = object.unpairedDevices?.map((e) => EnergySiteNetUnpairedDevice.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseEnergySiteNetAPIAddDeviceRequest(): EnergySiteNetAPIAddDeviceRequest {
+  return { device: undefined, networkType: 0 };
+}
+
+export const EnergySiteNetAPIAddDeviceRequest: MessageFns<EnergySiteNetAPIAddDeviceRequest> = {
+  encode(message: EnergySiteNetAPIAddDeviceRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.device !== undefined) {
+      EnergySiteNetDevice.encode(message.device, writer.uint32(10).fork()).join();
+    }
+    if (message.networkType !== 0) {
+      writer.uint32(16).int32(message.networkType);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EnergySiteNetAPIAddDeviceRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEnergySiteNetAPIAddDeviceRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.device = EnergySiteNetDevice.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.networkType = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EnergySiteNetAPIAddDeviceRequest {
+    return {
+      device: isSet(object.device) ? EnergySiteNetDevice.fromJSON(object.device) : undefined,
+      networkType: isSet(object.networkType) ? energySiteNetNetworkTypeFromJSON(object.networkType) : 0,
+    };
+  },
+
+  toJSON(message: EnergySiteNetAPIAddDeviceRequest): unknown {
+    const obj: any = {};
+    if (message.device !== undefined) {
+      obj.device = EnergySiteNetDevice.toJSON(message.device);
+    }
+    if (message.networkType !== undefined) {
+      obj.networkType = energySiteNetNetworkTypeToJSON(message.networkType);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EnergySiteNetAPIAddDeviceRequest>, I>>(
+    base?: I,
+  ): EnergySiteNetAPIAddDeviceRequest {
+    return EnergySiteNetAPIAddDeviceRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EnergySiteNetAPIAddDeviceRequest>, I>>(
+    object: I,
+  ): EnergySiteNetAPIAddDeviceRequest {
+    const message = createBaseEnergySiteNetAPIAddDeviceRequest();
+    message.device = (object.device !== undefined && object.device !== null)
+      ? EnergySiteNetDevice.fromPartial(object.device)
+      : undefined;
+    message.networkType = object.networkType ?? 0;
+    return message;
+  },
+};
+
+function createBaseEnergySiteNetAPIAddDeviceResponse(): EnergySiteNetAPIAddDeviceResponse {
+  return { recentlyAdded: undefined };
+}
+
+export const EnergySiteNetAPIAddDeviceResponse: MessageFns<EnergySiteNetAPIAddDeviceResponse> = {
+  encode(message: EnergySiteNetAPIAddDeviceResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.recentlyAdded !== undefined) {
+      EnergySiteNetRecentlyAddedDevice.encode(message.recentlyAdded, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EnergySiteNetAPIAddDeviceResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEnergySiteNetAPIAddDeviceResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.recentlyAdded = EnergySiteNetRecentlyAddedDevice.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EnergySiteNetAPIAddDeviceResponse {
+    return {
+      recentlyAdded: isSet(object.recentlyAdded)
+        ? EnergySiteNetRecentlyAddedDevice.fromJSON(object.recentlyAdded)
+        : undefined,
+    };
+  },
+
+  toJSON(message: EnergySiteNetAPIAddDeviceResponse): unknown {
+    const obj: any = {};
+    if (message.recentlyAdded !== undefined) {
+      obj.recentlyAdded = EnergySiteNetRecentlyAddedDevice.toJSON(message.recentlyAdded);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EnergySiteNetAPIAddDeviceResponse>, I>>(
+    base?: I,
+  ): EnergySiteNetAPIAddDeviceResponse {
+    return EnergySiteNetAPIAddDeviceResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EnergySiteNetAPIAddDeviceResponse>, I>>(
+    object: I,
+  ): EnergySiteNetAPIAddDeviceResponse {
+    const message = createBaseEnergySiteNetAPIAddDeviceResponse();
+    message.recentlyAdded = (object.recentlyAdded !== undefined && object.recentlyAdded !== null)
+      ? EnergySiteNetRecentlyAddedDevice.fromPartial(object.recentlyAdded)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseEnergySiteNetAPIRemoveDeviceRequest(): EnergySiteNetAPIRemoveDeviceRequest {
+  return { din: undefined, networkType: 0, serviceType: 0 };
+}
+
+export const EnergySiteNetAPIRemoveDeviceRequest: MessageFns<EnergySiteNetAPIRemoveDeviceRequest> = {
+  encode(message: EnergySiteNetAPIRemoveDeviceRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.din !== undefined) {
+      Din.encode(message.din, writer.uint32(10).fork()).join();
+    }
+    if (message.networkType !== 0) {
+      writer.uint32(16).int32(message.networkType);
+    }
+    if (message.serviceType !== 0) {
+      writer.uint32(24).int32(message.serviceType);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EnergySiteNetAPIRemoveDeviceRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEnergySiteNetAPIRemoveDeviceRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.din = Din.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.networkType = reader.int32() as any;
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.serviceType = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EnergySiteNetAPIRemoveDeviceRequest {
+    return {
+      din: isSet(object.din) ? Din.fromJSON(object.din) : undefined,
+      networkType: isSet(object.networkType) ? energySiteNetNetworkTypeFromJSON(object.networkType) : 0,
+      serviceType: isSet(object.serviceType) ? intraSiteServiceTypeFromJSON(object.serviceType) : 0,
+    };
+  },
+
+  toJSON(message: EnergySiteNetAPIRemoveDeviceRequest): unknown {
+    const obj: any = {};
+    if (message.din !== undefined) {
+      obj.din = Din.toJSON(message.din);
+    }
+    if (message.networkType !== undefined) {
+      obj.networkType = energySiteNetNetworkTypeToJSON(message.networkType);
+    }
+    if (message.serviceType !== undefined) {
+      obj.serviceType = intraSiteServiceTypeToJSON(message.serviceType);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EnergySiteNetAPIRemoveDeviceRequest>, I>>(
+    base?: I,
+  ): EnergySiteNetAPIRemoveDeviceRequest {
+    return EnergySiteNetAPIRemoveDeviceRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EnergySiteNetAPIRemoveDeviceRequest>, I>>(
+    object: I,
+  ): EnergySiteNetAPIRemoveDeviceRequest {
+    const message = createBaseEnergySiteNetAPIRemoveDeviceRequest();
+    message.din = (object.din !== undefined && object.din !== null) ? Din.fromPartial(object.din) : undefined;
+    message.networkType = object.networkType ?? 0;
+    message.serviceType = object.serviceType ?? 0;
+    return message;
+  },
+};
+
+function createBaseEnergySiteNetAPIRemoveDeviceResponse(): EnergySiteNetAPIRemoveDeviceResponse {
+  return { recentlyRemoved: undefined };
+}
+
+export const EnergySiteNetAPIRemoveDeviceResponse: MessageFns<EnergySiteNetAPIRemoveDeviceResponse> = {
+  encode(message: EnergySiteNetAPIRemoveDeviceResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.recentlyRemoved !== undefined) {
+      EnergySiteNetRecentlyRemovedDevice.encode(message.recentlyRemoved, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EnergySiteNetAPIRemoveDeviceResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEnergySiteNetAPIRemoveDeviceResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.recentlyRemoved = EnergySiteNetRecentlyRemovedDevice.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EnergySiteNetAPIRemoveDeviceResponse {
+    return {
+      recentlyRemoved: isSet(object.recentlyRemoved)
+        ? EnergySiteNetRecentlyRemovedDevice.fromJSON(object.recentlyRemoved)
+        : undefined,
+    };
+  },
+
+  toJSON(message: EnergySiteNetAPIRemoveDeviceResponse): unknown {
+    const obj: any = {};
+    if (message.recentlyRemoved !== undefined) {
+      obj.recentlyRemoved = EnergySiteNetRecentlyRemovedDevice.toJSON(message.recentlyRemoved);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EnergySiteNetAPIRemoveDeviceResponse>, I>>(
+    base?: I,
+  ): EnergySiteNetAPIRemoveDeviceResponse {
+    return EnergySiteNetAPIRemoveDeviceResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EnergySiteNetAPIRemoveDeviceResponse>, I>>(
+    object: I,
+  ): EnergySiteNetAPIRemoveDeviceResponse {
+    const message = createBaseEnergySiteNetAPIRemoveDeviceResponse();
+    message.recentlyRemoved = (object.recentlyRemoved !== undefined && object.recentlyRemoved !== null)
+      ? EnergySiteNetRecentlyRemovedDevice.fromPartial(object.recentlyRemoved)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseEnergySiteNetAPIGetConfigRequest(): EnergySiteNetAPIGetConfigRequest {
+  return { networkType: 0 };
+}
+
+export const EnergySiteNetAPIGetConfigRequest: MessageFns<EnergySiteNetAPIGetConfigRequest> = {
+  encode(message: EnergySiteNetAPIGetConfigRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.networkType !== 0) {
+      writer.uint32(8).int32(message.networkType);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EnergySiteNetAPIGetConfigRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEnergySiteNetAPIGetConfigRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.networkType = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EnergySiteNetAPIGetConfigRequest {
+    return { networkType: isSet(object.networkType) ? energySiteNetNetworkTypeFromJSON(object.networkType) : 0 };
+  },
+
+  toJSON(message: EnergySiteNetAPIGetConfigRequest): unknown {
+    const obj: any = {};
+    if (message.networkType !== undefined) {
+      obj.networkType = energySiteNetNetworkTypeToJSON(message.networkType);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EnergySiteNetAPIGetConfigRequest>, I>>(
+    base?: I,
+  ): EnergySiteNetAPIGetConfigRequest {
+    return EnergySiteNetAPIGetConfigRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EnergySiteNetAPIGetConfigRequest>, I>>(
+    object: I,
+  ): EnergySiteNetAPIGetConfigRequest {
+    const message = createBaseEnergySiteNetAPIGetConfigRequest();
+    message.networkType = object.networkType ?? 0;
+    return message;
+  },
+};
+
+function createBaseEnergySiteNetAPIGetConfigResponse(): EnergySiteNetAPIGetConfigResponse {
+  return { config: undefined, networkType: 0 };
+}
+
+export const EnergySiteNetAPIGetConfigResponse: MessageFns<EnergySiteNetAPIGetConfigResponse> = {
+  encode(message: EnergySiteNetAPIGetConfigResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.config !== undefined) {
+      EnergySiteNetConfig.encode(message.config, writer.uint32(10).fork()).join();
+    }
+    if (message.networkType !== 0) {
+      writer.uint32(16).int32(message.networkType);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EnergySiteNetAPIGetConfigResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEnergySiteNetAPIGetConfigResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.config = EnergySiteNetConfig.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.networkType = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EnergySiteNetAPIGetConfigResponse {
+    return {
+      config: isSet(object.config) ? EnergySiteNetConfig.fromJSON(object.config) : undefined,
+      networkType: isSet(object.networkType) ? energySiteNetNetworkTypeFromJSON(object.networkType) : 0,
+    };
+  },
+
+  toJSON(message: EnergySiteNetAPIGetConfigResponse): unknown {
+    const obj: any = {};
+    if (message.config !== undefined) {
+      obj.config = EnergySiteNetConfig.toJSON(message.config);
+    }
+    if (message.networkType !== undefined) {
+      obj.networkType = energySiteNetNetworkTypeToJSON(message.networkType);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EnergySiteNetAPIGetConfigResponse>, I>>(
+    base?: I,
+  ): EnergySiteNetAPIGetConfigResponse {
+    return EnergySiteNetAPIGetConfigResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EnergySiteNetAPIGetConfigResponse>, I>>(
+    object: I,
+  ): EnergySiteNetAPIGetConfigResponse {
+    const message = createBaseEnergySiteNetAPIGetConfigResponse();
+    message.config = (object.config !== undefined && object.config !== null)
+      ? EnergySiteNetConfig.fromPartial(object.config)
+      : undefined;
+    message.networkType = object.networkType ?? 0;
+    return message;
+  },
+};
+
+function createBaseEnergySiteNetMessages(): EnergySiteNetMessages {
+  return {
+    addDeviceRequest: undefined,
+    addDeviceResponse: undefined,
+    removeDeviceRequest: undefined,
+    removeDeviceResponse: undefined,
+    getConfigRequest: undefined,
+    getConfigResponse: undefined,
+  };
+}
+
+export const EnergySiteNetMessages: MessageFns<EnergySiteNetMessages> = {
+  encode(message: EnergySiteNetMessages, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.addDeviceRequest !== undefined) {
+      EnergySiteNetAPIAddDeviceRequest.encode(message.addDeviceRequest, writer.uint32(10).fork()).join();
+    }
+    if (message.addDeviceResponse !== undefined) {
+      EnergySiteNetAPIAddDeviceResponse.encode(message.addDeviceResponse, writer.uint32(18).fork()).join();
+    }
+    if (message.removeDeviceRequest !== undefined) {
+      EnergySiteNetAPIRemoveDeviceRequest.encode(message.removeDeviceRequest, writer.uint32(26).fork()).join();
+    }
+    if (message.removeDeviceResponse !== undefined) {
+      EnergySiteNetAPIRemoveDeviceResponse.encode(message.removeDeviceResponse, writer.uint32(34).fork()).join();
+    }
+    if (message.getConfigRequest !== undefined) {
+      EnergySiteNetAPIGetConfigRequest.encode(message.getConfigRequest, writer.uint32(42).fork()).join();
+    }
+    if (message.getConfigResponse !== undefined) {
+      EnergySiteNetAPIGetConfigResponse.encode(message.getConfigResponse, writer.uint32(50).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EnergySiteNetMessages {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEnergySiteNetMessages();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.addDeviceRequest = EnergySiteNetAPIAddDeviceRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.addDeviceResponse = EnergySiteNetAPIAddDeviceResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.removeDeviceRequest = EnergySiteNetAPIRemoveDeviceRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.removeDeviceResponse = EnergySiteNetAPIRemoveDeviceResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.getConfigRequest = EnergySiteNetAPIGetConfigRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.getConfigResponse = EnergySiteNetAPIGetConfigResponse.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EnergySiteNetMessages {
+    return {
+      addDeviceRequest: isSet(object.addDeviceRequest)
+        ? EnergySiteNetAPIAddDeviceRequest.fromJSON(object.addDeviceRequest)
+        : undefined,
+      addDeviceResponse: isSet(object.addDeviceResponse)
+        ? EnergySiteNetAPIAddDeviceResponse.fromJSON(object.addDeviceResponse)
+        : undefined,
+      removeDeviceRequest: isSet(object.removeDeviceRequest)
+        ? EnergySiteNetAPIRemoveDeviceRequest.fromJSON(object.removeDeviceRequest)
+        : undefined,
+      removeDeviceResponse: isSet(object.removeDeviceResponse)
+        ? EnergySiteNetAPIRemoveDeviceResponse.fromJSON(object.removeDeviceResponse)
+        : undefined,
+      getConfigRequest: isSet(object.getConfigRequest)
+        ? EnergySiteNetAPIGetConfigRequest.fromJSON(object.getConfigRequest)
+        : undefined,
+      getConfigResponse: isSet(object.getConfigResponse)
+        ? EnergySiteNetAPIGetConfigResponse.fromJSON(object.getConfigResponse)
+        : undefined,
+    };
+  },
+
+  toJSON(message: EnergySiteNetMessages): unknown {
+    const obj: any = {};
+    if (message.addDeviceRequest !== undefined) {
+      obj.addDeviceRequest = EnergySiteNetAPIAddDeviceRequest.toJSON(message.addDeviceRequest);
+    }
+    if (message.addDeviceResponse !== undefined) {
+      obj.addDeviceResponse = EnergySiteNetAPIAddDeviceResponse.toJSON(message.addDeviceResponse);
+    }
+    if (message.removeDeviceRequest !== undefined) {
+      obj.removeDeviceRequest = EnergySiteNetAPIRemoveDeviceRequest.toJSON(message.removeDeviceRequest);
+    }
+    if (message.removeDeviceResponse !== undefined) {
+      obj.removeDeviceResponse = EnergySiteNetAPIRemoveDeviceResponse.toJSON(message.removeDeviceResponse);
+    }
+    if (message.getConfigRequest !== undefined) {
+      obj.getConfigRequest = EnergySiteNetAPIGetConfigRequest.toJSON(message.getConfigRequest);
+    }
+    if (message.getConfigResponse !== undefined) {
+      obj.getConfigResponse = EnergySiteNetAPIGetConfigResponse.toJSON(message.getConfigResponse);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EnergySiteNetMessages>, I>>(base?: I): EnergySiteNetMessages {
+    return EnergySiteNetMessages.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EnergySiteNetMessages>, I>>(object: I): EnergySiteNetMessages {
+    const message = createBaseEnergySiteNetMessages();
+    message.addDeviceRequest = (object.addDeviceRequest !== undefined && object.addDeviceRequest !== null)
+      ? EnergySiteNetAPIAddDeviceRequest.fromPartial(object.addDeviceRequest)
+      : undefined;
+    message.addDeviceResponse = (object.addDeviceResponse !== undefined && object.addDeviceResponse !== null)
+      ? EnergySiteNetAPIAddDeviceResponse.fromPartial(object.addDeviceResponse)
+      : undefined;
+    message.removeDeviceRequest = (object.removeDeviceRequest !== undefined && object.removeDeviceRequest !== null)
+      ? EnergySiteNetAPIRemoveDeviceRequest.fromPartial(object.removeDeviceRequest)
+      : undefined;
+    message.removeDeviceResponse = (object.removeDeviceResponse !== undefined && object.removeDeviceResponse !== null)
+      ? EnergySiteNetAPIRemoveDeviceResponse.fromPartial(object.removeDeviceResponse)
+      : undefined;
+    message.getConfigRequest = (object.getConfigRequest !== undefined && object.getConfigRequest !== null)
+      ? EnergySiteNetAPIGetConfigRequest.fromPartial(object.getConfigRequest)
+      : undefined;
+    message.getConfigResponse = (object.getConfigResponse !== undefined && object.getConfigResponse !== null)
+      ? EnergySiteNetAPIGetConfigResponse.fromPartial(object.getConfigResponse)
+      : undefined;
+    return message;
+  },
+};
+
+type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+
+export type DeepPartial<T> = T extends Builtin ? T
+  : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
+  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
+  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
+  : Partial<T>;
+
+type KeysOfUnion<T> = T extends T ? keyof T : never;
+export type Exact<P, I extends P> = P extends Builtin ? P
+  : P & { [K in keyof P]: Exact<P[K], I[K]> } & { [K in Exclude<keyof I, KeysOfUnion<P>>]: never };
+
+function isSet(value: any): boolean {
+  return value !== null && value !== undefined;
+}
+
+export interface MessageFns<T> {
+  encode(message: T, writer?: BinaryWriter): BinaryWriter;
+  decode(input: BinaryReader | Uint8Array, length?: number): T;
+  fromJSON(object: any): T;
+  toJSON(message: T): unknown;
+  create<I extends Exact<DeepPartial<T>, I>>(base?: I): T;
+  fromPartial<I extends Exact<DeepPartial<T>, I>>(object: I): T;
 }
