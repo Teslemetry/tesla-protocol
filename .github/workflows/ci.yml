@@ -5,6 +5,7 @@ on:
   push:
     branches:
       - main
+  workflow_call: # reused by publish.yml to gate on the exact SHA it publishes
 
 jobs:
   build:
