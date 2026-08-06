@@ -62,6 +62,25 @@ single Version PR that bumps `package.json` and `pyproject.toml` together;
 merging that publishes both packages via OIDC trusted publishing (npm
 provenance + PyPI attestations, no stored tokens).
 
+Both publish jobs run under the `production` GitHub environment, which gates
+on a required reviewer approving the exact SHA that the `ci` job (reused from
+`ci.yml`) has already validated - approval cannot happen before that check is
+green because both jobs declare `needs: ci`/`needs: [ci, release]`. GitHub
+only asks for approval once per workflow run even though two jobs reference
+`production`.
+
+If a publish run is interrupted (cancelled, runner failure, transient
+network error), re-running the failed job(s) from the Actions UI is the
+recovery path - no manual registry cleanup is needed:
+
+- **npm leg**: `changeset publish` checks the npm registry before publishing
+  each package, so re-running `release` after a partial or already-completed
+  npm publish is a no-op for versions that already landed. Re-running before
+  the Version PR is merged just updates that PR in place.
+- **PyPI leg**: `pypa/gh-action-pypi-publish` runs with `skip-existing: true`,
+  so re-running `publish-pypi` after a version already uploaded skips it
+  instead of failing on a duplicate-file error.
+
 ## License
 
 [Apache-2.0](LICENSE), matching the upstream Tesla repositories this project
