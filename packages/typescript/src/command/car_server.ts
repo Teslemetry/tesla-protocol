@@ -425,7 +425,15 @@ export interface GetVehicleData {
   getGuiSettings: GetGuiSettings | undefined;
   getChargeState: GetChargeState | undefined;
   getClimateState: GetClimateState | undefined;
-  getDriveState: GetDriveState | undefined;
+  getDriveState:
+    | GetDriveState
+    | undefined;
+  /** TESLEMETRY-EXT (app-4.58.6) */
+  getLegacyVehicleState:
+    | GetLegacyVehicleState
+    | undefined;
+  /** TESLEMETRY-EXT (app-4.58.6) */
+  getVehicleConfig: GetVehicleConfig | undefined;
   getLocationState: GetLocationState | undefined;
   getClosuresState:
     | GetClosuresState
@@ -433,7 +441,15 @@ export interface GetVehicleData {
   /** TESLEMETRY-EXT (app-4.58.6) */
   getParkedAccessoryState: GetParkedAccessoryState | undefined;
   getChargeScheduleState: GetChargeScheduleState | undefined;
-  getPreconditioningScheduleState: GetPreconditioningScheduleState | undefined;
+  getPreconditioningScheduleState:
+    | GetPreconditioningScheduleState
+    | undefined;
+  /** TESLEMETRY-EXT (app-4.58.6) */
+  getSohState:
+    | GetSohState
+    | undefined;
+  /** TESLEMETRY-EXT (app-4.58.6) */
+  getVehicleDetailState: GetVehicleDetailState | undefined;
   getTirePressureState: GetTirePressureState | undefined;
   getMediaState: GetMediaState | undefined;
   getMediaDetailState: GetMediaDetailState | undefined;
@@ -467,6 +483,18 @@ export interface GetVehicleData {
 
 /** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
 export interface GetGuiSettings {
+}
+
+export interface GetLegacyVehicleState {
+}
+
+export interface GetVehicleConfig {
+}
+
+export interface GetSohState {
+}
+
+export interface GetVehicleDetailState {
 }
 
 export interface GetParkedAccessoryState {
@@ -5574,11 +5602,15 @@ function createBaseGetVehicleData(): GetVehicleData {
     getChargeState: undefined,
     getClimateState: undefined,
     getDriveState: undefined,
+    getLegacyVehicleState: undefined,
+    getVehicleConfig: undefined,
     getLocationState: undefined,
     getClosuresState: undefined,
     getParkedAccessoryState: undefined,
     getChargeScheduleState: undefined,
     getPreconditioningScheduleState: undefined,
+    getSohState: undefined,
+    getVehicleDetailState: undefined,
     getTirePressureState: undefined,
     getMediaState: undefined,
     getMediaDetailState: undefined,
@@ -5607,6 +5639,12 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
     if (message.getDriveState !== undefined) {
       GetDriveState.encode(message.getDriveState, writer.uint32(34).fork()).join();
     }
+    if (message.getLegacyVehicleState !== undefined) {
+      GetLegacyVehicleState.encode(message.getLegacyVehicleState, writer.uint32(42).fork()).join();
+    }
+    if (message.getVehicleConfig !== undefined) {
+      GetVehicleConfig.encode(message.getVehicleConfig, writer.uint32(50).fork()).join();
+    }
     if (message.getLocationState !== undefined) {
       GetLocationState.encode(message.getLocationState, writer.uint32(58).fork()).join();
     }
@@ -5621,6 +5659,12 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
     }
     if (message.getPreconditioningScheduleState !== undefined) {
       GetPreconditioningScheduleState.encode(message.getPreconditioningScheduleState, writer.uint32(90).fork()).join();
+    }
+    if (message.getSohState !== undefined) {
+      GetSohState.encode(message.getSohState, writer.uint32(98).fork()).join();
+    }
+    if (message.getVehicleDetailState !== undefined) {
+      GetVehicleDetailState.encode(message.getVehicleDetailState, writer.uint32(106).fork()).join();
     }
     if (message.getTirePressureState !== undefined) {
       GetTirePressureState.encode(message.getTirePressureState, writer.uint32(114).fork()).join();
@@ -5697,6 +5741,22 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
           message.getDriveState = GetDriveState.decode(reader, reader.uint32());
           continue;
         }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.getLegacyVehicleState = GetLegacyVehicleState.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.getVehicleConfig = GetVehicleConfig.decode(reader, reader.uint32());
+          continue;
+        }
         case 7: {
           if (tag !== 58) {
             break;
@@ -5735,6 +5795,22 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
           }
 
           message.getPreconditioningScheduleState = GetPreconditioningScheduleState.decode(reader, reader.uint32());
+          continue;
+        }
+        case 12: {
+          if (tag !== 98) {
+            break;
+          }
+
+          message.getSohState = GetSohState.decode(reader, reader.uint32());
+          continue;
+        }
+        case 13: {
+          if (tag !== 106) {
+            break;
+          }
+
+          message.getVehicleDetailState = GetVehicleDetailState.decode(reader, reader.uint32());
           continue;
         }
         case 14: {
@@ -5840,6 +5916,10 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
       getChargeState: isSet(object.getChargeState) ? GetChargeState.fromJSON(object.getChargeState) : undefined,
       getClimateState: isSet(object.getClimateState) ? GetClimateState.fromJSON(object.getClimateState) : undefined,
       getDriveState: isSet(object.getDriveState) ? GetDriveState.fromJSON(object.getDriveState) : undefined,
+      getLegacyVehicleState: isSet(object.getLegacyVehicleState)
+        ? GetLegacyVehicleState.fromJSON(object.getLegacyVehicleState)
+        : undefined,
+      getVehicleConfig: isSet(object.getVehicleConfig) ? GetVehicleConfig.fromJSON(object.getVehicleConfig) : undefined,
       getLocationState: isSet(object.getLocationState) ? GetLocationState.fromJSON(object.getLocationState) : undefined,
       getClosuresState: isSet(object.getClosuresState) ? GetClosuresState.fromJSON(object.getClosuresState) : undefined,
       getParkedAccessoryState: isSet(object.getParkedAccessoryState)
@@ -5850,6 +5930,10 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
         : undefined,
       getPreconditioningScheduleState: isSet(object.getPreconditioningScheduleState)
         ? GetPreconditioningScheduleState.fromJSON(object.getPreconditioningScheduleState)
+        : undefined,
+      getSohState: isSet(object.getSohState) ? GetSohState.fromJSON(object.getSohState) : undefined,
+      getVehicleDetailState: isSet(object.getVehicleDetailState)
+        ? GetVehicleDetailState.fromJSON(object.getVehicleDetailState)
         : undefined,
       getTirePressureState: isSet(object.getTirePressureState)
         ? GetTirePressureState.fromJSON(object.getTirePressureState)
@@ -5895,6 +5979,12 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
     if (message.getDriveState !== undefined) {
       obj.getDriveState = GetDriveState.toJSON(message.getDriveState);
     }
+    if (message.getLegacyVehicleState !== undefined) {
+      obj.getLegacyVehicleState = GetLegacyVehicleState.toJSON(message.getLegacyVehicleState);
+    }
+    if (message.getVehicleConfig !== undefined) {
+      obj.getVehicleConfig = GetVehicleConfig.toJSON(message.getVehicleConfig);
+    }
     if (message.getLocationState !== undefined) {
       obj.getLocationState = GetLocationState.toJSON(message.getLocationState);
     }
@@ -5911,6 +6001,12 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
       obj.getPreconditioningScheduleState = GetPreconditioningScheduleState.toJSON(
         message.getPreconditioningScheduleState,
       );
+    }
+    if (message.getSohState !== undefined) {
+      obj.getSohState = GetSohState.toJSON(message.getSohState);
+    }
+    if (message.getVehicleDetailState !== undefined) {
+      obj.getVehicleDetailState = GetVehicleDetailState.toJSON(message.getVehicleDetailState);
     }
     if (message.getTirePressureState !== undefined) {
       obj.getTirePressureState = GetTirePressureState.toJSON(message.getTirePressureState);
@@ -5967,6 +6063,13 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
     message.getDriveState = (object.getDriveState !== undefined && object.getDriveState !== null)
       ? GetDriveState.fromPartial(object.getDriveState)
       : undefined;
+    message.getLegacyVehicleState =
+      (object.getLegacyVehicleState !== undefined && object.getLegacyVehicleState !== null)
+        ? GetLegacyVehicleState.fromPartial(object.getLegacyVehicleState)
+        : undefined;
+    message.getVehicleConfig = (object.getVehicleConfig !== undefined && object.getVehicleConfig !== null)
+      ? GetVehicleConfig.fromPartial(object.getVehicleConfig)
+      : undefined;
     message.getLocationState = (object.getLocationState !== undefined && object.getLocationState !== null)
       ? GetLocationState.fromPartial(object.getLocationState)
       : undefined;
@@ -5984,6 +6087,13 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
     message.getPreconditioningScheduleState =
       (object.getPreconditioningScheduleState !== undefined && object.getPreconditioningScheduleState !== null)
         ? GetPreconditioningScheduleState.fromPartial(object.getPreconditioningScheduleState)
+        : undefined;
+    message.getSohState = (object.getSohState !== undefined && object.getSohState !== null)
+      ? GetSohState.fromPartial(object.getSohState)
+      : undefined;
+    message.getVehicleDetailState =
+      (object.getVehicleDetailState !== undefined && object.getVehicleDetailState !== null)
+        ? GetVehicleDetailState.fromPartial(object.getVehicleDetailState)
         : undefined;
     message.getTirePressureState = (object.getTirePressureState !== undefined && object.getTirePressureState !== null)
       ? GetTirePressureState.fromPartial(object.getTirePressureState)
@@ -6064,6 +6174,178 @@ export const GetGuiSettings: MessageFns<GetGuiSettings> = {
   },
   fromPartial<I extends Exact<DeepPartial<GetGuiSettings>, I>>(_: I): GetGuiSettings {
     const message = createBaseGetGuiSettings();
+    return message;
+  },
+};
+
+function createBaseGetLegacyVehicleState(): GetLegacyVehicleState {
+  return {};
+}
+
+export const GetLegacyVehicleState: MessageFns<GetLegacyVehicleState> = {
+  encode(_: GetLegacyVehicleState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GetLegacyVehicleState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetLegacyVehicleState();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): GetLegacyVehicleState {
+    return {};
+  },
+
+  toJSON(_: GetLegacyVehicleState): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetLegacyVehicleState>, I>>(base?: I): GetLegacyVehicleState {
+    return GetLegacyVehicleState.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetLegacyVehicleState>, I>>(_: I): GetLegacyVehicleState {
+    const message = createBaseGetLegacyVehicleState();
+    return message;
+  },
+};
+
+function createBaseGetVehicleConfig(): GetVehicleConfig {
+  return {};
+}
+
+export const GetVehicleConfig: MessageFns<GetVehicleConfig> = {
+  encode(_: GetVehicleConfig, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GetVehicleConfig {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetVehicleConfig();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): GetVehicleConfig {
+    return {};
+  },
+
+  toJSON(_: GetVehicleConfig): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetVehicleConfig>, I>>(base?: I): GetVehicleConfig {
+    return GetVehicleConfig.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetVehicleConfig>, I>>(_: I): GetVehicleConfig {
+    const message = createBaseGetVehicleConfig();
+    return message;
+  },
+};
+
+function createBaseGetSohState(): GetSohState {
+  return {};
+}
+
+export const GetSohState: MessageFns<GetSohState> = {
+  encode(_: GetSohState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GetSohState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetSohState();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): GetSohState {
+    return {};
+  },
+
+  toJSON(_: GetSohState): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetSohState>, I>>(base?: I): GetSohState {
+    return GetSohState.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetSohState>, I>>(_: I): GetSohState {
+    const message = createBaseGetSohState();
+    return message;
+  },
+};
+
+function createBaseGetVehicleDetailState(): GetVehicleDetailState {
+  return {};
+}
+
+export const GetVehicleDetailState: MessageFns<GetVehicleDetailState> = {
+  encode(_: GetVehicleDetailState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GetVehicleDetailState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetVehicleDetailState();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): GetVehicleDetailState {
+    return {};
+  },
+
+  toJSON(_: GetVehicleDetailState): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetVehicleDetailState>, I>>(base?: I): GetVehicleDetailState {
+    return GetVehicleDetailState.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetVehicleDetailState>, I>>(_: I): GetVehicleDetailState {
+    const message = createBaseGetVehicleDetailState();
     return message;
   },
 };

@@ -2155,7 +2155,7 @@ class ParkedAccessoryState(_message.Message):
         ...
 
 class SohState(_message.Message):
-    __slots__ = ('soh_test_state', 'soh_result', 'timestamp')
+    __slots__ = ('soh_test_state', 'soh_test_end_mode', 'soh_result', 'timestamp')
 
     class WarrantyServiceResult(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
@@ -2168,14 +2168,28 @@ class SohState(_message.Message):
     SOH_NO_INTERNET: SohState.WarrantyServiceResult
     SOH_UNKNOWN: SohState.WarrantyServiceResult
 
+    class SohTestPhase(_message.Message):
+        __slots__ = ()
+
+        def __init__(self) -> None:
+            ...
+
+    class SohTestEndMode(_message.Message):
+        __slots__ = ()
+
+        def __init__(self) -> None:
+            ...
+
     class SohTestState(_message.Message):
-        __slots__ = ('soh_time_estimate', 'soh_time_remaining')
+        __slots__ = ('soh_test_phase', 'soh_time_estimate', 'soh_time_remaining')
+        SOH_TEST_PHASE_FIELD_NUMBER: _ClassVar[int]
         SOH_TIME_ESTIMATE_FIELD_NUMBER: _ClassVar[int]
         SOH_TIME_REMAINING_FIELD_NUMBER: _ClassVar[int]
+        soh_test_phase: SohState.SohTestPhase
         soh_time_estimate: float
         soh_time_remaining: float
 
-        def __init__(self, soh_time_estimate: _Optional[float]=..., soh_time_remaining: _Optional[float]=...) -> None:
+        def __init__(self, soh_test_phase: _Optional[_Union[SohState.SohTestPhase, _Mapping]]=..., soh_time_estimate: _Optional[float]=..., soh_time_remaining: _Optional[float]=...) -> None:
             ...
 
     class SohResult(_message.Message):
@@ -2194,13 +2208,15 @@ class SohState(_message.Message):
         def __init__(self, soh_calibrated: bool=..., soh_last_test_time: _Optional[int]=..., soh_health_result: _Optional[_Union[SohState.WarrantyServiceResult, str]]=..., soh_distance_since_soh_test: _Optional[int]=..., soh_regulated: bool=...) -> None:
             ...
     SOH_TEST_STATE_FIELD_NUMBER: _ClassVar[int]
+    SOH_TEST_END_MODE_FIELD_NUMBER: _ClassVar[int]
     SOH_RESULT_FIELD_NUMBER: _ClassVar[int]
     TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     soh_test_state: SohState.SohTestState
+    soh_test_end_mode: SohState.SohTestEndMode
     soh_result: SohState.SohResult
     timestamp: _timestamp_pb2.Timestamp
 
-    def __init__(self, soh_test_state: _Optional[_Union[SohState.SohTestState, _Mapping]]=..., soh_result: _Optional[_Union[SohState.SohResult, _Mapping]]=..., timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=...) -> None:
+    def __init__(self, soh_test_state: _Optional[_Union[SohState.SohTestState, _Mapping]]=..., soh_test_end_mode: _Optional[_Union[SohState.SohTestEndMode, _Mapping]]=..., soh_result: _Optional[_Union[SohState.SohResult, _Mapping]]=..., timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=...) -> None:
         ...
 
 class AlertState(_message.Message):
@@ -2270,17 +2286,19 @@ class VehicleImageData(_message.Message):
         ...
 
 class VehicleImage(_message.Message):
-    __slots__ = ('image_id', 'asset_data', 'is_local_image', 'total_image_size')
+    __slots__ = ('image_id', 'asset_data', 'image_type', 'is_local_image', 'total_image_size')
     IMAGE_ID_FIELD_NUMBER: _ClassVar[int]
     ASSET_DATA_FIELD_NUMBER: _ClassVar[int]
+    IMAGE_TYPE_FIELD_NUMBER: _ClassVar[int]
     IS_LOCAL_IMAGE_FIELD_NUMBER: _ClassVar[int]
     TOTAL_IMAGE_SIZE_FIELD_NUMBER: _ClassVar[int]
     image_id: bytes
     asset_data: VehicleImageData
+    image_type: VehicleImageStateType
     is_local_image: bool
     total_image_size: int
 
-    def __init__(self, image_id: _Optional[bytes]=..., asset_data: _Optional[_Union[VehicleImageData, _Mapping]]=..., is_local_image: bool=..., total_image_size: _Optional[int]=...) -> None:
+    def __init__(self, image_id: _Optional[bytes]=..., asset_data: _Optional[_Union[VehicleImageData, _Mapping]]=..., image_type: _Optional[_Union[VehicleImageStateType, str]]=..., is_local_image: bool=..., total_image_size: _Optional[int]=...) -> None:
         ...
 
 class VehicleImageState(_message.Message):
@@ -2294,21 +2312,25 @@ class VehicleImageState(_message.Message):
         ...
 
 class SuspensionState(_message.Message):
-    __slots__ = ('current_level', 'target_level', 'movement_state', 'offroad_on', 'disabled_reason', 'timestamp')
+    __slots__ = ('allowed_levels', 'current_level', 'target_level', 'movement_state', 'offroad_on', 'disabled_reason', 'level_options', 'timestamp')
+    ALLOWED_LEVELS_FIELD_NUMBER: _ClassVar[int]
     CURRENT_LEVEL_FIELD_NUMBER: _ClassVar[int]
     TARGET_LEVEL_FIELD_NUMBER: _ClassVar[int]
     MOVEMENT_STATE_FIELD_NUMBER: _ClassVar[int]
     OFFROAD_ON_FIELD_NUMBER: _ClassVar[int]
     DISABLED_REASON_FIELD_NUMBER: _ClassVar[int]
+    LEVEL_OPTIONS_FIELD_NUMBER: _ClassVar[int]
     TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
+    allowed_levels: _containers.RepeatedCompositeFieldContainer[_common_pb2.SuspensionLevelObj]
     current_level: _common_pb2.SuspensionLevel
     target_level: _common_pb2.SuspensionLevel
     movement_state: _common_pb2.SuspensionActuationState
     offroad_on: bool
     disabled_reason: str
+    level_options: _containers.RepeatedCompositeFieldContainer[_common_pb2.SuspensionLevelObj]
     timestamp: _timestamp_pb2.Timestamp
 
-    def __init__(self, current_level: _Optional[_Union[_common_pb2.SuspensionLevel, str]]=..., target_level: _Optional[_Union[_common_pb2.SuspensionLevel, str]]=..., movement_state: _Optional[_Union[_common_pb2.SuspensionActuationState, str]]=..., offroad_on: bool=..., disabled_reason: _Optional[str]=..., timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=...) -> None:
+    def __init__(self, allowed_levels: _Optional[_Iterable[_Union[_common_pb2.SuspensionLevelObj, _Mapping]]]=..., current_level: _Optional[_Union[_common_pb2.SuspensionLevel, str]]=..., target_level: _Optional[_Union[_common_pb2.SuspensionLevel, str]]=..., movement_state: _Optional[_Union[_common_pb2.SuspensionActuationState, str]]=..., offroad_on: bool=..., disabled_reason: _Optional[str]=..., level_options: _Optional[_Iterable[_Union[_common_pb2.SuspensionLevelObj, _Mapping]]]=..., timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=...) -> None:
         ...
 
 class ChildPresenceDetectionState(_message.Message):

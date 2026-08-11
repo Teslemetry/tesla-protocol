@@ -293,16 +293,20 @@ class VehicleAction(_message.Message):
         ...
 
 class GetVehicleData(_message.Message):
-    __slots__ = ('getGuiSettings', 'getChargeState', 'getClimateState', 'getDriveState', 'getLocationState', 'getClosuresState', 'getParkedAccessoryState', 'getChargeScheduleState', 'getPreconditioningScheduleState', 'getTirePressureState', 'getMediaState', 'getMediaDetailState', 'getSoftwareUpdateState', 'getVehicleState', 'getParentalControlsState', 'getAlertState', 'getLightShowState', 'getVehicleImageState', 'getSuspensionState', 'getChildPresenceDetectionState')
+    __slots__ = ('getGuiSettings', 'getChargeState', 'getClimateState', 'getDriveState', 'getLegacyVehicleState', 'getVehicleConfig', 'getLocationState', 'getClosuresState', 'getParkedAccessoryState', 'getChargeScheduleState', 'getPreconditioningScheduleState', 'getSohState', 'getVehicleDetailState', 'getTirePressureState', 'getMediaState', 'getMediaDetailState', 'getSoftwareUpdateState', 'getVehicleState', 'getParentalControlsState', 'getAlertState', 'getLightShowState', 'getVehicleImageState', 'getSuspensionState', 'getChildPresenceDetectionState')
     GETGUISETTINGS_FIELD_NUMBER: _ClassVar[int]
     GETCHARGESTATE_FIELD_NUMBER: _ClassVar[int]
     GETCLIMATESTATE_FIELD_NUMBER: _ClassVar[int]
     GETDRIVESTATE_FIELD_NUMBER: _ClassVar[int]
+    GETLEGACYVEHICLESTATE_FIELD_NUMBER: _ClassVar[int]
+    GETVEHICLECONFIG_FIELD_NUMBER: _ClassVar[int]
     GETLOCATIONSTATE_FIELD_NUMBER: _ClassVar[int]
     GETCLOSURESSTATE_FIELD_NUMBER: _ClassVar[int]
     GETPARKEDACCESSORYSTATE_FIELD_NUMBER: _ClassVar[int]
     GETCHARGESCHEDULESTATE_FIELD_NUMBER: _ClassVar[int]
     GETPRECONDITIONINGSCHEDULESTATE_FIELD_NUMBER: _ClassVar[int]
+    GETSOHSTATE_FIELD_NUMBER: _ClassVar[int]
+    GETVEHICLEDETAILSTATE_FIELD_NUMBER: _ClassVar[int]
     GETTIREPRESSURESTATE_FIELD_NUMBER: _ClassVar[int]
     GETMEDIASTATE_FIELD_NUMBER: _ClassVar[int]
     GETMEDIADETAILSTATE_FIELD_NUMBER: _ClassVar[int]
@@ -318,11 +322,15 @@ class GetVehicleData(_message.Message):
     getChargeState: GetChargeState
     getClimateState: GetClimateState
     getDriveState: GetDriveState
+    getLegacyVehicleState: GetLegacyVehicleState
+    getVehicleConfig: GetVehicleConfig
     getLocationState: GetLocationState
     getClosuresState: GetClosuresState
     getParkedAccessoryState: GetParkedAccessoryState
     getChargeScheduleState: GetChargeScheduleState
     getPreconditioningScheduleState: GetPreconditioningScheduleState
+    getSohState: GetSohState
+    getVehicleDetailState: GetVehicleDetailState
     getTirePressureState: GetTirePressureState
     getMediaState: GetMediaState
     getMediaDetailState: GetMediaDetailState
@@ -335,10 +343,34 @@ class GetVehicleData(_message.Message):
     getSuspensionState: GetSuspensionState
     getChildPresenceDetectionState: GetChildPresenceDetectionState
 
-    def __init__(self, getGuiSettings: _Optional[_Union[GetGuiSettings, _Mapping]]=..., getChargeState: _Optional[_Union[GetChargeState, _Mapping]]=..., getClimateState: _Optional[_Union[GetClimateState, _Mapping]]=..., getDriveState: _Optional[_Union[GetDriveState, _Mapping]]=..., getLocationState: _Optional[_Union[GetLocationState, _Mapping]]=..., getClosuresState: _Optional[_Union[GetClosuresState, _Mapping]]=..., getParkedAccessoryState: _Optional[_Union[GetParkedAccessoryState, _Mapping]]=..., getChargeScheduleState: _Optional[_Union[GetChargeScheduleState, _Mapping]]=..., getPreconditioningScheduleState: _Optional[_Union[GetPreconditioningScheduleState, _Mapping]]=..., getTirePressureState: _Optional[_Union[GetTirePressureState, _Mapping]]=..., getMediaState: _Optional[_Union[GetMediaState, _Mapping]]=..., getMediaDetailState: _Optional[_Union[GetMediaDetailState, _Mapping]]=..., getSoftwareUpdateState: _Optional[_Union[GetSoftwareUpdateState, _Mapping]]=..., getVehicleState: _Optional[_Union[GetVehicleState, _Mapping]]=..., getParentalControlsState: _Optional[_Union[GetParentalControlsState, _Mapping]]=..., getAlertState: _Optional[_Union[GetAlertState, _Mapping]]=..., getLightShowState: _Optional[_Union[GetLightShowState, _Mapping]]=..., getVehicleImageState: _Optional[_Union[GetVehicleImageState, _Mapping]]=..., getSuspensionState: _Optional[_Union[GetSuspensionState, _Mapping]]=..., getChildPresenceDetectionState: _Optional[_Union[GetChildPresenceDetectionState, _Mapping]]=...) -> None:
+    def __init__(self, getGuiSettings: _Optional[_Union[GetGuiSettings, _Mapping]]=..., getChargeState: _Optional[_Union[GetChargeState, _Mapping]]=..., getClimateState: _Optional[_Union[GetClimateState, _Mapping]]=..., getDriveState: _Optional[_Union[GetDriveState, _Mapping]]=..., getLegacyVehicleState: _Optional[_Union[GetLegacyVehicleState, _Mapping]]=..., getVehicleConfig: _Optional[_Union[GetVehicleConfig, _Mapping]]=..., getLocationState: _Optional[_Union[GetLocationState, _Mapping]]=..., getClosuresState: _Optional[_Union[GetClosuresState, _Mapping]]=..., getParkedAccessoryState: _Optional[_Union[GetParkedAccessoryState, _Mapping]]=..., getChargeScheduleState: _Optional[_Union[GetChargeScheduleState, _Mapping]]=..., getPreconditioningScheduleState: _Optional[_Union[GetPreconditioningScheduleState, _Mapping]]=..., getSohState: _Optional[_Union[GetSohState, _Mapping]]=..., getVehicleDetailState: _Optional[_Union[GetVehicleDetailState, _Mapping]]=..., getTirePressureState: _Optional[_Union[GetTirePressureState, _Mapping]]=..., getMediaState: _Optional[_Union[GetMediaState, _Mapping]]=..., getMediaDetailState: _Optional[_Union[GetMediaDetailState, _Mapping]]=..., getSoftwareUpdateState: _Optional[_Union[GetSoftwareUpdateState, _Mapping]]=..., getVehicleState: _Optional[_Union[GetVehicleState, _Mapping]]=..., getParentalControlsState: _Optional[_Union[GetParentalControlsState, _Mapping]]=..., getAlertState: _Optional[_Union[GetAlertState, _Mapping]]=..., getLightShowState: _Optional[_Union[GetLightShowState, _Mapping]]=..., getVehicleImageState: _Optional[_Union[GetVehicleImageState, _Mapping]]=..., getSuspensionState: _Optional[_Union[GetSuspensionState, _Mapping]]=..., getChildPresenceDetectionState: _Optional[_Union[GetChildPresenceDetectionState, _Mapping]]=...) -> None:
         ...
 
 class GetGuiSettings(_message.Message):
+    __slots__ = ()
+
+    def __init__(self) -> None:
+        ...
+
+class GetLegacyVehicleState(_message.Message):
+    __slots__ = ()
+
+    def __init__(self) -> None:
+        ...
+
+class GetVehicleConfig(_message.Message):
+    __slots__ = ()
+
+    def __init__(self) -> None:
+        ...
+
+class GetSohState(_message.Message):
+    __slots__ = ()
+
+    def __init__(self) -> None:
+        ...
+
+class GetVehicleDetailState(_message.Message):
     __slots__ = ()
 
     def __init__(self) -> None:

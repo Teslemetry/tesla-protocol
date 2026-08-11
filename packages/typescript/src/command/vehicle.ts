@@ -40,6 +40,7 @@ import {
   suspensionActuationStateToJSON,
   SuspensionLevel,
   suspensionLevelFromJSON,
+  SuspensionLevelObj,
   suspensionLevelToJSON,
   Void,
   ZoneLightRequest,
@@ -2979,6 +2980,7 @@ export interface ParkedAccessoryState {
 
 export interface SohState {
   sohTestState: SohState_SohTestState | undefined;
+  sohTestEndMode: SohState_SohTestEndMode | undefined;
   sohResult: SohState_SohResult | undefined;
   timestamp: Date | undefined;
 }
@@ -3028,7 +3030,14 @@ export function sohState_WarrantyServiceResultToJSON(object: SohState_WarrantySe
   }
 }
 
+export interface SohState_SohTestPhase {
+}
+
+export interface SohState_SohTestEndMode {
+}
+
 export interface SohState_SohTestState {
+  sohTestPhase: SohState_SohTestPhase | undefined;
   sohTimeEstimate?: number | undefined;
   sohTimeRemaining?: number | undefined;
 }
@@ -3077,6 +3086,7 @@ export interface VehicleImageData {
 export interface VehicleImage {
   imageId: Uint8Array;
   assetData: VehicleImageData | undefined;
+  imageType: VehicleImageStateType;
   isLocalImage: boolean;
   totalImageSize: number;
 }
@@ -3087,11 +3097,13 @@ export interface VehicleImageState {
 }
 
 export interface SuspensionState {
+  allowedLevels: SuspensionLevelObj[];
   currentLevel?: SuspensionLevel | undefined;
   targetLevel?: SuspensionLevel | undefined;
   movementState?: SuspensionActuationState | undefined;
   offroadOn?: boolean | undefined;
   disabledReason?: string | undefined;
+  levelOptions: SuspensionLevelObj[];
   timestamp: Date | undefined;
 }
 
@@ -17623,13 +17635,16 @@ export const ParkedAccessoryState: MessageFns<ParkedAccessoryState> = {
 };
 
 function createBaseSohState(): SohState {
-  return { sohTestState: undefined, sohResult: undefined, timestamp: undefined };
+  return { sohTestState: undefined, sohTestEndMode: undefined, sohResult: undefined, timestamp: undefined };
 }
 
 export const SohState: MessageFns<SohState> = {
   encode(message: SohState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.sohTestState !== undefined) {
       SohState_SohTestState.encode(message.sohTestState, writer.uint32(10).fork()).join();
+    }
+    if (message.sohTestEndMode !== undefined) {
+      SohState_SohTestEndMode.encode(message.sohTestEndMode, writer.uint32(18).fork()).join();
     }
     if (message.sohResult !== undefined) {
       SohState_SohResult.encode(message.sohResult, writer.uint32(26).fork()).join();
@@ -17653,6 +17668,14 @@ export const SohState: MessageFns<SohState> = {
           }
 
           message.sohTestState = SohState_SohTestState.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.sohTestEndMode = SohState_SohTestEndMode.decode(reader, reader.uint32());
           continue;
         }
         case 3: {
@@ -17683,6 +17706,9 @@ export const SohState: MessageFns<SohState> = {
   fromJSON(object: any): SohState {
     return {
       sohTestState: isSet(object.sohTestState) ? SohState_SohTestState.fromJSON(object.sohTestState) : undefined,
+      sohTestEndMode: isSet(object.sohTestEndMode)
+        ? SohState_SohTestEndMode.fromJSON(object.sohTestEndMode)
+        : undefined,
       sohResult: isSet(object.sohResult) ? SohState_SohResult.fromJSON(object.sohResult) : undefined,
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
     };
@@ -17692,6 +17718,9 @@ export const SohState: MessageFns<SohState> = {
     const obj: any = {};
     if (message.sohTestState !== undefined) {
       obj.sohTestState = SohState_SohTestState.toJSON(message.sohTestState);
+    }
+    if (message.sohTestEndMode !== undefined) {
+      obj.sohTestEndMode = SohState_SohTestEndMode.toJSON(message.sohTestEndMode);
     }
     if (message.sohResult !== undefined) {
       obj.sohResult = SohState_SohResult.toJSON(message.sohResult);
@@ -17710,6 +17739,9 @@ export const SohState: MessageFns<SohState> = {
     message.sohTestState = (object.sohTestState !== undefined && object.sohTestState !== null)
       ? SohState_SohTestState.fromPartial(object.sohTestState)
       : undefined;
+    message.sohTestEndMode = (object.sohTestEndMode !== undefined && object.sohTestEndMode !== null)
+      ? SohState_SohTestEndMode.fromPartial(object.sohTestEndMode)
+      : undefined;
     message.sohResult = (object.sohResult !== undefined && object.sohResult !== null)
       ? SohState_SohResult.fromPartial(object.sohResult)
       : undefined;
@@ -17718,12 +17750,101 @@ export const SohState: MessageFns<SohState> = {
   },
 };
 
+function createBaseSohState_SohTestPhase(): SohState_SohTestPhase {
+  return {};
+}
+
+export const SohState_SohTestPhase: MessageFns<SohState_SohTestPhase> = {
+  encode(_: SohState_SohTestPhase, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SohState_SohTestPhase {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSohState_SohTestPhase();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): SohState_SohTestPhase {
+    return {};
+  },
+
+  toJSON(_: SohState_SohTestPhase): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SohState_SohTestPhase>, I>>(base?: I): SohState_SohTestPhase {
+    return SohState_SohTestPhase.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SohState_SohTestPhase>, I>>(_: I): SohState_SohTestPhase {
+    const message = createBaseSohState_SohTestPhase();
+    return message;
+  },
+};
+
+function createBaseSohState_SohTestEndMode(): SohState_SohTestEndMode {
+  return {};
+}
+
+export const SohState_SohTestEndMode: MessageFns<SohState_SohTestEndMode> = {
+  encode(_: SohState_SohTestEndMode, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SohState_SohTestEndMode {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSohState_SohTestEndMode();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): SohState_SohTestEndMode {
+    return {};
+  },
+
+  toJSON(_: SohState_SohTestEndMode): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SohState_SohTestEndMode>, I>>(base?: I): SohState_SohTestEndMode {
+    return SohState_SohTestEndMode.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SohState_SohTestEndMode>, I>>(_: I): SohState_SohTestEndMode {
+    const message = createBaseSohState_SohTestEndMode();
+    return message;
+  },
+};
+
 function createBaseSohState_SohTestState(): SohState_SohTestState {
-  return { sohTimeEstimate: undefined, sohTimeRemaining: undefined };
+  return { sohTestPhase: undefined, sohTimeEstimate: undefined, sohTimeRemaining: undefined };
 }
 
 export const SohState_SohTestState: MessageFns<SohState_SohTestState> = {
   encode(message: SohState_SohTestState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.sohTestPhase !== undefined) {
+      SohState_SohTestPhase.encode(message.sohTestPhase, writer.uint32(10).fork()).join();
+    }
     if (message.sohTimeEstimate !== undefined) {
       writer.uint32(21).float(message.sohTimeEstimate);
     }
@@ -17740,6 +17861,14 @@ export const SohState_SohTestState: MessageFns<SohState_SohTestState> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.sohTestPhase = SohState_SohTestPhase.decode(reader, reader.uint32());
+          continue;
+        }
         case 2: {
           if (tag !== 21) {
             break;
@@ -17767,6 +17896,7 @@ export const SohState_SohTestState: MessageFns<SohState_SohTestState> = {
 
   fromJSON(object: any): SohState_SohTestState {
     return {
+      sohTestPhase: isSet(object.sohTestPhase) ? SohState_SohTestPhase.fromJSON(object.sohTestPhase) : undefined,
       sohTimeEstimate: isSet(object.sohTimeEstimate) ? globalThis.Number(object.sohTimeEstimate) : undefined,
       sohTimeRemaining: isSet(object.sohTimeRemaining) ? globalThis.Number(object.sohTimeRemaining) : undefined,
     };
@@ -17774,6 +17904,9 @@ export const SohState_SohTestState: MessageFns<SohState_SohTestState> = {
 
   toJSON(message: SohState_SohTestState): unknown {
     const obj: any = {};
+    if (message.sohTestPhase !== undefined) {
+      obj.sohTestPhase = SohState_SohTestPhase.toJSON(message.sohTestPhase);
+    }
     if (message.sohTimeEstimate !== undefined) {
       obj.sohTimeEstimate = message.sohTimeEstimate;
     }
@@ -17788,6 +17921,9 @@ export const SohState_SohTestState: MessageFns<SohState_SohTestState> = {
   },
   fromPartial<I extends Exact<DeepPartial<SohState_SohTestState>, I>>(object: I): SohState_SohTestState {
     const message = createBaseSohState_SohTestState();
+    message.sohTestPhase = (object.sohTestPhase !== undefined && object.sohTestPhase !== null)
+      ? SohState_SohTestPhase.fromPartial(object.sohTestPhase)
+      : undefined;
     message.sohTimeEstimate = object.sohTimeEstimate ?? undefined;
     message.sohTimeRemaining = object.sohTimeRemaining ?? undefined;
     return message;
@@ -18473,7 +18609,7 @@ export const VehicleImageData: MessageFns<VehicleImageData> = {
 };
 
 function createBaseVehicleImage(): VehicleImage {
-  return { imageId: new Uint8Array(0), assetData: undefined, isLocalImage: false, totalImageSize: 0 };
+  return { imageId: new Uint8Array(0), assetData: undefined, imageType: 0, isLocalImage: false, totalImageSize: 0 };
 }
 
 export const VehicleImage: MessageFns<VehicleImage> = {
@@ -18483,6 +18619,9 @@ export const VehicleImage: MessageFns<VehicleImage> = {
     }
     if (message.assetData !== undefined) {
       VehicleImageData.encode(message.assetData, writer.uint32(18).fork()).join();
+    }
+    if (message.imageType !== 0) {
+      writer.uint32(24).int32(message.imageType);
     }
     if (message.isLocalImage !== false) {
       writer.uint32(32).bool(message.isLocalImage);
@@ -18516,6 +18655,14 @@ export const VehicleImage: MessageFns<VehicleImage> = {
           message.assetData = VehicleImageData.decode(reader, reader.uint32());
           continue;
         }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.imageType = reader.int32() as any;
+          continue;
+        }
         case 4: {
           if (tag !== 32) {
             break;
@@ -18545,6 +18692,7 @@ export const VehicleImage: MessageFns<VehicleImage> = {
     return {
       imageId: isSet(object.imageId) ? bytesFromBase64(object.imageId) : new Uint8Array(0),
       assetData: isSet(object.assetData) ? VehicleImageData.fromJSON(object.assetData) : undefined,
+      imageType: isSet(object.imageType) ? vehicleImageStateTypeFromJSON(object.imageType) : 0,
       isLocalImage: isSet(object.isLocalImage) ? globalThis.Boolean(object.isLocalImage) : false,
       totalImageSize: isSet(object.totalImageSize) ? globalThis.Number(object.totalImageSize) : 0,
     };
@@ -18557,6 +18705,9 @@ export const VehicleImage: MessageFns<VehicleImage> = {
     }
     if (message.assetData !== undefined) {
       obj.assetData = VehicleImageData.toJSON(message.assetData);
+    }
+    if (message.imageType !== undefined) {
+      obj.imageType = vehicleImageStateTypeToJSON(message.imageType);
     }
     if (message.isLocalImage !== undefined) {
       obj.isLocalImage = message.isLocalImage;
@@ -18576,6 +18727,7 @@ export const VehicleImage: MessageFns<VehicleImage> = {
     message.assetData = (object.assetData !== undefined && object.assetData !== null)
       ? VehicleImageData.fromPartial(object.assetData)
       : undefined;
+    message.imageType = object.imageType ?? 0;
     message.isLocalImage = object.isLocalImage ?? false;
     message.totalImageSize = object.totalImageSize ?? 0;
     return message;
@@ -18662,17 +18814,22 @@ export const VehicleImageState: MessageFns<VehicleImageState> = {
 
 function createBaseSuspensionState(): SuspensionState {
   return {
+    allowedLevels: [],
     currentLevel: undefined,
     targetLevel: undefined,
     movementState: undefined,
     offroadOn: undefined,
     disabledReason: undefined,
+    levelOptions: [],
     timestamp: undefined,
   };
 }
 
 export const SuspensionState: MessageFns<SuspensionState> = {
   encode(message: SuspensionState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.allowedLevels) {
+      SuspensionLevelObj.encode(v!, writer.uint32(10).fork()).join();
+    }
     if (message.currentLevel !== undefined) {
       writer.uint32(16).int32(message.currentLevel);
     }
@@ -18688,6 +18845,9 @@ export const SuspensionState: MessageFns<SuspensionState> = {
     if (message.disabledReason !== undefined) {
       writer.uint32(50).string(message.disabledReason);
     }
+    for (const v of message.levelOptions) {
+      SuspensionLevelObj.encode(v!, writer.uint32(58).fork()).join();
+    }
     if (message.timestamp !== undefined) {
       Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(16002).fork()).join();
     }
@@ -18701,6 +18861,14 @@ export const SuspensionState: MessageFns<SuspensionState> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.allowedLevels.push(SuspensionLevelObj.decode(reader, reader.uint32()));
+          continue;
+        }
         case 2: {
           if (tag !== 16) {
             break;
@@ -18741,6 +18909,14 @@ export const SuspensionState: MessageFns<SuspensionState> = {
           message.disabledReason = reader.string();
           continue;
         }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.levelOptions.push(SuspensionLevelObj.decode(reader, reader.uint32()));
+          continue;
+        }
         case 2000: {
           if (tag !== 16002) {
             break;
@@ -18760,17 +18936,26 @@ export const SuspensionState: MessageFns<SuspensionState> = {
 
   fromJSON(object: any): SuspensionState {
     return {
+      allowedLevels: globalThis.Array.isArray(object?.allowedLevels)
+        ? object.allowedLevels.map((e: any) => SuspensionLevelObj.fromJSON(e))
+        : [],
       currentLevel: isSet(object.currentLevel) ? suspensionLevelFromJSON(object.currentLevel) : undefined,
       targetLevel: isSet(object.targetLevel) ? suspensionLevelFromJSON(object.targetLevel) : undefined,
       movementState: isSet(object.movementState) ? suspensionActuationStateFromJSON(object.movementState) : undefined,
       offroadOn: isSet(object.offroadOn) ? globalThis.Boolean(object.offroadOn) : undefined,
       disabledReason: isSet(object.disabledReason) ? globalThis.String(object.disabledReason) : undefined,
+      levelOptions: globalThis.Array.isArray(object?.levelOptions)
+        ? object.levelOptions.map((e: any) => SuspensionLevelObj.fromJSON(e))
+        : [],
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
     };
   },
 
   toJSON(message: SuspensionState): unknown {
     const obj: any = {};
+    if (message.allowedLevels?.length) {
+      obj.allowedLevels = message.allowedLevels.map((e) => SuspensionLevelObj.toJSON(e));
+    }
     if (message.currentLevel !== undefined) {
       obj.currentLevel = suspensionLevelToJSON(message.currentLevel);
     }
@@ -18786,6 +18971,9 @@ export const SuspensionState: MessageFns<SuspensionState> = {
     if (message.disabledReason !== undefined) {
       obj.disabledReason = message.disabledReason;
     }
+    if (message.levelOptions?.length) {
+      obj.levelOptions = message.levelOptions.map((e) => SuspensionLevelObj.toJSON(e));
+    }
     if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp.toISOString();
     }
@@ -18797,11 +18985,13 @@ export const SuspensionState: MessageFns<SuspensionState> = {
   },
   fromPartial<I extends Exact<DeepPartial<SuspensionState>, I>>(object: I): SuspensionState {
     const message = createBaseSuspensionState();
+    message.allowedLevels = object.allowedLevels?.map((e) => SuspensionLevelObj.fromPartial(e)) || [];
     message.currentLevel = object.currentLevel ?? undefined;
     message.targetLevel = object.targetLevel ?? undefined;
     message.movementState = object.movementState ?? undefined;
     message.offroadOn = object.offroadOn ?? undefined;
     message.disabledReason = object.disabledReason ?? undefined;
+    message.levelOptions = object.levelOptions?.map((e) => SuspensionLevelObj.fromPartial(e)) || [];
     message.timestamp = object.timestamp ?? undefined;
     return message;
   },
