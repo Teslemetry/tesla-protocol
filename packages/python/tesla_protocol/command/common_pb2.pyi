@@ -511,3 +511,11 @@ class ChargingAlert(_message.Message):
 
     def __init__(self, alert_name: _Optional[_Union[ChargingAlertName, str]]=..., alert_type: _Optional[_Union[ChargingAlertType, str]]=...) -> None:
         ...
+
+class SuspensionLevelObj(_message.Message):
+    __slots__ = ('level',)
+    LEVEL_FIELD_NUMBER: _ClassVar[int]
+    level: SuspensionLevel
+
+    def __init__(self, level: _Optional[_Union[SuspensionLevel, str]]=...) -> None:
+        ...

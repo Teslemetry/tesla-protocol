@@ -1291,7 +1291,16 @@ message SohState {
         SOH_UNKNOWN = 3;
     }
 
+    message SohTestPhase {
+        reserved 1, 2, 3, 4; // wire-confirmed alternatives; names not confirmed
+    }
+
+    message SohTestEndMode {
+        reserved 1, 2; // wire-confirmed alternatives; names not confirmed
+    }
+
     message SohTestState {
+        SohTestPhase soh_test_phase = 1;
         oneof optional_soh_time_estimate { float soh_time_estimate = 2; }
         oneof optional_soh_time_remaining { float soh_time_remaining = 3; }
     }
@@ -1305,6 +1314,7 @@ message SohState {
     }
 
     SohTestState soh_test_state = 1;
+    SohTestEndMode soh_test_end_mode = 2;
     SohResult soh_result = 3;
     google.protobuf.Timestamp timestamp = 4;
 }
@@ -1351,6 +1361,7 @@ message VehicleImageData {
 message VehicleImage {
     bytes image_id = 1;
     VehicleImageData asset_data = 2;
+    VehicleImageStateType image_type = 3;
     bool is_local_image = 4;
     uint32 total_image_size = 5;
 }
@@ -1361,11 +1372,13 @@ message VehicleImageState {
 }
 
 message SuspensionState {
+    repeated SuspensionLevelObj allowed_levels = 1;
     oneof optional_current_level { SuspensionLevel current_level = 2; }
     oneof optional_target_level { SuspensionLevel target_level = 3; }
     oneof optional_movement_state { SuspensionActuationState movement_state = 4; }
     oneof optional_offroad_on { bool offroad_on = 5; }
     oneof optional_disabled_reason { string disabled_reason = 6; }
+    repeated SuspensionLevelObj level_options = 7;
     google.protobuf.Timestamp timestamp = 2000;
 }
 

@@ -167,13 +167,15 @@ message GetVehicleData {
   GetChargeState getChargeState = 2;
   GetClimateState getClimateState = 3;
   GetDriveState getDriveState = 4;
-  reserved 5, 6;
+  GetLegacyVehicleState getLegacyVehicleState = 5;  // TESLEMETRY-EXT (app-4.58.6)
+  GetVehicleConfig getVehicleConfig = 6;  // TESLEMETRY-EXT (app-4.58.6)
   GetLocationState getLocationState = 7;
   GetClosuresState getClosuresState = 8;
   GetParkedAccessoryState getParkedAccessoryState = 9;  // TESLEMETRY-EXT (app-4.58.6)
   GetChargeScheduleState getChargeScheduleState = 10;
   GetPreconditioningScheduleState getPreconditioningScheduleState = 11;
-  reserved 12, 13;
+  GetSohState getSohState = 12;  // TESLEMETRY-EXT (app-4.58.6)
+  GetVehicleDetailState getVehicleDetailState = 13;  // TESLEMETRY-EXT (app-4.58.6)
   GetTirePressureState getTirePressureState = 14;
   GetMediaState getMediaState = 15;
   GetMediaDetailState getMediaDetailState = 16;
@@ -189,6 +191,14 @@ message GetVehicleData {
 
 // ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
 message GetGuiSettings {}
+
+message GetLegacyVehicleState {}
+
+message GetVehicleConfig {}
+
+message GetSohState {}
+
+message GetVehicleDetailState {}
 
 message GetParkedAccessoryState {}
 

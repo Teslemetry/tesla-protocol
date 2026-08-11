@@ -281,6 +281,10 @@ enum SuspensionLevel {
     EXTRACT = 6;
 }
 
+message SuspensionLevelObj {
+    SuspensionLevel level = 1;
+}
+
 enum ZoneLightRequest {
     ZoneLightRequestOff = 0;
     ZoneLightRequestLow = 1;

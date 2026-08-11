@@ -1424,6 +1424,10 @@ export interface ChargingAlert {
   alertType: ChargingAlertType;
 }
 
+export interface SuspensionLevelObj {
+  level: SuspensionLevel;
+}
+
 function createBaseVoid(): Void {
   return {};
 }
@@ -2302,6 +2306,64 @@ export const ChargingAlert: MessageFns<ChargingAlert> = {
     const message = createBaseChargingAlert();
     message.alertName = object.alertName ?? 0;
     message.alertType = object.alertType ?? 0;
+    return message;
+  },
+};
+
+function createBaseSuspensionLevelObj(): SuspensionLevelObj {
+  return { level: 0 };
+}
+
+export const SuspensionLevelObj: MessageFns<SuspensionLevelObj> = {
+  encode(message: SuspensionLevelObj, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.level !== 0) {
+      writer.uint32(8).int32(message.level);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SuspensionLevelObj {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSuspensionLevelObj();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.level = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SuspensionLevelObj {
+    return { level: isSet(object.level) ? suspensionLevelFromJSON(object.level) : 0 };
+  },
+
+  toJSON(message: SuspensionLevelObj): unknown {
+    const obj: any = {};
+    if (message.level !== undefined) {
+      obj.level = suspensionLevelToJSON(message.level);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SuspensionLevelObj>, I>>(base?: I): SuspensionLevelObj {
+    return SuspensionLevelObj.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SuspensionLevelObj>, I>>(object: I): SuspensionLevelObj {
+    const message = createBaseSuspensionLevelObj();
+    message.level = object.level ?? 0;
     return message;
   },
 };
