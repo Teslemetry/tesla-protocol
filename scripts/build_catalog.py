@@ -4,19 +4,16 @@
 Compiles every publish group under `proto/` to a descriptor set (same
 technique as `upstream_coverage.py`/`check_reply_coverage.py`) and walks it
 into a sorted, machine-readable inventory: every group, file, package,
-message, enum, field (number/type/label/oneof), reservation, import and
-provenance class, plus each group's generated TypeScript/Python target.
-Cross-checks that every file's provenance class is consistent between its
-header banner and `PROVENANCE.md`, and that `buf.yaml`, `GROUPS_LIST` (in
-generate.sh), and the README/PROVENANCE group tables all register the same
-set of groups as actually exist under `proto/`.
+message, enum, field (number/type/label/oneof), reservation, import, and
+each group's generated TypeScript/Python target. Cross-checks that
+`buf.yaml`, `GROUPS_LIST` (in generate.sh), and the README layout table all
+register the same set of groups as actually exist under `proto/`.
 
 Writes `catalog/catalog.json` (full inventory) and `catalog/SUMMARY.md`
 (short human-readable digest). Run it, then `git diff --exit-code -- catalog/`
 to detect drift - the same pattern `generate.sh` uses for codegen output.
 Exits non-zero (before writing, with a stderr explanation) if group
-registration is inconsistent or any file's provenance class can't be
-resolved unambiguously.
+registration is inconsistent.
 
 Requires grpcio-tools (bundled protoc) in the running interpreter.
 """
@@ -37,10 +34,6 @@ PROTO_ROOT = REPO_ROOT / "proto"
 CATALOG_DIR = REPO_ROOT / "catalog"
 TS_ROOT = REPO_ROOT / "packages" / "typescript" / "src"
 PY_ROOT = REPO_ROOT / "packages" / "python" / "tesla_protocol"
-
-UPSTREAM_HEADER = "UPSTREAM-SOURCE:"
-SOR_HEADER = "TESLEMETRY SOURCE-OF-RECORD"
-VENDORED_HEADER = "Vendored from"
 
 FieldType = descriptor_pb2.FieldDescriptorProto.Type
 FieldLabel = descriptor_pb2.FieldDescriptorProto.Label
@@ -65,12 +58,12 @@ def compiled_top_level_files(group: str) -> list[Path]:
 
 
 def all_source_files(group: str) -> list[Path]:
-    """Every .proto file under the group, including vendored imports in subdirectories."""
+    """Every .proto file under the group, including files only reachable via import."""
     return sorted((PROTO_ROOT / group).rglob("*.proto"))
 
 
 # ---------------------------------------------------------------------------
-# Registration cross-check: buf.yaml / GROUPS_LIST / README / PROVENANCE.md
+# Registration cross-check: buf.yaml / GROUPS_LIST / README
 
 
 def parse_buf_yaml_groups() -> list[str]:
@@ -94,46 +87,11 @@ def parse_readme_groups() -> list[str]:
     return sorted(re.findall(r"^[├└]──\s*(\S+)/", m.group(1), re.MULTILINE))
 
 
-def parse_provenance_md_rows() -> list[tuple[str, str]]:
-    """Returns [(path_token, normalized_class), ...] from PROVENANCE.md's table."""
-    text = (REPO_ROOT / "PROVENANCE.md").read_text()
-    rows: list[tuple[str, str]] = []
-    for line in text.splitlines():
-        if not line.startswith("|") or "---" in line:
-            continue
-        cells = [c.strip() for c in line.strip("|").split("|")]
-        if len(cells) < 2 or cells[0] in ("Directory",):
-            continue
-        paths = re.findall(r"`(proto/[^`]+)`", cells[0])
-        if not paths:
-            continue
-        if "upstream-tracked" in cells[1]:
-            klass = "upstream-tracked"
-        elif "Teslemetry source-of-record" in cells[1]:
-            klass = "teslemetry-source-of-record"
-        else:
-            sys.exit(f"PROVENANCE.md: unrecognized provenance class {cells[1]!r} for {paths}")
-        for p in paths:
-            rows.append((p, klass))
-    return rows
-
-
-def parse_provenance_md_groups() -> list[str]:
-    groups = set()
-    for path, _klass in parse_provenance_md_rows():
-        rel = path[len("proto/"):].rstrip("/")
-        if not rel:
-            continue
-        groups.add(rel.split("/")[0])
-    return sorted(groups)
-
-
 def check_registration(groups_on_disk: list[str]) -> dict:
     sources = {
         "buf.yaml": parse_buf_yaml_groups(),
         "scripts/generate.sh GROUPS_LIST": parse_generate_sh_groups(),
         "README.md layout table": parse_readme_groups(),
-        "PROVENANCE.md table": parse_provenance_md_groups(),
     }
     problems = []
     for source_name, groups in sources.items():
@@ -155,49 +113,8 @@ def check_registration(groups_on_disk: list[str]) -> dict:
         **{f"groups_in_{k}": v for k, v in
            {"buf_yaml": sources["buf.yaml"],
             "generate_sh": sources["scripts/generate.sh GROUPS_LIST"],
-            "readme": sources["README.md layout table"],
-            "provenance_md": sources["PROVENANCE.md table"]}.items()},
+            "readme": sources["README.md layout table"]}.items()},
     }
-
-
-# ---------------------------------------------------------------------------
-# Provenance classification per file
-
-
-def header_class(text: str) -> str | None:
-    head = "\n".join(text.splitlines()[:10])
-    if UPSTREAM_HEADER in head:
-        return "upstream-tracked"
-    if SOR_HEADER in head:
-        return "teslemetry-source-of-record"
-    if VENDORED_HEADER in head:
-        return "vendored-import"
-    return None
-
-
-def provenance_md_class(rel_path: str, rows: list[tuple[str, str]]) -> str | None:
-    best: tuple[int, str] | None = None
-    for path, klass in rows:
-        if rel_path == path or rel_path.startswith(path):
-            if best is None or len(path) > best[0]:
-                best = (len(path), klass)
-    return best[1] if best else None
-
-
-def classify_file(proto_path: Path, provenance_rows: list[tuple[str, str]]) -> str:
-    rel = proto_path.relative_to(REPO_ROOT).as_posix()
-    header = header_class(proto_path.read_text())
-    if header == "vendored-import":
-        # Documented only in the file's own header, by design: it is an
-        # imported dependency, not part of any published group's surface.
-        return header
-    table = provenance_md_class(rel, provenance_rows)
-    if header and table and header != table:
-        sys.exit(f"{rel}: header says {header!r} but PROVENANCE.md says {table!r}")
-    klass = header or table
-    if klass is None:
-        sys.exit(f"{rel}: no provenance class found in its header or PROVENANCE.md")
-    return klass
 
 
 # ---------------------------------------------------------------------------
@@ -298,41 +215,38 @@ def walk_file(fd: descriptor_pb2.FileDescriptorProto) -> dict:
 # Catalog assembly
 
 
-def build_group(group: str, provenance_rows: list[tuple[str, str]]) -> dict:
+def build_group(group: str) -> dict:
     top_level = compiled_top_level_files(group)
     source_files = all_source_files(group)
-    vendored_only = sorted(set(source_files) - set(top_level))
+    import_only = sorted(set(source_files) - set(top_level))
 
     fds = run_protoc(group, top_level)
     by_name = {fd.name: fd for fd in fds.file}
 
     files = []
     for path in top_level:
-        name = path.name
-        fd = by_name.get(name)
+        fd = by_name.get(path.name)
         if fd is None:
             sys.exit(f"protoc did not emit a descriptor for compiled input {path}")
         entry = walk_file(fd)
         entry.update({
             "path": path.relative_to(REPO_ROOT).as_posix(),
             "compiled_top_level_input": True,
-            "provenance_class": classify_file(path, provenance_rows),
         })
         files.append(entry)
 
-    for path in vendored_only:
-        rel_name = path.relative_to(PROTO_ROOT / group).as_posix()
+    for path in import_only:
         files.append({
             "path": path.relative_to(REPO_ROOT).as_posix(),
             "compiled_top_level_input": False,
-            "provenance_class": classify_file(path, provenance_rows),
             "package": None,
             "imports": [],
             "messages": [],
             "enums": [],
             "note": (
-                f"vendored import dependency ({rel_name}); pulled in transitively, "
-                "not compiled as a top-level input, excluded from group/global totals"
+                "present under proto/ but not passed to protoc as a top-level input "
+                "(see generate.sh); reachable only via another file's import; "
+                "excluded from group/global totals"
             ),
         })
 
@@ -342,13 +256,10 @@ def build_group(group: str, provenance_rows: list[tuple[str, str]]) -> dict:
     total_enums = sum(len(f["enums"]) + count_nested_enums(f["messages"]) for f in files)
     total_fields = sum(count_fields(f["messages"]) for f in files)
 
-    classes = sorted({f["provenance_class"] for f in files})
-
     return {
         "name": group,
         "source_files": len(source_files),
         "compiled_top_level_inputs": len(top_level),
-        "provenance_classes": classes,
         "generated_targets": {
             "typescript": (TS_ROOT / group).relative_to(REPO_ROOT).as_posix(),
             "python": (PY_ROOT / group).relative_to(REPO_ROOT).as_posix(),
@@ -369,8 +280,7 @@ def build_catalog() -> dict:
             print(f"  - {p}", file=sys.stderr)
         sys.exit(1)
 
-    provenance_rows = parse_provenance_md_rows()
-    groups = [build_group(g, provenance_rows) for g in groups_on_disk]
+    groups = [build_group(g) for g in groups_on_disk]
 
     totals = {
         "source_files": sum(g["source_files"] for g in groups),
@@ -400,34 +310,33 @@ def render_summary_md(catalog: dict) -> str:
         f"**Totals:** {t['source_files']} source files, {t['groups']} groups, "
         f"{t['messages']} messages, {t['enums']} enums, {t['fields']} fields.",
         "",
-        "| Group | Source files | Compiled top-level inputs | Messages | Enums | Fields | Provenance |",
-        "|---|---:|---:|---:|---:|---:|---|",
+        "| Group | Source files | Compiled top-level inputs | Messages | Enums | Fields |",
+        "|---|---:|---:|---:|---:|---:|",
     ]
     for g in catalog["groups"]:
         lines.append(
             f"| `{g['name']}` | {g['source_files']} | {g['compiled_top_level_inputs']} | "
-            f"{g['messages']} | {g['enums']} | {g['fields']} | "
-            f"{', '.join(g['provenance_classes'])} |"
+            f"{g['messages']} | {g['enums']} | {g['fields']} |"
         )
     lines.append("")
 
-    vendored = [
+    import_only = [
         f for g in catalog["groups"] for f in g["files"] if not f["compiled_top_level_input"]
     ]
-    if vendored:
+    if import_only:
         lines.append(
-            "Vendored import dependencies (present under `proto/`, not passed to protoc "
-            "as a top-level input, excluded from the totals above):"
+            "Files present under `proto/` that are not compiled as a top-level input "
+            "(excluded from the totals above):"
         )
-        for f in vendored:
+        for f in import_only:
             lines.append(f"- `{f['path']}` - {f['note']}")
         lines.append("")
 
     reg = catalog["registration"]
     lines.append(
-        f"Group registration (`buf.yaml`, `scripts/generate.sh`, `README.md`, "
-        f"`PROVENANCE.md`) is **{'consistent' if reg['consistent'] else 'INCONSISTENT'}** "
-        f"with `proto/`: {', '.join(reg['groups_on_disk'])}."
+        f"Group registration (`buf.yaml`, `scripts/generate.sh`, `README.md`) is "
+        f"**{'consistent' if reg['consistent'] else 'INCONSISTENT'}** with `proto/`: "
+        f"{', '.join(reg['groups_on_disk'])}."
     )
     lines.append("")
     return "\n".join(lines)

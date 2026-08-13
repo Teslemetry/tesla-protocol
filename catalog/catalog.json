@@ -5,9 +5,6 @@
       "name": "charging",
       "source_files": 1,
       "compiled_top_level_inputs": 1,
-      "provenance_classes": [
-        "teslemetry-source-of-record"
-      ],
       "generated_targets": {
         "typescript": "packages/typescript/src/charging",
         "python": "packages/python/tesla_protocol/charging"
@@ -337,8 +334,7 @@
           ],
           "enums": [],
           "path": "proto/charging/charging.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         }
       ]
     },
@@ -346,10 +342,6 @@
       "name": "command",
       "source_files": 10,
       "compiled_top_level_inputs": 10,
-      "provenance_classes": [
-        "teslemetry-source-of-record",
-        "upstream-tracked"
-      ],
       "generated_targets": {
         "typescript": "packages/typescript/src/command",
         "python": "packages/python/tesla_protocol/command"
@@ -7242,8 +7234,7 @@
             }
           ],
           "path": "proto/command/car_server.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "upstream-tracked"
+          "compiled_top_level_input": true
         },
         {
           "package": "CarServer",
@@ -8433,8 +8424,7 @@
             }
           ],
           "path": "proto/command/common.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "upstream-tracked"
+          "compiled_top_level_input": true
         },
         {
           "package": "Errors",
@@ -8503,8 +8493,7 @@
             }
           ],
           "path": "proto/command/errors.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "upstream-tracked"
+          "compiled_top_level_input": true
         },
         {
           "package": "Keys",
@@ -8553,8 +8542,7 @@
             }
           ],
           "path": "proto/command/keys.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "upstream-tracked"
+          "compiled_top_level_input": true
         },
         {
           "package": "ManagedCharging",
@@ -8771,8 +8759,7 @@
             }
           ],
           "path": "proto/command/managed_charging.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "upstream-tracked"
+          "compiled_top_level_input": true
         },
         {
           "package": "Session",
@@ -8828,8 +8815,7 @@
           ],
           "enums": [],
           "path": "proto/command/session.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "Signatures",
@@ -9258,8 +9244,7 @@
             }
           ],
           "path": "proto/command/signatures.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "upstream-tracked"
+          "compiled_top_level_input": true
         },
         {
           "package": "UniversalMessage",
@@ -9657,8 +9642,7 @@
             }
           ],
           "path": "proto/command/universal_message.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "upstream-tracked"
+          "compiled_top_level_input": true
         },
         {
           "package": "VCSEC",
@@ -11233,8 +11217,7 @@
             }
           ],
           "path": "proto/command/vcsec.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "upstream-tracked"
+          "compiled_top_level_input": true
         },
         {
           "package": "CarServer",
@@ -19536,8 +19519,7 @@
             }
           ],
           "path": "proto/command/vehicle.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "upstream-tracked"
+          "compiled_top_level_input": true
         }
       ]
     },
@@ -19545,9 +19527,6 @@
       "name": "dashcam",
       "source_files": 1,
       "compiled_top_level_inputs": 1,
-      "provenance_classes": [
-        "teslemetry-source-of-record"
-      ],
       "generated_targets": {
         "typescript": "packages/typescript/src/dashcam",
         "python": "packages/python/tesla_protocol/dashcam"
@@ -19751,8 +19730,7 @@
           ],
           "enums": [],
           "path": "proto/dashcam/dashcam_sei.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         }
       ]
     },
@@ -19760,9 +19738,6 @@
       "name": "energy_command",
       "source_files": 1,
       "compiled_top_level_inputs": 1,
-      "provenance_classes": [
-        "teslemetry-source-of-record"
-      ],
       "generated_targets": {
         "typescript": "packages/typescript/src/energy_command",
         "python": "packages/python/tesla_protocol/energy_command"
@@ -19806,8 +19781,7 @@
             }
           ],
           "path": "proto/energy_command/identifier_type.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         }
       ]
     },
@@ -19815,10 +19789,6 @@
       "name": "energy_device",
       "source_files": 19,
       "compiled_top_level_inputs": 18,
-      "provenance_classes": [
-        "teslemetry-source-of-record",
-        "vendored-import"
-      ],
       "generated_targets": {
         "typescript": "packages/typescript/src/energy_device",
         "python": "packages/python/tesla_protocol/energy_device"
@@ -20243,8 +20213,7 @@
           ],
           "enums": [],
           "path": "proto/energy_device/authorization_api.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -20466,8 +20435,7 @@
             }
           ],
           "path": "proto/energy_device/authorization_types.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -21849,8 +21817,7 @@
           ],
           "enums": [],
           "path": "proto/energy_device/common_api.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -22201,8 +22168,7 @@
             }
           ],
           "path": "proto/energy_device/device.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -22452,8 +22418,7 @@
             }
           ],
           "path": "proto/energy_device/energy.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -23036,8 +23001,7 @@
             }
           ],
           "path": "proto/energy_device/energy_site_net.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -23067,8 +23031,7 @@
           ],
           "enums": [],
           "path": "proto/energy_device/error.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -23380,18 +23343,16 @@
             }
           ],
           "path": "proto/energy_device/filestore_api.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "path": "proto/energy_device/google/rpc/status.proto",
           "compiled_top_level_input": false,
-          "provenance_class": "vendored-import",
           "package": null,
           "imports": [],
           "messages": [],
           "enums": [],
-          "note": "vendored import dependency (google/rpc/status.proto); pulled in transitively, not compiled as a top-level input, excluded from group/global totals"
+          "note": "present under proto/ but not passed to protoc as a top-level input (see generate.sh); reachable only via another file's import; excluded from group/global totals"
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -23644,8 +23605,7 @@
             }
           ],
           "path": "proto/energy_device/graphql_api.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -24574,8 +24534,7 @@
             }
           ],
           "path": "proto/energy_device/intra_site_api.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -24836,8 +24795,7 @@
             }
           ],
           "path": "proto/energy_device/local_auth_api.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -25382,8 +25340,7 @@
             }
           ],
           "path": "proto/energy_device/networking.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -26236,8 +26193,7 @@
             }
           ],
           "path": "proto/energy_device/neurio_meter_api.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -27834,8 +27790,7 @@
             }
           ],
           "path": "proto/energy_device/pvi_api.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -30590,8 +30545,7 @@
             }
           ],
           "path": "proto/energy_device/teg_api.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -30952,8 +30906,7 @@
             }
           ],
           "path": "proto/energy_device/transport.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -31286,8 +31239,7 @@
             }
           ],
           "path": "proto/energy_device/update.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         },
         {
           "package": "tesla.proto.energy_device.v1",
@@ -35462,8 +35414,7 @@
             }
           ],
           "path": "proto/energy_device/wall_connector.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         }
       ]
     },
@@ -35471,9 +35422,6 @@
       "name": "telemetry",
       "source_files": 5,
       "compiled_top_level_inputs": 5,
-      "provenance_classes": [
-        "upstream-tracked"
-      ],
       "generated_targets": {
         "typescript": "packages/typescript/src/telemetry",
         "python": "packages/python/tesla_protocol/telemetry"
@@ -35594,8 +35542,7 @@
             }
           ],
           "path": "proto/telemetry/vehicle_alert.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "upstream-tracked"
+          "compiled_top_level_input": true
         },
         {
           "package": "telemetry.vehicle_connectivity",
@@ -35678,8 +35625,7 @@
             }
           ],
           "path": "proto/telemetry/vehicle_connectivity.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "upstream-tracked"
+          "compiled_top_level_input": true
         },
         {
           "package": "telemetry.vehicle_data",
@@ -38792,8 +38738,7 @@
             }
           ],
           "path": "proto/telemetry/vehicle_data.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "upstream-tracked"
+          "compiled_top_level_input": true
         },
         {
           "package": "telemetry.vehicle_error",
@@ -38910,8 +38855,7 @@
           ],
           "enums": [],
           "path": "proto/telemetry/vehicle_error.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "upstream-tracked"
+          "compiled_top_level_input": true
         },
         {
           "package": "telemetry.vehicle_metrics",
@@ -39020,8 +38964,7 @@
           ],
           "enums": [],
           "path": "proto/telemetry/vehicle_metric.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "upstream-tracked"
+          "compiled_top_level_input": true
         }
       ]
     },
@@ -39029,9 +38972,6 @@
       "name": "teslapower",
       "source_files": 1,
       "compiled_top_level_inputs": 1,
-      "provenance_classes": [
-        "teslemetry-source-of-record"
-      ],
       "generated_targets": {
         "typescript": "packages/typescript/src/teslapower",
         "python": "packages/python/tesla_protocol/teslapower"
@@ -41965,8 +41905,7 @@
             }
           ],
           "path": "proto/teslapower/teslapower.proto",
-          "compiled_top_level_input": true,
-          "provenance_class": "teslemetry-source-of-record"
+          "compiled_top_level_input": true
         }
       ]
     }
@@ -42009,15 +41948,6 @@
       "teslapower"
     ],
     "groups_in_readme": [
-      "charging",
-      "command",
-      "dashcam",
-      "energy_command",
-      "energy_device",
-      "telemetry",
-      "teslapower"
-    ],
-    "groups_in_provenance_md": [
       "charging",
       "command",
       "dashcam",

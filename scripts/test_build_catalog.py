@@ -164,27 +164,14 @@ class RepoIntegrationTests(unittest.TestCase):
             self.assertTrue((build_catalog.REPO_ROOT / targets["typescript"]).is_dir())
             self.assertTrue((build_catalog.REPO_ROOT / targets["python"]).is_dir())
 
-    def test_every_file_has_exactly_one_provenance_class(self):
-        known = {"upstream-tracked", "teslemetry-source-of-record", "vendored-import"}
-        for group in self.catalog["groups"]:
-            for f in group["files"]:
-                self.assertIn(f["provenance_class"], known, f["path"])
-
-    def test_vendored_status_proto_is_excluded_from_totals_but_catalogued(self):
+    def test_status_proto_import_only_is_excluded_from_totals_but_catalogued(self):
         energy_device = next(g for g in self.catalog["groups"] if g["name"] == "energy_device")
         self.assertEqual(energy_device["source_files"], 19)
         self.assertEqual(energy_device["compiled_top_level_inputs"], 18)
-        vendored = [f for f in energy_device["files"] if not f["compiled_top_level_input"]]
-        self.assertEqual(len(vendored), 1)
-        self.assertEqual(vendored[0]["path"], "proto/energy_device/google/rpc/status.proto")
-        self.assertEqual(vendored[0]["provenance_class"], "vendored-import")
-
-    def test_session_proto_overrides_command_directory_class(self):
-        command = next(g for g in self.catalog["groups"] if g["name"] == "command")
-        session = next(f for f in command["files"] if f["path"].endswith("session.proto"))
-        self.assertEqual(session["provenance_class"], "teslemetry-source-of-record")
-        car_server = next(f for f in command["files"] if f["path"].endswith("car_server.proto"))
-        self.assertEqual(car_server["provenance_class"], "upstream-tracked")
+        import_only = [f for f in energy_device["files"] if not f["compiled_top_level_input"]]
+        self.assertEqual(len(import_only), 1)
+        self.assertEqual(import_only[0]["path"], "proto/energy_device/google/rpc/status.proto")
+        self.assertEqual(import_only[0]["messages"], [])
 
     def test_files_within_each_group_are_sorted_by_path(self):
         for group in self.catalog["groups"]:

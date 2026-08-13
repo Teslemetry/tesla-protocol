@@ -6,17 +6,17 @@ See `catalog/catalog.json` for the full descriptor-based inventory.
 
 **Totals:** 38 source files, 7 groups, 868 messages, 236 enums, 2804 fields.
 
-| Group | Source files | Compiled top-level inputs | Messages | Enums | Fields | Provenance |
-|---|---:|---:|---:|---:|---:|---|
-| `charging` | 1 | 1 | 6 | 0 | 31 | teslemetry-source-of-record |
-| `command` | 10 | 10 | 315 | 96 | 1420 | teslemetry-source-of-record, upstream-tracked |
-| `dashcam` | 1 | 1 | 1 | 2 | 16 | teslemetry-source-of-record |
-| `energy_command` | 1 | 1 | 0 | 1 | 0 | teslemetry-source-of-record |
-| `energy_device` | 19 | 18 | 435 | 89 | 1014 | teslemetry-source-of-record, vendored-import |
-| `telemetry` | 5 | 5 | 16 | 45 | 109 | upstream-tracked |
-| `teslapower` | 1 | 1 | 95 | 3 | 214 | teslemetry-source-of-record |
+| Group | Source files | Compiled top-level inputs | Messages | Enums | Fields |
+|---|---:|---:|---:|---:|---:|
+| `charging` | 1 | 1 | 6 | 0 | 31 |
+| `command` | 10 | 10 | 315 | 96 | 1420 |
+| `dashcam` | 1 | 1 | 1 | 2 | 16 |
+| `energy_command` | 1 | 1 | 0 | 1 | 0 |
+| `energy_device` | 19 | 18 | 435 | 89 | 1014 |
+| `telemetry` | 5 | 5 | 16 | 45 | 109 |
+| `teslapower` | 1 | 1 | 95 | 3 | 214 |
 
-Vendored import dependencies (present under `proto/`, not passed to protoc as a top-level input, excluded from the totals above):
-- `proto/energy_device/google/rpc/status.proto` - vendored import dependency (google/rpc/status.proto); pulled in transitively, not compiled as a top-level input, excluded from group/global totals
+Files present under `proto/` that are not compiled as a top-level input (excluded from the totals above):
+- `proto/energy_device/google/rpc/status.proto` - present under proto/ but not passed to protoc as a top-level input (see generate.sh); reachable only via another file's import; excluded from group/global totals
 
-Group registration (`buf.yaml`, `scripts/generate.sh`, `README.md`, `PROVENANCE.md`) is **consistent** with `proto/`: charging, command, dashcam, energy_command, energy_device, telemetry, teslapower.
+Group registration (`buf.yaml`, `scripts/generate.sh`, `README.md`) is **consistent** with `proto/`: charging, command, dashcam, energy_command, energy_device, telemetry, teslapower.
