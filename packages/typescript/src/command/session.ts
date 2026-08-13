@@ -10,11 +10,6 @@ import { Timestamp } from "./google/protobuf/timestamp.js";
 
 export const protobufPackage = "Session";
 
-/**
- * TESLEMETRY SOURCE-OF-RECORD - no upstream.
- * Provenance: Teslemetry session persistence (session store for signed command state)
- */
-
 export interface SessionStore {
   publicKey: Uint8Array;
   epoch: Uint8Array;

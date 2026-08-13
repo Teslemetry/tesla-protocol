@@ -25,12 +25,6 @@ import { WCMessages } from "./wall_connector.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
-/**
- * TESLEMETRY SOURCE-OF-RECORD - no upstream.
- * Provenance: Tesla Energy gateway (TEG) local API, from our own
- * observations and contributions from the community
- */
-
 export enum DeliveryChannel {
   DELIVERY_CHANNEL_INVALID = 0,
   DELIVERY_CHANNEL_LOCAL_HTTPS = 1,

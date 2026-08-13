@@ -15,6 +15,4 @@ import { Payload } from "@teslemetry/tesla-protocol/telemetry/vehicle_data";
 ```
 
 See the [repository README](https://github.com/Teslemetry/tesla-protocol) for
-provenance (which definitions track Tesla's upstream repos and which are
-Teslemetry extensions from our own observations and contributions from the
-community) and the release model.
+the release model.

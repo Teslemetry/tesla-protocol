@@ -10,12 +10,6 @@ import { Int32Value, UInt32Value } from "./google/protobuf/wrappers.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
-/**
- * TESLEMETRY SOURCE-OF-RECORD - no upstream.
- * Provenance: Tesla Energy gateway (TEG) local API, from our own
- * observations and contributions from the community
- */
-
 export enum WifiNetworkSecurityType {
   WIFI_NETWORK_SECURITY_TYPE_INVALID = 0,
   WIFI_NETWORK_SECURITY_TYPE_NONE = 1,

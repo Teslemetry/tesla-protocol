@@ -35,10 +35,8 @@ PROTO_FILE = "car_server.proto"
 MESSAGE_FQN = ".CarServer.Response"
 ONEOF_NAME = "response_msg"
 
-# Field numbers known to exist in CarServer.Response.response_msg, from the
-# app-side completeness audit. Every one of these must be modelled or
-# reserved-with-reason below; see PROVENANCE.md / CLAUDE.md for the field
-# 12/17/19 exclusion rationale.
+# Field numbers known to exist in CarServer.Response.response_msg. Every one
+# of these must be modelled or reserved-with-reason below.
 KNOWN_REPLY_FIELDS = {
     2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 24, 25,
 }

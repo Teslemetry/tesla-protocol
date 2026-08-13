@@ -9,14 +9,11 @@ behind two packages published in lockstep:
 | [`@teslemetry/tesla-protocol`](https://www.npmjs.com/package/@teslemetry/tesla-protocol) | npm | `npm install @teslemetry/tesla-protocol` |
 | [`tesla-protocol`](https://pypi.org/project/tesla-protocol/) | PyPI | `pip install tesla-protocol` |
 
-The command and telemetry protos **track Tesla's upstream repositories**
+The command and telemetry protos track Tesla's public repositories
 ([`teslamotors/vehicle-command`](https://github.com/teslamotors/vehicle-command),
-[`teslamotors/fleet-telemetry`](https://github.com/teslamotors/fleet-telemetry))
-as the primary source, with Teslemetry extensions - from our own observations
-and contributions from the community - layered on top and marked
-`TESLEMETRY-EXT`. See
-**[PROVENANCE.md](PROVENANCE.md)** for the exact boundary, the upstream pin
-(`upstream.json`) and the CI gate that keeps coverage of upstream complete.
+[`teslamotors/fleet-telemetry`](https://github.com/teslamotors/fleet-telemetry)).
+`upstream.json` pins the exact commit this repo is reconciled against, and
+`scripts/upstream_coverage.py` is the CI gate that keeps coverage complete.
 
 ## Usage
 
@@ -63,8 +60,8 @@ packages/python/        tesla-protocol (generated, committed)
 
 Releases: merging a PR with changesets makes the release workflow open a
 single Version PR that bumps `package.json` and `pyproject.toml` together;
-merging that publishes both packages via OIDC trusted publishing (npm
-provenance + PyPI attestations, no stored tokens).
+merging that publishes both packages via OIDC trusted publishing (npm and
+PyPI attestations, no stored tokens).
 
 Both publish jobs run under the `production` GitHub environment, which gates
 on a required reviewer approving the exact SHA that the `ci` job (reused from

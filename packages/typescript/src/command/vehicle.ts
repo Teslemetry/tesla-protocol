@@ -64,7 +64,7 @@ export const protobufPackage = "CarServer";
  * This file = upstream base + Teslemetry extensions marked TESLEMETRY-EXT.
  */
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export enum AutopilotBase {
   AutopilotBase_NONE = 0,
   AutopilotBase_HIGHWAY = 1,
@@ -191,7 +191,7 @@ export function autopilotOverrideStateToJSON(object: AutopilotOverrideState): st
   }
 }
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export enum DashCamState {
   DashCamState_UNAVAILABLE = 0,
   DashCamState_AVAILABLE = 1,
@@ -261,7 +261,7 @@ export function dashCamStateToJSON(object: DashCamState): string {
   }
 }
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export enum TheaterSource {
   TheaterSource_None = 0,
   TheaterSource_YouTube = 1,
@@ -413,7 +413,7 @@ export enum MediaSourceType {
   MediaSourceType_OnlineRadio = 24,
   MediaSourceType_OnlineRadio2 = 25,
   MediaSourceType_NetEaseMusic = 26,
-  /** MediaSourceType_AppleMusic - TESLEMETRY-EXT (app-4.58.6) */
+  /** MediaSourceType_AppleMusic - TESLEMETRY-EXT */
   MediaSourceType_AppleMusic = 27,
   /** MediaSourceType_Browser - Entertainment sources */
   MediaSourceType_Browser = 28,
@@ -424,23 +424,23 @@ export enum MediaSourceType {
   MediaSourceType_RecentsFavorites = 33,
   MediaSourceType_HomeApps = 34,
   MediaSourceType_Search = 35,
-  /** MediaSourceType_ApplePodcasts - TESLEMETRY-EXT (app-4.58.6) */
+  /** MediaSourceType_ApplePodcasts - TESLEMETRY-EXT */
   MediaSourceType_ApplePodcasts = 36,
-  /** MediaSourceType_Audible - TESLEMETRY-EXT (app-4.58.6) */
+  /** MediaSourceType_Audible - TESLEMETRY-EXT */
   MediaSourceType_Audible = 37,
-  /** MediaSourceType_AmazonMusic - TESLEMETRY-EXT (app-4.58.6) */
+  /** MediaSourceType_AmazonMusic - TESLEMETRY-EXT */
   MediaSourceType_AmazonMusic = 38,
-  /** MediaSourceType_YouTubeMusic - TESLEMETRY-EXT (app-4.58.6) */
+  /** MediaSourceType_YouTubeMusic - TESLEMETRY-EXT */
   MediaSourceType_YouTubeMusic = 39,
-  /** MediaSourceType_SiriusXmWeb - TESLEMETRY-EXT (app-4.58.6) */
+  /** MediaSourceType_SiriusXmWeb - TESLEMETRY-EXT */
   MediaSourceType_SiriusXmWeb = 40,
-  /** MediaSourceType_Yunting - TESLEMETRY-EXT (app-4.58.6) */
+  /** MediaSourceType_Yunting - TESLEMETRY-EXT */
   MediaSourceType_Yunting = 41,
-  /** MediaSourceType_TuneInWeb - TESLEMETRY-EXT (app-4.58.6) */
+  /** MediaSourceType_TuneInWeb - TESLEMETRY-EXT */
   MediaSourceType_TuneInWeb = 42,
-  /** MediaSourceType_Kugou - TESLEMETRY-EXT (app-4.58.6) */
+  /** MediaSourceType_Kugou - TESLEMETRY-EXT */
   MediaSourceType_Kugou = 43,
-  /** MediaSourceType_Vohico - TESLEMETRY-EXT (app-4.58.6) */
+  /** MediaSourceType_Vohico - TESLEMETRY-EXT */
   MediaSourceType_Vohico = 44,
   UNRECOGNIZED = -1,
 }
@@ -717,18 +717,18 @@ export function vehicleImageStateTypeToJSON(object: VehicleImageStateType): stri
 }
 
 export interface VehicleData {
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   guiSettings: GuiSettings | undefined;
   chargeState: ChargeState | undefined;
   climateState: ClimateState | undefined;
   driveState:
     | DriveState
     | undefined;
-  /** VehicleState carries the legacy vehicle-state surface  // TESLEMETRY-EXT (app-4.58.6) */
+  /** VehicleState carries the legacy vehicle-state surface  // TESLEMETRY-EXT */
   legacyVehicleState:
     | VehicleState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   vehicleConfig: VehicleConfig | undefined;
   locationState: LocationState | undefined;
   closuresState: ClosuresState | undefined;
@@ -736,13 +736,13 @@ export interface VehicleData {
   uploadReason?:
     | string
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   parkedAccessoryState: ParkedAccessoryState | undefined;
   chargeScheduleState: ChargeScheduleState | undefined;
   preconditioningScheduleState:
     | PreconditioningScheduleState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   sohState:
     | SohState
     | undefined;
@@ -753,29 +753,29 @@ export interface VehicleData {
   mediaDetailState:
     | MediaDetailState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   vehicleDetailState: VehicleDetailState | undefined;
   softwareUpdateState: SoftwareUpdateState | undefined;
   parentalControlsState:
     | ParentalControlsState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   alertState:
     | AlertState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   lightShowState:
     | LightShowState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   vehicleImageState:
     | VehicleImageState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   suspensionState:
     | SuspensionState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   childPresenceDetectionState: ChildPresenceDetectionState | undefined;
   supportsOptionalFields?: boolean | undefined;
 }
@@ -943,25 +943,25 @@ export interface DriveState {
   fsdTotalMilesThisMonth?:
     | number
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   fsdMonthlyHistory: DriveState_FsdMonthlyMileage[];
   fsdStreakDays?:
     | number
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   fsdLast7DaysUsage: DriveState_FsdLast7DaysUsage | undefined;
   rainbowRoadEnabled?: boolean | undefined;
   fsdActive?: boolean | undefined;
 }
 
-/** TESLEMETRY-EXT (app-4.58.6) */
+/** TESLEMETRY-EXT */
 export interface DriveState_FsdMonthlyMileage {
   yearMonth: string;
   fsdMiles: number;
   totalMiles: number;
 }
 
-/** TESLEMETRY-EXT (app-4.58.6) */
+/** TESLEMETRY-EXT */
 export interface DriveState_FsdLast7DaysUsage {
   weekStartsOnSunday: boolean;
   /** one entry per day, most recent first */
@@ -1056,7 +1056,7 @@ export interface ChargeState {
   paidSessionPricebookGuid?:
     | string
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   paidSessionStartTime: Date | undefined;
   lowPowerMode?: boolean | undefined;
   lowPowerModeForcedOn?: boolean | undefined;
@@ -1198,7 +1198,7 @@ export enum ChargeState_ChargeLimitReason {
   ChargeLimitReasonBattTempLow = 3,
   ChargeLimitReasonHighSoc = 4,
   ChargeLimitReasonCabin = 5,
-  /** ChargeLimitReasonEvseRelocationRecommended - TESLEMETRY-EXT (app-4.58.6) */
+  /** ChargeLimitReasonEvseRelocationRecommended - TESLEMETRY-EXT */
   ChargeLimitReasonEvseRelocationRecommended = 6,
   UNRECOGNIZED = -1,
 }
@@ -1400,7 +1400,7 @@ export enum ChargeState_PowershareType {
   PowershareTypeNone = 0,
   PowershareTypeLoad = 1,
   PowershareTypeHome = 2,
-  /** PowershareTypeGrid - TESLEMETRY-EXT (app-4.58.6) */
+  /** PowershareTypeGrid - TESLEMETRY-EXT */
   PowershareTypeGrid = 3,
   UNRECOGNIZED = -1,
 }
@@ -1450,9 +1450,9 @@ export enum ChargeState_PowershareStopReason {
   PowershareStopReasonUser = 4,
   PowershareStopReasonReconnecting = 5,
   PowershareStopReasonAuthentication = 6,
-  /** PowershareStopReasonAdapterUpdating - TESLEMETRY-EXT (app-4.58.6) */
+  /** PowershareStopReasonAdapterUpdating - TESLEMETRY-EXT */
   PowershareStopReasonAdapterUpdating = 7,
-  /** PowershareStopReasonAdapterInitializationFailed - TESLEMETRY-EXT (app-4.58.6) */
+  /** PowershareStopReasonAdapterInitializationFailed - TESLEMETRY-EXT */
   PowershareStopReasonAdapterInitializationFailed = 8,
   UNRECOGNIZED = -1,
 }
@@ -1706,39 +1706,39 @@ export interface LocationState_GPSCoordinateType {
 }
 
 export interface VehicleState {
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   softwareUpdateState:
     | SoftwareUpdateState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   legacyMediaState:
     | LegacyMediaState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   timestamp:
     | Date
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   featureBitmask: number[];
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   tpmsLastSeenPressureTimeFl:
     | Date
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   tpmsLastSeenPressureTimeFr:
     | Date
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   tpmsLastSeenPressureTimeRl:
     | Date
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   tpmsLastSeenPressureTimeRr: Date | undefined;
   deckLightsOn?: boolean | undefined;
   hazardsOn?:
     | boolean
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   legacyMediaInfo: LegacyMediaInfo | undefined;
   allowAuthorizedMobileDevicesOnly?: boolean | undefined;
   guestMode: VehicleState_GuestMode | undefined;
@@ -1768,7 +1768,7 @@ export interface VehicleState {
   parentalControlsPinSet?:
     | boolean
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   parentalControlsSettings: ParentalControlsSettings | undefined;
   apiVersion?: number | undefined;
   carVersion?: string | undefined;
@@ -1808,9 +1808,9 @@ export interface VehicleState {
   fsdSoftwareVersion?:
     | string
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   autopilotBase: AutopilotBase;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   autopilotOverrideState: AutopilotOverrideState;
   autopilotOverrideExpireTime?: number | undefined;
 }
@@ -2161,7 +2161,7 @@ export function climateState_COPNotRunningReasonToJSON(object: ClimateState_COPN
   }
 }
 
-/** TESLEMETRY-EXT (app-4.58.6) */
+/** TESLEMETRY-EXT */
 export enum ClimateState_DogModeState {
   DogModeStateUnavailableFault = 0,
   DogModeStateUnavailableTooHot = 1,
@@ -2264,35 +2264,35 @@ export interface TirePressureState {
   tpmsPressureRe2R1?:
     | number
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   tpmsLastSeenPressureTimeRe1L0:
     | Date
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   tpmsLastSeenPressureTimeRe1L1:
     | Date
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   tpmsLastSeenPressureTimeRe1R0:
     | Date
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   tpmsLastSeenPressureTimeRe1R1:
     | Date
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   tpmsLastSeenPressureTimeRe2L0:
     | Date
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   tpmsLastSeenPressureTimeRe2L1:
     | Date
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   tpmsLastSeenPressureTimeRe2R0:
     | Date
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   tpmsLastSeenPressureTimeRe2R1: Date | undefined;
   tpmsHardWarningRe1L0?: boolean | undefined;
   tpmsHardWarningRe1L1?: boolean | undefined;
@@ -2382,7 +2382,7 @@ export interface ShiftState {
   SNA?: Void | undefined;
 }
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface GuiSettings {
   timestamp: Date | undefined;
   gui24HourTime?: boolean | undefined;
