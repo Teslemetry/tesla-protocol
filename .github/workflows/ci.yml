@@ -59,6 +59,15 @@ jobs:
       - name: Reply coverage gate (CarServer.Response)
         run: .venv/bin/python scripts/check_reply_coverage.py
 
+      - name: Protobuf surface catalog tests
+        run: .venv/bin/python -m unittest scripts/test_build_catalog.py
+
+      - name: Regenerate protobuf surface catalog
+        run: .venv/bin/python scripts/build_catalog.py
+
+      - name: Catalog is committed and fresh (drift + group registration)
+        run: git diff --exit-code -- catalog/
+
       - name: Build TypeScript package
         run: pnpm run build
 

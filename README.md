@@ -53,9 +53,13 @@ packages/python/        tesla-protocol (generated, committed)
 ## Contributing
 
 1. Edit `proto/`, then regenerate both packages: `pnpm install && pnpm generate`
-2. Add a changeset: `pnpm changeset` (see `.changeset/README.md` for bump rules)
-3. Open a PR. CI enforces: committed codegen freshness, `buf lint`,
-   `buf breaking`, and the upstream coverage gate.
+2. Regenerate the surface catalog: `.venv/bin/python scripts/build_catalog.py`
+   (see `catalog/SUMMARY.md` for the current inventory; full detail in
+   `catalog/catalog.json`)
+3. Add a changeset: `pnpm changeset` (see `.changeset/README.md` for bump rules)
+4. Open a PR. CI enforces: committed codegen freshness, `buf lint`,
+   `buf breaking`, the upstream coverage gate, and catalog freshness/group-registration
+   consistency.
 
 Releases: merging a PR with changesets makes the release workflow open a
 single Version PR that bumps `package.json` and `pyproject.toml` together;
