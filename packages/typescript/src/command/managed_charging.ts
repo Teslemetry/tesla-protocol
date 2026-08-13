@@ -120,7 +120,7 @@ export function errorCodeToJSON(object: ErrorCode): string {
   }
 }
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface ChargeOnSolarLimits {
   maxExcessSolarPowerW: number;
 }

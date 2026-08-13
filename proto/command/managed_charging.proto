@@ -27,7 +27,7 @@ enum ChargeOnSolarNoChargeReason {
     CHARGE_ON_SOLAR_NO_CHARGE_REASON_ALTERNATE_VEHICLE_CHARGE_PRIORITY = 4;
 }
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 message ChargeOnSolarLimits {
     float max_excess_solar_power_w = 1;
 }

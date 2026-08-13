@@ -15,12 +15,6 @@ import { NeurioMeterInterface } from "./neurio_meter_api.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
-/**
- * TESLEMETRY SOURCE-OF-RECORD - no upstream.
- * Provenance: Tesla Energy gateway (TEG) local API, from our own
- * observations and contributions from the community
- */
-
 export enum WCChargeScheduleChargingStatus {
   WC_CHARGE_SCHEDULE_CHARGING_STATUS_INVALID = 0,
   WC_CHARGE_SCHEDULE_CHARGING_STATUS_UNCONFIGURED_DISABLED = 1,

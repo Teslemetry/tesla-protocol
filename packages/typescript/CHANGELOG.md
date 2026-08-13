@@ -4,21 +4,21 @@
 
 ### Minor Changes
 
-- b755065: Add a new `charging` source-of-record module modelling `com.tesla.proto.charging.v1`, the EV charge-session energy metering and per-session billing schema (`Energy`, `StemInfo`, `StemEventInfo`, `ChargeSessionTimeSeries`, `StemUi`, `StemBilling`) - based on our own observations and contributions from the community.
-- 505c980: Model field-level definitions for the `energy_device.v1` local-Powerwall/Wall-Connector/PV-inverter API - Wall Connector (`WCAPI`), TEG/Powerwall (`TEGAPI`, controllable-device-program scheduling, OCPP/CSMS config), PV inverter (`PVIAPI`, new `pvi_api.proto`), CT metering (`NeurioMeterAPI`, new `neurio_meter_api.proto`), local login (`LocalAuthAPI`, new `local_auth_api.proto`), site device pairing (`EnergySiteNetAPI`, `IntraSiteAPI`, new `intra_site_api.proto`), on-gateway file storage (`FileStoreAPI`, new `filestore_api.proto`), and the GraphQL-over-protobuf sub-channel (`GraphQLAPI`, new `graphql_api.proto`) - completing each service's request/response bodies and its `*Messages` oneof envelope, based on our own observations and contributions from the community.
-- 15b0027: Model the remaining autonomy/autopilot surface and vehicle lighting fields observed in the current app: `UniversalMessage.Domain.DOMAIN_AUTOPILOT`, VCSEC's `AutonomyCommand` (wrapping the `PullOverCommand` trigger, wired into `UnsignedMessage` field 66), and `VehicleState.deck_lights_on` / `hazards_on` - based on our own observations and contributions from the community.
-- a777637: Model `DashcamSei.SeiMetadata`, the per-frame vehicle telemetry (speed, gear, steering, GPS, heading, linear acceleration, autopilot state, blinkers, brake) carried in the SEI payload embedded in TeslaCam/Sentry/live-camera video - based on our own observations and contributions from the community.
+- b755065: Add a new `charging` module modelling `com.tesla.proto.charging.v1`, the EV charge-session energy metering and per-session billing schema (`Energy`, `StemInfo`, `StemEventInfo`, `ChargeSessionTimeSeries`, `StemUi`, `StemBilling`).
+- 505c980: Model field-level definitions for the `energy_device.v1` local-Powerwall/Wall-Connector/PV-inverter API - Wall Connector (`WCAPI`), TEG/Powerwall (`TEGAPI`, controllable-device-program scheduling, OCPP/CSMS config), PV inverter (`PVIAPI`, new `pvi_api.proto`), CT metering (`NeurioMeterAPI`, new `neurio_meter_api.proto`), local login (`LocalAuthAPI`, new `local_auth_api.proto`), site device pairing (`EnergySiteNetAPI`, `IntraSiteAPI`, new `intra_site_api.proto`), on-gateway file storage (`FileStoreAPI`, new `filestore_api.proto`), and the GraphQL-over-protobuf sub-channel (`GraphQLAPI`, new `graphql_api.proto`) - completing each service's request/response bodies and its `*Messages` oneof envelope.
+- 15b0027: Model the remaining autonomy/autopilot surface and vehicle lighting fields: `UniversalMessage.Domain.DOMAIN_AUTOPILOT`, VCSEC's `AutonomyCommand` (wrapping the `PullOverCommand` trigger, wired into `UnsignedMessage` field 66), and `VehicleState.deck_lights_on` / `hazards_on`.
+- a777637: Model `DashcamSei.SeiMetadata`, the per-frame vehicle telemetry (speed, gear, steering, GPS, heading, linear acceleration, autopilot state, blinkers, brake) carried in the SEI payload embedded in TeslaCam/Sentry/live-camera video.
 - 82f65ef: Add `VehicleData.unknown` (field 18), an opaque `bytes` payload observed on live `vehicleDataSubscription` pushes but not yet decoded.
 
 ### Patch Changes
 
-- cf9d721: Regenerate `packages/typescript/src/charging/charging.ts` from `proto/charging/charging.proto` to drop a stale source-of-record comment block that was removed from the proto source but never re-synced into the generated output.
+- cf9d721: Regenerate `packages/typescript/src/charging/charging.ts` from `proto/charging/charging.proto` to drop a stale comment block that was removed from the proto source but never re-synced into the generated output.
 
 ## 0.5.0
 
 ### Minor Changes
 
-- a3d8ee5: Model the `Response.response_msg` field 12 reply payload, `GetRateTariffResponse`, mirroring the tariff document already declared for `SetRateTariffRequest` (VehicleAction tag 55) - based on our own observations and contributions from the community. Consumers decoding this reply previously saw only `{actionStatus}` and silently dropped the payload.
+- a3d8ee5: Model the `Response.response_msg` field 12 reply payload, `GetRateTariffResponse`, mirroring the tariff document already declared for `SetRateTariffRequest` (VehicleAction tag 55). Consumers decoding this reply previously saw only `{actionStatus}` and silently dropped the payload.
 
 ### Patch Changes
 
@@ -28,8 +28,8 @@
 
 ### Minor Changes
 
-- 31a7151: Add `BuckleStatusSNA` (value 4) to `BuckleStatus` in `vehicle_data.proto`, based on our own observations and contributions from the community. Consumers can now distinguish a signal-not-available buckle state from `Unknown`.
-- 45cbf6b: Add the remaining `Response.response_msg` reply payloads - `StreamMessage`, `VehicleDataSubscriptionResponse`, `VitalsSubscriptionResponse`, `PiiKeyResponse`, `PseudonymSyncResponse`, `NavigationRouteResponse`, `GetManagedChargingSitesResponse`, `AddManagedChargingSiteResponse`, `GetMessagesResponse`, `GetLocalProfilesResponse`, `KeysInfoResponse` and `BandwidthTestResponse` - based on our own observations and contributions from the community. Consumers decoding these replies previously saw only `{actionStatus}` and silently dropped the payload.
+- 31a7151: Add `BuckleStatusSNA` (value 4) to `BuckleStatus` in `vehicle_data.proto`. Consumers can now distinguish a signal-not-available buckle state from `Unknown`.
+- 45cbf6b: Add the remaining `Response.response_msg` reply payloads - `StreamMessage`, `VehicleDataSubscriptionResponse`, `VitalsSubscriptionResponse`, `PiiKeyResponse`, `PseudonymSyncResponse`, `NavigationRouteResponse`, `GetManagedChargingSitesResponse`, `AddManagedChargingSiteResponse`, `GetMessagesResponse`, `GetLocalProfilesResponse`, `KeysInfoResponse` and `BandwidthTestResponse`. Consumers decoding these replies previously saw only `{actionStatus}` and silently dropped the payload.
 
 ### Patch Changes
 
@@ -39,7 +39,7 @@
 
 ### Minor Changes
 
-- ef034d4: Add `GetChargeOnSolarFeatureResponse` to `Response.response_msg` (field 15) in `car_server.proto`, based on our own observations and contributions from the community. Consumers can now decode `enabled`, `lowerChargeLimit`, and `upperChargeLimit` from a Charge On Solar config read instead of only `{result: true}`.
+- ef034d4: Add `GetChargeOnSolarFeatureResponse` to `Response.response_msg` (field 15) in `car_server.proto`. Consumers can now decode `enabled`, `lowerChargeLimit`, and `upperChargeLimit` from a Charge On Solar config read instead of only `{result: true}`.
 
 ## 0.2.0
 
@@ -51,10 +51,10 @@
 
 ### Patch Changes
 
-- d65c4cd: Fix release workflow provenance configuration.
+- d65c4cd: Fix release workflow npm publish attestation configuration.
 
 ## 0.1.1
 
 ### Patch Changes
 
-- d7b1d83: Clarify provenance wording in docs and proto comments. No wire format, symbol, or logic changes.
+- d7b1d83: Clarify wording in docs and proto comments. No wire format, symbol, or logic changes.

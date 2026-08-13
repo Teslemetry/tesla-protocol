@@ -8,12 +8,6 @@
 
 export const protobufPackage = "tesla.proto.energy.command.v1";
 
-/**
- * TESLEMETRY SOURCE-OF-RECORD - no upstream.
- * Provenance: Tesla Energy gateway (TEG) local API, from our own
- * observations and contributions from the community
- */
-
 export enum IdentifierType {
   IDENTIFIER_TYPE_INVALID = 0,
   IDENTIFIER_TYPE_GATEWAY_DIN = 1,

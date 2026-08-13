@@ -19,12 +19,6 @@ import { WifiConfig } from "./networking.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
-/**
- * TESLEMETRY SOURCE-OF-RECORD - no upstream.
- * Provenance: Tesla Energy gateway (TEG) local API, from our own
- * observations and contributions from the community
- */
-
 export enum EnergySiteNetAdditionStatus {
   ENERGY_SITE_NET_ADDITION_STATUS_INVALID = 0,
   ENERGY_SITE_NET_ADDITION_STATUS_IN_PROGRESS = 1,

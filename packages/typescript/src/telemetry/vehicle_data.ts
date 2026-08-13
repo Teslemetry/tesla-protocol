@@ -2362,7 +2362,7 @@ export enum BuckleStatus {
   BuckleStatusUnlatched = 1,
   BuckleStatusLatched = 2,
   BuckleStatusFaulted = 3,
-  /** BuckleStatusSNA - TESLEMETRY-EXT (from our own observations and contributions from the community) */
+  /** BuckleStatusSNA - TESLEMETRY-EXT */
   BuckleStatusSNA = 4,
   UNRECOGNIZED = -1,
 }

@@ -82,15 +82,15 @@ export interface VehicleAction {
   getVehicleData?:
     | GetVehicleData
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   remoteStartDrive?:
     | RemoteStartDrive
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   createStreamSession?:
     | CreateStreamSession
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   streamMessage?: StreamMessage | undefined;
   chargingSetLimitAction?: ChargingSetLimitAction | undefined;
   chargingStartStopAction?: ChargingStartStopAction | undefined;
@@ -112,16 +112,16 @@ export interface VehicleAction {
   mediaPreviousTrack?:
     | MediaPreviousTrack
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   navigationRequest?:
     | NavigationRequest
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   navigationSuperchargerRequest?: NavigationSuperchargerRequest | undefined;
   getNearbyChargingSites?:
     | GetNearbyChargingSites
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   uiSetUpcomingCalendarEntries?: UiSetUpcomingCalendarEntries | undefined;
   vehicleControlCancelSoftwareUpdateAction?: VehicleControlCancelSoftwareUpdateAction | undefined;
   vehicleControlFlashLightsAction?: VehicleControlFlashLightsAction | undefined;
@@ -137,19 +137,19 @@ export interface VehicleAction {
   hvacSeatHeaterActions?:
     | HvacSeatHeaterActions
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   vehicleDataSubscription?:
     | VehicleDataSubscription
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   vehicleDataAck?:
     | VehicleDataAck
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   vitalsSubscription?:
     | VitalsSubscription
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   vitalsAck?: VitalsAck | undefined;
   scheduledChargingAction?: ScheduledChargingAction | undefined;
   scheduledDepartureAction?: ScheduledDepartureAction | undefined;
@@ -157,157 +157,157 @@ export interface VehicleAction {
   hvacClimateKeeperAction?:
     | HvacClimateKeeperAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   hvacRecirculationAction?: HvacRecirculationAction | undefined;
   ping?:
     | Ping
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   dashcamSaveClipAction?: DashcamSaveClipAction | undefined;
   autoSeatClimateAction?: AutoSeatClimateAction | undefined;
   hvacSeatCoolerActions?: HvacSeatCoolerActions | undefined;
   setCabinOverheatProtectionAction?:
     | SetCabinOverheatProtectionAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   piiKeyRequest?:
     | PiiKeyRequest
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   pseudonymSyncRequest?:
     | PseudonymSyncRequest
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   navigationGpsRequest?: NavigationGpsRequest | undefined;
   setVehicleNameAction?:
     | SetVehicleNameAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setRateTariffRequest?:
     | SetRateTariffRequest
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getRateTariffRequest?:
     | GetRateTariffRequest
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   videoRequestAction?:
     | VideoRequestAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   takeDrivenoteAction?: TakeDrivenoteAction | undefined;
   chargePortDoorClose?: ChargePortDoorClose | undefined;
   chargePortDoorOpen?:
     | ChargePortDoorOpen
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   bluetoothClassicPairingRequest?:
     | BluetoothClassicPairingRequest
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   boomboxAction?: BoomboxAction | undefined;
   guestModeAction?: VehicleState_GuestMode | undefined;
   setCopTempAction?:
     | SetCopTempAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   addManagedChargingSiteRequest?:
     | AddManagedChargingSiteRequest
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   removeManagedChargingSiteRequest?:
     | RemoveManagedChargingSiteRequest
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   navigationRouteAction?:
     | NavigationRouteAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   autoStwHeatAction?:
     | AutoStwHeatAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   stwHeatLevelAction?: StwHeatLevelAction | undefined;
   eraseUserDataAction?:
     | EraseUserDataAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getManagedChargingSitesRequest?:
     | GetManagedChargingSitesRequest
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   updateChargeOnSolarFeatureRequest?:
     | UpdateChargeOnSolarFeatureRequest
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getChargeOnSolarFeatureRequest?: GetChargeOnSolarFeatureRequest | undefined;
   vehicleControlSetPinToDriveAction?: VehicleControlSetPinToDriveAction | undefined;
   vehicleControlResetPinToDriveAction?: VehicleControlResetPinToDriveAction | undefined;
   drivingClearSpeedLimitPinAdminAction?:
     | DrivingClearSpeedLimitPinAdminAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setOutletsOnOffAction?:
     | SetOutletsOnOffAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setOutletTimerAction?:
     | SetOutletTimerAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setOutletSocLimitAction?:
     | SetOutletSocLimitAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setPowerFeedOnOffAction?:
     | SetPowerFeedOnOffAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setPowerFeedTimerAction?:
     | SetPowerFeedTimerAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setPowerFeedSocLimitAction?:
     | SetPowerFeedSocLimitAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setTrailerLightTestStartStopAction?:
     | SetTrailerLightTestStartStopAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setTruckBedLightAutoStateAction?:
     | SetTruckBedLightAutoStateAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setTruckBedLightBrightnessAction?: SetTruckBedLightBrightnessAction | undefined;
   vehicleControlResetPinToDriveAdminAction?:
     | VehicleControlResetPinToDriveAdminAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   navigationWaypointsRequest?:
     | NavigationWaypointsRequest
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setPowershareFeatureAction?:
     | SetPowershareFeatureAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setPowershareDischargeLimitAction?:
     | SetPowershareDischargeLimitAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setPowershareRequestAction?:
     | SetPowershareRequestAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setTentModeRequestAction?:
     | SetTentModeRequestAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setFrontZoneLightRequestAction?:
     | SetZoneLightRequestAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setRearZoneLightRequestAction?: SetZoneLightRequestAction | undefined;
   addChargeScheduleAction?: ChargeSchedule | undefined;
   removeChargeScheduleAction?: RemoveChargeScheduleAction | undefined;
@@ -315,27 +315,27 @@ export interface VehicleAction {
   removePreconditionScheduleAction?:
     | RemovePreconditionScheduleAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setLightbarBrightnessAction?:
     | SetLightbarBrightnessAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setLightbarMiddleAction?:
     | SetLightbarMiddleAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setLightbarDitchAction?:
     | SetLightbarDitchAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getMessagesAction?:
     | GetMessagesAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   teslaAuthResponseAction?:
     | TeslaAuthResponseAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   navigationGpsDestinationRequest?: NavigationGpsDestinationRequest | undefined;
   batchRemovePreconditionSchedulesAction?: BatchRemovePreconditionSchedulesAction | undefined;
   batchRemoveChargeSchedulesAction?: BatchRemoveChargeSchedulesAction | undefined;
@@ -346,7 +346,7 @@ export interface VehicleAction {
   parentalControlsSetSpeedLimitAction?:
     | ParentalControlsSetSpeedLimitAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   cancelSohTestAction?:
     | CancelSohTestAction
     | undefined;
@@ -354,101 +354,101 @@ export interface VehicleAction {
   stopLightShowAction?:
     | StopLightShowAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   startLightShowAction?:
     | StartLightShowAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setSuspensionLevelAction?:
     | SetSuspensionLevelAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setDischargeLimitAction?: SetDischargeLimitAction | undefined;
   setLowPowerModeAction?:
     | SetLowPowerModeAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setTemperatureUnitAction?:
     | SetTemperatureUnitAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setDistanceUnitAction?:
     | SetDistanceUnitAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setTimeDisplayFormatAction?:
     | SetTimeDisplayFormatAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setTirePressureUnitAction?:
     | SetTirePressureUnitAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setEnergyDisplayFormatAction?: SetEnergyDisplayFormatAction | undefined;
   setKeepAccessoryPowerModeAction?:
     | SetKeepAccessoryPowerModeAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setupCloudProfileWithLocalProfileUuidAction?:
     | SetupCloudProfileWithLocalProfileUuidAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getLocalProfilesForVaultUuidAction?:
     | GetLocalProfilesForVaultUuidAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   fetchKeysInfoAction?:
     | FetchKeysInfoAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   deleteDashcamClipsAction?:
     | DeleteDashcamClipsAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   formatUsbAction?:
     | FormatUSBAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   bandwidthTest?:
     | BandwidthTest
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   setPhoneSettingPreferencesAction?:
     | SetPhoneSettingPreferencesAction
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   cancelVehicleDataSubscription?: CancelVehicleDataSubscription | undefined;
 }
 
 export interface GetVehicleData {
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getGuiSettings: GetGuiSettings | undefined;
   getChargeState: GetChargeState | undefined;
   getClimateState: GetClimateState | undefined;
   getDriveState:
     | GetDriveState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getLegacyVehicleState:
     | GetLegacyVehicleState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getVehicleConfig: GetVehicleConfig | undefined;
   getLocationState: GetLocationState | undefined;
   getClosuresState:
     | GetClosuresState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getParkedAccessoryState: GetParkedAccessoryState | undefined;
   getChargeScheduleState: GetChargeScheduleState | undefined;
   getPreconditioningScheduleState:
     | GetPreconditioningScheduleState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getSohState:
     | GetSohState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getVehicleDetailState: GetVehicleDetailState | undefined;
   getTirePressureState: GetTirePressureState | undefined;
   getMediaState: GetMediaState | undefined;
@@ -456,32 +456,32 @@ export interface GetVehicleData {
   getSoftwareUpdateState:
     | GetSoftwareUpdateState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getVehicleState: GetVehicleState | undefined;
   getParentalControlsState:
     | GetParentalControlsState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getAlertState:
     | GetAlertState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getLightShowState:
     | GetLightShowState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getVehicleImageState:
     | GetVehicleImageState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getSuspensionState:
     | GetSuspensionState
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   getChildPresenceDetectionState: GetChildPresenceDetectionState | undefined;
 }
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface GetGuiSettings {
 }
 
@@ -601,7 +601,7 @@ export interface GetParentalControlsState {
 
 export interface EraseUserDataAction {
   reason: string;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   triggerOnPark: boolean;
 }
 
@@ -834,7 +834,7 @@ export interface EncryptedData {
 
 export interface ChargingSetLimitAction {
   percent: number;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   oneTime: boolean;
 }
 
@@ -949,9 +949,9 @@ export enum HvacSeatCoolerActions_HvacSeatCoolerPositionE {
   HvacSeatCoolerPosition_Unknown = 0,
   HvacSeatCoolerPosition_FrontLeft = 1,
   HvacSeatCoolerPosition_FrontRight = 2,
-  /** HvacSeatCoolerPosition_SecondRowLeft - TESLEMETRY-EXT (app-4.58.6) */
+  /** HvacSeatCoolerPosition_SecondRowLeft - TESLEMETRY-EXT */
   HvacSeatCoolerPosition_SecondRowLeft = 3,
-  /** HvacSeatCoolerPosition_SecondRowRight - TESLEMETRY-EXT (app-4.58.6) */
+  /** HvacSeatCoolerPosition_SecondRowRight - TESLEMETRY-EXT */
   HvacSeatCoolerPosition_SecondRowRight = 4,
   UNRECOGNIZED = -1,
 }
@@ -1093,13 +1093,13 @@ export interface NearbyChargingSites {
   timestamp:
     | Date
     | undefined;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   destinationCharging: DestinationCharging[];
   superchargers: Superchargers[];
   congestionSyncTimeUtcSecs: number;
 }
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface DestinationCharging {
   distanceMiles: number;
   postalCode: string;
@@ -1269,7 +1269,7 @@ export interface ScheduledDepartureAction {
 export interface HvacClimateKeeperAction {
   ClimateKeeperAction: HvacClimateKeeperAction_ClimateKeeperActionE;
   manualOverride: boolean;
-  /** TESLEMETRY-EXT (app-4.58.6) */
+  /** TESLEMETRY-EXT */
   manualOverrideMode: HvacClimateKeeperAction_ManualOverrideModeE[];
 }
 
@@ -1322,7 +1322,7 @@ export function hvacClimateKeeperAction_ClimateKeeperActionEToJSON(
   }
 }
 
-/** TESLEMETRY-EXT (app-4.58.6) */
+/** TESLEMETRY-EXT */
 export enum HvacClimateKeeperAction_ManualOverrideModeE {
   Soc = 0,
   Cpd = 1,
@@ -1360,7 +1360,7 @@ export function hvacClimateKeeperAction_ManualOverrideModeEToJSON(
   }
 }
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface HvacRecirculationAction {
   on: boolean;
 }
@@ -1408,7 +1408,7 @@ export interface ChargePortDoorClose {
 export interface ChargePortDoorOpen {
 }
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface BoomboxAction {
   sound: number;
 }
@@ -1425,7 +1425,7 @@ export interface VehicleControlSetPinToDriveAction {
 export interface VehicleControlResetPinToDriveAction {
 }
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface RemoteStartDrive {
 }
 
@@ -1576,7 +1576,7 @@ export function navigationGpsRequest_RemoteNavTripOrderToJSON(object: Navigation
 /**
  * The wire payload at VehicleAction tag 55 is a rate-tariff document; only the
  * parts of that document we have observed and documented are declared here.
- * ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+ * ===== TESLEMETRY-EXT BEGIN =====
  */
 export interface SetRateTariffRequest {
   seasons: SetRateTariffRequest_Seasons | undefined;
@@ -1717,7 +1717,7 @@ export interface ChargeOnSolarFeature {
 export interface DrivingClearSpeedLimitPinAdminAction {
 }
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface SetOutletsOnOffAction {
   /** Field with JSON name "outletRequest" */
   outletRequest: SetOutletsOnOffAction_OutletRequest;
@@ -1861,7 +1861,7 @@ export interface SetTruckBedLightBrightnessAction {
 export interface VehicleControlResetPinToDriveAdminAction {
 }
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface NavigationWaypointsRequest {
   waypoints: string;
   tripPlanOptions: NavigationWaypointsRequest_TripPlanOptions | undefined;
@@ -2196,7 +2196,7 @@ export interface ParentalControlsSetSpeedLimitAction {
   limitMph: number;
 }
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface CancelSohTestAction {
 }
 
@@ -2289,7 +2289,7 @@ export interface SetLowPowerModeAction {
   lowPowerMode: boolean;
 }
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface SetTemperatureUnitAction {
   unit: SetTemperatureUnitAction_Unit;
 }
@@ -2479,7 +2479,7 @@ export interface SetKeepAccessoryPowerModeAction {
   keepAccessoryPowerMode: boolean;
 }
 
-/** ===== TESLEMETRY-EXT BEGIN (app-4.58.6) ===== */
+/** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface SetupCloudProfileWithLocalProfileUuidAction {
   cloudVaultUuid: string;
   localProfileUuid: string;

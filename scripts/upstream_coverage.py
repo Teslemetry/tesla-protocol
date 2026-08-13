@@ -13,6 +13,10 @@ Modes:
   --mode head    compare against upstream main HEAD (used by the weekly
                  drift job; new gaps here are upstream additions, not PR bugs)
 
+Upstream wins: if upstream later publishes a symbol we already define under
+a different name or number, upstream's version replaces ours. A published
+reservation or void does not replace an existing concrete definition.
+
 Requires grpcio-tools (bundled protoc) in the running interpreter.
 """
 
@@ -272,7 +276,7 @@ def check_markers(
     marked = 0
     for fqn, file, kind in ours_only:
         if file not in tracked_files:
-            continue  # whole-file Teslemetry source-of-record, exempt
+            continue  # whole file has no upstream counterpart, exempt
         if is_marked(fqn, file):
             marked += 1
         else:

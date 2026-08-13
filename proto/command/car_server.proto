@@ -29,9 +29,9 @@ message VehicleAction {
   reserved 76;
   oneof vehicle_action_msg {
     GetVehicleData getVehicleData = 1;
-    RemoteStartDrive remoteStartDrive = 2;  // TESLEMETRY-EXT (app-4.58.6)
-    CreateStreamSession createStreamSession = 3;  // TESLEMETRY-EXT (app-4.58.6)
-    StreamMessage streamMessage = 4;  // TESLEMETRY-EXT (app-4.58.6)
+    RemoteStartDrive remoteStartDrive = 2;  // TESLEMETRY-EXT
+    CreateStreamSession createStreamSession = 3;  // TESLEMETRY-EXT
+    StreamMessage streamMessage = 4;  // TESLEMETRY-EXT
     ChargingSetLimitAction chargingSetLimitAction = 5;
     ChargingStartStopAction chargingStartStopAction = 6;
     DrivingClearSpeedLimitPinAction drivingClearSpeedLimitPinAction = 7;
@@ -48,10 +48,10 @@ message VehicleAction {
     MediaPreviousFavorite mediaPreviousFavorite = 18;
     MediaNextTrack mediaNextTrack = 19;
     MediaPreviousTrack mediaPreviousTrack = 20;
-    NavigationRequest navigationRequest = 21;  // TESLEMETRY-EXT (app-4.58.6)
-    NavigationSuperchargerRequest navigationSuperchargerRequest = 22;  // TESLEMETRY-EXT (app-4.58.6)
+    NavigationRequest navigationRequest = 21;  // TESLEMETRY-EXT
+    NavigationSuperchargerRequest navigationSuperchargerRequest = 22;  // TESLEMETRY-EXT
     GetNearbyChargingSites getNearbyChargingSites = 23;
-    UiSetUpcomingCalendarEntries uiSetUpcomingCalendarEntries = 24;  // TESLEMETRY-EXT (app-4.58.6)
+    UiSetUpcomingCalendarEntries uiSetUpcomingCalendarEntries = 24;  // TESLEMETRY-EXT
     VehicleControlCancelSoftwareUpdateAction vehicleControlCancelSoftwareUpdateAction = 25;
     VehicleControlFlashLightsAction vehicleControlFlashLightsAction = 26;
     VehicleControlHonkHornAction vehicleControlHonkHornAction = 27;
@@ -64,73 +64,73 @@ message VehicleAction {
     VehicleControlWindowAction vehicleControlWindowAction = 34;
     HvacBioweaponModeAction hvacBioweaponModeAction = 35;
     HvacSeatHeaterActions hvacSeatHeaterActions = 36;
-    VehicleDataSubscription vehicleDataSubscription = 37;  // TESLEMETRY-EXT (app-4.58.6)
-    VehicleDataAck vehicleDataAck = 38;  // TESLEMETRY-EXT (app-4.58.6)
-    VitalsSubscription vitalsSubscription = 39;  // TESLEMETRY-EXT (app-4.58.6)
-    VitalsAck vitalsAck = 40;  // TESLEMETRY-EXT (app-4.58.6)
+    VehicleDataSubscription vehicleDataSubscription = 37;  // TESLEMETRY-EXT
+    VehicleDataAck vehicleDataAck = 38;  // TESLEMETRY-EXT
+    VitalsSubscription vitalsSubscription = 39;  // TESLEMETRY-EXT
+    VitalsAck vitalsAck = 40;  // TESLEMETRY-EXT
     ScheduledChargingAction scheduledChargingAction = 41;
     ScheduledDepartureAction scheduledDepartureAction = 42;
     SetChargingAmpsAction setChargingAmpsAction = 43;
     HvacClimateKeeperAction hvacClimateKeeperAction = 44;
-    HvacRecirculationAction hvacRecirculationAction = 45;  // TESLEMETRY-EXT (app-4.58.6)
+    HvacRecirculationAction hvacRecirculationAction = 45;  // TESLEMETRY-EXT
     Ping ping = 46;
-    DashcamSaveClipAction dashcamSaveClipAction = 47;  // TESLEMETRY-EXT (app-4.58.6)
+    DashcamSaveClipAction dashcamSaveClipAction = 47;  // TESLEMETRY-EXT
     AutoSeatClimateAction autoSeatClimateAction = 48;
     HvacSeatCoolerActions hvacSeatCoolerActions = 49;
     SetCabinOverheatProtectionAction setCabinOverheatProtectionAction = 50;
-    PiiKeyRequest piiKeyRequest = 51;  // TESLEMETRY-EXT (app-4.58.6)
-    PseudonymSyncRequest pseudonymSyncRequest = 52;  // TESLEMETRY-EXT (app-4.58.6)
-    NavigationGpsRequest navigationGpsRequest = 53;  // TESLEMETRY-EXT (app-4.58.6)
+    PiiKeyRequest piiKeyRequest = 51;  // TESLEMETRY-EXT
+    PseudonymSyncRequest pseudonymSyncRequest = 52;  // TESLEMETRY-EXT
+    NavigationGpsRequest navigationGpsRequest = 53;  // TESLEMETRY-EXT
     SetVehicleNameAction setVehicleNameAction = 54;
-    SetRateTariffRequest setRateTariffRequest = 55;  // TESLEMETRY-EXT (app-4.58.6)
-    GetRateTariffRequest getRateTariffRequest = 56;  // TESLEMETRY-EXT (app-4.58.6)
-    VideoRequestAction videoRequestAction = 57;  // TESLEMETRY-EXT (app-4.58.6)
-    TakeDrivenoteAction takeDrivenoteAction = 58;  // TESLEMETRY-EXT (app-4.58.6)
+    SetRateTariffRequest setRateTariffRequest = 55;  // TESLEMETRY-EXT
+    GetRateTariffRequest getRateTariffRequest = 56;  // TESLEMETRY-EXT
+    VideoRequestAction videoRequestAction = 57;  // TESLEMETRY-EXT
+    TakeDrivenoteAction takeDrivenoteAction = 58;  // TESLEMETRY-EXT
     ChargePortDoorClose chargePortDoorClose = 61;
     ChargePortDoorOpen chargePortDoorOpen = 62;
-    BluetoothClassicPairingRequest bluetoothClassicPairingRequest = 63;  // TESLEMETRY-EXT (app-4.58.6)
-    BoomboxAction boomboxAction = 64;  // TESLEMETRY-EXT (app-4.58.6)
+    BluetoothClassicPairingRequest bluetoothClassicPairingRequest = 63;  // TESLEMETRY-EXT
+    BoomboxAction boomboxAction = 64;  // TESLEMETRY-EXT
     VehicleState.GuestMode guestModeAction = 65;
     SetCopTempAction setCopTempAction = 66;
-    AddManagedChargingSiteRequest addManagedChargingSiteRequest = 67;  // TESLEMETRY-EXT (app-4.58.6)
-    RemoveManagedChargingSiteRequest removeManagedChargingSiteRequest = 68;  // TESLEMETRY-EXT (app-4.58.6)
-    NavigationRouteAction navigationRouteAction = 69;  // TESLEMETRY-EXT (app-4.58.6)
-    AutoStwHeatAction autoStwHeatAction = 70;  // TESLEMETRY-EXT (app-4.58.6)
-    StwHeatLevelAction stwHeatLevelAction = 71;  // TESLEMETRY-EXT (app-4.58.6)
+    AddManagedChargingSiteRequest addManagedChargingSiteRequest = 67;  // TESLEMETRY-EXT
+    RemoveManagedChargingSiteRequest removeManagedChargingSiteRequest = 68;  // TESLEMETRY-EXT
+    NavigationRouteAction navigationRouteAction = 69;  // TESLEMETRY-EXT
+    AutoStwHeatAction autoStwHeatAction = 70;  // TESLEMETRY-EXT
+    StwHeatLevelAction stwHeatLevelAction = 71;  // TESLEMETRY-EXT
     EraseUserDataAction eraseUserDataAction = 72;
-    GetManagedChargingSitesRequest getManagedChargingSitesRequest = 73;  // TESLEMETRY-EXT (app-4.58.6)
-    UpdateChargeOnSolarFeatureRequest updateChargeOnSolarFeatureRequest = 74;  // TESLEMETRY-EXT (app-4.58.6)
-    GetChargeOnSolarFeatureRequest getChargeOnSolarFeatureRequest = 75;  // TESLEMETRY-EXT (app-4.58.6)
+    GetManagedChargingSitesRequest getManagedChargingSitesRequest = 73;  // TESLEMETRY-EXT
+    UpdateChargeOnSolarFeatureRequest updateChargeOnSolarFeatureRequest = 74;  // TESLEMETRY-EXT
+    GetChargeOnSolarFeatureRequest getChargeOnSolarFeatureRequest = 75;  // TESLEMETRY-EXT
     VehicleControlSetPinToDriveAction vehicleControlSetPinToDriveAction = 77;
     VehicleControlResetPinToDriveAction vehicleControlResetPinToDriveAction = 78;
     DrivingClearSpeedLimitPinAdminAction drivingClearSpeedLimitPinAdminAction = 79;
-    SetOutletsOnOffAction setOutletsOnOffAction = 80;  // TESLEMETRY-EXT (app-4.58.6)
-    SetOutletTimerAction setOutletTimerAction = 81;  // TESLEMETRY-EXT (app-4.58.6)
-    SetOutletSocLimitAction setOutletSocLimitAction = 82;  // TESLEMETRY-EXT (app-4.58.6)
-    SetPowerFeedOnOffAction setPowerFeedOnOffAction = 83;  // TESLEMETRY-EXT (app-4.58.6)
-    SetPowerFeedTimerAction setPowerFeedTimerAction = 84;  // TESLEMETRY-EXT (app-4.58.6)
-    SetPowerFeedSocLimitAction setPowerFeedSocLimitAction = 85;  // TESLEMETRY-EXT (app-4.58.6)
-    SetTrailerLightTestStartStopAction setTrailerLightTestStartStopAction = 86;  // TESLEMETRY-EXT (app-4.58.6)
-    SetTruckBedLightAutoStateAction setTruckBedLightAutoStateAction = 87;  // TESLEMETRY-EXT (app-4.58.6)
-    SetTruckBedLightBrightnessAction setTruckBedLightBrightnessAction = 88;  // TESLEMETRY-EXT (app-4.58.6)
+    SetOutletsOnOffAction setOutletsOnOffAction = 80;  // TESLEMETRY-EXT
+    SetOutletTimerAction setOutletTimerAction = 81;  // TESLEMETRY-EXT
+    SetOutletSocLimitAction setOutletSocLimitAction = 82;  // TESLEMETRY-EXT
+    SetPowerFeedOnOffAction setPowerFeedOnOffAction = 83;  // TESLEMETRY-EXT
+    SetPowerFeedTimerAction setPowerFeedTimerAction = 84;  // TESLEMETRY-EXT
+    SetPowerFeedSocLimitAction setPowerFeedSocLimitAction = 85;  // TESLEMETRY-EXT
+    SetTrailerLightTestStartStopAction setTrailerLightTestStartStopAction = 86;  // TESLEMETRY-EXT
+    SetTruckBedLightAutoStateAction setTruckBedLightAutoStateAction = 87;  // TESLEMETRY-EXT
+    SetTruckBedLightBrightnessAction setTruckBedLightBrightnessAction = 88;  // TESLEMETRY-EXT
     VehicleControlResetPinToDriveAdminAction vehicleControlResetPinToDriveAdminAction = 89;
-    NavigationWaypointsRequest navigationWaypointsRequest = 90;  // TESLEMETRY-EXT (app-4.58.6)
-    SetPowershareFeatureAction setPowershareFeatureAction = 91;  // TESLEMETRY-EXT (app-4.58.6)
-    SetPowershareDischargeLimitAction setPowershareDischargeLimitAction = 92;  // TESLEMETRY-EXT (app-4.58.6)
-    SetPowershareRequestAction setPowershareRequestAction = 93;  // TESLEMETRY-EXT (app-4.58.6)
-    SetTentModeRequestAction setTentModeRequestAction = 94;  // TESLEMETRY-EXT (app-4.58.6)
-    SetZoneLightRequestAction setFrontZoneLightRequestAction = 95;  // TESLEMETRY-EXT (app-4.58.6)
-    SetZoneLightRequestAction setRearZoneLightRequestAction = 96;  // TESLEMETRY-EXT (app-4.58.6)
+    NavigationWaypointsRequest navigationWaypointsRequest = 90;  // TESLEMETRY-EXT
+    SetPowershareFeatureAction setPowershareFeatureAction = 91;  // TESLEMETRY-EXT
+    SetPowershareDischargeLimitAction setPowershareDischargeLimitAction = 92;  // TESLEMETRY-EXT
+    SetPowershareRequestAction setPowershareRequestAction = 93;  // TESLEMETRY-EXT
+    SetTentModeRequestAction setTentModeRequestAction = 94;  // TESLEMETRY-EXT
+    SetZoneLightRequestAction setFrontZoneLightRequestAction = 95;  // TESLEMETRY-EXT
+    SetZoneLightRequestAction setRearZoneLightRequestAction = 96;  // TESLEMETRY-EXT
     ChargeSchedule addChargeScheduleAction = 97;
     RemoveChargeScheduleAction removeChargeScheduleAction = 98;
     PreconditionSchedule addPreconditionScheduleAction = 99;
     RemovePreconditionScheduleAction removePreconditionScheduleAction = 100;
-    SetLightbarBrightnessAction setLightbarBrightnessAction = 101;  // TESLEMETRY-EXT (app-4.58.6)
-    SetLightbarMiddleAction setLightbarMiddleAction = 102;  // TESLEMETRY-EXT (app-4.58.6)
-    SetLightbarDitchAction setLightbarDitchAction = 103;  // TESLEMETRY-EXT (app-4.58.6)
-    GetMessagesAction getMessagesAction = 104;  // TESLEMETRY-EXT (app-4.58.6)
-    TeslaAuthResponseAction teslaAuthResponseAction = 105;  // TESLEMETRY-EXT (app-4.58.6)
-    NavigationGpsDestinationRequest navigationGpsDestinationRequest = 106;  // TESLEMETRY-EXT (app-4.58.6)
+    SetLightbarBrightnessAction setLightbarBrightnessAction = 101;  // TESLEMETRY-EXT
+    SetLightbarMiddleAction setLightbarMiddleAction = 102;  // TESLEMETRY-EXT
+    SetLightbarDitchAction setLightbarDitchAction = 103;  // TESLEMETRY-EXT
+    GetMessagesAction getMessagesAction = 104;  // TESLEMETRY-EXT
+    TeslaAuthResponseAction teslaAuthResponseAction = 105;  // TESLEMETRY-EXT
+    NavigationGpsDestinationRequest navigationGpsDestinationRequest = 106;  // TESLEMETRY-EXT
     BatchRemovePreconditionSchedulesAction batchRemovePreconditionSchedulesAction = 107;
     BatchRemoveChargeSchedulesAction batchRemoveChargeSchedulesAction = 108;
     ParentalControlsClearPinAction parentalControlsClearPinAction = 109;
@@ -138,58 +138,58 @@ message VehicleAction {
     ParentalControlsAction parentalControlsAction = 111;
     ParentalControlsEnableSettingsAction parentalControlsEnableSettingsAction = 112;
     ParentalControlsSetSpeedLimitAction parentalControlsSetSpeedLimitAction = 113;
-    CancelSohTestAction cancelSohTestAction = 114;  // TESLEMETRY-EXT (app-4.58.6)
+    CancelSohTestAction cancelSohTestAction = 114;  // TESLEMETRY-EXT
     // Missing = 115;
-    StopLightShowAction stopLightShowAction = 116;  // TESLEMETRY-EXT (app-4.58.6)
-    StartLightShowAction startLightShowAction = 117;  // TESLEMETRY-EXT (app-4.58.6)
-    SetSuspensionLevelAction setSuspensionLevelAction = 118;  // TESLEMETRY-EXT (app-4.58.6)
-    SetDischargeLimitAction setDischargeLimitAction = 129;  // TESLEMETRY-EXT (app-4.58.6)
+    StopLightShowAction stopLightShowAction = 116;  // TESLEMETRY-EXT
+    StartLightShowAction startLightShowAction = 117;  // TESLEMETRY-EXT
+    SetSuspensionLevelAction setSuspensionLevelAction = 118;  // TESLEMETRY-EXT
+    SetDischargeLimitAction setDischargeLimitAction = 129;  // TESLEMETRY-EXT
     SetLowPowerModeAction setLowPowerModeAction = 130;
-    SetTemperatureUnitAction setTemperatureUnitAction = 132;  // TESLEMETRY-EXT (app-4.58.6)
-    SetDistanceUnitAction setDistanceUnitAction = 133;  // TESLEMETRY-EXT (app-4.58.6)
-    SetTimeDisplayFormatAction setTimeDisplayFormatAction = 134;  // TESLEMETRY-EXT (app-4.58.6)
-    SetTirePressureUnitAction setTirePressureUnitAction = 135;  // TESLEMETRY-EXT (app-4.58.6)
-    SetEnergyDisplayFormatAction setEnergyDisplayFormatAction = 136;  // TESLEMETRY-EXT (app-4.58.6)
+    SetTemperatureUnitAction setTemperatureUnitAction = 132;  // TESLEMETRY-EXT
+    SetDistanceUnitAction setDistanceUnitAction = 133;  // TESLEMETRY-EXT
+    SetTimeDisplayFormatAction setTimeDisplayFormatAction = 134;  // TESLEMETRY-EXT
+    SetTirePressureUnitAction setTirePressureUnitAction = 135;  // TESLEMETRY-EXT
+    SetEnergyDisplayFormatAction setEnergyDisplayFormatAction = 136;  // TESLEMETRY-EXT
     SetKeepAccessoryPowerModeAction setKeepAccessoryPowerModeAction = 138;
-    SetupCloudProfileWithLocalProfileUuidAction setupCloudProfileWithLocalProfileUuidAction = 139;  // TESLEMETRY-EXT (app-4.58.6)
-    GetLocalProfilesForVaultUuidAction getLocalProfilesForVaultUuidAction = 140;  // TESLEMETRY-EXT (app-4.58.6)
-    FetchKeysInfoAction fetchKeysInfoAction = 142;  // TESLEMETRY-EXT (app-4.58.6)
-    DeleteDashcamClipsAction deleteDashcamClipsAction = 144;  // TESLEMETRY-EXT (app-4.58.6)
-    FormatUSBAction formatUsbAction = 146;  // TESLEMETRY-EXT (app-4.58.6)
-    BandwidthTest bandwidthTest = 149;  // TESLEMETRY-EXT (app-4.58.6)
-    SetPhoneSettingPreferencesAction setPhoneSettingPreferencesAction = 151;  // TESLEMETRY-EXT (app-4.58.6)
-    CancelVehicleDataSubscription cancelVehicleDataSubscription = 171;  // TESLEMETRY-EXT (app-4.58.6)
+    SetupCloudProfileWithLocalProfileUuidAction setupCloudProfileWithLocalProfileUuidAction = 139;  // TESLEMETRY-EXT
+    GetLocalProfilesForVaultUuidAction getLocalProfilesForVaultUuidAction = 140;  // TESLEMETRY-EXT
+    FetchKeysInfoAction fetchKeysInfoAction = 142;  // TESLEMETRY-EXT
+    DeleteDashcamClipsAction deleteDashcamClipsAction = 144;  // TESLEMETRY-EXT
+    FormatUSBAction formatUsbAction = 146;  // TESLEMETRY-EXT
+    BandwidthTest bandwidthTest = 149;  // TESLEMETRY-EXT
+    SetPhoneSettingPreferencesAction setPhoneSettingPreferencesAction = 151;  // TESLEMETRY-EXT
+    CancelVehicleDataSubscription cancelVehicleDataSubscription = 171;  // TESLEMETRY-EXT
   }
 }
 
 message GetVehicleData {
-  GetGuiSettings getGuiSettings = 1;  // TESLEMETRY-EXT (app-4.58.6)
+  GetGuiSettings getGuiSettings = 1;  // TESLEMETRY-EXT
   GetChargeState getChargeState = 2;
   GetClimateState getClimateState = 3;
   GetDriveState getDriveState = 4;
-  GetLegacyVehicleState getLegacyVehicleState = 5;  // TESLEMETRY-EXT (app-4.58.6)
-  GetVehicleConfig getVehicleConfig = 6;  // TESLEMETRY-EXT (app-4.58.6)
+  GetLegacyVehicleState getLegacyVehicleState = 5;  // TESLEMETRY-EXT
+  GetVehicleConfig getVehicleConfig = 6;  // TESLEMETRY-EXT
   GetLocationState getLocationState = 7;
   GetClosuresState getClosuresState = 8;
-  GetParkedAccessoryState getParkedAccessoryState = 9;  // TESLEMETRY-EXT (app-4.58.6)
+  GetParkedAccessoryState getParkedAccessoryState = 9;  // TESLEMETRY-EXT
   GetChargeScheduleState getChargeScheduleState = 10;
   GetPreconditioningScheduleState getPreconditioningScheduleState = 11;
-  GetSohState getSohState = 12;  // TESLEMETRY-EXT (app-4.58.6)
-  GetVehicleDetailState getVehicleDetailState = 13;  // TESLEMETRY-EXT (app-4.58.6)
+  GetSohState getSohState = 12;  // TESLEMETRY-EXT
+  GetVehicleDetailState getVehicleDetailState = 13;  // TESLEMETRY-EXT
   GetTirePressureState getTirePressureState = 14;
   GetMediaState getMediaState = 15;
   GetMediaDetailState getMediaDetailState = 16;
   GetSoftwareUpdateState getSoftwareUpdateState = 17;
-  GetVehicleState getVehicleState = 18;  // TESLEMETRY-EXT (app-4.58.6)
+  GetVehicleState getVehicleState = 18;  // TESLEMETRY-EXT
   GetParentalControlsState getParentalControlsState = 19;
-  GetAlertState getAlertState = 20;  // TESLEMETRY-EXT (app-4.58.6)
-  GetLightShowState getLightShowState = 21;  // TESLEMETRY-EXT (app-4.58.6)
-  GetVehicleImageState getVehicleImageState = 22;  // TESLEMETRY-EXT (app-4.58.6)
-  GetSuspensionState getSuspensionState = 23;  // TESLEMETRY-EXT (app-4.58.6)
-  GetChildPresenceDetectionState getChildPresenceDetectionState = 25;  // TESLEMETRY-EXT (app-4.58.6)
+  GetAlertState getAlertState = 20;  // TESLEMETRY-EXT
+  GetLightShowState getLightShowState = 21;  // TESLEMETRY-EXT
+  GetVehicleImageState getVehicleImageState = 22;  // TESLEMETRY-EXT
+  GetSuspensionState getSuspensionState = 23;  // TESLEMETRY-EXT
+  GetChildPresenceDetectionState getChildPresenceDetectionState = 25;  // TESLEMETRY-EXT
 }
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 message GetGuiSettings {}
 
 message GetLegacyVehicleState {}
@@ -258,7 +258,7 @@ message GetParentalControlsState {}
 
 message EraseUserDataAction {
   string reason = 1;
-  bool trigger_on_park = 2;  // TESLEMETRY-EXT (app-4.58.6)
+  bool trigger_on_park = 2;  // TESLEMETRY-EXT
 }
 
 message Response {
@@ -411,7 +411,7 @@ message EncryptedData {
 
 message ChargingSetLimitAction {
   int32 percent = 1;
-  bool one_time = 2;  // TESLEMETRY-EXT (app-4.58.6)
+  bool one_time = 2;  // TESLEMETRY-EXT
 }
 
 message ChargingStartStopAction {
@@ -480,8 +480,8 @@ message HvacSeatCoolerActions {
     HvacSeatCoolerPosition_Unknown = 0;
     HvacSeatCoolerPosition_FrontLeft = 1;
     HvacSeatCoolerPosition_FrontRight = 2;
-    HvacSeatCoolerPosition_SecondRowLeft = 3;  // TESLEMETRY-EXT (app-4.58.6)
-    HvacSeatCoolerPosition_SecondRowRight = 4;  // TESLEMETRY-EXT (app-4.58.6)
+    HvacSeatCoolerPosition_SecondRowLeft = 3;  // TESLEMETRY-EXT
+    HvacSeatCoolerPosition_SecondRowRight = 4;  // TESLEMETRY-EXT
   }
   message HvacSeatCoolerAction {
     HvacSeatCoolerLevel_E seat_cooler_level = 1;
@@ -538,12 +538,12 @@ message GetNearbyChargingSites {
 
 message NearbyChargingSites {
   google.protobuf.Timestamp timestamp = 1;
-  repeated DestinationCharging destination_charging = 2;  // TESLEMETRY-EXT (app-4.58.6)
+  repeated DestinationCharging destination_charging = 2;  // TESLEMETRY-EXT
   repeated Superchargers superchargers = 3;
   int64 congestion_sync_time_utc_secs = 4;
 }
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 message DestinationCharging {
   float distance_miles = 5;
   string postal_code = 9;
@@ -685,17 +685,17 @@ message HvacClimateKeeperAction {
     ClimateKeeperAction_Dog = 2;
     ClimateKeeperAction_Camp = 3;
   }
-  enum ManualOverrideMode_E {  // TESLEMETRY-EXT (app-4.58.6)
+  enum ManualOverrideMode_E {  // TESLEMETRY-EXT
     Soc = 0;
     Cpd = 1;
   }
 
   ClimateKeeperAction_E ClimateKeeperAction = 1;
   bool manual_override = 2;
-  repeated ManualOverrideMode_E manual_override_mode = 3;  // TESLEMETRY-EXT (app-4.58.6)
+  repeated ManualOverrideMode_E manual_override_mode = 3;  // TESLEMETRY-EXT
 }
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 message HvacRecirculationAction {
   bool on = 1;
 }
@@ -738,7 +738,7 @@ message ChargePortDoorClose {}
 
 message ChargePortDoorOpen {}
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 message BoomboxAction {
   uint32 sound = 1;
 }
@@ -755,10 +755,7 @@ message VehicleControlSetPinToDriveAction {
 
 message VehicleControlResetPinToDriveAction {}
 
-// Teslemetry extensions, from our own observations and contributions from
-// the community
-
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 message RemoteStartDrive {}
 
 message CreateStreamSession {
@@ -865,7 +862,7 @@ message NavigationGpsRequest {
 
 // The wire payload at VehicleAction tag 55 is a rate-tariff document; only the
 // parts of that document we have observed and documented are declared here.
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 message SetRateTariffRequest {
   message TOUPeriod {
     int32 from_day_of_week = 1;
@@ -997,7 +994,7 @@ message DrivingClearSpeedLimitPinAdminAction {
   // This is an empty message with no fields
 }
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 message SetOutletsOnOffAction {
   enum OutletRequest {
     OUTLET_REQUEST_UNKNOWN = 0;
@@ -1052,7 +1049,7 @@ message SetTruckBedLightBrightnessAction {
 
 message VehicleControlResetPinToDriveAdminAction {}
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 message NavigationWaypointsRequest {
   string waypoints = 1;
   TripPlanOptions trip_plan_options = 2;
@@ -1172,7 +1169,7 @@ message ParentalControlsSetSpeedLimitAction {
   double limit_mph = 1;
 }
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 message CancelSohTestAction {}
 
 message StopLightShowAction {}
@@ -1207,7 +1204,7 @@ message SetLowPowerModeAction {
   bool low_power_mode = 1;
 }
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 message SetTemperatureUnitAction {
   enum Unit {
     UNIT_FAHRENHEIT = 0;
@@ -1258,7 +1255,7 @@ message SetKeepAccessoryPowerModeAction {
   bool keep_accessory_power_mode = 1;
 }
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 message SetupCloudProfileWithLocalProfileUuidAction {
   string cloud_vault_uuid = 1;
   string local_profile_uuid = 2;

@@ -10,12 +10,6 @@ import { FloatValue, UInt64Value } from "./google/protobuf/wrappers.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
-/**
- * TESLEMETRY SOURCE-OF-RECORD - no upstream.
- * Provenance: Tesla Energy gateway (TEG) local API, from our own
- * observations and contributions from the community
- */
-
 export enum EnergyAccumulationType {
   ENERGY_ACCUMULATION_TYPE_INVALID = 0,
   ENERGY_ACCUMULATION_TYPE_LIFETIME = 1,

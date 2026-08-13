@@ -16,33 +16,33 @@ option java_package = "com.tesla.generated.carserver.vehicle";
 option java_outer_classname = "Vehicle";
 
 message VehicleData {
-    GuiSettings gui_settings = 2;  // TESLEMETRY-EXT (app-4.58.6)
+    GuiSettings gui_settings = 2;  // TESLEMETRY-EXT
     ChargeState charge_state = 3;
     ClimateState climate_state = 4;
     DriveState drive_state = 5;
-    VehicleState legacy_vehicle_state = 6; // VehicleState carries the legacy vehicle-state surface  // TESLEMETRY-EXT (app-4.58.6)
-    VehicleConfig vehicle_config = 7;  // TESLEMETRY-EXT (app-4.58.6)
+    VehicleState legacy_vehicle_state = 6; // VehicleState carries the legacy vehicle-state surface  // TESLEMETRY-EXT
+    VehicleConfig vehicle_config = 7;  // TESLEMETRY-EXT
     LocationState location_state = 8;
     ClosuresState closures_state = 9;
-    oneof optional_proto_json_version { int32 proto_json_version = 10; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_upload_reason { string upload_reason = 12; }  // TESLEMETRY-EXT (app-4.58.6)
-    ParkedAccessoryState parked_accessory_state = 14;  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_proto_json_version { int32 proto_json_version = 10; }  // TESLEMETRY-EXT
+    oneof optional_upload_reason { string upload_reason = 12; }  // TESLEMETRY-EXT
+    ParkedAccessoryState parked_accessory_state = 14;  // TESLEMETRY-EXT
     ChargeScheduleState charge_schedule_state = 15;
     PreconditioningScheduleState preconditioning_schedule_state = 16;
-    SohState soh_state = 17;  // TESLEMETRY-EXT (app-4.58.6)
+    SohState soh_state = 17;  // TESLEMETRY-EXT
     bytes unknown = 18; // opaque, undecoded payload observed on live vehicleDataSubscription pushes  // TESLEMETRY-EXT
     TirePressureState tire_pressure_state = 19;
     MediaState media_state = 20;
     MediaDetailState media_detail_state = 21;
-    VehicleDetailState vehicle_detail_state = 22;  // TESLEMETRY-EXT (app-4.58.6)
+    VehicleDetailState vehicle_detail_state = 22;  // TESLEMETRY-EXT
     SoftwareUpdateState software_update_state = 23;
     ParentalControlsState parental_controls_state = 24;
-    AlertState alert_state = 25;  // TESLEMETRY-EXT (app-4.58.6)
-    LightShowState light_show_state = 26;  // TESLEMETRY-EXT (app-4.58.6)
-    VehicleImageState vehicle_image_state = 27;  // TESLEMETRY-EXT (app-4.58.6)
-    SuspensionState suspension_state = 29;  // TESLEMETRY-EXT (app-4.58.6)
-    ChildPresenceDetectionState child_presence_detection_state = 30;  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_supports_optional_fields { bool supports_optional_fields = 999; }  // TESLEMETRY-EXT (app-4.58.6)
+    AlertState alert_state = 25;  // TESLEMETRY-EXT
+    LightShowState light_show_state = 26;  // TESLEMETRY-EXT
+    VehicleImageState vehicle_image_state = 27;  // TESLEMETRY-EXT
+    SuspensionState suspension_state = 29;  // TESLEMETRY-EXT
+    ChildPresenceDetectionState child_presence_detection_state = 30;  // TESLEMETRY-EXT
+    oneof optional_supports_optional_fields { bool supports_optional_fields = 999; }  // TESLEMETRY-EXT
 }
 
 message ClosuresState {
@@ -115,10 +115,10 @@ message ClosuresState {
     oneof optional_tonneau_state { VCSEC.ClosureState_E tonneau_state = 23; }
     oneof optional_tonneau_percent_open { uint32 tonneau_percent_open = 24; }
     oneof optional_tonneau_in_motion { bool tonneau_in_motion = 25; }
-    oneof optional_has_automatic_tonneau { bool has_automatic_tonneau = 26; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_has_side_storage_doors { bool has_side_storage_doors = 27; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_door_open_side_storage_left { bool door_open_side_storage_left = 28; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_door_open_side_storage_right { bool door_open_side_storage_right = 29; }  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_has_automatic_tonneau { bool has_automatic_tonneau = 26; }  // TESLEMETRY-EXT
+    oneof optional_has_side_storage_doors { bool has_side_storage_doors = 27; }  // TESLEMETRY-EXT
+    oneof optional_door_open_side_storage_left { bool door_open_side_storage_left = 28; }  // TESLEMETRY-EXT
+    oneof optional_door_open_side_storage_right { bool door_open_side_storage_right = 29; }  // TESLEMETRY-EXT
 
     google.protobuf.Timestamp timestamp = 2000;
 }
@@ -160,9 +160,9 @@ message ParentalControlsSettings {
     oneof optional_curfew_enabled { bool curfew_enabled = 7; }
     oneof optional_curfew_start_time { int32 curfew_start_time = 8; }
     oneof optional_curfew_end_time { int32 curfew_end_time = 9; }
-    oneof optional_browser_blocked { bool browser_blocked = 10; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_theater_blocked { bool theater_blocked = 11; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_arcade_blocked { bool arcade_blocked = 12; }  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_browser_blocked { bool browser_blocked = 10; }  // TESLEMETRY-EXT
+    oneof optional_theater_blocked { bool theater_blocked = 11; }  // TESLEMETRY-EXT
+    oneof optional_arcade_blocked { bool arcade_blocked = 12; }  // TESLEMETRY-EXT
 }
 
 message ParentalControlsState {
@@ -194,7 +194,7 @@ message SoftwareUpdateState {
 
     google.protobuf.Timestamp timestamp = 108;
 
-    oneof optional_auto_scheduled { bool auto_scheduled = 109; }  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_auto_scheduled { bool auto_scheduled = 109; }  // TESLEMETRY-EXT
 }
 
 
@@ -219,27 +219,27 @@ message DriveState {
 
     LatLong active_route_coordinates = 12;
 
-    message FsdMonthlyMileage {  // TESLEMETRY-EXT (app-4.58.6)
+    message FsdMonthlyMileage {  // TESLEMETRY-EXT
         string year_month  = 1;
         float  fsd_miles   = 2;
         float  total_miles = 3;
     }
 
-    message FsdLast7DaysUsage {  // TESLEMETRY-EXT (app-4.58.6)
+    message FsdLast7DaysUsage {  // TESLEMETRY-EXT
         bool          week_starts_on_sunday = 1;
         repeated bool day_usage             = 2; // one entry per day, most recent first
     }
 
-    oneof optional_fsd_user_total_miles_travelled { float fsd_user_total_miles_travelled = 16; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_fsd_user_total_miles { float fsd_user_total_miles = 17; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_fsd_user_miles_hands_free_current { float fsd_user_miles_hands_free_current = 18; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_fsd_user_miles_hands_free_max { float fsd_user_miles_hands_free_max = 19; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_fsd_total_miles_this_month { float fsd_total_miles_this_month = 20; }  // TESLEMETRY-EXT (app-4.58.6)
-    repeated FsdMonthlyMileage fsd_monthly_history = 21;  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_fsd_streak_days { int32 fsd_streak_days = 22; }  // TESLEMETRY-EXT (app-4.58.6)
-    FsdLast7DaysUsage fsd_last_7_days_usage = 23;  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_rainbow_road_enabled { bool rainbow_road_enabled = 24; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_fsd_active { bool fsd_active = 25; }  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_fsd_user_total_miles_travelled { float fsd_user_total_miles_travelled = 16; }  // TESLEMETRY-EXT
+    oneof optional_fsd_user_total_miles { float fsd_user_total_miles = 17; }  // TESLEMETRY-EXT
+    oneof optional_fsd_user_miles_hands_free_current { float fsd_user_miles_hands_free_current = 18; }  // TESLEMETRY-EXT
+    oneof optional_fsd_user_miles_hands_free_max { float fsd_user_miles_hands_free_max = 19; }  // TESLEMETRY-EXT
+    oneof optional_fsd_total_miles_this_month { float fsd_total_miles_this_month = 20; }  // TESLEMETRY-EXT
+    repeated FsdMonthlyMileage fsd_monthly_history = 21;  // TESLEMETRY-EXT
+    oneof optional_fsd_streak_days { int32 fsd_streak_days = 22; }  // TESLEMETRY-EXT
+    FsdLast7DaysUsage fsd_last_7_days_usage = 23;  // TESLEMETRY-EXT
+    oneof optional_rainbow_road_enabled { bool rainbow_road_enabled = 24; }  // TESLEMETRY-EXT
+    oneof optional_fsd_active { bool fsd_active = 25; }  // TESLEMETRY-EXT
 }
 
 message ChargeState {
@@ -314,7 +314,7 @@ message ChargeState {
         ChargeLimitReasonBattTempLow = 3;
         ChargeLimitReasonHighSoc = 4;
         ChargeLimitReasonCabin = 5;
-        ChargeLimitReasonEvseRelocationRecommended = 6;  // TESLEMETRY-EXT (app-4.58.6)
+        ChargeLimitReasonEvseRelocationRecommended = 6;  // TESLEMETRY-EXT
     }
 
     enum OutletState {
@@ -342,7 +342,7 @@ message ChargeState {
         PowershareTypeNone = 0;
         PowershareTypeLoad = 1;
         PowershareTypeHome = 2;
-        PowershareTypeGrid = 3;  // TESLEMETRY-EXT (app-4.58.6)
+        PowershareTypeGrid = 3;  // TESLEMETRY-EXT
     }
 
     enum PowershareStopReason {
@@ -353,8 +353,8 @@ message ChargeState {
         PowershareStopReasonUser = 4;
         PowershareStopReasonReconnecting = 5;
         PowershareStopReasonAuthentication = 6;
-        PowershareStopReasonAdapterUpdating = 7;  // TESLEMETRY-EXT (app-4.58.6)
-        PowershareStopReasonAdapterInitializationFailed = 8;  // TESLEMETRY-EXT (app-4.58.6)
+        PowershareStopReasonAdapterUpdating = 7;  // TESLEMETRY-EXT
+        PowershareStopReasonAdapterInitializationFailed = 8;  // TESLEMETRY-EXT
     }
 
     ChargingState charging_state = 1;
@@ -456,22 +456,22 @@ message ChargeState {
     oneof optional_home_location { LatLong home_location = 176; }
     oneof optional_work_location { LatLong work_location = 177; }
     oneof optional_outlet_max_timer_minutes { int32 outlet_max_timer_minutes = 178; }
-    oneof optional_batt_heat_min_to_start_charge { int32 batt_heat_min_to_start_charge = 179; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_batt_heat_min_to_start_charge_calculating { bool batt_heat_min_to_start_charge_calculating = 180; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_has_ac_outlets { bool has_ac_outlets = 181; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_paid_session_fee { float paid_session_fee = 183; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_paid_session_fee_currency { string paid_session_fee_currency = 184; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_paid_session_kwh_rate { float paid_session_kwh_rate = 185; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_discharge_limit_soe { int32 discharge_limit_soe = 186; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_is_roaming { bool is_roaming = 187; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_paid_session_location_guid { string paid_session_location_guid = 188; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_paid_session_pricebook_guid { string paid_session_pricebook_guid = 189; }  // TESLEMETRY-EXT (app-4.58.6)
-    google.protobuf.Timestamp paid_session_start_time = 190;  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_low_power_mode { bool low_power_mode = 191; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_low_power_mode_forced_on { bool low_power_mode_forced_on = 192; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_convenience_features { uint32 convenience_features = 193; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_keep_accessory_power_mode { bool keep_accessory_power_mode = 194; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_should_hide_range_info { bool should_hide_range_info = 198; }  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_batt_heat_min_to_start_charge { int32 batt_heat_min_to_start_charge = 179; }  // TESLEMETRY-EXT
+    oneof optional_batt_heat_min_to_start_charge_calculating { bool batt_heat_min_to_start_charge_calculating = 180; }  // TESLEMETRY-EXT
+    oneof optional_has_ac_outlets { bool has_ac_outlets = 181; }  // TESLEMETRY-EXT
+    oneof optional_paid_session_fee { float paid_session_fee = 183; }  // TESLEMETRY-EXT
+    oneof optional_paid_session_fee_currency { string paid_session_fee_currency = 184; }  // TESLEMETRY-EXT
+    oneof optional_paid_session_kwh_rate { float paid_session_kwh_rate = 185; }  // TESLEMETRY-EXT
+    oneof optional_discharge_limit_soe { int32 discharge_limit_soe = 186; }  // TESLEMETRY-EXT
+    oneof optional_is_roaming { bool is_roaming = 187; }  // TESLEMETRY-EXT
+    oneof optional_paid_session_location_guid { string paid_session_location_guid = 188; }  // TESLEMETRY-EXT
+    oneof optional_paid_session_pricebook_guid { string paid_session_pricebook_guid = 189; }  // TESLEMETRY-EXT
+    google.protobuf.Timestamp paid_session_start_time = 190;  // TESLEMETRY-EXT
+    oneof optional_low_power_mode { bool low_power_mode = 191; }  // TESLEMETRY-EXT
+    oneof optional_low_power_mode_forced_on { bool low_power_mode_forced_on = 192; }  // TESLEMETRY-EXT
+    oneof optional_convenience_features { uint32 convenience_features = 193; }  // TESLEMETRY-EXT
+    oneof optional_keep_accessory_power_mode { bool keep_accessory_power_mode = 194; }  // TESLEMETRY-EXT
+    oneof optional_should_hide_range_info { bool should_hide_range_info = 198; }  // TESLEMETRY-EXT
 }
 
 message ManagedChargingState {
@@ -589,20 +589,20 @@ message LocationState {
     oneof optional_estimated_gps_valid { bool estimated_gps_valid  = 119; }
     oneof optional_estimated_to_raw_distance  { float estimated_to_raw_distance  = 120; } // the distance between the estimated and raw coordinates in meters
 
-    oneof optional_supercharger_trt_id { int32 supercharger_trt_id = 121; }  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_supercharger_trt_id { int32 supercharger_trt_id = 121; }  // TESLEMETRY-EXT
 
     // double-precision variants of the corresponding float coordinate fields
-    oneof optional_native_latitude_d { double native_latitude_d = 122; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_native_longitude_d { double native_longitude_d = 123; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_geo_latitude_d { double geo_latitude_d = 124; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_geo_longitude_d { double geo_longitude_d = 125; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_geo_hw_raw_latitude_d { double geo_hw_raw_latitude_d = 126; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_geo_hw_raw_longitude_d { double geo_hw_raw_longitude_d = 127; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_geo_horizontal_accuracy { float geo_horizontal_accuracy = 128; }  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_native_latitude_d { double native_latitude_d = 122; }  // TESLEMETRY-EXT
+    oneof optional_native_longitude_d { double native_longitude_d = 123; }  // TESLEMETRY-EXT
+    oneof optional_geo_latitude_d { double geo_latitude_d = 124; }  // TESLEMETRY-EXT
+    oneof optional_geo_longitude_d { double geo_longitude_d = 125; }  // TESLEMETRY-EXT
+    oneof optional_geo_hw_raw_latitude_d { double geo_hw_raw_latitude_d = 126; }  // TESLEMETRY-EXT
+    oneof optional_geo_hw_raw_longitude_d { double geo_hw_raw_longitude_d = 127; }  // TESLEMETRY-EXT
+    oneof optional_geo_horizontal_accuracy { float geo_horizontal_accuracy = 128; }  // TESLEMETRY-EXT
 } // LocationState
 
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 enum AutopilotBase {
     AutopilotBase_NONE         = 0;
     AutopilotBase_HIGHWAY      = 1;
@@ -629,92 +629,92 @@ message VehicleState {
         bool GuestModeActive = 1;
     }
 
-    SoftwareUpdateState software_update_state = 38;  // TESLEMETRY-EXT (app-4.58.6)
-    LegacyMediaState legacy_media_state = 39;  // TESLEMETRY-EXT (app-4.58.6)
+    SoftwareUpdateState software_update_state = 38;  // TESLEMETRY-EXT
+    LegacyMediaState legacy_media_state = 39;  // TESLEMETRY-EXT
 
-    google.protobuf.Timestamp timestamp = 43;  // TESLEMETRY-EXT (app-4.58.6)
+    google.protobuf.Timestamp timestamp = 43;  // TESLEMETRY-EXT
 
-    repeated uint32 feature_bitmask = 55;  // TESLEMETRY-EXT (app-4.58.6)
+    repeated uint32 feature_bitmask = 55;  // TESLEMETRY-EXT
 
-    google.protobuf.Timestamp tpms_last_seen_pressure_time_fl = 58;  // TESLEMETRY-EXT (app-4.58.6)
-    google.protobuf.Timestamp tpms_last_seen_pressure_time_fr = 59;  // TESLEMETRY-EXT (app-4.58.6)
-    google.protobuf.Timestamp tpms_last_seen_pressure_time_rl = 60;  // TESLEMETRY-EXT (app-4.58.6)
-    google.protobuf.Timestamp tpms_last_seen_pressure_time_rr = 61;  // TESLEMETRY-EXT (app-4.58.6)
+    google.protobuf.Timestamp tpms_last_seen_pressure_time_fl = 58;  // TESLEMETRY-EXT
+    google.protobuf.Timestamp tpms_last_seen_pressure_time_fr = 59;  // TESLEMETRY-EXT
+    google.protobuf.Timestamp tpms_last_seen_pressure_time_rl = 60;  // TESLEMETRY-EXT
+    google.protobuf.Timestamp tpms_last_seen_pressure_time_rr = 61;  // TESLEMETRY-EXT
 
-    oneof optional_deck_lights_on { bool deck_lights_on = 67; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_hazards_on { bool hazards_on = 68; }  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_deck_lights_on { bool deck_lights_on = 67; }  // TESLEMETRY-EXT
+    oneof optional_hazards_on { bool hazards_on = 68; }  // TESLEMETRY-EXT
 
-    LegacyMediaInfo legacy_media_info = 72;  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_allow_authorized_mobile_devices_only { bool allow_authorized_mobile_devices_only = 73; }  // TESLEMETRY-EXT (app-4.58.6)
+    LegacyMediaInfo legacy_media_info = 72;  // TESLEMETRY-EXT
+    oneof optional_allow_authorized_mobile_devices_only { bool allow_authorized_mobile_devices_only = 73; }  // TESLEMETRY-EXT
     GuestMode guestMode = 74;
-    oneof optional_drive_rail_on { bool drive_rail_on = 75; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_pin_to_drive_enabled { bool pin_to_drive_enabled = 76; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_pin_to_drive_pin_set { bool pin_to_drive_pin_set = 77; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_frontfoglights_on { bool frontfoglights_on = 78; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_rearfoglights_on { bool rearfoglights_on = 79; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_headlights_on { bool headlights_on = 80; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_highbeamlights_on { bool highbeamlights_on = 81; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_trailer_mode_on { bool trailer_mode_on = 82; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_trailer_light_test_available { bool trailer_light_test_available = 83; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_trailer_light_test_requested { bool trailer_light_test_requested = 84; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_truck_bed_lights_brightness { uint32 truck_bed_lights_brightness = 86; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_signed_cmd_service_mode { bool signed_cmd_service_mode = 87; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_accessory_lightbar_middle_on { bool accessory_lightbar_middle_on = 88; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_transport_mode { bool transport_mode = 89; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_truck_bed_lights_auto_brightness { uint32 truck_bed_lights_auto_brightness = 90; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_truck_bed_lights_auto_state { bool truck_bed_lights_auto_state = 91; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_truck_bed_lights_controls_disabled { bool truck_bed_lights_controls_disabled = 92; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_service_mode_auth { string service_mode_auth = 93; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_service_gtw_diag_session_active { bool service_gtw_diag_session_active = 94; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_factory_mode { bool factory_mode = 95; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_training_wheels_mode { bool training_wheels_mode = 96; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_gtw_diag_level { GtwDiagLevel gtw_diag_level = 97; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_parental_controls_active { bool parental_controls_active = 98; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_parental_controls_pin_set { bool parental_controls_pin_set = 99; }  // TESLEMETRY-EXT (app-4.58.6)
-    ParentalControlsSettings parental_controls_settings = 100;  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_api_version { uint32 api_version = 101; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_car_version { string car_version = 108; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_detailed_version { string detailed_version = 109; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_autopilot_hash { string autopilot_hash = 110; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_vehicle_name { string vehicle_name = 118; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_notifications_supported { bool notifications_supported = 120; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_remote_start_supported { bool remote_start_supported = 121; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_remote_start_enabled { bool remote_start_enabled = 122; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_last_autopark_error { string last_autopark_error = 131; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_homelink_device_count { uint32 homelink_device_count = 133; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_smart_summon_available { bool smart_summon_available = 135; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_summon_standby_mode_enabled { bool summon_standby_mode_enabled = 136; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_patsy_mode { bool patsy_mode = 141; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_webcam_available { bool webcam_available = 142; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_vehicle_self_test_requested { bool vehicle_self_test_requested = 144; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_vehicle_self_test_progress { uint32 vehicle_self_test_progress = 145; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_calendar_supported { bool calendar_supported = 148; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_dashcam_clip_save_available { bool dashcam_clip_save_available = 149; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_dashcam_state { DashCamState dashcam_state = 150; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_pressure_fl { float tpms_pressure_fl = 151; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_pressure_fr { float tpms_pressure_fr = 152; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_pressure_rl { float tpms_pressure_rl = 153; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_pressure_rr { float tpms_pressure_rr = 154; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_service_mode { bool service_mode = 156; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_service_mode_plus { bool service_mode_plus = 157; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_hard_warning_fl { bool tpms_hard_warning_fl = 162; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_hard_warning_fr { bool tpms_hard_warning_fr = 163; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_hard_warning_rl { bool tpms_hard_warning_rl = 164; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_hard_warning_rr { bool tpms_hard_warning_rr = 165; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_soft_warning_fl { bool tpms_soft_warning_fl = 166; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_soft_warning_fr { bool tpms_soft_warning_fr = 167; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_soft_warning_rl { bool tpms_soft_warning_rl = 168; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_soft_warning_rr { bool tpms_soft_warning_rr = 169; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_rcp_front_value { float tpms_rcp_front_value = 170; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_rcp_rear_value { float tpms_rcp_rear_value = 171; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_fsd_software_version { string fsd_software_version = 172; }  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_drive_rail_on { bool drive_rail_on = 75; }  // TESLEMETRY-EXT
+    oneof optional_pin_to_drive_enabled { bool pin_to_drive_enabled = 76; }  // TESLEMETRY-EXT
+    oneof optional_pin_to_drive_pin_set { bool pin_to_drive_pin_set = 77; }  // TESLEMETRY-EXT
+    oneof optional_frontfoglights_on { bool frontfoglights_on = 78; }  // TESLEMETRY-EXT
+    oneof optional_rearfoglights_on { bool rearfoglights_on = 79; }  // TESLEMETRY-EXT
+    oneof optional_headlights_on { bool headlights_on = 80; }  // TESLEMETRY-EXT
+    oneof optional_highbeamlights_on { bool highbeamlights_on = 81; }  // TESLEMETRY-EXT
+    oneof optional_trailer_mode_on { bool trailer_mode_on = 82; }  // TESLEMETRY-EXT
+    oneof optional_trailer_light_test_available { bool trailer_light_test_available = 83; }  // TESLEMETRY-EXT
+    oneof optional_trailer_light_test_requested { bool trailer_light_test_requested = 84; }  // TESLEMETRY-EXT
+    oneof optional_truck_bed_lights_brightness { uint32 truck_bed_lights_brightness = 86; }  // TESLEMETRY-EXT
+    oneof optional_signed_cmd_service_mode { bool signed_cmd_service_mode = 87; }  // TESLEMETRY-EXT
+    oneof optional_accessory_lightbar_middle_on { bool accessory_lightbar_middle_on = 88; }  // TESLEMETRY-EXT
+    oneof optional_transport_mode { bool transport_mode = 89; }  // TESLEMETRY-EXT
+    oneof optional_truck_bed_lights_auto_brightness { uint32 truck_bed_lights_auto_brightness = 90; }  // TESLEMETRY-EXT
+    oneof optional_truck_bed_lights_auto_state { bool truck_bed_lights_auto_state = 91; }  // TESLEMETRY-EXT
+    oneof optional_truck_bed_lights_controls_disabled { bool truck_bed_lights_controls_disabled = 92; }  // TESLEMETRY-EXT
+    oneof optional_service_mode_auth { string service_mode_auth = 93; }  // TESLEMETRY-EXT
+    oneof optional_service_gtw_diag_session_active { bool service_gtw_diag_session_active = 94; }  // TESLEMETRY-EXT
+    oneof optional_factory_mode { bool factory_mode = 95; }  // TESLEMETRY-EXT
+    oneof optional_training_wheels_mode { bool training_wheels_mode = 96; }  // TESLEMETRY-EXT
+    oneof optional_gtw_diag_level { GtwDiagLevel gtw_diag_level = 97; }  // TESLEMETRY-EXT
+    oneof optional_parental_controls_active { bool parental_controls_active = 98; }  // TESLEMETRY-EXT
+    oneof optional_parental_controls_pin_set { bool parental_controls_pin_set = 99; }  // TESLEMETRY-EXT
+    ParentalControlsSettings parental_controls_settings = 100;  // TESLEMETRY-EXT
+    oneof optional_api_version { uint32 api_version = 101; }  // TESLEMETRY-EXT
+    oneof optional_car_version { string car_version = 108; }  // TESLEMETRY-EXT
+    oneof optional_detailed_version { string detailed_version = 109; }  // TESLEMETRY-EXT
+    oneof optional_autopilot_hash { string autopilot_hash = 110; }  // TESLEMETRY-EXT
+    oneof optional_vehicle_name { string vehicle_name = 118; }  // TESLEMETRY-EXT
+    oneof optional_notifications_supported { bool notifications_supported = 120; }  // TESLEMETRY-EXT
+    oneof optional_remote_start_supported { bool remote_start_supported = 121; }  // TESLEMETRY-EXT
+    oneof optional_remote_start_enabled { bool remote_start_enabled = 122; }  // TESLEMETRY-EXT
+    oneof optional_last_autopark_error { string last_autopark_error = 131; }  // TESLEMETRY-EXT
+    oneof optional_homelink_device_count { uint32 homelink_device_count = 133; }  // TESLEMETRY-EXT
+    oneof optional_smart_summon_available { bool smart_summon_available = 135; }  // TESLEMETRY-EXT
+    oneof optional_summon_standby_mode_enabled { bool summon_standby_mode_enabled = 136; }  // TESLEMETRY-EXT
+    oneof optional_patsy_mode { bool patsy_mode = 141; }  // TESLEMETRY-EXT
+    oneof optional_webcam_available { bool webcam_available = 142; }  // TESLEMETRY-EXT
+    oneof optional_vehicle_self_test_requested { bool vehicle_self_test_requested = 144; }  // TESLEMETRY-EXT
+    oneof optional_vehicle_self_test_progress { uint32 vehicle_self_test_progress = 145; }  // TESLEMETRY-EXT
+    oneof optional_calendar_supported { bool calendar_supported = 148; }  // TESLEMETRY-EXT
+    oneof optional_dashcam_clip_save_available { bool dashcam_clip_save_available = 149; }  // TESLEMETRY-EXT
+    oneof optional_dashcam_state { DashCamState dashcam_state = 150; }  // TESLEMETRY-EXT
+    oneof optional_tpms_pressure_fl { float tpms_pressure_fl = 151; }  // TESLEMETRY-EXT
+    oneof optional_tpms_pressure_fr { float tpms_pressure_fr = 152; }  // TESLEMETRY-EXT
+    oneof optional_tpms_pressure_rl { float tpms_pressure_rl = 153; }  // TESLEMETRY-EXT
+    oneof optional_tpms_pressure_rr { float tpms_pressure_rr = 154; }  // TESLEMETRY-EXT
+    oneof optional_service_mode { bool service_mode = 156; }  // TESLEMETRY-EXT
+    oneof optional_service_mode_plus { bool service_mode_plus = 157; }  // TESLEMETRY-EXT
+    oneof optional_tpms_hard_warning_fl { bool tpms_hard_warning_fl = 162; }  // TESLEMETRY-EXT
+    oneof optional_tpms_hard_warning_fr { bool tpms_hard_warning_fr = 163; }  // TESLEMETRY-EXT
+    oneof optional_tpms_hard_warning_rl { bool tpms_hard_warning_rl = 164; }  // TESLEMETRY-EXT
+    oneof optional_tpms_hard_warning_rr { bool tpms_hard_warning_rr = 165; }  // TESLEMETRY-EXT
+    oneof optional_tpms_soft_warning_fl { bool tpms_soft_warning_fl = 166; }  // TESLEMETRY-EXT
+    oneof optional_tpms_soft_warning_fr { bool tpms_soft_warning_fr = 167; }  // TESLEMETRY-EXT
+    oneof optional_tpms_soft_warning_rl { bool tpms_soft_warning_rl = 168; }  // TESLEMETRY-EXT
+    oneof optional_tpms_soft_warning_rr { bool tpms_soft_warning_rr = 169; }  // TESLEMETRY-EXT
+    oneof optional_tpms_rcp_front_value { float tpms_rcp_front_value = 170; }  // TESLEMETRY-EXT
+    oneof optional_tpms_rcp_rear_value { float tpms_rcp_rear_value = 171; }  // TESLEMETRY-EXT
+    oneof optional_fsd_software_version { string fsd_software_version = 172; }  // TESLEMETRY-EXT
 
-    AutopilotBase autopilot_base = 196;  // TESLEMETRY-EXT (app-4.58.6)
-    AutopilotOverrideState autopilot_override_state = 197;  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_autopilot_override_expire_time { int64 autopilot_override_expire_time = 198; }  // TESLEMETRY-EXT (app-4.58.6)
+    AutopilotBase autopilot_base = 196;  // TESLEMETRY-EXT
+    AutopilotOverrideState autopilot_override_state = 197;  // TESLEMETRY-EXT
+    oneof optional_autopilot_override_expire_time { int64 autopilot_override_expire_time = 198; }  // TESLEMETRY-EXT
 }
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 enum DashCamState {
     DashCamState_UNAVAILABLE = 0;
     DashCamState_AVAILABLE = 1;
@@ -808,7 +808,7 @@ message ClimateState {
         COPNotRunningReasonCabinBelowThreshold = 6;
     }
 
-    enum DogModeState {  // TESLEMETRY-EXT (app-4.58.6)
+    enum DogModeState {  // TESLEMETRY-EXT
         DogModeStateUnavailableFault = 0;
         DogModeStateUnavailableTooHot = 1;
         DogModeStateAvailable = 2;
@@ -872,9 +872,9 @@ message ClimateState {
 
     oneof optional_hvac_auto_request { HvacAutoRequest hvac_auto_request = 150; }
     oneof optional_cop_not_running_reason { COPNotRunningReason cop_not_running_reason = 151; }
-    oneof optional_seat_fan_second_row_left { int32 seat_fan_second_row_left = 152; } // Values in 'SeatCoolingLevel_E'.  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_seat_fan_second_row_right { int32 seat_fan_second_row_right = 153; } // Values in 'SeatCoolingLevel_E'.  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_dog_mode_state { DogModeState dog_mode_state = 154; }  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_seat_fan_second_row_left { int32 seat_fan_second_row_left = 152; } // Values in 'SeatCoolingLevel_E'.  // TESLEMETRY-EXT
+    oneof optional_seat_fan_second_row_right { int32 seat_fan_second_row_right = 153; } // Values in 'SeatCoolingLevel_E'.  // TESLEMETRY-EXT
+    oneof optional_dog_mode_state { DogModeState dog_mode_state = 154; }  // TESLEMETRY-EXT
 }
 
 message TirePressureState {
@@ -901,75 +901,75 @@ message TirePressureState {
     oneof optional_tpms_rcp_rear_value { float tpms_rcp_rear_value = 19; }
 
     // rear-axle (re1/re2) positions, only set on vehicles with dual rear axles
-    oneof optional_tpms_pressure_re1_l0 { float tpms_pressure_re1_l0 = 20; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_pressure_re1_l1 { float tpms_pressure_re1_l1 = 21; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_pressure_re1_r0 { float tpms_pressure_re1_r0 = 22; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_pressure_re1_r1 { float tpms_pressure_re1_r1 = 23; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_pressure_re2_l0 { float tpms_pressure_re2_l0 = 24; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_pressure_re2_l1 { float tpms_pressure_re2_l1 = 25; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_pressure_re2_r0 { float tpms_pressure_re2_r0 = 26; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_pressure_re2_r1 { float tpms_pressure_re2_r1 = 27; }  // TESLEMETRY-EXT (app-4.58.6)
-    google.protobuf.Timestamp tpms_last_seen_pressure_time_re1_l0 = 28;  // TESLEMETRY-EXT (app-4.58.6)
-    google.protobuf.Timestamp tpms_last_seen_pressure_time_re1_l1 = 29;  // TESLEMETRY-EXT (app-4.58.6)
-    google.protobuf.Timestamp tpms_last_seen_pressure_time_re1_r0 = 30;  // TESLEMETRY-EXT (app-4.58.6)
-    google.protobuf.Timestamp tpms_last_seen_pressure_time_re1_r1 = 31;  // TESLEMETRY-EXT (app-4.58.6)
-    google.protobuf.Timestamp tpms_last_seen_pressure_time_re2_l0 = 32;  // TESLEMETRY-EXT (app-4.58.6)
-    google.protobuf.Timestamp tpms_last_seen_pressure_time_re2_l1 = 33;  // TESLEMETRY-EXT (app-4.58.6)
-    google.protobuf.Timestamp tpms_last_seen_pressure_time_re2_r0 = 34;  // TESLEMETRY-EXT (app-4.58.6)
-    google.protobuf.Timestamp tpms_last_seen_pressure_time_re2_r1 = 35;  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_hard_warning_re1_l0 { bool tpms_hard_warning_re1_l0 = 36; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_hard_warning_re1_l1 { bool tpms_hard_warning_re1_l1 = 37; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_hard_warning_re1_r0 { bool tpms_hard_warning_re1_r0 = 38; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_hard_warning_re1_r1 { bool tpms_hard_warning_re1_r1 = 39; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_hard_warning_re2_l0 { bool tpms_hard_warning_re2_l0 = 40; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_hard_warning_re2_l1 { bool tpms_hard_warning_re2_l1 = 41; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_hard_warning_re2_r0 { bool tpms_hard_warning_re2_r0 = 42; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_hard_warning_re2_r1 { bool tpms_hard_warning_re2_r1 = 43; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_soft_warning_re1_l0 { bool tpms_soft_warning_re1_l0 = 44; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_soft_warning_re1_l1 { bool tpms_soft_warning_re1_l1 = 45; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_soft_warning_re1_r0 { bool tpms_soft_warning_re1_r0 = 46; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_soft_warning_re1_r1 { bool tpms_soft_warning_re1_r1 = 47; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_soft_warning_re2_l0 { bool tpms_soft_warning_re2_l0 = 48; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_soft_warning_re2_l1 { bool tpms_soft_warning_re2_l1 = 49; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_soft_warning_re2_r0 { bool tpms_soft_warning_re2_r0 = 50; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_soft_warning_re2_r1 { bool tpms_soft_warning_re2_r1 = 51; }  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_tpms_pressure_re1_l0 { float tpms_pressure_re1_l0 = 20; }  // TESLEMETRY-EXT
+    oneof optional_tpms_pressure_re1_l1 { float tpms_pressure_re1_l1 = 21; }  // TESLEMETRY-EXT
+    oneof optional_tpms_pressure_re1_r0 { float tpms_pressure_re1_r0 = 22; }  // TESLEMETRY-EXT
+    oneof optional_tpms_pressure_re1_r1 { float tpms_pressure_re1_r1 = 23; }  // TESLEMETRY-EXT
+    oneof optional_tpms_pressure_re2_l0 { float tpms_pressure_re2_l0 = 24; }  // TESLEMETRY-EXT
+    oneof optional_tpms_pressure_re2_l1 { float tpms_pressure_re2_l1 = 25; }  // TESLEMETRY-EXT
+    oneof optional_tpms_pressure_re2_r0 { float tpms_pressure_re2_r0 = 26; }  // TESLEMETRY-EXT
+    oneof optional_tpms_pressure_re2_r1 { float tpms_pressure_re2_r1 = 27; }  // TESLEMETRY-EXT
+    google.protobuf.Timestamp tpms_last_seen_pressure_time_re1_l0 = 28;  // TESLEMETRY-EXT
+    google.protobuf.Timestamp tpms_last_seen_pressure_time_re1_l1 = 29;  // TESLEMETRY-EXT
+    google.protobuf.Timestamp tpms_last_seen_pressure_time_re1_r0 = 30;  // TESLEMETRY-EXT
+    google.protobuf.Timestamp tpms_last_seen_pressure_time_re1_r1 = 31;  // TESLEMETRY-EXT
+    google.protobuf.Timestamp tpms_last_seen_pressure_time_re2_l0 = 32;  // TESLEMETRY-EXT
+    google.protobuf.Timestamp tpms_last_seen_pressure_time_re2_l1 = 33;  // TESLEMETRY-EXT
+    google.protobuf.Timestamp tpms_last_seen_pressure_time_re2_r0 = 34;  // TESLEMETRY-EXT
+    google.protobuf.Timestamp tpms_last_seen_pressure_time_re2_r1 = 35;  // TESLEMETRY-EXT
+    oneof optional_tpms_hard_warning_re1_l0 { bool tpms_hard_warning_re1_l0 = 36; }  // TESLEMETRY-EXT
+    oneof optional_tpms_hard_warning_re1_l1 { bool tpms_hard_warning_re1_l1 = 37; }  // TESLEMETRY-EXT
+    oneof optional_tpms_hard_warning_re1_r0 { bool tpms_hard_warning_re1_r0 = 38; }  // TESLEMETRY-EXT
+    oneof optional_tpms_hard_warning_re1_r1 { bool tpms_hard_warning_re1_r1 = 39; }  // TESLEMETRY-EXT
+    oneof optional_tpms_hard_warning_re2_l0 { bool tpms_hard_warning_re2_l0 = 40; }  // TESLEMETRY-EXT
+    oneof optional_tpms_hard_warning_re2_l1 { bool tpms_hard_warning_re2_l1 = 41; }  // TESLEMETRY-EXT
+    oneof optional_tpms_hard_warning_re2_r0 { bool tpms_hard_warning_re2_r0 = 42; }  // TESLEMETRY-EXT
+    oneof optional_tpms_hard_warning_re2_r1 { bool tpms_hard_warning_re2_r1 = 43; }  // TESLEMETRY-EXT
+    oneof optional_tpms_soft_warning_re1_l0 { bool tpms_soft_warning_re1_l0 = 44; }  // TESLEMETRY-EXT
+    oneof optional_tpms_soft_warning_re1_l1 { bool tpms_soft_warning_re1_l1 = 45; }  // TESLEMETRY-EXT
+    oneof optional_tpms_soft_warning_re1_r0 { bool tpms_soft_warning_re1_r0 = 46; }  // TESLEMETRY-EXT
+    oneof optional_tpms_soft_warning_re1_r1 { bool tpms_soft_warning_re1_r1 = 47; }  // TESLEMETRY-EXT
+    oneof optional_tpms_soft_warning_re2_l0 { bool tpms_soft_warning_re2_l0 = 48; }  // TESLEMETRY-EXT
+    oneof optional_tpms_soft_warning_re2_l1 { bool tpms_soft_warning_re2_l1 = 49; }  // TESLEMETRY-EXT
+    oneof optional_tpms_soft_warning_re2_r0 { bool tpms_soft_warning_re2_r0 = 50; }  // TESLEMETRY-EXT
+    oneof optional_tpms_soft_warning_re2_r1 { bool tpms_soft_warning_re2_r1 = 51; }  // TESLEMETRY-EXT
     // tpms temperature values in celsius
-    oneof optional_tpms_temperature_fl { float tpms_temperature_fl = 52; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_fr { float tpms_temperature_fr = 53; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_rl { float tpms_temperature_rl = 54; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_rr { float tpms_temperature_rr = 55; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_re1_l0 { float tpms_temperature_re1_l0 = 56; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_re1_l1 { float tpms_temperature_re1_l1 = 57; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_re1_r0 { float tpms_temperature_re1_r0 = 58; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_re1_r1 { float tpms_temperature_re1_r1 = 59; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_re2_l0 { float tpms_temperature_re2_l0 = 60; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_re2_l1 { float tpms_temperature_re2_l1 = 61; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_re2_r0 { float tpms_temperature_re2_r0 = 62; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_re2_r1 { float tpms_temperature_re2_r1 = 63; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_hard_warning_fl { bool tpms_temperature_hard_warning_fl = 64; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_hard_warning_fr { bool tpms_temperature_hard_warning_fr = 65; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_hard_warning_rl { bool tpms_temperature_hard_warning_rl = 66; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_hard_warning_rr { bool tpms_temperature_hard_warning_rr = 67; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_hard_warning_re1_l0 { bool tpms_temperature_hard_warning_re1_l0 = 68; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_hard_warning_re1_l1 { bool tpms_temperature_hard_warning_re1_l1 = 69; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_hard_warning_re1_r0 { bool tpms_temperature_hard_warning_re1_r0 = 70; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_hard_warning_re1_r1 { bool tpms_temperature_hard_warning_re1_r1 = 71; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_hard_warning_re2_l0 { bool tpms_temperature_hard_warning_re2_l0 = 72; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_hard_warning_re2_l1 { bool tpms_temperature_hard_warning_re2_l1 = 73; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_hard_warning_re2_r0 { bool tpms_temperature_hard_warning_re2_r0 = 74; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_hard_warning_re2_r1 { bool tpms_temperature_hard_warning_re2_r1 = 75; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_soft_warning_fl { bool tpms_temperature_soft_warning_fl = 76; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_soft_warning_fr { bool tpms_temperature_soft_warning_fr = 77; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_soft_warning_rl { bool tpms_temperature_soft_warning_rl = 78; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_soft_warning_rr { bool tpms_temperature_soft_warning_rr = 79; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_soft_warning_re1_l0 { bool tpms_temperature_soft_warning_re1_l0 = 80; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_soft_warning_re1_l1 { bool tpms_temperature_soft_warning_re1_l1 = 81; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_soft_warning_re1_r0 { bool tpms_temperature_soft_warning_re1_r0 = 82; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_soft_warning_re1_r1 { bool tpms_temperature_soft_warning_re1_r1 = 83; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_soft_warning_re2_l0 { bool tpms_temperature_soft_warning_re2_l0 = 84; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_soft_warning_re2_l1 { bool tpms_temperature_soft_warning_re2_l1 = 85; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_soft_warning_re2_r0 { bool tpms_temperature_soft_warning_re2_r0 = 86; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_tpms_temperature_soft_warning_re2_r1 { bool tpms_temperature_soft_warning_re2_r1 = 87; }  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_tpms_temperature_fl { float tpms_temperature_fl = 52; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_fr { float tpms_temperature_fr = 53; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_rl { float tpms_temperature_rl = 54; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_rr { float tpms_temperature_rr = 55; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_re1_l0 { float tpms_temperature_re1_l0 = 56; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_re1_l1 { float tpms_temperature_re1_l1 = 57; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_re1_r0 { float tpms_temperature_re1_r0 = 58; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_re1_r1 { float tpms_temperature_re1_r1 = 59; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_re2_l0 { float tpms_temperature_re2_l0 = 60; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_re2_l1 { float tpms_temperature_re2_l1 = 61; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_re2_r0 { float tpms_temperature_re2_r0 = 62; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_re2_r1 { float tpms_temperature_re2_r1 = 63; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_hard_warning_fl { bool tpms_temperature_hard_warning_fl = 64; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_hard_warning_fr { bool tpms_temperature_hard_warning_fr = 65; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_hard_warning_rl { bool tpms_temperature_hard_warning_rl = 66; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_hard_warning_rr { bool tpms_temperature_hard_warning_rr = 67; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_hard_warning_re1_l0 { bool tpms_temperature_hard_warning_re1_l0 = 68; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_hard_warning_re1_l1 { bool tpms_temperature_hard_warning_re1_l1 = 69; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_hard_warning_re1_r0 { bool tpms_temperature_hard_warning_re1_r0 = 70; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_hard_warning_re1_r1 { bool tpms_temperature_hard_warning_re1_r1 = 71; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_hard_warning_re2_l0 { bool tpms_temperature_hard_warning_re2_l0 = 72; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_hard_warning_re2_l1 { bool tpms_temperature_hard_warning_re2_l1 = 73; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_hard_warning_re2_r0 { bool tpms_temperature_hard_warning_re2_r0 = 74; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_hard_warning_re2_r1 { bool tpms_temperature_hard_warning_re2_r1 = 75; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_soft_warning_fl { bool tpms_temperature_soft_warning_fl = 76; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_soft_warning_fr { bool tpms_temperature_soft_warning_fr = 77; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_soft_warning_rl { bool tpms_temperature_soft_warning_rl = 78; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_soft_warning_rr { bool tpms_temperature_soft_warning_rr = 79; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_soft_warning_re1_l0 { bool tpms_temperature_soft_warning_re1_l0 = 80; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_soft_warning_re1_l1 { bool tpms_temperature_soft_warning_re1_l1 = 81; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_soft_warning_re1_r0 { bool tpms_temperature_soft_warning_re1_r0 = 82; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_soft_warning_re1_r1 { bool tpms_temperature_soft_warning_re1_r1 = 83; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_soft_warning_re2_l0 { bool tpms_temperature_soft_warning_re2_l0 = 84; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_soft_warning_re2_l1 { bool tpms_temperature_soft_warning_re2_l1 = 85; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_soft_warning_re2_r0 { bool tpms_temperature_soft_warning_re2_r0 = 86; }  // TESLEMETRY-EXT
+    oneof optional_tpms_temperature_soft_warning_re2_r1 { bool tpms_temperature_soft_warning_re2_r1 = 87; }  // TESLEMETRY-EXT
 }
 
 message MediaState {
@@ -992,12 +992,12 @@ message MediaDetailState {
     oneof optional_now_playing_album { string now_playing_album = 5; }
     oneof optional_now_playing_station { string now_playing_station = 6; }
     oneof optional_a2dp_source_name { string a2dp_source_name = 7; }
-    oneof optional_recent_theater_source { TheaterSource recent_theater_source = 8; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_recent_theater_source_string { string recent_theater_source_string = 9; }  // TESLEMETRY-EXT (app-4.58.6)
-    oneof optional_theater_source_is_playing { bool theater_source_is_playing = 10; }  // TESLEMETRY-EXT (app-4.58.6)
+    oneof optional_recent_theater_source { TheaterSource recent_theater_source = 8; }  // TESLEMETRY-EXT
+    oneof optional_recent_theater_source_string { string recent_theater_source_string = 9; }  // TESLEMETRY-EXT
+    oneof optional_theater_source_is_playing { bool theater_source_is_playing = 10; }  // TESLEMETRY-EXT
 }
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 enum TheaterSource {
     TheaterSource_None = 0;
     TheaterSource_YouTube = 1;
@@ -1059,7 +1059,7 @@ enum MediaSourceType {
     MediaSourceType_OnlineRadio = 24;
     MediaSourceType_OnlineRadio2 = 25;
     MediaSourceType_NetEaseMusic = 26;
-    MediaSourceType_AppleMusic = 27;  // TESLEMETRY-EXT (app-4.58.6)
+    MediaSourceType_AppleMusic = 27;  // TESLEMETRY-EXT
 
     // Entertainment sources
     MediaSourceType_Browser = 28;
@@ -1072,18 +1072,18 @@ enum MediaSourceType {
     MediaSourceType_HomeApps = 34;
     MediaSourceType_Search = 35;
 
-    MediaSourceType_ApplePodcasts = 36;  // TESLEMETRY-EXT (app-4.58.6)
-    MediaSourceType_Audible = 37;  // TESLEMETRY-EXT (app-4.58.6)
-    MediaSourceType_AmazonMusic = 38;  // TESLEMETRY-EXT (app-4.58.6)
-    MediaSourceType_YouTubeMusic = 39;  // TESLEMETRY-EXT (app-4.58.6)
-    MediaSourceType_SiriusXmWeb = 40;  // TESLEMETRY-EXT (app-4.58.6)
-    MediaSourceType_Yunting = 41;  // TESLEMETRY-EXT (app-4.58.6)
-    MediaSourceType_TuneInWeb = 42;  // TESLEMETRY-EXT (app-4.58.6)
-    MediaSourceType_Kugou = 43;  // TESLEMETRY-EXT (app-4.58.6)
-    MediaSourceType_Vohico = 44;  // TESLEMETRY-EXT (app-4.58.6)
+    MediaSourceType_ApplePodcasts = 36;  // TESLEMETRY-EXT
+    MediaSourceType_Audible = 37;  // TESLEMETRY-EXT
+    MediaSourceType_AmazonMusic = 38;  // TESLEMETRY-EXT
+    MediaSourceType_YouTubeMusic = 39;  // TESLEMETRY-EXT
+    MediaSourceType_SiriusXmWeb = 40;  // TESLEMETRY-EXT
+    MediaSourceType_Yunting = 41;  // TESLEMETRY-EXT
+    MediaSourceType_TuneInWeb = 42;  // TESLEMETRY-EXT
+    MediaSourceType_Kugou = 43;  // TESLEMETRY-EXT
+    MediaSourceType_Vohico = 44;  // TESLEMETRY-EXT
 }
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 message GuiSettings {
     enum TirePressureUnit {
         TirePressureUnitPsi = 0;

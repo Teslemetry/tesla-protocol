@@ -81,7 +81,7 @@ message PreconditionSchedule {
     float                       longitude               = 8;
 }
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.58.6) =====
+// ===== TESLEMETRY-EXT BEGIN =====
 message ChargingAlert {
     ChargingAlertName alert_name = 1;
     ChargingAlertType alert_type = 2;

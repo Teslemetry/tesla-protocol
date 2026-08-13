@@ -10,12 +10,6 @@ import { WifiPassword } from "./networking.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
-/**
- * TESLEMETRY SOURCE-OF-RECORD - no upstream.
- * Provenance: Tesla Energy gateway (TEG) local API, from our own
- * observations and contributions from the community
- */
-
 export enum LocalAuthResult {
   LOCAL_AUTH_RESULT_INVALID = 0,
   LOCAL_AUTH_RESULT_SUCCESS = 1,
