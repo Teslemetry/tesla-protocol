@@ -29,8 +29,13 @@ jobs:
         id: drift
         run: |
           set +e
-          .venv/bin/python scripts/upstream_coverage.py --mode head --report drift-report.md
+          .venv/bin/python scripts/upstream_coverage.py --mode head \
+            --report drift-report.md --dump-delta delta.json
           echo "drifted=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          reconcile=$(.venv/bin/python -c \
+            "import json; print(1 if json.load(open('delta.json'))['reconcile_needed'] else 0)")
+          echo "reconcile=$reconcile" >> "$GITHUB_OUTPUT"
 
       - name: Open or update drift issue
         if: steps.drift.outputs.drifted != '0'
@@ -48,7 +53,7 @@ jobs:
           fi
 
       - name: Push reconcile branch and draft PR
-        if: steps.drift.outputs.drifted != '0'
+        if: steps.drift.outputs.reconcile != '0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -64,9 +69,11 @@ jobs:
           git commit -m "chore: advance upstream pin"
           git push --force origin upstream-reconcile
           {
-            echo "Advances \`upstream.json\` to upstream HEAD. CI's pinned coverage gate"
-            echo "now fails on exactly the symbols that must be merged into \`proto/\`;"
-            echo "make it green, add a changeset, then mark ready for review."
+            echo "Advances \`upstream.json\` to upstream HEAD. If CI's pinned coverage gate"
+            echo "fails, merge the listed symbols into \`proto/\` and add a changeset. If it's"
+            echo "already green, review any upstream overlap candidates below - upstream now"
+            echo "defines a symbol we previously carried as a local extension - then mark"
+            echo "ready for review."
             echo
             cat drift-report.md
           } > pr-body.md
@@ -80,5 +87,5 @@ jobs:
           exit 1 # keep the scheduled run red while drift is unresolved
 
       - name: No drift
-        if: steps.drift.outputs.drifted == '0'
-        run: echo "Coverage complete at upstream HEAD."
+        if: steps.drift.outputs.drifted == '0' && steps.drift.outputs.reconcile == '0'
+        run: echo "Coverage complete and pin current at upstream HEAD."

@@ -3,7 +3,11 @@
 
 Fetches each tracked upstream repo's HEAD commit, re-enumerates its proto
 directory (so brand-new upstream files are picked up), and rewrites
-upstream.json with the new commit, fetch date and per-file sha256 hashes.
+upstream.json with the new commit, fetch date and per-file sha256 hashes -
+but only for an upstream whose tracked proto bytes actually changed. If HEAD
+moved for reasons outside the tracked path prefix, the fetched hashes equal
+the pin's and that upstream's commit/fetched fields are left untouched, so a
+commit move alone never produces a diff to review.
 Used by the weekly upstream-drift workflow to prepare a reconcile PR; the PR's
 own CI (pinned-mode coverage gate) then lists exactly which symbols the human
 must merge into proto/ before it can go green.
@@ -53,6 +57,10 @@ def main() -> int:
             )
             with urllib.request.urlopen(url) as resp:
                 files[entry["name"]] = hashlib.sha256(resp.read()).hexdigest()
+        if files == cfg["files"]:
+            print(f"{name}: HEAD moved {cfg['commit'][:12]} -> {head[:12]} but "
+                  f"{cfg['pathPrefix']} bytes are unchanged - pin left at {cfg['commit'][:12]}")
+            continue
         print(f"{name}: {cfg['commit'][:12]} -> {head[:12]} ({len(files)} files)")
         cfg.update(commit=head, fetched=today, files=files)
         changed = True
