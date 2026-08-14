@@ -1,0 +1,43 @@
+{
+  "description": "Golden wire-format fixtures for CarServer.Action.vehicleAction (steering wheel heat commands). Consumed identically by the TypeScript and Python test suites: both encoders must produce these exact bytes, and both decoders must round-trip them back to the same field values.",
+  "outer_message": "CarServer.Action",
+  "outer_field": { "name": "vehicleAction", "tag": 2, "type": "CarServer.VehicleAction" },
+  "cases": [
+    {
+      "name": "auto_stw_heat_off",
+      "vehicle_action_field": { "name": "autoStwHeatAction", "tag": 70, "type": "CarServer.AutoStwHeatAction" },
+      "payload": { "on": false },
+      "hex": "1203b20400"
+    },
+    {
+      "name": "auto_stw_heat_on",
+      "vehicle_action_field": { "name": "autoStwHeatAction", "tag": 70, "type": "CarServer.AutoStwHeatAction" },
+      "payload": { "on": true },
+      "hex": "1205b204020801"
+    },
+    {
+      "name": "stw_heat_level_unknown",
+      "vehicle_action_field": { "name": "stwHeatLevelAction", "tag": 71, "type": "CarServer.StwHeatLevelAction" },
+      "payload": { "stw_heat_level": "StwHeatLevel_Unknown", "stw_heat_level_number": 0 },
+      "hex": "1203ba0400"
+    },
+    {
+      "name": "stw_heat_level_off",
+      "vehicle_action_field": { "name": "stwHeatLevelAction", "tag": 71, "type": "CarServer.StwHeatLevelAction" },
+      "payload": { "stw_heat_level": "StwHeatLevel_Off", "stw_heat_level_number": 1 },
+      "hex": "1205ba04020801"
+    },
+    {
+      "name": "stw_heat_level_low",
+      "vehicle_action_field": { "name": "stwHeatLevelAction", "tag": 71, "type": "CarServer.StwHeatLevelAction" },
+      "payload": { "stw_heat_level": "StwHeatLevel_Low", "stw_heat_level_number": 2 },
+      "hex": "1205ba04020802"
+    },
+    {
+      "name": "stw_heat_level_high",
+      "vehicle_action_field": { "name": "stwHeatLevelAction", "tag": 71, "type": "CarServer.StwHeatLevelAction" },
+      "payload": { "stw_heat_level": "StwHeatLevel_High", "stw_heat_level_number": 3 },
+      "hex": "1205ba04020803"
+    }
+  ]
+}

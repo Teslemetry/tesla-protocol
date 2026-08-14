@@ -74,6 +74,12 @@ jobs:
       - name: Typecheck
         run: pnpm run tsc
 
+      - name: Golden fixture tests (TypeScript)
+        run: node --test 'packages/typescript/test/*.test.ts'
+
+      - name: Golden fixture tests (Python)
+        run: PYTHONPATH=packages/python .venv/bin/python -m unittest discover -s packages/python/tests
+
       - name: Build Python distribution
         run: .venv/bin/python -m build --outdir packages/python/dist packages/python
 
