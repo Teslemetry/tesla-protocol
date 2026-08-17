@@ -1,0 +1,31 @@
+{
+  "description": "Golden wire-format fixtures for CarServer.Action.vehicleAction (navigation supercharger request). Pins the corrected field placement: NavigationSuperchargerRequest.remoteNavTripOrder is tag 2, not the previously-published tag 1. Consumed identically by the TypeScript and Python test suites: both encoders must produce these exact bytes, and both decoders must round-trip them back to the same field values.",
+  "outer_message": "CarServer.Action",
+  "outer_field": { "name": "vehicleAction", "tag": 2, "type": "CarServer.VehicleAction" },
+  "cases": [
+    {
+      "name": "navigation_supercharger_request_unknown",
+      "vehicle_action_field": { "name": "navigationSuperchargerRequest", "tag": 22, "type": "CarServer.NavigationSuperchargerRequest" },
+      "payload": { "remote_nav_trip_order": "REMOTE_NAV_TRIP_ORDER_UNKNOWN", "remote_nav_trip_order_number": 0 },
+      "hex": "1203b20100"
+    },
+    {
+      "name": "navigation_supercharger_request_replace",
+      "vehicle_action_field": { "name": "navigationSuperchargerRequest", "tag": 22, "type": "CarServer.NavigationSuperchargerRequest" },
+      "payload": { "remote_nav_trip_order": "REMOTE_NAV_TRIP_ORDER_REPLACE", "remote_nav_trip_order_number": 1 },
+      "hex": "1205b201021001"
+    },
+    {
+      "name": "navigation_supercharger_request_prepend",
+      "vehicle_action_field": { "name": "navigationSuperchargerRequest", "tag": 22, "type": "CarServer.NavigationSuperchargerRequest" },
+      "payload": { "remote_nav_trip_order": "REMOTE_NAV_TRIP_ORDER_PREPEND", "remote_nav_trip_order_number": 2 },
+      "hex": "1205b201021002"
+    },
+    {
+      "name": "navigation_supercharger_request_append",
+      "vehicle_action_field": { "name": "navigationSuperchargerRequest", "tag": 22, "type": "CarServer.NavigationSuperchargerRequest" },
+      "payload": { "remote_nav_trip_order": "REMOTE_NAV_TRIP_ORDER_APPEND", "remote_nav_trip_order_number": 3 },
+      "hex": "1205b201021003"
+    }
+  ]
+}
