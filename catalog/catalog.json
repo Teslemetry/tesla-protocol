@@ -347,7 +347,7 @@
         "python": "packages/python/tesla_protocol/command"
       },
       "messages": 315,
-      "enums": 96,
+      "enums": 97,
       "fields": 1420,
       "files": [
         {
@@ -4687,19 +4687,51 @@
               "name": "NavigationSuperchargerRequest",
               "fields": [
                 {
-                  "number": 1,
-                  "name": "order",
-                  "type": "TYPE_INT32",
-                  "type_name": null,
+                  "number": 2,
+                  "name": "remote_nav_trip_order",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.NavigationSuperchargerRequest.RemoteNavTripOrder",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 }
               ],
               "oneofs": [],
-              "reserved_ranges": [],
-              "reserved_names": [],
+              "reserved_ranges": [
+                [
+                  1,
+                  1
+                ]
+              ],
+              "reserved_names": [
+                "order"
+              ],
               "nested_messages": [],
-              "nested_enums": []
+              "nested_enums": [
+                {
+                  "fqn": ".CarServer.NavigationSuperchargerRequest.RemoteNavTripOrder",
+                  "name": "RemoteNavTripOrder",
+                  "values": [
+                    {
+                      "number": 0,
+                      "name": "REMOTE_NAV_TRIP_ORDER_UNKNOWN"
+                    },
+                    {
+                      "number": 1,
+                      "name": "REMOTE_NAV_TRIP_ORDER_REPLACE"
+                    },
+                    {
+                      "number": 2,
+                      "name": "REMOTE_NAV_TRIP_ORDER_PREPEND"
+                    },
+                    {
+                      "number": 3,
+                      "name": "REMOTE_NAV_TRIP_ORDER_APPEND"
+                    }
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": []
+                }
+              ]
             },
             {
               "fqn": ".CarServer.UiSetUpcomingCalendarEntries",
@@ -41914,7 +41946,7 @@
     "source_files": 38,
     "groups": 7,
     "messages": 868,
-    "enums": 236,
+    "enums": 237,
     "fields": 2804
   },
   "registration": {

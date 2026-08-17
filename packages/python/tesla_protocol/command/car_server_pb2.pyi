@@ -1497,11 +1497,22 @@ class NavigationRequest(_message.Message):
         ...
 
 class NavigationSuperchargerRequest(_message.Message):
-    __slots__ = ('order',)
-    ORDER_FIELD_NUMBER: _ClassVar[int]
-    order: int
+    __slots__ = ('remote_nav_trip_order',)
 
-    def __init__(self, order: _Optional[int]=...) -> None:
+    class RemoteNavTripOrder(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+        __slots__ = ()
+        REMOTE_NAV_TRIP_ORDER_UNKNOWN: _ClassVar[NavigationSuperchargerRequest.RemoteNavTripOrder]
+        REMOTE_NAV_TRIP_ORDER_REPLACE: _ClassVar[NavigationSuperchargerRequest.RemoteNavTripOrder]
+        REMOTE_NAV_TRIP_ORDER_PREPEND: _ClassVar[NavigationSuperchargerRequest.RemoteNavTripOrder]
+        REMOTE_NAV_TRIP_ORDER_APPEND: _ClassVar[NavigationSuperchargerRequest.RemoteNavTripOrder]
+    REMOTE_NAV_TRIP_ORDER_UNKNOWN: NavigationSuperchargerRequest.RemoteNavTripOrder
+    REMOTE_NAV_TRIP_ORDER_REPLACE: NavigationSuperchargerRequest.RemoteNavTripOrder
+    REMOTE_NAV_TRIP_ORDER_PREPEND: NavigationSuperchargerRequest.RemoteNavTripOrder
+    REMOTE_NAV_TRIP_ORDER_APPEND: NavigationSuperchargerRequest.RemoteNavTripOrder
+    REMOTE_NAV_TRIP_ORDER_FIELD_NUMBER: _ClassVar[int]
+    remote_nav_trip_order: NavigationSuperchargerRequest.RemoteNavTripOrder
+
+    def __init__(self, remote_nav_trip_order: _Optional[_Union[NavigationSuperchargerRequest.RemoteNavTripOrder, str]]=...) -> None:
         ...
 
 class UiSetUpcomingCalendarEntries(_message.Message):

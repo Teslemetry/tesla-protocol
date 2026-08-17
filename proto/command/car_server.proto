@@ -773,7 +773,16 @@ message NavigationRequest {
 }
 
 message NavigationSuperchargerRequest {
-  int32 order = 1;
+  // order was misdeclared at tag 1; reserved to block reuse, see AGENTS.md.
+  reserved 1;
+  reserved "order";
+  enum RemoteNavTripOrder {
+    REMOTE_NAV_TRIP_ORDER_UNKNOWN = 0;
+    REMOTE_NAV_TRIP_ORDER_REPLACE = 1;
+    REMOTE_NAV_TRIP_ORDER_PREPEND = 2;
+    REMOTE_NAV_TRIP_ORDER_APPEND = 3;
+  }
+  RemoteNavTripOrder remote_nav_trip_order = 2;
 }
 
 message UiSetUpcomingCalendarEntries {
