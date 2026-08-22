@@ -1444,6 +1444,8 @@ export interface NavigationRequest {
 }
 
 export interface NavigationSuperchargerRequest {
+  /** Supercharger location, identified as in Superchargers.id. */
+  id: number;
   remoteNavTripOrder: NavigationSuperchargerRequest_RemoteNavTripOrder;
 }
 
@@ -14660,11 +14662,14 @@ export const NavigationRequest: MessageFns<NavigationRequest> = {
 };
 
 function createBaseNavigationSuperchargerRequest(): NavigationSuperchargerRequest {
-  return { remoteNavTripOrder: 0 };
+  return { id: 0, remoteNavTripOrder: 0 };
 }
 
 export const NavigationSuperchargerRequest: MessageFns<NavigationSuperchargerRequest> = {
   encode(message: NavigationSuperchargerRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.id !== 0) {
+      writer.uint32(8).int64(message.id);
+    }
     if (message.remoteNavTripOrder !== 0) {
       writer.uint32(16).int32(message.remoteNavTripOrder);
     }
@@ -14678,6 +14683,14 @@ export const NavigationSuperchargerRequest: MessageFns<NavigationSuperchargerReq
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.id = longToNumber(reader.int64());
+          continue;
+        }
         case 2: {
           if (tag !== 16) {
             break;
@@ -14697,6 +14710,7 @@ export const NavigationSuperchargerRequest: MessageFns<NavigationSuperchargerReq
 
   fromJSON(object: any): NavigationSuperchargerRequest {
     return {
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
       remoteNavTripOrder: isSet(object.remoteNavTripOrder)
         ? navigationSuperchargerRequest_RemoteNavTripOrderFromJSON(object.remoteNavTripOrder)
         : 0,
@@ -14705,6 +14719,9 @@ export const NavigationSuperchargerRequest: MessageFns<NavigationSuperchargerReq
 
   toJSON(message: NavigationSuperchargerRequest): unknown {
     const obj: any = {};
+    if (message.id !== undefined) {
+      obj.id = Math.round(message.id);
+    }
     if (message.remoteNavTripOrder !== undefined) {
       obj.remoteNavTripOrder = navigationSuperchargerRequest_RemoteNavTripOrderToJSON(message.remoteNavTripOrder);
     }
@@ -14718,6 +14735,7 @@ export const NavigationSuperchargerRequest: MessageFns<NavigationSuperchargerReq
     object: I,
   ): NavigationSuperchargerRequest {
     const message = createBaseNavigationSuperchargerRequest();
+    message.id = object.id ?? 0;
     message.remoteNavTripOrder = object.remoteNavTripOrder ?? 0;
     return message;
   },

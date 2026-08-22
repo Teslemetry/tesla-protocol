@@ -179,15 +179,14 @@ class RepoIntegrationTests(unittest.TestCase):
             self.assertEqual(paths, sorted(paths))
 
     def test_baseline_totals(self):
-        # Reproduces the E4.1 breakdown report's baseline counts at main 1df2336b.
-        # If proto/ has changed since, the current tree is authoritative - this
-        # assertion documents that baseline, it doesn't freeze it.
+        # proto/ is authoritative: these document the current surface size so an
+        # unintended change shows up, they don't freeze it. Update on purpose.
         totals = self.catalog["totals"]
         self.assertEqual(totals["source_files"], 38)
         self.assertEqual(totals["groups"], 7)
         self.assertEqual(totals["messages"], 868)
         self.assertEqual(totals["enums"], 237)
-        self.assertEqual(totals["fields"], 2804)
+        self.assertEqual(totals["fields"], 2805)
 
     def test_rebuild_is_deterministic(self):
         second = build_catalog.build_catalog()

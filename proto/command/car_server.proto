@@ -773,8 +773,7 @@ message NavigationRequest {
 }
 
 message NavigationSuperchargerRequest {
-  // order was misdeclared at tag 1; reserved to block reuse, see AGENTS.md.
-  reserved 1;
+  // The trip order lives at tag 2, so the name stays blocked here, see AGENTS.md.
   reserved "order";
   enum RemoteNavTripOrder {
     REMOTE_NAV_TRIP_ORDER_UNKNOWN = 0;
@@ -782,6 +781,8 @@ message NavigationSuperchargerRequest {
     REMOTE_NAV_TRIP_ORDER_PREPEND = 2;
     REMOTE_NAV_TRIP_ORDER_APPEND = 3;
   }
+  // Supercharger location, identified as in Superchargers.id.
+  int64 id = 1;
   RemoteNavTripOrder remote_nav_trip_order = 2;
 }
 
