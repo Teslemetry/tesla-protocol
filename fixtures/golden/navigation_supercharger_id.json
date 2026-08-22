@@ -1,0 +1,31 @@
+{
+  "description": "Golden wire-format fixtures for CarServer.Action.vehicleAction (navigation supercharger request, supercharger location id). Pins NavigationSuperchargerRequest.id as an int64 varint at tag 1 alongside remoteNavTripOrder at tag 2. Ids below are synthetic. Consumed identically by the TypeScript and Python test suites: both encoders must produce these exact bytes, and both decoders must round-trip them back to the same field values.",
+  "outer_message": "CarServer.Action",
+  "outer_field": { "name": "vehicleAction", "tag": 2, "type": "CarServer.VehicleAction" },
+  "cases": [
+    {
+      "name": "navigation_supercharger_id_only",
+      "vehicle_action_field": { "name": "navigationSuperchargerRequest", "tag": 22, "type": "CarServer.NavigationSuperchargerRequest" },
+      "payload": { "id": 123456, "remote_nav_trip_order": "REMOTE_NAV_TRIP_ORDER_UNKNOWN", "remote_nav_trip_order_number": 0 },
+      "hex": "1207b2010408c0c407"
+    },
+    {
+      "name": "navigation_supercharger_id_with_replace",
+      "vehicle_action_field": { "name": "navigationSuperchargerRequest", "tag": 22, "type": "CarServer.NavigationSuperchargerRequest" },
+      "payload": { "id": 123456, "remote_nav_trip_order": "REMOTE_NAV_TRIP_ORDER_REPLACE", "remote_nav_trip_order_number": 1 },
+      "hex": "1209b2010608c0c4071001"
+    },
+    {
+      "name": "navigation_supercharger_id_with_prepend",
+      "vehicle_action_field": { "name": "navigationSuperchargerRequest", "tag": 22, "type": "CarServer.NavigationSuperchargerRequest" },
+      "payload": { "id": 987654321, "remote_nav_trip_order": "REMOTE_NAV_TRIP_ORDER_PREPEND", "remote_nav_trip_order_number": 2 },
+      "hex": "120bb2010808b1d1f9d6031002"
+    },
+    {
+      "name": "navigation_supercharger_id_with_append",
+      "vehicle_action_field": { "name": "navigationSuperchargerRequest", "tag": 22, "type": "CarServer.NavigationSuperchargerRequest" },
+      "payload": { "id": 1, "remote_nav_trip_order": "REMOTE_NAV_TRIP_ORDER_APPEND", "remote_nav_trip_order_number": 3 },
+      "hex": "1207b2010408011003"
+    }
+  ]
+}
