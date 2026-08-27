@@ -42,6 +42,7 @@ message VehicleData {
     VehicleImageState vehicle_image_state = 27;  // TESLEMETRY-EXT
     SuspensionState suspension_state = 29;  // TESLEMETRY-EXT
     ChildPresenceDetectionState child_presence_detection_state = 30;  // TESLEMETRY-EXT
+    DisplayState display_state = 36;  // TESLEMETRY-EXT
     oneof optional_supports_optional_fields { bool supports_optional_fields = 999; }  // TESLEMETRY-EXT
 }
 
@@ -119,6 +120,7 @@ message ClosuresState {
     oneof optional_has_side_storage_doors { bool has_side_storage_doors = 27; }  // TESLEMETRY-EXT
     oneof optional_door_open_side_storage_left { bool door_open_side_storage_left = 28; }  // TESLEMETRY-EXT
     oneof optional_door_open_side_storage_right { bool door_open_side_storage_right = 29; }  // TESLEMETRY-EXT
+    double cruise_speed_limit_mph = 30;  // TESLEMETRY-EXT
 
     google.protobuf.Timestamp timestamp = 2000;
 }
@@ -343,6 +345,7 @@ message ChargeState {
         PowershareTypeLoad = 1;
         PowershareTypeHome = 2;
         PowershareTypeGrid = 3;  // TESLEMETRY-EXT
+        PowershareTypePowerwall = 4;  // TESLEMETRY-EXT
     }
 
     enum PowershareStopReason {
@@ -643,6 +646,7 @@ message VehicleState {
 
     oneof optional_deck_lights_on { bool deck_lights_on = 67; }  // TESLEMETRY-EXT
     oneof optional_hazards_on { bool hazards_on = 68; }  // TESLEMETRY-EXT
+    oneof optional_deck_lights_allowed { bool deck_lights_allowed = 69; }  // TESLEMETRY-EXT
 
     LegacyMediaInfo legacy_media_info = 72;  // TESLEMETRY-EXT
     oneof optional_allow_authorized_mobile_devices_only { bool allow_authorized_mobile_devices_only = 73; }  // TESLEMETRY-EXT
@@ -1262,6 +1266,7 @@ message VehicleConfig {
     AutopilotBase autopilot_base = 196;
     AutopilotOverrideState autopilot_override_state = 197;
     oneof optional_autopilot_override_expire_time { int64 autopilot_override_expire_time = 198; }
+    oneof optional_supports_dynamic_environments { bool supports_dynamic_environments = 199; }  // TESLEMETRY-EXT
 }
 
 message ParkedAccessoryState {
@@ -1389,6 +1394,12 @@ message ChildPresenceDetectionState {
     google.protobuf.Timestamp timestamp = 2000;
 }
 
+message DisplayState {
+    bool displayBrightnessAuto = 1;
+    uint32 displayBrightnessScalePreference = 2;
+    google.protobuf.Timestamp timestamp = 2000;
+}
+
 message VehicleDetailState {
     google.protobuf.Timestamp timestamp = 1;
     oneof optional_vehicle_name { string vehicle_name = 2; }
@@ -1398,5 +1409,6 @@ message VehicleDetailState {
     oneof optional_fsd_software_version { string fsd_software_version = 6; }
     oneof optional_current_profile_name { string current_profile_name = 7; }
     oneof optional_china_autopilot_software_version { string china_autopilot_software_version = 8; }
+    oneof optional_is_fsd_v14_or_above { bool is_fsd_v14_or_above = 9; }  // TESLEMETRY-EXT
 }
 // ===== TESLEMETRY-EXT END =====

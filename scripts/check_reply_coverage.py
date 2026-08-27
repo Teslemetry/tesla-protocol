@@ -39,6 +39,7 @@ ONEOF_NAME = "response_msg"
 # of these must be modelled or reserved-with-reason below.
 KNOWN_REPLY_FIELDS = {
     2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 24, 25,
+    31, 32,
 }
 
 

@@ -776,7 +776,11 @@ export interface VehicleData {
     | SuspensionState
     | undefined;
   /** TESLEMETRY-EXT */
-  childPresenceDetectionState: ChildPresenceDetectionState | undefined;
+  childPresenceDetectionState:
+    | ChildPresenceDetectionState
+    | undefined;
+  /** TESLEMETRY-EXT */
+  displayState: DisplayState | undefined;
   supportsOptionalFields?: boolean | undefined;
 }
 
@@ -817,7 +821,11 @@ export interface ClosuresState {
   hasAutomaticTonneau?: boolean | undefined;
   hasSideStorageDoors?: boolean | undefined;
   doorOpenSideStorageLeft?: boolean | undefined;
-  doorOpenSideStorageRight?: boolean | undefined;
+  doorOpenSideStorageRight?:
+    | boolean
+    | undefined;
+  /** TESLEMETRY-EXT */
+  cruiseSpeedLimitMph: number;
   timestamp: Date | undefined;
 }
 
@@ -1402,6 +1410,8 @@ export enum ChargeState_PowershareType {
   PowershareTypeHome = 2,
   /** PowershareTypeGrid - TESLEMETRY-EXT */
   PowershareTypeGrid = 3,
+  /** PowershareTypePowerwall - TESLEMETRY-EXT */
+  PowershareTypePowerwall = 4,
   UNRECOGNIZED = -1,
 }
 
@@ -1419,6 +1429,9 @@ export function chargeState_PowershareTypeFromJSON(object: any): ChargeState_Pow
     case 3:
     case "PowershareTypeGrid":
       return ChargeState_PowershareType.PowershareTypeGrid;
+    case 4:
+    case "PowershareTypePowerwall":
+      return ChargeState_PowershareType.PowershareTypePowerwall;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -1436,6 +1449,8 @@ export function chargeState_PowershareTypeToJSON(object: ChargeState_PowershareT
       return "PowershareTypeHome";
     case ChargeState_PowershareType.PowershareTypeGrid:
       return "PowershareTypeGrid";
+    case ChargeState_PowershareType.PowershareTypePowerwall:
+      return "PowershareTypePowerwall";
     case ChargeState_PowershareType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -1735,7 +1750,8 @@ export interface VehicleState {
   /** TESLEMETRY-EXT */
   tpmsLastSeenPressureTimeRr: Date | undefined;
   deckLightsOn?: boolean | undefined;
-  hazardsOn?:
+  hazardsOn?: boolean | undefined;
+  deckLightsAllowed?:
     | boolean
     | undefined;
   /** TESLEMETRY-EXT */
@@ -2497,6 +2513,7 @@ export interface VehicleConfig {
   autopilotBase: AutopilotBase;
   autopilotOverrideState: AutopilotOverrideState;
   autopilotOverrideExpireTime?: number | undefined;
+  supportsDynamicEnvironments?: boolean | undefined;
 }
 
 export enum VehicleConfig_AuxParkLampsE {
@@ -3114,6 +3131,12 @@ export interface ChildPresenceDetectionState {
   timestamp: Date | undefined;
 }
 
+export interface DisplayState {
+  displayBrightnessAuto: boolean;
+  displayBrightnessScalePreference: number;
+  timestamp: Date | undefined;
+}
+
 export interface VehicleDetailState {
   timestamp: Date | undefined;
   vehicleName?: string | undefined;
@@ -3123,6 +3146,7 @@ export interface VehicleDetailState {
   fsdSoftwareVersion?: string | undefined;
   currentProfileName?: string | undefined;
   chinaAutopilotSoftwareVersion?: string | undefined;
+  isFsdV14OrAbove?: boolean | undefined;
 }
 
 function createBaseVehicleData(): VehicleData {
@@ -3153,6 +3177,7 @@ function createBaseVehicleData(): VehicleData {
     vehicleImageState: undefined,
     suspensionState: undefined,
     childPresenceDetectionState: undefined,
+    displayState: undefined,
     supportsOptionalFields: undefined,
   };
 }
@@ -3236,6 +3261,9 @@ export const VehicleData: MessageFns<VehicleData> = {
     }
     if (message.childPresenceDetectionState !== undefined) {
       ChildPresenceDetectionState.encode(message.childPresenceDetectionState, writer.uint32(242).fork()).join();
+    }
+    if (message.displayState !== undefined) {
+      DisplayState.encode(message.displayState, writer.uint32(290).fork()).join();
     }
     if (message.supportsOptionalFields !== undefined) {
       writer.uint32(7992).bool(message.supportsOptionalFields);
@@ -3458,6 +3486,14 @@ export const VehicleData: MessageFns<VehicleData> = {
           message.childPresenceDetectionState = ChildPresenceDetectionState.decode(reader, reader.uint32());
           continue;
         }
+        case 36: {
+          if (tag !== 290) {
+            break;
+          }
+
+          message.displayState = DisplayState.decode(reader, reader.uint32());
+          continue;
+        }
         case 999: {
           if (tag !== 7992) {
             break;
@@ -3523,6 +3559,7 @@ export const VehicleData: MessageFns<VehicleData> = {
       childPresenceDetectionState: isSet(object.childPresenceDetectionState)
         ? ChildPresenceDetectionState.fromJSON(object.childPresenceDetectionState)
         : undefined,
+      displayState: isSet(object.displayState) ? DisplayState.fromJSON(object.displayState) : undefined,
       supportsOptionalFields: isSet(object.supportsOptionalFields)
         ? globalThis.Boolean(object.supportsOptionalFields)
         : undefined,
@@ -3608,6 +3645,9 @@ export const VehicleData: MessageFns<VehicleData> = {
     }
     if (message.childPresenceDetectionState !== undefined) {
       obj.childPresenceDetectionState = ChildPresenceDetectionState.toJSON(message.childPresenceDetectionState);
+    }
+    if (message.displayState !== undefined) {
+      obj.displayState = DisplayState.toJSON(message.displayState);
     }
     if (message.supportsOptionalFields !== undefined) {
       obj.supportsOptionalFields = message.supportsOptionalFields;
@@ -3695,6 +3735,9 @@ export const VehicleData: MessageFns<VehicleData> = {
       (object.childPresenceDetectionState !== undefined && object.childPresenceDetectionState !== null)
         ? ChildPresenceDetectionState.fromPartial(object.childPresenceDetectionState)
         : undefined;
+    message.displayState = (object.displayState !== undefined && object.displayState !== null)
+      ? DisplayState.fromPartial(object.displayState)
+      : undefined;
     message.supportsOptionalFields = object.supportsOptionalFields ?? undefined;
     return message;
   },
@@ -3730,6 +3773,7 @@ function createBaseClosuresState(): ClosuresState {
     hasSideStorageDoors: undefined,
     doorOpenSideStorageLeft: undefined,
     doorOpenSideStorageRight: undefined,
+    cruiseSpeedLimitMph: 0,
     timestamp: undefined,
   };
 }
@@ -3819,6 +3863,9 @@ export const ClosuresState: MessageFns<ClosuresState> = {
     }
     if (message.doorOpenSideStorageRight !== undefined) {
       writer.uint32(232).bool(message.doorOpenSideStorageRight);
+    }
+    if (message.cruiseSpeedLimitMph !== 0) {
+      writer.uint32(241).double(message.cruiseSpeedLimitMph);
     }
     if (message.timestamp !== undefined) {
       Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(16002).fork()).join();
@@ -4057,6 +4104,14 @@ export const ClosuresState: MessageFns<ClosuresState> = {
           message.doorOpenSideStorageRight = reader.bool();
           continue;
         }
+        case 30: {
+          if (tag !== 241) {
+            break;
+          }
+
+          message.cruiseSpeedLimitMph = reader.double();
+          continue;
+        }
         case 2000: {
           if (tag !== 16002) {
             break;
@@ -4132,6 +4187,7 @@ export const ClosuresState: MessageFns<ClosuresState> = {
       doorOpenSideStorageRight: isSet(object.doorOpenSideStorageRight)
         ? globalThis.Boolean(object.doorOpenSideStorageRight)
         : undefined,
+      cruiseSpeedLimitMph: isSet(object.cruiseSpeedLimitMph) ? globalThis.Number(object.cruiseSpeedLimitMph) : 0,
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
     };
   },
@@ -4222,6 +4278,9 @@ export const ClosuresState: MessageFns<ClosuresState> = {
     if (message.doorOpenSideStorageRight !== undefined) {
       obj.doorOpenSideStorageRight = message.doorOpenSideStorageRight;
     }
+    if (message.cruiseSpeedLimitMph !== undefined) {
+      obj.cruiseSpeedLimitMph = message.cruiseSpeedLimitMph;
+    }
     if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp.toISOString();
     }
@@ -4269,6 +4328,7 @@ export const ClosuresState: MessageFns<ClosuresState> = {
     message.hasSideStorageDoors = object.hasSideStorageDoors ?? undefined;
     message.doorOpenSideStorageLeft = object.doorOpenSideStorageLeft ?? undefined;
     message.doorOpenSideStorageRight = object.doorOpenSideStorageRight ?? undefined;
+    message.cruiseSpeedLimitMph = object.cruiseSpeedLimitMph ?? 0;
     message.timestamp = object.timestamp ?? undefined;
     return message;
   },
@@ -10301,6 +10361,7 @@ function createBaseVehicleState(): VehicleState {
     tpmsLastSeenPressureTimeRr: undefined,
     deckLightsOn: undefined,
     hazardsOn: undefined,
+    deckLightsAllowed: undefined,
     legacyMediaInfo: undefined,
     allowAuthorizedMobileDevicesOnly: undefined,
     guestMode: undefined,
@@ -10404,6 +10465,9 @@ export const VehicleState: MessageFns<VehicleState> = {
     }
     if (message.hazardsOn !== undefined) {
       writer.uint32(544).bool(message.hazardsOn);
+    }
+    if (message.deckLightsAllowed !== undefined) {
+      writer.uint32(552).bool(message.deckLightsAllowed);
     }
     if (message.legacyMediaInfo !== undefined) {
       LegacyMediaInfo.encode(message.legacyMediaInfo, writer.uint32(578).fork()).join();
@@ -10704,6 +10768,14 @@ export const VehicleState: MessageFns<VehicleState> = {
           }
 
           message.hazardsOn = reader.bool();
+          continue;
+        }
+        case 69: {
+          if (tag !== 552) {
+            break;
+          }
+
+          message.deckLightsAllowed = reader.bool();
           continue;
         }
         case 72: {
@@ -11275,6 +11347,7 @@ export const VehicleState: MessageFns<VehicleState> = {
         : undefined,
       deckLightsOn: isSet(object.deckLightsOn) ? globalThis.Boolean(object.deckLightsOn) : undefined,
       hazardsOn: isSet(object.hazardsOn) ? globalThis.Boolean(object.hazardsOn) : undefined,
+      deckLightsAllowed: isSet(object.deckLightsAllowed) ? globalThis.Boolean(object.deckLightsAllowed) : undefined,
       legacyMediaInfo: isSet(object.legacyMediaInfo) ? LegacyMediaInfo.fromJSON(object.legacyMediaInfo) : undefined,
       allowAuthorizedMobileDevicesOnly: isSet(object.allowAuthorizedMobileDevicesOnly)
         ? globalThis.Boolean(object.allowAuthorizedMobileDevicesOnly)
@@ -11422,6 +11495,9 @@ export const VehicleState: MessageFns<VehicleState> = {
     }
     if (message.hazardsOn !== undefined) {
       obj.hazardsOn = message.hazardsOn;
+    }
+    if (message.deckLightsAllowed !== undefined) {
+      obj.deckLightsAllowed = message.deckLightsAllowed;
     }
     if (message.legacyMediaInfo !== undefined) {
       obj.legacyMediaInfo = LegacyMediaInfo.toJSON(message.legacyMediaInfo);
@@ -11646,6 +11722,7 @@ export const VehicleState: MessageFns<VehicleState> = {
     message.tpmsLastSeenPressureTimeRr = object.tpmsLastSeenPressureTimeRr ?? undefined;
     message.deckLightsOn = object.deckLightsOn ?? undefined;
     message.hazardsOn = object.hazardsOn ?? undefined;
+    message.deckLightsAllowed = object.deckLightsAllowed ?? undefined;
     message.legacyMediaInfo = (object.legacyMediaInfo !== undefined && object.legacyMediaInfo !== null)
       ? LegacyMediaInfo.fromPartial(object.legacyMediaInfo)
       : undefined;
@@ -15670,6 +15747,7 @@ function createBaseVehicleConfig(): VehicleConfig {
     autopilotBase: 0,
     autopilotOverrideState: 0,
     autopilotOverrideExpireTime: undefined,
+    supportsDynamicEnvironments: undefined,
   };
 }
 
@@ -15893,6 +15971,9 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
     }
     if (message.autopilotOverrideExpireTime !== undefined) {
       writer.uint32(1584).int64(message.autopilotOverrideExpireTime);
+    }
+    if (message.supportsDynamicEnvironments !== undefined) {
+      writer.uint32(1592).bool(message.supportsDynamicEnvironments);
     }
     return writer;
   },
@@ -16488,6 +16569,14 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
           message.autopilotOverrideExpireTime = longToNumber(reader.int64());
           continue;
         }
+        case 199: {
+          if (tag !== 1592) {
+            break;
+          }
+
+          message.supportsDynamicEnvironments = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -16639,6 +16728,9 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
         : 0,
       autopilotOverrideExpireTime: isSet(object.autopilotOverrideExpireTime)
         ? globalThis.Number(object.autopilotOverrideExpireTime)
+        : undefined,
+      supportsDynamicEnvironments: isSet(object.supportsDynamicEnvironments)
+        ? globalThis.Boolean(object.supportsDynamicEnvironments)
         : undefined,
     };
   },
@@ -16864,6 +16956,9 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
     if (message.autopilotOverrideExpireTime !== undefined) {
       obj.autopilotOverrideExpireTime = Math.round(message.autopilotOverrideExpireTime);
     }
+    if (message.supportsDynamicEnvironments !== undefined) {
+      obj.supportsDynamicEnvironments = message.supportsDynamicEnvironments;
+    }
     return obj;
   },
 
@@ -16949,6 +17044,7 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
     message.autopilotBase = object.autopilotBase ?? 0;
     message.autopilotOverrideState = object.autopilotOverrideState ?? 0;
     message.autopilotOverrideExpireTime = object.autopilotOverrideExpireTime ?? undefined;
+    message.supportsDynamicEnvironments = object.supportsDynamicEnvironments ?? undefined;
     return message;
   },
 };
@@ -19114,6 +19210,102 @@ export const ChildPresenceDetectionState: MessageFns<ChildPresenceDetectionState
   },
 };
 
+function createBaseDisplayState(): DisplayState {
+  return { displayBrightnessAuto: false, displayBrightnessScalePreference: 0, timestamp: undefined };
+}
+
+export const DisplayState: MessageFns<DisplayState> = {
+  encode(message: DisplayState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.displayBrightnessAuto !== false) {
+      writer.uint32(8).bool(message.displayBrightnessAuto);
+    }
+    if (message.displayBrightnessScalePreference !== 0) {
+      writer.uint32(16).uint32(message.displayBrightnessScalePreference);
+    }
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(16002).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): DisplayState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDisplayState();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.displayBrightnessAuto = reader.bool();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.displayBrightnessScalePreference = reader.uint32();
+          continue;
+        }
+        case 2000: {
+          if (tag !== 16002) {
+            break;
+          }
+
+          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DisplayState {
+    return {
+      displayBrightnessAuto: isSet(object.displayBrightnessAuto)
+        ? globalThis.Boolean(object.displayBrightnessAuto)
+        : false,
+      displayBrightnessScalePreference: isSet(object.displayBrightnessScalePreference)
+        ? globalThis.Number(object.displayBrightnessScalePreference)
+        : 0,
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+    };
+  },
+
+  toJSON(message: DisplayState): unknown {
+    const obj: any = {};
+    if (message.displayBrightnessAuto !== undefined) {
+      obj.displayBrightnessAuto = message.displayBrightnessAuto;
+    }
+    if (message.displayBrightnessScalePreference !== undefined) {
+      obj.displayBrightnessScalePreference = Math.round(message.displayBrightnessScalePreference);
+    }
+    if (message.timestamp !== undefined) {
+      obj.timestamp = message.timestamp.toISOString();
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DisplayState>, I>>(base?: I): DisplayState {
+    return DisplayState.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<DisplayState>, I>>(object: I): DisplayState {
+    const message = createBaseDisplayState();
+    message.displayBrightnessAuto = object.displayBrightnessAuto ?? false;
+    message.displayBrightnessScalePreference = object.displayBrightnessScalePreference ?? 0;
+    message.timestamp = object.timestamp ?? undefined;
+    return message;
+  },
+};
+
 function createBaseVehicleDetailState(): VehicleDetailState {
   return {
     timestamp: undefined,
@@ -19124,6 +19316,7 @@ function createBaseVehicleDetailState(): VehicleDetailState {
     fsdSoftwareVersion: undefined,
     currentProfileName: undefined,
     chinaAutopilotSoftwareVersion: undefined,
+    isFsdV14OrAbove: undefined,
   };
 }
 
@@ -19152,6 +19345,9 @@ export const VehicleDetailState: MessageFns<VehicleDetailState> = {
     }
     if (message.chinaAutopilotSoftwareVersion !== undefined) {
       writer.uint32(66).string(message.chinaAutopilotSoftwareVersion);
+    }
+    if (message.isFsdV14OrAbove !== undefined) {
+      writer.uint32(72).bool(message.isFsdV14OrAbove);
     }
     return writer;
   },
@@ -19227,6 +19423,14 @@ export const VehicleDetailState: MessageFns<VehicleDetailState> = {
           message.chinaAutopilotSoftwareVersion = reader.string();
           continue;
         }
+        case 9: {
+          if (tag !== 72) {
+            break;
+          }
+
+          message.isFsdV14OrAbove = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -19248,6 +19452,7 @@ export const VehicleDetailState: MessageFns<VehicleDetailState> = {
       chinaAutopilotSoftwareVersion: isSet(object.chinaAutopilotSoftwareVersion)
         ? globalThis.String(object.chinaAutopilotSoftwareVersion)
         : undefined,
+      isFsdV14OrAbove: isSet(object.isFsdV14OrAbove) ? globalThis.Boolean(object.isFsdV14OrAbove) : undefined,
     };
   },
 
@@ -19277,6 +19482,9 @@ export const VehicleDetailState: MessageFns<VehicleDetailState> = {
     if (message.chinaAutopilotSoftwareVersion !== undefined) {
       obj.chinaAutopilotSoftwareVersion = message.chinaAutopilotSoftwareVersion;
     }
+    if (message.isFsdV14OrAbove !== undefined) {
+      obj.isFsdV14OrAbove = message.isFsdV14OrAbove;
+    }
     return obj;
   },
 
@@ -19293,6 +19501,7 @@ export const VehicleDetailState: MessageFns<VehicleDetailState> = {
     message.fsdSoftwareVersion = object.fsdSoftwareVersion ?? undefined;
     message.currentProfileName = object.currentProfileName ?? undefined;
     message.chinaAutopilotSoftwareVersion = object.chinaAutopilotSoftwareVersion ?? undefined;
+    message.isFsdV14OrAbove = object.isFsdV14OrAbove ?? undefined;
     return message;
   },
 };

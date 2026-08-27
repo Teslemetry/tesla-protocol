@@ -64,6 +64,7 @@ class RKEAction_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     RKE_ACTION_AUTO_SECURE_VEHICLE: _ClassVar[RKEAction_E]
     RKE_ACTION_WAKE_VEHICLE: _ClassVar[RKEAction_E]
     RKE_ACTION_UNLOCK_AND_REMOTE_DRIVE: _ClassVar[RKEAction_E]
+    RKE_ACTION_UNLOCK_UNRESTRICTED_CLOSURES: _ClassVar[RKEAction_E]
 
 class ClosureMoveType_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -226,6 +227,7 @@ RKE_ACTION_REMOTE_DRIVE: RKEAction_E
 RKE_ACTION_AUTO_SECURE_VEHICLE: RKEAction_E
 RKE_ACTION_WAKE_VEHICLE: RKEAction_E
 RKE_ACTION_UNLOCK_AND_REMOTE_DRIVE: RKEAction_E
+RKE_ACTION_UNLOCK_UNRESTRICTED_CLOSURES: RKEAction_E
 CLOSURE_MOVE_TYPE_NONE: ClosureMoveType_E
 CLOSURE_MOVE_TYPE_MOVE: ClosureMoveType_E
 CLOSURE_MOVE_TYPE_STOP: ClosureMoveType_E

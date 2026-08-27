@@ -346,9 +346,9 @@
         "typescript": "packages/typescript/src/command",
         "python": "packages/python/tesla_protocol/command"
       },
-      "messages": 315,
-      "enums": 97,
-      "fields": 1421,
+      "messages": 325,
+      "enums": 100,
+      "fields": 1458,
       "files": [
         {
           "package": "CarServer",
@@ -1640,6 +1640,14 @@
                   "type_name": ".CarServer.GetChildPresenceDetectionState",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
+                },
+                {
+                  "number": 31,
+                  "name": "getDisplayState",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.GetDisplayState",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
                 }
               ],
               "oneofs": [],
@@ -1778,6 +1786,16 @@
               "nested_enums": []
             },
             {
+              "fqn": ".CarServer.GetDisplayState",
+              "name": "GetDisplayState",
+              "fields": [],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
               "fqn": ".CarServer.VehicleImageDataChunkRequest",
               "name": "VehicleImageDataChunkRequest",
               "fields": [
@@ -1849,6 +1867,382 @@
                     {
                       "number": 1,
                       "name": "DATA"
+                    }
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": []
+                }
+              ]
+            },
+            {
+              "fqn": ".CarServer.MobileImageUploadParams",
+              "name": "MobileImageUploadParams",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "imageType",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.VehicleImageStateType",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "widthPx",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "heightPx",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "mimeType",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.MobileUploadParams",
+              "name": "MobileUploadParams",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "totalSize",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "contentSha256",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.PrepareMobileUploadAction",
+              "name": "PrepareMobileUploadAction",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "uploadParams",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.MobileUploadParams",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "imageParams",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.MobileImageUploadParams",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "overwriteOldestIfFull",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.PrepareMobileUploadResponse",
+              "name": "PrepareMobileUploadResponse",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "status",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.PrepareMobileUploadResponse.Status",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "uploadId",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "maxChunkSize",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": [
+                {
+                  "fqn": ".CarServer.PrepareMobileUploadResponse.Status",
+                  "name": "Status",
+                  "values": [
+                    {
+                      "number": 0,
+                      "name": "OK"
+                    },
+                    {
+                      "number": 1,
+                      "name": "SIZE_EXCEEDED"
+                    },
+                    {
+                      "number": 2,
+                      "name": "INVALID_FORMAT"
+                    },
+                    {
+                      "number": 3,
+                      "name": "INVALID_DIMENSIONS"
+                    },
+                    {
+                      "number": 4,
+                      "name": "UNSUPPORTED_ASSET_TYPE"
+                    },
+                    {
+                      "number": 5,
+                      "name": "OUT_OF_SPACE"
+                    },
+                    {
+                      "number": 6,
+                      "name": "ALREADY_EXISTS"
+                    },
+                    {
+                      "number": 7,
+                      "name": "INTERNAL_ERROR"
+                    },
+                    {
+                      "number": 8,
+                      "name": "UPLOAD_CAP_REACHED"
+                    },
+                    {
+                      "number": 9,
+                      "name": "INVALID_REQUEST"
+                    },
+                    {
+                      "number": 10,
+                      "name": "UPLOAD_IN_PROGRESS"
+                    }
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": []
+                }
+              ]
+            },
+            {
+              "fqn": ".CarServer.PutMobileUploadChunkAction",
+              "name": "PutMobileUploadChunkAction",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "uploadId",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "chunkOffset",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "chunkData",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.PutMobileUploadChunkResponse",
+              "name": "PutMobileUploadChunkResponse",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "status",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.PutMobileUploadChunkResponse.Status",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "resourceId",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": [
+                {
+                  "fqn": ".CarServer.PutMobileUploadChunkResponse.Status",
+                  "name": "Status",
+                  "values": [
+                    {
+                      "number": 0,
+                      "name": "OK"
+                    },
+                    {
+                      "number": 1,
+                      "name": "COMPLETE"
+                    },
+                    {
+                      "number": 2,
+                      "name": "UNKNOWN_UPLOAD"
+                    },
+                    {
+                      "number": 3,
+                      "name": "OUT_OF_ORDER"
+                    },
+                    {
+                      "number": 4,
+                      "name": "SIZE_EXCEEDED"
+                    },
+                    {
+                      "number": 5,
+                      "name": "HASH_MISMATCH"
+                    },
+                    {
+                      "number": 6,
+                      "name": "INVALID_FORMAT"
+                    },
+                    {
+                      "number": 7,
+                      "name": "INVALID_DIMENSIONS"
+                    },
+                    {
+                      "number": 8,
+                      "name": "INTERNAL_ERROR"
+                    }
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": []
+                }
+              ]
+            },
+            {
+              "fqn": ".CarServer.DogModeLiveActivityData",
+              "name": "DogModeLiveActivityData",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "disabledReason",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.DogModeLiveActivityData.DisabledReason",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 5,
+                  "name": "insideTemperatureCelsius",
+                  "type": "TYPE_FLOAT",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 6,
+                  "name": "faultState",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.ClimateState.DogModeState",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 7,
+                  "name": "temperatureUnit",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.SetTemperatureUnitAction.Unit",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 8,
+                  "name": "batteryLevel",
+                  "type": "TYPE_FLOAT",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": [
+                {
+                  "fqn": ".CarServer.DogModeLiveActivityData.DisabledReason",
+                  "name": "DisabledReason",
+                  "values": [
+                    {
+                      "number": 0,
+                      "name": "REASON_UNKNOWN"
+                    },
+                    {
+                      "number": 1,
+                      "name": "REASON_NO_PREMIUM_CONNECTIVITY"
+                    },
+                    {
+                      "number": 2,
+                      "name": "REASON_TOGGLE_OFF"
+                    },
+                    {
+                      "number": 3,
+                      "name": "REASON_DISALLOWED_COUNTRY"
                     }
                   ],
                   "reserved_ranges": [],
@@ -2156,6 +2550,22 @@
                   "name": "bandwidthTestResponse",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".CarServer.BandwidthTestResponse",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "response_msg"
+                },
+                {
+                  "number": 31,
+                  "name": "prepareMobileUploadResponse",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.PrepareMobileUploadResponse",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "response_msg"
+                },
+                {
+                  "number": 32,
+                  "name": "putMobileUploadChunkResponse",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.PutMobileUploadChunkResponse",
                   "label": "LABEL_OPTIONAL",
                   "oneof": "response_msg"
                 }
@@ -4894,6 +5304,14 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
+                },
+                {
+                  "number": 28,
+                  "name": "display_state_max_update_rate_ms",
+                  "type": "TYPE_INT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
                 }
               ],
               "oneofs": [],
@@ -5025,6 +5443,14 @@
                 {
                   "number": 15,
                   "name": "suspension_state_timestamp",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".google.protobuf.Timestamp",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 24,
+                  "name": "display_state_timestamp",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".google.protobuf.Timestamp",
                   "label": "LABEL_OPTIONAL",
@@ -7027,6 +7453,33 @@
                   "reserved_names": []
                 }
               ]
+            },
+            {
+              "fqn": ".CarServer.DisplayStateAction",
+              "name": "DisplayStateAction",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "displayBrightnessAutoRequest",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "displayBrightnessScalePreferenceRequest",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
             },
             {
               "fqn": ".CarServer.SetKeepAccessoryPowerModeAction",
@@ -10817,6 +11270,10 @@
                 {
                   "number": 31,
                   "name": "RKE_ACTION_UNLOCK_AND_REMOTE_DRIVE"
+                },
+                {
+                  "number": 32,
+                  "name": "RKE_ACTION_UNLOCK_UNRESTRICTED_CLOSURES"
                 }
               ],
               "reserved_ranges": [],
@@ -11476,6 +11933,14 @@
                   "oneof": null
                 },
                 {
+                  "number": 36,
+                  "name": "display_state",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.DisplayState",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 999,
                   "name": "supports_optional_fields",
                   "type": "TYPE_BOOL",
@@ -11721,6 +12186,14 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": "optional_door_open_side_storage_right"
+                },
+                {
+                  "number": 30,
+                  "name": "cruise_speed_limit_mph",
+                  "type": "TYPE_DOUBLE",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
                 },
                 {
                   "number": 2000,
@@ -14043,6 +14516,10 @@
                     {
                       "number": 3,
                       "name": "PowershareTypeGrid"
+                    },
+                    {
+                      "number": 4,
+                      "name": "PowershareTypePowerwall"
                     }
                   ],
                   "reserved_ranges": [],
@@ -14694,6 +15171,14 @@
                   "oneof": "optional_hazards_on"
                 },
                 {
+                  "number": 69,
+                  "name": "deck_lights_allowed",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_deck_lights_allowed"
+                },
+                {
                   "number": 72,
                   "name": "legacy_media_info",
                   "type": "TYPE_MESSAGE",
@@ -15233,6 +15718,7 @@
               "oneofs": [
                 "optional_deck_lights_on",
                 "optional_hazards_on",
+                "optional_deck_lights_allowed",
                 "optional_allow_authorized_mobile_devices_only",
                 "optional_drive_rail_on",
                 "optional_pin_to_drive_enabled",
@@ -17867,6 +18353,14 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": "optional_autopilot_override_expire_time"
+                },
+                {
+                  "number": 199,
+                  "name": "supports_dynamic_environments",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_supports_dynamic_environments"
                 }
               ],
               "oneofs": [
@@ -17938,7 +18432,8 @@
                 "optional_country_code",
                 "optional_bed_lighting_type",
                 "optional_rear_light_hardware_variant",
-                "optional_autopilot_override_expire_time"
+                "optional_autopilot_override_expire_time",
+                "optional_supports_dynamic_environments"
               ],
               "reserved_ranges": [],
               "reserved_names": [],
@@ -19080,6 +19575,41 @@
               "nested_enums": []
             },
             {
+              "fqn": ".CarServer.DisplayState",
+              "name": "DisplayState",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "displayBrightnessAuto",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "displayBrightnessScalePreference",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2000,
+                  "name": "timestamp",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".google.protobuf.Timestamp",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
               "fqn": ".CarServer.VehicleDetailState",
               "name": "VehicleDetailState",
               "fields": [
@@ -19146,6 +19676,14 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": "optional_china_autopilot_software_version"
+                },
+                {
+                  "number": 9,
+                  "name": "is_fsd_v14_or_above",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_is_fsd_v14_or_above"
                 }
               ],
               "oneofs": [
@@ -19155,7 +19693,8 @@
                 "optional_autopilot_hash",
                 "optional_fsd_software_version",
                 "optional_current_profile_name",
-                "optional_china_autopilot_software_version"
+                "optional_china_autopilot_software_version",
+                "optional_is_fsd_v14_or_above"
               ],
               "reserved_ranges": [],
               "reserved_names": [],
@@ -41948,9 +42487,9 @@
   "totals": {
     "source_files": 38,
     "groups": 7,
-    "messages": 868,
-    "enums": 237,
-    "fields": 2805
+    "messages": 878,
+    "enums": 240,
+    "fields": 2842
   },
   "registration": {
     "consistent": true,
