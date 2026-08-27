@@ -187,6 +187,7 @@ message GetVehicleData {
   GetVehicleImageState getVehicleImageState = 22;  // TESLEMETRY-EXT
   GetSuspensionState getSuspensionState = 23;  // TESLEMETRY-EXT
   GetChildPresenceDetectionState getChildPresenceDetectionState = 25;  // TESLEMETRY-EXT
+  GetDisplayState getDisplayState = 31;  // TESLEMETRY-EXT
 }
 
 // ===== TESLEMETRY-EXT BEGIN =====
@@ -216,6 +217,8 @@ message GetSuspensionState {}
 
 message GetChildPresenceDetectionState {}
 
+message GetDisplayState {}
+
 message VehicleImageDataChunkRequest {
   uint32 chunk_offset = 1;
   uint32 chunk_size = 2;
@@ -229,6 +232,84 @@ message VehicleImageRequest {
   Type dataType = 1;
   VehicleImageStateType imageType = 2;
   VehicleImageDataChunkRequest chunkRequest = 3;
+}
+
+message MobileImageUploadParams {
+  VehicleImageStateType imageType = 1;
+  uint32 widthPx = 2;
+  uint32 heightPx = 3;
+  string mimeType = 4;
+}
+
+message MobileUploadParams {
+  uint32 totalSize = 1;
+  bytes contentSha256 = 2;
+}
+
+message PrepareMobileUploadAction {
+  MobileUploadParams uploadParams = 1;
+  MobileImageUploadParams imageParams = 2;
+  // Tag 3 carries an additional bool flag not modeled here.
+  bool overwriteOldestIfFull = 4;
+}
+
+message PrepareMobileUploadResponse {
+  enum Status {
+    OK = 0;
+    SIZE_EXCEEDED = 1;
+    INVALID_FORMAT = 2;
+    INVALID_DIMENSIONS = 3;
+    UNSUPPORTED_ASSET_TYPE = 4;
+    OUT_OF_SPACE = 5;
+    ALREADY_EXISTS = 6;
+    INTERNAL_ERROR = 7;
+    UPLOAD_CAP_REACHED = 8;
+    INVALID_REQUEST = 9;
+    UPLOAD_IN_PROGRESS = 10;
+  }
+  Status status = 1;
+  string uploadId = 2;
+  uint32 maxChunkSize = 3;
+}
+
+message PutMobileUploadChunkAction {
+  string uploadId = 1;
+  uint32 chunkOffset = 2;
+  bytes chunkData = 3;
+}
+
+message PutMobileUploadChunkResponse {
+  enum Status {
+    OK = 0;
+    COMPLETE = 1;
+    UNKNOWN_UPLOAD = 2;
+    OUT_OF_ORDER = 3;
+    SIZE_EXCEEDED = 4;
+    HASH_MISMATCH = 5;
+    INVALID_FORMAT = 6;
+    INVALID_DIMENSIONS = 7;
+    INTERNAL_ERROR = 8;
+  }
+  Status status = 1;
+  bytes resourceId = 2;
+}
+// ===== TESLEMETRY-EXT END =====
+
+// ===== TESLEMETRY-EXT BEGIN =====
+message DogModeLiveActivityData {
+  enum DisabledReason {
+    REASON_UNKNOWN = 0;
+    REASON_NO_PREMIUM_CONNECTIVITY = 1;
+    REASON_TOGGLE_OFF = 2;
+    REASON_DISALLOWED_COUNTRY = 3;
+  }
+
+  DisabledReason disabledReason = 1;
+  // Tags 2-4 carry additional live-activity fields not modeled here.
+  float insideTemperatureCelsius = 5;
+  ClimateState.DogModeState faultState = 6;
+  SetTemperatureUnitAction.Unit temperatureUnit = 7;
+  float batteryLevel = 8;
 }
 // ===== TESLEMETRY-EXT END =====
 
@@ -283,6 +364,8 @@ message Response {
     GetLocalProfilesResponse getLocalProfilesResponse = 20;  // TESLEMETRY-EXT
     KeysInfoResponse keysInfoResponse = 24;  // TESLEMETRY-EXT
     BandwidthTestResponse bandwidthTestResponse = 25;  // TESLEMETRY-EXT
+    PrepareMobileUploadResponse prepareMobileUploadResponse = 31;  // TESLEMETRY-EXT
+    PutMobileUploadChunkResponse putMobileUploadChunkResponse = 32;  // TESLEMETRY-EXT
   }
 }
 
@@ -818,6 +901,7 @@ message VehicleDataSubscription {
   int32 alert_state_max_update_rate_ms = 17;
   int32 suspension_state_max_update_rate_ms = 18;
   int32 child_presence_detection_state_max_update_rate_ms = 19;
+  int32 display_state_max_update_rate_ms = 28;  // TESLEMETRY-EXT
 }
 
 message VehicleDataAck {
@@ -835,6 +919,7 @@ message VehicleDataAck {
   google.protobuf.Timestamp preconditioning_schedule_state_timestamp = 13;
   google.protobuf.Timestamp alert_state_timestamp = 14;
   google.protobuf.Timestamp suspension_state_timestamp = 15;
+  google.protobuf.Timestamp display_state_timestamp = 24;  // TESLEMETRY-EXT
 
   // Field to report decryption errors encountered during processing
   repeated int32 decryption_error_field = 10 [packed = true];
@@ -1258,6 +1343,11 @@ message SetEnergyDisplayFormatAction {
   }
 
   Format format = 1;
+}
+
+message DisplayStateAction {
+  bool displayBrightnessAutoRequest = 1;
+  uint32 displayBrightnessScalePreferenceRequest = 2;
 }
 // ===== TESLEMETRY-EXT END =====
 

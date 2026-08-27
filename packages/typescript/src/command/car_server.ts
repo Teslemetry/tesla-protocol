@@ -25,6 +25,9 @@ import {
   ClimateState_CopActivationTemp,
   climateState_CopActivationTempFromJSON,
   climateState_CopActivationTempToJSON,
+  ClimateState_DogModeState,
+  climateState_DogModeStateFromJSON,
+  climateState_DogModeStateToJSON,
   VehicleData,
   VehicleImageStateType,
   vehicleImageStateTypeFromJSON,
@@ -478,7 +481,11 @@ export interface GetVehicleData {
     | GetSuspensionState
     | undefined;
   /** TESLEMETRY-EXT */
-  getChildPresenceDetectionState: GetChildPresenceDetectionState | undefined;
+  getChildPresenceDetectionState:
+    | GetChildPresenceDetectionState
+    | undefined;
+  /** TESLEMETRY-EXT */
+  getDisplayState: GetDisplayState | undefined;
 }
 
 /** ===== TESLEMETRY-EXT BEGIN ===== */
@@ -517,6 +524,9 @@ export interface GetSuspensionState {
 }
 
 export interface GetChildPresenceDetectionState {
+}
+
+export interface GetDisplayState {
 }
 
 export interface VehicleImageDataChunkRequest {
@@ -558,6 +568,261 @@ export function vehicleImageRequest_TypeToJSON(object: VehicleImageRequest_Type)
     case VehicleImageRequest_Type.DATA:
       return "DATA";
     case VehicleImageRequest_Type.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export interface MobileImageUploadParams {
+  imageType: VehicleImageStateType;
+  widthPx: number;
+  heightPx: number;
+  mimeType: string;
+}
+
+export interface MobileUploadParams {
+  totalSize: number;
+  contentSha256: Uint8Array;
+}
+
+export interface PrepareMobileUploadAction {
+  uploadParams: MobileUploadParams | undefined;
+  imageParams:
+    | MobileImageUploadParams
+    | undefined;
+  /** Tag 3 carries an additional bool flag not modeled here. */
+  overwriteOldestIfFull: boolean;
+}
+
+export interface PrepareMobileUploadResponse {
+  status: PrepareMobileUploadResponse_Status;
+  uploadId: string;
+  maxChunkSize: number;
+}
+
+export enum PrepareMobileUploadResponse_Status {
+  OK = 0,
+  SIZE_EXCEEDED = 1,
+  INVALID_FORMAT = 2,
+  INVALID_DIMENSIONS = 3,
+  UNSUPPORTED_ASSET_TYPE = 4,
+  OUT_OF_SPACE = 5,
+  ALREADY_EXISTS = 6,
+  INTERNAL_ERROR = 7,
+  UPLOAD_CAP_REACHED = 8,
+  INVALID_REQUEST = 9,
+  UPLOAD_IN_PROGRESS = 10,
+  UNRECOGNIZED = -1,
+}
+
+export function prepareMobileUploadResponse_StatusFromJSON(object: any): PrepareMobileUploadResponse_Status {
+  switch (object) {
+    case 0:
+    case "OK":
+      return PrepareMobileUploadResponse_Status.OK;
+    case 1:
+    case "SIZE_EXCEEDED":
+      return PrepareMobileUploadResponse_Status.SIZE_EXCEEDED;
+    case 2:
+    case "INVALID_FORMAT":
+      return PrepareMobileUploadResponse_Status.INVALID_FORMAT;
+    case 3:
+    case "INVALID_DIMENSIONS":
+      return PrepareMobileUploadResponse_Status.INVALID_DIMENSIONS;
+    case 4:
+    case "UNSUPPORTED_ASSET_TYPE":
+      return PrepareMobileUploadResponse_Status.UNSUPPORTED_ASSET_TYPE;
+    case 5:
+    case "OUT_OF_SPACE":
+      return PrepareMobileUploadResponse_Status.OUT_OF_SPACE;
+    case 6:
+    case "ALREADY_EXISTS":
+      return PrepareMobileUploadResponse_Status.ALREADY_EXISTS;
+    case 7:
+    case "INTERNAL_ERROR":
+      return PrepareMobileUploadResponse_Status.INTERNAL_ERROR;
+    case 8:
+    case "UPLOAD_CAP_REACHED":
+      return PrepareMobileUploadResponse_Status.UPLOAD_CAP_REACHED;
+    case 9:
+    case "INVALID_REQUEST":
+      return PrepareMobileUploadResponse_Status.INVALID_REQUEST;
+    case 10:
+    case "UPLOAD_IN_PROGRESS":
+      return PrepareMobileUploadResponse_Status.UPLOAD_IN_PROGRESS;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return PrepareMobileUploadResponse_Status.UNRECOGNIZED;
+  }
+}
+
+export function prepareMobileUploadResponse_StatusToJSON(object: PrepareMobileUploadResponse_Status): string {
+  switch (object) {
+    case PrepareMobileUploadResponse_Status.OK:
+      return "OK";
+    case PrepareMobileUploadResponse_Status.SIZE_EXCEEDED:
+      return "SIZE_EXCEEDED";
+    case PrepareMobileUploadResponse_Status.INVALID_FORMAT:
+      return "INVALID_FORMAT";
+    case PrepareMobileUploadResponse_Status.INVALID_DIMENSIONS:
+      return "INVALID_DIMENSIONS";
+    case PrepareMobileUploadResponse_Status.UNSUPPORTED_ASSET_TYPE:
+      return "UNSUPPORTED_ASSET_TYPE";
+    case PrepareMobileUploadResponse_Status.OUT_OF_SPACE:
+      return "OUT_OF_SPACE";
+    case PrepareMobileUploadResponse_Status.ALREADY_EXISTS:
+      return "ALREADY_EXISTS";
+    case PrepareMobileUploadResponse_Status.INTERNAL_ERROR:
+      return "INTERNAL_ERROR";
+    case PrepareMobileUploadResponse_Status.UPLOAD_CAP_REACHED:
+      return "UPLOAD_CAP_REACHED";
+    case PrepareMobileUploadResponse_Status.INVALID_REQUEST:
+      return "INVALID_REQUEST";
+    case PrepareMobileUploadResponse_Status.UPLOAD_IN_PROGRESS:
+      return "UPLOAD_IN_PROGRESS";
+    case PrepareMobileUploadResponse_Status.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export interface PutMobileUploadChunkAction {
+  uploadId: string;
+  chunkOffset: number;
+  chunkData: Uint8Array;
+}
+
+export interface PutMobileUploadChunkResponse {
+  status: PutMobileUploadChunkResponse_Status;
+  resourceId: Uint8Array;
+}
+
+export enum PutMobileUploadChunkResponse_Status {
+  OK = 0,
+  COMPLETE = 1,
+  UNKNOWN_UPLOAD = 2,
+  OUT_OF_ORDER = 3,
+  SIZE_EXCEEDED = 4,
+  HASH_MISMATCH = 5,
+  INVALID_FORMAT = 6,
+  INVALID_DIMENSIONS = 7,
+  INTERNAL_ERROR = 8,
+  UNRECOGNIZED = -1,
+}
+
+export function putMobileUploadChunkResponse_StatusFromJSON(object: any): PutMobileUploadChunkResponse_Status {
+  switch (object) {
+    case 0:
+    case "OK":
+      return PutMobileUploadChunkResponse_Status.OK;
+    case 1:
+    case "COMPLETE":
+      return PutMobileUploadChunkResponse_Status.COMPLETE;
+    case 2:
+    case "UNKNOWN_UPLOAD":
+      return PutMobileUploadChunkResponse_Status.UNKNOWN_UPLOAD;
+    case 3:
+    case "OUT_OF_ORDER":
+      return PutMobileUploadChunkResponse_Status.OUT_OF_ORDER;
+    case 4:
+    case "SIZE_EXCEEDED":
+      return PutMobileUploadChunkResponse_Status.SIZE_EXCEEDED;
+    case 5:
+    case "HASH_MISMATCH":
+      return PutMobileUploadChunkResponse_Status.HASH_MISMATCH;
+    case 6:
+    case "INVALID_FORMAT":
+      return PutMobileUploadChunkResponse_Status.INVALID_FORMAT;
+    case 7:
+    case "INVALID_DIMENSIONS":
+      return PutMobileUploadChunkResponse_Status.INVALID_DIMENSIONS;
+    case 8:
+    case "INTERNAL_ERROR":
+      return PutMobileUploadChunkResponse_Status.INTERNAL_ERROR;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return PutMobileUploadChunkResponse_Status.UNRECOGNIZED;
+  }
+}
+
+export function putMobileUploadChunkResponse_StatusToJSON(object: PutMobileUploadChunkResponse_Status): string {
+  switch (object) {
+    case PutMobileUploadChunkResponse_Status.OK:
+      return "OK";
+    case PutMobileUploadChunkResponse_Status.COMPLETE:
+      return "COMPLETE";
+    case PutMobileUploadChunkResponse_Status.UNKNOWN_UPLOAD:
+      return "UNKNOWN_UPLOAD";
+    case PutMobileUploadChunkResponse_Status.OUT_OF_ORDER:
+      return "OUT_OF_ORDER";
+    case PutMobileUploadChunkResponse_Status.SIZE_EXCEEDED:
+      return "SIZE_EXCEEDED";
+    case PutMobileUploadChunkResponse_Status.HASH_MISMATCH:
+      return "HASH_MISMATCH";
+    case PutMobileUploadChunkResponse_Status.INVALID_FORMAT:
+      return "INVALID_FORMAT";
+    case PutMobileUploadChunkResponse_Status.INVALID_DIMENSIONS:
+      return "INVALID_DIMENSIONS";
+    case PutMobileUploadChunkResponse_Status.INTERNAL_ERROR:
+      return "INTERNAL_ERROR";
+    case PutMobileUploadChunkResponse_Status.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** ===== TESLEMETRY-EXT BEGIN ===== */
+export interface DogModeLiveActivityData {
+  disabledReason: DogModeLiveActivityData_DisabledReason;
+  /** Tags 2-4 carry additional live-activity fields not modeled here. */
+  insideTemperatureCelsius: number;
+  faultState: ClimateState_DogModeState;
+  temperatureUnit: SetTemperatureUnitAction_Unit;
+  batteryLevel: number;
+}
+
+export enum DogModeLiveActivityData_DisabledReason {
+  REASON_UNKNOWN = 0,
+  REASON_NO_PREMIUM_CONNECTIVITY = 1,
+  REASON_TOGGLE_OFF = 2,
+  REASON_DISALLOWED_COUNTRY = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function dogModeLiveActivityData_DisabledReasonFromJSON(object: any): DogModeLiveActivityData_DisabledReason {
+  switch (object) {
+    case 0:
+    case "REASON_UNKNOWN":
+      return DogModeLiveActivityData_DisabledReason.REASON_UNKNOWN;
+    case 1:
+    case "REASON_NO_PREMIUM_CONNECTIVITY":
+      return DogModeLiveActivityData_DisabledReason.REASON_NO_PREMIUM_CONNECTIVITY;
+    case 2:
+    case "REASON_TOGGLE_OFF":
+      return DogModeLiveActivityData_DisabledReason.REASON_TOGGLE_OFF;
+    case 3:
+    case "REASON_DISALLOWED_COUNTRY":
+      return DogModeLiveActivityData_DisabledReason.REASON_DISALLOWED_COUNTRY;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return DogModeLiveActivityData_DisabledReason.UNRECOGNIZED;
+  }
+}
+
+export function dogModeLiveActivityData_DisabledReasonToJSON(object: DogModeLiveActivityData_DisabledReason): string {
+  switch (object) {
+    case DogModeLiveActivityData_DisabledReason.REASON_UNKNOWN:
+      return "REASON_UNKNOWN";
+    case DogModeLiveActivityData_DisabledReason.REASON_NO_PREMIUM_CONNECTIVITY:
+      return "REASON_NO_PREMIUM_CONNECTIVITY";
+    case DogModeLiveActivityData_DisabledReason.REASON_TOGGLE_OFF:
+      return "REASON_TOGGLE_OFF";
+    case DogModeLiveActivityData_DisabledReason.REASON_DISALLOWED_COUNTRY:
+      return "REASON_DISALLOWED_COUNTRY";
+    case DogModeLiveActivityData_DisabledReason.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
@@ -666,7 +931,15 @@ export interface Response {
     | KeysInfoResponse
     | undefined;
   /** TESLEMETRY-EXT */
-  bandwidthTestResponse?: BandwidthTestResponse | undefined;
+  bandwidthTestResponse?:
+    | BandwidthTestResponse
+    | undefined;
+  /** TESLEMETRY-EXT */
+  prepareMobileUploadResponse?:
+    | PrepareMobileUploadResponse
+    | undefined;
+  /** TESLEMETRY-EXT */
+  putMobileUploadChunkResponse?: PutMobileUploadChunkResponse | undefined;
 }
 
 /** ===== TESLEMETRY-EXT BEGIN ===== */
@@ -1526,6 +1799,8 @@ export interface VehicleDataSubscription {
   alertStateMaxUpdateRateMs: number;
   suspensionStateMaxUpdateRateMs: number;
   childPresenceDetectionStateMaxUpdateRateMs: number;
+  /** TESLEMETRY-EXT */
+  displayStateMaxUpdateRateMs: number;
 }
 
 /** Privacy/security request for handling PII (Personally Identifiable Information) */
@@ -1548,6 +1823,10 @@ export interface VehicleDataAck {
   preconditioningScheduleStateTimestamp: Date | undefined;
   alertStateTimestamp: Date | undefined;
   suspensionStateTimestamp:
+    | Date
+    | undefined;
+  /** TESLEMETRY-EXT */
+  displayStateTimestamp:
     | Date
     | undefined;
   /** Field to report decryption errors encountered during processing */
@@ -2524,6 +2803,11 @@ export function setEnergyDisplayFormatAction_FormatToJSON(object: SetEnergyDispl
     default:
       return "UNRECOGNIZED";
   }
+}
+
+export interface DisplayStateAction {
+  displayBrightnessAutoRequest: boolean;
+  displayBrightnessScalePreferenceRequest: number;
 }
 
 export interface SetKeepAccessoryPowerModeAction {
@@ -5673,6 +5957,7 @@ function createBaseGetVehicleData(): GetVehicleData {
     getVehicleImageState: undefined,
     getSuspensionState: undefined,
     getChildPresenceDetectionState: undefined,
+    getDisplayState: undefined,
   };
 }
 
@@ -5749,6 +6034,9 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
     }
     if (message.getChildPresenceDetectionState !== undefined) {
       GetChildPresenceDetectionState.encode(message.getChildPresenceDetectionState, writer.uint32(202).fork()).join();
+    }
+    if (message.getDisplayState !== undefined) {
+      GetDisplayState.encode(message.getDisplayState, writer.uint32(250).fork()).join();
     }
     return writer;
   },
@@ -5952,6 +6240,14 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
           message.getChildPresenceDetectionState = GetChildPresenceDetectionState.decode(reader, reader.uint32());
           continue;
         }
+        case 31: {
+          if (tag !== 250) {
+            break;
+          }
+
+          message.getDisplayState = GetDisplayState.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -6013,6 +6309,7 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
       getChildPresenceDetectionState: isSet(object.getChildPresenceDetectionState)
         ? GetChildPresenceDetectionState.fromJSON(object.getChildPresenceDetectionState)
         : undefined,
+      getDisplayState: isSet(object.getDisplayState) ? GetDisplayState.fromJSON(object.getDisplayState) : undefined,
     };
   },
 
@@ -6093,6 +6390,9 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
       obj.getChildPresenceDetectionState = GetChildPresenceDetectionState.toJSON(
         message.getChildPresenceDetectionState,
       );
+    }
+    if (message.getDisplayState !== undefined) {
+      obj.getDisplayState = GetDisplayState.toJSON(message.getDisplayState);
     }
     return obj;
   },
@@ -6182,6 +6482,9 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
       (object.getChildPresenceDetectionState !== undefined && object.getChildPresenceDetectionState !== null)
         ? GetChildPresenceDetectionState.fromPartial(object.getChildPresenceDetectionState)
         : undefined;
+    message.getDisplayState = (object.getDisplayState !== undefined && object.getDisplayState !== null)
+      ? GetDisplayState.fromPartial(object.getDisplayState)
+      : undefined;
     return message;
   },
 };
@@ -6721,6 +7024,49 @@ export const GetChildPresenceDetectionState: MessageFns<GetChildPresenceDetectio
   },
 };
 
+function createBaseGetDisplayState(): GetDisplayState {
+  return {};
+}
+
+export const GetDisplayState: MessageFns<GetDisplayState> = {
+  encode(_: GetDisplayState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GetDisplayState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetDisplayState();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): GetDisplayState {
+    return {};
+  },
+
+  toJSON(_: GetDisplayState): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetDisplayState>, I>>(base?: I): GetDisplayState {
+    return GetDisplayState.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetDisplayState>, I>>(_: I): GetDisplayState {
+    const message = createBaseGetDisplayState();
+    return message;
+  },
+};
+
 function createBaseVehicleImageDataChunkRequest(): VehicleImageDataChunkRequest {
   return { chunkOffset: 0, chunkSize: 0 };
 }
@@ -6887,6 +7233,678 @@ export const VehicleImageRequest: MessageFns<VehicleImageRequest> = {
     message.chunkRequest = (object.chunkRequest !== undefined && object.chunkRequest !== null)
       ? VehicleImageDataChunkRequest.fromPartial(object.chunkRequest)
       : undefined;
+    return message;
+  },
+};
+
+function createBaseMobileImageUploadParams(): MobileImageUploadParams {
+  return { imageType: 0, widthPx: 0, heightPx: 0, mimeType: "" };
+}
+
+export const MobileImageUploadParams: MessageFns<MobileImageUploadParams> = {
+  encode(message: MobileImageUploadParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.imageType !== 0) {
+      writer.uint32(8).int32(message.imageType);
+    }
+    if (message.widthPx !== 0) {
+      writer.uint32(16).uint32(message.widthPx);
+    }
+    if (message.heightPx !== 0) {
+      writer.uint32(24).uint32(message.heightPx);
+    }
+    if (message.mimeType !== "") {
+      writer.uint32(34).string(message.mimeType);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): MobileImageUploadParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMobileImageUploadParams();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.imageType = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.widthPx = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.heightPx = reader.uint32();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.mimeType = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MobileImageUploadParams {
+    return {
+      imageType: isSet(object.imageType) ? vehicleImageStateTypeFromJSON(object.imageType) : 0,
+      widthPx: isSet(object.widthPx) ? globalThis.Number(object.widthPx) : 0,
+      heightPx: isSet(object.heightPx) ? globalThis.Number(object.heightPx) : 0,
+      mimeType: isSet(object.mimeType) ? globalThis.String(object.mimeType) : "",
+    };
+  },
+
+  toJSON(message: MobileImageUploadParams): unknown {
+    const obj: any = {};
+    if (message.imageType !== undefined) {
+      obj.imageType = vehicleImageStateTypeToJSON(message.imageType);
+    }
+    if (message.widthPx !== undefined) {
+      obj.widthPx = Math.round(message.widthPx);
+    }
+    if (message.heightPx !== undefined) {
+      obj.heightPx = Math.round(message.heightPx);
+    }
+    if (message.mimeType !== undefined) {
+      obj.mimeType = message.mimeType;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MobileImageUploadParams>, I>>(base?: I): MobileImageUploadParams {
+    return MobileImageUploadParams.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<MobileImageUploadParams>, I>>(object: I): MobileImageUploadParams {
+    const message = createBaseMobileImageUploadParams();
+    message.imageType = object.imageType ?? 0;
+    message.widthPx = object.widthPx ?? 0;
+    message.heightPx = object.heightPx ?? 0;
+    message.mimeType = object.mimeType ?? "";
+    return message;
+  },
+};
+
+function createBaseMobileUploadParams(): MobileUploadParams {
+  return { totalSize: 0, contentSha256: new Uint8Array(0) };
+}
+
+export const MobileUploadParams: MessageFns<MobileUploadParams> = {
+  encode(message: MobileUploadParams, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.totalSize !== 0) {
+      writer.uint32(8).uint32(message.totalSize);
+    }
+    if (message.contentSha256.length !== 0) {
+      writer.uint32(18).bytes(message.contentSha256);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): MobileUploadParams {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMobileUploadParams();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.totalSize = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.contentSha256 = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MobileUploadParams {
+    return {
+      totalSize: isSet(object.totalSize) ? globalThis.Number(object.totalSize) : 0,
+      contentSha256: isSet(object.contentSha256) ? bytesFromBase64(object.contentSha256) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: MobileUploadParams): unknown {
+    const obj: any = {};
+    if (message.totalSize !== undefined) {
+      obj.totalSize = Math.round(message.totalSize);
+    }
+    if (message.contentSha256 !== undefined) {
+      obj.contentSha256 = base64FromBytes(message.contentSha256);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MobileUploadParams>, I>>(base?: I): MobileUploadParams {
+    return MobileUploadParams.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<MobileUploadParams>, I>>(object: I): MobileUploadParams {
+    const message = createBaseMobileUploadParams();
+    message.totalSize = object.totalSize ?? 0;
+    message.contentSha256 = object.contentSha256 ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBasePrepareMobileUploadAction(): PrepareMobileUploadAction {
+  return { uploadParams: undefined, imageParams: undefined, overwriteOldestIfFull: false };
+}
+
+export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = {
+  encode(message: PrepareMobileUploadAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.uploadParams !== undefined) {
+      MobileUploadParams.encode(message.uploadParams, writer.uint32(10).fork()).join();
+    }
+    if (message.imageParams !== undefined) {
+      MobileImageUploadParams.encode(message.imageParams, writer.uint32(18).fork()).join();
+    }
+    if (message.overwriteOldestIfFull !== false) {
+      writer.uint32(32).bool(message.overwriteOldestIfFull);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PrepareMobileUploadAction {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePrepareMobileUploadAction();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.uploadParams = MobileUploadParams.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.imageParams = MobileImageUploadParams.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.overwriteOldestIfFull = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PrepareMobileUploadAction {
+    return {
+      uploadParams: isSet(object.uploadParams) ? MobileUploadParams.fromJSON(object.uploadParams) : undefined,
+      imageParams: isSet(object.imageParams) ? MobileImageUploadParams.fromJSON(object.imageParams) : undefined,
+      overwriteOldestIfFull: isSet(object.overwriteOldestIfFull)
+        ? globalThis.Boolean(object.overwriteOldestIfFull)
+        : false,
+    };
+  },
+
+  toJSON(message: PrepareMobileUploadAction): unknown {
+    const obj: any = {};
+    if (message.uploadParams !== undefined) {
+      obj.uploadParams = MobileUploadParams.toJSON(message.uploadParams);
+    }
+    if (message.imageParams !== undefined) {
+      obj.imageParams = MobileImageUploadParams.toJSON(message.imageParams);
+    }
+    if (message.overwriteOldestIfFull !== undefined) {
+      obj.overwriteOldestIfFull = message.overwriteOldestIfFull;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<PrepareMobileUploadAction>, I>>(base?: I): PrepareMobileUploadAction {
+    return PrepareMobileUploadAction.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<PrepareMobileUploadAction>, I>>(object: I): PrepareMobileUploadAction {
+    const message = createBasePrepareMobileUploadAction();
+    message.uploadParams = (object.uploadParams !== undefined && object.uploadParams !== null)
+      ? MobileUploadParams.fromPartial(object.uploadParams)
+      : undefined;
+    message.imageParams = (object.imageParams !== undefined && object.imageParams !== null)
+      ? MobileImageUploadParams.fromPartial(object.imageParams)
+      : undefined;
+    message.overwriteOldestIfFull = object.overwriteOldestIfFull ?? false;
+    return message;
+  },
+};
+
+function createBasePrepareMobileUploadResponse(): PrepareMobileUploadResponse {
+  return { status: 0, uploadId: "", maxChunkSize: 0 };
+}
+
+export const PrepareMobileUploadResponse: MessageFns<PrepareMobileUploadResponse> = {
+  encode(message: PrepareMobileUploadResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.status !== 0) {
+      writer.uint32(8).int32(message.status);
+    }
+    if (message.uploadId !== "") {
+      writer.uint32(18).string(message.uploadId);
+    }
+    if (message.maxChunkSize !== 0) {
+      writer.uint32(24).uint32(message.maxChunkSize);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PrepareMobileUploadResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePrepareMobileUploadResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.status = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.uploadId = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.maxChunkSize = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PrepareMobileUploadResponse {
+    return {
+      status: isSet(object.status) ? prepareMobileUploadResponse_StatusFromJSON(object.status) : 0,
+      uploadId: isSet(object.uploadId) ? globalThis.String(object.uploadId) : "",
+      maxChunkSize: isSet(object.maxChunkSize) ? globalThis.Number(object.maxChunkSize) : 0,
+    };
+  },
+
+  toJSON(message: PrepareMobileUploadResponse): unknown {
+    const obj: any = {};
+    if (message.status !== undefined) {
+      obj.status = prepareMobileUploadResponse_StatusToJSON(message.status);
+    }
+    if (message.uploadId !== undefined) {
+      obj.uploadId = message.uploadId;
+    }
+    if (message.maxChunkSize !== undefined) {
+      obj.maxChunkSize = Math.round(message.maxChunkSize);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<PrepareMobileUploadResponse>, I>>(base?: I): PrepareMobileUploadResponse {
+    return PrepareMobileUploadResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<PrepareMobileUploadResponse>, I>>(object: I): PrepareMobileUploadResponse {
+    const message = createBasePrepareMobileUploadResponse();
+    message.status = object.status ?? 0;
+    message.uploadId = object.uploadId ?? "";
+    message.maxChunkSize = object.maxChunkSize ?? 0;
+    return message;
+  },
+};
+
+function createBasePutMobileUploadChunkAction(): PutMobileUploadChunkAction {
+  return { uploadId: "", chunkOffset: 0, chunkData: new Uint8Array(0) };
+}
+
+export const PutMobileUploadChunkAction: MessageFns<PutMobileUploadChunkAction> = {
+  encode(message: PutMobileUploadChunkAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.uploadId !== "") {
+      writer.uint32(10).string(message.uploadId);
+    }
+    if (message.chunkOffset !== 0) {
+      writer.uint32(16).uint32(message.chunkOffset);
+    }
+    if (message.chunkData.length !== 0) {
+      writer.uint32(26).bytes(message.chunkData);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PutMobileUploadChunkAction {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePutMobileUploadChunkAction();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.uploadId = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.chunkOffset = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.chunkData = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PutMobileUploadChunkAction {
+    return {
+      uploadId: isSet(object.uploadId) ? globalThis.String(object.uploadId) : "",
+      chunkOffset: isSet(object.chunkOffset) ? globalThis.Number(object.chunkOffset) : 0,
+      chunkData: isSet(object.chunkData) ? bytesFromBase64(object.chunkData) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: PutMobileUploadChunkAction): unknown {
+    const obj: any = {};
+    if (message.uploadId !== undefined) {
+      obj.uploadId = message.uploadId;
+    }
+    if (message.chunkOffset !== undefined) {
+      obj.chunkOffset = Math.round(message.chunkOffset);
+    }
+    if (message.chunkData !== undefined) {
+      obj.chunkData = base64FromBytes(message.chunkData);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<PutMobileUploadChunkAction>, I>>(base?: I): PutMobileUploadChunkAction {
+    return PutMobileUploadChunkAction.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<PutMobileUploadChunkAction>, I>>(object: I): PutMobileUploadChunkAction {
+    const message = createBasePutMobileUploadChunkAction();
+    message.uploadId = object.uploadId ?? "";
+    message.chunkOffset = object.chunkOffset ?? 0;
+    message.chunkData = object.chunkData ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBasePutMobileUploadChunkResponse(): PutMobileUploadChunkResponse {
+  return { status: 0, resourceId: new Uint8Array(0) };
+}
+
+export const PutMobileUploadChunkResponse: MessageFns<PutMobileUploadChunkResponse> = {
+  encode(message: PutMobileUploadChunkResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.status !== 0) {
+      writer.uint32(8).int32(message.status);
+    }
+    if (message.resourceId.length !== 0) {
+      writer.uint32(18).bytes(message.resourceId);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PutMobileUploadChunkResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePutMobileUploadChunkResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.status = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.resourceId = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PutMobileUploadChunkResponse {
+    return {
+      status: isSet(object.status) ? putMobileUploadChunkResponse_StatusFromJSON(object.status) : 0,
+      resourceId: isSet(object.resourceId) ? bytesFromBase64(object.resourceId) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: PutMobileUploadChunkResponse): unknown {
+    const obj: any = {};
+    if (message.status !== undefined) {
+      obj.status = putMobileUploadChunkResponse_StatusToJSON(message.status);
+    }
+    if (message.resourceId !== undefined) {
+      obj.resourceId = base64FromBytes(message.resourceId);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<PutMobileUploadChunkResponse>, I>>(base?: I): PutMobileUploadChunkResponse {
+    return PutMobileUploadChunkResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<PutMobileUploadChunkResponse>, I>>(object: I): PutMobileUploadChunkResponse {
+    const message = createBasePutMobileUploadChunkResponse();
+    message.status = object.status ?? 0;
+    message.resourceId = object.resourceId ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseDogModeLiveActivityData(): DogModeLiveActivityData {
+  return { disabledReason: 0, insideTemperatureCelsius: 0, faultState: 0, temperatureUnit: 0, batteryLevel: 0 };
+}
+
+export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
+  encode(message: DogModeLiveActivityData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.disabledReason !== 0) {
+      writer.uint32(8).int32(message.disabledReason);
+    }
+    if (message.insideTemperatureCelsius !== 0) {
+      writer.uint32(45).float(message.insideTemperatureCelsius);
+    }
+    if (message.faultState !== 0) {
+      writer.uint32(48).int32(message.faultState);
+    }
+    if (message.temperatureUnit !== 0) {
+      writer.uint32(56).int32(message.temperatureUnit);
+    }
+    if (message.batteryLevel !== 0) {
+      writer.uint32(69).float(message.batteryLevel);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): DogModeLiveActivityData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDogModeLiveActivityData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.disabledReason = reader.int32() as any;
+          continue;
+        }
+        case 5: {
+          if (tag !== 45) {
+            break;
+          }
+
+          message.insideTemperatureCelsius = reader.float();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.faultState = reader.int32() as any;
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.temperatureUnit = reader.int32() as any;
+          continue;
+        }
+        case 8: {
+          if (tag !== 69) {
+            break;
+          }
+
+          message.batteryLevel = reader.float();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DogModeLiveActivityData {
+    return {
+      disabledReason: isSet(object.disabledReason)
+        ? dogModeLiveActivityData_DisabledReasonFromJSON(object.disabledReason)
+        : 0,
+      insideTemperatureCelsius: isSet(object.insideTemperatureCelsius)
+        ? globalThis.Number(object.insideTemperatureCelsius)
+        : 0,
+      faultState: isSet(object.faultState) ? climateState_DogModeStateFromJSON(object.faultState) : 0,
+      temperatureUnit: isSet(object.temperatureUnit)
+        ? setTemperatureUnitAction_UnitFromJSON(object.temperatureUnit)
+        : 0,
+      batteryLevel: isSet(object.batteryLevel) ? globalThis.Number(object.batteryLevel) : 0,
+    };
+  },
+
+  toJSON(message: DogModeLiveActivityData): unknown {
+    const obj: any = {};
+    if (message.disabledReason !== undefined) {
+      obj.disabledReason = dogModeLiveActivityData_DisabledReasonToJSON(message.disabledReason);
+    }
+    if (message.insideTemperatureCelsius !== undefined) {
+      obj.insideTemperatureCelsius = message.insideTemperatureCelsius;
+    }
+    if (message.faultState !== undefined) {
+      obj.faultState = climateState_DogModeStateToJSON(message.faultState);
+    }
+    if (message.temperatureUnit !== undefined) {
+      obj.temperatureUnit = setTemperatureUnitAction_UnitToJSON(message.temperatureUnit);
+    }
+    if (message.batteryLevel !== undefined) {
+      obj.batteryLevel = message.batteryLevel;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DogModeLiveActivityData>, I>>(base?: I): DogModeLiveActivityData {
+    return DogModeLiveActivityData.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<DogModeLiveActivityData>, I>>(object: I): DogModeLiveActivityData {
+    const message = createBaseDogModeLiveActivityData();
+    message.disabledReason = object.disabledReason ?? 0;
+    message.insideTemperatureCelsius = object.insideTemperatureCelsius ?? 0;
+    message.faultState = object.faultState ?? 0;
+    message.temperatureUnit = object.temperatureUnit ?? 0;
+    message.batteryLevel = object.batteryLevel ?? 0;
     return message;
   },
 };
@@ -7504,6 +8522,8 @@ function createBaseResponse(): Response {
     getLocalProfilesResponse: undefined,
     keysInfoResponse: undefined,
     bandwidthTestResponse: undefined,
+    prepareMobileUploadResponse: undefined,
+    putMobileUploadChunkResponse: undefined,
   };
 }
 
@@ -7565,6 +8585,12 @@ export const Response: MessageFns<Response> = {
     }
     if (message.bandwidthTestResponse !== undefined) {
       BandwidthTestResponse.encode(message.bandwidthTestResponse, writer.uint32(202).fork()).join();
+    }
+    if (message.prepareMobileUploadResponse !== undefined) {
+      PrepareMobileUploadResponse.encode(message.prepareMobileUploadResponse, writer.uint32(250).fork()).join();
+    }
+    if (message.putMobileUploadChunkResponse !== undefined) {
+      PutMobileUploadChunkResponse.encode(message.putMobileUploadChunkResponse, writer.uint32(258).fork()).join();
     }
     return writer;
   },
@@ -7728,6 +8754,22 @@ export const Response: MessageFns<Response> = {
           message.bandwidthTestResponse = BandwidthTestResponse.decode(reader, reader.uint32());
           continue;
         }
+        case 31: {
+          if (tag !== 250) {
+            break;
+          }
+
+          message.prepareMobileUploadResponse = PrepareMobileUploadResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 32: {
+          if (tag !== 258) {
+            break;
+          }
+
+          message.putMobileUploadChunkResponse = PutMobileUploadChunkResponse.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -7783,6 +8825,12 @@ export const Response: MessageFns<Response> = {
       keysInfoResponse: isSet(object.keysInfoResponse) ? KeysInfoResponse.fromJSON(object.keysInfoResponse) : undefined,
       bandwidthTestResponse: isSet(object.bandwidthTestResponse)
         ? BandwidthTestResponse.fromJSON(object.bandwidthTestResponse)
+        : undefined,
+      prepareMobileUploadResponse: isSet(object.prepareMobileUploadResponse)
+        ? PrepareMobileUploadResponse.fromJSON(object.prepareMobileUploadResponse)
+        : undefined,
+      putMobileUploadChunkResponse: isSet(object.putMobileUploadChunkResponse)
+        ? PutMobileUploadChunkResponse.fromJSON(object.putMobileUploadChunkResponse)
         : undefined,
     };
   },
@@ -7853,6 +8901,12 @@ export const Response: MessageFns<Response> = {
     }
     if (message.bandwidthTestResponse !== undefined) {
       obj.bandwidthTestResponse = BandwidthTestResponse.toJSON(message.bandwidthTestResponse);
+    }
+    if (message.prepareMobileUploadResponse !== undefined) {
+      obj.prepareMobileUploadResponse = PrepareMobileUploadResponse.toJSON(message.prepareMobileUploadResponse);
+    }
+    if (message.putMobileUploadChunkResponse !== undefined) {
+      obj.putMobileUploadChunkResponse = PutMobileUploadChunkResponse.toJSON(message.putMobileUploadChunkResponse);
     }
     return obj;
   },
@@ -7928,6 +8982,14 @@ export const Response: MessageFns<Response> = {
     message.bandwidthTestResponse =
       (object.bandwidthTestResponse !== undefined && object.bandwidthTestResponse !== null)
         ? BandwidthTestResponse.fromPartial(object.bandwidthTestResponse)
+        : undefined;
+    message.prepareMobileUploadResponse =
+      (object.prepareMobileUploadResponse !== undefined && object.prepareMobileUploadResponse !== null)
+        ? PrepareMobileUploadResponse.fromPartial(object.prepareMobileUploadResponse)
+        : undefined;
+    message.putMobileUploadChunkResponse =
+      (object.putMobileUploadChunkResponse !== undefined && object.putMobileUploadChunkResponse !== null)
+        ? PutMobileUploadChunkResponse.fromPartial(object.putMobileUploadChunkResponse)
         : undefined;
     return message;
   },
@@ -14818,6 +15880,7 @@ function createBaseVehicleDataSubscription(): VehicleDataSubscription {
     alertStateMaxUpdateRateMs: 0,
     suspensionStateMaxUpdateRateMs: 0,
     childPresenceDetectionStateMaxUpdateRateMs: 0,
+    displayStateMaxUpdateRateMs: 0,
   };
 }
 
@@ -14873,6 +15936,9 @@ export const VehicleDataSubscription: MessageFns<VehicleDataSubscription> = {
     }
     if (message.childPresenceDetectionStateMaxUpdateRateMs !== 0) {
       writer.uint32(152).int32(message.childPresenceDetectionStateMaxUpdateRateMs);
+    }
+    if (message.displayStateMaxUpdateRateMs !== 0) {
+      writer.uint32(224).int32(message.displayStateMaxUpdateRateMs);
     }
     return writer;
   },
@@ -15020,6 +16086,14 @@ export const VehicleDataSubscription: MessageFns<VehicleDataSubscription> = {
           message.childPresenceDetectionStateMaxUpdateRateMs = reader.int32();
           continue;
         }
+        case 28: {
+          if (tag !== 224) {
+            break;
+          }
+
+          message.displayStateMaxUpdateRateMs = reader.int32();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -15078,6 +16152,9 @@ export const VehicleDataSubscription: MessageFns<VehicleDataSubscription> = {
       childPresenceDetectionStateMaxUpdateRateMs: isSet(object.childPresenceDetectionStateMaxUpdateRateMs)
         ? globalThis.Number(object.childPresenceDetectionStateMaxUpdateRateMs)
         : 0,
+      displayStateMaxUpdateRateMs: isSet(object.displayStateMaxUpdateRateMs)
+        ? globalThis.Number(object.displayStateMaxUpdateRateMs)
+        : 0,
     };
   },
 
@@ -15134,6 +16211,9 @@ export const VehicleDataSubscription: MessageFns<VehicleDataSubscription> = {
     if (message.childPresenceDetectionStateMaxUpdateRateMs !== undefined) {
       obj.childPresenceDetectionStateMaxUpdateRateMs = Math.round(message.childPresenceDetectionStateMaxUpdateRateMs);
     }
+    if (message.displayStateMaxUpdateRateMs !== undefined) {
+      obj.displayStateMaxUpdateRateMs = Math.round(message.displayStateMaxUpdateRateMs);
+    }
     return obj;
   },
 
@@ -15161,6 +16241,7 @@ export const VehicleDataSubscription: MessageFns<VehicleDataSubscription> = {
     message.alertStateMaxUpdateRateMs = object.alertStateMaxUpdateRateMs ?? 0;
     message.suspensionStateMaxUpdateRateMs = object.suspensionStateMaxUpdateRateMs ?? 0;
     message.childPresenceDetectionStateMaxUpdateRateMs = object.childPresenceDetectionStateMaxUpdateRateMs ?? 0;
+    message.displayStateMaxUpdateRateMs = object.displayStateMaxUpdateRateMs ?? 0;
     return message;
   },
 };
@@ -15244,6 +16325,7 @@ function createBaseVehicleDataAck(): VehicleDataAck {
     preconditioningScheduleStateTimestamp: undefined,
     alertStateTimestamp: undefined,
     suspensionStateTimestamp: undefined,
+    displayStateTimestamp: undefined,
     decryptionErrorField: [],
   };
 }
@@ -15288,6 +16370,9 @@ export const VehicleDataAck: MessageFns<VehicleDataAck> = {
     }
     if (message.suspensionStateTimestamp !== undefined) {
       Timestamp.encode(toTimestamp(message.suspensionStateTimestamp), writer.uint32(122).fork()).join();
+    }
+    if (message.displayStateTimestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.displayStateTimestamp), writer.uint32(194).fork()).join();
     }
     writer.uint32(82).fork();
     for (const v of message.decryptionErrorField) {
@@ -15408,6 +16493,14 @@ export const VehicleDataAck: MessageFns<VehicleDataAck> = {
           message.suspensionStateTimestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
         }
+        case 24: {
+          if (tag !== 194) {
+            break;
+          }
+
+          message.displayStateTimestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
         case 10: {
           if (tag === 80) {
             message.decryptionErrorField.push(reader.int32());
@@ -15476,6 +16569,9 @@ export const VehicleDataAck: MessageFns<VehicleDataAck> = {
       suspensionStateTimestamp: isSet(object.suspensionStateTimestamp)
         ? fromJsonTimestamp(object.suspensionStateTimestamp)
         : undefined,
+      displayStateTimestamp: isSet(object.displayStateTimestamp)
+        ? fromJsonTimestamp(object.displayStateTimestamp)
+        : undefined,
       decryptionErrorField: globalThis.Array.isArray(object?.decryptionErrorField)
         ? object.decryptionErrorField.map((e: any) => globalThis.Number(e))
         : [],
@@ -15523,6 +16619,9 @@ export const VehicleDataAck: MessageFns<VehicleDataAck> = {
     if (message.suspensionStateTimestamp !== undefined) {
       obj.suspensionStateTimestamp = message.suspensionStateTimestamp.toISOString();
     }
+    if (message.displayStateTimestamp !== undefined) {
+      obj.displayStateTimestamp = message.displayStateTimestamp.toISOString();
+    }
     if (message.decryptionErrorField?.length) {
       obj.decryptionErrorField = message.decryptionErrorField.map((e) => Math.round(e));
     }
@@ -15547,6 +16646,7 @@ export const VehicleDataAck: MessageFns<VehicleDataAck> = {
     message.preconditioningScheduleStateTimestamp = object.preconditioningScheduleStateTimestamp ?? undefined;
     message.alertStateTimestamp = object.alertStateTimestamp ?? undefined;
     message.suspensionStateTimestamp = object.suspensionStateTimestamp ?? undefined;
+    message.displayStateTimestamp = object.displayStateTimestamp ?? undefined;
     message.decryptionErrorField = object.decryptionErrorField?.map((e) => e) || [];
     return message;
   },
@@ -20540,6 +21640,86 @@ export const SetEnergyDisplayFormatAction: MessageFns<SetEnergyDisplayFormatActi
   fromPartial<I extends Exact<DeepPartial<SetEnergyDisplayFormatAction>, I>>(object: I): SetEnergyDisplayFormatAction {
     const message = createBaseSetEnergyDisplayFormatAction();
     message.format = object.format ?? 0;
+    return message;
+  },
+};
+
+function createBaseDisplayStateAction(): DisplayStateAction {
+  return { displayBrightnessAutoRequest: false, displayBrightnessScalePreferenceRequest: 0 };
+}
+
+export const DisplayStateAction: MessageFns<DisplayStateAction> = {
+  encode(message: DisplayStateAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.displayBrightnessAutoRequest !== false) {
+      writer.uint32(8).bool(message.displayBrightnessAutoRequest);
+    }
+    if (message.displayBrightnessScalePreferenceRequest !== 0) {
+      writer.uint32(16).uint32(message.displayBrightnessScalePreferenceRequest);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): DisplayStateAction {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDisplayStateAction();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.displayBrightnessAutoRequest = reader.bool();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.displayBrightnessScalePreferenceRequest = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DisplayStateAction {
+    return {
+      displayBrightnessAutoRequest: isSet(object.displayBrightnessAutoRequest)
+        ? globalThis.Boolean(object.displayBrightnessAutoRequest)
+        : false,
+      displayBrightnessScalePreferenceRequest: isSet(object.displayBrightnessScalePreferenceRequest)
+        ? globalThis.Number(object.displayBrightnessScalePreferenceRequest)
+        : 0,
+    };
+  },
+
+  toJSON(message: DisplayStateAction): unknown {
+    const obj: any = {};
+    if (message.displayBrightnessAutoRequest !== undefined) {
+      obj.displayBrightnessAutoRequest = message.displayBrightnessAutoRequest;
+    }
+    if (message.displayBrightnessScalePreferenceRequest !== undefined) {
+      obj.displayBrightnessScalePreferenceRequest = Math.round(message.displayBrightnessScalePreferenceRequest);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DisplayStateAction>, I>>(base?: I): DisplayStateAction {
+    return DisplayStateAction.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<DisplayStateAction>, I>>(object: I): DisplayStateAction {
+    const message = createBaseDisplayStateAction();
+    message.displayBrightnessAutoRequest = object.displayBrightnessAutoRequest ?? false;
+    message.displayBrightnessScalePreferenceRequest = object.displayBrightnessScalePreferenceRequest ?? 0;
     return message;
   },
 };
