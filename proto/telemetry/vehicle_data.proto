@@ -290,6 +290,17 @@ enum Field {
 
   MilesSinceReset = 258;
   SelfDrivingMilesSinceReset = 259;
+
+  GpsAccuracyMeters = 260;
+  LifetimeEnergyChargedKwh = 261;
+  BrickSocMinPercent = 262;
+  NominalFullPackEnergyKwh = 263;
+  GradeEstimatePercent = 264;
+  MaxSpeedToReachDestinationMph = 265;
+  SoftwareUpdateAvailable = 266;
+  SoftwareUpdateInProgress = 267;
+  RemoteStartActive = 268;
+  SemiCruiseSpeedLimitMph = 269; // Semi-truck only
 }
 
 // ChargingState is deprecated and not used

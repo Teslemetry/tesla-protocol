@@ -270,6 +270,16 @@ class Field(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     Deprecated_3: _ClassVar[Field]
     MilesSinceReset: _ClassVar[Field]
     SelfDrivingMilesSinceReset: _ClassVar[Field]
+    GpsAccuracyMeters: _ClassVar[Field]
+    LifetimeEnergyChargedKwh: _ClassVar[Field]
+    BrickSocMinPercent: _ClassVar[Field]
+    NominalFullPackEnergyKwh: _ClassVar[Field]
+    GradeEstimatePercent: _ClassVar[Field]
+    MaxSpeedToReachDestinationMph: _ClassVar[Field]
+    SoftwareUpdateAvailable: _ClassVar[Field]
+    SoftwareUpdateInProgress: _ClassVar[Field]
+    RemoteStartActive: _ClassVar[Field]
+    SemiCruiseSpeedLimitMph: _ClassVar[Field]
 
 class ChargingState(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -902,6 +912,16 @@ ChargeRateMilePerHour: Field
 Deprecated_3: Field
 MilesSinceReset: Field
 SelfDrivingMilesSinceReset: Field
+GpsAccuracyMeters: Field
+LifetimeEnergyChargedKwh: Field
+BrickSocMinPercent: Field
+NominalFullPackEnergyKwh: Field
+GradeEstimatePercent: Field
+MaxSpeedToReachDestinationMph: Field
+SoftwareUpdateAvailable: Field
+SoftwareUpdateInProgress: Field
+RemoteStartActive: Field
+SemiCruiseSpeedLimitMph: Field
 ChargeStateUnknown: ChargingState
 ChargeStateDisconnected: ChargingState
 ChargeStateNoPower: ChargingState
