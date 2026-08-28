@@ -37971,6 +37971,46 @@
                 {
                   "number": 259,
                   "name": "SelfDrivingMilesSinceReset"
+                },
+                {
+                  "number": 260,
+                  "name": "GpsAccuracyMeters"
+                },
+                {
+                  "number": 261,
+                  "name": "LifetimeEnergyChargedKwh"
+                },
+                {
+                  "number": 262,
+                  "name": "BrickSocMinPercent"
+                },
+                {
+                  "number": 263,
+                  "name": "NominalFullPackEnergyKwh"
+                },
+                {
+                  "number": 264,
+                  "name": "GradeEstimatePercent"
+                },
+                {
+                  "number": 265,
+                  "name": "MaxSpeedToReachDestinationMph"
+                },
+                {
+                  "number": 266,
+                  "name": "SoftwareUpdateAvailable"
+                },
+                {
+                  "number": 267,
+                  "name": "SoftwareUpdateInProgress"
+                },
+                {
+                  "number": 268,
+                  "name": "RemoteStartActive"
+                },
+                {
+                  "number": 269,
+                  "name": "SemiCruiseSpeedLimitMph"
                 }
               ],
               "reserved_ranges": [],

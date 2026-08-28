@@ -299,6 +299,17 @@ export enum Field {
   Deprecated_3 = 257,
   MilesSinceReset = 258,
   SelfDrivingMilesSinceReset = 259,
+  GpsAccuracyMeters = 260,
+  LifetimeEnergyChargedKwh = 261,
+  BrickSocMinPercent = 262,
+  NominalFullPackEnergyKwh = 263,
+  GradeEstimatePercent = 264,
+  MaxSpeedToReachDestinationMph = 265,
+  SoftwareUpdateAvailable = 266,
+  SoftwareUpdateInProgress = 267,
+  RemoteStartActive = 268,
+  /** SemiCruiseSpeedLimitMph - Semi-truck only */
+  SemiCruiseSpeedLimitMph = 269,
   UNRECOGNIZED = -1,
 }
 
@@ -1084,6 +1095,36 @@ export function fieldFromJSON(object: any): Field {
     case 259:
     case "SelfDrivingMilesSinceReset":
       return Field.SelfDrivingMilesSinceReset;
+    case 260:
+    case "GpsAccuracyMeters":
+      return Field.GpsAccuracyMeters;
+    case 261:
+    case "LifetimeEnergyChargedKwh":
+      return Field.LifetimeEnergyChargedKwh;
+    case 262:
+    case "BrickSocMinPercent":
+      return Field.BrickSocMinPercent;
+    case 263:
+    case "NominalFullPackEnergyKwh":
+      return Field.NominalFullPackEnergyKwh;
+    case 264:
+    case "GradeEstimatePercent":
+      return Field.GradeEstimatePercent;
+    case 265:
+    case "MaxSpeedToReachDestinationMph":
+      return Field.MaxSpeedToReachDestinationMph;
+    case 266:
+    case "SoftwareUpdateAvailable":
+      return Field.SoftwareUpdateAvailable;
+    case 267:
+    case "SoftwareUpdateInProgress":
+      return Field.SoftwareUpdateInProgress;
+    case 268:
+    case "RemoteStartActive":
+      return Field.RemoteStartActive;
+    case 269:
+    case "SemiCruiseSpeedLimitMph":
+      return Field.SemiCruiseSpeedLimitMph;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -1613,6 +1654,26 @@ export function fieldToJSON(object: Field): string {
       return "MilesSinceReset";
     case Field.SelfDrivingMilesSinceReset:
       return "SelfDrivingMilesSinceReset";
+    case Field.GpsAccuracyMeters:
+      return "GpsAccuracyMeters";
+    case Field.LifetimeEnergyChargedKwh:
+      return "LifetimeEnergyChargedKwh";
+    case Field.BrickSocMinPercent:
+      return "BrickSocMinPercent";
+    case Field.NominalFullPackEnergyKwh:
+      return "NominalFullPackEnergyKwh";
+    case Field.GradeEstimatePercent:
+      return "GradeEstimatePercent";
+    case Field.MaxSpeedToReachDestinationMph:
+      return "MaxSpeedToReachDestinationMph";
+    case Field.SoftwareUpdateAvailable:
+      return "SoftwareUpdateAvailable";
+    case Field.SoftwareUpdateInProgress:
+      return "SoftwareUpdateInProgress";
+    case Field.RemoteStartActive:
+      return "RemoteStartActive";
+    case Field.SemiCruiseSpeedLimitMph:
+      return "SemiCruiseSpeedLimitMph";
     case Field.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
