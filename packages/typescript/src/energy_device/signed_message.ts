@@ -66,6 +66,174 @@ export function domainToJSON(object: Domain): string {
   }
 }
 
+export enum SignatureType {
+  SIGNATURE_TYPE_AES_GCM = 0,
+  SIGNATURE_TYPE_ECDSA = 1,
+  SIGNATURE_TYPE_PRESENT_KEY = 2,
+  SIGNATURE_TYPE_AES_GCM_TOKEN = 3,
+  SIGNATURE_TYPE_ECDSA_PERSONALIZED = 4,
+  SIGNATURE_TYPE_AES_GCM_PERSONALIZED = 5,
+  SIGNATURE_TYPE_HMAC = 6,
+  SIGNATURE_TYPE_RSA = 7,
+  SIGNATURE_TYPE_HMAC_PERSONALIZED = 8,
+  SIGNATURE_TYPE_AES_GCM_RESPONSE = 9,
+  UNRECOGNIZED = -1,
+}
+
+export function signatureTypeFromJSON(object: any): SignatureType {
+  switch (object) {
+    case 0:
+    case "SIGNATURE_TYPE_AES_GCM":
+      return SignatureType.SIGNATURE_TYPE_AES_GCM;
+    case 1:
+    case "SIGNATURE_TYPE_ECDSA":
+      return SignatureType.SIGNATURE_TYPE_ECDSA;
+    case 2:
+    case "SIGNATURE_TYPE_PRESENT_KEY":
+      return SignatureType.SIGNATURE_TYPE_PRESENT_KEY;
+    case 3:
+    case "SIGNATURE_TYPE_AES_GCM_TOKEN":
+      return SignatureType.SIGNATURE_TYPE_AES_GCM_TOKEN;
+    case 4:
+    case "SIGNATURE_TYPE_ECDSA_PERSONALIZED":
+      return SignatureType.SIGNATURE_TYPE_ECDSA_PERSONALIZED;
+    case 5:
+    case "SIGNATURE_TYPE_AES_GCM_PERSONALIZED":
+      return SignatureType.SIGNATURE_TYPE_AES_GCM_PERSONALIZED;
+    case 6:
+    case "SIGNATURE_TYPE_HMAC":
+      return SignatureType.SIGNATURE_TYPE_HMAC;
+    case 7:
+    case "SIGNATURE_TYPE_RSA":
+      return SignatureType.SIGNATURE_TYPE_RSA;
+    case 8:
+    case "SIGNATURE_TYPE_HMAC_PERSONALIZED":
+      return SignatureType.SIGNATURE_TYPE_HMAC_PERSONALIZED;
+    case 9:
+    case "SIGNATURE_TYPE_AES_GCM_RESPONSE":
+      return SignatureType.SIGNATURE_TYPE_AES_GCM_RESPONSE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return SignatureType.UNRECOGNIZED;
+  }
+}
+
+export function signatureTypeToJSON(object: SignatureType): string {
+  switch (object) {
+    case SignatureType.SIGNATURE_TYPE_AES_GCM:
+      return "SIGNATURE_TYPE_AES_GCM";
+    case SignatureType.SIGNATURE_TYPE_ECDSA:
+      return "SIGNATURE_TYPE_ECDSA";
+    case SignatureType.SIGNATURE_TYPE_PRESENT_KEY:
+      return "SIGNATURE_TYPE_PRESENT_KEY";
+    case SignatureType.SIGNATURE_TYPE_AES_GCM_TOKEN:
+      return "SIGNATURE_TYPE_AES_GCM_TOKEN";
+    case SignatureType.SIGNATURE_TYPE_ECDSA_PERSONALIZED:
+      return "SIGNATURE_TYPE_ECDSA_PERSONALIZED";
+    case SignatureType.SIGNATURE_TYPE_AES_GCM_PERSONALIZED:
+      return "SIGNATURE_TYPE_AES_GCM_PERSONALIZED";
+    case SignatureType.SIGNATURE_TYPE_HMAC:
+      return "SIGNATURE_TYPE_HMAC";
+    case SignatureType.SIGNATURE_TYPE_RSA:
+      return "SIGNATURE_TYPE_RSA";
+    case SignatureType.SIGNATURE_TYPE_HMAC_PERSONALIZED:
+      return "SIGNATURE_TYPE_HMAC_PERSONALIZED";
+    case SignatureType.SIGNATURE_TYPE_AES_GCM_RESPONSE:
+      return "SIGNATURE_TYPE_AES_GCM_RESPONSE";
+    case SignatureType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum Tag {
+  TAG_SIGNATURE_TYPE = 0,
+  TAG_DOMAIN = 1,
+  TAG_PERSONALIZATION = 2,
+  TAG_EPOCH = 3,
+  TAG_EXPIRES_AT = 4,
+  TAG_COUNTER = 5,
+  TAG_CHALLENGE = 6,
+  TAG_FLAGS = 7,
+  TAG_REQUEST_HASH = 8,
+  TAG_FAULT = 9,
+  TAG_END = 255,
+  UNRECOGNIZED = -1,
+}
+
+export function tagFromJSON(object: any): Tag {
+  switch (object) {
+    case 0:
+    case "TAG_SIGNATURE_TYPE":
+      return Tag.TAG_SIGNATURE_TYPE;
+    case 1:
+    case "TAG_DOMAIN":
+      return Tag.TAG_DOMAIN;
+    case 2:
+    case "TAG_PERSONALIZATION":
+      return Tag.TAG_PERSONALIZATION;
+    case 3:
+    case "TAG_EPOCH":
+      return Tag.TAG_EPOCH;
+    case 4:
+    case "TAG_EXPIRES_AT":
+      return Tag.TAG_EXPIRES_AT;
+    case 5:
+    case "TAG_COUNTER":
+      return Tag.TAG_COUNTER;
+    case 6:
+    case "TAG_CHALLENGE":
+      return Tag.TAG_CHALLENGE;
+    case 7:
+    case "TAG_FLAGS":
+      return Tag.TAG_FLAGS;
+    case 8:
+    case "TAG_REQUEST_HASH":
+      return Tag.TAG_REQUEST_HASH;
+    case 9:
+    case "TAG_FAULT":
+      return Tag.TAG_FAULT;
+    case 255:
+    case "TAG_END":
+      return Tag.TAG_END;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return Tag.UNRECOGNIZED;
+  }
+}
+
+export function tagToJSON(object: Tag): string {
+  switch (object) {
+    case Tag.TAG_SIGNATURE_TYPE:
+      return "TAG_SIGNATURE_TYPE";
+    case Tag.TAG_DOMAIN:
+      return "TAG_DOMAIN";
+    case Tag.TAG_PERSONALIZATION:
+      return "TAG_PERSONALIZATION";
+    case Tag.TAG_EPOCH:
+      return "TAG_EPOCH";
+    case Tag.TAG_EXPIRES_AT:
+      return "TAG_EXPIRES_AT";
+    case Tag.TAG_COUNTER:
+      return "TAG_COUNTER";
+    case Tag.TAG_CHALLENGE:
+      return "TAG_CHALLENGE";
+    case Tag.TAG_FLAGS:
+      return "TAG_FLAGS";
+    case Tag.TAG_REQUEST_HASH:
+      return "TAG_REQUEST_HASH";
+    case Tag.TAG_FAULT:
+      return "TAG_FAULT";
+    case Tag.TAG_END:
+      return "TAG_END";
+    case Tag.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export enum Flags {
   FLAGS_NONE = 0,
   UNRECOGNIZED = -1,

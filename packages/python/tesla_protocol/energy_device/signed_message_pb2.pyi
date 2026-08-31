@@ -14,6 +14,33 @@ class Domain(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     DOMAIN_ENERGY_DEVICE: _ClassVar[Domain]
     DOMAIN_ENERGY_DEVICE_AUTH: _ClassVar[Domain]
 
+class SignatureType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SIGNATURE_TYPE_AES_GCM: _ClassVar[SignatureType]
+    SIGNATURE_TYPE_ECDSA: _ClassVar[SignatureType]
+    SIGNATURE_TYPE_PRESENT_KEY: _ClassVar[SignatureType]
+    SIGNATURE_TYPE_AES_GCM_TOKEN: _ClassVar[SignatureType]
+    SIGNATURE_TYPE_ECDSA_PERSONALIZED: _ClassVar[SignatureType]
+    SIGNATURE_TYPE_AES_GCM_PERSONALIZED: _ClassVar[SignatureType]
+    SIGNATURE_TYPE_HMAC: _ClassVar[SignatureType]
+    SIGNATURE_TYPE_RSA: _ClassVar[SignatureType]
+    SIGNATURE_TYPE_HMAC_PERSONALIZED: _ClassVar[SignatureType]
+    SIGNATURE_TYPE_AES_GCM_RESPONSE: _ClassVar[SignatureType]
+
+class Tag(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    TAG_SIGNATURE_TYPE: _ClassVar[Tag]
+    TAG_DOMAIN: _ClassVar[Tag]
+    TAG_PERSONALIZATION: _ClassVar[Tag]
+    TAG_EPOCH: _ClassVar[Tag]
+    TAG_EXPIRES_AT: _ClassVar[Tag]
+    TAG_COUNTER: _ClassVar[Tag]
+    TAG_CHALLENGE: _ClassVar[Tag]
+    TAG_FLAGS: _ClassVar[Tag]
+    TAG_REQUEST_HASH: _ClassVar[Tag]
+    TAG_FAULT: _ClassVar[Tag]
+    TAG_END: _ClassVar[Tag]
+
 class Flags(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     FLAGS_NONE: _ClassVar[Flags]
@@ -49,6 +76,27 @@ DOMAIN_INFOTAINMENT: Domain
 DOMAIN_AUTHD: Domain
 DOMAIN_ENERGY_DEVICE: Domain
 DOMAIN_ENERGY_DEVICE_AUTH: Domain
+SIGNATURE_TYPE_AES_GCM: SignatureType
+SIGNATURE_TYPE_ECDSA: SignatureType
+SIGNATURE_TYPE_PRESENT_KEY: SignatureType
+SIGNATURE_TYPE_AES_GCM_TOKEN: SignatureType
+SIGNATURE_TYPE_ECDSA_PERSONALIZED: SignatureType
+SIGNATURE_TYPE_AES_GCM_PERSONALIZED: SignatureType
+SIGNATURE_TYPE_HMAC: SignatureType
+SIGNATURE_TYPE_RSA: SignatureType
+SIGNATURE_TYPE_HMAC_PERSONALIZED: SignatureType
+SIGNATURE_TYPE_AES_GCM_RESPONSE: SignatureType
+TAG_SIGNATURE_TYPE: Tag
+TAG_DOMAIN: Tag
+TAG_PERSONALIZATION: Tag
+TAG_EPOCH: Tag
+TAG_EXPIRES_AT: Tag
+TAG_COUNTER: Tag
+TAG_CHALLENGE: Tag
+TAG_FLAGS: Tag
+TAG_REQUEST_HASH: Tag
+TAG_FAULT: Tag
+TAG_END: Tag
 FLAGS_NONE: Flags
 MESSAGEFAULT_ERROR_NONE: MessageFault_E
 MESSAGEFAULT_ERROR_BUSY: MessageFault_E
