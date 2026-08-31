@@ -20361,15 +20361,15 @@
     },
     {
       "name": "energy_device",
-      "source_files": 19,
-      "compiled_top_level_inputs": 18,
+      "source_files": 20,
+      "compiled_top_level_inputs": 19,
       "generated_targets": {
         "typescript": "packages/typescript/src/energy_device",
         "python": "packages/python/tesla_protocol/energy_device"
       },
-      "messages": 435,
-      "enums": 89,
-      "fields": 1014,
+      "messages": 443,
+      "enums": 92,
+      "fields": 1034,
       "files": [
         {
           "package": "tesla.proto.energy_device.v1",
@@ -28364,6 +28364,416 @@
             }
           ],
           "path": "proto/energy_device/pvi_api.proto",
+          "compiled_top_level_input": true
+        },
+        {
+          "package": "tesla.proto.energy_device.v1",
+          "imports": [],
+          "messages": [
+            {
+              "fqn": ".tesla.proto.energy_device.v1.Destination",
+              "name": "Destination",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "domain",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.Domain",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sub_destination"
+                },
+                {
+                  "number": 2,
+                  "name": "routing_address",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sub_destination"
+                }
+              ],
+              "oneofs": [
+                "sub_destination"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.KeyIdentity",
+              "name": "KeyIdentity",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "public_key",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "identity_type"
+                },
+                {
+                  "number": 3,
+                  "name": "handle",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "identity_type"
+                }
+              ],
+              "oneofs": [
+                "identity_type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.RsaSignatureData",
+              "name": "RsaSignatureData",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "expires_at",
+                  "type": "TYPE_FIXED32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "signature",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.SignatureData",
+              "name": "SignatureData",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "signer_identity",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.KeyIdentity",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 7,
+                  "name": "rsa_data",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.RsaSignatureData",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sig_type"
+                }
+              ],
+              "oneofs": [
+                "sig_type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.MessageStatus",
+              "name": "MessageStatus",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "message_fault",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.MessageFault_E",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.RoutableMessage",
+              "name": "RoutableMessage",
+              "fields": [
+                {
+                  "number": 6,
+                  "name": "to_destination",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.Destination",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 7,
+                  "name": "from_destination",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.Destination",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 10,
+                  "name": "protobuf_message_as_bytes",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "payload"
+                },
+                {
+                  "number": 13,
+                  "name": "signature_data",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.SignatureData",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 12,
+                  "name": "signed_message_status",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.MessageStatus",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 50,
+                  "name": "request_uuid",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 51,
+                  "name": "uuid",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 52,
+                  "name": "flags",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.Flags",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [
+                "payload"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.Tail",
+              "name": "Tail",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "value",
+                  "type": "TYPE_INT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.Message",
+              "name": "Message",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "message",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.RoutableMessage",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "tail",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.Tail",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            }
+          ],
+          "enums": [
+            {
+              "fqn": ".tesla.proto.energy_device.v1.Domain",
+              "name": "Domain",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "DOMAIN_BROADCAST"
+                },
+                {
+                  "number": 2,
+                  "name": "DOMAIN_VEHICLE_SECURITY"
+                },
+                {
+                  "number": 3,
+                  "name": "DOMAIN_INFOTAINMENT"
+                },
+                {
+                  "number": 5,
+                  "name": "DOMAIN_AUTHD"
+                },
+                {
+                  "number": 7,
+                  "name": "DOMAIN_ENERGY_DEVICE"
+                },
+                {
+                  "number": 8,
+                  "name": "DOMAIN_ENERGY_DEVICE_AUTH"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.Flags",
+              "name": "Flags",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "FLAGS_NONE"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.MessageFault_E",
+              "name": "MessageFault_E",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "MESSAGEFAULT_ERROR_NONE"
+                },
+                {
+                  "number": 1,
+                  "name": "MESSAGEFAULT_ERROR_BUSY"
+                },
+                {
+                  "number": 2,
+                  "name": "MESSAGEFAULT_ERROR_TIMEOUT"
+                },
+                {
+                  "number": 3,
+                  "name": "MESSAGEFAULT_ERROR_UNKNOWN_KEY_ID"
+                },
+                {
+                  "number": 4,
+                  "name": "MESSAGEFAULT_ERROR_INACTIVE_KEY"
+                },
+                {
+                  "number": 5,
+                  "name": "MESSAGEFAULT_ERROR_INVALID_SIGNATURE"
+                },
+                {
+                  "number": 6,
+                  "name": "MESSAGEFAULT_ERROR_INVALID_TOKEN_OR_COUNTER"
+                },
+                {
+                  "number": 7,
+                  "name": "MESSAGEFAULT_ERROR_INSUFFICIENT_PRIVILEGES"
+                },
+                {
+                  "number": 8,
+                  "name": "MESSAGEFAULT_ERROR_INVALID_DOMAINS"
+                },
+                {
+                  "number": 9,
+                  "name": "MESSAGEFAULT_ERROR_INVALID_COMMAND"
+                },
+                {
+                  "number": 10,
+                  "name": "MESSAGEFAULT_ERROR_DECODING"
+                },
+                {
+                  "number": 11,
+                  "name": "MESSAGEFAULT_ERROR_INTERNAL"
+                },
+                {
+                  "number": 12,
+                  "name": "MESSAGEFAULT_ERROR_WRONG_PERSONALIZATION"
+                },
+                {
+                  "number": 13,
+                  "name": "MESSAGEFAULT_ERROR_BAD_PARAMETER"
+                },
+                {
+                  "number": 14,
+                  "name": "MESSAGEFAULT_ERROR_KEYCHAIN_IS_FULL"
+                },
+                {
+                  "number": 15,
+                  "name": "MESSAGEFAULT_ERROR_INCORRECT_EPOCH"
+                },
+                {
+                  "number": 16,
+                  "name": "MESSAGEFAULT_ERROR_IV_INCORRECT_LENGTH"
+                },
+                {
+                  "number": 17,
+                  "name": "MESSAGEFAULT_ERROR_TIME_EXPIRED"
+                },
+                {
+                  "number": 18,
+                  "name": "MESSAGEFAULT_ERROR_NOT_PROVISIONED_WITH_IDENTITY"
+                },
+                {
+                  "number": 19,
+                  "name": "MESSAGEFAULT_ERROR_COULD_NOT_HASH_METADATA"
+                },
+                {
+                  "number": 20,
+                  "name": "MESSAGEFAULT_ERROR_TIME_TO_LIVE_TOO_LONG"
+                },
+                {
+                  "number": 21,
+                  "name": "MESSAGEFAULT_ERROR_REMOTE_ACCESS_DISABLED"
+                },
+                {
+                  "number": 22,
+                  "name": "MESSAGEFAULT_ERROR_REMOTE_SERVICE_REQUEST_NOT_SUPPORTED"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            }
+          ],
+          "path": "proto/energy_device/signed_message.proto",
           "compiled_top_level_input": true
         },
         {
@@ -42525,11 +42935,11 @@
     }
   ],
   "totals": {
-    "source_files": 38,
+    "source_files": 39,
     "groups": 7,
-    "messages": 878,
-    "enums": 240,
-    "fields": 2842
+    "messages": 886,
+    "enums": 243,
+    "fields": 2862
   },
   "registration": {
     "consistent": true,
