@@ -85,3 +85,38 @@ jobs:
 
       - name: twine check
         run: .venv/bin/twine check packages/python/dist/*
+
+  # The build job runs one protobuf version; this job proves the range declared
+  # in packages/python/pyproject.toml is honest. Generated code is committed (and
+  # the build job verifies it is fresh), so this only needs runtime deps.
+  python-runtime:
+    name: Python runtime (protobuf ${{ matrix.label }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - spec: "protobuf==6.32.0"
+            label: "6.32.0, declared floor"
+          - spec: "protobuf==6.33.6"
+            label: "6.33.6, Home Assistant constraint"
+          - spec: "protobuf>=7,<8"
+            label: "latest 7.x"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install published runtime dependencies only
+        run: pip install "${{ matrix.spec }}" "googleapis-common-protos>=1.60"
+
+      - name: Show resolved runtime
+        run: python -c "import google.protobuf as p; print('protobuf', p.__version__)"
+
+      - name: Gencode loads under this runtime
+        run: python scripts/check_gencode_runtime.py
+
+      - name: Golden fixture tests (Python)
+        run: PYTHONPATH=packages/python python -m unittest discover -s packages/python/tests
