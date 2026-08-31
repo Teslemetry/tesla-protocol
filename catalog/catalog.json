@@ -20368,7 +20368,7 @@
         "python": "packages/python/tesla_protocol/energy_device"
       },
       "messages": 443,
-      "enums": 92,
+      "enums": 94,
       "fields": 1034,
       "files": [
         {
@@ -28655,6 +28655,106 @@
                 {
                   "number": 8,
                   "name": "DOMAIN_ENERGY_DEVICE_AUTH"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.SignatureType",
+              "name": "SignatureType",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "SIGNATURE_TYPE_AES_GCM"
+                },
+                {
+                  "number": 1,
+                  "name": "SIGNATURE_TYPE_ECDSA"
+                },
+                {
+                  "number": 2,
+                  "name": "SIGNATURE_TYPE_PRESENT_KEY"
+                },
+                {
+                  "number": 3,
+                  "name": "SIGNATURE_TYPE_AES_GCM_TOKEN"
+                },
+                {
+                  "number": 4,
+                  "name": "SIGNATURE_TYPE_ECDSA_PERSONALIZED"
+                },
+                {
+                  "number": 5,
+                  "name": "SIGNATURE_TYPE_AES_GCM_PERSONALIZED"
+                },
+                {
+                  "number": 6,
+                  "name": "SIGNATURE_TYPE_HMAC"
+                },
+                {
+                  "number": 7,
+                  "name": "SIGNATURE_TYPE_RSA"
+                },
+                {
+                  "number": 8,
+                  "name": "SIGNATURE_TYPE_HMAC_PERSONALIZED"
+                },
+                {
+                  "number": 9,
+                  "name": "SIGNATURE_TYPE_AES_GCM_RESPONSE"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.Tag",
+              "name": "Tag",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "TAG_SIGNATURE_TYPE"
+                },
+                {
+                  "number": 1,
+                  "name": "TAG_DOMAIN"
+                },
+                {
+                  "number": 2,
+                  "name": "TAG_PERSONALIZATION"
+                },
+                {
+                  "number": 3,
+                  "name": "TAG_EPOCH"
+                },
+                {
+                  "number": 4,
+                  "name": "TAG_EXPIRES_AT"
+                },
+                {
+                  "number": 5,
+                  "name": "TAG_COUNTER"
+                },
+                {
+                  "number": 6,
+                  "name": "TAG_CHALLENGE"
+                },
+                {
+                  "number": 7,
+                  "name": "TAG_FLAGS"
+                },
+                {
+                  "number": 8,
+                  "name": "TAG_REQUEST_HASH"
+                },
+                {
+                  "number": 9,
+                  "name": "TAG_FAULT"
+                },
+                {
+                  "number": 255,
+                  "name": "TAG_END"
                 }
               ],
               "reserved_ranges": [],
@@ -42938,7 +43038,7 @@
     "source_files": 39,
     "groups": 7,
     "messages": 886,
-    "enums": 243,
+    "enums": 245,
     "fields": 2862
   },
   "registration": {
