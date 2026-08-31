@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "SignedMessage";
+
+enum Domain {
+  DOMAIN_BROADCAST          = 0;
+  DOMAIN_VEHICLE_SECURITY   = 2;
+  DOMAIN_INFOTAINMENT       = 3;
+  DOMAIN_AUTHD              = 5;
+  DOMAIN_ENERGY_DEVICE      = 7;
+  DOMAIN_ENERGY_DEVICE_AUTH = 8;
+}
+
+message Destination {
+  oneof sub_destination {
+    Domain domain         = 1;
+    bytes routing_address = 2;
+  }
+}
+
+message KeyIdentity {
+  oneof identity_type {
+    bytes public_key = 1;
+    uint32 handle    = 3;
+  }
+}
+
+message RsaSignatureData {
+  fixed32 expires_at = 1;
+  bytes signature    = 2;
+}
+
+message SignatureData {
+  KeyIdentity signer_identity = 1;
+
+  oneof sig_type {
+    RsaSignatureData rsa_data = 7;
+  }
+}
+
+enum Flags {
+  FLAGS_NONE = 0;
+}
+
+enum MessageFault_E {
+  MESSAGEFAULT_ERROR_NONE                                 = 0;
+  MESSAGEFAULT_ERROR_BUSY                                 = 1;
+  MESSAGEFAULT_ERROR_TIMEOUT                              = 2;
+  MESSAGEFAULT_ERROR_UNKNOWN_KEY_ID                       = 3;
+  MESSAGEFAULT_ERROR_INACTIVE_KEY                         = 4;
+  MESSAGEFAULT_ERROR_INVALID_SIGNATURE                    = 5;
+  MESSAGEFAULT_ERROR_INVALID_TOKEN_OR_COUNTER             = 6;
+  MESSAGEFAULT_ERROR_INSUFFICIENT_PRIVILEGES              = 7;
+  MESSAGEFAULT_ERROR_INVALID_DOMAINS                      = 8;
+  MESSAGEFAULT_ERROR_INVALID_COMMAND                      = 9;
+  MESSAGEFAULT_ERROR_DECODING                             = 10;
+  MESSAGEFAULT_ERROR_INTERNAL                             = 11;
+  MESSAGEFAULT_ERROR_WRONG_PERSONALIZATION                = 12;
+  MESSAGEFAULT_ERROR_BAD_PARAMETER                        = 13;
+  MESSAGEFAULT_ERROR_KEYCHAIN_IS_FULL                     = 14;
+  MESSAGEFAULT_ERROR_INCORRECT_EPOCH                      = 15;
+  MESSAGEFAULT_ERROR_IV_INCORRECT_LENGTH                  = 16;
+  MESSAGEFAULT_ERROR_TIME_EXPIRED                         = 17;
+  MESSAGEFAULT_ERROR_NOT_PROVISIONED_WITH_IDENTITY        = 18;
+  MESSAGEFAULT_ERROR_COULD_NOT_HASH_METADATA              = 19;
+  MESSAGEFAULT_ERROR_TIME_TO_LIVE_TOO_LONG                = 20;
+  MESSAGEFAULT_ERROR_REMOTE_ACCESS_DISABLED               = 21;
+  MESSAGEFAULT_ERROR_REMOTE_SERVICE_REQUEST_NOT_SUPPORTED = 22;
+}
+
+message MessageStatus {
+  MessageFault_E message_fault = 1;
+}
+
+message RoutableMessage {
+  Destination to_destination   = 6;
+  Destination from_destination = 7;
+
+  oneof payload {
+    bytes protobuf_message_as_bytes = 10;
+  }
+
+  SignatureData signature_data = 13;
+
+  MessageStatus signed_message_status = 12;
+  bytes request_uuid                  = 50;
+  bytes uuid                          = 51;
+  Flags flags                         = 52;
+}
+
+message Tail {
+  int32 value = 1;
+}
+
+message Message {
+  RoutableMessage message = 1;
+  Tail tail               = 2;
+}

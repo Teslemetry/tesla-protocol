@@ -12,6 +12,7 @@ from . import local_auth_api_pb2
 from . import networking_pb2
 from . import neurio_meter_api_pb2
 from . import pvi_api_pb2
+from . import signed_message_pb2
 from . import teg_api_pb2
 from . import transport_pb2
 from . import update_pb2
