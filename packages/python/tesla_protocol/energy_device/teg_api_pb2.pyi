@@ -99,7 +99,7 @@ class TEGAPISetIslandModeRequest(_message.Message):
     mode: TEGIslandMode
     force: bool
 
-    def __init__(self, mode: _Optional[_Union[TEGIslandMode, str]]=..., force: bool=...) -> None:
+    def __init__(self, mode: _Optional[_Union[TEGIslandMode, str]]=..., force: _Optional[bool]=...) -> None:
         ...
 
 class TEGAPISetIslandModeResponse(_message.Message):
@@ -349,7 +349,7 @@ class TEGAPIDisableBatteriesRequest_BatteryDisableRequest(_message.Message):
     din: str
     disable: bool
 
-    def __init__(self, din: _Optional[str]=..., disable: bool=...) -> None:
+    def __init__(self, din: _Optional[str]=..., disable: _Optional[bool]=...) -> None:
         ...
 
 class TEGAPIDisableBatteriesRequest(_message.Message):
@@ -373,7 +373,7 @@ class TEGAPIBypassBatterySoeAdjustmentConstraintsRequest(_message.Message):
     enable: bool
     duration_hours: int
 
-    def __init__(self, enable: bool=..., duration_hours: _Optional[int]=...) -> None:
+    def __init__(self, enable: _Optional[bool]=..., duration_hours: _Optional[int]=...) -> None:
         ...
 
 class TEGAPIBypassBatterySoeAdjustmentConstraintsResponse(_message.Message):
@@ -435,7 +435,7 @@ class TEGAPIEnsureCertificateRequest(_message.Message):
     csip_energex_ergon_energy_qld: TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLD
     csip_western_power_synergy: TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy
 
-    def __init__(self, force_renew: bool=..., csip_south_australia_power_networks: _Optional[_Union[TEGAPIEnsureCertificateRequest_CSIPSouthAustraliaPowerNetworks, _Mapping]]=..., csip_citipower_powercor_united: _Optional[_Union[TEGAPIEnsureCertificateRequest_CSIPCitiPowerPowercorUnited, _Mapping]]=..., csip_ausnet: _Optional[_Union[TEGAPIEnsureCertificateRequest_CSIPAusNet, _Mapping]]=..., csip_jemena: _Optional[_Union[TEGAPIEnsureCertificateRequest_CSIPJemena, _Mapping]]=..., csip_energex_ergon_energy_qld: _Optional[_Union[TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLD, _Mapping]]=..., csip_western_power_synergy: _Optional[_Union[TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy, _Mapping]]=...) -> None:
+    def __init__(self, force_renew: _Optional[bool]=..., csip_south_australia_power_networks: _Optional[_Union[TEGAPIEnsureCertificateRequest_CSIPSouthAustraliaPowerNetworks, _Mapping]]=..., csip_citipower_powercor_united: _Optional[_Union[TEGAPIEnsureCertificateRequest_CSIPCitiPowerPowercorUnited, _Mapping]]=..., csip_ausnet: _Optional[_Union[TEGAPIEnsureCertificateRequest_CSIPAusNet, _Mapping]]=..., csip_jemena: _Optional[_Union[TEGAPIEnsureCertificateRequest_CSIPJemena, _Mapping]]=..., csip_energex_ergon_energy_qld: _Optional[_Union[TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLD, _Mapping]]=..., csip_western_power_synergy: _Optional[_Union[TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy, _Mapping]]=...) -> None:
         ...
 
 class TEGAPIEnsureCertificateResponse(_message.Message):
@@ -443,7 +443,7 @@ class TEGAPIEnsureCertificateResponse(_message.Message):
     CERTIFICATE_EXISTS_FIELD_NUMBER: _ClassVar[int]
     certificate_exists: bool
 
-    def __init__(self, certificate_exists: bool=...) -> None:
+    def __init__(self, certificate_exists: _Optional[bool]=...) -> None:
         ...
 
 class ControlEventSchedulingInfo(_message.Message):
@@ -595,7 +595,7 @@ class TEGAPIStartProtectionTripSelfTestRequest(_message.Message):
     repetitions: int
     disable_inverter_fast_trips: bool
 
-    def __init__(self, tests_to_run: _Optional[_Iterable[str]]=..., disable_field_limits: bool=..., disable_disconnect_on_failure: bool=..., disable_abort_on_failure: bool=..., fast_forward_to_step_before_nominal: _Optional[int]=..., repetitions: _Optional[int]=..., disable_inverter_fast_trips: bool=...) -> None:
+    def __init__(self, tests_to_run: _Optional[_Iterable[str]]=..., disable_field_limits: _Optional[bool]=..., disable_disconnect_on_failure: _Optional[bool]=..., disable_abort_on_failure: _Optional[bool]=..., fast_forward_to_step_before_nominal: _Optional[int]=..., repetitions: _Optional[int]=..., disable_inverter_fast_trips: _Optional[bool]=...) -> None:
         ...
 
 class TEGAPIStartProtectionTripSelfTestResponse(_message.Message):

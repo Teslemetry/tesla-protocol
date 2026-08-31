@@ -431,7 +431,7 @@ class WCVitals(_message.Message):
     dry_contact_control_state: WCDryContactControlState
     smart_charging_reason: WCSmartChargingReason
 
-    def __init__(self, uptime_s: _Optional[int]=..., alerts: _Optional[_Iterable[int]]=..., contactor_closed: bool=..., vehicle_connected: bool=..., pcba_temp_c: _Optional[float]=..., handle_temp_c: _Optional[float]=..., mcu_temp_c: _Optional[float]=..., input_thermopile_v: _Optional[float]=..., prox_v: _Optional[float]=..., pilot_high_v: _Optional[float]=..., pilot_low_v: _Optional[float]=..., session_duration_s: _Optional[int]=..., session_energy: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]]=..., ac_measurement_grid: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=..., ac_measurement_vehicle: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=..., ground_resistance_ohms: _Optional[float]=..., line1_earth_vrms: _Optional[float]=..., neutral_earth_vrms: _Optional[float]=..., fault_status: _Optional[_Union[WCFaultStatusState, str]]=..., recent_fault_status_latched_alerts: _Optional[_Iterable[_Union[WCFaultStatusLatchedAlert, _Mapping]]]=..., vin: _Optional[_Union[_device_pb2.VIN, _Mapping]]=..., instantaneous_power_watts: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]]=..., scheduled_charging_status: _Optional[_Union[WCChargeScheduleChargingStatus, str]]=..., instantaneous_line_current: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]]=..., ocpp_status: _Optional[_Union[WCOcppStatus, str]]=..., evse_not_ready_reasons: _Optional[_Iterable[_Union[WCEvseNotReadyReason, str]]]=..., powershare_session_state: _Optional[_Union[WCPowershareSessionState, str]]=..., dry_contact_control_state: _Optional[_Union[WCDryContactControlState, str]]=..., smart_charging_reason: _Optional[_Union[WCSmartChargingReason, str]]=...) -> None:
+    def __init__(self, uptime_s: _Optional[int]=..., alerts: _Optional[_Iterable[int]]=..., contactor_closed: _Optional[bool]=..., vehicle_connected: _Optional[bool]=..., pcba_temp_c: _Optional[float]=..., handle_temp_c: _Optional[float]=..., mcu_temp_c: _Optional[float]=..., input_thermopile_v: _Optional[float]=..., prox_v: _Optional[float]=..., pilot_high_v: _Optional[float]=..., pilot_low_v: _Optional[float]=..., session_duration_s: _Optional[int]=..., session_energy: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]]=..., ac_measurement_grid: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=..., ac_measurement_vehicle: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=..., ground_resistance_ohms: _Optional[float]=..., line1_earth_vrms: _Optional[float]=..., neutral_earth_vrms: _Optional[float]=..., fault_status: _Optional[_Union[WCFaultStatusState, str]]=..., recent_fault_status_latched_alerts: _Optional[_Iterable[_Union[WCFaultStatusLatchedAlert, _Mapping]]]=..., vin: _Optional[_Union[_device_pb2.VIN, _Mapping]]=..., instantaneous_power_watts: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]]=..., scheduled_charging_status: _Optional[_Union[WCChargeScheduleChargingStatus, str]]=..., instantaneous_line_current: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]]=..., ocpp_status: _Optional[_Union[WCOcppStatus, str]]=..., evse_not_ready_reasons: _Optional[_Iterable[_Union[WCEvseNotReadyReason, str]]]=..., powershare_session_state: _Optional[_Union[WCPowershareSessionState, str]]=..., dry_contact_control_state: _Optional[_Union[WCDryContactControlState, str]]=..., smart_charging_reason: _Optional[_Union[WCSmartChargingReason, str]]=...) -> None:
         ...
 
 class WCLifetimeStats(_message.Message):
@@ -515,7 +515,7 @@ class WCLoadSharingConfig(_message.Message):
     settings: WCLoadSharingSettings
     charging_enabled: bool
 
-    def __init__(self, version: _Optional[int]=..., participant_dins: _Optional[_Iterable[_Union[_device_pb2.Din, _Mapping]]]=..., fixed_limit: _Optional[_Union[WCLoadSharingFixedLimitConfig, _Mapping]]=..., settings: _Optional[_Union[WCLoadSharingSettings, _Mapping]]=..., charging_enabled: bool=...) -> None:
+    def __init__(self, version: _Optional[int]=..., participant_dins: _Optional[_Iterable[_Union[_device_pb2.Din, _Mapping]]]=..., fixed_limit: _Optional[_Union[WCLoadSharingFixedLimitConfig, _Mapping]]=..., settings: _Optional[_Union[WCLoadSharingSettings, _Mapping]]=..., charging_enabled: _Optional[bool]=...) -> None:
         ...
 
 class WCPpuConfig(_message.Message):
@@ -533,7 +533,7 @@ class WCOperationalSettingsConfig(_message.Message):
     operational_mode: WCOperationalMode
     emit_increased_telemetry: bool
 
-    def __init__(self, operational_mode: _Optional[_Union[WCOperationalMode, str]]=..., emit_increased_telemetry: bool=...) -> None:
+    def __init__(self, operational_mode: _Optional[_Union[WCOperationalMode, str]]=..., emit_increased_telemetry: _Optional[bool]=...) -> None:
         ...
 
 class WCMeterInterface(_message.Message):
@@ -557,7 +557,7 @@ class WCDryContactConfig(_message.Message):
     max_current_amps: int
     germany_14a: bool
 
-    def __init__(self, enabled: bool=..., default_state: _Optional[_Union[WCDryContactDefaultState, str]]=..., disable_charging: bool=..., max_current_amps: _Optional[int]=..., germany_14a: bool=...) -> None:
+    def __init__(self, enabled: _Optional[bool]=..., default_state: _Optional[_Union[WCDryContactDefaultState, str]]=..., disable_charging: _Optional[bool]=..., max_current_amps: _Optional[int]=..., germany_14a: _Optional[bool]=...) -> None:
         ...
 
 class WCTimeZoneTransition(_message.Message):
@@ -595,7 +595,7 @@ class WCMIDConfig(_message.Message):
     enabled: bool
     time_zone: WCTimeZone
 
-    def __init__(self, enabled: bool=..., time_zone: _Optional[_Union[WCTimeZone, _Mapping]]=...) -> None:
+    def __init__(self, enabled: _Optional[bool]=..., time_zone: _Optional[_Union[WCTimeZone, _Mapping]]=...) -> None:
         ...
 
 class WCSettings(_message.Message):
@@ -661,7 +661,7 @@ class WCLoadSharingFollowerState(_message.Message):
     pilot_current_amps: int
     individual_pilot_current_amps: int
 
-    def __init__(self, version: _Optional[int]=..., charge_request: bool=..., load_current_amps: _Optional[float]=..., vehicle_connected: bool=..., alert_count: _Optional[int]=..., contactor_closed: bool=..., pilot_current_amps: _Optional[int]=..., individual_pilot_current_amps: _Optional[int]=...) -> None:
+    def __init__(self, version: _Optional[int]=..., charge_request: _Optional[bool]=..., load_current_amps: _Optional[float]=..., vehicle_connected: _Optional[bool]=..., alert_count: _Optional[int]=..., contactor_closed: _Optional[bool]=..., pilot_current_amps: _Optional[int]=..., individual_pilot_current_amps: _Optional[int]=...) -> None:
         ...
 
 class WCLoadSharingLeaderCommand(_message.Message):
@@ -671,7 +671,7 @@ class WCLoadSharingLeaderCommand(_message.Message):
     charge_allowed: bool
     pilot_current_amps: int
 
-    def __init__(self, charge_allowed: bool=..., pilot_current_amps: _Optional[int]=...) -> None:
+    def __init__(self, charge_allowed: _Optional[bool]=..., pilot_current_amps: _Optional[int]=...) -> None:
         ...
 
 class WCLoadSharingLeaderState(_message.Message):
@@ -689,7 +689,7 @@ class WCLoadSharingLeaderState(_message.Message):
     charging_enabled: bool
     active_unit_count: int
 
-    def __init__(self, version: _Optional[int]=..., network_current_limit_amps: _Optional[int]=..., fallback_current_amps: _Optional[int]=..., round_robin_index: _Optional[int]=..., charging_enabled: bool=..., active_unit_count: _Optional[int]=...) -> None:
+    def __init__(self, version: _Optional[int]=..., network_current_limit_amps: _Optional[int]=..., fallback_current_amps: _Optional[int]=..., round_robin_index: _Optional[int]=..., charging_enabled: _Optional[bool]=..., active_unit_count: _Optional[int]=...) -> None:
         ...
 
 class WCLoadSharingDeviceEntry(_message.Message):
@@ -703,7 +703,7 @@ class WCLoadSharingDeviceEntry(_message.Message):
     follower_state: WCLoadSharingFollowerState
     mia: bool
 
-    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]]=..., leader_command: _Optional[_Union[WCLoadSharingLeaderCommand, _Mapping]]=..., follower_state: _Optional[_Union[WCLoadSharingFollowerState, _Mapping]]=..., mia: bool=...) -> None:
+    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]]=..., leader_command: _Optional[_Union[WCLoadSharingLeaderCommand, _Mapping]]=..., follower_state: _Optional[_Union[WCLoadSharingFollowerState, _Mapping]]=..., mia: _Optional[bool]=...) -> None:
         ...
 
 class WCLoadSharingNetworkState(_message.Message):
@@ -731,7 +731,7 @@ class WCProvisionalOperationalParams(_message.Message):
     limit_timeout_s: int
     inhibit_charging: bool
 
-    def __init__(self, limit_current_max_amps: _Optional[int]=..., limit_timeout_s: _Optional[int]=..., inhibit_charging: bool=...) -> None:
+    def __init__(self, limit_current_max_amps: _Optional[int]=..., limit_timeout_s: _Optional[int]=..., inhibit_charging: _Optional[bool]=...) -> None:
         ...
 
 class WCAccessControlEntry(_message.Message):
@@ -795,7 +795,7 @@ class WCChargeScheduleConfig(_message.Message):
     schedule: WCChargeSchedule
     delay: WCChargeScheduleDelay
 
-    def __init__(self, enable_schedule: bool=..., schedule: _Optional[_Union[WCChargeSchedule, _Mapping]]=..., delay: _Optional[_Union[WCChargeScheduleDelay, _Mapping]]=...) -> None:
+    def __init__(self, enable_schedule: _Optional[bool]=..., schedule: _Optional[_Union[WCChargeSchedule, _Mapping]]=..., delay: _Optional[_Union[WCChargeScheduleDelay, _Mapping]]=...) -> None:
         ...
 
 class WCChargeScheduleConfigStatus(_message.Message):
@@ -833,7 +833,7 @@ class WCOcppSettings(_message.Message):
     provider_name: str
     scope: WCOcppScope
 
-    def __init__(self, connection_url: _Optional[str]=..., chargepoint_id: _Optional[str]=..., version: _Optional[_Union[WCOcppVersion, str]]=..., security_profile: _Optional[_Union[WCOcppSecurityProfile, str]]=..., enable: bool=..., provider_name: _Optional[str]=..., scope: _Optional[_Union[WCOcppScope, str]]=...) -> None:
+    def __init__(self, connection_url: _Optional[str]=..., chargepoint_id: _Optional[str]=..., version: _Optional[_Union[WCOcppVersion, str]]=..., security_profile: _Optional[_Union[WCOcppSecurityProfile, str]]=..., enable: _Optional[bool]=..., provider_name: _Optional[str]=..., scope: _Optional[_Union[WCOcppScope, str]]=...) -> None:
         ...
 
 class WCOcppAuthorizationData(_message.Message):
@@ -1005,7 +1005,7 @@ class WCAPISetLoadSharingNetworkOperationRequest(_message.Message):
     CHARGING_ENABLED_FIELD_NUMBER: _ClassVar[int]
     charging_enabled: bool
 
-    def __init__(self, charging_enabled: bool=...) -> None:
+    def __init__(self, charging_enabled: _Optional[bool]=...) -> None:
         ...
 
 class WCAPISetLoadSharingNetworkOperationResponse(_message.Message):
@@ -1189,7 +1189,7 @@ class WCAPIPushPpuAuthorizationStateRequest(_message.Message):
     authorized: bool
     auth_uuid: _device_pb2.UUIDv4Bytes
 
-    def __init__(self, authorized: bool=..., auth_uuid: _Optional[_Union[_device_pb2.UUIDv4Bytes, _Mapping]]=...) -> None:
+    def __init__(self, authorized: _Optional[bool]=..., auth_uuid: _Optional[_Union[_device_pb2.UUIDv4Bytes, _Mapping]]=...) -> None:
         ...
 
 class WCAPIPushPpuAuthorizationStateResponse(_message.Message):
@@ -1367,7 +1367,7 @@ class WCSmartChargingCommand(_message.Message):
     charge_disallowed: bool
     target_charge_power_params: WCTargetChargePowerParams
 
-    def __init__(self, ttl_seconds: _Optional[int]=..., charge_disallowed: bool=..., target_charge_power_params: _Optional[_Union[WCTargetChargePowerParams, _Mapping]]=...) -> None:
+    def __init__(self, ttl_seconds: _Optional[int]=..., charge_disallowed: _Optional[bool]=..., target_charge_power_params: _Optional[_Union[WCTargetChargePowerParams, _Mapping]]=...) -> None:
         ...
 
 class WCAPIPushSmartChargingCommandRequest(_message.Message):

@@ -34,7 +34,7 @@ class LocalAuthAPIRequiredFactorsResponse(_message.Message):
     password: bool
     presence: bool
 
-    def __init__(self, password: bool=..., presence: bool=...) -> None:
+    def __init__(self, password: _Optional[bool]=..., presence: _Optional[bool]=...) -> None:
         ...
 
 class LocalAuthAPILoginRequest(_message.Message):

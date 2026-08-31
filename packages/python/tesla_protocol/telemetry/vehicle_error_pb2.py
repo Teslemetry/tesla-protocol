@@ -4,7 +4,7 @@ from google.protobuf import descriptor_pool as _descriptor_pool
 from google.protobuf import runtime_version as _runtime_version
 from google.protobuf import symbol_database as _symbol_database
 from google.protobuf.internal import builder as _builder
-_runtime_version.ValidateProtobufRuntimeVersion(_runtime_version.Domain.PUBLIC, 6, 31, 1, '', 'vehicle_error.proto')
+_runtime_version.ValidateProtobufRuntimeVersion(_runtime_version.Domain.PUBLIC, 6, 33, 5, '', 'vehicle_error.proto')
 _sym_db = _symbol_database.Default()
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x13vehicle_error.proto\x12\x17telemetry.vehicle_error\x1a\x1fgoogle/protobuf/timestamp.proto"\x83\x01\n\rVehicleErrors\x125\n\x06errors\x18\x01 \x03(\x0b2%.telemetry.vehicle_error.VehicleError\x12.\n\ncreated_at\x18\x02 \x01(\x0b2\x1a.google.protobuf.Timestamp\x12\x0b\n\x03vin\x18\x03 \x01(\t"\xc6\x01\n\x0cVehicleError\x12.\n\ncreated_at\x18\x01 \x01(\x0b2\x1a.google.protobuf.Timestamp\x12\x0c\n\x04name\x18\x02 \x01(\t\x12=\n\x04tags\x18\x03 \x03(\x0b2/.telemetry.vehicle_error.VehicleError.TagsEntry\x12\x0c\n\x04body\x18\x04 \x01(\t\x1a+\n\tTagsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x028\x01B/Z-github.com/teslamotors/fleet-telemetry/protosb\x06proto3')

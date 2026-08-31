@@ -119,7 +119,7 @@ class CommonAPIConfigureWifiRequest(_message.Message):
     enabled: bool
     wifi_config: _networking_pb2.WifiConfig
 
-    def __init__(self, enabled: bool=..., wifi_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]]=...) -> None:
+    def __init__(self, enabled: _Optional[bool]=..., wifi_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]]=...) -> None:
         ...
 
 class CommonAPIConfigureWifiResponse(_message.Message):
@@ -141,7 +141,7 @@ class CommonAPIConfigureWifiWithEncryptedPasswordRequest(_message.Message):
     wifi_config: _networking_pb2.WifiConfig
     encrypted_password: _device_pb2.EncryptedMessage
 
-    def __init__(self, enabled: bool=..., wifi_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]]=..., encrypted_password: _Optional[_Union[_device_pb2.EncryptedMessage, _Mapping]]=...) -> None:
+    def __init__(self, enabled: _Optional[bool]=..., wifi_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]]=..., encrypted_password: _Optional[_Union[_device_pb2.EncryptedMessage, _Mapping]]=...) -> None:
         ...
 
 class CommonAPIConfigureWifiWithEncryptedPasswordResponse(_message.Message):
@@ -161,7 +161,7 @@ class CommonAPICheckForUpdateRequest(_message.Message):
     DOWNLOAD_IF_AVAILABLE_FIELD_NUMBER: _ClassVar[int]
     download_if_available: bool
 
-    def __init__(self, download_if_available: bool=...) -> None:
+    def __init__(self, download_if_available: _Optional[bool]=...) -> None:
         ...
 
 class CommonAPICheckForUpdateResponse(_message.Message):
@@ -393,7 +393,7 @@ class CommonAPIStopTcpdumpRequest(_message.Message):
     name: str
     remove: bool
 
-    def __init__(self, name: _Optional[str]=..., remove: bool=...) -> None:
+    def __init__(self, name: _Optional[str]=..., remove: _Optional[bool]=...) -> None:
         ...
 
 class CommonAPIStopTcpdumpResponse(_message.Message):

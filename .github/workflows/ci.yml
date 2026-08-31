@@ -96,8 +96,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - spec: "protobuf==6.32.0"
-            label: "6.32.0, declared floor"
+          - spec: "protobuf==6.33.5"
+            label: "6.33.5, declared floor"
           - spec: "protobuf==6.33.6"
             label: "6.33.6, Home Assistant constraint"
           - spec: "protobuf>=7,<8"

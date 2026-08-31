@@ -477,7 +477,7 @@ class ChargeSchedule(_message.Message):
     latitude: float
     longitude: float
 
-    def __init__(self, id: _Optional[int]=..., name: _Optional[str]=..., days_of_week: _Optional[int]=..., start_enabled: bool=..., start_time: _Optional[int]=..., end_enabled: bool=..., end_time: _Optional[int]=..., one_time: bool=..., enabled: bool=..., latitude: _Optional[float]=..., longitude: _Optional[float]=...) -> None:
+    def __init__(self, id: _Optional[int]=..., name: _Optional[str]=..., days_of_week: _Optional[int]=..., start_enabled: _Optional[bool]=..., start_time: _Optional[int]=..., end_enabled: _Optional[bool]=..., end_time: _Optional[int]=..., one_time: _Optional[bool]=..., enabled: _Optional[bool]=..., latitude: _Optional[float]=..., longitude: _Optional[float]=...) -> None:
         ...
 
 class PreconditionSchedule(_message.Message):
@@ -499,7 +499,7 @@ class PreconditionSchedule(_message.Message):
     latitude: float
     longitude: float
 
-    def __init__(self, id: _Optional[int]=..., name: _Optional[str]=..., days_of_week: _Optional[int]=..., precondition_time: _Optional[int]=..., one_time: bool=..., enabled: bool=..., latitude: _Optional[float]=..., longitude: _Optional[float]=...) -> None:
+    def __init__(self, id: _Optional[int]=..., name: _Optional[str]=..., days_of_week: _Optional[int]=..., precondition_time: _Optional[int]=..., one_time: _Optional[bool]=..., enabled: _Optional[bool]=..., latitude: _Optional[float]=..., longitude: _Optional[float]=...) -> None:
         ...
 
 class ChargingAlert(_message.Message):
