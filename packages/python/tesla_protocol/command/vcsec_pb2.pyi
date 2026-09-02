@@ -447,7 +447,7 @@ class ReplaceKey(_message.Message):
     keyRole: _keys_pb2.Role
     impermanent: bool
 
-    def __init__(self, publicKeyToReplace: _Optional[_Union[PublicKey, _Mapping]]=..., slotToReplace: _Optional[int]=..., keyToAdd: _Optional[_Union[PublicKey, _Mapping]]=..., keyRole: _Optional[_Union[_keys_pb2.Role, str]]=..., impermanent: bool=...) -> None:
+    def __init__(self, publicKeyToReplace: _Optional[_Union[PublicKey, _Mapping]]=..., slotToReplace: _Optional[int]=..., keyToAdd: _Optional[_Union[PublicKey, _Mapping]]=..., keyRole: _Optional[_Union[_keys_pb2.Role, str]]=..., impermanent: _Optional[bool]=...) -> None:
         ...
 
 class WhitelistOperation(_message.Message):
@@ -475,7 +475,7 @@ class WhitelistOperation(_message.Message):
     replaceKey: ReplaceKey
     metadataForKey: KeyMetadata
 
-    def __init__(self, addPublicKeyToWhitelist: _Optional[_Union[PublicKey, _Mapping]]=..., removePublicKeyFromWhitelist: _Optional[_Union[PublicKey, _Mapping]]=..., addPermissionsToPublicKey: _Optional[_Union[PermissionChange, _Mapping]]=..., removePermissionsFromPublicKey: _Optional[_Union[PermissionChange, _Mapping]]=..., addKeyToWhitelistAndAddPermissions: _Optional[_Union[PermissionChange, _Mapping]]=..., updateKeyAndPermissions: _Optional[_Union[PermissionChange, _Mapping]]=..., addImpermanentKey: _Optional[_Union[PermissionChange, _Mapping]]=..., addImpermanentKeyAndRemoveExisting: _Optional[_Union[PermissionChange, _Mapping]]=..., removeAllImpermanentKeys: bool=..., replaceKey: _Optional[_Union[ReplaceKey, _Mapping]]=..., metadataForKey: _Optional[_Union[KeyMetadata, _Mapping]]=...) -> None:
+    def __init__(self, addPublicKeyToWhitelist: _Optional[_Union[PublicKey, _Mapping]]=..., removePublicKeyFromWhitelist: _Optional[_Union[PublicKey, _Mapping]]=..., addPermissionsToPublicKey: _Optional[_Union[PermissionChange, _Mapping]]=..., removePermissionsFromPublicKey: _Optional[_Union[PermissionChange, _Mapping]]=..., addKeyToWhitelistAndAddPermissions: _Optional[_Union[PermissionChange, _Mapping]]=..., updateKeyAndPermissions: _Optional[_Union[PermissionChange, _Mapping]]=..., addImpermanentKey: _Optional[_Union[PermissionChange, _Mapping]]=..., addImpermanentKeyAndRemoveExisting: _Optional[_Union[PermissionChange, _Mapping]]=..., removeAllImpermanentKeys: _Optional[bool]=..., replaceKey: _Optional[_Union[ReplaceKey, _Mapping]]=..., metadataForKey: _Optional[_Union[KeyMetadata, _Mapping]]=...) -> None:
         ...
 
 class WhitelistOperation_status(_message.Message):

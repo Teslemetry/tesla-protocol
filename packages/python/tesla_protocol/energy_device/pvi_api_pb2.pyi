@@ -80,7 +80,7 @@ class PVStringVitals(_message.Message):
     connected: bool
     locked_out: bool
 
-    def __init__(self, dc_measurement: _Optional[_Union[_energy_pb2.InstDCMeasurement, _Mapping]]=..., string_id: _Optional[int]=..., connected: bool=..., locked_out: bool=...) -> None:
+    def __init__(self, dc_measurement: _Optional[_Union[_energy_pb2.InstDCMeasurement, _Mapping]]=..., string_id: _Optional[int]=..., connected: _Optional[bool]=..., locked_out: _Optional[bool]=...) -> None:
         ...
 
 class PVInverterVitals(_message.Message):
@@ -116,7 +116,7 @@ class PVInverterVitals(_message.Message):
     pvs_state: int
     ac_measurement_solar_rgm: _energy_pb2.InstACMeasurement
 
-    def __init__(self, uptime_s: _Optional[int]=..., pvac_faults: _Optional[_Iterable[int]]=..., pvs_faults: _Optional[_Iterable[int]]=..., ac_measurement_pvac: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=..., site_shutdown_switch_open: bool=..., energy_today: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]]=..., pv_string_vitals: _Optional[_Iterable[_Union[PVStringVitals, _Mapping]]]=..., ac_measurement_site: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=..., pvac_inv_state: _Optional[int]=..., pvac_state: _Optional[int]=..., grid_compliance_status: _Optional[_Union[_energy_pb2.GridComplianceStatus, _Mapping]]=..., pvac_warnings: _Optional[_Iterable[int]]=..., pvs_warnings: _Optional[_Iterable[int]]=..., pvs_state: _Optional[int]=..., ac_measurement_solar_rgm: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=...) -> None:
+    def __init__(self, uptime_s: _Optional[int]=..., pvac_faults: _Optional[_Iterable[int]]=..., pvs_faults: _Optional[_Iterable[int]]=..., ac_measurement_pvac: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=..., site_shutdown_switch_open: _Optional[bool]=..., energy_today: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]]=..., pv_string_vitals: _Optional[_Iterable[_Union[PVStringVitals, _Mapping]]]=..., ac_measurement_site: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=..., pvac_inv_state: _Optional[int]=..., pvac_state: _Optional[int]=..., grid_compliance_status: _Optional[_Union[_energy_pb2.GridComplianceStatus, _Mapping]]=..., pvac_warnings: _Optional[_Iterable[int]]=..., pvs_warnings: _Optional[_Iterable[int]]=..., pvs_state: _Optional[int]=..., ac_measurement_solar_rgm: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=...) -> None:
         ...
 
 class PVInverterLifetimeStats(_message.Message):
@@ -286,7 +286,7 @@ class PVIAPIConfigureGsmRequest(_message.Message):
     ENABLED_FIELD_NUMBER: _ClassVar[int]
     enabled: bool
 
-    def __init__(self, enabled: bool=...) -> None:
+    def __init__(self, enabled: _Optional[bool]=...) -> None:
         ...
 
 class PVIAPIConfigureGsmResponse(_message.Message):
@@ -306,7 +306,7 @@ class PVIAPIInverterResetRequest(_message.Message):
     reset_pvac: bool
     reset_pvs: bool
 
-    def __init__(self, reset_pvcom: bool=..., reset_pvac: bool=..., reset_pvs: bool=...) -> None:
+    def __init__(self, reset_pvcom: _Optional[bool]=..., reset_pvac: _Optional[bool]=..., reset_pvs: _Optional[bool]=...) -> None:
         ...
 
 class PVIAPIInverterResetResponse(_message.Message):
@@ -426,7 +426,7 @@ class PVIAPITriggerDrLogRequest(_message.Message):
     pvac: bool
     pvs: bool
 
-    def __init__(self, pvac: bool=..., pvs: bool=...) -> None:
+    def __init__(self, pvac: _Optional[bool]=..., pvs: _Optional[bool]=...) -> None:
         ...
 
 class PVIAPITriggerDrLogResponse(_message.Message):
@@ -444,7 +444,7 @@ class PVIAPIClearLogsRequest(_message.Message):
     alerts: bool
     drlog: bool
 
-    def __init__(self, telemetry: bool=..., alerts: bool=..., drlog: bool=...) -> None:
+    def __init__(self, telemetry: _Optional[bool]=..., alerts: _Optional[bool]=..., drlog: _Optional[bool]=...) -> None:
         ...
 
 class PVIAPIClearLogsResponse(_message.Message):

@@ -38,7 +38,7 @@ class StemEventInfo(_message.Message):
     invalidated: bool
     time_synchronized: bool
 
-    def __init__(self, event_occurred: bool=..., invalidated: bool=..., time_synchronized: bool=...) -> None:
+    def __init__(self, event_occurred: _Optional[bool]=..., invalidated: _Optional[bool]=..., time_synchronized: _Optional[bool]=...) -> None:
         ...
 
 class ChargeSessionTimeSeries(_message.Message):

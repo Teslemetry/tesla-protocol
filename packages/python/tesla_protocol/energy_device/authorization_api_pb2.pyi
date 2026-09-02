@@ -83,7 +83,7 @@ class AuthorizationAPIListAuthorizedClientsResponse(_message.Message):
     clients: _containers.RepeatedCompositeFieldContainer[_authorization_types_pb2.AuthorizationRecord]
     enable_line_switch_off: bool
 
-    def __init__(self, clients: _Optional[_Iterable[_Union[_authorization_types_pb2.AuthorizationRecord, _Mapping]]]=..., enable_line_switch_off: bool=...) -> None:
+    def __init__(self, clients: _Optional[_Iterable[_Union[_authorization_types_pb2.AuthorizationRecord, _Mapping]]]=..., enable_line_switch_off: _Optional[bool]=...) -> None:
         ...
 
 class AuthorizationAPIGetSignedCommandsPublicKeyRequest(_message.Message):

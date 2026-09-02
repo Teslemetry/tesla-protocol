@@ -167,7 +167,7 @@ class NetworkInterfaceIPv4Config(_message.Message):
     gateway: int
     dns: _containers.RepeatedScalarFieldContainer[int]
 
-    def __init__(self, dhcp_enabled: bool=..., address: _Optional[int]=..., subnet_mask: _Optional[int]=..., gateway: _Optional[int]=..., dns: _Optional[_Iterable[int]]=...) -> None:
+    def __init__(self, dhcp_enabled: _Optional[bool]=..., address: _Optional[int]=..., subnet_mask: _Optional[int]=..., gateway: _Optional[int]=..., dns: _Optional[_Iterable[int]]=...) -> None:
         ...
 
 class NetworkConnectivityStatus(_message.Message):
@@ -183,7 +183,7 @@ class NetworkConnectivityStatus(_message.Message):
     rssi: Rssi
     snr: _wrappers_pb2.Int32Value
 
-    def __init__(self, connected_physical: bool=..., connected_internet: bool=..., connected_tesla: bool=..., rssi: _Optional[_Union[Rssi, _Mapping]]=..., snr: _Optional[_Union[_wrappers_pb2.Int32Value, _Mapping]]=...) -> None:
+    def __init__(self, connected_physical: _Optional[bool]=..., connected_internet: _Optional[bool]=..., connected_tesla: _Optional[bool]=..., rssi: _Optional[_Union[Rssi, _Mapping]]=..., snr: _Optional[_Union[_wrappers_pb2.Int32Value, _Mapping]]=...) -> None:
         ...
 
 class NetworkInterface(_message.Message):
@@ -203,7 +203,7 @@ class NetworkInterface(_message.Message):
     device_state: NetworkDeviceState
     device_state_reason: NetworkDeviceStateReason
 
-    def __init__(self, mac_address: _Optional[bytes]=..., enabled: bool=..., active_route: bool=..., ipv4_config: _Optional[_Union[NetworkInterfaceIPv4Config, _Mapping]]=..., connectivity_status: _Optional[_Union[NetworkConnectivityStatus, _Mapping]]=..., device_state: _Optional[_Union[NetworkDeviceState, str]]=..., device_state_reason: _Optional[_Union[NetworkDeviceStateReason, str]]=...) -> None:
+    def __init__(self, mac_address: _Optional[bytes]=..., enabled: _Optional[bool]=..., active_route: _Optional[bool]=..., ipv4_config: _Optional[_Union[NetworkInterfaceIPv4Config, _Mapping]]=..., connectivity_status: _Optional[_Union[NetworkConnectivityStatus, _Mapping]]=..., device_state: _Optional[_Union[NetworkDeviceState, str]]=..., device_state_reason: _Optional[_Union[NetworkDeviceStateReason, str]]=...) -> None:
         ...
 
 class CellularEID(_message.Message):

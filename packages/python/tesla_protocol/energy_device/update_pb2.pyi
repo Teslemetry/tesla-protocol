@@ -88,7 +88,7 @@ class SystemUpdate(_message.Message):
     server_staged_packages: _containers.RepeatedCompositeFieldContainer[ServerStagedPackage]
     is_sideloading: bool
 
-    def __init__(self, handshake_result: _Optional[int]=..., update_status: _Optional[int]=..., server_staged_version: _Optional[_Union[FirmwareVersion, _Mapping]]=..., total_bytes: _Optional[int]=..., bytes_offset: _Optional[int]=..., estimated_bytes_per_second: _Optional[int]=..., last_handshake_timestamp: _Optional[int]=..., last_update_result: _Optional[int]=..., server_staged_packages: _Optional[_Iterable[_Union[ServerStagedPackage, _Mapping]]]=..., is_sideloading: bool=...) -> None:
+    def __init__(self, handshake_result: _Optional[int]=..., update_status: _Optional[int]=..., server_staged_version: _Optional[_Union[FirmwareVersion, _Mapping]]=..., total_bytes: _Optional[int]=..., bytes_offset: _Optional[int]=..., estimated_bytes_per_second: _Optional[int]=..., last_handshake_timestamp: _Optional[int]=..., last_update_result: _Optional[int]=..., server_staged_packages: _Optional[_Iterable[_Union[ServerStagedPackage, _Mapping]]]=..., is_sideloading: _Optional[bool]=...) -> None:
         ...
 
 class AcceptedPackage(_message.Message):
@@ -102,7 +102,7 @@ class AcceptedPackage(_message.Message):
     upload_endpoint: str
     will_attempt_download: bool
 
-    def __init__(self, package_id: _Optional[int]=..., package_signature: _Optional[bytes]=..., upload_endpoint: _Optional[str]=..., will_attempt_download: bool=...) -> None:
+    def __init__(self, package_id: _Optional[int]=..., package_signature: _Optional[bytes]=..., upload_endpoint: _Optional[str]=..., will_attempt_download: _Optional[bool]=...) -> None:
         ...
 
 class LocallyAvailablePackage(_message.Message):

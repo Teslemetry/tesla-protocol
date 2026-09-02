@@ -151,7 +151,7 @@ class NetworkInterfaceIPv4Config(_message.Message):
     gateway: int
     dns: _containers.RepeatedScalarFieldContainer[int]
 
-    def __init__(self, dhcpEnabled: bool=..., address: _Optional[int]=..., subnetMask: _Optional[int]=..., gateway: _Optional[int]=..., dns: _Optional[_Iterable[int]]=...) -> None:
+    def __init__(self, dhcpEnabled: _Optional[bool]=..., address: _Optional[int]=..., subnetMask: _Optional[int]=..., gateway: _Optional[int]=..., dns: _Optional[_Iterable[int]]=...) -> None:
         ...
 
 class Rssi(_message.Message):
@@ -177,7 +177,7 @@ class NetworkConnectivityStatus(_message.Message):
     rssi: Rssi
     snr: Int32Value
 
-    def __init__(self, connectedPhysical: bool=..., connectedInternet: bool=..., connectedTesla: bool=..., rssi: _Optional[_Union[Rssi, _Mapping]]=..., snr: _Optional[_Union[Int32Value, _Mapping]]=...) -> None:
+    def __init__(self, connectedPhysical: _Optional[bool]=..., connectedInternet: _Optional[bool]=..., connectedTesla: _Optional[bool]=..., rssi: _Optional[_Union[Rssi, _Mapping]]=..., snr: _Optional[_Union[Int32Value, _Mapping]]=...) -> None:
         ...
 
 class NetworkInterface(_message.Message):
@@ -193,7 +193,7 @@ class NetworkInterface(_message.Message):
     ipv4Config: NetworkInterfaceIPv4Config
     connectivityStatus: NetworkConnectivityStatus
 
-    def __init__(self, macAddress: _Optional[bytes]=..., enabled: bool=..., activeRoute: bool=..., ipv4Config: _Optional[_Union[NetworkInterfaceIPv4Config, _Mapping]]=..., connectivityStatus: _Optional[_Union[NetworkConnectivityStatus, _Mapping]]=...) -> None:
+    def __init__(self, macAddress: _Optional[bytes]=..., enabled: _Optional[bool]=..., activeRoute: _Optional[bool]=..., ipv4Config: _Optional[_Union[NetworkInterfaceIPv4Config, _Mapping]]=..., connectivityStatus: _Optional[_Union[NetworkConnectivityStatus, _Mapping]]=...) -> None:
         ...
 
 class WifiPassword(_message.Message):
@@ -397,7 +397,7 @@ class CommonAPIConfigureWifiRequest(_message.Message):
     enabled: bool
     wifiConfig: WifiConfig
 
-    def __init__(self, enabled: bool=..., wifiConfig: _Optional[_Union[WifiConfig, _Mapping]]=...) -> None:
+    def __init__(self, enabled: _Optional[bool]=..., wifiConfig: _Optional[_Union[WifiConfig, _Mapping]]=...) -> None:
         ...
 
 class CommonAPIConfigureWifiResponse(_message.Message):
@@ -419,7 +419,7 @@ class CommonAPIConfigureWifiWithEncryptedPasswordRequest(_message.Message):
     wifiConfig: WifiConfig
     encryptedPassword: EncryptedMessage
 
-    def __init__(self, enabled: bool=..., wifiConfig: _Optional[_Union[WifiConfig, _Mapping]]=..., encryptedPassword: _Optional[_Union[EncryptedMessage, _Mapping]]=...) -> None:
+    def __init__(self, enabled: _Optional[bool]=..., wifiConfig: _Optional[_Union[WifiConfig, _Mapping]]=..., encryptedPassword: _Optional[_Union[EncryptedMessage, _Mapping]]=...) -> None:
         ...
 
 class CommonAPIConfigureWifiWithEncryptedPasswordResponse(_message.Message):
@@ -567,7 +567,7 @@ class DeviceVital(_message.Message):
     stringValue: str
     boolValue: bool
 
-    def __init__(self, name: _Optional[str]=..., intValue: _Optional[int]=..., floatValue: _Optional[float]=..., stringValue: _Optional[str]=..., boolValue: bool=...) -> None:
+    def __init__(self, name: _Optional[str]=..., intValue: _Optional[int]=..., floatValue: _Optional[float]=..., stringValue: _Optional[str]=..., boolValue: _Optional[bool]=...) -> None:
         ...
 
 class StringValue(_message.Message):
@@ -933,7 +933,7 @@ class TEGAPISetIslandModeRequest(_message.Message):
     mode: int
     force: bool
 
-    def __init__(self, mode: _Optional[int]=..., force: bool=...) -> None:
+    def __init__(self, mode: _Optional[int]=..., force: _Optional[bool]=...) -> None:
         ...
 
 class TEGAPISetIslandModeResponse(_message.Message):
@@ -987,7 +987,7 @@ class LocalAuthAPIRequiredFactorsResponse(_message.Message):
     password: bool
     presence: bool
 
-    def __init__(self, password: bool=..., presence: bool=...) -> None:
+    def __init__(self, password: _Optional[bool]=..., presence: _Optional[bool]=...) -> None:
         ...
 
 class LocalAuthAPILoginRequest(_message.Message):
