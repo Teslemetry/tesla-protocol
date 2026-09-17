@@ -262,7 +262,7 @@ message CommandStatus
     }
 }
 
-message AutonomyCommand {
+message AutonomyCommand {  // TESLEMETRY-EXT
     // Remote "pull over" request for a vehicle driving under autonomy - a trigger, no parameters.
     message PullOverCommand {}
 
@@ -273,13 +273,13 @@ message AutonomyCommand {
 
 // Vehicle walk-up Bluetooth authentication challenge. Field numbers and types
 // are verified against a live vehicle; unverified field names are marked inline.
-enum AuthenticationLevel_E {
+enum AuthenticationLevel_E {  // TESLEMETRY-EXT
     AUTHENTICATION_LEVEL_NONE = 0;
     AUTHENTICATION_LEVEL_UNLOCK = 1;
     AUTHENTICATION_LEVEL_DRIVE = 2;
 }
 
-enum AuthenticationReason_E {
+enum AuthenticationReason_E {  // TESLEMETRY-EXT
     AUTHENTICATIONREASON_NOT_DOCUMENTED = 0;
     AUTHENTICATIONREASON_IDENTIFICATION = 1;
     AUTHENTICATIONREASON_POWER_ON_VEHICLE_REQUEST = 2;
@@ -293,7 +293,7 @@ enum AuthenticationReason_E {
     AUTHENTICATIONREASON_IMMOBILIZER = 10;
 }
 
-enum AuthenticationRejection_E {
+enum AuthenticationRejection_E {  // TESLEMETRY-EXT
     AUTHENTICATIONREJECTION_NONE = 0;
     AUTHENTICATIONREJECTION_DEVICE_STATIONARY = 1;
     AUTHENTICATIONREJECTION_PASSIVE_DISABLED = 2;
@@ -302,29 +302,28 @@ enum AuthenticationRejection_E {
     AUTHENTICATIONREJECTION_DEVICE_NOT_UNLOCKED_ON_WRIST = 5;
 }
 
-message AuthenticationRequestToken {
+message AuthenticationRequestToken {  // TESLEMETRY-EXT
     bytes token = 1;  // name unverified
 }
 
-message AuthenticationRequest {
+message AuthenticationRequest {  // TESLEMETRY-EXT
     AuthenticationRequestToken sessionInfo = 2;  // name unverified
     AuthenticationLevel_E requestedLevel = 3;  // name unverified
     repeated AuthenticationReason_E reasonsForAuth = 4;  // name unverified
 }
 
-message AuthenticationResponse {
+message AuthenticationResponse {  // TESLEMETRY-EXT
     AuthenticationLevel_E authenticationLevel = 1;  // name unverified
     uint32 estimatedDistance = 2;  // name unverified
     AuthenticationRejection_E authenticationRejection = 3;  // name unverified
 }
-// ===== TESLEMETRY-EXT END =====
 
 message UnsignedMessage {
     reserved 6,7,10,12,13;
     oneof sub_message {
         InformationRequest           InformationRequest = 1;
         RKEAction_E                  RKEAction = 2;
-        AuthenticationResponse       authenticationResponse = 3;
+        AuthenticationResponse       authenticationResponse = 3;  // TESLEMETRY-EXT
         ClosureMoveRequest           closureMoveRequest = 4;
         WhitelistOperation           WhitelistOperation = 16;
         AutonomyCommand              autonomyCommand = 66;  // TESLEMETRY-EXT
@@ -376,12 +375,12 @@ enum UserPresence_E {
     VEHICLE_USER_PRESENCE_PRESENT = 2;
 }
 
-enum UIDesire_E {
+enum UIDesire_E {  // TESLEMETRY-EXT
     UI_DESIRE_NONE = 0;
     UI_DESIRE_HAS_DATA = 1;
 }
 
-enum Gear_E {
+enum Gear_E {  // TESLEMETRY-EXT
     GEAR_UNKNOWN = 0;
     GEAR_PARK = 1;
     GEAR_DRIVE = 2;
@@ -403,7 +402,7 @@ message FromVCSECMessage {
     reserved 6 to 10;
     oneof sub_message {
         VehicleStatus               vehicleStatus = 1;
-        AuthenticationRequest       authenticationRequest = 3;
+        AuthenticationRequest       authenticationRequest = 3;  // TESLEMETRY-EXT
         CommandStatus               commandStatus = 4;
         WhitelistInfo               whitelistInfo = 16;
         WhitelistEntryInfo          whitelistEntryInfo = 17;
