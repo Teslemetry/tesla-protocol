@@ -141,6 +141,35 @@ class WhitelistOperation_information_E(int, metaclass=_enum_type_wrapper.EnumTyp
     WHITELISTOPERATION_INFORMATION_NON_SERVICE_KEY_ATTEMPTING_TO_ADD_PREDELIVERY_KEY: _ClassVar[WhitelistOperation_information_E]
     WHITELISTOPERATION_INFORMATION_SERVICE_KEY_ATTEMPTING_TO_ADD_PREDELIVERY_KEY_WHEN_ALREADY_DELIVERED: _ClassVar[WhitelistOperation_information_E]
 
+class AuthenticationLevel_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    AUTHENTICATION_LEVEL_NONE: _ClassVar[AuthenticationLevel_E]
+    AUTHENTICATION_LEVEL_UNLOCK: _ClassVar[AuthenticationLevel_E]
+    AUTHENTICATION_LEVEL_DRIVE: _ClassVar[AuthenticationLevel_E]
+
+class AuthenticationReason_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    AUTHENTICATIONREASON_NOT_DOCUMENTED: _ClassVar[AuthenticationReason_E]
+    AUTHENTICATIONREASON_IDENTIFICATION: _ClassVar[AuthenticationReason_E]
+    AUTHENTICATIONREASON_POWER_ON_VEHICLE_REQUEST: _ClassVar[AuthenticationReason_E]
+    AUTHENTICATIONREASON_GTW_REQUEST: _ClassVar[AuthenticationReason_E]
+    AUTHENTICATIONREASON_UI_UNLOCK_PASSIVE_AUTH: _ClassVar[AuthenticationReason_E]
+    AUTHENTICATIONREASON_PASSIVE_UNLOCK_EXTERIOR_HANDLE_PULL: _ClassVar[AuthenticationReason_E]
+    AUTHENTICATIONREASON_PASSIVE_UNLOCK_INTERIOR_HANDLE_PULL: _ClassVar[AuthenticationReason_E]
+    AUTHENTICATIONREASON_PASSIVE_UNLOCK_AUTOPRESENT_DOOR: _ClassVar[AuthenticationReason_E]
+    AUTHENTICATIONREASON_ENTERED_HIGHER_AUTH_ZONE: _ClassVar[AuthenticationReason_E]
+    AUTHENTICATIONREASON_WALK_UP_UNLOCK: _ClassVar[AuthenticationReason_E]
+    AUTHENTICATIONREASON_IMMOBILIZER: _ClassVar[AuthenticationReason_E]
+
+class AuthenticationRejection_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    AUTHENTICATIONREJECTION_NONE: _ClassVar[AuthenticationRejection_E]
+    AUTHENTICATIONREJECTION_DEVICE_STATIONARY: _ClassVar[AuthenticationRejection_E]
+    AUTHENTICATIONREJECTION_PASSIVE_DISABLED: _ClassVar[AuthenticationRejection_E]
+    AUTHENTICATIONREJECTION_NO_TOKEN: _ClassVar[AuthenticationRejection_E]
+    AUTHENTICATIONREJECTION_PASSIVE_DISABLED_AUTOMATION: _ClassVar[AuthenticationRejection_E]
+    AUTHENTICATIONREJECTION_DEVICE_NOT_UNLOCKED_ON_WRIST: _ClassVar[AuthenticationRejection_E]
+
 class ClosureState_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     CLOSURESTATE_CLOSED: _ClassVar[ClosureState_E]
@@ -291,6 +320,26 @@ WHITELISTOPERATION_INFORMATION_NON_SERVICE_KEY_ATTEMPTING_TO_ADD_RIDER_KEY: Whit
 WHITELISTOPERATION_INFORMATION_ATTEMPTING_TO_ADD_RIDER_KEY_OUTSIDE_FLEET_MODE: WhitelistOperation_information_E
 WHITELISTOPERATION_INFORMATION_NON_SERVICE_KEY_ATTEMPTING_TO_ADD_PREDELIVERY_KEY: WhitelistOperation_information_E
 WHITELISTOPERATION_INFORMATION_SERVICE_KEY_ATTEMPTING_TO_ADD_PREDELIVERY_KEY_WHEN_ALREADY_DELIVERED: WhitelistOperation_information_E
+AUTHENTICATION_LEVEL_NONE: AuthenticationLevel_E
+AUTHENTICATION_LEVEL_UNLOCK: AuthenticationLevel_E
+AUTHENTICATION_LEVEL_DRIVE: AuthenticationLevel_E
+AUTHENTICATIONREASON_NOT_DOCUMENTED: AuthenticationReason_E
+AUTHENTICATIONREASON_IDENTIFICATION: AuthenticationReason_E
+AUTHENTICATIONREASON_POWER_ON_VEHICLE_REQUEST: AuthenticationReason_E
+AUTHENTICATIONREASON_GTW_REQUEST: AuthenticationReason_E
+AUTHENTICATIONREASON_UI_UNLOCK_PASSIVE_AUTH: AuthenticationReason_E
+AUTHENTICATIONREASON_PASSIVE_UNLOCK_EXTERIOR_HANDLE_PULL: AuthenticationReason_E
+AUTHENTICATIONREASON_PASSIVE_UNLOCK_INTERIOR_HANDLE_PULL: AuthenticationReason_E
+AUTHENTICATIONREASON_PASSIVE_UNLOCK_AUTOPRESENT_DOOR: AuthenticationReason_E
+AUTHENTICATIONREASON_ENTERED_HIGHER_AUTH_ZONE: AuthenticationReason_E
+AUTHENTICATIONREASON_WALK_UP_UNLOCK: AuthenticationReason_E
+AUTHENTICATIONREASON_IMMOBILIZER: AuthenticationReason_E
+AUTHENTICATIONREJECTION_NONE: AuthenticationRejection_E
+AUTHENTICATIONREJECTION_DEVICE_STATIONARY: AuthenticationRejection_E
+AUTHENTICATIONREJECTION_PASSIVE_DISABLED: AuthenticationRejection_E
+AUTHENTICATIONREJECTION_NO_TOKEN: AuthenticationRejection_E
+AUTHENTICATIONREJECTION_PASSIVE_DISABLED_AUTOMATION: AuthenticationRejection_E
+AUTHENTICATIONREJECTION_DEVICE_NOT_UNLOCKED_ON_WRIST: AuthenticationRejection_E
 CLOSURESTATE_CLOSED: ClosureState_E
 CLOSURESTATE_OPEN: ClosureState_E
 CLOSURESTATE_AJAR: ClosureState_E
@@ -526,20 +575,54 @@ class AutonomyCommand(_message.Message):
     def __init__(self, pullOverCommand: _Optional[_Union[AutonomyCommand.PullOverCommand, _Mapping]]=...) -> None:
         ...
 
+class AuthenticationRequestToken(_message.Message):
+    __slots__ = ('token',)
+    TOKEN_FIELD_NUMBER: _ClassVar[int]
+    token: bytes
+
+    def __init__(self, token: _Optional[bytes]=...) -> None:
+        ...
+
+class AuthenticationRequest(_message.Message):
+    __slots__ = ('sessionInfo', 'requestedLevel', 'reasonsForAuth')
+    SESSIONINFO_FIELD_NUMBER: _ClassVar[int]
+    REQUESTEDLEVEL_FIELD_NUMBER: _ClassVar[int]
+    REASONSFORAUTH_FIELD_NUMBER: _ClassVar[int]
+    sessionInfo: AuthenticationRequestToken
+    requestedLevel: AuthenticationLevel_E
+    reasonsForAuth: _containers.RepeatedScalarFieldContainer[AuthenticationReason_E]
+
+    def __init__(self, sessionInfo: _Optional[_Union[AuthenticationRequestToken, _Mapping]]=..., requestedLevel: _Optional[_Union[AuthenticationLevel_E, str]]=..., reasonsForAuth: _Optional[_Iterable[_Union[AuthenticationReason_E, str]]]=...) -> None:
+        ...
+
+class AuthenticationResponse(_message.Message):
+    __slots__ = ('authenticationLevel', 'estimatedDistance', 'authenticationRejection')
+    AUTHENTICATIONLEVEL_FIELD_NUMBER: _ClassVar[int]
+    ESTIMATEDDISTANCE_FIELD_NUMBER: _ClassVar[int]
+    AUTHENTICATIONREJECTION_FIELD_NUMBER: _ClassVar[int]
+    authenticationLevel: AuthenticationLevel_E
+    estimatedDistance: int
+    authenticationRejection: AuthenticationRejection_E
+
+    def __init__(self, authenticationLevel: _Optional[_Union[AuthenticationLevel_E, str]]=..., estimatedDistance: _Optional[int]=..., authenticationRejection: _Optional[_Union[AuthenticationRejection_E, str]]=...) -> None:
+        ...
+
 class UnsignedMessage(_message.Message):
-    __slots__ = ('InformationRequest', 'RKEAction', 'closureMoveRequest', 'WhitelistOperation', 'autonomyCommand')
+    __slots__ = ('InformationRequest', 'RKEAction', 'authenticationResponse', 'closureMoveRequest', 'WhitelistOperation', 'autonomyCommand')
     INFORMATIONREQUEST_FIELD_NUMBER: _ClassVar[int]
     RKEACTION_FIELD_NUMBER: _ClassVar[int]
+    AUTHENTICATIONRESPONSE_FIELD_NUMBER: _ClassVar[int]
     CLOSUREMOVEREQUEST_FIELD_NUMBER: _ClassVar[int]
     WHITELISTOPERATION_FIELD_NUMBER: _ClassVar[int]
     AUTONOMYCOMMAND_FIELD_NUMBER: _ClassVar[int]
     InformationRequest: InformationRequest
     RKEAction: RKEAction_E
+    authenticationResponse: AuthenticationResponse
     closureMoveRequest: ClosureMoveRequest
     WhitelistOperation: WhitelistOperation
     autonomyCommand: AutonomyCommand
 
-    def __init__(self, InformationRequest: _Optional[_Union[InformationRequest, _Mapping]]=..., RKEAction: _Optional[_Union[RKEAction_E, str]]=..., closureMoveRequest: _Optional[_Union[ClosureMoveRequest, _Mapping]]=..., WhitelistOperation: _Optional[_Union[WhitelistOperation, _Mapping]]=..., autonomyCommand: _Optional[_Union[AutonomyCommand, _Mapping]]=...) -> None:
+    def __init__(self, InformationRequest: _Optional[_Union[InformationRequest, _Mapping]]=..., RKEAction: _Optional[_Union[RKEAction_E, str]]=..., authenticationResponse: _Optional[_Union[AuthenticationResponse, _Mapping]]=..., closureMoveRequest: _Optional[_Union[ClosureMoveRequest, _Mapping]]=..., WhitelistOperation: _Optional[_Union[WhitelistOperation, _Mapping]]=..., autonomyCommand: _Optional[_Union[AutonomyCommand, _Mapping]]=...) -> None:
         ...
 
 class ClosureStatuses(_message.Message):
@@ -593,17 +676,19 @@ class VehicleStatus(_message.Message):
         ...
 
 class FromVCSECMessage(_message.Message):
-    __slots__ = ('vehicleStatus', 'commandStatus', 'whitelistInfo', 'whitelistEntryInfo', 'nominalError')
+    __slots__ = ('vehicleStatus', 'authenticationRequest', 'commandStatus', 'whitelistInfo', 'whitelistEntryInfo', 'nominalError')
     VEHICLESTATUS_FIELD_NUMBER: _ClassVar[int]
+    AUTHENTICATIONREQUEST_FIELD_NUMBER: _ClassVar[int]
     COMMANDSTATUS_FIELD_NUMBER: _ClassVar[int]
     WHITELISTINFO_FIELD_NUMBER: _ClassVar[int]
     WHITELISTENTRYINFO_FIELD_NUMBER: _ClassVar[int]
     NOMINALERROR_FIELD_NUMBER: _ClassVar[int]
     vehicleStatus: VehicleStatus
+    authenticationRequest: AuthenticationRequest
     commandStatus: CommandStatus
     whitelistInfo: WhitelistInfo
     whitelistEntryInfo: WhitelistEntryInfo
     nominalError: _errors_pb2.NominalError
 
-    def __init__(self, vehicleStatus: _Optional[_Union[VehicleStatus, _Mapping]]=..., commandStatus: _Optional[_Union[CommandStatus, _Mapping]]=..., whitelistInfo: _Optional[_Union[WhitelistInfo, _Mapping]]=..., whitelistEntryInfo: _Optional[_Union[WhitelistEntryInfo, _Mapping]]=..., nominalError: _Optional[_Union[_errors_pb2.NominalError, _Mapping]]=...) -> None:
+    def __init__(self, vehicleStatus: _Optional[_Union[VehicleStatus, _Mapping]]=..., authenticationRequest: _Optional[_Union[AuthenticationRequest, _Mapping]]=..., commandStatus: _Optional[_Union[CommandStatus, _Mapping]]=..., whitelistInfo: _Optional[_Union[WhitelistInfo, _Mapping]]=..., whitelistEntryInfo: _Optional[_Union[WhitelistEntryInfo, _Mapping]]=..., nominalError: _Optional[_Union[_errors_pb2.NominalError, _Mapping]]=...) -> None:
         ...

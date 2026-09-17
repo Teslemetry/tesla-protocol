@@ -346,9 +346,9 @@
         "typescript": "packages/typescript/src/command",
         "python": "packages/python/tesla_protocol/command"
       },
-      "messages": 325,
-      "enums": 100,
-      "fields": 1458,
+      "messages": 328,
+      "enums": 103,
+      "fields": 1467,
       "files": [
         {
           "package": "CarServer",
@@ -10769,6 +10769,95 @@
               "nested_enums": []
             },
             {
+              "fqn": ".VCSEC.AuthenticationRequestToken",
+              "name": "AuthenticationRequestToken",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "token",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".VCSEC.AuthenticationRequest",
+              "name": "AuthenticationRequest",
+              "fields": [
+                {
+                  "number": 2,
+                  "name": "sessionInfo",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".VCSEC.AuthenticationRequestToken",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "requestedLevel",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".VCSEC.AuthenticationLevel_E",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "reasonsForAuth",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".VCSEC.AuthenticationReason_E",
+                  "label": "LABEL_REPEATED",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".VCSEC.AuthenticationResponse",
+              "name": "AuthenticationResponse",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "authenticationLevel",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".VCSEC.AuthenticationLevel_E",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "estimatedDistance",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "authenticationRejection",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".VCSEC.AuthenticationRejection_E",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
               "fqn": ".VCSEC.UnsignedMessage",
               "name": "UnsignedMessage",
               "fields": [
@@ -10785,6 +10874,14 @@
                   "name": "RKEAction",
                   "type": "TYPE_ENUM",
                   "type_name": ".VCSEC.RKEAction_E",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sub_message"
+                },
+                {
+                  "number": 3,
+                  "name": "authenticationResponse",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".VCSEC.AuthenticationResponse",
                   "label": "LABEL_OPTIONAL",
                   "oneof": "sub_message"
                 },
@@ -11012,6 +11109,14 @@
                   "name": "vehicleStatus",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".VCSEC.VehicleStatus",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sub_message"
+                },
+                {
+                  "number": 3,
+                  "name": "authenticationRequest",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".VCSEC.AuthenticationRequest",
                   "label": "LABEL_OPTIONAL",
                   "oneof": "sub_message"
                 },
@@ -11558,6 +11663,110 @@
                 {
                   "number": 32,
                   "name": "WHITELISTOPERATION_INFORMATION_SERVICE_KEY_ATTEMPTING_TO_ADD_PREDELIVERY_KEY_WHEN_ALREADY_DELIVERED"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".VCSEC.AuthenticationLevel_E",
+              "name": "AuthenticationLevel_E",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "AUTHENTICATION_LEVEL_NONE"
+                },
+                {
+                  "number": 1,
+                  "name": "AUTHENTICATION_LEVEL_UNLOCK"
+                },
+                {
+                  "number": 2,
+                  "name": "AUTHENTICATION_LEVEL_DRIVE"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".VCSEC.AuthenticationReason_E",
+              "name": "AuthenticationReason_E",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "AUTHENTICATIONREASON_NOT_DOCUMENTED"
+                },
+                {
+                  "number": 1,
+                  "name": "AUTHENTICATIONREASON_IDENTIFICATION"
+                },
+                {
+                  "number": 2,
+                  "name": "AUTHENTICATIONREASON_POWER_ON_VEHICLE_REQUEST"
+                },
+                {
+                  "number": 3,
+                  "name": "AUTHENTICATIONREASON_GTW_REQUEST"
+                },
+                {
+                  "number": 4,
+                  "name": "AUTHENTICATIONREASON_UI_UNLOCK_PASSIVE_AUTH"
+                },
+                {
+                  "number": 5,
+                  "name": "AUTHENTICATIONREASON_PASSIVE_UNLOCK_EXTERIOR_HANDLE_PULL"
+                },
+                {
+                  "number": 6,
+                  "name": "AUTHENTICATIONREASON_PASSIVE_UNLOCK_INTERIOR_HANDLE_PULL"
+                },
+                {
+                  "number": 7,
+                  "name": "AUTHENTICATIONREASON_PASSIVE_UNLOCK_AUTOPRESENT_DOOR"
+                },
+                {
+                  "number": 8,
+                  "name": "AUTHENTICATIONREASON_ENTERED_HIGHER_AUTH_ZONE"
+                },
+                {
+                  "number": 9,
+                  "name": "AUTHENTICATIONREASON_WALK_UP_UNLOCK"
+                },
+                {
+                  "number": 10,
+                  "name": "AUTHENTICATIONREASON_IMMOBILIZER"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".VCSEC.AuthenticationRejection_E",
+              "name": "AuthenticationRejection_E",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "AUTHENTICATIONREJECTION_NONE"
+                },
+                {
+                  "number": 1,
+                  "name": "AUTHENTICATIONREJECTION_DEVICE_STATIONARY"
+                },
+                {
+                  "number": 2,
+                  "name": "AUTHENTICATIONREJECTION_PASSIVE_DISABLED"
+                },
+                {
+                  "number": 3,
+                  "name": "AUTHENTICATIONREJECTION_NO_TOKEN"
+                },
+                {
+                  "number": 4,
+                  "name": "AUTHENTICATIONREJECTION_PASSIVE_DISABLED_AUTOMATION"
+                },
+                {
+                  "number": 5,
+                  "name": "AUTHENTICATIONREJECTION_DEVICE_NOT_UNLOCKED_ON_WRIST"
                 }
               ],
               "reserved_ranges": [],
@@ -43037,9 +43246,9 @@
   "totals": {
     "source_files": 39,
     "groups": 7,
-    "messages": 886,
-    "enums": 245,
-    "fields": 2862
+    "messages": 889,
+    "enums": 248,
+    "fields": 2871
   },
   "registration": {
     "consistent": true,
