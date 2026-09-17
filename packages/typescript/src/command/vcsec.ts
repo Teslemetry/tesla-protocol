@@ -891,6 +891,193 @@ export function whitelistOperationInformationEToJSON(object: WhitelistOperationI
   }
 }
 
+/**
+ * Vehicle walk-up Bluetooth authentication challenge. Field numbers and types
+ * are verified against a live vehicle; unverified field names are marked inline.
+ */
+export enum AuthenticationLevelE {
+  AUTHENTICATION_LEVEL_NONE = 0,
+  AUTHENTICATION_LEVEL_UNLOCK = 1,
+  AUTHENTICATION_LEVEL_DRIVE = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function authenticationLevelEFromJSON(object: any): AuthenticationLevelE {
+  switch (object) {
+    case 0:
+    case "AUTHENTICATION_LEVEL_NONE":
+      return AuthenticationLevelE.AUTHENTICATION_LEVEL_NONE;
+    case 1:
+    case "AUTHENTICATION_LEVEL_UNLOCK":
+      return AuthenticationLevelE.AUTHENTICATION_LEVEL_UNLOCK;
+    case 2:
+    case "AUTHENTICATION_LEVEL_DRIVE":
+      return AuthenticationLevelE.AUTHENTICATION_LEVEL_DRIVE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return AuthenticationLevelE.UNRECOGNIZED;
+  }
+}
+
+export function authenticationLevelEToJSON(object: AuthenticationLevelE): string {
+  switch (object) {
+    case AuthenticationLevelE.AUTHENTICATION_LEVEL_NONE:
+      return "AUTHENTICATION_LEVEL_NONE";
+    case AuthenticationLevelE.AUTHENTICATION_LEVEL_UNLOCK:
+      return "AUTHENTICATION_LEVEL_UNLOCK";
+    case AuthenticationLevelE.AUTHENTICATION_LEVEL_DRIVE:
+      return "AUTHENTICATION_LEVEL_DRIVE";
+    case AuthenticationLevelE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum AuthenticationReasonE {
+  AUTHENTICATIONREASON_NOT_DOCUMENTED = 0,
+  AUTHENTICATIONREASON_IDENTIFICATION = 1,
+  AUTHENTICATIONREASON_POWER_ON_VEHICLE_REQUEST = 2,
+  AUTHENTICATIONREASON_GTW_REQUEST = 3,
+  AUTHENTICATIONREASON_UI_UNLOCK_PASSIVE_AUTH = 4,
+  AUTHENTICATIONREASON_PASSIVE_UNLOCK_EXTERIOR_HANDLE_PULL = 5,
+  AUTHENTICATIONREASON_PASSIVE_UNLOCK_INTERIOR_HANDLE_PULL = 6,
+  AUTHENTICATIONREASON_PASSIVE_UNLOCK_AUTOPRESENT_DOOR = 7,
+  AUTHENTICATIONREASON_ENTERED_HIGHER_AUTH_ZONE = 8,
+  AUTHENTICATIONREASON_WALK_UP_UNLOCK = 9,
+  AUTHENTICATIONREASON_IMMOBILIZER = 10,
+  UNRECOGNIZED = -1,
+}
+
+export function authenticationReasonEFromJSON(object: any): AuthenticationReasonE {
+  switch (object) {
+    case 0:
+    case "AUTHENTICATIONREASON_NOT_DOCUMENTED":
+      return AuthenticationReasonE.AUTHENTICATIONREASON_NOT_DOCUMENTED;
+    case 1:
+    case "AUTHENTICATIONREASON_IDENTIFICATION":
+      return AuthenticationReasonE.AUTHENTICATIONREASON_IDENTIFICATION;
+    case 2:
+    case "AUTHENTICATIONREASON_POWER_ON_VEHICLE_REQUEST":
+      return AuthenticationReasonE.AUTHENTICATIONREASON_POWER_ON_VEHICLE_REQUEST;
+    case 3:
+    case "AUTHENTICATIONREASON_GTW_REQUEST":
+      return AuthenticationReasonE.AUTHENTICATIONREASON_GTW_REQUEST;
+    case 4:
+    case "AUTHENTICATIONREASON_UI_UNLOCK_PASSIVE_AUTH":
+      return AuthenticationReasonE.AUTHENTICATIONREASON_UI_UNLOCK_PASSIVE_AUTH;
+    case 5:
+    case "AUTHENTICATIONREASON_PASSIVE_UNLOCK_EXTERIOR_HANDLE_PULL":
+      return AuthenticationReasonE.AUTHENTICATIONREASON_PASSIVE_UNLOCK_EXTERIOR_HANDLE_PULL;
+    case 6:
+    case "AUTHENTICATIONREASON_PASSIVE_UNLOCK_INTERIOR_HANDLE_PULL":
+      return AuthenticationReasonE.AUTHENTICATIONREASON_PASSIVE_UNLOCK_INTERIOR_HANDLE_PULL;
+    case 7:
+    case "AUTHENTICATIONREASON_PASSIVE_UNLOCK_AUTOPRESENT_DOOR":
+      return AuthenticationReasonE.AUTHENTICATIONREASON_PASSIVE_UNLOCK_AUTOPRESENT_DOOR;
+    case 8:
+    case "AUTHENTICATIONREASON_ENTERED_HIGHER_AUTH_ZONE":
+      return AuthenticationReasonE.AUTHENTICATIONREASON_ENTERED_HIGHER_AUTH_ZONE;
+    case 9:
+    case "AUTHENTICATIONREASON_WALK_UP_UNLOCK":
+      return AuthenticationReasonE.AUTHENTICATIONREASON_WALK_UP_UNLOCK;
+    case 10:
+    case "AUTHENTICATIONREASON_IMMOBILIZER":
+      return AuthenticationReasonE.AUTHENTICATIONREASON_IMMOBILIZER;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return AuthenticationReasonE.UNRECOGNIZED;
+  }
+}
+
+export function authenticationReasonEToJSON(object: AuthenticationReasonE): string {
+  switch (object) {
+    case AuthenticationReasonE.AUTHENTICATIONREASON_NOT_DOCUMENTED:
+      return "AUTHENTICATIONREASON_NOT_DOCUMENTED";
+    case AuthenticationReasonE.AUTHENTICATIONREASON_IDENTIFICATION:
+      return "AUTHENTICATIONREASON_IDENTIFICATION";
+    case AuthenticationReasonE.AUTHENTICATIONREASON_POWER_ON_VEHICLE_REQUEST:
+      return "AUTHENTICATIONREASON_POWER_ON_VEHICLE_REQUEST";
+    case AuthenticationReasonE.AUTHENTICATIONREASON_GTW_REQUEST:
+      return "AUTHENTICATIONREASON_GTW_REQUEST";
+    case AuthenticationReasonE.AUTHENTICATIONREASON_UI_UNLOCK_PASSIVE_AUTH:
+      return "AUTHENTICATIONREASON_UI_UNLOCK_PASSIVE_AUTH";
+    case AuthenticationReasonE.AUTHENTICATIONREASON_PASSIVE_UNLOCK_EXTERIOR_HANDLE_PULL:
+      return "AUTHENTICATIONREASON_PASSIVE_UNLOCK_EXTERIOR_HANDLE_PULL";
+    case AuthenticationReasonE.AUTHENTICATIONREASON_PASSIVE_UNLOCK_INTERIOR_HANDLE_PULL:
+      return "AUTHENTICATIONREASON_PASSIVE_UNLOCK_INTERIOR_HANDLE_PULL";
+    case AuthenticationReasonE.AUTHENTICATIONREASON_PASSIVE_UNLOCK_AUTOPRESENT_DOOR:
+      return "AUTHENTICATIONREASON_PASSIVE_UNLOCK_AUTOPRESENT_DOOR";
+    case AuthenticationReasonE.AUTHENTICATIONREASON_ENTERED_HIGHER_AUTH_ZONE:
+      return "AUTHENTICATIONREASON_ENTERED_HIGHER_AUTH_ZONE";
+    case AuthenticationReasonE.AUTHENTICATIONREASON_WALK_UP_UNLOCK:
+      return "AUTHENTICATIONREASON_WALK_UP_UNLOCK";
+    case AuthenticationReasonE.AUTHENTICATIONREASON_IMMOBILIZER:
+      return "AUTHENTICATIONREASON_IMMOBILIZER";
+    case AuthenticationReasonE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum AuthenticationRejectionE {
+  AUTHENTICATIONREJECTION_NONE = 0,
+  AUTHENTICATIONREJECTION_DEVICE_STATIONARY = 1,
+  AUTHENTICATIONREJECTION_PASSIVE_DISABLED = 2,
+  AUTHENTICATIONREJECTION_NO_TOKEN = 3,
+  AUTHENTICATIONREJECTION_PASSIVE_DISABLED_AUTOMATION = 4,
+  AUTHENTICATIONREJECTION_DEVICE_NOT_UNLOCKED_ON_WRIST = 5,
+  UNRECOGNIZED = -1,
+}
+
+export function authenticationRejectionEFromJSON(object: any): AuthenticationRejectionE {
+  switch (object) {
+    case 0:
+    case "AUTHENTICATIONREJECTION_NONE":
+      return AuthenticationRejectionE.AUTHENTICATIONREJECTION_NONE;
+    case 1:
+    case "AUTHENTICATIONREJECTION_DEVICE_STATIONARY":
+      return AuthenticationRejectionE.AUTHENTICATIONREJECTION_DEVICE_STATIONARY;
+    case 2:
+    case "AUTHENTICATIONREJECTION_PASSIVE_DISABLED":
+      return AuthenticationRejectionE.AUTHENTICATIONREJECTION_PASSIVE_DISABLED;
+    case 3:
+    case "AUTHENTICATIONREJECTION_NO_TOKEN":
+      return AuthenticationRejectionE.AUTHENTICATIONREJECTION_NO_TOKEN;
+    case 4:
+    case "AUTHENTICATIONREJECTION_PASSIVE_DISABLED_AUTOMATION":
+      return AuthenticationRejectionE.AUTHENTICATIONREJECTION_PASSIVE_DISABLED_AUTOMATION;
+    case 5:
+    case "AUTHENTICATIONREJECTION_DEVICE_NOT_UNLOCKED_ON_WRIST":
+      return AuthenticationRejectionE.AUTHENTICATIONREJECTION_DEVICE_NOT_UNLOCKED_ON_WRIST;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return AuthenticationRejectionE.UNRECOGNIZED;
+  }
+}
+
+export function authenticationRejectionEToJSON(object: AuthenticationRejectionE): string {
+  switch (object) {
+    case AuthenticationRejectionE.AUTHENTICATIONREJECTION_NONE:
+      return "AUTHENTICATIONREJECTION_NONE";
+    case AuthenticationRejectionE.AUTHENTICATIONREJECTION_DEVICE_STATIONARY:
+      return "AUTHENTICATIONREJECTION_DEVICE_STATIONARY";
+    case AuthenticationRejectionE.AUTHENTICATIONREJECTION_PASSIVE_DISABLED:
+      return "AUTHENTICATIONREJECTION_PASSIVE_DISABLED";
+    case AuthenticationRejectionE.AUTHENTICATIONREJECTION_NO_TOKEN:
+      return "AUTHENTICATIONREJECTION_NO_TOKEN";
+    case AuthenticationRejectionE.AUTHENTICATIONREJECTION_PASSIVE_DISABLED_AUTOMATION:
+      return "AUTHENTICATIONREJECTION_PASSIVE_DISABLED_AUTOMATION";
+    case AuthenticationRejectionE.AUTHENTICATIONREJECTION_DEVICE_NOT_UNLOCKED_ON_WRIST:
+      return "AUTHENTICATIONREJECTION_DEVICE_NOT_UNLOCKED_ON_WRIST";
+    case AuthenticationRejectionE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export enum ClosureStateE {
   CLOSURESTATE_CLOSED = 0,
   CLOSURESTATE_OPEN = 1,
@@ -1077,7 +1264,6 @@ export function userPresenceEToJSON(object: UserPresenceE): string {
   }
 }
 
-/** ===== TESLEMETRY-EXT BEGIN ===== */
 export enum UIDesireE {
   UI_DESIRE_NONE = 0,
   UI_DESIRE_HAS_DATA = 1,
@@ -1260,7 +1446,6 @@ export interface CommandStatus {
   whitelistOperationStatus?: WhitelistOperationStatus | undefined;
 }
 
-/** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface AutonomyCommand {
   pullOverCommand?: AutonomyCommand_PullOverCommand | undefined;
 }
@@ -1269,9 +1454,35 @@ export interface AutonomyCommand {
 export interface AutonomyCommand_PullOverCommand {
 }
 
+export interface AuthenticationRequestToken {
+  /** name unverified */
+  token: Uint8Array;
+}
+
+export interface AuthenticationRequest {
+  /** name unverified */
+  sessionInfo:
+    | AuthenticationRequestToken
+    | undefined;
+  /** name unverified */
+  requestedLevel: AuthenticationLevelE;
+  /** name unverified */
+  reasonsForAuth: AuthenticationReasonE[];
+}
+
+export interface AuthenticationResponse {
+  /** name unverified */
+  authenticationLevel: AuthenticationLevelE;
+  /** name unverified */
+  estimatedDistance: number;
+  /** name unverified */
+  authenticationRejection: AuthenticationRejectionE;
+}
+
 export interface UnsignedMessage {
   InformationRequest?: InformationRequest | undefined;
   RKEAction?: RKEActionE | undefined;
+  authenticationResponse?: AuthenticationResponse | undefined;
   closureMoveRequest?: ClosureMoveRequest | undefined;
   WhitelistOperation?:
     | WhitelistOperation
@@ -1311,6 +1522,7 @@ export interface VehicleStatus {
 
 export interface FromVCSECMessage {
   vehicleStatus?: VehicleStatus | undefined;
+  authenticationRequest?: AuthenticationRequest | undefined;
   commandStatus?: CommandStatus | undefined;
   whitelistInfo?: WhitelistInfo | undefined;
   whitelistEntryInfo?: WhitelistEntryInfo | undefined;
@@ -3031,10 +3243,273 @@ export const AutonomyCommand_PullOverCommand: MessageFns<AutonomyCommand_PullOve
   },
 };
 
+function createBaseAuthenticationRequestToken(): AuthenticationRequestToken {
+  return { token: new Uint8Array(0) };
+}
+
+export const AuthenticationRequestToken: MessageFns<AuthenticationRequestToken> = {
+  encode(message: AuthenticationRequestToken, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.token.length !== 0) {
+      writer.uint32(10).bytes(message.token);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AuthenticationRequestToken {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAuthenticationRequestToken();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.token = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AuthenticationRequestToken {
+    return { token: isSet(object.token) ? bytesFromBase64(object.token) : new Uint8Array(0) };
+  },
+
+  toJSON(message: AuthenticationRequestToken): unknown {
+    const obj: any = {};
+    if (message.token !== undefined) {
+      obj.token = base64FromBytes(message.token);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AuthenticationRequestToken>, I>>(base?: I): AuthenticationRequestToken {
+    return AuthenticationRequestToken.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AuthenticationRequestToken>, I>>(object: I): AuthenticationRequestToken {
+    const message = createBaseAuthenticationRequestToken();
+    message.token = object.token ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseAuthenticationRequest(): AuthenticationRequest {
+  return { sessionInfo: undefined, requestedLevel: 0, reasonsForAuth: [] };
+}
+
+export const AuthenticationRequest: MessageFns<AuthenticationRequest> = {
+  encode(message: AuthenticationRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.sessionInfo !== undefined) {
+      AuthenticationRequestToken.encode(message.sessionInfo, writer.uint32(18).fork()).join();
+    }
+    if (message.requestedLevel !== 0) {
+      writer.uint32(24).int32(message.requestedLevel);
+    }
+    writer.uint32(34).fork();
+    for (const v of message.reasonsForAuth) {
+      writer.int32(v);
+    }
+    writer.join();
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AuthenticationRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAuthenticationRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.sessionInfo = AuthenticationRequestToken.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.requestedLevel = reader.int32() as any;
+          continue;
+        }
+        case 4: {
+          if (tag === 32) {
+            message.reasonsForAuth.push(reader.int32() as any);
+
+            continue;
+          }
+
+          if (tag === 34) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.reasonsForAuth.push(reader.int32() as any);
+            }
+
+            continue;
+          }
+
+          break;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AuthenticationRequest {
+    return {
+      sessionInfo: isSet(object.sessionInfo) ? AuthenticationRequestToken.fromJSON(object.sessionInfo) : undefined,
+      requestedLevel: isSet(object.requestedLevel) ? authenticationLevelEFromJSON(object.requestedLevel) : 0,
+      reasonsForAuth: globalThis.Array.isArray(object?.reasonsForAuth)
+        ? object.reasonsForAuth.map((e: any) => authenticationReasonEFromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: AuthenticationRequest): unknown {
+    const obj: any = {};
+    if (message.sessionInfo !== undefined) {
+      obj.sessionInfo = AuthenticationRequestToken.toJSON(message.sessionInfo);
+    }
+    if (message.requestedLevel !== undefined) {
+      obj.requestedLevel = authenticationLevelEToJSON(message.requestedLevel);
+    }
+    if (message.reasonsForAuth?.length) {
+      obj.reasonsForAuth = message.reasonsForAuth.map((e) => authenticationReasonEToJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AuthenticationRequest>, I>>(base?: I): AuthenticationRequest {
+    return AuthenticationRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AuthenticationRequest>, I>>(object: I): AuthenticationRequest {
+    const message = createBaseAuthenticationRequest();
+    message.sessionInfo = (object.sessionInfo !== undefined && object.sessionInfo !== null)
+      ? AuthenticationRequestToken.fromPartial(object.sessionInfo)
+      : undefined;
+    message.requestedLevel = object.requestedLevel ?? 0;
+    message.reasonsForAuth = object.reasonsForAuth?.map((e) => e) || [];
+    return message;
+  },
+};
+
+function createBaseAuthenticationResponse(): AuthenticationResponse {
+  return { authenticationLevel: 0, estimatedDistance: 0, authenticationRejection: 0 };
+}
+
+export const AuthenticationResponse: MessageFns<AuthenticationResponse> = {
+  encode(message: AuthenticationResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.authenticationLevel !== 0) {
+      writer.uint32(8).int32(message.authenticationLevel);
+    }
+    if (message.estimatedDistance !== 0) {
+      writer.uint32(16).uint32(message.estimatedDistance);
+    }
+    if (message.authenticationRejection !== 0) {
+      writer.uint32(24).int32(message.authenticationRejection);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AuthenticationResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAuthenticationResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.authenticationLevel = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.estimatedDistance = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.authenticationRejection = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AuthenticationResponse {
+    return {
+      authenticationLevel: isSet(object.authenticationLevel)
+        ? authenticationLevelEFromJSON(object.authenticationLevel)
+        : 0,
+      estimatedDistance: isSet(object.estimatedDistance) ? globalThis.Number(object.estimatedDistance) : 0,
+      authenticationRejection: isSet(object.authenticationRejection)
+        ? authenticationRejectionEFromJSON(object.authenticationRejection)
+        : 0,
+    };
+  },
+
+  toJSON(message: AuthenticationResponse): unknown {
+    const obj: any = {};
+    if (message.authenticationLevel !== undefined) {
+      obj.authenticationLevel = authenticationLevelEToJSON(message.authenticationLevel);
+    }
+    if (message.estimatedDistance !== undefined) {
+      obj.estimatedDistance = Math.round(message.estimatedDistance);
+    }
+    if (message.authenticationRejection !== undefined) {
+      obj.authenticationRejection = authenticationRejectionEToJSON(message.authenticationRejection);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AuthenticationResponse>, I>>(base?: I): AuthenticationResponse {
+    return AuthenticationResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AuthenticationResponse>, I>>(object: I): AuthenticationResponse {
+    const message = createBaseAuthenticationResponse();
+    message.authenticationLevel = object.authenticationLevel ?? 0;
+    message.estimatedDistance = object.estimatedDistance ?? 0;
+    message.authenticationRejection = object.authenticationRejection ?? 0;
+    return message;
+  },
+};
+
 function createBaseUnsignedMessage(): UnsignedMessage {
   return {
     InformationRequest: undefined,
     RKEAction: undefined,
+    authenticationResponse: undefined,
     closureMoveRequest: undefined,
     WhitelistOperation: undefined,
     autonomyCommand: undefined,
@@ -3048,6 +3523,9 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
     }
     if (message.RKEAction !== undefined) {
       writer.uint32(16).int32(message.RKEAction);
+    }
+    if (message.authenticationResponse !== undefined) {
+      AuthenticationResponse.encode(message.authenticationResponse, writer.uint32(26).fork()).join();
     }
     if (message.closureMoveRequest !== undefined) {
       ClosureMoveRequest.encode(message.closureMoveRequest, writer.uint32(34).fork()).join();
@@ -3082,6 +3560,14 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
           }
 
           message.RKEAction = reader.int32() as any;
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.authenticationResponse = AuthenticationResponse.decode(reader, reader.uint32());
           continue;
         }
         case 4: {
@@ -3123,6 +3609,9 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
         ? InformationRequest.fromJSON(object.InformationRequest)
         : undefined,
       RKEAction: isSet(object.RKEAction) ? rKEActionEFromJSON(object.RKEAction) : undefined,
+      authenticationResponse: isSet(object.authenticationResponse)
+        ? AuthenticationResponse.fromJSON(object.authenticationResponse)
+        : undefined,
       closureMoveRequest: isSet(object.closureMoveRequest)
         ? ClosureMoveRequest.fromJSON(object.closureMoveRequest)
         : undefined,
@@ -3140,6 +3629,9 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
     }
     if (message.RKEAction !== undefined) {
       obj.RKEAction = rKEActionEToJSON(message.RKEAction);
+    }
+    if (message.authenticationResponse !== undefined) {
+      obj.authenticationResponse = AuthenticationResponse.toJSON(message.authenticationResponse);
     }
     if (message.closureMoveRequest !== undefined) {
       obj.closureMoveRequest = ClosureMoveRequest.toJSON(message.closureMoveRequest);
@@ -3162,6 +3654,10 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
       ? InformationRequest.fromPartial(object.InformationRequest)
       : undefined;
     message.RKEAction = object.RKEAction ?? undefined;
+    message.authenticationResponse =
+      (object.authenticationResponse !== undefined && object.authenticationResponse !== null)
+        ? AuthenticationResponse.fromPartial(object.authenticationResponse)
+        : undefined;
     message.closureMoveRequest = (object.closureMoveRequest !== undefined && object.closureMoveRequest !== null)
       ? ClosureMoveRequest.fromPartial(object.closureMoveRequest)
       : undefined;
@@ -3588,6 +4084,7 @@ export const VehicleStatus: MessageFns<VehicleStatus> = {
 function createBaseFromVCSECMessage(): FromVCSECMessage {
   return {
     vehicleStatus: undefined,
+    authenticationRequest: undefined,
     commandStatus: undefined,
     whitelistInfo: undefined,
     whitelistEntryInfo: undefined,
@@ -3599,6 +4096,9 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
   encode(message: FromVCSECMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.vehicleStatus !== undefined) {
       VehicleStatus.encode(message.vehicleStatus, writer.uint32(10).fork()).join();
+    }
+    if (message.authenticationRequest !== undefined) {
+      AuthenticationRequest.encode(message.authenticationRequest, writer.uint32(26).fork()).join();
     }
     if (message.commandStatus !== undefined) {
       CommandStatus.encode(message.commandStatus, writer.uint32(34).fork()).join();
@@ -3628,6 +4128,14 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
           }
 
           message.vehicleStatus = VehicleStatus.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.authenticationRequest = AuthenticationRequest.decode(reader, reader.uint32());
           continue;
         }
         case 4: {
@@ -3674,6 +4182,9 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
   fromJSON(object: any): FromVCSECMessage {
     return {
       vehicleStatus: isSet(object.vehicleStatus) ? VehicleStatus.fromJSON(object.vehicleStatus) : undefined,
+      authenticationRequest: isSet(object.authenticationRequest)
+        ? AuthenticationRequest.fromJSON(object.authenticationRequest)
+        : undefined,
       commandStatus: isSet(object.commandStatus) ? CommandStatus.fromJSON(object.commandStatus) : undefined,
       whitelistInfo: isSet(object.whitelistInfo) ? WhitelistInfo.fromJSON(object.whitelistInfo) : undefined,
       whitelistEntryInfo: isSet(object.whitelistEntryInfo)
@@ -3687,6 +4198,9 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
     const obj: any = {};
     if (message.vehicleStatus !== undefined) {
       obj.vehicleStatus = VehicleStatus.toJSON(message.vehicleStatus);
+    }
+    if (message.authenticationRequest !== undefined) {
+      obj.authenticationRequest = AuthenticationRequest.toJSON(message.authenticationRequest);
     }
     if (message.commandStatus !== undefined) {
       obj.commandStatus = CommandStatus.toJSON(message.commandStatus);
@@ -3711,6 +4225,10 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
     message.vehicleStatus = (object.vehicleStatus !== undefined && object.vehicleStatus !== null)
       ? VehicleStatus.fromPartial(object.vehicleStatus)
       : undefined;
+    message.authenticationRequest =
+      (object.authenticationRequest !== undefined && object.authenticationRequest !== null)
+        ? AuthenticationRequest.fromPartial(object.authenticationRequest)
+        : undefined;
     message.commandStatus = (object.commandStatus !== undefined && object.commandStatus !== null)
       ? CommandStatus.fromPartial(object.commandStatus)
       : undefined;
