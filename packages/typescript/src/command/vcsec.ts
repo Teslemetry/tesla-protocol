@@ -892,7 +892,6 @@ export function whitelistOperationInformationEToJSON(object: WhitelistOperationI
 }
 
 /**
- * ===== TESLEMETRY-EXT BEGIN (app-4.48.5) =====
  * Vehicle walk-up Bluetooth authentication challenge. Field numbers and types
  * are verified against a live vehicle; unverified field names are marked inline.
  */
@@ -1487,13 +1486,11 @@ export interface UnsignedMessage {
   RKEAction?:
     | RKEActionE
     | undefined;
-  /** TESLEMETRY-EXT (app-4.48.5) */
   authenticationResponse?: AuthenticationResponse | undefined;
   closureMoveRequest?: ClosureMoveRequest | undefined;
   WhitelistOperation?:
     | WhitelistOperation
     | undefined;
-  /** TESLEMETRY-EXT */
   autonomyCommand?: AutonomyCommand | undefined;
 }
 
@@ -1530,7 +1527,6 @@ export interface FromVCSECMessage {
   vehicleStatus?:
     | VehicleStatus
     | undefined;
-  /** TESLEMETRY-EXT (app-4.48.5) */
   authenticationRequest?: AuthenticationRequest | undefined;
   commandStatus?: CommandStatus | undefined;
   whitelistInfo?: WhitelistInfo | undefined;
