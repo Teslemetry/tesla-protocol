@@ -934,6 +934,7 @@ export function authenticationLevelEToJSON(object: AuthenticationLevelE): string
   }
 }
 
+/** TESLEMETRY-EXT */
 export enum AuthenticationReasonE {
   AUTHENTICATIONREASON_NOT_DOCUMENTED = 0,
   AUTHENTICATIONREASON_IDENTIFICATION = 1,
@@ -1021,6 +1022,7 @@ export function authenticationReasonEToJSON(object: AuthenticationReasonE): stri
   }
 }
 
+/** TESLEMETRY-EXT */
 export enum AuthenticationRejectionE {
   AUTHENTICATIONREJECTION_NONE = 0,
   AUTHENTICATIONREJECTION_DEVICE_STATIONARY = 1,
@@ -1264,6 +1266,7 @@ export function userPresenceEToJSON(object: UserPresenceE): string {
   }
 }
 
+/** TESLEMETRY-EXT */
 export enum UIDesireE {
   UI_DESIRE_NONE = 0,
   UI_DESIRE_HAS_DATA = 1,
@@ -1297,6 +1300,7 @@ export function uIDesireEToJSON(object: UIDesireE): string {
   }
 }
 
+/** TESLEMETRY-EXT */
 export enum GearE {
   GEAR_UNKNOWN = 0,
   GEAR_PARK = 1,
@@ -1446,6 +1450,7 @@ export interface CommandStatus {
   whitelistOperationStatus?: WhitelistOperationStatus | undefined;
 }
 
+/** TESLEMETRY-EXT */
 export interface AutonomyCommand {
   pullOverCommand?: AutonomyCommand_PullOverCommand | undefined;
 }
@@ -1454,11 +1459,13 @@ export interface AutonomyCommand {
 export interface AutonomyCommand_PullOverCommand {
 }
 
+/** TESLEMETRY-EXT */
 export interface AuthenticationRequestToken {
   /** name unverified */
   token: Uint8Array;
 }
 
+/** TESLEMETRY-EXT */
 export interface AuthenticationRequest {
   /** name unverified */
   sessionInfo:
@@ -1470,6 +1477,7 @@ export interface AuthenticationRequest {
   reasonsForAuth: AuthenticationReasonE[];
 }
 
+/** TESLEMETRY-EXT */
 export interface AuthenticationResponse {
   /** name unverified */
   authenticationLevel: AuthenticationLevelE;
@@ -1481,7 +1489,10 @@ export interface AuthenticationResponse {
 
 export interface UnsignedMessage {
   InformationRequest?: InformationRequest | undefined;
-  RKEAction?: RKEActionE | undefined;
+  RKEAction?:
+    | RKEActionE
+    | undefined;
+  /** TESLEMETRY-EXT */
   authenticationResponse?: AuthenticationResponse | undefined;
   closureMoveRequest?: ClosureMoveRequest | undefined;
   WhitelistOperation?:
@@ -1521,7 +1532,10 @@ export interface VehicleStatus {
 }
 
 export interface FromVCSECMessage {
-  vehicleStatus?: VehicleStatus | undefined;
+  vehicleStatus?:
+    | VehicleStatus
+    | undefined;
+  /** TESLEMETRY-EXT */
   authenticationRequest?: AuthenticationRequest | undefined;
   commandStatus?: CommandStatus | undefined;
   whitelistInfo?: WhitelistInfo | undefined;
