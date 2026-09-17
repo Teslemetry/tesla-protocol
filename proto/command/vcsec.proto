@@ -262,7 +262,6 @@ message CommandStatus
     }
 }
 
-// ===== TESLEMETRY-EXT BEGIN =====
 message AutonomyCommand {
     // Remote "pull over" request for a vehicle driving under autonomy - a trigger, no parameters.
     message PullOverCommand {}
@@ -271,9 +270,7 @@ message AutonomyCommand {
         PullOverCommand pullOverCommand = 1;
     }
 }
-// ===== TESLEMETRY-EXT END =====
 
-// ===== TESLEMETRY-EXT BEGIN (app-4.48.5) =====
 // Vehicle walk-up Bluetooth authentication challenge. Field numbers and types
 // are verified against a live vehicle; unverified field names are marked inline.
 enum AuthenticationLevel_E {
@@ -327,7 +324,7 @@ message UnsignedMessage {
     oneof sub_message {
         InformationRequest           InformationRequest = 1;
         RKEAction_E                  RKEAction = 2;
-        AuthenticationResponse       authenticationResponse = 3;  // TESLEMETRY-EXT (app-4.48.5)
+        AuthenticationResponse       authenticationResponse = 3;
         ClosureMoveRequest           closureMoveRequest = 4;
         WhitelistOperation           WhitelistOperation = 16;
         AutonomyCommand              autonomyCommand = 66;  // TESLEMETRY-EXT
@@ -379,7 +376,6 @@ enum UserPresence_E {
     VEHICLE_USER_PRESENCE_PRESENT = 2;
 }
 
-// ===== TESLEMETRY-EXT BEGIN =====
 enum UIDesire_E {
     UI_DESIRE_NONE = 0;
     UI_DESIRE_HAS_DATA = 1;
@@ -392,7 +388,6 @@ enum Gear_E {
     GEAR_REVERSE = 3;
     GEAR_NEUTRAL = 4;
 }
-// ===== TESLEMETRY-EXT END =====
 
 message VehicleStatus {
     ClosureStatuses        closureStatuses = 1;
@@ -408,7 +403,7 @@ message FromVCSECMessage {
     reserved 6 to 10;
     oneof sub_message {
         VehicleStatus               vehicleStatus = 1;
-        AuthenticationRequest       authenticationRequest = 3;  // TESLEMETRY-EXT (app-4.48.5)
+        AuthenticationRequest       authenticationRequest = 3;
         CommandStatus               commandStatus = 4;
         WhitelistInfo               whitelistInfo = 16;
         WhitelistEntryInfo          whitelistEntryInfo = 17;

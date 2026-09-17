@@ -1264,7 +1264,6 @@ export function userPresenceEToJSON(object: UserPresenceE): string {
   }
 }
 
-/** ===== TESLEMETRY-EXT BEGIN ===== */
 export enum UIDesireE {
   UI_DESIRE_NONE = 0,
   UI_DESIRE_HAS_DATA = 1,
@@ -1447,7 +1446,6 @@ export interface CommandStatus {
   whitelistOperationStatus?: WhitelistOperationStatus | undefined;
 }
 
-/** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface AutonomyCommand {
   pullOverCommand?: AutonomyCommand_PullOverCommand | undefined;
 }
@@ -1483,14 +1481,13 @@ export interface AuthenticationResponse {
 
 export interface UnsignedMessage {
   InformationRequest?: InformationRequest | undefined;
-  RKEAction?:
-    | RKEActionE
-    | undefined;
+  RKEAction?: RKEActionE | undefined;
   authenticationResponse?: AuthenticationResponse | undefined;
   closureMoveRequest?: ClosureMoveRequest | undefined;
   WhitelistOperation?:
     | WhitelistOperation
     | undefined;
+  /** TESLEMETRY-EXT */
   autonomyCommand?: AutonomyCommand | undefined;
 }
 
@@ -1524,9 +1521,7 @@ export interface VehicleStatus {
 }
 
 export interface FromVCSECMessage {
-  vehicleStatus?:
-    | VehicleStatus
-    | undefined;
+  vehicleStatus?: VehicleStatus | undefined;
   authenticationRequest?: AuthenticationRequest | undefined;
   commandStatus?: CommandStatus | undefined;
   whitelistInfo?: WhitelistInfo | undefined;
