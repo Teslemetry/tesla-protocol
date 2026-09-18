@@ -310,6 +310,10 @@ export enum Field {
   RemoteStartActive = 268,
   /** SemiCruiseSpeedLimitMph - Semi-truck only */
   SemiCruiseSpeedLimitMph = 269,
+  /** Cabin12vPortKeepOn - Semi-truck only */
+  Cabin12vPortKeepOn = 270,
+  /** Cabin48vPortKeepOn - Semi-truck only */
+  Cabin48vPortKeepOn = 271,
   UNRECOGNIZED = -1,
 }
 
@@ -1125,6 +1129,12 @@ export function fieldFromJSON(object: any): Field {
     case 269:
     case "SemiCruiseSpeedLimitMph":
       return Field.SemiCruiseSpeedLimitMph;
+    case 270:
+    case "Cabin12vPortKeepOn":
+      return Field.Cabin12vPortKeepOn;
+    case 271:
+    case "Cabin48vPortKeepOn":
+      return Field.Cabin48vPortKeepOn;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -1674,6 +1684,10 @@ export function fieldToJSON(object: Field): string {
       return "RemoteStartActive";
     case Field.SemiCruiseSpeedLimitMph:
       return "SemiCruiseSpeedLimitMph";
+    case Field.Cabin12vPortKeepOn:
+      return "Cabin12vPortKeepOn";
+    case Field.Cabin48vPortKeepOn:
+      return "Cabin48vPortKeepOn";
     case Field.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -3946,6 +3960,45 @@ export function sunroofInstalledStateToJSON(object: SunroofInstalledState): stri
   }
 }
 
+export enum CabinPortKeepOnState {
+  CabinPortKeepOnStateUnknown = 0,
+  CabinPortKeepOnStateOff = 1,
+  CabinPortKeepOnStateOn = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function cabinPortKeepOnStateFromJSON(object: any): CabinPortKeepOnState {
+  switch (object) {
+    case 0:
+    case "CabinPortKeepOnStateUnknown":
+      return CabinPortKeepOnState.CabinPortKeepOnStateUnknown;
+    case 1:
+    case "CabinPortKeepOnStateOff":
+      return CabinPortKeepOnState.CabinPortKeepOnStateOff;
+    case 2:
+    case "CabinPortKeepOnStateOn":
+      return CabinPortKeepOnState.CabinPortKeepOnStateOn;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return CabinPortKeepOnState.UNRECOGNIZED;
+  }
+}
+
+export function cabinPortKeepOnStateToJSON(object: CabinPortKeepOnState): string {
+  switch (object) {
+    case CabinPortKeepOnState.CabinPortKeepOnStateUnknown:
+      return "CabinPortKeepOnStateUnknown";
+    case CabinPortKeepOnState.CabinPortKeepOnStateOff:
+      return "CabinPortKeepOnStateOff";
+    case CabinPortKeepOnState.CabinPortKeepOnStateOn:
+      return "CabinPortKeepOnStateOn";
+    case CabinPortKeepOnState.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export enum TurnSignalState {
   TurnSignalStateUnknown = 0,
   TurnSignalStateOff = 1,
@@ -4135,6 +4188,7 @@ export interface Value {
   turnSignalStateValue?: TurnSignalState | undefined;
   mediaStatusValue?: MediaStatus | undefined;
   sunroofInstalledStateValue?: SunroofInstalledState | undefined;
+  cabinPortKeepOnValue?: CabinPortKeepOnState | undefined;
 }
 
 /** Datum represents a single field and its value */
@@ -4738,6 +4792,7 @@ function createBaseValue(): Value {
     turnSignalStateValue: undefined,
     mediaStatusValue: undefined,
     sunroofInstalledStateValue: undefined,
+    cabinPortKeepOnValue: undefined,
   };
 }
 
@@ -4901,6 +4956,9 @@ export const Value: MessageFns<Value> = {
     }
     if (message.sunroofInstalledStateValue !== undefined) {
       writer.uint32(432).int32(message.sunroofInstalledStateValue);
+    }
+    if (message.cabinPortKeepOnValue !== undefined) {
+      writer.uint32(440).int32(message.cabinPortKeepOnValue);
     }
     return writer;
   },
@@ -5336,6 +5394,14 @@ export const Value: MessageFns<Value> = {
           message.sunroofInstalledStateValue = reader.int32() as any;
           continue;
         }
+        case 55: {
+          if (tag !== 440) {
+            break;
+          }
+
+          message.cabinPortKeepOnValue = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -5451,6 +5517,9 @@ export const Value: MessageFns<Value> = {
       mediaStatusValue: isSet(object.mediaStatusValue) ? mediaStatusFromJSON(object.mediaStatusValue) : undefined,
       sunroofInstalledStateValue: isSet(object.sunroofInstalledStateValue)
         ? sunroofInstalledStateFromJSON(object.sunroofInstalledStateValue)
+        : undefined,
+      cabinPortKeepOnValue: isSet(object.cabinPortKeepOnValue)
+        ? cabinPortKeepOnStateFromJSON(object.cabinPortKeepOnValue)
         : undefined,
     };
   },
@@ -5622,6 +5691,9 @@ export const Value: MessageFns<Value> = {
     if (message.sunroofInstalledStateValue !== undefined) {
       obj.sunroofInstalledStateValue = sunroofInstalledStateToJSON(message.sunroofInstalledStateValue);
     }
+    if (message.cabinPortKeepOnValue !== undefined) {
+      obj.cabinPortKeepOnValue = cabinPortKeepOnStateToJSON(message.cabinPortKeepOnValue);
+    }
     return obj;
   },
 
@@ -5692,6 +5764,7 @@ export const Value: MessageFns<Value> = {
     message.turnSignalStateValue = object.turnSignalStateValue ?? undefined;
     message.mediaStatusValue = object.mediaStatusValue ?? undefined;
     message.sunroofInstalledStateValue = object.sunroofInstalledStateValue ?? undefined;
+    message.cabinPortKeepOnValue = object.cabinPortKeepOnValue ?? undefined;
     return message;
   },
 };

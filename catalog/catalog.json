@@ -36720,8 +36720,8 @@
         "python": "packages/python/tesla_protocol/telemetry"
       },
       "messages": 16,
-      "enums": 45,
-      "fields": 109,
+      "enums": 46,
+      "fields": 110,
       "files": [
         {
           "package": "telemetry.vehicle_alerts",
@@ -37563,6 +37563,14 @@
                   "name": "sunroof_installed_state_value",
                   "type": "TYPE_ENUM",
                   "type_name": ".telemetry.vehicle_data.SunroofInstalledState",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "value"
+                },
+                {
+                  "number": 55,
+                  "name": "cabin_port_keep_on_value",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".telemetry.vehicle_data.CabinPortKeepOnState",
                   "label": "LABEL_OPTIONAL",
                   "oneof": "value"
                 }
@@ -38730,6 +38738,14 @@
                 {
                   "number": 269,
                   "name": "SemiCruiseSpeedLimitMph"
+                },
+                {
+                  "number": 270,
+                  "name": "Cabin12vPortKeepOn"
+                },
+                {
+                  "number": 271,
+                  "name": "Cabin48vPortKeepOn"
                 }
               ],
               "reserved_ranges": [],
@@ -40012,6 +40028,26 @@
                 {
                   "number": 3,
                   "name": "SunroofInstalledStateGen2Installed"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".telemetry.vehicle_data.CabinPortKeepOnState",
+              "name": "CabinPortKeepOnState",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "CabinPortKeepOnStateUnknown"
+                },
+                {
+                  "number": 1,
+                  "name": "CabinPortKeepOnStateOff"
+                },
+                {
+                  "number": 2,
+                  "name": "CabinPortKeepOnStateOn"
                 }
               ],
               "reserved_ranges": [],
@@ -43247,8 +43283,8 @@
     "source_files": 39,
     "groups": 7,
     "messages": 889,
-    "enums": 248,
-    "fields": 2871
+    "enums": 249,
+    "fields": 2872
   },
   "registration": {
     "consistent": true,
