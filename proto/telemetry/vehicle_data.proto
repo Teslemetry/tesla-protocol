@@ -302,8 +302,8 @@ enum Field {
   RemoteStartActive = 268;
   SemiCruiseSpeedLimitMph = 269; // Semi-truck only
 
-  Cabin12vPortKeepOn = 270; // Semi-truck only; TESLEMETRY-EXT: open upstream teslamotors/fleet-telemetry#554, not yet merged
-  Cabin48vPortKeepOn = 271; // Semi-truck only; TESLEMETRY-EXT: open upstream teslamotors/fleet-telemetry#554, not yet merged
+  Cabin12vPortKeepOn = 270; // Semi-truck only
+  Cabin48vPortKeepOn = 271; // Semi-truck only
 }
 
 // ChargingState is deprecated and not used
@@ -683,7 +683,7 @@ enum SunroofInstalledState {
   SunroofInstalledStateGen2Installed = 3;
 }
 
-enum CabinPortKeepOnState { // TESLEMETRY-EXT: open upstream teslamotors/fleet-telemetry#554, not yet merged
+enum CabinPortKeepOnState {
   CabinPortKeepOnStateUnknown = 0;
   CabinPortKeepOnStateOff = 1;
   CabinPortKeepOnStateOn = 2;
@@ -782,7 +782,7 @@ message Value {
     TurnSignalState turn_signal_state_value = 52;
     MediaStatus media_status_value = 53;
     SunroofInstalledState sunroof_installed_state_value = 54;
-    CabinPortKeepOnState cabin_port_keep_on_value = 55; // TESLEMETRY-EXT: open upstream teslamotors/fleet-telemetry#554, not yet merged
+    CabinPortKeepOnState cabin_port_keep_on_value = 55;
   }
 }
 

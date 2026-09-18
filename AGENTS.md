@@ -23,7 +23,6 @@ The codegen toolchain is fully pinned (`scripts/requirements.txt`, ts-proto in r
 - Local additions inside upstream-tracked files must carry a `TESLEMETRY-EXT` marker (trailing comment or `BEGIN`/`END` fence). The fence parser is flat and non-nesting: a `BEGIN` inside an open fence overwrites the open start, so only the innermost pair ends up marked. Adding a message inside an existing fenced block needs no new fence - it inherits the block's coverage.
 - `upstream-drift.yml` decides whether to reconcile from the delta's `reconcile_needed` field, NOT the exit code (which reflects schema coverage only): upstream re-publishing an already-local symbol changes pinned bytes without changing coverage.
 - To pull in a not-yet-merged upstream change (an open PR against a branch owned by the upstream org, not a fork), pin `upstream.json` to that PR's head commit and file sha256 so `--mode pinned` passes - these are upstream fields, not `TESLEMETRY-EXT` extensions. When upstream merges with identical bytes, reconciliation is a no-op.
-- When that not-yet-merged change instead comes from a fork PR, the pin-forwarding above does not apply - a fork commit isn't upstream-org-controlled. Mark the addition `TESLEMETRY-EXT` naming the fork PR instead and leave `upstream.json` untouched; drop the marker and pin-forward once the PR lands on a teslamotors-owned ref.
 
 ## Proto content rules
 

@@ -310,9 +310,9 @@ export enum Field {
   RemoteStartActive = 268,
   /** SemiCruiseSpeedLimitMph - Semi-truck only */
   SemiCruiseSpeedLimitMph = 269,
-  /** Cabin12vPortKeepOn - Semi-truck only; TESLEMETRY-EXT: open upstream teslamotors/fleet-telemetry#554, not yet merged */
+  /** Cabin12vPortKeepOn - Semi-truck only */
   Cabin12vPortKeepOn = 270,
-  /** Cabin48vPortKeepOn - Semi-truck only; TESLEMETRY-EXT: open upstream teslamotors/fleet-telemetry#554, not yet merged */
+  /** Cabin48vPortKeepOn - Semi-truck only */
   Cabin48vPortKeepOn = 271,
   UNRECOGNIZED = -1,
 }
@@ -3960,7 +3960,6 @@ export function sunroofInstalledStateToJSON(object: SunroofInstalledState): stri
   }
 }
 
-/** TESLEMETRY-EXT: open upstream teslamotors/fleet-telemetry#554, not yet merged */
 export enum CabinPortKeepOnState {
   CabinPortKeepOnStateUnknown = 0,
   CabinPortKeepOnStateOff = 1,
@@ -4188,10 +4187,7 @@ export interface Value {
   chargeUnitPreferenceValue?: ChargeUnitPreference | undefined;
   turnSignalStateValue?: TurnSignalState | undefined;
   mediaStatusValue?: MediaStatus | undefined;
-  sunroofInstalledStateValue?:
-    | SunroofInstalledState
-    | undefined;
-  /** TESLEMETRY-EXT: open upstream teslamotors/fleet-telemetry#554, not yet merged */
+  sunroofInstalledStateValue?: SunroofInstalledState | undefined;
   cabinPortKeepOnValue?: CabinPortKeepOnState | undefined;
 }
 
