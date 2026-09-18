@@ -280,6 +280,8 @@ class Field(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     SoftwareUpdateInProgress: _ClassVar[Field]
     RemoteStartActive: _ClassVar[Field]
     SemiCruiseSpeedLimitMph: _ClassVar[Field]
+    Cabin12vPortKeepOn: _ClassVar[Field]
+    Cabin48vPortKeepOn: _ClassVar[Field]
 
 class ChargingState(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -638,6 +640,12 @@ class SunroofInstalledState(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     SunroofInstalledStateGen1Installed: _ClassVar[SunroofInstalledState]
     SunroofInstalledStateGen2Installed: _ClassVar[SunroofInstalledState]
 
+class CabinPortKeepOnState(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    CabinPortKeepOnStateUnknown: _ClassVar[CabinPortKeepOnState]
+    CabinPortKeepOnStateOff: _ClassVar[CabinPortKeepOnState]
+    CabinPortKeepOnStateOn: _ClassVar[CabinPortKeepOnState]
+
 class TurnSignalState(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     TurnSignalStateUnknown: _ClassVar[TurnSignalState]
@@ -922,6 +930,8 @@ SoftwareUpdateAvailable: Field
 SoftwareUpdateInProgress: Field
 RemoteStartActive: Field
 SemiCruiseSpeedLimitMph: Field
+Cabin12vPortKeepOn: Field
+Cabin48vPortKeepOn: Field
 ChargeStateUnknown: ChargingState
 ChargeStateDisconnected: ChargingState
 ChargeStateNoPower: ChargingState
@@ -1159,6 +1169,9 @@ SunroofInstalledStateUnknown: SunroofInstalledState
 SunroofInstalledStateNotInstalled: SunroofInstalledState
 SunroofInstalledStateGen1Installed: SunroofInstalledState
 SunroofInstalledStateGen2Installed: SunroofInstalledState
+CabinPortKeepOnStateUnknown: CabinPortKeepOnState
+CabinPortKeepOnStateOff: CabinPortKeepOnState
+CabinPortKeepOnStateOn: CabinPortKeepOnState
 TurnSignalStateUnknown: TurnSignalState
 TurnSignalStateOff: TurnSignalState
 TurnSignalStateLeft: TurnSignalState
@@ -1236,7 +1249,7 @@ class Time(_message.Message):
         ...
 
 class Value(_message.Message):
-    __slots__ = ('string_value', 'int_value', 'long_value', 'float_value', 'double_value', 'boolean_value', 'location_value', 'charging_value', 'shift_state_value', 'invalid', 'lane_assist_level_value', 'scheduled_charging_mode_value', 'sentry_mode_state_value', 'speed_assist_level_value', 'bms_state_value', 'buckle_status_value', 'car_type_value', 'charge_port_value', 'charge_port_latch_value', 'door_value', 'drive_inverter_state_value', 'hvil_status_value', 'window_state_value', 'seat_fold_position_value', 'tractor_air_status_value', 'follow_distance_value', 'forward_collision_sensitivity_value', 'guest_mode_mobile_access_value', 'trailer_air_status_value', 'time_value', 'detailed_charge_state_value', 'hvac_auto_mode_value', 'cabin_overheat_protection_mode_value', 'cabin_overheat_protection_temperature_limit_value', 'defrost_mode_value', 'climate_keeper_mode_value', 'hvac_power_value', 'tire_location_value', 'fast_charger_value', 'cable_type_value', 'tonneau_tent_mode_value', 'tonneau_position_value', 'powershare_type_value', 'powershare_state_value', 'powershare_stop_reason_value', 'display_state_value', 'distance_unit_value', 'temperature_unit_value', 'pressure_unit_value', 'charge_unit_preference_value', 'turn_signal_state_value', 'media_status_value', 'sunroof_installed_state_value')
+    __slots__ = ('string_value', 'int_value', 'long_value', 'float_value', 'double_value', 'boolean_value', 'location_value', 'charging_value', 'shift_state_value', 'invalid', 'lane_assist_level_value', 'scheduled_charging_mode_value', 'sentry_mode_state_value', 'speed_assist_level_value', 'bms_state_value', 'buckle_status_value', 'car_type_value', 'charge_port_value', 'charge_port_latch_value', 'door_value', 'drive_inverter_state_value', 'hvil_status_value', 'window_state_value', 'seat_fold_position_value', 'tractor_air_status_value', 'follow_distance_value', 'forward_collision_sensitivity_value', 'guest_mode_mobile_access_value', 'trailer_air_status_value', 'time_value', 'detailed_charge_state_value', 'hvac_auto_mode_value', 'cabin_overheat_protection_mode_value', 'cabin_overheat_protection_temperature_limit_value', 'defrost_mode_value', 'climate_keeper_mode_value', 'hvac_power_value', 'tire_location_value', 'fast_charger_value', 'cable_type_value', 'tonneau_tent_mode_value', 'tonneau_position_value', 'powershare_type_value', 'powershare_state_value', 'powershare_stop_reason_value', 'display_state_value', 'distance_unit_value', 'temperature_unit_value', 'pressure_unit_value', 'charge_unit_preference_value', 'turn_signal_state_value', 'media_status_value', 'sunroof_installed_state_value', 'cabin_port_keep_on_value')
     STRING_VALUE_FIELD_NUMBER: _ClassVar[int]
     INT_VALUE_FIELD_NUMBER: _ClassVar[int]
     LONG_VALUE_FIELD_NUMBER: _ClassVar[int]
@@ -1290,6 +1303,7 @@ class Value(_message.Message):
     TURN_SIGNAL_STATE_VALUE_FIELD_NUMBER: _ClassVar[int]
     MEDIA_STATUS_VALUE_FIELD_NUMBER: _ClassVar[int]
     SUNROOF_INSTALLED_STATE_VALUE_FIELD_NUMBER: _ClassVar[int]
+    CABIN_PORT_KEEP_ON_VALUE_FIELD_NUMBER: _ClassVar[int]
     string_value: str
     int_value: int
     long_value: int
@@ -1343,8 +1357,9 @@ class Value(_message.Message):
     turn_signal_state_value: TurnSignalState
     media_status_value: MediaStatus
     sunroof_installed_state_value: SunroofInstalledState
+    cabin_port_keep_on_value: CabinPortKeepOnState
 
-    def __init__(self, string_value: _Optional[str]=..., int_value: _Optional[int]=..., long_value: _Optional[int]=..., float_value: _Optional[float]=..., double_value: _Optional[float]=..., boolean_value: _Optional[bool]=..., location_value: _Optional[_Union[LocationValue, _Mapping]]=..., charging_value: _Optional[_Union[ChargingState, str]]=..., shift_state_value: _Optional[_Union[ShiftState, str]]=..., invalid: _Optional[bool]=..., lane_assist_level_value: _Optional[_Union[LaneAssistLevel, str]]=..., scheduled_charging_mode_value: _Optional[_Union[ScheduledChargingModeValue, str]]=..., sentry_mode_state_value: _Optional[_Union[SentryModeState, str]]=..., speed_assist_level_value: _Optional[_Union[SpeedAssistLevel, str]]=..., bms_state_value: _Optional[_Union[BMSStateValue, str]]=..., buckle_status_value: _Optional[_Union[BuckleStatus, str]]=..., car_type_value: _Optional[_Union[CarTypeValue, str]]=..., charge_port_value: _Optional[_Union[ChargePortValue, str]]=..., charge_port_latch_value: _Optional[_Union[ChargePortLatchValue, str]]=..., door_value: _Optional[_Union[Doors, _Mapping]]=..., drive_inverter_state_value: _Optional[_Union[DriveInverterState, str]]=..., hvil_status_value: _Optional[_Union[HvilStatus, str]]=..., window_state_value: _Optional[_Union[WindowState, str]]=..., seat_fold_position_value: _Optional[_Union[SeatFoldPosition, str]]=..., tractor_air_status_value: _Optional[_Union[TractorAirStatus, str]]=..., follow_distance_value: _Optional[_Union[FollowDistance, str]]=..., forward_collision_sensitivity_value: _Optional[_Union[ForwardCollisionSensitivity, str]]=..., guest_mode_mobile_access_value: _Optional[_Union[GuestModeMobileAccess, str]]=..., trailer_air_status_value: _Optional[_Union[TrailerAirStatus, str]]=..., time_value: _Optional[_Union[Time, _Mapping]]=..., detailed_charge_state_value: _Optional[_Union[DetailedChargeStateValue, str]]=..., hvac_auto_mode_value: _Optional[_Union[HvacAutoModeState, str]]=..., cabin_overheat_protection_mode_value: _Optional[_Union[CabinOverheatProtectionModeState, str]]=..., cabin_overheat_protection_temperature_limit_value: _Optional[_Union[ClimateOverheatProtectionTempLimit, str]]=..., defrost_mode_value: _Optional[_Union[DefrostModeState, str]]=..., climate_keeper_mode_value: _Optional[_Union[ClimateKeeperModeState, str]]=..., hvac_power_value: _Optional[_Union[HvacPowerState, str]]=..., tire_location_value: _Optional[_Union[TireLocation, _Mapping]]=..., fast_charger_value: _Optional[_Union[FastCharger, str]]=..., cable_type_value: _Optional[_Union[CableType, str]]=..., tonneau_tent_mode_value: _Optional[_Union[TonneauTentModeState, str]]=..., tonneau_position_value: _Optional[_Union[TonneauPositionState, str]]=..., powershare_type_value: _Optional[_Union[PowershareTypeStatus, str]]=..., powershare_state_value: _Optional[_Union[PowershareState, str]]=..., powershare_stop_reason_value: _Optional[_Union[PowershareStopReasonStatus, str]]=..., display_state_value: _Optional[_Union[DisplayState, str]]=..., distance_unit_value: _Optional[_Union[DistanceUnit, str]]=..., temperature_unit_value: _Optional[_Union[TemperatureUnit, str]]=..., pressure_unit_value: _Optional[_Union[PressureUnit, str]]=..., charge_unit_preference_value: _Optional[_Union[ChargeUnitPreference, str]]=..., turn_signal_state_value: _Optional[_Union[TurnSignalState, str]]=..., media_status_value: _Optional[_Union[MediaStatus, str]]=..., sunroof_installed_state_value: _Optional[_Union[SunroofInstalledState, str]]=...) -> None:
+    def __init__(self, string_value: _Optional[str]=..., int_value: _Optional[int]=..., long_value: _Optional[int]=..., float_value: _Optional[float]=..., double_value: _Optional[float]=..., boolean_value: _Optional[bool]=..., location_value: _Optional[_Union[LocationValue, _Mapping]]=..., charging_value: _Optional[_Union[ChargingState, str]]=..., shift_state_value: _Optional[_Union[ShiftState, str]]=..., invalid: _Optional[bool]=..., lane_assist_level_value: _Optional[_Union[LaneAssistLevel, str]]=..., scheduled_charging_mode_value: _Optional[_Union[ScheduledChargingModeValue, str]]=..., sentry_mode_state_value: _Optional[_Union[SentryModeState, str]]=..., speed_assist_level_value: _Optional[_Union[SpeedAssistLevel, str]]=..., bms_state_value: _Optional[_Union[BMSStateValue, str]]=..., buckle_status_value: _Optional[_Union[BuckleStatus, str]]=..., car_type_value: _Optional[_Union[CarTypeValue, str]]=..., charge_port_value: _Optional[_Union[ChargePortValue, str]]=..., charge_port_latch_value: _Optional[_Union[ChargePortLatchValue, str]]=..., door_value: _Optional[_Union[Doors, _Mapping]]=..., drive_inverter_state_value: _Optional[_Union[DriveInverterState, str]]=..., hvil_status_value: _Optional[_Union[HvilStatus, str]]=..., window_state_value: _Optional[_Union[WindowState, str]]=..., seat_fold_position_value: _Optional[_Union[SeatFoldPosition, str]]=..., tractor_air_status_value: _Optional[_Union[TractorAirStatus, str]]=..., follow_distance_value: _Optional[_Union[FollowDistance, str]]=..., forward_collision_sensitivity_value: _Optional[_Union[ForwardCollisionSensitivity, str]]=..., guest_mode_mobile_access_value: _Optional[_Union[GuestModeMobileAccess, str]]=..., trailer_air_status_value: _Optional[_Union[TrailerAirStatus, str]]=..., time_value: _Optional[_Union[Time, _Mapping]]=..., detailed_charge_state_value: _Optional[_Union[DetailedChargeStateValue, str]]=..., hvac_auto_mode_value: _Optional[_Union[HvacAutoModeState, str]]=..., cabin_overheat_protection_mode_value: _Optional[_Union[CabinOverheatProtectionModeState, str]]=..., cabin_overheat_protection_temperature_limit_value: _Optional[_Union[ClimateOverheatProtectionTempLimit, str]]=..., defrost_mode_value: _Optional[_Union[DefrostModeState, str]]=..., climate_keeper_mode_value: _Optional[_Union[ClimateKeeperModeState, str]]=..., hvac_power_value: _Optional[_Union[HvacPowerState, str]]=..., tire_location_value: _Optional[_Union[TireLocation, _Mapping]]=..., fast_charger_value: _Optional[_Union[FastCharger, str]]=..., cable_type_value: _Optional[_Union[CableType, str]]=..., tonneau_tent_mode_value: _Optional[_Union[TonneauTentModeState, str]]=..., tonneau_position_value: _Optional[_Union[TonneauPositionState, str]]=..., powershare_type_value: _Optional[_Union[PowershareTypeStatus, str]]=..., powershare_state_value: _Optional[_Union[PowershareState, str]]=..., powershare_stop_reason_value: _Optional[_Union[PowershareStopReasonStatus, str]]=..., display_state_value: _Optional[_Union[DisplayState, str]]=..., distance_unit_value: _Optional[_Union[DistanceUnit, str]]=..., temperature_unit_value: _Optional[_Union[TemperatureUnit, str]]=..., pressure_unit_value: _Optional[_Union[PressureUnit, str]]=..., charge_unit_preference_value: _Optional[_Union[ChargeUnitPreference, str]]=..., turn_signal_state_value: _Optional[_Union[TurnSignalState, str]]=..., media_status_value: _Optional[_Union[MediaStatus, str]]=..., sunroof_installed_state_value: _Optional[_Union[SunroofInstalledState, str]]=..., cabin_port_keep_on_value: _Optional[_Union[CabinPortKeepOnState, str]]=...) -> None:
         ...
 
 class Datum(_message.Message):
