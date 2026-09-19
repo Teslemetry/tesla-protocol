@@ -2002,6 +2002,8 @@ export interface ManagerType {
 }
 
 export interface SiteController {
+  /** The gateway DIN the vehicle uses to match its managed charging site. */
+  din: string;
 }
 
 export interface RemoveManagedChargingSiteRequest {
@@ -18491,11 +18493,14 @@ export const ManagerType: MessageFns<ManagerType> = {
 };
 
 function createBaseSiteController(): SiteController {
-  return {};
+  return { din: "" };
 }
 
 export const SiteController: MessageFns<SiteController> = {
-  encode(_: SiteController, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: SiteController, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.din !== "") {
+      writer.uint32(10).string(message.din);
+    }
     return writer;
   },
 
@@ -18506,6 +18511,14 @@ export const SiteController: MessageFns<SiteController> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.din = reader.string();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -18515,20 +18528,24 @@ export const SiteController: MessageFns<SiteController> = {
     return message;
   },
 
-  fromJSON(_: any): SiteController {
-    return {};
+  fromJSON(object: any): SiteController {
+    return { din: isSet(object.din) ? globalThis.String(object.din) : "" };
   },
 
-  toJSON(_: SiteController): unknown {
+  toJSON(message: SiteController): unknown {
     const obj: any = {};
+    if (message.din !== undefined) {
+      obj.din = message.din;
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<SiteController>, I>>(base?: I): SiteController {
     return SiteController.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SiteController>, I>>(_: I): SiteController {
+  fromPartial<I extends Exact<DeepPartial<SiteController>, I>>(object: I): SiteController {
     const message = createBaseSiteController();
+    message.din = object.din ?? "";
     return message;
   },
 };

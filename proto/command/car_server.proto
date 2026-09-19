@@ -1050,7 +1050,10 @@ message ManagerType {
   SiteController site_controller = 1;
 }
 
-message SiteController {}
+message SiteController {
+  // The gateway DIN the vehicle uses to match its managed charging site.
+  string din = 1;
+}
 
 message RemoveManagedChargingSiteRequest {
   string public_key = 1;

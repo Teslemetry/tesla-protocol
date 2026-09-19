@@ -348,7 +348,7 @@
       },
       "messages": 328,
       "enums": 103,
-      "fields": 1467,
+      "fields": 1468,
       "files": [
         {
           "package": "CarServer",
@@ -6147,7 +6147,16 @@
             {
               "fqn": ".CarServer.SiteController",
               "name": "SiteController",
-              "fields": [],
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "din",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
               "oneofs": [],
               "reserved_ranges": [],
               "reserved_names": [],
@@ -43284,7 +43293,7 @@
     "groups": 7,
     "messages": 889,
     "enums": 249,
-    "fields": 2872
+    "fields": 2873
   },
   "registration": {
     "consistent": true,

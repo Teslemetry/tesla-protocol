@@ -186,7 +186,7 @@ class RepoIntegrationTests(unittest.TestCase):
         self.assertEqual(totals["groups"], 7)
         self.assertEqual(totals["messages"], 889)
         self.assertEqual(totals["enums"], 249)
-        self.assertEqual(totals["fields"], 2872)
+        self.assertEqual(totals["fields"], 2873)
 
     def test_rebuild_is_deterministic(self):
         second = build_catalog.build_catalog()
