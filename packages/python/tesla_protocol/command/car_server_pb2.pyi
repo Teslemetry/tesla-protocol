@@ -2012,9 +2012,11 @@ class ManagerType(_message.Message):
         ...
 
 class SiteController(_message.Message):
-    __slots__ = ()
+    __slots__ = ('din',)
+    DIN_FIELD_NUMBER: _ClassVar[int]
+    din: str
 
-    def __init__(self) -> None:
+    def __init__(self, din: _Optional[str]=...) -> None:
         ...
 
 class RemoveManagedChargingSiteRequest(_message.Message):
