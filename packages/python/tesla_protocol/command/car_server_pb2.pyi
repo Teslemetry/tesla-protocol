@@ -2263,11 +2263,9 @@ class SetOutletsOnOffAction(_message.Message):
 
     class OutletRequest(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
-        OUTLET_REQUEST_UNKNOWN: _ClassVar[SetOutletsOnOffAction.OutletRequest]
         OUTLET_REQUEST_OFF: _ClassVar[SetOutletsOnOffAction.OutletRequest]
         OUTLET_REQUEST_CABIN_AND_BED: _ClassVar[SetOutletsOnOffAction.OutletRequest]
         OUTLET_REQUEST_CABIN: _ClassVar[SetOutletsOnOffAction.OutletRequest]
-    OUTLET_REQUEST_UNKNOWN: SetOutletsOnOffAction.OutletRequest
     OUTLET_REQUEST_OFF: SetOutletsOnOffAction.OutletRequest
     OUTLET_REQUEST_CABIN_AND_BED: SetOutletsOnOffAction.OutletRequest
     OUTLET_REQUEST_CABIN: SetOutletsOnOffAction.OutletRequest
@@ -2298,12 +2296,10 @@ class SetPowerFeedOnOffAction(_message.Message):
 
     class PowerFeedRequest(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
-        POWER_FEED_REQUEST_UNKNOWN: _ClassVar[SetPowerFeedOnOffAction.PowerFeedRequest]
         POWER_FEED_REQUEST_OFF: _ClassVar[SetPowerFeedOnOffAction.PowerFeedRequest]
         POWER_FEED_REQUEST_FEED_1: _ClassVar[SetPowerFeedOnOffAction.PowerFeedRequest]
         POWER_FEED_REQUEST_FEED_2: _ClassVar[SetPowerFeedOnOffAction.PowerFeedRequest]
         POWER_FEED_REQUEST_FEED_1_AND_FEED_2: _ClassVar[SetPowerFeedOnOffAction.PowerFeedRequest]
-    POWER_FEED_REQUEST_UNKNOWN: SetPowerFeedOnOffAction.PowerFeedRequest
     POWER_FEED_REQUEST_OFF: SetPowerFeedOnOffAction.PowerFeedRequest
     POWER_FEED_REQUEST_FEED_1: SetPowerFeedOnOffAction.PowerFeedRequest
     POWER_FEED_REQUEST_FEED_2: SetPowerFeedOnOffAction.PowerFeedRequest
@@ -2385,10 +2381,8 @@ class SetPowershareFeatureAction(_message.Message):
 
     class PowershareFeatureRequest(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
-        POWERSHARE_FEATURE_REQUEST_UNKNOWN: _ClassVar[SetPowershareFeatureAction.PowershareFeatureRequest]
         POWERSHARE_FEATURE_REQUEST_OFF: _ClassVar[SetPowershareFeatureAction.PowershareFeatureRequest]
         POWERSHARE_FEATURE_REQUEST_ON: _ClassVar[SetPowershareFeatureAction.PowershareFeatureRequest]
-    POWERSHARE_FEATURE_REQUEST_UNKNOWN: SetPowershareFeatureAction.PowershareFeatureRequest
     POWERSHARE_FEATURE_REQUEST_OFF: SetPowershareFeatureAction.PowershareFeatureRequest
     POWERSHARE_FEATURE_REQUEST_ON: SetPowershareFeatureAction.PowershareFeatureRequest
     POWERSHARE_FEATURE_REQUEST_FIELD_NUMBER: _ClassVar[int]
@@ -2410,10 +2404,8 @@ class SetPowershareRequestAction(_message.Message):
 
     class PowershareRequest(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
-        POWERSHARE_REQUEST_UNKNOWN: _ClassVar[SetPowershareRequestAction.PowershareRequest]
         POWERSHARE_REQUEST_OFF: _ClassVar[SetPowershareRequestAction.PowershareRequest]
         POWERSHARE_REQUEST_ON: _ClassVar[SetPowershareRequestAction.PowershareRequest]
-    POWERSHARE_REQUEST_UNKNOWN: SetPowershareRequestAction.PowershareRequest
     POWERSHARE_REQUEST_OFF: SetPowershareRequestAction.PowershareRequest
     POWERSHARE_REQUEST_ON: SetPowershareRequestAction.PowershareRequest
     POWERSHARE_REQUEST_FIELD_NUMBER: _ClassVar[int]

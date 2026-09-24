@@ -1188,11 +1188,11 @@ message DrivingClearSpeedLimitPinAdminAction {
 
 // ===== TESLEMETRY-EXT BEGIN =====
 message SetOutletsOnOffAction {
+  // UNCONFIRMED: not yet confirmed on a live vehicle.
   enum OutletRequest {
-    OUTLET_REQUEST_UNKNOWN = 0;
-    OUTLET_REQUEST_OFF = 1;
-    OUTLET_REQUEST_CABIN_AND_BED = 2;
-    OUTLET_REQUEST_CABIN = 3;
+    OUTLET_REQUEST_OFF = 0;
+    OUTLET_REQUEST_CABIN_AND_BED = 1;
+    OUTLET_REQUEST_CABIN = 2;
   }
 
   OutletRequest outlet_request = 1; // Field with JSON name "outletRequest"
@@ -1207,12 +1207,12 @@ message SetOutletSocLimitAction {
 }
 
 message SetPowerFeedOnOffAction {
+  // UNCONFIRMED: not yet confirmed on a live vehicle.
   enum PowerFeedRequest {
-    POWER_FEED_REQUEST_UNKNOWN = 0;
-    POWER_FEED_REQUEST_OFF = 1;
-    POWER_FEED_REQUEST_FEED_1 = 2;
-    POWER_FEED_REQUEST_FEED_2 = 3;
-    POWER_FEED_REQUEST_FEED_1_AND_FEED_2 = 4;
+    POWER_FEED_REQUEST_OFF = 0;
+    POWER_FEED_REQUEST_FEED_1 = 1;
+    POWER_FEED_REQUEST_FEED_2 = 2;
+    POWER_FEED_REQUEST_FEED_1_AND_FEED_2 = 3;
   }
 
   PowerFeedRequest power_feed_request = 1; // Field with JSON name "powerFeedRequest"
@@ -1253,10 +1253,10 @@ message NavigationWaypointsRequest {
 }
 
 message SetPowershareFeatureAction {
+  // UNCONFIRMED: not yet confirmed on a live vehicle.
   enum PowershareFeatureRequest {
-    POWERSHARE_FEATURE_REQUEST_UNKNOWN = 0;
-    POWERSHARE_FEATURE_REQUEST_OFF = 1;
-    POWERSHARE_FEATURE_REQUEST_ON = 2;
+    POWERSHARE_FEATURE_REQUEST_OFF = 0;
+    POWERSHARE_FEATURE_REQUEST_ON = 1;
   }
 
   PowershareFeatureRequest powershare_feature_request = 1;
@@ -1267,10 +1267,10 @@ message SetPowershareDischargeLimitAction {
 }
 
 message SetPowershareRequestAction {
+  // UNCONFIRMED: not yet confirmed on a live vehicle.
   enum PowershareRequest {
-    POWERSHARE_REQUEST_UNKNOWN = 0;
-    POWERSHARE_REQUEST_OFF = 1;
-    POWERSHARE_REQUEST_ON = 2;
+    POWERSHARE_REQUEST_OFF = 0;
+    POWERSHARE_REQUEST_ON = 1;
   }
 
   PowershareRequest powershare_request = 1;
