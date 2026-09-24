@@ -1,5 +1,53 @@
 # @teslemetry/tesla-protocol
 
+## 3.0.0
+
+### Major Changes
+
+- 0522dc0: **Breaking corrections to published `command` content.**
+
+  - **Command enum numbering.** Four request enums carried an extra `*_UNKNOWN = 0` value, which
+    shifted every real value up by one. `*_UNKNOWN` is removed and the values now start at 0:
+
+    - `SetOutletsOnOffAction.OutletRequest`: `OFF = 0`, `CABIN_AND_BED = 1`, `CABIN = 2`
+    - `SetPowerFeedOnOffAction.PowerFeedRequest`: `OFF = 0`, `FEED_1 = 1`, `FEED_2 = 2`,
+      `FEED_1_AND_FEED_2 = 3`
+    - `SetPowershareFeatureAction.PowershareFeatureRequest`: `OFF = 0`, `ON = 1`
+    - `SetPowershareRequestAction.PowershareRequest`: `OFF = 0`, `ON = 1`
+
+    Callers that use the symbolic names pick up the new numbers when they rebuild against this
+    release. Callers that hard-code numbers, or reference a removed `*_UNKNOWN` value, must update.
+    The new values are not yet confirmed on a live vehicle.
+
+  - **`VehicleData.vehicle_state = 18` is now decoded.** The opaque `bytes unknown = 18` becomes
+    `CurrentVehicleState vehicle_state = 18`. This covers 65 fields, including `feature_bitmask`,
+    inlet heater, wiper service, photobooth, remote sketchpad, the Dog Mode live-activity key,
+    car wrap, FSD stats, and deck lights/hazards. The wire format is unchanged: both are
+    length-delimited. The generated field is renamed from `unknown` to `vehicleState` (TypeScript)
+    / `vehicle_state` (Python), and its type changes from bytes to a message. The new helper
+    messages are `DashcamUtils`, `AutoparkStyle`, `AutoparkVersion`, `AutoparkState` and
+    `SpoilerState`. Tags 53 and 70 are varint placeholders (`field_53`, `field_70`) whose names
+    and types are not yet known. Fields seen on a live vehicle are marked confirmed; the rest are
+    marked unconfirmed until they are.
+  - **Six misplaced fields are removed from `VehicleState`** (the legacy surface at
+    `VehicleData.legacy_vehicle_state = 6`):
+
+    - `deck_lights_on`, `hazards_on` and `deck_lights_allowed` (67-69) now live on
+      `CurrentVehicleState` 67-69.
+    - `autopilot_base`, `autopilot_override_state` and `autopilot_override_expire_time`
+      (196-198) are already on `VehicleConfig` 196-198.
+
+    Their tags and names are reserved on `VehicleState`.
+
+### Minor Changes
+
+- a7cfd24: Wire-compatible additions to the command protocol. Every new field is marked `UNCONFIRMED` (not yet confirmed on a live vehicle), and placeholder names are marked "name not recovered".
+
+  - `VehicleAction`: wire the existing `PrepareMobileUploadAction` (177), `PutMobileUploadChunkAction` (178) and `DisplayStateAction` (180) messages, and add `SetUpkeepUsernameAction` (147), `DrivingSetCruiseSpeedLimitAction` (694177) and `SetDeckLightAction` (698038). Fill in `PrepareMobileUploadAction` tag 3, `MediaPlayAction.media_playback_status`, `SetPhoneSettingPreferencesAction` tag 2, the remaining `DestinationCharging` fields and `DogModeLiveActivityData` tags 2-4, and reserve `Action` tags 6-8.
+  - Add the `MobileAppFeature` enum (the capability bits a vehicle advertises, with how to test them against the vehicle-state feature bitmask), `VehicleConfig.wheel_caps_on` (200), the `VehicleDataFields` enum that `EncryptedData.field_number` holds, the PII vehicle-data fields `VehicleData.encrypted_data` (11), `pii_key_responses` (900) and `wrapped_key` (901), and `SohState.SohResult` tag 3.
+  - Signed transport: add the `ECDSA`, `PRESENT_KEY`, `AES_GCM_TOKEN`, `ECDSA_PERSONALIZED`, `AES_GCM_DETACHED` and `CERTIFICATE_ECDSA` signature types with their `Present_Key_Signature_Data`, `AES_GCM_Detached_Signature_Data` and `Certificate_ECDSA_Signature_Data` payloads on `SignatureData`, `TAG_COMMAND_PREFIX`, `KeyIdentity.identified_key` with the `IdentifiedKey` enum, `SESSION_INFO_STATUS_INVALID_HANDLE`, `SessionInfo` tag 7, `SessionInfoRequest` tags 3-4, the message-framing and zlib `Flags`, `RoutableMessage.message_frame` (`MessageFrame`), `MESSAGEFAULT_ERROR_COMMAND_REQUIRES_PHYSICAL_PROXIMITY`, four more key `Role`s, the `KEY_NOT_FOUND`/`NOT_SUPPORTED` generic errors with `NominalError.keyNotFoundContext`, and three more VCSEC `SignatureType` values.
+  - Complete the rate-tariff document behind `SetRateTariffRequest` and its embedded `Tariff`: `code`, `name`, `utility`, `currency`, `daily_charges` (new `DailyCharge`), `monthly_charges`, `monthly_minimum_bill`, `demand_charges`, `daily_demand_charges`, `energy_charges`, `max_applicable_demand` and `min_applicable_demand` (tags 1-12). Add `GetRateTariffResponse.tariff_document` (1) alongside the existing tags 13-14.
+
 ## 2.2.0
 
 ### Minor Changes
