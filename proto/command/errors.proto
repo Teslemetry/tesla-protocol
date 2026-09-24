@@ -19,8 +19,19 @@ enum GenericError_E
     GENERICERROR_VEHICLE_NOT_IN_PARK = 5;
     GENERICERROR_UNAUTHORIZED = 6;
     GENERICERROR_NOT_ALLOWED_OVER_TRANSPORT = 7;
+    GENERICERROR_KEY_NOT_FOUND = 8;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    GENERICERROR_NOT_SUPPORTED = 9;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
+
+// ===== TESLEMETRY-EXT BEGIN =====
+// UNCONFIRMED: not yet confirmed on a live vehicle; names not recovered.
+message KeyNotFoundContext {
+    bytes  public_key = 1;
+    uint32 handle     = 2;
+}
+// ===== TESLEMETRY-EXT END =====
 
 message NominalError {
     GenericError_E  genericError = 1;
+    KeyNotFoundContext keyNotFoundContext = 8;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
 }

@@ -14,7 +14,10 @@ import "errors.proto";
 enum SignatureType
 {
     SIGNATURE_TYPE_NONE = 0;
+    SIGNATURE_TYPE_ECDSA = 1;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     SIGNATURE_TYPE_PRESENT_KEY  = 2;
+    SIGNATURE_TYPE_AES_GCM_TOKEN = 3;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    SIGNATURE_TYPE_UNSIGNED = 4;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 message SignedMessage {

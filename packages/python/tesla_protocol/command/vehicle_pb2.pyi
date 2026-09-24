@@ -113,6 +113,89 @@ class VehicleImageStateType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     APVIZ_INVALID: _ClassVar[VehicleImageStateType]
     APVIZ_WRAP: _ClassVar[VehicleImageStateType]
     APVIZ_LICENSE_PLATE: _ClassVar[VehicleImageStateType]
+
+class MobileAppFeature(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    MOBILE_APP_FEATURE_ACTIVE: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_CLIMATE_KEEPER: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_UNLOCK_STOP_CHARGE: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SET_RATE_TARIFF: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_GET_RATE_TARIFF: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_DRIVENOTE: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_CLIMATE_KEEPER_OVERRIDE: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SIGNED_VIDEO_REQUEST: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SENTRY_CAM_FLASH_LIGHTS: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_BOOMBOX: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_DOOR_UNLATCH: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SEAT_HEATERS_INSTALLED: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_LAST_SEEN_TPMS: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_UI_CHARGE_PORT: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_MONITOR_AND_CHARGE_ROLES: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_PROTO_FLOATS: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_BLUETOOTH_PAIRING: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_HMAC_AUTHENTICATION: _ClassVar[MobileAppFeature]
+    MOBILE_APP_COP_USER_SET_TEMP: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_MEDIA_DETAILS: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_RESPONSE_CACHE: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SCC: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SENTRY_CAM_WITH_DOG_MODE: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_AUTO_STEERING_WHEEL_HEAT: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_MANAGED_CHARGING: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND_DECPRECATED: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SEND_NAVIGATION_ROUTE: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_RED_BRAKE_CALIPER_FIX: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_PIN_TO_DRIVE: _ClassVar[MobileAppFeature]
+    MOBILE_APP_COP_NOT_RUNNING_REASON: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SET_VEHICLE_NAME: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_VEHICLE_DATA_PII_V2: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_BOOMBOX_V2: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_UWB_STABLE_FOR_SUPPORTED_CARS: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SPEED_LIMIT_PIN_RESET_SIGNED_COMMAND: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_PRECISE_LOCATION_TAG: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_IMU_ALERT_IS_VISIBLE: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_CT_SUPPORTS_COP: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_WAYPOINTS_SUPPORTED: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_OCTA_VIEW: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_BT_GTW_UNLOCK: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE_DEPRECATED: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SUMMON_PREWARMING: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S_DEPRECATED: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_UI_ONE_TIME_CHARGE_SUPPORTED: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SCHEDULE_V3: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_ECIES_VEHICLE_DATA_ENCRYPTION: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_TENT_MODE_SUPPORTED: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SCHEDULE_V3_NAMING: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_COLORIZER_COLOR_REMAP_ENABLED: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SEND_NAVIGATION_REQUEST_GPS_DESTINATION: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SUMMON_WEBCAM: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_BLE_REMOTE_START: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SOH_TEST_OBSOLETE: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SET_ARRIVAL_PERCENTAGE_OBSOLETE: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_REMOTE_THEATER_CONTROL: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_CT_SUSPENSION: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SOH_TEST_V2: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_ANDROID_UWB_ENABLED: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_LOW_POWER_MODE: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_ROBOTAXI_UWB: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_KEEP_ACCESSORY_POWER_MODE: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS_WITH_DELETION: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_FETCH_KEY_METADATA_DEPRECATED: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_FETCH_KEY_METADATA: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_TRAILER_LIGHT_TEST: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_DELETE_DASHCAM_CLIPS_AND_FORMAT_USB: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SOFTWARE_UPDATE_AUTO_SCHEDULED: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_BLE_MESSAGE_FRAMING: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_WAYPOINTS_REQUEST_ACCEPTS_COORDINATES: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_PHONE_SETTING_PREFERENCES_SYNC: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_UPLOAD_CAR_WRAP: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_SHARE_URLS_X: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_DISPLAY_BRIGHTNESS: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_ANDROID_BLE_BONDING: _ClassVar[MobileAppFeature]
+    MOBILE_APP_FEATURE_APVIZ_WHEEL_CAPS: _ClassVar[MobileAppFeature]
 AutopilotBase_NONE: AutopilotBase
 AutopilotBase_HIGHWAY: AutopilotBase
 AutopilotBase_ENHANCED: AutopilotBase
@@ -198,9 +281,89 @@ MediaSourceType_Vohico: MediaSourceType
 APVIZ_INVALID: VehicleImageStateType
 APVIZ_WRAP: VehicleImageStateType
 APVIZ_LICENSE_PLATE: VehicleImageStateType
+MOBILE_APP_FEATURE_ACTIVE: MobileAppFeature
+MOBILE_APP_FEATURE_CLIMATE_KEEPER: MobileAppFeature
+MOBILE_APP_FEATURE_UNLOCK_STOP_CHARGE: MobileAppFeature
+MOBILE_APP_FEATURE_SET_RATE_TARIFF: MobileAppFeature
+MOBILE_APP_FEATURE_GET_RATE_TARIFF: MobileAppFeature
+MOBILE_APP_FEATURE_DRIVENOTE: MobileAppFeature
+MOBILE_APP_FEATURE_CLIMATE_KEEPER_OVERRIDE: MobileAppFeature
+MOBILE_APP_FEATURE_SIGNED_VIDEO_REQUEST: MobileAppFeature
+MOBILE_APP_FEATURE_SENTRY_CAM_FLASH_LIGHTS: MobileAppFeature
+MOBILE_APP_FEATURE_BOOMBOX: MobileAppFeature
+MOBILE_APP_FEATURE_DOOR_UNLATCH: MobileAppFeature
+MOBILE_APP_FEATURE_SEAT_HEATERS_INSTALLED: MobileAppFeature
+MOBILE_APP_FEATURE_LAST_SEEN_TPMS: MobileAppFeature
+MOBILE_APP_FEATURE_UI_CHARGE_PORT: MobileAppFeature
+MOBILE_APP_FEATURE_MONITOR_AND_CHARGE_ROLES: MobileAppFeature
+MOBILE_APP_FEATURE_PROTO_FLOATS: MobileAppFeature
+MOBILE_APP_FEATURE_BLUETOOTH_PAIRING: MobileAppFeature
+MOBILE_APP_FEATURE_HMAC_AUTHENTICATION: MobileAppFeature
+MOBILE_APP_COP_USER_SET_TEMP: MobileAppFeature
+MOBILE_APP_FEATURE_MEDIA_DETAILS: MobileAppFeature
+MOBILE_APP_FEATURE_RESPONSE_CACHE: MobileAppFeature
+MOBILE_APP_FEATURE_SCC: MobileAppFeature
+MOBILE_APP_FEATURE_SENTRY_CAM_WITH_DOG_MODE: MobileAppFeature
+MOBILE_APP_FEATURE_AUTO_STEERING_WHEEL_HEAT: MobileAppFeature
+MOBILE_APP_FEATURE_MANAGED_CHARGING: MobileAppFeature
+MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND_DECPRECATED: MobileAppFeature
+MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND: MobileAppFeature
+MOBILE_APP_FEATURE_SEND_NAVIGATION_ROUTE: MobileAppFeature
+MOBILE_APP_FEATURE_RED_BRAKE_CALIPER_FIX: MobileAppFeature
+MOBILE_APP_FEATURE_PIN_TO_DRIVE: MobileAppFeature
+MOBILE_APP_COP_NOT_RUNNING_REASON: MobileAppFeature
+MOBILE_APP_FEATURE_SET_VEHICLE_NAME: MobileAppFeature
+MOBILE_APP_FEATURE_VEHICLE_DATA_PII_V2: MobileAppFeature
+MOBILE_APP_FEATURE_BOOMBOX_V2: MobileAppFeature
+MOBILE_APP_FEATURE_UWB_STABLE_FOR_SUPPORTED_CARS: MobileAppFeature
+MOBILE_APP_FEATURE_SPEED_LIMIT_PIN_RESET_SIGNED_COMMAND: MobileAppFeature
+MOBILE_APP_FEATURE_PRECISE_LOCATION_TAG: MobileAppFeature
+MOBILE_APP_FEATURE_IMU_ALERT_IS_VISIBLE: MobileAppFeature
+MOBILE_APP_FEATURE_CT_SUPPORTS_COP: MobileAppFeature
+MOBILE_APP_FEATURE_WAYPOINTS_SUPPORTED: MobileAppFeature
+MOBILE_APP_FEATURE_OCTA_VIEW: MobileAppFeature
+MOBILE_APP_FEATURE_BT_GTW_UNLOCK: MobileAppFeature
+MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE_DEPRECATED: MobileAppFeature
+MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE: MobileAppFeature
+MOBILE_APP_FEATURE_SUMMON_PREWARMING: MobileAppFeature
+MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S_DEPRECATED: MobileAppFeature
+MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S: MobileAppFeature
+MOBILE_APP_FEATURE_UI_ONE_TIME_CHARGE_SUPPORTED: MobileAppFeature
+MOBILE_APP_FEATURE_SCHEDULE_V3: MobileAppFeature
+MOBILE_APP_FEATURE_ECIES_VEHICLE_DATA_ENCRYPTION: MobileAppFeature
+MOBILE_APP_FEATURE_TENT_MODE_SUPPORTED: MobileAppFeature
+MOBILE_APP_FEATURE_SCHEDULE_V3_NAMING: MobileAppFeature
+MOBILE_APP_FEATURE_COLORIZER_COLOR_REMAP_ENABLED: MobileAppFeature
+MOBILE_APP_FEATURE_SEND_NAVIGATION_REQUEST_GPS_DESTINATION: MobileAppFeature
+MOBILE_APP_FEATURE_SUMMON_WEBCAM: MobileAppFeature
+MOBILE_APP_FEATURE_BLE_REMOTE_START: MobileAppFeature
+MOBILE_APP_FEATURE_SOH_TEST_OBSOLETE: MobileAppFeature
+MOBILE_APP_FEATURE_SET_ARRIVAL_PERCENTAGE_OBSOLETE: MobileAppFeature
+MOBILE_APP_FEATURE_REMOTE_THEATER_CONTROL: MobileAppFeature
+MOBILE_APP_FEATURE_CT_SUSPENSION: MobileAppFeature
+MOBILE_APP_FEATURE_SOH_TEST_V2: MobileAppFeature
+MOBILE_APP_FEATURE_ANDROID_UWB_ENABLED: MobileAppFeature
+MOBILE_APP_FEATURE_LOW_POWER_MODE: MobileAppFeature
+MOBILE_APP_FEATURE_ROBOTAXI_UWB: MobileAppFeature
+MOBILE_APP_FEATURE_KEEP_ACCESSORY_POWER_MODE: MobileAppFeature
+MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS: MobileAppFeature
+MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS_WITH_DELETION: MobileAppFeature
+MOBILE_APP_FEATURE_FETCH_KEY_METADATA_DEPRECATED: MobileAppFeature
+MOBILE_APP_FEATURE_FETCH_KEY_METADATA: MobileAppFeature
+MOBILE_APP_FEATURE_TRAILER_LIGHT_TEST: MobileAppFeature
+MOBILE_APP_FEATURE_DELETE_DASHCAM_CLIPS_AND_FORMAT_USB: MobileAppFeature
+MOBILE_APP_FEATURE_SOFTWARE_UPDATE_AUTO_SCHEDULED: MobileAppFeature
+MOBILE_APP_FEATURE_BLE_MESSAGE_FRAMING: MobileAppFeature
+MOBILE_APP_FEATURE_WAYPOINTS_REQUEST_ACCEPTS_COORDINATES: MobileAppFeature
+MOBILE_APP_FEATURE_PHONE_SETTING_PREFERENCES_SYNC: MobileAppFeature
+MOBILE_APP_FEATURE_UPLOAD_CAR_WRAP: MobileAppFeature
+MOBILE_APP_FEATURE_SHARE_URLS_X: MobileAppFeature
+MOBILE_APP_FEATURE_DISPLAY_BRIGHTNESS: MobileAppFeature
+MOBILE_APP_FEATURE_ANDROID_BLE_BONDING: MobileAppFeature
+MOBILE_APP_FEATURE_APVIZ_WHEEL_CAPS: MobileAppFeature
 
 class VehicleData(_message.Message):
-    __slots__ = ('gui_settings', 'charge_state', 'climate_state', 'drive_state', 'legacy_vehicle_state', 'vehicle_config', 'location_state', 'closures_state', 'proto_json_version', 'upload_reason', 'parked_accessory_state', 'charge_schedule_state', 'preconditioning_schedule_state', 'soh_state', 'unknown', 'tire_pressure_state', 'media_state', 'media_detail_state', 'vehicle_detail_state', 'software_update_state', 'parental_controls_state', 'alert_state', 'light_show_state', 'vehicle_image_state', 'suspension_state', 'child_presence_detection_state', 'display_state', 'supports_optional_fields')
+    __slots__ = ('gui_settings', 'charge_state', 'climate_state', 'drive_state', 'legacy_vehicle_state', 'vehicle_config', 'location_state', 'closures_state', 'proto_json_version', 'encrypted_data', 'upload_reason', 'parked_accessory_state', 'charge_schedule_state', 'preconditioning_schedule_state', 'soh_state', 'unknown', 'tire_pressure_state', 'media_state', 'media_detail_state', 'vehicle_detail_state', 'software_update_state', 'parental_controls_state', 'alert_state', 'light_show_state', 'vehicle_image_state', 'suspension_state', 'child_presence_detection_state', 'display_state', 'pii_key_responses', 'wrapped_key', 'supports_optional_fields')
     GUI_SETTINGS_FIELD_NUMBER: _ClassVar[int]
     CHARGE_STATE_FIELD_NUMBER: _ClassVar[int]
     CLIMATE_STATE_FIELD_NUMBER: _ClassVar[int]
@@ -210,6 +373,7 @@ class VehicleData(_message.Message):
     LOCATION_STATE_FIELD_NUMBER: _ClassVar[int]
     CLOSURES_STATE_FIELD_NUMBER: _ClassVar[int]
     PROTO_JSON_VERSION_FIELD_NUMBER: _ClassVar[int]
+    ENCRYPTED_DATA_FIELD_NUMBER: _ClassVar[int]
     UPLOAD_REASON_FIELD_NUMBER: _ClassVar[int]
     PARKED_ACCESSORY_STATE_FIELD_NUMBER: _ClassVar[int]
     CHARGE_SCHEDULE_STATE_FIELD_NUMBER: _ClassVar[int]
@@ -228,6 +392,8 @@ class VehicleData(_message.Message):
     SUSPENSION_STATE_FIELD_NUMBER: _ClassVar[int]
     CHILD_PRESENCE_DETECTION_STATE_FIELD_NUMBER: _ClassVar[int]
     DISPLAY_STATE_FIELD_NUMBER: _ClassVar[int]
+    PII_KEY_RESPONSES_FIELD_NUMBER: _ClassVar[int]
+    WRAPPED_KEY_FIELD_NUMBER: _ClassVar[int]
     SUPPORTS_OPTIONAL_FIELDS_FIELD_NUMBER: _ClassVar[int]
     gui_settings: GuiSettings
     charge_state: ChargeState
@@ -238,6 +404,7 @@ class VehicleData(_message.Message):
     location_state: LocationState
     closures_state: ClosuresState
     proto_json_version: int
+    encrypted_data: _containers.RepeatedScalarFieldContainer[bytes]
     upload_reason: str
     parked_accessory_state: ParkedAccessoryState
     charge_schedule_state: ChargeScheduleState
@@ -256,9 +423,11 @@ class VehicleData(_message.Message):
     suspension_state: SuspensionState
     child_presence_detection_state: ChildPresenceDetectionState
     display_state: DisplayState
+    pii_key_responses: _containers.RepeatedScalarFieldContainer[bytes]
+    wrapped_key: bytes
     supports_optional_fields: bool
 
-    def __init__(self, gui_settings: _Optional[_Union[GuiSettings, _Mapping]]=..., charge_state: _Optional[_Union[ChargeState, _Mapping]]=..., climate_state: _Optional[_Union[ClimateState, _Mapping]]=..., drive_state: _Optional[_Union[DriveState, _Mapping]]=..., legacy_vehicle_state: _Optional[_Union[VehicleState, _Mapping]]=..., vehicle_config: _Optional[_Union[VehicleConfig, _Mapping]]=..., location_state: _Optional[_Union[LocationState, _Mapping]]=..., closures_state: _Optional[_Union[ClosuresState, _Mapping]]=..., proto_json_version: _Optional[int]=..., upload_reason: _Optional[str]=..., parked_accessory_state: _Optional[_Union[ParkedAccessoryState, _Mapping]]=..., charge_schedule_state: _Optional[_Union[ChargeScheduleState, _Mapping]]=..., preconditioning_schedule_state: _Optional[_Union[PreconditioningScheduleState, _Mapping]]=..., soh_state: _Optional[_Union[SohState, _Mapping]]=..., unknown: _Optional[bytes]=..., tire_pressure_state: _Optional[_Union[TirePressureState, _Mapping]]=..., media_state: _Optional[_Union[MediaState, _Mapping]]=..., media_detail_state: _Optional[_Union[MediaDetailState, _Mapping]]=..., vehicle_detail_state: _Optional[_Union[VehicleDetailState, _Mapping]]=..., software_update_state: _Optional[_Union[SoftwareUpdateState, _Mapping]]=..., parental_controls_state: _Optional[_Union[ParentalControlsState, _Mapping]]=..., alert_state: _Optional[_Union[AlertState, _Mapping]]=..., light_show_state: _Optional[_Union[LightShowState, _Mapping]]=..., vehicle_image_state: _Optional[_Union[VehicleImageState, _Mapping]]=..., suspension_state: _Optional[_Union[SuspensionState, _Mapping]]=..., child_presence_detection_state: _Optional[_Union[ChildPresenceDetectionState, _Mapping]]=..., display_state: _Optional[_Union[DisplayState, _Mapping]]=..., supports_optional_fields: _Optional[bool]=...) -> None:
+    def __init__(self, gui_settings: _Optional[_Union[GuiSettings, _Mapping]]=..., charge_state: _Optional[_Union[ChargeState, _Mapping]]=..., climate_state: _Optional[_Union[ClimateState, _Mapping]]=..., drive_state: _Optional[_Union[DriveState, _Mapping]]=..., legacy_vehicle_state: _Optional[_Union[VehicleState, _Mapping]]=..., vehicle_config: _Optional[_Union[VehicleConfig, _Mapping]]=..., location_state: _Optional[_Union[LocationState, _Mapping]]=..., closures_state: _Optional[_Union[ClosuresState, _Mapping]]=..., proto_json_version: _Optional[int]=..., encrypted_data: _Optional[_Iterable[bytes]]=..., upload_reason: _Optional[str]=..., parked_accessory_state: _Optional[_Union[ParkedAccessoryState, _Mapping]]=..., charge_schedule_state: _Optional[_Union[ChargeScheduleState, _Mapping]]=..., preconditioning_schedule_state: _Optional[_Union[PreconditioningScheduleState, _Mapping]]=..., soh_state: _Optional[_Union[SohState, _Mapping]]=..., unknown: _Optional[bytes]=..., tire_pressure_state: _Optional[_Union[TirePressureState, _Mapping]]=..., media_state: _Optional[_Union[MediaState, _Mapping]]=..., media_detail_state: _Optional[_Union[MediaDetailState, _Mapping]]=..., vehicle_detail_state: _Optional[_Union[VehicleDetailState, _Mapping]]=..., software_update_state: _Optional[_Union[SoftwareUpdateState, _Mapping]]=..., parental_controls_state: _Optional[_Union[ParentalControlsState, _Mapping]]=..., alert_state: _Optional[_Union[AlertState, _Mapping]]=..., light_show_state: _Optional[_Union[LightShowState, _Mapping]]=..., vehicle_image_state: _Optional[_Union[VehicleImageState, _Mapping]]=..., suspension_state: _Optional[_Union[SuspensionState, _Mapping]]=..., child_presence_detection_state: _Optional[_Union[ChildPresenceDetectionState, _Mapping]]=..., display_state: _Optional[_Union[DisplayState, _Mapping]]=..., pii_key_responses: _Optional[_Iterable[bytes]]=..., wrapped_key: _Optional[bytes]=..., supports_optional_fields: _Optional[bool]=...) -> None:
         ...
 
 class ClosuresState(_message.Message):
@@ -1832,7 +2001,7 @@ class GuiSettings(_message.Message):
         ...
 
 class VehicleConfig(_message.Message):
-    __slots__ = ('interior_trim_type', 'exterior_trim_type', 'red_brake_calipers', 'use_range_badging', 'range_plus_badging', 'has_ludicrous_mode', 'can_actuate_trunks', 'has_air_suspension', 'ece_restrictions', 'eu_vehicle', 'motorized_charge_port', 'can_accept_navigation_requests', 'key_version', 'mobile_enabled', 'default_charge_to_max', 'steering_wheel_heater_installed', 'sentry_mode_supported', 'homelink_supported', 'webcam_supported', 'bioweapon_mode_supported', 'dashcam_clip_save_supported', 'has_pws', 'utc_offset', 'has_seat_cooling', 'paint_color_override', 'tpms_pressures_supported', 'vehicle_badging', 'exterior_trim_override', 'headlamp_type', 'aux_park_lamps', 'is_raven', 'has_auto_seat_climate', 'has_front_row_seat_heaters', 'has_third_row_seat_heaters', 'supports_qr_pairing', 'disable_window_vent_close', 'webcam_selfie_supported', 'cop_user_set_temp_supported', 'has_auto_stw_heat', 'rearlight_type', 'rear_seat_heater_type', 'webcam_grid_supported', 'has_tesla_badge', 'has_tesla_wordmark', 'fascia_type', 'accessory_lightbar_type', 'sentry_preview_supported', 'seat_trim_type', 'drivetrain_type', 'lightshow_supported', 'mobile_dashcam_viewer_version', 'has_premium_connectivity', 'car_wrap_enabled', 'supports_ride_height', 'supports_set_arrival_energy', 'supports_pillar_camera_metadata', 'chassis_type', 'is_china_vehicle', 'is_using_unreal_apviz', 'supports_flexible_dashcam_bitrate', 'front_fascia_camera_type', 'turn_indicator_control_type', 'has_rear_display', 'window_tint_color', 'interior_upper_trim_type', 'badging_material_type', 'webcam_interior_only', 'country_code', 'bed_lighting_type', 'rear_light_hardware_variant', 'autopilot_base', 'autopilot_override_state', 'autopilot_override_expire_time', 'supports_dynamic_environments')
+    __slots__ = ('interior_trim_type', 'exterior_trim_type', 'red_brake_calipers', 'use_range_badging', 'range_plus_badging', 'has_ludicrous_mode', 'can_actuate_trunks', 'has_air_suspension', 'ece_restrictions', 'eu_vehicle', 'motorized_charge_port', 'can_accept_navigation_requests', 'key_version', 'mobile_enabled', 'default_charge_to_max', 'steering_wheel_heater_installed', 'sentry_mode_supported', 'homelink_supported', 'webcam_supported', 'bioweapon_mode_supported', 'dashcam_clip_save_supported', 'has_pws', 'utc_offset', 'has_seat_cooling', 'paint_color_override', 'tpms_pressures_supported', 'vehicle_badging', 'exterior_trim_override', 'headlamp_type', 'aux_park_lamps', 'is_raven', 'has_auto_seat_climate', 'has_front_row_seat_heaters', 'has_third_row_seat_heaters', 'supports_qr_pairing', 'disable_window_vent_close', 'webcam_selfie_supported', 'cop_user_set_temp_supported', 'has_auto_stw_heat', 'rearlight_type', 'rear_seat_heater_type', 'webcam_grid_supported', 'has_tesla_badge', 'has_tesla_wordmark', 'fascia_type', 'accessory_lightbar_type', 'sentry_preview_supported', 'seat_trim_type', 'drivetrain_type', 'lightshow_supported', 'mobile_dashcam_viewer_version', 'has_premium_connectivity', 'car_wrap_enabled', 'supports_ride_height', 'supports_set_arrival_energy', 'supports_pillar_camera_metadata', 'chassis_type', 'is_china_vehicle', 'is_using_unreal_apviz', 'supports_flexible_dashcam_bitrate', 'front_fascia_camera_type', 'turn_indicator_control_type', 'has_rear_display', 'window_tint_color', 'interior_upper_trim_type', 'badging_material_type', 'webcam_interior_only', 'country_code', 'bed_lighting_type', 'rear_light_hardware_variant', 'autopilot_base', 'autopilot_override_state', 'autopilot_override_expire_time', 'supports_dynamic_environments', 'wheel_caps_on')
 
     class AuxParkLamps_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
@@ -2048,6 +2217,7 @@ class VehicleConfig(_message.Message):
     AUTOPILOT_OVERRIDE_STATE_FIELD_NUMBER: _ClassVar[int]
     AUTOPILOT_OVERRIDE_EXPIRE_TIME_FIELD_NUMBER: _ClassVar[int]
     SUPPORTS_DYNAMIC_ENVIRONMENTS_FIELD_NUMBER: _ClassVar[int]
+    WHEEL_CAPS_ON_FIELD_NUMBER: _ClassVar[int]
     interior_trim_type: VehicleConfig.InteriorTrimType
     exterior_trim_type: VehicleConfig.ExteriorTrimType
     red_brake_calipers: bool
@@ -2122,8 +2292,9 @@ class VehicleConfig(_message.Message):
     autopilot_override_state: AutopilotOverrideState
     autopilot_override_expire_time: int
     supports_dynamic_environments: bool
+    wheel_caps_on: bool
 
-    def __init__(self, interior_trim_type: _Optional[_Union[VehicleConfig.InteriorTrimType, _Mapping]]=..., exterior_trim_type: _Optional[_Union[VehicleConfig.ExteriorTrimType, _Mapping]]=..., red_brake_calipers: _Optional[bool]=..., use_range_badging: _Optional[bool]=..., range_plus_badging: _Optional[bool]=..., has_ludicrous_mode: _Optional[bool]=..., can_actuate_trunks: _Optional[bool]=..., has_air_suspension: _Optional[bool]=..., ece_restrictions: _Optional[bool]=..., eu_vehicle: _Optional[bool]=..., motorized_charge_port: _Optional[bool]=..., can_accept_navigation_requests: _Optional[bool]=..., key_version: _Optional[int]=..., mobile_enabled: _Optional[bool]=..., default_charge_to_max: _Optional[bool]=..., steering_wheel_heater_installed: _Optional[bool]=..., sentry_mode_supported: _Optional[bool]=..., homelink_supported: _Optional[bool]=..., webcam_supported: _Optional[bool]=..., bioweapon_mode_supported: _Optional[bool]=..., dashcam_clip_save_supported: _Optional[bool]=..., has_pws: _Optional[bool]=..., utc_offset: _Optional[int]=..., has_seat_cooling: _Optional[bool]=..., paint_color_override: _Optional[str]=..., tpms_pressures_supported: _Optional[bool]=..., vehicle_badging: _Optional[int]=..., exterior_trim_override: _Optional[str]=..., headlamp_type: _Optional[_Union[VehicleConfig.HeadlampType_E, str]]=..., aux_park_lamps: _Optional[_Union[VehicleConfig.AuxParkLamps_E, str]]=..., is_raven: _Optional[bool]=..., has_auto_seat_climate: _Optional[bool]=..., has_front_row_seat_heaters: _Optional[bool]=..., has_third_row_seat_heaters: _Optional[bool]=..., supports_qr_pairing: _Optional[bool]=..., disable_window_vent_close: _Optional[bool]=..., webcam_selfie_supported: _Optional[bool]=..., cop_user_set_temp_supported: _Optional[bool]=..., has_auto_stw_heat: _Optional[bool]=..., rearlight_type: _Optional[_Union[VehicleConfig.RearLightType, str]]=..., rear_seat_heater_type: _Optional[_Union[_common_pb2.RearSeatHeaterType, str]]=..., webcam_grid_supported: _Optional[bool]=..., has_tesla_badge: _Optional[bool]=..., has_tesla_wordmark: _Optional[bool]=..., fascia_type: _Optional[_Union[_common_pb2.FasciaType, str]]=..., accessory_lightbar_type: _Optional[_Union[_common_pb2.AccessoryLightbarType, str]]=..., sentry_preview_supported: _Optional[bool]=..., seat_trim_type: _Optional[_Union[VehicleConfig.SeatTrimType, str]]=..., drivetrain_type: _Optional[_Union[VehicleConfig.DrivetrainType, str]]=..., lightshow_supported: _Optional[bool]=..., mobile_dashcam_viewer_version: _Optional[int]=..., has_premium_connectivity: _Optional[bool]=..., car_wrap_enabled: _Optional[bool]=..., supports_ride_height: _Optional[bool]=..., supports_set_arrival_energy: _Optional[bool]=..., supports_pillar_camera_metadata: _Optional[bool]=..., chassis_type: _Optional[_Union[_common_pb2.ChassisType, str]]=..., is_china_vehicle: _Optional[bool]=..., is_using_unreal_apviz: _Optional[bool]=..., supports_flexible_dashcam_bitrate: _Optional[bool]=..., front_fascia_camera_type: _Optional[_Union[VehicleConfig.FrontFasciaCameraType, str]]=..., turn_indicator_control_type: _Optional[_Union[VehicleConfig.TurnIndicatorControlType, str]]=..., has_rear_display: _Optional[bool]=..., window_tint_color: _Optional[str]=..., interior_upper_trim_type: _Optional[_Union[VehicleConfig.InteriorUpperTrimType, str]]=..., badging_material_type: _Optional[_Union[VehicleConfig.BadgingMaterialType, str]]=..., webcam_interior_only: _Optional[bool]=..., country_code: _Optional[str]=..., bed_lighting_type: _Optional[_Union[VehicleConfig.BedLightingType, str]]=..., rear_light_hardware_variant: _Optional[_Union[VehicleConfig.RearLightHardwareVariant, str]]=..., autopilot_base: _Optional[_Union[AutopilotBase, str]]=..., autopilot_override_state: _Optional[_Union[AutopilotOverrideState, str]]=..., autopilot_override_expire_time: _Optional[int]=..., supports_dynamic_environments: _Optional[bool]=...) -> None:
+    def __init__(self, interior_trim_type: _Optional[_Union[VehicleConfig.InteriorTrimType, _Mapping]]=..., exterior_trim_type: _Optional[_Union[VehicleConfig.ExteriorTrimType, _Mapping]]=..., red_brake_calipers: _Optional[bool]=..., use_range_badging: _Optional[bool]=..., range_plus_badging: _Optional[bool]=..., has_ludicrous_mode: _Optional[bool]=..., can_actuate_trunks: _Optional[bool]=..., has_air_suspension: _Optional[bool]=..., ece_restrictions: _Optional[bool]=..., eu_vehicle: _Optional[bool]=..., motorized_charge_port: _Optional[bool]=..., can_accept_navigation_requests: _Optional[bool]=..., key_version: _Optional[int]=..., mobile_enabled: _Optional[bool]=..., default_charge_to_max: _Optional[bool]=..., steering_wheel_heater_installed: _Optional[bool]=..., sentry_mode_supported: _Optional[bool]=..., homelink_supported: _Optional[bool]=..., webcam_supported: _Optional[bool]=..., bioweapon_mode_supported: _Optional[bool]=..., dashcam_clip_save_supported: _Optional[bool]=..., has_pws: _Optional[bool]=..., utc_offset: _Optional[int]=..., has_seat_cooling: _Optional[bool]=..., paint_color_override: _Optional[str]=..., tpms_pressures_supported: _Optional[bool]=..., vehicle_badging: _Optional[int]=..., exterior_trim_override: _Optional[str]=..., headlamp_type: _Optional[_Union[VehicleConfig.HeadlampType_E, str]]=..., aux_park_lamps: _Optional[_Union[VehicleConfig.AuxParkLamps_E, str]]=..., is_raven: _Optional[bool]=..., has_auto_seat_climate: _Optional[bool]=..., has_front_row_seat_heaters: _Optional[bool]=..., has_third_row_seat_heaters: _Optional[bool]=..., supports_qr_pairing: _Optional[bool]=..., disable_window_vent_close: _Optional[bool]=..., webcam_selfie_supported: _Optional[bool]=..., cop_user_set_temp_supported: _Optional[bool]=..., has_auto_stw_heat: _Optional[bool]=..., rearlight_type: _Optional[_Union[VehicleConfig.RearLightType, str]]=..., rear_seat_heater_type: _Optional[_Union[_common_pb2.RearSeatHeaterType, str]]=..., webcam_grid_supported: _Optional[bool]=..., has_tesla_badge: _Optional[bool]=..., has_tesla_wordmark: _Optional[bool]=..., fascia_type: _Optional[_Union[_common_pb2.FasciaType, str]]=..., accessory_lightbar_type: _Optional[_Union[_common_pb2.AccessoryLightbarType, str]]=..., sentry_preview_supported: _Optional[bool]=..., seat_trim_type: _Optional[_Union[VehicleConfig.SeatTrimType, str]]=..., drivetrain_type: _Optional[_Union[VehicleConfig.DrivetrainType, str]]=..., lightshow_supported: _Optional[bool]=..., mobile_dashcam_viewer_version: _Optional[int]=..., has_premium_connectivity: _Optional[bool]=..., car_wrap_enabled: _Optional[bool]=..., supports_ride_height: _Optional[bool]=..., supports_set_arrival_energy: _Optional[bool]=..., supports_pillar_camera_metadata: _Optional[bool]=..., chassis_type: _Optional[_Union[_common_pb2.ChassisType, str]]=..., is_china_vehicle: _Optional[bool]=..., is_using_unreal_apviz: _Optional[bool]=..., supports_flexible_dashcam_bitrate: _Optional[bool]=..., front_fascia_camera_type: _Optional[_Union[VehicleConfig.FrontFasciaCameraType, str]]=..., turn_indicator_control_type: _Optional[_Union[VehicleConfig.TurnIndicatorControlType, str]]=..., has_rear_display: _Optional[bool]=..., window_tint_color: _Optional[str]=..., interior_upper_trim_type: _Optional[_Union[VehicleConfig.InteriorUpperTrimType, str]]=..., badging_material_type: _Optional[_Union[VehicleConfig.BadgingMaterialType, str]]=..., webcam_interior_only: _Optional[bool]=..., country_code: _Optional[str]=..., bed_lighting_type: _Optional[_Union[VehicleConfig.BedLightingType, str]]=..., rear_light_hardware_variant: _Optional[_Union[VehicleConfig.RearLightHardwareVariant, str]]=..., autopilot_base: _Optional[_Union[AutopilotBase, str]]=..., autopilot_override_state: _Optional[_Union[AutopilotOverrideState, str]]=..., autopilot_override_expire_time: _Optional[int]=..., supports_dynamic_environments: _Optional[bool]=..., wheel_caps_on: _Optional[bool]=...) -> None:
         ...
 
 class ParkedAccessoryState(_message.Message):
@@ -2203,19 +2374,21 @@ class SohState(_message.Message):
             ...
 
     class SohResult(_message.Message):
-        __slots__ = ('soh_calibrated', 'soh_last_test_time', 'soh_health_result', 'soh_distance_since_soh_test', 'soh_regulated')
+        __slots__ = ('field_3', 'soh_calibrated', 'soh_last_test_time', 'soh_health_result', 'soh_distance_since_soh_test', 'soh_regulated')
+        FIELD_3_FIELD_NUMBER: _ClassVar[int]
         SOH_CALIBRATED_FIELD_NUMBER: _ClassVar[int]
         SOH_LAST_TEST_TIME_FIELD_NUMBER: _ClassVar[int]
         SOH_HEALTH_RESULT_FIELD_NUMBER: _ClassVar[int]
         SOH_DISTANCE_SINCE_SOH_TEST_FIELD_NUMBER: _ClassVar[int]
         SOH_REGULATED_FIELD_NUMBER: _ClassVar[int]
+        field_3: float
         soh_calibrated: bool
         soh_last_test_time: int
         soh_health_result: SohState.WarrantyServiceResult
         soh_distance_since_soh_test: int
         soh_regulated: bool
 
-        def __init__(self, soh_calibrated: _Optional[bool]=..., soh_last_test_time: _Optional[int]=..., soh_health_result: _Optional[_Union[SohState.WarrantyServiceResult, str]]=..., soh_distance_since_soh_test: _Optional[int]=..., soh_regulated: _Optional[bool]=...) -> None:
+        def __init__(self, field_3: _Optional[float]=..., soh_calibrated: _Optional[bool]=..., soh_last_test_time: _Optional[int]=..., soh_health_result: _Optional[_Union[SohState.WarrantyServiceResult, str]]=..., soh_distance_since_soh_test: _Optional[int]=..., soh_regulated: _Optional[bool]=...) -> None:
             ...
     SOH_TEST_STATE_FIELD_NUMBER: _ClassVar[int]
     SOH_TEST_END_MODE_FIELD_NUMBER: _ClassVar[int]

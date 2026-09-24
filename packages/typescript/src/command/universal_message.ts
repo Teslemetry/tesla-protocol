@@ -6,7 +6,7 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { SignatureData } from "./signatures.js";
+import { IdentifiedKey, identifiedKeyFromJSON, identifiedKeyToJSON, SignatureData } from "./signatures.js";
 
 export const protobufPackage = "UniversalMessage";
 
@@ -179,6 +179,8 @@ export enum MessageFaultE {
   MESSAGEFAULT_ERROR_REPEATED_COUNTER = 26,
   MESSAGEFAULT_ERROR_INVALID_KEY_HANDLE = 27,
   MESSAGEFAULT_ERROR_REQUIRES_RESPONSE_ENCRYPTION = 28,
+  /** MESSAGEFAULT_ERROR_COMMAND_REQUIRES_PHYSICAL_PROXIMITY - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  MESSAGEFAULT_ERROR_COMMAND_REQUIRES_PHYSICAL_PROXIMITY = 29,
   UNRECOGNIZED = -1,
 }
 
@@ -271,6 +273,9 @@ export function messageFaultEFromJSON(object: any): MessageFaultE {
     case 28:
     case "MESSAGEFAULT_ERROR_REQUIRES_RESPONSE_ENCRYPTION":
       return MessageFaultE.MESSAGEFAULT_ERROR_REQUIRES_RESPONSE_ENCRYPTION;
+    case 29:
+    case "MESSAGEFAULT_ERROR_COMMAND_REQUIRES_PHYSICAL_PROXIMITY":
+      return MessageFaultE.MESSAGEFAULT_ERROR_COMMAND_REQUIRES_PHYSICAL_PROXIMITY;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -338,6 +343,8 @@ export function messageFaultEToJSON(object: MessageFaultE): string {
       return "MESSAGEFAULT_ERROR_INVALID_KEY_HANDLE";
     case MessageFaultE.MESSAGEFAULT_ERROR_REQUIRES_RESPONSE_ENCRYPTION:
       return "MESSAGEFAULT_ERROR_REQUIRES_RESPONSE_ENCRYPTION";
+    case MessageFaultE.MESSAGEFAULT_ERROR_COMMAND_REQUIRES_PHYSICAL_PROXIMITY:
+      return "MESSAGEFAULT_ERROR_COMMAND_REQUIRES_PHYSICAL_PROXIMITY";
     case MessageFaultE.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -347,6 +354,12 @@ export function messageFaultEToJSON(object: MessageFaultE): string {
 export enum Flags {
   FLAG_USER_COMMAND = 0,
   FLAG_ENCRYPT_RESPONSE = 1,
+  /** FLAG_SUPPORTS_MESSAGE_FRAMING - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  FLAG_SUPPORTS_MESSAGE_FRAMING = 2,
+  /** FLAG_COMPRESSED_ZLIB - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  FLAG_COMPRESSED_ZLIB = 3,
+  /** FLAG_SUPPORTS_COMPRESSION_ZLIB - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  FLAG_SUPPORTS_COMPRESSION_ZLIB = 4,
   UNRECOGNIZED = -1,
 }
 
@@ -358,6 +371,15 @@ export function flagsFromJSON(object: any): Flags {
     case 1:
     case "FLAG_ENCRYPT_RESPONSE":
       return Flags.FLAG_ENCRYPT_RESPONSE;
+    case 2:
+    case "FLAG_SUPPORTS_MESSAGE_FRAMING":
+      return Flags.FLAG_SUPPORTS_MESSAGE_FRAMING;
+    case 3:
+    case "FLAG_COMPRESSED_ZLIB":
+      return Flags.FLAG_COMPRESSED_ZLIB;
+    case 4:
+    case "FLAG_SUPPORTS_COMPRESSION_ZLIB":
+      return Flags.FLAG_SUPPORTS_COMPRESSION_ZLIB;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -371,6 +393,12 @@ export function flagsToJSON(object: Flags): string {
       return "FLAG_USER_COMMAND";
     case Flags.FLAG_ENCRYPT_RESPONSE:
       return "FLAG_ENCRYPT_RESPONSE";
+    case Flags.FLAG_SUPPORTS_MESSAGE_FRAMING:
+      return "FLAG_SUPPORTS_MESSAGE_FRAMING";
+    case Flags.FLAG_COMPRESSED_ZLIB:
+      return "FLAG_COMPRESSED_ZLIB";
+    case Flags.FLAG_SUPPORTS_COMPRESSION_ZLIB:
+      return "FLAG_SUPPORTS_COMPRESSION_ZLIB";
     case Flags.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -390,6 +418,21 @@ export interface MessageStatus {
 export interface SessionInfoRequest {
   publicKey: Uint8Array;
   challenge: Uint8Array;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  handle: number;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  identifiedKey: IdentifiedKey;
+}
+
+/**
+ * ===== TESLEMETRY-EXT BEGIN =====
+ * One chunk of a RoutableMessage split across several transport frames.
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export interface MessageFrame {
+  chunkIndex: number;
+  totalChunks: number;
+  data: Uint8Array;
 }
 
 export interface RoutableMessage {
@@ -403,6 +446,8 @@ export interface RoutableMessage {
   requestUuid: Uint8Array;
   uuid: Uint8Array;
   flags: number;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  messageFrame: MessageFrame | undefined;
 }
 
 function createBaseDestination(): Destination {
@@ -558,7 +603,7 @@ export const MessageStatus: MessageFns<MessageStatus> = {
 };
 
 function createBaseSessionInfoRequest(): SessionInfoRequest {
-  return { publicKey: new Uint8Array(0), challenge: new Uint8Array(0) };
+  return { publicKey: new Uint8Array(0), challenge: new Uint8Array(0), handle: 0, identifiedKey: 0 };
 }
 
 export const SessionInfoRequest: MessageFns<SessionInfoRequest> = {
@@ -568,6 +613,12 @@ export const SessionInfoRequest: MessageFns<SessionInfoRequest> = {
     }
     if (message.challenge.length !== 0) {
       writer.uint32(18).bytes(message.challenge);
+    }
+    if (message.handle !== 0) {
+      writer.uint32(24).uint32(message.handle);
+    }
+    if (message.identifiedKey !== 0) {
+      writer.uint32(32).int32(message.identifiedKey);
     }
     return writer;
   },
@@ -595,6 +646,22 @@ export const SessionInfoRequest: MessageFns<SessionInfoRequest> = {
           message.challenge = reader.bytes();
           continue;
         }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.handle = reader.uint32();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.identifiedKey = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -608,6 +675,8 @@ export const SessionInfoRequest: MessageFns<SessionInfoRequest> = {
     return {
       publicKey: isSet(object.publicKey) ? bytesFromBase64(object.publicKey) : new Uint8Array(0),
       challenge: isSet(object.challenge) ? bytesFromBase64(object.challenge) : new Uint8Array(0),
+      handle: isSet(object.handle) ? globalThis.Number(object.handle) : 0,
+      identifiedKey: isSet(object.identifiedKey) ? identifiedKeyFromJSON(object.identifiedKey) : 0,
     };
   },
 
@@ -619,6 +688,12 @@ export const SessionInfoRequest: MessageFns<SessionInfoRequest> = {
     if (message.challenge !== undefined) {
       obj.challenge = base64FromBytes(message.challenge);
     }
+    if (message.handle !== undefined) {
+      obj.handle = Math.round(message.handle);
+    }
+    if (message.identifiedKey !== undefined) {
+      obj.identifiedKey = identifiedKeyToJSON(message.identifiedKey);
+    }
     return obj;
   },
 
@@ -629,6 +704,100 @@ export const SessionInfoRequest: MessageFns<SessionInfoRequest> = {
     const message = createBaseSessionInfoRequest();
     message.publicKey = object.publicKey ?? new Uint8Array(0);
     message.challenge = object.challenge ?? new Uint8Array(0);
+    message.handle = object.handle ?? 0;
+    message.identifiedKey = object.identifiedKey ?? 0;
+    return message;
+  },
+};
+
+function createBaseMessageFrame(): MessageFrame {
+  return { chunkIndex: 0, totalChunks: 0, data: new Uint8Array(0) };
+}
+
+export const MessageFrame: MessageFns<MessageFrame> = {
+  encode(message: MessageFrame, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.chunkIndex !== 0) {
+      writer.uint32(8).uint32(message.chunkIndex);
+    }
+    if (message.totalChunks !== 0) {
+      writer.uint32(16).uint32(message.totalChunks);
+    }
+    if (message.data.length !== 0) {
+      writer.uint32(26).bytes(message.data);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): MessageFrame {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseMessageFrame();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.chunkIndex = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.totalChunks = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.data = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MessageFrame {
+    return {
+      chunkIndex: isSet(object.chunkIndex) ? globalThis.Number(object.chunkIndex) : 0,
+      totalChunks: isSet(object.totalChunks) ? globalThis.Number(object.totalChunks) : 0,
+      data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: MessageFrame): unknown {
+    const obj: any = {};
+    if (message.chunkIndex !== undefined) {
+      obj.chunkIndex = Math.round(message.chunkIndex);
+    }
+    if (message.totalChunks !== undefined) {
+      obj.totalChunks = Math.round(message.totalChunks);
+    }
+    if (message.data !== undefined) {
+      obj.data = base64FromBytes(message.data);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<MessageFrame>, I>>(base?: I): MessageFrame {
+    return MessageFrame.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<MessageFrame>, I>>(object: I): MessageFrame {
+    const message = createBaseMessageFrame();
+    message.chunkIndex = object.chunkIndex ?? 0;
+    message.totalChunks = object.totalChunks ?? 0;
+    message.data = object.data ?? new Uint8Array(0);
     return message;
   },
 };
@@ -645,6 +814,7 @@ function createBaseRoutableMessage(): RoutableMessage {
     requestUuid: new Uint8Array(0),
     uuid: new Uint8Array(0),
     flags: 0,
+    messageFrame: undefined,
   };
 }
 
@@ -679,6 +849,9 @@ export const RoutableMessage: MessageFns<RoutableMessage> = {
     }
     if (message.flags !== 0) {
       writer.uint32(416).uint32(message.flags);
+    }
+    if (message.messageFrame !== undefined) {
+      MessageFrame.encode(message.messageFrame, writer.uint32(426).fork()).join();
     }
     return writer;
   },
@@ -770,6 +943,14 @@ export const RoutableMessage: MessageFns<RoutableMessage> = {
           message.flags = reader.uint32();
           continue;
         }
+        case 53: {
+          if (tag !== 426) {
+            break;
+          }
+
+          message.messageFrame = MessageFrame.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -797,6 +978,7 @@ export const RoutableMessage: MessageFns<RoutableMessage> = {
       requestUuid: isSet(object.requestUuid) ? bytesFromBase64(object.requestUuid) : new Uint8Array(0),
       uuid: isSet(object.uuid) ? bytesFromBase64(object.uuid) : new Uint8Array(0),
       flags: isSet(object.flags) ? globalThis.Number(object.flags) : 0,
+      messageFrame: isSet(object.messageFrame) ? MessageFrame.fromJSON(object.messageFrame) : undefined,
     };
   },
 
@@ -832,6 +1014,9 @@ export const RoutableMessage: MessageFns<RoutableMessage> = {
     if (message.flags !== undefined) {
       obj.flags = Math.round(message.flags);
     }
+    if (message.messageFrame !== undefined) {
+      obj.messageFrame = MessageFrame.toJSON(message.messageFrame);
+    }
     return obj;
   },
 
@@ -860,6 +1045,9 @@ export const RoutableMessage: MessageFns<RoutableMessage> = {
     message.requestUuid = object.requestUuid ?? new Uint8Array(0);
     message.uuid = object.uuid ?? new Uint8Array(0);
     message.flags = object.flags ?? 0;
+    message.messageFrame = (object.messageFrame !== undefined && object.messageFrame !== null)
+      ? MessageFrame.fromPartial(object.messageFrame)
+      : undefined;
     return message;
   },
 };

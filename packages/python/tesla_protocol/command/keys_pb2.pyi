@@ -12,7 +12,11 @@ class Role(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     ROLE_FM: _ClassVar[Role]
     ROLE_VEHICLE_MONITOR: _ClassVar[Role]
     ROLE_CHARGING_MANAGER: _ClassVar[Role]
+    ROLE_SERVICE_TECH: _ClassVar[Role]
     ROLE_GUEST: _ClassVar[Role]
+    ROLE_RIDER: _ClassVar[Role]
+    ROLE_PREDELIVERY: _ClassVar[Role]
+    ROLE_INFOTAINMENT: _ClassVar[Role]
 ROLE_NONE: Role
 ROLE_SERVICE: Role
 ROLE_OWNER: Role
@@ -20,4 +24,8 @@ ROLE_DRIVER: Role
 ROLE_FM: Role
 ROLE_VEHICLE_MONITOR: Role
 ROLE_CHARGING_MANAGER: Role
+ROLE_SERVICE_TECH: Role
 ROLE_GUEST: Role
+ROLE_RIDER: Role
+ROLE_PREDELIVERY: Role
+ROLE_INFOTAINMENT: Role

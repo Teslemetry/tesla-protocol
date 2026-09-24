@@ -346,9 +346,9 @@
         "typescript": "packages/typescript/src/command",
         "python": "packages/python/tesla_protocol/command"
       },
-      "messages": 328,
-      "enums": 103,
-      "fields": 1468,
+      "messages": 338,
+      "enums": 106,
+      "fields": 1547,
       "files": [
         {
           "package": "CarServer",
@@ -381,6 +381,10 @@
                 [
                   3,
                   5
+                ],
+                [
+                  6,
+                  8
                 ]
               ],
               "reserved_names": [],
@@ -1400,6 +1404,14 @@
                   "oneof": "vehicle_action_msg"
                 },
                 {
+                  "number": 147,
+                  "name": "setUpkeepUsernameAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetUpkeepUsernameAction",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
                   "number": 149,
                   "name": "bandwidthTest",
                   "type": "TYPE_MESSAGE",
@@ -1420,6 +1432,46 @@
                   "name": "cancelVehicleDataSubscription",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".CarServer.CancelVehicleDataSubscription",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
+                  "number": 177,
+                  "name": "prepareMobileUploadAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.PrepareMobileUploadAction",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
+                  "number": 178,
+                  "name": "putMobileUploadChunkAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.PutMobileUploadChunkAction",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
+                  "number": 180,
+                  "name": "displayStateAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.DisplayStateAction",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
+                  "number": 694177,
+                  "name": "drivingSetCruiseSpeedLimitAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.DrivingSetCruiseSpeedLimitAction",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
+                  "number": 698038,
+                  "name": "setDeckLightAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetDeckLightAction",
                   "label": "LABEL_OPTIONAL",
                   "oneof": "vehicle_action_msg"
                 }
@@ -1965,6 +2017,14 @@
                   "oneof": null
                 },
                 {
+                  "number": 3,
+                  "name": "field_3",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 4,
                   "name": "overwriteOldestIfFull",
                   "type": "TYPE_BOOL",
@@ -2187,6 +2247,30 @@
                   "oneof": null
                 },
                 {
+                  "number": 2,
+                  "name": "interiorImage",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.DogModeLiveActivityData.DogModeImageData",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "field_3",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "field_4",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".google.protobuf.Timestamp",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 5,
                   "name": "insideTemperatureCelsius",
                   "type": "TYPE_FLOAT",
@@ -2222,7 +2306,35 @@
               "oneofs": [],
               "reserved_ranges": [],
               "reserved_names": [],
-              "nested_messages": [],
+              "nested_messages": [
+                {
+                  "fqn": ".CarServer.DogModeLiveActivityData.DogModeImageData",
+                  "name": "DogModeImageData",
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "wrappedKey",
+                      "type": "TYPE_BYTES",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 2,
+                      "name": "encryptedImage",
+                      "type": "TYPE_BYTES",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    }
+                  ],
+                  "oneofs": [],
+                  "reserved_ranges": [],
+                  "reserved_names": [],
+                  "nested_messages": [],
+                  "nested_enums": []
+                }
+              ],
               "nested_enums": [
                 {
                   "fqn": ".CarServer.DogModeLiveActivityData.DisabledReason",
@@ -3074,6 +3186,14 @@
               "name": "GetRateTariffResponse",
               "fields": [
                 {
+                  "number": 1,
+                  "name": "tariff_document",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetRateTariffRequest",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 13,
                   "name": "seasons",
                   "type": "TYPE_MESSAGE",
@@ -3917,6 +4037,38 @@
               "name": "DestinationCharging",
               "fields": [
                 {
+                  "number": 1,
+                  "name": "id",
+                  "type": "TYPE_INT64",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "amenities",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "city",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "country",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 5,
                   "name": "distance_miles",
                   "type": "TYPE_FLOAT",
@@ -3925,8 +4077,40 @@
                   "oneof": null
                 },
                 {
+                  "number": 6,
+                  "name": "district",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 7,
+                  "name": "location",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.LatLong",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 8,
+                  "name": "name",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 9,
                   "name": "postal_code",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 10,
+                  "name": "state",
                   "type": "TYPE_STRING",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -4129,7 +4313,16 @@
             {
               "fqn": ".CarServer.MediaPlayAction",
               "name": "MediaPlayAction",
-              "fields": [],
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "media_playback_status",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.MediaPlaybackStatus",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
               "oneofs": [],
               "reserved_ranges": [],
               "reserved_names": [],
@@ -5621,6 +5814,102 @@
               "name": "SetRateTariffRequest",
               "fields": [
                 {
+                  "number": 1,
+                  "name": "code",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "name",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "utility",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "currency",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 5,
+                  "name": "daily_charges",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetRateTariffRequest.DailyCharge",
+                  "label": "LABEL_REPEATED",
+                  "oneof": null
+                },
+                {
+                  "number": 6,
+                  "name": "monthly_charges",
+                  "type": "TYPE_DOUBLE",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 7,
+                  "name": "monthly_minimum_bill",
+                  "type": "TYPE_DOUBLE",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 8,
+                  "name": "demand_charges",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetRateTariffRequest.Charges",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 9,
+                  "name": "daily_demand_charges",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetRateTariffRequest.Charges",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 10,
+                  "name": "energy_charges",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetRateTariffRequest.Charges",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 11,
+                  "name": "max_applicable_demand",
+                  "type": "TYPE_DOUBLE",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 12,
+                  "name": "min_applicable_demand",
+                  "type": "TYPE_DOUBLE",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 13,
                   "name": "seasons",
                   "type": "TYPE_MESSAGE",
@@ -5916,6 +6205,33 @@
                   "nested_enums": []
                 },
                 {
+                  "fqn": ".CarServer.SetRateTariffRequest.DailyCharge",
+                  "name": "DailyCharge",
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "amount",
+                      "type": "TYPE_DOUBLE",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 2,
+                      "name": "name",
+                      "type": "TYPE_STRING",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    }
+                  ],
+                  "oneofs": [],
+                  "reserved_ranges": [],
+                  "reserved_names": [],
+                  "nested_messages": [],
+                  "nested_enums": []
+                },
+                {
                   "fqn": ".CarServer.SetRateTariffRequest.Charges",
                   "name": "Charges",
                   "fields": [
@@ -5978,6 +6294,102 @@
                   "fqn": ".CarServer.SetRateTariffRequest.Tariff",
                   "name": "Tariff",
                   "fields": [
+                    {
+                      "number": 1,
+                      "name": "code",
+                      "type": "TYPE_STRING",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 2,
+                      "name": "name",
+                      "type": "TYPE_STRING",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 3,
+                      "name": "utility",
+                      "type": "TYPE_STRING",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 4,
+                      "name": "currency",
+                      "type": "TYPE_STRING",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 5,
+                      "name": "daily_charges",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.SetRateTariffRequest.DailyCharge",
+                      "label": "LABEL_REPEATED",
+                      "oneof": null
+                    },
+                    {
+                      "number": 6,
+                      "name": "monthly_charges",
+                      "type": "TYPE_DOUBLE",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 7,
+                      "name": "monthly_minimum_bill",
+                      "type": "TYPE_DOUBLE",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 8,
+                      "name": "demand_charges",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.SetRateTariffRequest.Charges",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 9,
+                      "name": "daily_demand_charges",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.SetRateTariffRequest.Charges",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 10,
+                      "name": "energy_charges",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.SetRateTariffRequest.Charges",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 11,
+                      "name": "max_applicable_demand",
+                      "type": "TYPE_DOUBLE",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 12,
+                      "name": "min_applicable_demand",
+                      "type": "TYPE_DOUBLE",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
                     {
                       "number": 13,
                       "name": "seasons",
@@ -7670,6 +8082,14 @@
                   "oneof": null
                 },
                 {
+                  "number": 2,
+                  "name": "field_2",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 3,
                   "name": "unit_preferences",
                   "type": "TYPE_MESSAGE",
@@ -7710,6 +8130,63 @@
               "reserved_names": [],
               "nested_messages": [],
               "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.SetUpkeepUsernameAction",
+              "name": "SetUpkeepUsernameAction",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "username",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.DrivingSetCruiseSpeedLimitAction",
+              "name": "DrivingSetCruiseSpeedLimitAction",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "limitMph",
+                  "type": "TYPE_DOUBLE",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.SetDeckLightAction",
+              "name": "SetDeckLightAction",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "on",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
             }
           ],
           "enums": [
@@ -7724,6 +8201,118 @@
                 {
                   "number": 1,
                   "name": "OPERATIONSTATUS_ERROR"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".CarServer.VehicleDataFields",
+              "name": "VehicleDataFields",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "NOTHING"
+                },
+                {
+                  "number": 2,
+                  "name": "gui_settings"
+                },
+                {
+                  "number": 3,
+                  "name": "charge_state"
+                },
+                {
+                  "number": 4,
+                  "name": "climate_state"
+                },
+                {
+                  "number": 5,
+                  "name": "drive_state"
+                },
+                {
+                  "number": 6,
+                  "name": "vehicle_state"
+                },
+                {
+                  "number": 7,
+                  "name": "vehicle_config"
+                },
+                {
+                  "number": 8,
+                  "name": "location_state"
+                },
+                {
+                  "number": 9,
+                  "name": "closures_state"
+                },
+                {
+                  "number": 10,
+                  "name": "parked_accessory_state"
+                },
+                {
+                  "number": 11,
+                  "name": "charge_schedule_state"
+                },
+                {
+                  "number": 12,
+                  "name": "preconditioning_schedule_state"
+                },
+                {
+                  "number": 13,
+                  "name": "media_state"
+                },
+                {
+                  "number": 14,
+                  "name": "media_detail_state"
+                },
+                {
+                  "number": 15,
+                  "name": "tire_pressure_state"
+                },
+                {
+                  "number": 16,
+                  "name": "vehicle_detail_state"
+                },
+                {
+                  "number": 17,
+                  "name": "software_update_state"
+                },
+                {
+                  "number": 18,
+                  "name": "parental_controls_state"
+                },
+                {
+                  "number": 19,
+                  "name": "alert_state"
+                },
+                {
+                  "number": 20,
+                  "name": "light_show_state"
+                },
+                {
+                  "number": 21,
+                  "name": "vehicle_image_state"
+                },
+                {
+                  "number": 22,
+                  "name": "soh_state"
+                },
+                {
+                  "number": 23,
+                  "name": "suspension_state"
+                },
+                {
+                  "number": 24,
+                  "name": "child_presence_detection_state"
+                },
+                {
+                  "number": 30,
+                  "name": "display_state"
+                },
+                {
+                  "number": 6072,
+                  "name": "legacy_vehicle_state_media_info"
                 }
               ],
               "reserved_ranges": [],
@@ -8928,6 +9517,33 @@
           "imports": [],
           "messages": [
             {
+              "fqn": ".Errors.KeyNotFoundContext",
+              "name": "KeyNotFoundContext",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "public_key",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "handle",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
               "fqn": ".Errors.NominalError",
               "name": "NominalError",
               "fields": [
@@ -8936,6 +9552,14 @@
                   "name": "genericError",
                   "type": "TYPE_ENUM",
                   "type_name": ".Errors.GenericError_E",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 8,
+                  "name": "keyNotFoundContext",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".Errors.KeyNotFoundContext",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 }
@@ -8983,6 +9607,14 @@
                 {
                   "number": 7,
                   "name": "GENERICERROR_NOT_ALLOWED_OVER_TRANSPORT"
+                },
+                {
+                  "number": 8,
+                  "name": "GENERICERROR_KEY_NOT_FOUND"
+                },
+                {
+                  "number": 9,
+                  "name": "GENERICERROR_NOT_SUPPORTED"
                 }
               ],
               "reserved_ranges": [],
@@ -9030,8 +9662,24 @@
                   "name": "ROLE_CHARGING_MANAGER"
                 },
                 {
+                  "number": 7,
+                  "name": "ROLE_SERVICE_TECH"
+                },
+                {
                   "number": 8,
                   "name": "ROLE_GUEST"
+                },
+                {
+                  "number": 9,
+                  "name": "ROLE_RIDER"
+                },
+                {
+                  "number": 10,
+                  "name": "ROLE_PREDELIVERY"
+                },
+                {
+                  "number": 11,
+                  "name": "ROLE_INFOTAINMENT"
                 }
               ],
               "reserved_ranges": [],
@@ -9337,6 +9985,14 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": "identity_type"
+                },
+                {
+                  "number": 4,
+                  "name": "identified_key",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".Signatures.IdentifiedKey",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "identity_type"
                 }
               ],
               "oneofs": [
@@ -9439,6 +10095,103 @@
               "nested_enums": []
             },
             {
+              "fqn": ".Signatures.Present_Key_Signature_Data",
+              "name": "Present_Key_Signature_Data",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "auth_token",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".Signatures.AES_GCM_Detached_Signature_Data",
+              "name": "AES_GCM_Detached_Signature_Data",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "epoch",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "counter",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "expires_at",
+                  "type": "TYPE_FIXED32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "nonce",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 5,
+                  "name": "tag",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".Signatures.Certificate_ECDSA_Signature_Data",
+              "name": "Certificate_ECDSA_Signature_Data",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "certificate_chain_der",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "signature",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
               "fqn": ".Signatures.HMAC_Signature_Data",
               "name": "HMAC_Signature_Data",
               "fields": [
@@ -9513,6 +10266,14 @@
                   "oneof": null
                 },
                 {
+                  "number": 2,
+                  "name": "Present_Key_data",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".Signatures.Present_Key_Signature_Data",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sig_type"
+                },
+                {
                   "number": 5,
                   "name": "AES_GCM_Personalized_data",
                   "type": "TYPE_MESSAGE",
@@ -9541,6 +10302,22 @@
                   "name": "AES_GCM_Response_data",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".Signatures.AES_GCM_Response_Signature_Data",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sig_type"
+                },
+                {
+                  "number": 10,
+                  "name": "AES_GCM_Detached_data",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".Signatures.AES_GCM_Detached_Signature_Data",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sig_type"
+                },
+                {
+                  "number": 11,
+                  "name": "Certificate_ECDSA_data",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".Signatures.Certificate_ECDSA_Signature_Data",
                   "label": "LABEL_OPTIONAL",
                   "oneof": "sig_type"
                 }
@@ -9628,6 +10405,14 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
+                },
+                {
+                  "number": 7,
+                  "name": "field_7",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
                 }
               ],
               "oneofs": [],
@@ -9683,6 +10468,10 @@
                   "name": "TAG_FAULT"
                 },
                 {
+                  "number": 10,
+                  "name": "TAG_COMMAND_PREFIX"
+                },
+                {
                   "number": 255,
                   "name": "TAG_END"
                 }
@@ -9699,6 +10488,22 @@
                   "name": "SIGNATURE_TYPE_AES_GCM"
                 },
                 {
+                  "number": 1,
+                  "name": "SIGNATURE_TYPE_ECDSA"
+                },
+                {
+                  "number": 2,
+                  "name": "SIGNATURE_TYPE_PRESENT_KEY"
+                },
+                {
+                  "number": 3,
+                  "name": "SIGNATURE_TYPE_AES_GCM_TOKEN"
+                },
+                {
+                  "number": 4,
+                  "name": "SIGNATURE_TYPE_ECDSA_PERSONALIZED"
+                },
+                {
                   "number": 5,
                   "name": "SIGNATURE_TYPE_AES_GCM_PERSONALIZED"
                 },
@@ -9713,6 +10518,14 @@
                 {
                   "number": 9,
                   "name": "SIGNATURE_TYPE_AES_GCM_RESPONSE"
+                },
+                {
+                  "number": 10,
+                  "name": "SIGNATURE_TYPE_AES_GCM_DETACHED"
+                },
+                {
+                  "number": 11,
+                  "name": "SIGNATURE_TYPE_CERTIFICATE_ECDSA"
                 }
               ],
               "reserved_ranges": [
@@ -9721,6 +10534,22 @@
                   6
                 ]
               ],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".Signatures.IdentifiedKey",
+              "name": "IdentifiedKey",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "IDENTIFIEDKEY_UNKNOWN"
+                },
+                {
+                  "number": 1,
+                  "name": "IDENTIFIEDKEY_ROOT_KEY"
+                }
+              ],
+              "reserved_ranges": [],
               "reserved_names": []
             },
             {
@@ -9734,6 +10563,10 @@
                 {
                   "number": 1,
                   "name": "SESSION_INFO_STATUS_KEY_NOT_ON_WHITELIST"
+                },
+                {
+                  "number": 2,
+                  "name": "SESSION_INFO_STATUS_INVALID_HANDLE"
                 }
               ],
               "reserved_ranges": [],
@@ -9820,6 +10653,57 @@
                 {
                   "number": 2,
                   "name": "challenge",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "handle",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "identified_key",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".Signatures.IdentifiedKey",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".UniversalMessage.MessageFrame",
+              "name": "MessageFrame",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "chunk_index",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "total_chunks",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "data",
                   "type": "TYPE_BYTES",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -9913,6 +10797,14 @@
                   "name": "flags",
                   "type": "TYPE_UINT32",
                   "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 53,
+                  "name": "message_frame",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".UniversalMessage.MessageFrame",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 }
@@ -10116,6 +11008,10 @@
                 {
                   "number": 28,
                   "name": "MESSAGEFAULT_ERROR_REQUIRES_RESPONSE_ENCRYPTION"
+                },
+                {
+                  "number": 29,
+                  "name": "MESSAGEFAULT_ERROR_COMMAND_REQUIRES_PHYSICAL_PROXIMITY"
                 }
               ],
               "reserved_ranges": [],
@@ -10132,6 +11028,18 @@
                 {
                   "number": 1,
                   "name": "FLAG_ENCRYPT_RESPONSE"
+                },
+                {
+                  "number": 2,
+                  "name": "FLAG_SUPPORTS_MESSAGE_FRAMING"
+                },
+                {
+                  "number": 3,
+                  "name": "FLAG_COMPRESSED_ZLIB"
+                },
+                {
+                  "number": 4,
+                  "name": "FLAG_SUPPORTS_COMPRESSION_ZLIB"
                 }
               ],
               "reserved_ranges": [],
@@ -11186,8 +12094,20 @@
                   "name": "SIGNATURE_TYPE_NONE"
                 },
                 {
+                  "number": 1,
+                  "name": "SIGNATURE_TYPE_ECDSA"
+                },
+                {
                   "number": 2,
                   "name": "SIGNATURE_TYPE_PRESENT_KEY"
+                },
+                {
+                  "number": 3,
+                  "name": "SIGNATURE_TYPE_AES_GCM_TOKEN"
+                },
+                {
+                  "number": 4,
+                  "name": "SIGNATURE_TYPE_UNSIGNED"
                 }
               ],
               "reserved_ranges": [],
@@ -12015,6 +12935,14 @@
                   "oneof": "optional_proto_json_version"
                 },
                 {
+                  "number": 11,
+                  "name": "encrypted_data",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_REPEATED",
+                  "oneof": null
+                },
+                {
                   "number": 12,
                   "name": "upload_reason",
                   "type": "TYPE_STRING",
@@ -12155,6 +13083,22 @@
                   "name": "display_state",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".CarServer.DisplayState",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 900,
+                  "name": "pii_key_responses",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_REPEATED",
+                  "oneof": null
+                },
+                {
+                  "number": 901,
+                  "name": "wrapped_key",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
@@ -18579,6 +19523,14 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": "optional_supports_dynamic_environments"
+                },
+                {
+                  "number": 200,
+                  "name": "wheel_caps_on",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_wheel_caps_on"
                 }
               ],
               "oneofs": [
@@ -18651,7 +19603,8 @@
                 "optional_bed_lighting_type",
                 "optional_rear_light_hardware_variant",
                 "optional_autopilot_override_expire_time",
-                "optional_supports_dynamic_environments"
+                "optional_supports_dynamic_environments",
+                "optional_wheel_caps_on"
               ],
               "reserved_ranges": [],
               "reserved_names": [],
@@ -19303,6 +20256,14 @@
                   "name": "SohResult",
                   "fields": [
                     {
+                      "number": 3,
+                      "name": "field_3",
+                      "type": "TYPE_FLOAT",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "optional_field_3"
+                    },
+                    {
                       "number": 4,
                       "name": "soh_calibrated",
                       "type": "TYPE_BOOL",
@@ -19344,6 +20305,7 @@
                     }
                   ],
                   "oneofs": [
+                    "optional_field_3",
                     "optional_soh_calibrated",
                     "optional_soh_last_test_time",
                     "optional_soh_health_result",
@@ -20304,6 +21266,334 @@
                 {
                   "number": 2,
                   "name": "APVIZ_LICENSE_PLATE"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".CarServer.MobileAppFeature",
+              "name": "MobileAppFeature",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "MOBILE_APP_FEATURE_ACTIVE"
+                },
+                {
+                  "number": 1,
+                  "name": "MOBILE_APP_FEATURE_CLIMATE_KEEPER"
+                },
+                {
+                  "number": 2,
+                  "name": "MOBILE_APP_FEATURE_UNLOCK_STOP_CHARGE"
+                },
+                {
+                  "number": 3,
+                  "name": "MOBILE_APP_FEATURE_SET_RATE_TARIFF"
+                },
+                {
+                  "number": 4,
+                  "name": "MOBILE_APP_FEATURE_GET_RATE_TARIFF"
+                },
+                {
+                  "number": 5,
+                  "name": "MOBILE_APP_FEATURE_DRIVENOTE"
+                },
+                {
+                  "number": 6,
+                  "name": "MOBILE_APP_FEATURE_CLIMATE_KEEPER_OVERRIDE"
+                },
+                {
+                  "number": 7,
+                  "name": "MOBILE_APP_FEATURE_SIGNED_VIDEO_REQUEST"
+                },
+                {
+                  "number": 8,
+                  "name": "MOBILE_APP_FEATURE_SENTRY_CAM_FLASH_LIGHTS"
+                },
+                {
+                  "number": 9,
+                  "name": "MOBILE_APP_FEATURE_BOOMBOX"
+                },
+                {
+                  "number": 10,
+                  "name": "MOBILE_APP_FEATURE_DOOR_UNLATCH"
+                },
+                {
+                  "number": 11,
+                  "name": "MOBILE_APP_FEATURE_SEAT_HEATERS_INSTALLED"
+                },
+                {
+                  "number": 12,
+                  "name": "MOBILE_APP_FEATURE_LAST_SEEN_TPMS"
+                },
+                {
+                  "number": 13,
+                  "name": "MOBILE_APP_FEATURE_UI_CHARGE_PORT"
+                },
+                {
+                  "number": 14,
+                  "name": "MOBILE_APP_FEATURE_MONITOR_AND_CHARGE_ROLES"
+                },
+                {
+                  "number": 15,
+                  "name": "MOBILE_APP_FEATURE_PROTO_FLOATS"
+                },
+                {
+                  "number": 16,
+                  "name": "MOBILE_APP_FEATURE_BLUETOOTH_PAIRING"
+                },
+                {
+                  "number": 17,
+                  "name": "MOBILE_APP_FEATURE_HMAC_AUTHENTICATION"
+                },
+                {
+                  "number": 18,
+                  "name": "MOBILE_APP_COP_USER_SET_TEMP"
+                },
+                {
+                  "number": 19,
+                  "name": "MOBILE_APP_FEATURE_MEDIA_DETAILS"
+                },
+                {
+                  "number": 20,
+                  "name": "MOBILE_APP_FEATURE_RESPONSE_CACHE"
+                },
+                {
+                  "number": 22,
+                  "name": "MOBILE_APP_FEATURE_SCC"
+                },
+                {
+                  "number": 23,
+                  "name": "MOBILE_APP_FEATURE_SENTRY_CAM_WITH_DOG_MODE"
+                },
+                {
+                  "number": 24,
+                  "name": "MOBILE_APP_FEATURE_AUTO_STEERING_WHEEL_HEAT"
+                },
+                {
+                  "number": 25,
+                  "name": "MOBILE_APP_FEATURE_MANAGED_CHARGING"
+                },
+                {
+                  "number": 26,
+                  "name": "MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND_DECPRECATED"
+                },
+                {
+                  "number": 27,
+                  "name": "MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND"
+                },
+                {
+                  "number": 28,
+                  "name": "MOBILE_APP_FEATURE_SEND_NAVIGATION_ROUTE"
+                },
+                {
+                  "number": 29,
+                  "name": "MOBILE_APP_FEATURE_RED_BRAKE_CALIPER_FIX"
+                },
+                {
+                  "number": 30,
+                  "name": "MOBILE_APP_FEATURE_PIN_TO_DRIVE"
+                },
+                {
+                  "number": 31,
+                  "name": "MOBILE_APP_COP_NOT_RUNNING_REASON"
+                },
+                {
+                  "number": 32,
+                  "name": "MOBILE_APP_FEATURE_SET_VEHICLE_NAME"
+                },
+                {
+                  "number": 33,
+                  "name": "MOBILE_APP_FEATURE_VEHICLE_DATA_PII_V2"
+                },
+                {
+                  "number": 34,
+                  "name": "MOBILE_APP_FEATURE_BOOMBOX_V2"
+                },
+                {
+                  "number": 35,
+                  "name": "MOBILE_APP_FEATURE_UWB_STABLE_FOR_SUPPORTED_CARS"
+                },
+                {
+                  "number": 36,
+                  "name": "MOBILE_APP_FEATURE_SPEED_LIMIT_PIN_RESET_SIGNED_COMMAND"
+                },
+                {
+                  "number": 37,
+                  "name": "MOBILE_APP_FEATURE_PRECISE_LOCATION_TAG"
+                },
+                {
+                  "number": 38,
+                  "name": "MOBILE_APP_FEATURE_IMU_ALERT_IS_VISIBLE"
+                },
+                {
+                  "number": 42,
+                  "name": "MOBILE_APP_FEATURE_CT_SUPPORTS_COP"
+                },
+                {
+                  "number": 43,
+                  "name": "MOBILE_APP_FEATURE_WAYPOINTS_SUPPORTED"
+                },
+                {
+                  "number": 44,
+                  "name": "MOBILE_APP_FEATURE_OCTA_VIEW"
+                },
+                {
+                  "number": 45,
+                  "name": "MOBILE_APP_FEATURE_BT_GTW_UNLOCK"
+                },
+                {
+                  "number": 46,
+                  "name": "MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE_DEPRECATED"
+                },
+                {
+                  "number": 47,
+                  "name": "MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE"
+                },
+                {
+                  "number": 48,
+                  "name": "MOBILE_APP_FEATURE_SUMMON_PREWARMING"
+                },
+                {
+                  "number": 49,
+                  "name": "MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S_DEPRECATED"
+                },
+                {
+                  "number": 50,
+                  "name": "MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S"
+                },
+                {
+                  "number": 51,
+                  "name": "MOBILE_APP_FEATURE_UI_ONE_TIME_CHARGE_SUPPORTED"
+                },
+                {
+                  "number": 52,
+                  "name": "MOBILE_APP_FEATURE_SCHEDULE_V3"
+                },
+                {
+                  "number": 53,
+                  "name": "MOBILE_APP_FEATURE_ECIES_VEHICLE_DATA_ENCRYPTION"
+                },
+                {
+                  "number": 54,
+                  "name": "MOBILE_APP_FEATURE_TENT_MODE_SUPPORTED"
+                },
+                {
+                  "number": 55,
+                  "name": "MOBILE_APP_FEATURE_SCHEDULE_V3_NAMING"
+                },
+                {
+                  "number": 57,
+                  "name": "MOBILE_APP_FEATURE_COLORIZER_COLOR_REMAP_ENABLED"
+                },
+                {
+                  "number": 58,
+                  "name": "MOBILE_APP_FEATURE_SEND_NAVIGATION_REQUEST_GPS_DESTINATION"
+                },
+                {
+                  "number": 59,
+                  "name": "MOBILE_APP_FEATURE_SUMMON_WEBCAM"
+                },
+                {
+                  "number": 61,
+                  "name": "MOBILE_APP_FEATURE_BLE_REMOTE_START"
+                },
+                {
+                  "number": 62,
+                  "name": "MOBILE_APP_FEATURE_SOH_TEST_OBSOLETE"
+                },
+                {
+                  "number": 64,
+                  "name": "MOBILE_APP_FEATURE_SET_ARRIVAL_PERCENTAGE_OBSOLETE"
+                },
+                {
+                  "number": 66,
+                  "name": "MOBILE_APP_FEATURE_REMOTE_THEATER_CONTROL"
+                },
+                {
+                  "number": 67,
+                  "name": "MOBILE_APP_FEATURE_CT_SUSPENSION"
+                },
+                {
+                  "number": 68,
+                  "name": "MOBILE_APP_FEATURE_SOH_TEST_V2"
+                },
+                {
+                  "number": 69,
+                  "name": "MOBILE_APP_FEATURE_ANDROID_UWB_ENABLED"
+                },
+                {
+                  "number": 70,
+                  "name": "MOBILE_APP_FEATURE_LOW_POWER_MODE"
+                },
+                {
+                  "number": 71,
+                  "name": "MOBILE_APP_FEATURE_ROBOTAXI_UWB"
+                },
+                {
+                  "number": 72,
+                  "name": "MOBILE_APP_FEATURE_KEEP_ACCESSORY_POWER_MODE"
+                },
+                {
+                  "number": 73,
+                  "name": "MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS"
+                },
+                {
+                  "number": 77,
+                  "name": "MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS_WITH_DELETION"
+                },
+                {
+                  "number": 78,
+                  "name": "MOBILE_APP_FEATURE_FETCH_KEY_METADATA_DEPRECATED"
+                },
+                {
+                  "number": 79,
+                  "name": "MOBILE_APP_FEATURE_FETCH_KEY_METADATA"
+                },
+                {
+                  "number": 80,
+                  "name": "MOBILE_APP_FEATURE_TRAILER_LIGHT_TEST"
+                },
+                {
+                  "number": 81,
+                  "name": "MOBILE_APP_FEATURE_DELETE_DASHCAM_CLIPS_AND_FORMAT_USB"
+                },
+                {
+                  "number": 82,
+                  "name": "MOBILE_APP_FEATURE_SOFTWARE_UPDATE_AUTO_SCHEDULED"
+                },
+                {
+                  "number": 83,
+                  "name": "MOBILE_APP_FEATURE_BLE_MESSAGE_FRAMING"
+                },
+                {
+                  "number": 84,
+                  "name": "MOBILE_APP_FEATURE_WAYPOINTS_REQUEST_ACCEPTS_COORDINATES"
+                },
+                {
+                  "number": 85,
+                  "name": "MOBILE_APP_FEATURE_PHONE_SETTING_PREFERENCES_SYNC"
+                },
+                {
+                  "number": 90,
+                  "name": "MOBILE_APP_FEATURE_UPLOAD_CAR_WRAP"
+                },
+                {
+                  "number": 91,
+                  "name": "MOBILE_APP_FEATURE_SHARE_URLS_X"
+                },
+                {
+                  "number": 93,
+                  "name": "MOBILE_APP_FEATURE_DISPLAY_BRIGHTNESS"
+                },
+                {
+                  "number": 95,
+                  "name": "MOBILE_APP_FEATURE_ANDROID_BLE_BONDING"
+                },
+                {
+                  "number": 97,
+                  "name": "MOBILE_APP_FEATURE_APVIZ_WHEEL_CAPS"
                 }
               ],
               "reserved_ranges": [],
@@ -43291,9 +44581,9 @@
   "totals": {
     "source_files": 39,
     "groups": 7,
-    "messages": 889,
-    "enums": 249,
-    "fields": 2873
+    "messages": 899,
+    "enums": 252,
+    "fields": 2952
   },
   "registration": {
     "consistent": true,

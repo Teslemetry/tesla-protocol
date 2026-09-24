@@ -18,6 +18,7 @@ option java_package = "com.tesla.generated.carserver.server";
 
 message Action {
   reserved 3 to 5;
+  reserved 6 to 8; // requests in namespaces this repo does not publish  // TESLEMETRY-EXT
   oneof action_msg {
     VehicleAction vehicleAction = 2;
   }
@@ -156,9 +157,15 @@ message VehicleAction {
     FetchKeysInfoAction fetchKeysInfoAction = 142;  // TESLEMETRY-EXT
     DeleteDashcamClipsAction deleteDashcamClipsAction = 144;  // TESLEMETRY-EXT
     FormatUSBAction formatUsbAction = 146;  // TESLEMETRY-EXT
+    SetUpkeepUsernameAction setUpkeepUsernameAction = 147;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
     BandwidthTest bandwidthTest = 149;  // TESLEMETRY-EXT
     SetPhoneSettingPreferencesAction setPhoneSettingPreferencesAction = 151;  // TESLEMETRY-EXT
     CancelVehicleDataSubscription cancelVehicleDataSubscription = 171;  // TESLEMETRY-EXT
+    PrepareMobileUploadAction prepareMobileUploadAction = 177;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    PutMobileUploadChunkAction putMobileUploadChunkAction = 178;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    DisplayStateAction displayStateAction = 180;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    DrivingSetCruiseSpeedLimitAction drivingSetCruiseSpeedLimitAction = 694177;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    SetDeckLightAction setDeckLightAction = 698038;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
   }
 }
 
@@ -249,7 +256,8 @@ message MobileUploadParams {
 message PrepareMobileUploadAction {
   MobileUploadParams uploadParams = 1;
   MobileImageUploadParams imageParams = 2;
-  // Tag 3 carries an additional bool flag not modeled here.
+  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered.
+  bool field_3 = 3;
   bool overwriteOldestIfFull = 4;
 }
 
@@ -304,8 +312,17 @@ message DogModeLiveActivityData {
     REASON_DISALLOWED_COUNTRY = 3;
   }
 
+  // UNCONFIRMED: not yet confirmed on a live vehicle. Both fields carry an
+  // encrypted envelope whose message type this repo does not publish.
+  message DogModeImageData {
+    bytes wrappedKey = 1;
+    bytes encryptedImage = 2;  // name not recovered
+  }
+
   DisabledReason disabledReason = 1;
-  // Tags 2-4 carry additional live-activity fields not modeled here.
+  DogModeImageData interiorImage = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle
+  string field_3 = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+  google.protobuf.Timestamp field_4 = 4;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
   float insideTemperatureCelsius = 5;
   ClimateState.DogModeState faultState = 6;
   SetTemperatureUnitAction.Unit temperatureUnit = 7;
@@ -460,10 +477,11 @@ message BandwidthTestResponse {
   uint32 requested_size = 2;
 }
 
-// Answers GetRateTariffRequest with the same tariff document SetRateTariffRequest
-// writes (VehicleAction tag 55); only the parts of that document we have observed
-// and documented are declared here.
+// Answers GetRateTariffRequest with the tariff document SetRateTariffRequest
+// writes (VehicleAction tag 55). The document may arrive wrapped at tag 1 or with
+// its parts directly on this message at tags 13-14.
 message GetRateTariffResponse {
+  SetRateTariffRequest tariff_document = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle
   SetRateTariffRequest.Seasons seasons = 13;
   SetRateTariffRequest.Tariff tariff = 14;
 }
@@ -486,11 +504,45 @@ message ResultReason {
 }
 
 message EncryptedData {
-  int32 field_number = 1;
+  int32 field_number = 1; // holds a VehicleDataFields value
   bytes ciphertext = 2;
 
   bytes tag = 3;
 }
+
+// ===== TESLEMETRY-EXT BEGIN =====
+// Identifies the vehicle-data section an EncryptedData entry holds. These values
+// are this enum's own numbering, not VehicleData field numbers.
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+enum VehicleDataFields {
+  NOTHING = 0;
+  gui_settings = 2;
+  charge_state = 3;
+  climate_state = 4;
+  drive_state = 5;
+  vehicle_state = 6;
+  vehicle_config = 7;
+  location_state = 8;
+  closures_state = 9;
+  parked_accessory_state = 10;
+  charge_schedule_state = 11;
+  preconditioning_schedule_state = 12;
+  media_state = 13;
+  media_detail_state = 14;
+  tire_pressure_state = 15;
+  vehicle_detail_state = 16;
+  software_update_state = 17;
+  parental_controls_state = 18;
+  alert_state = 19;
+  light_show_state = 20;
+  vehicle_image_state = 21;
+  soh_state = 22;
+  suspension_state = 23;
+  child_presence_detection_state = 24;
+  display_state = 30;
+  legacy_vehicle_state_media_info = 6072;
+}
+// ===== TESLEMETRY-EXT END =====
 
 message ChargingSetLimitAction {
   int32 percent = 1;
@@ -628,8 +680,18 @@ message NearbyChargingSites {
 
 // ===== TESLEMETRY-EXT BEGIN =====
 message DestinationCharging {
+  // Tags 1-4, 6-8 and 10 are UNCONFIRMED: not yet confirmed on a live vehicle;
+  // names not recovered (they follow Superchargers' naming for the same data).
+  int64 id = 1;
+  string amenities = 2;
+  string city = 3;
+  string country = 4;
   float distance_miles = 5;
+  string district = 6;
+  LatLong location = 7;
+  string name = 8;
   string postal_code = 9;
+  string state = 10;
   string street_address = 11;
   bool within_range = 12;
 }
@@ -658,7 +720,9 @@ message Superchargers {
   string out_of_order_stalls_names = 20;
 }
 
-message MediaPlayAction {}
+message MediaPlayAction {
+  MediaPlaybackStatus media_playback_status = 1;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+}
 
 message MediaUpdateVolume {
   reserved 2;
@@ -955,8 +1019,9 @@ message NavigationGpsRequest {
 }
 // ===== TESLEMETRY-EXT END =====
 
-// The wire payload at VehicleAction tag 55 is a rate-tariff document; only the
-// parts of that document we have observed and documented are declared here.
+// The wire payload at VehicleAction tag 55 is a rate-tariff document.
+// Tags 1-12 of the document, of its embedded Tariff, and DailyCharge are
+// UNCONFIRMED: not yet confirmed on a live vehicle.
 // ===== TESLEMETRY-EXT BEGIN =====
 message SetRateTariffRequest {
   message TOUPeriod {
@@ -1003,6 +1068,11 @@ message SetRateTariffRequest {
     double SUPER_OFF_PEAK = 5;
   }
 
+  message DailyCharge {
+    double amount = 1;
+    string name = 2;
+  }
+
   message Charges {
     FixedCharge ALL = 1;
     RateBand Summer = 2;
@@ -1012,11 +1082,35 @@ message SetRateTariffRequest {
     RateBand Season5 = 6;
   }
 
-  // secondary tariff document embedded in the primary one
+  // secondary tariff document embedded in the primary one (the sell tariff)
   message Tariff {
+    string code = 1;
+    string name = 2;
+    string utility = 3;
+    string currency = 4;
+    repeated DailyCharge daily_charges = 5;
+    double monthly_charges = 6;
+    double monthly_minimum_bill = 7;
+    Charges demand_charges = 8;
+    Charges daily_demand_charges = 9;
+    Charges energy_charges = 10;
+    double max_applicable_demand = 11;
+    double min_applicable_demand = 12;
     Seasons seasons = 13;
   }
 
+  string code = 1;
+  string name = 2;
+  string utility = 3;
+  string currency = 4;
+  repeated DailyCharge daily_charges = 5;
+  double monthly_charges = 6;
+  double monthly_minimum_bill = 7;
+  Charges demand_charges = 8;
+  Charges daily_demand_charges = 9;
+  Charges energy_charges = 10;
+  double max_applicable_demand = 11;
+  double min_applicable_demand = 12;
   Seasons seasons = 13;
   Tariff tariff = 14;
 }
@@ -1395,8 +1489,26 @@ message SetPhoneSettingPreferencesAction {
   }
 
   FontSize font_size = 1;
+  string field_2 = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
   PhoneUnitPreferences unit_preferences = 3;
 }
 
 message CancelVehicleDataSubscription {}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message SetUpkeepUsernameAction {
+  string username = 1;  // name not recovered
+}
+
+// Sets the cruise-control speed limit reported back as
+// ClosuresState.cruise_speed_limit_mph.
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message DrivingSetCruiseSpeedLimitAction {
+  double limitMph = 1;
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message SetDeckLightAction {
+  bool on = 1;  // name not recovered
+}
 // ===== TESLEMETRY-EXT END =====

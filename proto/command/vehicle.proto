@@ -25,6 +25,9 @@ message VehicleData {
     LocationState location_state = 8;
     ClosuresState closures_state = 9;
     oneof optional_proto_json_version { int32 proto_json_version = 10; }  // TESLEMETRY-EXT
+    // Each entry is an encoded CarServer.EncryptedData (car_server.proto), declared
+    // as bytes because vehicle.proto cannot import car_server.proto.
+    repeated bytes encrypted_data = 11;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_upload_reason { string upload_reason = 12; }  // TESLEMETRY-EXT
     ParkedAccessoryState parked_accessory_state = 14;  // TESLEMETRY-EXT
     ChargeScheduleState charge_schedule_state = 15;
@@ -43,6 +46,11 @@ message VehicleData {
     SuspensionState suspension_state = 29;  // TESLEMETRY-EXT
     ChildPresenceDetectionState child_presence_detection_state = 30;  // TESLEMETRY-EXT
     DisplayState display_state = 36;  // TESLEMETRY-EXT
+    // Each entry is an encoded CarServer.PiiKeyResponse (car_server.proto), declared
+    // as bytes because vehicle.proto cannot import car_server.proto.
+    repeated bytes pii_key_responses = 900;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    // An encrypted envelope whose message type this repo does not publish.
+    bytes wrapped_key = 901;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_supports_optional_fields { bool supports_optional_fields = 999; }  // TESLEMETRY-EXT
 }
 
@@ -1267,6 +1275,7 @@ message VehicleConfig {
     AutopilotOverrideState autopilot_override_state = 197;
     oneof optional_autopilot_override_expire_time { int64 autopilot_override_expire_time = 198; }
     oneof optional_supports_dynamic_environments { bool supports_dynamic_environments = 199; }  // TESLEMETRY-EXT
+    oneof optional_wheel_caps_on { bool wheel_caps_on = 200; }  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 message ParkedAccessoryState {
@@ -1311,6 +1320,7 @@ message SohState {
     }
 
     message SohResult {
+        oneof optional_field_3 { float field_3 = 3; }  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
         oneof optional_soh_calibrated { bool soh_calibrated = 4; }
         oneof optional_soh_last_test_time { uint32 soh_last_test_time = 5; }
         oneof optional_soh_health_result { WarrantyServiceResult soh_health_result = 6; }
@@ -1410,5 +1420,95 @@ message VehicleDetailState {
     oneof optional_current_profile_name { string current_profile_name = 7; }
     oneof optional_china_autopilot_software_version { string china_autopilot_software_version = 8; }
     oneof optional_is_fsd_v14_or_above { bool is_fsd_v14_or_above = 9; }  // TESLEMETRY-EXT
+}
+// ===== TESLEMETRY-EXT END =====
+
+// ===== TESLEMETRY-EXT BEGIN =====
+// Capability bits a vehicle advertises to the mobile app. Each value is a bit
+// index into the vehicle-state feature bitmask, a repeated uint32 list (field 24
+// of the payload at VehicleData tag 18): the feature is supported when
+// bitmask[value / 32] & (1 << (value % 32)) is non-zero.
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+enum MobileAppFeature {
+    MOBILE_APP_FEATURE_ACTIVE = 0;
+    MOBILE_APP_FEATURE_CLIMATE_KEEPER = 1;
+    MOBILE_APP_FEATURE_UNLOCK_STOP_CHARGE = 2;
+    MOBILE_APP_FEATURE_SET_RATE_TARIFF = 3;
+    MOBILE_APP_FEATURE_GET_RATE_TARIFF = 4;
+    MOBILE_APP_FEATURE_DRIVENOTE = 5;
+    MOBILE_APP_FEATURE_CLIMATE_KEEPER_OVERRIDE = 6;
+    MOBILE_APP_FEATURE_SIGNED_VIDEO_REQUEST = 7;
+    MOBILE_APP_FEATURE_SENTRY_CAM_FLASH_LIGHTS = 8;
+    MOBILE_APP_FEATURE_BOOMBOX = 9;
+    MOBILE_APP_FEATURE_DOOR_UNLATCH = 10;
+    MOBILE_APP_FEATURE_SEAT_HEATERS_INSTALLED = 11;
+    MOBILE_APP_FEATURE_LAST_SEEN_TPMS = 12;
+    MOBILE_APP_FEATURE_UI_CHARGE_PORT = 13;
+    MOBILE_APP_FEATURE_MONITOR_AND_CHARGE_ROLES = 14;
+    MOBILE_APP_FEATURE_PROTO_FLOATS = 15;
+    MOBILE_APP_FEATURE_BLUETOOTH_PAIRING = 16;
+    MOBILE_APP_FEATURE_HMAC_AUTHENTICATION = 17;
+    MOBILE_APP_COP_USER_SET_TEMP = 18;
+    MOBILE_APP_FEATURE_MEDIA_DETAILS = 19;
+    MOBILE_APP_FEATURE_RESPONSE_CACHE = 20;
+    MOBILE_APP_FEATURE_SCC = 22;
+    MOBILE_APP_FEATURE_SENTRY_CAM_WITH_DOG_MODE = 23;
+    MOBILE_APP_FEATURE_AUTO_STEERING_WHEEL_HEAT = 24;
+    MOBILE_APP_FEATURE_MANAGED_CHARGING = 25;
+    MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND_DECPRECATED = 26;
+    MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND = 27;
+    MOBILE_APP_FEATURE_SEND_NAVIGATION_ROUTE = 28;
+    MOBILE_APP_FEATURE_RED_BRAKE_CALIPER_FIX = 29;
+    MOBILE_APP_FEATURE_PIN_TO_DRIVE = 30;
+    MOBILE_APP_COP_NOT_RUNNING_REASON = 31;
+    MOBILE_APP_FEATURE_SET_VEHICLE_NAME = 32;
+    MOBILE_APP_FEATURE_VEHICLE_DATA_PII_V2 = 33;
+    MOBILE_APP_FEATURE_BOOMBOX_V2 = 34;
+    MOBILE_APP_FEATURE_UWB_STABLE_FOR_SUPPORTED_CARS = 35;
+    MOBILE_APP_FEATURE_SPEED_LIMIT_PIN_RESET_SIGNED_COMMAND = 36;
+    MOBILE_APP_FEATURE_PRECISE_LOCATION_TAG = 37;
+    MOBILE_APP_FEATURE_IMU_ALERT_IS_VISIBLE = 38;
+    MOBILE_APP_FEATURE_CT_SUPPORTS_COP = 42;
+    MOBILE_APP_FEATURE_WAYPOINTS_SUPPORTED = 43;
+    MOBILE_APP_FEATURE_OCTA_VIEW = 44;
+    MOBILE_APP_FEATURE_BT_GTW_UNLOCK = 45;
+    MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE_DEPRECATED = 46;
+    MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE = 47;
+    MOBILE_APP_FEATURE_SUMMON_PREWARMING = 48;
+    MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S_DEPRECATED = 49;
+    MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S = 50;
+    MOBILE_APP_FEATURE_UI_ONE_TIME_CHARGE_SUPPORTED = 51;
+    MOBILE_APP_FEATURE_SCHEDULE_V3 = 52;
+    MOBILE_APP_FEATURE_ECIES_VEHICLE_DATA_ENCRYPTION = 53;
+    MOBILE_APP_FEATURE_TENT_MODE_SUPPORTED = 54;
+    MOBILE_APP_FEATURE_SCHEDULE_V3_NAMING = 55;
+    MOBILE_APP_FEATURE_COLORIZER_COLOR_REMAP_ENABLED = 57;
+    MOBILE_APP_FEATURE_SEND_NAVIGATION_REQUEST_GPS_DESTINATION = 58;
+    MOBILE_APP_FEATURE_SUMMON_WEBCAM = 59;
+    MOBILE_APP_FEATURE_BLE_REMOTE_START = 61;
+    MOBILE_APP_FEATURE_SOH_TEST_OBSOLETE = 62;
+    MOBILE_APP_FEATURE_SET_ARRIVAL_PERCENTAGE_OBSOLETE = 64;
+    MOBILE_APP_FEATURE_REMOTE_THEATER_CONTROL = 66;
+    MOBILE_APP_FEATURE_CT_SUSPENSION = 67;
+    MOBILE_APP_FEATURE_SOH_TEST_V2 = 68;
+    MOBILE_APP_FEATURE_ANDROID_UWB_ENABLED = 69;
+    MOBILE_APP_FEATURE_LOW_POWER_MODE = 70;
+    MOBILE_APP_FEATURE_ROBOTAXI_UWB = 71;
+    MOBILE_APP_FEATURE_KEEP_ACCESSORY_POWER_MODE = 72;
+    MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS = 73;
+    MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS_WITH_DELETION = 77;
+    MOBILE_APP_FEATURE_FETCH_KEY_METADATA_DEPRECATED = 78;
+    MOBILE_APP_FEATURE_FETCH_KEY_METADATA = 79;
+    MOBILE_APP_FEATURE_TRAILER_LIGHT_TEST = 80;
+    MOBILE_APP_FEATURE_DELETE_DASHCAM_CLIPS_AND_FORMAT_USB = 81;
+    MOBILE_APP_FEATURE_SOFTWARE_UPDATE_AUTO_SCHEDULED = 82;
+    MOBILE_APP_FEATURE_BLE_MESSAGE_FRAMING = 83;
+    MOBILE_APP_FEATURE_WAYPOINTS_REQUEST_ACCEPTS_COORDINATES = 84;
+    MOBILE_APP_FEATURE_PHONE_SETTING_PREFERENCES_SYNC = 85;
+    MOBILE_APP_FEATURE_UPLOAD_CAR_WRAP = 90;
+    MOBILE_APP_FEATURE_SHARE_URLS_X = 91;
+    MOBILE_APP_FEATURE_DISPLAY_BRIGHTNESS = 93;
+    MOBILE_APP_FEATURE_ANDROID_BLE_BONDING = 95;
+    MOBILE_APP_FEATURE_APVIZ_WHEEL_CAPS = 97;
 }
 // ===== TESLEMETRY-EXT END =====

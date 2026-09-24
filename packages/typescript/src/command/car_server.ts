@@ -9,6 +9,9 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import {
   ChargeSchedule,
   LatLong,
+  MediaPlaybackStatus,
+  mediaPlaybackStatusFromJSON,
+  mediaPlaybackStatusToJSON,
   OffPeakChargingTimes,
   PreconditioningTimes,
   PreconditionSchedule,
@@ -72,6 +75,189 @@ export function operationStatusEToJSON(object: OperationStatusE): string {
     case OperationStatusE.OPERATIONSTATUS_ERROR:
       return "OPERATIONSTATUS_ERROR";
     case OperationStatusE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/**
+ * ===== TESLEMETRY-EXT BEGIN =====
+ * Identifies the vehicle-data section an EncryptedData entry holds. These values
+ * are this enum's own numbering, not VehicleData field numbers.
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export enum VehicleDataFields {
+  NOTHING = 0,
+  gui_settings = 2,
+  charge_state = 3,
+  climate_state = 4,
+  drive_state = 5,
+  vehicle_state = 6,
+  vehicle_config = 7,
+  location_state = 8,
+  closures_state = 9,
+  parked_accessory_state = 10,
+  charge_schedule_state = 11,
+  preconditioning_schedule_state = 12,
+  media_state = 13,
+  media_detail_state = 14,
+  tire_pressure_state = 15,
+  vehicle_detail_state = 16,
+  software_update_state = 17,
+  parental_controls_state = 18,
+  alert_state = 19,
+  light_show_state = 20,
+  vehicle_image_state = 21,
+  soh_state = 22,
+  suspension_state = 23,
+  child_presence_detection_state = 24,
+  display_state = 30,
+  legacy_vehicle_state_media_info = 6072,
+  UNRECOGNIZED = -1,
+}
+
+export function vehicleDataFieldsFromJSON(object: any): VehicleDataFields {
+  switch (object) {
+    case 0:
+    case "NOTHING":
+      return VehicleDataFields.NOTHING;
+    case 2:
+    case "gui_settings":
+      return VehicleDataFields.gui_settings;
+    case 3:
+    case "charge_state":
+      return VehicleDataFields.charge_state;
+    case 4:
+    case "climate_state":
+      return VehicleDataFields.climate_state;
+    case 5:
+    case "drive_state":
+      return VehicleDataFields.drive_state;
+    case 6:
+    case "vehicle_state":
+      return VehicleDataFields.vehicle_state;
+    case 7:
+    case "vehicle_config":
+      return VehicleDataFields.vehicle_config;
+    case 8:
+    case "location_state":
+      return VehicleDataFields.location_state;
+    case 9:
+    case "closures_state":
+      return VehicleDataFields.closures_state;
+    case 10:
+    case "parked_accessory_state":
+      return VehicleDataFields.parked_accessory_state;
+    case 11:
+    case "charge_schedule_state":
+      return VehicleDataFields.charge_schedule_state;
+    case 12:
+    case "preconditioning_schedule_state":
+      return VehicleDataFields.preconditioning_schedule_state;
+    case 13:
+    case "media_state":
+      return VehicleDataFields.media_state;
+    case 14:
+    case "media_detail_state":
+      return VehicleDataFields.media_detail_state;
+    case 15:
+    case "tire_pressure_state":
+      return VehicleDataFields.tire_pressure_state;
+    case 16:
+    case "vehicle_detail_state":
+      return VehicleDataFields.vehicle_detail_state;
+    case 17:
+    case "software_update_state":
+      return VehicleDataFields.software_update_state;
+    case 18:
+    case "parental_controls_state":
+      return VehicleDataFields.parental_controls_state;
+    case 19:
+    case "alert_state":
+      return VehicleDataFields.alert_state;
+    case 20:
+    case "light_show_state":
+      return VehicleDataFields.light_show_state;
+    case 21:
+    case "vehicle_image_state":
+      return VehicleDataFields.vehicle_image_state;
+    case 22:
+    case "soh_state":
+      return VehicleDataFields.soh_state;
+    case 23:
+    case "suspension_state":
+      return VehicleDataFields.suspension_state;
+    case 24:
+    case "child_presence_detection_state":
+      return VehicleDataFields.child_presence_detection_state;
+    case 30:
+    case "display_state":
+      return VehicleDataFields.display_state;
+    case 6072:
+    case "legacy_vehicle_state_media_info":
+      return VehicleDataFields.legacy_vehicle_state_media_info;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return VehicleDataFields.UNRECOGNIZED;
+  }
+}
+
+export function vehicleDataFieldsToJSON(object: VehicleDataFields): string {
+  switch (object) {
+    case VehicleDataFields.NOTHING:
+      return "NOTHING";
+    case VehicleDataFields.gui_settings:
+      return "gui_settings";
+    case VehicleDataFields.charge_state:
+      return "charge_state";
+    case VehicleDataFields.climate_state:
+      return "climate_state";
+    case VehicleDataFields.drive_state:
+      return "drive_state";
+    case VehicleDataFields.vehicle_state:
+      return "vehicle_state";
+    case VehicleDataFields.vehicle_config:
+      return "vehicle_config";
+    case VehicleDataFields.location_state:
+      return "location_state";
+    case VehicleDataFields.closures_state:
+      return "closures_state";
+    case VehicleDataFields.parked_accessory_state:
+      return "parked_accessory_state";
+    case VehicleDataFields.charge_schedule_state:
+      return "charge_schedule_state";
+    case VehicleDataFields.preconditioning_schedule_state:
+      return "preconditioning_schedule_state";
+    case VehicleDataFields.media_state:
+      return "media_state";
+    case VehicleDataFields.media_detail_state:
+      return "media_detail_state";
+    case VehicleDataFields.tire_pressure_state:
+      return "tire_pressure_state";
+    case VehicleDataFields.vehicle_detail_state:
+      return "vehicle_detail_state";
+    case VehicleDataFields.software_update_state:
+      return "software_update_state";
+    case VehicleDataFields.parental_controls_state:
+      return "parental_controls_state";
+    case VehicleDataFields.alert_state:
+      return "alert_state";
+    case VehicleDataFields.light_show_state:
+      return "light_show_state";
+    case VehicleDataFields.vehicle_image_state:
+      return "vehicle_image_state";
+    case VehicleDataFields.soh_state:
+      return "soh_state";
+    case VehicleDataFields.suspension_state:
+      return "suspension_state";
+    case VehicleDataFields.child_presence_detection_state:
+      return "child_presence_detection_state";
+    case VehicleDataFields.display_state:
+      return "display_state";
+    case VehicleDataFields.legacy_vehicle_state_media_info:
+      return "legacy_vehicle_state_media_info";
+    case VehicleDataFields.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
@@ -411,6 +597,10 @@ export interface VehicleAction {
   formatUsbAction?:
     | FormatUSBAction
     | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  setUpkeepUsernameAction?:
+    | SetUpkeepUsernameAction
+    | undefined;
   /** TESLEMETRY-EXT */
   bandwidthTest?:
     | BandwidthTest
@@ -420,7 +610,27 @@ export interface VehicleAction {
     | SetPhoneSettingPreferencesAction
     | undefined;
   /** TESLEMETRY-EXT */
-  cancelVehicleDataSubscription?: CancelVehicleDataSubscription | undefined;
+  cancelVehicleDataSubscription?:
+    | CancelVehicleDataSubscription
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  prepareMobileUploadAction?:
+    | PrepareMobileUploadAction
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  putMobileUploadChunkAction?:
+    | PutMobileUploadChunkAction
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  displayStateAction?:
+    | DisplayStateAction
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  drivingSetCruiseSpeedLimitAction?:
+    | DrivingSetCruiseSpeedLimitAction
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  setDeckLightAction?: SetDeckLightAction | undefined;
 }
 
 export interface GetVehicleData {
@@ -590,7 +800,8 @@ export interface PrepareMobileUploadAction {
   imageParams:
     | MobileImageUploadParams
     | undefined;
-  /** Tag 3 carries an additional bool flag not modeled here. */
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered. */
+  field3: boolean;
   overwriteOldestIfFull: boolean;
 }
 
@@ -776,7 +987,14 @@ export function putMobileUploadChunkResponse_StatusToJSON(object: PutMobileUploa
 /** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface DogModeLiveActivityData {
   disabledReason: DogModeLiveActivityData_DisabledReason;
-  /** Tags 2-4 carry additional live-activity fields not modeled here. */
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  interiorImage:
+    | DogModeLiveActivityData_DogModeImageData
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field3: string;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field4: Date | undefined;
   insideTemperatureCelsius: number;
   faultState: ClimateState_DogModeState;
   temperatureUnit: SetTemperatureUnitAction_Unit;
@@ -826,6 +1044,16 @@ export function dogModeLiveActivityData_DisabledReasonToJSON(object: DogModeLive
     default:
       return "UNRECOGNIZED";
   }
+}
+
+/**
+ * UNCONFIRMED: not yet confirmed on a live vehicle. Both fields carry an
+ * encrypted envelope whose message type this repo does not publish.
+ */
+export interface DogModeLiveActivityData_DogModeImageData {
+  wrappedKey: Uint8Array;
+  /** name not recovered */
+  encryptedImage: Uint8Array;
 }
 
 export interface GetTirePressureState {
@@ -1081,11 +1309,13 @@ export interface BandwidthTestResponse {
 }
 
 /**
- * Answers GetRateTariffRequest with the same tariff document SetRateTariffRequest
- * writes (VehicleAction tag 55); only the parts of that document we have observed
- * and documented are declared here.
+ * Answers GetRateTariffRequest with the tariff document SetRateTariffRequest
+ * writes (VehicleAction tag 55). The document may arrive wrapped at tag 1 or with
+ * its parts directly on this message at tags 13-14.
  */
 export interface GetRateTariffResponse {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  tariffDocument: SetRateTariffRequest | undefined;
   seasons: SetRateTariffRequest_Seasons | undefined;
   tariff: SetRateTariffRequest_Tariff | undefined;
 }
@@ -1100,6 +1330,7 @@ export interface ResultReason {
 }
 
 export interface EncryptedData {
+  /** holds a VehicleDataFields value */
   fieldNumber: number;
   ciphertext: Uint8Array;
   tag: Uint8Array;
@@ -1374,8 +1605,20 @@ export interface NearbyChargingSites {
 
 /** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface DestinationCharging {
+  /**
+   * Tags 1-4, 6-8 and 10 are UNCONFIRMED: not yet confirmed on a live vehicle;
+   * names not recovered (they follow Superchargers' naming for the same data).
+   */
+  id: number;
+  amenities: string;
+  city: string;
+  country: string;
   distanceMiles: number;
+  district: string;
+  location: LatLong | undefined;
+  name: string;
   postalCode: string;
+  state: string;
   streetAddress: string;
   withinRange: boolean;
 }
@@ -1404,6 +1647,8 @@ export interface Superchargers {
 }
 
 export interface MediaPlayAction {
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  mediaPlaybackStatus: MediaPlaybackStatus;
 }
 
 export interface MediaUpdateVolume {
@@ -1904,11 +2149,24 @@ export function navigationGpsRequest_RemoteNavTripOrderToJSON(object: Navigation
 }
 
 /**
- * The wire payload at VehicleAction tag 55 is a rate-tariff document; only the
- * parts of that document we have observed and documented are declared here.
+ * The wire payload at VehicleAction tag 55 is a rate-tariff document.
+ * Tags 1-12 of the document, of its embedded Tariff, and DailyCharge are
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
  * ===== TESLEMETRY-EXT BEGIN =====
  */
 export interface SetRateTariffRequest {
+  code: string;
+  name: string;
+  utility: string;
+  currency: string;
+  dailyCharges: SetRateTariffRequest_DailyCharge[];
+  monthlyCharges: number;
+  monthlyMinimumBill: number;
+  demandCharges: SetRateTariffRequest_Charges | undefined;
+  dailyDemandCharges: SetRateTariffRequest_Charges | undefined;
+  energyCharges: SetRateTariffRequest_Charges | undefined;
+  maxApplicableDemand: number;
+  minApplicableDemand: number;
   seasons: SetRateTariffRequest_Seasons | undefined;
   tariff: SetRateTariffRequest_Tariff | undefined;
 }
@@ -1957,6 +2215,11 @@ export interface SetRateTariffRequest_RateBand {
   superOffPeak: number;
 }
 
+export interface SetRateTariffRequest_DailyCharge {
+  amount: number;
+  name: string;
+}
+
 export interface SetRateTariffRequest_Charges {
   ALL: SetRateTariffRequest_FixedCharge | undefined;
   Summer: SetRateTariffRequest_RateBand | undefined;
@@ -1966,8 +2229,20 @@ export interface SetRateTariffRequest_Charges {
   Season5: SetRateTariffRequest_RateBand | undefined;
 }
 
-/** secondary tariff document embedded in the primary one */
+/** secondary tariff document embedded in the primary one (the sell tariff) */
 export interface SetRateTariffRequest_Tariff {
+  code: string;
+  name: string;
+  utility: string;
+  currency: string;
+  dailyCharges: SetRateTariffRequest_DailyCharge[];
+  monthlyCharges: number;
+  monthlyMinimumBill: number;
+  demandCharges: SetRateTariffRequest_Charges | undefined;
+  dailyDemandCharges: SetRateTariffRequest_Charges | undefined;
+  energyCharges: SetRateTariffRequest_Charges | undefined;
+  maxApplicableDemand: number;
+  minApplicableDemand: number;
   seasons: SetRateTariffRequest_Seasons | undefined;
 }
 
@@ -2849,6 +3124,8 @@ export interface PhoneUnitPreferences {
 
 export interface SetPhoneSettingPreferencesAction {
   fontSize: SetPhoneSettingPreferencesAction_FontSize;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field2: string;
   unitPreferences: PhoneUnitPreferences | undefined;
 }
 
@@ -2890,6 +3167,27 @@ export function setPhoneSettingPreferencesAction_FontSizeToJSON(
 }
 
 export interface CancelVehicleDataSubscription {
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface SetUpkeepUsernameAction {
+  /** name not recovered */
+  username: string;
+}
+
+/**
+ * Sets the cruise-control speed limit reported back as
+ * ClosuresState.cruise_speed_limit_mph.
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export interface DrivingSetCruiseSpeedLimitAction {
+  limitMph: number;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface SetDeckLightAction {
+  /** name not recovered */
+  on: boolean;
 }
 
 function createBaseAction(): Action {
@@ -3080,9 +3378,15 @@ function createBaseVehicleAction(): VehicleAction {
     fetchKeysInfoAction: undefined,
     deleteDashcamClipsAction: undefined,
     formatUsbAction: undefined,
+    setUpkeepUsernameAction: undefined,
     bandwidthTest: undefined,
     setPhoneSettingPreferencesAction: undefined,
     cancelVehicleDataSubscription: undefined,
+    prepareMobileUploadAction: undefined,
+    putMobileUploadChunkAction: undefined,
+    displayStateAction: undefined,
+    drivingSetCruiseSpeedLimitAction: undefined,
+    setDeckLightAction: undefined,
   };
 }
 
@@ -3508,6 +3812,9 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     if (message.formatUsbAction !== undefined) {
       FormatUSBAction.encode(message.formatUsbAction, writer.uint32(1170).fork()).join();
     }
+    if (message.setUpkeepUsernameAction !== undefined) {
+      SetUpkeepUsernameAction.encode(message.setUpkeepUsernameAction, writer.uint32(1178).fork()).join();
+    }
     if (message.bandwidthTest !== undefined) {
       BandwidthTest.encode(message.bandwidthTest, writer.uint32(1194).fork()).join();
     }
@@ -3517,6 +3824,22 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     }
     if (message.cancelVehicleDataSubscription !== undefined) {
       CancelVehicleDataSubscription.encode(message.cancelVehicleDataSubscription, writer.uint32(1370).fork()).join();
+    }
+    if (message.prepareMobileUploadAction !== undefined) {
+      PrepareMobileUploadAction.encode(message.prepareMobileUploadAction, writer.uint32(1418).fork()).join();
+    }
+    if (message.putMobileUploadChunkAction !== undefined) {
+      PutMobileUploadChunkAction.encode(message.putMobileUploadChunkAction, writer.uint32(1426).fork()).join();
+    }
+    if (message.displayStateAction !== undefined) {
+      DisplayStateAction.encode(message.displayStateAction, writer.uint32(1442).fork()).join();
+    }
+    if (message.drivingSetCruiseSpeedLimitAction !== undefined) {
+      DrivingSetCruiseSpeedLimitAction.encode(message.drivingSetCruiseSpeedLimitAction, writer.uint32(5553418).fork())
+        .join();
+    }
+    if (message.setDeckLightAction !== undefined) {
+      SetDeckLightAction.encode(message.setDeckLightAction, writer.uint32(5584306).fork()).join();
     }
     return writer;
   },
@@ -4578,6 +4901,14 @@ export const VehicleAction: MessageFns<VehicleAction> = {
           message.formatUsbAction = FormatUSBAction.decode(reader, reader.uint32());
           continue;
         }
+        case 147: {
+          if (tag !== 1178) {
+            break;
+          }
+
+          message.setUpkeepUsernameAction = SetUpkeepUsernameAction.decode(reader, reader.uint32());
+          continue;
+        }
         case 149: {
           if (tag !== 1194) {
             break;
@@ -4600,6 +4931,46 @@ export const VehicleAction: MessageFns<VehicleAction> = {
           }
 
           message.cancelVehicleDataSubscription = CancelVehicleDataSubscription.decode(reader, reader.uint32());
+          continue;
+        }
+        case 177: {
+          if (tag !== 1418) {
+            break;
+          }
+
+          message.prepareMobileUploadAction = PrepareMobileUploadAction.decode(reader, reader.uint32());
+          continue;
+        }
+        case 178: {
+          if (tag !== 1426) {
+            break;
+          }
+
+          message.putMobileUploadChunkAction = PutMobileUploadChunkAction.decode(reader, reader.uint32());
+          continue;
+        }
+        case 180: {
+          if (tag !== 1442) {
+            break;
+          }
+
+          message.displayStateAction = DisplayStateAction.decode(reader, reader.uint32());
+          continue;
+        }
+        case 694177: {
+          if (tag !== 5553418) {
+            break;
+          }
+
+          message.drivingSetCruiseSpeedLimitAction = DrivingSetCruiseSpeedLimitAction.decode(reader, reader.uint32());
+          continue;
+        }
+        case 698038: {
+          if (tag !== 5584306) {
+            break;
+          }
+
+          message.setDeckLightAction = SetDeckLightAction.decode(reader, reader.uint32());
           continue;
         }
       }
@@ -4965,12 +5336,30 @@ export const VehicleAction: MessageFns<VehicleAction> = {
         ? DeleteDashcamClipsAction.fromJSON(object.deleteDashcamClipsAction)
         : undefined,
       formatUsbAction: isSet(object.formatUsbAction) ? FormatUSBAction.fromJSON(object.formatUsbAction) : undefined,
+      setUpkeepUsernameAction: isSet(object.setUpkeepUsernameAction)
+        ? SetUpkeepUsernameAction.fromJSON(object.setUpkeepUsernameAction)
+        : undefined,
       bandwidthTest: isSet(object.bandwidthTest) ? BandwidthTest.fromJSON(object.bandwidthTest) : undefined,
       setPhoneSettingPreferencesAction: isSet(object.setPhoneSettingPreferencesAction)
         ? SetPhoneSettingPreferencesAction.fromJSON(object.setPhoneSettingPreferencesAction)
         : undefined,
       cancelVehicleDataSubscription: isSet(object.cancelVehicleDataSubscription)
         ? CancelVehicleDataSubscription.fromJSON(object.cancelVehicleDataSubscription)
+        : undefined,
+      prepareMobileUploadAction: isSet(object.prepareMobileUploadAction)
+        ? PrepareMobileUploadAction.fromJSON(object.prepareMobileUploadAction)
+        : undefined,
+      putMobileUploadChunkAction: isSet(object.putMobileUploadChunkAction)
+        ? PutMobileUploadChunkAction.fromJSON(object.putMobileUploadChunkAction)
+        : undefined,
+      displayStateAction: isSet(object.displayStateAction)
+        ? DisplayStateAction.fromJSON(object.displayStateAction)
+        : undefined,
+      drivingSetCruiseSpeedLimitAction: isSet(object.drivingSetCruiseSpeedLimitAction)
+        ? DrivingSetCruiseSpeedLimitAction.fromJSON(object.drivingSetCruiseSpeedLimitAction)
+        : undefined,
+      setDeckLightAction: isSet(object.setDeckLightAction)
+        ? SetDeckLightAction.fromJSON(object.setDeckLightAction)
         : undefined,
     };
   },
@@ -5427,6 +5816,9 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     if (message.formatUsbAction !== undefined) {
       obj.formatUsbAction = FormatUSBAction.toJSON(message.formatUsbAction);
     }
+    if (message.setUpkeepUsernameAction !== undefined) {
+      obj.setUpkeepUsernameAction = SetUpkeepUsernameAction.toJSON(message.setUpkeepUsernameAction);
+    }
     if (message.bandwidthTest !== undefined) {
       obj.bandwidthTest = BandwidthTest.toJSON(message.bandwidthTest);
     }
@@ -5437,6 +5829,23 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     }
     if (message.cancelVehicleDataSubscription !== undefined) {
       obj.cancelVehicleDataSubscription = CancelVehicleDataSubscription.toJSON(message.cancelVehicleDataSubscription);
+    }
+    if (message.prepareMobileUploadAction !== undefined) {
+      obj.prepareMobileUploadAction = PrepareMobileUploadAction.toJSON(message.prepareMobileUploadAction);
+    }
+    if (message.putMobileUploadChunkAction !== undefined) {
+      obj.putMobileUploadChunkAction = PutMobileUploadChunkAction.toJSON(message.putMobileUploadChunkAction);
+    }
+    if (message.displayStateAction !== undefined) {
+      obj.displayStateAction = DisplayStateAction.toJSON(message.displayStateAction);
+    }
+    if (message.drivingSetCruiseSpeedLimitAction !== undefined) {
+      obj.drivingSetCruiseSpeedLimitAction = DrivingSetCruiseSpeedLimitAction.toJSON(
+        message.drivingSetCruiseSpeedLimitAction,
+      );
+    }
+    if (message.setDeckLightAction !== undefined) {
+      obj.setDeckLightAction = SetDeckLightAction.toJSON(message.setDeckLightAction);
     }
     return obj;
   },
@@ -5918,6 +6327,10 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     message.formatUsbAction = (object.formatUsbAction !== undefined && object.formatUsbAction !== null)
       ? FormatUSBAction.fromPartial(object.formatUsbAction)
       : undefined;
+    message.setUpkeepUsernameAction =
+      (object.setUpkeepUsernameAction !== undefined && object.setUpkeepUsernameAction !== null)
+        ? SetUpkeepUsernameAction.fromPartial(object.setUpkeepUsernameAction)
+        : undefined;
     message.bandwidthTest = (object.bandwidthTest !== undefined && object.bandwidthTest !== null)
       ? BandwidthTest.fromPartial(object.bandwidthTest)
       : undefined;
@@ -5929,6 +6342,24 @@ export const VehicleAction: MessageFns<VehicleAction> = {
       (object.cancelVehicleDataSubscription !== undefined && object.cancelVehicleDataSubscription !== null)
         ? CancelVehicleDataSubscription.fromPartial(object.cancelVehicleDataSubscription)
         : undefined;
+    message.prepareMobileUploadAction =
+      (object.prepareMobileUploadAction !== undefined && object.prepareMobileUploadAction !== null)
+        ? PrepareMobileUploadAction.fromPartial(object.prepareMobileUploadAction)
+        : undefined;
+    message.putMobileUploadChunkAction =
+      (object.putMobileUploadChunkAction !== undefined && object.putMobileUploadChunkAction !== null)
+        ? PutMobileUploadChunkAction.fromPartial(object.putMobileUploadChunkAction)
+        : undefined;
+    message.displayStateAction = (object.displayStateAction !== undefined && object.displayStateAction !== null)
+      ? DisplayStateAction.fromPartial(object.displayStateAction)
+      : undefined;
+    message.drivingSetCruiseSpeedLimitAction =
+      (object.drivingSetCruiseSpeedLimitAction !== undefined && object.drivingSetCruiseSpeedLimitAction !== null)
+        ? DrivingSetCruiseSpeedLimitAction.fromPartial(object.drivingSetCruiseSpeedLimitAction)
+        : undefined;
+    message.setDeckLightAction = (object.setDeckLightAction !== undefined && object.setDeckLightAction !== null)
+      ? SetDeckLightAction.fromPartial(object.setDeckLightAction)
+      : undefined;
     return message;
   },
 };
@@ -7424,7 +7855,7 @@ export const MobileUploadParams: MessageFns<MobileUploadParams> = {
 };
 
 function createBasePrepareMobileUploadAction(): PrepareMobileUploadAction {
-  return { uploadParams: undefined, imageParams: undefined, overwriteOldestIfFull: false };
+  return { uploadParams: undefined, imageParams: undefined, field3: false, overwriteOldestIfFull: false };
 }
 
 export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = {
@@ -7434,6 +7865,9 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
     }
     if (message.imageParams !== undefined) {
       MobileImageUploadParams.encode(message.imageParams, writer.uint32(18).fork()).join();
+    }
+    if (message.field3 !== false) {
+      writer.uint32(24).bool(message.field3);
     }
     if (message.overwriteOldestIfFull !== false) {
       writer.uint32(32).bool(message.overwriteOldestIfFull);
@@ -7464,6 +7898,14 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
           message.imageParams = MobileImageUploadParams.decode(reader, reader.uint32());
           continue;
         }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.field3 = reader.bool();
+          continue;
+        }
         case 4: {
           if (tag !== 32) {
             break;
@@ -7485,6 +7927,7 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
     return {
       uploadParams: isSet(object.uploadParams) ? MobileUploadParams.fromJSON(object.uploadParams) : undefined,
       imageParams: isSet(object.imageParams) ? MobileImageUploadParams.fromJSON(object.imageParams) : undefined,
+      field3: isSet(object.field3) ? globalThis.Boolean(object.field3) : false,
       overwriteOldestIfFull: isSet(object.overwriteOldestIfFull)
         ? globalThis.Boolean(object.overwriteOldestIfFull)
         : false,
@@ -7498,6 +7941,9 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
     }
     if (message.imageParams !== undefined) {
       obj.imageParams = MobileImageUploadParams.toJSON(message.imageParams);
+    }
+    if (message.field3 !== undefined) {
+      obj.field3 = message.field3;
     }
     if (message.overwriteOldestIfFull !== undefined) {
       obj.overwriteOldestIfFull = message.overwriteOldestIfFull;
@@ -7516,6 +7962,7 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
     message.imageParams = (object.imageParams !== undefined && object.imageParams !== null)
       ? MobileImageUploadParams.fromPartial(object.imageParams)
       : undefined;
+    message.field3 = object.field3 ?? false;
     message.overwriteOldestIfFull = object.overwriteOldestIfFull ?? false;
     return message;
   },
@@ -7782,13 +8229,31 @@ export const PutMobileUploadChunkResponse: MessageFns<PutMobileUploadChunkRespon
 };
 
 function createBaseDogModeLiveActivityData(): DogModeLiveActivityData {
-  return { disabledReason: 0, insideTemperatureCelsius: 0, faultState: 0, temperatureUnit: 0, batteryLevel: 0 };
+  return {
+    disabledReason: 0,
+    interiorImage: undefined,
+    field3: "",
+    field4: undefined,
+    insideTemperatureCelsius: 0,
+    faultState: 0,
+    temperatureUnit: 0,
+    batteryLevel: 0,
+  };
 }
 
 export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
   encode(message: DogModeLiveActivityData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.disabledReason !== 0) {
       writer.uint32(8).int32(message.disabledReason);
+    }
+    if (message.interiorImage !== undefined) {
+      DogModeLiveActivityData_DogModeImageData.encode(message.interiorImage, writer.uint32(18).fork()).join();
+    }
+    if (message.field3 !== "") {
+      writer.uint32(26).string(message.field3);
+    }
+    if (message.field4 !== undefined) {
+      Timestamp.encode(toTimestamp(message.field4), writer.uint32(34).fork()).join();
     }
     if (message.insideTemperatureCelsius !== 0) {
       writer.uint32(45).float(message.insideTemperatureCelsius);
@@ -7818,6 +8283,30 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
           }
 
           message.disabledReason = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.interiorImage = DogModeLiveActivityData_DogModeImageData.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.field3 = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.field4 = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
         }
         case 5: {
@@ -7866,6 +8355,11 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
       disabledReason: isSet(object.disabledReason)
         ? dogModeLiveActivityData_DisabledReasonFromJSON(object.disabledReason)
         : 0,
+      interiorImage: isSet(object.interiorImage)
+        ? DogModeLiveActivityData_DogModeImageData.fromJSON(object.interiorImage)
+        : undefined,
+      field3: isSet(object.field3) ? globalThis.String(object.field3) : "",
+      field4: isSet(object.field4) ? fromJsonTimestamp(object.field4) : undefined,
       insideTemperatureCelsius: isSet(object.insideTemperatureCelsius)
         ? globalThis.Number(object.insideTemperatureCelsius)
         : 0,
@@ -7881,6 +8375,15 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
     const obj: any = {};
     if (message.disabledReason !== undefined) {
       obj.disabledReason = dogModeLiveActivityData_DisabledReasonToJSON(message.disabledReason);
+    }
+    if (message.interiorImage !== undefined) {
+      obj.interiorImage = DogModeLiveActivityData_DogModeImageData.toJSON(message.interiorImage);
+    }
+    if (message.field3 !== undefined) {
+      obj.field3 = message.field3;
+    }
+    if (message.field4 !== undefined) {
+      obj.field4 = message.field4.toISOString();
     }
     if (message.insideTemperatureCelsius !== undefined) {
       obj.insideTemperatureCelsius = message.insideTemperatureCelsius;
@@ -7903,10 +8406,95 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
   fromPartial<I extends Exact<DeepPartial<DogModeLiveActivityData>, I>>(object: I): DogModeLiveActivityData {
     const message = createBaseDogModeLiveActivityData();
     message.disabledReason = object.disabledReason ?? 0;
+    message.interiorImage = (object.interiorImage !== undefined && object.interiorImage !== null)
+      ? DogModeLiveActivityData_DogModeImageData.fromPartial(object.interiorImage)
+      : undefined;
+    message.field3 = object.field3 ?? "";
+    message.field4 = object.field4 ?? undefined;
     message.insideTemperatureCelsius = object.insideTemperatureCelsius ?? 0;
     message.faultState = object.faultState ?? 0;
     message.temperatureUnit = object.temperatureUnit ?? 0;
     message.batteryLevel = object.batteryLevel ?? 0;
+    return message;
+  },
+};
+
+function createBaseDogModeLiveActivityData_DogModeImageData(): DogModeLiveActivityData_DogModeImageData {
+  return { wrappedKey: new Uint8Array(0), encryptedImage: new Uint8Array(0) };
+}
+
+export const DogModeLiveActivityData_DogModeImageData: MessageFns<DogModeLiveActivityData_DogModeImageData> = {
+  encode(message: DogModeLiveActivityData_DogModeImageData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.wrappedKey.length !== 0) {
+      writer.uint32(10).bytes(message.wrappedKey);
+    }
+    if (message.encryptedImage.length !== 0) {
+      writer.uint32(18).bytes(message.encryptedImage);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): DogModeLiveActivityData_DogModeImageData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDogModeLiveActivityData_DogModeImageData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.wrappedKey = reader.bytes();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.encryptedImage = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DogModeLiveActivityData_DogModeImageData {
+    return {
+      wrappedKey: isSet(object.wrappedKey) ? bytesFromBase64(object.wrappedKey) : new Uint8Array(0),
+      encryptedImage: isSet(object.encryptedImage) ? bytesFromBase64(object.encryptedImage) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: DogModeLiveActivityData_DogModeImageData): unknown {
+    const obj: any = {};
+    if (message.wrappedKey !== undefined) {
+      obj.wrappedKey = base64FromBytes(message.wrappedKey);
+    }
+    if (message.encryptedImage !== undefined) {
+      obj.encryptedImage = base64FromBytes(message.encryptedImage);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DogModeLiveActivityData_DogModeImageData>, I>>(
+    base?: I,
+  ): DogModeLiveActivityData_DogModeImageData {
+    return DogModeLiveActivityData_DogModeImageData.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<DogModeLiveActivityData_DogModeImageData>, I>>(
+    object: I,
+  ): DogModeLiveActivityData_DogModeImageData {
+    const message = createBaseDogModeLiveActivityData_DogModeImageData();
+    message.wrappedKey = object.wrappedKey ?? new Uint8Array(0);
+    message.encryptedImage = object.encryptedImage ?? new Uint8Array(0);
     return message;
   },
 };
@@ -10342,11 +10930,14 @@ export const BandwidthTestResponse: MessageFns<BandwidthTestResponse> = {
 };
 
 function createBaseGetRateTariffResponse(): GetRateTariffResponse {
-  return { seasons: undefined, tariff: undefined };
+  return { tariffDocument: undefined, seasons: undefined, tariff: undefined };
 }
 
 export const GetRateTariffResponse: MessageFns<GetRateTariffResponse> = {
   encode(message: GetRateTariffResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.tariffDocument !== undefined) {
+      SetRateTariffRequest.encode(message.tariffDocument, writer.uint32(10).fork()).join();
+    }
     if (message.seasons !== undefined) {
       SetRateTariffRequest_Seasons.encode(message.seasons, writer.uint32(106).fork()).join();
     }
@@ -10363,6 +10954,14 @@ export const GetRateTariffResponse: MessageFns<GetRateTariffResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.tariffDocument = SetRateTariffRequest.decode(reader, reader.uint32());
+          continue;
+        }
         case 13: {
           if (tag !== 106) {
             break;
@@ -10390,6 +10989,7 @@ export const GetRateTariffResponse: MessageFns<GetRateTariffResponse> = {
 
   fromJSON(object: any): GetRateTariffResponse {
     return {
+      tariffDocument: isSet(object.tariffDocument) ? SetRateTariffRequest.fromJSON(object.tariffDocument) : undefined,
       seasons: isSet(object.seasons) ? SetRateTariffRequest_Seasons.fromJSON(object.seasons) : undefined,
       tariff: isSet(object.tariff) ? SetRateTariffRequest_Tariff.fromJSON(object.tariff) : undefined,
     };
@@ -10397,6 +10997,9 @@ export const GetRateTariffResponse: MessageFns<GetRateTariffResponse> = {
 
   toJSON(message: GetRateTariffResponse): unknown {
     const obj: any = {};
+    if (message.tariffDocument !== undefined) {
+      obj.tariffDocument = SetRateTariffRequest.toJSON(message.tariffDocument);
+    }
     if (message.seasons !== undefined) {
       obj.seasons = SetRateTariffRequest_Seasons.toJSON(message.seasons);
     }
@@ -10411,6 +11014,9 @@ export const GetRateTariffResponse: MessageFns<GetRateTariffResponse> = {
   },
   fromPartial<I extends Exact<DeepPartial<GetRateTariffResponse>, I>>(object: I): GetRateTariffResponse {
     const message = createBaseGetRateTariffResponse();
+    message.tariffDocument = (object.tariffDocument !== undefined && object.tariffDocument !== null)
+      ? SetRateTariffRequest.fromPartial(object.tariffDocument)
+      : undefined;
     message.seasons = (object.seasons !== undefined && object.seasons !== null)
       ? SetRateTariffRequest_Seasons.fromPartial(object.seasons)
       : undefined;
@@ -12460,16 +13066,53 @@ export const NearbyChargingSites: MessageFns<NearbyChargingSites> = {
 };
 
 function createBaseDestinationCharging(): DestinationCharging {
-  return { distanceMiles: 0, postalCode: "", streetAddress: "", withinRange: false };
+  return {
+    id: 0,
+    amenities: "",
+    city: "",
+    country: "",
+    distanceMiles: 0,
+    district: "",
+    location: undefined,
+    name: "",
+    postalCode: "",
+    state: "",
+    streetAddress: "",
+    withinRange: false,
+  };
 }
 
 export const DestinationCharging: MessageFns<DestinationCharging> = {
   encode(message: DestinationCharging, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.id !== 0) {
+      writer.uint32(8).int64(message.id);
+    }
+    if (message.amenities !== "") {
+      writer.uint32(18).string(message.amenities);
+    }
+    if (message.city !== "") {
+      writer.uint32(26).string(message.city);
+    }
+    if (message.country !== "") {
+      writer.uint32(34).string(message.country);
+    }
     if (message.distanceMiles !== 0) {
       writer.uint32(45).float(message.distanceMiles);
     }
+    if (message.district !== "") {
+      writer.uint32(50).string(message.district);
+    }
+    if (message.location !== undefined) {
+      LatLong.encode(message.location, writer.uint32(58).fork()).join();
+    }
+    if (message.name !== "") {
+      writer.uint32(66).string(message.name);
+    }
     if (message.postalCode !== "") {
       writer.uint32(74).string(message.postalCode);
+    }
+    if (message.state !== "") {
+      writer.uint32(82).string(message.state);
     }
     if (message.streetAddress !== "") {
       writer.uint32(90).string(message.streetAddress);
@@ -12487,6 +13130,38 @@ export const DestinationCharging: MessageFns<DestinationCharging> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.id = longToNumber(reader.int64());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.amenities = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.city = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.country = reader.string();
+          continue;
+        }
         case 5: {
           if (tag !== 45) {
             break;
@@ -12495,12 +13170,44 @@ export const DestinationCharging: MessageFns<DestinationCharging> = {
           message.distanceMiles = reader.float();
           continue;
         }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.district = reader.string();
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.location = LatLong.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
         case 9: {
           if (tag !== 74) {
             break;
           }
 
           message.postalCode = reader.string();
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.state = reader.string();
           continue;
         }
         case 11: {
@@ -12530,8 +13237,16 @@ export const DestinationCharging: MessageFns<DestinationCharging> = {
 
   fromJSON(object: any): DestinationCharging {
     return {
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
+      amenities: isSet(object.amenities) ? globalThis.String(object.amenities) : "",
+      city: isSet(object.city) ? globalThis.String(object.city) : "",
+      country: isSet(object.country) ? globalThis.String(object.country) : "",
       distanceMiles: isSet(object.distanceMiles) ? globalThis.Number(object.distanceMiles) : 0,
+      district: isSet(object.district) ? globalThis.String(object.district) : "",
+      location: isSet(object.location) ? LatLong.fromJSON(object.location) : undefined,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
       postalCode: isSet(object.postalCode) ? globalThis.String(object.postalCode) : "",
+      state: isSet(object.state) ? globalThis.String(object.state) : "",
       streetAddress: isSet(object.streetAddress) ? globalThis.String(object.streetAddress) : "",
       withinRange: isSet(object.withinRange) ? globalThis.Boolean(object.withinRange) : false,
     };
@@ -12539,11 +13254,35 @@ export const DestinationCharging: MessageFns<DestinationCharging> = {
 
   toJSON(message: DestinationCharging): unknown {
     const obj: any = {};
+    if (message.id !== undefined) {
+      obj.id = Math.round(message.id);
+    }
+    if (message.amenities !== undefined) {
+      obj.amenities = message.amenities;
+    }
+    if (message.city !== undefined) {
+      obj.city = message.city;
+    }
+    if (message.country !== undefined) {
+      obj.country = message.country;
+    }
     if (message.distanceMiles !== undefined) {
       obj.distanceMiles = message.distanceMiles;
     }
+    if (message.district !== undefined) {
+      obj.district = message.district;
+    }
+    if (message.location !== undefined) {
+      obj.location = LatLong.toJSON(message.location);
+    }
+    if (message.name !== undefined) {
+      obj.name = message.name;
+    }
     if (message.postalCode !== undefined) {
       obj.postalCode = message.postalCode;
+    }
+    if (message.state !== undefined) {
+      obj.state = message.state;
     }
     if (message.streetAddress !== undefined) {
       obj.streetAddress = message.streetAddress;
@@ -12559,8 +13298,18 @@ export const DestinationCharging: MessageFns<DestinationCharging> = {
   },
   fromPartial<I extends Exact<DeepPartial<DestinationCharging>, I>>(object: I): DestinationCharging {
     const message = createBaseDestinationCharging();
+    message.id = object.id ?? 0;
+    message.amenities = object.amenities ?? "";
+    message.city = object.city ?? "";
+    message.country = object.country ?? "";
     message.distanceMiles = object.distanceMiles ?? 0;
+    message.district = object.district ?? "";
+    message.location = (object.location !== undefined && object.location !== null)
+      ? LatLong.fromPartial(object.location)
+      : undefined;
+    message.name = object.name ?? "";
     message.postalCode = object.postalCode ?? "";
+    message.state = object.state ?? "";
     message.streetAddress = object.streetAddress ?? "";
     message.withinRange = object.withinRange ?? false;
     return message;
@@ -12957,11 +13706,14 @@ export const Superchargers: MessageFns<Superchargers> = {
 };
 
 function createBaseMediaPlayAction(): MediaPlayAction {
-  return {};
+  return { mediaPlaybackStatus: 0 };
 }
 
 export const MediaPlayAction: MessageFns<MediaPlayAction> = {
-  encode(_: MediaPlayAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: MediaPlayAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.mediaPlaybackStatus !== 0) {
+      writer.uint32(8).int32(message.mediaPlaybackStatus);
+    }
     return writer;
   },
 
@@ -12972,6 +13724,14 @@ export const MediaPlayAction: MessageFns<MediaPlayAction> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.mediaPlaybackStatus = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -12981,20 +13741,28 @@ export const MediaPlayAction: MessageFns<MediaPlayAction> = {
     return message;
   },
 
-  fromJSON(_: any): MediaPlayAction {
-    return {};
+  fromJSON(object: any): MediaPlayAction {
+    return {
+      mediaPlaybackStatus: isSet(object.mediaPlaybackStatus)
+        ? mediaPlaybackStatusFromJSON(object.mediaPlaybackStatus)
+        : 0,
+    };
   },
 
-  toJSON(_: MediaPlayAction): unknown {
+  toJSON(message: MediaPlayAction): unknown {
     const obj: any = {};
+    if (message.mediaPlaybackStatus !== undefined) {
+      obj.mediaPlaybackStatus = mediaPlaybackStatusToJSON(message.mediaPlaybackStatus);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<MediaPlayAction>, I>>(base?: I): MediaPlayAction {
     return MediaPlayAction.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MediaPlayAction>, I>>(_: I): MediaPlayAction {
+  fromPartial<I extends Exact<DeepPartial<MediaPlayAction>, I>>(object: I): MediaPlayAction {
     const message = createBaseMediaPlayAction();
+    message.mediaPlaybackStatus = object.mediaPlaybackStatus ?? 0;
     return message;
   },
 };
@@ -17029,11 +17797,62 @@ export const NavigationGpsRequest: MessageFns<NavigationGpsRequest> = {
 };
 
 function createBaseSetRateTariffRequest(): SetRateTariffRequest {
-  return { seasons: undefined, tariff: undefined };
+  return {
+    code: "",
+    name: "",
+    utility: "",
+    currency: "",
+    dailyCharges: [],
+    monthlyCharges: 0,
+    monthlyMinimumBill: 0,
+    demandCharges: undefined,
+    dailyDemandCharges: undefined,
+    energyCharges: undefined,
+    maxApplicableDemand: 0,
+    minApplicableDemand: 0,
+    seasons: undefined,
+    tariff: undefined,
+  };
 }
 
 export const SetRateTariffRequest: MessageFns<SetRateTariffRequest> = {
   encode(message: SetRateTariffRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.code !== "") {
+      writer.uint32(10).string(message.code);
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    if (message.utility !== "") {
+      writer.uint32(26).string(message.utility);
+    }
+    if (message.currency !== "") {
+      writer.uint32(34).string(message.currency);
+    }
+    for (const v of message.dailyCharges) {
+      SetRateTariffRequest_DailyCharge.encode(v!, writer.uint32(42).fork()).join();
+    }
+    if (message.monthlyCharges !== 0) {
+      writer.uint32(49).double(message.monthlyCharges);
+    }
+    if (message.monthlyMinimumBill !== 0) {
+      writer.uint32(57).double(message.monthlyMinimumBill);
+    }
+    if (message.demandCharges !== undefined) {
+      SetRateTariffRequest_Charges.encode(message.demandCharges, writer.uint32(66).fork()).join();
+    }
+    if (message.dailyDemandCharges !== undefined) {
+      SetRateTariffRequest_Charges.encode(message.dailyDemandCharges, writer.uint32(74).fork()).join();
+    }
+    if (message.energyCharges !== undefined) {
+      SetRateTariffRequest_Charges.encode(message.energyCharges, writer.uint32(82).fork()).join();
+    }
+    if (message.maxApplicableDemand !== 0) {
+      writer.uint32(89).double(message.maxApplicableDemand);
+    }
+    if (message.minApplicableDemand !== 0) {
+      writer.uint32(97).double(message.minApplicableDemand);
+    }
     if (message.seasons !== undefined) {
       SetRateTariffRequest_Seasons.encode(message.seasons, writer.uint32(106).fork()).join();
     }
@@ -17050,6 +17869,102 @@ export const SetRateTariffRequest: MessageFns<SetRateTariffRequest> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.code = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.utility = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.currency = reader.string();
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.dailyCharges.push(SetRateTariffRequest_DailyCharge.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 6: {
+          if (tag !== 49) {
+            break;
+          }
+
+          message.monthlyCharges = reader.double();
+          continue;
+        }
+        case 7: {
+          if (tag !== 57) {
+            break;
+          }
+
+          message.monthlyMinimumBill = reader.double();
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.demandCharges = SetRateTariffRequest_Charges.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.dailyDemandCharges = SetRateTariffRequest_Charges.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.energyCharges = SetRateTariffRequest_Charges.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 89) {
+            break;
+          }
+
+          message.maxApplicableDemand = reader.double();
+          continue;
+        }
+        case 12: {
+          if (tag !== 97) {
+            break;
+          }
+
+          message.minApplicableDemand = reader.double();
+          continue;
+        }
         case 13: {
           if (tag !== 106) {
             break;
@@ -17077,6 +17992,26 @@ export const SetRateTariffRequest: MessageFns<SetRateTariffRequest> = {
 
   fromJSON(object: any): SetRateTariffRequest {
     return {
+      code: isSet(object.code) ? globalThis.String(object.code) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      utility: isSet(object.utility) ? globalThis.String(object.utility) : "",
+      currency: isSet(object.currency) ? globalThis.String(object.currency) : "",
+      dailyCharges: globalThis.Array.isArray(object?.dailyCharges)
+        ? object.dailyCharges.map((e: any) => SetRateTariffRequest_DailyCharge.fromJSON(e))
+        : [],
+      monthlyCharges: isSet(object.monthlyCharges) ? globalThis.Number(object.monthlyCharges) : 0,
+      monthlyMinimumBill: isSet(object.monthlyMinimumBill) ? globalThis.Number(object.monthlyMinimumBill) : 0,
+      demandCharges: isSet(object.demandCharges)
+        ? SetRateTariffRequest_Charges.fromJSON(object.demandCharges)
+        : undefined,
+      dailyDemandCharges: isSet(object.dailyDemandCharges)
+        ? SetRateTariffRequest_Charges.fromJSON(object.dailyDemandCharges)
+        : undefined,
+      energyCharges: isSet(object.energyCharges)
+        ? SetRateTariffRequest_Charges.fromJSON(object.energyCharges)
+        : undefined,
+      maxApplicableDemand: isSet(object.maxApplicableDemand) ? globalThis.Number(object.maxApplicableDemand) : 0,
+      minApplicableDemand: isSet(object.minApplicableDemand) ? globalThis.Number(object.minApplicableDemand) : 0,
       seasons: isSet(object.seasons) ? SetRateTariffRequest_Seasons.fromJSON(object.seasons) : undefined,
       tariff: isSet(object.tariff) ? SetRateTariffRequest_Tariff.fromJSON(object.tariff) : undefined,
     };
@@ -17084,6 +18019,42 @@ export const SetRateTariffRequest: MessageFns<SetRateTariffRequest> = {
 
   toJSON(message: SetRateTariffRequest): unknown {
     const obj: any = {};
+    if (message.code !== undefined) {
+      obj.code = message.code;
+    }
+    if (message.name !== undefined) {
+      obj.name = message.name;
+    }
+    if (message.utility !== undefined) {
+      obj.utility = message.utility;
+    }
+    if (message.currency !== undefined) {
+      obj.currency = message.currency;
+    }
+    if (message.dailyCharges?.length) {
+      obj.dailyCharges = message.dailyCharges.map((e) => SetRateTariffRequest_DailyCharge.toJSON(e));
+    }
+    if (message.monthlyCharges !== undefined) {
+      obj.monthlyCharges = message.monthlyCharges;
+    }
+    if (message.monthlyMinimumBill !== undefined) {
+      obj.monthlyMinimumBill = message.monthlyMinimumBill;
+    }
+    if (message.demandCharges !== undefined) {
+      obj.demandCharges = SetRateTariffRequest_Charges.toJSON(message.demandCharges);
+    }
+    if (message.dailyDemandCharges !== undefined) {
+      obj.dailyDemandCharges = SetRateTariffRequest_Charges.toJSON(message.dailyDemandCharges);
+    }
+    if (message.energyCharges !== undefined) {
+      obj.energyCharges = SetRateTariffRequest_Charges.toJSON(message.energyCharges);
+    }
+    if (message.maxApplicableDemand !== undefined) {
+      obj.maxApplicableDemand = message.maxApplicableDemand;
+    }
+    if (message.minApplicableDemand !== undefined) {
+      obj.minApplicableDemand = message.minApplicableDemand;
+    }
     if (message.seasons !== undefined) {
       obj.seasons = SetRateTariffRequest_Seasons.toJSON(message.seasons);
     }
@@ -17098,6 +18069,24 @@ export const SetRateTariffRequest: MessageFns<SetRateTariffRequest> = {
   },
   fromPartial<I extends Exact<DeepPartial<SetRateTariffRequest>, I>>(object: I): SetRateTariffRequest {
     const message = createBaseSetRateTariffRequest();
+    message.code = object.code ?? "";
+    message.name = object.name ?? "";
+    message.utility = object.utility ?? "";
+    message.currency = object.currency ?? "";
+    message.dailyCharges = object.dailyCharges?.map((e) => SetRateTariffRequest_DailyCharge.fromPartial(e)) || [];
+    message.monthlyCharges = object.monthlyCharges ?? 0;
+    message.monthlyMinimumBill = object.monthlyMinimumBill ?? 0;
+    message.demandCharges = (object.demandCharges !== undefined && object.demandCharges !== null)
+      ? SetRateTariffRequest_Charges.fromPartial(object.demandCharges)
+      : undefined;
+    message.dailyDemandCharges = (object.dailyDemandCharges !== undefined && object.dailyDemandCharges !== null)
+      ? SetRateTariffRequest_Charges.fromPartial(object.dailyDemandCharges)
+      : undefined;
+    message.energyCharges = (object.energyCharges !== undefined && object.energyCharges !== null)
+      ? SetRateTariffRequest_Charges.fromPartial(object.energyCharges)
+      : undefined;
+    message.maxApplicableDemand = object.maxApplicableDemand ?? 0;
+    message.minApplicableDemand = object.minApplicableDemand ?? 0;
     message.seasons = (object.seasons !== undefined && object.seasons !== null)
       ? SetRateTariffRequest_Seasons.fromPartial(object.seasons)
       : undefined;
@@ -17816,6 +18805,86 @@ export const SetRateTariffRequest_RateBand: MessageFns<SetRateTariffRequest_Rate
   },
 };
 
+function createBaseSetRateTariffRequest_DailyCharge(): SetRateTariffRequest_DailyCharge {
+  return { amount: 0, name: "" };
+}
+
+export const SetRateTariffRequest_DailyCharge: MessageFns<SetRateTariffRequest_DailyCharge> = {
+  encode(message: SetRateTariffRequest_DailyCharge, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.amount !== 0) {
+      writer.uint32(9).double(message.amount);
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SetRateTariffRequest_DailyCharge {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSetRateTariffRequest_DailyCharge();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 9) {
+            break;
+          }
+
+          message.amount = reader.double();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SetRateTariffRequest_DailyCharge {
+    return {
+      amount: isSet(object.amount) ? globalThis.Number(object.amount) : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+    };
+  },
+
+  toJSON(message: SetRateTariffRequest_DailyCharge): unknown {
+    const obj: any = {};
+    if (message.amount !== undefined) {
+      obj.amount = message.amount;
+    }
+    if (message.name !== undefined) {
+      obj.name = message.name;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SetRateTariffRequest_DailyCharge>, I>>(
+    base?: I,
+  ): SetRateTariffRequest_DailyCharge {
+    return SetRateTariffRequest_DailyCharge.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SetRateTariffRequest_DailyCharge>, I>>(
+    object: I,
+  ): SetRateTariffRequest_DailyCharge {
+    const message = createBaseSetRateTariffRequest_DailyCharge();
+    message.amount = object.amount ?? 0;
+    message.name = object.name ?? "";
+    return message;
+  },
+};
+
 function createBaseSetRateTariffRequest_Charges(): SetRateTariffRequest_Charges {
   return {
     ALL: undefined,
@@ -17976,11 +19045,61 @@ export const SetRateTariffRequest_Charges: MessageFns<SetRateTariffRequest_Charg
 };
 
 function createBaseSetRateTariffRequest_Tariff(): SetRateTariffRequest_Tariff {
-  return { seasons: undefined };
+  return {
+    code: "",
+    name: "",
+    utility: "",
+    currency: "",
+    dailyCharges: [],
+    monthlyCharges: 0,
+    monthlyMinimumBill: 0,
+    demandCharges: undefined,
+    dailyDemandCharges: undefined,
+    energyCharges: undefined,
+    maxApplicableDemand: 0,
+    minApplicableDemand: 0,
+    seasons: undefined,
+  };
 }
 
 export const SetRateTariffRequest_Tariff: MessageFns<SetRateTariffRequest_Tariff> = {
   encode(message: SetRateTariffRequest_Tariff, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.code !== "") {
+      writer.uint32(10).string(message.code);
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    if (message.utility !== "") {
+      writer.uint32(26).string(message.utility);
+    }
+    if (message.currency !== "") {
+      writer.uint32(34).string(message.currency);
+    }
+    for (const v of message.dailyCharges) {
+      SetRateTariffRequest_DailyCharge.encode(v!, writer.uint32(42).fork()).join();
+    }
+    if (message.monthlyCharges !== 0) {
+      writer.uint32(49).double(message.monthlyCharges);
+    }
+    if (message.monthlyMinimumBill !== 0) {
+      writer.uint32(57).double(message.monthlyMinimumBill);
+    }
+    if (message.demandCharges !== undefined) {
+      SetRateTariffRequest_Charges.encode(message.demandCharges, writer.uint32(66).fork()).join();
+    }
+    if (message.dailyDemandCharges !== undefined) {
+      SetRateTariffRequest_Charges.encode(message.dailyDemandCharges, writer.uint32(74).fork()).join();
+    }
+    if (message.energyCharges !== undefined) {
+      SetRateTariffRequest_Charges.encode(message.energyCharges, writer.uint32(82).fork()).join();
+    }
+    if (message.maxApplicableDemand !== 0) {
+      writer.uint32(89).double(message.maxApplicableDemand);
+    }
+    if (message.minApplicableDemand !== 0) {
+      writer.uint32(97).double(message.minApplicableDemand);
+    }
     if (message.seasons !== undefined) {
       SetRateTariffRequest_Seasons.encode(message.seasons, writer.uint32(106).fork()).join();
     }
@@ -17994,6 +19113,102 @@ export const SetRateTariffRequest_Tariff: MessageFns<SetRateTariffRequest_Tariff
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.code = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.utility = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.currency = reader.string();
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.dailyCharges.push(SetRateTariffRequest_DailyCharge.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 6: {
+          if (tag !== 49) {
+            break;
+          }
+
+          message.monthlyCharges = reader.double();
+          continue;
+        }
+        case 7: {
+          if (tag !== 57) {
+            break;
+          }
+
+          message.monthlyMinimumBill = reader.double();
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.demandCharges = SetRateTariffRequest_Charges.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.dailyDemandCharges = SetRateTariffRequest_Charges.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.energyCharges = SetRateTariffRequest_Charges.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 89) {
+            break;
+          }
+
+          message.maxApplicableDemand = reader.double();
+          continue;
+        }
+        case 12: {
+          if (tag !== 97) {
+            break;
+          }
+
+          message.minApplicableDemand = reader.double();
+          continue;
+        }
         case 13: {
           if (tag !== 106) {
             break;
@@ -18012,11 +19227,69 @@ export const SetRateTariffRequest_Tariff: MessageFns<SetRateTariffRequest_Tariff
   },
 
   fromJSON(object: any): SetRateTariffRequest_Tariff {
-    return { seasons: isSet(object.seasons) ? SetRateTariffRequest_Seasons.fromJSON(object.seasons) : undefined };
+    return {
+      code: isSet(object.code) ? globalThis.String(object.code) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      utility: isSet(object.utility) ? globalThis.String(object.utility) : "",
+      currency: isSet(object.currency) ? globalThis.String(object.currency) : "",
+      dailyCharges: globalThis.Array.isArray(object?.dailyCharges)
+        ? object.dailyCharges.map((e: any) => SetRateTariffRequest_DailyCharge.fromJSON(e))
+        : [],
+      monthlyCharges: isSet(object.monthlyCharges) ? globalThis.Number(object.monthlyCharges) : 0,
+      monthlyMinimumBill: isSet(object.monthlyMinimumBill) ? globalThis.Number(object.monthlyMinimumBill) : 0,
+      demandCharges: isSet(object.demandCharges)
+        ? SetRateTariffRequest_Charges.fromJSON(object.demandCharges)
+        : undefined,
+      dailyDemandCharges: isSet(object.dailyDemandCharges)
+        ? SetRateTariffRequest_Charges.fromJSON(object.dailyDemandCharges)
+        : undefined,
+      energyCharges: isSet(object.energyCharges)
+        ? SetRateTariffRequest_Charges.fromJSON(object.energyCharges)
+        : undefined,
+      maxApplicableDemand: isSet(object.maxApplicableDemand) ? globalThis.Number(object.maxApplicableDemand) : 0,
+      minApplicableDemand: isSet(object.minApplicableDemand) ? globalThis.Number(object.minApplicableDemand) : 0,
+      seasons: isSet(object.seasons) ? SetRateTariffRequest_Seasons.fromJSON(object.seasons) : undefined,
+    };
   },
 
   toJSON(message: SetRateTariffRequest_Tariff): unknown {
     const obj: any = {};
+    if (message.code !== undefined) {
+      obj.code = message.code;
+    }
+    if (message.name !== undefined) {
+      obj.name = message.name;
+    }
+    if (message.utility !== undefined) {
+      obj.utility = message.utility;
+    }
+    if (message.currency !== undefined) {
+      obj.currency = message.currency;
+    }
+    if (message.dailyCharges?.length) {
+      obj.dailyCharges = message.dailyCharges.map((e) => SetRateTariffRequest_DailyCharge.toJSON(e));
+    }
+    if (message.monthlyCharges !== undefined) {
+      obj.monthlyCharges = message.monthlyCharges;
+    }
+    if (message.monthlyMinimumBill !== undefined) {
+      obj.monthlyMinimumBill = message.monthlyMinimumBill;
+    }
+    if (message.demandCharges !== undefined) {
+      obj.demandCharges = SetRateTariffRequest_Charges.toJSON(message.demandCharges);
+    }
+    if (message.dailyDemandCharges !== undefined) {
+      obj.dailyDemandCharges = SetRateTariffRequest_Charges.toJSON(message.dailyDemandCharges);
+    }
+    if (message.energyCharges !== undefined) {
+      obj.energyCharges = SetRateTariffRequest_Charges.toJSON(message.energyCharges);
+    }
+    if (message.maxApplicableDemand !== undefined) {
+      obj.maxApplicableDemand = message.maxApplicableDemand;
+    }
+    if (message.minApplicableDemand !== undefined) {
+      obj.minApplicableDemand = message.minApplicableDemand;
+    }
     if (message.seasons !== undefined) {
       obj.seasons = SetRateTariffRequest_Seasons.toJSON(message.seasons);
     }
@@ -18028,6 +19301,24 @@ export const SetRateTariffRequest_Tariff: MessageFns<SetRateTariffRequest_Tariff
   },
   fromPartial<I extends Exact<DeepPartial<SetRateTariffRequest_Tariff>, I>>(object: I): SetRateTariffRequest_Tariff {
     const message = createBaseSetRateTariffRequest_Tariff();
+    message.code = object.code ?? "";
+    message.name = object.name ?? "";
+    message.utility = object.utility ?? "";
+    message.currency = object.currency ?? "";
+    message.dailyCharges = object.dailyCharges?.map((e) => SetRateTariffRequest_DailyCharge.fromPartial(e)) || [];
+    message.monthlyCharges = object.monthlyCharges ?? 0;
+    message.monthlyMinimumBill = object.monthlyMinimumBill ?? 0;
+    message.demandCharges = (object.demandCharges !== undefined && object.demandCharges !== null)
+      ? SetRateTariffRequest_Charges.fromPartial(object.demandCharges)
+      : undefined;
+    message.dailyDemandCharges = (object.dailyDemandCharges !== undefined && object.dailyDemandCharges !== null)
+      ? SetRateTariffRequest_Charges.fromPartial(object.dailyDemandCharges)
+      : undefined;
+    message.energyCharges = (object.energyCharges !== undefined && object.energyCharges !== null)
+      ? SetRateTariffRequest_Charges.fromPartial(object.energyCharges)
+      : undefined;
+    message.maxApplicableDemand = object.maxApplicableDemand ?? 0;
+    message.minApplicableDemand = object.minApplicableDemand ?? 0;
     message.seasons = (object.seasons !== undefined && object.seasons !== null)
       ? SetRateTariffRequest_Seasons.fromPartial(object.seasons)
       : undefined;
@@ -22264,13 +23555,16 @@ export const PhoneUnitPreferences: MessageFns<PhoneUnitPreferences> = {
 };
 
 function createBaseSetPhoneSettingPreferencesAction(): SetPhoneSettingPreferencesAction {
-  return { fontSize: 0, unitPreferences: undefined };
+  return { fontSize: 0, field2: "", unitPreferences: undefined };
 }
 
 export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPreferencesAction> = {
   encode(message: SetPhoneSettingPreferencesAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.fontSize !== 0) {
       writer.uint32(8).int32(message.fontSize);
+    }
+    if (message.field2 !== "") {
+      writer.uint32(18).string(message.field2);
     }
     if (message.unitPreferences !== undefined) {
       PhoneUnitPreferences.encode(message.unitPreferences, writer.uint32(26).fork()).join();
@@ -22293,6 +23587,14 @@ export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPrefere
           message.fontSize = reader.int32() as any;
           continue;
         }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.field2 = reader.string();
+          continue;
+        }
         case 3: {
           if (tag !== 26) {
             break;
@@ -22313,6 +23615,7 @@ export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPrefere
   fromJSON(object: any): SetPhoneSettingPreferencesAction {
     return {
       fontSize: isSet(object.fontSize) ? setPhoneSettingPreferencesAction_FontSizeFromJSON(object.fontSize) : 0,
+      field2: isSet(object.field2) ? globalThis.String(object.field2) : "",
       unitPreferences: isSet(object.unitPreferences)
         ? PhoneUnitPreferences.fromJSON(object.unitPreferences)
         : undefined,
@@ -22323,6 +23626,9 @@ export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPrefere
     const obj: any = {};
     if (message.fontSize !== undefined) {
       obj.fontSize = setPhoneSettingPreferencesAction_FontSizeToJSON(message.fontSize);
+    }
+    if (message.field2 !== undefined) {
+      obj.field2 = message.field2;
     }
     if (message.unitPreferences !== undefined) {
       obj.unitPreferences = PhoneUnitPreferences.toJSON(message.unitPreferences);
@@ -22340,6 +23646,7 @@ export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPrefere
   ): SetPhoneSettingPreferencesAction {
     const message = createBaseSetPhoneSettingPreferencesAction();
     message.fontSize = object.fontSize ?? 0;
+    message.field2 = object.field2 ?? "";
     message.unitPreferences = (object.unitPreferences !== undefined && object.unitPreferences !== null)
       ? PhoneUnitPreferences.fromPartial(object.unitPreferences)
       : undefined;
@@ -22386,6 +23693,184 @@ export const CancelVehicleDataSubscription: MessageFns<CancelVehicleDataSubscrip
   },
   fromPartial<I extends Exact<DeepPartial<CancelVehicleDataSubscription>, I>>(_: I): CancelVehicleDataSubscription {
     const message = createBaseCancelVehicleDataSubscription();
+    return message;
+  },
+};
+
+function createBaseSetUpkeepUsernameAction(): SetUpkeepUsernameAction {
+  return { username: "" };
+}
+
+export const SetUpkeepUsernameAction: MessageFns<SetUpkeepUsernameAction> = {
+  encode(message: SetUpkeepUsernameAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.username !== "") {
+      writer.uint32(10).string(message.username);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SetUpkeepUsernameAction {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSetUpkeepUsernameAction();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.username = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SetUpkeepUsernameAction {
+    return { username: isSet(object.username) ? globalThis.String(object.username) : "" };
+  },
+
+  toJSON(message: SetUpkeepUsernameAction): unknown {
+    const obj: any = {};
+    if (message.username !== undefined) {
+      obj.username = message.username;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SetUpkeepUsernameAction>, I>>(base?: I): SetUpkeepUsernameAction {
+    return SetUpkeepUsernameAction.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SetUpkeepUsernameAction>, I>>(object: I): SetUpkeepUsernameAction {
+    const message = createBaseSetUpkeepUsernameAction();
+    message.username = object.username ?? "";
+    return message;
+  },
+};
+
+function createBaseDrivingSetCruiseSpeedLimitAction(): DrivingSetCruiseSpeedLimitAction {
+  return { limitMph: 0 };
+}
+
+export const DrivingSetCruiseSpeedLimitAction: MessageFns<DrivingSetCruiseSpeedLimitAction> = {
+  encode(message: DrivingSetCruiseSpeedLimitAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.limitMph !== 0) {
+      writer.uint32(9).double(message.limitMph);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): DrivingSetCruiseSpeedLimitAction {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDrivingSetCruiseSpeedLimitAction();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 9) {
+            break;
+          }
+
+          message.limitMph = reader.double();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DrivingSetCruiseSpeedLimitAction {
+    return { limitMph: isSet(object.limitMph) ? globalThis.Number(object.limitMph) : 0 };
+  },
+
+  toJSON(message: DrivingSetCruiseSpeedLimitAction): unknown {
+    const obj: any = {};
+    if (message.limitMph !== undefined) {
+      obj.limitMph = message.limitMph;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DrivingSetCruiseSpeedLimitAction>, I>>(
+    base?: I,
+  ): DrivingSetCruiseSpeedLimitAction {
+    return DrivingSetCruiseSpeedLimitAction.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<DrivingSetCruiseSpeedLimitAction>, I>>(
+    object: I,
+  ): DrivingSetCruiseSpeedLimitAction {
+    const message = createBaseDrivingSetCruiseSpeedLimitAction();
+    message.limitMph = object.limitMph ?? 0;
+    return message;
+  },
+};
+
+function createBaseSetDeckLightAction(): SetDeckLightAction {
+  return { on: false };
+}
+
+export const SetDeckLightAction: MessageFns<SetDeckLightAction> = {
+  encode(message: SetDeckLightAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.on !== false) {
+      writer.uint32(8).bool(message.on);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SetDeckLightAction {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSetDeckLightAction();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.on = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SetDeckLightAction {
+    return { on: isSet(object.on) ? globalThis.Boolean(object.on) : false };
+  },
+
+  toJSON(message: SetDeckLightAction): unknown {
+    const obj: any = {};
+    if (message.on !== undefined) {
+      obj.on = message.on;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SetDeckLightAction>, I>>(base?: I): SetDeckLightAction {
+    return SetDeckLightAction.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SetDeckLightAction>, I>>(object: I): SetDeckLightAction {
+    const message = createBaseSetDeckLightAction();
+    message.on = object.on ?? false;
     return message;
   },
 };

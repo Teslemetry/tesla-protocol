@@ -17,5 +17,9 @@ enum Role
     ROLE_FM              = 4;
     ROLE_VEHICLE_MONITOR = 5;
     ROLE_CHARGING_MANAGER = 6;
+    ROLE_SERVICE_TECH    = 7;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     ROLE_GUEST           = 8;
+    ROLE_RIDER           = 9;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    ROLE_PREDELIVERY     = 10;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    ROLE_INFOTAINMENT    = 11;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }

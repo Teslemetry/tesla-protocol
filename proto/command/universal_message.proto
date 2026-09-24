@@ -66,6 +66,7 @@ enum MessageFault_E
     MESSAGEFAULT_ERROR_REPEATED_COUNTER = 26;
     MESSAGEFAULT_ERROR_INVALID_KEY_HANDLE = 27;
     MESSAGEFAULT_ERROR_REQUIRES_RESPONSE_ENCRYPTION = 28;
+    MESSAGEFAULT_ERROR_COMMAND_REQUIRES_PHYSICAL_PROXIMITY = 29;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 message MessageStatus
@@ -78,12 +79,27 @@ message SessionInfoRequest
 {
     bytes public_key = 1;
     bytes challenge = 2;
+    uint32 handle = 3;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    Signatures.IdentifiedKey identified_key = 4;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 enum Flags {
     FLAG_USER_COMMAND = 0;
     FLAG_ENCRYPT_RESPONSE = 1;
+    FLAG_SUPPORTS_MESSAGE_FRAMING = 2;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    FLAG_COMPRESSED_ZLIB = 3;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    FLAG_SUPPORTS_COMPRESSION_ZLIB = 4;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
+
+// ===== TESLEMETRY-EXT BEGIN =====
+// One chunk of a RoutableMessage split across several transport frames.
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message MessageFrame {
+    uint32 chunk_index  = 1;
+    uint32 total_chunks = 2;
+    bytes  data         = 3;
+}
+// ===== TESLEMETRY-EXT END =====
 
 message RoutableMessage {
     reserved 1 to 5;
@@ -106,4 +122,5 @@ message RoutableMessage {
     bytes request_uuid           = 50;
     bytes uuid                   = 51;
     uint32 flags = 52;
+    MessageFrame message_frame = 53;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }

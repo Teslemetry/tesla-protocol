@@ -20,7 +20,13 @@ export const protobufPackage = "VCSEC";
 
 export enum SignatureType {
   SIGNATURE_TYPE_NONE = 0,
+  /** SIGNATURE_TYPE_ECDSA - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  SIGNATURE_TYPE_ECDSA = 1,
   SIGNATURE_TYPE_PRESENT_KEY = 2,
+  /** SIGNATURE_TYPE_AES_GCM_TOKEN - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  SIGNATURE_TYPE_AES_GCM_TOKEN = 3,
+  /** SIGNATURE_TYPE_UNSIGNED - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  SIGNATURE_TYPE_UNSIGNED = 4,
   UNRECOGNIZED = -1,
 }
 
@@ -29,9 +35,18 @@ export function signatureTypeFromJSON(object: any): SignatureType {
     case 0:
     case "SIGNATURE_TYPE_NONE":
       return SignatureType.SIGNATURE_TYPE_NONE;
+    case 1:
+    case "SIGNATURE_TYPE_ECDSA":
+      return SignatureType.SIGNATURE_TYPE_ECDSA;
     case 2:
     case "SIGNATURE_TYPE_PRESENT_KEY":
       return SignatureType.SIGNATURE_TYPE_PRESENT_KEY;
+    case 3:
+    case "SIGNATURE_TYPE_AES_GCM_TOKEN":
+      return SignatureType.SIGNATURE_TYPE_AES_GCM_TOKEN;
+    case 4:
+    case "SIGNATURE_TYPE_UNSIGNED":
+      return SignatureType.SIGNATURE_TYPE_UNSIGNED;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -43,8 +58,14 @@ export function signatureTypeToJSON(object: SignatureType): string {
   switch (object) {
     case SignatureType.SIGNATURE_TYPE_NONE:
       return "SIGNATURE_TYPE_NONE";
+    case SignatureType.SIGNATURE_TYPE_ECDSA:
+      return "SIGNATURE_TYPE_ECDSA";
     case SignatureType.SIGNATURE_TYPE_PRESENT_KEY:
       return "SIGNATURE_TYPE_PRESENT_KEY";
+    case SignatureType.SIGNATURE_TYPE_AES_GCM_TOKEN:
+      return "SIGNATURE_TYPE_AES_GCM_TOKEN";
+    case SignatureType.SIGNATURE_TYPE_UNSIGNED:
+      return "SIGNATURE_TYPE_UNSIGNED";
     case SignatureType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

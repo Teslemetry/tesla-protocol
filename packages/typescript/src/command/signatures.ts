@@ -27,6 +27,8 @@ export enum Tag {
   TAG_FLAGS = 7,
   TAG_REQUEST_HASH = 8,
   TAG_FAULT = 9,
+  /** TAG_COMMAND_PREFIX - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  TAG_COMMAND_PREFIX = 10,
   TAG_END = 255,
   UNRECOGNIZED = -1,
 }
@@ -63,6 +65,9 @@ export function tagFromJSON(object: any): Tag {
     case 9:
     case "TAG_FAULT":
       return Tag.TAG_FAULT;
+    case 10:
+    case "TAG_COMMAND_PREFIX":
+      return Tag.TAG_COMMAND_PREFIX;
     case 255:
     case "TAG_END":
       return Tag.TAG_END;
@@ -95,6 +100,8 @@ export function tagToJSON(object: Tag): string {
       return "TAG_REQUEST_HASH";
     case Tag.TAG_FAULT:
       return "TAG_FAULT";
+    case Tag.TAG_COMMAND_PREFIX:
+      return "TAG_COMMAND_PREFIX";
     case Tag.TAG_END:
       return "TAG_END";
     case Tag.UNRECOGNIZED:
@@ -105,10 +112,22 @@ export function tagToJSON(object: Tag): string {
 
 export enum SignatureType {
   SIGNATURE_TYPE_AES_GCM = 0,
+  /** SIGNATURE_TYPE_ECDSA - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  SIGNATURE_TYPE_ECDSA = 1,
+  /** SIGNATURE_TYPE_PRESENT_KEY - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  SIGNATURE_TYPE_PRESENT_KEY = 2,
+  /** SIGNATURE_TYPE_AES_GCM_TOKEN - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  SIGNATURE_TYPE_AES_GCM_TOKEN = 3,
+  /** SIGNATURE_TYPE_ECDSA_PERSONALIZED - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  SIGNATURE_TYPE_ECDSA_PERSONALIZED = 4,
   SIGNATURE_TYPE_AES_GCM_PERSONALIZED = 5,
   SIGNATURE_TYPE_HMAC = 6,
   SIGNATURE_TYPE_HMAC_PERSONALIZED = 8,
   SIGNATURE_TYPE_AES_GCM_RESPONSE = 9,
+  /** SIGNATURE_TYPE_AES_GCM_DETACHED - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  SIGNATURE_TYPE_AES_GCM_DETACHED = 10,
+  /** SIGNATURE_TYPE_CERTIFICATE_ECDSA - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  SIGNATURE_TYPE_CERTIFICATE_ECDSA = 11,
   UNRECOGNIZED = -1,
 }
 
@@ -117,6 +136,18 @@ export function signatureTypeFromJSON(object: any): SignatureType {
     case 0:
     case "SIGNATURE_TYPE_AES_GCM":
       return SignatureType.SIGNATURE_TYPE_AES_GCM;
+    case 1:
+    case "SIGNATURE_TYPE_ECDSA":
+      return SignatureType.SIGNATURE_TYPE_ECDSA;
+    case 2:
+    case "SIGNATURE_TYPE_PRESENT_KEY":
+      return SignatureType.SIGNATURE_TYPE_PRESENT_KEY;
+    case 3:
+    case "SIGNATURE_TYPE_AES_GCM_TOKEN":
+      return SignatureType.SIGNATURE_TYPE_AES_GCM_TOKEN;
+    case 4:
+    case "SIGNATURE_TYPE_ECDSA_PERSONALIZED":
+      return SignatureType.SIGNATURE_TYPE_ECDSA_PERSONALIZED;
     case 5:
     case "SIGNATURE_TYPE_AES_GCM_PERSONALIZED":
       return SignatureType.SIGNATURE_TYPE_AES_GCM_PERSONALIZED;
@@ -129,6 +160,12 @@ export function signatureTypeFromJSON(object: any): SignatureType {
     case 9:
     case "SIGNATURE_TYPE_AES_GCM_RESPONSE":
       return SignatureType.SIGNATURE_TYPE_AES_GCM_RESPONSE;
+    case 10:
+    case "SIGNATURE_TYPE_AES_GCM_DETACHED":
+      return SignatureType.SIGNATURE_TYPE_AES_GCM_DETACHED;
+    case 11:
+    case "SIGNATURE_TYPE_CERTIFICATE_ECDSA":
+      return SignatureType.SIGNATURE_TYPE_CERTIFICATE_ECDSA;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -140,6 +177,14 @@ export function signatureTypeToJSON(object: SignatureType): string {
   switch (object) {
     case SignatureType.SIGNATURE_TYPE_AES_GCM:
       return "SIGNATURE_TYPE_AES_GCM";
+    case SignatureType.SIGNATURE_TYPE_ECDSA:
+      return "SIGNATURE_TYPE_ECDSA";
+    case SignatureType.SIGNATURE_TYPE_PRESENT_KEY:
+      return "SIGNATURE_TYPE_PRESENT_KEY";
+    case SignatureType.SIGNATURE_TYPE_AES_GCM_TOKEN:
+      return "SIGNATURE_TYPE_AES_GCM_TOKEN";
+    case SignatureType.SIGNATURE_TYPE_ECDSA_PERSONALIZED:
+      return "SIGNATURE_TYPE_ECDSA_PERSONALIZED";
     case SignatureType.SIGNATURE_TYPE_AES_GCM_PERSONALIZED:
       return "SIGNATURE_TYPE_AES_GCM_PERSONALIZED";
     case SignatureType.SIGNATURE_TYPE_HMAC:
@@ -148,7 +193,48 @@ export function signatureTypeToJSON(object: SignatureType): string {
       return "SIGNATURE_TYPE_HMAC_PERSONALIZED";
     case SignatureType.SIGNATURE_TYPE_AES_GCM_RESPONSE:
       return "SIGNATURE_TYPE_AES_GCM_RESPONSE";
+    case SignatureType.SIGNATURE_TYPE_AES_GCM_DETACHED:
+      return "SIGNATURE_TYPE_AES_GCM_DETACHED";
+    case SignatureType.SIGNATURE_TYPE_CERTIFICATE_ECDSA:
+      return "SIGNATURE_TYPE_CERTIFICATE_ECDSA";
     case SignatureType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/**
+ * ===== TESLEMETRY-EXT BEGIN =====
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export enum IdentifiedKey {
+  IDENTIFIEDKEY_UNKNOWN = 0,
+  IDENTIFIEDKEY_ROOT_KEY = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function identifiedKeyFromJSON(object: any): IdentifiedKey {
+  switch (object) {
+    case 0:
+    case "IDENTIFIEDKEY_UNKNOWN":
+      return IdentifiedKey.IDENTIFIEDKEY_UNKNOWN;
+    case 1:
+    case "IDENTIFIEDKEY_ROOT_KEY":
+      return IdentifiedKey.IDENTIFIEDKEY_ROOT_KEY;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return IdentifiedKey.UNRECOGNIZED;
+  }
+}
+
+export function identifiedKeyToJSON(object: IdentifiedKey): string {
+  switch (object) {
+    case IdentifiedKey.IDENTIFIEDKEY_UNKNOWN:
+      return "IDENTIFIEDKEY_UNKNOWN";
+    case IdentifiedKey.IDENTIFIEDKEY_ROOT_KEY:
+      return "IDENTIFIEDKEY_ROOT_KEY";
+    case IdentifiedKey.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
@@ -157,6 +243,8 @@ export function signatureTypeToJSON(object: SignatureType): string {
 export enum SessionInfoStatus {
   SESSION_INFO_STATUS_OK = 0,
   SESSION_INFO_STATUS_KEY_NOT_ON_WHITELIST = 1,
+  /** SESSION_INFO_STATUS_INVALID_HANDLE - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  SESSION_INFO_STATUS_INVALID_HANDLE = 2,
   UNRECOGNIZED = -1,
 }
 
@@ -168,6 +256,9 @@ export function sessionInfoStatusFromJSON(object: any): SessionInfoStatus {
     case 1:
     case "SESSION_INFO_STATUS_KEY_NOT_ON_WHITELIST":
       return SessionInfoStatus.SESSION_INFO_STATUS_KEY_NOT_ON_WHITELIST;
+    case 2:
+    case "SESSION_INFO_STATUS_INVALID_HANDLE":
+      return SessionInfoStatus.SESSION_INFO_STATUS_INVALID_HANDLE;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -181,6 +272,8 @@ export function sessionInfoStatusToJSON(object: SessionInfoStatus): string {
       return "SESSION_INFO_STATUS_OK";
     case SessionInfoStatus.SESSION_INFO_STATUS_KEY_NOT_ON_WHITELIST:
       return "SESSION_INFO_STATUS_KEY_NOT_ON_WHITELIST";
+    case SessionInfoStatus.SESSION_INFO_STATUS_INVALID_HANDLE:
+      return "SESSION_INFO_STATUS_INVALID_HANDLE";
     case SessionInfoStatus.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -189,7 +282,11 @@ export function sessionInfoStatusToJSON(object: SessionInfoStatus): string {
 
 export interface KeyIdentity {
   publicKey?: Uint8Array | undefined;
-  handle?: number | undefined;
+  handle?:
+    | number
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  identifiedKey?: IdentifiedKey | undefined;
 }
 
 export interface AESGCMPersonalizedSignatureData {
@@ -206,6 +303,36 @@ export interface AESGCMResponseSignatureData {
   tag: Uint8Array;
 }
 
+/**
+ * ===== TESLEMETRY-EXT BEGIN =====
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export interface PresentKeySignatureData {
+  authToken: Uint8Array;
+}
+
+/**
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ * Names of fields 1, 2, 4 and 5 not recovered.
+ */
+export interface AESGCMDetachedSignatureData {
+  epoch: Uint8Array;
+  counter: number;
+  expiresAt: number;
+  nonce: Uint8Array;
+  tag: Uint8Array;
+}
+
+/**
+ * Signs with a key vouched for by a DER certificate chain.
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export interface CertificateECDSASignatureData {
+  certificateChainDer: Uint8Array;
+  /** name not recovered */
+  signature: Uint8Array;
+}
+
 export interface HMACSignatureData {
   tag: Uint8Array;
 }
@@ -218,11 +345,23 @@ export interface HMACPersonalizedSignatureData {
 }
 
 export interface SignatureData {
-  signerIdentity: KeyIdentity | undefined;
+  signerIdentity:
+    | KeyIdentity
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  PresentKeyData?: PresentKeySignatureData | undefined;
   AESGCMPersonalizedData?: AESGCMPersonalizedSignatureData | undefined;
   sessionInfoTag?: HMACSignatureData | undefined;
   HMACPersonalizedData?: HMACPersonalizedSignatureData | undefined;
-  AESGCMResponseData?: AESGCMResponseSignatureData | undefined;
+  AESGCMResponseData?:
+    | AESGCMResponseSignatureData
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  AESGCMDetachedData?:
+    | AESGCMDetachedSignatureData
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  CertificateECDSAData?: CertificateECDSASignatureData | undefined;
 }
 
 export interface GetSessionInfoRequest {
@@ -236,10 +375,12 @@ export interface SessionInfo {
   clockTime: number;
   status: SessionInfoStatus;
   handle: number;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field7: number;
 }
 
 function createBaseKeyIdentity(): KeyIdentity {
-  return { publicKey: undefined, handle: undefined };
+  return { publicKey: undefined, handle: undefined, identifiedKey: undefined };
 }
 
 export const KeyIdentity: MessageFns<KeyIdentity> = {
@@ -249,6 +390,9 @@ export const KeyIdentity: MessageFns<KeyIdentity> = {
     }
     if (message.handle !== undefined) {
       writer.uint32(24).uint32(message.handle);
+    }
+    if (message.identifiedKey !== undefined) {
+      writer.uint32(32).int32(message.identifiedKey);
     }
     return writer;
   },
@@ -276,6 +420,14 @@ export const KeyIdentity: MessageFns<KeyIdentity> = {
           message.handle = reader.uint32();
           continue;
         }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.identifiedKey = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -289,6 +441,7 @@ export const KeyIdentity: MessageFns<KeyIdentity> = {
     return {
       publicKey: isSet(object.publicKey) ? bytesFromBase64(object.publicKey) : undefined,
       handle: isSet(object.handle) ? globalThis.Number(object.handle) : undefined,
+      identifiedKey: isSet(object.identifiedKey) ? identifiedKeyFromJSON(object.identifiedKey) : undefined,
     };
   },
 
@@ -300,6 +453,9 @@ export const KeyIdentity: MessageFns<KeyIdentity> = {
     if (message.handle !== undefined) {
       obj.handle = Math.round(message.handle);
     }
+    if (message.identifiedKey !== undefined) {
+      obj.identifiedKey = identifiedKeyToJSON(message.identifiedKey);
+    }
     return obj;
   },
 
@@ -310,6 +466,7 @@ export const KeyIdentity: MessageFns<KeyIdentity> = {
     const message = createBaseKeyIdentity();
     message.publicKey = object.publicKey ?? undefined;
     message.handle = object.handle ?? undefined;
+    message.identifiedKey = object.identifiedKey ?? undefined;
     return message;
   },
 };
@@ -532,6 +689,268 @@ export const AESGCMResponseSignatureData: MessageFns<AESGCMResponseSignatureData
   },
 };
 
+function createBasePresentKeySignatureData(): PresentKeySignatureData {
+  return { authToken: new Uint8Array(0) };
+}
+
+export const PresentKeySignatureData: MessageFns<PresentKeySignatureData> = {
+  encode(message: PresentKeySignatureData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.authToken.length !== 0) {
+      writer.uint32(10).bytes(message.authToken);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PresentKeySignatureData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePresentKeySignatureData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.authToken = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PresentKeySignatureData {
+    return { authToken: isSet(object.authToken) ? bytesFromBase64(object.authToken) : new Uint8Array(0) };
+  },
+
+  toJSON(message: PresentKeySignatureData): unknown {
+    const obj: any = {};
+    if (message.authToken !== undefined) {
+      obj.authToken = base64FromBytes(message.authToken);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<PresentKeySignatureData>, I>>(base?: I): PresentKeySignatureData {
+    return PresentKeySignatureData.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<PresentKeySignatureData>, I>>(object: I): PresentKeySignatureData {
+    const message = createBasePresentKeySignatureData();
+    message.authToken = object.authToken ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseAESGCMDetachedSignatureData(): AESGCMDetachedSignatureData {
+  return { epoch: new Uint8Array(0), counter: 0, expiresAt: 0, nonce: new Uint8Array(0), tag: new Uint8Array(0) };
+}
+
+export const AESGCMDetachedSignatureData: MessageFns<AESGCMDetachedSignatureData> = {
+  encode(message: AESGCMDetachedSignatureData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.epoch.length !== 0) {
+      writer.uint32(10).bytes(message.epoch);
+    }
+    if (message.counter !== 0) {
+      writer.uint32(16).uint32(message.counter);
+    }
+    if (message.expiresAt !== 0) {
+      writer.uint32(29).fixed32(message.expiresAt);
+    }
+    if (message.nonce.length !== 0) {
+      writer.uint32(34).bytes(message.nonce);
+    }
+    if (message.tag.length !== 0) {
+      writer.uint32(42).bytes(message.tag);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AESGCMDetachedSignatureData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAESGCMDetachedSignatureData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.epoch = reader.bytes();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.counter = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 29) {
+            break;
+          }
+
+          message.expiresAt = reader.fixed32();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.nonce = reader.bytes();
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.tag = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AESGCMDetachedSignatureData {
+    return {
+      epoch: isSet(object.epoch) ? bytesFromBase64(object.epoch) : new Uint8Array(0),
+      counter: isSet(object.counter) ? globalThis.Number(object.counter) : 0,
+      expiresAt: isSet(object.expiresAt) ? globalThis.Number(object.expiresAt) : 0,
+      nonce: isSet(object.nonce) ? bytesFromBase64(object.nonce) : new Uint8Array(0),
+      tag: isSet(object.tag) ? bytesFromBase64(object.tag) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: AESGCMDetachedSignatureData): unknown {
+    const obj: any = {};
+    if (message.epoch !== undefined) {
+      obj.epoch = base64FromBytes(message.epoch);
+    }
+    if (message.counter !== undefined) {
+      obj.counter = Math.round(message.counter);
+    }
+    if (message.expiresAt !== undefined) {
+      obj.expiresAt = Math.round(message.expiresAt);
+    }
+    if (message.nonce !== undefined) {
+      obj.nonce = base64FromBytes(message.nonce);
+    }
+    if (message.tag !== undefined) {
+      obj.tag = base64FromBytes(message.tag);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AESGCMDetachedSignatureData>, I>>(base?: I): AESGCMDetachedSignatureData {
+    return AESGCMDetachedSignatureData.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AESGCMDetachedSignatureData>, I>>(object: I): AESGCMDetachedSignatureData {
+    const message = createBaseAESGCMDetachedSignatureData();
+    message.epoch = object.epoch ?? new Uint8Array(0);
+    message.counter = object.counter ?? 0;
+    message.expiresAt = object.expiresAt ?? 0;
+    message.nonce = object.nonce ?? new Uint8Array(0);
+    message.tag = object.tag ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseCertificateECDSASignatureData(): CertificateECDSASignatureData {
+  return { certificateChainDer: new Uint8Array(0), signature: new Uint8Array(0) };
+}
+
+export const CertificateECDSASignatureData: MessageFns<CertificateECDSASignatureData> = {
+  encode(message: CertificateECDSASignatureData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.certificateChainDer.length !== 0) {
+      writer.uint32(10).bytes(message.certificateChainDer);
+    }
+    if (message.signature.length !== 0) {
+      writer.uint32(18).bytes(message.signature);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CertificateECDSASignatureData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCertificateECDSASignatureData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.certificateChainDer = reader.bytes();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.signature = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CertificateECDSASignatureData {
+    return {
+      certificateChainDer: isSet(object.certificateChainDer)
+        ? bytesFromBase64(object.certificateChainDer)
+        : new Uint8Array(0),
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: CertificateECDSASignatureData): unknown {
+    const obj: any = {};
+    if (message.certificateChainDer !== undefined) {
+      obj.certificateChainDer = base64FromBytes(message.certificateChainDer);
+    }
+    if (message.signature !== undefined) {
+      obj.signature = base64FromBytes(message.signature);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CertificateECDSASignatureData>, I>>(base?: I): CertificateECDSASignatureData {
+    return CertificateECDSASignatureData.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CertificateECDSASignatureData>, I>>(
+    object: I,
+  ): CertificateECDSASignatureData {
+    const message = createBaseCertificateECDSASignatureData();
+    message.certificateChainDer = object.certificateChainDer ?? new Uint8Array(0);
+    message.signature = object.signature ?? new Uint8Array(0);
+    return message;
+  },
+};
+
 function createBaseHMACSignatureData(): HMACSignatureData {
   return { tag: new Uint8Array(0) };
 }
@@ -703,10 +1122,13 @@ export const HMACPersonalizedSignatureData: MessageFns<HMACPersonalizedSignature
 function createBaseSignatureData(): SignatureData {
   return {
     signerIdentity: undefined,
+    PresentKeyData: undefined,
     AESGCMPersonalizedData: undefined,
     sessionInfoTag: undefined,
     HMACPersonalizedData: undefined,
     AESGCMResponseData: undefined,
+    AESGCMDetachedData: undefined,
+    CertificateECDSAData: undefined,
   };
 }
 
@@ -714,6 +1136,9 @@ export const SignatureData: MessageFns<SignatureData> = {
   encode(message: SignatureData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.signerIdentity !== undefined) {
       KeyIdentity.encode(message.signerIdentity, writer.uint32(10).fork()).join();
+    }
+    if (message.PresentKeyData !== undefined) {
+      PresentKeySignatureData.encode(message.PresentKeyData, writer.uint32(18).fork()).join();
     }
     if (message.AESGCMPersonalizedData !== undefined) {
       AESGCMPersonalizedSignatureData.encode(message.AESGCMPersonalizedData, writer.uint32(42).fork()).join();
@@ -726,6 +1151,12 @@ export const SignatureData: MessageFns<SignatureData> = {
     }
     if (message.AESGCMResponseData !== undefined) {
       AESGCMResponseSignatureData.encode(message.AESGCMResponseData, writer.uint32(74).fork()).join();
+    }
+    if (message.AESGCMDetachedData !== undefined) {
+      AESGCMDetachedSignatureData.encode(message.AESGCMDetachedData, writer.uint32(82).fork()).join();
+    }
+    if (message.CertificateECDSAData !== undefined) {
+      CertificateECDSASignatureData.encode(message.CertificateECDSAData, writer.uint32(90).fork()).join();
     }
     return writer;
   },
@@ -743,6 +1174,14 @@ export const SignatureData: MessageFns<SignatureData> = {
           }
 
           message.signerIdentity = KeyIdentity.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.PresentKeyData = PresentKeySignatureData.decode(reader, reader.uint32());
           continue;
         }
         case 5: {
@@ -777,6 +1216,22 @@ export const SignatureData: MessageFns<SignatureData> = {
           message.AESGCMResponseData = AESGCMResponseSignatureData.decode(reader, reader.uint32());
           continue;
         }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.AESGCMDetachedData = AESGCMDetachedSignatureData.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.CertificateECDSAData = CertificateECDSASignatureData.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -789,6 +1244,9 @@ export const SignatureData: MessageFns<SignatureData> = {
   fromJSON(object: any): SignatureData {
     return {
       signerIdentity: isSet(object.signerIdentity) ? KeyIdentity.fromJSON(object.signerIdentity) : undefined,
+      PresentKeyData: isSet(object.PresentKeyData)
+        ? PresentKeySignatureData.fromJSON(object.PresentKeyData)
+        : undefined,
       AESGCMPersonalizedData: isSet(object.AESGCMPersonalizedData)
         ? AESGCMPersonalizedSignatureData.fromJSON(object.AESGCMPersonalizedData)
         : undefined,
@@ -799,6 +1257,12 @@ export const SignatureData: MessageFns<SignatureData> = {
       AESGCMResponseData: isSet(object.AESGCMResponseData)
         ? AESGCMResponseSignatureData.fromJSON(object.AESGCMResponseData)
         : undefined,
+      AESGCMDetachedData: isSet(object.AESGCMDetachedData)
+        ? AESGCMDetachedSignatureData.fromJSON(object.AESGCMDetachedData)
+        : undefined,
+      CertificateECDSAData: isSet(object.CertificateECDSAData)
+        ? CertificateECDSASignatureData.fromJSON(object.CertificateECDSAData)
+        : undefined,
     };
   },
 
@@ -806,6 +1270,9 @@ export const SignatureData: MessageFns<SignatureData> = {
     const obj: any = {};
     if (message.signerIdentity !== undefined) {
       obj.signerIdentity = KeyIdentity.toJSON(message.signerIdentity);
+    }
+    if (message.PresentKeyData !== undefined) {
+      obj.PresentKeyData = PresentKeySignatureData.toJSON(message.PresentKeyData);
     }
     if (message.AESGCMPersonalizedData !== undefined) {
       obj.AESGCMPersonalizedData = AESGCMPersonalizedSignatureData.toJSON(message.AESGCMPersonalizedData);
@@ -819,6 +1286,12 @@ export const SignatureData: MessageFns<SignatureData> = {
     if (message.AESGCMResponseData !== undefined) {
       obj.AESGCMResponseData = AESGCMResponseSignatureData.toJSON(message.AESGCMResponseData);
     }
+    if (message.AESGCMDetachedData !== undefined) {
+      obj.AESGCMDetachedData = AESGCMDetachedSignatureData.toJSON(message.AESGCMDetachedData);
+    }
+    if (message.CertificateECDSAData !== undefined) {
+      obj.CertificateECDSAData = CertificateECDSASignatureData.toJSON(message.CertificateECDSAData);
+    }
     return obj;
   },
 
@@ -829,6 +1302,9 @@ export const SignatureData: MessageFns<SignatureData> = {
     const message = createBaseSignatureData();
     message.signerIdentity = (object.signerIdentity !== undefined && object.signerIdentity !== null)
       ? KeyIdentity.fromPartial(object.signerIdentity)
+      : undefined;
+    message.PresentKeyData = (object.PresentKeyData !== undefined && object.PresentKeyData !== null)
+      ? PresentKeySignatureData.fromPartial(object.PresentKeyData)
       : undefined;
     message.AESGCMPersonalizedData =
       (object.AESGCMPersonalizedData !== undefined && object.AESGCMPersonalizedData !== null)
@@ -842,6 +1318,12 @@ export const SignatureData: MessageFns<SignatureData> = {
       : undefined;
     message.AESGCMResponseData = (object.AESGCMResponseData !== undefined && object.AESGCMResponseData !== null)
       ? AESGCMResponseSignatureData.fromPartial(object.AESGCMResponseData)
+      : undefined;
+    message.AESGCMDetachedData = (object.AESGCMDetachedData !== undefined && object.AESGCMDetachedData !== null)
+      ? AESGCMDetachedSignatureData.fromPartial(object.AESGCMDetachedData)
+      : undefined;
+    message.CertificateECDSAData = (object.CertificateECDSAData !== undefined && object.CertificateECDSAData !== null)
+      ? CertificateECDSASignatureData.fromPartial(object.CertificateECDSAData)
       : undefined;
     return message;
   },
@@ -908,7 +1390,15 @@ export const GetSessionInfoRequest: MessageFns<GetSessionInfoRequest> = {
 };
 
 function createBaseSessionInfo(): SessionInfo {
-  return { counter: 0, publicKey: new Uint8Array(0), epoch: new Uint8Array(0), clockTime: 0, status: 0, handle: 0 };
+  return {
+    counter: 0,
+    publicKey: new Uint8Array(0),
+    epoch: new Uint8Array(0),
+    clockTime: 0,
+    status: 0,
+    handle: 0,
+    field7: 0,
+  };
 }
 
 export const SessionInfo: MessageFns<SessionInfo> = {
@@ -930,6 +1420,9 @@ export const SessionInfo: MessageFns<SessionInfo> = {
     }
     if (message.handle !== 0) {
       writer.uint32(48).uint32(message.handle);
+    }
+    if (message.field7 !== 0) {
+      writer.uint32(56).uint32(message.field7);
     }
     return writer;
   },
@@ -989,6 +1482,14 @@ export const SessionInfo: MessageFns<SessionInfo> = {
           message.handle = reader.uint32();
           continue;
         }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.field7 = reader.uint32();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1006,6 +1507,7 @@ export const SessionInfo: MessageFns<SessionInfo> = {
       clockTime: isSet(object.clockTime) ? globalThis.Number(object.clockTime) : 0,
       status: isSet(object.status) ? sessionInfoStatusFromJSON(object.status) : 0,
       handle: isSet(object.handle) ? globalThis.Number(object.handle) : 0,
+      field7: isSet(object.field7) ? globalThis.Number(object.field7) : 0,
     };
   },
 
@@ -1029,6 +1531,9 @@ export const SessionInfo: MessageFns<SessionInfo> = {
     if (message.handle !== undefined) {
       obj.handle = Math.round(message.handle);
     }
+    if (message.field7 !== undefined) {
+      obj.field7 = Math.round(message.field7);
+    }
     return obj;
   },
 
@@ -1043,6 +1548,7 @@ export const SessionInfo: MessageFns<SessionInfo> = {
     message.clockTime = object.clockTime ?? 0;
     message.status = object.status ?? 0;
     message.handle = object.handle ?? 0;
+    message.field7 = object.field7 ?? 0;
     return message;
   },
 };
