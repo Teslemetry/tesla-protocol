@@ -363,7 +363,7 @@ MOBILE_APP_FEATURE_ANDROID_BLE_BONDING: MobileAppFeature
 MOBILE_APP_FEATURE_APVIZ_WHEEL_CAPS: MobileAppFeature
 
 class VehicleData(_message.Message):
-    __slots__ = ('gui_settings', 'charge_state', 'climate_state', 'drive_state', 'legacy_vehicle_state', 'vehicle_config', 'location_state', 'closures_state', 'proto_json_version', 'encrypted_data', 'upload_reason', 'parked_accessory_state', 'charge_schedule_state', 'preconditioning_schedule_state', 'soh_state', 'unknown', 'tire_pressure_state', 'media_state', 'media_detail_state', 'vehicle_detail_state', 'software_update_state', 'parental_controls_state', 'alert_state', 'light_show_state', 'vehicle_image_state', 'suspension_state', 'child_presence_detection_state', 'display_state', 'pii_key_responses', 'wrapped_key', 'supports_optional_fields')
+    __slots__ = ('gui_settings', 'charge_state', 'climate_state', 'drive_state', 'legacy_vehicle_state', 'vehicle_config', 'location_state', 'closures_state', 'proto_json_version', 'encrypted_data', 'upload_reason', 'parked_accessory_state', 'charge_schedule_state', 'preconditioning_schedule_state', 'soh_state', 'vehicle_state', 'tire_pressure_state', 'media_state', 'media_detail_state', 'vehicle_detail_state', 'software_update_state', 'parental_controls_state', 'alert_state', 'light_show_state', 'vehicle_image_state', 'suspension_state', 'child_presence_detection_state', 'display_state', 'pii_key_responses', 'wrapped_key', 'supports_optional_fields')
     GUI_SETTINGS_FIELD_NUMBER: _ClassVar[int]
     CHARGE_STATE_FIELD_NUMBER: _ClassVar[int]
     CLIMATE_STATE_FIELD_NUMBER: _ClassVar[int]
@@ -379,7 +379,7 @@ class VehicleData(_message.Message):
     CHARGE_SCHEDULE_STATE_FIELD_NUMBER: _ClassVar[int]
     PRECONDITIONING_SCHEDULE_STATE_FIELD_NUMBER: _ClassVar[int]
     SOH_STATE_FIELD_NUMBER: _ClassVar[int]
-    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    VEHICLE_STATE_FIELD_NUMBER: _ClassVar[int]
     TIRE_PRESSURE_STATE_FIELD_NUMBER: _ClassVar[int]
     MEDIA_STATE_FIELD_NUMBER: _ClassVar[int]
     MEDIA_DETAIL_STATE_FIELD_NUMBER: _ClassVar[int]
@@ -410,7 +410,7 @@ class VehicleData(_message.Message):
     charge_schedule_state: ChargeScheduleState
     preconditioning_schedule_state: PreconditioningScheduleState
     soh_state: SohState
-    unknown: bytes
+    vehicle_state: CurrentVehicleState
     tire_pressure_state: TirePressureState
     media_state: MediaState
     media_detail_state: MediaDetailState
@@ -427,7 +427,7 @@ class VehicleData(_message.Message):
     wrapped_key: bytes
     supports_optional_fields: bool
 
-    def __init__(self, gui_settings: _Optional[_Union[GuiSettings, _Mapping]]=..., charge_state: _Optional[_Union[ChargeState, _Mapping]]=..., climate_state: _Optional[_Union[ClimateState, _Mapping]]=..., drive_state: _Optional[_Union[DriveState, _Mapping]]=..., legacy_vehicle_state: _Optional[_Union[VehicleState, _Mapping]]=..., vehicle_config: _Optional[_Union[VehicleConfig, _Mapping]]=..., location_state: _Optional[_Union[LocationState, _Mapping]]=..., closures_state: _Optional[_Union[ClosuresState, _Mapping]]=..., proto_json_version: _Optional[int]=..., encrypted_data: _Optional[_Iterable[bytes]]=..., upload_reason: _Optional[str]=..., parked_accessory_state: _Optional[_Union[ParkedAccessoryState, _Mapping]]=..., charge_schedule_state: _Optional[_Union[ChargeScheduleState, _Mapping]]=..., preconditioning_schedule_state: _Optional[_Union[PreconditioningScheduleState, _Mapping]]=..., soh_state: _Optional[_Union[SohState, _Mapping]]=..., unknown: _Optional[bytes]=..., tire_pressure_state: _Optional[_Union[TirePressureState, _Mapping]]=..., media_state: _Optional[_Union[MediaState, _Mapping]]=..., media_detail_state: _Optional[_Union[MediaDetailState, _Mapping]]=..., vehicle_detail_state: _Optional[_Union[VehicleDetailState, _Mapping]]=..., software_update_state: _Optional[_Union[SoftwareUpdateState, _Mapping]]=..., parental_controls_state: _Optional[_Union[ParentalControlsState, _Mapping]]=..., alert_state: _Optional[_Union[AlertState, _Mapping]]=..., light_show_state: _Optional[_Union[LightShowState, _Mapping]]=..., vehicle_image_state: _Optional[_Union[VehicleImageState, _Mapping]]=..., suspension_state: _Optional[_Union[SuspensionState, _Mapping]]=..., child_presence_detection_state: _Optional[_Union[ChildPresenceDetectionState, _Mapping]]=..., display_state: _Optional[_Union[DisplayState, _Mapping]]=..., pii_key_responses: _Optional[_Iterable[bytes]]=..., wrapped_key: _Optional[bytes]=..., supports_optional_fields: _Optional[bool]=...) -> None:
+    def __init__(self, gui_settings: _Optional[_Union[GuiSettings, _Mapping]]=..., charge_state: _Optional[_Union[ChargeState, _Mapping]]=..., climate_state: _Optional[_Union[ClimateState, _Mapping]]=..., drive_state: _Optional[_Union[DriveState, _Mapping]]=..., legacy_vehicle_state: _Optional[_Union[VehicleState, _Mapping]]=..., vehicle_config: _Optional[_Union[VehicleConfig, _Mapping]]=..., location_state: _Optional[_Union[LocationState, _Mapping]]=..., closures_state: _Optional[_Union[ClosuresState, _Mapping]]=..., proto_json_version: _Optional[int]=..., encrypted_data: _Optional[_Iterable[bytes]]=..., upload_reason: _Optional[str]=..., parked_accessory_state: _Optional[_Union[ParkedAccessoryState, _Mapping]]=..., charge_schedule_state: _Optional[_Union[ChargeScheduleState, _Mapping]]=..., preconditioning_schedule_state: _Optional[_Union[PreconditioningScheduleState, _Mapping]]=..., soh_state: _Optional[_Union[SohState, _Mapping]]=..., vehicle_state: _Optional[_Union[CurrentVehicleState, _Mapping]]=..., tire_pressure_state: _Optional[_Union[TirePressureState, _Mapping]]=..., media_state: _Optional[_Union[MediaState, _Mapping]]=..., media_detail_state: _Optional[_Union[MediaDetailState, _Mapping]]=..., vehicle_detail_state: _Optional[_Union[VehicleDetailState, _Mapping]]=..., software_update_state: _Optional[_Union[SoftwareUpdateState, _Mapping]]=..., parental_controls_state: _Optional[_Union[ParentalControlsState, _Mapping]]=..., alert_state: _Optional[_Union[AlertState, _Mapping]]=..., light_show_state: _Optional[_Union[LightShowState, _Mapping]]=..., vehicle_image_state: _Optional[_Union[VehicleImageState, _Mapping]]=..., suspension_state: _Optional[_Union[SuspensionState, _Mapping]]=..., child_presence_detection_state: _Optional[_Union[ChildPresenceDetectionState, _Mapping]]=..., display_state: _Optional[_Union[DisplayState, _Mapping]]=..., pii_key_responses: _Optional[_Iterable[bytes]]=..., wrapped_key: _Optional[bytes]=..., supports_optional_fields: _Optional[bool]=...) -> None:
         ...
 
 class ClosuresState(_message.Message):
@@ -1309,7 +1309,7 @@ class LocationState(_message.Message):
         ...
 
 class VehicleState(_message.Message):
-    __slots__ = ('software_update_state', 'legacy_media_state', 'timestamp', 'feature_bitmask', 'tpms_last_seen_pressure_time_fl', 'tpms_last_seen_pressure_time_fr', 'tpms_last_seen_pressure_time_rl', 'tpms_last_seen_pressure_time_rr', 'deck_lights_on', 'hazards_on', 'deck_lights_allowed', 'legacy_media_info', 'allow_authorized_mobile_devices_only', 'guestMode', 'drive_rail_on', 'pin_to_drive_enabled', 'pin_to_drive_pin_set', 'frontfoglights_on', 'rearfoglights_on', 'headlights_on', 'highbeamlights_on', 'trailer_mode_on', 'trailer_light_test_available', 'trailer_light_test_requested', 'truck_bed_lights_brightness', 'signed_cmd_service_mode', 'accessory_lightbar_middle_on', 'transport_mode', 'truck_bed_lights_auto_brightness', 'truck_bed_lights_auto_state', 'truck_bed_lights_controls_disabled', 'service_mode_auth', 'service_gtw_diag_session_active', 'factory_mode', 'training_wheels_mode', 'gtw_diag_level', 'parental_controls_active', 'parental_controls_pin_set', 'parental_controls_settings', 'api_version', 'car_version', 'detailed_version', 'autopilot_hash', 'vehicle_name', 'notifications_supported', 'remote_start_supported', 'remote_start_enabled', 'last_autopark_error', 'homelink_device_count', 'smart_summon_available', 'summon_standby_mode_enabled', 'patsy_mode', 'webcam_available', 'vehicle_self_test_requested', 'vehicle_self_test_progress', 'calendar_supported', 'dashcam_clip_save_available', 'dashcam_state', 'tpms_pressure_fl', 'tpms_pressure_fr', 'tpms_pressure_rl', 'tpms_pressure_rr', 'service_mode', 'service_mode_plus', 'tpms_hard_warning_fl', 'tpms_hard_warning_fr', 'tpms_hard_warning_rl', 'tpms_hard_warning_rr', 'tpms_soft_warning_fl', 'tpms_soft_warning_fr', 'tpms_soft_warning_rl', 'tpms_soft_warning_rr', 'tpms_rcp_front_value', 'tpms_rcp_rear_value', 'fsd_software_version', 'autopilot_base', 'autopilot_override_state', 'autopilot_override_expire_time')
+    __slots__ = ('software_update_state', 'legacy_media_state', 'timestamp', 'feature_bitmask', 'tpms_last_seen_pressure_time_fl', 'tpms_last_seen_pressure_time_fr', 'tpms_last_seen_pressure_time_rl', 'tpms_last_seen_pressure_time_rr', 'legacy_media_info', 'allow_authorized_mobile_devices_only', 'guestMode', 'drive_rail_on', 'pin_to_drive_enabled', 'pin_to_drive_pin_set', 'frontfoglights_on', 'rearfoglights_on', 'headlights_on', 'highbeamlights_on', 'trailer_mode_on', 'trailer_light_test_available', 'trailer_light_test_requested', 'truck_bed_lights_brightness', 'signed_cmd_service_mode', 'accessory_lightbar_middle_on', 'transport_mode', 'truck_bed_lights_auto_brightness', 'truck_bed_lights_auto_state', 'truck_bed_lights_controls_disabled', 'service_mode_auth', 'service_gtw_diag_session_active', 'factory_mode', 'training_wheels_mode', 'gtw_diag_level', 'parental_controls_active', 'parental_controls_pin_set', 'parental_controls_settings', 'api_version', 'car_version', 'detailed_version', 'autopilot_hash', 'vehicle_name', 'notifications_supported', 'remote_start_supported', 'remote_start_enabled', 'last_autopark_error', 'homelink_device_count', 'smart_summon_available', 'summon_standby_mode_enabled', 'patsy_mode', 'webcam_available', 'vehicle_self_test_requested', 'vehicle_self_test_progress', 'calendar_supported', 'dashcam_clip_save_available', 'dashcam_state', 'tpms_pressure_fl', 'tpms_pressure_fr', 'tpms_pressure_rl', 'tpms_pressure_rr', 'service_mode', 'service_mode_plus', 'tpms_hard_warning_fl', 'tpms_hard_warning_fr', 'tpms_hard_warning_rl', 'tpms_hard_warning_rr', 'tpms_soft_warning_fl', 'tpms_soft_warning_fr', 'tpms_soft_warning_rl', 'tpms_soft_warning_rr', 'tpms_rcp_front_value', 'tpms_rcp_rear_value', 'fsd_software_version')
 
     class GuestMode(_message.Message):
         __slots__ = ('GuestModeActive',)
@@ -1326,9 +1326,6 @@ class VehicleState(_message.Message):
     TPMS_LAST_SEEN_PRESSURE_TIME_FR_FIELD_NUMBER: _ClassVar[int]
     TPMS_LAST_SEEN_PRESSURE_TIME_RL_FIELD_NUMBER: _ClassVar[int]
     TPMS_LAST_SEEN_PRESSURE_TIME_RR_FIELD_NUMBER: _ClassVar[int]
-    DECK_LIGHTS_ON_FIELD_NUMBER: _ClassVar[int]
-    HAZARDS_ON_FIELD_NUMBER: _ClassVar[int]
-    DECK_LIGHTS_ALLOWED_FIELD_NUMBER: _ClassVar[int]
     LEGACY_MEDIA_INFO_FIELD_NUMBER: _ClassVar[int]
     ALLOW_AUTHORIZED_MOBILE_DEVICES_ONLY_FIELD_NUMBER: _ClassVar[int]
     GUESTMODE_FIELD_NUMBER: _ClassVar[int]
@@ -1393,9 +1390,6 @@ class VehicleState(_message.Message):
     TPMS_RCP_FRONT_VALUE_FIELD_NUMBER: _ClassVar[int]
     TPMS_RCP_REAR_VALUE_FIELD_NUMBER: _ClassVar[int]
     FSD_SOFTWARE_VERSION_FIELD_NUMBER: _ClassVar[int]
-    AUTOPILOT_BASE_FIELD_NUMBER: _ClassVar[int]
-    AUTOPILOT_OVERRIDE_STATE_FIELD_NUMBER: _ClassVar[int]
-    AUTOPILOT_OVERRIDE_EXPIRE_TIME_FIELD_NUMBER: _ClassVar[int]
     software_update_state: SoftwareUpdateState
     legacy_media_state: LegacyMediaState
     timestamp: _timestamp_pb2.Timestamp
@@ -1404,9 +1398,6 @@ class VehicleState(_message.Message):
     tpms_last_seen_pressure_time_fr: _timestamp_pb2.Timestamp
     tpms_last_seen_pressure_time_rl: _timestamp_pb2.Timestamp
     tpms_last_seen_pressure_time_rr: _timestamp_pb2.Timestamp
-    deck_lights_on: bool
-    hazards_on: bool
-    deck_lights_allowed: bool
     legacy_media_info: LegacyMediaInfo
     allow_authorized_mobile_devices_only: bool
     guestMode: VehicleState.GuestMode
@@ -1471,11 +1462,174 @@ class VehicleState(_message.Message):
     tpms_rcp_front_value: float
     tpms_rcp_rear_value: float
     fsd_software_version: str
-    autopilot_base: AutopilotBase
-    autopilot_override_state: AutopilotOverrideState
-    autopilot_override_expire_time: int
 
-    def __init__(self, software_update_state: _Optional[_Union[SoftwareUpdateState, _Mapping]]=..., legacy_media_state: _Optional[_Union[LegacyMediaState, _Mapping]]=..., timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., feature_bitmask: _Optional[_Iterable[int]]=..., tpms_last_seen_pressure_time_fl: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., tpms_last_seen_pressure_time_fr: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., tpms_last_seen_pressure_time_rl: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., tpms_last_seen_pressure_time_rr: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., deck_lights_on: _Optional[bool]=..., hazards_on: _Optional[bool]=..., deck_lights_allowed: _Optional[bool]=..., legacy_media_info: _Optional[_Union[LegacyMediaInfo, _Mapping]]=..., allow_authorized_mobile_devices_only: _Optional[bool]=..., guestMode: _Optional[_Union[VehicleState.GuestMode, _Mapping]]=..., drive_rail_on: _Optional[bool]=..., pin_to_drive_enabled: _Optional[bool]=..., pin_to_drive_pin_set: _Optional[bool]=..., frontfoglights_on: _Optional[bool]=..., rearfoglights_on: _Optional[bool]=..., headlights_on: _Optional[bool]=..., highbeamlights_on: _Optional[bool]=..., trailer_mode_on: _Optional[bool]=..., trailer_light_test_available: _Optional[bool]=..., trailer_light_test_requested: _Optional[bool]=..., truck_bed_lights_brightness: _Optional[int]=..., signed_cmd_service_mode: _Optional[bool]=..., accessory_lightbar_middle_on: _Optional[bool]=..., transport_mode: _Optional[bool]=..., truck_bed_lights_auto_brightness: _Optional[int]=..., truck_bed_lights_auto_state: _Optional[bool]=..., truck_bed_lights_controls_disabled: _Optional[bool]=..., service_mode_auth: _Optional[str]=..., service_gtw_diag_session_active: _Optional[bool]=..., factory_mode: _Optional[bool]=..., training_wheels_mode: _Optional[bool]=..., gtw_diag_level: _Optional[_Union[_common_pb2.GtwDiagLevel, str]]=..., parental_controls_active: _Optional[bool]=..., parental_controls_pin_set: _Optional[bool]=..., parental_controls_settings: _Optional[_Union[ParentalControlsSettings, _Mapping]]=..., api_version: _Optional[int]=..., car_version: _Optional[str]=..., detailed_version: _Optional[str]=..., autopilot_hash: _Optional[str]=..., vehicle_name: _Optional[str]=..., notifications_supported: _Optional[bool]=..., remote_start_supported: _Optional[bool]=..., remote_start_enabled: _Optional[bool]=..., last_autopark_error: _Optional[str]=..., homelink_device_count: _Optional[int]=..., smart_summon_available: _Optional[bool]=..., summon_standby_mode_enabled: _Optional[bool]=..., patsy_mode: _Optional[bool]=..., webcam_available: _Optional[bool]=..., vehicle_self_test_requested: _Optional[bool]=..., vehicle_self_test_progress: _Optional[int]=..., calendar_supported: _Optional[bool]=..., dashcam_clip_save_available: _Optional[bool]=..., dashcam_state: _Optional[_Union[DashCamState, str]]=..., tpms_pressure_fl: _Optional[float]=..., tpms_pressure_fr: _Optional[float]=..., tpms_pressure_rl: _Optional[float]=..., tpms_pressure_rr: _Optional[float]=..., service_mode: _Optional[bool]=..., service_mode_plus: _Optional[bool]=..., tpms_hard_warning_fl: _Optional[bool]=..., tpms_hard_warning_fr: _Optional[bool]=..., tpms_hard_warning_rl: _Optional[bool]=..., tpms_hard_warning_rr: _Optional[bool]=..., tpms_soft_warning_fl: _Optional[bool]=..., tpms_soft_warning_fr: _Optional[bool]=..., tpms_soft_warning_rl: _Optional[bool]=..., tpms_soft_warning_rr: _Optional[bool]=..., tpms_rcp_front_value: _Optional[float]=..., tpms_rcp_rear_value: _Optional[float]=..., fsd_software_version: _Optional[str]=..., autopilot_base: _Optional[_Union[AutopilotBase, str]]=..., autopilot_override_state: _Optional[_Union[AutopilotOverrideState, str]]=..., autopilot_override_expire_time: _Optional[int]=...) -> None:
+    def __init__(self, software_update_state: _Optional[_Union[SoftwareUpdateState, _Mapping]]=..., legacy_media_state: _Optional[_Union[LegacyMediaState, _Mapping]]=..., timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., feature_bitmask: _Optional[_Iterable[int]]=..., tpms_last_seen_pressure_time_fl: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., tpms_last_seen_pressure_time_fr: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., tpms_last_seen_pressure_time_rl: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., tpms_last_seen_pressure_time_rr: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., legacy_media_info: _Optional[_Union[LegacyMediaInfo, _Mapping]]=..., allow_authorized_mobile_devices_only: _Optional[bool]=..., guestMode: _Optional[_Union[VehicleState.GuestMode, _Mapping]]=..., drive_rail_on: _Optional[bool]=..., pin_to_drive_enabled: _Optional[bool]=..., pin_to_drive_pin_set: _Optional[bool]=..., frontfoglights_on: _Optional[bool]=..., rearfoglights_on: _Optional[bool]=..., headlights_on: _Optional[bool]=..., highbeamlights_on: _Optional[bool]=..., trailer_mode_on: _Optional[bool]=..., trailer_light_test_available: _Optional[bool]=..., trailer_light_test_requested: _Optional[bool]=..., truck_bed_lights_brightness: _Optional[int]=..., signed_cmd_service_mode: _Optional[bool]=..., accessory_lightbar_middle_on: _Optional[bool]=..., transport_mode: _Optional[bool]=..., truck_bed_lights_auto_brightness: _Optional[int]=..., truck_bed_lights_auto_state: _Optional[bool]=..., truck_bed_lights_controls_disabled: _Optional[bool]=..., service_mode_auth: _Optional[str]=..., service_gtw_diag_session_active: _Optional[bool]=..., factory_mode: _Optional[bool]=..., training_wheels_mode: _Optional[bool]=..., gtw_diag_level: _Optional[_Union[_common_pb2.GtwDiagLevel, str]]=..., parental_controls_active: _Optional[bool]=..., parental_controls_pin_set: _Optional[bool]=..., parental_controls_settings: _Optional[_Union[ParentalControlsSettings, _Mapping]]=..., api_version: _Optional[int]=..., car_version: _Optional[str]=..., detailed_version: _Optional[str]=..., autopilot_hash: _Optional[str]=..., vehicle_name: _Optional[str]=..., notifications_supported: _Optional[bool]=..., remote_start_supported: _Optional[bool]=..., remote_start_enabled: _Optional[bool]=..., last_autopark_error: _Optional[str]=..., homelink_device_count: _Optional[int]=..., smart_summon_available: _Optional[bool]=..., summon_standby_mode_enabled: _Optional[bool]=..., patsy_mode: _Optional[bool]=..., webcam_available: _Optional[bool]=..., vehicle_self_test_requested: _Optional[bool]=..., vehicle_self_test_progress: _Optional[int]=..., calendar_supported: _Optional[bool]=..., dashcam_clip_save_available: _Optional[bool]=..., dashcam_state: _Optional[_Union[DashCamState, str]]=..., tpms_pressure_fl: _Optional[float]=..., tpms_pressure_fr: _Optional[float]=..., tpms_pressure_rl: _Optional[float]=..., tpms_pressure_rr: _Optional[float]=..., service_mode: _Optional[bool]=..., service_mode_plus: _Optional[bool]=..., tpms_hard_warning_fl: _Optional[bool]=..., tpms_hard_warning_fr: _Optional[bool]=..., tpms_hard_warning_rl: _Optional[bool]=..., tpms_hard_warning_rr: _Optional[bool]=..., tpms_soft_warning_fl: _Optional[bool]=..., tpms_soft_warning_fr: _Optional[bool]=..., tpms_soft_warning_rl: _Optional[bool]=..., tpms_soft_warning_rr: _Optional[bool]=..., tpms_rcp_front_value: _Optional[float]=..., tpms_rcp_rear_value: _Optional[float]=..., fsd_software_version: _Optional[str]=...) -> None:
+        ...
+
+class CurrentVehicleState(_message.Message):
+    __slots__ = ('timestamp', 'api_version', 'notifications_supported', 'remote_start_supported', 'remote_start_enabled', 'last_autopark_error', 'homelink_device_count', 'autopark_style', 'smart_summon_available', 'summon_standby_mode_enabled', 'active_spoiler_state', 'patsy_mode', 'webcam_available', 'vehicle_self_test_requested', 'vehicle_self_test_progress', 'autopark_version', 'autopark_state', 'calendar_supported', 'dashcam_clip_save_available', 'dashcam_state', 'feature_bitmask', 'service_mode', 'service_mode_plus', 'service_mode_auth', 'service_gtw_diag_session_active', 'allow_authorized_mobile_devices_only', 'guest_mode', 'drive_rail_on', 'pin_to_drive_enabled', 'pin_to_drive_pin_set', 'frontfoglights_on', 'rearfoglights_on', 'headlights_on', 'highbeamlights_on', 'trailer_mode_on', 'signed_cmd_service_mode', 'transport_mode', 'factory_mode', 'training_wheels_mode', 'gtw_diag_level', 'trailer_light_test_available', 'trailer_light_test_requested', 'truck_bed_lights_brightness', 'truck_bed_lights_auto_brightness', 'truck_bed_lights_auto_state', 'truck_bed_lights_controls_disabled', 'accessory_lightbar_middle_on', 'inlet_heater_on', 'inlet_heater_supported', 'mobile_dashcam_viewer_enabled', 'car_wrap_enabled', 'dashcam_last_save_epoch', 'wiper_service_request', 'remote_photobooth_available', 'dog_mode_live_activity_key', 'photobooth_last_save_epoch', 'photobooth_last_update_epoch', 'fsd_stats_supported', 'dashcam_utils', 'remote_sketchpad_available', 'deck_lights_on', 'hazards_on', 'deck_lights_allowed')
+    TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
+    API_VERSION_FIELD_NUMBER: _ClassVar[int]
+    NOTIFICATIONS_SUPPORTED_FIELD_NUMBER: _ClassVar[int]
+    REMOTE_START_SUPPORTED_FIELD_NUMBER: _ClassVar[int]
+    REMOTE_START_ENABLED_FIELD_NUMBER: _ClassVar[int]
+    LAST_AUTOPARK_ERROR_FIELD_NUMBER: _ClassVar[int]
+    HOMELINK_DEVICE_COUNT_FIELD_NUMBER: _ClassVar[int]
+    AUTOPARK_STYLE_FIELD_NUMBER: _ClassVar[int]
+    SMART_SUMMON_AVAILABLE_FIELD_NUMBER: _ClassVar[int]
+    SUMMON_STANDBY_MODE_ENABLED_FIELD_NUMBER: _ClassVar[int]
+    ACTIVE_SPOILER_STATE_FIELD_NUMBER: _ClassVar[int]
+    PATSY_MODE_FIELD_NUMBER: _ClassVar[int]
+    WEBCAM_AVAILABLE_FIELD_NUMBER: _ClassVar[int]
+    VEHICLE_SELF_TEST_REQUESTED_FIELD_NUMBER: _ClassVar[int]
+    VEHICLE_SELF_TEST_PROGRESS_FIELD_NUMBER: _ClassVar[int]
+    AUTOPARK_VERSION_FIELD_NUMBER: _ClassVar[int]
+    AUTOPARK_STATE_FIELD_NUMBER: _ClassVar[int]
+    CALENDAR_SUPPORTED_FIELD_NUMBER: _ClassVar[int]
+    DASHCAM_CLIP_SAVE_AVAILABLE_FIELD_NUMBER: _ClassVar[int]
+    DASHCAM_STATE_FIELD_NUMBER: _ClassVar[int]
+    FEATURE_BITMASK_FIELD_NUMBER: _ClassVar[int]
+    SERVICE_MODE_FIELD_NUMBER: _ClassVar[int]
+    SERVICE_MODE_PLUS_FIELD_NUMBER: _ClassVar[int]
+    SERVICE_MODE_AUTH_FIELD_NUMBER: _ClassVar[int]
+    SERVICE_GTW_DIAG_SESSION_ACTIVE_FIELD_NUMBER: _ClassVar[int]
+    ALLOW_AUTHORIZED_MOBILE_DEVICES_ONLY_FIELD_NUMBER: _ClassVar[int]
+    GUEST_MODE_FIELD_NUMBER: _ClassVar[int]
+    DRIVE_RAIL_ON_FIELD_NUMBER: _ClassVar[int]
+    PIN_TO_DRIVE_ENABLED_FIELD_NUMBER: _ClassVar[int]
+    PIN_TO_DRIVE_PIN_SET_FIELD_NUMBER: _ClassVar[int]
+    FRONTFOGLIGHTS_ON_FIELD_NUMBER: _ClassVar[int]
+    REARFOGLIGHTS_ON_FIELD_NUMBER: _ClassVar[int]
+    HEADLIGHTS_ON_FIELD_NUMBER: _ClassVar[int]
+    HIGHBEAMLIGHTS_ON_FIELD_NUMBER: _ClassVar[int]
+    TRAILER_MODE_ON_FIELD_NUMBER: _ClassVar[int]
+    SIGNED_CMD_SERVICE_MODE_FIELD_NUMBER: _ClassVar[int]
+    TRANSPORT_MODE_FIELD_NUMBER: _ClassVar[int]
+    FACTORY_MODE_FIELD_NUMBER: _ClassVar[int]
+    TRAINING_WHEELS_MODE_FIELD_NUMBER: _ClassVar[int]
+    GTW_DIAG_LEVEL_FIELD_NUMBER: _ClassVar[int]
+    TRAILER_LIGHT_TEST_AVAILABLE_FIELD_NUMBER: _ClassVar[int]
+    TRAILER_LIGHT_TEST_REQUESTED_FIELD_NUMBER: _ClassVar[int]
+    TRUCK_BED_LIGHTS_BRIGHTNESS_FIELD_NUMBER: _ClassVar[int]
+    TRUCK_BED_LIGHTS_AUTO_BRIGHTNESS_FIELD_NUMBER: _ClassVar[int]
+    TRUCK_BED_LIGHTS_AUTO_STATE_FIELD_NUMBER: _ClassVar[int]
+    TRUCK_BED_LIGHTS_CONTROLS_DISABLED_FIELD_NUMBER: _ClassVar[int]
+    ACCESSORY_LIGHTBAR_MIDDLE_ON_FIELD_NUMBER: _ClassVar[int]
+    INLET_HEATER_ON_FIELD_NUMBER: _ClassVar[int]
+    INLET_HEATER_SUPPORTED_FIELD_NUMBER: _ClassVar[int]
+    MOBILE_DASHCAM_VIEWER_ENABLED_FIELD_NUMBER: _ClassVar[int]
+    CAR_WRAP_ENABLED_FIELD_NUMBER: _ClassVar[int]
+    DASHCAM_LAST_SAVE_EPOCH_FIELD_NUMBER: _ClassVar[int]
+    WIPER_SERVICE_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    REMOTE_PHOTOBOOTH_AVAILABLE_FIELD_NUMBER: _ClassVar[int]
+    DOG_MODE_LIVE_ACTIVITY_KEY_FIELD_NUMBER: _ClassVar[int]
+    PHOTOBOOTH_LAST_SAVE_EPOCH_FIELD_NUMBER: _ClassVar[int]
+    PHOTOBOOTH_LAST_UPDATE_EPOCH_FIELD_NUMBER: _ClassVar[int]
+    FSD_STATS_SUPPORTED_FIELD_NUMBER: _ClassVar[int]
+    DASHCAM_UTILS_FIELD_NUMBER: _ClassVar[int]
+    REMOTE_SKETCHPAD_AVAILABLE_FIELD_NUMBER: _ClassVar[int]
+    DECK_LIGHTS_ON_FIELD_NUMBER: _ClassVar[int]
+    HAZARDS_ON_FIELD_NUMBER: _ClassVar[int]
+    DECK_LIGHTS_ALLOWED_FIELD_NUMBER: _ClassVar[int]
+    timestamp: _timestamp_pb2.Timestamp
+    api_version: int
+    notifications_supported: bool
+    remote_start_supported: bool
+    remote_start_enabled: bool
+    last_autopark_error: str
+    homelink_device_count: int
+    autopark_style: AutoparkStyle
+    smart_summon_available: bool
+    summon_standby_mode_enabled: bool
+    active_spoiler_state: SpoilerState
+    patsy_mode: bool
+    webcam_available: bool
+    vehicle_self_test_requested: bool
+    vehicle_self_test_progress: int
+    autopark_version: AutoparkVersion
+    autopark_state: AutoparkState
+    calendar_supported: bool
+    dashcam_clip_save_available: bool
+    dashcam_state: DashCamState
+    feature_bitmask: _containers.RepeatedScalarFieldContainer[int]
+    service_mode: bool
+    service_mode_plus: bool
+    service_mode_auth: str
+    service_gtw_diag_session_active: bool
+    allow_authorized_mobile_devices_only: bool
+    guest_mode: VehicleState.GuestMode
+    drive_rail_on: bool
+    pin_to_drive_enabled: bool
+    pin_to_drive_pin_set: bool
+    frontfoglights_on: bool
+    rearfoglights_on: bool
+    headlights_on: bool
+    highbeamlights_on: bool
+    trailer_mode_on: bool
+    signed_cmd_service_mode: bool
+    transport_mode: bool
+    factory_mode: bool
+    training_wheels_mode: bool
+    gtw_diag_level: _common_pb2.GtwDiagLevel
+    trailer_light_test_available: bool
+    trailer_light_test_requested: bool
+    truck_bed_lights_brightness: int
+    truck_bed_lights_auto_brightness: int
+    truck_bed_lights_auto_state: bool
+    truck_bed_lights_controls_disabled: bool
+    accessory_lightbar_middle_on: bool
+    inlet_heater_on: bool
+    inlet_heater_supported: bool
+    mobile_dashcam_viewer_enabled: bool
+    car_wrap_enabled: bool
+    dashcam_last_save_epoch: int
+    wiper_service_request: bool
+    remote_photobooth_available: bool
+    dog_mode_live_activity_key: str
+    photobooth_last_save_epoch: int
+    photobooth_last_update_epoch: int
+    fsd_stats_supported: bool
+    dashcam_utils: DashcamUtils
+    remote_sketchpad_available: bool
+    deck_lights_on: bool
+    hazards_on: bool
+    deck_lights_allowed: bool
+
+    def __init__(self, timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., api_version: _Optional[int]=..., notifications_supported: _Optional[bool]=..., remote_start_supported: _Optional[bool]=..., remote_start_enabled: _Optional[bool]=..., last_autopark_error: _Optional[str]=..., homelink_device_count: _Optional[int]=..., autopark_style: _Optional[_Union[AutoparkStyle, _Mapping]]=..., smart_summon_available: _Optional[bool]=..., summon_standby_mode_enabled: _Optional[bool]=..., active_spoiler_state: _Optional[_Union[SpoilerState, _Mapping]]=..., patsy_mode: _Optional[bool]=..., webcam_available: _Optional[bool]=..., vehicle_self_test_requested: _Optional[bool]=..., vehicle_self_test_progress: _Optional[int]=..., autopark_version: _Optional[_Union[AutoparkVersion, _Mapping]]=..., autopark_state: _Optional[_Union[AutoparkState, _Mapping]]=..., calendar_supported: _Optional[bool]=..., dashcam_clip_save_available: _Optional[bool]=..., dashcam_state: _Optional[_Union[DashCamState, str]]=..., feature_bitmask: _Optional[_Iterable[int]]=..., service_mode: _Optional[bool]=..., service_mode_plus: _Optional[bool]=..., service_mode_auth: _Optional[str]=..., service_gtw_diag_session_active: _Optional[bool]=..., allow_authorized_mobile_devices_only: _Optional[bool]=..., guest_mode: _Optional[_Union[VehicleState.GuestMode, _Mapping]]=..., drive_rail_on: _Optional[bool]=..., pin_to_drive_enabled: _Optional[bool]=..., pin_to_drive_pin_set: _Optional[bool]=..., frontfoglights_on: _Optional[bool]=..., rearfoglights_on: _Optional[bool]=..., headlights_on: _Optional[bool]=..., highbeamlights_on: _Optional[bool]=..., trailer_mode_on: _Optional[bool]=..., signed_cmd_service_mode: _Optional[bool]=..., transport_mode: _Optional[bool]=..., factory_mode: _Optional[bool]=..., training_wheels_mode: _Optional[bool]=..., gtw_diag_level: _Optional[_Union[_common_pb2.GtwDiagLevel, str]]=..., trailer_light_test_available: _Optional[bool]=..., trailer_light_test_requested: _Optional[bool]=..., truck_bed_lights_brightness: _Optional[int]=..., truck_bed_lights_auto_brightness: _Optional[int]=..., truck_bed_lights_auto_state: _Optional[bool]=..., truck_bed_lights_controls_disabled: _Optional[bool]=..., accessory_lightbar_middle_on: _Optional[bool]=..., inlet_heater_on: _Optional[bool]=..., inlet_heater_supported: _Optional[bool]=..., mobile_dashcam_viewer_enabled: _Optional[bool]=..., car_wrap_enabled: _Optional[bool]=..., dashcam_last_save_epoch: _Optional[int]=..., wiper_service_request: _Optional[bool]=..., remote_photobooth_available: _Optional[bool]=..., dog_mode_live_activity_key: _Optional[str]=..., photobooth_last_save_epoch: _Optional[int]=..., photobooth_last_update_epoch: _Optional[int]=..., fsd_stats_supported: _Optional[bool]=..., dashcam_utils: _Optional[_Union[DashcamUtils, _Mapping]]=..., remote_sketchpad_available: _Optional[bool]=..., deck_lights_on: _Optional[bool]=..., hazards_on: _Optional[bool]=..., deck_lights_allowed: _Optional[bool]=...) -> None:
+        ...
+
+class DashcamUtils(_message.Message):
+    __slots__ = ('delete_dashcam_clips_available', 'format_usb_available')
+    DELETE_DASHCAM_CLIPS_AVAILABLE_FIELD_NUMBER: _ClassVar[int]
+    FORMAT_USB_AVAILABLE_FIELD_NUMBER: _ClassVar[int]
+    delete_dashcam_clips_available: bool
+    format_usb_available: bool
+
+    def __init__(self, delete_dashcam_clips_available: _Optional[bool]=..., format_usb_available: _Optional[bool]=...) -> None:
+        ...
+
+class AutoparkStyle(_message.Message):
+    __slots__ = ()
+
+    def __init__(self) -> None:
+        ...
+
+class AutoparkVersion(_message.Message):
+    __slots__ = ()
+
+    def __init__(self) -> None:
+        ...
+
+class AutoparkState(_message.Message):
+    __slots__ = ()
+
+    def __init__(self) -> None:
+        ...
+
+class SpoilerState(_message.Message):
+    __slots__ = ()
+
+    def __init__(self) -> None:
         ...
 
 class LegacyMediaState(_message.Message):

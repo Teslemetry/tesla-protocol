@@ -346,9 +346,9 @@
         "typescript": "packages/typescript/src/command",
         "python": "packages/python/tesla_protocol/command"
       },
-      "messages": 338,
+      "messages": 344,
       "enums": 106,
-      "fields": 1547,
+      "fields": 1606,
       "files": [
         {
           "package": "CarServer",
@@ -6769,18 +6769,14 @@
                   "values": [
                     {
                       "number": 0,
-                      "name": "OUTLET_REQUEST_UNKNOWN"
-                    },
-                    {
-                      "number": 1,
                       "name": "OUTLET_REQUEST_OFF"
                     },
                     {
-                      "number": 2,
+                      "number": 1,
                       "name": "OUTLET_REQUEST_CABIN_AND_BED"
                     },
                     {
-                      "number": 3,
+                      "number": 2,
                       "name": "OUTLET_REQUEST_CABIN"
                     }
                   ],
@@ -6851,22 +6847,18 @@
                   "values": [
                     {
                       "number": 0,
-                      "name": "POWER_FEED_REQUEST_UNKNOWN"
-                    },
-                    {
-                      "number": 1,
                       "name": "POWER_FEED_REQUEST_OFF"
                     },
                     {
-                      "number": 2,
+                      "number": 1,
                       "name": "POWER_FEED_REQUEST_FEED_1"
                     },
                     {
-                      "number": 3,
+                      "number": 2,
                       "name": "POWER_FEED_REQUEST_FEED_2"
                     },
                     {
-                      "number": 4,
+                      "number": 3,
                       "name": "POWER_FEED_REQUEST_FEED_1_AND_FEED_2"
                     }
                   ],
@@ -7059,14 +7051,10 @@
                   "values": [
                     {
                       "number": 0,
-                      "name": "POWERSHARE_FEATURE_REQUEST_UNKNOWN"
-                    },
-                    {
-                      "number": 1,
                       "name": "POWERSHARE_FEATURE_REQUEST_OFF"
                     },
                     {
-                      "number": 2,
+                      "number": 1,
                       "name": "POWERSHARE_FEATURE_REQUEST_ON"
                     }
                   ],
@@ -7118,14 +7106,10 @@
                   "values": [
                     {
                       "number": 0,
-                      "name": "POWERSHARE_REQUEST_UNKNOWN"
-                    },
-                    {
-                      "number": 1,
                       "name": "POWERSHARE_REQUEST_OFF"
                     },
                     {
-                      "number": 2,
+                      "number": 1,
                       "name": "POWERSHARE_REQUEST_ON"
                     }
                   ],
@@ -12984,9 +12968,9 @@
                 },
                 {
                   "number": 18,
-                  "name": "unknown",
-                  "type": "TYPE_BYTES",
-                  "type_name": null,
+                  "name": "vehicle_state",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.CurrentVehicleState",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
@@ -16317,30 +16301,6 @@
                   "oneof": null
                 },
                 {
-                  "number": 67,
-                  "name": "deck_lights_on",
-                  "type": "TYPE_BOOL",
-                  "type_name": null,
-                  "label": "LABEL_OPTIONAL",
-                  "oneof": "optional_deck_lights_on"
-                },
-                {
-                  "number": 68,
-                  "name": "hazards_on",
-                  "type": "TYPE_BOOL",
-                  "type_name": null,
-                  "label": "LABEL_OPTIONAL",
-                  "oneof": "optional_hazards_on"
-                },
-                {
-                  "number": 69,
-                  "name": "deck_lights_allowed",
-                  "type": "TYPE_BOOL",
-                  "type_name": null,
-                  "label": "LABEL_OPTIONAL",
-                  "oneof": "optional_deck_lights_allowed"
-                },
-                {
                   "number": 72,
                   "name": "legacy_media_info",
                   "type": "TYPE_MESSAGE",
@@ -16851,36 +16811,9 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": "optional_fsd_software_version"
-                },
-                {
-                  "number": 196,
-                  "name": "autopilot_base",
-                  "type": "TYPE_ENUM",
-                  "type_name": ".CarServer.AutopilotBase",
-                  "label": "LABEL_OPTIONAL",
-                  "oneof": null
-                },
-                {
-                  "number": 197,
-                  "name": "autopilot_override_state",
-                  "type": "TYPE_ENUM",
-                  "type_name": ".CarServer.AutopilotOverrideState",
-                  "label": "LABEL_OPTIONAL",
-                  "oneof": null
-                },
-                {
-                  "number": 198,
-                  "name": "autopilot_override_expire_time",
-                  "type": "TYPE_INT64",
-                  "type_name": null,
-                  "label": "LABEL_OPTIONAL",
-                  "oneof": "optional_autopilot_override_expire_time"
                 }
               ],
               "oneofs": [
-                "optional_deck_lights_on",
-                "optional_hazards_on",
-                "optional_deck_lights_allowed",
                 "optional_allow_authorized_mobile_devices_only",
                 "optional_drive_rail_on",
                 "optional_pin_to_drive_enabled",
@@ -16941,11 +16874,42 @@
                 "optional_tpms_soft_warning_rr",
                 "optional_tpms_rcp_front_value",
                 "optional_tpms_rcp_rear_value",
-                "optional_fsd_software_version",
-                "optional_autopilot_override_expire_time"
+                "optional_fsd_software_version"
               ],
-              "reserved_ranges": [],
-              "reserved_names": [],
+              "reserved_ranges": [
+                [
+                  67,
+                  67
+                ],
+                [
+                  68,
+                  68
+                ],
+                [
+                  69,
+                  69
+                ],
+                [
+                  196,
+                  196
+                ],
+                [
+                  197,
+                  197
+                ],
+                [
+                  198,
+                  198
+                ]
+              ],
+              "reserved_names": [
+                "autopilot_base",
+                "autopilot_override_expire_time",
+                "autopilot_override_state",
+                "deck_lights_allowed",
+                "deck_lights_on",
+                "hazards_on"
+              ],
               "nested_messages": [
                 {
                   "fqn": ".CarServer.VehicleState.GuestMode",
@@ -16967,6 +16931,691 @@
                   "nested_enums": []
                 }
               ],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.CurrentVehicleState",
+              "name": "CurrentVehicleState",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "timestamp",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".google.protobuf.Timestamp",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "api_version",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_api_version"
+                },
+                {
+                  "number": 3,
+                  "name": "notifications_supported",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_notifications_supported"
+                },
+                {
+                  "number": 4,
+                  "name": "remote_start_supported",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_remote_start_supported"
+                },
+                {
+                  "number": 5,
+                  "name": "remote_start_enabled",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_remote_start_enabled"
+                },
+                {
+                  "number": 6,
+                  "name": "last_autopark_error",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_last_autopark_error"
+                },
+                {
+                  "number": 7,
+                  "name": "homelink_device_count",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_homelink_device_count"
+                },
+                {
+                  "number": 8,
+                  "name": "autopark_style",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.AutoparkStyle",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 9,
+                  "name": "smart_summon_available",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_smart_summon_available"
+                },
+                {
+                  "number": 10,
+                  "name": "summon_standby_mode_enabled",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_summon_standby_mode_enabled"
+                },
+                {
+                  "number": 12,
+                  "name": "active_spoiler_state",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SpoilerState",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 15,
+                  "name": "patsy_mode",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_patsy_mode"
+                },
+                {
+                  "number": 16,
+                  "name": "webcam_available",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_webcam_available"
+                },
+                {
+                  "number": 17,
+                  "name": "vehicle_self_test_requested",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_vehicle_self_test_requested"
+                },
+                {
+                  "number": 18,
+                  "name": "vehicle_self_test_progress",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_vehicle_self_test_progress"
+                },
+                {
+                  "number": 19,
+                  "name": "autopark_version",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.AutoparkVersion",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 20,
+                  "name": "autopark_state",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.AutoparkState",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 21,
+                  "name": "calendar_supported",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_calendar_supported"
+                },
+                {
+                  "number": 22,
+                  "name": "dashcam_clip_save_available",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_dashcam_clip_save_available"
+                },
+                {
+                  "number": 23,
+                  "name": "dashcam_state",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.DashCamState",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_dashcam_state"
+                },
+                {
+                  "number": 24,
+                  "name": "feature_bitmask",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_REPEATED",
+                  "oneof": null
+                },
+                {
+                  "number": 25,
+                  "name": "service_mode",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_service_mode"
+                },
+                {
+                  "number": 26,
+                  "name": "service_mode_plus",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_service_mode_plus"
+                },
+                {
+                  "number": 27,
+                  "name": "service_mode_auth",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_service_mode_auth"
+                },
+                {
+                  "number": 28,
+                  "name": "service_gtw_diag_session_active",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_service_gtw_diag_session_active"
+                },
+                {
+                  "number": 29,
+                  "name": "allow_authorized_mobile_devices_only",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_allow_authorized_mobile_devices_only"
+                },
+                {
+                  "number": 30,
+                  "name": "guest_mode",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.VehicleState.GuestMode",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 31,
+                  "name": "drive_rail_on",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_drive_rail_on"
+                },
+                {
+                  "number": 32,
+                  "name": "pin_to_drive_enabled",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_pin_to_drive_enabled"
+                },
+                {
+                  "number": 33,
+                  "name": "pin_to_drive_pin_set",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_pin_to_drive_pin_set"
+                },
+                {
+                  "number": 34,
+                  "name": "frontfoglights_on",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_frontfoglights_on"
+                },
+                {
+                  "number": 35,
+                  "name": "rearfoglights_on",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_rearfoglights_on"
+                },
+                {
+                  "number": 36,
+                  "name": "headlights_on",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_headlights_on"
+                },
+                {
+                  "number": 37,
+                  "name": "highbeamlights_on",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_highbeamlights_on"
+                },
+                {
+                  "number": 38,
+                  "name": "trailer_mode_on",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_trailer_mode_on"
+                },
+                {
+                  "number": 39,
+                  "name": "signed_cmd_service_mode",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_signed_cmd_service_mode"
+                },
+                {
+                  "number": 40,
+                  "name": "transport_mode",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_transport_mode"
+                },
+                {
+                  "number": 41,
+                  "name": "factory_mode",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_factory_mode"
+                },
+                {
+                  "number": 42,
+                  "name": "training_wheels_mode",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_training_wheels_mode"
+                },
+                {
+                  "number": 43,
+                  "name": "gtw_diag_level",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.GtwDiagLevel",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_gtw_diag_level"
+                },
+                {
+                  "number": 44,
+                  "name": "trailer_light_test_available",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_trailer_light_test_available"
+                },
+                {
+                  "number": 45,
+                  "name": "trailer_light_test_requested",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_trailer_light_test_requested"
+                },
+                {
+                  "number": 46,
+                  "name": "truck_bed_lights_brightness",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_truck_bed_lights_brightness"
+                },
+                {
+                  "number": 47,
+                  "name": "truck_bed_lights_auto_brightness",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_truck_bed_lights_auto_brightness"
+                },
+                {
+                  "number": 48,
+                  "name": "truck_bed_lights_auto_state",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_truck_bed_lights_auto_state"
+                },
+                {
+                  "number": 49,
+                  "name": "truck_bed_lights_controls_disabled",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_truck_bed_lights_controls_disabled"
+                },
+                {
+                  "number": 50,
+                  "name": "accessory_lightbar_middle_on",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_accessory_lightbar_middle_on"
+                },
+                {
+                  "number": 51,
+                  "name": "inlet_heater_on",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_inlet_heater_on"
+                },
+                {
+                  "number": 52,
+                  "name": "inlet_heater_supported",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_inlet_heater_supported"
+                },
+                {
+                  "number": 54,
+                  "name": "mobile_dashcam_viewer_enabled",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_mobile_dashcam_viewer_enabled"
+                },
+                {
+                  "number": 55,
+                  "name": "car_wrap_enabled",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_car_wrap_enabled"
+                },
+                {
+                  "number": 56,
+                  "name": "dashcam_last_save_epoch",
+                  "type": "TYPE_UINT64",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_dashcam_last_save_epoch"
+                },
+                {
+                  "number": 58,
+                  "name": "wiper_service_request",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_wiper_service_request"
+                },
+                {
+                  "number": 59,
+                  "name": "remote_photobooth_available",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_remote_photobooth_available"
+                },
+                {
+                  "number": 60,
+                  "name": "dog_mode_live_activity_key",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_dog_mode_live_activity_key"
+                },
+                {
+                  "number": 61,
+                  "name": "photobooth_last_save_epoch",
+                  "type": "TYPE_UINT64",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_photobooth_last_save_epoch"
+                },
+                {
+                  "number": 62,
+                  "name": "photobooth_last_update_epoch",
+                  "type": "TYPE_UINT64",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_photobooth_last_update_epoch"
+                },
+                {
+                  "number": 63,
+                  "name": "fsd_stats_supported",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_fsd_stats_supported"
+                },
+                {
+                  "number": 65,
+                  "name": "dashcam_utils",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.DashcamUtils",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 66,
+                  "name": "remote_sketchpad_available",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_remote_sketchpad_available"
+                },
+                {
+                  "number": 67,
+                  "name": "deck_lights_on",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_deck_lights_on"
+                },
+                {
+                  "number": 68,
+                  "name": "hazards_on",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_hazards_on"
+                },
+                {
+                  "number": 69,
+                  "name": "deck_lights_allowed",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_deck_lights_allowed"
+                }
+              ],
+              "oneofs": [
+                "optional_api_version",
+                "optional_notifications_supported",
+                "optional_remote_start_supported",
+                "optional_remote_start_enabled",
+                "optional_last_autopark_error",
+                "optional_homelink_device_count",
+                "optional_smart_summon_available",
+                "optional_summon_standby_mode_enabled",
+                "optional_patsy_mode",
+                "optional_webcam_available",
+                "optional_vehicle_self_test_requested",
+                "optional_vehicle_self_test_progress",
+                "optional_calendar_supported",
+                "optional_dashcam_clip_save_available",
+                "optional_dashcam_state",
+                "optional_service_mode",
+                "optional_service_mode_plus",
+                "optional_service_mode_auth",
+                "optional_service_gtw_diag_session_active",
+                "optional_allow_authorized_mobile_devices_only",
+                "optional_drive_rail_on",
+                "optional_pin_to_drive_enabled",
+                "optional_pin_to_drive_pin_set",
+                "optional_frontfoglights_on",
+                "optional_rearfoglights_on",
+                "optional_headlights_on",
+                "optional_highbeamlights_on",
+                "optional_trailer_mode_on",
+                "optional_signed_cmd_service_mode",
+                "optional_transport_mode",
+                "optional_factory_mode",
+                "optional_training_wheels_mode",
+                "optional_gtw_diag_level",
+                "optional_trailer_light_test_available",
+                "optional_trailer_light_test_requested",
+                "optional_truck_bed_lights_brightness",
+                "optional_truck_bed_lights_auto_brightness",
+                "optional_truck_bed_lights_auto_state",
+                "optional_truck_bed_lights_controls_disabled",
+                "optional_accessory_lightbar_middle_on",
+                "optional_inlet_heater_on",
+                "optional_inlet_heater_supported",
+                "optional_mobile_dashcam_viewer_enabled",
+                "optional_car_wrap_enabled",
+                "optional_dashcam_last_save_epoch",
+                "optional_wiper_service_request",
+                "optional_remote_photobooth_available",
+                "optional_dog_mode_live_activity_key",
+                "optional_photobooth_last_save_epoch",
+                "optional_photobooth_last_update_epoch",
+                "optional_fsd_stats_supported",
+                "optional_remote_sketchpad_available",
+                "optional_deck_lights_on",
+                "optional_hazards_on",
+                "optional_deck_lights_allowed"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.DashcamUtils",
+              "name": "DashcamUtils",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "delete_dashcam_clips_available",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_delete_dashcam_clips_available"
+                },
+                {
+                  "number": 2,
+                  "name": "format_usb_available",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_format_usb_available"
+                }
+              ],
+              "oneofs": [
+                "optional_delete_dashcam_clips_available",
+                "optional_format_usb_available"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.AutoparkStyle",
+              "name": "AutoparkStyle",
+              "fields": [],
+              "oneofs": [],
+              "reserved_ranges": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ]
+              ],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.AutoparkVersion",
+              "name": "AutoparkVersion",
+              "fields": [],
+              "oneofs": [],
+              "reserved_ranges": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ]
+              ],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.AutoparkState",
+              "name": "AutoparkState",
+              "fields": [],
+              "oneofs": [],
+              "reserved_ranges": [
+                [
+                  1,
+                  12
+                ]
+              ],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.SpoilerState",
+              "name": "SpoilerState",
+              "fields": [],
+              "oneofs": [],
+              "reserved_ranges": [
+                [
+                  1,
+                  1
+                ],
+                [
+                  2,
+                  2
+                ],
+                [
+                  3,
+                  3
+                ],
+                [
+                  4,
+                  4
+                ]
+              ],
+              "reserved_names": [],
+              "nested_messages": [],
               "nested_enums": []
             },
             {
@@ -44581,9 +45230,9 @@
   "totals": {
     "source_files": 39,
     "groups": 7,
-    "messages": 899,
+    "messages": 905,
     "enums": 252,
-    "fields": 2952
+    "fields": 3011
   },
   "registration": {
     "consistent": true,

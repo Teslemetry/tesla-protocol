@@ -2330,26 +2330,23 @@ export interface SetOutletsOnOffAction {
   outletRequest: SetOutletsOnOffAction_OutletRequest;
 }
 
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
 export enum SetOutletsOnOffAction_OutletRequest {
-  OUTLET_REQUEST_UNKNOWN = 0,
-  OUTLET_REQUEST_OFF = 1,
-  OUTLET_REQUEST_CABIN_AND_BED = 2,
-  OUTLET_REQUEST_CABIN = 3,
+  OUTLET_REQUEST_OFF = 0,
+  OUTLET_REQUEST_CABIN_AND_BED = 1,
+  OUTLET_REQUEST_CABIN = 2,
   UNRECOGNIZED = -1,
 }
 
 export function setOutletsOnOffAction_OutletRequestFromJSON(object: any): SetOutletsOnOffAction_OutletRequest {
   switch (object) {
     case 0:
-    case "OUTLET_REQUEST_UNKNOWN":
-      return SetOutletsOnOffAction_OutletRequest.OUTLET_REQUEST_UNKNOWN;
-    case 1:
     case "OUTLET_REQUEST_OFF":
       return SetOutletsOnOffAction_OutletRequest.OUTLET_REQUEST_OFF;
-    case 2:
+    case 1:
     case "OUTLET_REQUEST_CABIN_AND_BED":
       return SetOutletsOnOffAction_OutletRequest.OUTLET_REQUEST_CABIN_AND_BED;
-    case 3:
+    case 2:
     case "OUTLET_REQUEST_CABIN":
       return SetOutletsOnOffAction_OutletRequest.OUTLET_REQUEST_CABIN;
     case -1:
@@ -2361,8 +2358,6 @@ export function setOutletsOnOffAction_OutletRequestFromJSON(object: any): SetOut
 
 export function setOutletsOnOffAction_OutletRequestToJSON(object: SetOutletsOnOffAction_OutletRequest): string {
   switch (object) {
-    case SetOutletsOnOffAction_OutletRequest.OUTLET_REQUEST_UNKNOWN:
-      return "OUTLET_REQUEST_UNKNOWN";
     case SetOutletsOnOffAction_OutletRequest.OUTLET_REQUEST_OFF:
       return "OUTLET_REQUEST_OFF";
     case SetOutletsOnOffAction_OutletRequest.OUTLET_REQUEST_CABIN_AND_BED:
@@ -2389,12 +2384,12 @@ export interface SetPowerFeedOnOffAction {
   powerFeedRequest: SetPowerFeedOnOffAction_PowerFeedRequest;
 }
 
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
 export enum SetPowerFeedOnOffAction_PowerFeedRequest {
-  POWER_FEED_REQUEST_UNKNOWN = 0,
-  POWER_FEED_REQUEST_OFF = 1,
-  POWER_FEED_REQUEST_FEED_1 = 2,
-  POWER_FEED_REQUEST_FEED_2 = 3,
-  POWER_FEED_REQUEST_FEED_1_AND_FEED_2 = 4,
+  POWER_FEED_REQUEST_OFF = 0,
+  POWER_FEED_REQUEST_FEED_1 = 1,
+  POWER_FEED_REQUEST_FEED_2 = 2,
+  POWER_FEED_REQUEST_FEED_1_AND_FEED_2 = 3,
   UNRECOGNIZED = -1,
 }
 
@@ -2403,18 +2398,15 @@ export function setPowerFeedOnOffAction_PowerFeedRequestFromJSON(
 ): SetPowerFeedOnOffAction_PowerFeedRequest {
   switch (object) {
     case 0:
-    case "POWER_FEED_REQUEST_UNKNOWN":
-      return SetPowerFeedOnOffAction_PowerFeedRequest.POWER_FEED_REQUEST_UNKNOWN;
-    case 1:
     case "POWER_FEED_REQUEST_OFF":
       return SetPowerFeedOnOffAction_PowerFeedRequest.POWER_FEED_REQUEST_OFF;
-    case 2:
+    case 1:
     case "POWER_FEED_REQUEST_FEED_1":
       return SetPowerFeedOnOffAction_PowerFeedRequest.POWER_FEED_REQUEST_FEED_1;
-    case 3:
+    case 2:
     case "POWER_FEED_REQUEST_FEED_2":
       return SetPowerFeedOnOffAction_PowerFeedRequest.POWER_FEED_REQUEST_FEED_2;
-    case 4:
+    case 3:
     case "POWER_FEED_REQUEST_FEED_1_AND_FEED_2":
       return SetPowerFeedOnOffAction_PowerFeedRequest.POWER_FEED_REQUEST_FEED_1_AND_FEED_2;
     case -1:
@@ -2428,8 +2420,6 @@ export function setPowerFeedOnOffAction_PowerFeedRequestToJSON(
   object: SetPowerFeedOnOffAction_PowerFeedRequest,
 ): string {
   switch (object) {
-    case SetPowerFeedOnOffAction_PowerFeedRequest.POWER_FEED_REQUEST_UNKNOWN:
-      return "POWER_FEED_REQUEST_UNKNOWN";
     case SetPowerFeedOnOffAction_PowerFeedRequest.POWER_FEED_REQUEST_OFF:
       return "POWER_FEED_REQUEST_OFF";
     case SetPowerFeedOnOffAction_PowerFeedRequest.POWER_FEED_REQUEST_FEED_1:
@@ -2483,10 +2473,10 @@ export interface SetPowershareFeatureAction {
   powershareFeatureRequest: SetPowershareFeatureAction_PowershareFeatureRequest;
 }
 
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
 export enum SetPowershareFeatureAction_PowershareFeatureRequest {
-  POWERSHARE_FEATURE_REQUEST_UNKNOWN = 0,
-  POWERSHARE_FEATURE_REQUEST_OFF = 1,
-  POWERSHARE_FEATURE_REQUEST_ON = 2,
+  POWERSHARE_FEATURE_REQUEST_OFF = 0,
+  POWERSHARE_FEATURE_REQUEST_ON = 1,
   UNRECOGNIZED = -1,
 }
 
@@ -2495,12 +2485,9 @@ export function setPowershareFeatureAction_PowershareFeatureRequestFromJSON(
 ): SetPowershareFeatureAction_PowershareFeatureRequest {
   switch (object) {
     case 0:
-    case "POWERSHARE_FEATURE_REQUEST_UNKNOWN":
-      return SetPowershareFeatureAction_PowershareFeatureRequest.POWERSHARE_FEATURE_REQUEST_UNKNOWN;
-    case 1:
     case "POWERSHARE_FEATURE_REQUEST_OFF":
       return SetPowershareFeatureAction_PowershareFeatureRequest.POWERSHARE_FEATURE_REQUEST_OFF;
-    case 2:
+    case 1:
     case "POWERSHARE_FEATURE_REQUEST_ON":
       return SetPowershareFeatureAction_PowershareFeatureRequest.POWERSHARE_FEATURE_REQUEST_ON;
     case -1:
@@ -2514,8 +2501,6 @@ export function setPowershareFeatureAction_PowershareFeatureRequestToJSON(
   object: SetPowershareFeatureAction_PowershareFeatureRequest,
 ): string {
   switch (object) {
-    case SetPowershareFeatureAction_PowershareFeatureRequest.POWERSHARE_FEATURE_REQUEST_UNKNOWN:
-      return "POWERSHARE_FEATURE_REQUEST_UNKNOWN";
     case SetPowershareFeatureAction_PowershareFeatureRequest.POWERSHARE_FEATURE_REQUEST_OFF:
       return "POWERSHARE_FEATURE_REQUEST_OFF";
     case SetPowershareFeatureAction_PowershareFeatureRequest.POWERSHARE_FEATURE_REQUEST_ON:
@@ -2534,10 +2519,10 @@ export interface SetPowershareRequestAction {
   powershareRequest: SetPowershareRequestAction_PowershareRequest;
 }
 
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
 export enum SetPowershareRequestAction_PowershareRequest {
-  POWERSHARE_REQUEST_UNKNOWN = 0,
-  POWERSHARE_REQUEST_OFF = 1,
-  POWERSHARE_REQUEST_ON = 2,
+  POWERSHARE_REQUEST_OFF = 0,
+  POWERSHARE_REQUEST_ON = 1,
   UNRECOGNIZED = -1,
 }
 
@@ -2546,12 +2531,9 @@ export function setPowershareRequestAction_PowershareRequestFromJSON(
 ): SetPowershareRequestAction_PowershareRequest {
   switch (object) {
     case 0:
-    case "POWERSHARE_REQUEST_UNKNOWN":
-      return SetPowershareRequestAction_PowershareRequest.POWERSHARE_REQUEST_UNKNOWN;
-    case 1:
     case "POWERSHARE_REQUEST_OFF":
       return SetPowershareRequestAction_PowershareRequest.POWERSHARE_REQUEST_OFF;
-    case 2:
+    case 1:
     case "POWERSHARE_REQUEST_ON":
       return SetPowershareRequestAction_PowershareRequest.POWERSHARE_REQUEST_ON;
     case -1:
@@ -2565,8 +2547,6 @@ export function setPowershareRequestAction_PowershareRequestToJSON(
   object: SetPowershareRequestAction_PowershareRequest,
 ): string {
   switch (object) {
-    case SetPowershareRequestAction_PowershareRequest.POWERSHARE_REQUEST_UNKNOWN:
-      return "POWERSHARE_REQUEST_UNKNOWN";
     case SetPowershareRequestAction_PowershareRequest.POWERSHARE_REQUEST_OFF:
       return "POWERSHARE_REQUEST_OFF";
     case SetPowershareRequestAction_PowershareRequest.POWERSHARE_REQUEST_ON:

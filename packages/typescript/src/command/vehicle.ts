@@ -191,7 +191,6 @@ export function autopilotOverrideStateToJSON(object: AutopilotOverrideState): st
   }
 }
 
-/** ===== TESLEMETRY-EXT BEGIN ===== */
 export enum DashCamState {
   DashCamState_UNAVAILABLE = 0,
   DashCamState_AVAILABLE = 1,
@@ -719,8 +718,8 @@ export function vehicleImageStateTypeToJSON(object: VehicleImageStateType): stri
 /**
  * ===== TESLEMETRY-EXT BEGIN =====
  * Capability bits a vehicle advertises to the mobile app. Each value is a bit
- * index into the vehicle-state feature bitmask, a repeated uint32 list (field 24
- * of the payload at VehicleData tag 18): the feature is supported when
+ * index into CurrentVehicleState.feature_bitmask (VehicleData.vehicle_state,
+ * tag 18): the feature is supported when
  * bitmask[value / 32] & (1 << (value % 32)) is non-zero.
  * UNCONFIRMED: not yet confirmed on a live vehicle.
  */
@@ -1262,8 +1261,8 @@ export interface VehicleData {
   sohState:
     | SohState
     | undefined;
-  /** opaque, undecoded payload observed on live vehicleDataSubscription pushes  // TESLEMETRY-EXT */
-  unknown: Uint8Array;
+  /** present on live vehicleDataSubscription pushes  // TESLEMETRY-EXT */
+  vehicleState: CurrentVehicleState | undefined;
   tirePressureState: TirePressureState | undefined;
   mediaState: MediaState | undefined;
   mediaDetailState:
@@ -2273,11 +2272,8 @@ export interface VehicleState {
     | Date
     | undefined;
   /** TESLEMETRY-EXT */
-  tpmsLastSeenPressureTimeRr: Date | undefined;
-  deckLightsOn?: boolean | undefined;
-  hazardsOn?: boolean | undefined;
-  deckLightsAllowed?:
-    | boolean
+  tpmsLastSeenPressureTimeRr:
+    | Date
     | undefined;
   /** TESLEMETRY-EXT */
   legacyMediaInfo: LegacyMediaInfo | undefined;
@@ -2346,18 +2342,123 @@ export interface VehicleState {
   tpmsSoftWarningRr?: boolean | undefined;
   tpmsRcpFrontValue?: number | undefined;
   tpmsRcpRearValue?: number | undefined;
-  fsdSoftwareVersion?:
-    | string
-    | undefined;
-  /** TESLEMETRY-EXT */
-  autopilotBase: AutopilotBase;
-  /** TESLEMETRY-EXT */
-  autopilotOverrideState: AutopilotOverrideState;
-  autopilotOverrideExpireTime?: number | undefined;
+  fsdSoftwareVersion?: string | undefined;
 }
 
 export interface VehicleState_GuestMode {
   GuestModeActive: boolean;
+}
+
+/**
+ * ===== TESLEMETRY-EXT BEGIN =====
+ * Current vehicle-state surface, carried at VehicleData.vehicle_state (18) and
+ * requested with GetVehicleData.getVehicleState. VehicleState (tag 6) is the
+ * legacy surface.
+ */
+export interface CurrentVehicleState {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  timestamp: Date | undefined;
+  apiVersion?: number | undefined;
+  notificationsSupported?: boolean | undefined;
+  remoteStartSupported?: boolean | undefined;
+  remoteStartEnabled?: boolean | undefined;
+  lastAutoparkError?: string | undefined;
+  homelinkDeviceCount?:
+    | number
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  autoparkStyle: AutoparkStyle | undefined;
+  smartSummonAvailable?: boolean | undefined;
+  summonStandbyModeEnabled?:
+    | boolean
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  activeSpoilerState: SpoilerState | undefined;
+  patsyMode?: boolean | undefined;
+  webcamAvailable?: boolean | undefined;
+  vehicleSelfTestRequested?: boolean | undefined;
+  vehicleSelfTestProgress?:
+    | number
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  autoparkVersion:
+    | AutoparkVersion
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  autoparkState: AutoparkState | undefined;
+  calendarSupported?: boolean | undefined;
+  dashcamClipSaveAvailable?: boolean | undefined;
+  dashcamState?:
+    | DashCamState
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  featureBitmask: number[];
+  serviceMode?: boolean | undefined;
+  serviceModePlus?: boolean | undefined;
+  serviceModeAuth?: string | undefined;
+  serviceGtwDiagSessionActive?: boolean | undefined;
+  allowAuthorizedMobileDevicesOnly?:
+    | boolean
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  guestMode: VehicleState_GuestMode | undefined;
+  driveRailOn?: boolean | undefined;
+  pinToDriveEnabled?: boolean | undefined;
+  pinToDrivePinSet?: boolean | undefined;
+  frontfoglightsOn?: boolean | undefined;
+  rearfoglightsOn?: boolean | undefined;
+  headlightsOn?: boolean | undefined;
+  highbeamlightsOn?: boolean | undefined;
+  trailerModeOn?: boolean | undefined;
+  signedCmdServiceMode?: boolean | undefined;
+  transportMode?: boolean | undefined;
+  factoryMode?: boolean | undefined;
+  trainingWheelsMode?: boolean | undefined;
+  gtwDiagLevel?: GtwDiagLevel | undefined;
+  trailerLightTestAvailable?: boolean | undefined;
+  trailerLightTestRequested?: boolean | undefined;
+  truckBedLightsBrightness?: number | undefined;
+  truckBedLightsAutoBrightness?: number | undefined;
+  truckBedLightsAutoState?: boolean | undefined;
+  truckBedLightsControlsDisabled?: boolean | undefined;
+  accessoryLightbarMiddleOn?: boolean | undefined;
+  inletHeaterOn?: boolean | undefined;
+  inletHeaterSupported?: boolean | undefined;
+  mobileDashcamViewerEnabled?: boolean | undefined;
+  carWrapEnabled?: boolean | undefined;
+  dashcamLastSaveEpoch?: number | undefined;
+  wiperServiceRequest?: boolean | undefined;
+  remotePhotoboothAvailable?: boolean | undefined;
+  dogModeLiveActivityKey?: string | undefined;
+  photoboothLastSaveEpoch?: number | undefined;
+  photoboothLastUpdateEpoch?: number | undefined;
+  fsdStatsSupported?:
+    | boolean
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  dashcamUtils: DashcamUtils | undefined;
+  remoteSketchpadAvailable?: boolean | undefined;
+  deckLightsOn?: boolean | undefined;
+  hazardsOn?: boolean | undefined;
+  deckLightsAllowed?: boolean | undefined;
+}
+
+export interface DashcamUtils {
+  deleteDashcamClipsAvailable?: boolean | undefined;
+  formatUsbAvailable?: boolean | undefined;
+}
+
+/** Void-oneof states whose alternatives have no recovered names. */
+export interface AutoparkStyle {
+}
+
+export interface AutoparkVersion {
+}
+
+export interface AutoparkState {
+}
+
+export interface SpoilerState {
 }
 
 export interface LegacyMediaState {
@@ -3693,7 +3794,7 @@ function createBaseVehicleData(): VehicleData {
     chargeScheduleState: undefined,
     preconditioningScheduleState: undefined,
     sohState: undefined,
-    unknown: new Uint8Array(0),
+    vehicleState: undefined,
     tirePressureState: undefined,
     mediaState: undefined,
     mediaDetailState: undefined,
@@ -3759,8 +3860,8 @@ export const VehicleData: MessageFns<VehicleData> = {
     if (message.sohState !== undefined) {
       SohState.encode(message.sohState, writer.uint32(138).fork()).join();
     }
-    if (message.unknown.length !== 0) {
-      writer.uint32(146).bytes(message.unknown);
+    if (message.vehicleState !== undefined) {
+      CurrentVehicleState.encode(message.vehicleState, writer.uint32(146).fork()).join();
     }
     if (message.tirePressureState !== undefined) {
       TirePressureState.encode(message.tirePressureState, writer.uint32(154).fork()).join();
@@ -3942,7 +4043,7 @@ export const VehicleData: MessageFns<VehicleData> = {
             break;
           }
 
-          message.unknown = reader.bytes();
+          message.vehicleState = CurrentVehicleState.decode(reader, reader.uint32());
           continue;
         }
         case 19: {
@@ -4101,7 +4202,7 @@ export const VehicleData: MessageFns<VehicleData> = {
         ? PreconditioningScheduleState.fromJSON(object.preconditioningScheduleState)
         : undefined,
       sohState: isSet(object.sohState) ? SohState.fromJSON(object.sohState) : undefined,
-      unknown: isSet(object.unknown) ? bytesFromBase64(object.unknown) : new Uint8Array(0),
+      vehicleState: isSet(object.vehicleState) ? CurrentVehicleState.fromJSON(object.vehicleState) : undefined,
       tirePressureState: isSet(object.tirePressureState)
         ? TirePressureState.fromJSON(object.tirePressureState)
         : undefined,
@@ -4183,8 +4284,8 @@ export const VehicleData: MessageFns<VehicleData> = {
     if (message.sohState !== undefined) {
       obj.sohState = SohState.toJSON(message.sohState);
     }
-    if (message.unknown !== undefined) {
-      obj.unknown = base64FromBytes(message.unknown);
+    if (message.vehicleState !== undefined) {
+      obj.vehicleState = CurrentVehicleState.toJSON(message.vehicleState);
     }
     if (message.tirePressureState !== undefined) {
       obj.tirePressureState = TirePressureState.toJSON(message.tirePressureState);
@@ -4279,7 +4380,9 @@ export const VehicleData: MessageFns<VehicleData> = {
     message.sohState = (object.sohState !== undefined && object.sohState !== null)
       ? SohState.fromPartial(object.sohState)
       : undefined;
-    message.unknown = object.unknown ?? new Uint8Array(0);
+    message.vehicleState = (object.vehicleState !== undefined && object.vehicleState !== null)
+      ? CurrentVehicleState.fromPartial(object.vehicleState)
+      : undefined;
     message.tirePressureState = (object.tirePressureState !== undefined && object.tirePressureState !== null)
       ? TirePressureState.fromPartial(object.tirePressureState)
       : undefined;
@@ -10941,9 +11044,6 @@ function createBaseVehicleState(): VehicleState {
     tpmsLastSeenPressureTimeFr: undefined,
     tpmsLastSeenPressureTimeRl: undefined,
     tpmsLastSeenPressureTimeRr: undefined,
-    deckLightsOn: undefined,
-    hazardsOn: undefined,
-    deckLightsAllowed: undefined,
     legacyMediaInfo: undefined,
     allowAuthorizedMobileDevicesOnly: undefined,
     guestMode: undefined,
@@ -11008,9 +11108,6 @@ function createBaseVehicleState(): VehicleState {
     tpmsRcpFrontValue: undefined,
     tpmsRcpRearValue: undefined,
     fsdSoftwareVersion: undefined,
-    autopilotBase: 0,
-    autopilotOverrideState: 0,
-    autopilotOverrideExpireTime: undefined,
   };
 }
 
@@ -11041,15 +11138,6 @@ export const VehicleState: MessageFns<VehicleState> = {
     }
     if (message.tpmsLastSeenPressureTimeRr !== undefined) {
       Timestamp.encode(toTimestamp(message.tpmsLastSeenPressureTimeRr), writer.uint32(490).fork()).join();
-    }
-    if (message.deckLightsOn !== undefined) {
-      writer.uint32(536).bool(message.deckLightsOn);
-    }
-    if (message.hazardsOn !== undefined) {
-      writer.uint32(544).bool(message.hazardsOn);
-    }
-    if (message.deckLightsAllowed !== undefined) {
-      writer.uint32(552).bool(message.deckLightsAllowed);
     }
     if (message.legacyMediaInfo !== undefined) {
       LegacyMediaInfo.encode(message.legacyMediaInfo, writer.uint32(578).fork()).join();
@@ -11243,15 +11331,6 @@ export const VehicleState: MessageFns<VehicleState> = {
     if (message.fsdSoftwareVersion !== undefined) {
       writer.uint32(1378).string(message.fsdSoftwareVersion);
     }
-    if (message.autopilotBase !== 0) {
-      writer.uint32(1568).int32(message.autopilotBase);
-    }
-    if (message.autopilotOverrideState !== 0) {
-      writer.uint32(1576).int32(message.autopilotOverrideState);
-    }
-    if (message.autopilotOverrideExpireTime !== undefined) {
-      writer.uint32(1584).int64(message.autopilotOverrideExpireTime);
-    }
     return writer;
   },
 
@@ -11334,30 +11413,6 @@ export const VehicleState: MessageFns<VehicleState> = {
           }
 
           message.tpmsLastSeenPressureTimeRr = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 67: {
-          if (tag !== 536) {
-            break;
-          }
-
-          message.deckLightsOn = reader.bool();
-          continue;
-        }
-        case 68: {
-          if (tag !== 544) {
-            break;
-          }
-
-          message.hazardsOn = reader.bool();
-          continue;
-        }
-        case 69: {
-          if (tag !== 552) {
-            break;
-          }
-
-          message.deckLightsAllowed = reader.bool();
           continue;
         }
         case 72: {
@@ -11872,30 +11927,6 @@ export const VehicleState: MessageFns<VehicleState> = {
           message.fsdSoftwareVersion = reader.string();
           continue;
         }
-        case 196: {
-          if (tag !== 1568) {
-            break;
-          }
-
-          message.autopilotBase = reader.int32() as any;
-          continue;
-        }
-        case 197: {
-          if (tag !== 1576) {
-            break;
-          }
-
-          message.autopilotOverrideState = reader.int32() as any;
-          continue;
-        }
-        case 198: {
-          if (tag !== 1584) {
-            break;
-          }
-
-          message.autopilotOverrideExpireTime = longToNumber(reader.int64());
-          continue;
-        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -11927,9 +11958,6 @@ export const VehicleState: MessageFns<VehicleState> = {
       tpmsLastSeenPressureTimeRr: isSet(object.tpmsLastSeenPressureTimeRr)
         ? fromJsonTimestamp(object.tpmsLastSeenPressureTimeRr)
         : undefined,
-      deckLightsOn: isSet(object.deckLightsOn) ? globalThis.Boolean(object.deckLightsOn) : undefined,
-      hazardsOn: isSet(object.hazardsOn) ? globalThis.Boolean(object.hazardsOn) : undefined,
-      deckLightsAllowed: isSet(object.deckLightsAllowed) ? globalThis.Boolean(object.deckLightsAllowed) : undefined,
       legacyMediaInfo: isSet(object.legacyMediaInfo) ? LegacyMediaInfo.fromJSON(object.legacyMediaInfo) : undefined,
       allowAuthorizedMobileDevicesOnly: isSet(object.allowAuthorizedMobileDevicesOnly)
         ? globalThis.Boolean(object.allowAuthorizedMobileDevicesOnly)
@@ -12036,13 +12064,6 @@ export const VehicleState: MessageFns<VehicleState> = {
       tpmsRcpFrontValue: isSet(object.tpmsRcpFrontValue) ? globalThis.Number(object.tpmsRcpFrontValue) : undefined,
       tpmsRcpRearValue: isSet(object.tpmsRcpRearValue) ? globalThis.Number(object.tpmsRcpRearValue) : undefined,
       fsdSoftwareVersion: isSet(object.fsdSoftwareVersion) ? globalThis.String(object.fsdSoftwareVersion) : undefined,
-      autopilotBase: isSet(object.autopilotBase) ? autopilotBaseFromJSON(object.autopilotBase) : 0,
-      autopilotOverrideState: isSet(object.autopilotOverrideState)
-        ? autopilotOverrideStateFromJSON(object.autopilotOverrideState)
-        : 0,
-      autopilotOverrideExpireTime: isSet(object.autopilotOverrideExpireTime)
-        ? globalThis.Number(object.autopilotOverrideExpireTime)
-        : undefined,
     };
   },
 
@@ -12071,15 +12092,6 @@ export const VehicleState: MessageFns<VehicleState> = {
     }
     if (message.tpmsLastSeenPressureTimeRr !== undefined) {
       obj.tpmsLastSeenPressureTimeRr = message.tpmsLastSeenPressureTimeRr.toISOString();
-    }
-    if (message.deckLightsOn !== undefined) {
-      obj.deckLightsOn = message.deckLightsOn;
-    }
-    if (message.hazardsOn !== undefined) {
-      obj.hazardsOn = message.hazardsOn;
-    }
-    if (message.deckLightsAllowed !== undefined) {
-      obj.deckLightsAllowed = message.deckLightsAllowed;
     }
     if (message.legacyMediaInfo !== undefined) {
       obj.legacyMediaInfo = LegacyMediaInfo.toJSON(message.legacyMediaInfo);
@@ -12273,15 +12285,6 @@ export const VehicleState: MessageFns<VehicleState> = {
     if (message.fsdSoftwareVersion !== undefined) {
       obj.fsdSoftwareVersion = message.fsdSoftwareVersion;
     }
-    if (message.autopilotBase !== undefined) {
-      obj.autopilotBase = autopilotBaseToJSON(message.autopilotBase);
-    }
-    if (message.autopilotOverrideState !== undefined) {
-      obj.autopilotOverrideState = autopilotOverrideStateToJSON(message.autopilotOverrideState);
-    }
-    if (message.autopilotOverrideExpireTime !== undefined) {
-      obj.autopilotOverrideExpireTime = Math.round(message.autopilotOverrideExpireTime);
-    }
     return obj;
   },
 
@@ -12302,9 +12305,6 @@ export const VehicleState: MessageFns<VehicleState> = {
     message.tpmsLastSeenPressureTimeFr = object.tpmsLastSeenPressureTimeFr ?? undefined;
     message.tpmsLastSeenPressureTimeRl = object.tpmsLastSeenPressureTimeRl ?? undefined;
     message.tpmsLastSeenPressureTimeRr = object.tpmsLastSeenPressureTimeRr ?? undefined;
-    message.deckLightsOn = object.deckLightsOn ?? undefined;
-    message.hazardsOn = object.hazardsOn ?? undefined;
-    message.deckLightsAllowed = object.deckLightsAllowed ?? undefined;
     message.legacyMediaInfo = (object.legacyMediaInfo !== undefined && object.legacyMediaInfo !== null)
       ? LegacyMediaInfo.fromPartial(object.legacyMediaInfo)
       : undefined;
@@ -12376,9 +12376,6 @@ export const VehicleState: MessageFns<VehicleState> = {
     message.tpmsRcpFrontValue = object.tpmsRcpFrontValue ?? undefined;
     message.tpmsRcpRearValue = object.tpmsRcpRearValue ?? undefined;
     message.fsdSoftwareVersion = object.fsdSoftwareVersion ?? undefined;
-    message.autopilotBase = object.autopilotBase ?? 0;
-    message.autopilotOverrideState = object.autopilotOverrideState ?? 0;
-    message.autopilotOverrideExpireTime = object.autopilotOverrideExpireTime ?? undefined;
     return message;
   },
 };
@@ -12437,6 +12434,1454 @@ export const VehicleState_GuestMode: MessageFns<VehicleState_GuestMode> = {
   fromPartial<I extends Exact<DeepPartial<VehicleState_GuestMode>, I>>(object: I): VehicleState_GuestMode {
     const message = createBaseVehicleState_GuestMode();
     message.GuestModeActive = object.GuestModeActive ?? false;
+    return message;
+  },
+};
+
+function createBaseCurrentVehicleState(): CurrentVehicleState {
+  return {
+    timestamp: undefined,
+    apiVersion: undefined,
+    notificationsSupported: undefined,
+    remoteStartSupported: undefined,
+    remoteStartEnabled: undefined,
+    lastAutoparkError: undefined,
+    homelinkDeviceCount: undefined,
+    autoparkStyle: undefined,
+    smartSummonAvailable: undefined,
+    summonStandbyModeEnabled: undefined,
+    activeSpoilerState: undefined,
+    patsyMode: undefined,
+    webcamAvailable: undefined,
+    vehicleSelfTestRequested: undefined,
+    vehicleSelfTestProgress: undefined,
+    autoparkVersion: undefined,
+    autoparkState: undefined,
+    calendarSupported: undefined,
+    dashcamClipSaveAvailable: undefined,
+    dashcamState: undefined,
+    featureBitmask: [],
+    serviceMode: undefined,
+    serviceModePlus: undefined,
+    serviceModeAuth: undefined,
+    serviceGtwDiagSessionActive: undefined,
+    allowAuthorizedMobileDevicesOnly: undefined,
+    guestMode: undefined,
+    driveRailOn: undefined,
+    pinToDriveEnabled: undefined,
+    pinToDrivePinSet: undefined,
+    frontfoglightsOn: undefined,
+    rearfoglightsOn: undefined,
+    headlightsOn: undefined,
+    highbeamlightsOn: undefined,
+    trailerModeOn: undefined,
+    signedCmdServiceMode: undefined,
+    transportMode: undefined,
+    factoryMode: undefined,
+    trainingWheelsMode: undefined,
+    gtwDiagLevel: undefined,
+    trailerLightTestAvailable: undefined,
+    trailerLightTestRequested: undefined,
+    truckBedLightsBrightness: undefined,
+    truckBedLightsAutoBrightness: undefined,
+    truckBedLightsAutoState: undefined,
+    truckBedLightsControlsDisabled: undefined,
+    accessoryLightbarMiddleOn: undefined,
+    inletHeaterOn: undefined,
+    inletHeaterSupported: undefined,
+    mobileDashcamViewerEnabled: undefined,
+    carWrapEnabled: undefined,
+    dashcamLastSaveEpoch: undefined,
+    wiperServiceRequest: undefined,
+    remotePhotoboothAvailable: undefined,
+    dogModeLiveActivityKey: undefined,
+    photoboothLastSaveEpoch: undefined,
+    photoboothLastUpdateEpoch: undefined,
+    fsdStatsSupported: undefined,
+    dashcamUtils: undefined,
+    remoteSketchpadAvailable: undefined,
+    deckLightsOn: undefined,
+    hazardsOn: undefined,
+    deckLightsAllowed: undefined,
+  };
+}
+
+export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
+  encode(message: CurrentVehicleState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(10).fork()).join();
+    }
+    if (message.apiVersion !== undefined) {
+      writer.uint32(16).uint32(message.apiVersion);
+    }
+    if (message.notificationsSupported !== undefined) {
+      writer.uint32(24).bool(message.notificationsSupported);
+    }
+    if (message.remoteStartSupported !== undefined) {
+      writer.uint32(32).bool(message.remoteStartSupported);
+    }
+    if (message.remoteStartEnabled !== undefined) {
+      writer.uint32(40).bool(message.remoteStartEnabled);
+    }
+    if (message.lastAutoparkError !== undefined) {
+      writer.uint32(50).string(message.lastAutoparkError);
+    }
+    if (message.homelinkDeviceCount !== undefined) {
+      writer.uint32(56).uint32(message.homelinkDeviceCount);
+    }
+    if (message.autoparkStyle !== undefined) {
+      AutoparkStyle.encode(message.autoparkStyle, writer.uint32(66).fork()).join();
+    }
+    if (message.smartSummonAvailable !== undefined) {
+      writer.uint32(72).bool(message.smartSummonAvailable);
+    }
+    if (message.summonStandbyModeEnabled !== undefined) {
+      writer.uint32(80).bool(message.summonStandbyModeEnabled);
+    }
+    if (message.activeSpoilerState !== undefined) {
+      SpoilerState.encode(message.activeSpoilerState, writer.uint32(98).fork()).join();
+    }
+    if (message.patsyMode !== undefined) {
+      writer.uint32(120).bool(message.patsyMode);
+    }
+    if (message.webcamAvailable !== undefined) {
+      writer.uint32(128).bool(message.webcamAvailable);
+    }
+    if (message.vehicleSelfTestRequested !== undefined) {
+      writer.uint32(136).bool(message.vehicleSelfTestRequested);
+    }
+    if (message.vehicleSelfTestProgress !== undefined) {
+      writer.uint32(144).uint32(message.vehicleSelfTestProgress);
+    }
+    if (message.autoparkVersion !== undefined) {
+      AutoparkVersion.encode(message.autoparkVersion, writer.uint32(154).fork()).join();
+    }
+    if (message.autoparkState !== undefined) {
+      AutoparkState.encode(message.autoparkState, writer.uint32(162).fork()).join();
+    }
+    if (message.calendarSupported !== undefined) {
+      writer.uint32(168).bool(message.calendarSupported);
+    }
+    if (message.dashcamClipSaveAvailable !== undefined) {
+      writer.uint32(176).bool(message.dashcamClipSaveAvailable);
+    }
+    if (message.dashcamState !== undefined) {
+      writer.uint32(184).int32(message.dashcamState);
+    }
+    writer.uint32(194).fork();
+    for (const v of message.featureBitmask) {
+      writer.uint32(v);
+    }
+    writer.join();
+    if (message.serviceMode !== undefined) {
+      writer.uint32(200).bool(message.serviceMode);
+    }
+    if (message.serviceModePlus !== undefined) {
+      writer.uint32(208).bool(message.serviceModePlus);
+    }
+    if (message.serviceModeAuth !== undefined) {
+      writer.uint32(218).string(message.serviceModeAuth);
+    }
+    if (message.serviceGtwDiagSessionActive !== undefined) {
+      writer.uint32(224).bool(message.serviceGtwDiagSessionActive);
+    }
+    if (message.allowAuthorizedMobileDevicesOnly !== undefined) {
+      writer.uint32(232).bool(message.allowAuthorizedMobileDevicesOnly);
+    }
+    if (message.guestMode !== undefined) {
+      VehicleState_GuestMode.encode(message.guestMode, writer.uint32(242).fork()).join();
+    }
+    if (message.driveRailOn !== undefined) {
+      writer.uint32(248).bool(message.driveRailOn);
+    }
+    if (message.pinToDriveEnabled !== undefined) {
+      writer.uint32(256).bool(message.pinToDriveEnabled);
+    }
+    if (message.pinToDrivePinSet !== undefined) {
+      writer.uint32(264).bool(message.pinToDrivePinSet);
+    }
+    if (message.frontfoglightsOn !== undefined) {
+      writer.uint32(272).bool(message.frontfoglightsOn);
+    }
+    if (message.rearfoglightsOn !== undefined) {
+      writer.uint32(280).bool(message.rearfoglightsOn);
+    }
+    if (message.headlightsOn !== undefined) {
+      writer.uint32(288).bool(message.headlightsOn);
+    }
+    if (message.highbeamlightsOn !== undefined) {
+      writer.uint32(296).bool(message.highbeamlightsOn);
+    }
+    if (message.trailerModeOn !== undefined) {
+      writer.uint32(304).bool(message.trailerModeOn);
+    }
+    if (message.signedCmdServiceMode !== undefined) {
+      writer.uint32(312).bool(message.signedCmdServiceMode);
+    }
+    if (message.transportMode !== undefined) {
+      writer.uint32(320).bool(message.transportMode);
+    }
+    if (message.factoryMode !== undefined) {
+      writer.uint32(328).bool(message.factoryMode);
+    }
+    if (message.trainingWheelsMode !== undefined) {
+      writer.uint32(336).bool(message.trainingWheelsMode);
+    }
+    if (message.gtwDiagLevel !== undefined) {
+      writer.uint32(344).int32(message.gtwDiagLevel);
+    }
+    if (message.trailerLightTestAvailable !== undefined) {
+      writer.uint32(352).bool(message.trailerLightTestAvailable);
+    }
+    if (message.trailerLightTestRequested !== undefined) {
+      writer.uint32(360).bool(message.trailerLightTestRequested);
+    }
+    if (message.truckBedLightsBrightness !== undefined) {
+      writer.uint32(368).uint32(message.truckBedLightsBrightness);
+    }
+    if (message.truckBedLightsAutoBrightness !== undefined) {
+      writer.uint32(376).uint32(message.truckBedLightsAutoBrightness);
+    }
+    if (message.truckBedLightsAutoState !== undefined) {
+      writer.uint32(384).bool(message.truckBedLightsAutoState);
+    }
+    if (message.truckBedLightsControlsDisabled !== undefined) {
+      writer.uint32(392).bool(message.truckBedLightsControlsDisabled);
+    }
+    if (message.accessoryLightbarMiddleOn !== undefined) {
+      writer.uint32(400).bool(message.accessoryLightbarMiddleOn);
+    }
+    if (message.inletHeaterOn !== undefined) {
+      writer.uint32(408).bool(message.inletHeaterOn);
+    }
+    if (message.inletHeaterSupported !== undefined) {
+      writer.uint32(416).bool(message.inletHeaterSupported);
+    }
+    if (message.mobileDashcamViewerEnabled !== undefined) {
+      writer.uint32(432).bool(message.mobileDashcamViewerEnabled);
+    }
+    if (message.carWrapEnabled !== undefined) {
+      writer.uint32(440).bool(message.carWrapEnabled);
+    }
+    if (message.dashcamLastSaveEpoch !== undefined) {
+      writer.uint32(448).uint64(message.dashcamLastSaveEpoch);
+    }
+    if (message.wiperServiceRequest !== undefined) {
+      writer.uint32(464).bool(message.wiperServiceRequest);
+    }
+    if (message.remotePhotoboothAvailable !== undefined) {
+      writer.uint32(472).bool(message.remotePhotoboothAvailable);
+    }
+    if (message.dogModeLiveActivityKey !== undefined) {
+      writer.uint32(482).string(message.dogModeLiveActivityKey);
+    }
+    if (message.photoboothLastSaveEpoch !== undefined) {
+      writer.uint32(488).uint64(message.photoboothLastSaveEpoch);
+    }
+    if (message.photoboothLastUpdateEpoch !== undefined) {
+      writer.uint32(496).uint64(message.photoboothLastUpdateEpoch);
+    }
+    if (message.fsdStatsSupported !== undefined) {
+      writer.uint32(504).bool(message.fsdStatsSupported);
+    }
+    if (message.dashcamUtils !== undefined) {
+      DashcamUtils.encode(message.dashcamUtils, writer.uint32(522).fork()).join();
+    }
+    if (message.remoteSketchpadAvailable !== undefined) {
+      writer.uint32(528).bool(message.remoteSketchpadAvailable);
+    }
+    if (message.deckLightsOn !== undefined) {
+      writer.uint32(536).bool(message.deckLightsOn);
+    }
+    if (message.hazardsOn !== undefined) {
+      writer.uint32(544).bool(message.hazardsOn);
+    }
+    if (message.deckLightsAllowed !== undefined) {
+      writer.uint32(552).bool(message.deckLightsAllowed);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CurrentVehicleState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCurrentVehicleState();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.apiVersion = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.notificationsSupported = reader.bool();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.remoteStartSupported = reader.bool();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.remoteStartEnabled = reader.bool();
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.lastAutoparkError = reader.string();
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.homelinkDeviceCount = reader.uint32();
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.autoparkStyle = AutoparkStyle.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 72) {
+            break;
+          }
+
+          message.smartSummonAvailable = reader.bool();
+          continue;
+        }
+        case 10: {
+          if (tag !== 80) {
+            break;
+          }
+
+          message.summonStandbyModeEnabled = reader.bool();
+          continue;
+        }
+        case 12: {
+          if (tag !== 98) {
+            break;
+          }
+
+          message.activeSpoilerState = SpoilerState.decode(reader, reader.uint32());
+          continue;
+        }
+        case 15: {
+          if (tag !== 120) {
+            break;
+          }
+
+          message.patsyMode = reader.bool();
+          continue;
+        }
+        case 16: {
+          if (tag !== 128) {
+            break;
+          }
+
+          message.webcamAvailable = reader.bool();
+          continue;
+        }
+        case 17: {
+          if (tag !== 136) {
+            break;
+          }
+
+          message.vehicleSelfTestRequested = reader.bool();
+          continue;
+        }
+        case 18: {
+          if (tag !== 144) {
+            break;
+          }
+
+          message.vehicleSelfTestProgress = reader.uint32();
+          continue;
+        }
+        case 19: {
+          if (tag !== 154) {
+            break;
+          }
+
+          message.autoparkVersion = AutoparkVersion.decode(reader, reader.uint32());
+          continue;
+        }
+        case 20: {
+          if (tag !== 162) {
+            break;
+          }
+
+          message.autoparkState = AutoparkState.decode(reader, reader.uint32());
+          continue;
+        }
+        case 21: {
+          if (tag !== 168) {
+            break;
+          }
+
+          message.calendarSupported = reader.bool();
+          continue;
+        }
+        case 22: {
+          if (tag !== 176) {
+            break;
+          }
+
+          message.dashcamClipSaveAvailable = reader.bool();
+          continue;
+        }
+        case 23: {
+          if (tag !== 184) {
+            break;
+          }
+
+          message.dashcamState = reader.int32() as any;
+          continue;
+        }
+        case 24: {
+          if (tag === 192) {
+            message.featureBitmask.push(reader.uint32());
+
+            continue;
+          }
+
+          if (tag === 194) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.featureBitmask.push(reader.uint32());
+            }
+
+            continue;
+          }
+
+          break;
+        }
+        case 25: {
+          if (tag !== 200) {
+            break;
+          }
+
+          message.serviceMode = reader.bool();
+          continue;
+        }
+        case 26: {
+          if (tag !== 208) {
+            break;
+          }
+
+          message.serviceModePlus = reader.bool();
+          continue;
+        }
+        case 27: {
+          if (tag !== 218) {
+            break;
+          }
+
+          message.serviceModeAuth = reader.string();
+          continue;
+        }
+        case 28: {
+          if (tag !== 224) {
+            break;
+          }
+
+          message.serviceGtwDiagSessionActive = reader.bool();
+          continue;
+        }
+        case 29: {
+          if (tag !== 232) {
+            break;
+          }
+
+          message.allowAuthorizedMobileDevicesOnly = reader.bool();
+          continue;
+        }
+        case 30: {
+          if (tag !== 242) {
+            break;
+          }
+
+          message.guestMode = VehicleState_GuestMode.decode(reader, reader.uint32());
+          continue;
+        }
+        case 31: {
+          if (tag !== 248) {
+            break;
+          }
+
+          message.driveRailOn = reader.bool();
+          continue;
+        }
+        case 32: {
+          if (tag !== 256) {
+            break;
+          }
+
+          message.pinToDriveEnabled = reader.bool();
+          continue;
+        }
+        case 33: {
+          if (tag !== 264) {
+            break;
+          }
+
+          message.pinToDrivePinSet = reader.bool();
+          continue;
+        }
+        case 34: {
+          if (tag !== 272) {
+            break;
+          }
+
+          message.frontfoglightsOn = reader.bool();
+          continue;
+        }
+        case 35: {
+          if (tag !== 280) {
+            break;
+          }
+
+          message.rearfoglightsOn = reader.bool();
+          continue;
+        }
+        case 36: {
+          if (tag !== 288) {
+            break;
+          }
+
+          message.headlightsOn = reader.bool();
+          continue;
+        }
+        case 37: {
+          if (tag !== 296) {
+            break;
+          }
+
+          message.highbeamlightsOn = reader.bool();
+          continue;
+        }
+        case 38: {
+          if (tag !== 304) {
+            break;
+          }
+
+          message.trailerModeOn = reader.bool();
+          continue;
+        }
+        case 39: {
+          if (tag !== 312) {
+            break;
+          }
+
+          message.signedCmdServiceMode = reader.bool();
+          continue;
+        }
+        case 40: {
+          if (tag !== 320) {
+            break;
+          }
+
+          message.transportMode = reader.bool();
+          continue;
+        }
+        case 41: {
+          if (tag !== 328) {
+            break;
+          }
+
+          message.factoryMode = reader.bool();
+          continue;
+        }
+        case 42: {
+          if (tag !== 336) {
+            break;
+          }
+
+          message.trainingWheelsMode = reader.bool();
+          continue;
+        }
+        case 43: {
+          if (tag !== 344) {
+            break;
+          }
+
+          message.gtwDiagLevel = reader.int32() as any;
+          continue;
+        }
+        case 44: {
+          if (tag !== 352) {
+            break;
+          }
+
+          message.trailerLightTestAvailable = reader.bool();
+          continue;
+        }
+        case 45: {
+          if (tag !== 360) {
+            break;
+          }
+
+          message.trailerLightTestRequested = reader.bool();
+          continue;
+        }
+        case 46: {
+          if (tag !== 368) {
+            break;
+          }
+
+          message.truckBedLightsBrightness = reader.uint32();
+          continue;
+        }
+        case 47: {
+          if (tag !== 376) {
+            break;
+          }
+
+          message.truckBedLightsAutoBrightness = reader.uint32();
+          continue;
+        }
+        case 48: {
+          if (tag !== 384) {
+            break;
+          }
+
+          message.truckBedLightsAutoState = reader.bool();
+          continue;
+        }
+        case 49: {
+          if (tag !== 392) {
+            break;
+          }
+
+          message.truckBedLightsControlsDisabled = reader.bool();
+          continue;
+        }
+        case 50: {
+          if (tag !== 400) {
+            break;
+          }
+
+          message.accessoryLightbarMiddleOn = reader.bool();
+          continue;
+        }
+        case 51: {
+          if (tag !== 408) {
+            break;
+          }
+
+          message.inletHeaterOn = reader.bool();
+          continue;
+        }
+        case 52: {
+          if (tag !== 416) {
+            break;
+          }
+
+          message.inletHeaterSupported = reader.bool();
+          continue;
+        }
+        case 54: {
+          if (tag !== 432) {
+            break;
+          }
+
+          message.mobileDashcamViewerEnabled = reader.bool();
+          continue;
+        }
+        case 55: {
+          if (tag !== 440) {
+            break;
+          }
+
+          message.carWrapEnabled = reader.bool();
+          continue;
+        }
+        case 56: {
+          if (tag !== 448) {
+            break;
+          }
+
+          message.dashcamLastSaveEpoch = longToNumber(reader.uint64());
+          continue;
+        }
+        case 58: {
+          if (tag !== 464) {
+            break;
+          }
+
+          message.wiperServiceRequest = reader.bool();
+          continue;
+        }
+        case 59: {
+          if (tag !== 472) {
+            break;
+          }
+
+          message.remotePhotoboothAvailable = reader.bool();
+          continue;
+        }
+        case 60: {
+          if (tag !== 482) {
+            break;
+          }
+
+          message.dogModeLiveActivityKey = reader.string();
+          continue;
+        }
+        case 61: {
+          if (tag !== 488) {
+            break;
+          }
+
+          message.photoboothLastSaveEpoch = longToNumber(reader.uint64());
+          continue;
+        }
+        case 62: {
+          if (tag !== 496) {
+            break;
+          }
+
+          message.photoboothLastUpdateEpoch = longToNumber(reader.uint64());
+          continue;
+        }
+        case 63: {
+          if (tag !== 504) {
+            break;
+          }
+
+          message.fsdStatsSupported = reader.bool();
+          continue;
+        }
+        case 65: {
+          if (tag !== 522) {
+            break;
+          }
+
+          message.dashcamUtils = DashcamUtils.decode(reader, reader.uint32());
+          continue;
+        }
+        case 66: {
+          if (tag !== 528) {
+            break;
+          }
+
+          message.remoteSketchpadAvailable = reader.bool();
+          continue;
+        }
+        case 67: {
+          if (tag !== 536) {
+            break;
+          }
+
+          message.deckLightsOn = reader.bool();
+          continue;
+        }
+        case 68: {
+          if (tag !== 544) {
+            break;
+          }
+
+          message.hazardsOn = reader.bool();
+          continue;
+        }
+        case 69: {
+          if (tag !== 552) {
+            break;
+          }
+
+          message.deckLightsAllowed = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CurrentVehicleState {
+    return {
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      apiVersion: isSet(object.apiVersion) ? globalThis.Number(object.apiVersion) : undefined,
+      notificationsSupported: isSet(object.notificationsSupported)
+        ? globalThis.Boolean(object.notificationsSupported)
+        : undefined,
+      remoteStartSupported: isSet(object.remoteStartSupported)
+        ? globalThis.Boolean(object.remoteStartSupported)
+        : undefined,
+      remoteStartEnabled: isSet(object.remoteStartEnabled) ? globalThis.Boolean(object.remoteStartEnabled) : undefined,
+      lastAutoparkError: isSet(object.lastAutoparkError) ? globalThis.String(object.lastAutoparkError) : undefined,
+      homelinkDeviceCount: isSet(object.homelinkDeviceCount)
+        ? globalThis.Number(object.homelinkDeviceCount)
+        : undefined,
+      autoparkStyle: isSet(object.autoparkStyle) ? AutoparkStyle.fromJSON(object.autoparkStyle) : undefined,
+      smartSummonAvailable: isSet(object.smartSummonAvailable)
+        ? globalThis.Boolean(object.smartSummonAvailable)
+        : undefined,
+      summonStandbyModeEnabled: isSet(object.summonStandbyModeEnabled)
+        ? globalThis.Boolean(object.summonStandbyModeEnabled)
+        : undefined,
+      activeSpoilerState: isSet(object.activeSpoilerState)
+        ? SpoilerState.fromJSON(object.activeSpoilerState)
+        : undefined,
+      patsyMode: isSet(object.patsyMode) ? globalThis.Boolean(object.patsyMode) : undefined,
+      webcamAvailable: isSet(object.webcamAvailable) ? globalThis.Boolean(object.webcamAvailable) : undefined,
+      vehicleSelfTestRequested: isSet(object.vehicleSelfTestRequested)
+        ? globalThis.Boolean(object.vehicleSelfTestRequested)
+        : undefined,
+      vehicleSelfTestProgress: isSet(object.vehicleSelfTestProgress)
+        ? globalThis.Number(object.vehicleSelfTestProgress)
+        : undefined,
+      autoparkVersion: isSet(object.autoparkVersion) ? AutoparkVersion.fromJSON(object.autoparkVersion) : undefined,
+      autoparkState: isSet(object.autoparkState) ? AutoparkState.fromJSON(object.autoparkState) : undefined,
+      calendarSupported: isSet(object.calendarSupported) ? globalThis.Boolean(object.calendarSupported) : undefined,
+      dashcamClipSaveAvailable: isSet(object.dashcamClipSaveAvailable)
+        ? globalThis.Boolean(object.dashcamClipSaveAvailable)
+        : undefined,
+      dashcamState: isSet(object.dashcamState) ? dashCamStateFromJSON(object.dashcamState) : undefined,
+      featureBitmask: globalThis.Array.isArray(object?.featureBitmask)
+        ? object.featureBitmask.map((e: any) => globalThis.Number(e))
+        : [],
+      serviceMode: isSet(object.serviceMode) ? globalThis.Boolean(object.serviceMode) : undefined,
+      serviceModePlus: isSet(object.serviceModePlus) ? globalThis.Boolean(object.serviceModePlus) : undefined,
+      serviceModeAuth: isSet(object.serviceModeAuth) ? globalThis.String(object.serviceModeAuth) : undefined,
+      serviceGtwDiagSessionActive: isSet(object.serviceGtwDiagSessionActive)
+        ? globalThis.Boolean(object.serviceGtwDiagSessionActive)
+        : undefined,
+      allowAuthorizedMobileDevicesOnly: isSet(object.allowAuthorizedMobileDevicesOnly)
+        ? globalThis.Boolean(object.allowAuthorizedMobileDevicesOnly)
+        : undefined,
+      guestMode: isSet(object.guestMode) ? VehicleState_GuestMode.fromJSON(object.guestMode) : undefined,
+      driveRailOn: isSet(object.driveRailOn) ? globalThis.Boolean(object.driveRailOn) : undefined,
+      pinToDriveEnabled: isSet(object.pinToDriveEnabled) ? globalThis.Boolean(object.pinToDriveEnabled) : undefined,
+      pinToDrivePinSet: isSet(object.pinToDrivePinSet) ? globalThis.Boolean(object.pinToDrivePinSet) : undefined,
+      frontfoglightsOn: isSet(object.frontfoglightsOn) ? globalThis.Boolean(object.frontfoglightsOn) : undefined,
+      rearfoglightsOn: isSet(object.rearfoglightsOn) ? globalThis.Boolean(object.rearfoglightsOn) : undefined,
+      headlightsOn: isSet(object.headlightsOn) ? globalThis.Boolean(object.headlightsOn) : undefined,
+      highbeamlightsOn: isSet(object.highbeamlightsOn) ? globalThis.Boolean(object.highbeamlightsOn) : undefined,
+      trailerModeOn: isSet(object.trailerModeOn) ? globalThis.Boolean(object.trailerModeOn) : undefined,
+      signedCmdServiceMode: isSet(object.signedCmdServiceMode)
+        ? globalThis.Boolean(object.signedCmdServiceMode)
+        : undefined,
+      transportMode: isSet(object.transportMode) ? globalThis.Boolean(object.transportMode) : undefined,
+      factoryMode: isSet(object.factoryMode) ? globalThis.Boolean(object.factoryMode) : undefined,
+      trainingWheelsMode: isSet(object.trainingWheelsMode) ? globalThis.Boolean(object.trainingWheelsMode) : undefined,
+      gtwDiagLevel: isSet(object.gtwDiagLevel) ? gtwDiagLevelFromJSON(object.gtwDiagLevel) : undefined,
+      trailerLightTestAvailable: isSet(object.trailerLightTestAvailable)
+        ? globalThis.Boolean(object.trailerLightTestAvailable)
+        : undefined,
+      trailerLightTestRequested: isSet(object.trailerLightTestRequested)
+        ? globalThis.Boolean(object.trailerLightTestRequested)
+        : undefined,
+      truckBedLightsBrightness: isSet(object.truckBedLightsBrightness)
+        ? globalThis.Number(object.truckBedLightsBrightness)
+        : undefined,
+      truckBedLightsAutoBrightness: isSet(object.truckBedLightsAutoBrightness)
+        ? globalThis.Number(object.truckBedLightsAutoBrightness)
+        : undefined,
+      truckBedLightsAutoState: isSet(object.truckBedLightsAutoState)
+        ? globalThis.Boolean(object.truckBedLightsAutoState)
+        : undefined,
+      truckBedLightsControlsDisabled: isSet(object.truckBedLightsControlsDisabled)
+        ? globalThis.Boolean(object.truckBedLightsControlsDisabled)
+        : undefined,
+      accessoryLightbarMiddleOn: isSet(object.accessoryLightbarMiddleOn)
+        ? globalThis.Boolean(object.accessoryLightbarMiddleOn)
+        : undefined,
+      inletHeaterOn: isSet(object.inletHeaterOn) ? globalThis.Boolean(object.inletHeaterOn) : undefined,
+      inletHeaterSupported: isSet(object.inletHeaterSupported)
+        ? globalThis.Boolean(object.inletHeaterSupported)
+        : undefined,
+      mobileDashcamViewerEnabled: isSet(object.mobileDashcamViewerEnabled)
+        ? globalThis.Boolean(object.mobileDashcamViewerEnabled)
+        : undefined,
+      carWrapEnabled: isSet(object.carWrapEnabled) ? globalThis.Boolean(object.carWrapEnabled) : undefined,
+      dashcamLastSaveEpoch: isSet(object.dashcamLastSaveEpoch)
+        ? globalThis.Number(object.dashcamLastSaveEpoch)
+        : undefined,
+      wiperServiceRequest: isSet(object.wiperServiceRequest)
+        ? globalThis.Boolean(object.wiperServiceRequest)
+        : undefined,
+      remotePhotoboothAvailable: isSet(object.remotePhotoboothAvailable)
+        ? globalThis.Boolean(object.remotePhotoboothAvailable)
+        : undefined,
+      dogModeLiveActivityKey: isSet(object.dogModeLiveActivityKey)
+        ? globalThis.String(object.dogModeLiveActivityKey)
+        : undefined,
+      photoboothLastSaveEpoch: isSet(object.photoboothLastSaveEpoch)
+        ? globalThis.Number(object.photoboothLastSaveEpoch)
+        : undefined,
+      photoboothLastUpdateEpoch: isSet(object.photoboothLastUpdateEpoch)
+        ? globalThis.Number(object.photoboothLastUpdateEpoch)
+        : undefined,
+      fsdStatsSupported: isSet(object.fsdStatsSupported) ? globalThis.Boolean(object.fsdStatsSupported) : undefined,
+      dashcamUtils: isSet(object.dashcamUtils) ? DashcamUtils.fromJSON(object.dashcamUtils) : undefined,
+      remoteSketchpadAvailable: isSet(object.remoteSketchpadAvailable)
+        ? globalThis.Boolean(object.remoteSketchpadAvailable)
+        : undefined,
+      deckLightsOn: isSet(object.deckLightsOn) ? globalThis.Boolean(object.deckLightsOn) : undefined,
+      hazardsOn: isSet(object.hazardsOn) ? globalThis.Boolean(object.hazardsOn) : undefined,
+      deckLightsAllowed: isSet(object.deckLightsAllowed) ? globalThis.Boolean(object.deckLightsAllowed) : undefined,
+    };
+  },
+
+  toJSON(message: CurrentVehicleState): unknown {
+    const obj: any = {};
+    if (message.timestamp !== undefined) {
+      obj.timestamp = message.timestamp.toISOString();
+    }
+    if (message.apiVersion !== undefined) {
+      obj.apiVersion = Math.round(message.apiVersion);
+    }
+    if (message.notificationsSupported !== undefined) {
+      obj.notificationsSupported = message.notificationsSupported;
+    }
+    if (message.remoteStartSupported !== undefined) {
+      obj.remoteStartSupported = message.remoteStartSupported;
+    }
+    if (message.remoteStartEnabled !== undefined) {
+      obj.remoteStartEnabled = message.remoteStartEnabled;
+    }
+    if (message.lastAutoparkError !== undefined) {
+      obj.lastAutoparkError = message.lastAutoparkError;
+    }
+    if (message.homelinkDeviceCount !== undefined) {
+      obj.homelinkDeviceCount = Math.round(message.homelinkDeviceCount);
+    }
+    if (message.autoparkStyle !== undefined) {
+      obj.autoparkStyle = AutoparkStyle.toJSON(message.autoparkStyle);
+    }
+    if (message.smartSummonAvailable !== undefined) {
+      obj.smartSummonAvailable = message.smartSummonAvailable;
+    }
+    if (message.summonStandbyModeEnabled !== undefined) {
+      obj.summonStandbyModeEnabled = message.summonStandbyModeEnabled;
+    }
+    if (message.activeSpoilerState !== undefined) {
+      obj.activeSpoilerState = SpoilerState.toJSON(message.activeSpoilerState);
+    }
+    if (message.patsyMode !== undefined) {
+      obj.patsyMode = message.patsyMode;
+    }
+    if (message.webcamAvailable !== undefined) {
+      obj.webcamAvailable = message.webcamAvailable;
+    }
+    if (message.vehicleSelfTestRequested !== undefined) {
+      obj.vehicleSelfTestRequested = message.vehicleSelfTestRequested;
+    }
+    if (message.vehicleSelfTestProgress !== undefined) {
+      obj.vehicleSelfTestProgress = Math.round(message.vehicleSelfTestProgress);
+    }
+    if (message.autoparkVersion !== undefined) {
+      obj.autoparkVersion = AutoparkVersion.toJSON(message.autoparkVersion);
+    }
+    if (message.autoparkState !== undefined) {
+      obj.autoparkState = AutoparkState.toJSON(message.autoparkState);
+    }
+    if (message.calendarSupported !== undefined) {
+      obj.calendarSupported = message.calendarSupported;
+    }
+    if (message.dashcamClipSaveAvailable !== undefined) {
+      obj.dashcamClipSaveAvailable = message.dashcamClipSaveAvailable;
+    }
+    if (message.dashcamState !== undefined) {
+      obj.dashcamState = dashCamStateToJSON(message.dashcamState);
+    }
+    if (message.featureBitmask?.length) {
+      obj.featureBitmask = message.featureBitmask.map((e) => Math.round(e));
+    }
+    if (message.serviceMode !== undefined) {
+      obj.serviceMode = message.serviceMode;
+    }
+    if (message.serviceModePlus !== undefined) {
+      obj.serviceModePlus = message.serviceModePlus;
+    }
+    if (message.serviceModeAuth !== undefined) {
+      obj.serviceModeAuth = message.serviceModeAuth;
+    }
+    if (message.serviceGtwDiagSessionActive !== undefined) {
+      obj.serviceGtwDiagSessionActive = message.serviceGtwDiagSessionActive;
+    }
+    if (message.allowAuthorizedMobileDevicesOnly !== undefined) {
+      obj.allowAuthorizedMobileDevicesOnly = message.allowAuthorizedMobileDevicesOnly;
+    }
+    if (message.guestMode !== undefined) {
+      obj.guestMode = VehicleState_GuestMode.toJSON(message.guestMode);
+    }
+    if (message.driveRailOn !== undefined) {
+      obj.driveRailOn = message.driveRailOn;
+    }
+    if (message.pinToDriveEnabled !== undefined) {
+      obj.pinToDriveEnabled = message.pinToDriveEnabled;
+    }
+    if (message.pinToDrivePinSet !== undefined) {
+      obj.pinToDrivePinSet = message.pinToDrivePinSet;
+    }
+    if (message.frontfoglightsOn !== undefined) {
+      obj.frontfoglightsOn = message.frontfoglightsOn;
+    }
+    if (message.rearfoglightsOn !== undefined) {
+      obj.rearfoglightsOn = message.rearfoglightsOn;
+    }
+    if (message.headlightsOn !== undefined) {
+      obj.headlightsOn = message.headlightsOn;
+    }
+    if (message.highbeamlightsOn !== undefined) {
+      obj.highbeamlightsOn = message.highbeamlightsOn;
+    }
+    if (message.trailerModeOn !== undefined) {
+      obj.trailerModeOn = message.trailerModeOn;
+    }
+    if (message.signedCmdServiceMode !== undefined) {
+      obj.signedCmdServiceMode = message.signedCmdServiceMode;
+    }
+    if (message.transportMode !== undefined) {
+      obj.transportMode = message.transportMode;
+    }
+    if (message.factoryMode !== undefined) {
+      obj.factoryMode = message.factoryMode;
+    }
+    if (message.trainingWheelsMode !== undefined) {
+      obj.trainingWheelsMode = message.trainingWheelsMode;
+    }
+    if (message.gtwDiagLevel !== undefined) {
+      obj.gtwDiagLevel = gtwDiagLevelToJSON(message.gtwDiagLevel);
+    }
+    if (message.trailerLightTestAvailable !== undefined) {
+      obj.trailerLightTestAvailable = message.trailerLightTestAvailable;
+    }
+    if (message.trailerLightTestRequested !== undefined) {
+      obj.trailerLightTestRequested = message.trailerLightTestRequested;
+    }
+    if (message.truckBedLightsBrightness !== undefined) {
+      obj.truckBedLightsBrightness = Math.round(message.truckBedLightsBrightness);
+    }
+    if (message.truckBedLightsAutoBrightness !== undefined) {
+      obj.truckBedLightsAutoBrightness = Math.round(message.truckBedLightsAutoBrightness);
+    }
+    if (message.truckBedLightsAutoState !== undefined) {
+      obj.truckBedLightsAutoState = message.truckBedLightsAutoState;
+    }
+    if (message.truckBedLightsControlsDisabled !== undefined) {
+      obj.truckBedLightsControlsDisabled = message.truckBedLightsControlsDisabled;
+    }
+    if (message.accessoryLightbarMiddleOn !== undefined) {
+      obj.accessoryLightbarMiddleOn = message.accessoryLightbarMiddleOn;
+    }
+    if (message.inletHeaterOn !== undefined) {
+      obj.inletHeaterOn = message.inletHeaterOn;
+    }
+    if (message.inletHeaterSupported !== undefined) {
+      obj.inletHeaterSupported = message.inletHeaterSupported;
+    }
+    if (message.mobileDashcamViewerEnabled !== undefined) {
+      obj.mobileDashcamViewerEnabled = message.mobileDashcamViewerEnabled;
+    }
+    if (message.carWrapEnabled !== undefined) {
+      obj.carWrapEnabled = message.carWrapEnabled;
+    }
+    if (message.dashcamLastSaveEpoch !== undefined) {
+      obj.dashcamLastSaveEpoch = Math.round(message.dashcamLastSaveEpoch);
+    }
+    if (message.wiperServiceRequest !== undefined) {
+      obj.wiperServiceRequest = message.wiperServiceRequest;
+    }
+    if (message.remotePhotoboothAvailable !== undefined) {
+      obj.remotePhotoboothAvailable = message.remotePhotoboothAvailable;
+    }
+    if (message.dogModeLiveActivityKey !== undefined) {
+      obj.dogModeLiveActivityKey = message.dogModeLiveActivityKey;
+    }
+    if (message.photoboothLastSaveEpoch !== undefined) {
+      obj.photoboothLastSaveEpoch = Math.round(message.photoboothLastSaveEpoch);
+    }
+    if (message.photoboothLastUpdateEpoch !== undefined) {
+      obj.photoboothLastUpdateEpoch = Math.round(message.photoboothLastUpdateEpoch);
+    }
+    if (message.fsdStatsSupported !== undefined) {
+      obj.fsdStatsSupported = message.fsdStatsSupported;
+    }
+    if (message.dashcamUtils !== undefined) {
+      obj.dashcamUtils = DashcamUtils.toJSON(message.dashcamUtils);
+    }
+    if (message.remoteSketchpadAvailable !== undefined) {
+      obj.remoteSketchpadAvailable = message.remoteSketchpadAvailable;
+    }
+    if (message.deckLightsOn !== undefined) {
+      obj.deckLightsOn = message.deckLightsOn;
+    }
+    if (message.hazardsOn !== undefined) {
+      obj.hazardsOn = message.hazardsOn;
+    }
+    if (message.deckLightsAllowed !== undefined) {
+      obj.deckLightsAllowed = message.deckLightsAllowed;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CurrentVehicleState>, I>>(base?: I): CurrentVehicleState {
+    return CurrentVehicleState.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CurrentVehicleState>, I>>(object: I): CurrentVehicleState {
+    const message = createBaseCurrentVehicleState();
+    message.timestamp = object.timestamp ?? undefined;
+    message.apiVersion = object.apiVersion ?? undefined;
+    message.notificationsSupported = object.notificationsSupported ?? undefined;
+    message.remoteStartSupported = object.remoteStartSupported ?? undefined;
+    message.remoteStartEnabled = object.remoteStartEnabled ?? undefined;
+    message.lastAutoparkError = object.lastAutoparkError ?? undefined;
+    message.homelinkDeviceCount = object.homelinkDeviceCount ?? undefined;
+    message.autoparkStyle = (object.autoparkStyle !== undefined && object.autoparkStyle !== null)
+      ? AutoparkStyle.fromPartial(object.autoparkStyle)
+      : undefined;
+    message.smartSummonAvailable = object.smartSummonAvailable ?? undefined;
+    message.summonStandbyModeEnabled = object.summonStandbyModeEnabled ?? undefined;
+    message.activeSpoilerState = (object.activeSpoilerState !== undefined && object.activeSpoilerState !== null)
+      ? SpoilerState.fromPartial(object.activeSpoilerState)
+      : undefined;
+    message.patsyMode = object.patsyMode ?? undefined;
+    message.webcamAvailable = object.webcamAvailable ?? undefined;
+    message.vehicleSelfTestRequested = object.vehicleSelfTestRequested ?? undefined;
+    message.vehicleSelfTestProgress = object.vehicleSelfTestProgress ?? undefined;
+    message.autoparkVersion = (object.autoparkVersion !== undefined && object.autoparkVersion !== null)
+      ? AutoparkVersion.fromPartial(object.autoparkVersion)
+      : undefined;
+    message.autoparkState = (object.autoparkState !== undefined && object.autoparkState !== null)
+      ? AutoparkState.fromPartial(object.autoparkState)
+      : undefined;
+    message.calendarSupported = object.calendarSupported ?? undefined;
+    message.dashcamClipSaveAvailable = object.dashcamClipSaveAvailable ?? undefined;
+    message.dashcamState = object.dashcamState ?? undefined;
+    message.featureBitmask = object.featureBitmask?.map((e) => e) || [];
+    message.serviceMode = object.serviceMode ?? undefined;
+    message.serviceModePlus = object.serviceModePlus ?? undefined;
+    message.serviceModeAuth = object.serviceModeAuth ?? undefined;
+    message.serviceGtwDiagSessionActive = object.serviceGtwDiagSessionActive ?? undefined;
+    message.allowAuthorizedMobileDevicesOnly = object.allowAuthorizedMobileDevicesOnly ?? undefined;
+    message.guestMode = (object.guestMode !== undefined && object.guestMode !== null)
+      ? VehicleState_GuestMode.fromPartial(object.guestMode)
+      : undefined;
+    message.driveRailOn = object.driveRailOn ?? undefined;
+    message.pinToDriveEnabled = object.pinToDriveEnabled ?? undefined;
+    message.pinToDrivePinSet = object.pinToDrivePinSet ?? undefined;
+    message.frontfoglightsOn = object.frontfoglightsOn ?? undefined;
+    message.rearfoglightsOn = object.rearfoglightsOn ?? undefined;
+    message.headlightsOn = object.headlightsOn ?? undefined;
+    message.highbeamlightsOn = object.highbeamlightsOn ?? undefined;
+    message.trailerModeOn = object.trailerModeOn ?? undefined;
+    message.signedCmdServiceMode = object.signedCmdServiceMode ?? undefined;
+    message.transportMode = object.transportMode ?? undefined;
+    message.factoryMode = object.factoryMode ?? undefined;
+    message.trainingWheelsMode = object.trainingWheelsMode ?? undefined;
+    message.gtwDiagLevel = object.gtwDiagLevel ?? undefined;
+    message.trailerLightTestAvailable = object.trailerLightTestAvailable ?? undefined;
+    message.trailerLightTestRequested = object.trailerLightTestRequested ?? undefined;
+    message.truckBedLightsBrightness = object.truckBedLightsBrightness ?? undefined;
+    message.truckBedLightsAutoBrightness = object.truckBedLightsAutoBrightness ?? undefined;
+    message.truckBedLightsAutoState = object.truckBedLightsAutoState ?? undefined;
+    message.truckBedLightsControlsDisabled = object.truckBedLightsControlsDisabled ?? undefined;
+    message.accessoryLightbarMiddleOn = object.accessoryLightbarMiddleOn ?? undefined;
+    message.inletHeaterOn = object.inletHeaterOn ?? undefined;
+    message.inletHeaterSupported = object.inletHeaterSupported ?? undefined;
+    message.mobileDashcamViewerEnabled = object.mobileDashcamViewerEnabled ?? undefined;
+    message.carWrapEnabled = object.carWrapEnabled ?? undefined;
+    message.dashcamLastSaveEpoch = object.dashcamLastSaveEpoch ?? undefined;
+    message.wiperServiceRequest = object.wiperServiceRequest ?? undefined;
+    message.remotePhotoboothAvailable = object.remotePhotoboothAvailable ?? undefined;
+    message.dogModeLiveActivityKey = object.dogModeLiveActivityKey ?? undefined;
+    message.photoboothLastSaveEpoch = object.photoboothLastSaveEpoch ?? undefined;
+    message.photoboothLastUpdateEpoch = object.photoboothLastUpdateEpoch ?? undefined;
+    message.fsdStatsSupported = object.fsdStatsSupported ?? undefined;
+    message.dashcamUtils = (object.dashcamUtils !== undefined && object.dashcamUtils !== null)
+      ? DashcamUtils.fromPartial(object.dashcamUtils)
+      : undefined;
+    message.remoteSketchpadAvailable = object.remoteSketchpadAvailable ?? undefined;
+    message.deckLightsOn = object.deckLightsOn ?? undefined;
+    message.hazardsOn = object.hazardsOn ?? undefined;
+    message.deckLightsAllowed = object.deckLightsAllowed ?? undefined;
+    return message;
+  },
+};
+
+function createBaseDashcamUtils(): DashcamUtils {
+  return { deleteDashcamClipsAvailable: undefined, formatUsbAvailable: undefined };
+}
+
+export const DashcamUtils: MessageFns<DashcamUtils> = {
+  encode(message: DashcamUtils, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.deleteDashcamClipsAvailable !== undefined) {
+      writer.uint32(8).bool(message.deleteDashcamClipsAvailable);
+    }
+    if (message.formatUsbAvailable !== undefined) {
+      writer.uint32(16).bool(message.formatUsbAvailable);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): DashcamUtils {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDashcamUtils();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.deleteDashcamClipsAvailable = reader.bool();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.formatUsbAvailable = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DashcamUtils {
+    return {
+      deleteDashcamClipsAvailable: isSet(object.deleteDashcamClipsAvailable)
+        ? globalThis.Boolean(object.deleteDashcamClipsAvailable)
+        : undefined,
+      formatUsbAvailable: isSet(object.formatUsbAvailable) ? globalThis.Boolean(object.formatUsbAvailable) : undefined,
+    };
+  },
+
+  toJSON(message: DashcamUtils): unknown {
+    const obj: any = {};
+    if (message.deleteDashcamClipsAvailable !== undefined) {
+      obj.deleteDashcamClipsAvailable = message.deleteDashcamClipsAvailable;
+    }
+    if (message.formatUsbAvailable !== undefined) {
+      obj.formatUsbAvailable = message.formatUsbAvailable;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DashcamUtils>, I>>(base?: I): DashcamUtils {
+    return DashcamUtils.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<DashcamUtils>, I>>(object: I): DashcamUtils {
+    const message = createBaseDashcamUtils();
+    message.deleteDashcamClipsAvailable = object.deleteDashcamClipsAvailable ?? undefined;
+    message.formatUsbAvailable = object.formatUsbAvailable ?? undefined;
+    return message;
+  },
+};
+
+function createBaseAutoparkStyle(): AutoparkStyle {
+  return {};
+}
+
+export const AutoparkStyle: MessageFns<AutoparkStyle> = {
+  encode(_: AutoparkStyle, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AutoparkStyle {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAutoparkStyle();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): AutoparkStyle {
+    return {};
+  },
+
+  toJSON(_: AutoparkStyle): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AutoparkStyle>, I>>(base?: I): AutoparkStyle {
+    return AutoparkStyle.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AutoparkStyle>, I>>(_: I): AutoparkStyle {
+    const message = createBaseAutoparkStyle();
+    return message;
+  },
+};
+
+function createBaseAutoparkVersion(): AutoparkVersion {
+  return {};
+}
+
+export const AutoparkVersion: MessageFns<AutoparkVersion> = {
+  encode(_: AutoparkVersion, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AutoparkVersion {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAutoparkVersion();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): AutoparkVersion {
+    return {};
+  },
+
+  toJSON(_: AutoparkVersion): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AutoparkVersion>, I>>(base?: I): AutoparkVersion {
+    return AutoparkVersion.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AutoparkVersion>, I>>(_: I): AutoparkVersion {
+    const message = createBaseAutoparkVersion();
+    return message;
+  },
+};
+
+function createBaseAutoparkState(): AutoparkState {
+  return {};
+}
+
+export const AutoparkState: MessageFns<AutoparkState> = {
+  encode(_: AutoparkState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AutoparkState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAutoparkState();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): AutoparkState {
+    return {};
+  },
+
+  toJSON(_: AutoparkState): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AutoparkState>, I>>(base?: I): AutoparkState {
+    return AutoparkState.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AutoparkState>, I>>(_: I): AutoparkState {
+    const message = createBaseAutoparkState();
+    return message;
+  },
+};
+
+function createBaseSpoilerState(): SpoilerState {
+  return {};
+}
+
+export const SpoilerState: MessageFns<SpoilerState> = {
+  encode(_: SpoilerState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SpoilerState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSpoilerState();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): SpoilerState {
+    return {};
+  },
+
+  toJSON(_: SpoilerState): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SpoilerState>, I>>(base?: I): SpoilerState {
+    return SpoilerState.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SpoilerState>, I>>(_: I): SpoilerState {
+    const message = createBaseSpoilerState();
     return message;
   },
 };

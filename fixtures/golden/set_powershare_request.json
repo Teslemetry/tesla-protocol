@@ -1,0 +1,19 @@
+{
+  "description": "Golden wire-format fixtures for CarServer.Action.vehicleAction (Powershare request). Pins the PowershareRequest numbering OFF = 0, ON = 1; the values are not yet confirmed on a live vehicle. Consumed identically by the TypeScript and Python test suites: both encoders must produce these exact bytes, and both decoders must round-trip them back to the same field values.",
+  "outer_message": "CarServer.Action",
+  "outer_field": { "name": "vehicleAction", "tag": 2, "type": "CarServer.VehicleAction" },
+  "cases": [
+    {
+      "name": "set_powershare_request_off",
+      "vehicle_action_field": { "name": "setPowershareRequestAction", "tag": 93, "type": "CarServer.SetPowershareRequestAction" },
+      "payload": { "powershare_request": "POWERSHARE_REQUEST_OFF", "powershare_request_number": 0 },
+      "hex": "1203ea0500"
+    },
+    {
+      "name": "set_powershare_request_on",
+      "vehicle_action_field": { "name": "setPowershareRequestAction", "tag": 93, "type": "CarServer.SetPowershareRequestAction" },
+      "payload": { "powershare_request": "POWERSHARE_REQUEST_ON", "powershare_request_number": 1 },
+      "hex": "1205ea05020801"
+    }
+  ]
+}

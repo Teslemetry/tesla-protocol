@@ -1,0 +1,25 @@
+{
+  "description": "Golden wire-format fixtures for CarServer.Action.vehicleAction (set outlets on/off). Pins the OutletRequest numbering OFF = 0, CABIN_AND_BED = 1, CABIN = 2; the values are not yet confirmed on a live vehicle. Consumed identically by the TypeScript and Python test suites: both encoders must produce these exact bytes, and both decoders must round-trip them back to the same field values.",
+  "outer_message": "CarServer.Action",
+  "outer_field": { "name": "vehicleAction", "tag": 2, "type": "CarServer.VehicleAction" },
+  "cases": [
+    {
+      "name": "set_outlets_off",
+      "vehicle_action_field": { "name": "setOutletsOnOffAction", "tag": 80, "type": "CarServer.SetOutletsOnOffAction" },
+      "payload": { "outlet_request": "OUTLET_REQUEST_OFF", "outlet_request_number": 0 },
+      "hex": "1203820500"
+    },
+    {
+      "name": "set_outlets_cabin_and_bed",
+      "vehicle_action_field": { "name": "setOutletsOnOffAction", "tag": 80, "type": "CarServer.SetOutletsOnOffAction" },
+      "payload": { "outlet_request": "OUTLET_REQUEST_CABIN_AND_BED", "outlet_request_number": 1 },
+      "hex": "12058205020801"
+    },
+    {
+      "name": "set_outlets_cabin",
+      "vehicle_action_field": { "name": "setOutletsOnOffAction", "tag": 80, "type": "CarServer.SetOutletsOnOffAction" },
+      "payload": { "outlet_request": "OUTLET_REQUEST_CABIN", "outlet_request_number": 2 },
+      "hex": "12058205020802"
+    }
+  ]
+}

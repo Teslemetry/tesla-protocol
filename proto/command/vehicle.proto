@@ -33,7 +33,7 @@ message VehicleData {
     ChargeScheduleState charge_schedule_state = 15;
     PreconditioningScheduleState preconditioning_schedule_state = 16;
     SohState soh_state = 17;  // TESLEMETRY-EXT
-    bytes unknown = 18; // opaque, undecoded payload observed on live vehicleDataSubscription pushes  // TESLEMETRY-EXT
+    CurrentVehicleState vehicle_state = 18; // present on live vehicleDataSubscription pushes  // TESLEMETRY-EXT
     TirePressureState tire_pressure_state = 19;
     MediaState media_state = 20;
     MediaDetailState media_detail_state = 21;
@@ -652,9 +652,9 @@ message VehicleState {
     google.protobuf.Timestamp tpms_last_seen_pressure_time_rl = 60;  // TESLEMETRY-EXT
     google.protobuf.Timestamp tpms_last_seen_pressure_time_rr = 61;  // TESLEMETRY-EXT
 
-    oneof optional_deck_lights_on { bool deck_lights_on = 67; }  // TESLEMETRY-EXT
-    oneof optional_hazards_on { bool hazards_on = 68; }  // TESLEMETRY-EXT
-    oneof optional_deck_lights_allowed { bool deck_lights_allowed = 69; }  // TESLEMETRY-EXT
+    // 67-69 are obsolete per-wheel TPMS soft-warning flags here; deck lights and hazards are CurrentVehicleState 67-69.  // TESLEMETRY-EXT
+    reserved 67, 68, 69;  // TESLEMETRY-EXT
+    reserved "deck_lights_on", "hazards_on", "deck_lights_allowed";  // TESLEMETRY-EXT
 
     LegacyMediaInfo legacy_media_info = 72;  // TESLEMETRY-EXT
     oneof optional_allow_authorized_mobile_devices_only { bool allow_authorized_mobile_devices_only = 73; }  // TESLEMETRY-EXT
@@ -721,12 +721,103 @@ message VehicleState {
     oneof optional_tpms_rcp_rear_value { float tpms_rcp_rear_value = 171; }  // TESLEMETRY-EXT
     oneof optional_fsd_software_version { string fsd_software_version = 172; }  // TESLEMETRY-EXT
 
-    AutopilotBase autopilot_base = 196;  // TESLEMETRY-EXT
-    AutopilotOverrideState autopilot_override_state = 197;  // TESLEMETRY-EXT
-    oneof optional_autopilot_override_expire_time { int64 autopilot_override_expire_time = 198; }  // TESLEMETRY-EXT
+    // Autopilot entitlement is VehicleConfig 196-198, not part of this message.  // TESLEMETRY-EXT
+    reserved 196, 197, 198;  // TESLEMETRY-EXT
+    reserved "autopilot_base", "autopilot_override_state", "autopilot_override_expire_time";  // TESLEMETRY-EXT
 }
 
 // ===== TESLEMETRY-EXT BEGIN =====
+// Current vehicle-state surface, carried at VehicleData.vehicle_state (18) and
+// requested with GetVehicleData.getVehicleState. VehicleState (tag 6) is the
+// legacy surface.
+message CurrentVehicleState {
+    google.protobuf.Timestamp timestamp = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    oneof optional_api_version { uint32 api_version = 2; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_notifications_supported { bool notifications_supported = 3; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_remote_start_supported { bool remote_start_supported = 4; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_remote_start_enabled { bool remote_start_enabled = 5; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_last_autopark_error { string last_autopark_error = 6; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_homelink_device_count { uint32 homelink_device_count = 7; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    AutoparkStyle autopark_style = 8;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_smart_summon_available { bool smart_summon_available = 9; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_summon_standby_mode_enabled { bool summon_standby_mode_enabled = 10; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    SpoilerState active_spoiler_state = 12;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_patsy_mode { bool patsy_mode = 15; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_webcam_available { bool webcam_available = 16; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_vehicle_self_test_requested { bool vehicle_self_test_requested = 17; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_vehicle_self_test_progress { uint32 vehicle_self_test_progress = 18; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    AutoparkVersion autopark_version = 19;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    AutoparkState autopark_state = 20;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_calendar_supported { bool calendar_supported = 21; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_dashcam_clip_save_available { bool dashcam_clip_save_available = 22; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_dashcam_state { DashCamState dashcam_state = 23; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    repeated uint32 feature_bitmask = 24;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_service_mode { bool service_mode = 25; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_service_mode_plus { bool service_mode_plus = 26; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_service_mode_auth { string service_mode_auth = 27; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_service_gtw_diag_session_active { bool service_gtw_diag_session_active = 28; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_allow_authorized_mobile_devices_only { bool allow_authorized_mobile_devices_only = 29; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    VehicleState.GuestMode guest_mode = 30;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    oneof optional_drive_rail_on { bool drive_rail_on = 31; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_pin_to_drive_enabled { bool pin_to_drive_enabled = 32; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_pin_to_drive_pin_set { bool pin_to_drive_pin_set = 33; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_frontfoglights_on { bool frontfoglights_on = 34; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_rearfoglights_on { bool rearfoglights_on = 35; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_headlights_on { bool headlights_on = 36; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_highbeamlights_on { bool highbeamlights_on = 37; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_trailer_mode_on { bool trailer_mode_on = 38; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_signed_cmd_service_mode { bool signed_cmd_service_mode = 39; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_transport_mode { bool transport_mode = 40; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_factory_mode { bool factory_mode = 41; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_training_wheels_mode { bool training_wheels_mode = 42; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_gtw_diag_level { GtwDiagLevel gtw_diag_level = 43; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_trailer_light_test_available { bool trailer_light_test_available = 44; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_trailer_light_test_requested { bool trailer_light_test_requested = 45; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_truck_bed_lights_brightness { uint32 truck_bed_lights_brightness = 46; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_truck_bed_lights_auto_brightness { uint32 truck_bed_lights_auto_brightness = 47; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_truck_bed_lights_auto_state { bool truck_bed_lights_auto_state = 48; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_truck_bed_lights_controls_disabled { bool truck_bed_lights_controls_disabled = 49; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_accessory_lightbar_middle_on { bool accessory_lightbar_middle_on = 50; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_inlet_heater_on { bool inlet_heater_on = 51; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_inlet_heater_supported { bool inlet_heater_supported = 52; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_mobile_dashcam_viewer_enabled { bool mobile_dashcam_viewer_enabled = 54; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_car_wrap_enabled { bool car_wrap_enabled = 55; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_dashcam_last_save_epoch { uint64 dashcam_last_save_epoch = 56; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_wiper_service_request { bool wiper_service_request = 58; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_remote_photobooth_available { bool remote_photobooth_available = 59; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_dog_mode_live_activity_key { string dog_mode_live_activity_key = 60; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_photobooth_last_save_epoch { uint64 photobooth_last_save_epoch = 61; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_photobooth_last_update_epoch { uint64 photobooth_last_update_epoch = 62; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_fsd_stats_supported { bool fsd_stats_supported = 63; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    DashcamUtils dashcam_utils = 65;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    oneof optional_remote_sketchpad_available { bool remote_sketchpad_available = 66; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_deck_lights_on { bool deck_lights_on = 67; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_hazards_on { bool hazards_on = 68; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_deck_lights_allowed { bool deck_lights_allowed = 69; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+}
+
+message DashcamUtils {
+    oneof optional_delete_dashcam_clips_available { bool delete_dashcam_clips_available = 1; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_format_usb_available { bool format_usb_available = 2; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+}
+
+// Void-oneof states whose alternatives have no recovered names.
+message AutoparkStyle {
+    reserved 1, 2; // alternatives; UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+}
+
+message AutoparkVersion {
+    reserved 1, 2, 3; // alternatives; UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+}
+
+message AutoparkState {
+    reserved 1 to 12; // alternatives; UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+}
+
+message SpoilerState {
+    reserved 1, 2, 3, 4; // alternatives; UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+}
+
 enum DashCamState {
     DashCamState_UNAVAILABLE = 0;
     DashCamState_AVAILABLE = 1;
@@ -1425,8 +1516,8 @@ message VehicleDetailState {
 
 // ===== TESLEMETRY-EXT BEGIN =====
 // Capability bits a vehicle advertises to the mobile app. Each value is a bit
-// index into the vehicle-state feature bitmask, a repeated uint32 list (field 24
-// of the payload at VehicleData tag 18): the feature is supported when
+// index into CurrentVehicleState.feature_bitmask (VehicleData.vehicle_state,
+// tag 18): the feature is supported when
 // bitmask[value / 32] & (1 << (value % 32)) is non-zero.
 // UNCONFIRMED: not yet confirmed on a live vehicle.
 enum MobileAppFeature {
