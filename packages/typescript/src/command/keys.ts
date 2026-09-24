@@ -23,7 +23,15 @@ export enum Role {
   ROLE_FM = 4,
   ROLE_VEHICLE_MONITOR = 5,
   ROLE_CHARGING_MANAGER = 6,
+  /** ROLE_SERVICE_TECH - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  ROLE_SERVICE_TECH = 7,
   ROLE_GUEST = 8,
+  /** ROLE_RIDER - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  ROLE_RIDER = 9,
+  /** ROLE_PREDELIVERY - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  ROLE_PREDELIVERY = 10,
+  /** ROLE_INFOTAINMENT - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  ROLE_INFOTAINMENT = 11,
   UNRECOGNIZED = -1,
 }
 
@@ -50,9 +58,21 @@ export function roleFromJSON(object: any): Role {
     case 6:
     case "ROLE_CHARGING_MANAGER":
       return Role.ROLE_CHARGING_MANAGER;
+    case 7:
+    case "ROLE_SERVICE_TECH":
+      return Role.ROLE_SERVICE_TECH;
     case 8:
     case "ROLE_GUEST":
       return Role.ROLE_GUEST;
+    case 9:
+    case "ROLE_RIDER":
+      return Role.ROLE_RIDER;
+    case 10:
+    case "ROLE_PREDELIVERY":
+      return Role.ROLE_PREDELIVERY;
+    case 11:
+    case "ROLE_INFOTAINMENT":
+      return Role.ROLE_INFOTAINMENT;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -76,8 +96,16 @@ export function roleToJSON(object: Role): string {
       return "ROLE_VEHICLE_MONITOR";
     case Role.ROLE_CHARGING_MANAGER:
       return "ROLE_CHARGING_MANAGER";
+    case Role.ROLE_SERVICE_TECH:
+      return "ROLE_SERVICE_TECH";
     case Role.ROLE_GUEST:
       return "ROLE_GUEST";
+    case Role.ROLE_RIDER:
+      return "ROLE_RIDER";
+    case Role.ROLE_PREDELIVERY:
+      return "ROLE_PREDELIVERY";
+    case Role.ROLE_INFOTAINMENT:
+      return "ROLE_INFOTAINMENT";
     case Role.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

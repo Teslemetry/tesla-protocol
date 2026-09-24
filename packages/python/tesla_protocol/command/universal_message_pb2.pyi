@@ -53,11 +53,15 @@ class MessageFault_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     MESSAGEFAULT_ERROR_REPEATED_COUNTER: _ClassVar[MessageFault_E]
     MESSAGEFAULT_ERROR_INVALID_KEY_HANDLE: _ClassVar[MessageFault_E]
     MESSAGEFAULT_ERROR_REQUIRES_RESPONSE_ENCRYPTION: _ClassVar[MessageFault_E]
+    MESSAGEFAULT_ERROR_COMMAND_REQUIRES_PHYSICAL_PROXIMITY: _ClassVar[MessageFault_E]
 
 class Flags(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     FLAG_USER_COMMAND: _ClassVar[Flags]
     FLAG_ENCRYPT_RESPONSE: _ClassVar[Flags]
+    FLAG_SUPPORTS_MESSAGE_FRAMING: _ClassVar[Flags]
+    FLAG_COMPRESSED_ZLIB: _ClassVar[Flags]
+    FLAG_SUPPORTS_COMPRESSION_ZLIB: _ClassVar[Flags]
 DOMAIN_BROADCAST: Domain
 DOMAIN_VEHICLE_SECURITY: Domain
 DOMAIN_INFOTAINMENT: Domain
@@ -97,8 +101,12 @@ MESSAGEFAULT_ERROR_RESPONSE_MTU_EXCEEDED: MessageFault_E
 MESSAGEFAULT_ERROR_REPEATED_COUNTER: MessageFault_E
 MESSAGEFAULT_ERROR_INVALID_KEY_HANDLE: MessageFault_E
 MESSAGEFAULT_ERROR_REQUIRES_RESPONSE_ENCRYPTION: MessageFault_E
+MESSAGEFAULT_ERROR_COMMAND_REQUIRES_PHYSICAL_PROXIMITY: MessageFault_E
 FLAG_USER_COMMAND: Flags
 FLAG_ENCRYPT_RESPONSE: Flags
+FLAG_SUPPORTS_MESSAGE_FRAMING: Flags
+FLAG_COMPRESSED_ZLIB: Flags
+FLAG_SUPPORTS_COMPRESSION_ZLIB: Flags
 
 class Destination(_message.Message):
     __slots__ = ('domain', 'routing_address')
@@ -121,17 +129,33 @@ class MessageStatus(_message.Message):
         ...
 
 class SessionInfoRequest(_message.Message):
-    __slots__ = ('public_key', 'challenge')
+    __slots__ = ('public_key', 'challenge', 'handle', 'identified_key')
     PUBLIC_KEY_FIELD_NUMBER: _ClassVar[int]
     CHALLENGE_FIELD_NUMBER: _ClassVar[int]
+    HANDLE_FIELD_NUMBER: _ClassVar[int]
+    IDENTIFIED_KEY_FIELD_NUMBER: _ClassVar[int]
     public_key: bytes
     challenge: bytes
+    handle: int
+    identified_key: _signatures_pb2.IdentifiedKey
 
-    def __init__(self, public_key: _Optional[bytes]=..., challenge: _Optional[bytes]=...) -> None:
+    def __init__(self, public_key: _Optional[bytes]=..., challenge: _Optional[bytes]=..., handle: _Optional[int]=..., identified_key: _Optional[_Union[_signatures_pb2.IdentifiedKey, str]]=...) -> None:
+        ...
+
+class MessageFrame(_message.Message):
+    __slots__ = ('chunk_index', 'total_chunks', 'data')
+    CHUNK_INDEX_FIELD_NUMBER: _ClassVar[int]
+    TOTAL_CHUNKS_FIELD_NUMBER: _ClassVar[int]
+    DATA_FIELD_NUMBER: _ClassVar[int]
+    chunk_index: int
+    total_chunks: int
+    data: bytes
+
+    def __init__(self, chunk_index: _Optional[int]=..., total_chunks: _Optional[int]=..., data: _Optional[bytes]=...) -> None:
         ...
 
 class RoutableMessage(_message.Message):
-    __slots__ = ('to_destination', 'from_destination', 'protobuf_message_as_bytes', 'session_info_request', 'session_info', 'signature_data', 'signedMessageStatus', 'request_uuid', 'uuid', 'flags')
+    __slots__ = ('to_destination', 'from_destination', 'protobuf_message_as_bytes', 'session_info_request', 'session_info', 'signature_data', 'signedMessageStatus', 'request_uuid', 'uuid', 'flags', 'message_frame')
     TO_DESTINATION_FIELD_NUMBER: _ClassVar[int]
     FROM_DESTINATION_FIELD_NUMBER: _ClassVar[int]
     PROTOBUF_MESSAGE_AS_BYTES_FIELD_NUMBER: _ClassVar[int]
@@ -142,6 +166,7 @@ class RoutableMessage(_message.Message):
     REQUEST_UUID_FIELD_NUMBER: _ClassVar[int]
     UUID_FIELD_NUMBER: _ClassVar[int]
     FLAGS_FIELD_NUMBER: _ClassVar[int]
+    MESSAGE_FRAME_FIELD_NUMBER: _ClassVar[int]
     to_destination: Destination
     from_destination: Destination
     protobuf_message_as_bytes: bytes
@@ -152,6 +177,7 @@ class RoutableMessage(_message.Message):
     request_uuid: bytes
     uuid: bytes
     flags: int
+    message_frame: MessageFrame
 
-    def __init__(self, to_destination: _Optional[_Union[Destination, _Mapping]]=..., from_destination: _Optional[_Union[Destination, _Mapping]]=..., protobuf_message_as_bytes: _Optional[bytes]=..., session_info_request: _Optional[_Union[SessionInfoRequest, _Mapping]]=..., session_info: _Optional[bytes]=..., signature_data: _Optional[_Union[_signatures_pb2.SignatureData, _Mapping]]=..., signedMessageStatus: _Optional[_Union[MessageStatus, _Mapping]]=..., request_uuid: _Optional[bytes]=..., uuid: _Optional[bytes]=..., flags: _Optional[int]=...) -> None:
+    def __init__(self, to_destination: _Optional[_Union[Destination, _Mapping]]=..., from_destination: _Optional[_Union[Destination, _Mapping]]=..., protobuf_message_as_bytes: _Optional[bytes]=..., session_info_request: _Optional[_Union[SessionInfoRequest, _Mapping]]=..., session_info: _Optional[bytes]=..., signature_data: _Optional[_Union[_signatures_pb2.SignatureData, _Mapping]]=..., signedMessageStatus: _Optional[_Union[MessageStatus, _Mapping]]=..., request_uuid: _Optional[bytes]=..., uuid: _Optional[bytes]=..., flags: _Optional[int]=..., message_frame: _Optional[_Union[MessageFrame, _Mapping]]=...) -> None:
         ...

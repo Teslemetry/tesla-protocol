@@ -346,9 +346,9 @@
         "typescript": "packages/typescript/src/command",
         "python": "packages/python/tesla_protocol/command"
       },
-      "messages": 332,
-      "enums": 105,
-      "fields": 1498,
+      "messages": 337,
+      "enums": 106,
+      "fields": 1520,
       "files": [
         {
           "package": "CarServer",
@@ -9290,6 +9290,33 @@
           "imports": [],
           "messages": [
             {
+              "fqn": ".Errors.KeyNotFoundContext",
+              "name": "KeyNotFoundContext",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "public_key",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "handle",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
               "fqn": ".Errors.NominalError",
               "name": "NominalError",
               "fields": [
@@ -9298,6 +9325,14 @@
                   "name": "genericError",
                   "type": "TYPE_ENUM",
                   "type_name": ".Errors.GenericError_E",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 8,
+                  "name": "keyNotFoundContext",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".Errors.KeyNotFoundContext",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 }
@@ -9345,6 +9380,14 @@
                 {
                   "number": 7,
                   "name": "GENERICERROR_NOT_ALLOWED_OVER_TRANSPORT"
+                },
+                {
+                  "number": 8,
+                  "name": "GENERICERROR_KEY_NOT_FOUND"
+                },
+                {
+                  "number": 9,
+                  "name": "GENERICERROR_NOT_SUPPORTED"
                 }
               ],
               "reserved_ranges": [],
@@ -9392,8 +9435,24 @@
                   "name": "ROLE_CHARGING_MANAGER"
                 },
                 {
+                  "number": 7,
+                  "name": "ROLE_SERVICE_TECH"
+                },
+                {
                   "number": 8,
                   "name": "ROLE_GUEST"
+                },
+                {
+                  "number": 9,
+                  "name": "ROLE_RIDER"
+                },
+                {
+                  "number": 10,
+                  "name": "ROLE_PREDELIVERY"
+                },
+                {
+                  "number": 11,
+                  "name": "ROLE_INFOTAINMENT"
                 }
               ],
               "reserved_ranges": [],
@@ -9699,6 +9758,14 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": "identity_type"
+                },
+                {
+                  "number": 4,
+                  "name": "identified_key",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".Signatures.IdentifiedKey",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "identity_type"
                 }
               ],
               "oneofs": [
@@ -9801,6 +9868,103 @@
               "nested_enums": []
             },
             {
+              "fqn": ".Signatures.Present_Key_Signature_Data",
+              "name": "Present_Key_Signature_Data",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "auth_token",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".Signatures.AES_GCM_Detached_Signature_Data",
+              "name": "AES_GCM_Detached_Signature_Data",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "epoch",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "counter",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "expires_at",
+                  "type": "TYPE_FIXED32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "nonce",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 5,
+                  "name": "tag",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".Signatures.Certificate_ECDSA_Signature_Data",
+              "name": "Certificate_ECDSA_Signature_Data",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "certificate_chain_der",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "signature",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
               "fqn": ".Signatures.HMAC_Signature_Data",
               "name": "HMAC_Signature_Data",
               "fields": [
@@ -9875,6 +10039,14 @@
                   "oneof": null
                 },
                 {
+                  "number": 2,
+                  "name": "Present_Key_data",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".Signatures.Present_Key_Signature_Data",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sig_type"
+                },
+                {
                   "number": 5,
                   "name": "AES_GCM_Personalized_data",
                   "type": "TYPE_MESSAGE",
@@ -9903,6 +10075,22 @@
                   "name": "AES_GCM_Response_data",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".Signatures.AES_GCM_Response_Signature_Data",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sig_type"
+                },
+                {
+                  "number": 10,
+                  "name": "AES_GCM_Detached_data",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".Signatures.AES_GCM_Detached_Signature_Data",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sig_type"
+                },
+                {
+                  "number": 11,
+                  "name": "Certificate_ECDSA_data",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".Signatures.Certificate_ECDSA_Signature_Data",
                   "label": "LABEL_OPTIONAL",
                   "oneof": "sig_type"
                 }
@@ -9990,6 +10178,14 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
+                },
+                {
+                  "number": 7,
+                  "name": "field_7",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
                 }
               ],
               "oneofs": [],
@@ -10045,6 +10241,10 @@
                   "name": "TAG_FAULT"
                 },
                 {
+                  "number": 10,
+                  "name": "TAG_COMMAND_PREFIX"
+                },
+                {
                   "number": 255,
                   "name": "TAG_END"
                 }
@@ -10061,6 +10261,22 @@
                   "name": "SIGNATURE_TYPE_AES_GCM"
                 },
                 {
+                  "number": 1,
+                  "name": "SIGNATURE_TYPE_ECDSA"
+                },
+                {
+                  "number": 2,
+                  "name": "SIGNATURE_TYPE_PRESENT_KEY"
+                },
+                {
+                  "number": 3,
+                  "name": "SIGNATURE_TYPE_AES_GCM_TOKEN"
+                },
+                {
+                  "number": 4,
+                  "name": "SIGNATURE_TYPE_ECDSA_PERSONALIZED"
+                },
+                {
                   "number": 5,
                   "name": "SIGNATURE_TYPE_AES_GCM_PERSONALIZED"
                 },
@@ -10075,6 +10291,14 @@
                 {
                   "number": 9,
                   "name": "SIGNATURE_TYPE_AES_GCM_RESPONSE"
+                },
+                {
+                  "number": 10,
+                  "name": "SIGNATURE_TYPE_AES_GCM_DETACHED"
+                },
+                {
+                  "number": 11,
+                  "name": "SIGNATURE_TYPE_CERTIFICATE_ECDSA"
                 }
               ],
               "reserved_ranges": [
@@ -10083,6 +10307,22 @@
                   6
                 ]
               ],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".Signatures.IdentifiedKey",
+              "name": "IdentifiedKey",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "IDENTIFIEDKEY_UNKNOWN"
+                },
+                {
+                  "number": 1,
+                  "name": "IDENTIFIEDKEY_ROOT_KEY"
+                }
+              ],
+              "reserved_ranges": [],
               "reserved_names": []
             },
             {
@@ -10096,6 +10336,10 @@
                 {
                   "number": 1,
                   "name": "SESSION_INFO_STATUS_KEY_NOT_ON_WHITELIST"
+                },
+                {
+                  "number": 2,
+                  "name": "SESSION_INFO_STATUS_INVALID_HANDLE"
                 }
               ],
               "reserved_ranges": [],
@@ -10182,6 +10426,57 @@
                 {
                   "number": 2,
                   "name": "challenge",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "handle",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "identified_key",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".Signatures.IdentifiedKey",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".UniversalMessage.MessageFrame",
+              "name": "MessageFrame",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "chunk_index",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "total_chunks",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "data",
                   "type": "TYPE_BYTES",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -10275,6 +10570,14 @@
                   "name": "flags",
                   "type": "TYPE_UINT32",
                   "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 53,
+                  "name": "message_frame",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".UniversalMessage.MessageFrame",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 }
@@ -10478,6 +10781,10 @@
                 {
                   "number": 28,
                   "name": "MESSAGEFAULT_ERROR_REQUIRES_RESPONSE_ENCRYPTION"
+                },
+                {
+                  "number": 29,
+                  "name": "MESSAGEFAULT_ERROR_COMMAND_REQUIRES_PHYSICAL_PROXIMITY"
                 }
               ],
               "reserved_ranges": [],
@@ -10494,6 +10801,18 @@
                 {
                   "number": 1,
                   "name": "FLAG_ENCRYPT_RESPONSE"
+                },
+                {
+                  "number": 2,
+                  "name": "FLAG_SUPPORTS_MESSAGE_FRAMING"
+                },
+                {
+                  "number": 3,
+                  "name": "FLAG_COMPRESSED_ZLIB"
+                },
+                {
+                  "number": 4,
+                  "name": "FLAG_SUPPORTS_COMPRESSION_ZLIB"
                 }
               ],
               "reserved_ranges": [],
@@ -11548,8 +11867,20 @@
                   "name": "SIGNATURE_TYPE_NONE"
                 },
                 {
+                  "number": 1,
+                  "name": "SIGNATURE_TYPE_ECDSA"
+                },
+                {
                   "number": 2,
                   "name": "SIGNATURE_TYPE_PRESENT_KEY"
+                },
+                {
+                  "number": 3,
+                  "name": "SIGNATURE_TYPE_AES_GCM_TOKEN"
+                },
+                {
+                  "number": 4,
+                  "name": "SIGNATURE_TYPE_UNSIGNED"
                 }
               ],
               "reserved_ranges": [],
@@ -44023,9 +44354,9 @@
   "totals": {
     "source_files": 39,
     "groups": 7,
-    "messages": 893,
-    "enums": 251,
-    "fields": 2903
+    "messages": 898,
+    "enums": 252,
+    "fields": 2925
   },
   "registration": {
     "consistent": true,

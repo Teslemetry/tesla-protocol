@@ -11,7 +11,10 @@ DESCRIPTOR: _descriptor.FileDescriptor
 class SignatureType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     SIGNATURE_TYPE_NONE: _ClassVar[SignatureType]
+    SIGNATURE_TYPE_ECDSA: _ClassVar[SignatureType]
     SIGNATURE_TYPE_PRESENT_KEY: _ClassVar[SignatureType]
+    SIGNATURE_TYPE_AES_GCM_TOKEN: _ClassVar[SignatureType]
+    SIGNATURE_TYPE_UNSIGNED: _ClassVar[SignatureType]
 
 class KeyFormFactor(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -212,7 +215,10 @@ class Gear_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     GEAR_REVERSE: _ClassVar[Gear_E]
     GEAR_NEUTRAL: _ClassVar[Gear_E]
 SIGNATURE_TYPE_NONE: SignatureType
+SIGNATURE_TYPE_ECDSA: SignatureType
 SIGNATURE_TYPE_PRESENT_KEY: SignatureType
+SIGNATURE_TYPE_AES_GCM_TOKEN: SignatureType
+SIGNATURE_TYPE_UNSIGNED: SignatureType
 KEY_FORM_FACTOR_UNKNOWN: KeyFormFactor
 KEY_FORM_FACTOR_NFC_CARD: KeyFormFactor
 KEY_FORM_FACTOR_3_BUTTON_BLE_CAR_KEYFOB: KeyFormFactor

@@ -21,24 +21,40 @@ enum Tag
     TAG_FLAGS           = 7;
     TAG_REQUEST_HASH    = 8;
     TAG_FAULT           = 9;
+    TAG_COMMAND_PREFIX  = 10;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     TAG_END             = 255;
 }
 
 enum SignatureType
 {
     SIGNATURE_TYPE_AES_GCM = 0;
+    SIGNATURE_TYPE_ECDSA                = 1;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    SIGNATURE_TYPE_PRESENT_KEY          = 2;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    SIGNATURE_TYPE_AES_GCM_TOKEN        = 3;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    SIGNATURE_TYPE_ECDSA_PERSONALIZED   = 4;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     SIGNATURE_TYPE_AES_GCM_PERSONALIZED = 5;
     SIGNATURE_TYPE_HMAC                 = 6;
     reserved 7;
     SIGNATURE_TYPE_HMAC_PERSONALIZED    = 8;
     SIGNATURE_TYPE_AES_GCM_RESPONSE     = 9;
+    SIGNATURE_TYPE_AES_GCM_DETACHED     = 10;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    SIGNATURE_TYPE_CERTIFICATE_ECDSA    = 11;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
+
+// ===== TESLEMETRY-EXT BEGIN =====
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+enum IdentifiedKey {
+    IDENTIFIEDKEY_UNKNOWN  = 0;
+    IDENTIFIEDKEY_ROOT_KEY = 1;
+}
+// ===== TESLEMETRY-EXT END =====
 
 message KeyIdentity {
     reserved 2;
     oneof identity_type {
         bytes public_key = 1;
         uint32 handle = 3;
+        IdentifiedKey identified_key = 4;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     }
 }
 
@@ -56,6 +72,30 @@ message AES_GCM_Response_Signature_Data {
     bytes  tag     = 3;
 }
 
+// ===== TESLEMETRY-EXT BEGIN =====
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message Present_Key_Signature_Data {
+    bytes auth_token = 1;
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+// Names of fields 1, 2, 4 and 5 not recovered.
+message AES_GCM_Detached_Signature_Data {
+    bytes   epoch       = 1;
+    uint32  counter     = 2;
+    fixed32 expires_at  = 3;
+    bytes   nonce       = 4;
+    bytes   tag         = 5;
+}
+
+// Signs with a key vouched for by a DER certificate chain.
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message Certificate_ECDSA_Signature_Data {
+    bytes certificate_chain_der = 1;
+    bytes signature             = 2; // name not recovered
+}
+// ===== TESLEMETRY-EXT END =====
+
 message HMAC_Signature_Data {
     bytes tag = 1;
 }
@@ -71,10 +111,13 @@ message SignatureData {
     reserved 7;
     KeyIdentity    signer_identity          = 1;
     oneof sig_type {
+        Present_Key_Signature_Data          Present_Key_data          = 2;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
         AES_GCM_Personalized_Signature_Data AES_GCM_Personalized_data = 5;
         HMAC_Signature_Data                 session_info_tag          = 6;
         HMAC_Personalized_Signature_Data    HMAC_Personalized_data    = 8;
         AES_GCM_Response_Signature_Data     AES_GCM_Response_data     = 9;
+        AES_GCM_Detached_Signature_Data     AES_GCM_Detached_data     = 10;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+        Certificate_ECDSA_Signature_Data    Certificate_ECDSA_data    = 11;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     }
 }
 
@@ -85,6 +128,7 @@ message GetSessionInfoRequest {
 enum Session_Info_Status {
     SESSION_INFO_STATUS_OK = 0;
     SESSION_INFO_STATUS_KEY_NOT_ON_WHITELIST = 1;
+    SESSION_INFO_STATUS_INVALID_HANDLE = 2;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 
@@ -95,4 +139,5 @@ message SessionInfo {
     fixed32 clock_time         = 4;
     Session_Info_Status status = 5;
     uint32  handle             = 6;
+    uint32  field_7            = 7;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
 }
