@@ -348,7 +348,7 @@
       },
       "messages": 344,
       "enums": 106,
-      "fields": 1606,
+      "fields": 1608,
       "files": [
         {
           "package": "CarServer",
@@ -17330,6 +17330,14 @@
                   "oneof": "optional_inlet_heater_supported"
                 },
                 {
+                  "number": 53,
+                  "name": "field_53",
+                  "type": "TYPE_UINT64",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_field_53"
+                },
+                {
                   "number": 54,
                   "name": "mobile_dashcam_viewer_enabled",
                   "type": "TYPE_BOOL",
@@ -17440,6 +17448,14 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": "optional_deck_lights_allowed"
+                },
+                {
+                  "number": 70,
+                  "name": "field_70",
+                  "type": "TYPE_UINT64",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_field_70"
                 }
               ],
               "oneofs": [
@@ -17485,6 +17501,7 @@
                 "optional_accessory_lightbar_middle_on",
                 "optional_inlet_heater_on",
                 "optional_inlet_heater_supported",
+                "optional_field_53",
                 "optional_mobile_dashcam_viewer_enabled",
                 "optional_car_wrap_enabled",
                 "optional_dashcam_last_save_epoch",
@@ -17497,7 +17514,8 @@
                 "optional_remote_sketchpad_available",
                 "optional_deck_lights_on",
                 "optional_hazards_on",
-                "optional_deck_lights_allowed"
+                "optional_deck_lights_allowed",
+                "optional_field_70"
               ],
               "reserved_ranges": [],
               "reserved_names": [],
@@ -45232,7 +45250,7 @@
     "groups": 7,
     "messages": 905,
     "enums": 252,
-    "fields": 3011
+    "fields": 3013
   },
   "registration": {
     "consistent": true,

@@ -16,14 +16,15 @@
   release. Callers that hard-code numbers, or reference a removed `*_UNKNOWN` value, must update.
   The new values are not yet confirmed on a live vehicle.
 - **`VehicleData.vehicle_state = 18` is now decoded.** The opaque `bytes unknown = 18` becomes
-  `CurrentVehicleState vehicle_state = 18`. This covers 63 fields, including `feature_bitmask`,
+  `CurrentVehicleState vehicle_state = 18`. This covers 65 fields, including `feature_bitmask`,
   inlet heater, wiper service, photobooth, remote sketchpad, the Dog Mode live-activity key,
   car wrap, FSD stats, and deck lights/hazards. The wire format is unchanged: both are
   length-delimited. The generated field is renamed from `unknown` to `vehicleState` (TypeScript)
   / `vehicle_state` (Python), and its type changes from bytes to a message. The new helper
   messages are `DashcamUtils`, `AutoparkStyle`, `AutoparkVersion`, `AutoparkState` and
-  `SpoilerState`. Every `CurrentVehicleState` field is marked unconfirmed until it is seen on a
-  live vehicle.
+  `SpoilerState`. Tags 53 and 70 are varint placeholders (`field_53`, `field_70`) whose names
+  and types are not yet known. Fields seen on a live vehicle are marked confirmed; the rest are
+  marked unconfirmed until they are.
 - **Six misplaced fields are removed from `VehicleState`** (the legacy surface at
   `VehicleData.legacy_vehicle_state = 6`):
   - `deck_lights_on`, `hazards_on` and `deck_lights_allowed` (67-69) now live on

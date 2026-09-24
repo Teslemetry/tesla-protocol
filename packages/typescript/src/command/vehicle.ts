@@ -2356,7 +2356,7 @@ export interface VehicleState_GuestMode {
  * legacy surface.
  */
 export interface CurrentVehicleState {
-  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  /** confirmed on a live vehicle; name not recovered */
   timestamp: Date | undefined;
   apiVersion?: number | undefined;
   notificationsSupported?: boolean | undefined;
@@ -2380,18 +2380,18 @@ export interface CurrentVehicleState {
   vehicleSelfTestProgress?:
     | number
     | undefined;
-  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  /** confirmed on a live vehicle */
   autoparkVersion:
     | AutoparkVersion
     | undefined;
-  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  /** confirmed on a live vehicle */
   autoparkState: AutoparkState | undefined;
   calendarSupported?: boolean | undefined;
   dashcamClipSaveAvailable?: boolean | undefined;
   dashcamState?:
     | DashCamState
     | undefined;
-  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  /** confirmed on a live vehicle */
   featureBitmask: number[];
   serviceMode?: boolean | undefined;
   serviceModePlus?: boolean | undefined;
@@ -2424,6 +2424,7 @@ export interface CurrentVehicleState {
   accessoryLightbarMiddleOn?: boolean | undefined;
   inletHeaterOn?: boolean | undefined;
   inletHeaterSupported?: boolean | undefined;
+  field53?: number | undefined;
   mobileDashcamViewerEnabled?: boolean | undefined;
   carWrapEnabled?: boolean | undefined;
   dashcamLastSaveEpoch?: number | undefined;
@@ -2435,12 +2436,13 @@ export interface CurrentVehicleState {
   fsdStatsSupported?:
     | boolean
     | undefined;
-  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  /** confirmed on a live vehicle; name not recovered */
   dashcamUtils: DashcamUtils | undefined;
   remoteSketchpadAvailable?: boolean | undefined;
   deckLightsOn?: boolean | undefined;
   hazardsOn?: boolean | undefined;
   deckLightsAllowed?: boolean | undefined;
+  field70?: number | undefined;
 }
 
 export interface DashcamUtils {
@@ -12489,6 +12491,7 @@ function createBaseCurrentVehicleState(): CurrentVehicleState {
     accessoryLightbarMiddleOn: undefined,
     inletHeaterOn: undefined,
     inletHeaterSupported: undefined,
+    field53: undefined,
     mobileDashcamViewerEnabled: undefined,
     carWrapEnabled: undefined,
     dashcamLastSaveEpoch: undefined,
@@ -12503,6 +12506,7 @@ function createBaseCurrentVehicleState(): CurrentVehicleState {
     deckLightsOn: undefined,
     hazardsOn: undefined,
     deckLightsAllowed: undefined,
+    field70: undefined,
   };
 }
 
@@ -12657,6 +12661,9 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
     if (message.inletHeaterSupported !== undefined) {
       writer.uint32(416).bool(message.inletHeaterSupported);
     }
+    if (message.field53 !== undefined) {
+      writer.uint32(424).uint64(message.field53);
+    }
     if (message.mobileDashcamViewerEnabled !== undefined) {
       writer.uint32(432).bool(message.mobileDashcamViewerEnabled);
     }
@@ -12698,6 +12705,9 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
     }
     if (message.deckLightsAllowed !== undefined) {
       writer.uint32(552).bool(message.deckLightsAllowed);
+    }
+    if (message.field70 !== undefined) {
+      writer.uint32(560).uint64(message.field70);
     }
     return writer;
   },
@@ -13111,6 +13121,14 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
           message.inletHeaterSupported = reader.bool();
           continue;
         }
+        case 53: {
+          if (tag !== 424) {
+            break;
+          }
+
+          message.field53 = longToNumber(reader.uint64());
+          continue;
+        }
         case 54: {
           if (tag !== 432) {
             break;
@@ -13223,6 +13241,14 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
           message.deckLightsAllowed = reader.bool();
           continue;
         }
+        case 70: {
+          if (tag !== 560) {
+            break;
+          }
+
+          message.field70 = longToNumber(reader.uint64());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -13325,6 +13351,7 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
       inletHeaterSupported: isSet(object.inletHeaterSupported)
         ? globalThis.Boolean(object.inletHeaterSupported)
         : undefined,
+      field53: isSet(object.field53) ? globalThis.Number(object.field53) : undefined,
       mobileDashcamViewerEnabled: isSet(object.mobileDashcamViewerEnabled)
         ? globalThis.Boolean(object.mobileDashcamViewerEnabled)
         : undefined,
@@ -13355,6 +13382,7 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
       deckLightsOn: isSet(object.deckLightsOn) ? globalThis.Boolean(object.deckLightsOn) : undefined,
       hazardsOn: isSet(object.hazardsOn) ? globalThis.Boolean(object.hazardsOn) : undefined,
       deckLightsAllowed: isSet(object.deckLightsAllowed) ? globalThis.Boolean(object.deckLightsAllowed) : undefined,
+      field70: isSet(object.field70) ? globalThis.Number(object.field70) : undefined,
     };
   },
 
@@ -13507,6 +13535,9 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
     if (message.inletHeaterSupported !== undefined) {
       obj.inletHeaterSupported = message.inletHeaterSupported;
     }
+    if (message.field53 !== undefined) {
+      obj.field53 = Math.round(message.field53);
+    }
     if (message.mobileDashcamViewerEnabled !== undefined) {
       obj.mobileDashcamViewerEnabled = message.mobileDashcamViewerEnabled;
     }
@@ -13548,6 +13579,9 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
     }
     if (message.deckLightsAllowed !== undefined) {
       obj.deckLightsAllowed = message.deckLightsAllowed;
+    }
+    if (message.field70 !== undefined) {
+      obj.field70 = Math.round(message.field70);
     }
     return obj;
   },
@@ -13616,6 +13650,7 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
     message.accessoryLightbarMiddleOn = object.accessoryLightbarMiddleOn ?? undefined;
     message.inletHeaterOn = object.inletHeaterOn ?? undefined;
     message.inletHeaterSupported = object.inletHeaterSupported ?? undefined;
+    message.field53 = object.field53 ?? undefined;
     message.mobileDashcamViewerEnabled = object.mobileDashcamViewerEnabled ?? undefined;
     message.carWrapEnabled = object.carWrapEnabled ?? undefined;
     message.dashcamLastSaveEpoch = object.dashcamLastSaveEpoch ?? undefined;
@@ -13632,6 +13667,7 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
     message.deckLightsOn = object.deckLightsOn ?? undefined;
     message.hazardsOn = object.hazardsOn ?? undefined;
     message.deckLightsAllowed = object.deckLightsAllowed ?? undefined;
+    message.field70 = object.field70 ?? undefined;
     return message;
   },
 };

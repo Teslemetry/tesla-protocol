@@ -731,8 +731,8 @@ message VehicleState {
 // requested with GetVehicleData.getVehicleState. VehicleState (tag 6) is the
 // legacy surface.
 message CurrentVehicleState {
-    google.protobuf.Timestamp timestamp = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
-    oneof optional_api_version { uint32 api_version = 2; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    google.protobuf.Timestamp timestamp = 1;  // confirmed on a live vehicle; name not recovered
+    oneof optional_api_version { uint32 api_version = 2; }  // confirmed on a live vehicle
     oneof optional_notifications_supported { bool notifications_supported = 3; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_remote_start_supported { bool remote_start_supported = 4; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_remote_start_enabled { bool remote_start_enabled = 5; }  // UNCONFIRMED: not yet confirmed on a live vehicle
@@ -746,12 +746,12 @@ message CurrentVehicleState {
     oneof optional_webcam_available { bool webcam_available = 16; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_vehicle_self_test_requested { bool vehicle_self_test_requested = 17; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_vehicle_self_test_progress { uint32 vehicle_self_test_progress = 18; }  // UNCONFIRMED: not yet confirmed on a live vehicle
-    AutoparkVersion autopark_version = 19;  // UNCONFIRMED: not yet confirmed on a live vehicle
-    AutoparkState autopark_state = 20;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    AutoparkVersion autopark_version = 19;  // confirmed on a live vehicle
+    AutoparkState autopark_state = 20;  // confirmed on a live vehicle
     oneof optional_calendar_supported { bool calendar_supported = 21; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_dashcam_clip_save_available { bool dashcam_clip_save_available = 22; }  // UNCONFIRMED: not yet confirmed on a live vehicle
-    oneof optional_dashcam_state { DashCamState dashcam_state = 23; }  // UNCONFIRMED: not yet confirmed on a live vehicle
-    repeated uint32 feature_bitmask = 24;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_dashcam_state { DashCamState dashcam_state = 23; }  // confirmed on a live vehicle
+    repeated uint32 feature_bitmask = 24;  // confirmed on a live vehicle
     oneof optional_service_mode { bool service_mode = 25; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_service_mode_plus { bool service_mode_plus = 26; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_service_mode_auth { string service_mode_auth = 27; }  // UNCONFIRMED: not yet confirmed on a live vehicle
@@ -760,7 +760,7 @@ message CurrentVehicleState {
     VehicleState.GuestMode guest_mode = 30;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
     oneof optional_drive_rail_on { bool drive_rail_on = 31; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_pin_to_drive_enabled { bool pin_to_drive_enabled = 32; }  // UNCONFIRMED: not yet confirmed on a live vehicle
-    oneof optional_pin_to_drive_pin_set { bool pin_to_drive_pin_set = 33; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_pin_to_drive_pin_set { bool pin_to_drive_pin_set = 33; }  // confirmed on a live vehicle
     oneof optional_frontfoglights_on { bool frontfoglights_on = 34; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_rearfoglights_on { bool rearfoglights_on = 35; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_headlights_on { bool headlights_on = 36; }  // UNCONFIRMED: not yet confirmed on a live vehicle
@@ -770,7 +770,7 @@ message CurrentVehicleState {
     oneof optional_transport_mode { bool transport_mode = 40; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_factory_mode { bool factory_mode = 41; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_training_wheels_mode { bool training_wheels_mode = 42; }  // UNCONFIRMED: not yet confirmed on a live vehicle
-    oneof optional_gtw_diag_level { GtwDiagLevel gtw_diag_level = 43; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_gtw_diag_level { GtwDiagLevel gtw_diag_level = 43; }  // confirmed on a live vehicle
     oneof optional_trailer_light_test_available { bool trailer_light_test_available = 44; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_trailer_light_test_requested { bool trailer_light_test_requested = 45; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_truck_bed_lights_brightness { uint32 truck_bed_lights_brightness = 46; }  // UNCONFIRMED: not yet confirmed on a live vehicle
@@ -780,25 +780,27 @@ message CurrentVehicleState {
     oneof optional_accessory_lightbar_middle_on { bool accessory_lightbar_middle_on = 50; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_inlet_heater_on { bool inlet_heater_on = 51; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_inlet_heater_supported { bool inlet_heater_supported = 52; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_field_53 { uint64 field_53 = 53; }  // confirmed on a live vehicle (varint); name and type not recovered
     oneof optional_mobile_dashcam_viewer_enabled { bool mobile_dashcam_viewer_enabled = 54; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_car_wrap_enabled { bool car_wrap_enabled = 55; }  // UNCONFIRMED: not yet confirmed on a live vehicle
-    oneof optional_dashcam_last_save_epoch { uint64 dashcam_last_save_epoch = 56; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_dashcam_last_save_epoch { uint64 dashcam_last_save_epoch = 56; }  // confirmed on a live vehicle
     oneof optional_wiper_service_request { bool wiper_service_request = 58; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_remote_photobooth_available { bool remote_photobooth_available = 59; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_dog_mode_live_activity_key { string dog_mode_live_activity_key = 60; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_photobooth_last_save_epoch { uint64 photobooth_last_save_epoch = 61; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_photobooth_last_update_epoch { uint64 photobooth_last_update_epoch = 62; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_fsd_stats_supported { bool fsd_stats_supported = 63; }  // UNCONFIRMED: not yet confirmed on a live vehicle
-    DashcamUtils dashcam_utils = 65;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    DashcamUtils dashcam_utils = 65;  // confirmed on a live vehicle; name not recovered
     oneof optional_remote_sketchpad_available { bool remote_sketchpad_available = 66; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_deck_lights_on { bool deck_lights_on = 67; }  // UNCONFIRMED: not yet confirmed on a live vehicle
-    oneof optional_hazards_on { bool hazards_on = 68; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_hazards_on { bool hazards_on = 68; }  // confirmed on a live vehicle
     oneof optional_deck_lights_allowed { bool deck_lights_allowed = 69; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_field_70 { uint64 field_70 = 70; }  // confirmed on a live vehicle (varint); name and type not recovered
 }
 
 message DashcamUtils {
-    oneof optional_delete_dashcam_clips_available { bool delete_dashcam_clips_available = 1; }  // UNCONFIRMED: not yet confirmed on a live vehicle
-    oneof optional_format_usb_available { bool format_usb_available = 2; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_delete_dashcam_clips_available { bool delete_dashcam_clips_available = 1; }  // confirmed on a live vehicle
+    oneof optional_format_usb_available { bool format_usb_available = 2; }  // confirmed on a live vehicle
 }
 
 // Void-oneof states whose alternatives have no recovered names.
@@ -807,11 +809,11 @@ message AutoparkStyle {
 }
 
 message AutoparkVersion {
-    reserved 1, 2, 3; // alternatives; UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    reserved 1, 2, 3; // alternatives; 1 confirmed on a live vehicle, 2-3 UNCONFIRMED; names not recovered
 }
 
 message AutoparkState {
-    reserved 1 to 12; // alternatives; UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    reserved 1 to 12; // alternatives; 2 confirmed on a live vehicle, the rest UNCONFIRMED; names not recovered
 }
 
 message SpoilerState {
