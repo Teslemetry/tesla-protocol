@@ -346,9 +346,9 @@
         "typescript": "packages/typescript/src/command",
         "python": "packages/python/tesla_protocol/command"
       },
-      "messages": 328,
+      "messages": 332,
       "enums": 103,
-      "fields": 1468,
+      "fields": 1493,
       "files": [
         {
           "package": "CarServer",
@@ -381,6 +381,10 @@
                 [
                   3,
                   5
+                ],
+                [
+                  6,
+                  8
                 ]
               ],
               "reserved_names": [],
@@ -1400,6 +1404,14 @@
                   "oneof": "vehicle_action_msg"
                 },
                 {
+                  "number": 147,
+                  "name": "setUpkeepUsernameAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetUpkeepUsernameAction",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
                   "number": 149,
                   "name": "bandwidthTest",
                   "type": "TYPE_MESSAGE",
@@ -1420,6 +1432,46 @@
                   "name": "cancelVehicleDataSubscription",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".CarServer.CancelVehicleDataSubscription",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
+                  "number": 177,
+                  "name": "prepareMobileUploadAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.PrepareMobileUploadAction",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
+                  "number": 178,
+                  "name": "putMobileUploadChunkAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.PutMobileUploadChunkAction",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
+                  "number": 180,
+                  "name": "displayStateAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.DisplayStateAction",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
+                  "number": 694177,
+                  "name": "drivingSetCruiseSpeedLimitAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.DrivingSetCruiseSpeedLimitAction",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
+                  "number": 698038,
+                  "name": "setDeckLightAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetDeckLightAction",
                   "label": "LABEL_OPTIONAL",
                   "oneof": "vehicle_action_msg"
                 }
@@ -1965,6 +2017,14 @@
                   "oneof": null
                 },
                 {
+                  "number": 3,
+                  "name": "field_3",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 4,
                   "name": "overwriteOldestIfFull",
                   "type": "TYPE_BOOL",
@@ -2187,6 +2247,30 @@
                   "oneof": null
                 },
                 {
+                  "number": 2,
+                  "name": "interiorImage",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.DogModeLiveActivityData.DogModeImageData",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "field_3",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "field_4",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".google.protobuf.Timestamp",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 5,
                   "name": "insideTemperatureCelsius",
                   "type": "TYPE_FLOAT",
@@ -2222,7 +2306,35 @@
               "oneofs": [],
               "reserved_ranges": [],
               "reserved_names": [],
-              "nested_messages": [],
+              "nested_messages": [
+                {
+                  "fqn": ".CarServer.DogModeLiveActivityData.DogModeImageData",
+                  "name": "DogModeImageData",
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "wrappedKey",
+                      "type": "TYPE_BYTES",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 2,
+                      "name": "encryptedImage",
+                      "type": "TYPE_BYTES",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    }
+                  ],
+                  "oneofs": [],
+                  "reserved_ranges": [],
+                  "reserved_names": [],
+                  "nested_messages": [],
+                  "nested_enums": []
+                }
+              ],
               "nested_enums": [
                 {
                   "fqn": ".CarServer.DogModeLiveActivityData.DisabledReason",
@@ -3917,6 +4029,38 @@
               "name": "DestinationCharging",
               "fields": [
                 {
+                  "number": 1,
+                  "name": "id",
+                  "type": "TYPE_INT64",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "amenities",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "city",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "country",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 5,
                   "name": "distance_miles",
                   "type": "TYPE_FLOAT",
@@ -3925,8 +4069,40 @@
                   "oneof": null
                 },
                 {
+                  "number": 6,
+                  "name": "district",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 7,
+                  "name": "location",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.LatLong",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 8,
+                  "name": "name",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 9,
                   "name": "postal_code",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 10,
+                  "name": "state",
                   "type": "TYPE_STRING",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -4129,7 +4305,16 @@
             {
               "fqn": ".CarServer.MediaPlayAction",
               "name": "MediaPlayAction",
-              "fields": [],
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "media_playback_status",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.MediaPlaybackStatus",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
               "oneofs": [],
               "reserved_ranges": [],
               "reserved_names": [],
@@ -7670,6 +7855,14 @@
                   "oneof": null
                 },
                 {
+                  "number": 2,
+                  "name": "field_2",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 3,
                   "name": "unit_preferences",
                   "type": "TYPE_MESSAGE",
@@ -7705,6 +7898,63 @@
               "fqn": ".CarServer.CancelVehicleDataSubscription",
               "name": "CancelVehicleDataSubscription",
               "fields": [],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.SetUpkeepUsernameAction",
+              "name": "SetUpkeepUsernameAction",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "username",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.DrivingSetCruiseSpeedLimitAction",
+              "name": "DrivingSetCruiseSpeedLimitAction",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "limitMph",
+                  "type": "TYPE_DOUBLE",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.SetDeckLightAction",
+              "name": "SetDeckLightAction",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "on",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
               "oneofs": [],
               "reserved_ranges": [],
               "reserved_names": [],
@@ -43291,9 +43541,9 @@
   "totals": {
     "source_files": 39,
     "groups": 7,
-    "messages": 889,
+    "messages": 893,
     "enums": 249,
-    "fields": 2873
+    "fields": 2898
   },
   "registration": {
     "consistent": true,

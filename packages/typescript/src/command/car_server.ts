@@ -9,6 +9,9 @@ import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import {
   ChargeSchedule,
   LatLong,
+  MediaPlaybackStatus,
+  mediaPlaybackStatusFromJSON,
+  mediaPlaybackStatusToJSON,
   OffPeakChargingTimes,
   PreconditioningTimes,
   PreconditionSchedule,
@@ -411,6 +414,10 @@ export interface VehicleAction {
   formatUsbAction?:
     | FormatUSBAction
     | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  setUpkeepUsernameAction?:
+    | SetUpkeepUsernameAction
+    | undefined;
   /** TESLEMETRY-EXT */
   bandwidthTest?:
     | BandwidthTest
@@ -420,7 +427,27 @@ export interface VehicleAction {
     | SetPhoneSettingPreferencesAction
     | undefined;
   /** TESLEMETRY-EXT */
-  cancelVehicleDataSubscription?: CancelVehicleDataSubscription | undefined;
+  cancelVehicleDataSubscription?:
+    | CancelVehicleDataSubscription
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  prepareMobileUploadAction?:
+    | PrepareMobileUploadAction
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  putMobileUploadChunkAction?:
+    | PutMobileUploadChunkAction
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  displayStateAction?:
+    | DisplayStateAction
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  drivingSetCruiseSpeedLimitAction?:
+    | DrivingSetCruiseSpeedLimitAction
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  setDeckLightAction?: SetDeckLightAction | undefined;
 }
 
 export interface GetVehicleData {
@@ -590,7 +617,8 @@ export interface PrepareMobileUploadAction {
   imageParams:
     | MobileImageUploadParams
     | undefined;
-  /** Tag 3 carries an additional bool flag not modeled here. */
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered. */
+  field3: boolean;
   overwriteOldestIfFull: boolean;
 }
 
@@ -776,7 +804,14 @@ export function putMobileUploadChunkResponse_StatusToJSON(object: PutMobileUploa
 /** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface DogModeLiveActivityData {
   disabledReason: DogModeLiveActivityData_DisabledReason;
-  /** Tags 2-4 carry additional live-activity fields not modeled here. */
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  interiorImage:
+    | DogModeLiveActivityData_DogModeImageData
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field3: string;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field4: Date | undefined;
   insideTemperatureCelsius: number;
   faultState: ClimateState_DogModeState;
   temperatureUnit: SetTemperatureUnitAction_Unit;
@@ -826,6 +861,16 @@ export function dogModeLiveActivityData_DisabledReasonToJSON(object: DogModeLive
     default:
       return "UNRECOGNIZED";
   }
+}
+
+/**
+ * UNCONFIRMED: not yet confirmed on a live vehicle. Both fields carry an
+ * encrypted envelope whose message type this repo does not publish.
+ */
+export interface DogModeLiveActivityData_DogModeImageData {
+  wrappedKey: Uint8Array;
+  /** name not recovered */
+  encryptedImage: Uint8Array;
 }
 
 export interface GetTirePressureState {
@@ -1374,8 +1419,20 @@ export interface NearbyChargingSites {
 
 /** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface DestinationCharging {
+  /**
+   * Tags 1-4, 6-8 and 10 are UNCONFIRMED: not yet confirmed on a live vehicle;
+   * names not recovered (they follow Superchargers' naming for the same data).
+   */
+  id: number;
+  amenities: string;
+  city: string;
+  country: string;
   distanceMiles: number;
+  district: string;
+  location: LatLong | undefined;
+  name: string;
   postalCode: string;
+  state: string;
   streetAddress: string;
   withinRange: boolean;
 }
@@ -1404,6 +1461,8 @@ export interface Superchargers {
 }
 
 export interface MediaPlayAction {
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  mediaPlaybackStatus: MediaPlaybackStatus;
 }
 
 export interface MediaUpdateVolume {
@@ -2849,6 +2908,8 @@ export interface PhoneUnitPreferences {
 
 export interface SetPhoneSettingPreferencesAction {
   fontSize: SetPhoneSettingPreferencesAction_FontSize;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field2: string;
   unitPreferences: PhoneUnitPreferences | undefined;
 }
 
@@ -2890,6 +2951,27 @@ export function setPhoneSettingPreferencesAction_FontSizeToJSON(
 }
 
 export interface CancelVehicleDataSubscription {
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface SetUpkeepUsernameAction {
+  /** name not recovered */
+  username: string;
+}
+
+/**
+ * Sets the cruise-control speed limit reported back as
+ * ClosuresState.cruise_speed_limit_mph.
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export interface DrivingSetCruiseSpeedLimitAction {
+  limitMph: number;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface SetDeckLightAction {
+  /** name not recovered */
+  on: boolean;
 }
 
 function createBaseAction(): Action {
@@ -3080,9 +3162,15 @@ function createBaseVehicleAction(): VehicleAction {
     fetchKeysInfoAction: undefined,
     deleteDashcamClipsAction: undefined,
     formatUsbAction: undefined,
+    setUpkeepUsernameAction: undefined,
     bandwidthTest: undefined,
     setPhoneSettingPreferencesAction: undefined,
     cancelVehicleDataSubscription: undefined,
+    prepareMobileUploadAction: undefined,
+    putMobileUploadChunkAction: undefined,
+    displayStateAction: undefined,
+    drivingSetCruiseSpeedLimitAction: undefined,
+    setDeckLightAction: undefined,
   };
 }
 
@@ -3508,6 +3596,9 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     if (message.formatUsbAction !== undefined) {
       FormatUSBAction.encode(message.formatUsbAction, writer.uint32(1170).fork()).join();
     }
+    if (message.setUpkeepUsernameAction !== undefined) {
+      SetUpkeepUsernameAction.encode(message.setUpkeepUsernameAction, writer.uint32(1178).fork()).join();
+    }
     if (message.bandwidthTest !== undefined) {
       BandwidthTest.encode(message.bandwidthTest, writer.uint32(1194).fork()).join();
     }
@@ -3517,6 +3608,22 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     }
     if (message.cancelVehicleDataSubscription !== undefined) {
       CancelVehicleDataSubscription.encode(message.cancelVehicleDataSubscription, writer.uint32(1370).fork()).join();
+    }
+    if (message.prepareMobileUploadAction !== undefined) {
+      PrepareMobileUploadAction.encode(message.prepareMobileUploadAction, writer.uint32(1418).fork()).join();
+    }
+    if (message.putMobileUploadChunkAction !== undefined) {
+      PutMobileUploadChunkAction.encode(message.putMobileUploadChunkAction, writer.uint32(1426).fork()).join();
+    }
+    if (message.displayStateAction !== undefined) {
+      DisplayStateAction.encode(message.displayStateAction, writer.uint32(1442).fork()).join();
+    }
+    if (message.drivingSetCruiseSpeedLimitAction !== undefined) {
+      DrivingSetCruiseSpeedLimitAction.encode(message.drivingSetCruiseSpeedLimitAction, writer.uint32(5553418).fork())
+        .join();
+    }
+    if (message.setDeckLightAction !== undefined) {
+      SetDeckLightAction.encode(message.setDeckLightAction, writer.uint32(5584306).fork()).join();
     }
     return writer;
   },
@@ -4578,6 +4685,14 @@ export const VehicleAction: MessageFns<VehicleAction> = {
           message.formatUsbAction = FormatUSBAction.decode(reader, reader.uint32());
           continue;
         }
+        case 147: {
+          if (tag !== 1178) {
+            break;
+          }
+
+          message.setUpkeepUsernameAction = SetUpkeepUsernameAction.decode(reader, reader.uint32());
+          continue;
+        }
         case 149: {
           if (tag !== 1194) {
             break;
@@ -4600,6 +4715,46 @@ export const VehicleAction: MessageFns<VehicleAction> = {
           }
 
           message.cancelVehicleDataSubscription = CancelVehicleDataSubscription.decode(reader, reader.uint32());
+          continue;
+        }
+        case 177: {
+          if (tag !== 1418) {
+            break;
+          }
+
+          message.prepareMobileUploadAction = PrepareMobileUploadAction.decode(reader, reader.uint32());
+          continue;
+        }
+        case 178: {
+          if (tag !== 1426) {
+            break;
+          }
+
+          message.putMobileUploadChunkAction = PutMobileUploadChunkAction.decode(reader, reader.uint32());
+          continue;
+        }
+        case 180: {
+          if (tag !== 1442) {
+            break;
+          }
+
+          message.displayStateAction = DisplayStateAction.decode(reader, reader.uint32());
+          continue;
+        }
+        case 694177: {
+          if (tag !== 5553418) {
+            break;
+          }
+
+          message.drivingSetCruiseSpeedLimitAction = DrivingSetCruiseSpeedLimitAction.decode(reader, reader.uint32());
+          continue;
+        }
+        case 698038: {
+          if (tag !== 5584306) {
+            break;
+          }
+
+          message.setDeckLightAction = SetDeckLightAction.decode(reader, reader.uint32());
           continue;
         }
       }
@@ -4965,12 +5120,30 @@ export const VehicleAction: MessageFns<VehicleAction> = {
         ? DeleteDashcamClipsAction.fromJSON(object.deleteDashcamClipsAction)
         : undefined,
       formatUsbAction: isSet(object.formatUsbAction) ? FormatUSBAction.fromJSON(object.formatUsbAction) : undefined,
+      setUpkeepUsernameAction: isSet(object.setUpkeepUsernameAction)
+        ? SetUpkeepUsernameAction.fromJSON(object.setUpkeepUsernameAction)
+        : undefined,
       bandwidthTest: isSet(object.bandwidthTest) ? BandwidthTest.fromJSON(object.bandwidthTest) : undefined,
       setPhoneSettingPreferencesAction: isSet(object.setPhoneSettingPreferencesAction)
         ? SetPhoneSettingPreferencesAction.fromJSON(object.setPhoneSettingPreferencesAction)
         : undefined,
       cancelVehicleDataSubscription: isSet(object.cancelVehicleDataSubscription)
         ? CancelVehicleDataSubscription.fromJSON(object.cancelVehicleDataSubscription)
+        : undefined,
+      prepareMobileUploadAction: isSet(object.prepareMobileUploadAction)
+        ? PrepareMobileUploadAction.fromJSON(object.prepareMobileUploadAction)
+        : undefined,
+      putMobileUploadChunkAction: isSet(object.putMobileUploadChunkAction)
+        ? PutMobileUploadChunkAction.fromJSON(object.putMobileUploadChunkAction)
+        : undefined,
+      displayStateAction: isSet(object.displayStateAction)
+        ? DisplayStateAction.fromJSON(object.displayStateAction)
+        : undefined,
+      drivingSetCruiseSpeedLimitAction: isSet(object.drivingSetCruiseSpeedLimitAction)
+        ? DrivingSetCruiseSpeedLimitAction.fromJSON(object.drivingSetCruiseSpeedLimitAction)
+        : undefined,
+      setDeckLightAction: isSet(object.setDeckLightAction)
+        ? SetDeckLightAction.fromJSON(object.setDeckLightAction)
         : undefined,
     };
   },
@@ -5427,6 +5600,9 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     if (message.formatUsbAction !== undefined) {
       obj.formatUsbAction = FormatUSBAction.toJSON(message.formatUsbAction);
     }
+    if (message.setUpkeepUsernameAction !== undefined) {
+      obj.setUpkeepUsernameAction = SetUpkeepUsernameAction.toJSON(message.setUpkeepUsernameAction);
+    }
     if (message.bandwidthTest !== undefined) {
       obj.bandwidthTest = BandwidthTest.toJSON(message.bandwidthTest);
     }
@@ -5437,6 +5613,23 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     }
     if (message.cancelVehicleDataSubscription !== undefined) {
       obj.cancelVehicleDataSubscription = CancelVehicleDataSubscription.toJSON(message.cancelVehicleDataSubscription);
+    }
+    if (message.prepareMobileUploadAction !== undefined) {
+      obj.prepareMobileUploadAction = PrepareMobileUploadAction.toJSON(message.prepareMobileUploadAction);
+    }
+    if (message.putMobileUploadChunkAction !== undefined) {
+      obj.putMobileUploadChunkAction = PutMobileUploadChunkAction.toJSON(message.putMobileUploadChunkAction);
+    }
+    if (message.displayStateAction !== undefined) {
+      obj.displayStateAction = DisplayStateAction.toJSON(message.displayStateAction);
+    }
+    if (message.drivingSetCruiseSpeedLimitAction !== undefined) {
+      obj.drivingSetCruiseSpeedLimitAction = DrivingSetCruiseSpeedLimitAction.toJSON(
+        message.drivingSetCruiseSpeedLimitAction,
+      );
+    }
+    if (message.setDeckLightAction !== undefined) {
+      obj.setDeckLightAction = SetDeckLightAction.toJSON(message.setDeckLightAction);
     }
     return obj;
   },
@@ -5918,6 +6111,10 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     message.formatUsbAction = (object.formatUsbAction !== undefined && object.formatUsbAction !== null)
       ? FormatUSBAction.fromPartial(object.formatUsbAction)
       : undefined;
+    message.setUpkeepUsernameAction =
+      (object.setUpkeepUsernameAction !== undefined && object.setUpkeepUsernameAction !== null)
+        ? SetUpkeepUsernameAction.fromPartial(object.setUpkeepUsernameAction)
+        : undefined;
     message.bandwidthTest = (object.bandwidthTest !== undefined && object.bandwidthTest !== null)
       ? BandwidthTest.fromPartial(object.bandwidthTest)
       : undefined;
@@ -5929,6 +6126,24 @@ export const VehicleAction: MessageFns<VehicleAction> = {
       (object.cancelVehicleDataSubscription !== undefined && object.cancelVehicleDataSubscription !== null)
         ? CancelVehicleDataSubscription.fromPartial(object.cancelVehicleDataSubscription)
         : undefined;
+    message.prepareMobileUploadAction =
+      (object.prepareMobileUploadAction !== undefined && object.prepareMobileUploadAction !== null)
+        ? PrepareMobileUploadAction.fromPartial(object.prepareMobileUploadAction)
+        : undefined;
+    message.putMobileUploadChunkAction =
+      (object.putMobileUploadChunkAction !== undefined && object.putMobileUploadChunkAction !== null)
+        ? PutMobileUploadChunkAction.fromPartial(object.putMobileUploadChunkAction)
+        : undefined;
+    message.displayStateAction = (object.displayStateAction !== undefined && object.displayStateAction !== null)
+      ? DisplayStateAction.fromPartial(object.displayStateAction)
+      : undefined;
+    message.drivingSetCruiseSpeedLimitAction =
+      (object.drivingSetCruiseSpeedLimitAction !== undefined && object.drivingSetCruiseSpeedLimitAction !== null)
+        ? DrivingSetCruiseSpeedLimitAction.fromPartial(object.drivingSetCruiseSpeedLimitAction)
+        : undefined;
+    message.setDeckLightAction = (object.setDeckLightAction !== undefined && object.setDeckLightAction !== null)
+      ? SetDeckLightAction.fromPartial(object.setDeckLightAction)
+      : undefined;
     return message;
   },
 };
@@ -7424,7 +7639,7 @@ export const MobileUploadParams: MessageFns<MobileUploadParams> = {
 };
 
 function createBasePrepareMobileUploadAction(): PrepareMobileUploadAction {
-  return { uploadParams: undefined, imageParams: undefined, overwriteOldestIfFull: false };
+  return { uploadParams: undefined, imageParams: undefined, field3: false, overwriteOldestIfFull: false };
 }
 
 export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = {
@@ -7434,6 +7649,9 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
     }
     if (message.imageParams !== undefined) {
       MobileImageUploadParams.encode(message.imageParams, writer.uint32(18).fork()).join();
+    }
+    if (message.field3 !== false) {
+      writer.uint32(24).bool(message.field3);
     }
     if (message.overwriteOldestIfFull !== false) {
       writer.uint32(32).bool(message.overwriteOldestIfFull);
@@ -7464,6 +7682,14 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
           message.imageParams = MobileImageUploadParams.decode(reader, reader.uint32());
           continue;
         }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.field3 = reader.bool();
+          continue;
+        }
         case 4: {
           if (tag !== 32) {
             break;
@@ -7485,6 +7711,7 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
     return {
       uploadParams: isSet(object.uploadParams) ? MobileUploadParams.fromJSON(object.uploadParams) : undefined,
       imageParams: isSet(object.imageParams) ? MobileImageUploadParams.fromJSON(object.imageParams) : undefined,
+      field3: isSet(object.field3) ? globalThis.Boolean(object.field3) : false,
       overwriteOldestIfFull: isSet(object.overwriteOldestIfFull)
         ? globalThis.Boolean(object.overwriteOldestIfFull)
         : false,
@@ -7498,6 +7725,9 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
     }
     if (message.imageParams !== undefined) {
       obj.imageParams = MobileImageUploadParams.toJSON(message.imageParams);
+    }
+    if (message.field3 !== undefined) {
+      obj.field3 = message.field3;
     }
     if (message.overwriteOldestIfFull !== undefined) {
       obj.overwriteOldestIfFull = message.overwriteOldestIfFull;
@@ -7516,6 +7746,7 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
     message.imageParams = (object.imageParams !== undefined && object.imageParams !== null)
       ? MobileImageUploadParams.fromPartial(object.imageParams)
       : undefined;
+    message.field3 = object.field3 ?? false;
     message.overwriteOldestIfFull = object.overwriteOldestIfFull ?? false;
     return message;
   },
@@ -7782,13 +8013,31 @@ export const PutMobileUploadChunkResponse: MessageFns<PutMobileUploadChunkRespon
 };
 
 function createBaseDogModeLiveActivityData(): DogModeLiveActivityData {
-  return { disabledReason: 0, insideTemperatureCelsius: 0, faultState: 0, temperatureUnit: 0, batteryLevel: 0 };
+  return {
+    disabledReason: 0,
+    interiorImage: undefined,
+    field3: "",
+    field4: undefined,
+    insideTemperatureCelsius: 0,
+    faultState: 0,
+    temperatureUnit: 0,
+    batteryLevel: 0,
+  };
 }
 
 export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
   encode(message: DogModeLiveActivityData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.disabledReason !== 0) {
       writer.uint32(8).int32(message.disabledReason);
+    }
+    if (message.interiorImage !== undefined) {
+      DogModeLiveActivityData_DogModeImageData.encode(message.interiorImage, writer.uint32(18).fork()).join();
+    }
+    if (message.field3 !== "") {
+      writer.uint32(26).string(message.field3);
+    }
+    if (message.field4 !== undefined) {
+      Timestamp.encode(toTimestamp(message.field4), writer.uint32(34).fork()).join();
     }
     if (message.insideTemperatureCelsius !== 0) {
       writer.uint32(45).float(message.insideTemperatureCelsius);
@@ -7818,6 +8067,30 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
           }
 
           message.disabledReason = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.interiorImage = DogModeLiveActivityData_DogModeImageData.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.field3 = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.field4 = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
         }
         case 5: {
@@ -7866,6 +8139,11 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
       disabledReason: isSet(object.disabledReason)
         ? dogModeLiveActivityData_DisabledReasonFromJSON(object.disabledReason)
         : 0,
+      interiorImage: isSet(object.interiorImage)
+        ? DogModeLiveActivityData_DogModeImageData.fromJSON(object.interiorImage)
+        : undefined,
+      field3: isSet(object.field3) ? globalThis.String(object.field3) : "",
+      field4: isSet(object.field4) ? fromJsonTimestamp(object.field4) : undefined,
       insideTemperatureCelsius: isSet(object.insideTemperatureCelsius)
         ? globalThis.Number(object.insideTemperatureCelsius)
         : 0,
@@ -7881,6 +8159,15 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
     const obj: any = {};
     if (message.disabledReason !== undefined) {
       obj.disabledReason = dogModeLiveActivityData_DisabledReasonToJSON(message.disabledReason);
+    }
+    if (message.interiorImage !== undefined) {
+      obj.interiorImage = DogModeLiveActivityData_DogModeImageData.toJSON(message.interiorImage);
+    }
+    if (message.field3 !== undefined) {
+      obj.field3 = message.field3;
+    }
+    if (message.field4 !== undefined) {
+      obj.field4 = message.field4.toISOString();
     }
     if (message.insideTemperatureCelsius !== undefined) {
       obj.insideTemperatureCelsius = message.insideTemperatureCelsius;
@@ -7903,10 +8190,95 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
   fromPartial<I extends Exact<DeepPartial<DogModeLiveActivityData>, I>>(object: I): DogModeLiveActivityData {
     const message = createBaseDogModeLiveActivityData();
     message.disabledReason = object.disabledReason ?? 0;
+    message.interiorImage = (object.interiorImage !== undefined && object.interiorImage !== null)
+      ? DogModeLiveActivityData_DogModeImageData.fromPartial(object.interiorImage)
+      : undefined;
+    message.field3 = object.field3 ?? "";
+    message.field4 = object.field4 ?? undefined;
     message.insideTemperatureCelsius = object.insideTemperatureCelsius ?? 0;
     message.faultState = object.faultState ?? 0;
     message.temperatureUnit = object.temperatureUnit ?? 0;
     message.batteryLevel = object.batteryLevel ?? 0;
+    return message;
+  },
+};
+
+function createBaseDogModeLiveActivityData_DogModeImageData(): DogModeLiveActivityData_DogModeImageData {
+  return { wrappedKey: new Uint8Array(0), encryptedImage: new Uint8Array(0) };
+}
+
+export const DogModeLiveActivityData_DogModeImageData: MessageFns<DogModeLiveActivityData_DogModeImageData> = {
+  encode(message: DogModeLiveActivityData_DogModeImageData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.wrappedKey.length !== 0) {
+      writer.uint32(10).bytes(message.wrappedKey);
+    }
+    if (message.encryptedImage.length !== 0) {
+      writer.uint32(18).bytes(message.encryptedImage);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): DogModeLiveActivityData_DogModeImageData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDogModeLiveActivityData_DogModeImageData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.wrappedKey = reader.bytes();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.encryptedImage = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DogModeLiveActivityData_DogModeImageData {
+    return {
+      wrappedKey: isSet(object.wrappedKey) ? bytesFromBase64(object.wrappedKey) : new Uint8Array(0),
+      encryptedImage: isSet(object.encryptedImage) ? bytesFromBase64(object.encryptedImage) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: DogModeLiveActivityData_DogModeImageData): unknown {
+    const obj: any = {};
+    if (message.wrappedKey !== undefined) {
+      obj.wrappedKey = base64FromBytes(message.wrappedKey);
+    }
+    if (message.encryptedImage !== undefined) {
+      obj.encryptedImage = base64FromBytes(message.encryptedImage);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DogModeLiveActivityData_DogModeImageData>, I>>(
+    base?: I,
+  ): DogModeLiveActivityData_DogModeImageData {
+    return DogModeLiveActivityData_DogModeImageData.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<DogModeLiveActivityData_DogModeImageData>, I>>(
+    object: I,
+  ): DogModeLiveActivityData_DogModeImageData {
+    const message = createBaseDogModeLiveActivityData_DogModeImageData();
+    message.wrappedKey = object.wrappedKey ?? new Uint8Array(0);
+    message.encryptedImage = object.encryptedImage ?? new Uint8Array(0);
     return message;
   },
 };
@@ -12460,16 +12832,53 @@ export const NearbyChargingSites: MessageFns<NearbyChargingSites> = {
 };
 
 function createBaseDestinationCharging(): DestinationCharging {
-  return { distanceMiles: 0, postalCode: "", streetAddress: "", withinRange: false };
+  return {
+    id: 0,
+    amenities: "",
+    city: "",
+    country: "",
+    distanceMiles: 0,
+    district: "",
+    location: undefined,
+    name: "",
+    postalCode: "",
+    state: "",
+    streetAddress: "",
+    withinRange: false,
+  };
 }
 
 export const DestinationCharging: MessageFns<DestinationCharging> = {
   encode(message: DestinationCharging, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.id !== 0) {
+      writer.uint32(8).int64(message.id);
+    }
+    if (message.amenities !== "") {
+      writer.uint32(18).string(message.amenities);
+    }
+    if (message.city !== "") {
+      writer.uint32(26).string(message.city);
+    }
+    if (message.country !== "") {
+      writer.uint32(34).string(message.country);
+    }
     if (message.distanceMiles !== 0) {
       writer.uint32(45).float(message.distanceMiles);
     }
+    if (message.district !== "") {
+      writer.uint32(50).string(message.district);
+    }
+    if (message.location !== undefined) {
+      LatLong.encode(message.location, writer.uint32(58).fork()).join();
+    }
+    if (message.name !== "") {
+      writer.uint32(66).string(message.name);
+    }
     if (message.postalCode !== "") {
       writer.uint32(74).string(message.postalCode);
+    }
+    if (message.state !== "") {
+      writer.uint32(82).string(message.state);
     }
     if (message.streetAddress !== "") {
       writer.uint32(90).string(message.streetAddress);
@@ -12487,6 +12896,38 @@ export const DestinationCharging: MessageFns<DestinationCharging> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.id = longToNumber(reader.int64());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.amenities = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.city = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.country = reader.string();
+          continue;
+        }
         case 5: {
           if (tag !== 45) {
             break;
@@ -12495,12 +12936,44 @@ export const DestinationCharging: MessageFns<DestinationCharging> = {
           message.distanceMiles = reader.float();
           continue;
         }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.district = reader.string();
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.location = LatLong.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
         case 9: {
           if (tag !== 74) {
             break;
           }
 
           message.postalCode = reader.string();
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.state = reader.string();
           continue;
         }
         case 11: {
@@ -12530,8 +13003,16 @@ export const DestinationCharging: MessageFns<DestinationCharging> = {
 
   fromJSON(object: any): DestinationCharging {
     return {
+      id: isSet(object.id) ? globalThis.Number(object.id) : 0,
+      amenities: isSet(object.amenities) ? globalThis.String(object.amenities) : "",
+      city: isSet(object.city) ? globalThis.String(object.city) : "",
+      country: isSet(object.country) ? globalThis.String(object.country) : "",
       distanceMiles: isSet(object.distanceMiles) ? globalThis.Number(object.distanceMiles) : 0,
+      district: isSet(object.district) ? globalThis.String(object.district) : "",
+      location: isSet(object.location) ? LatLong.fromJSON(object.location) : undefined,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
       postalCode: isSet(object.postalCode) ? globalThis.String(object.postalCode) : "",
+      state: isSet(object.state) ? globalThis.String(object.state) : "",
       streetAddress: isSet(object.streetAddress) ? globalThis.String(object.streetAddress) : "",
       withinRange: isSet(object.withinRange) ? globalThis.Boolean(object.withinRange) : false,
     };
@@ -12539,11 +13020,35 @@ export const DestinationCharging: MessageFns<DestinationCharging> = {
 
   toJSON(message: DestinationCharging): unknown {
     const obj: any = {};
+    if (message.id !== undefined) {
+      obj.id = Math.round(message.id);
+    }
+    if (message.amenities !== undefined) {
+      obj.amenities = message.amenities;
+    }
+    if (message.city !== undefined) {
+      obj.city = message.city;
+    }
+    if (message.country !== undefined) {
+      obj.country = message.country;
+    }
     if (message.distanceMiles !== undefined) {
       obj.distanceMiles = message.distanceMiles;
     }
+    if (message.district !== undefined) {
+      obj.district = message.district;
+    }
+    if (message.location !== undefined) {
+      obj.location = LatLong.toJSON(message.location);
+    }
+    if (message.name !== undefined) {
+      obj.name = message.name;
+    }
     if (message.postalCode !== undefined) {
       obj.postalCode = message.postalCode;
+    }
+    if (message.state !== undefined) {
+      obj.state = message.state;
     }
     if (message.streetAddress !== undefined) {
       obj.streetAddress = message.streetAddress;
@@ -12559,8 +13064,18 @@ export const DestinationCharging: MessageFns<DestinationCharging> = {
   },
   fromPartial<I extends Exact<DeepPartial<DestinationCharging>, I>>(object: I): DestinationCharging {
     const message = createBaseDestinationCharging();
+    message.id = object.id ?? 0;
+    message.amenities = object.amenities ?? "";
+    message.city = object.city ?? "";
+    message.country = object.country ?? "";
     message.distanceMiles = object.distanceMiles ?? 0;
+    message.district = object.district ?? "";
+    message.location = (object.location !== undefined && object.location !== null)
+      ? LatLong.fromPartial(object.location)
+      : undefined;
+    message.name = object.name ?? "";
     message.postalCode = object.postalCode ?? "";
+    message.state = object.state ?? "";
     message.streetAddress = object.streetAddress ?? "";
     message.withinRange = object.withinRange ?? false;
     return message;
@@ -12957,11 +13472,14 @@ export const Superchargers: MessageFns<Superchargers> = {
 };
 
 function createBaseMediaPlayAction(): MediaPlayAction {
-  return {};
+  return { mediaPlaybackStatus: 0 };
 }
 
 export const MediaPlayAction: MessageFns<MediaPlayAction> = {
-  encode(_: MediaPlayAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: MediaPlayAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.mediaPlaybackStatus !== 0) {
+      writer.uint32(8).int32(message.mediaPlaybackStatus);
+    }
     return writer;
   },
 
@@ -12972,6 +13490,14 @@ export const MediaPlayAction: MessageFns<MediaPlayAction> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.mediaPlaybackStatus = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -12981,20 +13507,28 @@ export const MediaPlayAction: MessageFns<MediaPlayAction> = {
     return message;
   },
 
-  fromJSON(_: any): MediaPlayAction {
-    return {};
+  fromJSON(object: any): MediaPlayAction {
+    return {
+      mediaPlaybackStatus: isSet(object.mediaPlaybackStatus)
+        ? mediaPlaybackStatusFromJSON(object.mediaPlaybackStatus)
+        : 0,
+    };
   },
 
-  toJSON(_: MediaPlayAction): unknown {
+  toJSON(message: MediaPlayAction): unknown {
     const obj: any = {};
+    if (message.mediaPlaybackStatus !== undefined) {
+      obj.mediaPlaybackStatus = mediaPlaybackStatusToJSON(message.mediaPlaybackStatus);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<MediaPlayAction>, I>>(base?: I): MediaPlayAction {
     return MediaPlayAction.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<MediaPlayAction>, I>>(_: I): MediaPlayAction {
+  fromPartial<I extends Exact<DeepPartial<MediaPlayAction>, I>>(object: I): MediaPlayAction {
     const message = createBaseMediaPlayAction();
+    message.mediaPlaybackStatus = object.mediaPlaybackStatus ?? 0;
     return message;
   },
 };
@@ -22264,13 +22798,16 @@ export const PhoneUnitPreferences: MessageFns<PhoneUnitPreferences> = {
 };
 
 function createBaseSetPhoneSettingPreferencesAction(): SetPhoneSettingPreferencesAction {
-  return { fontSize: 0, unitPreferences: undefined };
+  return { fontSize: 0, field2: "", unitPreferences: undefined };
 }
 
 export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPreferencesAction> = {
   encode(message: SetPhoneSettingPreferencesAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.fontSize !== 0) {
       writer.uint32(8).int32(message.fontSize);
+    }
+    if (message.field2 !== "") {
+      writer.uint32(18).string(message.field2);
     }
     if (message.unitPreferences !== undefined) {
       PhoneUnitPreferences.encode(message.unitPreferences, writer.uint32(26).fork()).join();
@@ -22293,6 +22830,14 @@ export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPrefere
           message.fontSize = reader.int32() as any;
           continue;
         }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.field2 = reader.string();
+          continue;
+        }
         case 3: {
           if (tag !== 26) {
             break;
@@ -22313,6 +22858,7 @@ export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPrefere
   fromJSON(object: any): SetPhoneSettingPreferencesAction {
     return {
       fontSize: isSet(object.fontSize) ? setPhoneSettingPreferencesAction_FontSizeFromJSON(object.fontSize) : 0,
+      field2: isSet(object.field2) ? globalThis.String(object.field2) : "",
       unitPreferences: isSet(object.unitPreferences)
         ? PhoneUnitPreferences.fromJSON(object.unitPreferences)
         : undefined,
@@ -22323,6 +22869,9 @@ export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPrefere
     const obj: any = {};
     if (message.fontSize !== undefined) {
       obj.fontSize = setPhoneSettingPreferencesAction_FontSizeToJSON(message.fontSize);
+    }
+    if (message.field2 !== undefined) {
+      obj.field2 = message.field2;
     }
     if (message.unitPreferences !== undefined) {
       obj.unitPreferences = PhoneUnitPreferences.toJSON(message.unitPreferences);
@@ -22340,6 +22889,7 @@ export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPrefere
   ): SetPhoneSettingPreferencesAction {
     const message = createBaseSetPhoneSettingPreferencesAction();
     message.fontSize = object.fontSize ?? 0;
+    message.field2 = object.field2 ?? "";
     message.unitPreferences = (object.unitPreferences !== undefined && object.unitPreferences !== null)
       ? PhoneUnitPreferences.fromPartial(object.unitPreferences)
       : undefined;
@@ -22386,6 +22936,184 @@ export const CancelVehicleDataSubscription: MessageFns<CancelVehicleDataSubscrip
   },
   fromPartial<I extends Exact<DeepPartial<CancelVehicleDataSubscription>, I>>(_: I): CancelVehicleDataSubscription {
     const message = createBaseCancelVehicleDataSubscription();
+    return message;
+  },
+};
+
+function createBaseSetUpkeepUsernameAction(): SetUpkeepUsernameAction {
+  return { username: "" };
+}
+
+export const SetUpkeepUsernameAction: MessageFns<SetUpkeepUsernameAction> = {
+  encode(message: SetUpkeepUsernameAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.username !== "") {
+      writer.uint32(10).string(message.username);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SetUpkeepUsernameAction {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSetUpkeepUsernameAction();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.username = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SetUpkeepUsernameAction {
+    return { username: isSet(object.username) ? globalThis.String(object.username) : "" };
+  },
+
+  toJSON(message: SetUpkeepUsernameAction): unknown {
+    const obj: any = {};
+    if (message.username !== undefined) {
+      obj.username = message.username;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SetUpkeepUsernameAction>, I>>(base?: I): SetUpkeepUsernameAction {
+    return SetUpkeepUsernameAction.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SetUpkeepUsernameAction>, I>>(object: I): SetUpkeepUsernameAction {
+    const message = createBaseSetUpkeepUsernameAction();
+    message.username = object.username ?? "";
+    return message;
+  },
+};
+
+function createBaseDrivingSetCruiseSpeedLimitAction(): DrivingSetCruiseSpeedLimitAction {
+  return { limitMph: 0 };
+}
+
+export const DrivingSetCruiseSpeedLimitAction: MessageFns<DrivingSetCruiseSpeedLimitAction> = {
+  encode(message: DrivingSetCruiseSpeedLimitAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.limitMph !== 0) {
+      writer.uint32(9).double(message.limitMph);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): DrivingSetCruiseSpeedLimitAction {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDrivingSetCruiseSpeedLimitAction();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 9) {
+            break;
+          }
+
+          message.limitMph = reader.double();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DrivingSetCruiseSpeedLimitAction {
+    return { limitMph: isSet(object.limitMph) ? globalThis.Number(object.limitMph) : 0 };
+  },
+
+  toJSON(message: DrivingSetCruiseSpeedLimitAction): unknown {
+    const obj: any = {};
+    if (message.limitMph !== undefined) {
+      obj.limitMph = message.limitMph;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DrivingSetCruiseSpeedLimitAction>, I>>(
+    base?: I,
+  ): DrivingSetCruiseSpeedLimitAction {
+    return DrivingSetCruiseSpeedLimitAction.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<DrivingSetCruiseSpeedLimitAction>, I>>(
+    object: I,
+  ): DrivingSetCruiseSpeedLimitAction {
+    const message = createBaseDrivingSetCruiseSpeedLimitAction();
+    message.limitMph = object.limitMph ?? 0;
+    return message;
+  },
+};
+
+function createBaseSetDeckLightAction(): SetDeckLightAction {
+  return { on: false };
+}
+
+export const SetDeckLightAction: MessageFns<SetDeckLightAction> = {
+  encode(message: SetDeckLightAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.on !== false) {
+      writer.uint32(8).bool(message.on);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SetDeckLightAction {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSetDeckLightAction();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.on = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SetDeckLightAction {
+    return { on: isSet(object.on) ? globalThis.Boolean(object.on) : false };
+  },
+
+  toJSON(message: SetDeckLightAction): unknown {
+    const obj: any = {};
+    if (message.on !== undefined) {
+      obj.on = message.on;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SetDeckLightAction>, I>>(base?: I): SetDeckLightAction {
+    return SetDeckLightAction.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SetDeckLightAction>, I>>(object: I): SetDeckLightAction {
+    const message = createBaseSetDeckLightAction();
+    message.on = object.on ?? false;
     return message;
   },
 };
