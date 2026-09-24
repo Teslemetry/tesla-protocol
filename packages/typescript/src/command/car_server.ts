@@ -80,6 +80,189 @@ export function operationStatusEToJSON(object: OperationStatusE): string {
   }
 }
 
+/**
+ * ===== TESLEMETRY-EXT BEGIN =====
+ * Identifies the vehicle-data section an EncryptedData entry holds. These values
+ * are this enum's own numbering, not VehicleData field numbers.
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export enum VehicleDataFields {
+  NOTHING = 0,
+  gui_settings = 2,
+  charge_state = 3,
+  climate_state = 4,
+  drive_state = 5,
+  vehicle_state = 6,
+  vehicle_config = 7,
+  location_state = 8,
+  closures_state = 9,
+  parked_accessory_state = 10,
+  charge_schedule_state = 11,
+  preconditioning_schedule_state = 12,
+  media_state = 13,
+  media_detail_state = 14,
+  tire_pressure_state = 15,
+  vehicle_detail_state = 16,
+  software_update_state = 17,
+  parental_controls_state = 18,
+  alert_state = 19,
+  light_show_state = 20,
+  vehicle_image_state = 21,
+  soh_state = 22,
+  suspension_state = 23,
+  child_presence_detection_state = 24,
+  display_state = 30,
+  legacy_vehicle_state_media_info = 6072,
+  UNRECOGNIZED = -1,
+}
+
+export function vehicleDataFieldsFromJSON(object: any): VehicleDataFields {
+  switch (object) {
+    case 0:
+    case "NOTHING":
+      return VehicleDataFields.NOTHING;
+    case 2:
+    case "gui_settings":
+      return VehicleDataFields.gui_settings;
+    case 3:
+    case "charge_state":
+      return VehicleDataFields.charge_state;
+    case 4:
+    case "climate_state":
+      return VehicleDataFields.climate_state;
+    case 5:
+    case "drive_state":
+      return VehicleDataFields.drive_state;
+    case 6:
+    case "vehicle_state":
+      return VehicleDataFields.vehicle_state;
+    case 7:
+    case "vehicle_config":
+      return VehicleDataFields.vehicle_config;
+    case 8:
+    case "location_state":
+      return VehicleDataFields.location_state;
+    case 9:
+    case "closures_state":
+      return VehicleDataFields.closures_state;
+    case 10:
+    case "parked_accessory_state":
+      return VehicleDataFields.parked_accessory_state;
+    case 11:
+    case "charge_schedule_state":
+      return VehicleDataFields.charge_schedule_state;
+    case 12:
+    case "preconditioning_schedule_state":
+      return VehicleDataFields.preconditioning_schedule_state;
+    case 13:
+    case "media_state":
+      return VehicleDataFields.media_state;
+    case 14:
+    case "media_detail_state":
+      return VehicleDataFields.media_detail_state;
+    case 15:
+    case "tire_pressure_state":
+      return VehicleDataFields.tire_pressure_state;
+    case 16:
+    case "vehicle_detail_state":
+      return VehicleDataFields.vehicle_detail_state;
+    case 17:
+    case "software_update_state":
+      return VehicleDataFields.software_update_state;
+    case 18:
+    case "parental_controls_state":
+      return VehicleDataFields.parental_controls_state;
+    case 19:
+    case "alert_state":
+      return VehicleDataFields.alert_state;
+    case 20:
+    case "light_show_state":
+      return VehicleDataFields.light_show_state;
+    case 21:
+    case "vehicle_image_state":
+      return VehicleDataFields.vehicle_image_state;
+    case 22:
+    case "soh_state":
+      return VehicleDataFields.soh_state;
+    case 23:
+    case "suspension_state":
+      return VehicleDataFields.suspension_state;
+    case 24:
+    case "child_presence_detection_state":
+      return VehicleDataFields.child_presence_detection_state;
+    case 30:
+    case "display_state":
+      return VehicleDataFields.display_state;
+    case 6072:
+    case "legacy_vehicle_state_media_info":
+      return VehicleDataFields.legacy_vehicle_state_media_info;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return VehicleDataFields.UNRECOGNIZED;
+  }
+}
+
+export function vehicleDataFieldsToJSON(object: VehicleDataFields): string {
+  switch (object) {
+    case VehicleDataFields.NOTHING:
+      return "NOTHING";
+    case VehicleDataFields.gui_settings:
+      return "gui_settings";
+    case VehicleDataFields.charge_state:
+      return "charge_state";
+    case VehicleDataFields.climate_state:
+      return "climate_state";
+    case VehicleDataFields.drive_state:
+      return "drive_state";
+    case VehicleDataFields.vehicle_state:
+      return "vehicle_state";
+    case VehicleDataFields.vehicle_config:
+      return "vehicle_config";
+    case VehicleDataFields.location_state:
+      return "location_state";
+    case VehicleDataFields.closures_state:
+      return "closures_state";
+    case VehicleDataFields.parked_accessory_state:
+      return "parked_accessory_state";
+    case VehicleDataFields.charge_schedule_state:
+      return "charge_schedule_state";
+    case VehicleDataFields.preconditioning_schedule_state:
+      return "preconditioning_schedule_state";
+    case VehicleDataFields.media_state:
+      return "media_state";
+    case VehicleDataFields.media_detail_state:
+      return "media_detail_state";
+    case VehicleDataFields.tire_pressure_state:
+      return "tire_pressure_state";
+    case VehicleDataFields.vehicle_detail_state:
+      return "vehicle_detail_state";
+    case VehicleDataFields.software_update_state:
+      return "software_update_state";
+    case VehicleDataFields.parental_controls_state:
+      return "parental_controls_state";
+    case VehicleDataFields.alert_state:
+      return "alert_state";
+    case VehicleDataFields.light_show_state:
+      return "light_show_state";
+    case VehicleDataFields.vehicle_image_state:
+      return "vehicle_image_state";
+    case VehicleDataFields.soh_state:
+      return "soh_state";
+    case VehicleDataFields.suspension_state:
+      return "suspension_state";
+    case VehicleDataFields.child_presence_detection_state:
+      return "child_presence_detection_state";
+    case VehicleDataFields.display_state:
+      return "display_state";
+    case VehicleDataFields.legacy_vehicle_state_media_info:
+      return "legacy_vehicle_state_media_info";
+    case VehicleDataFields.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface Action {
   vehicleAction?: VehicleAction | undefined;
 }
@@ -1145,6 +1328,7 @@ export interface ResultReason {
 }
 
 export interface EncryptedData {
+  /** holds a VehicleDataFields value */
   fieldNumber: number;
   ciphertext: Uint8Array;
   tag: Uint8Array;

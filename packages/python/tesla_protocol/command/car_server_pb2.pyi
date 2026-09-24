@@ -17,8 +17,63 @@ class OperationStatus_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     OPERATIONSTATUS_OK: _ClassVar[OperationStatus_E]
     OPERATIONSTATUS_ERROR: _ClassVar[OperationStatus_E]
+
+class VehicleDataFields(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    NOTHING: _ClassVar[VehicleDataFields]
+    gui_settings: _ClassVar[VehicleDataFields]
+    charge_state: _ClassVar[VehicleDataFields]
+    climate_state: _ClassVar[VehicleDataFields]
+    drive_state: _ClassVar[VehicleDataFields]
+    vehicle_state: _ClassVar[VehicleDataFields]
+    vehicle_config: _ClassVar[VehicleDataFields]
+    location_state: _ClassVar[VehicleDataFields]
+    closures_state: _ClassVar[VehicleDataFields]
+    parked_accessory_state: _ClassVar[VehicleDataFields]
+    charge_schedule_state: _ClassVar[VehicleDataFields]
+    preconditioning_schedule_state: _ClassVar[VehicleDataFields]
+    media_state: _ClassVar[VehicleDataFields]
+    media_detail_state: _ClassVar[VehicleDataFields]
+    tire_pressure_state: _ClassVar[VehicleDataFields]
+    vehicle_detail_state: _ClassVar[VehicleDataFields]
+    software_update_state: _ClassVar[VehicleDataFields]
+    parental_controls_state: _ClassVar[VehicleDataFields]
+    alert_state: _ClassVar[VehicleDataFields]
+    light_show_state: _ClassVar[VehicleDataFields]
+    vehicle_image_state: _ClassVar[VehicleDataFields]
+    soh_state: _ClassVar[VehicleDataFields]
+    suspension_state: _ClassVar[VehicleDataFields]
+    child_presence_detection_state: _ClassVar[VehicleDataFields]
+    display_state: _ClassVar[VehicleDataFields]
+    legacy_vehicle_state_media_info: _ClassVar[VehicleDataFields]
 OPERATIONSTATUS_OK: OperationStatus_E
 OPERATIONSTATUS_ERROR: OperationStatus_E
+NOTHING: VehicleDataFields
+gui_settings: VehicleDataFields
+charge_state: VehicleDataFields
+climate_state: VehicleDataFields
+drive_state: VehicleDataFields
+vehicle_state: VehicleDataFields
+vehicle_config: VehicleDataFields
+location_state: VehicleDataFields
+closures_state: VehicleDataFields
+parked_accessory_state: VehicleDataFields
+charge_schedule_state: VehicleDataFields
+preconditioning_schedule_state: VehicleDataFields
+media_state: VehicleDataFields
+media_detail_state: VehicleDataFields
+tire_pressure_state: VehicleDataFields
+vehicle_detail_state: VehicleDataFields
+software_update_state: VehicleDataFields
+parental_controls_state: VehicleDataFields
+alert_state: VehicleDataFields
+light_show_state: VehicleDataFields
+vehicle_image_state: VehicleDataFields
+soh_state: VehicleDataFields
+suspension_state: VehicleDataFields
+child_presence_detection_state: VehicleDataFields
+display_state: VehicleDataFields
+legacy_vehicle_state_media_info: VehicleDataFields
 
 class Action(_message.Message):
     __slots__ = ('vehicleAction',)

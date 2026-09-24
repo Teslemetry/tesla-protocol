@@ -347,8 +347,8 @@
         "python": "packages/python/tesla_protocol/command"
       },
       "messages": 332,
-      "enums": 103,
-      "fields": 1493,
+      "enums": 105,
+      "fields": 1498,
       "files": [
         {
           "package": "CarServer",
@@ -7978,6 +7978,118 @@
               ],
               "reserved_ranges": [],
               "reserved_names": []
+            },
+            {
+              "fqn": ".CarServer.VehicleDataFields",
+              "name": "VehicleDataFields",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "NOTHING"
+                },
+                {
+                  "number": 2,
+                  "name": "gui_settings"
+                },
+                {
+                  "number": 3,
+                  "name": "charge_state"
+                },
+                {
+                  "number": 4,
+                  "name": "climate_state"
+                },
+                {
+                  "number": 5,
+                  "name": "drive_state"
+                },
+                {
+                  "number": 6,
+                  "name": "vehicle_state"
+                },
+                {
+                  "number": 7,
+                  "name": "vehicle_config"
+                },
+                {
+                  "number": 8,
+                  "name": "location_state"
+                },
+                {
+                  "number": 9,
+                  "name": "closures_state"
+                },
+                {
+                  "number": 10,
+                  "name": "parked_accessory_state"
+                },
+                {
+                  "number": 11,
+                  "name": "charge_schedule_state"
+                },
+                {
+                  "number": 12,
+                  "name": "preconditioning_schedule_state"
+                },
+                {
+                  "number": 13,
+                  "name": "media_state"
+                },
+                {
+                  "number": 14,
+                  "name": "media_detail_state"
+                },
+                {
+                  "number": 15,
+                  "name": "tire_pressure_state"
+                },
+                {
+                  "number": 16,
+                  "name": "vehicle_detail_state"
+                },
+                {
+                  "number": 17,
+                  "name": "software_update_state"
+                },
+                {
+                  "number": 18,
+                  "name": "parental_controls_state"
+                },
+                {
+                  "number": 19,
+                  "name": "alert_state"
+                },
+                {
+                  "number": 20,
+                  "name": "light_show_state"
+                },
+                {
+                  "number": 21,
+                  "name": "vehicle_image_state"
+                },
+                {
+                  "number": 22,
+                  "name": "soh_state"
+                },
+                {
+                  "number": 23,
+                  "name": "suspension_state"
+                },
+                {
+                  "number": 24,
+                  "name": "child_presence_detection_state"
+                },
+                {
+                  "number": 30,
+                  "name": "display_state"
+                },
+                {
+                  "number": 6072,
+                  "name": "legacy_vehicle_state_media_info"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
             }
           ],
           "path": "proto/command/car_server.proto",
@@ -12265,6 +12377,14 @@
                   "oneof": "optional_proto_json_version"
                 },
                 {
+                  "number": 11,
+                  "name": "encrypted_data",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_REPEATED",
+                  "oneof": null
+                },
+                {
                   "number": 12,
                   "name": "upload_reason",
                   "type": "TYPE_STRING",
@@ -12405,6 +12525,22 @@
                   "name": "display_state",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".CarServer.DisplayState",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 900,
+                  "name": "pii_key_responses",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_REPEATED",
+                  "oneof": null
+                },
+                {
+                  "number": 901,
+                  "name": "wrapped_key",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
@@ -18829,6 +18965,14 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": "optional_supports_dynamic_environments"
+                },
+                {
+                  "number": 200,
+                  "name": "wheel_caps_on",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_wheel_caps_on"
                 }
               ],
               "oneofs": [
@@ -18901,7 +19045,8 @@
                 "optional_bed_lighting_type",
                 "optional_rear_light_hardware_variant",
                 "optional_autopilot_override_expire_time",
-                "optional_supports_dynamic_environments"
+                "optional_supports_dynamic_environments",
+                "optional_wheel_caps_on"
               ],
               "reserved_ranges": [],
               "reserved_names": [],
@@ -19553,6 +19698,14 @@
                   "name": "SohResult",
                   "fields": [
                     {
+                      "number": 3,
+                      "name": "field_3",
+                      "type": "TYPE_FLOAT",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "optional_field_3"
+                    },
+                    {
                       "number": 4,
                       "name": "soh_calibrated",
                       "type": "TYPE_BOOL",
@@ -19594,6 +19747,7 @@
                     }
                   ],
                   "oneofs": [
+                    "optional_field_3",
                     "optional_soh_calibrated",
                     "optional_soh_last_test_time",
                     "optional_soh_health_result",
@@ -20554,6 +20708,334 @@
                 {
                   "number": 2,
                   "name": "APVIZ_LICENSE_PLATE"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".CarServer.MobileAppFeature",
+              "name": "MobileAppFeature",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "MOBILE_APP_FEATURE_ACTIVE"
+                },
+                {
+                  "number": 1,
+                  "name": "MOBILE_APP_FEATURE_CLIMATE_KEEPER"
+                },
+                {
+                  "number": 2,
+                  "name": "MOBILE_APP_FEATURE_UNLOCK_STOP_CHARGE"
+                },
+                {
+                  "number": 3,
+                  "name": "MOBILE_APP_FEATURE_SET_RATE_TARIFF"
+                },
+                {
+                  "number": 4,
+                  "name": "MOBILE_APP_FEATURE_GET_RATE_TARIFF"
+                },
+                {
+                  "number": 5,
+                  "name": "MOBILE_APP_FEATURE_DRIVENOTE"
+                },
+                {
+                  "number": 6,
+                  "name": "MOBILE_APP_FEATURE_CLIMATE_KEEPER_OVERRIDE"
+                },
+                {
+                  "number": 7,
+                  "name": "MOBILE_APP_FEATURE_SIGNED_VIDEO_REQUEST"
+                },
+                {
+                  "number": 8,
+                  "name": "MOBILE_APP_FEATURE_SENTRY_CAM_FLASH_LIGHTS"
+                },
+                {
+                  "number": 9,
+                  "name": "MOBILE_APP_FEATURE_BOOMBOX"
+                },
+                {
+                  "number": 10,
+                  "name": "MOBILE_APP_FEATURE_DOOR_UNLATCH"
+                },
+                {
+                  "number": 11,
+                  "name": "MOBILE_APP_FEATURE_SEAT_HEATERS_INSTALLED"
+                },
+                {
+                  "number": 12,
+                  "name": "MOBILE_APP_FEATURE_LAST_SEEN_TPMS"
+                },
+                {
+                  "number": 13,
+                  "name": "MOBILE_APP_FEATURE_UI_CHARGE_PORT"
+                },
+                {
+                  "number": 14,
+                  "name": "MOBILE_APP_FEATURE_MONITOR_AND_CHARGE_ROLES"
+                },
+                {
+                  "number": 15,
+                  "name": "MOBILE_APP_FEATURE_PROTO_FLOATS"
+                },
+                {
+                  "number": 16,
+                  "name": "MOBILE_APP_FEATURE_BLUETOOTH_PAIRING"
+                },
+                {
+                  "number": 17,
+                  "name": "MOBILE_APP_FEATURE_HMAC_AUTHENTICATION"
+                },
+                {
+                  "number": 18,
+                  "name": "MOBILE_APP_COP_USER_SET_TEMP"
+                },
+                {
+                  "number": 19,
+                  "name": "MOBILE_APP_FEATURE_MEDIA_DETAILS"
+                },
+                {
+                  "number": 20,
+                  "name": "MOBILE_APP_FEATURE_RESPONSE_CACHE"
+                },
+                {
+                  "number": 22,
+                  "name": "MOBILE_APP_FEATURE_SCC"
+                },
+                {
+                  "number": 23,
+                  "name": "MOBILE_APP_FEATURE_SENTRY_CAM_WITH_DOG_MODE"
+                },
+                {
+                  "number": 24,
+                  "name": "MOBILE_APP_FEATURE_AUTO_STEERING_WHEEL_HEAT"
+                },
+                {
+                  "number": 25,
+                  "name": "MOBILE_APP_FEATURE_MANAGED_CHARGING"
+                },
+                {
+                  "number": 26,
+                  "name": "MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND_DECPRECATED"
+                },
+                {
+                  "number": 27,
+                  "name": "MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND"
+                },
+                {
+                  "number": 28,
+                  "name": "MOBILE_APP_FEATURE_SEND_NAVIGATION_ROUTE"
+                },
+                {
+                  "number": 29,
+                  "name": "MOBILE_APP_FEATURE_RED_BRAKE_CALIPER_FIX"
+                },
+                {
+                  "number": 30,
+                  "name": "MOBILE_APP_FEATURE_PIN_TO_DRIVE"
+                },
+                {
+                  "number": 31,
+                  "name": "MOBILE_APP_COP_NOT_RUNNING_REASON"
+                },
+                {
+                  "number": 32,
+                  "name": "MOBILE_APP_FEATURE_SET_VEHICLE_NAME"
+                },
+                {
+                  "number": 33,
+                  "name": "MOBILE_APP_FEATURE_VEHICLE_DATA_PII_V2"
+                },
+                {
+                  "number": 34,
+                  "name": "MOBILE_APP_FEATURE_BOOMBOX_V2"
+                },
+                {
+                  "number": 35,
+                  "name": "MOBILE_APP_FEATURE_UWB_STABLE_FOR_SUPPORTED_CARS"
+                },
+                {
+                  "number": 36,
+                  "name": "MOBILE_APP_FEATURE_SPEED_LIMIT_PIN_RESET_SIGNED_COMMAND"
+                },
+                {
+                  "number": 37,
+                  "name": "MOBILE_APP_FEATURE_PRECISE_LOCATION_TAG"
+                },
+                {
+                  "number": 38,
+                  "name": "MOBILE_APP_FEATURE_IMU_ALERT_IS_VISIBLE"
+                },
+                {
+                  "number": 42,
+                  "name": "MOBILE_APP_FEATURE_CT_SUPPORTS_COP"
+                },
+                {
+                  "number": 43,
+                  "name": "MOBILE_APP_FEATURE_WAYPOINTS_SUPPORTED"
+                },
+                {
+                  "number": 44,
+                  "name": "MOBILE_APP_FEATURE_OCTA_VIEW"
+                },
+                {
+                  "number": 45,
+                  "name": "MOBILE_APP_FEATURE_BT_GTW_UNLOCK"
+                },
+                {
+                  "number": 46,
+                  "name": "MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE_DEPRECATED"
+                },
+                {
+                  "number": 47,
+                  "name": "MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE"
+                },
+                {
+                  "number": 48,
+                  "name": "MOBILE_APP_FEATURE_SUMMON_PREWARMING"
+                },
+                {
+                  "number": 49,
+                  "name": "MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S_DEPRECATED"
+                },
+                {
+                  "number": 50,
+                  "name": "MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S"
+                },
+                {
+                  "number": 51,
+                  "name": "MOBILE_APP_FEATURE_UI_ONE_TIME_CHARGE_SUPPORTED"
+                },
+                {
+                  "number": 52,
+                  "name": "MOBILE_APP_FEATURE_SCHEDULE_V3"
+                },
+                {
+                  "number": 53,
+                  "name": "MOBILE_APP_FEATURE_ECIES_VEHICLE_DATA_ENCRYPTION"
+                },
+                {
+                  "number": 54,
+                  "name": "MOBILE_APP_FEATURE_TENT_MODE_SUPPORTED"
+                },
+                {
+                  "number": 55,
+                  "name": "MOBILE_APP_FEATURE_SCHEDULE_V3_NAMING"
+                },
+                {
+                  "number": 57,
+                  "name": "MOBILE_APP_FEATURE_COLORIZER_COLOR_REMAP_ENABLED"
+                },
+                {
+                  "number": 58,
+                  "name": "MOBILE_APP_FEATURE_SEND_NAVIGATION_REQUEST_GPS_DESTINATION"
+                },
+                {
+                  "number": 59,
+                  "name": "MOBILE_APP_FEATURE_SUMMON_WEBCAM"
+                },
+                {
+                  "number": 61,
+                  "name": "MOBILE_APP_FEATURE_BLE_REMOTE_START"
+                },
+                {
+                  "number": 62,
+                  "name": "MOBILE_APP_FEATURE_SOH_TEST_OBSOLETE"
+                },
+                {
+                  "number": 64,
+                  "name": "MOBILE_APP_FEATURE_SET_ARRIVAL_PERCENTAGE_OBSOLETE"
+                },
+                {
+                  "number": 66,
+                  "name": "MOBILE_APP_FEATURE_REMOTE_THEATER_CONTROL"
+                },
+                {
+                  "number": 67,
+                  "name": "MOBILE_APP_FEATURE_CT_SUSPENSION"
+                },
+                {
+                  "number": 68,
+                  "name": "MOBILE_APP_FEATURE_SOH_TEST_V2"
+                },
+                {
+                  "number": 69,
+                  "name": "MOBILE_APP_FEATURE_ANDROID_UWB_ENABLED"
+                },
+                {
+                  "number": 70,
+                  "name": "MOBILE_APP_FEATURE_LOW_POWER_MODE"
+                },
+                {
+                  "number": 71,
+                  "name": "MOBILE_APP_FEATURE_ROBOTAXI_UWB"
+                },
+                {
+                  "number": 72,
+                  "name": "MOBILE_APP_FEATURE_KEEP_ACCESSORY_POWER_MODE"
+                },
+                {
+                  "number": 73,
+                  "name": "MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS"
+                },
+                {
+                  "number": 77,
+                  "name": "MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS_WITH_DELETION"
+                },
+                {
+                  "number": 78,
+                  "name": "MOBILE_APP_FEATURE_FETCH_KEY_METADATA_DEPRECATED"
+                },
+                {
+                  "number": 79,
+                  "name": "MOBILE_APP_FEATURE_FETCH_KEY_METADATA"
+                },
+                {
+                  "number": 80,
+                  "name": "MOBILE_APP_FEATURE_TRAILER_LIGHT_TEST"
+                },
+                {
+                  "number": 81,
+                  "name": "MOBILE_APP_FEATURE_DELETE_DASHCAM_CLIPS_AND_FORMAT_USB"
+                },
+                {
+                  "number": 82,
+                  "name": "MOBILE_APP_FEATURE_SOFTWARE_UPDATE_AUTO_SCHEDULED"
+                },
+                {
+                  "number": 83,
+                  "name": "MOBILE_APP_FEATURE_BLE_MESSAGE_FRAMING"
+                },
+                {
+                  "number": 84,
+                  "name": "MOBILE_APP_FEATURE_WAYPOINTS_REQUEST_ACCEPTS_COORDINATES"
+                },
+                {
+                  "number": 85,
+                  "name": "MOBILE_APP_FEATURE_PHONE_SETTING_PREFERENCES_SYNC"
+                },
+                {
+                  "number": 90,
+                  "name": "MOBILE_APP_FEATURE_UPLOAD_CAR_WRAP"
+                },
+                {
+                  "number": 91,
+                  "name": "MOBILE_APP_FEATURE_SHARE_URLS_X"
+                },
+                {
+                  "number": 93,
+                  "name": "MOBILE_APP_FEATURE_DISPLAY_BRIGHTNESS"
+                },
+                {
+                  "number": 95,
+                  "name": "MOBILE_APP_FEATURE_ANDROID_BLE_BONDING"
+                },
+                {
+                  "number": 97,
+                  "name": "MOBILE_APP_FEATURE_APVIZ_WHEEL_CAPS"
                 }
               ],
               "reserved_ranges": [],
@@ -43542,8 +44024,8 @@
     "source_files": 39,
     "groups": 7,
     "messages": 893,
-    "enums": 249,
-    "fields": 2898
+    "enums": 251,
+    "fields": 2903
   },
   "registration": {
     "consistent": true,

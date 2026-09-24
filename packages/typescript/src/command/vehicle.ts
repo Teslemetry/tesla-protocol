@@ -716,6 +716,515 @@ export function vehicleImageStateTypeToJSON(object: VehicleImageStateType): stri
   }
 }
 
+/**
+ * ===== TESLEMETRY-EXT BEGIN =====
+ * Capability bits a vehicle advertises to the mobile app. Each value is a bit
+ * index into the vehicle-state feature bitmask, a repeated uint32 list (field 24
+ * of the payload at VehicleData tag 18): the feature is supported when
+ * bitmask[value / 32] & (1 << (value % 32)) is non-zero.
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export enum MobileAppFeature {
+  MOBILE_APP_FEATURE_ACTIVE = 0,
+  MOBILE_APP_FEATURE_CLIMATE_KEEPER = 1,
+  MOBILE_APP_FEATURE_UNLOCK_STOP_CHARGE = 2,
+  MOBILE_APP_FEATURE_SET_RATE_TARIFF = 3,
+  MOBILE_APP_FEATURE_GET_RATE_TARIFF = 4,
+  MOBILE_APP_FEATURE_DRIVENOTE = 5,
+  MOBILE_APP_FEATURE_CLIMATE_KEEPER_OVERRIDE = 6,
+  MOBILE_APP_FEATURE_SIGNED_VIDEO_REQUEST = 7,
+  MOBILE_APP_FEATURE_SENTRY_CAM_FLASH_LIGHTS = 8,
+  MOBILE_APP_FEATURE_BOOMBOX = 9,
+  MOBILE_APP_FEATURE_DOOR_UNLATCH = 10,
+  MOBILE_APP_FEATURE_SEAT_HEATERS_INSTALLED = 11,
+  MOBILE_APP_FEATURE_LAST_SEEN_TPMS = 12,
+  MOBILE_APP_FEATURE_UI_CHARGE_PORT = 13,
+  MOBILE_APP_FEATURE_MONITOR_AND_CHARGE_ROLES = 14,
+  MOBILE_APP_FEATURE_PROTO_FLOATS = 15,
+  MOBILE_APP_FEATURE_BLUETOOTH_PAIRING = 16,
+  MOBILE_APP_FEATURE_HMAC_AUTHENTICATION = 17,
+  MOBILE_APP_COP_USER_SET_TEMP = 18,
+  MOBILE_APP_FEATURE_MEDIA_DETAILS = 19,
+  MOBILE_APP_FEATURE_RESPONSE_CACHE = 20,
+  MOBILE_APP_FEATURE_SCC = 22,
+  MOBILE_APP_FEATURE_SENTRY_CAM_WITH_DOG_MODE = 23,
+  MOBILE_APP_FEATURE_AUTO_STEERING_WHEEL_HEAT = 24,
+  MOBILE_APP_FEATURE_MANAGED_CHARGING = 25,
+  MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND_DECPRECATED = 26,
+  MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND = 27,
+  MOBILE_APP_FEATURE_SEND_NAVIGATION_ROUTE = 28,
+  MOBILE_APP_FEATURE_RED_BRAKE_CALIPER_FIX = 29,
+  MOBILE_APP_FEATURE_PIN_TO_DRIVE = 30,
+  MOBILE_APP_COP_NOT_RUNNING_REASON = 31,
+  MOBILE_APP_FEATURE_SET_VEHICLE_NAME = 32,
+  MOBILE_APP_FEATURE_VEHICLE_DATA_PII_V2 = 33,
+  MOBILE_APP_FEATURE_BOOMBOX_V2 = 34,
+  MOBILE_APP_FEATURE_UWB_STABLE_FOR_SUPPORTED_CARS = 35,
+  MOBILE_APP_FEATURE_SPEED_LIMIT_PIN_RESET_SIGNED_COMMAND = 36,
+  MOBILE_APP_FEATURE_PRECISE_LOCATION_TAG = 37,
+  MOBILE_APP_FEATURE_IMU_ALERT_IS_VISIBLE = 38,
+  MOBILE_APP_FEATURE_CT_SUPPORTS_COP = 42,
+  MOBILE_APP_FEATURE_WAYPOINTS_SUPPORTED = 43,
+  MOBILE_APP_FEATURE_OCTA_VIEW = 44,
+  MOBILE_APP_FEATURE_BT_GTW_UNLOCK = 45,
+  MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE_DEPRECATED = 46,
+  MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE = 47,
+  MOBILE_APP_FEATURE_SUMMON_PREWARMING = 48,
+  MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S_DEPRECATED = 49,
+  MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S = 50,
+  MOBILE_APP_FEATURE_UI_ONE_TIME_CHARGE_SUPPORTED = 51,
+  MOBILE_APP_FEATURE_SCHEDULE_V3 = 52,
+  MOBILE_APP_FEATURE_ECIES_VEHICLE_DATA_ENCRYPTION = 53,
+  MOBILE_APP_FEATURE_TENT_MODE_SUPPORTED = 54,
+  MOBILE_APP_FEATURE_SCHEDULE_V3_NAMING = 55,
+  MOBILE_APP_FEATURE_COLORIZER_COLOR_REMAP_ENABLED = 57,
+  MOBILE_APP_FEATURE_SEND_NAVIGATION_REQUEST_GPS_DESTINATION = 58,
+  MOBILE_APP_FEATURE_SUMMON_WEBCAM = 59,
+  MOBILE_APP_FEATURE_BLE_REMOTE_START = 61,
+  MOBILE_APP_FEATURE_SOH_TEST_OBSOLETE = 62,
+  MOBILE_APP_FEATURE_SET_ARRIVAL_PERCENTAGE_OBSOLETE = 64,
+  MOBILE_APP_FEATURE_REMOTE_THEATER_CONTROL = 66,
+  MOBILE_APP_FEATURE_CT_SUSPENSION = 67,
+  MOBILE_APP_FEATURE_SOH_TEST_V2 = 68,
+  MOBILE_APP_FEATURE_ANDROID_UWB_ENABLED = 69,
+  MOBILE_APP_FEATURE_LOW_POWER_MODE = 70,
+  MOBILE_APP_FEATURE_ROBOTAXI_UWB = 71,
+  MOBILE_APP_FEATURE_KEEP_ACCESSORY_POWER_MODE = 72,
+  MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS = 73,
+  MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS_WITH_DELETION = 77,
+  MOBILE_APP_FEATURE_FETCH_KEY_METADATA_DEPRECATED = 78,
+  MOBILE_APP_FEATURE_FETCH_KEY_METADATA = 79,
+  MOBILE_APP_FEATURE_TRAILER_LIGHT_TEST = 80,
+  MOBILE_APP_FEATURE_DELETE_DASHCAM_CLIPS_AND_FORMAT_USB = 81,
+  MOBILE_APP_FEATURE_SOFTWARE_UPDATE_AUTO_SCHEDULED = 82,
+  MOBILE_APP_FEATURE_BLE_MESSAGE_FRAMING = 83,
+  MOBILE_APP_FEATURE_WAYPOINTS_REQUEST_ACCEPTS_COORDINATES = 84,
+  MOBILE_APP_FEATURE_PHONE_SETTING_PREFERENCES_SYNC = 85,
+  MOBILE_APP_FEATURE_UPLOAD_CAR_WRAP = 90,
+  MOBILE_APP_FEATURE_SHARE_URLS_X = 91,
+  MOBILE_APP_FEATURE_DISPLAY_BRIGHTNESS = 93,
+  MOBILE_APP_FEATURE_ANDROID_BLE_BONDING = 95,
+  MOBILE_APP_FEATURE_APVIZ_WHEEL_CAPS = 97,
+  UNRECOGNIZED = -1,
+}
+
+export function mobileAppFeatureFromJSON(object: any): MobileAppFeature {
+  switch (object) {
+    case 0:
+    case "MOBILE_APP_FEATURE_ACTIVE":
+      return MobileAppFeature.MOBILE_APP_FEATURE_ACTIVE;
+    case 1:
+    case "MOBILE_APP_FEATURE_CLIMATE_KEEPER":
+      return MobileAppFeature.MOBILE_APP_FEATURE_CLIMATE_KEEPER;
+    case 2:
+    case "MOBILE_APP_FEATURE_UNLOCK_STOP_CHARGE":
+      return MobileAppFeature.MOBILE_APP_FEATURE_UNLOCK_STOP_CHARGE;
+    case 3:
+    case "MOBILE_APP_FEATURE_SET_RATE_TARIFF":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SET_RATE_TARIFF;
+    case 4:
+    case "MOBILE_APP_FEATURE_GET_RATE_TARIFF":
+      return MobileAppFeature.MOBILE_APP_FEATURE_GET_RATE_TARIFF;
+    case 5:
+    case "MOBILE_APP_FEATURE_DRIVENOTE":
+      return MobileAppFeature.MOBILE_APP_FEATURE_DRIVENOTE;
+    case 6:
+    case "MOBILE_APP_FEATURE_CLIMATE_KEEPER_OVERRIDE":
+      return MobileAppFeature.MOBILE_APP_FEATURE_CLIMATE_KEEPER_OVERRIDE;
+    case 7:
+    case "MOBILE_APP_FEATURE_SIGNED_VIDEO_REQUEST":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SIGNED_VIDEO_REQUEST;
+    case 8:
+    case "MOBILE_APP_FEATURE_SENTRY_CAM_FLASH_LIGHTS":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SENTRY_CAM_FLASH_LIGHTS;
+    case 9:
+    case "MOBILE_APP_FEATURE_BOOMBOX":
+      return MobileAppFeature.MOBILE_APP_FEATURE_BOOMBOX;
+    case 10:
+    case "MOBILE_APP_FEATURE_DOOR_UNLATCH":
+      return MobileAppFeature.MOBILE_APP_FEATURE_DOOR_UNLATCH;
+    case 11:
+    case "MOBILE_APP_FEATURE_SEAT_HEATERS_INSTALLED":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SEAT_HEATERS_INSTALLED;
+    case 12:
+    case "MOBILE_APP_FEATURE_LAST_SEEN_TPMS":
+      return MobileAppFeature.MOBILE_APP_FEATURE_LAST_SEEN_TPMS;
+    case 13:
+    case "MOBILE_APP_FEATURE_UI_CHARGE_PORT":
+      return MobileAppFeature.MOBILE_APP_FEATURE_UI_CHARGE_PORT;
+    case 14:
+    case "MOBILE_APP_FEATURE_MONITOR_AND_CHARGE_ROLES":
+      return MobileAppFeature.MOBILE_APP_FEATURE_MONITOR_AND_CHARGE_ROLES;
+    case 15:
+    case "MOBILE_APP_FEATURE_PROTO_FLOATS":
+      return MobileAppFeature.MOBILE_APP_FEATURE_PROTO_FLOATS;
+    case 16:
+    case "MOBILE_APP_FEATURE_BLUETOOTH_PAIRING":
+      return MobileAppFeature.MOBILE_APP_FEATURE_BLUETOOTH_PAIRING;
+    case 17:
+    case "MOBILE_APP_FEATURE_HMAC_AUTHENTICATION":
+      return MobileAppFeature.MOBILE_APP_FEATURE_HMAC_AUTHENTICATION;
+    case 18:
+    case "MOBILE_APP_COP_USER_SET_TEMP":
+      return MobileAppFeature.MOBILE_APP_COP_USER_SET_TEMP;
+    case 19:
+    case "MOBILE_APP_FEATURE_MEDIA_DETAILS":
+      return MobileAppFeature.MOBILE_APP_FEATURE_MEDIA_DETAILS;
+    case 20:
+    case "MOBILE_APP_FEATURE_RESPONSE_CACHE":
+      return MobileAppFeature.MOBILE_APP_FEATURE_RESPONSE_CACHE;
+    case 22:
+    case "MOBILE_APP_FEATURE_SCC":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SCC;
+    case 23:
+    case "MOBILE_APP_FEATURE_SENTRY_CAM_WITH_DOG_MODE":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SENTRY_CAM_WITH_DOG_MODE;
+    case 24:
+    case "MOBILE_APP_FEATURE_AUTO_STEERING_WHEEL_HEAT":
+      return MobileAppFeature.MOBILE_APP_FEATURE_AUTO_STEERING_WHEEL_HEAT;
+    case 25:
+    case "MOBILE_APP_FEATURE_MANAGED_CHARGING":
+      return MobileAppFeature.MOBILE_APP_FEATURE_MANAGED_CHARGING;
+    case 26:
+    case "MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND_DECPRECATED":
+      return MobileAppFeature.MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND_DECPRECATED;
+    case 27:
+    case "MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND":
+      return MobileAppFeature.MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND;
+    case 28:
+    case "MOBILE_APP_FEATURE_SEND_NAVIGATION_ROUTE":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SEND_NAVIGATION_ROUTE;
+    case 29:
+    case "MOBILE_APP_FEATURE_RED_BRAKE_CALIPER_FIX":
+      return MobileAppFeature.MOBILE_APP_FEATURE_RED_BRAKE_CALIPER_FIX;
+    case 30:
+    case "MOBILE_APP_FEATURE_PIN_TO_DRIVE":
+      return MobileAppFeature.MOBILE_APP_FEATURE_PIN_TO_DRIVE;
+    case 31:
+    case "MOBILE_APP_COP_NOT_RUNNING_REASON":
+      return MobileAppFeature.MOBILE_APP_COP_NOT_RUNNING_REASON;
+    case 32:
+    case "MOBILE_APP_FEATURE_SET_VEHICLE_NAME":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SET_VEHICLE_NAME;
+    case 33:
+    case "MOBILE_APP_FEATURE_VEHICLE_DATA_PII_V2":
+      return MobileAppFeature.MOBILE_APP_FEATURE_VEHICLE_DATA_PII_V2;
+    case 34:
+    case "MOBILE_APP_FEATURE_BOOMBOX_V2":
+      return MobileAppFeature.MOBILE_APP_FEATURE_BOOMBOX_V2;
+    case 35:
+    case "MOBILE_APP_FEATURE_UWB_STABLE_FOR_SUPPORTED_CARS":
+      return MobileAppFeature.MOBILE_APP_FEATURE_UWB_STABLE_FOR_SUPPORTED_CARS;
+    case 36:
+    case "MOBILE_APP_FEATURE_SPEED_LIMIT_PIN_RESET_SIGNED_COMMAND":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SPEED_LIMIT_PIN_RESET_SIGNED_COMMAND;
+    case 37:
+    case "MOBILE_APP_FEATURE_PRECISE_LOCATION_TAG":
+      return MobileAppFeature.MOBILE_APP_FEATURE_PRECISE_LOCATION_TAG;
+    case 38:
+    case "MOBILE_APP_FEATURE_IMU_ALERT_IS_VISIBLE":
+      return MobileAppFeature.MOBILE_APP_FEATURE_IMU_ALERT_IS_VISIBLE;
+    case 42:
+    case "MOBILE_APP_FEATURE_CT_SUPPORTS_COP":
+      return MobileAppFeature.MOBILE_APP_FEATURE_CT_SUPPORTS_COP;
+    case 43:
+    case "MOBILE_APP_FEATURE_WAYPOINTS_SUPPORTED":
+      return MobileAppFeature.MOBILE_APP_FEATURE_WAYPOINTS_SUPPORTED;
+    case 44:
+    case "MOBILE_APP_FEATURE_OCTA_VIEW":
+      return MobileAppFeature.MOBILE_APP_FEATURE_OCTA_VIEW;
+    case 45:
+    case "MOBILE_APP_FEATURE_BT_GTW_UNLOCK":
+      return MobileAppFeature.MOBILE_APP_FEATURE_BT_GTW_UNLOCK;
+    case 46:
+    case "MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE_DEPRECATED":
+      return MobileAppFeature.MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE_DEPRECATED;
+    case 47:
+    case "MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE":
+      return MobileAppFeature.MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE;
+    case 48:
+    case "MOBILE_APP_FEATURE_SUMMON_PREWARMING":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SUMMON_PREWARMING;
+    case 49:
+    case "MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S_DEPRECATED":
+      return MobileAppFeature.MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S_DEPRECATED;
+    case 50:
+    case "MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S":
+      return MobileAppFeature.MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S;
+    case 51:
+    case "MOBILE_APP_FEATURE_UI_ONE_TIME_CHARGE_SUPPORTED":
+      return MobileAppFeature.MOBILE_APP_FEATURE_UI_ONE_TIME_CHARGE_SUPPORTED;
+    case 52:
+    case "MOBILE_APP_FEATURE_SCHEDULE_V3":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SCHEDULE_V3;
+    case 53:
+    case "MOBILE_APP_FEATURE_ECIES_VEHICLE_DATA_ENCRYPTION":
+      return MobileAppFeature.MOBILE_APP_FEATURE_ECIES_VEHICLE_DATA_ENCRYPTION;
+    case 54:
+    case "MOBILE_APP_FEATURE_TENT_MODE_SUPPORTED":
+      return MobileAppFeature.MOBILE_APP_FEATURE_TENT_MODE_SUPPORTED;
+    case 55:
+    case "MOBILE_APP_FEATURE_SCHEDULE_V3_NAMING":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SCHEDULE_V3_NAMING;
+    case 57:
+    case "MOBILE_APP_FEATURE_COLORIZER_COLOR_REMAP_ENABLED":
+      return MobileAppFeature.MOBILE_APP_FEATURE_COLORIZER_COLOR_REMAP_ENABLED;
+    case 58:
+    case "MOBILE_APP_FEATURE_SEND_NAVIGATION_REQUEST_GPS_DESTINATION":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SEND_NAVIGATION_REQUEST_GPS_DESTINATION;
+    case 59:
+    case "MOBILE_APP_FEATURE_SUMMON_WEBCAM":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SUMMON_WEBCAM;
+    case 61:
+    case "MOBILE_APP_FEATURE_BLE_REMOTE_START":
+      return MobileAppFeature.MOBILE_APP_FEATURE_BLE_REMOTE_START;
+    case 62:
+    case "MOBILE_APP_FEATURE_SOH_TEST_OBSOLETE":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SOH_TEST_OBSOLETE;
+    case 64:
+    case "MOBILE_APP_FEATURE_SET_ARRIVAL_PERCENTAGE_OBSOLETE":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SET_ARRIVAL_PERCENTAGE_OBSOLETE;
+    case 66:
+    case "MOBILE_APP_FEATURE_REMOTE_THEATER_CONTROL":
+      return MobileAppFeature.MOBILE_APP_FEATURE_REMOTE_THEATER_CONTROL;
+    case 67:
+    case "MOBILE_APP_FEATURE_CT_SUSPENSION":
+      return MobileAppFeature.MOBILE_APP_FEATURE_CT_SUSPENSION;
+    case 68:
+    case "MOBILE_APP_FEATURE_SOH_TEST_V2":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SOH_TEST_V2;
+    case 69:
+    case "MOBILE_APP_FEATURE_ANDROID_UWB_ENABLED":
+      return MobileAppFeature.MOBILE_APP_FEATURE_ANDROID_UWB_ENABLED;
+    case 70:
+    case "MOBILE_APP_FEATURE_LOW_POWER_MODE":
+      return MobileAppFeature.MOBILE_APP_FEATURE_LOW_POWER_MODE;
+    case 71:
+    case "MOBILE_APP_FEATURE_ROBOTAXI_UWB":
+      return MobileAppFeature.MOBILE_APP_FEATURE_ROBOTAXI_UWB;
+    case 72:
+    case "MOBILE_APP_FEATURE_KEEP_ACCESSORY_POWER_MODE":
+      return MobileAppFeature.MOBILE_APP_FEATURE_KEEP_ACCESSORY_POWER_MODE;
+    case 73:
+    case "MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS;
+    case 77:
+    case "MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS_WITH_DELETION":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS_WITH_DELETION;
+    case 78:
+    case "MOBILE_APP_FEATURE_FETCH_KEY_METADATA_DEPRECATED":
+      return MobileAppFeature.MOBILE_APP_FEATURE_FETCH_KEY_METADATA_DEPRECATED;
+    case 79:
+    case "MOBILE_APP_FEATURE_FETCH_KEY_METADATA":
+      return MobileAppFeature.MOBILE_APP_FEATURE_FETCH_KEY_METADATA;
+    case 80:
+    case "MOBILE_APP_FEATURE_TRAILER_LIGHT_TEST":
+      return MobileAppFeature.MOBILE_APP_FEATURE_TRAILER_LIGHT_TEST;
+    case 81:
+    case "MOBILE_APP_FEATURE_DELETE_DASHCAM_CLIPS_AND_FORMAT_USB":
+      return MobileAppFeature.MOBILE_APP_FEATURE_DELETE_DASHCAM_CLIPS_AND_FORMAT_USB;
+    case 82:
+    case "MOBILE_APP_FEATURE_SOFTWARE_UPDATE_AUTO_SCHEDULED":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SOFTWARE_UPDATE_AUTO_SCHEDULED;
+    case 83:
+    case "MOBILE_APP_FEATURE_BLE_MESSAGE_FRAMING":
+      return MobileAppFeature.MOBILE_APP_FEATURE_BLE_MESSAGE_FRAMING;
+    case 84:
+    case "MOBILE_APP_FEATURE_WAYPOINTS_REQUEST_ACCEPTS_COORDINATES":
+      return MobileAppFeature.MOBILE_APP_FEATURE_WAYPOINTS_REQUEST_ACCEPTS_COORDINATES;
+    case 85:
+    case "MOBILE_APP_FEATURE_PHONE_SETTING_PREFERENCES_SYNC":
+      return MobileAppFeature.MOBILE_APP_FEATURE_PHONE_SETTING_PREFERENCES_SYNC;
+    case 90:
+    case "MOBILE_APP_FEATURE_UPLOAD_CAR_WRAP":
+      return MobileAppFeature.MOBILE_APP_FEATURE_UPLOAD_CAR_WRAP;
+    case 91:
+    case "MOBILE_APP_FEATURE_SHARE_URLS_X":
+      return MobileAppFeature.MOBILE_APP_FEATURE_SHARE_URLS_X;
+    case 93:
+    case "MOBILE_APP_FEATURE_DISPLAY_BRIGHTNESS":
+      return MobileAppFeature.MOBILE_APP_FEATURE_DISPLAY_BRIGHTNESS;
+    case 95:
+    case "MOBILE_APP_FEATURE_ANDROID_BLE_BONDING":
+      return MobileAppFeature.MOBILE_APP_FEATURE_ANDROID_BLE_BONDING;
+    case 97:
+    case "MOBILE_APP_FEATURE_APVIZ_WHEEL_CAPS":
+      return MobileAppFeature.MOBILE_APP_FEATURE_APVIZ_WHEEL_CAPS;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return MobileAppFeature.UNRECOGNIZED;
+  }
+}
+
+export function mobileAppFeatureToJSON(object: MobileAppFeature): string {
+  switch (object) {
+    case MobileAppFeature.MOBILE_APP_FEATURE_ACTIVE:
+      return "MOBILE_APP_FEATURE_ACTIVE";
+    case MobileAppFeature.MOBILE_APP_FEATURE_CLIMATE_KEEPER:
+      return "MOBILE_APP_FEATURE_CLIMATE_KEEPER";
+    case MobileAppFeature.MOBILE_APP_FEATURE_UNLOCK_STOP_CHARGE:
+      return "MOBILE_APP_FEATURE_UNLOCK_STOP_CHARGE";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SET_RATE_TARIFF:
+      return "MOBILE_APP_FEATURE_SET_RATE_TARIFF";
+    case MobileAppFeature.MOBILE_APP_FEATURE_GET_RATE_TARIFF:
+      return "MOBILE_APP_FEATURE_GET_RATE_TARIFF";
+    case MobileAppFeature.MOBILE_APP_FEATURE_DRIVENOTE:
+      return "MOBILE_APP_FEATURE_DRIVENOTE";
+    case MobileAppFeature.MOBILE_APP_FEATURE_CLIMATE_KEEPER_OVERRIDE:
+      return "MOBILE_APP_FEATURE_CLIMATE_KEEPER_OVERRIDE";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SIGNED_VIDEO_REQUEST:
+      return "MOBILE_APP_FEATURE_SIGNED_VIDEO_REQUEST";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SENTRY_CAM_FLASH_LIGHTS:
+      return "MOBILE_APP_FEATURE_SENTRY_CAM_FLASH_LIGHTS";
+    case MobileAppFeature.MOBILE_APP_FEATURE_BOOMBOX:
+      return "MOBILE_APP_FEATURE_BOOMBOX";
+    case MobileAppFeature.MOBILE_APP_FEATURE_DOOR_UNLATCH:
+      return "MOBILE_APP_FEATURE_DOOR_UNLATCH";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SEAT_HEATERS_INSTALLED:
+      return "MOBILE_APP_FEATURE_SEAT_HEATERS_INSTALLED";
+    case MobileAppFeature.MOBILE_APP_FEATURE_LAST_SEEN_TPMS:
+      return "MOBILE_APP_FEATURE_LAST_SEEN_TPMS";
+    case MobileAppFeature.MOBILE_APP_FEATURE_UI_CHARGE_PORT:
+      return "MOBILE_APP_FEATURE_UI_CHARGE_PORT";
+    case MobileAppFeature.MOBILE_APP_FEATURE_MONITOR_AND_CHARGE_ROLES:
+      return "MOBILE_APP_FEATURE_MONITOR_AND_CHARGE_ROLES";
+    case MobileAppFeature.MOBILE_APP_FEATURE_PROTO_FLOATS:
+      return "MOBILE_APP_FEATURE_PROTO_FLOATS";
+    case MobileAppFeature.MOBILE_APP_FEATURE_BLUETOOTH_PAIRING:
+      return "MOBILE_APP_FEATURE_BLUETOOTH_PAIRING";
+    case MobileAppFeature.MOBILE_APP_FEATURE_HMAC_AUTHENTICATION:
+      return "MOBILE_APP_FEATURE_HMAC_AUTHENTICATION";
+    case MobileAppFeature.MOBILE_APP_COP_USER_SET_TEMP:
+      return "MOBILE_APP_COP_USER_SET_TEMP";
+    case MobileAppFeature.MOBILE_APP_FEATURE_MEDIA_DETAILS:
+      return "MOBILE_APP_FEATURE_MEDIA_DETAILS";
+    case MobileAppFeature.MOBILE_APP_FEATURE_RESPONSE_CACHE:
+      return "MOBILE_APP_FEATURE_RESPONSE_CACHE";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SCC:
+      return "MOBILE_APP_FEATURE_SCC";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SENTRY_CAM_WITH_DOG_MODE:
+      return "MOBILE_APP_FEATURE_SENTRY_CAM_WITH_DOG_MODE";
+    case MobileAppFeature.MOBILE_APP_FEATURE_AUTO_STEERING_WHEEL_HEAT:
+      return "MOBILE_APP_FEATURE_AUTO_STEERING_WHEEL_HEAT";
+    case MobileAppFeature.MOBILE_APP_FEATURE_MANAGED_CHARGING:
+      return "MOBILE_APP_FEATURE_MANAGED_CHARGING";
+    case MobileAppFeature.MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND_DECPRECATED:
+      return "MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND_DECPRECATED";
+    case MobileAppFeature.MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND:
+      return "MOBILE_APP_FEATURE_TOGGLE_REMOTE_SERVICE_ACCESS_COMMAND";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SEND_NAVIGATION_ROUTE:
+      return "MOBILE_APP_FEATURE_SEND_NAVIGATION_ROUTE";
+    case MobileAppFeature.MOBILE_APP_FEATURE_RED_BRAKE_CALIPER_FIX:
+      return "MOBILE_APP_FEATURE_RED_BRAKE_CALIPER_FIX";
+    case MobileAppFeature.MOBILE_APP_FEATURE_PIN_TO_DRIVE:
+      return "MOBILE_APP_FEATURE_PIN_TO_DRIVE";
+    case MobileAppFeature.MOBILE_APP_COP_NOT_RUNNING_REASON:
+      return "MOBILE_APP_COP_NOT_RUNNING_REASON";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SET_VEHICLE_NAME:
+      return "MOBILE_APP_FEATURE_SET_VEHICLE_NAME";
+    case MobileAppFeature.MOBILE_APP_FEATURE_VEHICLE_DATA_PII_V2:
+      return "MOBILE_APP_FEATURE_VEHICLE_DATA_PII_V2";
+    case MobileAppFeature.MOBILE_APP_FEATURE_BOOMBOX_V2:
+      return "MOBILE_APP_FEATURE_BOOMBOX_V2";
+    case MobileAppFeature.MOBILE_APP_FEATURE_UWB_STABLE_FOR_SUPPORTED_CARS:
+      return "MOBILE_APP_FEATURE_UWB_STABLE_FOR_SUPPORTED_CARS";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SPEED_LIMIT_PIN_RESET_SIGNED_COMMAND:
+      return "MOBILE_APP_FEATURE_SPEED_LIMIT_PIN_RESET_SIGNED_COMMAND";
+    case MobileAppFeature.MOBILE_APP_FEATURE_PRECISE_LOCATION_TAG:
+      return "MOBILE_APP_FEATURE_PRECISE_LOCATION_TAG";
+    case MobileAppFeature.MOBILE_APP_FEATURE_IMU_ALERT_IS_VISIBLE:
+      return "MOBILE_APP_FEATURE_IMU_ALERT_IS_VISIBLE";
+    case MobileAppFeature.MOBILE_APP_FEATURE_CT_SUPPORTS_COP:
+      return "MOBILE_APP_FEATURE_CT_SUPPORTS_COP";
+    case MobileAppFeature.MOBILE_APP_FEATURE_WAYPOINTS_SUPPORTED:
+      return "MOBILE_APP_FEATURE_WAYPOINTS_SUPPORTED";
+    case MobileAppFeature.MOBILE_APP_FEATURE_OCTA_VIEW:
+      return "MOBILE_APP_FEATURE_OCTA_VIEW";
+    case MobileAppFeature.MOBILE_APP_FEATURE_BT_GTW_UNLOCK:
+      return "MOBILE_APP_FEATURE_BT_GTW_UNLOCK";
+    case MobileAppFeature.MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE_DEPRECATED:
+      return "MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE_DEPRECATED";
+    case MobileAppFeature.MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE:
+      return "MOBILE_APP_FEATURE_UI_PHONEKEY_WHITELIST_RELIABLE";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SUMMON_PREWARMING:
+      return "MOBILE_APP_FEATURE_SUMMON_PREWARMING";
+    case MobileAppFeature.MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S_DEPRECATED:
+      return "MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S_DEPRECATED";
+    case MobileAppFeature.MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S:
+      return "MOBILE_APP_FEATURE_UWB_ENABLED_FOR_P2S";
+    case MobileAppFeature.MOBILE_APP_FEATURE_UI_ONE_TIME_CHARGE_SUPPORTED:
+      return "MOBILE_APP_FEATURE_UI_ONE_TIME_CHARGE_SUPPORTED";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SCHEDULE_V3:
+      return "MOBILE_APP_FEATURE_SCHEDULE_V3";
+    case MobileAppFeature.MOBILE_APP_FEATURE_ECIES_VEHICLE_DATA_ENCRYPTION:
+      return "MOBILE_APP_FEATURE_ECIES_VEHICLE_DATA_ENCRYPTION";
+    case MobileAppFeature.MOBILE_APP_FEATURE_TENT_MODE_SUPPORTED:
+      return "MOBILE_APP_FEATURE_TENT_MODE_SUPPORTED";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SCHEDULE_V3_NAMING:
+      return "MOBILE_APP_FEATURE_SCHEDULE_V3_NAMING";
+    case MobileAppFeature.MOBILE_APP_FEATURE_COLORIZER_COLOR_REMAP_ENABLED:
+      return "MOBILE_APP_FEATURE_COLORIZER_COLOR_REMAP_ENABLED";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SEND_NAVIGATION_REQUEST_GPS_DESTINATION:
+      return "MOBILE_APP_FEATURE_SEND_NAVIGATION_REQUEST_GPS_DESTINATION";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SUMMON_WEBCAM:
+      return "MOBILE_APP_FEATURE_SUMMON_WEBCAM";
+    case MobileAppFeature.MOBILE_APP_FEATURE_BLE_REMOTE_START:
+      return "MOBILE_APP_FEATURE_BLE_REMOTE_START";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SOH_TEST_OBSOLETE:
+      return "MOBILE_APP_FEATURE_SOH_TEST_OBSOLETE";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SET_ARRIVAL_PERCENTAGE_OBSOLETE:
+      return "MOBILE_APP_FEATURE_SET_ARRIVAL_PERCENTAGE_OBSOLETE";
+    case MobileAppFeature.MOBILE_APP_FEATURE_REMOTE_THEATER_CONTROL:
+      return "MOBILE_APP_FEATURE_REMOTE_THEATER_CONTROL";
+    case MobileAppFeature.MOBILE_APP_FEATURE_CT_SUSPENSION:
+      return "MOBILE_APP_FEATURE_CT_SUSPENSION";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SOH_TEST_V2:
+      return "MOBILE_APP_FEATURE_SOH_TEST_V2";
+    case MobileAppFeature.MOBILE_APP_FEATURE_ANDROID_UWB_ENABLED:
+      return "MOBILE_APP_FEATURE_ANDROID_UWB_ENABLED";
+    case MobileAppFeature.MOBILE_APP_FEATURE_LOW_POWER_MODE:
+      return "MOBILE_APP_FEATURE_LOW_POWER_MODE";
+    case MobileAppFeature.MOBILE_APP_FEATURE_ROBOTAXI_UWB:
+      return "MOBILE_APP_FEATURE_ROBOTAXI_UWB";
+    case MobileAppFeature.MOBILE_APP_FEATURE_KEEP_ACCESSORY_POWER_MODE:
+      return "MOBILE_APP_FEATURE_KEEP_ACCESSORY_POWER_MODE";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS:
+      return "MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS_WITH_DELETION:
+      return "MOBILE_APP_FEATURE_SETUP_CLOUD_ACCOUNTS_WITH_DELETION";
+    case MobileAppFeature.MOBILE_APP_FEATURE_FETCH_KEY_METADATA_DEPRECATED:
+      return "MOBILE_APP_FEATURE_FETCH_KEY_METADATA_DEPRECATED";
+    case MobileAppFeature.MOBILE_APP_FEATURE_FETCH_KEY_METADATA:
+      return "MOBILE_APP_FEATURE_FETCH_KEY_METADATA";
+    case MobileAppFeature.MOBILE_APP_FEATURE_TRAILER_LIGHT_TEST:
+      return "MOBILE_APP_FEATURE_TRAILER_LIGHT_TEST";
+    case MobileAppFeature.MOBILE_APP_FEATURE_DELETE_DASHCAM_CLIPS_AND_FORMAT_USB:
+      return "MOBILE_APP_FEATURE_DELETE_DASHCAM_CLIPS_AND_FORMAT_USB";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SOFTWARE_UPDATE_AUTO_SCHEDULED:
+      return "MOBILE_APP_FEATURE_SOFTWARE_UPDATE_AUTO_SCHEDULED";
+    case MobileAppFeature.MOBILE_APP_FEATURE_BLE_MESSAGE_FRAMING:
+      return "MOBILE_APP_FEATURE_BLE_MESSAGE_FRAMING";
+    case MobileAppFeature.MOBILE_APP_FEATURE_WAYPOINTS_REQUEST_ACCEPTS_COORDINATES:
+      return "MOBILE_APP_FEATURE_WAYPOINTS_REQUEST_ACCEPTS_COORDINATES";
+    case MobileAppFeature.MOBILE_APP_FEATURE_PHONE_SETTING_PREFERENCES_SYNC:
+      return "MOBILE_APP_FEATURE_PHONE_SETTING_PREFERENCES_SYNC";
+    case MobileAppFeature.MOBILE_APP_FEATURE_UPLOAD_CAR_WRAP:
+      return "MOBILE_APP_FEATURE_UPLOAD_CAR_WRAP";
+    case MobileAppFeature.MOBILE_APP_FEATURE_SHARE_URLS_X:
+      return "MOBILE_APP_FEATURE_SHARE_URLS_X";
+    case MobileAppFeature.MOBILE_APP_FEATURE_DISPLAY_BRIGHTNESS:
+      return "MOBILE_APP_FEATURE_DISPLAY_BRIGHTNESS";
+    case MobileAppFeature.MOBILE_APP_FEATURE_ANDROID_BLE_BONDING:
+      return "MOBILE_APP_FEATURE_ANDROID_BLE_BONDING";
+    case MobileAppFeature.MOBILE_APP_FEATURE_APVIZ_WHEEL_CAPS:
+      return "MOBILE_APP_FEATURE_APVIZ_WHEEL_CAPS";
+    case MobileAppFeature.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface VehicleData {
   /** TESLEMETRY-EXT */
   guiSettings: GuiSettings | undefined;
@@ -732,7 +1241,14 @@ export interface VehicleData {
   vehicleConfig: VehicleConfig | undefined;
   locationState: LocationState | undefined;
   closuresState: ClosuresState | undefined;
-  protoJsonVersion?: number | undefined;
+  protoJsonVersion?:
+    | number
+    | undefined;
+  /**
+   * Each entry is an encoded CarServer.EncryptedData (car_server.proto), declared
+   * as bytes because vehicle.proto cannot import car_server.proto.
+   */
+  encryptedData: Uint8Array[];
   uploadReason?:
     | string
     | undefined;
@@ -780,7 +1296,16 @@ export interface VehicleData {
     | ChildPresenceDetectionState
     | undefined;
   /** TESLEMETRY-EXT */
-  displayState: DisplayState | undefined;
+  displayState:
+    | DisplayState
+    | undefined;
+  /**
+   * Each entry is an encoded CarServer.PiiKeyResponse (car_server.proto), declared
+   * as bytes because vehicle.proto cannot import car_server.proto.
+   */
+  piiKeyResponses: Uint8Array[];
+  /** An encrypted envelope whose message type this repo does not publish. */
+  wrappedKey: Uint8Array;
   supportsOptionalFields?: boolean | undefined;
 }
 
@@ -2514,6 +3039,7 @@ export interface VehicleConfig {
   autopilotOverrideState: AutopilotOverrideState;
   autopilotOverrideExpireTime?: number | undefined;
   supportsDynamicEnvironments?: boolean | undefined;
+  wheelCapsOn?: boolean | undefined;
 }
 
 export enum VehicleConfig_AuxParkLampsE {
@@ -3060,6 +3586,7 @@ export interface SohState_SohTestState {
 }
 
 export interface SohState_SohResult {
+  field3?: number | undefined;
   sohCalibrated?: boolean | undefined;
   sohLastTestTime?: number | undefined;
   sohHealthResult?: SohState_WarrantyServiceResult | undefined;
@@ -3160,6 +3687,7 @@ function createBaseVehicleData(): VehicleData {
     locationState: undefined,
     closuresState: undefined,
     protoJsonVersion: undefined,
+    encryptedData: [],
     uploadReason: undefined,
     parkedAccessoryState: undefined,
     chargeScheduleState: undefined,
@@ -3178,6 +3706,8 @@ function createBaseVehicleData(): VehicleData {
     suspensionState: undefined,
     childPresenceDetectionState: undefined,
     displayState: undefined,
+    piiKeyResponses: [],
+    wrappedKey: new Uint8Array(0),
     supportsOptionalFields: undefined,
   };
 }
@@ -3210,6 +3740,9 @@ export const VehicleData: MessageFns<VehicleData> = {
     }
     if (message.protoJsonVersion !== undefined) {
       writer.uint32(80).int32(message.protoJsonVersion);
+    }
+    for (const v of message.encryptedData) {
+      writer.uint32(90).bytes(v!);
     }
     if (message.uploadReason !== undefined) {
       writer.uint32(98).string(message.uploadReason);
@@ -3264,6 +3797,12 @@ export const VehicleData: MessageFns<VehicleData> = {
     }
     if (message.displayState !== undefined) {
       DisplayState.encode(message.displayState, writer.uint32(290).fork()).join();
+    }
+    for (const v of message.piiKeyResponses) {
+      writer.uint32(7202).bytes(v!);
+    }
+    if (message.wrappedKey.length !== 0) {
+      writer.uint32(7210).bytes(message.wrappedKey);
     }
     if (message.supportsOptionalFields !== undefined) {
       writer.uint32(7992).bool(message.supportsOptionalFields);
@@ -3348,6 +3887,14 @@ export const VehicleData: MessageFns<VehicleData> = {
           }
 
           message.protoJsonVersion = reader.int32();
+          continue;
+        }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.encryptedData.push(reader.bytes());
           continue;
         }
         case 12: {
@@ -3494,6 +4041,22 @@ export const VehicleData: MessageFns<VehicleData> = {
           message.displayState = DisplayState.decode(reader, reader.uint32());
           continue;
         }
+        case 900: {
+          if (tag !== 7202) {
+            break;
+          }
+
+          message.piiKeyResponses.push(reader.bytes());
+          continue;
+        }
+        case 901: {
+          if (tag !== 7210) {
+            break;
+          }
+
+          message.wrappedKey = reader.bytes();
+          continue;
+        }
         case 999: {
           if (tag !== 7992) {
             break;
@@ -3524,6 +4087,9 @@ export const VehicleData: MessageFns<VehicleData> = {
       locationState: isSet(object.locationState) ? LocationState.fromJSON(object.locationState) : undefined,
       closuresState: isSet(object.closuresState) ? ClosuresState.fromJSON(object.closuresState) : undefined,
       protoJsonVersion: isSet(object.protoJsonVersion) ? globalThis.Number(object.protoJsonVersion) : undefined,
+      encryptedData: globalThis.Array.isArray(object?.encryptedData)
+        ? object.encryptedData.map((e: any) => bytesFromBase64(e))
+        : [],
       uploadReason: isSet(object.uploadReason) ? globalThis.String(object.uploadReason) : undefined,
       parkedAccessoryState: isSet(object.parkedAccessoryState)
         ? ParkedAccessoryState.fromJSON(object.parkedAccessoryState)
@@ -3560,6 +4126,10 @@ export const VehicleData: MessageFns<VehicleData> = {
         ? ChildPresenceDetectionState.fromJSON(object.childPresenceDetectionState)
         : undefined,
       displayState: isSet(object.displayState) ? DisplayState.fromJSON(object.displayState) : undefined,
+      piiKeyResponses: globalThis.Array.isArray(object?.piiKeyResponses)
+        ? object.piiKeyResponses.map((e: any) => bytesFromBase64(e))
+        : [],
+      wrappedKey: isSet(object.wrappedKey) ? bytesFromBase64(object.wrappedKey) : new Uint8Array(0),
       supportsOptionalFields: isSet(object.supportsOptionalFields)
         ? globalThis.Boolean(object.supportsOptionalFields)
         : undefined,
@@ -3594,6 +4164,9 @@ export const VehicleData: MessageFns<VehicleData> = {
     }
     if (message.protoJsonVersion !== undefined) {
       obj.protoJsonVersion = Math.round(message.protoJsonVersion);
+    }
+    if (message.encryptedData?.length) {
+      obj.encryptedData = message.encryptedData.map((e) => base64FromBytes(e));
     }
     if (message.uploadReason !== undefined) {
       obj.uploadReason = message.uploadReason;
@@ -3649,6 +4222,12 @@ export const VehicleData: MessageFns<VehicleData> = {
     if (message.displayState !== undefined) {
       obj.displayState = DisplayState.toJSON(message.displayState);
     }
+    if (message.piiKeyResponses?.length) {
+      obj.piiKeyResponses = message.piiKeyResponses.map((e) => base64FromBytes(e));
+    }
+    if (message.wrappedKey !== undefined) {
+      obj.wrappedKey = base64FromBytes(message.wrappedKey);
+    }
     if (message.supportsOptionalFields !== undefined) {
       obj.supportsOptionalFields = message.supportsOptionalFields;
     }
@@ -3685,6 +4264,7 @@ export const VehicleData: MessageFns<VehicleData> = {
       ? ClosuresState.fromPartial(object.closuresState)
       : undefined;
     message.protoJsonVersion = object.protoJsonVersion ?? undefined;
+    message.encryptedData = object.encryptedData?.map((e) => e) || [];
     message.uploadReason = object.uploadReason ?? undefined;
     message.parkedAccessoryState = (object.parkedAccessoryState !== undefined && object.parkedAccessoryState !== null)
       ? ParkedAccessoryState.fromPartial(object.parkedAccessoryState)
@@ -3738,6 +4318,8 @@ export const VehicleData: MessageFns<VehicleData> = {
     message.displayState = (object.displayState !== undefined && object.displayState !== null)
       ? DisplayState.fromPartial(object.displayState)
       : undefined;
+    message.piiKeyResponses = object.piiKeyResponses?.map((e) => e) || [];
+    message.wrappedKey = object.wrappedKey ?? new Uint8Array(0);
     message.supportsOptionalFields = object.supportsOptionalFields ?? undefined;
     return message;
   },
@@ -15748,6 +16330,7 @@ function createBaseVehicleConfig(): VehicleConfig {
     autopilotOverrideState: 0,
     autopilotOverrideExpireTime: undefined,
     supportsDynamicEnvironments: undefined,
+    wheelCapsOn: undefined,
   };
 }
 
@@ -15974,6 +16557,9 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
     }
     if (message.supportsDynamicEnvironments !== undefined) {
       writer.uint32(1592).bool(message.supportsDynamicEnvironments);
+    }
+    if (message.wheelCapsOn !== undefined) {
+      writer.uint32(1600).bool(message.wheelCapsOn);
     }
     return writer;
   },
@@ -16577,6 +17163,14 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
           message.supportsDynamicEnvironments = reader.bool();
           continue;
         }
+        case 200: {
+          if (tag !== 1600) {
+            break;
+          }
+
+          message.wheelCapsOn = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -16732,6 +17326,7 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
       supportsDynamicEnvironments: isSet(object.supportsDynamicEnvironments)
         ? globalThis.Boolean(object.supportsDynamicEnvironments)
         : undefined,
+      wheelCapsOn: isSet(object.wheelCapsOn) ? globalThis.Boolean(object.wheelCapsOn) : undefined,
     };
   },
 
@@ -16959,6 +17554,9 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
     if (message.supportsDynamicEnvironments !== undefined) {
       obj.supportsDynamicEnvironments = message.supportsDynamicEnvironments;
     }
+    if (message.wheelCapsOn !== undefined) {
+      obj.wheelCapsOn = message.wheelCapsOn;
+    }
     return obj;
   },
 
@@ -17045,6 +17643,7 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
     message.autopilotOverrideState = object.autopilotOverrideState ?? 0;
     message.autopilotOverrideExpireTime = object.autopilotOverrideExpireTime ?? undefined;
     message.supportsDynamicEnvironments = object.supportsDynamicEnvironments ?? undefined;
+    message.wheelCapsOn = object.wheelCapsOn ?? undefined;
     return message;
   },
 };
@@ -18028,6 +18627,7 @@ export const SohState_SohTestState: MessageFns<SohState_SohTestState> = {
 
 function createBaseSohState_SohResult(): SohState_SohResult {
   return {
+    field3: undefined,
     sohCalibrated: undefined,
     sohLastTestTime: undefined,
     sohHealthResult: undefined,
@@ -18038,6 +18638,9 @@ function createBaseSohState_SohResult(): SohState_SohResult {
 
 export const SohState_SohResult: MessageFns<SohState_SohResult> = {
   encode(message: SohState_SohResult, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.field3 !== undefined) {
+      writer.uint32(29).float(message.field3);
+    }
     if (message.sohCalibrated !== undefined) {
       writer.uint32(32).bool(message.sohCalibrated);
     }
@@ -18063,6 +18666,14 @@ export const SohState_SohResult: MessageFns<SohState_SohResult> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 3: {
+          if (tag !== 29) {
+            break;
+          }
+
+          message.field3 = reader.float();
+          continue;
+        }
         case 4: {
           if (tag !== 32) {
             break;
@@ -18114,6 +18725,7 @@ export const SohState_SohResult: MessageFns<SohState_SohResult> = {
 
   fromJSON(object: any): SohState_SohResult {
     return {
+      field3: isSet(object.field3) ? globalThis.Number(object.field3) : undefined,
       sohCalibrated: isSet(object.sohCalibrated) ? globalThis.Boolean(object.sohCalibrated) : undefined,
       sohLastTestTime: isSet(object.sohLastTestTime) ? globalThis.Number(object.sohLastTestTime) : undefined,
       sohHealthResult: isSet(object.sohHealthResult)
@@ -18128,6 +18740,9 @@ export const SohState_SohResult: MessageFns<SohState_SohResult> = {
 
   toJSON(message: SohState_SohResult): unknown {
     const obj: any = {};
+    if (message.field3 !== undefined) {
+      obj.field3 = message.field3;
+    }
     if (message.sohCalibrated !== undefined) {
       obj.sohCalibrated = message.sohCalibrated;
     }
@@ -18151,6 +18766,7 @@ export const SohState_SohResult: MessageFns<SohState_SohResult> = {
   },
   fromPartial<I extends Exact<DeepPartial<SohState_SohResult>, I>>(object: I): SohState_SohResult {
     const message = createBaseSohState_SohResult();
+    message.field3 = object.field3 ?? undefined;
     message.sohCalibrated = object.sohCalibrated ?? undefined;
     message.sohLastTestTime = object.sohLastTestTime ?? undefined;
     message.sohHealthResult = object.sohHealthResult ?? undefined;

@@ -503,11 +503,45 @@ message ResultReason {
 }
 
 message EncryptedData {
-  int32 field_number = 1;
+  int32 field_number = 1; // holds a VehicleDataFields value
   bytes ciphertext = 2;
 
   bytes tag = 3;
 }
+
+// ===== TESLEMETRY-EXT BEGIN =====
+// Identifies the vehicle-data section an EncryptedData entry holds. These values
+// are this enum's own numbering, not VehicleData field numbers.
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+enum VehicleDataFields {
+  NOTHING = 0;
+  gui_settings = 2;
+  charge_state = 3;
+  climate_state = 4;
+  drive_state = 5;
+  vehicle_state = 6;
+  vehicle_config = 7;
+  location_state = 8;
+  closures_state = 9;
+  parked_accessory_state = 10;
+  charge_schedule_state = 11;
+  preconditioning_schedule_state = 12;
+  media_state = 13;
+  media_detail_state = 14;
+  tire_pressure_state = 15;
+  vehicle_detail_state = 16;
+  software_update_state = 17;
+  parental_controls_state = 18;
+  alert_state = 19;
+  light_show_state = 20;
+  vehicle_image_state = 21;
+  soh_state = 22;
+  suspension_state = 23;
+  child_presence_detection_state = 24;
+  display_state = 30;
+  legacy_vehicle_state_media_info = 6072;
+}
+// ===== TESLEMETRY-EXT END =====
 
 message ChargingSetLimitAction {
   int32 percent = 1;
