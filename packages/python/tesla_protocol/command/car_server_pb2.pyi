@@ -1001,13 +1001,15 @@ class BandwidthTestResponse(_message.Message):
         ...
 
 class GetRateTariffResponse(_message.Message):
-    __slots__ = ('seasons', 'tariff')
+    __slots__ = ('tariff_document', 'seasons', 'tariff')
+    TARIFF_DOCUMENT_FIELD_NUMBER: _ClassVar[int]
     SEASONS_FIELD_NUMBER: _ClassVar[int]
     TARIFF_FIELD_NUMBER: _ClassVar[int]
+    tariff_document: SetRateTariffRequest
     seasons: SetRateTariffRequest.Seasons
     tariff: SetRateTariffRequest.Tariff
 
-    def __init__(self, seasons: _Optional[_Union[SetRateTariffRequest.Seasons, _Mapping]]=..., tariff: _Optional[_Union[SetRateTariffRequest.Tariff, _Mapping]]=...) -> None:
+    def __init__(self, tariff_document: _Optional[_Union[SetRateTariffRequest, _Mapping]]=..., seasons: _Optional[_Union[SetRateTariffRequest.Seasons, _Mapping]]=..., tariff: _Optional[_Union[SetRateTariffRequest.Tariff, _Mapping]]=...) -> None:
         ...
 
 class ActionStatus(_message.Message):
@@ -1931,7 +1933,7 @@ class NavigationGpsRequest(_message.Message):
         ...
 
 class SetRateTariffRequest(_message.Message):
-    __slots__ = ('seasons', 'tariff')
+    __slots__ = ('code', 'name', 'utility', 'currency', 'daily_charges', 'monthly_charges', 'monthly_minimum_bill', 'demand_charges', 'daily_demand_charges', 'energy_charges', 'max_applicable_demand', 'min_applicable_demand', 'seasons', 'tariff')
 
     class TOUPeriod(_message.Message):
         __slots__ = ('from_day_of_week', 'to_day_of_week', 'from_hour', 'from_minute', 'to_hour', 'to_minute')
@@ -2021,6 +2023,16 @@ class SetRateTariffRequest(_message.Message):
         def __init__(self, ALL: _Optional[float]=..., ON_PEAK: _Optional[float]=..., PARTIAL_PEAK: _Optional[float]=..., OFF_PEAK: _Optional[float]=..., SUPER_OFF_PEAK: _Optional[float]=...) -> None:
             ...
 
+    class DailyCharge(_message.Message):
+        __slots__ = ('amount', 'name')
+        AMOUNT_FIELD_NUMBER: _ClassVar[int]
+        NAME_FIELD_NUMBER: _ClassVar[int]
+        amount: float
+        name: str
+
+        def __init__(self, amount: _Optional[float]=..., name: _Optional[str]=...) -> None:
+            ...
+
     class Charges(_message.Message):
         __slots__ = ('ALL', 'Summer', 'Winter', 'Season3', 'Season4', 'Season5')
         ALL_FIELD_NUMBER: _ClassVar[int]
@@ -2040,18 +2052,66 @@ class SetRateTariffRequest(_message.Message):
             ...
 
     class Tariff(_message.Message):
-        __slots__ = ('seasons',)
+        __slots__ = ('code', 'name', 'utility', 'currency', 'daily_charges', 'monthly_charges', 'monthly_minimum_bill', 'demand_charges', 'daily_demand_charges', 'energy_charges', 'max_applicable_demand', 'min_applicable_demand', 'seasons')
+        CODE_FIELD_NUMBER: _ClassVar[int]
+        NAME_FIELD_NUMBER: _ClassVar[int]
+        UTILITY_FIELD_NUMBER: _ClassVar[int]
+        CURRENCY_FIELD_NUMBER: _ClassVar[int]
+        DAILY_CHARGES_FIELD_NUMBER: _ClassVar[int]
+        MONTHLY_CHARGES_FIELD_NUMBER: _ClassVar[int]
+        MONTHLY_MINIMUM_BILL_FIELD_NUMBER: _ClassVar[int]
+        DEMAND_CHARGES_FIELD_NUMBER: _ClassVar[int]
+        DAILY_DEMAND_CHARGES_FIELD_NUMBER: _ClassVar[int]
+        ENERGY_CHARGES_FIELD_NUMBER: _ClassVar[int]
+        MAX_APPLICABLE_DEMAND_FIELD_NUMBER: _ClassVar[int]
+        MIN_APPLICABLE_DEMAND_FIELD_NUMBER: _ClassVar[int]
         SEASONS_FIELD_NUMBER: _ClassVar[int]
+        code: str
+        name: str
+        utility: str
+        currency: str
+        daily_charges: _containers.RepeatedCompositeFieldContainer[SetRateTariffRequest.DailyCharge]
+        monthly_charges: float
+        monthly_minimum_bill: float
+        demand_charges: SetRateTariffRequest.Charges
+        daily_demand_charges: SetRateTariffRequest.Charges
+        energy_charges: SetRateTariffRequest.Charges
+        max_applicable_demand: float
+        min_applicable_demand: float
         seasons: SetRateTariffRequest.Seasons
 
-        def __init__(self, seasons: _Optional[_Union[SetRateTariffRequest.Seasons, _Mapping]]=...) -> None:
+        def __init__(self, code: _Optional[str]=..., name: _Optional[str]=..., utility: _Optional[str]=..., currency: _Optional[str]=..., daily_charges: _Optional[_Iterable[_Union[SetRateTariffRequest.DailyCharge, _Mapping]]]=..., monthly_charges: _Optional[float]=..., monthly_minimum_bill: _Optional[float]=..., demand_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]]=..., daily_demand_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]]=..., energy_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]]=..., max_applicable_demand: _Optional[float]=..., min_applicable_demand: _Optional[float]=..., seasons: _Optional[_Union[SetRateTariffRequest.Seasons, _Mapping]]=...) -> None:
             ...
+    CODE_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    UTILITY_FIELD_NUMBER: _ClassVar[int]
+    CURRENCY_FIELD_NUMBER: _ClassVar[int]
+    DAILY_CHARGES_FIELD_NUMBER: _ClassVar[int]
+    MONTHLY_CHARGES_FIELD_NUMBER: _ClassVar[int]
+    MONTHLY_MINIMUM_BILL_FIELD_NUMBER: _ClassVar[int]
+    DEMAND_CHARGES_FIELD_NUMBER: _ClassVar[int]
+    DAILY_DEMAND_CHARGES_FIELD_NUMBER: _ClassVar[int]
+    ENERGY_CHARGES_FIELD_NUMBER: _ClassVar[int]
+    MAX_APPLICABLE_DEMAND_FIELD_NUMBER: _ClassVar[int]
+    MIN_APPLICABLE_DEMAND_FIELD_NUMBER: _ClassVar[int]
     SEASONS_FIELD_NUMBER: _ClassVar[int]
     TARIFF_FIELD_NUMBER: _ClassVar[int]
+    code: str
+    name: str
+    utility: str
+    currency: str
+    daily_charges: _containers.RepeatedCompositeFieldContainer[SetRateTariffRequest.DailyCharge]
+    monthly_charges: float
+    monthly_minimum_bill: float
+    demand_charges: SetRateTariffRequest.Charges
+    daily_demand_charges: SetRateTariffRequest.Charges
+    energy_charges: SetRateTariffRequest.Charges
+    max_applicable_demand: float
+    min_applicable_demand: float
     seasons: SetRateTariffRequest.Seasons
     tariff: SetRateTariffRequest.Tariff
 
-    def __init__(self, seasons: _Optional[_Union[SetRateTariffRequest.Seasons, _Mapping]]=..., tariff: _Optional[_Union[SetRateTariffRequest.Tariff, _Mapping]]=...) -> None:
+    def __init__(self, code: _Optional[str]=..., name: _Optional[str]=..., utility: _Optional[str]=..., currency: _Optional[str]=..., daily_charges: _Optional[_Iterable[_Union[SetRateTariffRequest.DailyCharge, _Mapping]]]=..., monthly_charges: _Optional[float]=..., monthly_minimum_bill: _Optional[float]=..., demand_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]]=..., daily_demand_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]]=..., energy_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]]=..., max_applicable_demand: _Optional[float]=..., min_applicable_demand: _Optional[float]=..., seasons: _Optional[_Union[SetRateTariffRequest.Seasons, _Mapping]]=..., tariff: _Optional[_Union[SetRateTariffRequest.Tariff, _Mapping]]=...) -> None:
         ...
 
 class GetRateTariffRequest(_message.Message):

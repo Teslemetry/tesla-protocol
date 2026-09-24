@@ -1309,11 +1309,13 @@ export interface BandwidthTestResponse {
 }
 
 /**
- * Answers GetRateTariffRequest with the same tariff document SetRateTariffRequest
- * writes (VehicleAction tag 55); only the parts of that document we have observed
- * and documented are declared here.
+ * Answers GetRateTariffRequest with the tariff document SetRateTariffRequest
+ * writes (VehicleAction tag 55). The document may arrive wrapped at tag 1 or with
+ * its parts directly on this message at tags 13-14.
  */
 export interface GetRateTariffResponse {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  tariffDocument: SetRateTariffRequest | undefined;
   seasons: SetRateTariffRequest_Seasons | undefined;
   tariff: SetRateTariffRequest_Tariff | undefined;
 }
@@ -2147,11 +2149,24 @@ export function navigationGpsRequest_RemoteNavTripOrderToJSON(object: Navigation
 }
 
 /**
- * The wire payload at VehicleAction tag 55 is a rate-tariff document; only the
- * parts of that document we have observed and documented are declared here.
+ * The wire payload at VehicleAction tag 55 is a rate-tariff document.
+ * Tags 1-12 of the document, of its embedded Tariff, and DailyCharge are
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
  * ===== TESLEMETRY-EXT BEGIN =====
  */
 export interface SetRateTariffRequest {
+  code: string;
+  name: string;
+  utility: string;
+  currency: string;
+  dailyCharges: SetRateTariffRequest_DailyCharge[];
+  monthlyCharges: number;
+  monthlyMinimumBill: number;
+  demandCharges: SetRateTariffRequest_Charges | undefined;
+  dailyDemandCharges: SetRateTariffRequest_Charges | undefined;
+  energyCharges: SetRateTariffRequest_Charges | undefined;
+  maxApplicableDemand: number;
+  minApplicableDemand: number;
   seasons: SetRateTariffRequest_Seasons | undefined;
   tariff: SetRateTariffRequest_Tariff | undefined;
 }
@@ -2200,6 +2215,11 @@ export interface SetRateTariffRequest_RateBand {
   superOffPeak: number;
 }
 
+export interface SetRateTariffRequest_DailyCharge {
+  amount: number;
+  name: string;
+}
+
 export interface SetRateTariffRequest_Charges {
   ALL: SetRateTariffRequest_FixedCharge | undefined;
   Summer: SetRateTariffRequest_RateBand | undefined;
@@ -2209,8 +2229,20 @@ export interface SetRateTariffRequest_Charges {
   Season5: SetRateTariffRequest_RateBand | undefined;
 }
 
-/** secondary tariff document embedded in the primary one */
+/** secondary tariff document embedded in the primary one (the sell tariff) */
 export interface SetRateTariffRequest_Tariff {
+  code: string;
+  name: string;
+  utility: string;
+  currency: string;
+  dailyCharges: SetRateTariffRequest_DailyCharge[];
+  monthlyCharges: number;
+  monthlyMinimumBill: number;
+  demandCharges: SetRateTariffRequest_Charges | undefined;
+  dailyDemandCharges: SetRateTariffRequest_Charges | undefined;
+  energyCharges: SetRateTariffRequest_Charges | undefined;
+  maxApplicableDemand: number;
+  minApplicableDemand: number;
   seasons: SetRateTariffRequest_Seasons | undefined;
 }
 
@@ -10898,11 +10930,14 @@ export const BandwidthTestResponse: MessageFns<BandwidthTestResponse> = {
 };
 
 function createBaseGetRateTariffResponse(): GetRateTariffResponse {
-  return { seasons: undefined, tariff: undefined };
+  return { tariffDocument: undefined, seasons: undefined, tariff: undefined };
 }
 
 export const GetRateTariffResponse: MessageFns<GetRateTariffResponse> = {
   encode(message: GetRateTariffResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.tariffDocument !== undefined) {
+      SetRateTariffRequest.encode(message.tariffDocument, writer.uint32(10).fork()).join();
+    }
     if (message.seasons !== undefined) {
       SetRateTariffRequest_Seasons.encode(message.seasons, writer.uint32(106).fork()).join();
     }
@@ -10919,6 +10954,14 @@ export const GetRateTariffResponse: MessageFns<GetRateTariffResponse> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.tariffDocument = SetRateTariffRequest.decode(reader, reader.uint32());
+          continue;
+        }
         case 13: {
           if (tag !== 106) {
             break;
@@ -10946,6 +10989,7 @@ export const GetRateTariffResponse: MessageFns<GetRateTariffResponse> = {
 
   fromJSON(object: any): GetRateTariffResponse {
     return {
+      tariffDocument: isSet(object.tariffDocument) ? SetRateTariffRequest.fromJSON(object.tariffDocument) : undefined,
       seasons: isSet(object.seasons) ? SetRateTariffRequest_Seasons.fromJSON(object.seasons) : undefined,
       tariff: isSet(object.tariff) ? SetRateTariffRequest_Tariff.fromJSON(object.tariff) : undefined,
     };
@@ -10953,6 +10997,9 @@ export const GetRateTariffResponse: MessageFns<GetRateTariffResponse> = {
 
   toJSON(message: GetRateTariffResponse): unknown {
     const obj: any = {};
+    if (message.tariffDocument !== undefined) {
+      obj.tariffDocument = SetRateTariffRequest.toJSON(message.tariffDocument);
+    }
     if (message.seasons !== undefined) {
       obj.seasons = SetRateTariffRequest_Seasons.toJSON(message.seasons);
     }
@@ -10967,6 +11014,9 @@ export const GetRateTariffResponse: MessageFns<GetRateTariffResponse> = {
   },
   fromPartial<I extends Exact<DeepPartial<GetRateTariffResponse>, I>>(object: I): GetRateTariffResponse {
     const message = createBaseGetRateTariffResponse();
+    message.tariffDocument = (object.tariffDocument !== undefined && object.tariffDocument !== null)
+      ? SetRateTariffRequest.fromPartial(object.tariffDocument)
+      : undefined;
     message.seasons = (object.seasons !== undefined && object.seasons !== null)
       ? SetRateTariffRequest_Seasons.fromPartial(object.seasons)
       : undefined;
@@ -17747,11 +17797,62 @@ export const NavigationGpsRequest: MessageFns<NavigationGpsRequest> = {
 };
 
 function createBaseSetRateTariffRequest(): SetRateTariffRequest {
-  return { seasons: undefined, tariff: undefined };
+  return {
+    code: "",
+    name: "",
+    utility: "",
+    currency: "",
+    dailyCharges: [],
+    monthlyCharges: 0,
+    monthlyMinimumBill: 0,
+    demandCharges: undefined,
+    dailyDemandCharges: undefined,
+    energyCharges: undefined,
+    maxApplicableDemand: 0,
+    minApplicableDemand: 0,
+    seasons: undefined,
+    tariff: undefined,
+  };
 }
 
 export const SetRateTariffRequest: MessageFns<SetRateTariffRequest> = {
   encode(message: SetRateTariffRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.code !== "") {
+      writer.uint32(10).string(message.code);
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    if (message.utility !== "") {
+      writer.uint32(26).string(message.utility);
+    }
+    if (message.currency !== "") {
+      writer.uint32(34).string(message.currency);
+    }
+    for (const v of message.dailyCharges) {
+      SetRateTariffRequest_DailyCharge.encode(v!, writer.uint32(42).fork()).join();
+    }
+    if (message.monthlyCharges !== 0) {
+      writer.uint32(49).double(message.monthlyCharges);
+    }
+    if (message.monthlyMinimumBill !== 0) {
+      writer.uint32(57).double(message.monthlyMinimumBill);
+    }
+    if (message.demandCharges !== undefined) {
+      SetRateTariffRequest_Charges.encode(message.demandCharges, writer.uint32(66).fork()).join();
+    }
+    if (message.dailyDemandCharges !== undefined) {
+      SetRateTariffRequest_Charges.encode(message.dailyDemandCharges, writer.uint32(74).fork()).join();
+    }
+    if (message.energyCharges !== undefined) {
+      SetRateTariffRequest_Charges.encode(message.energyCharges, writer.uint32(82).fork()).join();
+    }
+    if (message.maxApplicableDemand !== 0) {
+      writer.uint32(89).double(message.maxApplicableDemand);
+    }
+    if (message.minApplicableDemand !== 0) {
+      writer.uint32(97).double(message.minApplicableDemand);
+    }
     if (message.seasons !== undefined) {
       SetRateTariffRequest_Seasons.encode(message.seasons, writer.uint32(106).fork()).join();
     }
@@ -17768,6 +17869,102 @@ export const SetRateTariffRequest: MessageFns<SetRateTariffRequest> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.code = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.utility = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.currency = reader.string();
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.dailyCharges.push(SetRateTariffRequest_DailyCharge.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 6: {
+          if (tag !== 49) {
+            break;
+          }
+
+          message.monthlyCharges = reader.double();
+          continue;
+        }
+        case 7: {
+          if (tag !== 57) {
+            break;
+          }
+
+          message.monthlyMinimumBill = reader.double();
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.demandCharges = SetRateTariffRequest_Charges.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.dailyDemandCharges = SetRateTariffRequest_Charges.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.energyCharges = SetRateTariffRequest_Charges.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 89) {
+            break;
+          }
+
+          message.maxApplicableDemand = reader.double();
+          continue;
+        }
+        case 12: {
+          if (tag !== 97) {
+            break;
+          }
+
+          message.minApplicableDemand = reader.double();
+          continue;
+        }
         case 13: {
           if (tag !== 106) {
             break;
@@ -17795,6 +17992,26 @@ export const SetRateTariffRequest: MessageFns<SetRateTariffRequest> = {
 
   fromJSON(object: any): SetRateTariffRequest {
     return {
+      code: isSet(object.code) ? globalThis.String(object.code) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      utility: isSet(object.utility) ? globalThis.String(object.utility) : "",
+      currency: isSet(object.currency) ? globalThis.String(object.currency) : "",
+      dailyCharges: globalThis.Array.isArray(object?.dailyCharges)
+        ? object.dailyCharges.map((e: any) => SetRateTariffRequest_DailyCharge.fromJSON(e))
+        : [],
+      monthlyCharges: isSet(object.monthlyCharges) ? globalThis.Number(object.monthlyCharges) : 0,
+      monthlyMinimumBill: isSet(object.monthlyMinimumBill) ? globalThis.Number(object.monthlyMinimumBill) : 0,
+      demandCharges: isSet(object.demandCharges)
+        ? SetRateTariffRequest_Charges.fromJSON(object.demandCharges)
+        : undefined,
+      dailyDemandCharges: isSet(object.dailyDemandCharges)
+        ? SetRateTariffRequest_Charges.fromJSON(object.dailyDemandCharges)
+        : undefined,
+      energyCharges: isSet(object.energyCharges)
+        ? SetRateTariffRequest_Charges.fromJSON(object.energyCharges)
+        : undefined,
+      maxApplicableDemand: isSet(object.maxApplicableDemand) ? globalThis.Number(object.maxApplicableDemand) : 0,
+      minApplicableDemand: isSet(object.minApplicableDemand) ? globalThis.Number(object.minApplicableDemand) : 0,
       seasons: isSet(object.seasons) ? SetRateTariffRequest_Seasons.fromJSON(object.seasons) : undefined,
       tariff: isSet(object.tariff) ? SetRateTariffRequest_Tariff.fromJSON(object.tariff) : undefined,
     };
@@ -17802,6 +18019,42 @@ export const SetRateTariffRequest: MessageFns<SetRateTariffRequest> = {
 
   toJSON(message: SetRateTariffRequest): unknown {
     const obj: any = {};
+    if (message.code !== undefined) {
+      obj.code = message.code;
+    }
+    if (message.name !== undefined) {
+      obj.name = message.name;
+    }
+    if (message.utility !== undefined) {
+      obj.utility = message.utility;
+    }
+    if (message.currency !== undefined) {
+      obj.currency = message.currency;
+    }
+    if (message.dailyCharges?.length) {
+      obj.dailyCharges = message.dailyCharges.map((e) => SetRateTariffRequest_DailyCharge.toJSON(e));
+    }
+    if (message.monthlyCharges !== undefined) {
+      obj.monthlyCharges = message.monthlyCharges;
+    }
+    if (message.monthlyMinimumBill !== undefined) {
+      obj.monthlyMinimumBill = message.monthlyMinimumBill;
+    }
+    if (message.demandCharges !== undefined) {
+      obj.demandCharges = SetRateTariffRequest_Charges.toJSON(message.demandCharges);
+    }
+    if (message.dailyDemandCharges !== undefined) {
+      obj.dailyDemandCharges = SetRateTariffRequest_Charges.toJSON(message.dailyDemandCharges);
+    }
+    if (message.energyCharges !== undefined) {
+      obj.energyCharges = SetRateTariffRequest_Charges.toJSON(message.energyCharges);
+    }
+    if (message.maxApplicableDemand !== undefined) {
+      obj.maxApplicableDemand = message.maxApplicableDemand;
+    }
+    if (message.minApplicableDemand !== undefined) {
+      obj.minApplicableDemand = message.minApplicableDemand;
+    }
     if (message.seasons !== undefined) {
       obj.seasons = SetRateTariffRequest_Seasons.toJSON(message.seasons);
     }
@@ -17816,6 +18069,24 @@ export const SetRateTariffRequest: MessageFns<SetRateTariffRequest> = {
   },
   fromPartial<I extends Exact<DeepPartial<SetRateTariffRequest>, I>>(object: I): SetRateTariffRequest {
     const message = createBaseSetRateTariffRequest();
+    message.code = object.code ?? "";
+    message.name = object.name ?? "";
+    message.utility = object.utility ?? "";
+    message.currency = object.currency ?? "";
+    message.dailyCharges = object.dailyCharges?.map((e) => SetRateTariffRequest_DailyCharge.fromPartial(e)) || [];
+    message.monthlyCharges = object.monthlyCharges ?? 0;
+    message.monthlyMinimumBill = object.monthlyMinimumBill ?? 0;
+    message.demandCharges = (object.demandCharges !== undefined && object.demandCharges !== null)
+      ? SetRateTariffRequest_Charges.fromPartial(object.demandCharges)
+      : undefined;
+    message.dailyDemandCharges = (object.dailyDemandCharges !== undefined && object.dailyDemandCharges !== null)
+      ? SetRateTariffRequest_Charges.fromPartial(object.dailyDemandCharges)
+      : undefined;
+    message.energyCharges = (object.energyCharges !== undefined && object.energyCharges !== null)
+      ? SetRateTariffRequest_Charges.fromPartial(object.energyCharges)
+      : undefined;
+    message.maxApplicableDemand = object.maxApplicableDemand ?? 0;
+    message.minApplicableDemand = object.minApplicableDemand ?? 0;
     message.seasons = (object.seasons !== undefined && object.seasons !== null)
       ? SetRateTariffRequest_Seasons.fromPartial(object.seasons)
       : undefined;
@@ -18534,6 +18805,86 @@ export const SetRateTariffRequest_RateBand: MessageFns<SetRateTariffRequest_Rate
   },
 };
 
+function createBaseSetRateTariffRequest_DailyCharge(): SetRateTariffRequest_DailyCharge {
+  return { amount: 0, name: "" };
+}
+
+export const SetRateTariffRequest_DailyCharge: MessageFns<SetRateTariffRequest_DailyCharge> = {
+  encode(message: SetRateTariffRequest_DailyCharge, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.amount !== 0) {
+      writer.uint32(9).double(message.amount);
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SetRateTariffRequest_DailyCharge {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSetRateTariffRequest_DailyCharge();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 9) {
+            break;
+          }
+
+          message.amount = reader.double();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SetRateTariffRequest_DailyCharge {
+    return {
+      amount: isSet(object.amount) ? globalThis.Number(object.amount) : 0,
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+    };
+  },
+
+  toJSON(message: SetRateTariffRequest_DailyCharge): unknown {
+    const obj: any = {};
+    if (message.amount !== undefined) {
+      obj.amount = message.amount;
+    }
+    if (message.name !== undefined) {
+      obj.name = message.name;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SetRateTariffRequest_DailyCharge>, I>>(
+    base?: I,
+  ): SetRateTariffRequest_DailyCharge {
+    return SetRateTariffRequest_DailyCharge.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SetRateTariffRequest_DailyCharge>, I>>(
+    object: I,
+  ): SetRateTariffRequest_DailyCharge {
+    const message = createBaseSetRateTariffRequest_DailyCharge();
+    message.amount = object.amount ?? 0;
+    message.name = object.name ?? "";
+    return message;
+  },
+};
+
 function createBaseSetRateTariffRequest_Charges(): SetRateTariffRequest_Charges {
   return {
     ALL: undefined,
@@ -18694,11 +19045,61 @@ export const SetRateTariffRequest_Charges: MessageFns<SetRateTariffRequest_Charg
 };
 
 function createBaseSetRateTariffRequest_Tariff(): SetRateTariffRequest_Tariff {
-  return { seasons: undefined };
+  return {
+    code: "",
+    name: "",
+    utility: "",
+    currency: "",
+    dailyCharges: [],
+    monthlyCharges: 0,
+    monthlyMinimumBill: 0,
+    demandCharges: undefined,
+    dailyDemandCharges: undefined,
+    energyCharges: undefined,
+    maxApplicableDemand: 0,
+    minApplicableDemand: 0,
+    seasons: undefined,
+  };
 }
 
 export const SetRateTariffRequest_Tariff: MessageFns<SetRateTariffRequest_Tariff> = {
   encode(message: SetRateTariffRequest_Tariff, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.code !== "") {
+      writer.uint32(10).string(message.code);
+    }
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
+    }
+    if (message.utility !== "") {
+      writer.uint32(26).string(message.utility);
+    }
+    if (message.currency !== "") {
+      writer.uint32(34).string(message.currency);
+    }
+    for (const v of message.dailyCharges) {
+      SetRateTariffRequest_DailyCharge.encode(v!, writer.uint32(42).fork()).join();
+    }
+    if (message.monthlyCharges !== 0) {
+      writer.uint32(49).double(message.monthlyCharges);
+    }
+    if (message.monthlyMinimumBill !== 0) {
+      writer.uint32(57).double(message.monthlyMinimumBill);
+    }
+    if (message.demandCharges !== undefined) {
+      SetRateTariffRequest_Charges.encode(message.demandCharges, writer.uint32(66).fork()).join();
+    }
+    if (message.dailyDemandCharges !== undefined) {
+      SetRateTariffRequest_Charges.encode(message.dailyDemandCharges, writer.uint32(74).fork()).join();
+    }
+    if (message.energyCharges !== undefined) {
+      SetRateTariffRequest_Charges.encode(message.energyCharges, writer.uint32(82).fork()).join();
+    }
+    if (message.maxApplicableDemand !== 0) {
+      writer.uint32(89).double(message.maxApplicableDemand);
+    }
+    if (message.minApplicableDemand !== 0) {
+      writer.uint32(97).double(message.minApplicableDemand);
+    }
     if (message.seasons !== undefined) {
       SetRateTariffRequest_Seasons.encode(message.seasons, writer.uint32(106).fork()).join();
     }
@@ -18712,6 +19113,102 @@ export const SetRateTariffRequest_Tariff: MessageFns<SetRateTariffRequest_Tariff
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.code = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.name = reader.string();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.utility = reader.string();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.currency = reader.string();
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.dailyCharges.push(SetRateTariffRequest_DailyCharge.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 6: {
+          if (tag !== 49) {
+            break;
+          }
+
+          message.monthlyCharges = reader.double();
+          continue;
+        }
+        case 7: {
+          if (tag !== 57) {
+            break;
+          }
+
+          message.monthlyMinimumBill = reader.double();
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.demandCharges = SetRateTariffRequest_Charges.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.dailyDemandCharges = SetRateTariffRequest_Charges.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.energyCharges = SetRateTariffRequest_Charges.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 89) {
+            break;
+          }
+
+          message.maxApplicableDemand = reader.double();
+          continue;
+        }
+        case 12: {
+          if (tag !== 97) {
+            break;
+          }
+
+          message.minApplicableDemand = reader.double();
+          continue;
+        }
         case 13: {
           if (tag !== 106) {
             break;
@@ -18730,11 +19227,69 @@ export const SetRateTariffRequest_Tariff: MessageFns<SetRateTariffRequest_Tariff
   },
 
   fromJSON(object: any): SetRateTariffRequest_Tariff {
-    return { seasons: isSet(object.seasons) ? SetRateTariffRequest_Seasons.fromJSON(object.seasons) : undefined };
+    return {
+      code: isSet(object.code) ? globalThis.String(object.code) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      utility: isSet(object.utility) ? globalThis.String(object.utility) : "",
+      currency: isSet(object.currency) ? globalThis.String(object.currency) : "",
+      dailyCharges: globalThis.Array.isArray(object?.dailyCharges)
+        ? object.dailyCharges.map((e: any) => SetRateTariffRequest_DailyCharge.fromJSON(e))
+        : [],
+      monthlyCharges: isSet(object.monthlyCharges) ? globalThis.Number(object.monthlyCharges) : 0,
+      monthlyMinimumBill: isSet(object.monthlyMinimumBill) ? globalThis.Number(object.monthlyMinimumBill) : 0,
+      demandCharges: isSet(object.demandCharges)
+        ? SetRateTariffRequest_Charges.fromJSON(object.demandCharges)
+        : undefined,
+      dailyDemandCharges: isSet(object.dailyDemandCharges)
+        ? SetRateTariffRequest_Charges.fromJSON(object.dailyDemandCharges)
+        : undefined,
+      energyCharges: isSet(object.energyCharges)
+        ? SetRateTariffRequest_Charges.fromJSON(object.energyCharges)
+        : undefined,
+      maxApplicableDemand: isSet(object.maxApplicableDemand) ? globalThis.Number(object.maxApplicableDemand) : 0,
+      minApplicableDemand: isSet(object.minApplicableDemand) ? globalThis.Number(object.minApplicableDemand) : 0,
+      seasons: isSet(object.seasons) ? SetRateTariffRequest_Seasons.fromJSON(object.seasons) : undefined,
+    };
   },
 
   toJSON(message: SetRateTariffRequest_Tariff): unknown {
     const obj: any = {};
+    if (message.code !== undefined) {
+      obj.code = message.code;
+    }
+    if (message.name !== undefined) {
+      obj.name = message.name;
+    }
+    if (message.utility !== undefined) {
+      obj.utility = message.utility;
+    }
+    if (message.currency !== undefined) {
+      obj.currency = message.currency;
+    }
+    if (message.dailyCharges?.length) {
+      obj.dailyCharges = message.dailyCharges.map((e) => SetRateTariffRequest_DailyCharge.toJSON(e));
+    }
+    if (message.monthlyCharges !== undefined) {
+      obj.monthlyCharges = message.monthlyCharges;
+    }
+    if (message.monthlyMinimumBill !== undefined) {
+      obj.monthlyMinimumBill = message.monthlyMinimumBill;
+    }
+    if (message.demandCharges !== undefined) {
+      obj.demandCharges = SetRateTariffRequest_Charges.toJSON(message.demandCharges);
+    }
+    if (message.dailyDemandCharges !== undefined) {
+      obj.dailyDemandCharges = SetRateTariffRequest_Charges.toJSON(message.dailyDemandCharges);
+    }
+    if (message.energyCharges !== undefined) {
+      obj.energyCharges = SetRateTariffRequest_Charges.toJSON(message.energyCharges);
+    }
+    if (message.maxApplicableDemand !== undefined) {
+      obj.maxApplicableDemand = message.maxApplicableDemand;
+    }
+    if (message.minApplicableDemand !== undefined) {
+      obj.minApplicableDemand = message.minApplicableDemand;
+    }
     if (message.seasons !== undefined) {
       obj.seasons = SetRateTariffRequest_Seasons.toJSON(message.seasons);
     }
@@ -18746,6 +19301,24 @@ export const SetRateTariffRequest_Tariff: MessageFns<SetRateTariffRequest_Tariff
   },
   fromPartial<I extends Exact<DeepPartial<SetRateTariffRequest_Tariff>, I>>(object: I): SetRateTariffRequest_Tariff {
     const message = createBaseSetRateTariffRequest_Tariff();
+    message.code = object.code ?? "";
+    message.name = object.name ?? "";
+    message.utility = object.utility ?? "";
+    message.currency = object.currency ?? "";
+    message.dailyCharges = object.dailyCharges?.map((e) => SetRateTariffRequest_DailyCharge.fromPartial(e)) || [];
+    message.monthlyCharges = object.monthlyCharges ?? 0;
+    message.monthlyMinimumBill = object.monthlyMinimumBill ?? 0;
+    message.demandCharges = (object.demandCharges !== undefined && object.demandCharges !== null)
+      ? SetRateTariffRequest_Charges.fromPartial(object.demandCharges)
+      : undefined;
+    message.dailyDemandCharges = (object.dailyDemandCharges !== undefined && object.dailyDemandCharges !== null)
+      ? SetRateTariffRequest_Charges.fromPartial(object.dailyDemandCharges)
+      : undefined;
+    message.energyCharges = (object.energyCharges !== undefined && object.energyCharges !== null)
+      ? SetRateTariffRequest_Charges.fromPartial(object.energyCharges)
+      : undefined;
+    message.maxApplicableDemand = object.maxApplicableDemand ?? 0;
+    message.minApplicableDemand = object.minApplicableDemand ?? 0;
     message.seasons = (object.seasons !== undefined && object.seasons !== null)
       ? SetRateTariffRequest_Seasons.fromPartial(object.seasons)
       : undefined;

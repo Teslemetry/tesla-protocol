@@ -346,9 +346,9 @@
         "typescript": "packages/typescript/src/command",
         "python": "packages/python/tesla_protocol/command"
       },
-      "messages": 337,
+      "messages": 338,
       "enums": 106,
-      "fields": 1520,
+      "fields": 1547,
       "files": [
         {
           "package": "CarServer",
@@ -3186,6 +3186,14 @@
               "name": "GetRateTariffResponse",
               "fields": [
                 {
+                  "number": 1,
+                  "name": "tariff_document",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetRateTariffRequest",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 13,
                   "name": "seasons",
                   "type": "TYPE_MESSAGE",
@@ -5806,6 +5814,102 @@
               "name": "SetRateTariffRequest",
               "fields": [
                 {
+                  "number": 1,
+                  "name": "code",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "name",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "utility",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "currency",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 5,
+                  "name": "daily_charges",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetRateTariffRequest.DailyCharge",
+                  "label": "LABEL_REPEATED",
+                  "oneof": null
+                },
+                {
+                  "number": 6,
+                  "name": "monthly_charges",
+                  "type": "TYPE_DOUBLE",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 7,
+                  "name": "monthly_minimum_bill",
+                  "type": "TYPE_DOUBLE",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 8,
+                  "name": "demand_charges",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetRateTariffRequest.Charges",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 9,
+                  "name": "daily_demand_charges",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetRateTariffRequest.Charges",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 10,
+                  "name": "energy_charges",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetRateTariffRequest.Charges",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 11,
+                  "name": "max_applicable_demand",
+                  "type": "TYPE_DOUBLE",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 12,
+                  "name": "min_applicable_demand",
+                  "type": "TYPE_DOUBLE",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 13,
                   "name": "seasons",
                   "type": "TYPE_MESSAGE",
@@ -6101,6 +6205,33 @@
                   "nested_enums": []
                 },
                 {
+                  "fqn": ".CarServer.SetRateTariffRequest.DailyCharge",
+                  "name": "DailyCharge",
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "amount",
+                      "type": "TYPE_DOUBLE",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 2,
+                      "name": "name",
+                      "type": "TYPE_STRING",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    }
+                  ],
+                  "oneofs": [],
+                  "reserved_ranges": [],
+                  "reserved_names": [],
+                  "nested_messages": [],
+                  "nested_enums": []
+                },
+                {
                   "fqn": ".CarServer.SetRateTariffRequest.Charges",
                   "name": "Charges",
                   "fields": [
@@ -6163,6 +6294,102 @@
                   "fqn": ".CarServer.SetRateTariffRequest.Tariff",
                   "name": "Tariff",
                   "fields": [
+                    {
+                      "number": 1,
+                      "name": "code",
+                      "type": "TYPE_STRING",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 2,
+                      "name": "name",
+                      "type": "TYPE_STRING",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 3,
+                      "name": "utility",
+                      "type": "TYPE_STRING",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 4,
+                      "name": "currency",
+                      "type": "TYPE_STRING",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 5,
+                      "name": "daily_charges",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.SetRateTariffRequest.DailyCharge",
+                      "label": "LABEL_REPEATED",
+                      "oneof": null
+                    },
+                    {
+                      "number": 6,
+                      "name": "monthly_charges",
+                      "type": "TYPE_DOUBLE",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 7,
+                      "name": "monthly_minimum_bill",
+                      "type": "TYPE_DOUBLE",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 8,
+                      "name": "demand_charges",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.SetRateTariffRequest.Charges",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 9,
+                      "name": "daily_demand_charges",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.SetRateTariffRequest.Charges",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 10,
+                      "name": "energy_charges",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.SetRateTariffRequest.Charges",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 11,
+                      "name": "max_applicable_demand",
+                      "type": "TYPE_DOUBLE",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
+                    {
+                      "number": 12,
+                      "name": "min_applicable_demand",
+                      "type": "TYPE_DOUBLE",
+                      "type_name": null,
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": null
+                    },
                     {
                       "number": 13,
                       "name": "seasons",
@@ -44354,9 +44581,9 @@
   "totals": {
     "source_files": 39,
     "groups": 7,
-    "messages": 898,
+    "messages": 899,
     "enums": 252,
-    "fields": 2925
+    "fields": 2952
   },
   "registration": {
     "consistent": true,

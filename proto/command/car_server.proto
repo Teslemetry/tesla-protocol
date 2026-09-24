@@ -477,10 +477,11 @@ message BandwidthTestResponse {
   uint32 requested_size = 2;
 }
 
-// Answers GetRateTariffRequest with the same tariff document SetRateTariffRequest
-// writes (VehicleAction tag 55); only the parts of that document we have observed
-// and documented are declared here.
+// Answers GetRateTariffRequest with the tariff document SetRateTariffRequest
+// writes (VehicleAction tag 55). The document may arrive wrapped at tag 1 or with
+// its parts directly on this message at tags 13-14.
 message GetRateTariffResponse {
+  SetRateTariffRequest tariff_document = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle
   SetRateTariffRequest.Seasons seasons = 13;
   SetRateTariffRequest.Tariff tariff = 14;
 }
@@ -1018,8 +1019,9 @@ message NavigationGpsRequest {
 }
 // ===== TESLEMETRY-EXT END =====
 
-// The wire payload at VehicleAction tag 55 is a rate-tariff document; only the
-// parts of that document we have observed and documented are declared here.
+// The wire payload at VehicleAction tag 55 is a rate-tariff document.
+// Tags 1-12 of the document, of its embedded Tariff, and DailyCharge are
+// UNCONFIRMED: not yet confirmed on a live vehicle.
 // ===== TESLEMETRY-EXT BEGIN =====
 message SetRateTariffRequest {
   message TOUPeriod {
@@ -1066,6 +1068,11 @@ message SetRateTariffRequest {
     double SUPER_OFF_PEAK = 5;
   }
 
+  message DailyCharge {
+    double amount = 1;
+    string name = 2;
+  }
+
   message Charges {
     FixedCharge ALL = 1;
     RateBand Summer = 2;
@@ -1075,11 +1082,35 @@ message SetRateTariffRequest {
     RateBand Season5 = 6;
   }
 
-  // secondary tariff document embedded in the primary one
+  // secondary tariff document embedded in the primary one (the sell tariff)
   message Tariff {
+    string code = 1;
+    string name = 2;
+    string utility = 3;
+    string currency = 4;
+    repeated DailyCharge daily_charges = 5;
+    double monthly_charges = 6;
+    double monthly_minimum_bill = 7;
+    Charges demand_charges = 8;
+    Charges daily_demand_charges = 9;
+    Charges energy_charges = 10;
+    double max_applicable_demand = 11;
+    double min_applicable_demand = 12;
     Seasons seasons = 13;
   }
 
+  string code = 1;
+  string name = 2;
+  string utility = 3;
+  string currency = 4;
+  repeated DailyCharge daily_charges = 5;
+  double monthly_charges = 6;
+  double monthly_minimum_bill = 7;
+  Charges demand_charges = 8;
+  Charges daily_demand_charges = 9;
+  Charges energy_charges = 10;
+  double max_applicable_demand = 11;
+  double min_applicable_demand = 12;
   Seasons seasons = 13;
   Tariff tariff = 14;
 }
