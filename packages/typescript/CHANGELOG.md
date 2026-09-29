@@ -1,5 +1,11 @@
 # @teslemetry/tesla-protocol
 
+## 3.0.1
+
+### Patch Changes
+
+- 29640b7: Add `CarTypeSemiTruckV2` (7) and `CarTypeCybercab` (8) to the telemetry `CarTypeValue` enum.
+
 ## 3.0.0
 
 ### Major Changes
