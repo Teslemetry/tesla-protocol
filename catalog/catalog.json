@@ -41200,6 +41200,14 @@
                 {
                   "number": 6,
                   "name": "CarTypeCybertruck"
+                },
+                {
+                  "number": 7,
+                  "name": "CarTypeSemiTruckV2"
+                },
+                {
+                  "number": 8,
+                  "name": "CarTypeCybercab"
                 }
               ],
               "reserved_ranges": [],

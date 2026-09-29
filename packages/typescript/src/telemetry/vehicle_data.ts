@@ -2492,6 +2492,8 @@ export enum CarTypeValue {
   CarTypeModelY = 4,
   CarTypeSemiTruck = 5,
   CarTypeCybertruck = 6,
+  CarTypeSemiTruckV2 = 7,
+  CarTypeCybercab = 8,
   UNRECOGNIZED = -1,
 }
 
@@ -2518,6 +2520,12 @@ export function carTypeValueFromJSON(object: any): CarTypeValue {
     case 6:
     case "CarTypeCybertruck":
       return CarTypeValue.CarTypeCybertruck;
+    case 7:
+    case "CarTypeSemiTruckV2":
+      return CarTypeValue.CarTypeSemiTruckV2;
+    case 8:
+    case "CarTypeCybercab":
+      return CarTypeValue.CarTypeCybercab;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -2541,6 +2549,10 @@ export function carTypeValueToJSON(object: CarTypeValue): string {
       return "CarTypeSemiTruck";
     case CarTypeValue.CarTypeCybertruck:
       return "CarTypeCybertruck";
+    case CarTypeValue.CarTypeSemiTruckV2:
+      return "CarTypeSemiTruckV2";
+    case CarTypeValue.CarTypeCybercab:
+      return "CarTypeCybercab";
     case CarTypeValue.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
