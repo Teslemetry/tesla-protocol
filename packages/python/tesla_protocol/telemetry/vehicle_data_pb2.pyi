@@ -417,6 +417,8 @@ class CarTypeValue(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     CarTypeModelY: _ClassVar[CarTypeValue]
     CarTypeSemiTruck: _ClassVar[CarTypeValue]
     CarTypeCybertruck: _ClassVar[CarTypeValue]
+    CarTypeSemiTruckV2: _ClassVar[CarTypeValue]
+    CarTypeCybercab: _ClassVar[CarTypeValue]
 
 class ChargePortValue(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -1028,6 +1030,8 @@ CarTypeModel3: CarTypeValue
 CarTypeModelY: CarTypeValue
 CarTypeSemiTruck: CarTypeValue
 CarTypeCybertruck: CarTypeValue
+CarTypeSemiTruckV2: CarTypeValue
+CarTypeCybercab: CarTypeValue
 ChargePortUnknown: ChargePortValue
 ChargePortUS: ChargePortValue
 ChargePortEU: ChargePortValue
