@@ -559,7 +559,7 @@ class PrepareMobileUploadAction(_message.Message):
     field_3: bool
     overwriteOldestIfFull: bool
 
-    def __init__(self, uploadParams: _Optional[_Union[MobileUploadParams, _Mapping]]=..., imageParams: _Optional[_Union[MobileImageUploadParams, _Mapping]]=..., field_3: _Optional[bool]=..., overwriteOldestIfFull: _Optional[bool]=...) -> None:
+    def __init__(self, uploadParams: _Optional[_Union[MobileUploadParams, _Mapping]]=..., imageParams: _Optional[_Union[MobileImageUploadParams, _Mapping]]=..., field_3: bool=..., overwriteOldestIfFull: bool=...) -> None:
         ...
 
 class PrepareMobileUploadResponse(_message.Message):
@@ -764,7 +764,7 @@ class EraseUserDataAction(_message.Message):
     reason: str
     trigger_on_park: bool
 
-    def __init__(self, reason: _Optional[str]=..., trigger_on_park: _Optional[bool]=...) -> None:
+    def __init__(self, reason: _Optional[str]=..., trigger_on_park: bool=...) -> None:
         ...
 
 class Response(_message.Message):
@@ -927,7 +927,7 @@ class RequestTeslaAuthCommand(_message.Message):
     unknown: str
     return_scoped_token: bool
 
-    def __init__(self, client_id: _Optional[str]=..., unknown: _Optional[str]=..., return_scoped_token: _Optional[bool]=...) -> None:
+    def __init__(self, client_id: _Optional[str]=..., unknown: _Optional[str]=..., return_scoped_token: bool=...) -> None:
         ...
 
 class MobileAppMessage(_message.Message):
@@ -1049,7 +1049,7 @@ class ChargingSetLimitAction(_message.Message):
     percent: int
     one_time: bool
 
-    def __init__(self, percent: _Optional[int]=..., one_time: _Optional[bool]=...) -> None:
+    def __init__(self, percent: _Optional[int]=..., one_time: bool=...) -> None:
         ...
 
 class ChargingStartStopAction(_message.Message):
@@ -1091,7 +1091,7 @@ class DrivingSpeedLimitAction(_message.Message):
     activate: bool
     pin: str
 
-    def __init__(self, activate: _Optional[bool]=..., pin: _Optional[str]=...) -> None:
+    def __init__(self, activate: bool=..., pin: _Optional[str]=...) -> None:
         ...
 
 class HvacAutoAction(_message.Message):
@@ -1101,7 +1101,7 @@ class HvacAutoAction(_message.Message):
     power_on: bool
     manual_override: bool
 
-    def __init__(self, power_on: _Optional[bool]=..., manual_override: _Optional[bool]=...) -> None:
+    def __init__(self, power_on: bool=..., manual_override: bool=...) -> None:
         ...
 
 class HvacSeatHeaterActions(_message.Message):
@@ -1210,7 +1210,7 @@ class HvacSetPreconditioningMaxAction(_message.Message):
     manual_override: bool
     manual_override_mode: _containers.RepeatedScalarFieldContainer[HvacSetPreconditioningMaxAction.ManualOverrideMode_E]
 
-    def __init__(self, on: _Optional[bool]=..., manual_override: _Optional[bool]=..., manual_override_mode: _Optional[_Iterable[_Union[HvacSetPreconditioningMaxAction.ManualOverrideMode_E, str]]]=...) -> None:
+    def __init__(self, on: bool=..., manual_override: bool=..., manual_override_mode: _Optional[_Iterable[_Union[HvacSetPreconditioningMaxAction.ManualOverrideMode_E, str]]]=...) -> None:
         ...
 
 class HvacSteeringWheelHeaterAction(_message.Message):
@@ -1218,7 +1218,7 @@ class HvacSteeringWheelHeaterAction(_message.Message):
     POWER_ON_FIELD_NUMBER: _ClassVar[int]
     power_on: bool
 
-    def __init__(self, power_on: _Optional[bool]=...) -> None:
+    def __init__(self, power_on: bool=...) -> None:
         ...
 
 class HvacTemperatureAdjustmentAction(_message.Message):
@@ -1276,7 +1276,7 @@ class GetNearbyChargingSites(_message.Message):
     radius: int
     count: int
 
-    def __init__(self, include_meta_data: _Optional[bool]=..., radius: _Optional[int]=..., count: _Optional[int]=...) -> None:
+    def __init__(self, include_meta_data: bool=..., radius: _Optional[int]=..., count: _Optional[int]=...) -> None:
         ...
 
 class NearbyChargingSites(_message.Message):
@@ -1320,7 +1320,7 @@ class DestinationCharging(_message.Message):
     street_address: str
     within_range: bool
 
-    def __init__(self, id: _Optional[int]=..., amenities: _Optional[str]=..., city: _Optional[str]=..., country: _Optional[str]=..., distance_miles: _Optional[float]=..., district: _Optional[str]=..., location: _Optional[_Union[_common_pb2.LatLong, _Mapping]]=..., name: _Optional[str]=..., postal_code: _Optional[str]=..., state: _Optional[str]=..., street_address: _Optional[str]=..., within_range: _Optional[bool]=...) -> None:
+    def __init__(self, id: _Optional[int]=..., amenities: _Optional[str]=..., city: _Optional[str]=..., country: _Optional[str]=..., distance_miles: _Optional[float]=..., district: _Optional[str]=..., location: _Optional[_Union[_common_pb2.LatLong, _Mapping]]=..., name: _Optional[str]=..., postal_code: _Optional[str]=..., state: _Optional[str]=..., street_address: _Optional[str]=..., within_range: bool=...) -> None:
         ...
 
 class Superchargers(_message.Message):
@@ -1366,7 +1366,7 @@ class Superchargers(_message.Message):
     out_of_order_stalls_number: int
     out_of_order_stalls_names: str
 
-    def __init__(self, id: _Optional[int]=..., amenities: _Optional[str]=..., available_stalls: _Optional[int]=..., billing_info: _Optional[str]=..., billing_time: _Optional[str]=..., city: _Optional[str]=..., country: _Optional[str]=..., distance_miles: _Optional[float]=..., district: _Optional[str]=..., location: _Optional[_Union[_common_pb2.LatLong, _Mapping]]=..., name: _Optional[str]=..., postal_code: _Optional[str]=..., site_closed: _Optional[bool]=..., state: _Optional[str]=..., street_address: _Optional[str]=..., total_stalls: _Optional[int]=..., within_range: _Optional[bool]=..., max_power_kw: _Optional[int]=..., out_of_order_stalls_number: _Optional[int]=..., out_of_order_stalls_names: _Optional[str]=...) -> None:
+    def __init__(self, id: _Optional[int]=..., amenities: _Optional[str]=..., available_stalls: _Optional[int]=..., billing_info: _Optional[str]=..., billing_time: _Optional[str]=..., city: _Optional[str]=..., country: _Optional[str]=..., distance_miles: _Optional[float]=..., district: _Optional[str]=..., location: _Optional[_Union[_common_pb2.LatLong, _Mapping]]=..., name: _Optional[str]=..., postal_code: _Optional[str]=..., site_closed: bool=..., state: _Optional[str]=..., street_address: _Optional[str]=..., total_stalls: _Optional[int]=..., within_range: bool=..., max_power_kw: _Optional[int]=..., out_of_order_stalls_number: _Optional[int]=..., out_of_order_stalls_names: _Optional[str]=...) -> None:
         ...
 
 class MediaPlayAction(_message.Message):
@@ -1448,7 +1448,7 @@ class VehicleControlSetSentryModeAction(_message.Message):
     ON_FIELD_NUMBER: _ClassVar[int]
     on: bool
 
-    def __init__(self, on: _Optional[bool]=...) -> None:
+    def __init__(self, on: bool=...) -> None:
         ...
 
 class VehicleControlSetValetModeAction(_message.Message):
@@ -1458,7 +1458,7 @@ class VehicleControlSetValetModeAction(_message.Message):
     on: bool
     password: str
 
-    def __init__(self, on: _Optional[bool]=..., password: _Optional[str]=...) -> None:
+    def __init__(self, on: bool=..., password: _Optional[str]=...) -> None:
         ...
 
 class VehicleControlSunroofOpenCloseAction(_message.Message):
@@ -1506,7 +1506,7 @@ class HvacBioweaponModeAction(_message.Message):
     on: bool
     manual_override: bool
 
-    def __init__(self, on: _Optional[bool]=..., manual_override: _Optional[bool]=...) -> None:
+    def __init__(self, on: bool=..., manual_override: bool=...) -> None:
         ...
 
 class AutoSeatClimateAction(_message.Message):
@@ -1528,7 +1528,7 @@ class AutoSeatClimateAction(_message.Message):
         on: bool
         seat_position: AutoSeatClimateAction.AutoSeatPosition_E
 
-        def __init__(self, on: _Optional[bool]=..., seat_position: _Optional[_Union[AutoSeatClimateAction.AutoSeatPosition_E, str]]=...) -> None:
+        def __init__(self, on: bool=..., seat_position: _Optional[_Union[AutoSeatClimateAction.AutoSeatPosition_E, str]]=...) -> None:
             ...
     CARSEAT_FIELD_NUMBER: _ClassVar[int]
     carseat: _containers.RepeatedCompositeFieldContainer[AutoSeatClimateAction.CarSeat]
@@ -1555,7 +1555,7 @@ class ScheduledChargingAction(_message.Message):
     enabled: bool
     charging_time: int
 
-    def __init__(self, enabled: _Optional[bool]=..., charging_time: _Optional[int]=...) -> None:
+    def __init__(self, enabled: bool=..., charging_time: _Optional[int]=...) -> None:
         ...
 
 class ScheduledDepartureAction(_message.Message):
@@ -1571,7 +1571,7 @@ class ScheduledDepartureAction(_message.Message):
     off_peak_charging_times: _common_pb2.OffPeakChargingTimes
     off_peak_hours_end_time: int
 
-    def __init__(self, enabled: _Optional[bool]=..., departure_time: _Optional[int]=..., preconditioning_times: _Optional[_Union[_common_pb2.PreconditioningTimes, _Mapping]]=..., off_peak_charging_times: _Optional[_Union[_common_pb2.OffPeakChargingTimes, _Mapping]]=..., off_peak_hours_end_time: _Optional[int]=...) -> None:
+    def __init__(self, enabled: bool=..., departure_time: _Optional[int]=..., preconditioning_times: _Optional[_Union[_common_pb2.PreconditioningTimes, _Mapping]]=..., off_peak_charging_times: _Optional[_Union[_common_pb2.OffPeakChargingTimes, _Mapping]]=..., off_peak_hours_end_time: _Optional[int]=...) -> None:
         ...
 
 class HvacClimateKeeperAction(_message.Message):
@@ -1601,7 +1601,7 @@ class HvacClimateKeeperAction(_message.Message):
     manual_override: bool
     manual_override_mode: _containers.RepeatedScalarFieldContainer[HvacClimateKeeperAction.ManualOverrideMode_E]
 
-    def __init__(self, ClimateKeeperAction: _Optional[_Union[HvacClimateKeeperAction.ClimateKeeperAction_E, str]]=..., manual_override: _Optional[bool]=..., manual_override_mode: _Optional[_Iterable[_Union[HvacClimateKeeperAction.ManualOverrideMode_E, str]]]=...) -> None:
+    def __init__(self, ClimateKeeperAction: _Optional[_Union[HvacClimateKeeperAction.ClimateKeeperAction_E, str]]=..., manual_override: bool=..., manual_override_mode: _Optional[_Iterable[_Union[HvacClimateKeeperAction.ManualOverrideMode_E, str]]]=...) -> None:
         ...
 
 class HvacRecirculationAction(_message.Message):
@@ -1609,7 +1609,7 @@ class HvacRecirculationAction(_message.Message):
     ON_FIELD_NUMBER: _ClassVar[int]
     on: bool
 
-    def __init__(self, on: _Optional[bool]=...) -> None:
+    def __init__(self, on: bool=...) -> None:
         ...
 
 class SetChargingAmpsAction(_message.Message):
@@ -1637,7 +1637,7 @@ class BatchRemoveChargeSchedulesAction(_message.Message):
     work: bool
     other: bool
 
-    def __init__(self, home: _Optional[bool]=..., work: _Optional[bool]=..., other: _Optional[bool]=...) -> None:
+    def __init__(self, home: bool=..., work: bool=..., other: bool=...) -> None:
         ...
 
 class BatchRemovePreconditionSchedulesAction(_message.Message):
@@ -1649,7 +1649,7 @@ class BatchRemovePreconditionSchedulesAction(_message.Message):
     work: bool
     other: bool
 
-    def __init__(self, home: _Optional[bool]=..., work: _Optional[bool]=..., other: _Optional[bool]=...) -> None:
+    def __init__(self, home: bool=..., work: bool=..., other: bool=...) -> None:
         ...
 
 class RemovePreconditionScheduleAction(_message.Message):
@@ -1667,7 +1667,7 @@ class SetCabinOverheatProtectionAction(_message.Message):
     on: bool
     fan_only: bool
 
-    def __init__(self, on: _Optional[bool]=..., fan_only: _Optional[bool]=...) -> None:
+    def __init__(self, on: bool=..., fan_only: bool=...) -> None:
         ...
 
 class SetVehicleNameAction(_message.Message):
@@ -1713,7 +1713,7 @@ class VehicleControlSetPinToDriveAction(_message.Message):
     on: bool
     password: str
 
-    def __init__(self, on: _Optional[bool]=..., password: _Optional[str]=...) -> None:
+    def __init__(self, on: bool=..., password: _Optional[str]=...) -> None:
         ...
 
 class VehicleControlResetPinToDriveAction(_message.Message):
@@ -2201,7 +2201,7 @@ class AutoStwHeatAction(_message.Message):
     ON_FIELD_NUMBER: _ClassVar[int]
     on: bool
 
-    def __init__(self, on: _Optional[bool]=...) -> None:
+    def __init__(self, on: bool=...) -> None:
         ...
 
 class StwHeatLevelAction(_message.Message):
@@ -2249,7 +2249,7 @@ class ChargeOnSolarFeature(_message.Message):
     lower_charge_limit: float
     upper_charge_limit: float
 
-    def __init__(self, enabled: _Optional[bool]=..., lower_charge_limit: _Optional[float]=..., upper_charge_limit: _Optional[float]=...) -> None:
+    def __init__(self, enabled: bool=..., lower_charge_limit: _Optional[float]=..., upper_charge_limit: _Optional[float]=...) -> None:
         ...
 
 class DrivingClearSpeedLimitPinAdminAction(_message.Message):
@@ -2331,7 +2331,7 @@ class SetTrailerLightTestStartStopAction(_message.Message):
     START_STOP_FIELD_NUMBER: _ClassVar[int]
     start_stop: bool
 
-    def __init__(self, start_stop: _Optional[bool]=...) -> None:
+    def __init__(self, start_stop: bool=...) -> None:
         ...
 
 class SetTruckBedLightAutoStateAction(_message.Message):
@@ -2339,7 +2339,7 @@ class SetTruckBedLightAutoStateAction(_message.Message):
     POWER_STATE_FIELD_NUMBER: _ClassVar[int]
     power_state: bool
 
-    def __init__(self, power_state: _Optional[bool]=...) -> None:
+    def __init__(self, power_state: bool=...) -> None:
         ...
 
 class SetTruckBedLightBrightnessAction(_message.Message):
@@ -2419,7 +2419,7 @@ class SetTentModeRequestAction(_message.Message):
     ON_FIELD_NUMBER: _ClassVar[int]
     on: bool
 
-    def __init__(self, on: _Optional[bool]=...) -> None:
+    def __init__(self, on: bool=...) -> None:
         ...
 
 class SetZoneLightRequestAction(_message.Message):
@@ -2454,7 +2454,7 @@ class SetLightbarMiddleAction(_message.Message):
     MIDDLE_LIGHT_REQUEST_FIELD_NUMBER: _ClassVar[int]
     middle_light_request: bool
 
-    def __init__(self, middle_light_request: _Optional[bool]=...) -> None:
+    def __init__(self, middle_light_request: bool=...) -> None:
         ...
 
 class SetLightbarDitchAction(_message.Message):
@@ -2462,7 +2462,7 @@ class SetLightbarDitchAction(_message.Message):
     DITCH_LIGHTS_REQUEST_FIELD_NUMBER: _ClassVar[int]
     ditch_lights_request: bool
 
-    def __init__(self, ditch_lights_request: _Optional[bool]=...) -> None:
+    def __init__(self, ditch_lights_request: bool=...) -> None:
         ...
 
 class GetMessagesAction(_message.Message):
@@ -2537,7 +2537,7 @@ class ParentalControlsAction(_message.Message):
     activate: bool
     pin: str
 
-    def __init__(self, activate: _Optional[bool]=..., pin: _Optional[str]=...) -> None:
+    def __init__(self, activate: bool=..., pin: _Optional[str]=...) -> None:
         ...
 
 class ParentalControlsEnableSettingsAction(_message.Message):
@@ -2564,7 +2564,7 @@ class ParentalControlsEnableSettingsAction(_message.Message):
     setting: ParentalControlsEnableSettingsAction.ParentalControlsSetting_E
     enable: bool
 
-    def __init__(self, setting: _Optional[_Union[ParentalControlsEnableSettingsAction.ParentalControlsSetting_E, str]]=..., enable: _Optional[bool]=...) -> None:
+    def __init__(self, setting: _Optional[_Union[ParentalControlsEnableSettingsAction.ParentalControlsSetting_E, str]]=..., enable: bool=...) -> None:
         ...
 
 class ParentalControlsSetSpeedLimitAction(_message.Message):
@@ -2598,7 +2598,7 @@ class StartLightShowAction(_message.Message):
     volume: float
     dance_moves: bool
 
-    def __init__(self, show_index: _Optional[int]=..., start_time: _Optional[int]=..., volume: _Optional[float]=..., dance_moves: _Optional[bool]=...) -> None:
+    def __init__(self, show_index: _Optional[int]=..., start_time: _Optional[int]=..., volume: _Optional[float]=..., dance_moves: bool=...) -> None:
         ...
 
 class SetSuspensionLevelAction(_message.Message):
@@ -2639,7 +2639,7 @@ class SetLowPowerModeAction(_message.Message):
     LOW_POWER_MODE_FIELD_NUMBER: _ClassVar[int]
     low_power_mode: bool
 
-    def __init__(self, low_power_mode: _Optional[bool]=...) -> None:
+    def __init__(self, low_power_mode: bool=...) -> None:
         ...
 
 class SetTemperatureUnitAction(_message.Message):
@@ -2724,7 +2724,7 @@ class DisplayStateAction(_message.Message):
     displayBrightnessAutoRequest: bool
     displayBrightnessScalePreferenceRequest: int
 
-    def __init__(self, displayBrightnessAutoRequest: _Optional[bool]=..., displayBrightnessScalePreferenceRequest: _Optional[int]=...) -> None:
+    def __init__(self, displayBrightnessAutoRequest: bool=..., displayBrightnessScalePreferenceRequest: _Optional[int]=...) -> None:
         ...
 
 class SetKeepAccessoryPowerModeAction(_message.Message):
@@ -2732,7 +2732,7 @@ class SetKeepAccessoryPowerModeAction(_message.Message):
     KEEP_ACCESSORY_POWER_MODE_FIELD_NUMBER: _ClassVar[int]
     keep_accessory_power_mode: bool
 
-    def __init__(self, keep_accessory_power_mode: _Optional[bool]=...) -> None:
+    def __init__(self, keep_accessory_power_mode: bool=...) -> None:
         ...
 
 class SetupCloudProfileWithLocalProfileUuidAction(_message.Message):
@@ -2744,7 +2744,7 @@ class SetupCloudProfileWithLocalProfileUuidAction(_message.Message):
     local_profile_uuid: str
     delete_local_profile_after_setup: bool
 
-    def __init__(self, cloud_vault_uuid: _Optional[str]=..., local_profile_uuid: _Optional[str]=..., delete_local_profile_after_setup: _Optional[bool]=...) -> None:
+    def __init__(self, cloud_vault_uuid: _Optional[str]=..., local_profile_uuid: _Optional[str]=..., delete_local_profile_after_setup: bool=...) -> None:
         ...
 
 class GetLocalProfilesForVaultUuidAction(_message.Message):
@@ -2766,7 +2766,7 @@ class DeleteDashcamClipsAction(_message.Message):
     DELETE_CLIPS_FIELD_NUMBER: _ClassVar[int]
     delete_clips: bool
 
-    def __init__(self, delete_clips: _Optional[bool]=...) -> None:
+    def __init__(self, delete_clips: bool=...) -> None:
         ...
 
 class FormatUSBAction(_message.Message):
@@ -2774,7 +2774,7 @@ class FormatUSBAction(_message.Message):
     FORMAT_USB_FIELD_NUMBER: _ClassVar[int]
     format_usb: bool
 
-    def __init__(self, format_usb: _Optional[bool]=...) -> None:
+    def __init__(self, format_usb: bool=...) -> None:
         ...
 
 class BandwidthTest(_message.Message):
@@ -2841,5 +2841,5 @@ class SetDeckLightAction(_message.Message):
     ON_FIELD_NUMBER: _ClassVar[int]
     on: bool
 
-    def __init__(self, on: _Optional[bool]=...) -> None:
+    def __init__(self, on: bool=...) -> None:
         ...
