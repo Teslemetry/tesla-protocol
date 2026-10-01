@@ -314,6 +314,14 @@ export enum Field {
   Cabin12vPortKeepOn = 270,
   /** Cabin48vPortKeepOn - Semi-truck only */
   Cabin48vPortKeepOn = 271,
+  AccRail = 272,
+  PowerTransferStatus = 273,
+  AutomaticEmergencyBrakingState = 274,
+  RollingResistanceCoefficient = 275,
+  CruiseState = 276,
+  LifetimeDcChargeEnergyKwh = 277,
+  /** VehicleMassKg - Semi-truck only */
+  VehicleMassKg = 278,
   UNRECOGNIZED = -1,
 }
 
@@ -1135,6 +1143,27 @@ export function fieldFromJSON(object: any): Field {
     case 271:
     case "Cabin48vPortKeepOn":
       return Field.Cabin48vPortKeepOn;
+    case 272:
+    case "AccRail":
+      return Field.AccRail;
+    case 273:
+    case "PowerTransferStatus":
+      return Field.PowerTransferStatus;
+    case 274:
+    case "AutomaticEmergencyBrakingState":
+      return Field.AutomaticEmergencyBrakingState;
+    case 275:
+    case "RollingResistanceCoefficient":
+      return Field.RollingResistanceCoefficient;
+    case 276:
+    case "CruiseState":
+      return Field.CruiseState;
+    case 277:
+    case "LifetimeDcChargeEnergyKwh":
+      return Field.LifetimeDcChargeEnergyKwh;
+    case 278:
+    case "VehicleMassKg":
+      return Field.VehicleMassKg;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -1688,6 +1717,20 @@ export function fieldToJSON(object: Field): string {
       return "Cabin12vPortKeepOn";
     case Field.Cabin48vPortKeepOn:
       return "Cabin48vPortKeepOn";
+    case Field.AccRail:
+      return "AccRail";
+    case Field.PowerTransferStatus:
+      return "PowerTransferStatus";
+    case Field.AutomaticEmergencyBrakingState:
+      return "AutomaticEmergencyBrakingState";
+    case Field.RollingResistanceCoefficient:
+      return "RollingResistanceCoefficient";
+    case Field.CruiseState:
+      return "CruiseState";
+    case Field.LifetimeDcChargeEnergyKwh:
+      return "LifetimeDcChargeEnergyKwh";
+    case Field.VehicleMassKg:
+      return "VehicleMassKg";
     case Field.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -4011,6 +4054,162 @@ export function cabinPortKeepOnStateToJSON(object: CabinPortKeepOnState): string
   }
 }
 
+export enum CruiseStateValue {
+  CruiseStateUnknown = 0,
+  CruiseStateOff = 1,
+  CruiseStateStandby = 2,
+  CruiseStateOn = 3,
+  CruiseStateStandstill = 4,
+  CruiseStateOverride = 5,
+  CruiseStateFault = 6,
+  CruiseStatePreFault = 7,
+  CruiseStatePreCancel = 8,
+  UNRECOGNIZED = -1,
+}
+
+export function cruiseStateValueFromJSON(object: any): CruiseStateValue {
+  switch (object) {
+    case 0:
+    case "CruiseStateUnknown":
+      return CruiseStateValue.CruiseStateUnknown;
+    case 1:
+    case "CruiseStateOff":
+      return CruiseStateValue.CruiseStateOff;
+    case 2:
+    case "CruiseStateStandby":
+      return CruiseStateValue.CruiseStateStandby;
+    case 3:
+    case "CruiseStateOn":
+      return CruiseStateValue.CruiseStateOn;
+    case 4:
+    case "CruiseStateStandstill":
+      return CruiseStateValue.CruiseStateStandstill;
+    case 5:
+    case "CruiseStateOverride":
+      return CruiseStateValue.CruiseStateOverride;
+    case 6:
+    case "CruiseStateFault":
+      return CruiseStateValue.CruiseStateFault;
+    case 7:
+    case "CruiseStatePreFault":
+      return CruiseStateValue.CruiseStatePreFault;
+    case 8:
+    case "CruiseStatePreCancel":
+      return CruiseStateValue.CruiseStatePreCancel;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return CruiseStateValue.UNRECOGNIZED;
+  }
+}
+
+export function cruiseStateValueToJSON(object: CruiseStateValue): string {
+  switch (object) {
+    case CruiseStateValue.CruiseStateUnknown:
+      return "CruiseStateUnknown";
+    case CruiseStateValue.CruiseStateOff:
+      return "CruiseStateOff";
+    case CruiseStateValue.CruiseStateStandby:
+      return "CruiseStateStandby";
+    case CruiseStateValue.CruiseStateOn:
+      return "CruiseStateOn";
+    case CruiseStateValue.CruiseStateStandstill:
+      return "CruiseStateStandstill";
+    case CruiseStateValue.CruiseStateOverride:
+      return "CruiseStateOverride";
+    case CruiseStateValue.CruiseStateFault:
+      return "CruiseStateFault";
+    case CruiseStateValue.CruiseStatePreFault:
+      return "CruiseStatePreFault";
+    case CruiseStateValue.CruiseStatePreCancel:
+      return "CruiseStatePreCancel";
+    case CruiseStateValue.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum PowerTransferStatusValue {
+  PowerTransferStatusUnknown = 0,
+  PowerTransferStatusStandby = 1,
+  PowerTransferStatusFaulted = 2,
+  PowerTransferStatusEmergencyShutdown = 3,
+  PowerTransferStatusExtEvseTestAllowed = 4,
+  PowerTransferStatusExtPrechargeAllowed = 5,
+  PowerTransferStatusChargeEnabling = 6,
+  PowerTransferStatusChargeEnabled = 7,
+  PowerTransferStatusGracefulShutdown = 8,
+  PowerTransferStatusBlocked = 9,
+  UNRECOGNIZED = -1,
+}
+
+export function powerTransferStatusValueFromJSON(object: any): PowerTransferStatusValue {
+  switch (object) {
+    case 0:
+    case "PowerTransferStatusUnknown":
+      return PowerTransferStatusValue.PowerTransferStatusUnknown;
+    case 1:
+    case "PowerTransferStatusStandby":
+      return PowerTransferStatusValue.PowerTransferStatusStandby;
+    case 2:
+    case "PowerTransferStatusFaulted":
+      return PowerTransferStatusValue.PowerTransferStatusFaulted;
+    case 3:
+    case "PowerTransferStatusEmergencyShutdown":
+      return PowerTransferStatusValue.PowerTransferStatusEmergencyShutdown;
+    case 4:
+    case "PowerTransferStatusExtEvseTestAllowed":
+      return PowerTransferStatusValue.PowerTransferStatusExtEvseTestAllowed;
+    case 5:
+    case "PowerTransferStatusExtPrechargeAllowed":
+      return PowerTransferStatusValue.PowerTransferStatusExtPrechargeAllowed;
+    case 6:
+    case "PowerTransferStatusChargeEnabling":
+      return PowerTransferStatusValue.PowerTransferStatusChargeEnabling;
+    case 7:
+    case "PowerTransferStatusChargeEnabled":
+      return PowerTransferStatusValue.PowerTransferStatusChargeEnabled;
+    case 8:
+    case "PowerTransferStatusGracefulShutdown":
+      return PowerTransferStatusValue.PowerTransferStatusGracefulShutdown;
+    case 9:
+    case "PowerTransferStatusBlocked":
+      return PowerTransferStatusValue.PowerTransferStatusBlocked;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return PowerTransferStatusValue.UNRECOGNIZED;
+  }
+}
+
+export function powerTransferStatusValueToJSON(object: PowerTransferStatusValue): string {
+  switch (object) {
+    case PowerTransferStatusValue.PowerTransferStatusUnknown:
+      return "PowerTransferStatusUnknown";
+    case PowerTransferStatusValue.PowerTransferStatusStandby:
+      return "PowerTransferStatusStandby";
+    case PowerTransferStatusValue.PowerTransferStatusFaulted:
+      return "PowerTransferStatusFaulted";
+    case PowerTransferStatusValue.PowerTransferStatusEmergencyShutdown:
+      return "PowerTransferStatusEmergencyShutdown";
+    case PowerTransferStatusValue.PowerTransferStatusExtEvseTestAllowed:
+      return "PowerTransferStatusExtEvseTestAllowed";
+    case PowerTransferStatusValue.PowerTransferStatusExtPrechargeAllowed:
+      return "PowerTransferStatusExtPrechargeAllowed";
+    case PowerTransferStatusValue.PowerTransferStatusChargeEnabling:
+      return "PowerTransferStatusChargeEnabling";
+    case PowerTransferStatusValue.PowerTransferStatusChargeEnabled:
+      return "PowerTransferStatusChargeEnabled";
+    case PowerTransferStatusValue.PowerTransferStatusGracefulShutdown:
+      return "PowerTransferStatusGracefulShutdown";
+    case PowerTransferStatusValue.PowerTransferStatusBlocked:
+      return "PowerTransferStatusBlocked";
+    case PowerTransferStatusValue.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export enum TurnSignalState {
   TurnSignalStateUnknown = 0,
   TurnSignalStateOff = 1,
@@ -4201,6 +4400,8 @@ export interface Value {
   mediaStatusValue?: MediaStatus | undefined;
   sunroofInstalledStateValue?: SunroofInstalledState | undefined;
   cabinPortKeepOnValue?: CabinPortKeepOnState | undefined;
+  cruiseStateValue?: CruiseStateValue | undefined;
+  powerTransferStatusValue?: PowerTransferStatusValue | undefined;
 }
 
 /** Datum represents a single field and its value */
@@ -4805,6 +5006,8 @@ function createBaseValue(): Value {
     mediaStatusValue: undefined,
     sunroofInstalledStateValue: undefined,
     cabinPortKeepOnValue: undefined,
+    cruiseStateValue: undefined,
+    powerTransferStatusValue: undefined,
   };
 }
 
@@ -4971,6 +5174,12 @@ export const Value: MessageFns<Value> = {
     }
     if (message.cabinPortKeepOnValue !== undefined) {
       writer.uint32(440).int32(message.cabinPortKeepOnValue);
+    }
+    if (message.cruiseStateValue !== undefined) {
+      writer.uint32(448).int32(message.cruiseStateValue);
+    }
+    if (message.powerTransferStatusValue !== undefined) {
+      writer.uint32(456).int32(message.powerTransferStatusValue);
     }
     return writer;
   },
@@ -5414,6 +5623,22 @@ export const Value: MessageFns<Value> = {
           message.cabinPortKeepOnValue = reader.int32() as any;
           continue;
         }
+        case 56: {
+          if (tag !== 448) {
+            break;
+          }
+
+          message.cruiseStateValue = reader.int32() as any;
+          continue;
+        }
+        case 57: {
+          if (tag !== 456) {
+            break;
+          }
+
+          message.powerTransferStatusValue = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -5532,6 +5757,10 @@ export const Value: MessageFns<Value> = {
         : undefined,
       cabinPortKeepOnValue: isSet(object.cabinPortKeepOnValue)
         ? cabinPortKeepOnStateFromJSON(object.cabinPortKeepOnValue)
+        : undefined,
+      cruiseStateValue: isSet(object.cruiseStateValue) ? cruiseStateValueFromJSON(object.cruiseStateValue) : undefined,
+      powerTransferStatusValue: isSet(object.powerTransferStatusValue)
+        ? powerTransferStatusValueFromJSON(object.powerTransferStatusValue)
         : undefined,
     };
   },
@@ -5706,6 +5935,12 @@ export const Value: MessageFns<Value> = {
     if (message.cabinPortKeepOnValue !== undefined) {
       obj.cabinPortKeepOnValue = cabinPortKeepOnStateToJSON(message.cabinPortKeepOnValue);
     }
+    if (message.cruiseStateValue !== undefined) {
+      obj.cruiseStateValue = cruiseStateValueToJSON(message.cruiseStateValue);
+    }
+    if (message.powerTransferStatusValue !== undefined) {
+      obj.powerTransferStatusValue = powerTransferStatusValueToJSON(message.powerTransferStatusValue);
+    }
     return obj;
   },
 
@@ -5777,6 +6012,8 @@ export const Value: MessageFns<Value> = {
     message.mediaStatusValue = object.mediaStatusValue ?? undefined;
     message.sunroofInstalledStateValue = object.sunroofInstalledStateValue ?? undefined;
     message.cabinPortKeepOnValue = object.cabinPortKeepOnValue ?? undefined;
+    message.cruiseStateValue = object.cruiseStateValue ?? undefined;
+    message.powerTransferStatusValue = object.powerTransferStatusValue ?? undefined;
     return message;
   },
 };
