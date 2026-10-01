@@ -38686,8 +38686,8 @@
         "python": "packages/python/tesla_protocol/telemetry"
       },
       "messages": 16,
-      "enums": 46,
-      "fields": 110,
+      "enums": 48,
+      "fields": 112,
       "files": [
         {
           "package": "telemetry.vehicle_alerts",
@@ -39537,6 +39537,22 @@
                   "name": "cabin_port_keep_on_value",
                   "type": "TYPE_ENUM",
                   "type_name": ".telemetry.vehicle_data.CabinPortKeepOnState",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "value"
+                },
+                {
+                  "number": 56,
+                  "name": "cruise_state_value",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".telemetry.vehicle_data.CruiseStateValue",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "value"
+                },
+                {
+                  "number": 57,
+                  "name": "power_transfer_status_value",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".telemetry.vehicle_data.PowerTransferStatusValue",
                   "label": "LABEL_OPTIONAL",
                   "oneof": "value"
                 }
@@ -40712,6 +40728,34 @@
                 {
                   "number": 271,
                   "name": "Cabin48vPortKeepOn"
+                },
+                {
+                  "number": 272,
+                  "name": "AccRail"
+                },
+                {
+                  "number": 273,
+                  "name": "PowerTransferStatus"
+                },
+                {
+                  "number": 274,
+                  "name": "AutomaticEmergencyBrakingState"
+                },
+                {
+                  "number": 275,
+                  "name": "RollingResistanceCoefficient"
+                },
+                {
+                  "number": 276,
+                  "name": "CruiseState"
+                },
+                {
+                  "number": 277,
+                  "name": "LifetimeDcChargeEnergyKwh"
+                },
+                {
+                  "number": 278,
+                  "name": "VehicleMassKg"
                 }
               ],
               "reserved_ranges": [],
@@ -42022,6 +42066,98 @@
                 {
                   "number": 2,
                   "name": "CabinPortKeepOnStateOn"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".telemetry.vehicle_data.CruiseStateValue",
+              "name": "CruiseStateValue",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "CruiseStateUnknown"
+                },
+                {
+                  "number": 1,
+                  "name": "CruiseStateOff"
+                },
+                {
+                  "number": 2,
+                  "name": "CruiseStateStandby"
+                },
+                {
+                  "number": 3,
+                  "name": "CruiseStateOn"
+                },
+                {
+                  "number": 4,
+                  "name": "CruiseStateStandstill"
+                },
+                {
+                  "number": 5,
+                  "name": "CruiseStateOverride"
+                },
+                {
+                  "number": 6,
+                  "name": "CruiseStateFault"
+                },
+                {
+                  "number": 7,
+                  "name": "CruiseStatePreFault"
+                },
+                {
+                  "number": 8,
+                  "name": "CruiseStatePreCancel"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".telemetry.vehicle_data.PowerTransferStatusValue",
+              "name": "PowerTransferStatusValue",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "PowerTransferStatusUnknown"
+                },
+                {
+                  "number": 1,
+                  "name": "PowerTransferStatusStandby"
+                },
+                {
+                  "number": 2,
+                  "name": "PowerTransferStatusFaulted"
+                },
+                {
+                  "number": 3,
+                  "name": "PowerTransferStatusEmergencyShutdown"
+                },
+                {
+                  "number": 4,
+                  "name": "PowerTransferStatusExtEvseTestAllowed"
+                },
+                {
+                  "number": 5,
+                  "name": "PowerTransferStatusExtPrechargeAllowed"
+                },
+                {
+                  "number": 6,
+                  "name": "PowerTransferStatusChargeEnabling"
+                },
+                {
+                  "number": 7,
+                  "name": "PowerTransferStatusChargeEnabled"
+                },
+                {
+                  "number": 8,
+                  "name": "PowerTransferStatusGracefulShutdown"
+                },
+                {
+                  "number": 9,
+                  "name": "PowerTransferStatusBlocked"
                 }
               ],
               "reserved_ranges": [],
@@ -45257,8 +45393,8 @@
     "source_files": 39,
     "groups": 7,
     "messages": 905,
-    "enums": 252,
-    "fields": 3013
+    "enums": 254,
+    "fields": 3015
   },
   "registration": {
     "consistent": true,
