@@ -2,6 +2,7 @@ from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class DeviceType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -79,49 +80,39 @@ IPM_DEVICE_TYPE_POWERPACK3: iPMDeviceType
 IPM_DEVICE_TYPE_SUPERCHARGER4: iPMDeviceType
 
 class Din(_message.Message):
-    __slots__ = ('value',)
+    __slots__ = ("value",)
     VALUE_FIELD_NUMBER: _ClassVar[int]
     value: str
-
-    def __init__(self, value: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, value: _Optional[str] = ...) -> None: ...
 
 class EcuId(_message.Message):
-    __slots__ = ('part_number', 'serial_number')
+    __slots__ = ("part_number", "serial_number")
     PART_NUMBER_FIELD_NUMBER: _ClassVar[int]
     SERIAL_NUMBER_FIELD_NUMBER: _ClassVar[int]
     part_number: str
     serial_number: str
-
-    def __init__(self, part_number: _Optional[str]=..., serial_number: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, part_number: _Optional[str] = ..., serial_number: _Optional[str] = ...) -> None: ...
 
 class VIN(_message.Message):
-    __slots__ = ('value',)
+    __slots__ = ("value",)
     VALUE_FIELD_NUMBER: _ClassVar[int]
     value: str
-
-    def __init__(self, value: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, value: _Optional[str] = ...) -> None: ...
 
 class UUIDv4Bytes(_message.Message):
-    __slots__ = ('value',)
+    __slots__ = ("value",)
     VALUE_FIELD_NUMBER: _ClassVar[int]
     value: bytes
-
-    def __init__(self, value: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, value: _Optional[bytes] = ...) -> None: ...
 
 class UUIDv4(_message.Message):
-    __slots__ = ('text',)
+    __slots__ = ("text",)
     TEXT_FIELD_NUMBER: _ClassVar[int]
     text: str
-
-    def __init__(self, text: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, text: _Optional[str] = ...) -> None: ...
 
 class DeviceSignedPayload(_message.Message):
-    __slots__ = ('payload', 'device_signature_type', 'signature', 'device_cert_format', 'device_cert')
+    __slots__ = ("payload", "device_signature_type", "signature", "device_cert_format", "device_cert")
     PAYLOAD_FIELD_NUMBER: _ClassVar[int]
     DEVICE_SIGNATURE_TYPE_FIELD_NUMBER: _ClassVar[int]
     SIGNATURE_FIELD_NUMBER: _ClassVar[int]
@@ -132,16 +123,12 @@ class DeviceSignedPayload(_message.Message):
     signature: bytes
     device_cert_format: DeviceCertFormat
     device_cert: bytes
-
-    def __init__(self, payload: _Optional[bytes]=..., device_signature_type: _Optional[_Union[DeviceSignatureType, str]]=..., signature: _Optional[bytes]=..., device_cert_format: _Optional[_Union[DeviceCertFormat, str]]=..., device_cert: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, payload: _Optional[bytes] = ..., device_signature_type: _Optional[_Union[DeviceSignatureType, str]] = ..., signature: _Optional[bytes] = ..., device_cert_format: _Optional[_Union[DeviceCertFormat, str]] = ..., device_cert: _Optional[bytes] = ...) -> None: ...
 
 class EncryptedMessage(_message.Message):
-    __slots__ = ('cipher', 'cipher_text')
+    __slots__ = ("cipher", "cipher_text")
     CIPHER_FIELD_NUMBER: _ClassVar[int]
     CIPHER_TEXT_FIELD_NUMBER: _ClassVar[int]
     cipher: Cipher
     cipher_text: bytes
-
-    def __init__(self, cipher: _Optional[_Union[Cipher, str]]=..., cipher_text: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, cipher: _Optional[_Union[Cipher, str]] = ..., cipher_text: _Optional[bytes] = ...) -> None: ...

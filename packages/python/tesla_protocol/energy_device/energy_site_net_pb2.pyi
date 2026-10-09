@@ -1,11 +1,12 @@
-from . import device_pb2 as _device_pb2
-from . import networking_pb2 as _networking_pb2
+from tesla_protocol.energy_device import device_pb2 as _device_pb2
+from tesla_protocol.energy_device import networking_pb2 as _networking_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from collections.abc import Iterable as _Iterable, Mapping as _Mapping
 from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class EnergySiteNetAdditionStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -94,39 +95,33 @@ INTRA_SITE_SERVICE_TYPE_WC_LOAD_SHARING_FOLLOWER: IntraSiteServiceType
 INTRA_SITE_SERVICE_TYPE_WC_CURRENT_CONTROL: IntraSiteServiceType
 
 class EnergySiteNetDevice(_message.Message):
-    __slots__ = ('din', 'wifi_ap_config', 'service_types')
+    __slots__ = ("din", "wifi_ap_config", "service_types")
     DIN_FIELD_NUMBER: _ClassVar[int]
     WIFI_AP_CONFIG_FIELD_NUMBER: _ClassVar[int]
     SERVICE_TYPES_FIELD_NUMBER: _ClassVar[int]
     din: _device_pb2.Din
     wifi_ap_config: _networking_pb2.WifiConfig
     service_types: _containers.RepeatedScalarFieldContainer[IntraSiteServiceType]
-
-    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]]=..., wifi_ap_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]]=..., service_types: _Optional[_Iterable[_Union[IntraSiteServiceType, str]]]=...) -> None:
-        ...
+    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]] = ..., wifi_ap_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]] = ..., service_types: _Optional[_Iterable[_Union[IntraSiteServiceType, str]]] = ...) -> None: ...
 
 class EnergySiteNetRecentlyAddedDevice(_message.Message):
-    __slots__ = ('din', 'status')
+    __slots__ = ("din", "status")
     DIN_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     din: _device_pb2.Din
     status: EnergySiteNetAdditionStatus
-
-    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]]=..., status: _Optional[_Union[EnergySiteNetAdditionStatus, str]]=...) -> None:
-        ...
+    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]] = ..., status: _Optional[_Union[EnergySiteNetAdditionStatus, str]] = ...) -> None: ...
 
 class EnergySiteNetRecentlyRemovedDevice(_message.Message):
-    __slots__ = ('din', 'status')
+    __slots__ = ("din", "status")
     DIN_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     din: _device_pb2.Din
     status: EnergySiteNetRemovalStatus
-
-    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]]=..., status: _Optional[_Union[EnergySiteNetRemovalStatus, str]]=...) -> None:
-        ...
+    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]] = ..., status: _Optional[_Union[EnergySiteNetRemovalStatus, str]] = ...) -> None: ...
 
 class EnergySiteNetUnpairedDevice(_message.Message):
-    __slots__ = ('din', 'pair_status', 'firmware_version', 'device_type', 'teg_device_type')
+    __slots__ = ("din", "pair_status", "firmware_version", "device_type", "teg_device_type")
     DIN_FIELD_NUMBER: _ClassVar[int]
     PAIR_STATUS_FIELD_NUMBER: _ClassVar[int]
     FIRMWARE_VERSION_FIELD_NUMBER: _ClassVar[int]
@@ -137,12 +132,10 @@ class EnergySiteNetUnpairedDevice(_message.Message):
     firmware_version: str
     device_type: _device_pb2.DeviceType
     teg_device_type: _device_pb2.TEGDeviceType
-
-    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]]=..., pair_status: _Optional[_Union[EnergySiteNetPairStatus, str]]=..., firmware_version: _Optional[str]=..., device_type: _Optional[_Union[_device_pb2.DeviceType, str]]=..., teg_device_type: _Optional[_Union[_device_pb2.TEGDeviceType, str]]=...) -> None:
-        ...
+    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]] = ..., pair_status: _Optional[_Union[EnergySiteNetPairStatus, str]] = ..., firmware_version: _Optional[str] = ..., device_type: _Optional[_Union[_device_pb2.DeviceType, str]] = ..., teg_device_type: _Optional[_Union[_device_pb2.TEGDeviceType, str]] = ...) -> None: ...
 
 class EnergySiteNetConfig(_message.Message):
-    __slots__ = ('devices', 'recently_added', 'recently_removed', 'unpaired_devices')
+    __slots__ = ("devices", "recently_added", "recently_removed", "unpaired_devices")
     DEVICES_FIELD_NUMBER: _ClassVar[int]
     RECENTLY_ADDED_FIELD_NUMBER: _ClassVar[int]
     RECENTLY_REMOVED_FIELD_NUMBER: _ClassVar[int]
@@ -151,68 +144,54 @@ class EnergySiteNetConfig(_message.Message):
     recently_added: EnergySiteNetRecentlyAddedDevice
     recently_removed: EnergySiteNetRecentlyRemovedDevice
     unpaired_devices: _containers.RepeatedCompositeFieldContainer[EnergySiteNetUnpairedDevice]
-
-    def __init__(self, devices: _Optional[_Iterable[_Union[EnergySiteNetDevice, _Mapping]]]=..., recently_added: _Optional[_Union[EnergySiteNetRecentlyAddedDevice, _Mapping]]=..., recently_removed: _Optional[_Union[EnergySiteNetRecentlyRemovedDevice, _Mapping]]=..., unpaired_devices: _Optional[_Iterable[_Union[EnergySiteNetUnpairedDevice, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, devices: _Optional[_Iterable[_Union[EnergySiteNetDevice, _Mapping]]] = ..., recently_added: _Optional[_Union[EnergySiteNetRecentlyAddedDevice, _Mapping]] = ..., recently_removed: _Optional[_Union[EnergySiteNetRecentlyRemovedDevice, _Mapping]] = ..., unpaired_devices: _Optional[_Iterable[_Union[EnergySiteNetUnpairedDevice, _Mapping]]] = ...) -> None: ...
 
 class EnergySiteNetAPIAddDeviceRequest(_message.Message):
-    __slots__ = ('device', 'network_type')
+    __slots__ = ("device", "network_type")
     DEVICE_FIELD_NUMBER: _ClassVar[int]
     NETWORK_TYPE_FIELD_NUMBER: _ClassVar[int]
     device: EnergySiteNetDevice
     network_type: EnergySiteNetNetworkType
-
-    def __init__(self, device: _Optional[_Union[EnergySiteNetDevice, _Mapping]]=..., network_type: _Optional[_Union[EnergySiteNetNetworkType, str]]=...) -> None:
-        ...
+    def __init__(self, device: _Optional[_Union[EnergySiteNetDevice, _Mapping]] = ..., network_type: _Optional[_Union[EnergySiteNetNetworkType, str]] = ...) -> None: ...
 
 class EnergySiteNetAPIAddDeviceResponse(_message.Message):
-    __slots__ = ('recently_added',)
+    __slots__ = ("recently_added",)
     RECENTLY_ADDED_FIELD_NUMBER: _ClassVar[int]
     recently_added: EnergySiteNetRecentlyAddedDevice
-
-    def __init__(self, recently_added: _Optional[_Union[EnergySiteNetRecentlyAddedDevice, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, recently_added: _Optional[_Union[EnergySiteNetRecentlyAddedDevice, _Mapping]] = ...) -> None: ...
 
 class EnergySiteNetAPIRemoveDeviceRequest(_message.Message):
-    __slots__ = ('din', 'network_type', 'service_type')
+    __slots__ = ("din", "network_type", "service_type")
     DIN_FIELD_NUMBER: _ClassVar[int]
     NETWORK_TYPE_FIELD_NUMBER: _ClassVar[int]
     SERVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
     din: _device_pb2.Din
     network_type: EnergySiteNetNetworkType
     service_type: IntraSiteServiceType
-
-    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]]=..., network_type: _Optional[_Union[EnergySiteNetNetworkType, str]]=..., service_type: _Optional[_Union[IntraSiteServiceType, str]]=...) -> None:
-        ...
+    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]] = ..., network_type: _Optional[_Union[EnergySiteNetNetworkType, str]] = ..., service_type: _Optional[_Union[IntraSiteServiceType, str]] = ...) -> None: ...
 
 class EnergySiteNetAPIRemoveDeviceResponse(_message.Message):
-    __slots__ = ('recently_removed',)
+    __slots__ = ("recently_removed",)
     RECENTLY_REMOVED_FIELD_NUMBER: _ClassVar[int]
     recently_removed: EnergySiteNetRecentlyRemovedDevice
-
-    def __init__(self, recently_removed: _Optional[_Union[EnergySiteNetRecentlyRemovedDevice, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, recently_removed: _Optional[_Union[EnergySiteNetRecentlyRemovedDevice, _Mapping]] = ...) -> None: ...
 
 class EnergySiteNetAPIGetConfigRequest(_message.Message):
-    __slots__ = ('network_type',)
+    __slots__ = ("network_type",)
     NETWORK_TYPE_FIELD_NUMBER: _ClassVar[int]
     network_type: EnergySiteNetNetworkType
-
-    def __init__(self, network_type: _Optional[_Union[EnergySiteNetNetworkType, str]]=...) -> None:
-        ...
+    def __init__(self, network_type: _Optional[_Union[EnergySiteNetNetworkType, str]] = ...) -> None: ...
 
 class EnergySiteNetAPIGetConfigResponse(_message.Message):
-    __slots__ = ('config', 'network_type')
+    __slots__ = ("config", "network_type")
     CONFIG_FIELD_NUMBER: _ClassVar[int]
     NETWORK_TYPE_FIELD_NUMBER: _ClassVar[int]
     config: EnergySiteNetConfig
     network_type: EnergySiteNetNetworkType
-
-    def __init__(self, config: _Optional[_Union[EnergySiteNetConfig, _Mapping]]=..., network_type: _Optional[_Union[EnergySiteNetNetworkType, str]]=...) -> None:
-        ...
+    def __init__(self, config: _Optional[_Union[EnergySiteNetConfig, _Mapping]] = ..., network_type: _Optional[_Union[EnergySiteNetNetworkType, str]] = ...) -> None: ...
 
 class EnergySiteNetMessages(_message.Message):
-    __slots__ = ('add_device_request', 'add_device_response', 'remove_device_request', 'remove_device_response', 'get_config_request', 'get_config_response')
+    __slots__ = ("add_device_request", "add_device_response", "remove_device_request", "remove_device_response", "get_config_request", "get_config_response")
     ADD_DEVICE_REQUEST_FIELD_NUMBER: _ClassVar[int]
     ADD_DEVICE_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     REMOVE_DEVICE_REQUEST_FIELD_NUMBER: _ClassVar[int]
@@ -225,6 +204,4 @@ class EnergySiteNetMessages(_message.Message):
     remove_device_response: EnergySiteNetAPIRemoveDeviceResponse
     get_config_request: EnergySiteNetAPIGetConfigRequest
     get_config_response: EnergySiteNetAPIGetConfigResponse
-
-    def __init__(self, add_device_request: _Optional[_Union[EnergySiteNetAPIAddDeviceRequest, _Mapping]]=..., add_device_response: _Optional[_Union[EnergySiteNetAPIAddDeviceResponse, _Mapping]]=..., remove_device_request: _Optional[_Union[EnergySiteNetAPIRemoveDeviceRequest, _Mapping]]=..., remove_device_response: _Optional[_Union[EnergySiteNetAPIRemoveDeviceResponse, _Mapping]]=..., get_config_request: _Optional[_Union[EnergySiteNetAPIGetConfigRequest, _Mapping]]=..., get_config_response: _Optional[_Union[EnergySiteNetAPIGetConfigResponse, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, add_device_request: _Optional[_Union[EnergySiteNetAPIAddDeviceRequest, _Mapping]] = ..., add_device_response: _Optional[_Union[EnergySiteNetAPIAddDeviceResponse, _Mapping]] = ..., remove_device_request: _Optional[_Union[EnergySiteNetAPIRemoveDeviceRequest, _Mapping]] = ..., remove_device_response: _Optional[_Union[EnergySiteNetAPIRemoveDeviceResponse, _Mapping]] = ..., get_config_request: _Optional[_Union[EnergySiteNetAPIGetConfigRequest, _Mapping]] = ..., get_config_response: _Optional[_Union[EnergySiteNetAPIGetConfigResponse, _Mapping]] = ...) -> None: ...

@@ -1,11 +1,12 @@
-from . import networking_pb2 as _networking_pb2
-from . import energy_site_net_pb2 as _energy_site_net_pb2
+from tesla_protocol.energy_device import networking_pb2 as _networking_pb2
+from tesla_protocol.energy_device import energy_site_net_pb2 as _energy_site_net_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from collections.abc import Iterable as _Iterable, Mapping as _Mapping
 from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class IntraSiteBackhaulInterfaceType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -112,7 +113,7 @@ INTRA_SITE_LAN_TYPE_SOFT_AP: IntraSiteLanType
 INTRA_SITE_LAN_TYPE_PRE_DEFINED: IntraSiteLanType
 
 class IntraSiteConfig(_message.Message):
-    __slots__ = ('last_changed_timestamp', 'site_config', 'backhaul_interface_type', 'site_wifi', 'leader', 'service_types', 'lan_type')
+    __slots__ = ("last_changed_timestamp", "site_config", "backhaul_interface_type", "site_wifi", "leader", "service_types", "lan_type")
     LAST_CHANGED_TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     SITE_CONFIG_FIELD_NUMBER: _ClassVar[int]
     BACKHAUL_INTERFACE_TYPE_FIELD_NUMBER: _ClassVar[int]
@@ -127,196 +128,146 @@ class IntraSiteConfig(_message.Message):
     leader: _energy_site_net_pb2.EnergySiteNetDevice
     service_types: _containers.RepeatedScalarFieldContainer[_energy_site_net_pb2.IntraSiteServiceType]
     lan_type: IntraSiteLanType
-
-    def __init__(self, last_changed_timestamp: _Optional[int]=..., site_config: _Optional[_Union[_energy_site_net_pb2.EnergySiteNetConfig, _Mapping]]=..., backhaul_interface_type: _Optional[_Union[IntraSiteBackhaulInterfaceType, str]]=..., site_wifi: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]]=..., leader: _Optional[_Union[_energy_site_net_pb2.EnergySiteNetDevice, _Mapping]]=..., service_types: _Optional[_Iterable[_Union[_energy_site_net_pb2.IntraSiteServiceType, str]]]=..., lan_type: _Optional[_Union[IntraSiteLanType, str]]=...) -> None:
-        ...
+    def __init__(self, last_changed_timestamp: _Optional[int] = ..., site_config: _Optional[_Union[_energy_site_net_pb2.EnergySiteNetConfig, _Mapping]] = ..., backhaul_interface_type: _Optional[_Union[IntraSiteBackhaulInterfaceType, str]] = ..., site_wifi: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]] = ..., leader: _Optional[_Union[_energy_site_net_pb2.EnergySiteNetDevice, _Mapping]] = ..., service_types: _Optional[_Iterable[_Union[_energy_site_net_pb2.IntraSiteServiceType, str]]] = ..., lan_type: _Optional[_Union[IntraSiteLanType, str]] = ...) -> None: ...
 
 class IntraSiteAPIPairRequest(_message.Message):
-    __slots__ = ('site',)
+    __slots__ = ("site",)
     SITE_FIELD_NUMBER: _ClassVar[int]
     site: IntraSiteConfig
-
-    def __init__(self, site: _Optional[_Union[IntraSiteConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, site: _Optional[_Union[IntraSiteConfig, _Mapping]] = ...) -> None: ...
 
 class IntraSiteAPIPairResponse(_message.Message):
-    __slots__ = ('result',)
+    __slots__ = ("result",)
     RESULT_FIELD_NUMBER: _ClassVar[int]
     result: IntraSitePairResult
-
-    def __init__(self, result: _Optional[_Union[IntraSitePairResult, str]]=...) -> None:
-        ...
+    def __init__(self, result: _Optional[_Union[IntraSitePairResult, str]] = ...) -> None: ...
 
 class IntraSiteAPIUnpairRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class IntraSiteAPIUnpairResponse(_message.Message):
-    __slots__ = ('result',)
+    __slots__ = ("result",)
     RESULT_FIELD_NUMBER: _ClassVar[int]
     result: IntraSiteUnpairResult
-
-    def __init__(self, result: _Optional[_Union[IntraSiteUnpairResult, str]]=...) -> None:
-        ...
+    def __init__(self, result: _Optional[_Union[IntraSiteUnpairResult, str]] = ...) -> None: ...
 
 class IntraSiteAPIJoinNetworkRequest(_message.Message):
-    __slots__ = ('site',)
+    __slots__ = ("site",)
     SITE_FIELD_NUMBER: _ClassVar[int]
     site: IntraSiteConfig
-
-    def __init__(self, site: _Optional[_Union[IntraSiteConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, site: _Optional[_Union[IntraSiteConfig, _Mapping]] = ...) -> None: ...
 
 class IntraSiteAPIJoinNetworkResponse(_message.Message):
-    __slots__ = ('result',)
+    __slots__ = ("result",)
     RESULT_FIELD_NUMBER: _ClassVar[int]
     result: IntraSiteJoinNetworkResult
-
-    def __init__(self, result: _Optional[_Union[IntraSiteJoinNetworkResult, str]]=...) -> None:
-        ...
+    def __init__(self, result: _Optional[_Union[IntraSiteJoinNetworkResult, str]] = ...) -> None: ...
 
 class IntraSiteAPIAddDeviceRequest(_message.Message):
-    __slots__ = ('device', 'site')
+    __slots__ = ("device", "site")
     DEVICE_FIELD_NUMBER: _ClassVar[int]
     SITE_FIELD_NUMBER: _ClassVar[int]
     device: _energy_site_net_pb2.EnergySiteNetDevice
     site: IntraSiteConfig
-
-    def __init__(self, device: _Optional[_Union[_energy_site_net_pb2.EnergySiteNetDevice, _Mapping]]=..., site: _Optional[_Union[IntraSiteConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, device: _Optional[_Union[_energy_site_net_pb2.EnergySiteNetDevice, _Mapping]] = ..., site: _Optional[_Union[IntraSiteConfig, _Mapping]] = ...) -> None: ...
 
 class IntraSiteAPIAddDeviceResponse(_message.Message):
-    __slots__ = ('result',)
+    __slots__ = ("result",)
     RESULT_FIELD_NUMBER: _ClassVar[int]
     result: _energy_site_net_pb2.EnergySiteNetAdditionStatus
-
-    def __init__(self, result: _Optional[_Union[_energy_site_net_pb2.EnergySiteNetAdditionStatus, str]]=...) -> None:
-        ...
+    def __init__(self, result: _Optional[_Union[_energy_site_net_pb2.EnergySiteNetAdditionStatus, str]] = ...) -> None: ...
 
 class IntraSiteAPIPushAddDeviceResultRequest(_message.Message):
-    __slots__ = ('device', 'result')
+    __slots__ = ("device", "result")
     DEVICE_FIELD_NUMBER: _ClassVar[int]
     RESULT_FIELD_NUMBER: _ClassVar[int]
     device: _energy_site_net_pb2.EnergySiteNetDevice
     result: _energy_site_net_pb2.EnergySiteNetAdditionStatus
-
-    def __init__(self, device: _Optional[_Union[_energy_site_net_pb2.EnergySiteNetDevice, _Mapping]]=..., result: _Optional[_Union[_energy_site_net_pb2.EnergySiteNetAdditionStatus, str]]=...) -> None:
-        ...
+    def __init__(self, device: _Optional[_Union[_energy_site_net_pb2.EnergySiteNetDevice, _Mapping]] = ..., result: _Optional[_Union[_energy_site_net_pb2.EnergySiteNetAdditionStatus, str]] = ...) -> None: ...
 
 class IntraSiteAPIPushAddDeviceResultResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class IntraSiteAPILeaveNetworkRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class IntraSiteAPILeaveNetworkResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class IntraSiteAPIPushHeartbeatRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class IntraSiteAPIPushHeartbeatResponse(_message.Message):
-    __slots__ = ('result',)
+    __slots__ = ("result",)
     RESULT_FIELD_NUMBER: _ClassVar[int]
     result: IntraSiteHeartbeatResult
-
-    def __init__(self, result: _Optional[_Union[IntraSiteHeartbeatResult, str]]=...) -> None:
-        ...
+    def __init__(self, result: _Optional[_Union[IntraSiteHeartbeatResult, str]] = ...) -> None: ...
 
 class IntraSiteAPIPushConfigRequest(_message.Message):
-    __slots__ = ('site',)
+    __slots__ = ("site",)
     SITE_FIELD_NUMBER: _ClassVar[int]
     site: IntraSiteConfig
-
-    def __init__(self, site: _Optional[_Union[IntraSiteConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, site: _Optional[_Union[IntraSiteConfig, _Mapping]] = ...) -> None: ...
 
 class IntraSiteAPIPushConfigResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class IntraSiteAPIPushBackhaulStatusRequest(_message.Message):
-    __slots__ = ('backhaul_interface_type', 'backhaul_status')
+    __slots__ = ("backhaul_interface_type", "backhaul_status")
     BACKHAUL_INTERFACE_TYPE_FIELD_NUMBER: _ClassVar[int]
     BACKHAUL_STATUS_FIELD_NUMBER: _ClassVar[int]
     backhaul_interface_type: IntraSiteBackhaulInterfaceType
     backhaul_status: IntraSiteBackhaulStatus
-
-    def __init__(self, backhaul_interface_type: _Optional[_Union[IntraSiteBackhaulInterfaceType, str]]=..., backhaul_status: _Optional[_Union[IntraSiteBackhaulStatus, str]]=...) -> None:
-        ...
+    def __init__(self, backhaul_interface_type: _Optional[_Union[IntraSiteBackhaulInterfaceType, str]] = ..., backhaul_status: _Optional[_Union[IntraSiteBackhaulStatus, str]] = ...) -> None: ...
 
 class IntraSiteAPIPushBackhaulStatusResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class IntraSiteAPIPushLeaderStatusRequest(_message.Message):
-    __slots__ = ('status', 'expected_duration_s')
+    __slots__ = ("status", "expected_duration_s")
     STATUS_FIELD_NUMBER: _ClassVar[int]
     EXPECTED_DURATION_S_FIELD_NUMBER: _ClassVar[int]
     status: IntraSiteLeaderStatus
     expected_duration_s: int
-
-    def __init__(self, status: _Optional[_Union[IntraSiteLeaderStatus, str]]=..., expected_duration_s: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, status: _Optional[_Union[IntraSiteLeaderStatus, str]] = ..., expected_duration_s: _Optional[int] = ...) -> None: ...
 
 class IntraSiteAPIPushLeaderStatusResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class IntraSiteAPIRequestUpdateRequest(_message.Message):
-    __slots__ = ('din',)
+    __slots__ = ("din",)
     DIN_FIELD_NUMBER: _ClassVar[int]
     din: str
-
-    def __init__(self, din: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, din: _Optional[str] = ...) -> None: ...
 
 class IntraSiteAPIRequestUpdateResponse(_message.Message):
-    __slots__ = ('signature',)
+    __slots__ = ("signature",)
     SIGNATURE_FIELD_NUMBER: _ClassVar[int]
     signature: str
-
-    def __init__(self, signature: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, signature: _Optional[str] = ...) -> None: ...
 
 class IntraSiteAPICompleteUpdateRequest(_message.Message):
-    __slots__ = ('din', 'result')
+    __slots__ = ("din", "result")
     DIN_FIELD_NUMBER: _ClassVar[int]
     RESULT_FIELD_NUMBER: _ClassVar[int]
     din: str
     result: IntraSiteCompleteUpdateResult
-
-    def __init__(self, din: _Optional[str]=..., result: _Optional[_Union[IntraSiteCompleteUpdateResult, str]]=...) -> None:
-        ...
+    def __init__(self, din: _Optional[str] = ..., result: _Optional[_Union[IntraSiteCompleteUpdateResult, str]] = ...) -> None: ...
 
 class IntraSiteAPICompleteUpdateResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class IntraSiteMessages(_message.Message):
-    __slots__ = ('join_network_request', 'join_network_response', 'add_device_request', 'add_device_response', 'push_add_device_result_request', 'push_add_device_result_response', 'leave_network_request', 'leave_network_response', 'push_heartbeat_request', 'push_heartbeat_response', 'push_config_request', 'push_config_response', 'push_backhaul_status_request', 'push_backhaul_status_response', 'push_leader_status_request', 'push_leader_status_response', 'request_update_request', 'request_update_response', 'complete_update_request', 'complete_update_response', 'pair_request', 'pair_response', 'unpair_request', 'unpair_response')
+    __slots__ = ("join_network_request", "join_network_response", "add_device_request", "add_device_response", "push_add_device_result_request", "push_add_device_result_response", "leave_network_request", "leave_network_response", "push_heartbeat_request", "push_heartbeat_response", "push_config_request", "push_config_response", "push_backhaul_status_request", "push_backhaul_status_response", "push_leader_status_request", "push_leader_status_response", "request_update_request", "request_update_response", "complete_update_request", "complete_update_response", "pair_request", "pair_response", "unpair_request", "unpair_response")
     JOIN_NETWORK_REQUEST_FIELD_NUMBER: _ClassVar[int]
     JOIN_NETWORK_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     ADD_DEVICE_REQUEST_FIELD_NUMBER: _ClassVar[int]
@@ -365,6 +316,4 @@ class IntraSiteMessages(_message.Message):
     pair_response: IntraSiteAPIPairResponse
     unpair_request: IntraSiteAPIUnpairRequest
     unpair_response: IntraSiteAPIUnpairResponse
-
-    def __init__(self, join_network_request: _Optional[_Union[IntraSiteAPIJoinNetworkRequest, _Mapping]]=..., join_network_response: _Optional[_Union[IntraSiteAPIJoinNetworkResponse, _Mapping]]=..., add_device_request: _Optional[_Union[IntraSiteAPIAddDeviceRequest, _Mapping]]=..., add_device_response: _Optional[_Union[IntraSiteAPIAddDeviceResponse, _Mapping]]=..., push_add_device_result_request: _Optional[_Union[IntraSiteAPIPushAddDeviceResultRequest, _Mapping]]=..., push_add_device_result_response: _Optional[_Union[IntraSiteAPIPushAddDeviceResultResponse, _Mapping]]=..., leave_network_request: _Optional[_Union[IntraSiteAPILeaveNetworkRequest, _Mapping]]=..., leave_network_response: _Optional[_Union[IntraSiteAPILeaveNetworkResponse, _Mapping]]=..., push_heartbeat_request: _Optional[_Union[IntraSiteAPIPushHeartbeatRequest, _Mapping]]=..., push_heartbeat_response: _Optional[_Union[IntraSiteAPIPushHeartbeatResponse, _Mapping]]=..., push_config_request: _Optional[_Union[IntraSiteAPIPushConfigRequest, _Mapping]]=..., push_config_response: _Optional[_Union[IntraSiteAPIPushConfigResponse, _Mapping]]=..., push_backhaul_status_request: _Optional[_Union[IntraSiteAPIPushBackhaulStatusRequest, _Mapping]]=..., push_backhaul_status_response: _Optional[_Union[IntraSiteAPIPushBackhaulStatusResponse, _Mapping]]=..., push_leader_status_request: _Optional[_Union[IntraSiteAPIPushLeaderStatusRequest, _Mapping]]=..., push_leader_status_response: _Optional[_Union[IntraSiteAPIPushLeaderStatusResponse, _Mapping]]=..., request_update_request: _Optional[_Union[IntraSiteAPIRequestUpdateRequest, _Mapping]]=..., request_update_response: _Optional[_Union[IntraSiteAPIRequestUpdateResponse, _Mapping]]=..., complete_update_request: _Optional[_Union[IntraSiteAPICompleteUpdateRequest, _Mapping]]=..., complete_update_response: _Optional[_Union[IntraSiteAPICompleteUpdateResponse, _Mapping]]=..., pair_request: _Optional[_Union[IntraSiteAPIPairRequest, _Mapping]]=..., pair_response: _Optional[_Union[IntraSiteAPIPairResponse, _Mapping]]=..., unpair_request: _Optional[_Union[IntraSiteAPIUnpairRequest, _Mapping]]=..., unpair_response: _Optional[_Union[IntraSiteAPIUnpairResponse, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, join_network_request: _Optional[_Union[IntraSiteAPIJoinNetworkRequest, _Mapping]] = ..., join_network_response: _Optional[_Union[IntraSiteAPIJoinNetworkResponse, _Mapping]] = ..., add_device_request: _Optional[_Union[IntraSiteAPIAddDeviceRequest, _Mapping]] = ..., add_device_response: _Optional[_Union[IntraSiteAPIAddDeviceResponse, _Mapping]] = ..., push_add_device_result_request: _Optional[_Union[IntraSiteAPIPushAddDeviceResultRequest, _Mapping]] = ..., push_add_device_result_response: _Optional[_Union[IntraSiteAPIPushAddDeviceResultResponse, _Mapping]] = ..., leave_network_request: _Optional[_Union[IntraSiteAPILeaveNetworkRequest, _Mapping]] = ..., leave_network_response: _Optional[_Union[IntraSiteAPILeaveNetworkResponse, _Mapping]] = ..., push_heartbeat_request: _Optional[_Union[IntraSiteAPIPushHeartbeatRequest, _Mapping]] = ..., push_heartbeat_response: _Optional[_Union[IntraSiteAPIPushHeartbeatResponse, _Mapping]] = ..., push_config_request: _Optional[_Union[IntraSiteAPIPushConfigRequest, _Mapping]] = ..., push_config_response: _Optional[_Union[IntraSiteAPIPushConfigResponse, _Mapping]] = ..., push_backhaul_status_request: _Optional[_Union[IntraSiteAPIPushBackhaulStatusRequest, _Mapping]] = ..., push_backhaul_status_response: _Optional[_Union[IntraSiteAPIPushBackhaulStatusResponse, _Mapping]] = ..., push_leader_status_request: _Optional[_Union[IntraSiteAPIPushLeaderStatusRequest, _Mapping]] = ..., push_leader_status_response: _Optional[_Union[IntraSiteAPIPushLeaderStatusResponse, _Mapping]] = ..., request_update_request: _Optional[_Union[IntraSiteAPIRequestUpdateRequest, _Mapping]] = ..., request_update_response: _Optional[_Union[IntraSiteAPIRequestUpdateResponse, _Mapping]] = ..., complete_update_request: _Optional[_Union[IntraSiteAPICompleteUpdateRequest, _Mapping]] = ..., complete_update_response: _Optional[_Union[IntraSiteAPICompleteUpdateResponse, _Mapping]] = ..., pair_request: _Optional[_Union[IntraSiteAPIPairRequest, _Mapping]] = ..., pair_response: _Optional[_Union[IntraSiteAPIPairResponse, _Mapping]] = ..., unpair_request: _Optional[_Union[IntraSiteAPIUnpairRequest, _Mapping]] = ..., unpair_response: _Optional[_Union[IntraSiteAPIUnpairResponse, _Mapping]] = ...) -> None: ...

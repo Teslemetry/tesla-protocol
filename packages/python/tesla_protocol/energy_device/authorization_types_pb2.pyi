@@ -1,4 +1,5 @@
 import datetime
+
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
@@ -6,6 +7,7 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from collections.abc import Iterable as _Iterable, Mapping as _Mapping
 from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class AuthorizationRole(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -62,7 +64,7 @@ AUTHORIZED_VERIFICATION_TYPE_SIGNED: AuthorizedVerificationType
 AUTHORIZED_VERIFICATION_TYPE_HERMES_COMMAND: AuthorizedVerificationType
 
 class AuthorizationRecord(_message.Message):
-    __slots__ = ('type', 'description', 'key_type', 'public_key', 'roles', 'state', 'verification', 'added_time', 'identifier', 'authorized_by_public_key')
+    __slots__ = ("type", "description", "key_type", "public_key", "roles", "state", "verification", "added_time", "identifier", "authorized_by_public_key")
     TYPE_FIELD_NUMBER: _ClassVar[int]
     DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
     KEY_TYPE_FIELD_NUMBER: _ClassVar[int]
@@ -83,6 +85,4 @@ class AuthorizationRecord(_message.Message):
     added_time: _timestamp_pb2.Timestamp
     identifier: str
     authorized_by_public_key: bytes
-
-    def __init__(self, type: _Optional[_Union[AuthorizedClientType, str]]=..., description: _Optional[str]=..., key_type: _Optional[_Union[AuthorizedKeyType, str]]=..., public_key: _Optional[bytes]=..., roles: _Optional[_Iterable[_Union[AuthorizationRole, str]]]=..., state: _Optional[_Union[AuthorizedState, str]]=..., verification: _Optional[_Union[AuthorizedVerificationType, str]]=..., added_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., identifier: _Optional[str]=..., authorized_by_public_key: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, type: _Optional[_Union[AuthorizedClientType, str]] = ..., description: _Optional[str] = ..., key_type: _Optional[_Union[AuthorizedKeyType, str]] = ..., public_key: _Optional[bytes] = ..., roles: _Optional[_Iterable[_Union[AuthorizationRole, str]]] = ..., state: _Optional[_Union[AuthorizedState, str]] = ..., verification: _Optional[_Union[AuthorizedVerificationType, str]] = ..., added_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., identifier: _Optional[str] = ..., authorized_by_public_key: _Optional[bytes] = ...) -> None: ...

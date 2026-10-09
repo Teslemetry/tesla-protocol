@@ -1,16 +1,18 @@
 import datetime
-from . import common_pb2 as _common_pb2
+
+from tesla_protocol.command import common_pb2 as _common_pb2
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
-from . import keys_pb2 as _keys_pb2
-from . import signatures_pb2 as _signatures_pb2
-from . import vcsec_pb2 as _vcsec_pb2
-from . import vehicle_pb2 as _vehicle_pb2
+from tesla_protocol.command import keys_pb2 as _keys_pb2
+from tesla_protocol.command import signatures_pb2 as _signatures_pb2
+from tesla_protocol.command import vcsec_pb2 as _vcsec_pb2
+from tesla_protocol.command import vehicle_pb2 as _vehicle_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from collections.abc import Iterable as _Iterable, Mapping as _Mapping
 from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class OperationStatus_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -76,15 +78,13 @@ display_state: VehicleDataFields
 legacy_vehicle_state_media_info: VehicleDataFields
 
 class Action(_message.Message):
-    __slots__ = ('vehicleAction',)
+    __slots__ = ("vehicleAction",)
     VEHICLEACTION_FIELD_NUMBER: _ClassVar[int]
     vehicleAction: VehicleAction
-
-    def __init__(self, vehicleAction: _Optional[_Union[VehicleAction, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, vehicleAction: _Optional[_Union[VehicleAction, _Mapping]] = ...) -> None: ...
 
 class VehicleAction(_message.Message):
-    __slots__ = ('getVehicleData', 'remoteStartDrive', 'createStreamSession', 'streamMessage', 'chargingSetLimitAction', 'chargingStartStopAction', 'drivingClearSpeedLimitPinAction', 'drivingSetSpeedLimitAction', 'drivingSpeedLimitAction', 'hvacAutoAction', 'hvacSetPreconditioningMaxAction', 'hvacSteeringWheelHeaterAction', 'hvacTemperatureAdjustmentAction', 'mediaPlayAction', 'mediaUpdateVolume', 'mediaNextFavorite', 'mediaPreviousFavorite', 'mediaNextTrack', 'mediaPreviousTrack', 'navigationRequest', 'navigationSuperchargerRequest', 'getNearbyChargingSites', 'uiSetUpcomingCalendarEntries', 'vehicleControlCancelSoftwareUpdateAction', 'vehicleControlFlashLightsAction', 'vehicleControlHonkHornAction', 'vehicleControlResetValetPinAction', 'vehicleControlScheduleSoftwareUpdateAction', 'vehicleControlSetSentryModeAction', 'vehicleControlSetValetModeAction', 'vehicleControlSunroofOpenCloseAction', 'vehicleControlTriggerHomelinkAction', 'vehicleControlWindowAction', 'hvacBioweaponModeAction', 'hvacSeatHeaterActions', 'vehicleDataSubscription', 'vehicleDataAck', 'vitalsSubscription', 'vitalsAck', 'scheduledChargingAction', 'scheduledDepartureAction', 'setChargingAmpsAction', 'hvacClimateKeeperAction', 'hvacRecirculationAction', 'ping', 'dashcamSaveClipAction', 'autoSeatClimateAction', 'hvacSeatCoolerActions', 'setCabinOverheatProtectionAction', 'piiKeyRequest', 'pseudonymSyncRequest', 'navigationGpsRequest', 'setVehicleNameAction', 'setRateTariffRequest', 'getRateTariffRequest', 'videoRequestAction', 'takeDrivenoteAction', 'chargePortDoorClose', 'chargePortDoorOpen', 'bluetoothClassicPairingRequest', 'boomboxAction', 'guestModeAction', 'setCopTempAction', 'addManagedChargingSiteRequest', 'removeManagedChargingSiteRequest', 'navigationRouteAction', 'autoStwHeatAction', 'stwHeatLevelAction', 'eraseUserDataAction', 'getManagedChargingSitesRequest', 'updateChargeOnSolarFeatureRequest', 'getChargeOnSolarFeatureRequest', 'vehicleControlSetPinToDriveAction', 'vehicleControlResetPinToDriveAction', 'drivingClearSpeedLimitPinAdminAction', 'setOutletsOnOffAction', 'setOutletTimerAction', 'setOutletSocLimitAction', 'setPowerFeedOnOffAction', 'setPowerFeedTimerAction', 'setPowerFeedSocLimitAction', 'setTrailerLightTestStartStopAction', 'setTruckBedLightAutoStateAction', 'setTruckBedLightBrightnessAction', 'vehicleControlResetPinToDriveAdminAction', 'navigationWaypointsRequest', 'setPowershareFeatureAction', 'setPowershareDischargeLimitAction', 'setPowershareRequestAction', 'setTentModeRequestAction', 'setFrontZoneLightRequestAction', 'setRearZoneLightRequestAction', 'addChargeScheduleAction', 'removeChargeScheduleAction', 'addPreconditionScheduleAction', 'removePreconditionScheduleAction', 'setLightbarBrightnessAction', 'setLightbarMiddleAction', 'setLightbarDitchAction', 'getMessagesAction', 'teslaAuthResponseAction', 'navigationGpsDestinationRequest', 'batchRemovePreconditionSchedulesAction', 'batchRemoveChargeSchedulesAction', 'parentalControlsClearPinAction', 'parentalControlsClearPinAdminAction', 'parentalControlsAction', 'parentalControlsEnableSettingsAction', 'parentalControlsSetSpeedLimitAction', 'cancelSohTestAction', 'stopLightShowAction', 'startLightShowAction', 'setSuspensionLevelAction', 'setDischargeLimitAction', 'setLowPowerModeAction', 'setTemperatureUnitAction', 'setDistanceUnitAction', 'setTimeDisplayFormatAction', 'setTirePressureUnitAction', 'setEnergyDisplayFormatAction', 'setKeepAccessoryPowerModeAction', 'setupCloudProfileWithLocalProfileUuidAction', 'getLocalProfilesForVaultUuidAction', 'fetchKeysInfoAction', 'deleteDashcamClipsAction', 'formatUsbAction', 'setUpkeepUsernameAction', 'bandwidthTest', 'setPhoneSettingPreferencesAction', 'cancelVehicleDataSubscription', 'prepareMobileUploadAction', 'putMobileUploadChunkAction', 'displayStateAction', 'drivingSetCruiseSpeedLimitAction', 'setDeckLightAction')
+    __slots__ = ("getVehicleData", "remoteStartDrive", "createStreamSession", "streamMessage", "chargingSetLimitAction", "chargingStartStopAction", "drivingClearSpeedLimitPinAction", "drivingSetSpeedLimitAction", "drivingSpeedLimitAction", "hvacAutoAction", "hvacSetPreconditioningMaxAction", "hvacSteeringWheelHeaterAction", "hvacTemperatureAdjustmentAction", "mediaPlayAction", "mediaUpdateVolume", "mediaNextFavorite", "mediaPreviousFavorite", "mediaNextTrack", "mediaPreviousTrack", "navigationRequest", "navigationSuperchargerRequest", "getNearbyChargingSites", "uiSetUpcomingCalendarEntries", "vehicleControlCancelSoftwareUpdateAction", "vehicleControlFlashLightsAction", "vehicleControlHonkHornAction", "vehicleControlResetValetPinAction", "vehicleControlScheduleSoftwareUpdateAction", "vehicleControlSetSentryModeAction", "vehicleControlSetValetModeAction", "vehicleControlSunroofOpenCloseAction", "vehicleControlTriggerHomelinkAction", "vehicleControlWindowAction", "hvacBioweaponModeAction", "hvacSeatHeaterActions", "vehicleDataSubscription", "vehicleDataAck", "vitalsSubscription", "vitalsAck", "scheduledChargingAction", "scheduledDepartureAction", "setChargingAmpsAction", "hvacClimateKeeperAction", "hvacRecirculationAction", "ping", "dashcamSaveClipAction", "autoSeatClimateAction", "hvacSeatCoolerActions", "setCabinOverheatProtectionAction", "piiKeyRequest", "pseudonymSyncRequest", "navigationGpsRequest", "setVehicleNameAction", "setRateTariffRequest", "getRateTariffRequest", "videoRequestAction", "takeDrivenoteAction", "chargePortDoorClose", "chargePortDoorOpen", "bluetoothClassicPairingRequest", "boomboxAction", "guestModeAction", "setCopTempAction", "addManagedChargingSiteRequest", "removeManagedChargingSiteRequest", "navigationRouteAction", "autoStwHeatAction", "stwHeatLevelAction", "eraseUserDataAction", "getManagedChargingSitesRequest", "updateChargeOnSolarFeatureRequest", "getChargeOnSolarFeatureRequest", "vehicleControlSetPinToDriveAction", "vehicleControlResetPinToDriveAction", "drivingClearSpeedLimitPinAdminAction", "setOutletsOnOffAction", "setOutletTimerAction", "setOutletSocLimitAction", "setPowerFeedOnOffAction", "setPowerFeedTimerAction", "setPowerFeedSocLimitAction", "setTrailerLightTestStartStopAction", "setTruckBedLightAutoStateAction", "setTruckBedLightBrightnessAction", "vehicleControlResetPinToDriveAdminAction", "navigationWaypointsRequest", "setPowershareFeatureAction", "setPowershareDischargeLimitAction", "setPowershareRequestAction", "setTentModeRequestAction", "setFrontZoneLightRequestAction", "setRearZoneLightRequestAction", "addChargeScheduleAction", "removeChargeScheduleAction", "addPreconditionScheduleAction", "removePreconditionScheduleAction", "setLightbarBrightnessAction", "setLightbarMiddleAction", "setLightbarDitchAction", "getMessagesAction", "teslaAuthResponseAction", "navigationGpsDestinationRequest", "batchRemovePreconditionSchedulesAction", "batchRemoveChargeSchedulesAction", "parentalControlsClearPinAction", "parentalControlsClearPinAdminAction", "parentalControlsAction", "parentalControlsEnableSettingsAction", "parentalControlsSetSpeedLimitAction", "cancelSohTestAction", "stopLightShowAction", "startLightShowAction", "setSuspensionLevelAction", "setDischargeLimitAction", "setLowPowerModeAction", "setTemperatureUnitAction", "setDistanceUnitAction", "setTimeDisplayFormatAction", "setTirePressureUnitAction", "setEnergyDisplayFormatAction", "setKeepAccessoryPowerModeAction", "setupCloudProfileWithLocalProfileUuidAction", "getLocalProfilesForVaultUuidAction", "fetchKeysInfoAction", "deleteDashcamClipsAction", "formatUsbAction", "setUpkeepUsernameAction", "bandwidthTest", "setPhoneSettingPreferencesAction", "cancelVehicleDataSubscription", "prepareMobileUploadAction", "putMobileUploadChunkAction", "displayStateAction", "drivingSetCruiseSpeedLimitAction", "setDeckLightAction")
     GETVEHICLEDATA_FIELD_NUMBER: _ClassVar[int]
     REMOTESTARTDRIVE_FIELD_NUMBER: _ClassVar[int]
     CREATESTREAMSESSION_FIELD_NUMBER: _ClassVar[int]
@@ -355,12 +355,10 @@ class VehicleAction(_message.Message):
     displayStateAction: DisplayStateAction
     drivingSetCruiseSpeedLimitAction: DrivingSetCruiseSpeedLimitAction
     setDeckLightAction: SetDeckLightAction
-
-    def __init__(self, getVehicleData: _Optional[_Union[GetVehicleData, _Mapping]]=..., remoteStartDrive: _Optional[_Union[RemoteStartDrive, _Mapping]]=..., createStreamSession: _Optional[_Union[CreateStreamSession, _Mapping]]=..., streamMessage: _Optional[_Union[StreamMessage, _Mapping]]=..., chargingSetLimitAction: _Optional[_Union[ChargingSetLimitAction, _Mapping]]=..., chargingStartStopAction: _Optional[_Union[ChargingStartStopAction, _Mapping]]=..., drivingClearSpeedLimitPinAction: _Optional[_Union[DrivingClearSpeedLimitPinAction, _Mapping]]=..., drivingSetSpeedLimitAction: _Optional[_Union[DrivingSetSpeedLimitAction, _Mapping]]=..., drivingSpeedLimitAction: _Optional[_Union[DrivingSpeedLimitAction, _Mapping]]=..., hvacAutoAction: _Optional[_Union[HvacAutoAction, _Mapping]]=..., hvacSetPreconditioningMaxAction: _Optional[_Union[HvacSetPreconditioningMaxAction, _Mapping]]=..., hvacSteeringWheelHeaterAction: _Optional[_Union[HvacSteeringWheelHeaterAction, _Mapping]]=..., hvacTemperatureAdjustmentAction: _Optional[_Union[HvacTemperatureAdjustmentAction, _Mapping]]=..., mediaPlayAction: _Optional[_Union[MediaPlayAction, _Mapping]]=..., mediaUpdateVolume: _Optional[_Union[MediaUpdateVolume, _Mapping]]=..., mediaNextFavorite: _Optional[_Union[MediaNextFavorite, _Mapping]]=..., mediaPreviousFavorite: _Optional[_Union[MediaPreviousFavorite, _Mapping]]=..., mediaNextTrack: _Optional[_Union[MediaNextTrack, _Mapping]]=..., mediaPreviousTrack: _Optional[_Union[MediaPreviousTrack, _Mapping]]=..., navigationRequest: _Optional[_Union[NavigationRequest, _Mapping]]=..., navigationSuperchargerRequest: _Optional[_Union[NavigationSuperchargerRequest, _Mapping]]=..., getNearbyChargingSites: _Optional[_Union[GetNearbyChargingSites, _Mapping]]=..., uiSetUpcomingCalendarEntries: _Optional[_Union[UiSetUpcomingCalendarEntries, _Mapping]]=..., vehicleControlCancelSoftwareUpdateAction: _Optional[_Union[VehicleControlCancelSoftwareUpdateAction, _Mapping]]=..., vehicleControlFlashLightsAction: _Optional[_Union[VehicleControlFlashLightsAction, _Mapping]]=..., vehicleControlHonkHornAction: _Optional[_Union[VehicleControlHonkHornAction, _Mapping]]=..., vehicleControlResetValetPinAction: _Optional[_Union[VehicleControlResetValetPinAction, _Mapping]]=..., vehicleControlScheduleSoftwareUpdateAction: _Optional[_Union[VehicleControlScheduleSoftwareUpdateAction, _Mapping]]=..., vehicleControlSetSentryModeAction: _Optional[_Union[VehicleControlSetSentryModeAction, _Mapping]]=..., vehicleControlSetValetModeAction: _Optional[_Union[VehicleControlSetValetModeAction, _Mapping]]=..., vehicleControlSunroofOpenCloseAction: _Optional[_Union[VehicleControlSunroofOpenCloseAction, _Mapping]]=..., vehicleControlTriggerHomelinkAction: _Optional[_Union[VehicleControlTriggerHomelinkAction, _Mapping]]=..., vehicleControlWindowAction: _Optional[_Union[VehicleControlWindowAction, _Mapping]]=..., hvacBioweaponModeAction: _Optional[_Union[HvacBioweaponModeAction, _Mapping]]=..., hvacSeatHeaterActions: _Optional[_Union[HvacSeatHeaterActions, _Mapping]]=..., vehicleDataSubscription: _Optional[_Union[VehicleDataSubscription, _Mapping]]=..., vehicleDataAck: _Optional[_Union[VehicleDataAck, _Mapping]]=..., vitalsSubscription: _Optional[_Union[VitalsSubscription, _Mapping]]=..., vitalsAck: _Optional[_Union[VitalsAck, _Mapping]]=..., scheduledChargingAction: _Optional[_Union[ScheduledChargingAction, _Mapping]]=..., scheduledDepartureAction: _Optional[_Union[ScheduledDepartureAction, _Mapping]]=..., setChargingAmpsAction: _Optional[_Union[SetChargingAmpsAction, _Mapping]]=..., hvacClimateKeeperAction: _Optional[_Union[HvacClimateKeeperAction, _Mapping]]=..., hvacRecirculationAction: _Optional[_Union[HvacRecirculationAction, _Mapping]]=..., ping: _Optional[_Union[Ping, _Mapping]]=..., dashcamSaveClipAction: _Optional[_Union[DashcamSaveClipAction, _Mapping]]=..., autoSeatClimateAction: _Optional[_Union[AutoSeatClimateAction, _Mapping]]=..., hvacSeatCoolerActions: _Optional[_Union[HvacSeatCoolerActions, _Mapping]]=..., setCabinOverheatProtectionAction: _Optional[_Union[SetCabinOverheatProtectionAction, _Mapping]]=..., piiKeyRequest: _Optional[_Union[PiiKeyRequest, _Mapping]]=..., pseudonymSyncRequest: _Optional[_Union[PseudonymSyncRequest, _Mapping]]=..., navigationGpsRequest: _Optional[_Union[NavigationGpsRequest, _Mapping]]=..., setVehicleNameAction: _Optional[_Union[SetVehicleNameAction, _Mapping]]=..., setRateTariffRequest: _Optional[_Union[SetRateTariffRequest, _Mapping]]=..., getRateTariffRequest: _Optional[_Union[GetRateTariffRequest, _Mapping]]=..., videoRequestAction: _Optional[_Union[VideoRequestAction, _Mapping]]=..., takeDrivenoteAction: _Optional[_Union[TakeDrivenoteAction, _Mapping]]=..., chargePortDoorClose: _Optional[_Union[ChargePortDoorClose, _Mapping]]=..., chargePortDoorOpen: _Optional[_Union[ChargePortDoorOpen, _Mapping]]=..., bluetoothClassicPairingRequest: _Optional[_Union[BluetoothClassicPairingRequest, _Mapping]]=..., boomboxAction: _Optional[_Union[BoomboxAction, _Mapping]]=..., guestModeAction: _Optional[_Union[_vehicle_pb2.VehicleState.GuestMode, _Mapping]]=..., setCopTempAction: _Optional[_Union[SetCopTempAction, _Mapping]]=..., addManagedChargingSiteRequest: _Optional[_Union[AddManagedChargingSiteRequest, _Mapping]]=..., removeManagedChargingSiteRequest: _Optional[_Union[RemoveManagedChargingSiteRequest, _Mapping]]=..., navigationRouteAction: _Optional[_Union[NavigationRouteAction, _Mapping]]=..., autoStwHeatAction: _Optional[_Union[AutoStwHeatAction, _Mapping]]=..., stwHeatLevelAction: _Optional[_Union[StwHeatLevelAction, _Mapping]]=..., eraseUserDataAction: _Optional[_Union[EraseUserDataAction, _Mapping]]=..., getManagedChargingSitesRequest: _Optional[_Union[GetManagedChargingSitesRequest, _Mapping]]=..., updateChargeOnSolarFeatureRequest: _Optional[_Union[UpdateChargeOnSolarFeatureRequest, _Mapping]]=..., getChargeOnSolarFeatureRequest: _Optional[_Union[GetChargeOnSolarFeatureRequest, _Mapping]]=..., vehicleControlSetPinToDriveAction: _Optional[_Union[VehicleControlSetPinToDriveAction, _Mapping]]=..., vehicleControlResetPinToDriveAction: _Optional[_Union[VehicleControlResetPinToDriveAction, _Mapping]]=..., drivingClearSpeedLimitPinAdminAction: _Optional[_Union[DrivingClearSpeedLimitPinAdminAction, _Mapping]]=..., setOutletsOnOffAction: _Optional[_Union[SetOutletsOnOffAction, _Mapping]]=..., setOutletTimerAction: _Optional[_Union[SetOutletTimerAction, _Mapping]]=..., setOutletSocLimitAction: _Optional[_Union[SetOutletSocLimitAction, _Mapping]]=..., setPowerFeedOnOffAction: _Optional[_Union[SetPowerFeedOnOffAction, _Mapping]]=..., setPowerFeedTimerAction: _Optional[_Union[SetPowerFeedTimerAction, _Mapping]]=..., setPowerFeedSocLimitAction: _Optional[_Union[SetPowerFeedSocLimitAction, _Mapping]]=..., setTrailerLightTestStartStopAction: _Optional[_Union[SetTrailerLightTestStartStopAction, _Mapping]]=..., setTruckBedLightAutoStateAction: _Optional[_Union[SetTruckBedLightAutoStateAction, _Mapping]]=..., setTruckBedLightBrightnessAction: _Optional[_Union[SetTruckBedLightBrightnessAction, _Mapping]]=..., vehicleControlResetPinToDriveAdminAction: _Optional[_Union[VehicleControlResetPinToDriveAdminAction, _Mapping]]=..., navigationWaypointsRequest: _Optional[_Union[NavigationWaypointsRequest, _Mapping]]=..., setPowershareFeatureAction: _Optional[_Union[SetPowershareFeatureAction, _Mapping]]=..., setPowershareDischargeLimitAction: _Optional[_Union[SetPowershareDischargeLimitAction, _Mapping]]=..., setPowershareRequestAction: _Optional[_Union[SetPowershareRequestAction, _Mapping]]=..., setTentModeRequestAction: _Optional[_Union[SetTentModeRequestAction, _Mapping]]=..., setFrontZoneLightRequestAction: _Optional[_Union[SetZoneLightRequestAction, _Mapping]]=..., setRearZoneLightRequestAction: _Optional[_Union[SetZoneLightRequestAction, _Mapping]]=..., addChargeScheduleAction: _Optional[_Union[_common_pb2.ChargeSchedule, _Mapping]]=..., removeChargeScheduleAction: _Optional[_Union[RemoveChargeScheduleAction, _Mapping]]=..., addPreconditionScheduleAction: _Optional[_Union[_common_pb2.PreconditionSchedule, _Mapping]]=..., removePreconditionScheduleAction: _Optional[_Union[RemovePreconditionScheduleAction, _Mapping]]=..., setLightbarBrightnessAction: _Optional[_Union[SetLightbarBrightnessAction, _Mapping]]=..., setLightbarMiddleAction: _Optional[_Union[SetLightbarMiddleAction, _Mapping]]=..., setLightbarDitchAction: _Optional[_Union[SetLightbarDitchAction, _Mapping]]=..., getMessagesAction: _Optional[_Union[GetMessagesAction, _Mapping]]=..., teslaAuthResponseAction: _Optional[_Union[TeslaAuthResponseAction, _Mapping]]=..., navigationGpsDestinationRequest: _Optional[_Union[NavigationGpsDestinationRequest, _Mapping]]=..., batchRemovePreconditionSchedulesAction: _Optional[_Union[BatchRemovePreconditionSchedulesAction, _Mapping]]=..., batchRemoveChargeSchedulesAction: _Optional[_Union[BatchRemoveChargeSchedulesAction, _Mapping]]=..., parentalControlsClearPinAction: _Optional[_Union[ParentalControlsClearPinAction, _Mapping]]=..., parentalControlsClearPinAdminAction: _Optional[_Union[ParentalControlsClearPinAdminAction, _Mapping]]=..., parentalControlsAction: _Optional[_Union[ParentalControlsAction, _Mapping]]=..., parentalControlsEnableSettingsAction: _Optional[_Union[ParentalControlsEnableSettingsAction, _Mapping]]=..., parentalControlsSetSpeedLimitAction: _Optional[_Union[ParentalControlsSetSpeedLimitAction, _Mapping]]=..., cancelSohTestAction: _Optional[_Union[CancelSohTestAction, _Mapping]]=..., stopLightShowAction: _Optional[_Union[StopLightShowAction, _Mapping]]=..., startLightShowAction: _Optional[_Union[StartLightShowAction, _Mapping]]=..., setSuspensionLevelAction: _Optional[_Union[SetSuspensionLevelAction, _Mapping]]=..., setDischargeLimitAction: _Optional[_Union[SetDischargeLimitAction, _Mapping]]=..., setLowPowerModeAction: _Optional[_Union[SetLowPowerModeAction, _Mapping]]=..., setTemperatureUnitAction: _Optional[_Union[SetTemperatureUnitAction, _Mapping]]=..., setDistanceUnitAction: _Optional[_Union[SetDistanceUnitAction, _Mapping]]=..., setTimeDisplayFormatAction: _Optional[_Union[SetTimeDisplayFormatAction, _Mapping]]=..., setTirePressureUnitAction: _Optional[_Union[SetTirePressureUnitAction, _Mapping]]=..., setEnergyDisplayFormatAction: _Optional[_Union[SetEnergyDisplayFormatAction, _Mapping]]=..., setKeepAccessoryPowerModeAction: _Optional[_Union[SetKeepAccessoryPowerModeAction, _Mapping]]=..., setupCloudProfileWithLocalProfileUuidAction: _Optional[_Union[SetupCloudProfileWithLocalProfileUuidAction, _Mapping]]=..., getLocalProfilesForVaultUuidAction: _Optional[_Union[GetLocalProfilesForVaultUuidAction, _Mapping]]=..., fetchKeysInfoAction: _Optional[_Union[FetchKeysInfoAction, _Mapping]]=..., deleteDashcamClipsAction: _Optional[_Union[DeleteDashcamClipsAction, _Mapping]]=..., formatUsbAction: _Optional[_Union[FormatUSBAction, _Mapping]]=..., setUpkeepUsernameAction: _Optional[_Union[SetUpkeepUsernameAction, _Mapping]]=..., bandwidthTest: _Optional[_Union[BandwidthTest, _Mapping]]=..., setPhoneSettingPreferencesAction: _Optional[_Union[SetPhoneSettingPreferencesAction, _Mapping]]=..., cancelVehicleDataSubscription: _Optional[_Union[CancelVehicleDataSubscription, _Mapping]]=..., prepareMobileUploadAction: _Optional[_Union[PrepareMobileUploadAction, _Mapping]]=..., putMobileUploadChunkAction: _Optional[_Union[PutMobileUploadChunkAction, _Mapping]]=..., displayStateAction: _Optional[_Union[DisplayStateAction, _Mapping]]=..., drivingSetCruiseSpeedLimitAction: _Optional[_Union[DrivingSetCruiseSpeedLimitAction, _Mapping]]=..., setDeckLightAction: _Optional[_Union[SetDeckLightAction, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, getVehicleData: _Optional[_Union[GetVehicleData, _Mapping]] = ..., remoteStartDrive: _Optional[_Union[RemoteStartDrive, _Mapping]] = ..., createStreamSession: _Optional[_Union[CreateStreamSession, _Mapping]] = ..., streamMessage: _Optional[_Union[StreamMessage, _Mapping]] = ..., chargingSetLimitAction: _Optional[_Union[ChargingSetLimitAction, _Mapping]] = ..., chargingStartStopAction: _Optional[_Union[ChargingStartStopAction, _Mapping]] = ..., drivingClearSpeedLimitPinAction: _Optional[_Union[DrivingClearSpeedLimitPinAction, _Mapping]] = ..., drivingSetSpeedLimitAction: _Optional[_Union[DrivingSetSpeedLimitAction, _Mapping]] = ..., drivingSpeedLimitAction: _Optional[_Union[DrivingSpeedLimitAction, _Mapping]] = ..., hvacAutoAction: _Optional[_Union[HvacAutoAction, _Mapping]] = ..., hvacSetPreconditioningMaxAction: _Optional[_Union[HvacSetPreconditioningMaxAction, _Mapping]] = ..., hvacSteeringWheelHeaterAction: _Optional[_Union[HvacSteeringWheelHeaterAction, _Mapping]] = ..., hvacTemperatureAdjustmentAction: _Optional[_Union[HvacTemperatureAdjustmentAction, _Mapping]] = ..., mediaPlayAction: _Optional[_Union[MediaPlayAction, _Mapping]] = ..., mediaUpdateVolume: _Optional[_Union[MediaUpdateVolume, _Mapping]] = ..., mediaNextFavorite: _Optional[_Union[MediaNextFavorite, _Mapping]] = ..., mediaPreviousFavorite: _Optional[_Union[MediaPreviousFavorite, _Mapping]] = ..., mediaNextTrack: _Optional[_Union[MediaNextTrack, _Mapping]] = ..., mediaPreviousTrack: _Optional[_Union[MediaPreviousTrack, _Mapping]] = ..., navigationRequest: _Optional[_Union[NavigationRequest, _Mapping]] = ..., navigationSuperchargerRequest: _Optional[_Union[NavigationSuperchargerRequest, _Mapping]] = ..., getNearbyChargingSites: _Optional[_Union[GetNearbyChargingSites, _Mapping]] = ..., uiSetUpcomingCalendarEntries: _Optional[_Union[UiSetUpcomingCalendarEntries, _Mapping]] = ..., vehicleControlCancelSoftwareUpdateAction: _Optional[_Union[VehicleControlCancelSoftwareUpdateAction, _Mapping]] = ..., vehicleControlFlashLightsAction: _Optional[_Union[VehicleControlFlashLightsAction, _Mapping]] = ..., vehicleControlHonkHornAction: _Optional[_Union[VehicleControlHonkHornAction, _Mapping]] = ..., vehicleControlResetValetPinAction: _Optional[_Union[VehicleControlResetValetPinAction, _Mapping]] = ..., vehicleControlScheduleSoftwareUpdateAction: _Optional[_Union[VehicleControlScheduleSoftwareUpdateAction, _Mapping]] = ..., vehicleControlSetSentryModeAction: _Optional[_Union[VehicleControlSetSentryModeAction, _Mapping]] = ..., vehicleControlSetValetModeAction: _Optional[_Union[VehicleControlSetValetModeAction, _Mapping]] = ..., vehicleControlSunroofOpenCloseAction: _Optional[_Union[VehicleControlSunroofOpenCloseAction, _Mapping]] = ..., vehicleControlTriggerHomelinkAction: _Optional[_Union[VehicleControlTriggerHomelinkAction, _Mapping]] = ..., vehicleControlWindowAction: _Optional[_Union[VehicleControlWindowAction, _Mapping]] = ..., hvacBioweaponModeAction: _Optional[_Union[HvacBioweaponModeAction, _Mapping]] = ..., hvacSeatHeaterActions: _Optional[_Union[HvacSeatHeaterActions, _Mapping]] = ..., vehicleDataSubscription: _Optional[_Union[VehicleDataSubscription, _Mapping]] = ..., vehicleDataAck: _Optional[_Union[VehicleDataAck, _Mapping]] = ..., vitalsSubscription: _Optional[_Union[VitalsSubscription, _Mapping]] = ..., vitalsAck: _Optional[_Union[VitalsAck, _Mapping]] = ..., scheduledChargingAction: _Optional[_Union[ScheduledChargingAction, _Mapping]] = ..., scheduledDepartureAction: _Optional[_Union[ScheduledDepartureAction, _Mapping]] = ..., setChargingAmpsAction: _Optional[_Union[SetChargingAmpsAction, _Mapping]] = ..., hvacClimateKeeperAction: _Optional[_Union[HvacClimateKeeperAction, _Mapping]] = ..., hvacRecirculationAction: _Optional[_Union[HvacRecirculationAction, _Mapping]] = ..., ping: _Optional[_Union[Ping, _Mapping]] = ..., dashcamSaveClipAction: _Optional[_Union[DashcamSaveClipAction, _Mapping]] = ..., autoSeatClimateAction: _Optional[_Union[AutoSeatClimateAction, _Mapping]] = ..., hvacSeatCoolerActions: _Optional[_Union[HvacSeatCoolerActions, _Mapping]] = ..., setCabinOverheatProtectionAction: _Optional[_Union[SetCabinOverheatProtectionAction, _Mapping]] = ..., piiKeyRequest: _Optional[_Union[PiiKeyRequest, _Mapping]] = ..., pseudonymSyncRequest: _Optional[_Union[PseudonymSyncRequest, _Mapping]] = ..., navigationGpsRequest: _Optional[_Union[NavigationGpsRequest, _Mapping]] = ..., setVehicleNameAction: _Optional[_Union[SetVehicleNameAction, _Mapping]] = ..., setRateTariffRequest: _Optional[_Union[SetRateTariffRequest, _Mapping]] = ..., getRateTariffRequest: _Optional[_Union[GetRateTariffRequest, _Mapping]] = ..., videoRequestAction: _Optional[_Union[VideoRequestAction, _Mapping]] = ..., takeDrivenoteAction: _Optional[_Union[TakeDrivenoteAction, _Mapping]] = ..., chargePortDoorClose: _Optional[_Union[ChargePortDoorClose, _Mapping]] = ..., chargePortDoorOpen: _Optional[_Union[ChargePortDoorOpen, _Mapping]] = ..., bluetoothClassicPairingRequest: _Optional[_Union[BluetoothClassicPairingRequest, _Mapping]] = ..., boomboxAction: _Optional[_Union[BoomboxAction, _Mapping]] = ..., guestModeAction: _Optional[_Union[_vehicle_pb2.VehicleState.GuestMode, _Mapping]] = ..., setCopTempAction: _Optional[_Union[SetCopTempAction, _Mapping]] = ..., addManagedChargingSiteRequest: _Optional[_Union[AddManagedChargingSiteRequest, _Mapping]] = ..., removeManagedChargingSiteRequest: _Optional[_Union[RemoveManagedChargingSiteRequest, _Mapping]] = ..., navigationRouteAction: _Optional[_Union[NavigationRouteAction, _Mapping]] = ..., autoStwHeatAction: _Optional[_Union[AutoStwHeatAction, _Mapping]] = ..., stwHeatLevelAction: _Optional[_Union[StwHeatLevelAction, _Mapping]] = ..., eraseUserDataAction: _Optional[_Union[EraseUserDataAction, _Mapping]] = ..., getManagedChargingSitesRequest: _Optional[_Union[GetManagedChargingSitesRequest, _Mapping]] = ..., updateChargeOnSolarFeatureRequest: _Optional[_Union[UpdateChargeOnSolarFeatureRequest, _Mapping]] = ..., getChargeOnSolarFeatureRequest: _Optional[_Union[GetChargeOnSolarFeatureRequest, _Mapping]] = ..., vehicleControlSetPinToDriveAction: _Optional[_Union[VehicleControlSetPinToDriveAction, _Mapping]] = ..., vehicleControlResetPinToDriveAction: _Optional[_Union[VehicleControlResetPinToDriveAction, _Mapping]] = ..., drivingClearSpeedLimitPinAdminAction: _Optional[_Union[DrivingClearSpeedLimitPinAdminAction, _Mapping]] = ..., setOutletsOnOffAction: _Optional[_Union[SetOutletsOnOffAction, _Mapping]] = ..., setOutletTimerAction: _Optional[_Union[SetOutletTimerAction, _Mapping]] = ..., setOutletSocLimitAction: _Optional[_Union[SetOutletSocLimitAction, _Mapping]] = ..., setPowerFeedOnOffAction: _Optional[_Union[SetPowerFeedOnOffAction, _Mapping]] = ..., setPowerFeedTimerAction: _Optional[_Union[SetPowerFeedTimerAction, _Mapping]] = ..., setPowerFeedSocLimitAction: _Optional[_Union[SetPowerFeedSocLimitAction, _Mapping]] = ..., setTrailerLightTestStartStopAction: _Optional[_Union[SetTrailerLightTestStartStopAction, _Mapping]] = ..., setTruckBedLightAutoStateAction: _Optional[_Union[SetTruckBedLightAutoStateAction, _Mapping]] = ..., setTruckBedLightBrightnessAction: _Optional[_Union[SetTruckBedLightBrightnessAction, _Mapping]] = ..., vehicleControlResetPinToDriveAdminAction: _Optional[_Union[VehicleControlResetPinToDriveAdminAction, _Mapping]] = ..., navigationWaypointsRequest: _Optional[_Union[NavigationWaypointsRequest, _Mapping]] = ..., setPowershareFeatureAction: _Optional[_Union[SetPowershareFeatureAction, _Mapping]] = ..., setPowershareDischargeLimitAction: _Optional[_Union[SetPowershareDischargeLimitAction, _Mapping]] = ..., setPowershareRequestAction: _Optional[_Union[SetPowershareRequestAction, _Mapping]] = ..., setTentModeRequestAction: _Optional[_Union[SetTentModeRequestAction, _Mapping]] = ..., setFrontZoneLightRequestAction: _Optional[_Union[SetZoneLightRequestAction, _Mapping]] = ..., setRearZoneLightRequestAction: _Optional[_Union[SetZoneLightRequestAction, _Mapping]] = ..., addChargeScheduleAction: _Optional[_Union[_common_pb2.ChargeSchedule, _Mapping]] = ..., removeChargeScheduleAction: _Optional[_Union[RemoveChargeScheduleAction, _Mapping]] = ..., addPreconditionScheduleAction: _Optional[_Union[_common_pb2.PreconditionSchedule, _Mapping]] = ..., removePreconditionScheduleAction: _Optional[_Union[RemovePreconditionScheduleAction, _Mapping]] = ..., setLightbarBrightnessAction: _Optional[_Union[SetLightbarBrightnessAction, _Mapping]] = ..., setLightbarMiddleAction: _Optional[_Union[SetLightbarMiddleAction, _Mapping]] = ..., setLightbarDitchAction: _Optional[_Union[SetLightbarDitchAction, _Mapping]] = ..., getMessagesAction: _Optional[_Union[GetMessagesAction, _Mapping]] = ..., teslaAuthResponseAction: _Optional[_Union[TeslaAuthResponseAction, _Mapping]] = ..., navigationGpsDestinationRequest: _Optional[_Union[NavigationGpsDestinationRequest, _Mapping]] = ..., batchRemovePreconditionSchedulesAction: _Optional[_Union[BatchRemovePreconditionSchedulesAction, _Mapping]] = ..., batchRemoveChargeSchedulesAction: _Optional[_Union[BatchRemoveChargeSchedulesAction, _Mapping]] = ..., parentalControlsClearPinAction: _Optional[_Union[ParentalControlsClearPinAction, _Mapping]] = ..., parentalControlsClearPinAdminAction: _Optional[_Union[ParentalControlsClearPinAdminAction, _Mapping]] = ..., parentalControlsAction: _Optional[_Union[ParentalControlsAction, _Mapping]] = ..., parentalControlsEnableSettingsAction: _Optional[_Union[ParentalControlsEnableSettingsAction, _Mapping]] = ..., parentalControlsSetSpeedLimitAction: _Optional[_Union[ParentalControlsSetSpeedLimitAction, _Mapping]] = ..., cancelSohTestAction: _Optional[_Union[CancelSohTestAction, _Mapping]] = ..., stopLightShowAction: _Optional[_Union[StopLightShowAction, _Mapping]] = ..., startLightShowAction: _Optional[_Union[StartLightShowAction, _Mapping]] = ..., setSuspensionLevelAction: _Optional[_Union[SetSuspensionLevelAction, _Mapping]] = ..., setDischargeLimitAction: _Optional[_Union[SetDischargeLimitAction, _Mapping]] = ..., setLowPowerModeAction: _Optional[_Union[SetLowPowerModeAction, _Mapping]] = ..., setTemperatureUnitAction: _Optional[_Union[SetTemperatureUnitAction, _Mapping]] = ..., setDistanceUnitAction: _Optional[_Union[SetDistanceUnitAction, _Mapping]] = ..., setTimeDisplayFormatAction: _Optional[_Union[SetTimeDisplayFormatAction, _Mapping]] = ..., setTirePressureUnitAction: _Optional[_Union[SetTirePressureUnitAction, _Mapping]] = ..., setEnergyDisplayFormatAction: _Optional[_Union[SetEnergyDisplayFormatAction, _Mapping]] = ..., setKeepAccessoryPowerModeAction: _Optional[_Union[SetKeepAccessoryPowerModeAction, _Mapping]] = ..., setupCloudProfileWithLocalProfileUuidAction: _Optional[_Union[SetupCloudProfileWithLocalProfileUuidAction, _Mapping]] = ..., getLocalProfilesForVaultUuidAction: _Optional[_Union[GetLocalProfilesForVaultUuidAction, _Mapping]] = ..., fetchKeysInfoAction: _Optional[_Union[FetchKeysInfoAction, _Mapping]] = ..., deleteDashcamClipsAction: _Optional[_Union[DeleteDashcamClipsAction, _Mapping]] = ..., formatUsbAction: _Optional[_Union[FormatUSBAction, _Mapping]] = ..., setUpkeepUsernameAction: _Optional[_Union[SetUpkeepUsernameAction, _Mapping]] = ..., bandwidthTest: _Optional[_Union[BandwidthTest, _Mapping]] = ..., setPhoneSettingPreferencesAction: _Optional[_Union[SetPhoneSettingPreferencesAction, _Mapping]] = ..., cancelVehicleDataSubscription: _Optional[_Union[CancelVehicleDataSubscription, _Mapping]] = ..., prepareMobileUploadAction: _Optional[_Union[PrepareMobileUploadAction, _Mapping]] = ..., putMobileUploadChunkAction: _Optional[_Union[PutMobileUploadChunkAction, _Mapping]] = ..., displayStateAction: _Optional[_Union[DisplayStateAction, _Mapping]] = ..., drivingSetCruiseSpeedLimitAction: _Optional[_Union[DrivingSetCruiseSpeedLimitAction, _Mapping]] = ..., setDeckLightAction: _Optional[_Union[SetDeckLightAction, _Mapping]] = ...) -> None: ...
 
 class GetVehicleData(_message.Message):
-    __slots__ = ('getGuiSettings', 'getChargeState', 'getClimateState', 'getDriveState', 'getLegacyVehicleState', 'getVehicleConfig', 'getLocationState', 'getClosuresState', 'getParkedAccessoryState', 'getChargeScheduleState', 'getPreconditioningScheduleState', 'getSohState', 'getVehicleDetailState', 'getTirePressureState', 'getMediaState', 'getMediaDetailState', 'getSoftwareUpdateState', 'getVehicleState', 'getParentalControlsState', 'getAlertState', 'getLightShowState', 'getVehicleImageState', 'getSuspensionState', 'getChildPresenceDetectionState', 'getDisplayState')
+    __slots__ = ("getGuiSettings", "getChargeState", "getClimateState", "getDriveState", "getLegacyVehicleState", "getVehicleConfig", "getLocationState", "getClosuresState", "getParkedAccessoryState", "getChargeScheduleState", "getPreconditioningScheduleState", "getSohState", "getVehicleDetailState", "getTirePressureState", "getMediaState", "getMediaDetailState", "getSoftwareUpdateState", "getVehicleState", "getParentalControlsState", "getAlertState", "getLightShowState", "getVehicleImageState", "getSuspensionState", "getChildPresenceDetectionState", "getDisplayState")
     GETGUISETTINGS_FIELD_NUMBER: _ClassVar[int]
     GETCHARGESTATE_FIELD_NUMBER: _ClassVar[int]
     GETCLIMATESTATE_FIELD_NUMBER: _ClassVar[int]
@@ -411,103 +409,72 @@ class GetVehicleData(_message.Message):
     getSuspensionState: GetSuspensionState
     getChildPresenceDetectionState: GetChildPresenceDetectionState
     getDisplayState: GetDisplayState
-
-    def __init__(self, getGuiSettings: _Optional[_Union[GetGuiSettings, _Mapping]]=..., getChargeState: _Optional[_Union[GetChargeState, _Mapping]]=..., getClimateState: _Optional[_Union[GetClimateState, _Mapping]]=..., getDriveState: _Optional[_Union[GetDriveState, _Mapping]]=..., getLegacyVehicleState: _Optional[_Union[GetLegacyVehicleState, _Mapping]]=..., getVehicleConfig: _Optional[_Union[GetVehicleConfig, _Mapping]]=..., getLocationState: _Optional[_Union[GetLocationState, _Mapping]]=..., getClosuresState: _Optional[_Union[GetClosuresState, _Mapping]]=..., getParkedAccessoryState: _Optional[_Union[GetParkedAccessoryState, _Mapping]]=..., getChargeScheduleState: _Optional[_Union[GetChargeScheduleState, _Mapping]]=..., getPreconditioningScheduleState: _Optional[_Union[GetPreconditioningScheduleState, _Mapping]]=..., getSohState: _Optional[_Union[GetSohState, _Mapping]]=..., getVehicleDetailState: _Optional[_Union[GetVehicleDetailState, _Mapping]]=..., getTirePressureState: _Optional[_Union[GetTirePressureState, _Mapping]]=..., getMediaState: _Optional[_Union[GetMediaState, _Mapping]]=..., getMediaDetailState: _Optional[_Union[GetMediaDetailState, _Mapping]]=..., getSoftwareUpdateState: _Optional[_Union[GetSoftwareUpdateState, _Mapping]]=..., getVehicleState: _Optional[_Union[GetVehicleState, _Mapping]]=..., getParentalControlsState: _Optional[_Union[GetParentalControlsState, _Mapping]]=..., getAlertState: _Optional[_Union[GetAlertState, _Mapping]]=..., getLightShowState: _Optional[_Union[GetLightShowState, _Mapping]]=..., getVehicleImageState: _Optional[_Union[GetVehicleImageState, _Mapping]]=..., getSuspensionState: _Optional[_Union[GetSuspensionState, _Mapping]]=..., getChildPresenceDetectionState: _Optional[_Union[GetChildPresenceDetectionState, _Mapping]]=..., getDisplayState: _Optional[_Union[GetDisplayState, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, getGuiSettings: _Optional[_Union[GetGuiSettings, _Mapping]] = ..., getChargeState: _Optional[_Union[GetChargeState, _Mapping]] = ..., getClimateState: _Optional[_Union[GetClimateState, _Mapping]] = ..., getDriveState: _Optional[_Union[GetDriveState, _Mapping]] = ..., getLegacyVehicleState: _Optional[_Union[GetLegacyVehicleState, _Mapping]] = ..., getVehicleConfig: _Optional[_Union[GetVehicleConfig, _Mapping]] = ..., getLocationState: _Optional[_Union[GetLocationState, _Mapping]] = ..., getClosuresState: _Optional[_Union[GetClosuresState, _Mapping]] = ..., getParkedAccessoryState: _Optional[_Union[GetParkedAccessoryState, _Mapping]] = ..., getChargeScheduleState: _Optional[_Union[GetChargeScheduleState, _Mapping]] = ..., getPreconditioningScheduleState: _Optional[_Union[GetPreconditioningScheduleState, _Mapping]] = ..., getSohState: _Optional[_Union[GetSohState, _Mapping]] = ..., getVehicleDetailState: _Optional[_Union[GetVehicleDetailState, _Mapping]] = ..., getTirePressureState: _Optional[_Union[GetTirePressureState, _Mapping]] = ..., getMediaState: _Optional[_Union[GetMediaState, _Mapping]] = ..., getMediaDetailState: _Optional[_Union[GetMediaDetailState, _Mapping]] = ..., getSoftwareUpdateState: _Optional[_Union[GetSoftwareUpdateState, _Mapping]] = ..., getVehicleState: _Optional[_Union[GetVehicleState, _Mapping]] = ..., getParentalControlsState: _Optional[_Union[GetParentalControlsState, _Mapping]] = ..., getAlertState: _Optional[_Union[GetAlertState, _Mapping]] = ..., getLightShowState: _Optional[_Union[GetLightShowState, _Mapping]] = ..., getVehicleImageState: _Optional[_Union[GetVehicleImageState, _Mapping]] = ..., getSuspensionState: _Optional[_Union[GetSuspensionState, _Mapping]] = ..., getChildPresenceDetectionState: _Optional[_Union[GetChildPresenceDetectionState, _Mapping]] = ..., getDisplayState: _Optional[_Union[GetDisplayState, _Mapping]] = ...) -> None: ...
 
 class GetGuiSettings(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetLegacyVehicleState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetVehicleConfig(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetSohState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetVehicleDetailState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetParkedAccessoryState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetVehicleState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetAlertState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetLightShowState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetVehicleImageState(_message.Message):
-    __slots__ = ('imageRequests',)
+    __slots__ = ("imageRequests",)
     IMAGEREQUESTS_FIELD_NUMBER: _ClassVar[int]
     imageRequests: _containers.RepeatedCompositeFieldContainer[VehicleImageRequest]
-
-    def __init__(self, imageRequests: _Optional[_Iterable[_Union[VehicleImageRequest, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, imageRequests: _Optional[_Iterable[_Union[VehicleImageRequest, _Mapping]]] = ...) -> None: ...
 
 class GetSuspensionState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetChildPresenceDetectionState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetDisplayState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class VehicleImageDataChunkRequest(_message.Message):
-    __slots__ = ('chunk_offset', 'chunk_size')
+    __slots__ = ("chunk_offset", "chunk_size")
     CHUNK_OFFSET_FIELD_NUMBER: _ClassVar[int]
     CHUNK_SIZE_FIELD_NUMBER: _ClassVar[int]
     chunk_offset: int
     chunk_size: int
-
-    def __init__(self, chunk_offset: _Optional[int]=..., chunk_size: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, chunk_offset: _Optional[int] = ..., chunk_size: _Optional[int] = ...) -> None: ...
 
 class VehicleImageRequest(_message.Message):
-    __slots__ = ('dataType', 'imageType', 'chunkRequest')
-
+    __slots__ = ("dataType", "imageType", "chunkRequest")
     class Type(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         ID: _ClassVar[VehicleImageRequest.Type]
@@ -520,12 +487,10 @@ class VehicleImageRequest(_message.Message):
     dataType: VehicleImageRequest.Type
     imageType: _vehicle_pb2.VehicleImageStateType
     chunkRequest: VehicleImageDataChunkRequest
-
-    def __init__(self, dataType: _Optional[_Union[VehicleImageRequest.Type, str]]=..., imageType: _Optional[_Union[_vehicle_pb2.VehicleImageStateType, str]]=..., chunkRequest: _Optional[_Union[VehicleImageDataChunkRequest, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, dataType: _Optional[_Union[VehicleImageRequest.Type, str]] = ..., imageType: _Optional[_Union[_vehicle_pb2.VehicleImageStateType, str]] = ..., chunkRequest: _Optional[_Union[VehicleImageDataChunkRequest, _Mapping]] = ...) -> None: ...
 
 class MobileImageUploadParams(_message.Message):
-    __slots__ = ('imageType', 'widthPx', 'heightPx', 'mimeType')
+    __slots__ = ("imageType", "widthPx", "heightPx", "mimeType")
     IMAGETYPE_FIELD_NUMBER: _ClassVar[int]
     WIDTHPX_FIELD_NUMBER: _ClassVar[int]
     HEIGHTPX_FIELD_NUMBER: _ClassVar[int]
@@ -534,22 +499,18 @@ class MobileImageUploadParams(_message.Message):
     widthPx: int
     heightPx: int
     mimeType: str
-
-    def __init__(self, imageType: _Optional[_Union[_vehicle_pb2.VehicleImageStateType, str]]=..., widthPx: _Optional[int]=..., heightPx: _Optional[int]=..., mimeType: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, imageType: _Optional[_Union[_vehicle_pb2.VehicleImageStateType, str]] = ..., widthPx: _Optional[int] = ..., heightPx: _Optional[int] = ..., mimeType: _Optional[str] = ...) -> None: ...
 
 class MobileUploadParams(_message.Message):
-    __slots__ = ('totalSize', 'contentSha256')
+    __slots__ = ("totalSize", "contentSha256")
     TOTALSIZE_FIELD_NUMBER: _ClassVar[int]
     CONTENTSHA256_FIELD_NUMBER: _ClassVar[int]
     totalSize: int
     contentSha256: bytes
-
-    def __init__(self, totalSize: _Optional[int]=..., contentSha256: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, totalSize: _Optional[int] = ..., contentSha256: _Optional[bytes] = ...) -> None: ...
 
 class PrepareMobileUploadAction(_message.Message):
-    __slots__ = ('uploadParams', 'imageParams', 'field_3', 'overwriteOldestIfFull')
+    __slots__ = ("uploadParams", "imageParams", "field_3", "overwriteOldestIfFull")
     UPLOADPARAMS_FIELD_NUMBER: _ClassVar[int]
     IMAGEPARAMS_FIELD_NUMBER: _ClassVar[int]
     FIELD_3_FIELD_NUMBER: _ClassVar[int]
@@ -558,13 +519,10 @@ class PrepareMobileUploadAction(_message.Message):
     imageParams: MobileImageUploadParams
     field_3: bool
     overwriteOldestIfFull: bool
-
-    def __init__(self, uploadParams: _Optional[_Union[MobileUploadParams, _Mapping]]=..., imageParams: _Optional[_Union[MobileImageUploadParams, _Mapping]]=..., field_3: _Optional[bool]=..., overwriteOldestIfFull: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, uploadParams: _Optional[_Union[MobileUploadParams, _Mapping]] = ..., imageParams: _Optional[_Union[MobileImageUploadParams, _Mapping]] = ..., field_3: _Optional[bool] = ..., overwriteOldestIfFull: _Optional[bool] = ...) -> None: ...
 
 class PrepareMobileUploadResponse(_message.Message):
-    __slots__ = ('status', 'uploadId', 'maxChunkSize')
-
+    __slots__ = ("status", "uploadId", "maxChunkSize")
     class Status(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         OK: _ClassVar[PrepareMobileUploadResponse.Status]
@@ -595,25 +553,20 @@ class PrepareMobileUploadResponse(_message.Message):
     status: PrepareMobileUploadResponse.Status
     uploadId: str
     maxChunkSize: int
-
-    def __init__(self, status: _Optional[_Union[PrepareMobileUploadResponse.Status, str]]=..., uploadId: _Optional[str]=..., maxChunkSize: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, status: _Optional[_Union[PrepareMobileUploadResponse.Status, str]] = ..., uploadId: _Optional[str] = ..., maxChunkSize: _Optional[int] = ...) -> None: ...
 
 class PutMobileUploadChunkAction(_message.Message):
-    __slots__ = ('uploadId', 'chunkOffset', 'chunkData')
+    __slots__ = ("uploadId", "chunkOffset", "chunkData")
     UPLOADID_FIELD_NUMBER: _ClassVar[int]
     CHUNKOFFSET_FIELD_NUMBER: _ClassVar[int]
     CHUNKDATA_FIELD_NUMBER: _ClassVar[int]
     uploadId: str
     chunkOffset: int
     chunkData: bytes
-
-    def __init__(self, uploadId: _Optional[str]=..., chunkOffset: _Optional[int]=..., chunkData: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, uploadId: _Optional[str] = ..., chunkOffset: _Optional[int] = ..., chunkData: _Optional[bytes] = ...) -> None: ...
 
 class PutMobileUploadChunkResponse(_message.Message):
-    __slots__ = ('status', 'resourceId')
-
+    __slots__ = ("status", "resourceId")
     class Status(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         OK: _ClassVar[PutMobileUploadChunkResponse.Status]
@@ -638,13 +591,10 @@ class PutMobileUploadChunkResponse(_message.Message):
     RESOURCEID_FIELD_NUMBER: _ClassVar[int]
     status: PutMobileUploadChunkResponse.Status
     resourceId: bytes
-
-    def __init__(self, status: _Optional[_Union[PutMobileUploadChunkResponse.Status, str]]=..., resourceId: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, status: _Optional[_Union[PutMobileUploadChunkResponse.Status, str]] = ..., resourceId: _Optional[bytes] = ...) -> None: ...
 
 class DogModeLiveActivityData(_message.Message):
-    __slots__ = ('disabledReason', 'interiorImage', 'field_3', 'field_4', 'insideTemperatureCelsius', 'faultState', 'temperatureUnit', 'batteryLevel')
-
+    __slots__ = ("disabledReason", "interiorImage", "field_3", "field_4", "insideTemperatureCelsius", "faultState", "temperatureUnit", "batteryLevel")
     class DisabledReason(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         REASON_UNKNOWN: _ClassVar[DogModeLiveActivityData.DisabledReason]
@@ -655,16 +605,13 @@ class DogModeLiveActivityData(_message.Message):
     REASON_NO_PREMIUM_CONNECTIVITY: DogModeLiveActivityData.DisabledReason
     REASON_TOGGLE_OFF: DogModeLiveActivityData.DisabledReason
     REASON_DISALLOWED_COUNTRY: DogModeLiveActivityData.DisabledReason
-
     class DogModeImageData(_message.Message):
-        __slots__ = ('wrappedKey', 'encryptedImage')
+        __slots__ = ("wrappedKey", "encryptedImage")
         WRAPPEDKEY_FIELD_NUMBER: _ClassVar[int]
         ENCRYPTEDIMAGE_FIELD_NUMBER: _ClassVar[int]
         wrappedKey: bytes
         encryptedImage: bytes
-
-        def __init__(self, wrappedKey: _Optional[bytes]=..., encryptedImage: _Optional[bytes]=...) -> None:
-            ...
+        def __init__(self, wrappedKey: _Optional[bytes] = ..., encryptedImage: _Optional[bytes] = ...) -> None: ...
     DISABLEDREASON_FIELD_NUMBER: _ClassVar[int]
     INTERIORIMAGE_FIELD_NUMBER: _ClassVar[int]
     FIELD_3_FIELD_NUMBER: _ClassVar[int]
@@ -681,94 +628,66 @@ class DogModeLiveActivityData(_message.Message):
     faultState: _vehicle_pb2.ClimateState.DogModeState
     temperatureUnit: SetTemperatureUnitAction.Unit
     batteryLevel: float
-
-    def __init__(self, disabledReason: _Optional[_Union[DogModeLiveActivityData.DisabledReason, str]]=..., interiorImage: _Optional[_Union[DogModeLiveActivityData.DogModeImageData, _Mapping]]=..., field_3: _Optional[str]=..., field_4: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., insideTemperatureCelsius: _Optional[float]=..., faultState: _Optional[_Union[_vehicle_pb2.ClimateState.DogModeState, str]]=..., temperatureUnit: _Optional[_Union[SetTemperatureUnitAction.Unit, str]]=..., batteryLevel: _Optional[float]=...) -> None:
-        ...
+    def __init__(self, disabledReason: _Optional[_Union[DogModeLiveActivityData.DisabledReason, str]] = ..., interiorImage: _Optional[_Union[DogModeLiveActivityData.DogModeImageData, _Mapping]] = ..., field_3: _Optional[str] = ..., field_4: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., insideTemperatureCelsius: _Optional[float] = ..., faultState: _Optional[_Union[_vehicle_pb2.ClimateState.DogModeState, str]] = ..., temperatureUnit: _Optional[_Union[SetTemperatureUnitAction.Unit, str]] = ..., batteryLevel: _Optional[float] = ...) -> None: ...
 
 class GetTirePressureState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetMediaState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetMediaDetailState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetSoftwareUpdateState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetChargeState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetClimateState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetDriveState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetLocationState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetClosuresState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetChargeScheduleState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetPreconditioningScheduleState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetParentalControlsState(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class EraseUserDataAction(_message.Message):
-    __slots__ = ('reason', 'trigger_on_park')
+    __slots__ = ("reason", "trigger_on_park")
     REASON_FIELD_NUMBER: _ClassVar[int]
     TRIGGER_ON_PARK_FIELD_NUMBER: _ClassVar[int]
     reason: str
     trigger_on_park: bool
-
-    def __init__(self, reason: _Optional[str]=..., trigger_on_park: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, reason: _Optional[str] = ..., trigger_on_park: _Optional[bool] = ...) -> None: ...
 
 class Response(_message.Message):
-    __slots__ = ('actionStatus', 'vehicleData', 'getSessionInfoResponse', 'streamMessage', 'getNearbyChargingSites', 'vehicleDataSubscriptionResponse', 'vitalsSubscriptionResponse', 'ping', 'piiKeyResponse', 'pseudonymSyncResponse', 'getRateTariffResponse', 'navigationRouteResponse', 'getManagedChargingSitesResponse', 'getChargeOnSolarFeatureResponse', 'addManagedChargingSiteResponse', 'getMessagesResponse', 'getLocalProfilesResponse', 'keysInfoResponse', 'bandwidthTestResponse', 'prepareMobileUploadResponse', 'putMobileUploadChunkResponse')
+    __slots__ = ("actionStatus", "vehicleData", "getSessionInfoResponse", "streamMessage", "getNearbyChargingSites", "vehicleDataSubscriptionResponse", "vitalsSubscriptionResponse", "ping", "piiKeyResponse", "pseudonymSyncResponse", "getRateTariffResponse", "navigationRouteResponse", "getManagedChargingSitesResponse", "getChargeOnSolarFeatureResponse", "addManagedChargingSiteResponse", "getMessagesResponse", "getLocalProfilesResponse", "keysInfoResponse", "bandwidthTestResponse", "prepareMobileUploadResponse", "putMobileUploadChunkResponse")
     ACTIONSTATUS_FIELD_NUMBER: _ClassVar[int]
     VEHICLEDATA_FIELD_NUMBER: _ClassVar[int]
     GETSESSIONINFORESPONSE_FIELD_NUMBER: _ClassVar[int]
@@ -811,53 +730,42 @@ class Response(_message.Message):
     bandwidthTestResponse: BandwidthTestResponse
     prepareMobileUploadResponse: PrepareMobileUploadResponse
     putMobileUploadChunkResponse: PutMobileUploadChunkResponse
-
-    def __init__(self, actionStatus: _Optional[_Union[ActionStatus, _Mapping]]=..., vehicleData: _Optional[_Union[_vehicle_pb2.VehicleData, _Mapping]]=..., getSessionInfoResponse: _Optional[_Union[_signatures_pb2.SessionInfo, _Mapping]]=..., streamMessage: _Optional[_Union[StreamMessage, _Mapping]]=..., getNearbyChargingSites: _Optional[_Union[NearbyChargingSites, _Mapping]]=..., vehicleDataSubscriptionResponse: _Optional[_Union[VehicleDataSubscriptionResponse, _Mapping]]=..., vitalsSubscriptionResponse: _Optional[_Union[VitalsSubscriptionResponse, _Mapping]]=..., ping: _Optional[_Union[Ping, _Mapping]]=..., piiKeyResponse: _Optional[_Union[PiiKeyResponse, _Mapping]]=..., pseudonymSyncResponse: _Optional[_Union[PseudonymSyncResponse, _Mapping]]=..., getRateTariffResponse: _Optional[_Union[GetRateTariffResponse, _Mapping]]=..., navigationRouteResponse: _Optional[_Union[NavigationRouteResponse, _Mapping]]=..., getManagedChargingSitesResponse: _Optional[_Union[GetManagedChargingSitesResponse, _Mapping]]=..., getChargeOnSolarFeatureResponse: _Optional[_Union[GetChargeOnSolarFeatureResponse, _Mapping]]=..., addManagedChargingSiteResponse: _Optional[_Union[AddManagedChargingSiteResponse, _Mapping]]=..., getMessagesResponse: _Optional[_Union[GetMessagesResponse, _Mapping]]=..., getLocalProfilesResponse: _Optional[_Union[GetLocalProfilesResponse, _Mapping]]=..., keysInfoResponse: _Optional[_Union[KeysInfoResponse, _Mapping]]=..., bandwidthTestResponse: _Optional[_Union[BandwidthTestResponse, _Mapping]]=..., prepareMobileUploadResponse: _Optional[_Union[PrepareMobileUploadResponse, _Mapping]]=..., putMobileUploadChunkResponse: _Optional[_Union[PutMobileUploadChunkResponse, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, actionStatus: _Optional[_Union[ActionStatus, _Mapping]] = ..., vehicleData: _Optional[_Union[_vehicle_pb2.VehicleData, _Mapping]] = ..., getSessionInfoResponse: _Optional[_Union[_signatures_pb2.SessionInfo, _Mapping]] = ..., streamMessage: _Optional[_Union[StreamMessage, _Mapping]] = ..., getNearbyChargingSites: _Optional[_Union[NearbyChargingSites, _Mapping]] = ..., vehicleDataSubscriptionResponse: _Optional[_Union[VehicleDataSubscriptionResponse, _Mapping]] = ..., vitalsSubscriptionResponse: _Optional[_Union[VitalsSubscriptionResponse, _Mapping]] = ..., ping: _Optional[_Union[Ping, _Mapping]] = ..., piiKeyResponse: _Optional[_Union[PiiKeyResponse, _Mapping]] = ..., pseudonymSyncResponse: _Optional[_Union[PseudonymSyncResponse, _Mapping]] = ..., getRateTariffResponse: _Optional[_Union[GetRateTariffResponse, _Mapping]] = ..., navigationRouteResponse: _Optional[_Union[NavigationRouteResponse, _Mapping]] = ..., getManagedChargingSitesResponse: _Optional[_Union[GetManagedChargingSitesResponse, _Mapping]] = ..., getChargeOnSolarFeatureResponse: _Optional[_Union[GetChargeOnSolarFeatureResponse, _Mapping]] = ..., addManagedChargingSiteResponse: _Optional[_Union[AddManagedChargingSiteResponse, _Mapping]] = ..., getMessagesResponse: _Optional[_Union[GetMessagesResponse, _Mapping]] = ..., getLocalProfilesResponse: _Optional[_Union[GetLocalProfilesResponse, _Mapping]] = ..., keysInfoResponse: _Optional[_Union[KeysInfoResponse, _Mapping]] = ..., bandwidthTestResponse: _Optional[_Union[BandwidthTestResponse, _Mapping]] = ..., prepareMobileUploadResponse: _Optional[_Union[PrepareMobileUploadResponse, _Mapping]] = ..., putMobileUploadChunkResponse: _Optional[_Union[PutMobileUploadChunkResponse, _Mapping]] = ...) -> None: ...
 
 class VehicleDataSubscriptionResponse(_message.Message):
-    __slots__ = ('unknown', 'pii_key_response')
+    __slots__ = ("unknown", "pii_key_response")
     UNKNOWN_FIELD_NUMBER: _ClassVar[int]
     PII_KEY_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     unknown: str
     pii_key_response: PiiKeyResponse
-
-    def __init__(self, unknown: _Optional[str]=..., pii_key_response: _Optional[_Union[PiiKeyResponse, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, unknown: _Optional[str] = ..., pii_key_response: _Optional[_Union[PiiKeyResponse, _Mapping]] = ...) -> None: ...
 
 class VitalsSubscriptionResponse(_message.Message):
-    __slots__ = ('session_id', 'unknown')
+    __slots__ = ("session_id", "unknown")
     SESSION_ID_FIELD_NUMBER: _ClassVar[int]
     UNKNOWN_FIELD_NUMBER: _ClassVar[int]
     session_id: int
     unknown: str
-
-    def __init__(self, session_id: _Optional[int]=..., unknown: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, session_id: _Optional[int] = ..., unknown: _Optional[str] = ...) -> None: ...
 
 class PiiKeyResponse(_message.Message):
-    __slots__ = ('encrypted_pii_key', 'pii_key_expiration', 'subscriber_public_key_expiration')
+    __slots__ = ("encrypted_pii_key", "pii_key_expiration", "subscriber_public_key_expiration")
     ENCRYPTED_PII_KEY_FIELD_NUMBER: _ClassVar[int]
     PII_KEY_EXPIRATION_FIELD_NUMBER: _ClassVar[int]
     SUBSCRIBER_PUBLIC_KEY_EXPIRATION_FIELD_NUMBER: _ClassVar[int]
     encrypted_pii_key: bytes
     pii_key_expiration: _timestamp_pb2.Timestamp
     subscriber_public_key_expiration: _timestamp_pb2.Timestamp
-
-    def __init__(self, encrypted_pii_key: _Optional[bytes]=..., pii_key_expiration: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., subscriber_public_key_expiration: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, encrypted_pii_key: _Optional[bytes] = ..., pii_key_expiration: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., subscriber_public_key_expiration: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class PseudonymSyncResponse(_message.Message):
-    __slots__ = ('unknown',)
+    __slots__ = ("unknown",)
     UNKNOWN_FIELD_NUMBER: _ClassVar[int]
     unknown: str
-
-    def __init__(self, unknown: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, unknown: _Optional[str] = ...) -> None: ...
 
 class NavigationRouteResponse(_message.Message):
-    __slots__ = ('unknown', 'traffic_detail')
-
+    __slots__ = ("unknown", "traffic_detail")
     class TrafficStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         TS_NO_DATA: _ClassVar[NavigationRouteResponse.TrafficStatus]
@@ -870,102 +778,79 @@ class NavigationRouteResponse(_message.Message):
     TS_MODERATE: NavigationRouteResponse.TrafficStatus
     TS_CONGESTION: NavigationRouteResponse.TrafficStatus
     TS_SEVERE_CONGESTION: NavigationRouteResponse.TrafficStatus
-
     class TrafficDetail(_message.Message):
-        __slots__ = ('offset_to_dest', 'traffic_status')
+        __slots__ = ("offset_to_dest", "traffic_status")
         OFFSET_TO_DEST_FIELD_NUMBER: _ClassVar[int]
         TRAFFIC_STATUS_FIELD_NUMBER: _ClassVar[int]
         offset_to_dest: float
         traffic_status: NavigationRouteResponse.TrafficStatus
-
-        def __init__(self, offset_to_dest: _Optional[float]=..., traffic_status: _Optional[_Union[NavigationRouteResponse.TrafficStatus, str]]=...) -> None:
-            ...
+        def __init__(self, offset_to_dest: _Optional[float] = ..., traffic_status: _Optional[_Union[NavigationRouteResponse.TrafficStatus, str]] = ...) -> None: ...
     UNKNOWN_FIELD_NUMBER: _ClassVar[int]
     TRAFFIC_DETAIL_FIELD_NUMBER: _ClassVar[int]
     unknown: str
     traffic_detail: _containers.RepeatedCompositeFieldContainer[NavigationRouteResponse.TrafficDetail]
-
-    def __init__(self, unknown: _Optional[str]=..., traffic_detail: _Optional[_Iterable[_Union[NavigationRouteResponse.TrafficDetail, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, unknown: _Optional[str] = ..., traffic_detail: _Optional[_Iterable[_Union[NavigationRouteResponse.TrafficDetail, _Mapping]]] = ...) -> None: ...
 
 class GetManagedChargingSitesResponse(_message.Message):
-    __slots__ = ('sites',)
+    __slots__ = ("sites",)
     SITES_FIELD_NUMBER: _ClassVar[int]
     sites: _containers.RepeatedCompositeFieldContainer[ManagedChargingSite]
-
-    def __init__(self, sites: _Optional[_Iterable[_Union[ManagedChargingSite, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, sites: _Optional[_Iterable[_Union[ManagedChargingSite, _Mapping]]] = ...) -> None: ...
 
 class ManagedChargingSiteAddedOrUpdated(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class ExistingManagedChargingSiteNearby(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class AddManagedChargingSiteResponse(_message.Message):
-    __slots__ = ('added_or_updated', 'existing_site_nearby')
+    __slots__ = ("added_or_updated", "existing_site_nearby")
     ADDED_OR_UPDATED_FIELD_NUMBER: _ClassVar[int]
     EXISTING_SITE_NEARBY_FIELD_NUMBER: _ClassVar[int]
     added_or_updated: ManagedChargingSiteAddedOrUpdated
     existing_site_nearby: ExistingManagedChargingSiteNearby
-
-    def __init__(self, added_or_updated: _Optional[_Union[ManagedChargingSiteAddedOrUpdated, _Mapping]]=..., existing_site_nearby: _Optional[_Union[ExistingManagedChargingSiteNearby, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, added_or_updated: _Optional[_Union[ManagedChargingSiteAddedOrUpdated, _Mapping]] = ..., existing_site_nearby: _Optional[_Union[ExistingManagedChargingSiteNearby, _Mapping]] = ...) -> None: ...
 
 class RequestTeslaAuthCommand(_message.Message):
-    __slots__ = ('client_id', 'unknown', 'return_scoped_token')
+    __slots__ = ("client_id", "unknown", "return_scoped_token")
     CLIENT_ID_FIELD_NUMBER: _ClassVar[int]
     UNKNOWN_FIELD_NUMBER: _ClassVar[int]
     RETURN_SCOPED_TOKEN_FIELD_NUMBER: _ClassVar[int]
     client_id: str
     unknown: str
     return_scoped_token: bool
-
-    def __init__(self, client_id: _Optional[str]=..., unknown: _Optional[str]=..., return_scoped_token: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, client_id: _Optional[str] = ..., unknown: _Optional[str] = ..., return_scoped_token: _Optional[bool] = ...) -> None: ...
 
 class MobileAppMessage(_message.Message):
-    __slots__ = ('request_tesla_auth_command',)
+    __slots__ = ("request_tesla_auth_command",)
     REQUEST_TESLA_AUTH_COMMAND_FIELD_NUMBER: _ClassVar[int]
     request_tesla_auth_command: RequestTeslaAuthCommand
-
-    def __init__(self, request_tesla_auth_command: _Optional[_Union[RequestTeslaAuthCommand, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, request_tesla_auth_command: _Optional[_Union[RequestTeslaAuthCommand, _Mapping]] = ...) -> None: ...
 
 class GetMessagesResponse(_message.Message):
-    __slots__ = ('mobile_app_messages',)
+    __slots__ = ("mobile_app_messages",)
     MOBILE_APP_MESSAGES_FIELD_NUMBER: _ClassVar[int]
     mobile_app_messages: _containers.RepeatedCompositeFieldContainer[MobileAppMessage]
-
-    def __init__(self, mobile_app_messages: _Optional[_Iterable[_Union[MobileAppMessage, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, mobile_app_messages: _Optional[_Iterable[_Union[MobileAppMessage, _Mapping]]] = ...) -> None: ...
 
 class Profile(_message.Message):
-    __slots__ = ('unknown_1', 'unknown_2')
+    __slots__ = ("unknown_1", "unknown_2")
     UNKNOWN_1_FIELD_NUMBER: _ClassVar[int]
     UNKNOWN_2_FIELD_NUMBER: _ClassVar[int]
     unknown_1: str
     unknown_2: str
-
-    def __init__(self, unknown_1: _Optional[str]=..., unknown_2: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, unknown_1: _Optional[str] = ..., unknown_2: _Optional[str] = ...) -> None: ...
 
 class GetLocalProfilesResponse(_message.Message):
-    __slots__ = ('profiles',)
+    __slots__ = ("profiles",)
     PROFILES_FIELD_NUMBER: _ClassVar[int]
     profiles: _containers.RepeatedCompositeFieldContainer[Profile]
-
-    def __init__(self, profiles: _Optional[_Iterable[_Union[Profile, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, profiles: _Optional[_Iterable[_Union[Profile, _Mapping]]] = ...) -> None: ...
 
 class KeyInfo(_message.Message):
-    __slots__ = ('unknown_1', 'unknown_2', 'public_key', 'last_seen', 'role', 'form_factor')
+    __slots__ = ("unknown_1", "unknown_2", "public_key", "last_seen", "role", "form_factor")
     UNKNOWN_1_FIELD_NUMBER: _ClassVar[int]
     UNKNOWN_2_FIELD_NUMBER: _ClassVar[int]
     PUBLIC_KEY_FIELD_NUMBER: _ClassVar[int]
@@ -978,82 +863,66 @@ class KeyInfo(_message.Message):
     last_seen: _timestamp_pb2.Timestamp
     role: _keys_pb2.Role
     form_factor: _vcsec_pb2.KeyFormFactor
-
-    def __init__(self, unknown_1: _Optional[str]=..., unknown_2: _Optional[str]=..., public_key: _Optional[bytes]=..., last_seen: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., role: _Optional[_Union[_keys_pb2.Role, str]]=..., form_factor: _Optional[_Union[_vcsec_pb2.KeyFormFactor, str]]=...) -> None:
-        ...
+    def __init__(self, unknown_1: _Optional[str] = ..., unknown_2: _Optional[str] = ..., public_key: _Optional[bytes] = ..., last_seen: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., role: _Optional[_Union[_keys_pb2.Role, str]] = ..., form_factor: _Optional[_Union[_vcsec_pb2.KeyFormFactor, str]] = ...) -> None: ...
 
 class KeysInfoResponse(_message.Message):
-    __slots__ = ('keys_info',)
+    __slots__ = ("keys_info",)
     KEYS_INFO_FIELD_NUMBER: _ClassVar[int]
     keys_info: _containers.RepeatedCompositeFieldContainer[KeyInfo]
-
-    def __init__(self, keys_info: _Optional[_Iterable[_Union[KeyInfo, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, keys_info: _Optional[_Iterable[_Union[KeyInfo, _Mapping]]] = ...) -> None: ...
 
 class BandwidthTestResponse(_message.Message):
-    __slots__ = ('data', 'requested_size')
+    __slots__ = ("data", "requested_size")
     DATA_FIELD_NUMBER: _ClassVar[int]
     REQUESTED_SIZE_FIELD_NUMBER: _ClassVar[int]
     data: bytes
     requested_size: int
-
-    def __init__(self, data: _Optional[bytes]=..., requested_size: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, data: _Optional[bytes] = ..., requested_size: _Optional[int] = ...) -> None: ...
 
 class GetRateTariffResponse(_message.Message):
-    __slots__ = ('tariff_document', 'seasons', 'tariff')
+    __slots__ = ("tariff_document", "seasons", "tariff")
     TARIFF_DOCUMENT_FIELD_NUMBER: _ClassVar[int]
     SEASONS_FIELD_NUMBER: _ClassVar[int]
     TARIFF_FIELD_NUMBER: _ClassVar[int]
     tariff_document: SetRateTariffRequest
     seasons: SetRateTariffRequest.Seasons
     tariff: SetRateTariffRequest.Tariff
-
-    def __init__(self, tariff_document: _Optional[_Union[SetRateTariffRequest, _Mapping]]=..., seasons: _Optional[_Union[SetRateTariffRequest.Seasons, _Mapping]]=..., tariff: _Optional[_Union[SetRateTariffRequest.Tariff, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, tariff_document: _Optional[_Union[SetRateTariffRequest, _Mapping]] = ..., seasons: _Optional[_Union[SetRateTariffRequest.Seasons, _Mapping]] = ..., tariff: _Optional[_Union[SetRateTariffRequest.Tariff, _Mapping]] = ...) -> None: ...
 
 class ActionStatus(_message.Message):
-    __slots__ = ('result', 'result_reason')
+    __slots__ = ("result", "result_reason")
     RESULT_FIELD_NUMBER: _ClassVar[int]
     RESULT_REASON_FIELD_NUMBER: _ClassVar[int]
     result: OperationStatus_E
     result_reason: ResultReason
-
-    def __init__(self, result: _Optional[_Union[OperationStatus_E, str]]=..., result_reason: _Optional[_Union[ResultReason, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, result: _Optional[_Union[OperationStatus_E, str]] = ..., result_reason: _Optional[_Union[ResultReason, _Mapping]] = ...) -> None: ...
 
 class ResultReason(_message.Message):
-    __slots__ = ('plain_text',)
+    __slots__ = ("plain_text",)
     PLAIN_TEXT_FIELD_NUMBER: _ClassVar[int]
     plain_text: str
-
-    def __init__(self, plain_text: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, plain_text: _Optional[str] = ...) -> None: ...
 
 class EncryptedData(_message.Message):
-    __slots__ = ('field_number', 'ciphertext', 'tag')
+    __slots__ = ("field_number", "ciphertext", "tag")
     FIELD_NUMBER_FIELD_NUMBER: _ClassVar[int]
     CIPHERTEXT_FIELD_NUMBER: _ClassVar[int]
     TAG_FIELD_NUMBER: _ClassVar[int]
     field_number: int
     ciphertext: bytes
     tag: bytes
-
-    def __init__(self, field_number: _Optional[int]=..., ciphertext: _Optional[bytes]=..., tag: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, field_number: _Optional[int] = ..., ciphertext: _Optional[bytes] = ..., tag: _Optional[bytes] = ...) -> None: ...
 
 class ChargingSetLimitAction(_message.Message):
-    __slots__ = ('percent', 'one_time')
+    __slots__ = ("percent", "one_time")
     PERCENT_FIELD_NUMBER: _ClassVar[int]
     ONE_TIME_FIELD_NUMBER: _ClassVar[int]
     percent: int
     one_time: bool
-
-    def __init__(self, percent: _Optional[int]=..., one_time: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, percent: _Optional[int] = ..., one_time: _Optional[bool] = ...) -> None: ...
 
 class ChargingStartStopAction(_message.Message):
-    __slots__ = ('unknown', 'start', 'start_standard', 'start_max_range', 'stop')
+    __slots__ = ("unknown", "start", "start_standard", "start_max_range", "stop")
     UNKNOWN_FIELD_NUMBER: _ClassVar[int]
     START_FIELD_NUMBER: _ClassVar[int]
     START_STANDARD_FIELD_NUMBER: _ClassVar[int]
@@ -1064,51 +933,40 @@ class ChargingStartStopAction(_message.Message):
     start_standard: _common_pb2.Void
     start_max_range: _common_pb2.Void
     stop: _common_pb2.Void
-
-    def __init__(self, unknown: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., start: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., start_standard: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., start_max_range: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., stop: _Optional[_Union[_common_pb2.Void, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, unknown: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., start: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., start_standard: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., start_max_range: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., stop: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
 class DrivingClearSpeedLimitPinAction(_message.Message):
-    __slots__ = ('pin',)
+    __slots__ = ("pin",)
     PIN_FIELD_NUMBER: _ClassVar[int]
     pin: str
-
-    def __init__(self, pin: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, pin: _Optional[str] = ...) -> None: ...
 
 class DrivingSetSpeedLimitAction(_message.Message):
-    __slots__ = ('limit_mph',)
+    __slots__ = ("limit_mph",)
     LIMIT_MPH_FIELD_NUMBER: _ClassVar[int]
     limit_mph: float
-
-    def __init__(self, limit_mph: _Optional[float]=...) -> None:
-        ...
+    def __init__(self, limit_mph: _Optional[float] = ...) -> None: ...
 
 class DrivingSpeedLimitAction(_message.Message):
-    __slots__ = ('activate', 'pin')
+    __slots__ = ("activate", "pin")
     ACTIVATE_FIELD_NUMBER: _ClassVar[int]
     PIN_FIELD_NUMBER: _ClassVar[int]
     activate: bool
     pin: str
-
-    def __init__(self, activate: _Optional[bool]=..., pin: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, activate: _Optional[bool] = ..., pin: _Optional[str] = ...) -> None: ...
 
 class HvacAutoAction(_message.Message):
-    __slots__ = ('power_on', 'manual_override')
+    __slots__ = ("power_on", "manual_override")
     POWER_ON_FIELD_NUMBER: _ClassVar[int]
     MANUAL_OVERRIDE_FIELD_NUMBER: _ClassVar[int]
     power_on: bool
     manual_override: bool
-
-    def __init__(self, power_on: _Optional[bool]=..., manual_override: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, power_on: _Optional[bool] = ..., manual_override: _Optional[bool] = ...) -> None: ...
 
 class HvacSeatHeaterActions(_message.Message):
-    __slots__ = ('hvacSeatHeaterAction',)
-
+    __slots__ = ("hvacSeatHeaterAction",)
     class HvacSeatHeaterAction(_message.Message):
-        __slots__ = ('SEAT_HEATER_UNKNOWN', 'SEAT_HEATER_OFF', 'SEAT_HEATER_LOW', 'SEAT_HEATER_MED', 'SEAT_HEATER_HIGH', 'CAR_SEAT_UNKNOWN', 'CAR_SEAT_FRONT_LEFT', 'CAR_SEAT_FRONT_RIGHT', 'CAR_SEAT_REAR_LEFT', 'CAR_SEAT_REAR_LEFT_BACK', 'CAR_SEAT_REAR_CENTER', 'CAR_SEAT_REAR_RIGHT', 'CAR_SEAT_REAR_RIGHT_BACK', 'CAR_SEAT_THIRD_ROW_LEFT', 'CAR_SEAT_THIRD_ROW_RIGHT')
+        __slots__ = ("SEAT_HEATER_UNKNOWN", "SEAT_HEATER_OFF", "SEAT_HEATER_LOW", "SEAT_HEATER_MED", "SEAT_HEATER_HIGH", "CAR_SEAT_UNKNOWN", "CAR_SEAT_FRONT_LEFT", "CAR_SEAT_FRONT_RIGHT", "CAR_SEAT_REAR_LEFT", "CAR_SEAT_REAR_LEFT_BACK", "CAR_SEAT_REAR_CENTER", "CAR_SEAT_REAR_RIGHT", "CAR_SEAT_REAR_RIGHT_BACK", "CAR_SEAT_THIRD_ROW_LEFT", "CAR_SEAT_THIRD_ROW_RIGHT")
         SEAT_HEATER_UNKNOWN_FIELD_NUMBER: _ClassVar[int]
         SEAT_HEATER_OFF_FIELD_NUMBER: _ClassVar[int]
         SEAT_HEATER_LOW_FIELD_NUMBER: _ClassVar[int]
@@ -1139,18 +997,13 @@ class HvacSeatHeaterActions(_message.Message):
         CAR_SEAT_REAR_RIGHT_BACK: _common_pb2.Void
         CAR_SEAT_THIRD_ROW_LEFT: _common_pb2.Void
         CAR_SEAT_THIRD_ROW_RIGHT: _common_pb2.Void
-
-        def __init__(self, SEAT_HEATER_UNKNOWN: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., SEAT_HEATER_OFF: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., SEAT_HEATER_LOW: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., SEAT_HEATER_MED: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., SEAT_HEATER_HIGH: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., CAR_SEAT_UNKNOWN: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., CAR_SEAT_FRONT_LEFT: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., CAR_SEAT_FRONT_RIGHT: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., CAR_SEAT_REAR_LEFT: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., CAR_SEAT_REAR_LEFT_BACK: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., CAR_SEAT_REAR_CENTER: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., CAR_SEAT_REAR_RIGHT: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., CAR_SEAT_REAR_RIGHT_BACK: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., CAR_SEAT_THIRD_ROW_LEFT: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., CAR_SEAT_THIRD_ROW_RIGHT: _Optional[_Union[_common_pb2.Void, _Mapping]]=...) -> None:
-            ...
+        def __init__(self, SEAT_HEATER_UNKNOWN: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SEAT_HEATER_OFF: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SEAT_HEATER_LOW: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SEAT_HEATER_MED: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SEAT_HEATER_HIGH: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CAR_SEAT_UNKNOWN: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CAR_SEAT_FRONT_LEFT: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CAR_SEAT_FRONT_RIGHT: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CAR_SEAT_REAR_LEFT: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CAR_SEAT_REAR_LEFT_BACK: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CAR_SEAT_REAR_CENTER: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CAR_SEAT_REAR_RIGHT: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CAR_SEAT_REAR_RIGHT_BACK: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CAR_SEAT_THIRD_ROW_LEFT: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CAR_SEAT_THIRD_ROW_RIGHT: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
     HVACSEATHEATERACTION_FIELD_NUMBER: _ClassVar[int]
     hvacSeatHeaterAction: _containers.RepeatedCompositeFieldContainer[HvacSeatHeaterActions.HvacSeatHeaterAction]
-
-    def __init__(self, hvacSeatHeaterAction: _Optional[_Iterable[_Union[HvacSeatHeaterActions.HvacSeatHeaterAction, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, hvacSeatHeaterAction: _Optional[_Iterable[_Union[HvacSeatHeaterActions.HvacSeatHeaterAction, _Mapping]]] = ...) -> None: ...
 
 class HvacSeatCoolerActions(_message.Message):
-    __slots__ = ('hvacSeatCoolerAction',)
-
+    __slots__ = ("hvacSeatCoolerAction",)
     class HvacSeatCoolerLevel_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         HvacSeatCoolerLevel_Unknown: _ClassVar[HvacSeatCoolerActions.HvacSeatCoolerLevel_E]
@@ -1163,7 +1016,6 @@ class HvacSeatCoolerActions(_message.Message):
     HvacSeatCoolerLevel_Low: HvacSeatCoolerActions.HvacSeatCoolerLevel_E
     HvacSeatCoolerLevel_Med: HvacSeatCoolerActions.HvacSeatCoolerLevel_E
     HvacSeatCoolerLevel_High: HvacSeatCoolerActions.HvacSeatCoolerLevel_E
-
     class HvacSeatCoolerPosition_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         HvacSeatCoolerPosition_Unknown: _ClassVar[HvacSeatCoolerActions.HvacSeatCoolerPosition_E]
@@ -1176,25 +1028,19 @@ class HvacSeatCoolerActions(_message.Message):
     HvacSeatCoolerPosition_FrontRight: HvacSeatCoolerActions.HvacSeatCoolerPosition_E
     HvacSeatCoolerPosition_SecondRowLeft: HvacSeatCoolerActions.HvacSeatCoolerPosition_E
     HvacSeatCoolerPosition_SecondRowRight: HvacSeatCoolerActions.HvacSeatCoolerPosition_E
-
     class HvacSeatCoolerAction(_message.Message):
-        __slots__ = ('seat_cooler_level', 'seat_position')
+        __slots__ = ("seat_cooler_level", "seat_position")
         SEAT_COOLER_LEVEL_FIELD_NUMBER: _ClassVar[int]
         SEAT_POSITION_FIELD_NUMBER: _ClassVar[int]
         seat_cooler_level: HvacSeatCoolerActions.HvacSeatCoolerLevel_E
         seat_position: HvacSeatCoolerActions.HvacSeatCoolerPosition_E
-
-        def __init__(self, seat_cooler_level: _Optional[_Union[HvacSeatCoolerActions.HvacSeatCoolerLevel_E, str]]=..., seat_position: _Optional[_Union[HvacSeatCoolerActions.HvacSeatCoolerPosition_E, str]]=...) -> None:
-            ...
+        def __init__(self, seat_cooler_level: _Optional[_Union[HvacSeatCoolerActions.HvacSeatCoolerLevel_E, str]] = ..., seat_position: _Optional[_Union[HvacSeatCoolerActions.HvacSeatCoolerPosition_E, str]] = ...) -> None: ...
     HVACSEATCOOLERACTION_FIELD_NUMBER: _ClassVar[int]
     hvacSeatCoolerAction: _containers.RepeatedCompositeFieldContainer[HvacSeatCoolerActions.HvacSeatCoolerAction]
-
-    def __init__(self, hvacSeatCoolerAction: _Optional[_Iterable[_Union[HvacSeatCoolerActions.HvacSeatCoolerAction, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, hvacSeatCoolerAction: _Optional[_Iterable[_Union[HvacSeatCoolerActions.HvacSeatCoolerAction, _Mapping]]] = ...) -> None: ...
 
 class HvacSetPreconditioningMaxAction(_message.Message):
-    __slots__ = ('on', 'manual_override', 'manual_override_mode')
-
+    __slots__ = ("on", "manual_override", "manual_override_mode")
     class ManualOverrideMode_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         DogMode: _ClassVar[HvacSetPreconditioningMaxAction.ManualOverrideMode_E]
@@ -1209,35 +1055,27 @@ class HvacSetPreconditioningMaxAction(_message.Message):
     on: bool
     manual_override: bool
     manual_override_mode: _containers.RepeatedScalarFieldContainer[HvacSetPreconditioningMaxAction.ManualOverrideMode_E]
-
-    def __init__(self, on: _Optional[bool]=..., manual_override: _Optional[bool]=..., manual_override_mode: _Optional[_Iterable[_Union[HvacSetPreconditioningMaxAction.ManualOverrideMode_E, str]]]=...) -> None:
-        ...
+    def __init__(self, on: _Optional[bool] = ..., manual_override: _Optional[bool] = ..., manual_override_mode: _Optional[_Iterable[_Union[HvacSetPreconditioningMaxAction.ManualOverrideMode_E, str]]] = ...) -> None: ...
 
 class HvacSteeringWheelHeaterAction(_message.Message):
-    __slots__ = ('power_on',)
+    __slots__ = ("power_on",)
     POWER_ON_FIELD_NUMBER: _ClassVar[int]
     power_on: bool
-
-    def __init__(self, power_on: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, power_on: _Optional[bool] = ...) -> None: ...
 
 class HvacTemperatureAdjustmentAction(_message.Message):
-    __slots__ = ('delta_celsius', 'delta_percent', 'absolute_celsius', 'level', 'hvac_temperature_zone', 'driver_temp_celsius', 'passenger_temp_celsius')
-
+    __slots__ = ("delta_celsius", "delta_percent", "absolute_celsius", "level", "hvac_temperature_zone", "driver_temp_celsius", "passenger_temp_celsius")
     class Temperature(_message.Message):
-        __slots__ = ('TEMP_UNKNOWN', 'TEMP_MIN', 'TEMP_MAX')
+        __slots__ = ("TEMP_UNKNOWN", "TEMP_MIN", "TEMP_MAX")
         TEMP_UNKNOWN_FIELD_NUMBER: _ClassVar[int]
         TEMP_MIN_FIELD_NUMBER: _ClassVar[int]
         TEMP_MAX_FIELD_NUMBER: _ClassVar[int]
         TEMP_UNKNOWN: _common_pb2.Void
         TEMP_MIN: _common_pb2.Void
         TEMP_MAX: _common_pb2.Void
-
-        def __init__(self, TEMP_UNKNOWN: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., TEMP_MIN: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., TEMP_MAX: _Optional[_Union[_common_pb2.Void, _Mapping]]=...) -> None:
-            ...
-
+        def __init__(self, TEMP_UNKNOWN: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TEMP_MIN: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TEMP_MAX: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
     class HvacTemperatureZone(_message.Message):
-        __slots__ = ('TEMP_ZONE_UNKNOWN', 'TEMP_ZONE_FRONT_LEFT', 'TEMP_ZONE_FRONT_RIGHT', 'TEMP_ZONE_REAR')
+        __slots__ = ("TEMP_ZONE_UNKNOWN", "TEMP_ZONE_FRONT_LEFT", "TEMP_ZONE_FRONT_RIGHT", "TEMP_ZONE_REAR")
         TEMP_ZONE_UNKNOWN_FIELD_NUMBER: _ClassVar[int]
         TEMP_ZONE_FRONT_LEFT_FIELD_NUMBER: _ClassVar[int]
         TEMP_ZONE_FRONT_RIGHT_FIELD_NUMBER: _ClassVar[int]
@@ -1246,9 +1084,7 @@ class HvacTemperatureAdjustmentAction(_message.Message):
         TEMP_ZONE_FRONT_LEFT: _common_pb2.Void
         TEMP_ZONE_FRONT_RIGHT: _common_pb2.Void
         TEMP_ZONE_REAR: _common_pb2.Void
-
-        def __init__(self, TEMP_ZONE_UNKNOWN: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., TEMP_ZONE_FRONT_LEFT: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., TEMP_ZONE_FRONT_RIGHT: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., TEMP_ZONE_REAR: _Optional[_Union[_common_pb2.Void, _Mapping]]=...) -> None:
-            ...
+        def __init__(self, TEMP_ZONE_UNKNOWN: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TEMP_ZONE_FRONT_LEFT: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TEMP_ZONE_FRONT_RIGHT: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TEMP_ZONE_REAR: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
     DELTA_CELSIUS_FIELD_NUMBER: _ClassVar[int]
     DELTA_PERCENT_FIELD_NUMBER: _ClassVar[int]
     ABSOLUTE_CELSIUS_FIELD_NUMBER: _ClassVar[int]
@@ -1263,24 +1099,20 @@ class HvacTemperatureAdjustmentAction(_message.Message):
     hvac_temperature_zone: _containers.RepeatedCompositeFieldContainer[HvacTemperatureAdjustmentAction.HvacTemperatureZone]
     driver_temp_celsius: float
     passenger_temp_celsius: float
-
-    def __init__(self, delta_celsius: _Optional[float]=..., delta_percent: _Optional[int]=..., absolute_celsius: _Optional[float]=..., level: _Optional[_Union[HvacTemperatureAdjustmentAction.Temperature, _Mapping]]=..., hvac_temperature_zone: _Optional[_Iterable[_Union[HvacTemperatureAdjustmentAction.HvacTemperatureZone, _Mapping]]]=..., driver_temp_celsius: _Optional[float]=..., passenger_temp_celsius: _Optional[float]=...) -> None:
-        ...
+    def __init__(self, delta_celsius: _Optional[float] = ..., delta_percent: _Optional[int] = ..., absolute_celsius: _Optional[float] = ..., level: _Optional[_Union[HvacTemperatureAdjustmentAction.Temperature, _Mapping]] = ..., hvac_temperature_zone: _Optional[_Iterable[_Union[HvacTemperatureAdjustmentAction.HvacTemperatureZone, _Mapping]]] = ..., driver_temp_celsius: _Optional[float] = ..., passenger_temp_celsius: _Optional[float] = ...) -> None: ...
 
 class GetNearbyChargingSites(_message.Message):
-    __slots__ = ('include_meta_data', 'radius', 'count')
+    __slots__ = ("include_meta_data", "radius", "count")
     INCLUDE_META_DATA_FIELD_NUMBER: _ClassVar[int]
     RADIUS_FIELD_NUMBER: _ClassVar[int]
     COUNT_FIELD_NUMBER: _ClassVar[int]
     include_meta_data: bool
     radius: int
     count: int
-
-    def __init__(self, include_meta_data: _Optional[bool]=..., radius: _Optional[int]=..., count: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, include_meta_data: _Optional[bool] = ..., radius: _Optional[int] = ..., count: _Optional[int] = ...) -> None: ...
 
 class NearbyChargingSites(_message.Message):
-    __slots__ = ('timestamp', 'destination_charging', 'superchargers', 'congestion_sync_time_utc_secs')
+    __slots__ = ("timestamp", "destination_charging", "superchargers", "congestion_sync_time_utc_secs")
     TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     DESTINATION_CHARGING_FIELD_NUMBER: _ClassVar[int]
     SUPERCHARGERS_FIELD_NUMBER: _ClassVar[int]
@@ -1289,12 +1121,10 @@ class NearbyChargingSites(_message.Message):
     destination_charging: _containers.RepeatedCompositeFieldContainer[DestinationCharging]
     superchargers: _containers.RepeatedCompositeFieldContainer[Superchargers]
     congestion_sync_time_utc_secs: int
-
-    def __init__(self, timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., destination_charging: _Optional[_Iterable[_Union[DestinationCharging, _Mapping]]]=..., superchargers: _Optional[_Iterable[_Union[Superchargers, _Mapping]]]=..., congestion_sync_time_utc_secs: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., destination_charging: _Optional[_Iterable[_Union[DestinationCharging, _Mapping]]] = ..., superchargers: _Optional[_Iterable[_Union[Superchargers, _Mapping]]] = ..., congestion_sync_time_utc_secs: _Optional[int] = ...) -> None: ...
 
 class DestinationCharging(_message.Message):
-    __slots__ = ('id', 'amenities', 'city', 'country', 'distance_miles', 'district', 'location', 'name', 'postal_code', 'state', 'street_address', 'within_range')
+    __slots__ = ("id", "amenities", "city", "country", "distance_miles", "district", "location", "name", "postal_code", "state", "street_address", "within_range")
     ID_FIELD_NUMBER: _ClassVar[int]
     AMENITIES_FIELD_NUMBER: _ClassVar[int]
     CITY_FIELD_NUMBER: _ClassVar[int]
@@ -1319,12 +1149,10 @@ class DestinationCharging(_message.Message):
     state: str
     street_address: str
     within_range: bool
-
-    def __init__(self, id: _Optional[int]=..., amenities: _Optional[str]=..., city: _Optional[str]=..., country: _Optional[str]=..., distance_miles: _Optional[float]=..., district: _Optional[str]=..., location: _Optional[_Union[_common_pb2.LatLong, _Mapping]]=..., name: _Optional[str]=..., postal_code: _Optional[str]=..., state: _Optional[str]=..., street_address: _Optional[str]=..., within_range: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, id: _Optional[int] = ..., amenities: _Optional[str] = ..., city: _Optional[str] = ..., country: _Optional[str] = ..., distance_miles: _Optional[float] = ..., district: _Optional[str] = ..., location: _Optional[_Union[_common_pb2.LatLong, _Mapping]] = ..., name: _Optional[str] = ..., postal_code: _Optional[str] = ..., state: _Optional[str] = ..., street_address: _Optional[str] = ..., within_range: _Optional[bool] = ...) -> None: ...
 
 class Superchargers(_message.Message):
-    __slots__ = ('id', 'amenities', 'available_stalls', 'billing_info', 'billing_time', 'city', 'country', 'distance_miles', 'district', 'location', 'name', 'postal_code', 'site_closed', 'state', 'street_address', 'total_stalls', 'within_range', 'max_power_kw', 'out_of_order_stalls_number', 'out_of_order_stalls_names')
+    __slots__ = ("id", "amenities", "available_stalls", "billing_info", "billing_time", "city", "country", "distance_miles", "district", "location", "name", "postal_code", "site_closed", "state", "street_address", "total_stalls", "within_range", "max_power_kw", "out_of_order_stalls_number", "out_of_order_stalls_names")
     ID_FIELD_NUMBER: _ClassVar[int]
     AMENITIES_FIELD_NUMBER: _ClassVar[int]
     AVAILABLE_STALLS_FIELD_NUMBER: _ClassVar[int]
@@ -1365,104 +1193,76 @@ class Superchargers(_message.Message):
     max_power_kw: int
     out_of_order_stalls_number: int
     out_of_order_stalls_names: str
-
-    def __init__(self, id: _Optional[int]=..., amenities: _Optional[str]=..., available_stalls: _Optional[int]=..., billing_info: _Optional[str]=..., billing_time: _Optional[str]=..., city: _Optional[str]=..., country: _Optional[str]=..., distance_miles: _Optional[float]=..., district: _Optional[str]=..., location: _Optional[_Union[_common_pb2.LatLong, _Mapping]]=..., name: _Optional[str]=..., postal_code: _Optional[str]=..., site_closed: _Optional[bool]=..., state: _Optional[str]=..., street_address: _Optional[str]=..., total_stalls: _Optional[int]=..., within_range: _Optional[bool]=..., max_power_kw: _Optional[int]=..., out_of_order_stalls_number: _Optional[int]=..., out_of_order_stalls_names: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, id: _Optional[int] = ..., amenities: _Optional[str] = ..., available_stalls: _Optional[int] = ..., billing_info: _Optional[str] = ..., billing_time: _Optional[str] = ..., city: _Optional[str] = ..., country: _Optional[str] = ..., distance_miles: _Optional[float] = ..., district: _Optional[str] = ..., location: _Optional[_Union[_common_pb2.LatLong, _Mapping]] = ..., name: _Optional[str] = ..., postal_code: _Optional[str] = ..., site_closed: _Optional[bool] = ..., state: _Optional[str] = ..., street_address: _Optional[str] = ..., total_stalls: _Optional[int] = ..., within_range: _Optional[bool] = ..., max_power_kw: _Optional[int] = ..., out_of_order_stalls_number: _Optional[int] = ..., out_of_order_stalls_names: _Optional[str] = ...) -> None: ...
 
 class MediaPlayAction(_message.Message):
-    __slots__ = ('media_playback_status',)
+    __slots__ = ("media_playback_status",)
     MEDIA_PLAYBACK_STATUS_FIELD_NUMBER: _ClassVar[int]
     media_playback_status: _common_pb2.MediaPlaybackStatus
-
-    def __init__(self, media_playback_status: _Optional[_Union[_common_pb2.MediaPlaybackStatus, str]]=...) -> None:
-        ...
+    def __init__(self, media_playback_status: _Optional[_Union[_common_pb2.MediaPlaybackStatus, str]] = ...) -> None: ...
 
 class MediaUpdateVolume(_message.Message):
-    __slots__ = ('volume_delta', 'volume_absolute_float')
+    __slots__ = ("volume_delta", "volume_absolute_float")
     VOLUME_DELTA_FIELD_NUMBER: _ClassVar[int]
     VOLUME_ABSOLUTE_FLOAT_FIELD_NUMBER: _ClassVar[int]
     volume_delta: int
     volume_absolute_float: float
-
-    def __init__(self, volume_delta: _Optional[int]=..., volume_absolute_float: _Optional[float]=...) -> None:
-        ...
+    def __init__(self, volume_delta: _Optional[int] = ..., volume_absolute_float: _Optional[float] = ...) -> None: ...
 
 class MediaNextFavorite(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class MediaPreviousFavorite(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class MediaNextTrack(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class MediaPreviousTrack(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class VehicleControlCancelSoftwareUpdateAction(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class VehicleControlFlashLightsAction(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class VehicleControlHonkHornAction(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class VehicleControlResetValetPinAction(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class VehicleControlScheduleSoftwareUpdateAction(_message.Message):
-    __slots__ = ('offset_sec',)
+    __slots__ = ("offset_sec",)
     OFFSET_SEC_FIELD_NUMBER: _ClassVar[int]
     offset_sec: int
-
-    def __init__(self, offset_sec: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, offset_sec: _Optional[int] = ...) -> None: ...
 
 class VehicleControlSetSentryModeAction(_message.Message):
-    __slots__ = ('on',)
+    __slots__ = ("on",)
     ON_FIELD_NUMBER: _ClassVar[int]
     on: bool
-
-    def __init__(self, on: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, on: _Optional[bool] = ...) -> None: ...
 
 class VehicleControlSetValetModeAction(_message.Message):
-    __slots__ = ('on', 'password')
+    __slots__ = ("on", "password")
     ON_FIELD_NUMBER: _ClassVar[int]
     PASSWORD_FIELD_NUMBER: _ClassVar[int]
     on: bool
     password: str
-
-    def __init__(self, on: _Optional[bool]=..., password: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, on: _Optional[bool] = ..., password: _Optional[str] = ...) -> None: ...
 
 class VehicleControlSunroofOpenCloseAction(_message.Message):
-    __slots__ = ('absolute_level', 'delta_level', 'vent', 'close', 'open')
+    __slots__ = ("absolute_level", "delta_level", "vent", "close", "open")
     ABSOLUTE_LEVEL_FIELD_NUMBER: _ClassVar[int]
     DELTA_LEVEL_FIELD_NUMBER: _ClassVar[int]
     VENT_FIELD_NUMBER: _ClassVar[int]
@@ -1473,45 +1273,36 @@ class VehicleControlSunroofOpenCloseAction(_message.Message):
     vent: _common_pb2.Void
     close: _common_pb2.Void
     open: _common_pb2.Void
-
-    def __init__(self, absolute_level: _Optional[int]=..., delta_level: _Optional[int]=..., vent: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., close: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., open: _Optional[_Union[_common_pb2.Void, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, absolute_level: _Optional[int] = ..., delta_level: _Optional[int] = ..., vent: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., close: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., open: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
 class VehicleControlTriggerHomelinkAction(_message.Message):
-    __slots__ = ('location', 'token')
+    __slots__ = ("location", "token")
     LOCATION_FIELD_NUMBER: _ClassVar[int]
     TOKEN_FIELD_NUMBER: _ClassVar[int]
     location: _common_pb2.LatLong
     token: str
-
-    def __init__(self, location: _Optional[_Union[_common_pb2.LatLong, _Mapping]]=..., token: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, location: _Optional[_Union[_common_pb2.LatLong, _Mapping]] = ..., token: _Optional[str] = ...) -> None: ...
 
 class VehicleControlWindowAction(_message.Message):
-    __slots__ = ('unknown', 'vent', 'close')
+    __slots__ = ("unknown", "vent", "close")
     UNKNOWN_FIELD_NUMBER: _ClassVar[int]
     VENT_FIELD_NUMBER: _ClassVar[int]
     CLOSE_FIELD_NUMBER: _ClassVar[int]
     unknown: _common_pb2.Void
     vent: _common_pb2.Void
     close: _common_pb2.Void
-
-    def __init__(self, unknown: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., vent: _Optional[_Union[_common_pb2.Void, _Mapping]]=..., close: _Optional[_Union[_common_pb2.Void, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, unknown: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., vent: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., close: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
 class HvacBioweaponModeAction(_message.Message):
-    __slots__ = ('on', 'manual_override')
+    __slots__ = ("on", "manual_override")
     ON_FIELD_NUMBER: _ClassVar[int]
     MANUAL_OVERRIDE_FIELD_NUMBER: _ClassVar[int]
     on: bool
     manual_override: bool
-
-    def __init__(self, on: _Optional[bool]=..., manual_override: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, on: _Optional[bool] = ..., manual_override: _Optional[bool] = ...) -> None: ...
 
 class AutoSeatClimateAction(_message.Message):
-    __slots__ = ('carseat',)
-
+    __slots__ = ("carseat",)
     class AutoSeatPosition_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         AutoSeatPosition_Unknown: _ClassVar[AutoSeatClimateAction.AutoSeatPosition_E]
@@ -1520,46 +1311,37 @@ class AutoSeatClimateAction(_message.Message):
     AutoSeatPosition_Unknown: AutoSeatClimateAction.AutoSeatPosition_E
     AutoSeatPosition_FrontLeft: AutoSeatClimateAction.AutoSeatPosition_E
     AutoSeatPosition_FrontRight: AutoSeatClimateAction.AutoSeatPosition_E
-
     class CarSeat(_message.Message):
-        __slots__ = ('on', 'seat_position')
+        __slots__ = ("on", "seat_position")
         ON_FIELD_NUMBER: _ClassVar[int]
         SEAT_POSITION_FIELD_NUMBER: _ClassVar[int]
         on: bool
         seat_position: AutoSeatClimateAction.AutoSeatPosition_E
-
-        def __init__(self, on: _Optional[bool]=..., seat_position: _Optional[_Union[AutoSeatClimateAction.AutoSeatPosition_E, str]]=...) -> None:
-            ...
+        def __init__(self, on: _Optional[bool] = ..., seat_position: _Optional[_Union[AutoSeatClimateAction.AutoSeatPosition_E, str]] = ...) -> None: ...
     CARSEAT_FIELD_NUMBER: _ClassVar[int]
     carseat: _containers.RepeatedCompositeFieldContainer[AutoSeatClimateAction.CarSeat]
-
-    def __init__(self, carseat: _Optional[_Iterable[_Union[AutoSeatClimateAction.CarSeat, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, carseat: _Optional[_Iterable[_Union[AutoSeatClimateAction.CarSeat, _Mapping]]] = ...) -> None: ...
 
 class Ping(_message.Message):
-    __slots__ = ('ping_id', 'local_timestamp', 'last_remote_timestamp')
+    __slots__ = ("ping_id", "local_timestamp", "last_remote_timestamp")
     PING_ID_FIELD_NUMBER: _ClassVar[int]
     LOCAL_TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     LAST_REMOTE_TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     ping_id: int
     local_timestamp: _timestamp_pb2.Timestamp
     last_remote_timestamp: _timestamp_pb2.Timestamp
-
-    def __init__(self, ping_id: _Optional[int]=..., local_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., last_remote_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, ping_id: _Optional[int] = ..., local_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., last_remote_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class ScheduledChargingAction(_message.Message):
-    __slots__ = ('enabled', 'charging_time')
+    __slots__ = ("enabled", "charging_time")
     ENABLED_FIELD_NUMBER: _ClassVar[int]
     CHARGING_TIME_FIELD_NUMBER: _ClassVar[int]
     enabled: bool
     charging_time: int
-
-    def __init__(self, enabled: _Optional[bool]=..., charging_time: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, enabled: _Optional[bool] = ..., charging_time: _Optional[int] = ...) -> None: ...
 
 class ScheduledDepartureAction(_message.Message):
-    __slots__ = ('enabled', 'departure_time', 'preconditioning_times', 'off_peak_charging_times', 'off_peak_hours_end_time')
+    __slots__ = ("enabled", "departure_time", "preconditioning_times", "off_peak_charging_times", "off_peak_hours_end_time")
     ENABLED_FIELD_NUMBER: _ClassVar[int]
     DEPARTURE_TIME_FIELD_NUMBER: _ClassVar[int]
     PRECONDITIONING_TIMES_FIELD_NUMBER: _ClassVar[int]
@@ -1570,13 +1352,10 @@ class ScheduledDepartureAction(_message.Message):
     preconditioning_times: _common_pb2.PreconditioningTimes
     off_peak_charging_times: _common_pb2.OffPeakChargingTimes
     off_peak_hours_end_time: int
-
-    def __init__(self, enabled: _Optional[bool]=..., departure_time: _Optional[int]=..., preconditioning_times: _Optional[_Union[_common_pb2.PreconditioningTimes, _Mapping]]=..., off_peak_charging_times: _Optional[_Union[_common_pb2.OffPeakChargingTimes, _Mapping]]=..., off_peak_hours_end_time: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, enabled: _Optional[bool] = ..., departure_time: _Optional[int] = ..., preconditioning_times: _Optional[_Union[_common_pb2.PreconditioningTimes, _Mapping]] = ..., off_peak_charging_times: _Optional[_Union[_common_pb2.OffPeakChargingTimes, _Mapping]] = ..., off_peak_hours_end_time: _Optional[int] = ...) -> None: ...
 
 class HvacClimateKeeperAction(_message.Message):
-    __slots__ = ('ClimateKeeperAction', 'manual_override', 'manual_override_mode')
-
+    __slots__ = ("ClimateKeeperAction", "manual_override", "manual_override_mode")
     class ClimateKeeperAction_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         ClimateKeeperAction_Off: _ClassVar[HvacClimateKeeperAction.ClimateKeeperAction_E]
@@ -1587,7 +1366,6 @@ class HvacClimateKeeperAction(_message.Message):
     ClimateKeeperAction_On: HvacClimateKeeperAction.ClimateKeeperAction_E
     ClimateKeeperAction_Dog: HvacClimateKeeperAction.ClimateKeeperAction_E
     ClimateKeeperAction_Camp: HvacClimateKeeperAction.ClimateKeeperAction_E
-
     class ManualOverrideMode_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         Soc: _ClassVar[HvacClimateKeeperAction.ManualOverrideMode_E]
@@ -1600,165 +1378,126 @@ class HvacClimateKeeperAction(_message.Message):
     ClimateKeeperAction: HvacClimateKeeperAction.ClimateKeeperAction_E
     manual_override: bool
     manual_override_mode: _containers.RepeatedScalarFieldContainer[HvacClimateKeeperAction.ManualOverrideMode_E]
-
-    def __init__(self, ClimateKeeperAction: _Optional[_Union[HvacClimateKeeperAction.ClimateKeeperAction_E, str]]=..., manual_override: _Optional[bool]=..., manual_override_mode: _Optional[_Iterable[_Union[HvacClimateKeeperAction.ManualOverrideMode_E, str]]]=...) -> None:
-        ...
+    def __init__(self, ClimateKeeperAction: _Optional[_Union[HvacClimateKeeperAction.ClimateKeeperAction_E, str]] = ..., manual_override: _Optional[bool] = ..., manual_override_mode: _Optional[_Iterable[_Union[HvacClimateKeeperAction.ManualOverrideMode_E, str]]] = ...) -> None: ...
 
 class HvacRecirculationAction(_message.Message):
-    __slots__ = ('on',)
+    __slots__ = ("on",)
     ON_FIELD_NUMBER: _ClassVar[int]
     on: bool
-
-    def __init__(self, on: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, on: _Optional[bool] = ...) -> None: ...
 
 class SetChargingAmpsAction(_message.Message):
-    __slots__ = ('charging_amps',)
+    __slots__ = ("charging_amps",)
     CHARGING_AMPS_FIELD_NUMBER: _ClassVar[int]
     charging_amps: int
-
-    def __init__(self, charging_amps: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, charging_amps: _Optional[int] = ...) -> None: ...
 
 class RemoveChargeScheduleAction(_message.Message):
-    __slots__ = ('id',)
+    __slots__ = ("id",)
     ID_FIELD_NUMBER: _ClassVar[int]
     id: int
-
-    def __init__(self, id: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, id: _Optional[int] = ...) -> None: ...
 
 class BatchRemoveChargeSchedulesAction(_message.Message):
-    __slots__ = ('home', 'work', 'other')
+    __slots__ = ("home", "work", "other")
     HOME_FIELD_NUMBER: _ClassVar[int]
     WORK_FIELD_NUMBER: _ClassVar[int]
     OTHER_FIELD_NUMBER: _ClassVar[int]
     home: bool
     work: bool
     other: bool
-
-    def __init__(self, home: _Optional[bool]=..., work: _Optional[bool]=..., other: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, home: _Optional[bool] = ..., work: _Optional[bool] = ..., other: _Optional[bool] = ...) -> None: ...
 
 class BatchRemovePreconditionSchedulesAction(_message.Message):
-    __slots__ = ('home', 'work', 'other')
+    __slots__ = ("home", "work", "other")
     HOME_FIELD_NUMBER: _ClassVar[int]
     WORK_FIELD_NUMBER: _ClassVar[int]
     OTHER_FIELD_NUMBER: _ClassVar[int]
     home: bool
     work: bool
     other: bool
-
-    def __init__(self, home: _Optional[bool]=..., work: _Optional[bool]=..., other: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, home: _Optional[bool] = ..., work: _Optional[bool] = ..., other: _Optional[bool] = ...) -> None: ...
 
 class RemovePreconditionScheduleAction(_message.Message):
-    __slots__ = ('id',)
+    __slots__ = ("id",)
     ID_FIELD_NUMBER: _ClassVar[int]
     id: int
-
-    def __init__(self, id: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, id: _Optional[int] = ...) -> None: ...
 
 class SetCabinOverheatProtectionAction(_message.Message):
-    __slots__ = ('on', 'fan_only')
+    __slots__ = ("on", "fan_only")
     ON_FIELD_NUMBER: _ClassVar[int]
     FAN_ONLY_FIELD_NUMBER: _ClassVar[int]
     on: bool
     fan_only: bool
-
-    def __init__(self, on: _Optional[bool]=..., fan_only: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, on: _Optional[bool] = ..., fan_only: _Optional[bool] = ...) -> None: ...
 
 class SetVehicleNameAction(_message.Message):
-    __slots__ = ('vehicleName',)
+    __slots__ = ("vehicleName",)
     VEHICLENAME_FIELD_NUMBER: _ClassVar[int]
     vehicleName: str
-
-    def __init__(self, vehicleName: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, vehicleName: _Optional[str] = ...) -> None: ...
 
 class ChargePortDoorClose(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class ChargePortDoorOpen(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class BoomboxAction(_message.Message):
-    __slots__ = ('sound',)
+    __slots__ = ("sound",)
     SOUND_FIELD_NUMBER: _ClassVar[int]
     sound: int
-
-    def __init__(self, sound: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, sound: _Optional[int] = ...) -> None: ...
 
 class SetCopTempAction(_message.Message):
-    __slots__ = ('copActivationTemp',)
+    __slots__ = ("copActivationTemp",)
     COPACTIVATIONTEMP_FIELD_NUMBER: _ClassVar[int]
     copActivationTemp: _vehicle_pb2.ClimateState.CopActivationTemp
-
-    def __init__(self, copActivationTemp: _Optional[_Union[_vehicle_pb2.ClimateState.CopActivationTemp, str]]=...) -> None:
-        ...
+    def __init__(self, copActivationTemp: _Optional[_Union[_vehicle_pb2.ClimateState.CopActivationTemp, str]] = ...) -> None: ...
 
 class VehicleControlSetPinToDriveAction(_message.Message):
-    __slots__ = ('on', 'password')
+    __slots__ = ("on", "password")
     ON_FIELD_NUMBER: _ClassVar[int]
     PASSWORD_FIELD_NUMBER: _ClassVar[int]
     on: bool
     password: str
-
-    def __init__(self, on: _Optional[bool]=..., password: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, on: _Optional[bool] = ..., password: _Optional[str] = ...) -> None: ...
 
 class VehicleControlResetPinToDriveAction(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class RemoteStartDrive(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class CreateStreamSession(_message.Message):
-    __slots__ = ('session_id',)
+    __slots__ = ("session_id",)
     SESSION_ID_FIELD_NUMBER: _ClassVar[int]
     session_id: str
-
-    def __init__(self, session_id: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, session_id: _Optional[str] = ...) -> None: ...
 
 class StreamMessage(_message.Message):
-    __slots__ = ('session_id', 'data')
+    __slots__ = ("session_id", "data")
     SESSION_ID_FIELD_NUMBER: _ClassVar[int]
     DATA_FIELD_NUMBER: _ClassVar[int]
     session_id: str
     data: bytes
-
-    def __init__(self, session_id: _Optional[str]=..., data: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, session_id: _Optional[str] = ..., data: _Optional[bytes] = ...) -> None: ...
 
 class NavigationRequest(_message.Message):
-    __slots__ = ('destination', 'order')
+    __slots__ = ("destination", "order")
     DESTINATION_FIELD_NUMBER: _ClassVar[int]
     ORDER_FIELD_NUMBER: _ClassVar[int]
     destination: str
     order: int
-
-    def __init__(self, destination: _Optional[str]=..., order: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, destination: _Optional[str] = ..., order: _Optional[int] = ...) -> None: ...
 
 class NavigationSuperchargerRequest(_message.Message):
-    __slots__ = ('id', 'remote_nav_trip_order')
-
+    __slots__ = ("id", "remote_nav_trip_order")
     class RemoteNavTripOrder(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         REMOTE_NAV_TRIP_ORDER_UNKNOWN: _ClassVar[NavigationSuperchargerRequest.RemoteNavTripOrder]
@@ -1773,28 +1512,21 @@ class NavigationSuperchargerRequest(_message.Message):
     REMOTE_NAV_TRIP_ORDER_FIELD_NUMBER: _ClassVar[int]
     id: int
     remote_nav_trip_order: NavigationSuperchargerRequest.RemoteNavTripOrder
-
-    def __init__(self, id: _Optional[int]=..., remote_nav_trip_order: _Optional[_Union[NavigationSuperchargerRequest.RemoteNavTripOrder, str]]=...) -> None:
-        ...
+    def __init__(self, id: _Optional[int] = ..., remote_nav_trip_order: _Optional[_Union[NavigationSuperchargerRequest.RemoteNavTripOrder, str]] = ...) -> None: ...
 
 class UiSetUpcomingCalendarEntries(_message.Message):
-    __slots__ = ('calendar_data',)
+    __slots__ = ("calendar_data",)
     CALENDAR_DATA_FIELD_NUMBER: _ClassVar[int]
     calendar_data: str
-
-    def __init__(self, calendar_data: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, calendar_data: _Optional[str] = ...) -> None: ...
 
 class VehicleDataSubscription(_message.Message):
-    __slots__ = ('pii_key_request', 'subscription_duration_s', 'subscription_ping_s', 'gui_settings_max_update_rate_ms', 'charge_state_max_update_rate_ms', 'climate_state_max_update_rate_ms', 'drive_state_max_update_rate_ms', 'vehicle_state_max_update_rate_ms', 'vehicle_config_max_update_rate_ms', 'location_state_max_update_rate_ms', 'closures_state_max_update_rate_ms', 'parked_accessory_state_max_update_rate_ms', 'charge_schedule_state_max_update_rate_ms', 'preconditioning_schedule_state_max_update_rate_ms', 'alert_state_max_update_rate_ms', 'suspension_state_max_update_rate_ms', 'child_presence_detection_state_max_update_rate_ms', 'display_state_max_update_rate_ms')
-
+    __slots__ = ("pii_key_request", "subscription_duration_s", "subscription_ping_s", "gui_settings_max_update_rate_ms", "charge_state_max_update_rate_ms", "climate_state_max_update_rate_ms", "drive_state_max_update_rate_ms", "vehicle_state_max_update_rate_ms", "vehicle_config_max_update_rate_ms", "location_state_max_update_rate_ms", "closures_state_max_update_rate_ms", "parked_accessory_state_max_update_rate_ms", "charge_schedule_state_max_update_rate_ms", "preconditioning_schedule_state_max_update_rate_ms", "alert_state_max_update_rate_ms", "suspension_state_max_update_rate_ms", "child_presence_detection_state_max_update_rate_ms", "display_state_max_update_rate_ms")
     class PiiKeyRequest(_message.Message):
-        __slots__ = ('subscriber_public_key',)
+        __slots__ = ("subscriber_public_key",)
         SUBSCRIBER_PUBLIC_KEY_FIELD_NUMBER: _ClassVar[int]
         subscriber_public_key: str
-
-        def __init__(self, subscriber_public_key: _Optional[str]=...) -> None:
-            ...
+        def __init__(self, subscriber_public_key: _Optional[str] = ...) -> None: ...
     PII_KEY_REQUEST_FIELD_NUMBER: _ClassVar[int]
     SUBSCRIPTION_DURATION_S_FIELD_NUMBER: _ClassVar[int]
     SUBSCRIPTION_PING_S_FIELD_NUMBER: _ClassVar[int]
@@ -1831,12 +1563,10 @@ class VehicleDataSubscription(_message.Message):
     suspension_state_max_update_rate_ms: int
     child_presence_detection_state_max_update_rate_ms: int
     display_state_max_update_rate_ms: int
-
-    def __init__(self, pii_key_request: _Optional[_Union[VehicleDataSubscription.PiiKeyRequest, _Mapping]]=..., subscription_duration_s: _Optional[int]=..., subscription_ping_s: _Optional[int]=..., gui_settings_max_update_rate_ms: _Optional[int]=..., charge_state_max_update_rate_ms: _Optional[int]=..., climate_state_max_update_rate_ms: _Optional[int]=..., drive_state_max_update_rate_ms: _Optional[int]=..., vehicle_state_max_update_rate_ms: _Optional[int]=..., vehicle_config_max_update_rate_ms: _Optional[int]=..., location_state_max_update_rate_ms: _Optional[int]=..., closures_state_max_update_rate_ms: _Optional[int]=..., parked_accessory_state_max_update_rate_ms: _Optional[int]=..., charge_schedule_state_max_update_rate_ms: _Optional[int]=..., preconditioning_schedule_state_max_update_rate_ms: _Optional[int]=..., alert_state_max_update_rate_ms: _Optional[int]=..., suspension_state_max_update_rate_ms: _Optional[int]=..., child_presence_detection_state_max_update_rate_ms: _Optional[int]=..., display_state_max_update_rate_ms: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, pii_key_request: _Optional[_Union[VehicleDataSubscription.PiiKeyRequest, _Mapping]] = ..., subscription_duration_s: _Optional[int] = ..., subscription_ping_s: _Optional[int] = ..., gui_settings_max_update_rate_ms: _Optional[int] = ..., charge_state_max_update_rate_ms: _Optional[int] = ..., climate_state_max_update_rate_ms: _Optional[int] = ..., drive_state_max_update_rate_ms: _Optional[int] = ..., vehicle_state_max_update_rate_ms: _Optional[int] = ..., vehicle_config_max_update_rate_ms: _Optional[int] = ..., location_state_max_update_rate_ms: _Optional[int] = ..., closures_state_max_update_rate_ms: _Optional[int] = ..., parked_accessory_state_max_update_rate_ms: _Optional[int] = ..., charge_schedule_state_max_update_rate_ms: _Optional[int] = ..., preconditioning_schedule_state_max_update_rate_ms: _Optional[int] = ..., alert_state_max_update_rate_ms: _Optional[int] = ..., suspension_state_max_update_rate_ms: _Optional[int] = ..., child_presence_detection_state_max_update_rate_ms: _Optional[int] = ..., display_state_max_update_rate_ms: _Optional[int] = ...) -> None: ...
 
 class VehicleDataAck(_message.Message):
-    __slots__ = ('charge_state_timestamp', 'climate_state_timestamp', 'closures_state_timestamp', 'drive_state_timestamp', 'gui_settings_timestamp', 'location_state_timestamp', 'vehicle_config_timestamp', 'vehicle_state_timestamp', 'parked_accessory_state_timestamp', 'charge_schedule_state_timestamp', 'preconditioning_schedule_state_timestamp', 'alert_state_timestamp', 'suspension_state_timestamp', 'display_state_timestamp', 'decryption_error_field')
+    __slots__ = ("charge_state_timestamp", "climate_state_timestamp", "closures_state_timestamp", "drive_state_timestamp", "gui_settings_timestamp", "location_state_timestamp", "vehicle_config_timestamp", "vehicle_state_timestamp", "parked_accessory_state_timestamp", "charge_schedule_state_timestamp", "preconditioning_schedule_state_timestamp", "alert_state_timestamp", "suspension_state_timestamp", "display_state_timestamp", "decryption_error_field")
     CHARGE_STATE_TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     CLIMATE_STATE_TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     CLOSURES_STATE_TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
@@ -1867,51 +1597,38 @@ class VehicleDataAck(_message.Message):
     suspension_state_timestamp: _timestamp_pb2.Timestamp
     display_state_timestamp: _timestamp_pb2.Timestamp
     decryption_error_field: _containers.RepeatedScalarFieldContainer[int]
-
-    def __init__(self, charge_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., climate_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., closures_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., drive_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., gui_settings_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., location_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., vehicle_config_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., vehicle_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., parked_accessory_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., charge_schedule_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., preconditioning_schedule_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., alert_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., suspension_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., display_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., decryption_error_field: _Optional[_Iterable[int]]=...) -> None:
-        ...
+    def __init__(self, charge_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., climate_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., closures_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., drive_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., gui_settings_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., location_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., vehicle_config_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., vehicle_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., parked_accessory_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., charge_schedule_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., preconditioning_schedule_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., alert_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., suspension_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., display_state_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., decryption_error_field: _Optional[_Iterable[int]] = ...) -> None: ...
 
 class VitalsSubscription(_message.Message):
-    __slots__ = ('session_id',)
+    __slots__ = ("session_id",)
     SESSION_ID_FIELD_NUMBER: _ClassVar[int]
     session_id: int
-
-    def __init__(self, session_id: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, session_id: _Optional[int] = ...) -> None: ...
 
 class VitalsAck(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class DashcamSaveClipAction(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class PiiKeyRequest(_message.Message):
-    __slots__ = ('subscriber_public_key', 'pii_key_expiration')
+    __slots__ = ("subscriber_public_key", "pii_key_expiration")
     SUBSCRIBER_PUBLIC_KEY_FIELD_NUMBER: _ClassVar[int]
     PII_KEY_EXPIRATION_FIELD_NUMBER: _ClassVar[int]
     subscriber_public_key: str
     pii_key_expiration: _timestamp_pb2.Timestamp
-
-    def __init__(self, subscriber_public_key: _Optional[str]=..., pii_key_expiration: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, subscriber_public_key: _Optional[str] = ..., pii_key_expiration: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class PseudonymSyncRequest(_message.Message):
-    __slots__ = ('last_known_pseudonym_hashed',)
+    __slots__ = ("last_known_pseudonym_hashed",)
     LAST_KNOWN_PSEUDONYM_HASHED_FIELD_NUMBER: _ClassVar[int]
     last_known_pseudonym_hashed: bytes
-
-    def __init__(self, last_known_pseudonym_hashed: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, last_known_pseudonym_hashed: _Optional[bytes] = ...) -> None: ...
 
 class NavigationGpsRequest(_message.Message):
-    __slots__ = ('lat', 'lon', 'order')
-
+    __slots__ = ("lat", "lon", "order")
     class RemoteNavTripOrder(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         REMOTE_NAV_TRIP_ORDER_UNKNOWN: _ClassVar[NavigationGpsRequest.RemoteNavTripOrder]
@@ -1928,15 +1645,12 @@ class NavigationGpsRequest(_message.Message):
     lat: float
     lon: float
     order: NavigationGpsRequest.RemoteNavTripOrder
-
-    def __init__(self, lat: _Optional[float]=..., lon: _Optional[float]=..., order: _Optional[_Union[NavigationGpsRequest.RemoteNavTripOrder, str]]=...) -> None:
-        ...
+    def __init__(self, lat: _Optional[float] = ..., lon: _Optional[float] = ..., order: _Optional[_Union[NavigationGpsRequest.RemoteNavTripOrder, str]] = ...) -> None: ...
 
 class SetRateTariffRequest(_message.Message):
-    __slots__ = ('code', 'name', 'utility', 'currency', 'daily_charges', 'monthly_charges', 'monthly_minimum_bill', 'demand_charges', 'daily_demand_charges', 'energy_charges', 'max_applicable_demand', 'min_applicable_demand', 'seasons', 'tariff')
-
+    __slots__ = ("code", "name", "utility", "currency", "daily_charges", "monthly_charges", "monthly_minimum_bill", "demand_charges", "daily_demand_charges", "energy_charges", "max_applicable_demand", "min_applicable_demand", "seasons", "tariff")
     class TOUPeriod(_message.Message):
-        __slots__ = ('from_day_of_week', 'to_day_of_week', 'from_hour', 'from_minute', 'to_hour', 'to_minute')
+        __slots__ = ("from_day_of_week", "to_day_of_week", "from_hour", "from_minute", "to_hour", "to_minute")
         FROM_DAY_OF_WEEK_FIELD_NUMBER: _ClassVar[int]
         TO_DAY_OF_WEEK_FIELD_NUMBER: _ClassVar[int]
         FROM_HOUR_FIELD_NUMBER: _ClassVar[int]
@@ -1949,12 +1663,9 @@ class SetRateTariffRequest(_message.Message):
         from_minute: int
         to_hour: int
         to_minute: int
-
-        def __init__(self, from_day_of_week: _Optional[int]=..., to_day_of_week: _Optional[int]=..., from_hour: _Optional[int]=..., from_minute: _Optional[int]=..., to_hour: _Optional[int]=..., to_minute: _Optional[int]=...) -> None:
-            ...
-
+        def __init__(self, from_day_of_week: _Optional[int] = ..., to_day_of_week: _Optional[int] = ..., from_hour: _Optional[int] = ..., from_minute: _Optional[int] = ..., to_hour: _Optional[int] = ..., to_minute: _Optional[int] = ...) -> None: ...
     class TOUPeriods(_message.Message):
-        __slots__ = ('ON_PEAK', 'PARTIAL_PEAK', 'OFF_PEAK', 'SUPER_OFF_PEAK')
+        __slots__ = ("ON_PEAK", "PARTIAL_PEAK", "OFF_PEAK", "SUPER_OFF_PEAK")
         ON_PEAK_FIELD_NUMBER: _ClassVar[int]
         PARTIAL_PEAK_FIELD_NUMBER: _ClassVar[int]
         OFF_PEAK_FIELD_NUMBER: _ClassVar[int]
@@ -1963,12 +1674,9 @@ class SetRateTariffRequest(_message.Message):
         PARTIAL_PEAK: _containers.RepeatedCompositeFieldContainer[SetRateTariffRequest.TOUPeriod]
         OFF_PEAK: _containers.RepeatedCompositeFieldContainer[SetRateTariffRequest.TOUPeriod]
         SUPER_OFF_PEAK: _containers.RepeatedCompositeFieldContainer[SetRateTariffRequest.TOUPeriod]
-
-        def __init__(self, ON_PEAK: _Optional[_Iterable[_Union[SetRateTariffRequest.TOUPeriod, _Mapping]]]=..., PARTIAL_PEAK: _Optional[_Iterable[_Union[SetRateTariffRequest.TOUPeriod, _Mapping]]]=..., OFF_PEAK: _Optional[_Iterable[_Union[SetRateTariffRequest.TOUPeriod, _Mapping]]]=..., SUPER_OFF_PEAK: _Optional[_Iterable[_Union[SetRateTariffRequest.TOUPeriod, _Mapping]]]=...) -> None:
-            ...
-
+        def __init__(self, ON_PEAK: _Optional[_Iterable[_Union[SetRateTariffRequest.TOUPeriod, _Mapping]]] = ..., PARTIAL_PEAK: _Optional[_Iterable[_Union[SetRateTariffRequest.TOUPeriod, _Mapping]]] = ..., OFF_PEAK: _Optional[_Iterable[_Union[SetRateTariffRequest.TOUPeriod, _Mapping]]] = ..., SUPER_OFF_PEAK: _Optional[_Iterable[_Union[SetRateTariffRequest.TOUPeriod, _Mapping]]] = ...) -> None: ...
     class Season(_message.Message):
-        __slots__ = ('from_day', 'to_day', 'from_month', 'to_month', 'tou_periods')
+        __slots__ = ("from_day", "to_day", "from_month", "to_month", "tou_periods")
         FROM_DAY_FIELD_NUMBER: _ClassVar[int]
         TO_DAY_FIELD_NUMBER: _ClassVar[int]
         FROM_MONTH_FIELD_NUMBER: _ClassVar[int]
@@ -1979,12 +1687,9 @@ class SetRateTariffRequest(_message.Message):
         from_month: int
         to_month: int
         tou_periods: SetRateTariffRequest.TOUPeriods
-
-        def __init__(self, from_day: _Optional[int]=..., to_day: _Optional[int]=..., from_month: _Optional[int]=..., to_month: _Optional[int]=..., tou_periods: _Optional[_Union[SetRateTariffRequest.TOUPeriods, _Mapping]]=...) -> None:
-            ...
-
+        def __init__(self, from_day: _Optional[int] = ..., to_day: _Optional[int] = ..., from_month: _Optional[int] = ..., to_month: _Optional[int] = ..., tou_periods: _Optional[_Union[SetRateTariffRequest.TOUPeriods, _Mapping]] = ...) -> None: ...
     class Seasons(_message.Message):
-        __slots__ = ('Summer', 'Winter', 'Season3', 'Season4', 'Season5')
+        __slots__ = ("Summer", "Winter", "Season3", "Season4", "Season5")
         SUMMER_FIELD_NUMBER: _ClassVar[int]
         WINTER_FIELD_NUMBER: _ClassVar[int]
         SEASON3_FIELD_NUMBER: _ClassVar[int]
@@ -1995,20 +1700,14 @@ class SetRateTariffRequest(_message.Message):
         Season3: SetRateTariffRequest.Season
         Season4: SetRateTariffRequest.Season
         Season5: SetRateTariffRequest.Season
-
-        def __init__(self, Summer: _Optional[_Union[SetRateTariffRequest.Season, _Mapping]]=..., Winter: _Optional[_Union[SetRateTariffRequest.Season, _Mapping]]=..., Season3: _Optional[_Union[SetRateTariffRequest.Season, _Mapping]]=..., Season4: _Optional[_Union[SetRateTariffRequest.Season, _Mapping]]=..., Season5: _Optional[_Union[SetRateTariffRequest.Season, _Mapping]]=...) -> None:
-            ...
-
+        def __init__(self, Summer: _Optional[_Union[SetRateTariffRequest.Season, _Mapping]] = ..., Winter: _Optional[_Union[SetRateTariffRequest.Season, _Mapping]] = ..., Season3: _Optional[_Union[SetRateTariffRequest.Season, _Mapping]] = ..., Season4: _Optional[_Union[SetRateTariffRequest.Season, _Mapping]] = ..., Season5: _Optional[_Union[SetRateTariffRequest.Season, _Mapping]] = ...) -> None: ...
     class FixedCharge(_message.Message):
-        __slots__ = ('ALL',)
+        __slots__ = ("ALL",)
         ALL_FIELD_NUMBER: _ClassVar[int]
         ALL: float
-
-        def __init__(self, ALL: _Optional[float]=...) -> None:
-            ...
-
+        def __init__(self, ALL: _Optional[float] = ...) -> None: ...
     class RateBand(_message.Message):
-        __slots__ = ('ALL', 'ON_PEAK', 'PARTIAL_PEAK', 'OFF_PEAK', 'SUPER_OFF_PEAK')
+        __slots__ = ("ALL", "ON_PEAK", "PARTIAL_PEAK", "OFF_PEAK", "SUPER_OFF_PEAK")
         ALL_FIELD_NUMBER: _ClassVar[int]
         ON_PEAK_FIELD_NUMBER: _ClassVar[int]
         PARTIAL_PEAK_FIELD_NUMBER: _ClassVar[int]
@@ -2019,22 +1718,16 @@ class SetRateTariffRequest(_message.Message):
         PARTIAL_PEAK: float
         OFF_PEAK: float
         SUPER_OFF_PEAK: float
-
-        def __init__(self, ALL: _Optional[float]=..., ON_PEAK: _Optional[float]=..., PARTIAL_PEAK: _Optional[float]=..., OFF_PEAK: _Optional[float]=..., SUPER_OFF_PEAK: _Optional[float]=...) -> None:
-            ...
-
+        def __init__(self, ALL: _Optional[float] = ..., ON_PEAK: _Optional[float] = ..., PARTIAL_PEAK: _Optional[float] = ..., OFF_PEAK: _Optional[float] = ..., SUPER_OFF_PEAK: _Optional[float] = ...) -> None: ...
     class DailyCharge(_message.Message):
-        __slots__ = ('amount', 'name')
+        __slots__ = ("amount", "name")
         AMOUNT_FIELD_NUMBER: _ClassVar[int]
         NAME_FIELD_NUMBER: _ClassVar[int]
         amount: float
         name: str
-
-        def __init__(self, amount: _Optional[float]=..., name: _Optional[str]=...) -> None:
-            ...
-
+        def __init__(self, amount: _Optional[float] = ..., name: _Optional[str] = ...) -> None: ...
     class Charges(_message.Message):
-        __slots__ = ('ALL', 'Summer', 'Winter', 'Season3', 'Season4', 'Season5')
+        __slots__ = ("ALL", "Summer", "Winter", "Season3", "Season4", "Season5")
         ALL_FIELD_NUMBER: _ClassVar[int]
         SUMMER_FIELD_NUMBER: _ClassVar[int]
         WINTER_FIELD_NUMBER: _ClassVar[int]
@@ -2047,12 +1740,9 @@ class SetRateTariffRequest(_message.Message):
         Season3: SetRateTariffRequest.RateBand
         Season4: SetRateTariffRequest.RateBand
         Season5: SetRateTariffRequest.RateBand
-
-        def __init__(self, ALL: _Optional[_Union[SetRateTariffRequest.FixedCharge, _Mapping]]=..., Summer: _Optional[_Union[SetRateTariffRequest.RateBand, _Mapping]]=..., Winter: _Optional[_Union[SetRateTariffRequest.RateBand, _Mapping]]=..., Season3: _Optional[_Union[SetRateTariffRequest.RateBand, _Mapping]]=..., Season4: _Optional[_Union[SetRateTariffRequest.RateBand, _Mapping]]=..., Season5: _Optional[_Union[SetRateTariffRequest.RateBand, _Mapping]]=...) -> None:
-            ...
-
+        def __init__(self, ALL: _Optional[_Union[SetRateTariffRequest.FixedCharge, _Mapping]] = ..., Summer: _Optional[_Union[SetRateTariffRequest.RateBand, _Mapping]] = ..., Winter: _Optional[_Union[SetRateTariffRequest.RateBand, _Mapping]] = ..., Season3: _Optional[_Union[SetRateTariffRequest.RateBand, _Mapping]] = ..., Season4: _Optional[_Union[SetRateTariffRequest.RateBand, _Mapping]] = ..., Season5: _Optional[_Union[SetRateTariffRequest.RateBand, _Mapping]] = ...) -> None: ...
     class Tariff(_message.Message):
-        __slots__ = ('code', 'name', 'utility', 'currency', 'daily_charges', 'monthly_charges', 'monthly_minimum_bill', 'demand_charges', 'daily_demand_charges', 'energy_charges', 'max_applicable_demand', 'min_applicable_demand', 'seasons')
+        __slots__ = ("code", "name", "utility", "currency", "daily_charges", "monthly_charges", "monthly_minimum_bill", "demand_charges", "daily_demand_charges", "energy_charges", "max_applicable_demand", "min_applicable_demand", "seasons")
         CODE_FIELD_NUMBER: _ClassVar[int]
         NAME_FIELD_NUMBER: _ClassVar[int]
         UTILITY_FIELD_NUMBER: _ClassVar[int]
@@ -2079,9 +1769,7 @@ class SetRateTariffRequest(_message.Message):
         max_applicable_demand: float
         min_applicable_demand: float
         seasons: SetRateTariffRequest.Seasons
-
-        def __init__(self, code: _Optional[str]=..., name: _Optional[str]=..., utility: _Optional[str]=..., currency: _Optional[str]=..., daily_charges: _Optional[_Iterable[_Union[SetRateTariffRequest.DailyCharge, _Mapping]]]=..., monthly_charges: _Optional[float]=..., monthly_minimum_bill: _Optional[float]=..., demand_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]]=..., daily_demand_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]]=..., energy_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]]=..., max_applicable_demand: _Optional[float]=..., min_applicable_demand: _Optional[float]=..., seasons: _Optional[_Union[SetRateTariffRequest.Seasons, _Mapping]]=...) -> None:
-            ...
+        def __init__(self, code: _Optional[str] = ..., name: _Optional[str] = ..., utility: _Optional[str] = ..., currency: _Optional[str] = ..., daily_charges: _Optional[_Iterable[_Union[SetRateTariffRequest.DailyCharge, _Mapping]]] = ..., monthly_charges: _Optional[float] = ..., monthly_minimum_bill: _Optional[float] = ..., demand_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]] = ..., daily_demand_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]] = ..., energy_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]] = ..., max_applicable_demand: _Optional[float] = ..., min_applicable_demand: _Optional[float] = ..., seasons: _Optional[_Union[SetRateTariffRequest.Seasons, _Mapping]] = ...) -> None: ...
     CODE_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     UTILITY_FIELD_NUMBER: _ClassVar[int]
@@ -2110,157 +1798,118 @@ class SetRateTariffRequest(_message.Message):
     min_applicable_demand: float
     seasons: SetRateTariffRequest.Seasons
     tariff: SetRateTariffRequest.Tariff
-
-    def __init__(self, code: _Optional[str]=..., name: _Optional[str]=..., utility: _Optional[str]=..., currency: _Optional[str]=..., daily_charges: _Optional[_Iterable[_Union[SetRateTariffRequest.DailyCharge, _Mapping]]]=..., monthly_charges: _Optional[float]=..., monthly_minimum_bill: _Optional[float]=..., demand_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]]=..., daily_demand_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]]=..., energy_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]]=..., max_applicable_demand: _Optional[float]=..., min_applicable_demand: _Optional[float]=..., seasons: _Optional[_Union[SetRateTariffRequest.Seasons, _Mapping]]=..., tariff: _Optional[_Union[SetRateTariffRequest.Tariff, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, code: _Optional[str] = ..., name: _Optional[str] = ..., utility: _Optional[str] = ..., currency: _Optional[str] = ..., daily_charges: _Optional[_Iterable[_Union[SetRateTariffRequest.DailyCharge, _Mapping]]] = ..., monthly_charges: _Optional[float] = ..., monthly_minimum_bill: _Optional[float] = ..., demand_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]] = ..., daily_demand_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]] = ..., energy_charges: _Optional[_Union[SetRateTariffRequest.Charges, _Mapping]] = ..., max_applicable_demand: _Optional[float] = ..., min_applicable_demand: _Optional[float] = ..., seasons: _Optional[_Union[SetRateTariffRequest.Seasons, _Mapping]] = ..., tariff: _Optional[_Union[SetRateTariffRequest.Tariff, _Mapping]] = ...) -> None: ...
 
 class GetRateTariffRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class VideoRequestAction(_message.Message):
-    __slots__ = ('url',)
+    __slots__ = ("url",)
     URL_FIELD_NUMBER: _ClassVar[int]
     url: str
-
-    def __init__(self, url: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, url: _Optional[str] = ...) -> None: ...
 
 class TakeDrivenoteAction(_message.Message):
-    __slots__ = ('note',)
+    __slots__ = ("note",)
     NOTE_FIELD_NUMBER: _ClassVar[int]
     note: str
-
-    def __init__(self, note: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, note: _Optional[str] = ...) -> None: ...
 
 class BluetoothClassicPairingRequest(_message.Message):
-    __slots__ = ('utf8_name', 'mac_address')
+    __slots__ = ("utf8_name", "mac_address")
     UTF8_NAME_FIELD_NUMBER: _ClassVar[int]
     MAC_ADDRESS_FIELD_NUMBER: _ClassVar[int]
     utf8_name: str
     mac_address: bytes
-
-    def __init__(self, utf8_name: _Optional[str]=..., mac_address: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, utf8_name: _Optional[str] = ..., mac_address: _Optional[bytes] = ...) -> None: ...
 
 class AddManagedChargingSiteRequest(_message.Message):
-    __slots__ = ('site',)
+    __slots__ = ("site",)
     SITE_FIELD_NUMBER: _ClassVar[int]
     site: ManagedChargingSite
-
-    def __init__(self, site: _Optional[_Union[ManagedChargingSite, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, site: _Optional[_Union[ManagedChargingSite, _Mapping]] = ...) -> None: ...
 
 class ManagedChargingSite(_message.Message):
-    __slots__ = ('public_key', 'manager_type', 'lat_lon')
+    __slots__ = ("public_key", "manager_type", "lat_lon")
     PUBLIC_KEY_FIELD_NUMBER: _ClassVar[int]
     MANAGER_TYPE_FIELD_NUMBER: _ClassVar[int]
     LAT_LON_FIELD_NUMBER: _ClassVar[int]
     public_key: str
     manager_type: ManagerType
     lat_lon: _common_pb2.LatLong
-
-    def __init__(self, public_key: _Optional[str]=..., manager_type: _Optional[_Union[ManagerType, _Mapping]]=..., lat_lon: _Optional[_Union[_common_pb2.LatLong, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, public_key: _Optional[str] = ..., manager_type: _Optional[_Union[ManagerType, _Mapping]] = ..., lat_lon: _Optional[_Union[_common_pb2.LatLong, _Mapping]] = ...) -> None: ...
 
 class ManagerType(_message.Message):
-    __slots__ = ('site_controller',)
+    __slots__ = ("site_controller",)
     SITE_CONTROLLER_FIELD_NUMBER: _ClassVar[int]
     site_controller: SiteController
-
-    def __init__(self, site_controller: _Optional[_Union[SiteController, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, site_controller: _Optional[_Union[SiteController, _Mapping]] = ...) -> None: ...
 
 class SiteController(_message.Message):
-    __slots__ = ('din',)
+    __slots__ = ("din",)
     DIN_FIELD_NUMBER: _ClassVar[int]
     din: str
-
-    def __init__(self, din: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, din: _Optional[str] = ...) -> None: ...
 
 class RemoveManagedChargingSiteRequest(_message.Message):
-    __slots__ = ('public_key',)
+    __slots__ = ("public_key",)
     PUBLIC_KEY_FIELD_NUMBER: _ClassVar[int]
     public_key: str
-
-    def __init__(self, public_key: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, public_key: _Optional[str] = ...) -> None: ...
 
 class NavigationRouteAction(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class AutoStwHeatAction(_message.Message):
-    __slots__ = ('on',)
+    __slots__ = ("on",)
     ON_FIELD_NUMBER: _ClassVar[int]
     on: bool
-
-    def __init__(self, on: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, on: _Optional[bool] = ...) -> None: ...
 
 class StwHeatLevelAction(_message.Message):
-    __slots__ = ('stw_heat_level',)
+    __slots__ = ("stw_heat_level",)
     STW_HEAT_LEVEL_FIELD_NUMBER: _ClassVar[int]
     stw_heat_level: _common_pb2.StwHeatLevel
-
-    def __init__(self, stw_heat_level: _Optional[_Union[_common_pb2.StwHeatLevel, str]]=...) -> None:
-        ...
+    def __init__(self, stw_heat_level: _Optional[_Union[_common_pb2.StwHeatLevel, str]] = ...) -> None: ...
 
 class GetManagedChargingSitesRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class UpdateChargeOnSolarFeatureRequest(_message.Message):
-    __slots__ = ('charge_on_solar',)
+    __slots__ = ("charge_on_solar",)
     CHARGE_ON_SOLAR_FIELD_NUMBER: _ClassVar[int]
     charge_on_solar: ChargeOnSolarFeature
-
-    def __init__(self, charge_on_solar: _Optional[_Union[ChargeOnSolarFeature, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, charge_on_solar: _Optional[_Union[ChargeOnSolarFeature, _Mapping]] = ...) -> None: ...
 
 class GetChargeOnSolarFeatureRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class GetChargeOnSolarFeatureResponse(_message.Message):
-    __slots__ = ('charge_on_solar',)
+    __slots__ = ("charge_on_solar",)
     CHARGE_ON_SOLAR_FIELD_NUMBER: _ClassVar[int]
     charge_on_solar: ChargeOnSolarFeature
-
-    def __init__(self, charge_on_solar: _Optional[_Union[ChargeOnSolarFeature, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, charge_on_solar: _Optional[_Union[ChargeOnSolarFeature, _Mapping]] = ...) -> None: ...
 
 class ChargeOnSolarFeature(_message.Message):
-    __slots__ = ('enabled', 'lower_charge_limit', 'upper_charge_limit')
+    __slots__ = ("enabled", "lower_charge_limit", "upper_charge_limit")
     ENABLED_FIELD_NUMBER: _ClassVar[int]
     LOWER_CHARGE_LIMIT_FIELD_NUMBER: _ClassVar[int]
     UPPER_CHARGE_LIMIT_FIELD_NUMBER: _ClassVar[int]
     enabled: bool
     lower_charge_limit: float
     upper_charge_limit: float
-
-    def __init__(self, enabled: _Optional[bool]=..., lower_charge_limit: _Optional[float]=..., upper_charge_limit: _Optional[float]=...) -> None:
-        ...
+    def __init__(self, enabled: _Optional[bool] = ..., lower_charge_limit: _Optional[float] = ..., upper_charge_limit: _Optional[float] = ...) -> None: ...
 
 class DrivingClearSpeedLimitPinAdminAction(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class SetOutletsOnOffAction(_message.Message):
-    __slots__ = ('outlet_request',)
-
+    __slots__ = ("outlet_request",)
     class OutletRequest(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         OUTLET_REQUEST_OFF: _ClassVar[SetOutletsOnOffAction.OutletRequest]
@@ -2271,29 +1920,22 @@ class SetOutletsOnOffAction(_message.Message):
     OUTLET_REQUEST_CABIN: SetOutletsOnOffAction.OutletRequest
     OUTLET_REQUEST_FIELD_NUMBER: _ClassVar[int]
     outlet_request: SetOutletsOnOffAction.OutletRequest
-
-    def __init__(self, outlet_request: _Optional[_Union[SetOutletsOnOffAction.OutletRequest, str]]=...) -> None:
-        ...
+    def __init__(self, outlet_request: _Optional[_Union[SetOutletsOnOffAction.OutletRequest, str]] = ...) -> None: ...
 
 class SetOutletTimerAction(_message.Message):
-    __slots__ = ('num_minutes',)
+    __slots__ = ("num_minutes",)
     NUM_MINUTES_FIELD_NUMBER: _ClassVar[int]
     num_minutes: int
-
-    def __init__(self, num_minutes: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, num_minutes: _Optional[int] = ...) -> None: ...
 
 class SetOutletSocLimitAction(_message.Message):
-    __slots__ = ('percent',)
+    __slots__ = ("percent",)
     PERCENT_FIELD_NUMBER: _ClassVar[int]
     percent: int
-
-    def __init__(self, percent: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, percent: _Optional[int] = ...) -> None: ...
 
 class SetPowerFeedOnOffAction(_message.Message):
-    __slots__ = ('power_feed_request',)
-
+    __slots__ = ("power_feed_request",)
     class PowerFeedRequest(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         POWER_FEED_REQUEST_OFF: _ClassVar[SetPowerFeedOnOffAction.PowerFeedRequest]
@@ -2306,79 +1948,59 @@ class SetPowerFeedOnOffAction(_message.Message):
     POWER_FEED_REQUEST_FEED_1_AND_FEED_2: SetPowerFeedOnOffAction.PowerFeedRequest
     POWER_FEED_REQUEST_FIELD_NUMBER: _ClassVar[int]
     power_feed_request: SetPowerFeedOnOffAction.PowerFeedRequest
-
-    def __init__(self, power_feed_request: _Optional[_Union[SetPowerFeedOnOffAction.PowerFeedRequest, str]]=...) -> None:
-        ...
+    def __init__(self, power_feed_request: _Optional[_Union[SetPowerFeedOnOffAction.PowerFeedRequest, str]] = ...) -> None: ...
 
 class SetPowerFeedTimerAction(_message.Message):
-    __slots__ = ('num_minutes',)
+    __slots__ = ("num_minutes",)
     NUM_MINUTES_FIELD_NUMBER: _ClassVar[int]
     num_minutes: int
-
-    def __init__(self, num_minutes: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, num_minutes: _Optional[int] = ...) -> None: ...
 
 class SetPowerFeedSocLimitAction(_message.Message):
-    __slots__ = ('percent',)
+    __slots__ = ("percent",)
     PERCENT_FIELD_NUMBER: _ClassVar[int]
     percent: int
-
-    def __init__(self, percent: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, percent: _Optional[int] = ...) -> None: ...
 
 class SetTrailerLightTestStartStopAction(_message.Message):
-    __slots__ = ('start_stop',)
+    __slots__ = ("start_stop",)
     START_STOP_FIELD_NUMBER: _ClassVar[int]
     start_stop: bool
-
-    def __init__(self, start_stop: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, start_stop: _Optional[bool] = ...) -> None: ...
 
 class SetTruckBedLightAutoStateAction(_message.Message):
-    __slots__ = ('power_state',)
+    __slots__ = ("power_state",)
     POWER_STATE_FIELD_NUMBER: _ClassVar[int]
     power_state: bool
-
-    def __init__(self, power_state: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, power_state: _Optional[bool] = ...) -> None: ...
 
 class SetTruckBedLightBrightnessAction(_message.Message):
-    __slots__ = ('brightness',)
+    __slots__ = ("brightness",)
     BRIGHTNESS_FIELD_NUMBER: _ClassVar[int]
     brightness: int
-
-    def __init__(self, brightness: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, brightness: _Optional[int] = ...) -> None: ...
 
 class VehicleControlResetPinToDriveAdminAction(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class NavigationWaypointsRequest(_message.Message):
-    __slots__ = ('waypoints', 'trip_plan_options')
-
+    __slots__ = ("waypoints", "trip_plan_options")
     class TripPlanOptions(_message.Message):
-        __slots__ = ('destination_start_soe', 'destination_arrival_soe')
+        __slots__ = ("destination_start_soe", "destination_arrival_soe")
         DESTINATION_START_SOE_FIELD_NUMBER: _ClassVar[int]
         DESTINATION_ARRIVAL_SOE_FIELD_NUMBER: _ClassVar[int]
         destination_start_soe: int
         destination_arrival_soe: int
-
-        def __init__(self, destination_start_soe: _Optional[int]=..., destination_arrival_soe: _Optional[int]=...) -> None:
-            ...
+        def __init__(self, destination_start_soe: _Optional[int] = ..., destination_arrival_soe: _Optional[int] = ...) -> None: ...
     WAYPOINTS_FIELD_NUMBER: _ClassVar[int]
     TRIP_PLAN_OPTIONS_FIELD_NUMBER: _ClassVar[int]
     waypoints: str
     trip_plan_options: NavigationWaypointsRequest.TripPlanOptions
-
-    def __init__(self, waypoints: _Optional[str]=..., trip_plan_options: _Optional[_Union[NavigationWaypointsRequest.TripPlanOptions, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, waypoints: _Optional[str] = ..., trip_plan_options: _Optional[_Union[NavigationWaypointsRequest.TripPlanOptions, _Mapping]] = ...) -> None: ...
 
 class SetPowershareFeatureAction(_message.Message):
-    __slots__ = ('powershare_feature_request',)
-
+    __slots__ = ("powershare_feature_request",)
     class PowershareFeatureRequest(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         POWERSHARE_FEATURE_REQUEST_OFF: _ClassVar[SetPowershareFeatureAction.PowershareFeatureRequest]
@@ -2387,21 +2009,16 @@ class SetPowershareFeatureAction(_message.Message):
     POWERSHARE_FEATURE_REQUEST_ON: SetPowershareFeatureAction.PowershareFeatureRequest
     POWERSHARE_FEATURE_REQUEST_FIELD_NUMBER: _ClassVar[int]
     powershare_feature_request: SetPowershareFeatureAction.PowershareFeatureRequest
-
-    def __init__(self, powershare_feature_request: _Optional[_Union[SetPowershareFeatureAction.PowershareFeatureRequest, str]]=...) -> None:
-        ...
+    def __init__(self, powershare_feature_request: _Optional[_Union[SetPowershareFeatureAction.PowershareFeatureRequest, str]] = ...) -> None: ...
 
 class SetPowershareDischargeLimitAction(_message.Message):
-    __slots__ = ('powershare_discharge_limit',)
+    __slots__ = ("powershare_discharge_limit",)
     POWERSHARE_DISCHARGE_LIMIT_FIELD_NUMBER: _ClassVar[int]
     powershare_discharge_limit: int
-
-    def __init__(self, powershare_discharge_limit: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, powershare_discharge_limit: _Optional[int] = ...) -> None: ...
 
 class SetPowershareRequestAction(_message.Message):
-    __slots__ = ('powershare_request',)
-
+    __slots__ = ("powershare_request",)
     class PowershareRequest(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         POWERSHARE_REQUEST_OFF: _ClassVar[SetPowershareRequestAction.PowershareRequest]
@@ -2410,21 +2027,16 @@ class SetPowershareRequestAction(_message.Message):
     POWERSHARE_REQUEST_ON: SetPowershareRequestAction.PowershareRequest
     POWERSHARE_REQUEST_FIELD_NUMBER: _ClassVar[int]
     powershare_request: SetPowershareRequestAction.PowershareRequest
-
-    def __init__(self, powershare_request: _Optional[_Union[SetPowershareRequestAction.PowershareRequest, str]]=...) -> None:
-        ...
+    def __init__(self, powershare_request: _Optional[_Union[SetPowershareRequestAction.PowershareRequest, str]] = ...) -> None: ...
 
 class SetTentModeRequestAction(_message.Message):
-    __slots__ = ('on',)
+    __slots__ = ("on",)
     ON_FIELD_NUMBER: _ClassVar[int]
     on: bool
-
-    def __init__(self, on: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, on: _Optional[bool] = ...) -> None: ...
 
 class SetZoneLightRequestAction(_message.Message):
-    __slots__ = ('zone_light_request',)
-
+    __slots__ = ("zone_light_request",)
     class ZoneLightRequest(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         ZONE_LIGHT_REQUEST_OFF: _ClassVar[SetZoneLightRequestAction.ZoneLightRequest]
@@ -2437,42 +2049,32 @@ class SetZoneLightRequestAction(_message.Message):
     ZONE_LIGHT_REQUEST_HIGH: SetZoneLightRequestAction.ZoneLightRequest
     ZONE_LIGHT_REQUEST_FIELD_NUMBER: _ClassVar[int]
     zone_light_request: SetZoneLightRequestAction.ZoneLightRequest
-
-    def __init__(self, zone_light_request: _Optional[_Union[SetZoneLightRequestAction.ZoneLightRequest, str]]=...) -> None:
-        ...
+    def __init__(self, zone_light_request: _Optional[_Union[SetZoneLightRequestAction.ZoneLightRequest, str]] = ...) -> None: ...
 
 class SetLightbarBrightnessAction(_message.Message):
-    __slots__ = ('brightness_request',)
+    __slots__ = ("brightness_request",)
     BRIGHTNESS_REQUEST_FIELD_NUMBER: _ClassVar[int]
     brightness_request: int
-
-    def __init__(self, brightness_request: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, brightness_request: _Optional[int] = ...) -> None: ...
 
 class SetLightbarMiddleAction(_message.Message):
-    __slots__ = ('middle_light_request',)
+    __slots__ = ("middle_light_request",)
     MIDDLE_LIGHT_REQUEST_FIELD_NUMBER: _ClassVar[int]
     middle_light_request: bool
-
-    def __init__(self, middle_light_request: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, middle_light_request: _Optional[bool] = ...) -> None: ...
 
 class SetLightbarDitchAction(_message.Message):
-    __slots__ = ('ditch_lights_request',)
+    __slots__ = ("ditch_lights_request",)
     DITCH_LIGHTS_REQUEST_FIELD_NUMBER: _ClassVar[int]
     ditch_lights_request: bool
-
-    def __init__(self, ditch_lights_request: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, ditch_lights_request: _Optional[bool] = ...) -> None: ...
 
 class GetMessagesAction(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class TeslaAuthResponseAction(_message.Message):
-    __slots__ = ('client_id', 'scope', 'access_token', 'refresh_token', 'expiry_timestamp', 'error', 'scoped_token')
+    __slots__ = ("client_id", "scope", "access_token", "refresh_token", "expiry_timestamp", "error", "scoped_token")
     CLIENT_ID_FIELD_NUMBER: _ClassVar[int]
     SCOPE_FIELD_NUMBER: _ClassVar[int]
     ACCESS_TOKEN_FIELD_NUMBER: _ClassVar[int]
@@ -2487,13 +2089,10 @@ class TeslaAuthResponseAction(_message.Message):
     expiry_timestamp: int
     error: str
     scoped_token: str
-
-    def __init__(self, client_id: _Optional[str]=..., scope: _Optional[str]=..., access_token: _Optional[str]=..., refresh_token: _Optional[str]=..., expiry_timestamp: _Optional[int]=..., error: _Optional[str]=..., scoped_token: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, client_id: _Optional[str] = ..., scope: _Optional[str] = ..., access_token: _Optional[str] = ..., refresh_token: _Optional[str] = ..., expiry_timestamp: _Optional[int] = ..., error: _Optional[str] = ..., scoped_token: _Optional[str] = ...) -> None: ...
 
 class NavigationGpsDestinationRequest(_message.Message):
-    __slots__ = ('lat', 'lon', 'destination', 'order')
-
+    __slots__ = ("lat", "lon", "destination", "order")
     class RemoteNavTripOrder(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         REMOTE_NAV_TRIP_ORDER_UNKNOWN: _ClassVar[NavigationGpsDestinationRequest.RemoteNavTripOrder]
@@ -2512,37 +2111,28 @@ class NavigationGpsDestinationRequest(_message.Message):
     lon: float
     destination: str
     order: NavigationGpsDestinationRequest.RemoteNavTripOrder
-
-    def __init__(self, lat: _Optional[float]=..., lon: _Optional[float]=..., destination: _Optional[str]=..., order: _Optional[_Union[NavigationGpsDestinationRequest.RemoteNavTripOrder, str]]=...) -> None:
-        ...
+    def __init__(self, lat: _Optional[float] = ..., lon: _Optional[float] = ..., destination: _Optional[str] = ..., order: _Optional[_Union[NavigationGpsDestinationRequest.RemoteNavTripOrder, str]] = ...) -> None: ...
 
 class ParentalControlsClearPinAction(_message.Message):
-    __slots__ = ('pin',)
+    __slots__ = ("pin",)
     PIN_FIELD_NUMBER: _ClassVar[int]
     pin: str
-
-    def __init__(self, pin: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, pin: _Optional[str] = ...) -> None: ...
 
 class ParentalControlsClearPinAdminAction(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class ParentalControlsAction(_message.Message):
-    __slots__ = ('activate', 'pin')
+    __slots__ = ("activate", "pin")
     ACTIVATE_FIELD_NUMBER: _ClassVar[int]
     PIN_FIELD_NUMBER: _ClassVar[int]
     activate: bool
     pin: str
-
-    def __init__(self, activate: _Optional[bool]=..., pin: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, activate: _Optional[bool] = ..., pin: _Optional[str] = ...) -> None: ...
 
 class ParentalControlsEnableSettingsAction(_message.Message):
-    __slots__ = ('setting', 'enable')
-
+    __slots__ = ("setting", "enable")
     class ParentalControlsSetting_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         SpeedLimit: _ClassVar[ParentalControlsEnableSettingsAction.ParentalControlsSetting_E]
@@ -2563,32 +2153,24 @@ class ParentalControlsEnableSettingsAction(_message.Message):
     ENABLE_FIELD_NUMBER: _ClassVar[int]
     setting: ParentalControlsEnableSettingsAction.ParentalControlsSetting_E
     enable: bool
-
-    def __init__(self, setting: _Optional[_Union[ParentalControlsEnableSettingsAction.ParentalControlsSetting_E, str]]=..., enable: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, setting: _Optional[_Union[ParentalControlsEnableSettingsAction.ParentalControlsSetting_E, str]] = ..., enable: _Optional[bool] = ...) -> None: ...
 
 class ParentalControlsSetSpeedLimitAction(_message.Message):
-    __slots__ = ('limit_mph',)
+    __slots__ = ("limit_mph",)
     LIMIT_MPH_FIELD_NUMBER: _ClassVar[int]
     limit_mph: float
-
-    def __init__(self, limit_mph: _Optional[float]=...) -> None:
-        ...
+    def __init__(self, limit_mph: _Optional[float] = ...) -> None: ...
 
 class CancelSohTestAction(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class StopLightShowAction(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class StartLightShowAction(_message.Message):
-    __slots__ = ('show_index', 'start_time', 'volume', 'dance_moves')
+    __slots__ = ("show_index", "start_time", "volume", "dance_moves")
     SHOW_INDEX_FIELD_NUMBER: _ClassVar[int]
     START_TIME_FIELD_NUMBER: _ClassVar[int]
     VOLUME_FIELD_NUMBER: _ClassVar[int]
@@ -2597,13 +2179,10 @@ class StartLightShowAction(_message.Message):
     start_time: int
     volume: float
     dance_moves: bool
-
-    def __init__(self, show_index: _Optional[int]=..., start_time: _Optional[int]=..., volume: _Optional[float]=..., dance_moves: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, show_index: _Optional[int] = ..., start_time: _Optional[int] = ..., volume: _Optional[float] = ..., dance_moves: _Optional[bool] = ...) -> None: ...
 
 class SetSuspensionLevelAction(_message.Message):
-    __slots__ = ('suspension_level',)
-
+    __slots__ = ("suspension_level",)
     class SuspensionLevel(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         SUSPENSION_LEVEL_INVALID: _ClassVar[SetSuspensionLevelAction.SuspensionLevel]
@@ -2622,29 +2201,22 @@ class SetSuspensionLevelAction(_message.Message):
     SUSPENSION_LEVEL_EXTRACT: SetSuspensionLevelAction.SuspensionLevel
     SUSPENSION_LEVEL_FIELD_NUMBER: _ClassVar[int]
     suspension_level: SetSuspensionLevelAction.SuspensionLevel
-
-    def __init__(self, suspension_level: _Optional[_Union[SetSuspensionLevelAction.SuspensionLevel, str]]=...) -> None:
-        ...
+    def __init__(self, suspension_level: _Optional[_Union[SetSuspensionLevelAction.SuspensionLevel, str]] = ...) -> None: ...
 
 class SetDischargeLimitAction(_message.Message):
-    __slots__ = ('discharge_limit',)
+    __slots__ = ("discharge_limit",)
     DISCHARGE_LIMIT_FIELD_NUMBER: _ClassVar[int]
     discharge_limit: int
-
-    def __init__(self, discharge_limit: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, discharge_limit: _Optional[int] = ...) -> None: ...
 
 class SetLowPowerModeAction(_message.Message):
-    __slots__ = ('low_power_mode',)
+    __slots__ = ("low_power_mode",)
     LOW_POWER_MODE_FIELD_NUMBER: _ClassVar[int]
     low_power_mode: bool
-
-    def __init__(self, low_power_mode: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, low_power_mode: _Optional[bool] = ...) -> None: ...
 
 class SetTemperatureUnitAction(_message.Message):
-    __slots__ = ('unit',)
-
+    __slots__ = ("unit",)
     class Unit(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         UNIT_FAHRENHEIT: _ClassVar[SetTemperatureUnitAction.Unit]
@@ -2653,13 +2225,10 @@ class SetTemperatureUnitAction(_message.Message):
     UNIT_CELSIUS: SetTemperatureUnitAction.Unit
     UNIT_FIELD_NUMBER: _ClassVar[int]
     unit: SetTemperatureUnitAction.Unit
-
-    def __init__(self, unit: _Optional[_Union[SetTemperatureUnitAction.Unit, str]]=...) -> None:
-        ...
+    def __init__(self, unit: _Optional[_Union[SetTemperatureUnitAction.Unit, str]] = ...) -> None: ...
 
 class SetDistanceUnitAction(_message.Message):
-    __slots__ = ('unit',)
-
+    __slots__ = ("unit",)
     class Unit(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         UNIT_MILES: _ClassVar[SetDistanceUnitAction.Unit]
@@ -2668,13 +2237,10 @@ class SetDistanceUnitAction(_message.Message):
     UNIT_KILOMETERS: SetDistanceUnitAction.Unit
     UNIT_FIELD_NUMBER: _ClassVar[int]
     unit: SetDistanceUnitAction.Unit
-
-    def __init__(self, unit: _Optional[_Union[SetDistanceUnitAction.Unit, str]]=...) -> None:
-        ...
+    def __init__(self, unit: _Optional[_Union[SetDistanceUnitAction.Unit, str]] = ...) -> None: ...
 
 class SetTimeDisplayFormatAction(_message.Message):
-    __slots__ = ('format',)
-
+    __slots__ = ("format",)
     class Format(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         FORMAT_12_HOUR: _ClassVar[SetTimeDisplayFormatAction.Format]
@@ -2683,13 +2249,10 @@ class SetTimeDisplayFormatAction(_message.Message):
     FORMAT_24_HOUR: SetTimeDisplayFormatAction.Format
     FORMAT_FIELD_NUMBER: _ClassVar[int]
     format: SetTimeDisplayFormatAction.Format
-
-    def __init__(self, format: _Optional[_Union[SetTimeDisplayFormatAction.Format, str]]=...) -> None:
-        ...
+    def __init__(self, format: _Optional[_Union[SetTimeDisplayFormatAction.Format, str]] = ...) -> None: ...
 
 class SetTirePressureUnitAction(_message.Message):
-    __slots__ = ('unit',)
-
+    __slots__ = ("unit",)
     class Unit(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         UNIT_PSI: _ClassVar[SetTirePressureUnitAction.Unit]
@@ -2698,13 +2261,10 @@ class SetTirePressureUnitAction(_message.Message):
     UNIT_BAR: SetTirePressureUnitAction.Unit
     UNIT_FIELD_NUMBER: _ClassVar[int]
     unit: SetTirePressureUnitAction.Unit
-
-    def __init__(self, unit: _Optional[_Union[SetTirePressureUnitAction.Unit, str]]=...) -> None:
-        ...
+    def __init__(self, unit: _Optional[_Union[SetTirePressureUnitAction.Unit, str]] = ...) -> None: ...
 
 class SetEnergyDisplayFormatAction(_message.Message):
-    __slots__ = ('format',)
-
+    __slots__ = ("format",)
     class Format(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         FORMAT_PERCENTAGE: _ClassVar[SetEnergyDisplayFormatAction.Format]
@@ -2713,91 +2273,70 @@ class SetEnergyDisplayFormatAction(_message.Message):
     FORMAT_DISTANCE: SetEnergyDisplayFormatAction.Format
     FORMAT_FIELD_NUMBER: _ClassVar[int]
     format: SetEnergyDisplayFormatAction.Format
-
-    def __init__(self, format: _Optional[_Union[SetEnergyDisplayFormatAction.Format, str]]=...) -> None:
-        ...
+    def __init__(self, format: _Optional[_Union[SetEnergyDisplayFormatAction.Format, str]] = ...) -> None: ...
 
 class DisplayStateAction(_message.Message):
-    __slots__ = ('displayBrightnessAutoRequest', 'displayBrightnessScalePreferenceRequest')
+    __slots__ = ("displayBrightnessAutoRequest", "displayBrightnessScalePreferenceRequest")
     DISPLAYBRIGHTNESSAUTOREQUEST_FIELD_NUMBER: _ClassVar[int]
     DISPLAYBRIGHTNESSSCALEPREFERENCEREQUEST_FIELD_NUMBER: _ClassVar[int]
     displayBrightnessAutoRequest: bool
     displayBrightnessScalePreferenceRequest: int
-
-    def __init__(self, displayBrightnessAutoRequest: _Optional[bool]=..., displayBrightnessScalePreferenceRequest: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, displayBrightnessAutoRequest: _Optional[bool] = ..., displayBrightnessScalePreferenceRequest: _Optional[int] = ...) -> None: ...
 
 class SetKeepAccessoryPowerModeAction(_message.Message):
-    __slots__ = ('keep_accessory_power_mode',)
+    __slots__ = ("keep_accessory_power_mode",)
     KEEP_ACCESSORY_POWER_MODE_FIELD_NUMBER: _ClassVar[int]
     keep_accessory_power_mode: bool
-
-    def __init__(self, keep_accessory_power_mode: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, keep_accessory_power_mode: _Optional[bool] = ...) -> None: ...
 
 class SetupCloudProfileWithLocalProfileUuidAction(_message.Message):
-    __slots__ = ('cloud_vault_uuid', 'local_profile_uuid', 'delete_local_profile_after_setup')
+    __slots__ = ("cloud_vault_uuid", "local_profile_uuid", "delete_local_profile_after_setup")
     CLOUD_VAULT_UUID_FIELD_NUMBER: _ClassVar[int]
     LOCAL_PROFILE_UUID_FIELD_NUMBER: _ClassVar[int]
     DELETE_LOCAL_PROFILE_AFTER_SETUP_FIELD_NUMBER: _ClassVar[int]
     cloud_vault_uuid: str
     local_profile_uuid: str
     delete_local_profile_after_setup: bool
-
-    def __init__(self, cloud_vault_uuid: _Optional[str]=..., local_profile_uuid: _Optional[str]=..., delete_local_profile_after_setup: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, cloud_vault_uuid: _Optional[str] = ..., local_profile_uuid: _Optional[str] = ..., delete_local_profile_after_setup: _Optional[bool] = ...) -> None: ...
 
 class GetLocalProfilesForVaultUuidAction(_message.Message):
-    __slots__ = ('vault_uuid',)
+    __slots__ = ("vault_uuid",)
     VAULT_UUID_FIELD_NUMBER: _ClassVar[int]
     vault_uuid: str
-
-    def __init__(self, vault_uuid: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, vault_uuid: _Optional[str] = ...) -> None: ...
 
 class FetchKeysInfoAction(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class DeleteDashcamClipsAction(_message.Message):
-    __slots__ = ('delete_clips',)
+    __slots__ = ("delete_clips",)
     DELETE_CLIPS_FIELD_NUMBER: _ClassVar[int]
     delete_clips: bool
-
-    def __init__(self, delete_clips: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, delete_clips: _Optional[bool] = ...) -> None: ...
 
 class FormatUSBAction(_message.Message):
-    __slots__ = ('format_usb',)
+    __slots__ = ("format_usb",)
     FORMAT_USB_FIELD_NUMBER: _ClassVar[int]
     format_usb: bool
-
-    def __init__(self, format_usb: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, format_usb: _Optional[bool] = ...) -> None: ...
 
 class BandwidthTest(_message.Message):
-    __slots__ = ('requested_size',)
+    __slots__ = ("requested_size",)
     REQUESTED_SIZE_FIELD_NUMBER: _ClassVar[int]
     requested_size: int
-
-    def __init__(self, requested_size: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, requested_size: _Optional[int] = ...) -> None: ...
 
 class PhoneUnitPreferences(_message.Message):
-    __slots__ = ('distance_unit', 'temperature_unit')
+    __slots__ = ("distance_unit", "temperature_unit")
     DISTANCE_UNIT_FIELD_NUMBER: _ClassVar[int]
     TEMPERATURE_UNIT_FIELD_NUMBER: _ClassVar[int]
     distance_unit: SetDistanceUnitAction.Unit
     temperature_unit: SetTemperatureUnitAction.Unit
-
-    def __init__(self, distance_unit: _Optional[_Union[SetDistanceUnitAction.Unit, str]]=..., temperature_unit: _Optional[_Union[SetTemperatureUnitAction.Unit, str]]=...) -> None:
-        ...
+    def __init__(self, distance_unit: _Optional[_Union[SetDistanceUnitAction.Unit, str]] = ..., temperature_unit: _Optional[_Union[SetTemperatureUnitAction.Unit, str]] = ...) -> None: ...
 
 class SetPhoneSettingPreferencesAction(_message.Message):
-    __slots__ = ('font_size', 'field_2', 'unit_preferences')
-
+    __slots__ = ("font_size", "field_2", "unit_preferences")
     class FontSize(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         FONT_SIZE_STANDARD: _ClassVar[SetPhoneSettingPreferencesAction.FontSize]
@@ -2810,36 +2349,26 @@ class SetPhoneSettingPreferencesAction(_message.Message):
     font_size: SetPhoneSettingPreferencesAction.FontSize
     field_2: str
     unit_preferences: PhoneUnitPreferences
-
-    def __init__(self, font_size: _Optional[_Union[SetPhoneSettingPreferencesAction.FontSize, str]]=..., field_2: _Optional[str]=..., unit_preferences: _Optional[_Union[PhoneUnitPreferences, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, font_size: _Optional[_Union[SetPhoneSettingPreferencesAction.FontSize, str]] = ..., field_2: _Optional[str] = ..., unit_preferences: _Optional[_Union[PhoneUnitPreferences, _Mapping]] = ...) -> None: ...
 
 class CancelVehicleDataSubscription(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class SetUpkeepUsernameAction(_message.Message):
-    __slots__ = ('username',)
+    __slots__ = ("username",)
     USERNAME_FIELD_NUMBER: _ClassVar[int]
     username: str
-
-    def __init__(self, username: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, username: _Optional[str] = ...) -> None: ...
 
 class DrivingSetCruiseSpeedLimitAction(_message.Message):
-    __slots__ = ('limitMph',)
+    __slots__ = ("limitMph",)
     LIMITMPH_FIELD_NUMBER: _ClassVar[int]
     limitMph: float
-
-    def __init__(self, limitMph: _Optional[float]=...) -> None:
-        ...
+    def __init__(self, limitMph: _Optional[float] = ...) -> None: ...
 
 class SetDeckLightAction(_message.Message):
-    __slots__ = ('on',)
+    __slots__ = ("on",)
     ON_FIELD_NUMBER: _ClassVar[int]
     on: bool
-
-    def __init__(self, on: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, on: _Optional[bool] = ...) -> None: ...

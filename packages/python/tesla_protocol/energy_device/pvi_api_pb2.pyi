@@ -1,15 +1,16 @@
 from google.protobuf import wrappers_pb2 as _wrappers_pb2
-from . import device_pb2 as _device_pb2
-from . import networking_pb2 as _networking_pb2
-from . import update_pb2 as _update_pb2
-from . import energy_pb2 as _energy_pb2
-from . import neurio_meter_api_pb2 as _neurio_meter_api_pb2
+from tesla_protocol.energy_device import device_pb2 as _device_pb2
+from tesla_protocol.energy_device import networking_pb2 as _networking_pb2
+from tesla_protocol.energy_device import update_pb2 as _update_pb2
+from tesla_protocol.energy_device import energy_pb2 as _energy_pb2
+from tesla_protocol.energy_device import neurio_meter_api_pb2 as _neurio_meter_api_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from collections.abc import Iterable as _Iterable, Mapping as _Mapping
 from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class PVInverterSolarInstallationType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -70,7 +71,7 @@ PV_INVERTER_CLEAR_LOGS_STATUS_SUCCESS: PVInverterClearLogsStatus
 PV_INVERTER_CLEAR_LOGS_STATUS_ATTEMPTED: PVInverterClearLogsStatus
 
 class PVStringVitals(_message.Message):
-    __slots__ = ('dc_measurement', 'string_id', 'connected', 'locked_out')
+    __slots__ = ("dc_measurement", "string_id", "connected", "locked_out")
     DC_MEASUREMENT_FIELD_NUMBER: _ClassVar[int]
     STRING_ID_FIELD_NUMBER: _ClassVar[int]
     CONNECTED_FIELD_NUMBER: _ClassVar[int]
@@ -79,12 +80,10 @@ class PVStringVitals(_message.Message):
     string_id: int
     connected: bool
     locked_out: bool
-
-    def __init__(self, dc_measurement: _Optional[_Union[_energy_pb2.InstDCMeasurement, _Mapping]]=..., string_id: _Optional[int]=..., connected: _Optional[bool]=..., locked_out: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, dc_measurement: _Optional[_Union[_energy_pb2.InstDCMeasurement, _Mapping]] = ..., string_id: _Optional[int] = ..., connected: _Optional[bool] = ..., locked_out: _Optional[bool] = ...) -> None: ...
 
 class PVInverterVitals(_message.Message):
-    __slots__ = ('uptime_s', 'pvac_faults', 'pvs_faults', 'ac_measurement_pvac', 'site_shutdown_switch_open', 'energy_today', 'pv_string_vitals', 'ac_measurement_site', 'pvac_inv_state', 'pvac_state', 'grid_compliance_status', 'pvac_warnings', 'pvs_warnings', 'pvs_state', 'ac_measurement_solar_rgm')
+    __slots__ = ("uptime_s", "pvac_faults", "pvs_faults", "ac_measurement_pvac", "site_shutdown_switch_open", "energy_today", "pv_string_vitals", "ac_measurement_site", "pvac_inv_state", "pvac_state", "grid_compliance_status", "pvac_warnings", "pvs_warnings", "pvs_state", "ac_measurement_solar_rgm")
     UPTIME_S_FIELD_NUMBER: _ClassVar[int]
     PVAC_FAULTS_FIELD_NUMBER: _ClassVar[int]
     PVS_FAULTS_FIELD_NUMBER: _ClassVar[int]
@@ -115,42 +114,34 @@ class PVInverterVitals(_message.Message):
     pvs_warnings: _containers.RepeatedScalarFieldContainer[int]
     pvs_state: int
     ac_measurement_solar_rgm: _energy_pb2.InstACMeasurement
-
-    def __init__(self, uptime_s: _Optional[int]=..., pvac_faults: _Optional[_Iterable[int]]=..., pvs_faults: _Optional[_Iterable[int]]=..., ac_measurement_pvac: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=..., site_shutdown_switch_open: _Optional[bool]=..., energy_today: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]]=..., pv_string_vitals: _Optional[_Iterable[_Union[PVStringVitals, _Mapping]]]=..., ac_measurement_site: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=..., pvac_inv_state: _Optional[int]=..., pvac_state: _Optional[int]=..., grid_compliance_status: _Optional[_Union[_energy_pb2.GridComplianceStatus, _Mapping]]=..., pvac_warnings: _Optional[_Iterable[int]]=..., pvs_warnings: _Optional[_Iterable[int]]=..., pvs_state: _Optional[int]=..., ac_measurement_solar_rgm: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, uptime_s: _Optional[int] = ..., pvac_faults: _Optional[_Iterable[int]] = ..., pvs_faults: _Optional[_Iterable[int]] = ..., ac_measurement_pvac: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]] = ..., site_shutdown_switch_open: _Optional[bool] = ..., energy_today: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]] = ..., pv_string_vitals: _Optional[_Iterable[_Union[PVStringVitals, _Mapping]]] = ..., ac_measurement_site: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]] = ..., pvac_inv_state: _Optional[int] = ..., pvac_state: _Optional[int] = ..., grid_compliance_status: _Optional[_Union[_energy_pb2.GridComplianceStatus, _Mapping]] = ..., pvac_warnings: _Optional[_Iterable[int]] = ..., pvs_warnings: _Optional[_Iterable[int]] = ..., pvs_state: _Optional[int] = ..., ac_measurement_solar_rgm: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]] = ...) -> None: ...
 
 class PVInverterLifetimeStats(_message.Message):
-    __slots__ = ('uptime_s', 'alert_count', 'energy_lifetime')
+    __slots__ = ("uptime_s", "alert_count", "energy_lifetime")
     UPTIME_S_FIELD_NUMBER: _ClassVar[int]
     ALERT_COUNT_FIELD_NUMBER: _ClassVar[int]
     ENERGY_LIFETIME_FIELD_NUMBER: _ClassVar[int]
     uptime_s: int
     alert_count: int
     energy_lifetime: _energy_pb2.AccumulatedEnergy
-
-    def __init__(self, uptime_s: _Optional[int]=..., alert_count: _Optional[int]=..., energy_lifetime: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, uptime_s: _Optional[int] = ..., alert_count: _Optional[int] = ..., energy_lifetime: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]] = ...) -> None: ...
 
 class PVMeterInterface(_message.Message):
-    __slots__ = ('neurio',)
+    __slots__ = ("neurio",)
     NEURIO_FIELD_NUMBER: _ClassVar[int]
     neurio: _neurio_meter_api_pb2.NeurioMeterInterface
-
-    def __init__(self, neurio: _Optional[_Union[_neurio_meter_api_pb2.NeurioMeterInterface, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, neurio: _Optional[_Union[_neurio_meter_api_pb2.NeurioMeterInterface, _Mapping]] = ...) -> None: ...
 
 class PVGridCodeConfig(_message.Message):
-    __slots__ = ('grid_code', 'region_info')
+    __slots__ = ("grid_code", "region_info")
     GRID_CODE_FIELD_NUMBER: _ClassVar[int]
     REGION_INFO_FIELD_NUMBER: _ClassVar[int]
     grid_code: str
     region_info: str
-
-    def __init__(self, grid_code: _Optional[str]=..., region_info: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, grid_code: _Optional[str] = ..., region_info: _Optional[str] = ...) -> None: ...
 
 class PVInverterSettings(_message.Message):
-    __slots__ = ('grid_code', 'meters', 'solar_installation_type', 'current_rating_override_a')
+    __slots__ = ("grid_code", "meters", "solar_installation_type", "current_rating_override_a")
     GRID_CODE_FIELD_NUMBER: _ClassVar[int]
     METERS_FIELD_NUMBER: _ClassVar[int]
     SOLAR_INSTALLATION_TYPE_FIELD_NUMBER: _ClassVar[int]
@@ -159,28 +150,22 @@ class PVInverterSettings(_message.Message):
     meters: _containers.RepeatedCompositeFieldContainer[PVMeterInterface]
     solar_installation_type: PVInverterSolarInstallationType
     current_rating_override_a: _wrappers_pb2.FloatValue
-
-    def __init__(self, grid_code: _Optional[_Union[PVGridCodeConfig, _Mapping]]=..., meters: _Optional[_Iterable[_Union[PVMeterInterface, _Mapping]]]=..., solar_installation_type: _Optional[_Union[PVInverterSolarInstallationType, str]]=..., current_rating_override_a: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, grid_code: _Optional[_Union[PVGridCodeConfig, _Mapping]] = ..., meters: _Optional[_Iterable[_Union[PVMeterInterface, _Mapping]]] = ..., solar_installation_type: _Optional[_Union[PVInverterSolarInstallationType, str]] = ..., current_rating_override_a: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ...) -> None: ...
 
 class PVInverterCanMessage(_message.Message):
-    __slots__ = ('can_id', 'can_payload')
+    __slots__ = ("can_id", "can_payload")
     CAN_ID_FIELD_NUMBER: _ClassVar[int]
     CAN_PAYLOAD_FIELD_NUMBER: _ClassVar[int]
     can_id: int
     can_payload: bytes
-
-    def __init__(self, can_id: _Optional[int]=..., can_payload: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, can_id: _Optional[int] = ..., can_payload: _Optional[bytes] = ...) -> None: ...
 
 class PVIAPIGetSystemInfoRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class PVIAPIGetSystemInfoResponse(_message.Message):
-    __slots__ = ('pvcom_id', 'pvac_id', 'pvs_id', 'firmware_version', 'nominal_current_amps', 'nominal_apparent_power_va')
+    __slots__ = ("pvcom_id", "pvac_id", "pvs_id", "firmware_version", "nominal_current_amps", "nominal_apparent_power_va")
     PVCOM_ID_FIELD_NUMBER: _ClassVar[int]
     PVAC_ID_FIELD_NUMBER: _ClassVar[int]
     PVS_ID_FIELD_NUMBER: _ClassVar[int]
@@ -193,46 +178,34 @@ class PVIAPIGetSystemInfoResponse(_message.Message):
     firmware_version: _update_pb2.FirmwareVersion
     nominal_current_amps: float
     nominal_apparent_power_va: float
-
-    def __init__(self, pvcom_id: _Optional[_Union[_device_pb2.EcuId, _Mapping]]=..., pvac_id: _Optional[_Union[_device_pb2.EcuId, _Mapping]]=..., pvs_id: _Optional[_Union[_device_pb2.EcuId, _Mapping]]=..., firmware_version: _Optional[_Union[_update_pb2.FirmwareVersion, _Mapping]]=..., nominal_current_amps: _Optional[float]=..., nominal_apparent_power_va: _Optional[float]=...) -> None:
-        ...
+    def __init__(self, pvcom_id: _Optional[_Union[_device_pb2.EcuId, _Mapping]] = ..., pvac_id: _Optional[_Union[_device_pb2.EcuId, _Mapping]] = ..., pvs_id: _Optional[_Union[_device_pb2.EcuId, _Mapping]] = ..., firmware_version: _Optional[_Union[_update_pb2.FirmwareVersion, _Mapping]] = ..., nominal_current_amps: _Optional[float] = ..., nominal_apparent_power_va: _Optional[float] = ...) -> None: ...
 
 class PVIAPIGetVitalsRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class PVIAPIGetVitalsResponse(_message.Message):
-    __slots__ = ('vitals',)
+    __slots__ = ("vitals",)
     VITALS_FIELD_NUMBER: _ClassVar[int]
     vitals: PVInverterVitals
-
-    def __init__(self, vitals: _Optional[_Union[PVInverterVitals, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, vitals: _Optional[_Union[PVInverterVitals, _Mapping]] = ...) -> None: ...
 
 class PVIAPIGetLifetimeStatsRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class PVIAPIGetLifetimeStatsResponse(_message.Message):
-    __slots__ = ('lifetime_stats',)
+    __slots__ = ("lifetime_stats",)
     LIFETIME_STATS_FIELD_NUMBER: _ClassVar[int]
     lifetime_stats: PVInverterLifetimeStats
-
-    def __init__(self, lifetime_stats: _Optional[_Union[PVInverterLifetimeStats, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, lifetime_stats: _Optional[_Union[PVInverterLifetimeStats, _Mapping]] = ...) -> None: ...
 
 class PVIAPIGetConfigRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class PVIAPIGetConfigResponse(_message.Message):
-    __slots__ = ('settings', 'wifi_config', 'wifi', 'eth', 'gsm', 'power_status')
+    __slots__ = ("settings", "wifi_config", "wifi", "eth", "gsm", "power_status")
     SETTINGS_FIELD_NUMBER: _ClassVar[int]
     WIFI_CONFIG_FIELD_NUMBER: _ClassVar[int]
     WIFI_FIELD_NUMBER: _ClassVar[int]
@@ -245,266 +218,204 @@ class PVIAPIGetConfigResponse(_message.Message):
     eth: _networking_pb2.NetworkInterface
     gsm: _networking_pb2.NetworkInterface
     power_status: PVInverterPowerStatus
-
-    def __init__(self, settings: _Optional[_Union[PVInverterSettings, _Mapping]]=..., wifi_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]]=..., wifi: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]]=..., eth: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]]=..., gsm: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]]=..., power_status: _Optional[_Union[PVInverterPowerStatus, str]]=...) -> None:
-        ...
+    def __init__(self, settings: _Optional[_Union[PVInverterSettings, _Mapping]] = ..., wifi_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]] = ..., wifi: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]] = ..., eth: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]] = ..., gsm: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]] = ..., power_status: _Optional[_Union[PVInverterPowerStatus, str]] = ...) -> None: ...
 
 class PVIAPIConfigureSettingsRequest(_message.Message):
-    __slots__ = ('settings',)
+    __slots__ = ("settings",)
     SETTINGS_FIELD_NUMBER: _ClassVar[int]
     settings: PVInverterSettings
-
-    def __init__(self, settings: _Optional[_Union[PVInverterSettings, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, settings: _Optional[_Union[PVInverterSettings, _Mapping]] = ...) -> None: ...
 
 class PVIAPIConfigureSettingsResponse(_message.Message):
-    __slots__ = ('settings',)
+    __slots__ = ("settings",)
     SETTINGS_FIELD_NUMBER: _ClassVar[int]
     settings: PVInverterSettings
-
-    def __init__(self, settings: _Optional[_Union[PVInverterSettings, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, settings: _Optional[_Union[PVInverterSettings, _Mapping]] = ...) -> None: ...
 
 class PVIAPIConfigureEthernetRequest(_message.Message):
-    __slots__ = ('ip4_config',)
+    __slots__ = ("ip4_config",)
     IP4_CONFIG_FIELD_NUMBER: _ClassVar[int]
     ip4_config: _networking_pb2.NetworkInterfaceIPv4Config
-
-    def __init__(self, ip4_config: _Optional[_Union[_networking_pb2.NetworkInterfaceIPv4Config, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, ip4_config: _Optional[_Union[_networking_pb2.NetworkInterfaceIPv4Config, _Mapping]] = ...) -> None: ...
 
 class PVIAPIConfigureEthernetResponse(_message.Message):
-    __slots__ = ('eth',)
+    __slots__ = ("eth",)
     ETH_FIELD_NUMBER: _ClassVar[int]
     eth: _networking_pb2.NetworkInterface
-
-    def __init__(self, eth: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, eth: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]] = ...) -> None: ...
 
 class PVIAPIConfigureGsmRequest(_message.Message):
-    __slots__ = ('enabled',)
+    __slots__ = ("enabled",)
     ENABLED_FIELD_NUMBER: _ClassVar[int]
     enabled: bool
-
-    def __init__(self, enabled: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, enabled: _Optional[bool] = ...) -> None: ...
 
 class PVIAPIConfigureGsmResponse(_message.Message):
-    __slots__ = ('gsm',)
+    __slots__ = ("gsm",)
     GSM_FIELD_NUMBER: _ClassVar[int]
     gsm: _networking_pb2.NetworkInterface
-
-    def __init__(self, gsm: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, gsm: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]] = ...) -> None: ...
 
 class PVIAPIInverterResetRequest(_message.Message):
-    __slots__ = ('reset_pvcom', 'reset_pvac', 'reset_pvs')
+    __slots__ = ("reset_pvcom", "reset_pvac", "reset_pvs")
     RESET_PVCOM_FIELD_NUMBER: _ClassVar[int]
     RESET_PVAC_FIELD_NUMBER: _ClassVar[int]
     RESET_PVS_FIELD_NUMBER: _ClassVar[int]
     reset_pvcom: bool
     reset_pvac: bool
     reset_pvs: bool
-
-    def __init__(self, reset_pvcom: _Optional[bool]=..., reset_pvac: _Optional[bool]=..., reset_pvs: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, reset_pvcom: _Optional[bool] = ..., reset_pvac: _Optional[bool] = ..., reset_pvs: _Optional[bool] = ...) -> None: ...
 
 class PVIAPIInverterResetResponse(_message.Message):
-    __slots__ = ('pvcom_status', 'pvac_status', 'pvs_status')
+    __slots__ = ("pvcom_status", "pvac_status", "pvs_status")
     PVCOM_STATUS_FIELD_NUMBER: _ClassVar[int]
     PVAC_STATUS_FIELD_NUMBER: _ClassVar[int]
     PVS_STATUS_FIELD_NUMBER: _ClassVar[int]
     pvcom_status: PVInverterEcuResetStatus
     pvac_status: PVInverterEcuResetStatus
     pvs_status: PVInverterEcuResetStatus
-
-    def __init__(self, pvcom_status: _Optional[_Union[PVInverterEcuResetStatus, str]]=..., pvac_status: _Optional[_Union[PVInverterEcuResetStatus, str]]=..., pvs_status: _Optional[_Union[PVInverterEcuResetStatus, str]]=...) -> None:
-        ...
+    def __init__(self, pvcom_status: _Optional[_Union[PVInverterEcuResetStatus, str]] = ..., pvac_status: _Optional[_Union[PVInverterEcuResetStatus, str]] = ..., pvs_status: _Optional[_Union[PVInverterEcuResetStatus, str]] = ...) -> None: ...
 
 class PVIAPISetOperationParamsRequest(_message.Message):
-    __slots__ = ('power_status', 'active_power_limit_w')
+    __slots__ = ("power_status", "active_power_limit_w")
     POWER_STATUS_FIELD_NUMBER: _ClassVar[int]
     ACTIVE_POWER_LIMIT_W_FIELD_NUMBER: _ClassVar[int]
     power_status: PVInverterPowerStatus
     active_power_limit_w: _wrappers_pb2.FloatValue
-
-    def __init__(self, power_status: _Optional[_Union[PVInverterPowerStatus, str]]=..., active_power_limit_w: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, power_status: _Optional[_Union[PVInverterPowerStatus, str]] = ..., active_power_limit_w: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ...) -> None: ...
 
 class PVIAPISetOperationParamsResponse(_message.Message):
-    __slots__ = ('power_status', 'active_power_limit_w')
+    __slots__ = ("power_status", "active_power_limit_w")
     POWER_STATUS_FIELD_NUMBER: _ClassVar[int]
     ACTIVE_POWER_LIMIT_W_FIELD_NUMBER: _ClassVar[int]
     power_status: PVInverterPowerStatus
     active_power_limit_w: _wrappers_pb2.FloatValue
-
-    def __init__(self, power_status: _Optional[_Union[PVInverterPowerStatus, str]]=..., active_power_limit_w: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, power_status: _Optional[_Union[PVInverterPowerStatus, str]] = ..., active_power_limit_w: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ...) -> None: ...
 
 class PVIAPISendCanMessageRequest(_message.Message):
-    __slots__ = ('can_message',)
+    __slots__ = ("can_message",)
     CAN_MESSAGE_FIELD_NUMBER: _ClassVar[int]
     can_message: PVInverterCanMessage
-
-    def __init__(self, can_message: _Optional[_Union[PVInverterCanMessage, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, can_message: _Optional[_Union[PVInverterCanMessage, _Mapping]] = ...) -> None: ...
 
 class PVIAPISendCanMessageResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class PVIAPIUdsWriteDataByIdentifierRequest(_message.Message):
-    __slots__ = ('ecu', 'did', 'payload')
+    __slots__ = ("ecu", "did", "payload")
     ECU_FIELD_NUMBER: _ClassVar[int]
     DID_FIELD_NUMBER: _ClassVar[int]
     PAYLOAD_FIELD_NUMBER: _ClassVar[int]
     ecu: PVInverterEcu
     did: int
     payload: bytes
-
-    def __init__(self, ecu: _Optional[_Union[PVInverterEcu, str]]=..., did: _Optional[int]=..., payload: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, ecu: _Optional[_Union[PVInverterEcu, str]] = ..., did: _Optional[int] = ..., payload: _Optional[bytes] = ...) -> None: ...
 
 class PVIAPIUdsWriteDataByIdentifierResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class PVIAPICheckInternetRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class PVIAPICheckInternetResponse(_message.Message):
-    __slots__ = ('wifi', 'eth', 'gsm')
+    __slots__ = ("wifi", "eth", "gsm")
     WIFI_FIELD_NUMBER: _ClassVar[int]
     ETH_FIELD_NUMBER: _ClassVar[int]
     GSM_FIELD_NUMBER: _ClassVar[int]
     wifi: _networking_pb2.NetworkInterface
     eth: _networking_pb2.NetworkInterface
     gsm: _networking_pb2.NetworkInterface
-
-    def __init__(self, wifi: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]]=..., eth: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]]=..., gsm: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, wifi: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]] = ..., eth: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]] = ..., gsm: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]] = ...) -> None: ...
 
 class PVIAPIConfigureGridCodeRequest(_message.Message):
-    __slots__ = ('grid_code',)
+    __slots__ = ("grid_code",)
     GRID_CODE_FIELD_NUMBER: _ClassVar[int]
     grid_code: PVGridCodeConfig
-
-    def __init__(self, grid_code: _Optional[_Union[PVGridCodeConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, grid_code: _Optional[_Union[PVGridCodeConfig, _Mapping]] = ...) -> None: ...
 
 class PVIAPIConfigureGridCodeResponse(_message.Message):
-    __slots__ = ('grid_code',)
+    __slots__ = ("grid_code",)
     GRID_CODE_FIELD_NUMBER: _ClassVar[int]
     grid_code: PVGridCodeConfig
-
-    def __init__(self, grid_code: _Optional[_Union[PVGridCodeConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, grid_code: _Optional[_Union[PVGridCodeConfig, _Mapping]] = ...) -> None: ...
 
 class PVIAPIClearAlertsRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class PVIAPIClearAlertsResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class PVIAPITriggerDrLogRequest(_message.Message):
-    __slots__ = ('pvac', 'pvs')
+    __slots__ = ("pvac", "pvs")
     PVAC_FIELD_NUMBER: _ClassVar[int]
     PVS_FIELD_NUMBER: _ClassVar[int]
     pvac: bool
     pvs: bool
-
-    def __init__(self, pvac: _Optional[bool]=..., pvs: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, pvac: _Optional[bool] = ..., pvs: _Optional[bool] = ...) -> None: ...
 
 class PVIAPITriggerDrLogResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class PVIAPIClearLogsRequest(_message.Message):
-    __slots__ = ('telemetry', 'alerts', 'drlog')
+    __slots__ = ("telemetry", "alerts", "drlog")
     TELEMETRY_FIELD_NUMBER: _ClassVar[int]
     ALERTS_FIELD_NUMBER: _ClassVar[int]
     DRLOG_FIELD_NUMBER: _ClassVar[int]
     telemetry: bool
     alerts: bool
     drlog: bool
-
-    def __init__(self, telemetry: _Optional[bool]=..., alerts: _Optional[bool]=..., drlog: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, telemetry: _Optional[bool] = ..., alerts: _Optional[bool] = ..., drlog: _Optional[bool] = ...) -> None: ...
 
 class PVIAPIClearLogsResponse(_message.Message):
-    __slots__ = ('telemetry', 'alerts', 'drlog')
+    __slots__ = ("telemetry", "alerts", "drlog")
     TELEMETRY_FIELD_NUMBER: _ClassVar[int]
     ALERTS_FIELD_NUMBER: _ClassVar[int]
     DRLOG_FIELD_NUMBER: _ClassVar[int]
     telemetry: PVInverterClearLogsStatus
     alerts: PVInverterClearLogsStatus
     drlog: PVInverterClearLogsStatus
-
-    def __init__(self, telemetry: _Optional[_Union[PVInverterClearLogsStatus, str]]=..., alerts: _Optional[_Union[PVInverterClearLogsStatus, str]]=..., drlog: _Optional[_Union[PVInverterClearLogsStatus, str]]=...) -> None:
-        ...
+    def __init__(self, telemetry: _Optional[_Union[PVInverterClearLogsStatus, str]] = ..., alerts: _Optional[_Union[PVInverterClearLogsStatus, str]] = ..., drlog: _Optional[_Union[PVInverterClearLogsStatus, str]] = ...) -> None: ...
 
 class PVIAPIConfigureSolarInstallationTypeRequest(_message.Message):
-    __slots__ = ('solar_installation_type',)
+    __slots__ = ("solar_installation_type",)
     SOLAR_INSTALLATION_TYPE_FIELD_NUMBER: _ClassVar[int]
     solar_installation_type: PVInverterSolarInstallationType
-
-    def __init__(self, solar_installation_type: _Optional[_Union[PVInverterSolarInstallationType, str]]=...) -> None:
-        ...
+    def __init__(self, solar_installation_type: _Optional[_Union[PVInverterSolarInstallationType, str]] = ...) -> None: ...
 
 class PVIAPIConfigureSolarInstallationTypeResponse(_message.Message):
-    __slots__ = ('solar_installation_type',)
+    __slots__ = ("solar_installation_type",)
     SOLAR_INSTALLATION_TYPE_FIELD_NUMBER: _ClassVar[int]
     solar_installation_type: PVInverterSolarInstallationType
-
-    def __init__(self, solar_installation_type: _Optional[_Union[PVInverterSolarInstallationType, str]]=...) -> None:
-        ...
+    def __init__(self, solar_installation_type: _Optional[_Union[PVInverterSolarInstallationType, str]] = ...) -> None: ...
 
 class PVIAPIConfigureCurrentRatingOverrideRequest(_message.Message):
-    __slots__ = ('current_rating_override_a',)
+    __slots__ = ("current_rating_override_a",)
     CURRENT_RATING_OVERRIDE_A_FIELD_NUMBER: _ClassVar[int]
     current_rating_override_a: float
-
-    def __init__(self, current_rating_override_a: _Optional[float]=...) -> None:
-        ...
+    def __init__(self, current_rating_override_a: _Optional[float] = ...) -> None: ...
 
 class PVIAPIConfigureCurrentRatingOverrideResponse(_message.Message):
-    __slots__ = ('current_rating_override_a',)
+    __slots__ = ("current_rating_override_a",)
     CURRENT_RATING_OVERRIDE_A_FIELD_NUMBER: _ClassVar[int]
     current_rating_override_a: float
-
-    def __init__(self, current_rating_override_a: _Optional[float]=...) -> None:
-        ...
+    def __init__(self, current_rating_override_a: _Optional[float] = ...) -> None: ...
 
 class PVIAPIRemoveCurrentRatingOverrideRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class PVIAPIRemoveCurrentRatingOverrideResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class PVIMessages(_message.Message):
-    __slots__ = ('get_system_info_request', 'get_system_info_response', 'get_vitals_request', 'get_vitals_response', 'get_lifetime_stats_request', 'get_lifetime_stats_response', 'get_config_request', 'get_config_response', 'configure_settings_request', 'configure_settings_response', 'configure_ethernet_request', 'configure_ethernet_response', 'configure_gsm_request', 'configure_gsm_response', 'inverter_reset_request', 'inverter_reset_response', 'set_operation_params_request', 'set_operation_params_response', 'send_can_message_request', 'send_can_message_response', 'uds_write_data_by_identifier_request', 'uds_write_data_by_identifier_response', 'check_internet_request', 'check_internet_response', 'configure_grid_code_request', 'configure_grid_code_response', 'clear_alerts_request', 'clear_alerts_response', 'trigger_dr_log_request', 'trigger_dr_log_response', 'clear_logs_request', 'clear_logs_response', 'configure_solar_installation_type_request', 'configure_solar_installation_type_response', 'configure_current_rating_override_request', 'configure_current_rating_override_response', 'remove_current_rating_override_request', 'remove_current_rating_override_response')
+    __slots__ = ("get_system_info_request", "get_system_info_response", "get_vitals_request", "get_vitals_response", "get_lifetime_stats_request", "get_lifetime_stats_response", "get_config_request", "get_config_response", "configure_settings_request", "configure_settings_response", "configure_ethernet_request", "configure_ethernet_response", "configure_gsm_request", "configure_gsm_response", "inverter_reset_request", "inverter_reset_response", "set_operation_params_request", "set_operation_params_response", "send_can_message_request", "send_can_message_response", "uds_write_data_by_identifier_request", "uds_write_data_by_identifier_response", "check_internet_request", "check_internet_response", "configure_grid_code_request", "configure_grid_code_response", "clear_alerts_request", "clear_alerts_response", "trigger_dr_log_request", "trigger_dr_log_response", "clear_logs_request", "clear_logs_response", "configure_solar_installation_type_request", "configure_solar_installation_type_response", "configure_current_rating_override_request", "configure_current_rating_override_response", "remove_current_rating_override_request", "remove_current_rating_override_response")
     GET_SYSTEM_INFO_REQUEST_FIELD_NUMBER: _ClassVar[int]
     GET_SYSTEM_INFO_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     GET_VITALS_REQUEST_FIELD_NUMBER: _ClassVar[int]
@@ -581,6 +492,4 @@ class PVIMessages(_message.Message):
     configure_current_rating_override_response: PVIAPIConfigureCurrentRatingOverrideResponse
     remove_current_rating_override_request: PVIAPIRemoveCurrentRatingOverrideRequest
     remove_current_rating_override_response: PVIAPIRemoveCurrentRatingOverrideResponse
-
-    def __init__(self, get_system_info_request: _Optional[_Union[PVIAPIGetSystemInfoRequest, _Mapping]]=..., get_system_info_response: _Optional[_Union[PVIAPIGetSystemInfoResponse, _Mapping]]=..., get_vitals_request: _Optional[_Union[PVIAPIGetVitalsRequest, _Mapping]]=..., get_vitals_response: _Optional[_Union[PVIAPIGetVitalsResponse, _Mapping]]=..., get_lifetime_stats_request: _Optional[_Union[PVIAPIGetLifetimeStatsRequest, _Mapping]]=..., get_lifetime_stats_response: _Optional[_Union[PVIAPIGetLifetimeStatsResponse, _Mapping]]=..., get_config_request: _Optional[_Union[PVIAPIGetConfigRequest, _Mapping]]=..., get_config_response: _Optional[_Union[PVIAPIGetConfigResponse, _Mapping]]=..., configure_settings_request: _Optional[_Union[PVIAPIConfigureSettingsRequest, _Mapping]]=..., configure_settings_response: _Optional[_Union[PVIAPIConfigureSettingsResponse, _Mapping]]=..., configure_ethernet_request: _Optional[_Union[PVIAPIConfigureEthernetRequest, _Mapping]]=..., configure_ethernet_response: _Optional[_Union[PVIAPIConfigureEthernetResponse, _Mapping]]=..., configure_gsm_request: _Optional[_Union[PVIAPIConfigureGsmRequest, _Mapping]]=..., configure_gsm_response: _Optional[_Union[PVIAPIConfigureGsmResponse, _Mapping]]=..., inverter_reset_request: _Optional[_Union[PVIAPIInverterResetRequest, _Mapping]]=..., inverter_reset_response: _Optional[_Union[PVIAPIInverterResetResponse, _Mapping]]=..., set_operation_params_request: _Optional[_Union[PVIAPISetOperationParamsRequest, _Mapping]]=..., set_operation_params_response: _Optional[_Union[PVIAPISetOperationParamsResponse, _Mapping]]=..., send_can_message_request: _Optional[_Union[PVIAPISendCanMessageRequest, _Mapping]]=..., send_can_message_response: _Optional[_Union[PVIAPISendCanMessageResponse, _Mapping]]=..., uds_write_data_by_identifier_request: _Optional[_Union[PVIAPIUdsWriteDataByIdentifierRequest, _Mapping]]=..., uds_write_data_by_identifier_response: _Optional[_Union[PVIAPIUdsWriteDataByIdentifierResponse, _Mapping]]=..., check_internet_request: _Optional[_Union[PVIAPICheckInternetRequest, _Mapping]]=..., check_internet_response: _Optional[_Union[PVIAPICheckInternetResponse, _Mapping]]=..., configure_grid_code_request: _Optional[_Union[PVIAPIConfigureGridCodeRequest, _Mapping]]=..., configure_grid_code_response: _Optional[_Union[PVIAPIConfigureGridCodeResponse, _Mapping]]=..., clear_alerts_request: _Optional[_Union[PVIAPIClearAlertsRequest, _Mapping]]=..., clear_alerts_response: _Optional[_Union[PVIAPIClearAlertsResponse, _Mapping]]=..., trigger_dr_log_request: _Optional[_Union[PVIAPITriggerDrLogRequest, _Mapping]]=..., trigger_dr_log_response: _Optional[_Union[PVIAPITriggerDrLogResponse, _Mapping]]=..., clear_logs_request: _Optional[_Union[PVIAPIClearLogsRequest, _Mapping]]=..., clear_logs_response: _Optional[_Union[PVIAPIClearLogsResponse, _Mapping]]=..., configure_solar_installation_type_request: _Optional[_Union[PVIAPIConfigureSolarInstallationTypeRequest, _Mapping]]=..., configure_solar_installation_type_response: _Optional[_Union[PVIAPIConfigureSolarInstallationTypeResponse, _Mapping]]=..., configure_current_rating_override_request: _Optional[_Union[PVIAPIConfigureCurrentRatingOverrideRequest, _Mapping]]=..., configure_current_rating_override_response: _Optional[_Union[PVIAPIConfigureCurrentRatingOverrideResponse, _Mapping]]=..., remove_current_rating_override_request: _Optional[_Union[PVIAPIRemoveCurrentRatingOverrideRequest, _Mapping]]=..., remove_current_rating_override_response: _Optional[_Union[PVIAPIRemoveCurrentRatingOverrideResponse, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, get_system_info_request: _Optional[_Union[PVIAPIGetSystemInfoRequest, _Mapping]] = ..., get_system_info_response: _Optional[_Union[PVIAPIGetSystemInfoResponse, _Mapping]] = ..., get_vitals_request: _Optional[_Union[PVIAPIGetVitalsRequest, _Mapping]] = ..., get_vitals_response: _Optional[_Union[PVIAPIGetVitalsResponse, _Mapping]] = ..., get_lifetime_stats_request: _Optional[_Union[PVIAPIGetLifetimeStatsRequest, _Mapping]] = ..., get_lifetime_stats_response: _Optional[_Union[PVIAPIGetLifetimeStatsResponse, _Mapping]] = ..., get_config_request: _Optional[_Union[PVIAPIGetConfigRequest, _Mapping]] = ..., get_config_response: _Optional[_Union[PVIAPIGetConfigResponse, _Mapping]] = ..., configure_settings_request: _Optional[_Union[PVIAPIConfigureSettingsRequest, _Mapping]] = ..., configure_settings_response: _Optional[_Union[PVIAPIConfigureSettingsResponse, _Mapping]] = ..., configure_ethernet_request: _Optional[_Union[PVIAPIConfigureEthernetRequest, _Mapping]] = ..., configure_ethernet_response: _Optional[_Union[PVIAPIConfigureEthernetResponse, _Mapping]] = ..., configure_gsm_request: _Optional[_Union[PVIAPIConfigureGsmRequest, _Mapping]] = ..., configure_gsm_response: _Optional[_Union[PVIAPIConfigureGsmResponse, _Mapping]] = ..., inverter_reset_request: _Optional[_Union[PVIAPIInverterResetRequest, _Mapping]] = ..., inverter_reset_response: _Optional[_Union[PVIAPIInverterResetResponse, _Mapping]] = ..., set_operation_params_request: _Optional[_Union[PVIAPISetOperationParamsRequest, _Mapping]] = ..., set_operation_params_response: _Optional[_Union[PVIAPISetOperationParamsResponse, _Mapping]] = ..., send_can_message_request: _Optional[_Union[PVIAPISendCanMessageRequest, _Mapping]] = ..., send_can_message_response: _Optional[_Union[PVIAPISendCanMessageResponse, _Mapping]] = ..., uds_write_data_by_identifier_request: _Optional[_Union[PVIAPIUdsWriteDataByIdentifierRequest, _Mapping]] = ..., uds_write_data_by_identifier_response: _Optional[_Union[PVIAPIUdsWriteDataByIdentifierResponse, _Mapping]] = ..., check_internet_request: _Optional[_Union[PVIAPICheckInternetRequest, _Mapping]] = ..., check_internet_response: _Optional[_Union[PVIAPICheckInternetResponse, _Mapping]] = ..., configure_grid_code_request: _Optional[_Union[PVIAPIConfigureGridCodeRequest, _Mapping]] = ..., configure_grid_code_response: _Optional[_Union[PVIAPIConfigureGridCodeResponse, _Mapping]] = ..., clear_alerts_request: _Optional[_Union[PVIAPIClearAlertsRequest, _Mapping]] = ..., clear_alerts_response: _Optional[_Union[PVIAPIClearAlertsResponse, _Mapping]] = ..., trigger_dr_log_request: _Optional[_Union[PVIAPITriggerDrLogRequest, _Mapping]] = ..., trigger_dr_log_response: _Optional[_Union[PVIAPITriggerDrLogResponse, _Mapping]] = ..., clear_logs_request: _Optional[_Union[PVIAPIClearLogsRequest, _Mapping]] = ..., clear_logs_response: _Optional[_Union[PVIAPIClearLogsResponse, _Mapping]] = ..., configure_solar_installation_type_request: _Optional[_Union[PVIAPIConfigureSolarInstallationTypeRequest, _Mapping]] = ..., configure_solar_installation_type_response: _Optional[_Union[PVIAPIConfigureSolarInstallationTypeResponse, _Mapping]] = ..., configure_current_rating_override_request: _Optional[_Union[PVIAPIConfigureCurrentRatingOverrideRequest, _Mapping]] = ..., configure_current_rating_override_response: _Optional[_Union[PVIAPIConfigureCurrentRatingOverrideResponse, _Mapping]] = ..., remove_current_rating_override_request: _Optional[_Union[PVIAPIRemoveCurrentRatingOverrideRequest, _Mapping]] = ..., remove_current_rating_override_response: _Optional[_Union[PVIAPIRemoveCurrentRatingOverrideResponse, _Mapping]] = ...) -> None: ...

@@ -1,16 +1,18 @@
 import datetime
+
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from google.protobuf import wrappers_pb2 as _wrappers_pb2
-from . import device_pb2 as _device_pb2
-from . import networking_pb2 as _networking_pb2
-from . import energy_pb2 as _energy_pb2
-from . import neurio_meter_api_pb2 as _neurio_meter_api_pb2
+from tesla_protocol.energy_device import device_pb2 as _device_pb2
+from tesla_protocol.energy_device import networking_pb2 as _networking_pb2
+from tesla_protocol.energy_device import energy_pb2 as _energy_pb2
+from tesla_protocol.energy_device import neurio_meter_api_pb2 as _neurio_meter_api_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from collections.abc import Iterable as _Iterable, Mapping as _Mapping
 from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class WCChargeScheduleChargingStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -361,17 +363,15 @@ WC_CHARGING_COMMAND_START: WCChargingCommand
 WC_CHARGING_COMMAND_STOP: WCChargingCommand
 
 class WCFaultStatusLatchedAlert(_message.Message):
-    __slots__ = ('alert_id', 'alert_timestamp')
+    __slots__ = ("alert_id", "alert_timestamp")
     ALERT_ID_FIELD_NUMBER: _ClassVar[int]
     ALERT_TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     alert_id: int
     alert_timestamp: _timestamp_pb2.Timestamp
-
-    def __init__(self, alert_id: _Optional[int]=..., alert_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, alert_id: _Optional[int] = ..., alert_timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class WCVitals(_message.Message):
-    __slots__ = ('uptime_s', 'alerts', 'contactor_closed', 'vehicle_connected', 'pcba_temp_c', 'handle_temp_c', 'mcu_temp_c', 'input_thermopile_v', 'prox_v', 'pilot_high_v', 'pilot_low_v', 'session_duration_s', 'session_energy', 'ac_measurement_grid', 'ac_measurement_vehicle', 'ground_resistance_ohms', 'line1_earth_vrms', 'neutral_earth_vrms', 'fault_status', 'recent_fault_status_latched_alerts', 'vin', 'instantaneous_power_watts', 'scheduled_charging_status', 'instantaneous_line_current', 'ocpp_status', 'evse_not_ready_reasons', 'powershare_session_state', 'dry_contact_control_state', 'smart_charging_reason')
+    __slots__ = ("uptime_s", "alerts", "contactor_closed", "vehicle_connected", "pcba_temp_c", "handle_temp_c", "mcu_temp_c", "input_thermopile_v", "prox_v", "pilot_high_v", "pilot_low_v", "session_duration_s", "session_energy", "ac_measurement_grid", "ac_measurement_vehicle", "ground_resistance_ohms", "line1_earth_vrms", "neutral_earth_vrms", "fault_status", "recent_fault_status_latched_alerts", "vin", "instantaneous_power_watts", "scheduled_charging_status", "instantaneous_line_current", "ocpp_status", "evse_not_ready_reasons", "powershare_session_state", "dry_contact_control_state", "smart_charging_reason")
     UPTIME_S_FIELD_NUMBER: _ClassVar[int]
     ALERTS_FIELD_NUMBER: _ClassVar[int]
     CONTACTOR_CLOSED_FIELD_NUMBER: _ClassVar[int]
@@ -430,12 +430,10 @@ class WCVitals(_message.Message):
     powershare_session_state: WCPowershareSessionState
     dry_contact_control_state: WCDryContactControlState
     smart_charging_reason: WCSmartChargingReason
-
-    def __init__(self, uptime_s: _Optional[int]=..., alerts: _Optional[_Iterable[int]]=..., contactor_closed: _Optional[bool]=..., vehicle_connected: _Optional[bool]=..., pcba_temp_c: _Optional[float]=..., handle_temp_c: _Optional[float]=..., mcu_temp_c: _Optional[float]=..., input_thermopile_v: _Optional[float]=..., prox_v: _Optional[float]=..., pilot_high_v: _Optional[float]=..., pilot_low_v: _Optional[float]=..., session_duration_s: _Optional[int]=..., session_energy: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]]=..., ac_measurement_grid: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=..., ac_measurement_vehicle: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]]=..., ground_resistance_ohms: _Optional[float]=..., line1_earth_vrms: _Optional[float]=..., neutral_earth_vrms: _Optional[float]=..., fault_status: _Optional[_Union[WCFaultStatusState, str]]=..., recent_fault_status_latched_alerts: _Optional[_Iterable[_Union[WCFaultStatusLatchedAlert, _Mapping]]]=..., vin: _Optional[_Union[_device_pb2.VIN, _Mapping]]=..., instantaneous_power_watts: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]]=..., scheduled_charging_status: _Optional[_Union[WCChargeScheduleChargingStatus, str]]=..., instantaneous_line_current: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]]=..., ocpp_status: _Optional[_Union[WCOcppStatus, str]]=..., evse_not_ready_reasons: _Optional[_Iterable[_Union[WCEvseNotReadyReason, str]]]=..., powershare_session_state: _Optional[_Union[WCPowershareSessionState, str]]=..., dry_contact_control_state: _Optional[_Union[WCDryContactControlState, str]]=..., smart_charging_reason: _Optional[_Union[WCSmartChargingReason, str]]=...) -> None:
-        ...
+    def __init__(self, uptime_s: _Optional[int] = ..., alerts: _Optional[_Iterable[int]] = ..., contactor_closed: _Optional[bool] = ..., vehicle_connected: _Optional[bool] = ..., pcba_temp_c: _Optional[float] = ..., handle_temp_c: _Optional[float] = ..., mcu_temp_c: _Optional[float] = ..., input_thermopile_v: _Optional[float] = ..., prox_v: _Optional[float] = ..., pilot_high_v: _Optional[float] = ..., pilot_low_v: _Optional[float] = ..., session_duration_s: _Optional[int] = ..., session_energy: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]] = ..., ac_measurement_grid: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]] = ..., ac_measurement_vehicle: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]] = ..., ground_resistance_ohms: _Optional[float] = ..., line1_earth_vrms: _Optional[float] = ..., neutral_earth_vrms: _Optional[float] = ..., fault_status: _Optional[_Union[WCFaultStatusState, str]] = ..., recent_fault_status_latched_alerts: _Optional[_Iterable[_Union[WCFaultStatusLatchedAlert, _Mapping]]] = ..., vin: _Optional[_Union[_device_pb2.VIN, _Mapping]] = ..., instantaneous_power_watts: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ..., scheduled_charging_status: _Optional[_Union[WCChargeScheduleChargingStatus, str]] = ..., instantaneous_line_current: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ..., ocpp_status: _Optional[_Union[WCOcppStatus, str]] = ..., evse_not_ready_reasons: _Optional[_Iterable[_Union[WCEvseNotReadyReason, str]]] = ..., powershare_session_state: _Optional[_Union[WCPowershareSessionState, str]] = ..., dry_contact_control_state: _Optional[_Union[WCDryContactControlState, str]] = ..., smart_charging_reason: _Optional[_Union[WCSmartChargingReason, str]] = ...) -> None: ...
 
 class WCLifetimeStats(_message.Message):
-    __slots__ = ('uptime_s', 'alert_count', 'contactor_cycles', 'contactor_cycles_loaded', 'connector_cycles', 'thermal_foldbacks', 'avg_startup_temp_c', 'charge_starts', 'charging_time_s', 'charging_energy')
+    __slots__ = ("uptime_s", "alert_count", "contactor_cycles", "contactor_cycles_loaded", "connector_cycles", "thermal_foldbacks", "avg_startup_temp_c", "charge_starts", "charging_time_s", "charging_energy")
     UPTIME_S_FIELD_NUMBER: _ClassVar[int]
     ALERT_COUNT_FIELD_NUMBER: _ClassVar[int]
     CONTACTOR_CYCLES_FIELD_NUMBER: _ClassVar[int]
@@ -456,54 +454,42 @@ class WCLifetimeStats(_message.Message):
     charge_starts: int
     charging_time_s: int
     charging_energy: _energy_pb2.AccumulatedEnergy
-
-    def __init__(self, uptime_s: _Optional[int]=..., alert_count: _Optional[int]=..., contactor_cycles: _Optional[int]=..., contactor_cycles_loaded: _Optional[int]=..., connector_cycles: _Optional[int]=..., thermal_foldbacks: _Optional[int]=..., avg_startup_temp_c: _Optional[float]=..., charge_starts: _Optional[int]=..., charging_time_s: _Optional[int]=..., charging_energy: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, uptime_s: _Optional[int] = ..., alert_count: _Optional[int] = ..., contactor_cycles: _Optional[int] = ..., contactor_cycles_loaded: _Optional[int] = ..., connector_cycles: _Optional[int] = ..., thermal_foldbacks: _Optional[int] = ..., avg_startup_temp_c: _Optional[float] = ..., charge_starts: _Optional[int] = ..., charging_time_s: _Optional[int] = ..., charging_energy: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]] = ...) -> None: ...
 
 class WCLoadSharingFixedLimitConfig(_message.Message):
-    __slots__ = ('network_limit_amps',)
+    __slots__ = ("network_limit_amps",)
     NETWORK_LIMIT_AMPS_FIELD_NUMBER: _ClassVar[int]
     network_limit_amps: int
-
-    def __init__(self, network_limit_amps: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, network_limit_amps: _Optional[int] = ...) -> None: ...
 
 class WCLoadSharingConductorLimitConfig(_message.Message):
-    __slots__ = ('conductor_limit_amps',)
+    __slots__ = ("conductor_limit_amps",)
     CONDUCTOR_LIMIT_AMPS_FIELD_NUMBER: _ClassVar[int]
     conductor_limit_amps: int
-
-    def __init__(self, conductor_limit_amps: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, conductor_limit_amps: _Optional[int] = ...) -> None: ...
 
 class WCLoadSharingSettings(_message.Message):
-    __slots__ = ('fixed_limit', 'conductor_limit')
+    __slots__ = ("fixed_limit", "conductor_limit")
     FIXED_LIMIT_FIELD_NUMBER: _ClassVar[int]
     CONDUCTOR_LIMIT_FIELD_NUMBER: _ClassVar[int]
     fixed_limit: WCLoadSharingFixedLimitConfig
     conductor_limit: WCLoadSharingConductorLimitConfig
-
-    def __init__(self, fixed_limit: _Optional[_Union[WCLoadSharingFixedLimitConfig, _Mapping]]=..., conductor_limit: _Optional[_Union[WCLoadSharingConductorLimitConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, fixed_limit: _Optional[_Union[WCLoadSharingFixedLimitConfig, _Mapping]] = ..., conductor_limit: _Optional[_Union[WCLoadSharingConductorLimitConfig, _Mapping]] = ...) -> None: ...
 
 class WCLoadSharingLimits(_message.Message):
-    __slots__ = ('max_participants',)
+    __slots__ = ("max_participants",)
     MAX_PARTICIPANTS_FIELD_NUMBER: _ClassVar[int]
     max_participants: int
-
-    def __init__(self, max_participants: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, max_participants: _Optional[int] = ...) -> None: ...
 
 class WCLoadSharingNetworkStatus(_message.Message):
-    __slots__ = ('network_charging_inhibitors',)
+    __slots__ = ("network_charging_inhibitors",)
     NETWORK_CHARGING_INHIBITORS_FIELD_NUMBER: _ClassVar[int]
     network_charging_inhibitors: _containers.RepeatedScalarFieldContainer[WCLoadSharingNetworkChargingInhibitor]
-
-    def __init__(self, network_charging_inhibitors: _Optional[_Iterable[_Union[WCLoadSharingNetworkChargingInhibitor, str]]]=...) -> None:
-        ...
+    def __init__(self, network_charging_inhibitors: _Optional[_Iterable[_Union[WCLoadSharingNetworkChargingInhibitor, str]]] = ...) -> None: ...
 
 class WCLoadSharingConfig(_message.Message):
-    __slots__ = ('version', 'participant_dins', 'fixed_limit', 'settings', 'charging_enabled')
+    __slots__ = ("version", "participant_dins", "fixed_limit", "settings", "charging_enabled")
     VERSION_FIELD_NUMBER: _ClassVar[int]
     PARTICIPANT_DINS_FIELD_NUMBER: _ClassVar[int]
     FIXED_LIMIT_FIELD_NUMBER: _ClassVar[int]
@@ -514,38 +500,30 @@ class WCLoadSharingConfig(_message.Message):
     fixed_limit: WCLoadSharingFixedLimitConfig
     settings: WCLoadSharingSettings
     charging_enabled: bool
-
-    def __init__(self, version: _Optional[int]=..., participant_dins: _Optional[_Iterable[_Union[_device_pb2.Din, _Mapping]]]=..., fixed_limit: _Optional[_Union[WCLoadSharingFixedLimitConfig, _Mapping]]=..., settings: _Optional[_Union[WCLoadSharingSettings, _Mapping]]=..., charging_enabled: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, version: _Optional[int] = ..., participant_dins: _Optional[_Iterable[_Union[_device_pb2.Din, _Mapping]]] = ..., fixed_limit: _Optional[_Union[WCLoadSharingFixedLimitConfig, _Mapping]] = ..., settings: _Optional[_Union[WCLoadSharingSettings, _Mapping]] = ..., charging_enabled: _Optional[bool] = ...) -> None: ...
 
 class WCPpuConfig(_message.Message):
-    __slots__ = ('session_reporting_mode',)
+    __slots__ = ("session_reporting_mode",)
     SESSION_REPORTING_MODE_FIELD_NUMBER: _ClassVar[int]
     session_reporting_mode: WCPpuSessionReportingMode
-
-    def __init__(self, session_reporting_mode: _Optional[_Union[WCPpuSessionReportingMode, str]]=...) -> None:
-        ...
+    def __init__(self, session_reporting_mode: _Optional[_Union[WCPpuSessionReportingMode, str]] = ...) -> None: ...
 
 class WCOperationalSettingsConfig(_message.Message):
-    __slots__ = ('operational_mode', 'emit_increased_telemetry')
+    __slots__ = ("operational_mode", "emit_increased_telemetry")
     OPERATIONAL_MODE_FIELD_NUMBER: _ClassVar[int]
     EMIT_INCREASED_TELEMETRY_FIELD_NUMBER: _ClassVar[int]
     operational_mode: WCOperationalMode
     emit_increased_telemetry: bool
-
-    def __init__(self, operational_mode: _Optional[_Union[WCOperationalMode, str]]=..., emit_increased_telemetry: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, operational_mode: _Optional[_Union[WCOperationalMode, str]] = ..., emit_increased_telemetry: _Optional[bool] = ...) -> None: ...
 
 class WCMeterInterface(_message.Message):
-    __slots__ = ('neurio',)
+    __slots__ = ("neurio",)
     NEURIO_FIELD_NUMBER: _ClassVar[int]
     neurio: _neurio_meter_api_pb2.NeurioMeterInterface
-
-    def __init__(self, neurio: _Optional[_Union[_neurio_meter_api_pb2.NeurioMeterInterface, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, neurio: _Optional[_Union[_neurio_meter_api_pb2.NeurioMeterInterface, _Mapping]] = ...) -> None: ...
 
 class WCDryContactConfig(_message.Message):
-    __slots__ = ('enabled', 'default_state', 'disable_charging', 'max_current_amps', 'germany_14a')
+    __slots__ = ("enabled", "default_state", "disable_charging", "max_current_amps", "germany_14a")
     ENABLED_FIELD_NUMBER: _ClassVar[int]
     DEFAULT_STATE_FIELD_NUMBER: _ClassVar[int]
     DISABLE_CHARGING_FIELD_NUMBER: _ClassVar[int]
@@ -556,50 +534,40 @@ class WCDryContactConfig(_message.Message):
     disable_charging: bool
     max_current_amps: int
     germany_14a: bool
-
-    def __init__(self, enabled: _Optional[bool]=..., default_state: _Optional[_Union[WCDryContactDefaultState, str]]=..., disable_charging: _Optional[bool]=..., max_current_amps: _Optional[int]=..., germany_14a: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, enabled: _Optional[bool] = ..., default_state: _Optional[_Union[WCDryContactDefaultState, str]] = ..., disable_charging: _Optional[bool] = ..., max_current_amps: _Optional[int] = ..., germany_14a: _Optional[bool] = ...) -> None: ...
 
 class WCTimeZoneTransition(_message.Message):
-    __slots__ = ('timestamp', 'local_time_utc_offset')
+    __slots__ = ("timestamp", "local_time_utc_offset")
     TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     LOCAL_TIME_UTC_OFFSET_FIELD_NUMBER: _ClassVar[int]
     timestamp: _timestamp_pb2.Timestamp
     local_time_utc_offset: int
-
-    def __init__(self, timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., local_time_utc_offset: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., local_time_utc_offset: _Optional[int] = ...) -> None: ...
 
 class WCTimeZoneInfo(_message.Message):
-    __slots__ = ('transitions',)
+    __slots__ = ("transitions",)
     TRANSITIONS_FIELD_NUMBER: _ClassVar[int]
     transitions: _containers.RepeatedCompositeFieldContainer[WCTimeZoneTransition]
-
-    def __init__(self, transitions: _Optional[_Iterable[_Union[WCTimeZoneTransition, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, transitions: _Optional[_Iterable[_Union[WCTimeZoneTransition, _Mapping]]] = ...) -> None: ...
 
 class WCTimeZone(_message.Message):
-    __slots__ = ('time_zone_id', 'time_zone_info')
+    __slots__ = ("time_zone_id", "time_zone_info")
     TIME_ZONE_ID_FIELD_NUMBER: _ClassVar[int]
     TIME_ZONE_INFO_FIELD_NUMBER: _ClassVar[int]
     time_zone_id: str
     time_zone_info: WCTimeZoneInfo
-
-    def __init__(self, time_zone_id: _Optional[str]=..., time_zone_info: _Optional[_Union[WCTimeZoneInfo, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, time_zone_id: _Optional[str] = ..., time_zone_info: _Optional[_Union[WCTimeZoneInfo, _Mapping]] = ...) -> None: ...
 
 class WCMIDConfig(_message.Message):
-    __slots__ = ('enabled', 'time_zone')
+    __slots__ = ("enabled", "time_zone")
     ENABLED_FIELD_NUMBER: _ClassVar[int]
     TIME_ZONE_FIELD_NUMBER: _ClassVar[int]
     enabled: bool
     time_zone: WCTimeZone
-
-    def __init__(self, enabled: _Optional[bool]=..., time_zone: _Optional[_Union[WCTimeZone, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, enabled: _Optional[bool] = ..., time_zone: _Optional[_Union[WCTimeZone, _Mapping]] = ...) -> None: ...
 
 class WCSettings(_message.Message):
-    __slots__ = ('max_output_current_amps', 'gmi_mode', 'country', 'third_party_vehicle_mode', 'load_sharing_config', 'dry_contact', 'mid_config')
+    __slots__ = ("max_output_current_amps", "gmi_mode", "country", "third_party_vehicle_mode", "load_sharing_config", "dry_contact", "mid_config")
     MAX_OUTPUT_CURRENT_AMPS_FIELD_NUMBER: _ClassVar[int]
     GMI_MODE_FIELD_NUMBER: _ClassVar[int]
     COUNTRY_FIELD_NUMBER: _ClassVar[int]
@@ -614,12 +582,10 @@ class WCSettings(_message.Message):
     load_sharing_config: WCLoadSharingConfig
     dry_contact: WCDryContactConfig
     mid_config: WCMIDConfig
-
-    def __init__(self, max_output_current_amps: _Optional[int]=..., gmi_mode: _Optional[_Union[WCGroundMonitorMode, str]]=..., country: _Optional[str]=..., third_party_vehicle_mode: _Optional[_Union[WCThirdPartyVehicleMode, str]]=..., load_sharing_config: _Optional[_Union[WCLoadSharingConfig, _Mapping]]=..., dry_contact: _Optional[_Union[WCDryContactConfig, _Mapping]]=..., mid_config: _Optional[_Union[WCMIDConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, max_output_current_amps: _Optional[int] = ..., gmi_mode: _Optional[_Union[WCGroundMonitorMode, str]] = ..., country: _Optional[str] = ..., third_party_vehicle_mode: _Optional[_Union[WCThirdPartyVehicleMode, str]] = ..., load_sharing_config: _Optional[_Union[WCLoadSharingConfig, _Mapping]] = ..., dry_contact: _Optional[_Union[WCDryContactConfig, _Mapping]] = ..., mid_config: _Optional[_Union[WCMIDConfig, _Mapping]] = ...) -> None: ...
 
 class WCGenealogy(_message.Message):
-    __slots__ = ('region', 'handle_type', 'hardware_features', 'sub_usage_id')
+    __slots__ = ("region", "handle_type", "hardware_features", "sub_usage_id")
     REGION_FIELD_NUMBER: _ClassVar[int]
     HANDLE_TYPE_FIELD_NUMBER: _ClassVar[int]
     HARDWARE_FEATURES_FIELD_NUMBER: _ClassVar[int]
@@ -628,22 +594,18 @@ class WCGenealogy(_message.Message):
     handle_type: int
     hardware_features: int
     sub_usage_id: int
-
-    def __init__(self, region: _Optional[int]=..., handle_type: _Optional[int]=..., hardware_features: _Optional[int]=..., sub_usage_id: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, region: _Optional[int] = ..., handle_type: _Optional[int] = ..., hardware_features: _Optional[int] = ..., sub_usage_id: _Optional[int] = ...) -> None: ...
 
 class ComplianceCRC32(_message.Message):
-    __slots__ = ('name', 'crc32')
+    __slots__ = ("name", "crc32")
     NAME_FIELD_NUMBER: _ClassVar[int]
     CRC32_FIELD_NUMBER: _ClassVar[int]
     name: str
     crc32: int
-
-    def __init__(self, name: _Optional[str]=..., crc32: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, name: _Optional[str] = ..., crc32: _Optional[int] = ...) -> None: ...
 
 class WCLoadSharingFollowerState(_message.Message):
-    __slots__ = ('version', 'charge_request', 'load_current_amps', 'vehicle_connected', 'alert_count', 'contactor_closed', 'pilot_current_amps', 'individual_pilot_current_amps')
+    __slots__ = ("version", "charge_request", "load_current_amps", "vehicle_connected", "alert_count", "contactor_closed", "pilot_current_amps", "individual_pilot_current_amps")
     VERSION_FIELD_NUMBER: _ClassVar[int]
     CHARGE_REQUEST_FIELD_NUMBER: _ClassVar[int]
     LOAD_CURRENT_AMPS_FIELD_NUMBER: _ClassVar[int]
@@ -660,22 +622,18 @@ class WCLoadSharingFollowerState(_message.Message):
     contactor_closed: bool
     pilot_current_amps: int
     individual_pilot_current_amps: int
-
-    def __init__(self, version: _Optional[int]=..., charge_request: _Optional[bool]=..., load_current_amps: _Optional[float]=..., vehicle_connected: _Optional[bool]=..., alert_count: _Optional[int]=..., contactor_closed: _Optional[bool]=..., pilot_current_amps: _Optional[int]=..., individual_pilot_current_amps: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, version: _Optional[int] = ..., charge_request: _Optional[bool] = ..., load_current_amps: _Optional[float] = ..., vehicle_connected: _Optional[bool] = ..., alert_count: _Optional[int] = ..., contactor_closed: _Optional[bool] = ..., pilot_current_amps: _Optional[int] = ..., individual_pilot_current_amps: _Optional[int] = ...) -> None: ...
 
 class WCLoadSharingLeaderCommand(_message.Message):
-    __slots__ = ('charge_allowed', 'pilot_current_amps')
+    __slots__ = ("charge_allowed", "pilot_current_amps")
     CHARGE_ALLOWED_FIELD_NUMBER: _ClassVar[int]
     PILOT_CURRENT_AMPS_FIELD_NUMBER: _ClassVar[int]
     charge_allowed: bool
     pilot_current_amps: int
-
-    def __init__(self, charge_allowed: _Optional[bool]=..., pilot_current_amps: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, charge_allowed: _Optional[bool] = ..., pilot_current_amps: _Optional[int] = ...) -> None: ...
 
 class WCLoadSharingLeaderState(_message.Message):
-    __slots__ = ('version', 'network_current_limit_amps', 'fallback_current_amps', 'round_robin_index', 'charging_enabled', 'active_unit_count')
+    __slots__ = ("version", "network_current_limit_amps", "fallback_current_amps", "round_robin_index", "charging_enabled", "active_unit_count")
     VERSION_FIELD_NUMBER: _ClassVar[int]
     NETWORK_CURRENT_LIMIT_AMPS_FIELD_NUMBER: _ClassVar[int]
     FALLBACK_CURRENT_AMPS_FIELD_NUMBER: _ClassVar[int]
@@ -688,12 +646,10 @@ class WCLoadSharingLeaderState(_message.Message):
     round_robin_index: int
     charging_enabled: bool
     active_unit_count: int
-
-    def __init__(self, version: _Optional[int]=..., network_current_limit_amps: _Optional[int]=..., fallback_current_amps: _Optional[int]=..., round_robin_index: _Optional[int]=..., charging_enabled: _Optional[bool]=..., active_unit_count: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, version: _Optional[int] = ..., network_current_limit_amps: _Optional[int] = ..., fallback_current_amps: _Optional[int] = ..., round_robin_index: _Optional[int] = ..., charging_enabled: _Optional[bool] = ..., active_unit_count: _Optional[int] = ...) -> None: ...
 
 class WCLoadSharingDeviceEntry(_message.Message):
-    __slots__ = ('din', 'leader_command', 'follower_state', 'mia')
+    __slots__ = ("din", "leader_command", "follower_state", "mia")
     DIN_FIELD_NUMBER: _ClassVar[int]
     LEADER_COMMAND_FIELD_NUMBER: _ClassVar[int]
     FOLLOWER_STATE_FIELD_NUMBER: _ClassVar[int]
@@ -702,12 +658,10 @@ class WCLoadSharingDeviceEntry(_message.Message):
     leader_command: WCLoadSharingLeaderCommand
     follower_state: WCLoadSharingFollowerState
     mia: bool
-
-    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]]=..., leader_command: _Optional[_Union[WCLoadSharingLeaderCommand, _Mapping]]=..., follower_state: _Optional[_Union[WCLoadSharingFollowerState, _Mapping]]=..., mia: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]] = ..., leader_command: _Optional[_Union[WCLoadSharingLeaderCommand, _Mapping]] = ..., follower_state: _Optional[_Union[WCLoadSharingFollowerState, _Mapping]] = ..., mia: _Optional[bool] = ...) -> None: ...
 
 class WCLoadSharingNetworkState(_message.Message):
-    __slots__ = ('devices', 'leader_state', 'settings', 'status', 'limits')
+    __slots__ = ("devices", "leader_state", "settings", "status", "limits")
     DEVICES_FIELD_NUMBER: _ClassVar[int]
     LEADER_STATE_FIELD_NUMBER: _ClassVar[int]
     SETTINGS_FIELD_NUMBER: _ClassVar[int]
@@ -718,24 +672,20 @@ class WCLoadSharingNetworkState(_message.Message):
     settings: WCLoadSharingSettings
     status: WCLoadSharingNetworkStatus
     limits: WCLoadSharingLimits
-
-    def __init__(self, devices: _Optional[_Iterable[_Union[WCLoadSharingDeviceEntry, _Mapping]]]=..., leader_state: _Optional[_Union[WCLoadSharingLeaderState, _Mapping]]=..., settings: _Optional[_Union[WCLoadSharingSettings, _Mapping]]=..., status: _Optional[_Union[WCLoadSharingNetworkStatus, _Mapping]]=..., limits: _Optional[_Union[WCLoadSharingLimits, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, devices: _Optional[_Iterable[_Union[WCLoadSharingDeviceEntry, _Mapping]]] = ..., leader_state: _Optional[_Union[WCLoadSharingLeaderState, _Mapping]] = ..., settings: _Optional[_Union[WCLoadSharingSettings, _Mapping]] = ..., status: _Optional[_Union[WCLoadSharingNetworkStatus, _Mapping]] = ..., limits: _Optional[_Union[WCLoadSharingLimits, _Mapping]] = ...) -> None: ...
 
 class WCProvisionalOperationalParams(_message.Message):
-    __slots__ = ('limit_current_max_amps', 'limit_timeout_s', 'inhibit_charging')
+    __slots__ = ("limit_current_max_amps", "limit_timeout_s", "inhibit_charging")
     LIMIT_CURRENT_MAX_AMPS_FIELD_NUMBER: _ClassVar[int]
     LIMIT_TIMEOUT_S_FIELD_NUMBER: _ClassVar[int]
     INHIBIT_CHARGING_FIELD_NUMBER: _ClassVar[int]
     limit_current_max_amps: int
     limit_timeout_s: int
     inhibit_charging: bool
-
-    def __init__(self, limit_current_max_amps: _Optional[int]=..., limit_timeout_s: _Optional[int]=..., inhibit_charging: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, limit_current_max_amps: _Optional[int] = ..., limit_timeout_s: _Optional[int] = ..., inhibit_charging: _Optional[bool] = ...) -> None: ...
 
 class WCAccessControlEntry(_message.Message):
-    __slots__ = ('vin', 'name', 'model', 'model_year', 'drive_type')
+    __slots__ = ("vin", "name", "model", "model_year", "drive_type")
     VIN_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     MODEL_FIELD_NUMBER: _ClassVar[int]
@@ -746,78 +696,62 @@ class WCAccessControlEntry(_message.Message):
     model: WCTeslaVehicleModel
     model_year: int
     drive_type: WCTeslaVehicleDriveType
-
-    def __init__(self, vin: _Optional[_Union[_device_pb2.VIN, _Mapping]]=..., name: _Optional[str]=..., model: _Optional[_Union[WCTeslaVehicleModel, str]]=..., model_year: _Optional[int]=..., drive_type: _Optional[_Union[WCTeslaVehicleDriveType, str]]=...) -> None:
-        ...
+    def __init__(self, vin: _Optional[_Union[_device_pb2.VIN, _Mapping]] = ..., name: _Optional[str] = ..., model: _Optional[_Union[WCTeslaVehicleModel, str]] = ..., model_year: _Optional[int] = ..., drive_type: _Optional[_Union[WCTeslaVehicleDriveType, str]] = ...) -> None: ...
 
 class WCChargeScheduleTimePeriod(_message.Message):
-    __slots__ = ('start_seconds', 'end_seconds')
+    __slots__ = ("start_seconds", "end_seconds")
     START_SECONDS_FIELD_NUMBER: _ClassVar[int]
     END_SECONDS_FIELD_NUMBER: _ClassVar[int]
     start_seconds: int
     end_seconds: int
-
-    def __init__(self, start_seconds: _Optional[int]=..., end_seconds: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, start_seconds: _Optional[int] = ..., end_seconds: _Optional[int] = ...) -> None: ...
 
 class WCChargeScheduleDayTimePeriods(_message.Message):
-    __slots__ = ('time_periods', 'day_bitmask')
+    __slots__ = ("time_periods", "day_bitmask")
     TIME_PERIODS_FIELD_NUMBER: _ClassVar[int]
     DAY_BITMASK_FIELD_NUMBER: _ClassVar[int]
     time_periods: _containers.RepeatedCompositeFieldContainer[WCChargeScheduleTimePeriod]
     day_bitmask: int
-
-    def __init__(self, time_periods: _Optional[_Iterable[_Union[WCChargeScheduleTimePeriod, _Mapping]]]=..., day_bitmask: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, time_periods: _Optional[_Iterable[_Union[WCChargeScheduleTimePeriod, _Mapping]]] = ..., day_bitmask: _Optional[int] = ...) -> None: ...
 
 class WCChargeSchedule(_message.Message):
-    __slots__ = ('day_time_periods',)
+    __slots__ = ("day_time_periods",)
     DAY_TIME_PERIODS_FIELD_NUMBER: _ClassVar[int]
     day_time_periods: _containers.RepeatedCompositeFieldContainer[WCChargeScheduleDayTimePeriods]
-
-    def __init__(self, day_time_periods: _Optional[_Iterable[_Union[WCChargeScheduleDayTimePeriods, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, day_time_periods: _Optional[_Iterable[_Union[WCChargeScheduleDayTimePeriods, _Mapping]]] = ...) -> None: ...
 
 class WCChargeScheduleDelay(_message.Message):
-    __slots__ = ('max_delay_seconds',)
+    __slots__ = ("max_delay_seconds",)
     MAX_DELAY_SECONDS_FIELD_NUMBER: _ClassVar[int]
     max_delay_seconds: int
-
-    def __init__(self, max_delay_seconds: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, max_delay_seconds: _Optional[int] = ...) -> None: ...
 
 class WCChargeScheduleConfig(_message.Message):
-    __slots__ = ('enable_schedule', 'schedule', 'delay')
+    __slots__ = ("enable_schedule", "schedule", "delay")
     ENABLE_SCHEDULE_FIELD_NUMBER: _ClassVar[int]
     SCHEDULE_FIELD_NUMBER: _ClassVar[int]
     DELAY_FIELD_NUMBER: _ClassVar[int]
     enable_schedule: bool
     schedule: WCChargeSchedule
     delay: WCChargeScheduleDelay
-
-    def __init__(self, enable_schedule: _Optional[bool]=..., schedule: _Optional[_Union[WCChargeSchedule, _Mapping]]=..., delay: _Optional[_Union[WCChargeScheduleDelay, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, enable_schedule: _Optional[bool] = ..., schedule: _Optional[_Union[WCChargeSchedule, _Mapping]] = ..., delay: _Optional[_Union[WCChargeScheduleDelay, _Mapping]] = ...) -> None: ...
 
 class WCChargeScheduleConfigStatus(_message.Message):
-    __slots__ = ('config', 'error')
+    __slots__ = ("config", "error")
     CONFIG_FIELD_NUMBER: _ClassVar[int]
     ERROR_FIELD_NUMBER: _ClassVar[int]
     config: WCChargeScheduleConfig
     error: WCChargeScheduleConfigError
-
-    def __init__(self, config: _Optional[_Union[WCChargeScheduleConfig, _Mapping]]=..., error: _Optional[_Union[WCChargeScheduleConfigError, str]]=...) -> None:
-        ...
+    def __init__(self, config: _Optional[_Union[WCChargeScheduleConfig, _Mapping]] = ..., error: _Optional[_Union[WCChargeScheduleConfigError, str]] = ...) -> None: ...
 
 class WCChargeCommand(_message.Message):
-    __slots__ = ('charging_command',)
+    __slots__ = ("charging_command",)
     CHARGING_COMMAND_FIELD_NUMBER: _ClassVar[int]
     charging_command: WCChargingCommand
-
-    def __init__(self, charging_command: _Optional[_Union[WCChargingCommand, str]]=...) -> None:
-        ...
+    def __init__(self, charging_command: _Optional[_Union[WCChargingCommand, str]] = ...) -> None: ...
 
 class WCOcppSettings(_message.Message):
-    __slots__ = ('connection_url', 'chargepoint_id', 'version', 'security_profile', 'enable', 'provider_name', 'scope')
+    __slots__ = ("connection_url", "chargepoint_id", "version", "security_profile", "enable", "provider_name", "scope")
     CONNECTION_URL_FIELD_NUMBER: _ClassVar[int]
     CHARGEPOINT_ID_FIELD_NUMBER: _ClassVar[int]
     VERSION_FIELD_NUMBER: _ClassVar[int]
@@ -832,72 +766,54 @@ class WCOcppSettings(_message.Message):
     enable: bool
     provider_name: str
     scope: WCOcppScope
-
-    def __init__(self, connection_url: _Optional[str]=..., chargepoint_id: _Optional[str]=..., version: _Optional[_Union[WCOcppVersion, str]]=..., security_profile: _Optional[_Union[WCOcppSecurityProfile, str]]=..., enable: _Optional[bool]=..., provider_name: _Optional[str]=..., scope: _Optional[_Union[WCOcppScope, str]]=...) -> None:
-        ...
+    def __init__(self, connection_url: _Optional[str] = ..., chargepoint_id: _Optional[str] = ..., version: _Optional[_Union[WCOcppVersion, str]] = ..., security_profile: _Optional[_Union[WCOcppSecurityProfile, str]] = ..., enable: _Optional[bool] = ..., provider_name: _Optional[str] = ..., scope: _Optional[_Union[WCOcppScope, str]] = ...) -> None: ...
 
 class WCOcppAuthorizationData(_message.Message):
-    __slots__ = ('id_tag',)
+    __slots__ = ("id_tag",)
     ID_TAG_FIELD_NUMBER: _ClassVar[int]
     id_tag: str
-
-    def __init__(self, id_tag: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, id_tag: _Optional[str] = ...) -> None: ...
 
 class WCOcppAuthorizationList(_message.Message):
-    __slots__ = ('auth_data',)
+    __slots__ = ("auth_data",)
     AUTH_DATA_FIELD_NUMBER: _ClassVar[int]
     auth_data: _containers.RepeatedCompositeFieldContainer[WCOcppAuthorizationData]
-
-    def __init__(self, auth_data: _Optional[_Iterable[_Union[WCOcppAuthorizationData, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, auth_data: _Optional[_Iterable[_Union[WCOcppAuthorizationData, _Mapping]]] = ...) -> None: ...
 
 class WCVehicleToHomeConfig(_message.Message):
-    __slots__ = ('site_controller_din', 'modbus_node_id')
+    __slots__ = ("site_controller_din", "modbus_node_id")
     SITE_CONTROLLER_DIN_FIELD_NUMBER: _ClassVar[int]
     MODBUS_NODE_ID_FIELD_NUMBER: _ClassVar[int]
     site_controller_din: _device_pb2.Din
     modbus_node_id: int
-
-    def __init__(self, site_controller_din: _Optional[_Union[_device_pb2.Din, _Mapping]]=..., modbus_node_id: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, site_controller_din: _Optional[_Union[_device_pb2.Din, _Mapping]] = ..., modbus_node_id: _Optional[int] = ...) -> None: ...
 
 class WCAPIGetVitalsRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIGetVitalsResponse(_message.Message):
-    __slots__ = ('vitals',)
+    __slots__ = ("vitals",)
     VITALS_FIELD_NUMBER: _ClassVar[int]
     vitals: WCVitals
-
-    def __init__(self, vitals: _Optional[_Union[WCVitals, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, vitals: _Optional[_Union[WCVitals, _Mapping]] = ...) -> None: ...
 
 class WCAPIGetLifetimeStatsRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIGetLifetimeStatsResponse(_message.Message):
-    __slots__ = ('lifetime_stats',)
+    __slots__ = ("lifetime_stats",)
     LIFETIME_STATS_FIELD_NUMBER: _ClassVar[int]
     lifetime_stats: WCLifetimeStats
-
-    def __init__(self, lifetime_stats: _Optional[_Union[WCLifetimeStats, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, lifetime_stats: _Optional[_Union[WCLifetimeStats, _Mapping]] = ...) -> None: ...
 
 class WCAPIGetConfigRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIGetConfigResponse(_message.Message):
-    __slots__ = ('settings', 'wifi_config', 'wifi', 'meters', 'charge_schedule', 'ocpp_settings', 'vehicle_to_home', 'time_source')
+    __slots__ = ("settings", "wifi_config", "wifi", "meters", "charge_schedule", "ocpp_settings", "vehicle_to_home", "time_source")
     SETTINGS_FIELD_NUMBER: _ClassVar[int]
     WIFI_CONFIG_FIELD_NUMBER: _ClassVar[int]
     WIFI_FIELD_NUMBER: _ClassVar[int]
@@ -914,492 +830,370 @@ class WCAPIGetConfigResponse(_message.Message):
     ocpp_settings: WCOcppSettings
     vehicle_to_home: WCVehicleToHomeConfig
     time_source: WCTimeSource
-
-    def __init__(self, settings: _Optional[_Union[WCSettings, _Mapping]]=..., wifi_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]]=..., wifi: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]]=..., meters: _Optional[_Iterable[_Union[WCMeterInterface, _Mapping]]]=..., charge_schedule: _Optional[_Union[WCChargeScheduleConfig, _Mapping]]=..., ocpp_settings: _Optional[_Union[WCOcppSettings, _Mapping]]=..., vehicle_to_home: _Optional[_Union[WCVehicleToHomeConfig, _Mapping]]=..., time_source: _Optional[_Union[WCTimeSource, str]]=...) -> None:
-        ...
+    def __init__(self, settings: _Optional[_Union[WCSettings, _Mapping]] = ..., wifi_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]] = ..., wifi: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]] = ..., meters: _Optional[_Iterable[_Union[WCMeterInterface, _Mapping]]] = ..., charge_schedule: _Optional[_Union[WCChargeScheduleConfig, _Mapping]] = ..., ocpp_settings: _Optional[_Union[WCOcppSettings, _Mapping]] = ..., vehicle_to_home: _Optional[_Union[WCVehicleToHomeConfig, _Mapping]] = ..., time_source: _Optional[_Union[WCTimeSource, str]] = ...) -> None: ...
 
 class WCAPIConfigureSettingsRequest(_message.Message):
-    __slots__ = ('settings',)
+    __slots__ = ("settings",)
     SETTINGS_FIELD_NUMBER: _ClassVar[int]
     settings: WCSettings
-
-    def __init__(self, settings: _Optional[_Union[WCSettings, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, settings: _Optional[_Union[WCSettings, _Mapping]] = ...) -> None: ...
 
 class WCAPIConfigureSettingsResponse(_message.Message):
-    __slots__ = ('settings',)
+    __slots__ = ("settings",)
     SETTINGS_FIELD_NUMBER: _ClassVar[int]
     settings: WCSettings
-
-    def __init__(self, settings: _Optional[_Union[WCSettings, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, settings: _Optional[_Union[WCSettings, _Mapping]] = ...) -> None: ...
 
 class WCAPIGetSystemInfoRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIGetSystemInfoResponse(_message.Message):
-    __slots__ = ('genealogy', 'compliance_crcs')
+    __slots__ = ("genealogy", "compliance_crcs")
     GENEALOGY_FIELD_NUMBER: _ClassVar[int]
     COMPLIANCE_CRCS_FIELD_NUMBER: _ClassVar[int]
     genealogy: WCGenealogy
     compliance_crcs: _containers.RepeatedCompositeFieldContainer[ComplianceCRC32]
-
-    def __init__(self, genealogy: _Optional[_Union[WCGenealogy, _Mapping]]=..., compliance_crcs: _Optional[_Iterable[_Union[ComplianceCRC32, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, genealogy: _Optional[_Union[WCGenealogy, _Mapping]] = ..., compliance_crcs: _Optional[_Iterable[_Union[ComplianceCRC32, _Mapping]]] = ...) -> None: ...
 
 class WCAPIGetLoadSharingNetworkStateRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIGetLoadSharingNetworkStateResponse(_message.Message):
-    __slots__ = ('network_state',)
+    __slots__ = ("network_state",)
     NETWORK_STATE_FIELD_NUMBER: _ClassVar[int]
     network_state: WCLoadSharingNetworkState
-
-    def __init__(self, network_state: _Optional[_Union[WCLoadSharingNetworkState, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, network_state: _Optional[_Union[WCLoadSharingNetworkState, _Mapping]] = ...) -> None: ...
 
 class WCAPIPushLoadSharingFollowerStateRequest(_message.Message):
-    __slots__ = ('follower_state',)
+    __slots__ = ("follower_state",)
     FOLLOWER_STATE_FIELD_NUMBER: _ClassVar[int]
     follower_state: WCLoadSharingFollowerState
-
-    def __init__(self, follower_state: _Optional[_Union[WCLoadSharingFollowerState, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, follower_state: _Optional[_Union[WCLoadSharingFollowerState, _Mapping]] = ...) -> None: ...
 
 class WCAPIPushLoadSharingFollowerStateResponse(_message.Message):
-    __slots__ = ('leader_state', 'leader_command')
+    __slots__ = ("leader_state", "leader_command")
     LEADER_STATE_FIELD_NUMBER: _ClassVar[int]
     LEADER_COMMAND_FIELD_NUMBER: _ClassVar[int]
     leader_state: WCLoadSharingLeaderState
     leader_command: WCLoadSharingLeaderCommand
-
-    def __init__(self, leader_state: _Optional[_Union[WCLoadSharingLeaderState, _Mapping]]=..., leader_command: _Optional[_Union[WCLoadSharingLeaderCommand, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, leader_state: _Optional[_Union[WCLoadSharingLeaderState, _Mapping]] = ..., leader_command: _Optional[_Union[WCLoadSharingLeaderCommand, _Mapping]] = ...) -> None: ...
 
 class WCAPIPushLoadSharingLeaderCommandRequest(_message.Message):
-    __slots__ = ('leader_state', 'leader_command')
+    __slots__ = ("leader_state", "leader_command")
     LEADER_STATE_FIELD_NUMBER: _ClassVar[int]
     LEADER_COMMAND_FIELD_NUMBER: _ClassVar[int]
     leader_state: WCLoadSharingLeaderState
     leader_command: WCLoadSharingLeaderCommand
-
-    def __init__(self, leader_state: _Optional[_Union[WCLoadSharingLeaderState, _Mapping]]=..., leader_command: _Optional[_Union[WCLoadSharingLeaderCommand, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, leader_state: _Optional[_Union[WCLoadSharingLeaderState, _Mapping]] = ..., leader_command: _Optional[_Union[WCLoadSharingLeaderCommand, _Mapping]] = ...) -> None: ...
 
 class WCAPIPushLoadSharingLeaderCommandResponse(_message.Message):
-    __slots__ = ('follower_state',)
+    __slots__ = ("follower_state",)
     FOLLOWER_STATE_FIELD_NUMBER: _ClassVar[int]
     follower_state: WCLoadSharingFollowerState
-
-    def __init__(self, follower_state: _Optional[_Union[WCLoadSharingFollowerState, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, follower_state: _Optional[_Union[WCLoadSharingFollowerState, _Mapping]] = ...) -> None: ...
 
 class WCAPISetLoadSharingNetworkOperationRequest(_message.Message):
-    __slots__ = ('charging_enabled',)
+    __slots__ = ("charging_enabled",)
     CHARGING_ENABLED_FIELD_NUMBER: _ClassVar[int]
     charging_enabled: bool
-
-    def __init__(self, charging_enabled: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, charging_enabled: _Optional[bool] = ...) -> None: ...
 
 class WCAPISetLoadSharingNetworkOperationResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIConfigureLoadSharingSettingsRequest(_message.Message):
-    __slots__ = ('settings',)
+    __slots__ = ("settings",)
     SETTINGS_FIELD_NUMBER: _ClassVar[int]
     settings: WCLoadSharingSettings
-
-    def __init__(self, settings: _Optional[_Union[WCLoadSharingSettings, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, settings: _Optional[_Union[WCLoadSharingSettings, _Mapping]] = ...) -> None: ...
 
 class WCAPIConfigureLoadSharingSettingsResponse(_message.Message):
-    __slots__ = ('settings',)
+    __slots__ = ("settings",)
     SETTINGS_FIELD_NUMBER: _ClassVar[int]
     settings: WCLoadSharingSettings
-
-    def __init__(self, settings: _Optional[_Union[WCLoadSharingSettings, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, settings: _Optional[_Union[WCLoadSharingSettings, _Mapping]] = ...) -> None: ...
 
 class WCAPIPushLoadSharingConfigRequest(_message.Message):
-    __slots__ = ('load_sharing_config',)
+    __slots__ = ("load_sharing_config",)
     LOAD_SHARING_CONFIG_FIELD_NUMBER: _ClassVar[int]
     load_sharing_config: WCLoadSharingConfig
-
-    def __init__(self, load_sharing_config: _Optional[_Union[WCLoadSharingConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, load_sharing_config: _Optional[_Union[WCLoadSharingConfig, _Mapping]] = ...) -> None: ...
 
 class WCAPIPushLoadSharingConfigResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIConfigurePpuSettingsRequest(_message.Message):
-    __slots__ = ('ppu_config',)
+    __slots__ = ("ppu_config",)
     PPU_CONFIG_FIELD_NUMBER: _ClassVar[int]
     ppu_config: WCPpuConfig
-
-    def __init__(self, ppu_config: _Optional[_Union[WCPpuConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, ppu_config: _Optional[_Union[WCPpuConfig, _Mapping]] = ...) -> None: ...
 
 class WCAPIConfigurePpuSettingsResponse(_message.Message):
-    __slots__ = ('ppu_config',)
+    __slots__ = ("ppu_config",)
     PPU_CONFIG_FIELD_NUMBER: _ClassVar[int]
     ppu_config: WCPpuConfig
-
-    def __init__(self, ppu_config: _Optional[_Union[WCPpuConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, ppu_config: _Optional[_Union[WCPpuConfig, _Mapping]] = ...) -> None: ...
 
 class WCAPIGetPpuSettingsRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIGetPpuSettingsResponse(_message.Message):
-    __slots__ = ('ppu_config',)
+    __slots__ = ("ppu_config",)
     PPU_CONFIG_FIELD_NUMBER: _ClassVar[int]
     ppu_config: WCPpuConfig
-
-    def __init__(self, ppu_config: _Optional[_Union[WCPpuConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, ppu_config: _Optional[_Union[WCPpuConfig, _Mapping]] = ...) -> None: ...
 
 class WCAPIConfigureOperationalSettingsRequest(_message.Message):
-    __slots__ = ('operational_settings_config',)
+    __slots__ = ("operational_settings_config",)
     OPERATIONAL_SETTINGS_CONFIG_FIELD_NUMBER: _ClassVar[int]
     operational_settings_config: WCOperationalSettingsConfig
-
-    def __init__(self, operational_settings_config: _Optional[_Union[WCOperationalSettingsConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, operational_settings_config: _Optional[_Union[WCOperationalSettingsConfig, _Mapping]] = ...) -> None: ...
 
 class WCAPIConfigureOperationalSettingsResponse(_message.Message):
-    __slots__ = ('operational_settings_config',)
+    __slots__ = ("operational_settings_config",)
     OPERATIONAL_SETTINGS_CONFIG_FIELD_NUMBER: _ClassVar[int]
     operational_settings_config: WCOperationalSettingsConfig
-
-    def __init__(self, operational_settings_config: _Optional[_Union[WCOperationalSettingsConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, operational_settings_config: _Optional[_Union[WCOperationalSettingsConfig, _Mapping]] = ...) -> None: ...
 
 class WCAPIGetOperationalSettingsRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIGetOperationalSettingsResponse(_message.Message):
-    __slots__ = ('operational_settings_config',)
+    __slots__ = ("operational_settings_config",)
     OPERATIONAL_SETTINGS_CONFIG_FIELD_NUMBER: _ClassVar[int]
     operational_settings_config: WCOperationalSettingsConfig
-
-    def __init__(self, operational_settings_config: _Optional[_Union[WCOperationalSettingsConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, operational_settings_config: _Optional[_Union[WCOperationalSettingsConfig, _Mapping]] = ...) -> None: ...
 
 class WCAPISetProvisionalOperationalParamsRequest(_message.Message):
-    __slots__ = ('prov_op_params',)
+    __slots__ = ("prov_op_params",)
     PROV_OP_PARAMS_FIELD_NUMBER: _ClassVar[int]
     prov_op_params: WCProvisionalOperationalParams
-
-    def __init__(self, prov_op_params: _Optional[_Union[WCProvisionalOperationalParams, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, prov_op_params: _Optional[_Union[WCProvisionalOperationalParams, _Mapping]] = ...) -> None: ...
 
 class WCAPISetProvisionalOperationalParamsResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIGetProvisionalOperationalParamsRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIGetProvisionalOperationalParamsResponse(_message.Message):
-    __slots__ = ('prov_op_params', 'configured_current_limit_amps')
+    __slots__ = ("prov_op_params", "configured_current_limit_amps")
     PROV_OP_PARAMS_FIELD_NUMBER: _ClassVar[int]
     CONFIGURED_CURRENT_LIMIT_AMPS_FIELD_NUMBER: _ClassVar[int]
     prov_op_params: WCProvisionalOperationalParams
     configured_current_limit_amps: int
-
-    def __init__(self, prov_op_params: _Optional[_Union[WCProvisionalOperationalParams, _Mapping]]=..., configured_current_limit_amps: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, prov_op_params: _Optional[_Union[WCProvisionalOperationalParams, _Mapping]] = ..., configured_current_limit_amps: _Optional[int] = ...) -> None: ...
 
 class WCAPIGetAccessControlSettingsRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIGetAccessControlSettingsResponse(_message.Message):
-    __slots__ = ('entries',)
+    __slots__ = ("entries",)
     ENTRIES_FIELD_NUMBER: _ClassVar[int]
     entries: _containers.RepeatedCompositeFieldContainer[WCAccessControlEntry]
-
-    def __init__(self, entries: _Optional[_Iterable[_Union[WCAccessControlEntry, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, entries: _Optional[_Iterable[_Union[WCAccessControlEntry, _Mapping]]] = ...) -> None: ...
 
 class WCAPIConfigureAccessControlSettingsRequest(_message.Message):
-    __slots__ = ('operation', 'vin', 'name')
+    __slots__ = ("operation", "vin", "name")
     OPERATION_FIELD_NUMBER: _ClassVar[int]
     VIN_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
     operation: WCConfigureAccessControlOperation
     vin: _device_pb2.VIN
     name: str
-
-    def __init__(self, operation: _Optional[_Union[WCConfigureAccessControlOperation, str]]=..., vin: _Optional[_Union[_device_pb2.VIN, _Mapping]]=..., name: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, operation: _Optional[_Union[WCConfigureAccessControlOperation, str]] = ..., vin: _Optional[_Union[_device_pb2.VIN, _Mapping]] = ..., name: _Optional[str] = ...) -> None: ...
 
 class WCAPIConfigureAccessControlSettingsResponse(_message.Message):
-    __slots__ = ('entries',)
+    __slots__ = ("entries",)
     ENTRIES_FIELD_NUMBER: _ClassVar[int]
     entries: _containers.RepeatedCompositeFieldContainer[WCAccessControlEntry]
-
-    def __init__(self, entries: _Optional[_Iterable[_Union[WCAccessControlEntry, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, entries: _Optional[_Iterable[_Union[WCAccessControlEntry, _Mapping]]] = ...) -> None: ...
 
 class WCAPIGetRecentVehiclesRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIGetRecentVehiclesResponse(_message.Message):
-    __slots__ = ('recent_vehicles',)
+    __slots__ = ("recent_vehicles",)
     RECENT_VEHICLES_FIELD_NUMBER: _ClassVar[int]
     recent_vehicles: _containers.RepeatedScalarFieldContainer[str]
-
-    def __init__(self, recent_vehicles: _Optional[_Iterable[str]]=...) -> None:
-        ...
+    def __init__(self, recent_vehicles: _Optional[_Iterable[str]] = ...) -> None: ...
 
 class WCAPIPushPpuAuthorizationStateRequest(_message.Message):
-    __slots__ = ('authorized', 'auth_uuid')
+    __slots__ = ("authorized", "auth_uuid")
     AUTHORIZED_FIELD_NUMBER: _ClassVar[int]
     AUTH_UUID_FIELD_NUMBER: _ClassVar[int]
     authorized: bool
     auth_uuid: _device_pb2.UUIDv4Bytes
-
-    def __init__(self, authorized: _Optional[bool]=..., auth_uuid: _Optional[_Union[_device_pb2.UUIDv4Bytes, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, authorized: _Optional[bool] = ..., auth_uuid: _Optional[_Union[_device_pb2.UUIDv4Bytes, _Mapping]] = ...) -> None: ...
 
 class WCAPIPushPpuAuthorizationStateResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIConfigureChargeScheduleRequest(_message.Message):
-    __slots__ = ('config', 'time_zone')
+    __slots__ = ("config", "time_zone")
     CONFIG_FIELD_NUMBER: _ClassVar[int]
     TIME_ZONE_FIELD_NUMBER: _ClassVar[int]
     config: WCChargeScheduleConfig
     time_zone: WCTimeZone
-
-    def __init__(self, config: _Optional[_Union[WCChargeScheduleConfig, _Mapping]]=..., time_zone: _Optional[_Union[WCTimeZone, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, config: _Optional[_Union[WCChargeScheduleConfig, _Mapping]] = ..., time_zone: _Optional[_Union[WCTimeZone, _Mapping]] = ...) -> None: ...
 
 class WCAPIConfigureChargeScheduleResponse(_message.Message):
-    __slots__ = ('error',)
+    __slots__ = ("error",)
     ERROR_FIELD_NUMBER: _ClassVar[int]
     error: WCChargeScheduleError
-
-    def __init__(self, error: _Optional[_Union[WCChargeScheduleError, str]]=...) -> None:
-        ...
+    def __init__(self, error: _Optional[_Union[WCChargeScheduleError, str]] = ...) -> None: ...
 
 class WCAPIConfigureThirdPartyVehicleModeRequest(_message.Message):
-    __slots__ = ('third_party_vehicle_mode',)
+    __slots__ = ("third_party_vehicle_mode",)
     THIRD_PARTY_VEHICLE_MODE_FIELD_NUMBER: _ClassVar[int]
     third_party_vehicle_mode: WCThirdPartyVehicleMode
-
-    def __init__(self, third_party_vehicle_mode: _Optional[_Union[WCThirdPartyVehicleMode, str]]=...) -> None:
-        ...
+    def __init__(self, third_party_vehicle_mode: _Optional[_Union[WCThirdPartyVehicleMode, str]] = ...) -> None: ...
 
 class WCAPIConfigureThirdPartyVehicleModeResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIPushChargeCommandRequest(_message.Message):
-    __slots__ = ('charge_command',)
+    __slots__ = ("charge_command",)
     CHARGE_COMMAND_FIELD_NUMBER: _ClassVar[int]
     charge_command: WCChargeCommand
-
-    def __init__(self, charge_command: _Optional[_Union[WCChargeCommand, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, charge_command: _Optional[_Union[WCChargeCommand, _Mapping]] = ...) -> None: ...
 
 class WCAPIPushChargeCommandResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIConfigureHomeSiteControllerRequest(_message.Message):
-    __slots__ = ('din', 'modbus_node_id', 'config')
+    __slots__ = ("din", "modbus_node_id", "config")
     DIN_FIELD_NUMBER: _ClassVar[int]
     MODBUS_NODE_ID_FIELD_NUMBER: _ClassVar[int]
     CONFIG_FIELD_NUMBER: _ClassVar[int]
     din: _device_pb2.Din
     modbus_node_id: int
     config: WCVehicleToHomeConfig
-
-    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]]=..., modbus_node_id: _Optional[int]=..., config: _Optional[_Union[WCVehicleToHomeConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]] = ..., modbus_node_id: _Optional[int] = ..., config: _Optional[_Union[WCVehicleToHomeConfig, _Mapping]] = ...) -> None: ...
 
 class WCAPIConfigureHomeSiteControllerResponse(_message.Message):
-    __slots__ = ('config',)
+    __slots__ = ("config",)
     CONFIG_FIELD_NUMBER: _ClassVar[int]
     config: WCVehicleToHomeConfig
-
-    def __init__(self, config: _Optional[_Union[WCVehicleToHomeConfig, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, config: _Optional[_Union[WCVehicleToHomeConfig, _Mapping]] = ...) -> None: ...
 
 class WCAPIConfigureOcppSettingsRequest(_message.Message):
-    __slots__ = ('settings',)
+    __slots__ = ("settings",)
     SETTINGS_FIELD_NUMBER: _ClassVar[int]
     settings: WCOcppSettings
-
-    def __init__(self, settings: _Optional[_Union[WCOcppSettings, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, settings: _Optional[_Union[WCOcppSettings, _Mapping]] = ...) -> None: ...
 
 class WCAPIConfigureOcppSettingsResponse(_message.Message):
-    __slots__ = ('settings', 'status')
+    __slots__ = ("settings", "status")
     SETTINGS_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     settings: WCOcppSettings
     status: WCOcppStatus
-
-    def __init__(self, settings: _Optional[_Union[WCOcppSettings, _Mapping]]=..., status: _Optional[_Union[WCOcppStatus, str]]=...) -> None:
-        ...
+    def __init__(self, settings: _Optional[_Union[WCOcppSettings, _Mapping]] = ..., status: _Optional[_Union[WCOcppStatus, str]] = ...) -> None: ...
 
 class WCAPISetOcppSecurityParameterRequest(_message.Message):
-    __slots__ = ('security_parameter_type', 'security_parameter')
+    __slots__ = ("security_parameter_type", "security_parameter")
     SECURITY_PARAMETER_TYPE_FIELD_NUMBER: _ClassVar[int]
     SECURITY_PARAMETER_FIELD_NUMBER: _ClassVar[int]
     security_parameter_type: WCOcppSecurityParameterType
     security_parameter: bytes
-
-    def __init__(self, security_parameter_type: _Optional[_Union[WCOcppSecurityParameterType, str]]=..., security_parameter: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, security_parameter_type: _Optional[_Union[WCOcppSecurityParameterType, str]] = ..., security_parameter: _Optional[bytes] = ...) -> None: ...
 
 class WCAPISetOcppSecurityParameterResponse(_message.Message):
-    __slots__ = ('status',)
+    __slots__ = ("status",)
     STATUS_FIELD_NUMBER: _ClassVar[int]
     status: WCOcppStatus
-
-    def __init__(self, status: _Optional[_Union[WCOcppStatus, str]]=...) -> None:
-        ...
+    def __init__(self, status: _Optional[_Union[WCOcppStatus, str]] = ...) -> None: ...
 
 class WCAPIGetOcppSecurityParameterRequest(_message.Message):
-    __slots__ = ('security_parameter_type',)
+    __slots__ = ("security_parameter_type",)
     SECURITY_PARAMETER_TYPE_FIELD_NUMBER: _ClassVar[int]
     security_parameter_type: WCOcppSecurityParameterType
-
-    def __init__(self, security_parameter_type: _Optional[_Union[WCOcppSecurityParameterType, str]]=...) -> None:
-        ...
+    def __init__(self, security_parameter_type: _Optional[_Union[WCOcppSecurityParameterType, str]] = ...) -> None: ...
 
 class WCAPIGetOcppSecurityParameterResponse(_message.Message):
-    __slots__ = ('security_parameter_type', 'security_parameter')
+    __slots__ = ("security_parameter_type", "security_parameter")
     SECURITY_PARAMETER_TYPE_FIELD_NUMBER: _ClassVar[int]
     SECURITY_PARAMETER_FIELD_NUMBER: _ClassVar[int]
     security_parameter_type: WCOcppSecurityParameterType
     security_parameter: bytes
-
-    def __init__(self, security_parameter_type: _Optional[_Union[WCOcppSecurityParameterType, str]]=..., security_parameter: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, security_parameter_type: _Optional[_Union[WCOcppSecurityParameterType, str]] = ..., security_parameter: _Optional[bytes] = ...) -> None: ...
 
 class WCAPIGetOcppLocalAuthListRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIGetOcppLocalAuthListResponse(_message.Message):
-    __slots__ = ('auth_list',)
+    __slots__ = ("auth_list",)
     AUTH_LIST_FIELD_NUMBER: _ClassVar[int]
     auth_list: WCOcppAuthorizationList
-
-    def __init__(self, auth_list: _Optional[_Union[WCOcppAuthorizationList, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, auth_list: _Optional[_Union[WCOcppAuthorizationList, _Mapping]] = ...) -> None: ...
 
 class WCAPIConfigureCountryCodeSettingsRequest(_message.Message):
-    __slots__ = ('country',)
+    __slots__ = ("country",)
     COUNTRY_FIELD_NUMBER: _ClassVar[int]
     country: str
-
-    def __init__(self, country: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, country: _Optional[str] = ...) -> None: ...
 
 class WCAPIConfigureCountryCodeSettingsResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCTargetChargePowerParams(_message.Message):
-    __slots__ = ('target_charge_power_w', 'max_charge_power_w', 'max_charge_current_a')
+    __slots__ = ("target_charge_power_w", "max_charge_power_w", "max_charge_current_a")
     TARGET_CHARGE_POWER_W_FIELD_NUMBER: _ClassVar[int]
     MAX_CHARGE_POWER_W_FIELD_NUMBER: _ClassVar[int]
     MAX_CHARGE_CURRENT_A_FIELD_NUMBER: _ClassVar[int]
     target_charge_power_w: float
     max_charge_power_w: _wrappers_pb2.FloatValue
     max_charge_current_a: int
-
-    def __init__(self, target_charge_power_w: _Optional[float]=..., max_charge_power_w: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]]=..., max_charge_current_a: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, target_charge_power_w: _Optional[float] = ..., max_charge_power_w: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ..., max_charge_current_a: _Optional[int] = ...) -> None: ...
 
 class WCSmartChargingCommand(_message.Message):
-    __slots__ = ('ttl_seconds', 'charge_disallowed', 'target_charge_power_params')
+    __slots__ = ("ttl_seconds", "charge_disallowed", "target_charge_power_params")
     TTL_SECONDS_FIELD_NUMBER: _ClassVar[int]
     CHARGE_DISALLOWED_FIELD_NUMBER: _ClassVar[int]
     TARGET_CHARGE_POWER_PARAMS_FIELD_NUMBER: _ClassVar[int]
     ttl_seconds: int
     charge_disallowed: bool
     target_charge_power_params: WCTargetChargePowerParams
-
-    def __init__(self, ttl_seconds: _Optional[int]=..., charge_disallowed: _Optional[bool]=..., target_charge_power_params: _Optional[_Union[WCTargetChargePowerParams, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, ttl_seconds: _Optional[int] = ..., charge_disallowed: _Optional[bool] = ..., target_charge_power_params: _Optional[_Union[WCTargetChargePowerParams, _Mapping]] = ...) -> None: ...
 
 class WCAPIPushSmartChargingCommandRequest(_message.Message):
-    __slots__ = ('command',)
+    __slots__ = ("command",)
     COMMAND_FIELD_NUMBER: _ClassVar[int]
     command: WCSmartChargingCommand
-
-    def __init__(self, command: _Optional[_Union[WCSmartChargingCommand, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, command: _Optional[_Union[WCSmartChargingCommand, _Mapping]] = ...) -> None: ...
 
 class WCAPIPushSmartChargingCommandResponse(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIRegisterCommercialRequest(_message.Message):
     __slots__ = ()
-
-    def __init__(self) -> None:
-        ...
+    def __init__(self) -> None: ...
 
 class WCAPIRegisterCommercialResponse(_message.Message):
-    __slots__ = ('failure',)
+    __slots__ = ("failure",)
     FAILURE_FIELD_NUMBER: _ClassVar[int]
     failure: int
-
-    def __init__(self, failure: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, failure: _Optional[int] = ...) -> None: ...
 
 class WCAPIPushPowershareCommandRequest(_message.Message):
-    __slots__ = ('site_vehicle_request', 'site_evse_request', 'inverter_config', 'ttl_seconds')
+    __slots__ = ("site_vehicle_request", "site_evse_request", "inverter_config", "ttl_seconds")
     SITE_VEHICLE_REQUEST_FIELD_NUMBER: _ClassVar[int]
     SITE_EVSE_REQUEST_FIELD_NUMBER: _ClassVar[int]
     INVERTER_CONFIG_FIELD_NUMBER: _ClassVar[int]
@@ -1408,22 +1202,18 @@ class WCAPIPushPowershareCommandRequest(_message.Message):
     site_evse_request: bytes
     inverter_config: bytes
     ttl_seconds: int
-
-    def __init__(self, site_vehicle_request: _Optional[bytes]=..., site_evse_request: _Optional[bytes]=..., inverter_config: _Optional[bytes]=..., ttl_seconds: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, site_vehicle_request: _Optional[bytes] = ..., site_evse_request: _Optional[bytes] = ..., inverter_config: _Optional[bytes] = ..., ttl_seconds: _Optional[int] = ...) -> None: ...
 
 class WCAPIPushPowershareCommandResponse(_message.Message):
-    __slots__ = ('site_vehicle_response', 'site_evse_response')
+    __slots__ = ("site_vehicle_response", "site_evse_response")
     SITE_VEHICLE_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     SITE_EVSE_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     site_vehicle_response: bytes
     site_evse_response: bytes
-
-    def __init__(self, site_vehicle_response: _Optional[bytes]=..., site_evse_response: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, site_vehicle_response: _Optional[bytes] = ..., site_evse_response: _Optional[bytes] = ...) -> None: ...
 
 class WCMessages(_message.Message):
-    __slots__ = ('get_vitals_request', 'get_vitals_response', 'get_lifetime_stats_request', 'get_lifetime_stats_response', 'get_config_request', 'get_config_response', 'configure_settings_request', 'configure_settings_response', 'get_system_info_request', 'get_system_info_response', 'get_load_sharing_network_state_request', 'get_load_sharing_network_state_response', 'push_load_sharing_follower_state_request', 'push_load_sharing_follower_state_response', 'push_load_sharing_leader_command_request', 'push_load_sharing_leader_command_response', 'set_load_sharing_network_operation_request', 'set_load_sharing_network_operation_response', 'configure_load_sharing_settings_request', 'configure_load_sharing_settings_response', 'configure_ppu_settings_request', 'configure_ppu_settings_response', 'get_ppu_settings_request', 'get_ppu_settings_response', 'set_provisional_operational_params_request', 'set_provisional_operational_params_response', 'get_provisional_operational_params_request', 'get_provisional_operational_params_response', 'get_access_control_settings_request', 'get_access_control_settings_response', 'configure_access_control_settings_request', 'configure_access_control_settings_response', 'get_recent_vehicles_request', 'get_recent_vehicles_response', 'push_ppu_authorization_state_request', 'push_ppu_authorization_state_response', 'configure_charge_schedule_request', 'configure_charge_schedule_response', 'push_charge_command_request', 'push_charge_command_response', 'configure_third_party_vehicle_mode_request', 'configure_third_party_vehicle_mode_response', 'configure_home_site_controller_request', 'configure_home_site_controller_response', 'configure_ocpp_settings_request', 'configure_ocpp_settings_response', 'set_ocpp_security_parameter_request', 'set_ocpp_security_parameter_response', 'get_ocpp_security_parameter_request', 'get_ocpp_security_parameter_response', 'configure_operational_settings_request', 'configure_operational_settings_response', 'get_operational_settings_request', 'get_operational_settings_response', 'configure_country_code_settings_request', 'configure_country_code_settings_response', 'push_load_sharing_config_request', 'push_load_sharing_config_response', 'push_smart_charging_command_request', 'push_smart_charging_command_response', 'register_commercial_request', 'register_commercial_response', 'get_ocpp_local_auth_list_request', 'get_ocpp_local_auth_list_response', 'push_powershare_command_request', 'push_powershare_command_response')
+    __slots__ = ("get_vitals_request", "get_vitals_response", "get_lifetime_stats_request", "get_lifetime_stats_response", "get_config_request", "get_config_response", "configure_settings_request", "configure_settings_response", "get_system_info_request", "get_system_info_response", "get_load_sharing_network_state_request", "get_load_sharing_network_state_response", "push_load_sharing_follower_state_request", "push_load_sharing_follower_state_response", "push_load_sharing_leader_command_request", "push_load_sharing_leader_command_response", "set_load_sharing_network_operation_request", "set_load_sharing_network_operation_response", "configure_load_sharing_settings_request", "configure_load_sharing_settings_response", "configure_ppu_settings_request", "configure_ppu_settings_response", "get_ppu_settings_request", "get_ppu_settings_response", "set_provisional_operational_params_request", "set_provisional_operational_params_response", "get_provisional_operational_params_request", "get_provisional_operational_params_response", "get_access_control_settings_request", "get_access_control_settings_response", "configure_access_control_settings_request", "configure_access_control_settings_response", "get_recent_vehicles_request", "get_recent_vehicles_response", "push_ppu_authorization_state_request", "push_ppu_authorization_state_response", "configure_charge_schedule_request", "configure_charge_schedule_response", "push_charge_command_request", "push_charge_command_response", "configure_third_party_vehicle_mode_request", "configure_third_party_vehicle_mode_response", "configure_home_site_controller_request", "configure_home_site_controller_response", "configure_ocpp_settings_request", "configure_ocpp_settings_response", "set_ocpp_security_parameter_request", "set_ocpp_security_parameter_response", "get_ocpp_security_parameter_request", "get_ocpp_security_parameter_response", "configure_operational_settings_request", "configure_operational_settings_response", "get_operational_settings_request", "get_operational_settings_response", "configure_country_code_settings_request", "configure_country_code_settings_response", "push_load_sharing_config_request", "push_load_sharing_config_response", "push_smart_charging_command_request", "push_smart_charging_command_response", "register_commercial_request", "register_commercial_response", "get_ocpp_local_auth_list_request", "get_ocpp_local_auth_list_response", "push_powershare_command_request", "push_powershare_command_response")
     GET_VITALS_REQUEST_FIELD_NUMBER: _ClassVar[int]
     GET_VITALS_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     GET_LIFETIME_STATS_REQUEST_FIELD_NUMBER: _ClassVar[int]
@@ -1556,6 +1346,4 @@ class WCMessages(_message.Message):
     get_ocpp_local_auth_list_response: WCAPIGetOcppLocalAuthListResponse
     push_powershare_command_request: WCAPIPushPowershareCommandRequest
     push_powershare_command_response: WCAPIPushPowershareCommandResponse
-
-    def __init__(self, get_vitals_request: _Optional[_Union[WCAPIGetVitalsRequest, _Mapping]]=..., get_vitals_response: _Optional[_Union[WCAPIGetVitalsResponse, _Mapping]]=..., get_lifetime_stats_request: _Optional[_Union[WCAPIGetLifetimeStatsRequest, _Mapping]]=..., get_lifetime_stats_response: _Optional[_Union[WCAPIGetLifetimeStatsResponse, _Mapping]]=..., get_config_request: _Optional[_Union[WCAPIGetConfigRequest, _Mapping]]=..., get_config_response: _Optional[_Union[WCAPIGetConfigResponse, _Mapping]]=..., configure_settings_request: _Optional[_Union[WCAPIConfigureSettingsRequest, _Mapping]]=..., configure_settings_response: _Optional[_Union[WCAPIConfigureSettingsResponse, _Mapping]]=..., get_system_info_request: _Optional[_Union[WCAPIGetSystemInfoRequest, _Mapping]]=..., get_system_info_response: _Optional[_Union[WCAPIGetSystemInfoResponse, _Mapping]]=..., get_load_sharing_network_state_request: _Optional[_Union[WCAPIGetLoadSharingNetworkStateRequest, _Mapping]]=..., get_load_sharing_network_state_response: _Optional[_Union[WCAPIGetLoadSharingNetworkStateResponse, _Mapping]]=..., push_load_sharing_follower_state_request: _Optional[_Union[WCAPIPushLoadSharingFollowerStateRequest, _Mapping]]=..., push_load_sharing_follower_state_response: _Optional[_Union[WCAPIPushLoadSharingFollowerStateResponse, _Mapping]]=..., push_load_sharing_leader_command_request: _Optional[_Union[WCAPIPushLoadSharingLeaderCommandRequest, _Mapping]]=..., push_load_sharing_leader_command_response: _Optional[_Union[WCAPIPushLoadSharingLeaderCommandResponse, _Mapping]]=..., set_load_sharing_network_operation_request: _Optional[_Union[WCAPISetLoadSharingNetworkOperationRequest, _Mapping]]=..., set_load_sharing_network_operation_response: _Optional[_Union[WCAPISetLoadSharingNetworkOperationResponse, _Mapping]]=..., configure_load_sharing_settings_request: _Optional[_Union[WCAPIConfigureLoadSharingSettingsRequest, _Mapping]]=..., configure_load_sharing_settings_response: _Optional[_Union[WCAPIConfigureLoadSharingSettingsResponse, _Mapping]]=..., configure_ppu_settings_request: _Optional[_Union[WCAPIConfigurePpuSettingsRequest, _Mapping]]=..., configure_ppu_settings_response: _Optional[_Union[WCAPIConfigurePpuSettingsResponse, _Mapping]]=..., get_ppu_settings_request: _Optional[_Union[WCAPIGetPpuSettingsRequest, _Mapping]]=..., get_ppu_settings_response: _Optional[_Union[WCAPIGetPpuSettingsResponse, _Mapping]]=..., set_provisional_operational_params_request: _Optional[_Union[WCAPISetProvisionalOperationalParamsRequest, _Mapping]]=..., set_provisional_operational_params_response: _Optional[_Union[WCAPISetProvisionalOperationalParamsResponse, _Mapping]]=..., get_provisional_operational_params_request: _Optional[_Union[WCAPIGetProvisionalOperationalParamsRequest, _Mapping]]=..., get_provisional_operational_params_response: _Optional[_Union[WCAPIGetProvisionalOperationalParamsResponse, _Mapping]]=..., get_access_control_settings_request: _Optional[_Union[WCAPIGetAccessControlSettingsRequest, _Mapping]]=..., get_access_control_settings_response: _Optional[_Union[WCAPIGetAccessControlSettingsResponse, _Mapping]]=..., configure_access_control_settings_request: _Optional[_Union[WCAPIConfigureAccessControlSettingsRequest, _Mapping]]=..., configure_access_control_settings_response: _Optional[_Union[WCAPIConfigureAccessControlSettingsResponse, _Mapping]]=..., get_recent_vehicles_request: _Optional[_Union[WCAPIGetRecentVehiclesRequest, _Mapping]]=..., get_recent_vehicles_response: _Optional[_Union[WCAPIGetRecentVehiclesResponse, _Mapping]]=..., push_ppu_authorization_state_request: _Optional[_Union[WCAPIPushPpuAuthorizationStateRequest, _Mapping]]=..., push_ppu_authorization_state_response: _Optional[_Union[WCAPIPushPpuAuthorizationStateResponse, _Mapping]]=..., configure_charge_schedule_request: _Optional[_Union[WCAPIConfigureChargeScheduleRequest, _Mapping]]=..., configure_charge_schedule_response: _Optional[_Union[WCAPIConfigureChargeScheduleResponse, _Mapping]]=..., push_charge_command_request: _Optional[_Union[WCAPIPushChargeCommandRequest, _Mapping]]=..., push_charge_command_response: _Optional[_Union[WCAPIPushChargeCommandResponse, _Mapping]]=..., configure_third_party_vehicle_mode_request: _Optional[_Union[WCAPIConfigureThirdPartyVehicleModeRequest, _Mapping]]=..., configure_third_party_vehicle_mode_response: _Optional[_Union[WCAPIConfigureThirdPartyVehicleModeResponse, _Mapping]]=..., configure_home_site_controller_request: _Optional[_Union[WCAPIConfigureHomeSiteControllerRequest, _Mapping]]=..., configure_home_site_controller_response: _Optional[_Union[WCAPIConfigureHomeSiteControllerResponse, _Mapping]]=..., configure_ocpp_settings_request: _Optional[_Union[WCAPIConfigureOcppSettingsRequest, _Mapping]]=..., configure_ocpp_settings_response: _Optional[_Union[WCAPIConfigureOcppSettingsResponse, _Mapping]]=..., set_ocpp_security_parameter_request: _Optional[_Union[WCAPISetOcppSecurityParameterRequest, _Mapping]]=..., set_ocpp_security_parameter_response: _Optional[_Union[WCAPISetOcppSecurityParameterResponse, _Mapping]]=..., get_ocpp_security_parameter_request: _Optional[_Union[WCAPIGetOcppSecurityParameterRequest, _Mapping]]=..., get_ocpp_security_parameter_response: _Optional[_Union[WCAPIGetOcppSecurityParameterResponse, _Mapping]]=..., configure_operational_settings_request: _Optional[_Union[WCAPIConfigureOperationalSettingsRequest, _Mapping]]=..., configure_operational_settings_response: _Optional[_Union[WCAPIConfigureOperationalSettingsResponse, _Mapping]]=..., get_operational_settings_request: _Optional[_Union[WCAPIGetOperationalSettingsRequest, _Mapping]]=..., get_operational_settings_response: _Optional[_Union[WCAPIGetOperationalSettingsResponse, _Mapping]]=..., configure_country_code_settings_request: _Optional[_Union[WCAPIConfigureCountryCodeSettingsRequest, _Mapping]]=..., configure_country_code_settings_response: _Optional[_Union[WCAPIConfigureCountryCodeSettingsResponse, _Mapping]]=..., push_load_sharing_config_request: _Optional[_Union[WCAPIPushLoadSharingConfigRequest, _Mapping]]=..., push_load_sharing_config_response: _Optional[_Union[WCAPIPushLoadSharingConfigResponse, _Mapping]]=..., push_smart_charging_command_request: _Optional[_Union[WCAPIPushSmartChargingCommandRequest, _Mapping]]=..., push_smart_charging_command_response: _Optional[_Union[WCAPIPushSmartChargingCommandResponse, _Mapping]]=..., register_commercial_request: _Optional[_Union[WCAPIRegisterCommercialRequest, _Mapping]]=..., register_commercial_response: _Optional[_Union[WCAPIRegisterCommercialResponse, _Mapping]]=..., get_ocpp_local_auth_list_request: _Optional[_Union[WCAPIGetOcppLocalAuthListRequest, _Mapping]]=..., get_ocpp_local_auth_list_response: _Optional[_Union[WCAPIGetOcppLocalAuthListResponse, _Mapping]]=..., push_powershare_command_request: _Optional[_Union[WCAPIPushPowershareCommandRequest, _Mapping]]=..., push_powershare_command_response: _Optional[_Union[WCAPIPushPowershareCommandResponse, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, get_vitals_request: _Optional[_Union[WCAPIGetVitalsRequest, _Mapping]] = ..., get_vitals_response: _Optional[_Union[WCAPIGetVitalsResponse, _Mapping]] = ..., get_lifetime_stats_request: _Optional[_Union[WCAPIGetLifetimeStatsRequest, _Mapping]] = ..., get_lifetime_stats_response: _Optional[_Union[WCAPIGetLifetimeStatsResponse, _Mapping]] = ..., get_config_request: _Optional[_Union[WCAPIGetConfigRequest, _Mapping]] = ..., get_config_response: _Optional[_Union[WCAPIGetConfigResponse, _Mapping]] = ..., configure_settings_request: _Optional[_Union[WCAPIConfigureSettingsRequest, _Mapping]] = ..., configure_settings_response: _Optional[_Union[WCAPIConfigureSettingsResponse, _Mapping]] = ..., get_system_info_request: _Optional[_Union[WCAPIGetSystemInfoRequest, _Mapping]] = ..., get_system_info_response: _Optional[_Union[WCAPIGetSystemInfoResponse, _Mapping]] = ..., get_load_sharing_network_state_request: _Optional[_Union[WCAPIGetLoadSharingNetworkStateRequest, _Mapping]] = ..., get_load_sharing_network_state_response: _Optional[_Union[WCAPIGetLoadSharingNetworkStateResponse, _Mapping]] = ..., push_load_sharing_follower_state_request: _Optional[_Union[WCAPIPushLoadSharingFollowerStateRequest, _Mapping]] = ..., push_load_sharing_follower_state_response: _Optional[_Union[WCAPIPushLoadSharingFollowerStateResponse, _Mapping]] = ..., push_load_sharing_leader_command_request: _Optional[_Union[WCAPIPushLoadSharingLeaderCommandRequest, _Mapping]] = ..., push_load_sharing_leader_command_response: _Optional[_Union[WCAPIPushLoadSharingLeaderCommandResponse, _Mapping]] = ..., set_load_sharing_network_operation_request: _Optional[_Union[WCAPISetLoadSharingNetworkOperationRequest, _Mapping]] = ..., set_load_sharing_network_operation_response: _Optional[_Union[WCAPISetLoadSharingNetworkOperationResponse, _Mapping]] = ..., configure_load_sharing_settings_request: _Optional[_Union[WCAPIConfigureLoadSharingSettingsRequest, _Mapping]] = ..., configure_load_sharing_settings_response: _Optional[_Union[WCAPIConfigureLoadSharingSettingsResponse, _Mapping]] = ..., configure_ppu_settings_request: _Optional[_Union[WCAPIConfigurePpuSettingsRequest, _Mapping]] = ..., configure_ppu_settings_response: _Optional[_Union[WCAPIConfigurePpuSettingsResponse, _Mapping]] = ..., get_ppu_settings_request: _Optional[_Union[WCAPIGetPpuSettingsRequest, _Mapping]] = ..., get_ppu_settings_response: _Optional[_Union[WCAPIGetPpuSettingsResponse, _Mapping]] = ..., set_provisional_operational_params_request: _Optional[_Union[WCAPISetProvisionalOperationalParamsRequest, _Mapping]] = ..., set_provisional_operational_params_response: _Optional[_Union[WCAPISetProvisionalOperationalParamsResponse, _Mapping]] = ..., get_provisional_operational_params_request: _Optional[_Union[WCAPIGetProvisionalOperationalParamsRequest, _Mapping]] = ..., get_provisional_operational_params_response: _Optional[_Union[WCAPIGetProvisionalOperationalParamsResponse, _Mapping]] = ..., get_access_control_settings_request: _Optional[_Union[WCAPIGetAccessControlSettingsRequest, _Mapping]] = ..., get_access_control_settings_response: _Optional[_Union[WCAPIGetAccessControlSettingsResponse, _Mapping]] = ..., configure_access_control_settings_request: _Optional[_Union[WCAPIConfigureAccessControlSettingsRequest, _Mapping]] = ..., configure_access_control_settings_response: _Optional[_Union[WCAPIConfigureAccessControlSettingsResponse, _Mapping]] = ..., get_recent_vehicles_request: _Optional[_Union[WCAPIGetRecentVehiclesRequest, _Mapping]] = ..., get_recent_vehicles_response: _Optional[_Union[WCAPIGetRecentVehiclesResponse, _Mapping]] = ..., push_ppu_authorization_state_request: _Optional[_Union[WCAPIPushPpuAuthorizationStateRequest, _Mapping]] = ..., push_ppu_authorization_state_response: _Optional[_Union[WCAPIPushPpuAuthorizationStateResponse, _Mapping]] = ..., configure_charge_schedule_request: _Optional[_Union[WCAPIConfigureChargeScheduleRequest, _Mapping]] = ..., configure_charge_schedule_response: _Optional[_Union[WCAPIConfigureChargeScheduleResponse, _Mapping]] = ..., push_charge_command_request: _Optional[_Union[WCAPIPushChargeCommandRequest, _Mapping]] = ..., push_charge_command_response: _Optional[_Union[WCAPIPushChargeCommandResponse, _Mapping]] = ..., configure_third_party_vehicle_mode_request: _Optional[_Union[WCAPIConfigureThirdPartyVehicleModeRequest, _Mapping]] = ..., configure_third_party_vehicle_mode_response: _Optional[_Union[WCAPIConfigureThirdPartyVehicleModeResponse, _Mapping]] = ..., configure_home_site_controller_request: _Optional[_Union[WCAPIConfigureHomeSiteControllerRequest, _Mapping]] = ..., configure_home_site_controller_response: _Optional[_Union[WCAPIConfigureHomeSiteControllerResponse, _Mapping]] = ..., configure_ocpp_settings_request: _Optional[_Union[WCAPIConfigureOcppSettingsRequest, _Mapping]] = ..., configure_ocpp_settings_response: _Optional[_Union[WCAPIConfigureOcppSettingsResponse, _Mapping]] = ..., set_ocpp_security_parameter_request: _Optional[_Union[WCAPISetOcppSecurityParameterRequest, _Mapping]] = ..., set_ocpp_security_parameter_response: _Optional[_Union[WCAPISetOcppSecurityParameterResponse, _Mapping]] = ..., get_ocpp_security_parameter_request: _Optional[_Union[WCAPIGetOcppSecurityParameterRequest, _Mapping]] = ..., get_ocpp_security_parameter_response: _Optional[_Union[WCAPIGetOcppSecurityParameterResponse, _Mapping]] = ..., configure_operational_settings_request: _Optional[_Union[WCAPIConfigureOperationalSettingsRequest, _Mapping]] = ..., configure_operational_settings_response: _Optional[_Union[WCAPIConfigureOperationalSettingsResponse, _Mapping]] = ..., get_operational_settings_request: _Optional[_Union[WCAPIGetOperationalSettingsRequest, _Mapping]] = ..., get_operational_settings_response: _Optional[_Union[WCAPIGetOperationalSettingsResponse, _Mapping]] = ..., configure_country_code_settings_request: _Optional[_Union[WCAPIConfigureCountryCodeSettingsRequest, _Mapping]] = ..., configure_country_code_settings_response: _Optional[_Union[WCAPIConfigureCountryCodeSettingsResponse, _Mapping]] = ..., push_load_sharing_config_request: _Optional[_Union[WCAPIPushLoadSharingConfigRequest, _Mapping]] = ..., push_load_sharing_config_response: _Optional[_Union[WCAPIPushLoadSharingConfigResponse, _Mapping]] = ..., push_smart_charging_command_request: _Optional[_Union[WCAPIPushSmartChargingCommandRequest, _Mapping]] = ..., push_smart_charging_command_response: _Optional[_Union[WCAPIPushSmartChargingCommandResponse, _Mapping]] = ..., register_commercial_request: _Optional[_Union[WCAPIRegisterCommercialRequest, _Mapping]] = ..., register_commercial_response: _Optional[_Union[WCAPIRegisterCommercialResponse, _Mapping]] = ..., get_ocpp_local_auth_list_request: _Optional[_Union[WCAPIGetOcppLocalAuthListRequest, _Mapping]] = ..., get_ocpp_local_auth_list_response: _Optional[_Union[WCAPIGetOcppLocalAuthListResponse, _Mapping]] = ..., push_powershare_command_request: _Optional[_Union[WCAPIPushPowershareCommandRequest, _Mapping]] = ..., push_powershare_command_response: _Optional[_Union[WCAPIPushPowershareCommandResponse, _Mapping]] = ...) -> None: ...
