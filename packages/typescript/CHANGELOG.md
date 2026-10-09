@@ -1,5 +1,28 @@
 # @teslemetry/tesla-protocol
 
+## 4.0.0
+
+### Major Changes
+
+- 2870ee5: Correct `energy_device` `CommonAPIGetSystemInfoResponse` to the layout the gateway sends. Before this change, a real gateway reply failed to decode with `DecodeError`, because tag 2 is a plain string on the wire, not a `Din` message.
+
+  | Tag | Before                            | After                                               |
+  | --- | --------------------------------- | --------------------------------------------------- |
+  | 2   | `Din din`                         | `string din`                                        |
+  | 3   | `FirmwareVersion firmare_version` | `FirmwareVersion firmware_version` (spelling fixed) |
+  | 4   | `SystemUpdate system_update`      | reserved (never sent)                               |
+  | 5   | `DeviceType device_type`          | `SystemUpdate system_update`                        |
+  | 6   | -                                 | `DeviceType device_type`                            |
+  | 7   | -                                 | `ComplianceInformation compliance_information`      |
+
+  Tags 8 and 9 carry bytes and stay unmodelled; one of them is `installed_firmware_signature`. Code that read `response.din.value` now reads `response.din`, and code that read `response.firmare_version` now reads `response.firmware_version`. A golden fixture (`fixtures/golden/get_system_info_response.json`) pins a recorded Powerwall 3 reply in both packages.
+
+- ebc7866: Register every Python module under a `tesla_protocol` namespace in the protobuf descriptor pool. Each file is now registered as `tesla_protocol/<group>/<file>.proto` (for example `tesla_protocol/command/car_server.proto`) and each package as `tesla_protocol.<package>` (for example `tesla_protocol.CarServer`). Before this change, the bare file names and Tesla's generic package names (`CarServer`, `VCSEC`, `UniversalMessage`, ...) clashed with any other library that loads Tesla's protos into the same Python process: the import failed with `TypeError: Couldn't build proto file into descriptor pool`.
+
+  Python import paths do not change (`from tesla_protocol.command import car_server_pb2` still works), and the encoded bytes of every message do not change, except where a full type name is itself serialized: a `google.protobuf.Any` packed in Python now carries a `tesla_protocol.`-prefixed `type_url`. Code that uses descriptor full names does change: `DESCRIPTOR.full_name`, `descriptor_pool.FindMessageTypeByName("CarServer.Action")` and `google.protobuf.Any` type URLs now carry the `tesla_protocol.` prefix. The only `Any` field is `teslapower.Status.details`. The generated imports between modules are now absolute (`from tesla_protocol.command import ...`).
+
+  The TypeScript package is unchanged. It has no global descriptor registry, so it keeps upstream's package names; its major version moves only because the two packages release in lockstep.
+
 ## 3.0.2
 
 ### Patch Changes
