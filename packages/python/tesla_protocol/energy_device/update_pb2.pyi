@@ -4,6 +4,7 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from collections.abc import Iterable as _Iterable, Mapping as _Mapping
 from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class UpdateStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -42,17 +43,15 @@ LAST_UPDATE_RESULT_FAILED: LastUpdateResult
 LAST_UPDATE_RESULT_SUCCEEDED: LastUpdateResult
 
 class FirmwareVersion(_message.Message):
-    __slots__ = ('version', 'githash')
+    __slots__ = ("version", "githash")
     VERSION_FIELD_NUMBER: _ClassVar[int]
     GITHASH_FIELD_NUMBER: _ClassVar[int]
     version: str
     githash: bytes
-
-    def __init__(self, version: _Optional[str]=..., githash: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, version: _Optional[str] = ..., githash: _Optional[bytes] = ...) -> None: ...
 
 class ServerStagedPackage(_message.Message):
-    __slots__ = ('download_url', 'package_id', 'package_signature', 'server_staged_version')
+    __slots__ = ("download_url", "package_id", "package_signature", "server_staged_version")
     DOWNLOAD_URL_FIELD_NUMBER: _ClassVar[int]
     PACKAGE_ID_FIELD_NUMBER: _ClassVar[int]
     PACKAGE_SIGNATURE_FIELD_NUMBER: _ClassVar[int]
@@ -61,12 +60,10 @@ class ServerStagedPackage(_message.Message):
     package_id: int
     package_signature: bytes
     server_staged_version: FirmwareVersion
-
-    def __init__(self, download_url: _Optional[str]=..., package_id: _Optional[int]=..., package_signature: _Optional[bytes]=..., server_staged_version: _Optional[_Union[FirmwareVersion, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, download_url: _Optional[str] = ..., package_id: _Optional[int] = ..., package_signature: _Optional[bytes] = ..., server_staged_version: _Optional[_Union[FirmwareVersion, _Mapping]] = ...) -> None: ...
 
 class SystemUpdate(_message.Message):
-    __slots__ = ('handshake_result', 'update_status', 'server_staged_version', 'total_bytes', 'bytes_offset', 'estimated_bytes_per_second', 'last_handshake_timestamp', 'last_update_result', 'server_staged_packages', 'is_sideloading')
+    __slots__ = ("handshake_result", "update_status", "server_staged_version", "total_bytes", "bytes_offset", "estimated_bytes_per_second", "last_handshake_timestamp", "last_update_result", "server_staged_packages", "is_sideloading")
     HANDSHAKE_RESULT_FIELD_NUMBER: _ClassVar[int]
     UPDATE_STATUS_FIELD_NUMBER: _ClassVar[int]
     SERVER_STAGED_VERSION_FIELD_NUMBER: _ClassVar[int]
@@ -87,12 +84,10 @@ class SystemUpdate(_message.Message):
     last_update_result: int
     server_staged_packages: _containers.RepeatedCompositeFieldContainer[ServerStagedPackage]
     is_sideloading: bool
-
-    def __init__(self, handshake_result: _Optional[int]=..., update_status: _Optional[int]=..., server_staged_version: _Optional[_Union[FirmwareVersion, _Mapping]]=..., total_bytes: _Optional[int]=..., bytes_offset: _Optional[int]=..., estimated_bytes_per_second: _Optional[int]=..., last_handshake_timestamp: _Optional[int]=..., last_update_result: _Optional[int]=..., server_staged_packages: _Optional[_Iterable[_Union[ServerStagedPackage, _Mapping]]]=..., is_sideloading: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, handshake_result: _Optional[int] = ..., update_status: _Optional[int] = ..., server_staged_version: _Optional[_Union[FirmwareVersion, _Mapping]] = ..., total_bytes: _Optional[int] = ..., bytes_offset: _Optional[int] = ..., estimated_bytes_per_second: _Optional[int] = ..., last_handshake_timestamp: _Optional[int] = ..., last_update_result: _Optional[int] = ..., server_staged_packages: _Optional[_Iterable[_Union[ServerStagedPackage, _Mapping]]] = ..., is_sideloading: _Optional[bool] = ...) -> None: ...
 
 class AcceptedPackage(_message.Message):
-    __slots__ = ('package_id', 'package_signature', 'upload_endpoint', 'will_attempt_download')
+    __slots__ = ("package_id", "package_signature", "upload_endpoint", "will_attempt_download")
     PACKAGE_ID_FIELD_NUMBER: _ClassVar[int]
     PACKAGE_SIGNATURE_FIELD_NUMBER: _ClassVar[int]
     UPLOAD_ENDPOINT_FIELD_NUMBER: _ClassVar[int]
@@ -101,12 +96,10 @@ class AcceptedPackage(_message.Message):
     package_signature: bytes
     upload_endpoint: str
     will_attempt_download: bool
-
-    def __init__(self, package_id: _Optional[int]=..., package_signature: _Optional[bytes]=..., upload_endpoint: _Optional[str]=..., will_attempt_download: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, package_id: _Optional[int] = ..., package_signature: _Optional[bytes] = ..., upload_endpoint: _Optional[str] = ..., will_attempt_download: _Optional[bool] = ...) -> None: ...
 
 class LocallyAvailablePackage(_message.Message):
-    __slots__ = ('package_id', 'package_signature', 'file_size_bytes', 'download_url')
+    __slots__ = ("package_id", "package_signature", "file_size_bytes", "download_url")
     PACKAGE_ID_FIELD_NUMBER: _ClassVar[int]
     PACKAGE_SIGNATURE_FIELD_NUMBER: _ClassVar[int]
     FILE_SIZE_BYTES_FIELD_NUMBER: _ClassVar[int]
@@ -115,6 +108,4 @@ class LocallyAvailablePackage(_message.Message):
     package_signature: bytes
     file_size_bytes: int
     download_url: str
-
-    def __init__(self, package_id: _Optional[int]=..., package_signature: _Optional[bytes]=..., file_size_bytes: _Optional[int]=..., download_url: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, package_id: _Optional[int] = ..., package_signature: _Optional[bytes] = ..., file_size_bytes: _Optional[int] = ..., download_url: _Optional[str] = ...) -> None: ...

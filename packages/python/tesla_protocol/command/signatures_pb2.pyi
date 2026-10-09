@@ -3,6 +3,7 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from collections.abc import Mapping as _Mapping
 from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Tag(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -74,19 +75,17 @@ SESSION_INFO_STATUS_KEY_NOT_ON_WHITELIST: Session_Info_Status
 SESSION_INFO_STATUS_INVALID_HANDLE: Session_Info_Status
 
 class KeyIdentity(_message.Message):
-    __slots__ = ('public_key', 'handle', 'identified_key')
+    __slots__ = ("public_key", "handle", "identified_key")
     PUBLIC_KEY_FIELD_NUMBER: _ClassVar[int]
     HANDLE_FIELD_NUMBER: _ClassVar[int]
     IDENTIFIED_KEY_FIELD_NUMBER: _ClassVar[int]
     public_key: bytes
     handle: int
     identified_key: IdentifiedKey
-
-    def __init__(self, public_key: _Optional[bytes]=..., handle: _Optional[int]=..., identified_key: _Optional[_Union[IdentifiedKey, str]]=...) -> None:
-        ...
+    def __init__(self, public_key: _Optional[bytes] = ..., handle: _Optional[int] = ..., identified_key: _Optional[_Union[IdentifiedKey, str]] = ...) -> None: ...
 
 class AES_GCM_Personalized_Signature_Data(_message.Message):
-    __slots__ = ('epoch', 'nonce', 'counter', 'expires_at', 'tag')
+    __slots__ = ("epoch", "nonce", "counter", "expires_at", "tag")
     EPOCH_FIELD_NUMBER: _ClassVar[int]
     NONCE_FIELD_NUMBER: _ClassVar[int]
     COUNTER_FIELD_NUMBER: _ClassVar[int]
@@ -97,32 +96,26 @@ class AES_GCM_Personalized_Signature_Data(_message.Message):
     counter: int
     expires_at: int
     tag: bytes
-
-    def __init__(self, epoch: _Optional[bytes]=..., nonce: _Optional[bytes]=..., counter: _Optional[int]=..., expires_at: _Optional[int]=..., tag: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, epoch: _Optional[bytes] = ..., nonce: _Optional[bytes] = ..., counter: _Optional[int] = ..., expires_at: _Optional[int] = ..., tag: _Optional[bytes] = ...) -> None: ...
 
 class AES_GCM_Response_Signature_Data(_message.Message):
-    __slots__ = ('nonce', 'counter', 'tag')
+    __slots__ = ("nonce", "counter", "tag")
     NONCE_FIELD_NUMBER: _ClassVar[int]
     COUNTER_FIELD_NUMBER: _ClassVar[int]
     TAG_FIELD_NUMBER: _ClassVar[int]
     nonce: bytes
     counter: int
     tag: bytes
-
-    def __init__(self, nonce: _Optional[bytes]=..., counter: _Optional[int]=..., tag: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, nonce: _Optional[bytes] = ..., counter: _Optional[int] = ..., tag: _Optional[bytes] = ...) -> None: ...
 
 class Present_Key_Signature_Data(_message.Message):
-    __slots__ = ('auth_token',)
+    __slots__ = ("auth_token",)
     AUTH_TOKEN_FIELD_NUMBER: _ClassVar[int]
     auth_token: bytes
-
-    def __init__(self, auth_token: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, auth_token: _Optional[bytes] = ...) -> None: ...
 
 class AES_GCM_Detached_Signature_Data(_message.Message):
-    __slots__ = ('epoch', 'counter', 'expires_at', 'nonce', 'tag')
+    __slots__ = ("epoch", "counter", "expires_at", "nonce", "tag")
     EPOCH_FIELD_NUMBER: _ClassVar[int]
     COUNTER_FIELD_NUMBER: _ClassVar[int]
     EXPIRES_AT_FIELD_NUMBER: _ClassVar[int]
@@ -133,30 +126,24 @@ class AES_GCM_Detached_Signature_Data(_message.Message):
     expires_at: int
     nonce: bytes
     tag: bytes
-
-    def __init__(self, epoch: _Optional[bytes]=..., counter: _Optional[int]=..., expires_at: _Optional[int]=..., nonce: _Optional[bytes]=..., tag: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, epoch: _Optional[bytes] = ..., counter: _Optional[int] = ..., expires_at: _Optional[int] = ..., nonce: _Optional[bytes] = ..., tag: _Optional[bytes] = ...) -> None: ...
 
 class Certificate_ECDSA_Signature_Data(_message.Message):
-    __slots__ = ('certificate_chain_der', 'signature')
+    __slots__ = ("certificate_chain_der", "signature")
     CERTIFICATE_CHAIN_DER_FIELD_NUMBER: _ClassVar[int]
     SIGNATURE_FIELD_NUMBER: _ClassVar[int]
     certificate_chain_der: bytes
     signature: bytes
-
-    def __init__(self, certificate_chain_der: _Optional[bytes]=..., signature: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, certificate_chain_der: _Optional[bytes] = ..., signature: _Optional[bytes] = ...) -> None: ...
 
 class HMAC_Signature_Data(_message.Message):
-    __slots__ = ('tag',)
+    __slots__ = ("tag",)
     TAG_FIELD_NUMBER: _ClassVar[int]
     tag: bytes
-
-    def __init__(self, tag: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, tag: _Optional[bytes] = ...) -> None: ...
 
 class HMAC_Personalized_Signature_Data(_message.Message):
-    __slots__ = ('epoch', 'counter', 'expires_at', 'tag')
+    __slots__ = ("epoch", "counter", "expires_at", "tag")
     EPOCH_FIELD_NUMBER: _ClassVar[int]
     COUNTER_FIELD_NUMBER: _ClassVar[int]
     EXPIRES_AT_FIELD_NUMBER: _ClassVar[int]
@@ -165,12 +152,10 @@ class HMAC_Personalized_Signature_Data(_message.Message):
     counter: int
     expires_at: int
     tag: bytes
-
-    def __init__(self, epoch: _Optional[bytes]=..., counter: _Optional[int]=..., expires_at: _Optional[int]=..., tag: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, epoch: _Optional[bytes] = ..., counter: _Optional[int] = ..., expires_at: _Optional[int] = ..., tag: _Optional[bytes] = ...) -> None: ...
 
 class SignatureData(_message.Message):
-    __slots__ = ('signer_identity', 'Present_Key_data', 'AES_GCM_Personalized_data', 'session_info_tag', 'HMAC_Personalized_data', 'AES_GCM_Response_data', 'AES_GCM_Detached_data', 'Certificate_ECDSA_data')
+    __slots__ = ("signer_identity", "Present_Key_data", "AES_GCM_Personalized_data", "session_info_tag", "HMAC_Personalized_data", "AES_GCM_Response_data", "AES_GCM_Detached_data", "Certificate_ECDSA_data")
     SIGNER_IDENTITY_FIELD_NUMBER: _ClassVar[int]
     PRESENT_KEY_DATA_FIELD_NUMBER: _ClassVar[int]
     AES_GCM_PERSONALIZED_DATA_FIELD_NUMBER: _ClassVar[int]
@@ -187,20 +172,16 @@ class SignatureData(_message.Message):
     AES_GCM_Response_data: AES_GCM_Response_Signature_Data
     AES_GCM_Detached_data: AES_GCM_Detached_Signature_Data
     Certificate_ECDSA_data: Certificate_ECDSA_Signature_Data
-
-    def __init__(self, signer_identity: _Optional[_Union[KeyIdentity, _Mapping]]=..., Present_Key_data: _Optional[_Union[Present_Key_Signature_Data, _Mapping]]=..., AES_GCM_Personalized_data: _Optional[_Union[AES_GCM_Personalized_Signature_Data, _Mapping]]=..., session_info_tag: _Optional[_Union[HMAC_Signature_Data, _Mapping]]=..., HMAC_Personalized_data: _Optional[_Union[HMAC_Personalized_Signature_Data, _Mapping]]=..., AES_GCM_Response_data: _Optional[_Union[AES_GCM_Response_Signature_Data, _Mapping]]=..., AES_GCM_Detached_data: _Optional[_Union[AES_GCM_Detached_Signature_Data, _Mapping]]=..., Certificate_ECDSA_data: _Optional[_Union[Certificate_ECDSA_Signature_Data, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, signer_identity: _Optional[_Union[KeyIdentity, _Mapping]] = ..., Present_Key_data: _Optional[_Union[Present_Key_Signature_Data, _Mapping]] = ..., AES_GCM_Personalized_data: _Optional[_Union[AES_GCM_Personalized_Signature_Data, _Mapping]] = ..., session_info_tag: _Optional[_Union[HMAC_Signature_Data, _Mapping]] = ..., HMAC_Personalized_data: _Optional[_Union[HMAC_Personalized_Signature_Data, _Mapping]] = ..., AES_GCM_Response_data: _Optional[_Union[AES_GCM_Response_Signature_Data, _Mapping]] = ..., AES_GCM_Detached_data: _Optional[_Union[AES_GCM_Detached_Signature_Data, _Mapping]] = ..., Certificate_ECDSA_data: _Optional[_Union[Certificate_ECDSA_Signature_Data, _Mapping]] = ...) -> None: ...
 
 class GetSessionInfoRequest(_message.Message):
-    __slots__ = ('key_identity',)
+    __slots__ = ("key_identity",)
     KEY_IDENTITY_FIELD_NUMBER: _ClassVar[int]
     key_identity: KeyIdentity
-
-    def __init__(self, key_identity: _Optional[_Union[KeyIdentity, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, key_identity: _Optional[_Union[KeyIdentity, _Mapping]] = ...) -> None: ...
 
 class SessionInfo(_message.Message):
-    __slots__ = ('counter', 'publicKey', 'epoch', 'clock_time', 'status', 'handle', 'field_7')
+    __slots__ = ("counter", "publicKey", "epoch", "clock_time", "status", "handle", "field_7")
     COUNTER_FIELD_NUMBER: _ClassVar[int]
     PUBLICKEY_FIELD_NUMBER: _ClassVar[int]
     EPOCH_FIELD_NUMBER: _ClassVar[int]
@@ -215,6 +196,4 @@ class SessionInfo(_message.Message):
     status: Session_Info_Status
     handle: int
     field_7: int
-
-    def __init__(self, counter: _Optional[int]=..., publicKey: _Optional[bytes]=..., epoch: _Optional[bytes]=..., clock_time: _Optional[int]=..., status: _Optional[_Union[Session_Info_Status, str]]=..., handle: _Optional[int]=..., field_7: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, counter: _Optional[int] = ..., publicKey: _Optional[bytes] = ..., epoch: _Optional[bytes] = ..., clock_time: _Optional[int] = ..., status: _Optional[_Union[Session_Info_Status, str]] = ..., handle: _Optional[int] = ..., field_7: _Optional[int] = ...) -> None: ...

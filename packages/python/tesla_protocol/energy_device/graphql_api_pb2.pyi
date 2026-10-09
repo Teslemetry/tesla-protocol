@@ -5,6 +5,7 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from collections.abc import Iterable as _Iterable, Mapping as _Mapping
 from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class GraphQLQueryFormat(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -41,29 +42,25 @@ GRAPH_QL_ERROR_CODE_RESOLVER_PROCESS_UNRESPONSIVE: GraphQLErrorCode
 GRAPH_QL_ERROR_CODE_RESPONSE_TOO_BIG: GraphQLErrorCode
 
 class SignedGraphQLQuery(_message.Message):
-    __slots__ = ('version', 'query')
+    __slots__ = ("version", "query")
     VERSION_FIELD_NUMBER: _ClassVar[int]
     QUERY_FIELD_NUMBER: _ClassVar[int]
     version: int
     query: bytes
-
-    def __init__(self, version: _Optional[int]=..., query: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, version: _Optional[int] = ..., query: _Optional[bytes] = ...) -> None: ...
 
 class GraphQLError(_message.Message):
-    __slots__ = ('path', 'code', 'message')
+    __slots__ = ("path", "code", "message")
     PATH_FIELD_NUMBER: _ClassVar[int]
     CODE_FIELD_NUMBER: _ClassVar[int]
     MESSAGE_FIELD_NUMBER: _ClassVar[int]
     path: _containers.RepeatedScalarFieldContainer[str]
     code: GraphQLErrorCode
     message: str
-
-    def __init__(self, path: _Optional[_Iterable[str]]=..., code: _Optional[_Union[GraphQLErrorCode, str]]=..., message: _Optional[str]=...) -> None:
-        ...
+    def __init__(self, path: _Optional[_Iterable[str]] = ..., code: _Optional[_Union[GraphQLErrorCode, str]] = ..., message: _Optional[str] = ...) -> None: ...
 
 class GraphQLAPIQueryRequest(_message.Message):
-    __slots__ = ('format', 'query', 'signature', 'variables_json')
+    __slots__ = ("format", "query", "signature", "variables_json")
     FORMAT_FIELD_NUMBER: _ClassVar[int]
     QUERY_FIELD_NUMBER: _ClassVar[int]
     SIGNATURE_FIELD_NUMBER: _ClassVar[int]
@@ -72,28 +69,22 @@ class GraphQLAPIQueryRequest(_message.Message):
     query: bytes
     signature: bytes
     variables_json: _wrappers_pb2.StringValue
-
-    def __init__(self, format: _Optional[_Union[GraphQLQueryFormat, str]]=..., query: _Optional[bytes]=..., signature: _Optional[bytes]=..., variables_json: _Optional[_Union[_wrappers_pb2.StringValue, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, format: _Optional[_Union[GraphQLQueryFormat, str]] = ..., query: _Optional[bytes] = ..., signature: _Optional[bytes] = ..., variables_json: _Optional[_Union[_wrappers_pb2.StringValue, _Mapping]] = ...) -> None: ...
 
 class GraphQLAPIQueryResponse(_message.Message):
-    __slots__ = ('status', 'data', 'errors')
+    __slots__ = ("status", "data", "errors")
     STATUS_FIELD_NUMBER: _ClassVar[int]
     DATA_FIELD_NUMBER: _ClassVar[int]
     ERRORS_FIELD_NUMBER: _ClassVar[int]
     status: GraphQLStatus
     data: str
     errors: _containers.RepeatedCompositeFieldContainer[GraphQLError]
-
-    def __init__(self, status: _Optional[_Union[GraphQLStatus, str]]=..., data: _Optional[str]=..., errors: _Optional[_Iterable[_Union[GraphQLError, _Mapping]]]=...) -> None:
-        ...
+    def __init__(self, status: _Optional[_Union[GraphQLStatus, str]] = ..., data: _Optional[str] = ..., errors: _Optional[_Iterable[_Union[GraphQLError, _Mapping]]] = ...) -> None: ...
 
 class GraphQLMessages(_message.Message):
-    __slots__ = ('query_request', 'query_response')
+    __slots__ = ("query_request", "query_response")
     QUERY_REQUEST_FIELD_NUMBER: _ClassVar[int]
     QUERY_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     query_request: GraphQLAPIQueryRequest
     query_response: GraphQLAPIQueryResponse
-
-    def __init__(self, query_request: _Optional[_Union[GraphQLAPIQueryRequest, _Mapping]]=..., query_response: _Optional[_Union[GraphQLAPIQueryResponse, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, query_request: _Optional[_Union[GraphQLAPIQueryRequest, _Mapping]] = ..., query_response: _Optional[_Union[GraphQLAPIQueryResponse, _Mapping]] = ...) -> None: ...

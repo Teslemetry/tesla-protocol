@@ -1,11 +1,12 @@
-from . import keys_pb2 as _keys_pb2
-from . import errors_pb2 as _errors_pb2
+from tesla_protocol.command import keys_pb2 as _keys_pb2
+from tesla_protocol.command import errors_pb2 as _errors_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from collections.abc import Iterable as _Iterable, Mapping as _Mapping
 from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class SignatureType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -372,61 +373,49 @@ GEAR_REVERSE: Gear_E
 GEAR_NEUTRAL: Gear_E
 
 class SignedMessage(_message.Message):
-    __slots__ = ('protobufMessageAsBytes', 'signatureType')
+    __slots__ = ("protobufMessageAsBytes", "signatureType")
     PROTOBUFMESSAGEASBYTES_FIELD_NUMBER: _ClassVar[int]
     SIGNATURETYPE_FIELD_NUMBER: _ClassVar[int]
     protobufMessageAsBytes: bytes
     signatureType: SignatureType
-
-    def __init__(self, protobufMessageAsBytes: _Optional[bytes]=..., signatureType: _Optional[_Union[SignatureType, str]]=...) -> None:
-        ...
+    def __init__(self, protobufMessageAsBytes: _Optional[bytes] = ..., signatureType: _Optional[_Union[SignatureType, str]] = ...) -> None: ...
 
 class ToVCSECMessage(_message.Message):
-    __slots__ = ('signedMessage',)
+    __slots__ = ("signedMessage",)
     SIGNEDMESSAGE_FIELD_NUMBER: _ClassVar[int]
     signedMessage: SignedMessage
-
-    def __init__(self, signedMessage: _Optional[_Union[SignedMessage, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, signedMessage: _Optional[_Union[SignedMessage, _Mapping]] = ...) -> None: ...
 
 class KeyIdentifier(_message.Message):
-    __slots__ = ('publicKeySHA1',)
+    __slots__ = ("publicKeySHA1",)
     PUBLICKEYSHA1_FIELD_NUMBER: _ClassVar[int]
     publicKeySHA1: bytes
-
-    def __init__(self, publicKeySHA1: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, publicKeySHA1: _Optional[bytes] = ...) -> None: ...
 
 class KeyMetadata(_message.Message):
-    __slots__ = ('keyFormFactor',)
+    __slots__ = ("keyFormFactor",)
     KEYFORMFACTOR_FIELD_NUMBER: _ClassVar[int]
     keyFormFactor: KeyFormFactor
-
-    def __init__(self, keyFormFactor: _Optional[_Union[KeyFormFactor, str]]=...) -> None:
-        ...
+    def __init__(self, keyFormFactor: _Optional[_Union[KeyFormFactor, str]] = ...) -> None: ...
 
 class PublicKey(_message.Message):
-    __slots__ = ('PublicKeyRaw',)
+    __slots__ = ("PublicKeyRaw",)
     PUBLICKEYRAW_FIELD_NUMBER: _ClassVar[int]
     PublicKeyRaw: bytes
-
-    def __init__(self, PublicKeyRaw: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, PublicKeyRaw: _Optional[bytes] = ...) -> None: ...
 
 class WhitelistInfo(_message.Message):
-    __slots__ = ('numberOfEntries', 'whitelistEntries', 'slotMask')
+    __slots__ = ("numberOfEntries", "whitelistEntries", "slotMask")
     NUMBEROFENTRIES_FIELD_NUMBER: _ClassVar[int]
     WHITELISTENTRIES_FIELD_NUMBER: _ClassVar[int]
     SLOTMASK_FIELD_NUMBER: _ClassVar[int]
     numberOfEntries: int
     whitelistEntries: _containers.RepeatedCompositeFieldContainer[KeyIdentifier]
     slotMask: int
-
-    def __init__(self, numberOfEntries: _Optional[int]=..., whitelistEntries: _Optional[_Iterable[_Union[KeyIdentifier, _Mapping]]]=..., slotMask: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, numberOfEntries: _Optional[int] = ..., whitelistEntries: _Optional[_Iterable[_Union[KeyIdentifier, _Mapping]]] = ..., slotMask: _Optional[int] = ...) -> None: ...
 
 class WhitelistEntryInfo(_message.Message):
-    __slots__ = ('keyId', 'publicKey', 'metadataForKey', 'slot', 'keyRole')
+    __slots__ = ("keyId", "publicKey", "metadataForKey", "slot", "keyRole")
     KEYID_FIELD_NUMBER: _ClassVar[int]
     PUBLICKEY_FIELD_NUMBER: _ClassVar[int]
     METADATAFORKEY_FIELD_NUMBER: _ClassVar[int]
@@ -437,12 +426,10 @@ class WhitelistEntryInfo(_message.Message):
     metadataForKey: KeyMetadata
     slot: int
     keyRole: _keys_pb2.Role
-
-    def __init__(self, keyId: _Optional[_Union[KeyIdentifier, _Mapping]]=..., publicKey: _Optional[_Union[PublicKey, _Mapping]]=..., metadataForKey: _Optional[_Union[KeyMetadata, _Mapping]]=..., slot: _Optional[int]=..., keyRole: _Optional[_Union[_keys_pb2.Role, str]]=...) -> None:
-        ...
+    def __init__(self, keyId: _Optional[_Union[KeyIdentifier, _Mapping]] = ..., publicKey: _Optional[_Union[PublicKey, _Mapping]] = ..., metadataForKey: _Optional[_Union[KeyMetadata, _Mapping]] = ..., slot: _Optional[int] = ..., keyRole: _Optional[_Union[_keys_pb2.Role, str]] = ...) -> None: ...
 
 class InformationRequest(_message.Message):
-    __slots__ = ('informationRequestType', 'keyId', 'publicKey', 'slot')
+    __slots__ = ("informationRequestType", "keyId", "publicKey", "slot")
     INFORMATIONREQUESTTYPE_FIELD_NUMBER: _ClassVar[int]
     KEYID_FIELD_NUMBER: _ClassVar[int]
     PUBLICKEY_FIELD_NUMBER: _ClassVar[int]
@@ -451,12 +438,10 @@ class InformationRequest(_message.Message):
     keyId: KeyIdentifier
     publicKey: bytes
     slot: int
-
-    def __init__(self, informationRequestType: _Optional[_Union[InformationRequestType, str]]=..., keyId: _Optional[_Union[KeyIdentifier, _Mapping]]=..., publicKey: _Optional[bytes]=..., slot: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, informationRequestType: _Optional[_Union[InformationRequestType, str]] = ..., keyId: _Optional[_Union[KeyIdentifier, _Mapping]] = ..., publicKey: _Optional[bytes] = ..., slot: _Optional[int] = ...) -> None: ...
 
 class ClosureMoveRequest(_message.Message):
-    __slots__ = ('frontDriverDoor', 'frontPassengerDoor', 'rearDriverDoor', 'rearPassengerDoor', 'rearTrunk', 'frontTrunk', 'chargePort', 'tonneau')
+    __slots__ = ("frontDriverDoor", "frontPassengerDoor", "rearDriverDoor", "rearPassengerDoor", "rearTrunk", "frontTrunk", "chargePort", "tonneau")
     FRONTDRIVERDOOR_FIELD_NUMBER: _ClassVar[int]
     FRONTPASSENGERDOOR_FIELD_NUMBER: _ClassVar[int]
     REARDRIVERDOOR_FIELD_NUMBER: _ClassVar[int]
@@ -473,24 +458,20 @@ class ClosureMoveRequest(_message.Message):
     frontTrunk: ClosureMoveType_E
     chargePort: ClosureMoveType_E
     tonneau: ClosureMoveType_E
-
-    def __init__(self, frontDriverDoor: _Optional[_Union[ClosureMoveType_E, str]]=..., frontPassengerDoor: _Optional[_Union[ClosureMoveType_E, str]]=..., rearDriverDoor: _Optional[_Union[ClosureMoveType_E, str]]=..., rearPassengerDoor: _Optional[_Union[ClosureMoveType_E, str]]=..., rearTrunk: _Optional[_Union[ClosureMoveType_E, str]]=..., frontTrunk: _Optional[_Union[ClosureMoveType_E, str]]=..., chargePort: _Optional[_Union[ClosureMoveType_E, str]]=..., tonneau: _Optional[_Union[ClosureMoveType_E, str]]=...) -> None:
-        ...
+    def __init__(self, frontDriverDoor: _Optional[_Union[ClosureMoveType_E, str]] = ..., frontPassengerDoor: _Optional[_Union[ClosureMoveType_E, str]] = ..., rearDriverDoor: _Optional[_Union[ClosureMoveType_E, str]] = ..., rearPassengerDoor: _Optional[_Union[ClosureMoveType_E, str]] = ..., rearTrunk: _Optional[_Union[ClosureMoveType_E, str]] = ..., frontTrunk: _Optional[_Union[ClosureMoveType_E, str]] = ..., chargePort: _Optional[_Union[ClosureMoveType_E, str]] = ..., tonneau: _Optional[_Union[ClosureMoveType_E, str]] = ...) -> None: ...
 
 class PermissionChange(_message.Message):
-    __slots__ = ('key', 'secondsToBeActive', 'keyRole')
+    __slots__ = ("key", "secondsToBeActive", "keyRole")
     KEY_FIELD_NUMBER: _ClassVar[int]
     SECONDSTOBEACTIVE_FIELD_NUMBER: _ClassVar[int]
     KEYROLE_FIELD_NUMBER: _ClassVar[int]
     key: PublicKey
     secondsToBeActive: int
     keyRole: _keys_pb2.Role
-
-    def __init__(self, key: _Optional[_Union[PublicKey, _Mapping]]=..., secondsToBeActive: _Optional[int]=..., keyRole: _Optional[_Union[_keys_pb2.Role, str]]=...) -> None:
-        ...
+    def __init__(self, key: _Optional[_Union[PublicKey, _Mapping]] = ..., secondsToBeActive: _Optional[int] = ..., keyRole: _Optional[_Union[_keys_pb2.Role, str]] = ...) -> None: ...
 
 class ReplaceKey(_message.Message):
-    __slots__ = ('publicKeyToReplace', 'slotToReplace', 'keyToAdd', 'keyRole', 'impermanent')
+    __slots__ = ("publicKeyToReplace", "slotToReplace", "keyToAdd", "keyRole", "impermanent")
     PUBLICKEYTOREPLACE_FIELD_NUMBER: _ClassVar[int]
     SLOTTOREPLACE_FIELD_NUMBER: _ClassVar[int]
     KEYTOADD_FIELD_NUMBER: _ClassVar[int]
@@ -501,12 +482,10 @@ class ReplaceKey(_message.Message):
     keyToAdd: PublicKey
     keyRole: _keys_pb2.Role
     impermanent: bool
-
-    def __init__(self, publicKeyToReplace: _Optional[_Union[PublicKey, _Mapping]]=..., slotToReplace: _Optional[int]=..., keyToAdd: _Optional[_Union[PublicKey, _Mapping]]=..., keyRole: _Optional[_Union[_keys_pb2.Role, str]]=..., impermanent: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, publicKeyToReplace: _Optional[_Union[PublicKey, _Mapping]] = ..., slotToReplace: _Optional[int] = ..., keyToAdd: _Optional[_Union[PublicKey, _Mapping]] = ..., keyRole: _Optional[_Union[_keys_pb2.Role, str]] = ..., impermanent: _Optional[bool] = ...) -> None: ...
 
 class WhitelistOperation(_message.Message):
-    __slots__ = ('addPublicKeyToWhitelist', 'removePublicKeyFromWhitelist', 'addPermissionsToPublicKey', 'removePermissionsFromPublicKey', 'addKeyToWhitelistAndAddPermissions', 'updateKeyAndPermissions', 'addImpermanentKey', 'addImpermanentKeyAndRemoveExisting', 'removeAllImpermanentKeys', 'replaceKey', 'metadataForKey')
+    __slots__ = ("addPublicKeyToWhitelist", "removePublicKeyFromWhitelist", "addPermissionsToPublicKey", "removePermissionsFromPublicKey", "addKeyToWhitelistAndAddPermissions", "updateKeyAndPermissions", "addImpermanentKey", "addImpermanentKeyAndRemoveExisting", "removeAllImpermanentKeys", "replaceKey", "metadataForKey")
     ADDPUBLICKEYTOWHITELIST_FIELD_NUMBER: _ClassVar[int]
     REMOVEPUBLICKEYFROMWHITELIST_FIELD_NUMBER: _ClassVar[int]
     ADDPERMISSIONSTOPUBLICKEY_FIELD_NUMBER: _ClassVar[int]
@@ -529,92 +508,73 @@ class WhitelistOperation(_message.Message):
     removeAllImpermanentKeys: bool
     replaceKey: ReplaceKey
     metadataForKey: KeyMetadata
-
-    def __init__(self, addPublicKeyToWhitelist: _Optional[_Union[PublicKey, _Mapping]]=..., removePublicKeyFromWhitelist: _Optional[_Union[PublicKey, _Mapping]]=..., addPermissionsToPublicKey: _Optional[_Union[PermissionChange, _Mapping]]=..., removePermissionsFromPublicKey: _Optional[_Union[PermissionChange, _Mapping]]=..., addKeyToWhitelistAndAddPermissions: _Optional[_Union[PermissionChange, _Mapping]]=..., updateKeyAndPermissions: _Optional[_Union[PermissionChange, _Mapping]]=..., addImpermanentKey: _Optional[_Union[PermissionChange, _Mapping]]=..., addImpermanentKeyAndRemoveExisting: _Optional[_Union[PermissionChange, _Mapping]]=..., removeAllImpermanentKeys: _Optional[bool]=..., replaceKey: _Optional[_Union[ReplaceKey, _Mapping]]=..., metadataForKey: _Optional[_Union[KeyMetadata, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, addPublicKeyToWhitelist: _Optional[_Union[PublicKey, _Mapping]] = ..., removePublicKeyFromWhitelist: _Optional[_Union[PublicKey, _Mapping]] = ..., addPermissionsToPublicKey: _Optional[_Union[PermissionChange, _Mapping]] = ..., removePermissionsFromPublicKey: _Optional[_Union[PermissionChange, _Mapping]] = ..., addKeyToWhitelistAndAddPermissions: _Optional[_Union[PermissionChange, _Mapping]] = ..., updateKeyAndPermissions: _Optional[_Union[PermissionChange, _Mapping]] = ..., addImpermanentKey: _Optional[_Union[PermissionChange, _Mapping]] = ..., addImpermanentKeyAndRemoveExisting: _Optional[_Union[PermissionChange, _Mapping]] = ..., removeAllImpermanentKeys: _Optional[bool] = ..., replaceKey: _Optional[_Union[ReplaceKey, _Mapping]] = ..., metadataForKey: _Optional[_Union[KeyMetadata, _Mapping]] = ...) -> None: ...
 
 class WhitelistOperation_status(_message.Message):
-    __slots__ = ('whitelistOperationInformation', 'signerOfOperation', 'operationStatus')
+    __slots__ = ("whitelistOperationInformation", "signerOfOperation", "operationStatus")
     WHITELISTOPERATIONINFORMATION_FIELD_NUMBER: _ClassVar[int]
     SIGNEROFOPERATION_FIELD_NUMBER: _ClassVar[int]
     OPERATIONSTATUS_FIELD_NUMBER: _ClassVar[int]
     whitelistOperationInformation: WhitelistOperation_information_E
     signerOfOperation: KeyIdentifier
     operationStatus: OperationStatus_E
-
-    def __init__(self, whitelistOperationInformation: _Optional[_Union[WhitelistOperation_information_E, str]]=..., signerOfOperation: _Optional[_Union[KeyIdentifier, _Mapping]]=..., operationStatus: _Optional[_Union[OperationStatus_E, str]]=...) -> None:
-        ...
+    def __init__(self, whitelistOperationInformation: _Optional[_Union[WhitelistOperation_information_E, str]] = ..., signerOfOperation: _Optional[_Union[KeyIdentifier, _Mapping]] = ..., operationStatus: _Optional[_Union[OperationStatus_E, str]] = ...) -> None: ...
 
 class SignedMessage_status(_message.Message):
-    __slots__ = ('counter', 'signedMessageInformation')
+    __slots__ = ("counter", "signedMessageInformation")
     COUNTER_FIELD_NUMBER: _ClassVar[int]
     SIGNEDMESSAGEINFORMATION_FIELD_NUMBER: _ClassVar[int]
     counter: int
     signedMessageInformation: SignedMessage_information_E
-
-    def __init__(self, counter: _Optional[int]=..., signedMessageInformation: _Optional[_Union[SignedMessage_information_E, str]]=...) -> None:
-        ...
+    def __init__(self, counter: _Optional[int] = ..., signedMessageInformation: _Optional[_Union[SignedMessage_information_E, str]] = ...) -> None: ...
 
 class CommandStatus(_message.Message):
-    __slots__ = ('operationStatus', 'signedMessageStatus', 'whitelistOperationStatus')
+    __slots__ = ("operationStatus", "signedMessageStatus", "whitelistOperationStatus")
     OPERATIONSTATUS_FIELD_NUMBER: _ClassVar[int]
     SIGNEDMESSAGESTATUS_FIELD_NUMBER: _ClassVar[int]
     WHITELISTOPERATIONSTATUS_FIELD_NUMBER: _ClassVar[int]
     operationStatus: OperationStatus_E
     signedMessageStatus: SignedMessage_status
     whitelistOperationStatus: WhitelistOperation_status
-
-    def __init__(self, operationStatus: _Optional[_Union[OperationStatus_E, str]]=..., signedMessageStatus: _Optional[_Union[SignedMessage_status, _Mapping]]=..., whitelistOperationStatus: _Optional[_Union[WhitelistOperation_status, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, operationStatus: _Optional[_Union[OperationStatus_E, str]] = ..., signedMessageStatus: _Optional[_Union[SignedMessage_status, _Mapping]] = ..., whitelistOperationStatus: _Optional[_Union[WhitelistOperation_status, _Mapping]] = ...) -> None: ...
 
 class AutonomyCommand(_message.Message):
-    __slots__ = ('pullOverCommand',)
-
+    __slots__ = ("pullOverCommand",)
     class PullOverCommand(_message.Message):
         __slots__ = ()
-
-        def __init__(self) -> None:
-            ...
+        def __init__(self) -> None: ...
     PULLOVERCOMMAND_FIELD_NUMBER: _ClassVar[int]
     pullOverCommand: AutonomyCommand.PullOverCommand
-
-    def __init__(self, pullOverCommand: _Optional[_Union[AutonomyCommand.PullOverCommand, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, pullOverCommand: _Optional[_Union[AutonomyCommand.PullOverCommand, _Mapping]] = ...) -> None: ...
 
 class AuthenticationRequestToken(_message.Message):
-    __slots__ = ('token',)
+    __slots__ = ("token",)
     TOKEN_FIELD_NUMBER: _ClassVar[int]
     token: bytes
-
-    def __init__(self, token: _Optional[bytes]=...) -> None:
-        ...
+    def __init__(self, token: _Optional[bytes] = ...) -> None: ...
 
 class AuthenticationRequest(_message.Message):
-    __slots__ = ('sessionInfo', 'requestedLevel', 'reasonsForAuth')
+    __slots__ = ("sessionInfo", "requestedLevel", "reasonsForAuth")
     SESSIONINFO_FIELD_NUMBER: _ClassVar[int]
     REQUESTEDLEVEL_FIELD_NUMBER: _ClassVar[int]
     REASONSFORAUTH_FIELD_NUMBER: _ClassVar[int]
     sessionInfo: AuthenticationRequestToken
     requestedLevel: AuthenticationLevel_E
     reasonsForAuth: _containers.RepeatedScalarFieldContainer[AuthenticationReason_E]
-
-    def __init__(self, sessionInfo: _Optional[_Union[AuthenticationRequestToken, _Mapping]]=..., requestedLevel: _Optional[_Union[AuthenticationLevel_E, str]]=..., reasonsForAuth: _Optional[_Iterable[_Union[AuthenticationReason_E, str]]]=...) -> None:
-        ...
+    def __init__(self, sessionInfo: _Optional[_Union[AuthenticationRequestToken, _Mapping]] = ..., requestedLevel: _Optional[_Union[AuthenticationLevel_E, str]] = ..., reasonsForAuth: _Optional[_Iterable[_Union[AuthenticationReason_E, str]]] = ...) -> None: ...
 
 class AuthenticationResponse(_message.Message):
-    __slots__ = ('authenticationLevel', 'estimatedDistance', 'authenticationRejection')
+    __slots__ = ("authenticationLevel", "estimatedDistance", "authenticationRejection")
     AUTHENTICATIONLEVEL_FIELD_NUMBER: _ClassVar[int]
     ESTIMATEDDISTANCE_FIELD_NUMBER: _ClassVar[int]
     AUTHENTICATIONREJECTION_FIELD_NUMBER: _ClassVar[int]
     authenticationLevel: AuthenticationLevel_E
     estimatedDistance: int
     authenticationRejection: AuthenticationRejection_E
-
-    def __init__(self, authenticationLevel: _Optional[_Union[AuthenticationLevel_E, str]]=..., estimatedDistance: _Optional[int]=..., authenticationRejection: _Optional[_Union[AuthenticationRejection_E, str]]=...) -> None:
-        ...
+    def __init__(self, authenticationLevel: _Optional[_Union[AuthenticationLevel_E, str]] = ..., estimatedDistance: _Optional[int] = ..., authenticationRejection: _Optional[_Union[AuthenticationRejection_E, str]] = ...) -> None: ...
 
 class UnsignedMessage(_message.Message):
-    __slots__ = ('InformationRequest', 'RKEAction', 'authenticationResponse', 'closureMoveRequest', 'WhitelistOperation', 'autonomyCommand')
+    __slots__ = ("InformationRequest", "RKEAction", "authenticationResponse", "closureMoveRequest", "WhitelistOperation", "autonomyCommand")
     INFORMATIONREQUEST_FIELD_NUMBER: _ClassVar[int]
     RKEACTION_FIELD_NUMBER: _ClassVar[int]
     AUTHENTICATIONRESPONSE_FIELD_NUMBER: _ClassVar[int]
@@ -627,12 +587,10 @@ class UnsignedMessage(_message.Message):
     closureMoveRequest: ClosureMoveRequest
     WhitelistOperation: WhitelistOperation
     autonomyCommand: AutonomyCommand
-
-    def __init__(self, InformationRequest: _Optional[_Union[InformationRequest, _Mapping]]=..., RKEAction: _Optional[_Union[RKEAction_E, str]]=..., authenticationResponse: _Optional[_Union[AuthenticationResponse, _Mapping]]=..., closureMoveRequest: _Optional[_Union[ClosureMoveRequest, _Mapping]]=..., WhitelistOperation: _Optional[_Union[WhitelistOperation, _Mapping]]=..., autonomyCommand: _Optional[_Union[AutonomyCommand, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, InformationRequest: _Optional[_Union[InformationRequest, _Mapping]] = ..., RKEAction: _Optional[_Union[RKEAction_E, str]] = ..., authenticationResponse: _Optional[_Union[AuthenticationResponse, _Mapping]] = ..., closureMoveRequest: _Optional[_Union[ClosureMoveRequest, _Mapping]] = ..., WhitelistOperation: _Optional[_Union[WhitelistOperation, _Mapping]] = ..., autonomyCommand: _Optional[_Union[AutonomyCommand, _Mapping]] = ...) -> None: ...
 
 class ClosureStatuses(_message.Message):
-    __slots__ = ('frontDriverDoor', 'frontPassengerDoor', 'rearDriverDoor', 'rearPassengerDoor', 'rearTrunk', 'frontTrunk', 'chargePort', 'tonneau')
+    __slots__ = ("frontDriverDoor", "frontPassengerDoor", "rearDriverDoor", "rearPassengerDoor", "rearTrunk", "frontTrunk", "chargePort", "tonneau")
     FRONTDRIVERDOOR_FIELD_NUMBER: _ClassVar[int]
     FRONTPASSENGERDOOR_FIELD_NUMBER: _ClassVar[int]
     REARDRIVERDOOR_FIELD_NUMBER: _ClassVar[int]
@@ -649,20 +607,16 @@ class ClosureStatuses(_message.Message):
     frontTrunk: ClosureState_E
     chargePort: ClosureState_E
     tonneau: ClosureState_E
-
-    def __init__(self, frontDriverDoor: _Optional[_Union[ClosureState_E, str]]=..., frontPassengerDoor: _Optional[_Union[ClosureState_E, str]]=..., rearDriverDoor: _Optional[_Union[ClosureState_E, str]]=..., rearPassengerDoor: _Optional[_Union[ClosureState_E, str]]=..., rearTrunk: _Optional[_Union[ClosureState_E, str]]=..., frontTrunk: _Optional[_Union[ClosureState_E, str]]=..., chargePort: _Optional[_Union[ClosureState_E, str]]=..., tonneau: _Optional[_Union[ClosureState_E, str]]=...) -> None:
-        ...
+    def __init__(self, frontDriverDoor: _Optional[_Union[ClosureState_E, str]] = ..., frontPassengerDoor: _Optional[_Union[ClosureState_E, str]] = ..., rearDriverDoor: _Optional[_Union[ClosureState_E, str]] = ..., rearPassengerDoor: _Optional[_Union[ClosureState_E, str]] = ..., rearTrunk: _Optional[_Union[ClosureState_E, str]] = ..., frontTrunk: _Optional[_Union[ClosureState_E, str]] = ..., chargePort: _Optional[_Union[ClosureState_E, str]] = ..., tonneau: _Optional[_Union[ClosureState_E, str]] = ...) -> None: ...
 
 class DetailedClosureStatus(_message.Message):
-    __slots__ = ('tonneauPercentOpen',)
+    __slots__ = ("tonneauPercentOpen",)
     TONNEAUPERCENTOPEN_FIELD_NUMBER: _ClassVar[int]
     tonneauPercentOpen: int
-
-    def __init__(self, tonneauPercentOpen: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, tonneauPercentOpen: _Optional[int] = ...) -> None: ...
 
 class VehicleStatus(_message.Message):
-    __slots__ = ('closureStatuses', 'vehicleLockState', 'vehicleSleepStatus', 'userPresence', 'detailedClosureStatus', 'uiDesire', 'gear')
+    __slots__ = ("closureStatuses", "vehicleLockState", "vehicleSleepStatus", "userPresence", "detailedClosureStatus", "uiDesire", "gear")
     CLOSURESTATUSES_FIELD_NUMBER: _ClassVar[int]
     VEHICLELOCKSTATE_FIELD_NUMBER: _ClassVar[int]
     VEHICLESLEEPSTATUS_FIELD_NUMBER: _ClassVar[int]
@@ -677,12 +631,10 @@ class VehicleStatus(_message.Message):
     detailedClosureStatus: DetailedClosureStatus
     uiDesire: UIDesire_E
     gear: Gear_E
-
-    def __init__(self, closureStatuses: _Optional[_Union[ClosureStatuses, _Mapping]]=..., vehicleLockState: _Optional[_Union[VehicleLockState_E, str]]=..., vehicleSleepStatus: _Optional[_Union[VehicleSleepStatus_E, str]]=..., userPresence: _Optional[_Union[UserPresence_E, str]]=..., detailedClosureStatus: _Optional[_Union[DetailedClosureStatus, _Mapping]]=..., uiDesire: _Optional[_Union[UIDesire_E, str]]=..., gear: _Optional[_Union[Gear_E, str]]=...) -> None:
-        ...
+    def __init__(self, closureStatuses: _Optional[_Union[ClosureStatuses, _Mapping]] = ..., vehicleLockState: _Optional[_Union[VehicleLockState_E, str]] = ..., vehicleSleepStatus: _Optional[_Union[VehicleSleepStatus_E, str]] = ..., userPresence: _Optional[_Union[UserPresence_E, str]] = ..., detailedClosureStatus: _Optional[_Union[DetailedClosureStatus, _Mapping]] = ..., uiDesire: _Optional[_Union[UIDesire_E, str]] = ..., gear: _Optional[_Union[Gear_E, str]] = ...) -> None: ...
 
 class FromVCSECMessage(_message.Message):
-    __slots__ = ('vehicleStatus', 'authenticationRequest', 'commandStatus', 'whitelistInfo', 'whitelistEntryInfo', 'nominalError')
+    __slots__ = ("vehicleStatus", "authenticationRequest", "commandStatus", "whitelistInfo", "whitelistEntryInfo", "nominalError")
     VEHICLESTATUS_FIELD_NUMBER: _ClassVar[int]
     AUTHENTICATIONREQUEST_FIELD_NUMBER: _ClassVar[int]
     COMMANDSTATUS_FIELD_NUMBER: _ClassVar[int]
@@ -695,6 +647,4 @@ class FromVCSECMessage(_message.Message):
     whitelistInfo: WhitelistInfo
     whitelistEntryInfo: WhitelistEntryInfo
     nominalError: _errors_pb2.NominalError
-
-    def __init__(self, vehicleStatus: _Optional[_Union[VehicleStatus, _Mapping]]=..., authenticationRequest: _Optional[_Union[AuthenticationRequest, _Mapping]]=..., commandStatus: _Optional[_Union[CommandStatus, _Mapping]]=..., whitelistInfo: _Optional[_Union[WhitelistInfo, _Mapping]]=..., whitelistEntryInfo: _Optional[_Union[WhitelistEntryInfo, _Mapping]]=..., nominalError: _Optional[_Union[_errors_pb2.NominalError, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, vehicleStatus: _Optional[_Union[VehicleStatus, _Mapping]] = ..., authenticationRequest: _Optional[_Union[AuthenticationRequest, _Mapping]] = ..., commandStatus: _Optional[_Union[CommandStatus, _Mapping]] = ..., whitelistInfo: _Optional[_Union[WhitelistInfo, _Mapping]] = ..., whitelistEntryInfo: _Optional[_Union[WhitelistEntryInfo, _Mapping]] = ..., nominalError: _Optional[_Union[_errors_pb2.NominalError, _Mapping]] = ...) -> None: ...

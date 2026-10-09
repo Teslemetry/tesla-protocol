@@ -1,4 +1,5 @@
 import datetime
+
 from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
@@ -6,6 +7,7 @@ from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
 from collections.abc import Iterable as _Iterable, Mapping as _Mapping
 from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
+
 DESCRIPTOR: _descriptor.FileDescriptor
 
 class Field(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
@@ -1245,17 +1247,15 @@ MediaStatusPlaying: MediaStatus
 MediaStatusPaused: MediaStatus
 
 class LocationValue(_message.Message):
-    __slots__ = ('latitude', 'longitude')
+    __slots__ = ("latitude", "longitude")
     LATITUDE_FIELD_NUMBER: _ClassVar[int]
     LONGITUDE_FIELD_NUMBER: _ClassVar[int]
     latitude: float
     longitude: float
-
-    def __init__(self, latitude: _Optional[float]=..., longitude: _Optional[float]=...) -> None:
-        ...
+    def __init__(self, latitude: _Optional[float] = ..., longitude: _Optional[float] = ...) -> None: ...
 
 class Doors(_message.Message):
-    __slots__ = ('DriverFront', 'DriverRear', 'PassengerFront', 'PassengerRear', 'TrunkFront', 'TrunkRear')
+    __slots__ = ("DriverFront", "DriverRear", "PassengerFront", "PassengerRear", "TrunkFront", "TrunkRear")
     DRIVERFRONT_FIELD_NUMBER: _ClassVar[int]
     DRIVERREAR_FIELD_NUMBER: _ClassVar[int]
     PASSENGERFRONT_FIELD_NUMBER: _ClassVar[int]
@@ -1268,12 +1268,10 @@ class Doors(_message.Message):
     PassengerRear: bool
     TrunkFront: bool
     TrunkRear: bool
-
-    def __init__(self, DriverFront: _Optional[bool]=..., DriverRear: _Optional[bool]=..., PassengerFront: _Optional[bool]=..., PassengerRear: _Optional[bool]=..., TrunkFront: _Optional[bool]=..., TrunkRear: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, DriverFront: _Optional[bool] = ..., DriverRear: _Optional[bool] = ..., PassengerFront: _Optional[bool] = ..., PassengerRear: _Optional[bool] = ..., TrunkFront: _Optional[bool] = ..., TrunkRear: _Optional[bool] = ...) -> None: ...
 
 class TireLocation(_message.Message):
-    __slots__ = ('front_left', 'front_right', 'rear_left', 'rear_right', 'semi_middle_axle_left_2', 'semi_middle_axle_right_2', 'semi_rear_axle_left', 'semi_rear_axle_right', 'semi_rear_axle_left_2', 'semi_rear_axle_right_2')
+    __slots__ = ("front_left", "front_right", "rear_left", "rear_right", "semi_middle_axle_left_2", "semi_middle_axle_right_2", "semi_rear_axle_left", "semi_rear_axle_right", "semi_rear_axle_left_2", "semi_rear_axle_right_2")
     FRONT_LEFT_FIELD_NUMBER: _ClassVar[int]
     FRONT_RIGHT_FIELD_NUMBER: _ClassVar[int]
     REAR_LEFT_FIELD_NUMBER: _ClassVar[int]
@@ -1294,24 +1292,20 @@ class TireLocation(_message.Message):
     semi_rear_axle_right: bool
     semi_rear_axle_left_2: bool
     semi_rear_axle_right_2: bool
-
-    def __init__(self, front_left: _Optional[bool]=..., front_right: _Optional[bool]=..., rear_left: _Optional[bool]=..., rear_right: _Optional[bool]=..., semi_middle_axle_left_2: _Optional[bool]=..., semi_middle_axle_right_2: _Optional[bool]=..., semi_rear_axle_left: _Optional[bool]=..., semi_rear_axle_right: _Optional[bool]=..., semi_rear_axle_left_2: _Optional[bool]=..., semi_rear_axle_right_2: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, front_left: _Optional[bool] = ..., front_right: _Optional[bool] = ..., rear_left: _Optional[bool] = ..., rear_right: _Optional[bool] = ..., semi_middle_axle_left_2: _Optional[bool] = ..., semi_middle_axle_right_2: _Optional[bool] = ..., semi_rear_axle_left: _Optional[bool] = ..., semi_rear_axle_right: _Optional[bool] = ..., semi_rear_axle_left_2: _Optional[bool] = ..., semi_rear_axle_right_2: _Optional[bool] = ...) -> None: ...
 
 class Time(_message.Message):
-    __slots__ = ('hour', 'minute', 'second')
+    __slots__ = ("hour", "minute", "second")
     HOUR_FIELD_NUMBER: _ClassVar[int]
     MINUTE_FIELD_NUMBER: _ClassVar[int]
     SECOND_FIELD_NUMBER: _ClassVar[int]
     hour: int
     minute: int
     second: int
-
-    def __init__(self, hour: _Optional[int]=..., minute: _Optional[int]=..., second: _Optional[int]=...) -> None:
-        ...
+    def __init__(self, hour: _Optional[int] = ..., minute: _Optional[int] = ..., second: _Optional[int] = ...) -> None: ...
 
 class Value(_message.Message):
-    __slots__ = ('string_value', 'int_value', 'long_value', 'float_value', 'double_value', 'boolean_value', 'location_value', 'charging_value', 'shift_state_value', 'invalid', 'lane_assist_level_value', 'scheduled_charging_mode_value', 'sentry_mode_state_value', 'speed_assist_level_value', 'bms_state_value', 'buckle_status_value', 'car_type_value', 'charge_port_value', 'charge_port_latch_value', 'door_value', 'drive_inverter_state_value', 'hvil_status_value', 'window_state_value', 'seat_fold_position_value', 'tractor_air_status_value', 'follow_distance_value', 'forward_collision_sensitivity_value', 'guest_mode_mobile_access_value', 'trailer_air_status_value', 'time_value', 'detailed_charge_state_value', 'hvac_auto_mode_value', 'cabin_overheat_protection_mode_value', 'cabin_overheat_protection_temperature_limit_value', 'defrost_mode_value', 'climate_keeper_mode_value', 'hvac_power_value', 'tire_location_value', 'fast_charger_value', 'cable_type_value', 'tonneau_tent_mode_value', 'tonneau_position_value', 'powershare_type_value', 'powershare_state_value', 'powershare_stop_reason_value', 'display_state_value', 'distance_unit_value', 'temperature_unit_value', 'pressure_unit_value', 'charge_unit_preference_value', 'turn_signal_state_value', 'media_status_value', 'sunroof_installed_state_value', 'cabin_port_keep_on_value', 'cruise_state_value', 'power_transfer_status_value')
+    __slots__ = ("string_value", "int_value", "long_value", "float_value", "double_value", "boolean_value", "location_value", "charging_value", "shift_state_value", "invalid", "lane_assist_level_value", "scheduled_charging_mode_value", "sentry_mode_state_value", "speed_assist_level_value", "bms_state_value", "buckle_status_value", "car_type_value", "charge_port_value", "charge_port_latch_value", "door_value", "drive_inverter_state_value", "hvil_status_value", "window_state_value", "seat_fold_position_value", "tractor_air_status_value", "follow_distance_value", "forward_collision_sensitivity_value", "guest_mode_mobile_access_value", "trailer_air_status_value", "time_value", "detailed_charge_state_value", "hvac_auto_mode_value", "cabin_overheat_protection_mode_value", "cabin_overheat_protection_temperature_limit_value", "defrost_mode_value", "climate_keeper_mode_value", "hvac_power_value", "tire_location_value", "fast_charger_value", "cable_type_value", "tonneau_tent_mode_value", "tonneau_position_value", "powershare_type_value", "powershare_state_value", "powershare_stop_reason_value", "display_state_value", "distance_unit_value", "temperature_unit_value", "pressure_unit_value", "charge_unit_preference_value", "turn_signal_state_value", "media_status_value", "sunroof_installed_state_value", "cabin_port_keep_on_value", "cruise_state_value", "power_transfer_status_value")
     STRING_VALUE_FIELD_NUMBER: _ClassVar[int]
     INT_VALUE_FIELD_NUMBER: _ClassVar[int]
     LONG_VALUE_FIELD_NUMBER: _ClassVar[int]
@@ -1424,22 +1418,18 @@ class Value(_message.Message):
     cabin_port_keep_on_value: CabinPortKeepOnState
     cruise_state_value: CruiseStateValue
     power_transfer_status_value: PowerTransferStatusValue
-
-    def __init__(self, string_value: _Optional[str]=..., int_value: _Optional[int]=..., long_value: _Optional[int]=..., float_value: _Optional[float]=..., double_value: _Optional[float]=..., boolean_value: _Optional[bool]=..., location_value: _Optional[_Union[LocationValue, _Mapping]]=..., charging_value: _Optional[_Union[ChargingState, str]]=..., shift_state_value: _Optional[_Union[ShiftState, str]]=..., invalid: _Optional[bool]=..., lane_assist_level_value: _Optional[_Union[LaneAssistLevel, str]]=..., scheduled_charging_mode_value: _Optional[_Union[ScheduledChargingModeValue, str]]=..., sentry_mode_state_value: _Optional[_Union[SentryModeState, str]]=..., speed_assist_level_value: _Optional[_Union[SpeedAssistLevel, str]]=..., bms_state_value: _Optional[_Union[BMSStateValue, str]]=..., buckle_status_value: _Optional[_Union[BuckleStatus, str]]=..., car_type_value: _Optional[_Union[CarTypeValue, str]]=..., charge_port_value: _Optional[_Union[ChargePortValue, str]]=..., charge_port_latch_value: _Optional[_Union[ChargePortLatchValue, str]]=..., door_value: _Optional[_Union[Doors, _Mapping]]=..., drive_inverter_state_value: _Optional[_Union[DriveInverterState, str]]=..., hvil_status_value: _Optional[_Union[HvilStatus, str]]=..., window_state_value: _Optional[_Union[WindowState, str]]=..., seat_fold_position_value: _Optional[_Union[SeatFoldPosition, str]]=..., tractor_air_status_value: _Optional[_Union[TractorAirStatus, str]]=..., follow_distance_value: _Optional[_Union[FollowDistance, str]]=..., forward_collision_sensitivity_value: _Optional[_Union[ForwardCollisionSensitivity, str]]=..., guest_mode_mobile_access_value: _Optional[_Union[GuestModeMobileAccess, str]]=..., trailer_air_status_value: _Optional[_Union[TrailerAirStatus, str]]=..., time_value: _Optional[_Union[Time, _Mapping]]=..., detailed_charge_state_value: _Optional[_Union[DetailedChargeStateValue, str]]=..., hvac_auto_mode_value: _Optional[_Union[HvacAutoModeState, str]]=..., cabin_overheat_protection_mode_value: _Optional[_Union[CabinOverheatProtectionModeState, str]]=..., cabin_overheat_protection_temperature_limit_value: _Optional[_Union[ClimateOverheatProtectionTempLimit, str]]=..., defrost_mode_value: _Optional[_Union[DefrostModeState, str]]=..., climate_keeper_mode_value: _Optional[_Union[ClimateKeeperModeState, str]]=..., hvac_power_value: _Optional[_Union[HvacPowerState, str]]=..., tire_location_value: _Optional[_Union[TireLocation, _Mapping]]=..., fast_charger_value: _Optional[_Union[FastCharger, str]]=..., cable_type_value: _Optional[_Union[CableType, str]]=..., tonneau_tent_mode_value: _Optional[_Union[TonneauTentModeState, str]]=..., tonneau_position_value: _Optional[_Union[TonneauPositionState, str]]=..., powershare_type_value: _Optional[_Union[PowershareTypeStatus, str]]=..., powershare_state_value: _Optional[_Union[PowershareState, str]]=..., powershare_stop_reason_value: _Optional[_Union[PowershareStopReasonStatus, str]]=..., display_state_value: _Optional[_Union[DisplayState, str]]=..., distance_unit_value: _Optional[_Union[DistanceUnit, str]]=..., temperature_unit_value: _Optional[_Union[TemperatureUnit, str]]=..., pressure_unit_value: _Optional[_Union[PressureUnit, str]]=..., charge_unit_preference_value: _Optional[_Union[ChargeUnitPreference, str]]=..., turn_signal_state_value: _Optional[_Union[TurnSignalState, str]]=..., media_status_value: _Optional[_Union[MediaStatus, str]]=..., sunroof_installed_state_value: _Optional[_Union[SunroofInstalledState, str]]=..., cabin_port_keep_on_value: _Optional[_Union[CabinPortKeepOnState, str]]=..., cruise_state_value: _Optional[_Union[CruiseStateValue, str]]=..., power_transfer_status_value: _Optional[_Union[PowerTransferStatusValue, str]]=...) -> None:
-        ...
+    def __init__(self, string_value: _Optional[str] = ..., int_value: _Optional[int] = ..., long_value: _Optional[int] = ..., float_value: _Optional[float] = ..., double_value: _Optional[float] = ..., boolean_value: _Optional[bool] = ..., location_value: _Optional[_Union[LocationValue, _Mapping]] = ..., charging_value: _Optional[_Union[ChargingState, str]] = ..., shift_state_value: _Optional[_Union[ShiftState, str]] = ..., invalid: _Optional[bool] = ..., lane_assist_level_value: _Optional[_Union[LaneAssistLevel, str]] = ..., scheduled_charging_mode_value: _Optional[_Union[ScheduledChargingModeValue, str]] = ..., sentry_mode_state_value: _Optional[_Union[SentryModeState, str]] = ..., speed_assist_level_value: _Optional[_Union[SpeedAssistLevel, str]] = ..., bms_state_value: _Optional[_Union[BMSStateValue, str]] = ..., buckle_status_value: _Optional[_Union[BuckleStatus, str]] = ..., car_type_value: _Optional[_Union[CarTypeValue, str]] = ..., charge_port_value: _Optional[_Union[ChargePortValue, str]] = ..., charge_port_latch_value: _Optional[_Union[ChargePortLatchValue, str]] = ..., door_value: _Optional[_Union[Doors, _Mapping]] = ..., drive_inverter_state_value: _Optional[_Union[DriveInverterState, str]] = ..., hvil_status_value: _Optional[_Union[HvilStatus, str]] = ..., window_state_value: _Optional[_Union[WindowState, str]] = ..., seat_fold_position_value: _Optional[_Union[SeatFoldPosition, str]] = ..., tractor_air_status_value: _Optional[_Union[TractorAirStatus, str]] = ..., follow_distance_value: _Optional[_Union[FollowDistance, str]] = ..., forward_collision_sensitivity_value: _Optional[_Union[ForwardCollisionSensitivity, str]] = ..., guest_mode_mobile_access_value: _Optional[_Union[GuestModeMobileAccess, str]] = ..., trailer_air_status_value: _Optional[_Union[TrailerAirStatus, str]] = ..., time_value: _Optional[_Union[Time, _Mapping]] = ..., detailed_charge_state_value: _Optional[_Union[DetailedChargeStateValue, str]] = ..., hvac_auto_mode_value: _Optional[_Union[HvacAutoModeState, str]] = ..., cabin_overheat_protection_mode_value: _Optional[_Union[CabinOverheatProtectionModeState, str]] = ..., cabin_overheat_protection_temperature_limit_value: _Optional[_Union[ClimateOverheatProtectionTempLimit, str]] = ..., defrost_mode_value: _Optional[_Union[DefrostModeState, str]] = ..., climate_keeper_mode_value: _Optional[_Union[ClimateKeeperModeState, str]] = ..., hvac_power_value: _Optional[_Union[HvacPowerState, str]] = ..., tire_location_value: _Optional[_Union[TireLocation, _Mapping]] = ..., fast_charger_value: _Optional[_Union[FastCharger, str]] = ..., cable_type_value: _Optional[_Union[CableType, str]] = ..., tonneau_tent_mode_value: _Optional[_Union[TonneauTentModeState, str]] = ..., tonneau_position_value: _Optional[_Union[TonneauPositionState, str]] = ..., powershare_type_value: _Optional[_Union[PowershareTypeStatus, str]] = ..., powershare_state_value: _Optional[_Union[PowershareState, str]] = ..., powershare_stop_reason_value: _Optional[_Union[PowershareStopReasonStatus, str]] = ..., display_state_value: _Optional[_Union[DisplayState, str]] = ..., distance_unit_value: _Optional[_Union[DistanceUnit, str]] = ..., temperature_unit_value: _Optional[_Union[TemperatureUnit, str]] = ..., pressure_unit_value: _Optional[_Union[PressureUnit, str]] = ..., charge_unit_preference_value: _Optional[_Union[ChargeUnitPreference, str]] = ..., turn_signal_state_value: _Optional[_Union[TurnSignalState, str]] = ..., media_status_value: _Optional[_Union[MediaStatus, str]] = ..., sunroof_installed_state_value: _Optional[_Union[SunroofInstalledState, str]] = ..., cabin_port_keep_on_value: _Optional[_Union[CabinPortKeepOnState, str]] = ..., cruise_state_value: _Optional[_Union[CruiseStateValue, str]] = ..., power_transfer_status_value: _Optional[_Union[PowerTransferStatusValue, str]] = ...) -> None: ...
 
 class Datum(_message.Message):
-    __slots__ = ('key', 'value')
+    __slots__ = ("key", "value")
     KEY_FIELD_NUMBER: _ClassVar[int]
     VALUE_FIELD_NUMBER: _ClassVar[int]
     key: Field
     value: Value
-
-    def __init__(self, key: _Optional[_Union[Field, str]]=..., value: _Optional[_Union[Value, _Mapping]]=...) -> None:
-        ...
+    def __init__(self, key: _Optional[_Union[Field, str]] = ..., value: _Optional[_Union[Value, _Mapping]] = ...) -> None: ...
 
 class Payload(_message.Message):
-    __slots__ = ('data', 'created_at', 'vin', 'is_resend')
+    __slots__ = ("data", "created_at", "vin", "is_resend")
     DATA_FIELD_NUMBER: _ClassVar[int]
     CREATED_AT_FIELD_NUMBER: _ClassVar[int]
     VIN_FIELD_NUMBER: _ClassVar[int]
@@ -1448,6 +1438,4 @@ class Payload(_message.Message):
     created_at: _timestamp_pb2.Timestamp
     vin: str
     is_resend: bool
-
-    def __init__(self, data: _Optional[_Iterable[_Union[Datum, _Mapping]]]=..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]]=..., vin: _Optional[str]=..., is_resend: _Optional[bool]=...) -> None:
-        ...
+    def __init__(self, data: _Optional[_Iterable[_Union[Datum, _Mapping]]] = ..., created_at: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., vin: _Optional[str] = ..., is_resend: _Optional[bool] = ...) -> None: ...
