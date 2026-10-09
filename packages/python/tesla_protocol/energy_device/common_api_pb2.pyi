@@ -37,18 +37,20 @@ class ComplianceInformation(_message.Message):
     def __init__(self, radio_legal_information: _Optional[_Iterable[_Union[RadioLegalInformation, _Mapping]]] = ...) -> None: ...
 
 class CommonAPIGetSystemInfoResponse(_message.Message):
-    __slots__ = ("device_id", "din", "firmare_version", "system_update", "device_type")
+    __slots__ = ("device_id", "din", "firmware_version", "system_update", "device_type", "compliance_information")
     DEVICE_ID_FIELD_NUMBER: _ClassVar[int]
     DIN_FIELD_NUMBER: _ClassVar[int]
-    FIRMARE_VERSION_FIELD_NUMBER: _ClassVar[int]
+    FIRMWARE_VERSION_FIELD_NUMBER: _ClassVar[int]
     SYSTEM_UPDATE_FIELD_NUMBER: _ClassVar[int]
     DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
+    COMPLIANCE_INFORMATION_FIELD_NUMBER: _ClassVar[int]
     device_id: _device_pb2.EcuId
-    din: _device_pb2.Din
-    firmare_version: _update_pb2.FirmwareVersion
+    din: str
+    firmware_version: _update_pb2.FirmwareVersion
     system_update: _update_pb2.SystemUpdate
     device_type: _device_pb2.DeviceType
-    def __init__(self, device_id: _Optional[_Union[_device_pb2.EcuId, _Mapping]] = ..., din: _Optional[_Union[_device_pb2.Din, _Mapping]] = ..., firmare_version: _Optional[_Union[_update_pb2.FirmwareVersion, _Mapping]] = ..., system_update: _Optional[_Union[_update_pb2.SystemUpdate, _Mapping]] = ..., device_type: _Optional[_Union[_device_pb2.DeviceType, str]] = ...) -> None: ...
+    compliance_information: ComplianceInformation
+    def __init__(self, device_id: _Optional[_Union[_device_pb2.EcuId, _Mapping]] = ..., din: _Optional[str] = ..., firmware_version: _Optional[_Union[_update_pb2.FirmwareVersion, _Mapping]] = ..., system_update: _Optional[_Union[_update_pb2.SystemUpdate, _Mapping]] = ..., device_type: _Optional[_Union[_device_pb2.DeviceType, str]] = ..., compliance_information: _Optional[_Union[ComplianceInformation, _Mapping]] = ...) -> None: ...
 
 class CommonAPISetLocalSiteConfigRequest(_message.Message):
     __slots__ = ()

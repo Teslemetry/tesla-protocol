@@ -27,12 +27,16 @@ message ComplianceInformation {
   repeated RadioLegalInformation radio_legal_information = 1;
 }
 
+// Tags 8 and 9 carry bytes. One of them is installed_firmware_signature;
+// which one is not known, so both stay unmodelled.
 message CommonAPIGetSystemInfoResponse {
-  EcuId device_id                 = 1;
-  Din din                         = 2;
-  FirmwareVersion firmare_version = 3;
-  SystemUpdate system_update      = 4;
-  DeviceType device_type          = 5;
+  reserved 4;
+  EcuId device_id                              = 1;
+  string din                                   = 2;
+  FirmwareVersion firmware_version             = 3;
+  SystemUpdate system_update                   = 5;
+  DeviceType device_type                       = 6;
+  ComplianceInformation compliance_information = 7;
 }
 
 message CommonAPISetLocalSiteConfigRequest {

@@ -14,7 +14,6 @@ import {
   DeviceType,
   deviceTypeFromJSON,
   deviceTypeToJSON,
-  Din,
   EcuId,
   EncryptedMessage,
 } from "./device.js";
@@ -49,12 +48,17 @@ export interface ComplianceInformation {
   radioLegalInformation: RadioLegalInformation[];
 }
 
+/**
+ * Tags 8 and 9 carry bytes. One of them is installed_firmware_signature;
+ * which one is not known, so both stay unmodelled.
+ */
 export interface CommonAPIGetSystemInfoResponse {
   deviceId: EcuId | undefined;
-  din: Din | undefined;
-  firmareVersion: FirmwareVersion | undefined;
+  din: string;
+  firmwareVersion: FirmwareVersion | undefined;
   systemUpdate: SystemUpdate | undefined;
   deviceType: DeviceType;
+  complianceInformation: ComplianceInformation | undefined;
 }
 
 export interface CommonAPISetLocalSiteConfigRequest {
@@ -519,7 +523,14 @@ export const ComplianceInformation: MessageFns<ComplianceInformation> = {
 };
 
 function createBaseCommonAPIGetSystemInfoResponse(): CommonAPIGetSystemInfoResponse {
-  return { deviceId: undefined, din: undefined, firmareVersion: undefined, systemUpdate: undefined, deviceType: 0 };
+  return {
+    deviceId: undefined,
+    din: "",
+    firmwareVersion: undefined,
+    systemUpdate: undefined,
+    deviceType: 0,
+    complianceInformation: undefined,
+  };
 }
 
 export const CommonAPIGetSystemInfoResponse: MessageFns<CommonAPIGetSystemInfoResponse> = {
@@ -527,17 +538,20 @@ export const CommonAPIGetSystemInfoResponse: MessageFns<CommonAPIGetSystemInfoRe
     if (message.deviceId !== undefined) {
       EcuId.encode(message.deviceId, writer.uint32(10).fork()).join();
     }
-    if (message.din !== undefined) {
-      Din.encode(message.din, writer.uint32(18).fork()).join();
+    if (message.din !== "") {
+      writer.uint32(18).string(message.din);
     }
-    if (message.firmareVersion !== undefined) {
-      FirmwareVersion.encode(message.firmareVersion, writer.uint32(26).fork()).join();
+    if (message.firmwareVersion !== undefined) {
+      FirmwareVersion.encode(message.firmwareVersion, writer.uint32(26).fork()).join();
     }
     if (message.systemUpdate !== undefined) {
-      SystemUpdate.encode(message.systemUpdate, writer.uint32(34).fork()).join();
+      SystemUpdate.encode(message.systemUpdate, writer.uint32(42).fork()).join();
     }
     if (message.deviceType !== 0) {
-      writer.uint32(40).int32(message.deviceType);
+      writer.uint32(48).int32(message.deviceType);
+    }
+    if (message.complianceInformation !== undefined) {
+      ComplianceInformation.encode(message.complianceInformation, writer.uint32(58).fork()).join();
     }
     return writer;
   },
@@ -562,7 +576,7 @@ export const CommonAPIGetSystemInfoResponse: MessageFns<CommonAPIGetSystemInfoRe
             break;
           }
 
-          message.din = Din.decode(reader, reader.uint32());
+          message.din = reader.string();
           continue;
         }
         case 3: {
@@ -570,23 +584,31 @@ export const CommonAPIGetSystemInfoResponse: MessageFns<CommonAPIGetSystemInfoRe
             break;
           }
 
-          message.firmareVersion = FirmwareVersion.decode(reader, reader.uint32());
+          message.firmwareVersion = FirmwareVersion.decode(reader, reader.uint32());
           continue;
         }
-        case 4: {
-          if (tag !== 34) {
+        case 5: {
+          if (tag !== 42) {
             break;
           }
 
           message.systemUpdate = SystemUpdate.decode(reader, reader.uint32());
           continue;
         }
-        case 5: {
-          if (tag !== 40) {
+        case 6: {
+          if (tag !== 48) {
             break;
           }
 
           message.deviceType = reader.int32() as any;
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.complianceInformation = ComplianceInformation.decode(reader, reader.uint32());
           continue;
         }
       }
@@ -601,10 +623,13 @@ export const CommonAPIGetSystemInfoResponse: MessageFns<CommonAPIGetSystemInfoRe
   fromJSON(object: any): CommonAPIGetSystemInfoResponse {
     return {
       deviceId: isSet(object.deviceId) ? EcuId.fromJSON(object.deviceId) : undefined,
-      din: isSet(object.din) ? Din.fromJSON(object.din) : undefined,
-      firmareVersion: isSet(object.firmareVersion) ? FirmwareVersion.fromJSON(object.firmareVersion) : undefined,
+      din: isSet(object.din) ? globalThis.String(object.din) : "",
+      firmwareVersion: isSet(object.firmwareVersion) ? FirmwareVersion.fromJSON(object.firmwareVersion) : undefined,
       systemUpdate: isSet(object.systemUpdate) ? SystemUpdate.fromJSON(object.systemUpdate) : undefined,
       deviceType: isSet(object.deviceType) ? deviceTypeFromJSON(object.deviceType) : 0,
+      complianceInformation: isSet(object.complianceInformation)
+        ? ComplianceInformation.fromJSON(object.complianceInformation)
+        : undefined,
     };
   },
 
@@ -614,16 +639,19 @@ export const CommonAPIGetSystemInfoResponse: MessageFns<CommonAPIGetSystemInfoRe
       obj.deviceId = EcuId.toJSON(message.deviceId);
     }
     if (message.din !== undefined) {
-      obj.din = Din.toJSON(message.din);
+      obj.din = message.din;
     }
-    if (message.firmareVersion !== undefined) {
-      obj.firmareVersion = FirmwareVersion.toJSON(message.firmareVersion);
+    if (message.firmwareVersion !== undefined) {
+      obj.firmwareVersion = FirmwareVersion.toJSON(message.firmwareVersion);
     }
     if (message.systemUpdate !== undefined) {
       obj.systemUpdate = SystemUpdate.toJSON(message.systemUpdate);
     }
     if (message.deviceType !== undefined) {
       obj.deviceType = deviceTypeToJSON(message.deviceType);
+    }
+    if (message.complianceInformation !== undefined) {
+      obj.complianceInformation = ComplianceInformation.toJSON(message.complianceInformation);
     }
     return obj;
   },
@@ -638,14 +666,18 @@ export const CommonAPIGetSystemInfoResponse: MessageFns<CommonAPIGetSystemInfoRe
     message.deviceId = (object.deviceId !== undefined && object.deviceId !== null)
       ? EcuId.fromPartial(object.deviceId)
       : undefined;
-    message.din = (object.din !== undefined && object.din !== null) ? Din.fromPartial(object.din) : undefined;
-    message.firmareVersion = (object.firmareVersion !== undefined && object.firmareVersion !== null)
-      ? FirmwareVersion.fromPartial(object.firmareVersion)
+    message.din = object.din ?? "";
+    message.firmwareVersion = (object.firmwareVersion !== undefined && object.firmwareVersion !== null)
+      ? FirmwareVersion.fromPartial(object.firmwareVersion)
       : undefined;
     message.systemUpdate = (object.systemUpdate !== undefined && object.systemUpdate !== null)
       ? SystemUpdate.fromPartial(object.systemUpdate)
       : undefined;
     message.deviceType = object.deviceType ?? 0;
+    message.complianceInformation =
+      (object.complianceInformation !== undefined && object.complianceInformation !== null)
+        ? ComplianceInformation.fromPartial(object.complianceInformation)
+        : undefined;
     return message;
   },
 };
