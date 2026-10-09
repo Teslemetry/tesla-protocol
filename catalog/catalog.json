@@ -22544,7 +22544,7 @@
       },
       "messages": 443,
       "enums": 94,
-      "fields": 1034,
+      "fields": 1035,
       "files": [
         {
           "package": "tesla.proto.energy_device.v1",
@@ -23284,21 +23284,21 @@
                 {
                   "number": 2,
                   "name": "din",
-                  "type": "TYPE_MESSAGE",
-                  "type_name": ".tesla.proto.energy_device.v1.Din",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
                 {
                   "number": 3,
-                  "name": "firmare_version",
+                  "name": "firmware_version",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".tesla.proto.energy_device.v1.FirmwareVersion",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
                 {
-                  "number": 4,
+                  "number": 5,
                   "name": "system_update",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".tesla.proto.energy_device.v1.SystemUpdate",
@@ -23306,16 +23306,29 @@
                   "oneof": null
                 },
                 {
-                  "number": 5,
+                  "number": 6,
                   "name": "device_type",
                   "type": "TYPE_ENUM",
                   "type_name": ".tesla.proto.energy_device.v1.DeviceType",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
+                },
+                {
+                  "number": 7,
+                  "name": "compliance_information",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.ComplianceInformation",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
                 }
               ],
               "oneofs": [],
-              "reserved_ranges": [],
+              "reserved_ranges": [
+                [
+                  4,
+                  4
+                ]
+              ],
               "reserved_names": [],
               "nested_messages": [],
               "nested_enums": []
@@ -45394,7 +45407,7 @@
     "groups": 7,
     "messages": 905,
     "enums": 254,
-    "fields": 3015
+    "fields": 3016
   },
   "registration": {
     "consistent": true,

@@ -1,0 +1,25 @@
+{
+  "description": "Golden wire-format fixture for energy_device MessageEnvelope.common.get_system_info_response, the gateway's reply to get_system_info_request. device_reply_hex is a Powerwall 3 (firmware 24.12.6) reply as received from the device, with the githash and the tag 8/9 byte strings truncated. Tags 8 and 9 are not modelled; one of them is installed_firmware_signature. Consumed identically by the TypeScript and Python test suites: both decoders must read the payload fields from device_reply_hex, and both encoders must produce modelled_hex (the same reply without tags 8 and 9) from those fields.",
+  "outer_message": "tesla.proto.energy_device.v1.MessageEnvelope",
+  "outer_field": { "name": "common", "tag": 4, "type": "tesla.proto.energy_device.v1.CommonMessages" },
+  "message_field": { "name": "get_system_info_response", "tag": 3, "type": "tesla.proto.energy_device.v1.CommonAPIGetSystemInfoResponse" },
+  "envelope": {
+    "delivery_channel_number": 1,
+    "sender_din": "1707000-00-J--TG9999999999XP",
+    "recipient_local_number": 1
+  },
+  "payload": {
+    "device_id": { "part_number": "1707000-00-J", "serial_number": "TG9999999999XP" },
+    "din": "1707000-00-J--TG9999999999XP",
+    "firmware_version": { "version": "24.12.6-PW3-AFCI 008bf6ff", "githash_hex": "008bf6ff" },
+    "system_update": { "update_status": 1 },
+    "device_type": "DEVICE_TYPE_SITECONTROLLER",
+    "device_type_number": 4,
+    "compliance_information": [
+      { "manufacturer": "Quectel", "model": "BG95-M2", "fcc_id": "XMR2020BG95M2", "ic_id": "10224A-2020BG95M2" },
+      { "manufacturer": "Texas Instruments", "model": "WL18MODGI", "fcc_id": "Z64-WL18DBMOD", "ic_id": "451I-WL18DBMOD" }
+    ]
+  },
+  "device_reply_hex": "0801121e0a1c313730373030302d30302d4a2d2d54473939393939393939393958501a02180122ff011afc010a1e0a0c313730373030302d30302d4a120e5447393939393939393939395850121c313730373030302d30302d4a2d2d54473939393939393939393958501a210a1932342e31322e362d5057332d414643492030303862663666661204008bf6ff2a02100130043a85010a3c0a090a075175656374656c12090a07424739352d4d321a0f0a0d584d5232303230424739354d3222130a113130323234412d32303230424739354d320a450a130a11546578617320496e737472756d656e7473120b0a09574c31384d4f4447491a0f0a0d5a36342d574c313844424d4f4422100a0e343531492d574c313844424d4f444205f82173c68a4a04fb55ebd2",
+  "modelled_hex": "0801121e0a1c313730373030302d30302d4a2d2d54473939393939393939393958501a02180122f2011aef010a1e0a0c313730373030302d30302d4a120e5447393939393939393939395850121c313730373030302d30302d4a2d2d54473939393939393939393958501a210a1932342e31322e362d5057332d414643492030303862663666661204008bf6ff2a02100130043a85010a3c0a090a075175656374656c12090a07424739352d4d321a0f0a0d584d5232303230424739354d3222130a113130323234412d32303230424739354d320a450a130a11546578617320496e737472756d656e7473120b0a09574c31384d4f4447491a0f0a0d5a36342d574c313844424d4f4422100a0e343531492d574c313844424d4f44"
+}

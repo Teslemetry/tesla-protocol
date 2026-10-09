@@ -24,3 +24,15 @@ breaking:
   # trips this rule every time, so it's excepted repo-wide rather than per-PR.
   except:
     - RESERVED_MESSAGE_NO_DELETE
+  # Temporary: the 4.0.0 major corrects CommonAPIGetSystemInfoResponse to the
+  # gateway's wire layout, which these rules flag. Delete this block in the
+  # first PR after 4.0.0 is released.
+  ignore_only:
+    FIELD_NO_DELETE_UNLESS_NAME_RESERVED:
+      - proto/energy_device/common_api.proto
+    FIELD_SAME_JSON_NAME:
+      - proto/energy_device/common_api.proto
+    FIELD_SAME_NAME:
+      - proto/energy_device/common_api.proto
+    FIELD_WIRE_JSON_COMPATIBLE_TYPE:
+      - proto/energy_device/common_api.proto
