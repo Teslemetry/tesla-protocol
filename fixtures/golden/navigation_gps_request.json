@@ -1,0 +1,71 @@
+{
+  "description": "Golden wire-format fixtures for CarServer.Action.vehicleAction (navigation GPS request, latitude/longitude pair). Pins NavigationGpsRequest.lat and .lon as little-endian IEEE-754 doubles at tags 1 and 2. Coordinates below are synthetic, and every case leaves order (tag 3) at its default so it is absent from the wire. Consumed identically by the TypeScript and Python test suites: both encoders must produce these exact bytes, and both decoders must round-trip them back to the same field values.",
+  "outer_message": "CarServer.Action",
+  "outer_field": {
+    "name": "vehicleAction",
+    "tag": 2,
+    "type": "CarServer.VehicleAction"
+  },
+  "cases": [
+    {
+      "name": "navigation_gps_northern_western",
+      "vehicle_action_field": {
+        "name": "navigationGpsRequest",
+        "tag": 53,
+        "type": "CarServer.NavigationGpsRequest"
+      },
+      "payload": {
+        "lat": 37.5,
+        "lon": -122.25,
+        "order": "REMOTE_NAV_TRIP_ORDER_UNKNOWN",
+        "order_number": 0
+      },
+      "hex": "1215aa0312090000000000c04240110000000000905ec0"
+    },
+    {
+      "name": "navigation_gps_origin_all_defaults",
+      "vehicle_action_field": {
+        "name": "navigationGpsRequest",
+        "tag": 53,
+        "type": "CarServer.NavigationGpsRequest"
+      },
+      "payload": {
+        "lat": 0.0,
+        "lon": 0.0,
+        "order": "REMOTE_NAV_TRIP_ORDER_UNKNOWN",
+        "order_number": 0
+      },
+      "hex": "1203aa0300"
+    },
+    {
+      "name": "navigation_gps_southern_eastern",
+      "vehicle_action_field": {
+        "name": "navigationGpsRequest",
+        "tag": 53,
+        "type": "CarServer.NavigationGpsRequest"
+      },
+      "payload": {
+        "lat": -33.875,
+        "lon": 151.25,
+        "order": "REMOTE_NAV_TRIP_ORDER_UNKNOWN",
+        "order_number": 0
+      },
+      "hex": "1215aa0312090000000000f040c0110000000000e86240"
+    },
+    {
+      "name": "navigation_gps_positive_extremes",
+      "vehicle_action_field": {
+        "name": "navigationGpsRequest",
+        "tag": 53,
+        "type": "CarServer.NavigationGpsRequest"
+      },
+      "payload": {
+        "lat": 90.0,
+        "lon": 180.0,
+        "order": "REMOTE_NAV_TRIP_ORDER_UNKNOWN",
+        "order_number": 0
+      },
+      "hex": "1215aa0312090000000000805640110000000000806640"
+    }
+  ]
+}
