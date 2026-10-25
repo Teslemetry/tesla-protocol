@@ -82,6 +82,10 @@ recovery path - no manual registry cleanup is needed:
   so re-running `publish-pypi` after a version already uploaded skips it
   instead of failing on a duplicate-file error.
 
+## Credits
+
+- [@Matthew1471](https://github.com/Matthew1471) ([Tesla-API](https://github.com/Matthew1471/Tesla-API)): RSA key pairing research and the dispatch battery power command.
+
 ## License
 
 [Apache-2.0](LICENSE), matching the upstream Tesla repositories this project
