@@ -24,3 +24,19 @@ breaking:
   # trips this rule every time, so it's excepted repo-wide rather than per-PR.
   except:
     - RESERVED_MESSAGE_NO_DELETE
+  # Temporary: this patch release mirrors fleet-telemetry PR 572's final
+  # content, which renames, removes and renumbers Field 272-278 and drops
+  # Value.cruise_state_value (56) as published by the PR's first version.
+  # These rules flag that. Delete this block in the first PR after this
+  # release is published.
+  ignore_only:
+    ENUM_VALUE_NO_DELETE_UNLESS_NAME_RESERVED:
+      - proto/telemetry/vehicle_data.proto
+    ENUM_VALUE_NO_DELETE_UNLESS_NUMBER_RESERVED:
+      - proto/telemetry/vehicle_data.proto
+    ENUM_VALUE_SAME_NAME:
+      - proto/telemetry/vehicle_data.proto
+    FIELD_NO_DELETE_UNLESS_NAME_RESERVED:
+      - proto/telemetry/vehicle_data.proto
+    FIELD_NO_DELETE_UNLESS_NUMBER_RESERVED:
+      - proto/telemetry/vehicle_data.proto

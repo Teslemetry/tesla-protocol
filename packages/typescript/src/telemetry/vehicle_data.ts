@@ -314,14 +314,13 @@ export enum Field {
   Cabin12vPortKeepOn = 270,
   /** Cabin48vPortKeepOn - Semi-truck only */
   Cabin48vPortKeepOn = 271,
-  AccRail = 272,
+  AccessoryRail = 272,
   PowerTransferStatus = 273,
   AutomaticEmergencyBrakingState = 274,
   RollingResistanceCoefficient = 275,
-  CruiseState = 276,
-  LifetimeDcChargeEnergyKwh = 277,
-  /** VehicleMassKg - Semi-truck only */
-  VehicleMassKg = 278,
+  LifetimeDcChargeEnergyKwh = 276,
+  /** SemiVehicleMassKg - Semi-truck only */
+  SemiVehicleMassKg = 277,
   UNRECOGNIZED = -1,
 }
 
@@ -1144,8 +1143,8 @@ export function fieldFromJSON(object: any): Field {
     case "Cabin48vPortKeepOn":
       return Field.Cabin48vPortKeepOn;
     case 272:
-    case "AccRail":
-      return Field.AccRail;
+    case "AccessoryRail":
+      return Field.AccessoryRail;
     case 273:
     case "PowerTransferStatus":
       return Field.PowerTransferStatus;
@@ -1156,14 +1155,11 @@ export function fieldFromJSON(object: any): Field {
     case "RollingResistanceCoefficient":
       return Field.RollingResistanceCoefficient;
     case 276:
-    case "CruiseState":
-      return Field.CruiseState;
-    case 277:
     case "LifetimeDcChargeEnergyKwh":
       return Field.LifetimeDcChargeEnergyKwh;
-    case 278:
-    case "VehicleMassKg":
-      return Field.VehicleMassKg;
+    case 277:
+    case "SemiVehicleMassKg":
+      return Field.SemiVehicleMassKg;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -1717,20 +1713,18 @@ export function fieldToJSON(object: Field): string {
       return "Cabin12vPortKeepOn";
     case Field.Cabin48vPortKeepOn:
       return "Cabin48vPortKeepOn";
-    case Field.AccRail:
-      return "AccRail";
+    case Field.AccessoryRail:
+      return "AccessoryRail";
     case Field.PowerTransferStatus:
       return "PowerTransferStatus";
     case Field.AutomaticEmergencyBrakingState:
       return "AutomaticEmergencyBrakingState";
     case Field.RollingResistanceCoefficient:
       return "RollingResistanceCoefficient";
-    case Field.CruiseState:
-      return "CruiseState";
     case Field.LifetimeDcChargeEnergyKwh:
       return "LifetimeDcChargeEnergyKwh";
-    case Field.VehicleMassKg:
-      return "VehicleMassKg";
+    case Field.SemiVehicleMassKg:
+      return "SemiVehicleMassKg";
     case Field.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -4054,76 +4048,52 @@ export function cabinPortKeepOnStateToJSON(object: CabinPortKeepOnState): string
   }
 }
 
-export enum CruiseStateValue {
-  CruiseStateUnknown = 0,
-  CruiseStateOff = 1,
-  CruiseStateStandby = 2,
-  CruiseStateOn = 3,
-  CruiseStateStandstill = 4,
-  CruiseStateOverride = 5,
-  CruiseStateFault = 6,
-  CruiseStatePreFault = 7,
-  CruiseStatePreCancel = 8,
+export enum AutomaticEmergencyBrakingStateValue {
+  AutomaticEmergencyBrakingStateUnknown = 0,
+  AutomaticEmergencyBrakingStateUnavailable = 1,
+  AutomaticEmergencyBrakingStateStandby = 2,
+  AutomaticEmergencyBrakingStateEnabled = 3,
+  AutomaticEmergencyBrakingStateStandstill = 4,
   UNRECOGNIZED = -1,
 }
 
-export function cruiseStateValueFromJSON(object: any): CruiseStateValue {
+export function automaticEmergencyBrakingStateValueFromJSON(object: any): AutomaticEmergencyBrakingStateValue {
   switch (object) {
     case 0:
-    case "CruiseStateUnknown":
-      return CruiseStateValue.CruiseStateUnknown;
+    case "AutomaticEmergencyBrakingStateUnknown":
+      return AutomaticEmergencyBrakingStateValue.AutomaticEmergencyBrakingStateUnknown;
     case 1:
-    case "CruiseStateOff":
-      return CruiseStateValue.CruiseStateOff;
+    case "AutomaticEmergencyBrakingStateUnavailable":
+      return AutomaticEmergencyBrakingStateValue.AutomaticEmergencyBrakingStateUnavailable;
     case 2:
-    case "CruiseStateStandby":
-      return CruiseStateValue.CruiseStateStandby;
+    case "AutomaticEmergencyBrakingStateStandby":
+      return AutomaticEmergencyBrakingStateValue.AutomaticEmergencyBrakingStateStandby;
     case 3:
-    case "CruiseStateOn":
-      return CruiseStateValue.CruiseStateOn;
+    case "AutomaticEmergencyBrakingStateEnabled":
+      return AutomaticEmergencyBrakingStateValue.AutomaticEmergencyBrakingStateEnabled;
     case 4:
-    case "CruiseStateStandstill":
-      return CruiseStateValue.CruiseStateStandstill;
-    case 5:
-    case "CruiseStateOverride":
-      return CruiseStateValue.CruiseStateOverride;
-    case 6:
-    case "CruiseStateFault":
-      return CruiseStateValue.CruiseStateFault;
-    case 7:
-    case "CruiseStatePreFault":
-      return CruiseStateValue.CruiseStatePreFault;
-    case 8:
-    case "CruiseStatePreCancel":
-      return CruiseStateValue.CruiseStatePreCancel;
+    case "AutomaticEmergencyBrakingStateStandstill":
+      return AutomaticEmergencyBrakingStateValue.AutomaticEmergencyBrakingStateStandstill;
     case -1:
     case "UNRECOGNIZED":
     default:
-      return CruiseStateValue.UNRECOGNIZED;
+      return AutomaticEmergencyBrakingStateValue.UNRECOGNIZED;
   }
 }
 
-export function cruiseStateValueToJSON(object: CruiseStateValue): string {
+export function automaticEmergencyBrakingStateValueToJSON(object: AutomaticEmergencyBrakingStateValue): string {
   switch (object) {
-    case CruiseStateValue.CruiseStateUnknown:
-      return "CruiseStateUnknown";
-    case CruiseStateValue.CruiseStateOff:
-      return "CruiseStateOff";
-    case CruiseStateValue.CruiseStateStandby:
-      return "CruiseStateStandby";
-    case CruiseStateValue.CruiseStateOn:
-      return "CruiseStateOn";
-    case CruiseStateValue.CruiseStateStandstill:
-      return "CruiseStateStandstill";
-    case CruiseStateValue.CruiseStateOverride:
-      return "CruiseStateOverride";
-    case CruiseStateValue.CruiseStateFault:
-      return "CruiseStateFault";
-    case CruiseStateValue.CruiseStatePreFault:
-      return "CruiseStatePreFault";
-    case CruiseStateValue.CruiseStatePreCancel:
-      return "CruiseStatePreCancel";
-    case CruiseStateValue.UNRECOGNIZED:
+    case AutomaticEmergencyBrakingStateValue.AutomaticEmergencyBrakingStateUnknown:
+      return "AutomaticEmergencyBrakingStateUnknown";
+    case AutomaticEmergencyBrakingStateValue.AutomaticEmergencyBrakingStateUnavailable:
+      return "AutomaticEmergencyBrakingStateUnavailable";
+    case AutomaticEmergencyBrakingStateValue.AutomaticEmergencyBrakingStateStandby:
+      return "AutomaticEmergencyBrakingStateStandby";
+    case AutomaticEmergencyBrakingStateValue.AutomaticEmergencyBrakingStateEnabled:
+      return "AutomaticEmergencyBrakingStateEnabled";
+    case AutomaticEmergencyBrakingStateValue.AutomaticEmergencyBrakingStateStandstill:
+      return "AutomaticEmergencyBrakingStateStandstill";
+    case AutomaticEmergencyBrakingStateValue.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
@@ -4400,8 +4370,8 @@ export interface Value {
   mediaStatusValue?: MediaStatus | undefined;
   sunroofInstalledStateValue?: SunroofInstalledState | undefined;
   cabinPortKeepOnValue?: CabinPortKeepOnState | undefined;
-  cruiseStateValue?: CruiseStateValue | undefined;
   powerTransferStatusValue?: PowerTransferStatusValue | undefined;
+  automaticEmergencyBrakingStateValue?: AutomaticEmergencyBrakingStateValue | undefined;
 }
 
 /** Datum represents a single field and its value */
@@ -5006,8 +4976,8 @@ function createBaseValue(): Value {
     mediaStatusValue: undefined,
     sunroofInstalledStateValue: undefined,
     cabinPortKeepOnValue: undefined,
-    cruiseStateValue: undefined,
     powerTransferStatusValue: undefined,
+    automaticEmergencyBrakingStateValue: undefined,
   };
 }
 
@@ -5175,11 +5145,11 @@ export const Value: MessageFns<Value> = {
     if (message.cabinPortKeepOnValue !== undefined) {
       writer.uint32(440).int32(message.cabinPortKeepOnValue);
     }
-    if (message.cruiseStateValue !== undefined) {
-      writer.uint32(448).int32(message.cruiseStateValue);
-    }
     if (message.powerTransferStatusValue !== undefined) {
       writer.uint32(456).int32(message.powerTransferStatusValue);
+    }
+    if (message.automaticEmergencyBrakingStateValue !== undefined) {
+      writer.uint32(480).int32(message.automaticEmergencyBrakingStateValue);
     }
     return writer;
   },
@@ -5623,20 +5593,20 @@ export const Value: MessageFns<Value> = {
           message.cabinPortKeepOnValue = reader.int32() as any;
           continue;
         }
-        case 56: {
-          if (tag !== 448) {
-            break;
-          }
-
-          message.cruiseStateValue = reader.int32() as any;
-          continue;
-        }
         case 57: {
           if (tag !== 456) {
             break;
           }
 
           message.powerTransferStatusValue = reader.int32() as any;
+          continue;
+        }
+        case 60: {
+          if (tag !== 480) {
+            break;
+          }
+
+          message.automaticEmergencyBrakingStateValue = reader.int32() as any;
           continue;
         }
       }
@@ -5758,9 +5728,11 @@ export const Value: MessageFns<Value> = {
       cabinPortKeepOnValue: isSet(object.cabinPortKeepOnValue)
         ? cabinPortKeepOnStateFromJSON(object.cabinPortKeepOnValue)
         : undefined,
-      cruiseStateValue: isSet(object.cruiseStateValue) ? cruiseStateValueFromJSON(object.cruiseStateValue) : undefined,
       powerTransferStatusValue: isSet(object.powerTransferStatusValue)
         ? powerTransferStatusValueFromJSON(object.powerTransferStatusValue)
+        : undefined,
+      automaticEmergencyBrakingStateValue: isSet(object.automaticEmergencyBrakingStateValue)
+        ? automaticEmergencyBrakingStateValueFromJSON(object.automaticEmergencyBrakingStateValue)
         : undefined,
     };
   },
@@ -5935,11 +5907,13 @@ export const Value: MessageFns<Value> = {
     if (message.cabinPortKeepOnValue !== undefined) {
       obj.cabinPortKeepOnValue = cabinPortKeepOnStateToJSON(message.cabinPortKeepOnValue);
     }
-    if (message.cruiseStateValue !== undefined) {
-      obj.cruiseStateValue = cruiseStateValueToJSON(message.cruiseStateValue);
-    }
     if (message.powerTransferStatusValue !== undefined) {
       obj.powerTransferStatusValue = powerTransferStatusValueToJSON(message.powerTransferStatusValue);
+    }
+    if (message.automaticEmergencyBrakingStateValue !== undefined) {
+      obj.automaticEmergencyBrakingStateValue = automaticEmergencyBrakingStateValueToJSON(
+        message.automaticEmergencyBrakingStateValue,
+      );
     }
     return obj;
   },
@@ -6012,8 +5986,8 @@ export const Value: MessageFns<Value> = {
     message.mediaStatusValue = object.mediaStatusValue ?? undefined;
     message.sunroofInstalledStateValue = object.sunroofInstalledStateValue ?? undefined;
     message.cabinPortKeepOnValue = object.cabinPortKeepOnValue ?? undefined;
-    message.cruiseStateValue = object.cruiseStateValue ?? undefined;
     message.powerTransferStatusValue = object.powerTransferStatusValue ?? undefined;
+    message.automaticEmergencyBrakingStateValue = object.automaticEmergencyBrakingStateValue ?? undefined;
     return message;
   },
 };

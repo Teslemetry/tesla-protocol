@@ -39554,18 +39554,18 @@
                   "oneof": "value"
                 },
                 {
-                  "number": 56,
-                  "name": "cruise_state_value",
-                  "type": "TYPE_ENUM",
-                  "type_name": ".telemetry.vehicle_data.CruiseStateValue",
-                  "label": "LABEL_OPTIONAL",
-                  "oneof": "value"
-                },
-                {
                   "number": 57,
                   "name": "power_transfer_status_value",
                   "type": "TYPE_ENUM",
                   "type_name": ".telemetry.vehicle_data.PowerTransferStatusValue",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "value"
+                },
+                {
+                  "number": 60,
+                  "name": "automatic_emergency_braking_state_value",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".telemetry.vehicle_data.AutomaticEmergencyBrakingStateValue",
                   "label": "LABEL_OPTIONAL",
                   "oneof": "value"
                 }
@@ -40744,7 +40744,7 @@
                 },
                 {
                   "number": 272,
-                  "name": "AccRail"
+                  "name": "AccessoryRail"
                 },
                 {
                   "number": 273,
@@ -40760,15 +40760,11 @@
                 },
                 {
                   "number": 276,
-                  "name": "CruiseState"
-                },
-                {
-                  "number": 277,
                   "name": "LifetimeDcChargeEnergyKwh"
                 },
                 {
-                  "number": 278,
-                  "name": "VehicleMassKg"
+                  "number": 277,
+                  "name": "SemiVehicleMassKg"
                 }
               ],
               "reserved_ranges": [],
@@ -42085,44 +42081,28 @@
               "reserved_names": []
             },
             {
-              "fqn": ".telemetry.vehicle_data.CruiseStateValue",
-              "name": "CruiseStateValue",
+              "fqn": ".telemetry.vehicle_data.AutomaticEmergencyBrakingStateValue",
+              "name": "AutomaticEmergencyBrakingStateValue",
               "values": [
                 {
                   "number": 0,
-                  "name": "CruiseStateUnknown"
+                  "name": "AutomaticEmergencyBrakingStateUnknown"
                 },
                 {
                   "number": 1,
-                  "name": "CruiseStateOff"
+                  "name": "AutomaticEmergencyBrakingStateUnavailable"
                 },
                 {
                   "number": 2,
-                  "name": "CruiseStateStandby"
+                  "name": "AutomaticEmergencyBrakingStateStandby"
                 },
                 {
                   "number": 3,
-                  "name": "CruiseStateOn"
+                  "name": "AutomaticEmergencyBrakingStateEnabled"
                 },
                 {
                   "number": 4,
-                  "name": "CruiseStateStandstill"
-                },
-                {
-                  "number": 5,
-                  "name": "CruiseStateOverride"
-                },
-                {
-                  "number": 6,
-                  "name": "CruiseStateFault"
-                },
-                {
-                  "number": 7,
-                  "name": "CruiseStatePreFault"
-                },
-                {
-                  "number": 8,
-                  "name": "CruiseStatePreCancel"
+                  "name": "AutomaticEmergencyBrakingStateStandstill"
                 }
               ],
               "reserved_ranges": [],
