@@ -166,7 +166,11 @@ message VehicleAction {
     DisplayStateAction displayStateAction = 180;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
     DrivingSetCruiseSpeedLimitAction drivingSetCruiseSpeedLimitAction = 694177;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
     SetDeckLightAction setDeckLightAction = 698038;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    SetKeepOnCabin12vPortAction setKeepOnCabin12vPortAction = 721262;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    SetKeepOnCabin48vPortAction setKeepOnCabin48vPortAction = 721263;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
   }
+  // Asks the vehicle not to send the routine success reply to this action.  // TESLEMETRY-EXT
+  bool dropNominalSuccessResponses = 185;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 message GetVehicleData {
@@ -195,10 +199,13 @@ message GetVehicleData {
   GetSuspensionState getSuspensionState = 23;  // TESLEMETRY-EXT
   GetChildPresenceDetectionState getChildPresenceDetectionState = 25;  // TESLEMETRY-EXT
   GetDisplayState getDisplayState = 31;  // TESLEMETRY-EXT
+  GetKeepOnAccessoryPortsState getKeepOnAccessoryPortsState = 34;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 // ===== TESLEMETRY-EXT BEGIN =====
 message GetGuiSettings {}
+
+message GetKeepOnAccessoryPortsState {}
 
 message GetLegacyVehicleState {}
 
@@ -540,6 +547,7 @@ enum VehicleDataFields {
   suspension_state = 23;
   child_presence_detection_state = 24;
   display_state = 30;
+  keep_on_accessory_ports_state = 33;
   legacy_vehicle_state_media_info = 6072;
 }
 // ===== TESLEMETRY-EXT END =====
@@ -966,6 +974,7 @@ message VehicleDataSubscription {
   int32 suspension_state_max_update_rate_ms = 18;
   int32 child_presence_detection_state_max_update_rate_ms = 19;
   int32 display_state_max_update_rate_ms = 28;  // TESLEMETRY-EXT
+  int32 keep_on_accessory_ports_state_max_update_rate_ms = 31;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 message VehicleDataAck {
@@ -1510,5 +1519,17 @@ message DrivingSetCruiseSpeedLimitAction {
 // UNCONFIRMED: not yet confirmed on a live vehicle.
 message SetDeckLightAction {
   bool on = 1;  // name not recovered
+}
+
+// Keeps the 12 V cabin accessory socket powered (or not).
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message SetKeepOnCabin12vPortAction {
+  KeepOnAccessoryPortRequest keepOnMode = 1;
+}
+
+// Keeps the 48 V cabin accessory socket powered (or not).
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message SetKeepOnCabin48vPortAction {
+  KeepOnAccessoryPortRequest keepOnMode = 1;
 }
 // ===== TESLEMETRY-EXT END =====

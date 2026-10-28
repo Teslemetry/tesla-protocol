@@ -31,6 +31,9 @@ import {
   ClimateState_DogModeState,
   climateState_DogModeStateFromJSON,
   climateState_DogModeStateToJSON,
+  KeepOnAccessoryPortRequest,
+  keepOnAccessoryPortRequestFromJSON,
+  keepOnAccessoryPortRequestToJSON,
   VehicleData,
   VehicleImageStateType,
   vehicleImageStateTypeFromJSON,
@@ -112,6 +115,7 @@ export enum VehicleDataFields {
   suspension_state = 23,
   child_presence_detection_state = 24,
   display_state = 30,
+  keep_on_accessory_ports_state = 33,
   legacy_vehicle_state_media_info = 6072,
   UNRECOGNIZED = -1,
 }
@@ -193,6 +197,9 @@ export function vehicleDataFieldsFromJSON(object: any): VehicleDataFields {
     case 30:
     case "display_state":
       return VehicleDataFields.display_state;
+    case 33:
+    case "keep_on_accessory_ports_state":
+      return VehicleDataFields.keep_on_accessory_ports_state;
     case 6072:
     case "legacy_vehicle_state_media_info":
       return VehicleDataFields.legacy_vehicle_state_media_info;
@@ -255,6 +262,8 @@ export function vehicleDataFieldsToJSON(object: VehicleDataFields): string {
       return "child_presence_detection_state";
     case VehicleDataFields.display_state:
       return "display_state";
+    case VehicleDataFields.keep_on_accessory_ports_state:
+      return "keep_on_accessory_ports_state";
     case VehicleDataFields.legacy_vehicle_state_media_info:
       return "legacy_vehicle_state_media_info";
     case VehicleDataFields.UNRECOGNIZED:
@@ -630,7 +639,19 @@ export interface VehicleAction {
     | DrivingSetCruiseSpeedLimitAction
     | undefined;
   /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
-  setDeckLightAction?: SetDeckLightAction | undefined;
+  setDeckLightAction?:
+    | SetDeckLightAction
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  setKeepOnCabin12vPortAction?:
+    | SetKeepOnCabin12vPortAction
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  setKeepOnCabin48vPortAction?:
+    | SetKeepOnCabin48vPortAction
+    | undefined;
+  /** Asks the vehicle not to send the routine success reply to this action.  // TESLEMETRY-EXT */
+  dropNominalSuccessResponses: boolean;
 }
 
 export interface GetVehicleData {
@@ -695,11 +716,18 @@ export interface GetVehicleData {
     | GetChildPresenceDetectionState
     | undefined;
   /** TESLEMETRY-EXT */
-  getDisplayState: GetDisplayState | undefined;
+  getDisplayState:
+    | GetDisplayState
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  getKeepOnAccessoryPortsState: GetKeepOnAccessoryPortsState | undefined;
 }
 
 /** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface GetGuiSettings {
+}
+
+export interface GetKeepOnAccessoryPortsState {
 }
 
 export interface GetLegacyVehicleState {
@@ -2046,6 +2074,8 @@ export interface VehicleDataSubscription {
   childPresenceDetectionStateMaxUpdateRateMs: number;
   /** TESLEMETRY-EXT */
   displayStateMaxUpdateRateMs: number;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  keepOnAccessoryPortsStateMaxUpdateRateMs: number;
 }
 
 /** Privacy/security request for handling PII (Personally Identifiable Information) */
@@ -3170,6 +3200,22 @@ export interface SetDeckLightAction {
   on: boolean;
 }
 
+/**
+ * Keeps the 12 V cabin accessory socket powered (or not).
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export interface SetKeepOnCabin12vPortAction {
+  keepOnMode: KeepOnAccessoryPortRequest;
+}
+
+/**
+ * Keeps the 48 V cabin accessory socket powered (or not).
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export interface SetKeepOnCabin48vPortAction {
+  keepOnMode: KeepOnAccessoryPortRequest;
+}
+
 function createBaseAction(): Action {
   return { vehicleAction: undefined };
 }
@@ -3367,6 +3413,9 @@ function createBaseVehicleAction(): VehicleAction {
     displayStateAction: undefined,
     drivingSetCruiseSpeedLimitAction: undefined,
     setDeckLightAction: undefined,
+    setKeepOnCabin12vPortAction: undefined,
+    setKeepOnCabin48vPortAction: undefined,
+    dropNominalSuccessResponses: false,
   };
 }
 
@@ -3820,6 +3869,15 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     }
     if (message.setDeckLightAction !== undefined) {
       SetDeckLightAction.encode(message.setDeckLightAction, writer.uint32(5584306).fork()).join();
+    }
+    if (message.setKeepOnCabin12vPortAction !== undefined) {
+      SetKeepOnCabin12vPortAction.encode(message.setKeepOnCabin12vPortAction, writer.uint32(5770098).fork()).join();
+    }
+    if (message.setKeepOnCabin48vPortAction !== undefined) {
+      SetKeepOnCabin48vPortAction.encode(message.setKeepOnCabin48vPortAction, writer.uint32(5770106).fork()).join();
+    }
+    if (message.dropNominalSuccessResponses !== false) {
+      writer.uint32(1480).bool(message.dropNominalSuccessResponses);
     }
     return writer;
   },
@@ -4953,6 +5011,30 @@ export const VehicleAction: MessageFns<VehicleAction> = {
           message.setDeckLightAction = SetDeckLightAction.decode(reader, reader.uint32());
           continue;
         }
+        case 721262: {
+          if (tag !== 5770098) {
+            break;
+          }
+
+          message.setKeepOnCabin12vPortAction = SetKeepOnCabin12vPortAction.decode(reader, reader.uint32());
+          continue;
+        }
+        case 721263: {
+          if (tag !== 5770106) {
+            break;
+          }
+
+          message.setKeepOnCabin48vPortAction = SetKeepOnCabin48vPortAction.decode(reader, reader.uint32());
+          continue;
+        }
+        case 185: {
+          if (tag !== 1480) {
+            break;
+          }
+
+          message.dropNominalSuccessResponses = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -5341,6 +5423,15 @@ export const VehicleAction: MessageFns<VehicleAction> = {
       setDeckLightAction: isSet(object.setDeckLightAction)
         ? SetDeckLightAction.fromJSON(object.setDeckLightAction)
         : undefined,
+      setKeepOnCabin12vPortAction: isSet(object.setKeepOnCabin12vPortAction)
+        ? SetKeepOnCabin12vPortAction.fromJSON(object.setKeepOnCabin12vPortAction)
+        : undefined,
+      setKeepOnCabin48vPortAction: isSet(object.setKeepOnCabin48vPortAction)
+        ? SetKeepOnCabin48vPortAction.fromJSON(object.setKeepOnCabin48vPortAction)
+        : undefined,
+      dropNominalSuccessResponses: isSet(object.dropNominalSuccessResponses)
+        ? globalThis.Boolean(object.dropNominalSuccessResponses)
+        : false,
     };
   },
 
@@ -5826,6 +5917,15 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     }
     if (message.setDeckLightAction !== undefined) {
       obj.setDeckLightAction = SetDeckLightAction.toJSON(message.setDeckLightAction);
+    }
+    if (message.setKeepOnCabin12vPortAction !== undefined) {
+      obj.setKeepOnCabin12vPortAction = SetKeepOnCabin12vPortAction.toJSON(message.setKeepOnCabin12vPortAction);
+    }
+    if (message.setKeepOnCabin48vPortAction !== undefined) {
+      obj.setKeepOnCabin48vPortAction = SetKeepOnCabin48vPortAction.toJSON(message.setKeepOnCabin48vPortAction);
+    }
+    if (message.dropNominalSuccessResponses !== undefined) {
+      obj.dropNominalSuccessResponses = message.dropNominalSuccessResponses;
     }
     return obj;
   },
@@ -6340,6 +6440,15 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     message.setDeckLightAction = (object.setDeckLightAction !== undefined && object.setDeckLightAction !== null)
       ? SetDeckLightAction.fromPartial(object.setDeckLightAction)
       : undefined;
+    message.setKeepOnCabin12vPortAction =
+      (object.setKeepOnCabin12vPortAction !== undefined && object.setKeepOnCabin12vPortAction !== null)
+        ? SetKeepOnCabin12vPortAction.fromPartial(object.setKeepOnCabin12vPortAction)
+        : undefined;
+    message.setKeepOnCabin48vPortAction =
+      (object.setKeepOnCabin48vPortAction !== undefined && object.setKeepOnCabin48vPortAction !== null)
+        ? SetKeepOnCabin48vPortAction.fromPartial(object.setKeepOnCabin48vPortAction)
+        : undefined;
+    message.dropNominalSuccessResponses = object.dropNominalSuccessResponses ?? false;
     return message;
   },
 };
@@ -6371,6 +6480,7 @@ function createBaseGetVehicleData(): GetVehicleData {
     getSuspensionState: undefined,
     getChildPresenceDetectionState: undefined,
     getDisplayState: undefined,
+    getKeepOnAccessoryPortsState: undefined,
   };
 }
 
@@ -6450,6 +6560,9 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
     }
     if (message.getDisplayState !== undefined) {
       GetDisplayState.encode(message.getDisplayState, writer.uint32(250).fork()).join();
+    }
+    if (message.getKeepOnAccessoryPortsState !== undefined) {
+      GetKeepOnAccessoryPortsState.encode(message.getKeepOnAccessoryPortsState, writer.uint32(274).fork()).join();
     }
     return writer;
   },
@@ -6661,6 +6774,14 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
           message.getDisplayState = GetDisplayState.decode(reader, reader.uint32());
           continue;
         }
+        case 34: {
+          if (tag !== 274) {
+            break;
+          }
+
+          message.getKeepOnAccessoryPortsState = GetKeepOnAccessoryPortsState.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -6723,6 +6844,9 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
         ? GetChildPresenceDetectionState.fromJSON(object.getChildPresenceDetectionState)
         : undefined,
       getDisplayState: isSet(object.getDisplayState) ? GetDisplayState.fromJSON(object.getDisplayState) : undefined,
+      getKeepOnAccessoryPortsState: isSet(object.getKeepOnAccessoryPortsState)
+        ? GetKeepOnAccessoryPortsState.fromJSON(object.getKeepOnAccessoryPortsState)
+        : undefined,
     };
   },
 
@@ -6806,6 +6930,9 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
     }
     if (message.getDisplayState !== undefined) {
       obj.getDisplayState = GetDisplayState.toJSON(message.getDisplayState);
+    }
+    if (message.getKeepOnAccessoryPortsState !== undefined) {
+      obj.getKeepOnAccessoryPortsState = GetKeepOnAccessoryPortsState.toJSON(message.getKeepOnAccessoryPortsState);
     }
     return obj;
   },
@@ -6898,6 +7025,10 @@ export const GetVehicleData: MessageFns<GetVehicleData> = {
     message.getDisplayState = (object.getDisplayState !== undefined && object.getDisplayState !== null)
       ? GetDisplayState.fromPartial(object.getDisplayState)
       : undefined;
+    message.getKeepOnAccessoryPortsState =
+      (object.getKeepOnAccessoryPortsState !== undefined && object.getKeepOnAccessoryPortsState !== null)
+        ? GetKeepOnAccessoryPortsState.fromPartial(object.getKeepOnAccessoryPortsState)
+        : undefined;
     return message;
   },
 };
@@ -6941,6 +7072,49 @@ export const GetGuiSettings: MessageFns<GetGuiSettings> = {
   },
   fromPartial<I extends Exact<DeepPartial<GetGuiSettings>, I>>(_: I): GetGuiSettings {
     const message = createBaseGetGuiSettings();
+    return message;
+  },
+};
+
+function createBaseGetKeepOnAccessoryPortsState(): GetKeepOnAccessoryPortsState {
+  return {};
+}
+
+export const GetKeepOnAccessoryPortsState: MessageFns<GetKeepOnAccessoryPortsState> = {
+  encode(_: GetKeepOnAccessoryPortsState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GetKeepOnAccessoryPortsState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetKeepOnAccessoryPortsState();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): GetKeepOnAccessoryPortsState {
+    return {};
+  },
+
+  toJSON(_: GetKeepOnAccessoryPortsState): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetKeepOnAccessoryPortsState>, I>>(base?: I): GetKeepOnAccessoryPortsState {
+    return GetKeepOnAccessoryPortsState.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetKeepOnAccessoryPortsState>, I>>(_: I): GetKeepOnAccessoryPortsState {
+    const message = createBaseGetKeepOnAccessoryPortsState();
     return message;
   },
 };
@@ -16631,6 +16805,7 @@ function createBaseVehicleDataSubscription(): VehicleDataSubscription {
     suspensionStateMaxUpdateRateMs: 0,
     childPresenceDetectionStateMaxUpdateRateMs: 0,
     displayStateMaxUpdateRateMs: 0,
+    keepOnAccessoryPortsStateMaxUpdateRateMs: 0,
   };
 }
 
@@ -16689,6 +16864,9 @@ export const VehicleDataSubscription: MessageFns<VehicleDataSubscription> = {
     }
     if (message.displayStateMaxUpdateRateMs !== 0) {
       writer.uint32(224).int32(message.displayStateMaxUpdateRateMs);
+    }
+    if (message.keepOnAccessoryPortsStateMaxUpdateRateMs !== 0) {
+      writer.uint32(248).int32(message.keepOnAccessoryPortsStateMaxUpdateRateMs);
     }
     return writer;
   },
@@ -16844,6 +17022,14 @@ export const VehicleDataSubscription: MessageFns<VehicleDataSubscription> = {
           message.displayStateMaxUpdateRateMs = reader.int32();
           continue;
         }
+        case 31: {
+          if (tag !== 248) {
+            break;
+          }
+
+          message.keepOnAccessoryPortsStateMaxUpdateRateMs = reader.int32();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -16905,6 +17091,9 @@ export const VehicleDataSubscription: MessageFns<VehicleDataSubscription> = {
       displayStateMaxUpdateRateMs: isSet(object.displayStateMaxUpdateRateMs)
         ? globalThis.Number(object.displayStateMaxUpdateRateMs)
         : 0,
+      keepOnAccessoryPortsStateMaxUpdateRateMs: isSet(object.keepOnAccessoryPortsStateMaxUpdateRateMs)
+        ? globalThis.Number(object.keepOnAccessoryPortsStateMaxUpdateRateMs)
+        : 0,
     };
   },
 
@@ -16964,6 +17153,9 @@ export const VehicleDataSubscription: MessageFns<VehicleDataSubscription> = {
     if (message.displayStateMaxUpdateRateMs !== undefined) {
       obj.displayStateMaxUpdateRateMs = Math.round(message.displayStateMaxUpdateRateMs);
     }
+    if (message.keepOnAccessoryPortsStateMaxUpdateRateMs !== undefined) {
+      obj.keepOnAccessoryPortsStateMaxUpdateRateMs = Math.round(message.keepOnAccessoryPortsStateMaxUpdateRateMs);
+    }
     return obj;
   },
 
@@ -16992,6 +17184,7 @@ export const VehicleDataSubscription: MessageFns<VehicleDataSubscription> = {
     message.suspensionStateMaxUpdateRateMs = object.suspensionStateMaxUpdateRateMs ?? 0;
     message.childPresenceDetectionStateMaxUpdateRateMs = object.childPresenceDetectionStateMaxUpdateRateMs ?? 0;
     message.displayStateMaxUpdateRateMs = object.displayStateMaxUpdateRateMs ?? 0;
+    message.keepOnAccessoryPortsStateMaxUpdateRateMs = object.keepOnAccessoryPortsStateMaxUpdateRateMs ?? 0;
     return message;
   },
 };
@@ -23851,6 +24044,122 @@ export const SetDeckLightAction: MessageFns<SetDeckLightAction> = {
   fromPartial<I extends Exact<DeepPartial<SetDeckLightAction>, I>>(object: I): SetDeckLightAction {
     const message = createBaseSetDeckLightAction();
     message.on = object.on ?? false;
+    return message;
+  },
+};
+
+function createBaseSetKeepOnCabin12vPortAction(): SetKeepOnCabin12vPortAction {
+  return { keepOnMode: 0 };
+}
+
+export const SetKeepOnCabin12vPortAction: MessageFns<SetKeepOnCabin12vPortAction> = {
+  encode(message: SetKeepOnCabin12vPortAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.keepOnMode !== 0) {
+      writer.uint32(8).int32(message.keepOnMode);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SetKeepOnCabin12vPortAction {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSetKeepOnCabin12vPortAction();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.keepOnMode = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SetKeepOnCabin12vPortAction {
+    return { keepOnMode: isSet(object.keepOnMode) ? keepOnAccessoryPortRequestFromJSON(object.keepOnMode) : 0 };
+  },
+
+  toJSON(message: SetKeepOnCabin12vPortAction): unknown {
+    const obj: any = {};
+    if (message.keepOnMode !== undefined) {
+      obj.keepOnMode = keepOnAccessoryPortRequestToJSON(message.keepOnMode);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SetKeepOnCabin12vPortAction>, I>>(base?: I): SetKeepOnCabin12vPortAction {
+    return SetKeepOnCabin12vPortAction.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SetKeepOnCabin12vPortAction>, I>>(object: I): SetKeepOnCabin12vPortAction {
+    const message = createBaseSetKeepOnCabin12vPortAction();
+    message.keepOnMode = object.keepOnMode ?? 0;
+    return message;
+  },
+};
+
+function createBaseSetKeepOnCabin48vPortAction(): SetKeepOnCabin48vPortAction {
+  return { keepOnMode: 0 };
+}
+
+export const SetKeepOnCabin48vPortAction: MessageFns<SetKeepOnCabin48vPortAction> = {
+  encode(message: SetKeepOnCabin48vPortAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.keepOnMode !== 0) {
+      writer.uint32(8).int32(message.keepOnMode);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SetKeepOnCabin48vPortAction {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSetKeepOnCabin48vPortAction();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.keepOnMode = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SetKeepOnCabin48vPortAction {
+    return { keepOnMode: isSet(object.keepOnMode) ? keepOnAccessoryPortRequestFromJSON(object.keepOnMode) : 0 };
+  },
+
+  toJSON(message: SetKeepOnCabin48vPortAction): unknown {
+    const obj: any = {};
+    if (message.keepOnMode !== undefined) {
+      obj.keepOnMode = keepOnAccessoryPortRequestToJSON(message.keepOnMode);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SetKeepOnCabin48vPortAction>, I>>(base?: I): SetKeepOnCabin48vPortAction {
+    return SetKeepOnCabin48vPortAction.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SetKeepOnCabin48vPortAction>, I>>(object: I): SetKeepOnCabin48vPortAction {
+    const message = createBaseSetKeepOnCabin48vPortAction();
+    message.keepOnMode = object.keepOnMode ?? 0;
     return message;
   },
 };

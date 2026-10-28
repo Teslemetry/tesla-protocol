@@ -46,6 +46,7 @@ message VehicleData {
     SuspensionState suspension_state = 29;  // TESLEMETRY-EXT
     ChildPresenceDetectionState child_presence_detection_state = 30;  // TESLEMETRY-EXT
     DisplayState display_state = 36;  // TESLEMETRY-EXT
+    KeepOnAccessoryPortsState keep_on_accessory_ports_state = 39;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     // Each entry is an encoded CarServer.PiiKeyResponse (car_server.proto), declared
     // as bytes because vehicle.proto cannot import car_server.proto.
     repeated bytes pii_key_responses = 900;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
@@ -796,6 +797,8 @@ message CurrentVehicleState {
     oneof optional_hazards_on { bool hazards_on = 68; }  // confirmed on a live vehicle
     oneof optional_deck_lights_allowed { bool deck_lights_allowed = 69; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_field_70 { uint64 field_70 = 70; }  // confirmed on a live vehicle (varint); name and type not recovered
+    oneof optional_halloween_mode { bool halloween_mode = 71; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_trick_or_treat_mode { bool trick_or_treat_mode = 72; }  // UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 message DashcamUtils {
@@ -1513,6 +1516,20 @@ message VehicleDetailState {
     oneof optional_current_profile_name { string current_profile_name = 7; }
     oneof optional_china_autopilot_software_version { string china_autopilot_software_version = 8; }
     oneof optional_is_fsd_v14_or_above { bool is_fsd_v14_or_above = 9; }  // TESLEMETRY-EXT
+}
+
+// Keep-on request for a cabin accessory power socket.
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+enum KeepOnAccessoryPortRequest {
+    KeepOnAccessoryPortRequest_Off = 0;
+    KeepOnAccessoryPortRequest_On = 1;
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message KeepOnAccessoryPortsState {
+    oneof optional_keep_on_cabin_12v_port_request { KeepOnAccessoryPortRequest keep_on_cabin_12v_port_request = 1; }
+    oneof optional_keep_on_cabin_48v_port_request { KeepOnAccessoryPortRequest keep_on_cabin_48v_port_request = 2; }
+    google.protobuf.Timestamp timestamp = 2000;
 }
 // ===== TESLEMETRY-EXT END =====
 

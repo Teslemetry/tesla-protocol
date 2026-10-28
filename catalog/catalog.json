@@ -346,9 +346,9 @@
         "typescript": "packages/typescript/src/command",
         "python": "packages/python/tesla_protocol/command"
       },
-      "messages": 344,
-      "enums": 106,
-      "fields": 1608,
+      "messages": 348,
+      "enums": 107,
+      "fields": 1621,
       "files": [
         {
           "package": "CarServer",
@@ -1474,6 +1474,30 @@
                   "type_name": ".CarServer.SetDeckLightAction",
                   "label": "LABEL_OPTIONAL",
                   "oneof": "vehicle_action_msg"
+                },
+                {
+                  "number": 721262,
+                  "name": "setKeepOnCabin12vPortAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetKeepOnCabin12vPortAction",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
+                  "number": 721263,
+                  "name": "setKeepOnCabin48vPortAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SetKeepOnCabin48vPortAction",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
+                  "number": 185,
+                  "name": "dropNominalSuccessResponses",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
                 }
               ],
               "oneofs": [
@@ -1700,6 +1724,14 @@
                   "type_name": ".CarServer.GetDisplayState",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
+                },
+                {
+                  "number": 34,
+                  "name": "getKeepOnAccessoryPortsState",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.GetKeepOnAccessoryPortsState",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
                 }
               ],
               "oneofs": [],
@@ -1711,6 +1743,16 @@
             {
               "fqn": ".CarServer.GetGuiSettings",
               "name": "GetGuiSettings",
+              "fields": [],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.GetKeepOnAccessoryPortsState",
+              "name": "GetKeepOnAccessoryPortsState",
               "fields": [],
               "oneofs": [],
               "reserved_ranges": [],
@@ -5505,6 +5547,14 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
+                },
+                {
+                  "number": 31,
+                  "name": "keep_on_accessory_ports_state_max_update_rate_ms",
+                  "type": "TYPE_INT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
                 }
               ],
               "oneofs": [],
@@ -8171,6 +8221,44 @@
               "reserved_names": [],
               "nested_messages": [],
               "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.SetKeepOnCabin12vPortAction",
+              "name": "SetKeepOnCabin12vPortAction",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "keepOnMode",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.KeepOnAccessoryPortRequest",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.SetKeepOnCabin48vPortAction",
+              "name": "SetKeepOnCabin48vPortAction",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "keepOnMode",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.KeepOnAccessoryPortRequest",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
             }
           ],
           "enums": [
@@ -8293,6 +8381,10 @@
                 {
                   "number": 30,
                   "name": "display_state"
+                },
+                {
+                  "number": 33,
+                  "name": "keep_on_accessory_ports_state"
                 },
                 {
                   "number": 6072,
@@ -10848,6 +10940,10 @@
                 {
                   "number": 8,
                   "name": "DOMAIN_ENERGY_DEVICE_AUTH"
+                },
+                {
+                  "number": 11,
+                  "name": "DOMAIN_ENERGY_DEVICE_AUTHORIZED_COMMAND"
                 }
               ],
               "reserved_ranges": [],
@@ -12292,6 +12388,14 @@
                 {
                   "number": 32,
                   "name": "RKE_ACTION_UNLOCK_UNRESTRICTED_CLOSURES"
+                },
+                {
+                  "number": 33,
+                  "name": "RKE_ACTION_LEFT_STORAGE_OPEN"
+                },
+                {
+                  "number": 34,
+                  "name": "RKE_ACTION_RIGHT_STORAGE_OPEN"
                 }
               ],
               "reserved_ranges": [],
@@ -13067,6 +13171,14 @@
                   "name": "display_state",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".CarServer.DisplayState",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 39,
+                  "name": "keep_on_accessory_ports_state",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.KeepOnAccessoryPortsState",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
@@ -17456,6 +17568,22 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": "optional_field_70"
+                },
+                {
+                  "number": 71,
+                  "name": "halloween_mode",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_halloween_mode"
+                },
+                {
+                  "number": 72,
+                  "name": "trick_or_treat_mode",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_trick_or_treat_mode"
                 }
               ],
               "oneofs": [
@@ -17515,7 +17643,9 @@
                 "optional_deck_lights_on",
                 "optional_hazards_on",
                 "optional_deck_lights_allowed",
-                "optional_field_70"
+                "optional_field_70",
+                "optional_halloween_mode",
+                "optional_trick_or_treat_mode"
               ],
               "reserved_ranges": [],
               "reserved_names": [],
@@ -21547,6 +21677,44 @@
               "reserved_names": [],
               "nested_messages": [],
               "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.KeepOnAccessoryPortsState",
+              "name": "KeepOnAccessoryPortsState",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "keep_on_cabin_12v_port_request",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.KeepOnAccessoryPortRequest",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_keep_on_cabin_12v_port_request"
+                },
+                {
+                  "number": 2,
+                  "name": "keep_on_cabin_48v_port_request",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.KeepOnAccessoryPortRequest",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_keep_on_cabin_48v_port_request"
+                },
+                {
+                  "number": 2000,
+                  "name": "timestamp",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".google.protobuf.Timestamp",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [
+                "optional_keep_on_cabin_12v_port_request",
+                "optional_keep_on_cabin_48v_port_request"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
             }
           ],
           "enums": [
@@ -21933,6 +22101,22 @@
                 {
                   "number": 2,
                   "name": "APVIZ_LICENSE_PLATE"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".CarServer.KeepOnAccessoryPortRequest",
+              "name": "KeepOnAccessoryPortRequest",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "KeepOnAccessoryPortRequest_Off"
+                },
+                {
+                  "number": 1,
+                  "name": "KeepOnAccessoryPortRequest_On"
                 }
               ],
               "reserved_ranges": [],
@@ -45385,9 +45569,9 @@
   "totals": {
     "source_files": 39,
     "groups": 7,
-    "messages": 905,
-    "enums": 254,
-    "fields": 3016
+    "messages": 909,
+    "enums": 255,
+    "fields": 3029
   },
   "registration": {
     "consistent": true,

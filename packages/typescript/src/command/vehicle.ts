@@ -716,6 +716,43 @@ export function vehicleImageStateTypeToJSON(object: VehicleImageStateType): stri
 }
 
 /**
+ * Keep-on request for a cabin accessory power socket.
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export enum KeepOnAccessoryPortRequest {
+  KeepOnAccessoryPortRequest_Off = 0,
+  KeepOnAccessoryPortRequest_On = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function keepOnAccessoryPortRequestFromJSON(object: any): KeepOnAccessoryPortRequest {
+  switch (object) {
+    case 0:
+    case "KeepOnAccessoryPortRequest_Off":
+      return KeepOnAccessoryPortRequest.KeepOnAccessoryPortRequest_Off;
+    case 1:
+    case "KeepOnAccessoryPortRequest_On":
+      return KeepOnAccessoryPortRequest.KeepOnAccessoryPortRequest_On;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return KeepOnAccessoryPortRequest.UNRECOGNIZED;
+  }
+}
+
+export function keepOnAccessoryPortRequestToJSON(object: KeepOnAccessoryPortRequest): string {
+  switch (object) {
+    case KeepOnAccessoryPortRequest.KeepOnAccessoryPortRequest_Off:
+      return "KeepOnAccessoryPortRequest_Off";
+    case KeepOnAccessoryPortRequest.KeepOnAccessoryPortRequest_On:
+      return "KeepOnAccessoryPortRequest_On";
+    case KeepOnAccessoryPortRequest.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/**
  * ===== TESLEMETRY-EXT BEGIN =====
  * Capability bits a vehicle advertises to the mobile app. Each value is a bit
  * index into CurrentVehicleState.feature_bitmask (VehicleData.vehicle_state,
@@ -1297,6 +1334,10 @@ export interface VehicleData {
   /** TESLEMETRY-EXT */
   displayState:
     | DisplayState
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  keepOnAccessoryPortsState:
+    | KeepOnAccessoryPortsState
     | undefined;
   /**
    * Each entry is an encoded CarServer.PiiKeyResponse (car_server.proto), declared
@@ -2443,6 +2484,8 @@ export interface CurrentVehicleState {
   hazardsOn?: boolean | undefined;
   deckLightsAllowed?: boolean | undefined;
   field70?: number | undefined;
+  halloweenMode?: boolean | undefined;
+  trickOrTreatMode?: boolean | undefined;
 }
 
 export interface DashcamUtils {
@@ -3779,6 +3822,13 @@ export interface VehicleDetailState {
   isFsdV14OrAbove?: boolean | undefined;
 }
 
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface KeepOnAccessoryPortsState {
+  keepOnCabin12vPortRequest?: KeepOnAccessoryPortRequest | undefined;
+  keepOnCabin48vPortRequest?: KeepOnAccessoryPortRequest | undefined;
+  timestamp: Date | undefined;
+}
+
 function createBaseVehicleData(): VehicleData {
   return {
     guiSettings: undefined,
@@ -3809,6 +3859,7 @@ function createBaseVehicleData(): VehicleData {
     suspensionState: undefined,
     childPresenceDetectionState: undefined,
     displayState: undefined,
+    keepOnAccessoryPortsState: undefined,
     piiKeyResponses: [],
     wrappedKey: new Uint8Array(0),
     supportsOptionalFields: undefined,
@@ -3900,6 +3951,9 @@ export const VehicleData: MessageFns<VehicleData> = {
     }
     if (message.displayState !== undefined) {
       DisplayState.encode(message.displayState, writer.uint32(290).fork()).join();
+    }
+    if (message.keepOnAccessoryPortsState !== undefined) {
+      KeepOnAccessoryPortsState.encode(message.keepOnAccessoryPortsState, writer.uint32(314).fork()).join();
     }
     for (const v of message.piiKeyResponses) {
       writer.uint32(7202).bytes(v!);
@@ -4144,6 +4198,14 @@ export const VehicleData: MessageFns<VehicleData> = {
           message.displayState = DisplayState.decode(reader, reader.uint32());
           continue;
         }
+        case 39: {
+          if (tag !== 314) {
+            break;
+          }
+
+          message.keepOnAccessoryPortsState = KeepOnAccessoryPortsState.decode(reader, reader.uint32());
+          continue;
+        }
         case 900: {
           if (tag !== 7202) {
             break;
@@ -4229,6 +4291,9 @@ export const VehicleData: MessageFns<VehicleData> = {
         ? ChildPresenceDetectionState.fromJSON(object.childPresenceDetectionState)
         : undefined,
       displayState: isSet(object.displayState) ? DisplayState.fromJSON(object.displayState) : undefined,
+      keepOnAccessoryPortsState: isSet(object.keepOnAccessoryPortsState)
+        ? KeepOnAccessoryPortsState.fromJSON(object.keepOnAccessoryPortsState)
+        : undefined,
       piiKeyResponses: globalThis.Array.isArray(object?.piiKeyResponses)
         ? object.piiKeyResponses.map((e: any) => bytesFromBase64(e))
         : [],
@@ -4324,6 +4389,9 @@ export const VehicleData: MessageFns<VehicleData> = {
     }
     if (message.displayState !== undefined) {
       obj.displayState = DisplayState.toJSON(message.displayState);
+    }
+    if (message.keepOnAccessoryPortsState !== undefined) {
+      obj.keepOnAccessoryPortsState = KeepOnAccessoryPortsState.toJSON(message.keepOnAccessoryPortsState);
     }
     if (message.piiKeyResponses?.length) {
       obj.piiKeyResponses = message.piiKeyResponses.map((e) => base64FromBytes(e));
@@ -4423,6 +4491,10 @@ export const VehicleData: MessageFns<VehicleData> = {
     message.displayState = (object.displayState !== undefined && object.displayState !== null)
       ? DisplayState.fromPartial(object.displayState)
       : undefined;
+    message.keepOnAccessoryPortsState =
+      (object.keepOnAccessoryPortsState !== undefined && object.keepOnAccessoryPortsState !== null)
+        ? KeepOnAccessoryPortsState.fromPartial(object.keepOnAccessoryPortsState)
+        : undefined;
     message.piiKeyResponses = object.piiKeyResponses?.map((e) => e) || [];
     message.wrappedKey = object.wrappedKey ?? new Uint8Array(0);
     message.supportsOptionalFields = object.supportsOptionalFields ?? undefined;
@@ -12507,6 +12579,8 @@ function createBaseCurrentVehicleState(): CurrentVehicleState {
     hazardsOn: undefined,
     deckLightsAllowed: undefined,
     field70: undefined,
+    halloweenMode: undefined,
+    trickOrTreatMode: undefined,
   };
 }
 
@@ -12708,6 +12782,12 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
     }
     if (message.field70 !== undefined) {
       writer.uint32(560).uint64(message.field70);
+    }
+    if (message.halloweenMode !== undefined) {
+      writer.uint32(568).bool(message.halloweenMode);
+    }
+    if (message.trickOrTreatMode !== undefined) {
+      writer.uint32(576).bool(message.trickOrTreatMode);
     }
     return writer;
   },
@@ -13249,6 +13329,22 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
           message.field70 = longToNumber(reader.uint64());
           continue;
         }
+        case 71: {
+          if (tag !== 568) {
+            break;
+          }
+
+          message.halloweenMode = reader.bool();
+          continue;
+        }
+        case 72: {
+          if (tag !== 576) {
+            break;
+          }
+
+          message.trickOrTreatMode = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -13383,6 +13479,8 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
       hazardsOn: isSet(object.hazardsOn) ? globalThis.Boolean(object.hazardsOn) : undefined,
       deckLightsAllowed: isSet(object.deckLightsAllowed) ? globalThis.Boolean(object.deckLightsAllowed) : undefined,
       field70: isSet(object.field70) ? globalThis.Number(object.field70) : undefined,
+      halloweenMode: isSet(object.halloweenMode) ? globalThis.Boolean(object.halloweenMode) : undefined,
+      trickOrTreatMode: isSet(object.trickOrTreatMode) ? globalThis.Boolean(object.trickOrTreatMode) : undefined,
     };
   },
 
@@ -13583,6 +13681,12 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
     if (message.field70 !== undefined) {
       obj.field70 = Math.round(message.field70);
     }
+    if (message.halloweenMode !== undefined) {
+      obj.halloweenMode = message.halloweenMode;
+    }
+    if (message.trickOrTreatMode !== undefined) {
+      obj.trickOrTreatMode = message.trickOrTreatMode;
+    }
     return obj;
   },
 
@@ -13668,6 +13772,8 @@ export const CurrentVehicleState: MessageFns<CurrentVehicleState> = {
     message.hazardsOn = object.hazardsOn ?? undefined;
     message.deckLightsAllowed = object.deckLightsAllowed ?? undefined;
     message.field70 = object.field70 ?? undefined;
+    message.halloweenMode = object.halloweenMode ?? undefined;
+    message.trickOrTreatMode = object.trickOrTreatMode ?? undefined;
     return message;
   },
 };
@@ -21599,6 +21705,102 @@ export const VehicleDetailState: MessageFns<VehicleDetailState> = {
     message.currentProfileName = object.currentProfileName ?? undefined;
     message.chinaAutopilotSoftwareVersion = object.chinaAutopilotSoftwareVersion ?? undefined;
     message.isFsdV14OrAbove = object.isFsdV14OrAbove ?? undefined;
+    return message;
+  },
+};
+
+function createBaseKeepOnAccessoryPortsState(): KeepOnAccessoryPortsState {
+  return { keepOnCabin12vPortRequest: undefined, keepOnCabin48vPortRequest: undefined, timestamp: undefined };
+}
+
+export const KeepOnAccessoryPortsState: MessageFns<KeepOnAccessoryPortsState> = {
+  encode(message: KeepOnAccessoryPortsState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.keepOnCabin12vPortRequest !== undefined) {
+      writer.uint32(8).int32(message.keepOnCabin12vPortRequest);
+    }
+    if (message.keepOnCabin48vPortRequest !== undefined) {
+      writer.uint32(16).int32(message.keepOnCabin48vPortRequest);
+    }
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(16002).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): KeepOnAccessoryPortsState {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseKeepOnAccessoryPortsState();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.keepOnCabin12vPortRequest = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.keepOnCabin48vPortRequest = reader.int32() as any;
+          continue;
+        }
+        case 2000: {
+          if (tag !== 16002) {
+            break;
+          }
+
+          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): KeepOnAccessoryPortsState {
+    return {
+      keepOnCabin12vPortRequest: isSet(object.keepOnCabin12vPortRequest)
+        ? keepOnAccessoryPortRequestFromJSON(object.keepOnCabin12vPortRequest)
+        : undefined,
+      keepOnCabin48vPortRequest: isSet(object.keepOnCabin48vPortRequest)
+        ? keepOnAccessoryPortRequestFromJSON(object.keepOnCabin48vPortRequest)
+        : undefined,
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+    };
+  },
+
+  toJSON(message: KeepOnAccessoryPortsState): unknown {
+    const obj: any = {};
+    if (message.keepOnCabin12vPortRequest !== undefined) {
+      obj.keepOnCabin12vPortRequest = keepOnAccessoryPortRequestToJSON(message.keepOnCabin12vPortRequest);
+    }
+    if (message.keepOnCabin48vPortRequest !== undefined) {
+      obj.keepOnCabin48vPortRequest = keepOnAccessoryPortRequestToJSON(message.keepOnCabin48vPortRequest);
+    }
+    if (message.timestamp !== undefined) {
+      obj.timestamp = message.timestamp.toISOString();
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<KeepOnAccessoryPortsState>, I>>(base?: I): KeepOnAccessoryPortsState {
+    return KeepOnAccessoryPortsState.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<KeepOnAccessoryPortsState>, I>>(object: I): KeepOnAccessoryPortsState {
+    const message = createBaseKeepOnAccessoryPortsState();
+    message.keepOnCabin12vPortRequest = object.keepOnCabin12vPortRequest ?? undefined;
+    message.keepOnCabin48vPortRequest = object.keepOnCabin48vPortRequest ?? undefined;
+    message.timestamp = object.timestamp ?? undefined;
     return message;
   },
 };
