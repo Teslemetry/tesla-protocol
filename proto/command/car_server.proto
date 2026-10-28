@@ -157,15 +157,15 @@ message VehicleAction {
     FetchKeysInfoAction fetchKeysInfoAction = 142;  // TESLEMETRY-EXT
     DeleteDashcamClipsAction deleteDashcamClipsAction = 144;  // TESLEMETRY-EXT
     FormatUSBAction formatUsbAction = 146;  // TESLEMETRY-EXT
-    SetUpkeepUsernameAction setUpkeepUsernameAction = 147;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    SetUpkeepUsernameAction setUpkeepUsernameAction = 147;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     BandwidthTest bandwidthTest = 149;  // TESLEMETRY-EXT
     SetPhoneSettingPreferencesAction setPhoneSettingPreferencesAction = 151;  // TESLEMETRY-EXT
     CancelVehicleDataSubscription cancelVehicleDataSubscription = 171;  // TESLEMETRY-EXT
-    PrepareMobileUploadAction prepareMobileUploadAction = 177;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
-    PutMobileUploadChunkAction putMobileUploadChunkAction = 178;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
-    DisplayStateAction displayStateAction = 180;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
-    DrivingSetCruiseSpeedLimitAction drivingSetCruiseSpeedLimitAction = 694177;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
-    SetDeckLightAction setDeckLightAction = 698038;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    PrepareMobileUploadAction prepareMobileUploadAction = 177;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    PutMobileUploadChunkAction putMobileUploadChunkAction = 178;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    DisplayStateAction displayStateAction = 180;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    DrivingSetCruiseSpeedLimitAction drivingSetCruiseSpeedLimitAction = 694177;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    SetDeckLightAction setDeckLightAction = 698038;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     SetKeepOnCabin12vPortAction setKeepOnCabin12vPortAction = 721262;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     SetKeepOnCabin48vPortAction setKeepOnCabin48vPortAction = 721263;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
   }
@@ -1506,7 +1506,7 @@ message CancelVehicleDataSubscription {}
 
 // UNCONFIRMED: not yet confirmed on a live vehicle.
 message SetUpkeepUsernameAction {
-  string username = 1;  // name not recovered
+  string username = 1;
 }
 
 // Sets the cruise-control speed limit reported back as
@@ -1518,7 +1518,7 @@ message DrivingSetCruiseSpeedLimitAction {
 
 // UNCONFIRMED: not yet confirmed on a live vehicle.
 message SetDeckLightAction {
-  bool on = 1;  // name not recovered
+  bool on = 1;
 }
 
 // Keeps the 12 V cabin accessory socket powered (or not).

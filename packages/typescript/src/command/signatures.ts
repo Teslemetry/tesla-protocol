@@ -329,7 +329,6 @@ export interface AESGCMDetachedSignatureData {
  */
 export interface CertificateECDSASignatureData {
   certificateChainDer: Uint8Array;
-  /** name not recovered */
   signature: Uint8Array;
 }
 

@@ -606,7 +606,7 @@ export interface VehicleAction {
   formatUsbAction?:
     | FormatUSBAction
     | undefined;
-  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
   setUpkeepUsernameAction?:
     | SetUpkeepUsernameAction
     | undefined;
@@ -622,23 +622,23 @@ export interface VehicleAction {
   cancelVehicleDataSubscription?:
     | CancelVehicleDataSubscription
     | undefined;
-  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
   prepareMobileUploadAction?:
     | PrepareMobileUploadAction
     | undefined;
-  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
   putMobileUploadChunkAction?:
     | PutMobileUploadChunkAction
     | undefined;
-  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
   displayStateAction?:
     | DisplayStateAction
     | undefined;
-  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
   drivingSetCruiseSpeedLimitAction?:
     | DrivingSetCruiseSpeedLimitAction
     | undefined;
-  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
   setDeckLightAction?:
     | SetDeckLightAction
     | undefined;
@@ -3181,7 +3181,6 @@ export interface CancelVehicleDataSubscription {
 
 /** UNCONFIRMED: not yet confirmed on a live vehicle. */
 export interface SetUpkeepUsernameAction {
-  /** name not recovered */
   username: string;
 }
 
@@ -3196,7 +3195,6 @@ export interface DrivingSetCruiseSpeedLimitAction {
 
 /** UNCONFIRMED: not yet confirmed on a live vehicle. */
 export interface SetDeckLightAction {
-  /** name not recovered */
   on: boolean;
 }
 

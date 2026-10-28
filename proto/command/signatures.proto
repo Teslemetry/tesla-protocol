@@ -92,7 +92,7 @@ message AES_GCM_Detached_Signature_Data {
 // UNCONFIRMED: not yet confirmed on a live vehicle.
 message Certificate_ECDSA_Signature_Data {
     bytes certificate_chain_der = 1;
-    bytes signature             = 2; // name not recovered
+    bytes signature             = 2;
 }
 // ===== TESLEMETRY-EXT END =====
 

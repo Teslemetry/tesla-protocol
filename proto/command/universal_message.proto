@@ -80,7 +80,7 @@ message SessionInfoRequest
 {
     bytes public_key = 1;
     bytes challenge = 2;
-    uint32 handle = 3;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    uint32 handle = 3;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     Signatures.IdentifiedKey identified_key = 4;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 

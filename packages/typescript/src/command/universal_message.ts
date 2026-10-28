@@ -425,7 +425,7 @@ export interface MessageStatus {
 export interface SessionInfoRequest {
   publicKey: Uint8Array;
   challenge: Uint8Array;
-  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
   handle: number;
   /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
   identifiedKey: IdentifiedKey;

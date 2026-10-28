@@ -2397,7 +2397,7 @@ export interface VehicleState_GuestMode {
  * legacy surface.
  */
 export interface CurrentVehicleState {
-  /** confirmed on a live vehicle; name not recovered */
+  /** confirmed on a live vehicle */
   timestamp: Date | undefined;
   apiVersion?: number | undefined;
   notificationsSupported?: boolean | undefined;
@@ -2441,7 +2441,7 @@ export interface CurrentVehicleState {
   allowAuthorizedMobileDevicesOnly?:
     | boolean
     | undefined;
-  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
   guestMode: VehicleState_GuestMode | undefined;
   driveRailOn?: boolean | undefined;
   pinToDriveEnabled?: boolean | undefined;
@@ -2477,7 +2477,7 @@ export interface CurrentVehicleState {
   fsdStatsSupported?:
     | boolean
     | undefined;
-  /** confirmed on a live vehicle; name not recovered */
+  /** confirmed on a live vehicle */
   dashcamUtils: DashcamUtils | undefined;
   remoteSketchpadAvailable?: boolean | undefined;
   deckLightsOn?: boolean | undefined;
