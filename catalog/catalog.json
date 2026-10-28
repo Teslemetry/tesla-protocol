@@ -348,7 +348,7 @@
       },
       "messages": 348,
       "enums": 107,
-      "fields": 1621,
+      "fields": 1652,
       "files": [
         {
           "package": "CarServer",
@@ -16349,6 +16349,22 @@
               "name": "VehicleState",
               "fields": [
                 {
+                  "number": 34,
+                  "name": "autopark_style",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.AutoparkStyle",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 37,
+                  "name": "active_spoiler_state",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SpoilerState",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 38,
                   "name": "software_update_state",
                   "type": "TYPE_MESSAGE",
@@ -16369,6 +16385,22 @@
                   "name": "timestamp",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".google.protobuf.Timestamp",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 46,
+                  "name": "autopark_version",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.AutoparkVersion",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 47,
+                  "name": "autopark_state",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.AutoparkState",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
@@ -17685,18 +17717,28 @@
             {
               "fqn": ".CarServer.AutoparkStyle",
               "name": "AutoparkStyle",
-              "fields": [],
-              "oneofs": [],
-              "reserved_ranges": [
-                [
-                  1,
-                  1
-                ],
-                [
-                  2,
-                  2
-                ]
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "Deadman",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "Standard",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
               ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
               "reserved_names": [],
               "nested_messages": [],
               "nested_enums": []
@@ -17704,22 +17746,36 @@
             {
               "fqn": ".CarServer.AutoparkVersion",
               "name": "AutoparkVersion",
-              "fields": [],
-              "oneofs": [],
-              "reserved_ranges": [
-                [
-                  1,
-                  1
-                ],
-                [
-                  2,
-                  2
-                ],
-                [
-                  3,
-                  3
-                ]
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "Version2",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "Version3",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "Version4",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
               ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
               "reserved_names": [],
               "nested_messages": [],
               "nested_enums": []
@@ -17727,14 +17783,108 @@
             {
               "fqn": ".CarServer.AutoparkState",
               "name": "AutoparkState",
-              "fields": [],
-              "oneofs": [],
-              "reserved_ranges": [
-                [
-                  1,
-                  12
-                ]
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "Standby",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "Unavailable",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "Ready",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 4,
+                  "name": "ActiveForward",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 5,
+                  "name": "ActiveReverse",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 6,
+                  "name": "Disabled",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 7,
+                  "name": "Panic",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 8,
+                  "name": "Preparing",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 9,
+                  "name": "Aborting",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 10,
+                  "name": "Paused",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 11,
+                  "name": "Resuming",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 12,
+                  "name": "OpeningGate",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
               ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
               "reserved_names": [],
               "nested_messages": [],
               "nested_enums": []
@@ -17742,26 +17892,44 @@
             {
               "fqn": ".CarServer.SpoilerState",
               "name": "SpoilerState",
-              "fields": [],
-              "oneofs": [],
-              "reserved_ranges": [
-                [
-                  1,
-                  1
-                ],
-                [
-                  2,
-                  2
-                ],
-                [
-                  3,
-                  3
-                ],
-                [
-                  4,
-                  4
-                ]
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "Unknown",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "Retracted",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "Extended",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 4,
+                  "name": "Fault",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
               ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
               "reserved_names": [],
               "nested_messages": [],
               "nested_enums": []
@@ -20967,26 +21135,44 @@
                 {
                   "fqn": ".CarServer.SohState.SohTestPhase",
                   "name": "SohTestPhase",
-                  "fields": [],
-                  "oneofs": [],
-                  "reserved_ranges": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ],
-                    [
-                      3,
-                      3
-                    ],
-                    [
-                      4,
-                      4
-                    ]
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "Discharge",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 2,
+                      "name": "DischargeRest",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 3,
+                      "name": "Charge",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 4,
+                      "name": "ChargeRest",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    }
                   ],
+                  "oneofs": [
+                    "type"
+                  ],
+                  "reserved_ranges": [],
                   "reserved_names": [],
                   "nested_messages": [],
                   "nested_enums": []
@@ -20994,18 +21180,28 @@
                 {
                   "fqn": ".CarServer.SohState.SohTestEndMode",
                   "name": "SohTestEndMode",
-                  "fields": [],
-                  "oneofs": [],
-                  "reserved_ranges": [
-                    [
-                      1,
-                      1
-                    ],
-                    [
-                      2,
-                      2
-                    ]
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "Complete",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 2,
+                      "name": "Failed",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    }
                   ],
+                  "oneofs": [
+                    "type"
+                  ],
+                  "reserved_ranges": [],
                   "reserved_names": [],
                   "nested_messages": [],
                   "nested_enums": []
@@ -45571,7 +45767,7 @@
     "groups": 7,
     "messages": 909,
     "enums": 255,
-    "fields": 3029
+    "fields": 3060
   },
   "registration": {
     "consistent": true,

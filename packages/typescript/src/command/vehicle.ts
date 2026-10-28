@@ -2286,6 +2286,14 @@ export interface LocationState_GPSCoordinateType {
 }
 
 export interface VehicleState {
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  autoparkStyle:
+    | AutoparkStyle
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  activeSpoilerState:
+    | SpoilerState
+    | undefined;
   /** TESLEMETRY-EXT */
   softwareUpdateState:
     | SoftwareUpdateState
@@ -2297,6 +2305,14 @@ export interface VehicleState {
   /** TESLEMETRY-EXT */
   timestamp:
     | Date
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  autoparkVersion:
+    | AutoparkVersion
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  autoparkState:
+    | AutoparkState
     | undefined;
   /** TESLEMETRY-EXT */
   featureBitmask: number[];
@@ -2493,17 +2509,80 @@ export interface DashcamUtils {
   formatUsbAvailable?: boolean | undefined;
 }
 
-/** Void-oneof states whose alternatives have no recovered names. */
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
 export interface AutoparkStyle {
+  Deadman?: Void | undefined;
+  Standard?: Void | undefined;
 }
 
 export interface AutoparkVersion {
+  /** confirmed on a live vehicle */
+  Version2?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  Version3?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  Version4?: Void | undefined;
 }
 
 export interface AutoparkState {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  Standby?:
+    | Void
+    | undefined;
+  /** confirmed on a live vehicle */
+  Unavailable?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  Ready?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  ActiveForward?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  ActiveReverse?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  Disabled?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  Panic?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  Preparing?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  Aborting?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  Paused?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  Resuming?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  OpeningGate?: Void | undefined;
 }
 
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
 export interface SpoilerState {
+  Unknown?: Void | undefined;
+  Retracted?: Void | undefined;
+  Extended?: Void | undefined;
+  Fault?: Void | undefined;
 }
 
 export interface LegacyMediaState {
@@ -3719,10 +3798,18 @@ export function sohState_WarrantyServiceResultToJSON(object: SohState_WarrantySe
   }
 }
 
+/** Alternatives are wire-confirmed. */
 export interface SohState_SohTestPhase {
+  Discharge?: Void | undefined;
+  DischargeRest?: Void | undefined;
+  Charge?: Void | undefined;
+  ChargeRest?: Void | undefined;
 }
 
+/** Alternatives are wire-confirmed. */
 export interface SohState_SohTestEndMode {
+  Complete?: Void | undefined;
+  Failed?: Void | undefined;
 }
 
 export interface SohState_SohTestState {
@@ -11110,9 +11197,13 @@ export const LocationState_GPSCoordinateType: MessageFns<LocationState_GPSCoordi
 
 function createBaseVehicleState(): VehicleState {
   return {
+    autoparkStyle: undefined,
+    activeSpoilerState: undefined,
     softwareUpdateState: undefined,
     legacyMediaState: undefined,
     timestamp: undefined,
+    autoparkVersion: undefined,
+    autoparkState: undefined,
     featureBitmask: [],
     tpmsLastSeenPressureTimeFl: undefined,
     tpmsLastSeenPressureTimeFr: undefined,
@@ -11187,6 +11278,12 @@ function createBaseVehicleState(): VehicleState {
 
 export const VehicleState: MessageFns<VehicleState> = {
   encode(message: VehicleState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.autoparkStyle !== undefined) {
+      AutoparkStyle.encode(message.autoparkStyle, writer.uint32(274).fork()).join();
+    }
+    if (message.activeSpoilerState !== undefined) {
+      SpoilerState.encode(message.activeSpoilerState, writer.uint32(298).fork()).join();
+    }
     if (message.softwareUpdateState !== undefined) {
       SoftwareUpdateState.encode(message.softwareUpdateState, writer.uint32(306).fork()).join();
     }
@@ -11195,6 +11292,12 @@ export const VehicleState: MessageFns<VehicleState> = {
     }
     if (message.timestamp !== undefined) {
       Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(346).fork()).join();
+    }
+    if (message.autoparkVersion !== undefined) {
+      AutoparkVersion.encode(message.autoparkVersion, writer.uint32(370).fork()).join();
+    }
+    if (message.autoparkState !== undefined) {
+      AutoparkState.encode(message.autoparkState, writer.uint32(378).fork()).join();
     }
     writer.uint32(442).fork();
     for (const v of message.featureBitmask) {
@@ -11415,6 +11518,22 @@ export const VehicleState: MessageFns<VehicleState> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 34: {
+          if (tag !== 274) {
+            break;
+          }
+
+          message.autoparkStyle = AutoparkStyle.decode(reader, reader.uint32());
+          continue;
+        }
+        case 37: {
+          if (tag !== 298) {
+            break;
+          }
+
+          message.activeSpoilerState = SpoilerState.decode(reader, reader.uint32());
+          continue;
+        }
         case 38: {
           if (tag !== 306) {
             break;
@@ -11437,6 +11556,22 @@ export const VehicleState: MessageFns<VehicleState> = {
           }
 
           message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 46: {
+          if (tag !== 370) {
+            break;
+          }
+
+          message.autoparkVersion = AutoparkVersion.decode(reader, reader.uint32());
+          continue;
+        }
+        case 47: {
+          if (tag !== 378) {
+            break;
+          }
+
+          message.autoparkState = AutoparkState.decode(reader, reader.uint32());
           continue;
         }
         case 55: {
@@ -12012,11 +12147,17 @@ export const VehicleState: MessageFns<VehicleState> = {
 
   fromJSON(object: any): VehicleState {
     return {
+      autoparkStyle: isSet(object.autoparkStyle) ? AutoparkStyle.fromJSON(object.autoparkStyle) : undefined,
+      activeSpoilerState: isSet(object.activeSpoilerState)
+        ? SpoilerState.fromJSON(object.activeSpoilerState)
+        : undefined,
       softwareUpdateState: isSet(object.softwareUpdateState)
         ? SoftwareUpdateState.fromJSON(object.softwareUpdateState)
         : undefined,
       legacyMediaState: isSet(object.legacyMediaState) ? LegacyMediaState.fromJSON(object.legacyMediaState) : undefined,
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
+      autoparkVersion: isSet(object.autoparkVersion) ? AutoparkVersion.fromJSON(object.autoparkVersion) : undefined,
+      autoparkState: isSet(object.autoparkState) ? AutoparkState.fromJSON(object.autoparkState) : undefined,
       featureBitmask: globalThis.Array.isArray(object?.featureBitmask)
         ? object.featureBitmask.map((e: any) => globalThis.Number(e))
         : [],
@@ -12143,6 +12284,12 @@ export const VehicleState: MessageFns<VehicleState> = {
 
   toJSON(message: VehicleState): unknown {
     const obj: any = {};
+    if (message.autoparkStyle !== undefined) {
+      obj.autoparkStyle = AutoparkStyle.toJSON(message.autoparkStyle);
+    }
+    if (message.activeSpoilerState !== undefined) {
+      obj.activeSpoilerState = SpoilerState.toJSON(message.activeSpoilerState);
+    }
     if (message.softwareUpdateState !== undefined) {
       obj.softwareUpdateState = SoftwareUpdateState.toJSON(message.softwareUpdateState);
     }
@@ -12151,6 +12298,12 @@ export const VehicleState: MessageFns<VehicleState> = {
     }
     if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp.toISOString();
+    }
+    if (message.autoparkVersion !== undefined) {
+      obj.autoparkVersion = AutoparkVersion.toJSON(message.autoparkVersion);
+    }
+    if (message.autoparkState !== undefined) {
+      obj.autoparkState = AutoparkState.toJSON(message.autoparkState);
     }
     if (message.featureBitmask?.length) {
       obj.featureBitmask = message.featureBitmask.map((e) => Math.round(e));
@@ -12367,6 +12520,12 @@ export const VehicleState: MessageFns<VehicleState> = {
   },
   fromPartial<I extends Exact<DeepPartial<VehicleState>, I>>(object: I): VehicleState {
     const message = createBaseVehicleState();
+    message.autoparkStyle = (object.autoparkStyle !== undefined && object.autoparkStyle !== null)
+      ? AutoparkStyle.fromPartial(object.autoparkStyle)
+      : undefined;
+    message.activeSpoilerState = (object.activeSpoilerState !== undefined && object.activeSpoilerState !== null)
+      ? SpoilerState.fromPartial(object.activeSpoilerState)
+      : undefined;
     message.softwareUpdateState = (object.softwareUpdateState !== undefined && object.softwareUpdateState !== null)
       ? SoftwareUpdateState.fromPartial(object.softwareUpdateState)
       : undefined;
@@ -12374,6 +12533,12 @@ export const VehicleState: MessageFns<VehicleState> = {
       ? LegacyMediaState.fromPartial(object.legacyMediaState)
       : undefined;
     message.timestamp = object.timestamp ?? undefined;
+    message.autoparkVersion = (object.autoparkVersion !== undefined && object.autoparkVersion !== null)
+      ? AutoparkVersion.fromPartial(object.autoparkVersion)
+      : undefined;
+    message.autoparkState = (object.autoparkState !== undefined && object.autoparkState !== null)
+      ? AutoparkState.fromPartial(object.autoparkState)
+      : undefined;
     message.featureBitmask = object.featureBitmask?.map((e) => e) || [];
     message.tpmsLastSeenPressureTimeFl = object.tpmsLastSeenPressureTimeFl ?? undefined;
     message.tpmsLastSeenPressureTimeFr = object.tpmsLastSeenPressureTimeFr ?? undefined;
@@ -13857,11 +14022,17 @@ export const DashcamUtils: MessageFns<DashcamUtils> = {
 };
 
 function createBaseAutoparkStyle(): AutoparkStyle {
-  return {};
+  return { Deadman: undefined, Standard: undefined };
 }
 
 export const AutoparkStyle: MessageFns<AutoparkStyle> = {
-  encode(_: AutoparkStyle, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: AutoparkStyle, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Deadman !== undefined) {
+      Void.encode(message.Deadman, writer.uint32(10).fork()).join();
+    }
+    if (message.Standard !== undefined) {
+      Void.encode(message.Standard, writer.uint32(18).fork()).join();
+    }
     return writer;
   },
 
@@ -13872,6 +14043,22 @@ export const AutoparkStyle: MessageFns<AutoparkStyle> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Deadman = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Standard = Void.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -13881,30 +14068,54 @@ export const AutoparkStyle: MessageFns<AutoparkStyle> = {
     return message;
   },
 
-  fromJSON(_: any): AutoparkStyle {
-    return {};
+  fromJSON(object: any): AutoparkStyle {
+    return {
+      Deadman: isSet(object.Deadman) ? Void.fromJSON(object.Deadman) : undefined,
+      Standard: isSet(object.Standard) ? Void.fromJSON(object.Standard) : undefined,
+    };
   },
 
-  toJSON(_: AutoparkStyle): unknown {
+  toJSON(message: AutoparkStyle): unknown {
     const obj: any = {};
+    if (message.Deadman !== undefined) {
+      obj.Deadman = Void.toJSON(message.Deadman);
+    }
+    if (message.Standard !== undefined) {
+      obj.Standard = Void.toJSON(message.Standard);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<AutoparkStyle>, I>>(base?: I): AutoparkStyle {
     return AutoparkStyle.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AutoparkStyle>, I>>(_: I): AutoparkStyle {
+  fromPartial<I extends Exact<DeepPartial<AutoparkStyle>, I>>(object: I): AutoparkStyle {
     const message = createBaseAutoparkStyle();
+    message.Deadman = (object.Deadman !== undefined && object.Deadman !== null)
+      ? Void.fromPartial(object.Deadman)
+      : undefined;
+    message.Standard = (object.Standard !== undefined && object.Standard !== null)
+      ? Void.fromPartial(object.Standard)
+      : undefined;
     return message;
   },
 };
 
 function createBaseAutoparkVersion(): AutoparkVersion {
-  return {};
+  return { Version2: undefined, Version3: undefined, Version4: undefined };
 }
 
 export const AutoparkVersion: MessageFns<AutoparkVersion> = {
-  encode(_: AutoparkVersion, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: AutoparkVersion, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Version2 !== undefined) {
+      Void.encode(message.Version2, writer.uint32(10).fork()).join();
+    }
+    if (message.Version3 !== undefined) {
+      Void.encode(message.Version3, writer.uint32(18).fork()).join();
+    }
+    if (message.Version4 !== undefined) {
+      Void.encode(message.Version4, writer.uint32(26).fork()).join();
+    }
     return writer;
   },
 
@@ -13915,6 +14126,30 @@ export const AutoparkVersion: MessageFns<AutoparkVersion> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Version2 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Version3 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Version4 = Void.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -13924,30 +14159,101 @@ export const AutoparkVersion: MessageFns<AutoparkVersion> = {
     return message;
   },
 
-  fromJSON(_: any): AutoparkVersion {
-    return {};
+  fromJSON(object: any): AutoparkVersion {
+    return {
+      Version2: isSet(object.Version2) ? Void.fromJSON(object.Version2) : undefined,
+      Version3: isSet(object.Version3) ? Void.fromJSON(object.Version3) : undefined,
+      Version4: isSet(object.Version4) ? Void.fromJSON(object.Version4) : undefined,
+    };
   },
 
-  toJSON(_: AutoparkVersion): unknown {
+  toJSON(message: AutoparkVersion): unknown {
     const obj: any = {};
+    if (message.Version2 !== undefined) {
+      obj.Version2 = Void.toJSON(message.Version2);
+    }
+    if (message.Version3 !== undefined) {
+      obj.Version3 = Void.toJSON(message.Version3);
+    }
+    if (message.Version4 !== undefined) {
+      obj.Version4 = Void.toJSON(message.Version4);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<AutoparkVersion>, I>>(base?: I): AutoparkVersion {
     return AutoparkVersion.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AutoparkVersion>, I>>(_: I): AutoparkVersion {
+  fromPartial<I extends Exact<DeepPartial<AutoparkVersion>, I>>(object: I): AutoparkVersion {
     const message = createBaseAutoparkVersion();
+    message.Version2 = (object.Version2 !== undefined && object.Version2 !== null)
+      ? Void.fromPartial(object.Version2)
+      : undefined;
+    message.Version3 = (object.Version3 !== undefined && object.Version3 !== null)
+      ? Void.fromPartial(object.Version3)
+      : undefined;
+    message.Version4 = (object.Version4 !== undefined && object.Version4 !== null)
+      ? Void.fromPartial(object.Version4)
+      : undefined;
     return message;
   },
 };
 
 function createBaseAutoparkState(): AutoparkState {
-  return {};
+  return {
+    Standby: undefined,
+    Unavailable: undefined,
+    Ready: undefined,
+    ActiveForward: undefined,
+    ActiveReverse: undefined,
+    Disabled: undefined,
+    Panic: undefined,
+    Preparing: undefined,
+    Aborting: undefined,
+    Paused: undefined,
+    Resuming: undefined,
+    OpeningGate: undefined,
+  };
 }
 
 export const AutoparkState: MessageFns<AutoparkState> = {
-  encode(_: AutoparkState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: AutoparkState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Standby !== undefined) {
+      Void.encode(message.Standby, writer.uint32(10).fork()).join();
+    }
+    if (message.Unavailable !== undefined) {
+      Void.encode(message.Unavailable, writer.uint32(18).fork()).join();
+    }
+    if (message.Ready !== undefined) {
+      Void.encode(message.Ready, writer.uint32(26).fork()).join();
+    }
+    if (message.ActiveForward !== undefined) {
+      Void.encode(message.ActiveForward, writer.uint32(34).fork()).join();
+    }
+    if (message.ActiveReverse !== undefined) {
+      Void.encode(message.ActiveReverse, writer.uint32(42).fork()).join();
+    }
+    if (message.Disabled !== undefined) {
+      Void.encode(message.Disabled, writer.uint32(50).fork()).join();
+    }
+    if (message.Panic !== undefined) {
+      Void.encode(message.Panic, writer.uint32(58).fork()).join();
+    }
+    if (message.Preparing !== undefined) {
+      Void.encode(message.Preparing, writer.uint32(66).fork()).join();
+    }
+    if (message.Aborting !== undefined) {
+      Void.encode(message.Aborting, writer.uint32(74).fork()).join();
+    }
+    if (message.Paused !== undefined) {
+      Void.encode(message.Paused, writer.uint32(82).fork()).join();
+    }
+    if (message.Resuming !== undefined) {
+      Void.encode(message.Resuming, writer.uint32(90).fork()).join();
+    }
+    if (message.OpeningGate !== undefined) {
+      Void.encode(message.OpeningGate, writer.uint32(98).fork()).join();
+    }
     return writer;
   },
 
@@ -13958,6 +14264,102 @@ export const AutoparkState: MessageFns<AutoparkState> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Standby = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Unavailable = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Ready = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.ActiveForward = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.ActiveReverse = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.Disabled = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.Panic = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.Preparing = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.Aborting = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.Paused = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.Resuming = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 12: {
+          if (tag !== 98) {
+            break;
+          }
+
+          message.OpeningGate = Void.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -13967,30 +14369,123 @@ export const AutoparkState: MessageFns<AutoparkState> = {
     return message;
   },
 
-  fromJSON(_: any): AutoparkState {
-    return {};
+  fromJSON(object: any): AutoparkState {
+    return {
+      Standby: isSet(object.Standby) ? Void.fromJSON(object.Standby) : undefined,
+      Unavailable: isSet(object.Unavailable) ? Void.fromJSON(object.Unavailable) : undefined,
+      Ready: isSet(object.Ready) ? Void.fromJSON(object.Ready) : undefined,
+      ActiveForward: isSet(object.ActiveForward) ? Void.fromJSON(object.ActiveForward) : undefined,
+      ActiveReverse: isSet(object.ActiveReverse) ? Void.fromJSON(object.ActiveReverse) : undefined,
+      Disabled: isSet(object.Disabled) ? Void.fromJSON(object.Disabled) : undefined,
+      Panic: isSet(object.Panic) ? Void.fromJSON(object.Panic) : undefined,
+      Preparing: isSet(object.Preparing) ? Void.fromJSON(object.Preparing) : undefined,
+      Aborting: isSet(object.Aborting) ? Void.fromJSON(object.Aborting) : undefined,
+      Paused: isSet(object.Paused) ? Void.fromJSON(object.Paused) : undefined,
+      Resuming: isSet(object.Resuming) ? Void.fromJSON(object.Resuming) : undefined,
+      OpeningGate: isSet(object.OpeningGate) ? Void.fromJSON(object.OpeningGate) : undefined,
+    };
   },
 
-  toJSON(_: AutoparkState): unknown {
+  toJSON(message: AutoparkState): unknown {
     const obj: any = {};
+    if (message.Standby !== undefined) {
+      obj.Standby = Void.toJSON(message.Standby);
+    }
+    if (message.Unavailable !== undefined) {
+      obj.Unavailable = Void.toJSON(message.Unavailable);
+    }
+    if (message.Ready !== undefined) {
+      obj.Ready = Void.toJSON(message.Ready);
+    }
+    if (message.ActiveForward !== undefined) {
+      obj.ActiveForward = Void.toJSON(message.ActiveForward);
+    }
+    if (message.ActiveReverse !== undefined) {
+      obj.ActiveReverse = Void.toJSON(message.ActiveReverse);
+    }
+    if (message.Disabled !== undefined) {
+      obj.Disabled = Void.toJSON(message.Disabled);
+    }
+    if (message.Panic !== undefined) {
+      obj.Panic = Void.toJSON(message.Panic);
+    }
+    if (message.Preparing !== undefined) {
+      obj.Preparing = Void.toJSON(message.Preparing);
+    }
+    if (message.Aborting !== undefined) {
+      obj.Aborting = Void.toJSON(message.Aborting);
+    }
+    if (message.Paused !== undefined) {
+      obj.Paused = Void.toJSON(message.Paused);
+    }
+    if (message.Resuming !== undefined) {
+      obj.Resuming = Void.toJSON(message.Resuming);
+    }
+    if (message.OpeningGate !== undefined) {
+      obj.OpeningGate = Void.toJSON(message.OpeningGate);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<AutoparkState>, I>>(base?: I): AutoparkState {
     return AutoparkState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<AutoparkState>, I>>(_: I): AutoparkState {
+  fromPartial<I extends Exact<DeepPartial<AutoparkState>, I>>(object: I): AutoparkState {
     const message = createBaseAutoparkState();
+    message.Standby = (object.Standby !== undefined && object.Standby !== null)
+      ? Void.fromPartial(object.Standby)
+      : undefined;
+    message.Unavailable = (object.Unavailable !== undefined && object.Unavailable !== null)
+      ? Void.fromPartial(object.Unavailable)
+      : undefined;
+    message.Ready = (object.Ready !== undefined && object.Ready !== null) ? Void.fromPartial(object.Ready) : undefined;
+    message.ActiveForward = (object.ActiveForward !== undefined && object.ActiveForward !== null)
+      ? Void.fromPartial(object.ActiveForward)
+      : undefined;
+    message.ActiveReverse = (object.ActiveReverse !== undefined && object.ActiveReverse !== null)
+      ? Void.fromPartial(object.ActiveReverse)
+      : undefined;
+    message.Disabled = (object.Disabled !== undefined && object.Disabled !== null)
+      ? Void.fromPartial(object.Disabled)
+      : undefined;
+    message.Panic = (object.Panic !== undefined && object.Panic !== null) ? Void.fromPartial(object.Panic) : undefined;
+    message.Preparing = (object.Preparing !== undefined && object.Preparing !== null)
+      ? Void.fromPartial(object.Preparing)
+      : undefined;
+    message.Aborting = (object.Aborting !== undefined && object.Aborting !== null)
+      ? Void.fromPartial(object.Aborting)
+      : undefined;
+    message.Paused = (object.Paused !== undefined && object.Paused !== null)
+      ? Void.fromPartial(object.Paused)
+      : undefined;
+    message.Resuming = (object.Resuming !== undefined && object.Resuming !== null)
+      ? Void.fromPartial(object.Resuming)
+      : undefined;
+    message.OpeningGate = (object.OpeningGate !== undefined && object.OpeningGate !== null)
+      ? Void.fromPartial(object.OpeningGate)
+      : undefined;
     return message;
   },
 };
 
 function createBaseSpoilerState(): SpoilerState {
-  return {};
+  return { Unknown: undefined, Retracted: undefined, Extended: undefined, Fault: undefined };
 }
 
 export const SpoilerState: MessageFns<SpoilerState> = {
-  encode(_: SpoilerState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: SpoilerState, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Unknown !== undefined) {
+      Void.encode(message.Unknown, writer.uint32(10).fork()).join();
+    }
+    if (message.Retracted !== undefined) {
+      Void.encode(message.Retracted, writer.uint32(18).fork()).join();
+    }
+    if (message.Extended !== undefined) {
+      Void.encode(message.Extended, writer.uint32(26).fork()).join();
+    }
+    if (message.Fault !== undefined) {
+      Void.encode(message.Fault, writer.uint32(34).fork()).join();
+    }
     return writer;
   },
 
@@ -14001,6 +14496,38 @@ export const SpoilerState: MessageFns<SpoilerState> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Unknown = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Retracted = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Extended = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.Fault = Void.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -14010,20 +14537,47 @@ export const SpoilerState: MessageFns<SpoilerState> = {
     return message;
   },
 
-  fromJSON(_: any): SpoilerState {
-    return {};
+  fromJSON(object: any): SpoilerState {
+    return {
+      Unknown: isSet(object.Unknown) ? Void.fromJSON(object.Unknown) : undefined,
+      Retracted: isSet(object.Retracted) ? Void.fromJSON(object.Retracted) : undefined,
+      Extended: isSet(object.Extended) ? Void.fromJSON(object.Extended) : undefined,
+      Fault: isSet(object.Fault) ? Void.fromJSON(object.Fault) : undefined,
+    };
   },
 
-  toJSON(_: SpoilerState): unknown {
+  toJSON(message: SpoilerState): unknown {
     const obj: any = {};
+    if (message.Unknown !== undefined) {
+      obj.Unknown = Void.toJSON(message.Unknown);
+    }
+    if (message.Retracted !== undefined) {
+      obj.Retracted = Void.toJSON(message.Retracted);
+    }
+    if (message.Extended !== undefined) {
+      obj.Extended = Void.toJSON(message.Extended);
+    }
+    if (message.Fault !== undefined) {
+      obj.Fault = Void.toJSON(message.Fault);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<SpoilerState>, I>>(base?: I): SpoilerState {
     return SpoilerState.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SpoilerState>, I>>(_: I): SpoilerState {
+  fromPartial<I extends Exact<DeepPartial<SpoilerState>, I>>(object: I): SpoilerState {
     const message = createBaseSpoilerState();
+    message.Unknown = (object.Unknown !== undefined && object.Unknown !== null)
+      ? Void.fromPartial(object.Unknown)
+      : undefined;
+    message.Retracted = (object.Retracted !== undefined && object.Retracted !== null)
+      ? Void.fromPartial(object.Retracted)
+      : undefined;
+    message.Extended = (object.Extended !== undefined && object.Extended !== null)
+      ? Void.fromPartial(object.Extended)
+      : undefined;
+    message.Fault = (object.Fault !== undefined && object.Fault !== null) ? Void.fromPartial(object.Fault) : undefined;
     return message;
   },
 };
@@ -20033,11 +20587,23 @@ export const SohState: MessageFns<SohState> = {
 };
 
 function createBaseSohState_SohTestPhase(): SohState_SohTestPhase {
-  return {};
+  return { Discharge: undefined, DischargeRest: undefined, Charge: undefined, ChargeRest: undefined };
 }
 
 export const SohState_SohTestPhase: MessageFns<SohState_SohTestPhase> = {
-  encode(_: SohState_SohTestPhase, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: SohState_SohTestPhase, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Discharge !== undefined) {
+      Void.encode(message.Discharge, writer.uint32(10).fork()).join();
+    }
+    if (message.DischargeRest !== undefined) {
+      Void.encode(message.DischargeRest, writer.uint32(18).fork()).join();
+    }
+    if (message.Charge !== undefined) {
+      Void.encode(message.Charge, writer.uint32(26).fork()).join();
+    }
+    if (message.ChargeRest !== undefined) {
+      Void.encode(message.ChargeRest, writer.uint32(34).fork()).join();
+    }
     return writer;
   },
 
@@ -20048,6 +20614,38 @@ export const SohState_SohTestPhase: MessageFns<SohState_SohTestPhase> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Discharge = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.DischargeRest = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Charge = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.ChargeRest = Void.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -20057,30 +20655,65 @@ export const SohState_SohTestPhase: MessageFns<SohState_SohTestPhase> = {
     return message;
   },
 
-  fromJSON(_: any): SohState_SohTestPhase {
-    return {};
+  fromJSON(object: any): SohState_SohTestPhase {
+    return {
+      Discharge: isSet(object.Discharge) ? Void.fromJSON(object.Discharge) : undefined,
+      DischargeRest: isSet(object.DischargeRest) ? Void.fromJSON(object.DischargeRest) : undefined,
+      Charge: isSet(object.Charge) ? Void.fromJSON(object.Charge) : undefined,
+      ChargeRest: isSet(object.ChargeRest) ? Void.fromJSON(object.ChargeRest) : undefined,
+    };
   },
 
-  toJSON(_: SohState_SohTestPhase): unknown {
+  toJSON(message: SohState_SohTestPhase): unknown {
     const obj: any = {};
+    if (message.Discharge !== undefined) {
+      obj.Discharge = Void.toJSON(message.Discharge);
+    }
+    if (message.DischargeRest !== undefined) {
+      obj.DischargeRest = Void.toJSON(message.DischargeRest);
+    }
+    if (message.Charge !== undefined) {
+      obj.Charge = Void.toJSON(message.Charge);
+    }
+    if (message.ChargeRest !== undefined) {
+      obj.ChargeRest = Void.toJSON(message.ChargeRest);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<SohState_SohTestPhase>, I>>(base?: I): SohState_SohTestPhase {
     return SohState_SohTestPhase.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SohState_SohTestPhase>, I>>(_: I): SohState_SohTestPhase {
+  fromPartial<I extends Exact<DeepPartial<SohState_SohTestPhase>, I>>(object: I): SohState_SohTestPhase {
     const message = createBaseSohState_SohTestPhase();
+    message.Discharge = (object.Discharge !== undefined && object.Discharge !== null)
+      ? Void.fromPartial(object.Discharge)
+      : undefined;
+    message.DischargeRest = (object.DischargeRest !== undefined && object.DischargeRest !== null)
+      ? Void.fromPartial(object.DischargeRest)
+      : undefined;
+    message.Charge = (object.Charge !== undefined && object.Charge !== null)
+      ? Void.fromPartial(object.Charge)
+      : undefined;
+    message.ChargeRest = (object.ChargeRest !== undefined && object.ChargeRest !== null)
+      ? Void.fromPartial(object.ChargeRest)
+      : undefined;
     return message;
   },
 };
 
 function createBaseSohState_SohTestEndMode(): SohState_SohTestEndMode {
-  return {};
+  return { Complete: undefined, Failed: undefined };
 }
 
 export const SohState_SohTestEndMode: MessageFns<SohState_SohTestEndMode> = {
-  encode(_: SohState_SohTestEndMode, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: SohState_SohTestEndMode, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Complete !== undefined) {
+      Void.encode(message.Complete, writer.uint32(10).fork()).join();
+    }
+    if (message.Failed !== undefined) {
+      Void.encode(message.Failed, writer.uint32(18).fork()).join();
+    }
     return writer;
   },
 
@@ -20091,6 +20724,22 @@ export const SohState_SohTestEndMode: MessageFns<SohState_SohTestEndMode> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Complete = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Failed = Void.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -20100,20 +20749,35 @@ export const SohState_SohTestEndMode: MessageFns<SohState_SohTestEndMode> = {
     return message;
   },
 
-  fromJSON(_: any): SohState_SohTestEndMode {
-    return {};
+  fromJSON(object: any): SohState_SohTestEndMode {
+    return {
+      Complete: isSet(object.Complete) ? Void.fromJSON(object.Complete) : undefined,
+      Failed: isSet(object.Failed) ? Void.fromJSON(object.Failed) : undefined,
+    };
   },
 
-  toJSON(_: SohState_SohTestEndMode): unknown {
+  toJSON(message: SohState_SohTestEndMode): unknown {
     const obj: any = {};
+    if (message.Complete !== undefined) {
+      obj.Complete = Void.toJSON(message.Complete);
+    }
+    if (message.Failed !== undefined) {
+      obj.Failed = Void.toJSON(message.Failed);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<SohState_SohTestEndMode>, I>>(base?: I): SohState_SohTestEndMode {
     return SohState_SohTestEndMode.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<SohState_SohTestEndMode>, I>>(_: I): SohState_SohTestEndMode {
+  fromPartial<I extends Exact<DeepPartial<SohState_SohTestEndMode>, I>>(object: I): SohState_SohTestEndMode {
     const message = createBaseSohState_SohTestEndMode();
+    message.Complete = (object.Complete !== undefined && object.Complete !== null)
+      ? Void.fromPartial(object.Complete)
+      : undefined;
+    message.Failed = (object.Failed !== undefined && object.Failed !== null)
+      ? Void.fromPartial(object.Failed)
+      : undefined;
     return message;
   },
 };

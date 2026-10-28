@@ -641,10 +641,14 @@ message VehicleState {
         bool GuestModeActive = 1;
     }
 
+    AutoparkStyle autopark_style = 34;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    SpoilerState active_spoiler_state = 37;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     SoftwareUpdateState software_update_state = 38;  // TESLEMETRY-EXT
     LegacyMediaState legacy_media_state = 39;  // TESLEMETRY-EXT
 
     google.protobuf.Timestamp timestamp = 43;  // TESLEMETRY-EXT
+    AutoparkVersion autopark_version = 46;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    AutoparkState autopark_state = 47;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 
     repeated uint32 feature_bitmask = 55;  // TESLEMETRY-EXT
 
@@ -806,21 +810,47 @@ message DashcamUtils {
     oneof optional_format_usb_available { bool format_usb_available = 2; }  // confirmed on a live vehicle
 }
 
-// Void-oneof states whose alternatives have no recovered names.
+// UNCONFIRMED: not yet confirmed on a live vehicle.
 message AutoparkStyle {
-    reserved 1, 2; // alternatives; UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    oneof type {
+        Void Deadman = 1;
+        Void Standard = 2;
+    }
 }
 
 message AutoparkVersion {
-    reserved 1, 2, 3; // alternatives; 1 confirmed on a live vehicle, 2-3 UNCONFIRMED; names not recovered
+    oneof type {
+        Void Version2 = 1;  // confirmed on a live vehicle
+        Void Version3 = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle
+        Void Version4 = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    }
 }
 
 message AutoparkState {
-    reserved 1 to 12; // alternatives; 2 confirmed on a live vehicle, the rest UNCONFIRMED; names not recovered
+    oneof type {
+        Void Standby = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle
+        Void Unavailable = 2;  // confirmed on a live vehicle
+        Void Ready = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle
+        Void ActiveForward = 4;  // UNCONFIRMED: not yet confirmed on a live vehicle
+        Void ActiveReverse = 5;  // UNCONFIRMED: not yet confirmed on a live vehicle
+        Void Disabled = 6;  // UNCONFIRMED: not yet confirmed on a live vehicle
+        Void Panic = 7;  // UNCONFIRMED: not yet confirmed on a live vehicle
+        Void Preparing = 8;  // UNCONFIRMED: not yet confirmed on a live vehicle
+        Void Aborting = 9;  // UNCONFIRMED: not yet confirmed on a live vehicle
+        Void Paused = 10;  // UNCONFIRMED: not yet confirmed on a live vehicle
+        Void Resuming = 11;  // UNCONFIRMED: not yet confirmed on a live vehicle
+        Void OpeningGate = 12;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    }
 }
 
+// UNCONFIRMED: not yet confirmed on a live vehicle.
 message SpoilerState {
-    reserved 1, 2, 3, 4; // alternatives; UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    oneof type {
+        Void Unknown = 1;
+        Void Retracted = 2;
+        Void Extended = 3;
+        Void Fault = 4;
+    }
 }
 
 enum DashCamState {
@@ -1401,12 +1431,22 @@ message SohState {
         SOH_UNKNOWN = 3;
     }
 
+    // Alternatives are wire-confirmed.
     message SohTestPhase {
-        reserved 1, 2, 3, 4; // wire-confirmed alternatives; names not confirmed
+        oneof type {
+            Void Discharge = 1;
+            Void DischargeRest = 2;
+            Void Charge = 3;
+            Void ChargeRest = 4;
+        }
     }
 
+    // Alternatives are wire-confirmed.
     message SohTestEndMode {
-        reserved 1, 2; // wire-confirmed alternatives; names not confirmed
+        oneof type {
+            Void Complete = 1;
+            Void Failed = 2;
+        }
     }
 
     message SohTestState {
