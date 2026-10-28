@@ -29,6 +29,8 @@ export enum Domain {
   DOMAIN_ENERGY_DEVICE = 7,
   /** DOMAIN_ENERGY_DEVICE_AUTH - TESLEMETRY-EXT */
   DOMAIN_ENERGY_DEVICE_AUTH = 8,
+  /** DOMAIN_ENERGY_DEVICE_AUTHORIZED_COMMAND - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  DOMAIN_ENERGY_DEVICE_AUTHORIZED_COMMAND = 11,
   UNRECOGNIZED = -1,
 }
 
@@ -55,6 +57,9 @@ export function domainFromJSON(object: any): Domain {
     case 8:
     case "DOMAIN_ENERGY_DEVICE_AUTH":
       return Domain.DOMAIN_ENERGY_DEVICE_AUTH;
+    case 11:
+    case "DOMAIN_ENERGY_DEVICE_AUTHORIZED_COMMAND":
+      return Domain.DOMAIN_ENERGY_DEVICE_AUTHORIZED_COMMAND;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -78,6 +83,8 @@ export function domainToJSON(object: Domain): string {
       return "DOMAIN_ENERGY_DEVICE";
     case Domain.DOMAIN_ENERGY_DEVICE_AUTH:
       return "DOMAIN_ENERGY_DEVICE_AUTH";
+    case Domain.DOMAIN_ENERGY_DEVICE_AUTHORIZED_COMMAND:
+      return "DOMAIN_ENERGY_DEVICE_AUTHORIZED_COMMAND";
     case Domain.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -418,7 +425,7 @@ export interface MessageStatus {
 export interface SessionInfoRequest {
   publicKey: Uint8Array;
   challenge: Uint8Array;
-  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
   handle: number;
   /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
   identifiedKey: IdentifiedKey;

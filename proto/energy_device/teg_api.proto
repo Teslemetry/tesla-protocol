@@ -10,6 +10,7 @@ import "google/protobuf/timestamp.proto";
 import "device.proto";
 import "networking.proto";
 import "common_api.proto";
+import "registration_api.proto";
 
 message TEGSettings {
 }
@@ -117,14 +118,12 @@ message TEGAPIDetectWiredMetersResponse {
 }
 
 message TEGAPIRegisterRequest {
-  // Field 1 (registration_request) is a type from a separate, not-yet-modeled
-  // proto package; left unmodeled here.
+  RegistrationRequest registration_request = 1;
 }
 
 message TEGAPIRegisterResponse {
-  int32 failure = 1;
-  // Field 2 (registration_response) is a type from a separate, not-yet-modeled
-  // proto package; left unmodeled here.
+  int32 failure                              = 1;
+  RegistrationResponse registration_response = 2;
 }
 
 message TEGAPITriggerPowerwall2PhaseDetectionRequest {
@@ -473,18 +472,15 @@ message TEGAPIRetrieveSiteUuidRequest {
 }
 
 message TEGAPIRetrieveSiteUuidResponse {
-  // Field 1 (response) is a type from a separate, not-yet-modeled proto
-  // package; left unmodeled here.
+  AssetSiteUuidOfDeviceResponse response = 1;
 }
 
 message TEGAPIRetrieveSiteSuggestionRequest {
-  // Field 1 (request) is a type from a separate, not-yet-modeled proto
-  // package; left unmodeled here.
+  SiteSuggestionRequest request = 1;
 }
 
 message TEGAPIRetrieveSiteSuggestionResponse {
-  // Field 1 (response) is a type from a separate, not-yet-modeled proto
-  // package; left unmodeled here.
+  SiteSuggestionResponse response = 1;
 }
 
 message TEGMessages {

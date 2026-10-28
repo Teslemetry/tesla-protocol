@@ -18,6 +18,8 @@ import "energy_site_net.proto";
 import "intra_site_api.proto";
 import "filestore_api.proto";
 import "graphql_api.proto";
+import "registration_api.proto";
+import "supercharger_api.proto";
 
 enum DeliveryChannel {
   DELIVERY_CHANNEL_INVALID        = 0;
@@ -62,7 +64,13 @@ message Participant {
     TeslaService tesla_service             = 2;
     LocalParticipant local                 = 3;
     AuthorizedClientType authorized_client = 4;
+    ProxiedDevice proxied_device           = 5;
   }
+}
+
+message ProxiedDevice {
+  string proxy_din = 1;
+  string target_din = 2;
 }
 
 message RegistrationPayload {
@@ -74,6 +82,7 @@ message MessageEnvelope {
   DeliveryChannel delivery_channel = 1;
   Participant sender               = 2;
   Participant recipient            = 3;
+  // 13 (wmsa) and 14 (sm) carry payloads whose message types this repo does not publish.
   reserved 13, 14;
   oneof payload {
     CommonMessages common               = 4;
@@ -87,5 +96,7 @@ message MessageEnvelope {
     AuthorizationMessages authorization = 12;
     FileStoreMessages filestore         = 15;
     GraphQLMessages graphql             = 16;
+    SuperchargerMessages supercharger   = 17;
+    RegistrationMessages registration   = 18;
   }
 }

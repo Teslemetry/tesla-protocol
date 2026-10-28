@@ -12,6 +12,8 @@ enum UpdateStatus {
   UPDATE_STATUS_DOWNLOADING = 2;
   UPDATE_STATUS_DOWNLOADED  = 3;
   UPDATE_STATUS_STAGED      = 4;
+  UPDATE_STATUS_COMMITTING  = 5;
+  UPDATE_STATUS_CHECKING    = 6;
 }
 
 enum UpdateHandshakeResult {

@@ -12,6 +12,7 @@ import "device.proto";
 import "networking.proto";
 import "energy.proto";
 import "neurio_meter_api.proto";
+import "registration_api.proto";
 
 enum WCChargeScheduleChargingStatus {
   WC_CHARGE_SCHEDULE_CHARGING_STATUS_INVALID                = 0;
@@ -114,6 +115,7 @@ enum WCThirdPartyVehicleMode {
   WC_THIRD_PARTY_VEHICLE_MODE_DISABLED             = 2;
   WC_THIRD_PARTY_VEHICLE_MODE_DISABLED_NO_ROADSTER = 3;
   WC_THIRD_PARTY_VEHICLE_MODE_VIN_ALLOW_LIST       = 4;
+  WC_THIRD_PARTY_VEHICLE_MODE_COMPATIBILITY        = 5;
 }
 
 enum WCEvseNotReadyReason {
@@ -131,6 +133,9 @@ enum WCEvseNotReadyReason {
   WC_EVSE_NOT_READY_REASON_ACCESS_CONTROL_LIST  = 11;
   WC_EVSE_NOT_READY_REASON_PAY_PER_USE          = 12;
   WC_EVSE_NOT_READY_REASON_THIRD_PARTY_VEHICLE  = 13;
+  WC_EVSE_NOT_READY_REASON_VF_TRIPPED           = 14;
+  WC_EVSE_NOT_READY_REASON_V2G                  = 15;
+  WC_EVSE_NOT_READY_REASON_V2HPW                = 16;
 }
 
 enum WCOcppStatus {
@@ -740,14 +745,12 @@ message WCAPIPushSmartChargingCommandResponse {
 }
 
 message WCAPIRegisterCommercialRequest {
-  // Field 1 (request) is a type from a separate, not-yet-modeled proto
-  // package; left unmodeled here.
+  WCCommercialRegistrationRequest request = 1;
 }
 
 message WCAPIRegisterCommercialResponse {
-  int32 failure = 1;
-  // Field 2 (response) is a type from a separate, not-yet-modeled proto
-  // package; left unmodeled here.
+  int32 failure                 = 1;
+  RegistrationResponse response = 2;
 }
 
 message WCAPIPushPowershareCommandRequest {

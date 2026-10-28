@@ -15,6 +15,8 @@ export enum UpdateStatus {
   UPDATE_STATUS_DOWNLOADING = 2,
   UPDATE_STATUS_DOWNLOADED = 3,
   UPDATE_STATUS_STAGED = 4,
+  UPDATE_STATUS_COMMITTING = 5,
+  UPDATE_STATUS_CHECKING = 6,
   UNRECOGNIZED = -1,
 }
 
@@ -35,6 +37,12 @@ export function updateStatusFromJSON(object: any): UpdateStatus {
     case 4:
     case "UPDATE_STATUS_STAGED":
       return UpdateStatus.UPDATE_STATUS_STAGED;
+    case 5:
+    case "UPDATE_STATUS_COMMITTING":
+      return UpdateStatus.UPDATE_STATUS_COMMITTING;
+    case 6:
+    case "UPDATE_STATUS_CHECKING":
+      return UpdateStatus.UPDATE_STATUS_CHECKING;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -54,6 +62,10 @@ export function updateStatusToJSON(object: UpdateStatus): string {
       return "UPDATE_STATUS_DOWNLOADED";
     case UpdateStatus.UPDATE_STATUS_STAGED:
       return "UPDATE_STATUS_STAGED";
+    case UpdateStatus.UPDATE_STATUS_COMMITTING:
+      return "UPDATE_STATUS_COMMITTING";
+    case UpdateStatus.UPDATE_STATUS_CHECKING:
+      return "UPDATE_STATUS_CHECKING";
     case UpdateStatus.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

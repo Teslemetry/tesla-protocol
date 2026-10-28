@@ -16,6 +16,7 @@ class Domain(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     DOMAIN_AUTHD: _ClassVar[Domain]
     DOMAIN_ENERGY_DEVICE: _ClassVar[Domain]
     DOMAIN_ENERGY_DEVICE_AUTH: _ClassVar[Domain]
+    DOMAIN_ENERGY_DEVICE_AUTHORIZED_COMMAND: _ClassVar[Domain]
 
 class OperationStatus_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -70,6 +71,7 @@ DOMAIN_AUTOPILOT: Domain
 DOMAIN_AUTHD: Domain
 DOMAIN_ENERGY_DEVICE: Domain
 DOMAIN_ENERGY_DEVICE_AUTH: Domain
+DOMAIN_ENERGY_DEVICE_AUTHORIZED_COMMAND: Domain
 OPERATIONSTATUS_OK: OperationStatus_E
 OPERATIONSTATUS_WAIT: OperationStatus_E
 OPERATIONSTATUS_ERROR: OperationStatus_E

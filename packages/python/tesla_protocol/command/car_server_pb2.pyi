@@ -47,6 +47,7 @@ class VehicleDataFields(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     suspension_state: _ClassVar[VehicleDataFields]
     child_presence_detection_state: _ClassVar[VehicleDataFields]
     display_state: _ClassVar[VehicleDataFields]
+    keep_on_accessory_ports_state: _ClassVar[VehicleDataFields]
     legacy_vehicle_state_media_info: _ClassVar[VehicleDataFields]
 OPERATIONSTATUS_OK: OperationStatus_E
 OPERATIONSTATUS_ERROR: OperationStatus_E
@@ -75,6 +76,7 @@ soh_state: VehicleDataFields
 suspension_state: VehicleDataFields
 child_presence_detection_state: VehicleDataFields
 display_state: VehicleDataFields
+keep_on_accessory_ports_state: VehicleDataFields
 legacy_vehicle_state_media_info: VehicleDataFields
 
 class Action(_message.Message):
@@ -84,7 +86,7 @@ class Action(_message.Message):
     def __init__(self, vehicleAction: _Optional[_Union[VehicleAction, _Mapping]] = ...) -> None: ...
 
 class VehicleAction(_message.Message):
-    __slots__ = ("getVehicleData", "remoteStartDrive", "createStreamSession", "streamMessage", "chargingSetLimitAction", "chargingStartStopAction", "drivingClearSpeedLimitPinAction", "drivingSetSpeedLimitAction", "drivingSpeedLimitAction", "hvacAutoAction", "hvacSetPreconditioningMaxAction", "hvacSteeringWheelHeaterAction", "hvacTemperatureAdjustmentAction", "mediaPlayAction", "mediaUpdateVolume", "mediaNextFavorite", "mediaPreviousFavorite", "mediaNextTrack", "mediaPreviousTrack", "navigationRequest", "navigationSuperchargerRequest", "getNearbyChargingSites", "uiSetUpcomingCalendarEntries", "vehicleControlCancelSoftwareUpdateAction", "vehicleControlFlashLightsAction", "vehicleControlHonkHornAction", "vehicleControlResetValetPinAction", "vehicleControlScheduleSoftwareUpdateAction", "vehicleControlSetSentryModeAction", "vehicleControlSetValetModeAction", "vehicleControlSunroofOpenCloseAction", "vehicleControlTriggerHomelinkAction", "vehicleControlWindowAction", "hvacBioweaponModeAction", "hvacSeatHeaterActions", "vehicleDataSubscription", "vehicleDataAck", "vitalsSubscription", "vitalsAck", "scheduledChargingAction", "scheduledDepartureAction", "setChargingAmpsAction", "hvacClimateKeeperAction", "hvacRecirculationAction", "ping", "dashcamSaveClipAction", "autoSeatClimateAction", "hvacSeatCoolerActions", "setCabinOverheatProtectionAction", "piiKeyRequest", "pseudonymSyncRequest", "navigationGpsRequest", "setVehicleNameAction", "setRateTariffRequest", "getRateTariffRequest", "videoRequestAction", "takeDrivenoteAction", "chargePortDoorClose", "chargePortDoorOpen", "bluetoothClassicPairingRequest", "boomboxAction", "guestModeAction", "setCopTempAction", "addManagedChargingSiteRequest", "removeManagedChargingSiteRequest", "navigationRouteAction", "autoStwHeatAction", "stwHeatLevelAction", "eraseUserDataAction", "getManagedChargingSitesRequest", "updateChargeOnSolarFeatureRequest", "getChargeOnSolarFeatureRequest", "vehicleControlSetPinToDriveAction", "vehicleControlResetPinToDriveAction", "drivingClearSpeedLimitPinAdminAction", "setOutletsOnOffAction", "setOutletTimerAction", "setOutletSocLimitAction", "setPowerFeedOnOffAction", "setPowerFeedTimerAction", "setPowerFeedSocLimitAction", "setTrailerLightTestStartStopAction", "setTruckBedLightAutoStateAction", "setTruckBedLightBrightnessAction", "vehicleControlResetPinToDriveAdminAction", "navigationWaypointsRequest", "setPowershareFeatureAction", "setPowershareDischargeLimitAction", "setPowershareRequestAction", "setTentModeRequestAction", "setFrontZoneLightRequestAction", "setRearZoneLightRequestAction", "addChargeScheduleAction", "removeChargeScheduleAction", "addPreconditionScheduleAction", "removePreconditionScheduleAction", "setLightbarBrightnessAction", "setLightbarMiddleAction", "setLightbarDitchAction", "getMessagesAction", "teslaAuthResponseAction", "navigationGpsDestinationRequest", "batchRemovePreconditionSchedulesAction", "batchRemoveChargeSchedulesAction", "parentalControlsClearPinAction", "parentalControlsClearPinAdminAction", "parentalControlsAction", "parentalControlsEnableSettingsAction", "parentalControlsSetSpeedLimitAction", "cancelSohTestAction", "stopLightShowAction", "startLightShowAction", "setSuspensionLevelAction", "setDischargeLimitAction", "setLowPowerModeAction", "setTemperatureUnitAction", "setDistanceUnitAction", "setTimeDisplayFormatAction", "setTirePressureUnitAction", "setEnergyDisplayFormatAction", "setKeepAccessoryPowerModeAction", "setupCloudProfileWithLocalProfileUuidAction", "getLocalProfilesForVaultUuidAction", "fetchKeysInfoAction", "deleteDashcamClipsAction", "formatUsbAction", "setUpkeepUsernameAction", "bandwidthTest", "setPhoneSettingPreferencesAction", "cancelVehicleDataSubscription", "prepareMobileUploadAction", "putMobileUploadChunkAction", "displayStateAction", "drivingSetCruiseSpeedLimitAction", "setDeckLightAction")
+    __slots__ = ("getVehicleData", "remoteStartDrive", "createStreamSession", "streamMessage", "chargingSetLimitAction", "chargingStartStopAction", "drivingClearSpeedLimitPinAction", "drivingSetSpeedLimitAction", "drivingSpeedLimitAction", "hvacAutoAction", "hvacSetPreconditioningMaxAction", "hvacSteeringWheelHeaterAction", "hvacTemperatureAdjustmentAction", "mediaPlayAction", "mediaUpdateVolume", "mediaNextFavorite", "mediaPreviousFavorite", "mediaNextTrack", "mediaPreviousTrack", "navigationRequest", "navigationSuperchargerRequest", "getNearbyChargingSites", "uiSetUpcomingCalendarEntries", "vehicleControlCancelSoftwareUpdateAction", "vehicleControlFlashLightsAction", "vehicleControlHonkHornAction", "vehicleControlResetValetPinAction", "vehicleControlScheduleSoftwareUpdateAction", "vehicleControlSetSentryModeAction", "vehicleControlSetValetModeAction", "vehicleControlSunroofOpenCloseAction", "vehicleControlTriggerHomelinkAction", "vehicleControlWindowAction", "hvacBioweaponModeAction", "hvacSeatHeaterActions", "vehicleDataSubscription", "vehicleDataAck", "vitalsSubscription", "vitalsAck", "scheduledChargingAction", "scheduledDepartureAction", "setChargingAmpsAction", "hvacClimateKeeperAction", "hvacRecirculationAction", "ping", "dashcamSaveClipAction", "autoSeatClimateAction", "hvacSeatCoolerActions", "setCabinOverheatProtectionAction", "piiKeyRequest", "pseudonymSyncRequest", "navigationGpsRequest", "setVehicleNameAction", "setRateTariffRequest", "getRateTariffRequest", "videoRequestAction", "takeDrivenoteAction", "chargePortDoorClose", "chargePortDoorOpen", "bluetoothClassicPairingRequest", "boomboxAction", "guestModeAction", "setCopTempAction", "addManagedChargingSiteRequest", "removeManagedChargingSiteRequest", "navigationRouteAction", "autoStwHeatAction", "stwHeatLevelAction", "eraseUserDataAction", "getManagedChargingSitesRequest", "updateChargeOnSolarFeatureRequest", "getChargeOnSolarFeatureRequest", "vehicleControlSetPinToDriveAction", "vehicleControlResetPinToDriveAction", "drivingClearSpeedLimitPinAdminAction", "setOutletsOnOffAction", "setOutletTimerAction", "setOutletSocLimitAction", "setPowerFeedOnOffAction", "setPowerFeedTimerAction", "setPowerFeedSocLimitAction", "setTrailerLightTestStartStopAction", "setTruckBedLightAutoStateAction", "setTruckBedLightBrightnessAction", "vehicleControlResetPinToDriveAdminAction", "navigationWaypointsRequest", "setPowershareFeatureAction", "setPowershareDischargeLimitAction", "setPowershareRequestAction", "setTentModeRequestAction", "setFrontZoneLightRequestAction", "setRearZoneLightRequestAction", "addChargeScheduleAction", "removeChargeScheduleAction", "addPreconditionScheduleAction", "removePreconditionScheduleAction", "setLightbarBrightnessAction", "setLightbarMiddleAction", "setLightbarDitchAction", "getMessagesAction", "teslaAuthResponseAction", "navigationGpsDestinationRequest", "batchRemovePreconditionSchedulesAction", "batchRemoveChargeSchedulesAction", "parentalControlsClearPinAction", "parentalControlsClearPinAdminAction", "parentalControlsAction", "parentalControlsEnableSettingsAction", "parentalControlsSetSpeedLimitAction", "cancelSohTestAction", "stopLightShowAction", "startLightShowAction", "setSuspensionLevelAction", "setDischargeLimitAction", "setLowPowerModeAction", "setTemperatureUnitAction", "setDistanceUnitAction", "setTimeDisplayFormatAction", "setTirePressureUnitAction", "setEnergyDisplayFormatAction", "setKeepAccessoryPowerModeAction", "setupCloudProfileWithLocalProfileUuidAction", "getLocalProfilesForVaultUuidAction", "fetchKeysInfoAction", "deleteDashcamClipsAction", "formatUsbAction", "setUpkeepUsernameAction", "bandwidthTest", "setPhoneSettingPreferencesAction", "cancelVehicleDataSubscription", "prepareMobileUploadAction", "putMobileUploadChunkAction", "displayStateAction", "drivingSetCruiseSpeedLimitAction", "setDeckLightAction", "setKeepOnCabin12vPortAction", "setKeepOnCabin48vPortAction", "dropNominalSuccessResponses")
     GETVEHICLEDATA_FIELD_NUMBER: _ClassVar[int]
     REMOTESTARTDRIVE_FIELD_NUMBER: _ClassVar[int]
     CREATESTREAMSESSION_FIELD_NUMBER: _ClassVar[int]
@@ -220,6 +222,9 @@ class VehicleAction(_message.Message):
     DISPLAYSTATEACTION_FIELD_NUMBER: _ClassVar[int]
     DRIVINGSETCRUISESPEEDLIMITACTION_FIELD_NUMBER: _ClassVar[int]
     SETDECKLIGHTACTION_FIELD_NUMBER: _ClassVar[int]
+    SETKEEPONCABIN12VPORTACTION_FIELD_NUMBER: _ClassVar[int]
+    SETKEEPONCABIN48VPORTACTION_FIELD_NUMBER: _ClassVar[int]
+    DROPNOMINALSUCCESSRESPONSES_FIELD_NUMBER: _ClassVar[int]
     getVehicleData: GetVehicleData
     remoteStartDrive: RemoteStartDrive
     createStreamSession: CreateStreamSession
@@ -355,10 +360,13 @@ class VehicleAction(_message.Message):
     displayStateAction: DisplayStateAction
     drivingSetCruiseSpeedLimitAction: DrivingSetCruiseSpeedLimitAction
     setDeckLightAction: SetDeckLightAction
-    def __init__(self, getVehicleData: _Optional[_Union[GetVehicleData, _Mapping]] = ..., remoteStartDrive: _Optional[_Union[RemoteStartDrive, _Mapping]] = ..., createStreamSession: _Optional[_Union[CreateStreamSession, _Mapping]] = ..., streamMessage: _Optional[_Union[StreamMessage, _Mapping]] = ..., chargingSetLimitAction: _Optional[_Union[ChargingSetLimitAction, _Mapping]] = ..., chargingStartStopAction: _Optional[_Union[ChargingStartStopAction, _Mapping]] = ..., drivingClearSpeedLimitPinAction: _Optional[_Union[DrivingClearSpeedLimitPinAction, _Mapping]] = ..., drivingSetSpeedLimitAction: _Optional[_Union[DrivingSetSpeedLimitAction, _Mapping]] = ..., drivingSpeedLimitAction: _Optional[_Union[DrivingSpeedLimitAction, _Mapping]] = ..., hvacAutoAction: _Optional[_Union[HvacAutoAction, _Mapping]] = ..., hvacSetPreconditioningMaxAction: _Optional[_Union[HvacSetPreconditioningMaxAction, _Mapping]] = ..., hvacSteeringWheelHeaterAction: _Optional[_Union[HvacSteeringWheelHeaterAction, _Mapping]] = ..., hvacTemperatureAdjustmentAction: _Optional[_Union[HvacTemperatureAdjustmentAction, _Mapping]] = ..., mediaPlayAction: _Optional[_Union[MediaPlayAction, _Mapping]] = ..., mediaUpdateVolume: _Optional[_Union[MediaUpdateVolume, _Mapping]] = ..., mediaNextFavorite: _Optional[_Union[MediaNextFavorite, _Mapping]] = ..., mediaPreviousFavorite: _Optional[_Union[MediaPreviousFavorite, _Mapping]] = ..., mediaNextTrack: _Optional[_Union[MediaNextTrack, _Mapping]] = ..., mediaPreviousTrack: _Optional[_Union[MediaPreviousTrack, _Mapping]] = ..., navigationRequest: _Optional[_Union[NavigationRequest, _Mapping]] = ..., navigationSuperchargerRequest: _Optional[_Union[NavigationSuperchargerRequest, _Mapping]] = ..., getNearbyChargingSites: _Optional[_Union[GetNearbyChargingSites, _Mapping]] = ..., uiSetUpcomingCalendarEntries: _Optional[_Union[UiSetUpcomingCalendarEntries, _Mapping]] = ..., vehicleControlCancelSoftwareUpdateAction: _Optional[_Union[VehicleControlCancelSoftwareUpdateAction, _Mapping]] = ..., vehicleControlFlashLightsAction: _Optional[_Union[VehicleControlFlashLightsAction, _Mapping]] = ..., vehicleControlHonkHornAction: _Optional[_Union[VehicleControlHonkHornAction, _Mapping]] = ..., vehicleControlResetValetPinAction: _Optional[_Union[VehicleControlResetValetPinAction, _Mapping]] = ..., vehicleControlScheduleSoftwareUpdateAction: _Optional[_Union[VehicleControlScheduleSoftwareUpdateAction, _Mapping]] = ..., vehicleControlSetSentryModeAction: _Optional[_Union[VehicleControlSetSentryModeAction, _Mapping]] = ..., vehicleControlSetValetModeAction: _Optional[_Union[VehicleControlSetValetModeAction, _Mapping]] = ..., vehicleControlSunroofOpenCloseAction: _Optional[_Union[VehicleControlSunroofOpenCloseAction, _Mapping]] = ..., vehicleControlTriggerHomelinkAction: _Optional[_Union[VehicleControlTriggerHomelinkAction, _Mapping]] = ..., vehicleControlWindowAction: _Optional[_Union[VehicleControlWindowAction, _Mapping]] = ..., hvacBioweaponModeAction: _Optional[_Union[HvacBioweaponModeAction, _Mapping]] = ..., hvacSeatHeaterActions: _Optional[_Union[HvacSeatHeaterActions, _Mapping]] = ..., vehicleDataSubscription: _Optional[_Union[VehicleDataSubscription, _Mapping]] = ..., vehicleDataAck: _Optional[_Union[VehicleDataAck, _Mapping]] = ..., vitalsSubscription: _Optional[_Union[VitalsSubscription, _Mapping]] = ..., vitalsAck: _Optional[_Union[VitalsAck, _Mapping]] = ..., scheduledChargingAction: _Optional[_Union[ScheduledChargingAction, _Mapping]] = ..., scheduledDepartureAction: _Optional[_Union[ScheduledDepartureAction, _Mapping]] = ..., setChargingAmpsAction: _Optional[_Union[SetChargingAmpsAction, _Mapping]] = ..., hvacClimateKeeperAction: _Optional[_Union[HvacClimateKeeperAction, _Mapping]] = ..., hvacRecirculationAction: _Optional[_Union[HvacRecirculationAction, _Mapping]] = ..., ping: _Optional[_Union[Ping, _Mapping]] = ..., dashcamSaveClipAction: _Optional[_Union[DashcamSaveClipAction, _Mapping]] = ..., autoSeatClimateAction: _Optional[_Union[AutoSeatClimateAction, _Mapping]] = ..., hvacSeatCoolerActions: _Optional[_Union[HvacSeatCoolerActions, _Mapping]] = ..., setCabinOverheatProtectionAction: _Optional[_Union[SetCabinOverheatProtectionAction, _Mapping]] = ..., piiKeyRequest: _Optional[_Union[PiiKeyRequest, _Mapping]] = ..., pseudonymSyncRequest: _Optional[_Union[PseudonymSyncRequest, _Mapping]] = ..., navigationGpsRequest: _Optional[_Union[NavigationGpsRequest, _Mapping]] = ..., setVehicleNameAction: _Optional[_Union[SetVehicleNameAction, _Mapping]] = ..., setRateTariffRequest: _Optional[_Union[SetRateTariffRequest, _Mapping]] = ..., getRateTariffRequest: _Optional[_Union[GetRateTariffRequest, _Mapping]] = ..., videoRequestAction: _Optional[_Union[VideoRequestAction, _Mapping]] = ..., takeDrivenoteAction: _Optional[_Union[TakeDrivenoteAction, _Mapping]] = ..., chargePortDoorClose: _Optional[_Union[ChargePortDoorClose, _Mapping]] = ..., chargePortDoorOpen: _Optional[_Union[ChargePortDoorOpen, _Mapping]] = ..., bluetoothClassicPairingRequest: _Optional[_Union[BluetoothClassicPairingRequest, _Mapping]] = ..., boomboxAction: _Optional[_Union[BoomboxAction, _Mapping]] = ..., guestModeAction: _Optional[_Union[_vehicle_pb2.VehicleState.GuestMode, _Mapping]] = ..., setCopTempAction: _Optional[_Union[SetCopTempAction, _Mapping]] = ..., addManagedChargingSiteRequest: _Optional[_Union[AddManagedChargingSiteRequest, _Mapping]] = ..., removeManagedChargingSiteRequest: _Optional[_Union[RemoveManagedChargingSiteRequest, _Mapping]] = ..., navigationRouteAction: _Optional[_Union[NavigationRouteAction, _Mapping]] = ..., autoStwHeatAction: _Optional[_Union[AutoStwHeatAction, _Mapping]] = ..., stwHeatLevelAction: _Optional[_Union[StwHeatLevelAction, _Mapping]] = ..., eraseUserDataAction: _Optional[_Union[EraseUserDataAction, _Mapping]] = ..., getManagedChargingSitesRequest: _Optional[_Union[GetManagedChargingSitesRequest, _Mapping]] = ..., updateChargeOnSolarFeatureRequest: _Optional[_Union[UpdateChargeOnSolarFeatureRequest, _Mapping]] = ..., getChargeOnSolarFeatureRequest: _Optional[_Union[GetChargeOnSolarFeatureRequest, _Mapping]] = ..., vehicleControlSetPinToDriveAction: _Optional[_Union[VehicleControlSetPinToDriveAction, _Mapping]] = ..., vehicleControlResetPinToDriveAction: _Optional[_Union[VehicleControlResetPinToDriveAction, _Mapping]] = ..., drivingClearSpeedLimitPinAdminAction: _Optional[_Union[DrivingClearSpeedLimitPinAdminAction, _Mapping]] = ..., setOutletsOnOffAction: _Optional[_Union[SetOutletsOnOffAction, _Mapping]] = ..., setOutletTimerAction: _Optional[_Union[SetOutletTimerAction, _Mapping]] = ..., setOutletSocLimitAction: _Optional[_Union[SetOutletSocLimitAction, _Mapping]] = ..., setPowerFeedOnOffAction: _Optional[_Union[SetPowerFeedOnOffAction, _Mapping]] = ..., setPowerFeedTimerAction: _Optional[_Union[SetPowerFeedTimerAction, _Mapping]] = ..., setPowerFeedSocLimitAction: _Optional[_Union[SetPowerFeedSocLimitAction, _Mapping]] = ..., setTrailerLightTestStartStopAction: _Optional[_Union[SetTrailerLightTestStartStopAction, _Mapping]] = ..., setTruckBedLightAutoStateAction: _Optional[_Union[SetTruckBedLightAutoStateAction, _Mapping]] = ..., setTruckBedLightBrightnessAction: _Optional[_Union[SetTruckBedLightBrightnessAction, _Mapping]] = ..., vehicleControlResetPinToDriveAdminAction: _Optional[_Union[VehicleControlResetPinToDriveAdminAction, _Mapping]] = ..., navigationWaypointsRequest: _Optional[_Union[NavigationWaypointsRequest, _Mapping]] = ..., setPowershareFeatureAction: _Optional[_Union[SetPowershareFeatureAction, _Mapping]] = ..., setPowershareDischargeLimitAction: _Optional[_Union[SetPowershareDischargeLimitAction, _Mapping]] = ..., setPowershareRequestAction: _Optional[_Union[SetPowershareRequestAction, _Mapping]] = ..., setTentModeRequestAction: _Optional[_Union[SetTentModeRequestAction, _Mapping]] = ..., setFrontZoneLightRequestAction: _Optional[_Union[SetZoneLightRequestAction, _Mapping]] = ..., setRearZoneLightRequestAction: _Optional[_Union[SetZoneLightRequestAction, _Mapping]] = ..., addChargeScheduleAction: _Optional[_Union[_common_pb2.ChargeSchedule, _Mapping]] = ..., removeChargeScheduleAction: _Optional[_Union[RemoveChargeScheduleAction, _Mapping]] = ..., addPreconditionScheduleAction: _Optional[_Union[_common_pb2.PreconditionSchedule, _Mapping]] = ..., removePreconditionScheduleAction: _Optional[_Union[RemovePreconditionScheduleAction, _Mapping]] = ..., setLightbarBrightnessAction: _Optional[_Union[SetLightbarBrightnessAction, _Mapping]] = ..., setLightbarMiddleAction: _Optional[_Union[SetLightbarMiddleAction, _Mapping]] = ..., setLightbarDitchAction: _Optional[_Union[SetLightbarDitchAction, _Mapping]] = ..., getMessagesAction: _Optional[_Union[GetMessagesAction, _Mapping]] = ..., teslaAuthResponseAction: _Optional[_Union[TeslaAuthResponseAction, _Mapping]] = ..., navigationGpsDestinationRequest: _Optional[_Union[NavigationGpsDestinationRequest, _Mapping]] = ..., batchRemovePreconditionSchedulesAction: _Optional[_Union[BatchRemovePreconditionSchedulesAction, _Mapping]] = ..., batchRemoveChargeSchedulesAction: _Optional[_Union[BatchRemoveChargeSchedulesAction, _Mapping]] = ..., parentalControlsClearPinAction: _Optional[_Union[ParentalControlsClearPinAction, _Mapping]] = ..., parentalControlsClearPinAdminAction: _Optional[_Union[ParentalControlsClearPinAdminAction, _Mapping]] = ..., parentalControlsAction: _Optional[_Union[ParentalControlsAction, _Mapping]] = ..., parentalControlsEnableSettingsAction: _Optional[_Union[ParentalControlsEnableSettingsAction, _Mapping]] = ..., parentalControlsSetSpeedLimitAction: _Optional[_Union[ParentalControlsSetSpeedLimitAction, _Mapping]] = ..., cancelSohTestAction: _Optional[_Union[CancelSohTestAction, _Mapping]] = ..., stopLightShowAction: _Optional[_Union[StopLightShowAction, _Mapping]] = ..., startLightShowAction: _Optional[_Union[StartLightShowAction, _Mapping]] = ..., setSuspensionLevelAction: _Optional[_Union[SetSuspensionLevelAction, _Mapping]] = ..., setDischargeLimitAction: _Optional[_Union[SetDischargeLimitAction, _Mapping]] = ..., setLowPowerModeAction: _Optional[_Union[SetLowPowerModeAction, _Mapping]] = ..., setTemperatureUnitAction: _Optional[_Union[SetTemperatureUnitAction, _Mapping]] = ..., setDistanceUnitAction: _Optional[_Union[SetDistanceUnitAction, _Mapping]] = ..., setTimeDisplayFormatAction: _Optional[_Union[SetTimeDisplayFormatAction, _Mapping]] = ..., setTirePressureUnitAction: _Optional[_Union[SetTirePressureUnitAction, _Mapping]] = ..., setEnergyDisplayFormatAction: _Optional[_Union[SetEnergyDisplayFormatAction, _Mapping]] = ..., setKeepAccessoryPowerModeAction: _Optional[_Union[SetKeepAccessoryPowerModeAction, _Mapping]] = ..., setupCloudProfileWithLocalProfileUuidAction: _Optional[_Union[SetupCloudProfileWithLocalProfileUuidAction, _Mapping]] = ..., getLocalProfilesForVaultUuidAction: _Optional[_Union[GetLocalProfilesForVaultUuidAction, _Mapping]] = ..., fetchKeysInfoAction: _Optional[_Union[FetchKeysInfoAction, _Mapping]] = ..., deleteDashcamClipsAction: _Optional[_Union[DeleteDashcamClipsAction, _Mapping]] = ..., formatUsbAction: _Optional[_Union[FormatUSBAction, _Mapping]] = ..., setUpkeepUsernameAction: _Optional[_Union[SetUpkeepUsernameAction, _Mapping]] = ..., bandwidthTest: _Optional[_Union[BandwidthTest, _Mapping]] = ..., setPhoneSettingPreferencesAction: _Optional[_Union[SetPhoneSettingPreferencesAction, _Mapping]] = ..., cancelVehicleDataSubscription: _Optional[_Union[CancelVehicleDataSubscription, _Mapping]] = ..., prepareMobileUploadAction: _Optional[_Union[PrepareMobileUploadAction, _Mapping]] = ..., putMobileUploadChunkAction: _Optional[_Union[PutMobileUploadChunkAction, _Mapping]] = ..., displayStateAction: _Optional[_Union[DisplayStateAction, _Mapping]] = ..., drivingSetCruiseSpeedLimitAction: _Optional[_Union[DrivingSetCruiseSpeedLimitAction, _Mapping]] = ..., setDeckLightAction: _Optional[_Union[SetDeckLightAction, _Mapping]] = ...) -> None: ...
+    setKeepOnCabin12vPortAction: SetKeepOnCabin12vPortAction
+    setKeepOnCabin48vPortAction: SetKeepOnCabin48vPortAction
+    dropNominalSuccessResponses: bool
+    def __init__(self, getVehicleData: _Optional[_Union[GetVehicleData, _Mapping]] = ..., remoteStartDrive: _Optional[_Union[RemoteStartDrive, _Mapping]] = ..., createStreamSession: _Optional[_Union[CreateStreamSession, _Mapping]] = ..., streamMessage: _Optional[_Union[StreamMessage, _Mapping]] = ..., chargingSetLimitAction: _Optional[_Union[ChargingSetLimitAction, _Mapping]] = ..., chargingStartStopAction: _Optional[_Union[ChargingStartStopAction, _Mapping]] = ..., drivingClearSpeedLimitPinAction: _Optional[_Union[DrivingClearSpeedLimitPinAction, _Mapping]] = ..., drivingSetSpeedLimitAction: _Optional[_Union[DrivingSetSpeedLimitAction, _Mapping]] = ..., drivingSpeedLimitAction: _Optional[_Union[DrivingSpeedLimitAction, _Mapping]] = ..., hvacAutoAction: _Optional[_Union[HvacAutoAction, _Mapping]] = ..., hvacSetPreconditioningMaxAction: _Optional[_Union[HvacSetPreconditioningMaxAction, _Mapping]] = ..., hvacSteeringWheelHeaterAction: _Optional[_Union[HvacSteeringWheelHeaterAction, _Mapping]] = ..., hvacTemperatureAdjustmentAction: _Optional[_Union[HvacTemperatureAdjustmentAction, _Mapping]] = ..., mediaPlayAction: _Optional[_Union[MediaPlayAction, _Mapping]] = ..., mediaUpdateVolume: _Optional[_Union[MediaUpdateVolume, _Mapping]] = ..., mediaNextFavorite: _Optional[_Union[MediaNextFavorite, _Mapping]] = ..., mediaPreviousFavorite: _Optional[_Union[MediaPreviousFavorite, _Mapping]] = ..., mediaNextTrack: _Optional[_Union[MediaNextTrack, _Mapping]] = ..., mediaPreviousTrack: _Optional[_Union[MediaPreviousTrack, _Mapping]] = ..., navigationRequest: _Optional[_Union[NavigationRequest, _Mapping]] = ..., navigationSuperchargerRequest: _Optional[_Union[NavigationSuperchargerRequest, _Mapping]] = ..., getNearbyChargingSites: _Optional[_Union[GetNearbyChargingSites, _Mapping]] = ..., uiSetUpcomingCalendarEntries: _Optional[_Union[UiSetUpcomingCalendarEntries, _Mapping]] = ..., vehicleControlCancelSoftwareUpdateAction: _Optional[_Union[VehicleControlCancelSoftwareUpdateAction, _Mapping]] = ..., vehicleControlFlashLightsAction: _Optional[_Union[VehicleControlFlashLightsAction, _Mapping]] = ..., vehicleControlHonkHornAction: _Optional[_Union[VehicleControlHonkHornAction, _Mapping]] = ..., vehicleControlResetValetPinAction: _Optional[_Union[VehicleControlResetValetPinAction, _Mapping]] = ..., vehicleControlScheduleSoftwareUpdateAction: _Optional[_Union[VehicleControlScheduleSoftwareUpdateAction, _Mapping]] = ..., vehicleControlSetSentryModeAction: _Optional[_Union[VehicleControlSetSentryModeAction, _Mapping]] = ..., vehicleControlSetValetModeAction: _Optional[_Union[VehicleControlSetValetModeAction, _Mapping]] = ..., vehicleControlSunroofOpenCloseAction: _Optional[_Union[VehicleControlSunroofOpenCloseAction, _Mapping]] = ..., vehicleControlTriggerHomelinkAction: _Optional[_Union[VehicleControlTriggerHomelinkAction, _Mapping]] = ..., vehicleControlWindowAction: _Optional[_Union[VehicleControlWindowAction, _Mapping]] = ..., hvacBioweaponModeAction: _Optional[_Union[HvacBioweaponModeAction, _Mapping]] = ..., hvacSeatHeaterActions: _Optional[_Union[HvacSeatHeaterActions, _Mapping]] = ..., vehicleDataSubscription: _Optional[_Union[VehicleDataSubscription, _Mapping]] = ..., vehicleDataAck: _Optional[_Union[VehicleDataAck, _Mapping]] = ..., vitalsSubscription: _Optional[_Union[VitalsSubscription, _Mapping]] = ..., vitalsAck: _Optional[_Union[VitalsAck, _Mapping]] = ..., scheduledChargingAction: _Optional[_Union[ScheduledChargingAction, _Mapping]] = ..., scheduledDepartureAction: _Optional[_Union[ScheduledDepartureAction, _Mapping]] = ..., setChargingAmpsAction: _Optional[_Union[SetChargingAmpsAction, _Mapping]] = ..., hvacClimateKeeperAction: _Optional[_Union[HvacClimateKeeperAction, _Mapping]] = ..., hvacRecirculationAction: _Optional[_Union[HvacRecirculationAction, _Mapping]] = ..., ping: _Optional[_Union[Ping, _Mapping]] = ..., dashcamSaveClipAction: _Optional[_Union[DashcamSaveClipAction, _Mapping]] = ..., autoSeatClimateAction: _Optional[_Union[AutoSeatClimateAction, _Mapping]] = ..., hvacSeatCoolerActions: _Optional[_Union[HvacSeatCoolerActions, _Mapping]] = ..., setCabinOverheatProtectionAction: _Optional[_Union[SetCabinOverheatProtectionAction, _Mapping]] = ..., piiKeyRequest: _Optional[_Union[PiiKeyRequest, _Mapping]] = ..., pseudonymSyncRequest: _Optional[_Union[PseudonymSyncRequest, _Mapping]] = ..., navigationGpsRequest: _Optional[_Union[NavigationGpsRequest, _Mapping]] = ..., setVehicleNameAction: _Optional[_Union[SetVehicleNameAction, _Mapping]] = ..., setRateTariffRequest: _Optional[_Union[SetRateTariffRequest, _Mapping]] = ..., getRateTariffRequest: _Optional[_Union[GetRateTariffRequest, _Mapping]] = ..., videoRequestAction: _Optional[_Union[VideoRequestAction, _Mapping]] = ..., takeDrivenoteAction: _Optional[_Union[TakeDrivenoteAction, _Mapping]] = ..., chargePortDoorClose: _Optional[_Union[ChargePortDoorClose, _Mapping]] = ..., chargePortDoorOpen: _Optional[_Union[ChargePortDoorOpen, _Mapping]] = ..., bluetoothClassicPairingRequest: _Optional[_Union[BluetoothClassicPairingRequest, _Mapping]] = ..., boomboxAction: _Optional[_Union[BoomboxAction, _Mapping]] = ..., guestModeAction: _Optional[_Union[_vehicle_pb2.VehicleState.GuestMode, _Mapping]] = ..., setCopTempAction: _Optional[_Union[SetCopTempAction, _Mapping]] = ..., addManagedChargingSiteRequest: _Optional[_Union[AddManagedChargingSiteRequest, _Mapping]] = ..., removeManagedChargingSiteRequest: _Optional[_Union[RemoveManagedChargingSiteRequest, _Mapping]] = ..., navigationRouteAction: _Optional[_Union[NavigationRouteAction, _Mapping]] = ..., autoStwHeatAction: _Optional[_Union[AutoStwHeatAction, _Mapping]] = ..., stwHeatLevelAction: _Optional[_Union[StwHeatLevelAction, _Mapping]] = ..., eraseUserDataAction: _Optional[_Union[EraseUserDataAction, _Mapping]] = ..., getManagedChargingSitesRequest: _Optional[_Union[GetManagedChargingSitesRequest, _Mapping]] = ..., updateChargeOnSolarFeatureRequest: _Optional[_Union[UpdateChargeOnSolarFeatureRequest, _Mapping]] = ..., getChargeOnSolarFeatureRequest: _Optional[_Union[GetChargeOnSolarFeatureRequest, _Mapping]] = ..., vehicleControlSetPinToDriveAction: _Optional[_Union[VehicleControlSetPinToDriveAction, _Mapping]] = ..., vehicleControlResetPinToDriveAction: _Optional[_Union[VehicleControlResetPinToDriveAction, _Mapping]] = ..., drivingClearSpeedLimitPinAdminAction: _Optional[_Union[DrivingClearSpeedLimitPinAdminAction, _Mapping]] = ..., setOutletsOnOffAction: _Optional[_Union[SetOutletsOnOffAction, _Mapping]] = ..., setOutletTimerAction: _Optional[_Union[SetOutletTimerAction, _Mapping]] = ..., setOutletSocLimitAction: _Optional[_Union[SetOutletSocLimitAction, _Mapping]] = ..., setPowerFeedOnOffAction: _Optional[_Union[SetPowerFeedOnOffAction, _Mapping]] = ..., setPowerFeedTimerAction: _Optional[_Union[SetPowerFeedTimerAction, _Mapping]] = ..., setPowerFeedSocLimitAction: _Optional[_Union[SetPowerFeedSocLimitAction, _Mapping]] = ..., setTrailerLightTestStartStopAction: _Optional[_Union[SetTrailerLightTestStartStopAction, _Mapping]] = ..., setTruckBedLightAutoStateAction: _Optional[_Union[SetTruckBedLightAutoStateAction, _Mapping]] = ..., setTruckBedLightBrightnessAction: _Optional[_Union[SetTruckBedLightBrightnessAction, _Mapping]] = ..., vehicleControlResetPinToDriveAdminAction: _Optional[_Union[VehicleControlResetPinToDriveAdminAction, _Mapping]] = ..., navigationWaypointsRequest: _Optional[_Union[NavigationWaypointsRequest, _Mapping]] = ..., setPowershareFeatureAction: _Optional[_Union[SetPowershareFeatureAction, _Mapping]] = ..., setPowershareDischargeLimitAction: _Optional[_Union[SetPowershareDischargeLimitAction, _Mapping]] = ..., setPowershareRequestAction: _Optional[_Union[SetPowershareRequestAction, _Mapping]] = ..., setTentModeRequestAction: _Optional[_Union[SetTentModeRequestAction, _Mapping]] = ..., setFrontZoneLightRequestAction: _Optional[_Union[SetZoneLightRequestAction, _Mapping]] = ..., setRearZoneLightRequestAction: _Optional[_Union[SetZoneLightRequestAction, _Mapping]] = ..., addChargeScheduleAction: _Optional[_Union[_common_pb2.ChargeSchedule, _Mapping]] = ..., removeChargeScheduleAction: _Optional[_Union[RemoveChargeScheduleAction, _Mapping]] = ..., addPreconditionScheduleAction: _Optional[_Union[_common_pb2.PreconditionSchedule, _Mapping]] = ..., removePreconditionScheduleAction: _Optional[_Union[RemovePreconditionScheduleAction, _Mapping]] = ..., setLightbarBrightnessAction: _Optional[_Union[SetLightbarBrightnessAction, _Mapping]] = ..., setLightbarMiddleAction: _Optional[_Union[SetLightbarMiddleAction, _Mapping]] = ..., setLightbarDitchAction: _Optional[_Union[SetLightbarDitchAction, _Mapping]] = ..., getMessagesAction: _Optional[_Union[GetMessagesAction, _Mapping]] = ..., teslaAuthResponseAction: _Optional[_Union[TeslaAuthResponseAction, _Mapping]] = ..., navigationGpsDestinationRequest: _Optional[_Union[NavigationGpsDestinationRequest, _Mapping]] = ..., batchRemovePreconditionSchedulesAction: _Optional[_Union[BatchRemovePreconditionSchedulesAction, _Mapping]] = ..., batchRemoveChargeSchedulesAction: _Optional[_Union[BatchRemoveChargeSchedulesAction, _Mapping]] = ..., parentalControlsClearPinAction: _Optional[_Union[ParentalControlsClearPinAction, _Mapping]] = ..., parentalControlsClearPinAdminAction: _Optional[_Union[ParentalControlsClearPinAdminAction, _Mapping]] = ..., parentalControlsAction: _Optional[_Union[ParentalControlsAction, _Mapping]] = ..., parentalControlsEnableSettingsAction: _Optional[_Union[ParentalControlsEnableSettingsAction, _Mapping]] = ..., parentalControlsSetSpeedLimitAction: _Optional[_Union[ParentalControlsSetSpeedLimitAction, _Mapping]] = ..., cancelSohTestAction: _Optional[_Union[CancelSohTestAction, _Mapping]] = ..., stopLightShowAction: _Optional[_Union[StopLightShowAction, _Mapping]] = ..., startLightShowAction: _Optional[_Union[StartLightShowAction, _Mapping]] = ..., setSuspensionLevelAction: _Optional[_Union[SetSuspensionLevelAction, _Mapping]] = ..., setDischargeLimitAction: _Optional[_Union[SetDischargeLimitAction, _Mapping]] = ..., setLowPowerModeAction: _Optional[_Union[SetLowPowerModeAction, _Mapping]] = ..., setTemperatureUnitAction: _Optional[_Union[SetTemperatureUnitAction, _Mapping]] = ..., setDistanceUnitAction: _Optional[_Union[SetDistanceUnitAction, _Mapping]] = ..., setTimeDisplayFormatAction: _Optional[_Union[SetTimeDisplayFormatAction, _Mapping]] = ..., setTirePressureUnitAction: _Optional[_Union[SetTirePressureUnitAction, _Mapping]] = ..., setEnergyDisplayFormatAction: _Optional[_Union[SetEnergyDisplayFormatAction, _Mapping]] = ..., setKeepAccessoryPowerModeAction: _Optional[_Union[SetKeepAccessoryPowerModeAction, _Mapping]] = ..., setupCloudProfileWithLocalProfileUuidAction: _Optional[_Union[SetupCloudProfileWithLocalProfileUuidAction, _Mapping]] = ..., getLocalProfilesForVaultUuidAction: _Optional[_Union[GetLocalProfilesForVaultUuidAction, _Mapping]] = ..., fetchKeysInfoAction: _Optional[_Union[FetchKeysInfoAction, _Mapping]] = ..., deleteDashcamClipsAction: _Optional[_Union[DeleteDashcamClipsAction, _Mapping]] = ..., formatUsbAction: _Optional[_Union[FormatUSBAction, _Mapping]] = ..., setUpkeepUsernameAction: _Optional[_Union[SetUpkeepUsernameAction, _Mapping]] = ..., bandwidthTest: _Optional[_Union[BandwidthTest, _Mapping]] = ..., setPhoneSettingPreferencesAction: _Optional[_Union[SetPhoneSettingPreferencesAction, _Mapping]] = ..., cancelVehicleDataSubscription: _Optional[_Union[CancelVehicleDataSubscription, _Mapping]] = ..., prepareMobileUploadAction: _Optional[_Union[PrepareMobileUploadAction, _Mapping]] = ..., putMobileUploadChunkAction: _Optional[_Union[PutMobileUploadChunkAction, _Mapping]] = ..., displayStateAction: _Optional[_Union[DisplayStateAction, _Mapping]] = ..., drivingSetCruiseSpeedLimitAction: _Optional[_Union[DrivingSetCruiseSpeedLimitAction, _Mapping]] = ..., setDeckLightAction: _Optional[_Union[SetDeckLightAction, _Mapping]] = ..., setKeepOnCabin12vPortAction: _Optional[_Union[SetKeepOnCabin12vPortAction, _Mapping]] = ..., setKeepOnCabin48vPortAction: _Optional[_Union[SetKeepOnCabin48vPortAction, _Mapping]] = ..., dropNominalSuccessResponses: _Optional[bool] = ...) -> None: ...
 
 class GetVehicleData(_message.Message):
-    __slots__ = ("getGuiSettings", "getChargeState", "getClimateState", "getDriveState", "getLegacyVehicleState", "getVehicleConfig", "getLocationState", "getClosuresState", "getParkedAccessoryState", "getChargeScheduleState", "getPreconditioningScheduleState", "getSohState", "getVehicleDetailState", "getTirePressureState", "getMediaState", "getMediaDetailState", "getSoftwareUpdateState", "getVehicleState", "getParentalControlsState", "getAlertState", "getLightShowState", "getVehicleImageState", "getSuspensionState", "getChildPresenceDetectionState", "getDisplayState")
+    __slots__ = ("getGuiSettings", "getChargeState", "getClimateState", "getDriveState", "getLegacyVehicleState", "getVehicleConfig", "getLocationState", "getClosuresState", "getParkedAccessoryState", "getChargeScheduleState", "getPreconditioningScheduleState", "getSohState", "getVehicleDetailState", "getTirePressureState", "getMediaState", "getMediaDetailState", "getSoftwareUpdateState", "getVehicleState", "getParentalControlsState", "getAlertState", "getLightShowState", "getVehicleImageState", "getSuspensionState", "getChildPresenceDetectionState", "getDisplayState", "getKeepOnAccessoryPortsState")
     GETGUISETTINGS_FIELD_NUMBER: _ClassVar[int]
     GETCHARGESTATE_FIELD_NUMBER: _ClassVar[int]
     GETCLIMATESTATE_FIELD_NUMBER: _ClassVar[int]
@@ -384,6 +392,7 @@ class GetVehicleData(_message.Message):
     GETSUSPENSIONSTATE_FIELD_NUMBER: _ClassVar[int]
     GETCHILDPRESENCEDETECTIONSTATE_FIELD_NUMBER: _ClassVar[int]
     GETDISPLAYSTATE_FIELD_NUMBER: _ClassVar[int]
+    GETKEEPONACCESSORYPORTSSTATE_FIELD_NUMBER: _ClassVar[int]
     getGuiSettings: GetGuiSettings
     getChargeState: GetChargeState
     getClimateState: GetClimateState
@@ -409,9 +418,14 @@ class GetVehicleData(_message.Message):
     getSuspensionState: GetSuspensionState
     getChildPresenceDetectionState: GetChildPresenceDetectionState
     getDisplayState: GetDisplayState
-    def __init__(self, getGuiSettings: _Optional[_Union[GetGuiSettings, _Mapping]] = ..., getChargeState: _Optional[_Union[GetChargeState, _Mapping]] = ..., getClimateState: _Optional[_Union[GetClimateState, _Mapping]] = ..., getDriveState: _Optional[_Union[GetDriveState, _Mapping]] = ..., getLegacyVehicleState: _Optional[_Union[GetLegacyVehicleState, _Mapping]] = ..., getVehicleConfig: _Optional[_Union[GetVehicleConfig, _Mapping]] = ..., getLocationState: _Optional[_Union[GetLocationState, _Mapping]] = ..., getClosuresState: _Optional[_Union[GetClosuresState, _Mapping]] = ..., getParkedAccessoryState: _Optional[_Union[GetParkedAccessoryState, _Mapping]] = ..., getChargeScheduleState: _Optional[_Union[GetChargeScheduleState, _Mapping]] = ..., getPreconditioningScheduleState: _Optional[_Union[GetPreconditioningScheduleState, _Mapping]] = ..., getSohState: _Optional[_Union[GetSohState, _Mapping]] = ..., getVehicleDetailState: _Optional[_Union[GetVehicleDetailState, _Mapping]] = ..., getTirePressureState: _Optional[_Union[GetTirePressureState, _Mapping]] = ..., getMediaState: _Optional[_Union[GetMediaState, _Mapping]] = ..., getMediaDetailState: _Optional[_Union[GetMediaDetailState, _Mapping]] = ..., getSoftwareUpdateState: _Optional[_Union[GetSoftwareUpdateState, _Mapping]] = ..., getVehicleState: _Optional[_Union[GetVehicleState, _Mapping]] = ..., getParentalControlsState: _Optional[_Union[GetParentalControlsState, _Mapping]] = ..., getAlertState: _Optional[_Union[GetAlertState, _Mapping]] = ..., getLightShowState: _Optional[_Union[GetLightShowState, _Mapping]] = ..., getVehicleImageState: _Optional[_Union[GetVehicleImageState, _Mapping]] = ..., getSuspensionState: _Optional[_Union[GetSuspensionState, _Mapping]] = ..., getChildPresenceDetectionState: _Optional[_Union[GetChildPresenceDetectionState, _Mapping]] = ..., getDisplayState: _Optional[_Union[GetDisplayState, _Mapping]] = ...) -> None: ...
+    getKeepOnAccessoryPortsState: GetKeepOnAccessoryPortsState
+    def __init__(self, getGuiSettings: _Optional[_Union[GetGuiSettings, _Mapping]] = ..., getChargeState: _Optional[_Union[GetChargeState, _Mapping]] = ..., getClimateState: _Optional[_Union[GetClimateState, _Mapping]] = ..., getDriveState: _Optional[_Union[GetDriveState, _Mapping]] = ..., getLegacyVehicleState: _Optional[_Union[GetLegacyVehicleState, _Mapping]] = ..., getVehicleConfig: _Optional[_Union[GetVehicleConfig, _Mapping]] = ..., getLocationState: _Optional[_Union[GetLocationState, _Mapping]] = ..., getClosuresState: _Optional[_Union[GetClosuresState, _Mapping]] = ..., getParkedAccessoryState: _Optional[_Union[GetParkedAccessoryState, _Mapping]] = ..., getChargeScheduleState: _Optional[_Union[GetChargeScheduleState, _Mapping]] = ..., getPreconditioningScheduleState: _Optional[_Union[GetPreconditioningScheduleState, _Mapping]] = ..., getSohState: _Optional[_Union[GetSohState, _Mapping]] = ..., getVehicleDetailState: _Optional[_Union[GetVehicleDetailState, _Mapping]] = ..., getTirePressureState: _Optional[_Union[GetTirePressureState, _Mapping]] = ..., getMediaState: _Optional[_Union[GetMediaState, _Mapping]] = ..., getMediaDetailState: _Optional[_Union[GetMediaDetailState, _Mapping]] = ..., getSoftwareUpdateState: _Optional[_Union[GetSoftwareUpdateState, _Mapping]] = ..., getVehicleState: _Optional[_Union[GetVehicleState, _Mapping]] = ..., getParentalControlsState: _Optional[_Union[GetParentalControlsState, _Mapping]] = ..., getAlertState: _Optional[_Union[GetAlertState, _Mapping]] = ..., getLightShowState: _Optional[_Union[GetLightShowState, _Mapping]] = ..., getVehicleImageState: _Optional[_Union[GetVehicleImageState, _Mapping]] = ..., getSuspensionState: _Optional[_Union[GetSuspensionState, _Mapping]] = ..., getChildPresenceDetectionState: _Optional[_Union[GetChildPresenceDetectionState, _Mapping]] = ..., getDisplayState: _Optional[_Union[GetDisplayState, _Mapping]] = ..., getKeepOnAccessoryPortsState: _Optional[_Union[GetKeepOnAccessoryPortsState, _Mapping]] = ...) -> None: ...
 
 class GetGuiSettings(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class GetKeepOnAccessoryPortsState(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
@@ -510,16 +524,16 @@ class MobileUploadParams(_message.Message):
     def __init__(self, totalSize: _Optional[int] = ..., contentSha256: _Optional[bytes] = ...) -> None: ...
 
 class PrepareMobileUploadAction(_message.Message):
-    __slots__ = ("uploadParams", "imageParams", "field_3", "overwriteOldestIfFull")
+    __slots__ = ("uploadParams", "imageParams", "apply", "overwriteOldestIfFull")
     UPLOADPARAMS_FIELD_NUMBER: _ClassVar[int]
     IMAGEPARAMS_FIELD_NUMBER: _ClassVar[int]
-    FIELD_3_FIELD_NUMBER: _ClassVar[int]
+    APPLY_FIELD_NUMBER: _ClassVar[int]
     OVERWRITEOLDESTIFFULL_FIELD_NUMBER: _ClassVar[int]
     uploadParams: MobileUploadParams
     imageParams: MobileImageUploadParams
-    field_3: bool
+    apply: bool
     overwriteOldestIfFull: bool
-    def __init__(self, uploadParams: _Optional[_Union[MobileUploadParams, _Mapping]] = ..., imageParams: _Optional[_Union[MobileImageUploadParams, _Mapping]] = ..., field_3: _Optional[bool] = ..., overwriteOldestIfFull: _Optional[bool] = ...) -> None: ...
+    def __init__(self, uploadParams: _Optional[_Union[MobileUploadParams, _Mapping]] = ..., imageParams: _Optional[_Union[MobileImageUploadParams, _Mapping]] = ..., apply: _Optional[bool] = ..., overwriteOldestIfFull: _Optional[bool] = ...) -> None: ...
 
 class PrepareMobileUploadResponse(_message.Message):
     __slots__ = ("status", "uploadId", "maxChunkSize")
@@ -594,7 +608,7 @@ class PutMobileUploadChunkResponse(_message.Message):
     def __init__(self, status: _Optional[_Union[PutMobileUploadChunkResponse.Status, str]] = ..., resourceId: _Optional[bytes] = ...) -> None: ...
 
 class DogModeLiveActivityData(_message.Message):
-    __slots__ = ("disabledReason", "interiorImage", "field_3", "field_4", "insideTemperatureCelsius", "faultState", "temperatureUnit", "batteryLevel")
+    __slots__ = ("disabledReason", "interiorImage", "vin", "timestamp", "insideTemperatureCelsius", "faultState", "temperatureUnit", "batteryLevel")
     class DisabledReason(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         REASON_UNKNOWN: _ClassVar[DogModeLiveActivityData.DisabledReason]
@@ -606,29 +620,29 @@ class DogModeLiveActivityData(_message.Message):
     REASON_TOGGLE_OFF: DogModeLiveActivityData.DisabledReason
     REASON_DISALLOWED_COUNTRY: DogModeLiveActivityData.DisabledReason
     class DogModeImageData(_message.Message):
-        __slots__ = ("wrappedKey", "encryptedImage")
+        __slots__ = ("wrappedKey", "image")
         WRAPPEDKEY_FIELD_NUMBER: _ClassVar[int]
-        ENCRYPTEDIMAGE_FIELD_NUMBER: _ClassVar[int]
+        IMAGE_FIELD_NUMBER: _ClassVar[int]
         wrappedKey: bytes
-        encryptedImage: bytes
-        def __init__(self, wrappedKey: _Optional[bytes] = ..., encryptedImage: _Optional[bytes] = ...) -> None: ...
+        image: bytes
+        def __init__(self, wrappedKey: _Optional[bytes] = ..., image: _Optional[bytes] = ...) -> None: ...
     DISABLEDREASON_FIELD_NUMBER: _ClassVar[int]
     INTERIORIMAGE_FIELD_NUMBER: _ClassVar[int]
-    FIELD_3_FIELD_NUMBER: _ClassVar[int]
-    FIELD_4_FIELD_NUMBER: _ClassVar[int]
+    VIN_FIELD_NUMBER: _ClassVar[int]
+    TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     INSIDETEMPERATURECELSIUS_FIELD_NUMBER: _ClassVar[int]
     FAULTSTATE_FIELD_NUMBER: _ClassVar[int]
     TEMPERATUREUNIT_FIELD_NUMBER: _ClassVar[int]
     BATTERYLEVEL_FIELD_NUMBER: _ClassVar[int]
     disabledReason: DogModeLiveActivityData.DisabledReason
     interiorImage: DogModeLiveActivityData.DogModeImageData
-    field_3: str
-    field_4: _timestamp_pb2.Timestamp
+    vin: str
+    timestamp: _timestamp_pb2.Timestamp
     insideTemperatureCelsius: float
     faultState: _vehicle_pb2.ClimateState.DogModeState
     temperatureUnit: SetTemperatureUnitAction.Unit
     batteryLevel: float
-    def __init__(self, disabledReason: _Optional[_Union[DogModeLiveActivityData.DisabledReason, str]] = ..., interiorImage: _Optional[_Union[DogModeLiveActivityData.DogModeImageData, _Mapping]] = ..., field_3: _Optional[str] = ..., field_4: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., insideTemperatureCelsius: _Optional[float] = ..., faultState: _Optional[_Union[_vehicle_pb2.ClimateState.DogModeState, str]] = ..., temperatureUnit: _Optional[_Union[SetTemperatureUnitAction.Unit, str]] = ..., batteryLevel: _Optional[float] = ...) -> None: ...
+    def __init__(self, disabledReason: _Optional[_Union[DogModeLiveActivityData.DisabledReason, str]] = ..., interiorImage: _Optional[_Union[DogModeLiveActivityData.DogModeImageData, _Mapping]] = ..., vin: _Optional[str] = ..., timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., insideTemperatureCelsius: _Optional[float] = ..., faultState: _Optional[_Union[_vehicle_pb2.ClimateState.DogModeState, str]] = ..., temperatureUnit: _Optional[_Union[SetTemperatureUnitAction.Unit, str]] = ..., batteryLevel: _Optional[float] = ...) -> None: ...
 
 class GetTirePressureState(_message.Message):
     __slots__ = ()
@@ -733,20 +747,20 @@ class Response(_message.Message):
     def __init__(self, actionStatus: _Optional[_Union[ActionStatus, _Mapping]] = ..., vehicleData: _Optional[_Union[_vehicle_pb2.VehicleData, _Mapping]] = ..., getSessionInfoResponse: _Optional[_Union[_signatures_pb2.SessionInfo, _Mapping]] = ..., streamMessage: _Optional[_Union[StreamMessage, _Mapping]] = ..., getNearbyChargingSites: _Optional[_Union[NearbyChargingSites, _Mapping]] = ..., vehicleDataSubscriptionResponse: _Optional[_Union[VehicleDataSubscriptionResponse, _Mapping]] = ..., vitalsSubscriptionResponse: _Optional[_Union[VitalsSubscriptionResponse, _Mapping]] = ..., ping: _Optional[_Union[Ping, _Mapping]] = ..., piiKeyResponse: _Optional[_Union[PiiKeyResponse, _Mapping]] = ..., pseudonymSyncResponse: _Optional[_Union[PseudonymSyncResponse, _Mapping]] = ..., getRateTariffResponse: _Optional[_Union[GetRateTariffResponse, _Mapping]] = ..., navigationRouteResponse: _Optional[_Union[NavigationRouteResponse, _Mapping]] = ..., getManagedChargingSitesResponse: _Optional[_Union[GetManagedChargingSitesResponse, _Mapping]] = ..., getChargeOnSolarFeatureResponse: _Optional[_Union[GetChargeOnSolarFeatureResponse, _Mapping]] = ..., addManagedChargingSiteResponse: _Optional[_Union[AddManagedChargingSiteResponse, _Mapping]] = ..., getMessagesResponse: _Optional[_Union[GetMessagesResponse, _Mapping]] = ..., getLocalProfilesResponse: _Optional[_Union[GetLocalProfilesResponse, _Mapping]] = ..., keysInfoResponse: _Optional[_Union[KeysInfoResponse, _Mapping]] = ..., bandwidthTestResponse: _Optional[_Union[BandwidthTestResponse, _Mapping]] = ..., prepareMobileUploadResponse: _Optional[_Union[PrepareMobileUploadResponse, _Mapping]] = ..., putMobileUploadChunkResponse: _Optional[_Union[PutMobileUploadChunkResponse, _Mapping]] = ...) -> None: ...
 
 class VehicleDataSubscriptionResponse(_message.Message):
-    __slots__ = ("unknown", "pii_key_response")
-    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("error", "pii_key_response")
+    ERROR_FIELD_NUMBER: _ClassVar[int]
     PII_KEY_RESPONSE_FIELD_NUMBER: _ClassVar[int]
-    unknown: str
+    error: str
     pii_key_response: PiiKeyResponse
-    def __init__(self, unknown: _Optional[str] = ..., pii_key_response: _Optional[_Union[PiiKeyResponse, _Mapping]] = ...) -> None: ...
+    def __init__(self, error: _Optional[str] = ..., pii_key_response: _Optional[_Union[PiiKeyResponse, _Mapping]] = ...) -> None: ...
 
 class VitalsSubscriptionResponse(_message.Message):
-    __slots__ = ("session_id", "unknown")
+    __slots__ = ("session_id", "error")
     SESSION_ID_FIELD_NUMBER: _ClassVar[int]
-    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    ERROR_FIELD_NUMBER: _ClassVar[int]
     session_id: int
-    unknown: str
-    def __init__(self, session_id: _Optional[int] = ..., unknown: _Optional[str] = ...) -> None: ...
+    error: str
+    def __init__(self, session_id: _Optional[int] = ..., error: _Optional[str] = ...) -> None: ...
 
 class PiiKeyResponse(_message.Message):
     __slots__ = ("encrypted_pii_key", "pii_key_expiration", "subscriber_public_key_expiration")
@@ -759,13 +773,13 @@ class PiiKeyResponse(_message.Message):
     def __init__(self, encrypted_pii_key: _Optional[bytes] = ..., pii_key_expiration: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., subscriber_public_key_expiration: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class PseudonymSyncResponse(_message.Message):
-    __slots__ = ("unknown",)
-    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
-    unknown: str
-    def __init__(self, unknown: _Optional[str] = ...) -> None: ...
+    __slots__ = ("pseudonym",)
+    PSEUDONYM_FIELD_NUMBER: _ClassVar[int]
+    pseudonym: str
+    def __init__(self, pseudonym: _Optional[str] = ...) -> None: ...
 
 class NavigationRouteResponse(_message.Message):
-    __slots__ = ("unknown", "traffic_detail")
+    __slots__ = ("route", "traffic_detail")
     class TrafficStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         TS_NO_DATA: _ClassVar[NavigationRouteResponse.TrafficStatus]
@@ -785,11 +799,11 @@ class NavigationRouteResponse(_message.Message):
         offset_to_dest: float
         traffic_status: NavigationRouteResponse.TrafficStatus
         def __init__(self, offset_to_dest: _Optional[float] = ..., traffic_status: _Optional[_Union[NavigationRouteResponse.TrafficStatus, str]] = ...) -> None: ...
-    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    ROUTE_FIELD_NUMBER: _ClassVar[int]
     TRAFFIC_DETAIL_FIELD_NUMBER: _ClassVar[int]
-    unknown: str
+    route: str
     traffic_detail: _containers.RepeatedCompositeFieldContainer[NavigationRouteResponse.TrafficDetail]
-    def __init__(self, unknown: _Optional[str] = ..., traffic_detail: _Optional[_Iterable[_Union[NavigationRouteResponse.TrafficDetail, _Mapping]]] = ...) -> None: ...
+    def __init__(self, route: _Optional[str] = ..., traffic_detail: _Optional[_Iterable[_Union[NavigationRouteResponse.TrafficDetail, _Mapping]]] = ...) -> None: ...
 
 class GetManagedChargingSitesResponse(_message.Message):
     __slots__ = ("sites",)
@@ -814,14 +828,14 @@ class AddManagedChargingSiteResponse(_message.Message):
     def __init__(self, added_or_updated: _Optional[_Union[ManagedChargingSiteAddedOrUpdated, _Mapping]] = ..., existing_site_nearby: _Optional[_Union[ExistingManagedChargingSiteNearby, _Mapping]] = ...) -> None: ...
 
 class RequestTeslaAuthCommand(_message.Message):
-    __slots__ = ("client_id", "unknown", "return_scoped_token")
+    __slots__ = ("client_id", "scope", "return_scoped_token")
     CLIENT_ID_FIELD_NUMBER: _ClassVar[int]
-    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    SCOPE_FIELD_NUMBER: _ClassVar[int]
     RETURN_SCOPED_TOKEN_FIELD_NUMBER: _ClassVar[int]
     client_id: str
-    unknown: str
+    scope: str
     return_scoped_token: bool
-    def __init__(self, client_id: _Optional[str] = ..., unknown: _Optional[str] = ..., return_scoped_token: _Optional[bool] = ...) -> None: ...
+    def __init__(self, client_id: _Optional[str] = ..., scope: _Optional[str] = ..., return_scoped_token: _Optional[bool] = ...) -> None: ...
 
 class MobileAppMessage(_message.Message):
     __slots__ = ("request_tesla_auth_command",)
@@ -836,12 +850,12 @@ class GetMessagesResponse(_message.Message):
     def __init__(self, mobile_app_messages: _Optional[_Iterable[_Union[MobileAppMessage, _Mapping]]] = ...) -> None: ...
 
 class Profile(_message.Message):
-    __slots__ = ("unknown_1", "unknown_2")
-    UNKNOWN_1_FIELD_NUMBER: _ClassVar[int]
-    UNKNOWN_2_FIELD_NUMBER: _ClassVar[int]
-    unknown_1: str
-    unknown_2: str
-    def __init__(self, unknown_1: _Optional[str] = ..., unknown_2: _Optional[str] = ...) -> None: ...
+    __slots__ = ("uuid", "name")
+    UUID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    uuid: str
+    name: str
+    def __init__(self, uuid: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
 class GetLocalProfilesResponse(_message.Message):
     __slots__ = ("profiles",)
@@ -850,20 +864,20 @@ class GetLocalProfilesResponse(_message.Message):
     def __init__(self, profiles: _Optional[_Iterable[_Union[Profile, _Mapping]]] = ...) -> None: ...
 
 class KeyInfo(_message.Message):
-    __slots__ = ("unknown_1", "unknown_2", "public_key", "last_seen", "role", "form_factor")
-    UNKNOWN_1_FIELD_NUMBER: _ClassVar[int]
-    UNKNOWN_2_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("name", "model", "public_key", "last_seen", "role", "form_factor")
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    MODEL_FIELD_NUMBER: _ClassVar[int]
     PUBLIC_KEY_FIELD_NUMBER: _ClassVar[int]
     LAST_SEEN_FIELD_NUMBER: _ClassVar[int]
     ROLE_FIELD_NUMBER: _ClassVar[int]
     FORM_FACTOR_FIELD_NUMBER: _ClassVar[int]
-    unknown_1: str
-    unknown_2: str
+    name: str
+    model: str
     public_key: bytes
     last_seen: _timestamp_pb2.Timestamp
     role: _keys_pb2.Role
     form_factor: _vcsec_pb2.KeyFormFactor
-    def __init__(self, unknown_1: _Optional[str] = ..., unknown_2: _Optional[str] = ..., public_key: _Optional[bytes] = ..., last_seen: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., role: _Optional[_Union[_keys_pb2.Role, str]] = ..., form_factor: _Optional[_Union[_vcsec_pb2.KeyFormFactor, str]] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., model: _Optional[str] = ..., public_key: _Optional[bytes] = ..., last_seen: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., role: _Optional[_Union[_keys_pb2.Role, str]] = ..., form_factor: _Optional[_Union[_vcsec_pb2.KeyFormFactor, str]] = ...) -> None: ...
 
 class KeysInfoResponse(_message.Message):
     __slots__ = ("keys_info",)
@@ -1521,7 +1535,7 @@ class UiSetUpcomingCalendarEntries(_message.Message):
     def __init__(self, calendar_data: _Optional[str] = ...) -> None: ...
 
 class VehicleDataSubscription(_message.Message):
-    __slots__ = ("pii_key_request", "subscription_duration_s", "subscription_ping_s", "gui_settings_max_update_rate_ms", "charge_state_max_update_rate_ms", "climate_state_max_update_rate_ms", "drive_state_max_update_rate_ms", "vehicle_state_max_update_rate_ms", "vehicle_config_max_update_rate_ms", "location_state_max_update_rate_ms", "closures_state_max_update_rate_ms", "parked_accessory_state_max_update_rate_ms", "charge_schedule_state_max_update_rate_ms", "preconditioning_schedule_state_max_update_rate_ms", "alert_state_max_update_rate_ms", "suspension_state_max_update_rate_ms", "child_presence_detection_state_max_update_rate_ms", "display_state_max_update_rate_ms")
+    __slots__ = ("pii_key_request", "subscription_duration_s", "subscription_ping_s", "gui_settings_max_update_rate_ms", "charge_state_max_update_rate_ms", "climate_state_max_update_rate_ms", "drive_state_max_update_rate_ms", "vehicle_state_max_update_rate_ms", "vehicle_config_max_update_rate_ms", "location_state_max_update_rate_ms", "closures_state_max_update_rate_ms", "parked_accessory_state_max_update_rate_ms", "charge_schedule_state_max_update_rate_ms", "preconditioning_schedule_state_max_update_rate_ms", "alert_state_max_update_rate_ms", "suspension_state_max_update_rate_ms", "child_presence_detection_state_max_update_rate_ms", "display_state_max_update_rate_ms", "keep_on_accessory_ports_state_max_update_rate_ms")
     class PiiKeyRequest(_message.Message):
         __slots__ = ("subscriber_public_key",)
         SUBSCRIBER_PUBLIC_KEY_FIELD_NUMBER: _ClassVar[int]
@@ -1545,6 +1559,7 @@ class VehicleDataSubscription(_message.Message):
     SUSPENSION_STATE_MAX_UPDATE_RATE_MS_FIELD_NUMBER: _ClassVar[int]
     CHILD_PRESENCE_DETECTION_STATE_MAX_UPDATE_RATE_MS_FIELD_NUMBER: _ClassVar[int]
     DISPLAY_STATE_MAX_UPDATE_RATE_MS_FIELD_NUMBER: _ClassVar[int]
+    KEEP_ON_ACCESSORY_PORTS_STATE_MAX_UPDATE_RATE_MS_FIELD_NUMBER: _ClassVar[int]
     pii_key_request: VehicleDataSubscription.PiiKeyRequest
     subscription_duration_s: int
     subscription_ping_s: int
@@ -1563,7 +1578,8 @@ class VehicleDataSubscription(_message.Message):
     suspension_state_max_update_rate_ms: int
     child_presence_detection_state_max_update_rate_ms: int
     display_state_max_update_rate_ms: int
-    def __init__(self, pii_key_request: _Optional[_Union[VehicleDataSubscription.PiiKeyRequest, _Mapping]] = ..., subscription_duration_s: _Optional[int] = ..., subscription_ping_s: _Optional[int] = ..., gui_settings_max_update_rate_ms: _Optional[int] = ..., charge_state_max_update_rate_ms: _Optional[int] = ..., climate_state_max_update_rate_ms: _Optional[int] = ..., drive_state_max_update_rate_ms: _Optional[int] = ..., vehicle_state_max_update_rate_ms: _Optional[int] = ..., vehicle_config_max_update_rate_ms: _Optional[int] = ..., location_state_max_update_rate_ms: _Optional[int] = ..., closures_state_max_update_rate_ms: _Optional[int] = ..., parked_accessory_state_max_update_rate_ms: _Optional[int] = ..., charge_schedule_state_max_update_rate_ms: _Optional[int] = ..., preconditioning_schedule_state_max_update_rate_ms: _Optional[int] = ..., alert_state_max_update_rate_ms: _Optional[int] = ..., suspension_state_max_update_rate_ms: _Optional[int] = ..., child_presence_detection_state_max_update_rate_ms: _Optional[int] = ..., display_state_max_update_rate_ms: _Optional[int] = ...) -> None: ...
+    keep_on_accessory_ports_state_max_update_rate_ms: int
+    def __init__(self, pii_key_request: _Optional[_Union[VehicleDataSubscription.PiiKeyRequest, _Mapping]] = ..., subscription_duration_s: _Optional[int] = ..., subscription_ping_s: _Optional[int] = ..., gui_settings_max_update_rate_ms: _Optional[int] = ..., charge_state_max_update_rate_ms: _Optional[int] = ..., climate_state_max_update_rate_ms: _Optional[int] = ..., drive_state_max_update_rate_ms: _Optional[int] = ..., vehicle_state_max_update_rate_ms: _Optional[int] = ..., vehicle_config_max_update_rate_ms: _Optional[int] = ..., location_state_max_update_rate_ms: _Optional[int] = ..., closures_state_max_update_rate_ms: _Optional[int] = ..., parked_accessory_state_max_update_rate_ms: _Optional[int] = ..., charge_schedule_state_max_update_rate_ms: _Optional[int] = ..., preconditioning_schedule_state_max_update_rate_ms: _Optional[int] = ..., alert_state_max_update_rate_ms: _Optional[int] = ..., suspension_state_max_update_rate_ms: _Optional[int] = ..., child_presence_detection_state_max_update_rate_ms: _Optional[int] = ..., display_state_max_update_rate_ms: _Optional[int] = ..., keep_on_accessory_ports_state_max_update_rate_ms: _Optional[int] = ...) -> None: ...
 
 class VehicleDataAck(_message.Message):
     __slots__ = ("charge_state_timestamp", "climate_state_timestamp", "closures_state_timestamp", "drive_state_timestamp", "gui_settings_timestamp", "location_state_timestamp", "vehicle_config_timestamp", "vehicle_state_timestamp", "parked_accessory_state_timestamp", "charge_schedule_state_timestamp", "preconditioning_schedule_state_timestamp", "alert_state_timestamp", "suspension_state_timestamp", "display_state_timestamp", "decryption_error_field")
@@ -2336,7 +2352,7 @@ class PhoneUnitPreferences(_message.Message):
     def __init__(self, distance_unit: _Optional[_Union[SetDistanceUnitAction.Unit, str]] = ..., temperature_unit: _Optional[_Union[SetTemperatureUnitAction.Unit, str]] = ...) -> None: ...
 
 class SetPhoneSettingPreferencesAction(_message.Message):
-    __slots__ = ("font_size", "field_2", "unit_preferences")
+    __slots__ = ("font_size", "language", "unit_preferences")
     class FontSize(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         FONT_SIZE_STANDARD: _ClassVar[SetPhoneSettingPreferencesAction.FontSize]
@@ -2344,12 +2360,12 @@ class SetPhoneSettingPreferencesAction(_message.Message):
     FONT_SIZE_STANDARD: SetPhoneSettingPreferencesAction.FontSize
     FONT_SIZE_LARGE: SetPhoneSettingPreferencesAction.FontSize
     FONT_SIZE_FIELD_NUMBER: _ClassVar[int]
-    FIELD_2_FIELD_NUMBER: _ClassVar[int]
+    LANGUAGE_FIELD_NUMBER: _ClassVar[int]
     UNIT_PREFERENCES_FIELD_NUMBER: _ClassVar[int]
     font_size: SetPhoneSettingPreferencesAction.FontSize
-    field_2: str
+    language: str
     unit_preferences: PhoneUnitPreferences
-    def __init__(self, font_size: _Optional[_Union[SetPhoneSettingPreferencesAction.FontSize, str]] = ..., field_2: _Optional[str] = ..., unit_preferences: _Optional[_Union[PhoneUnitPreferences, _Mapping]] = ...) -> None: ...
+    def __init__(self, font_size: _Optional[_Union[SetPhoneSettingPreferencesAction.FontSize, str]] = ..., language: _Optional[str] = ..., unit_preferences: _Optional[_Union[PhoneUnitPreferences, _Mapping]] = ...) -> None: ...
 
 class CancelVehicleDataSubscription(_message.Message):
     __slots__ = ()
@@ -2372,3 +2388,15 @@ class SetDeckLightAction(_message.Message):
     ON_FIELD_NUMBER: _ClassVar[int]
     on: bool
     def __init__(self, on: _Optional[bool] = ...) -> None: ...
+
+class SetKeepOnCabin12vPortAction(_message.Message):
+    __slots__ = ("keepOnMode",)
+    KEEPONMODE_FIELD_NUMBER: _ClassVar[int]
+    keepOnMode: _vehicle_pb2.KeepOnAccessoryPortRequest
+    def __init__(self, keepOnMode: _Optional[_Union[_vehicle_pb2.KeepOnAccessoryPortRequest, str]] = ...) -> None: ...
+
+class SetKeepOnCabin48vPortAction(_message.Message):
+    __slots__ = ("keepOnMode",)
+    KEEPONMODE_FIELD_NUMBER: _ClassVar[int]
+    keepOnMode: _vehicle_pb2.KeepOnAccessoryPortRequest
+    def __init__(self, keepOnMode: _Optional[_Union[_vehicle_pb2.KeepOnAccessoryPortRequest, str]] = ...) -> None: ...

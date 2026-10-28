@@ -30,6 +30,13 @@ import {
   wifiNetworkSecurityTypeFromJSON,
   wifiNetworkSecurityTypeToJSON,
 } from "./networking.js";
+import {
+  AssetSiteUuidOfDeviceResponse,
+  RegistrationRequest,
+  RegistrationResponse,
+  SiteSuggestionRequest,
+  SiteSuggestionResponse,
+} from "./registration_api.js";
 import { AcceptedPackage, FirmwareVersion, LocallyAvailablePackage, SystemUpdate } from "./update.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
@@ -48,10 +55,6 @@ export interface ComplianceInformation {
   radioLegalInformation: RadioLegalInformation[];
 }
 
-/**
- * Tags 8 and 9 carry bytes. One of them is installed_firmware_signature;
- * which one is not known, so both stay unmodelled.
- */
 export interface CommonAPIGetSystemInfoResponse {
   deviceId: EcuId | undefined;
   din: string;
@@ -59,6 +62,8 @@ export interface CommonAPIGetSystemInfoResponse {
   systemUpdate: SystemUpdate | undefined;
   deviceType: DeviceType;
   complianceInformation: ComplianceInformation | undefined;
+  installedFirmwareSignature: Uint8Array;
+  offlineFirmwareSignature: Uint8Array;
 }
 
 export interface CommonAPISetLocalSiteConfigRequest {
@@ -242,6 +247,31 @@ export interface CommonAPIGetTcpdumpInfoResponse {
   diskQuota: number;
 }
 
+export interface CommonAPIRegisterRequest {
+  request: RegistrationRequest | undefined;
+}
+
+export interface CommonAPIRegisterResponse {
+  /** may be an enum; values not yet known */
+  failure: number;
+  response: RegistrationResponse | undefined;
+}
+
+export interface CommonAPIRetrieveSiteUuidRequest {
+}
+
+export interface CommonAPIRetrieveSiteUuidResponse {
+  response: AssetSiteUuidOfDeviceResponse | undefined;
+}
+
+export interface CommonAPIRetrieveSiteSuggestionRequest {
+  request: SiteSuggestionRequest | undefined;
+}
+
+export interface CommonAPIRetrieveSiteSuggestionResponse {
+  response: SiteSuggestionResponse | undefined;
+}
+
 export interface CommonMessages {
   errorResponse: ErrorResponse | undefined;
   getSystemInfoRequest?: CommonAPIGetSystemInfoRequest | undefined;
@@ -290,16 +320,12 @@ export interface CommonMessages {
   performUpdateFromLocallyAvailablePackagesResponse?:
     | CommonAPIPerformUpdateFromLocallyAvailablePackagesResponse
     | undefined;
-  /**
-   * Tags 40-45 carry request/response payloads whose bodies are types from a
-   * separate, not-yet-modeled proto package; left unmodeled here.
-   * CommonAPIRegisterRequest registration_request                                                                          = 40;
-   * CommonAPIRegisterResponse registration_response                                                                        = 41;
-   * CommonAPIRetrieveSiteUuidRequest retrieve_site_uuid_request                                                            = 42;
-   * CommonAPIRetrieveSiteUuidResponse retrieve_site_uuid_response                                                          = 43;
-   * CommonAPIRetrieveSiteSuggestionRequest retrieve_site_suggestion_request                                                = 44;
-   * CommonAPIRetrieveSiteSuggestionResponse retrieve_site_suggestion_response                                              = 45;
-   */
+  registerRequest?: CommonAPIRegisterRequest | undefined;
+  registerResponse?: CommonAPIRegisterResponse | undefined;
+  retrieveSiteUuidRequest?: CommonAPIRetrieveSiteUuidRequest | undefined;
+  retrieveSiteUuidResponse?: CommonAPIRetrieveSiteUuidResponse | undefined;
+  retrieveSiteSuggestionRequest?: CommonAPIRetrieveSiteSuggestionRequest | undefined;
+  retrieveSiteSuggestionResponse?: CommonAPIRetrieveSiteSuggestionResponse | undefined;
   startTcpdumpRequest?: CommonAPIStartTcpdumpRequest | undefined;
   startTcpdumpResponse?: CommonAPIStartTcpdumpResponse | undefined;
   stopTcpdumpRequest?: CommonAPIStopTcpdumpRequest | undefined;
@@ -530,6 +556,8 @@ function createBaseCommonAPIGetSystemInfoResponse(): CommonAPIGetSystemInfoRespo
     systemUpdate: undefined,
     deviceType: 0,
     complianceInformation: undefined,
+    installedFirmwareSignature: new Uint8Array(0),
+    offlineFirmwareSignature: new Uint8Array(0),
   };
 }
 
@@ -552,6 +580,12 @@ export const CommonAPIGetSystemInfoResponse: MessageFns<CommonAPIGetSystemInfoRe
     }
     if (message.complianceInformation !== undefined) {
       ComplianceInformation.encode(message.complianceInformation, writer.uint32(58).fork()).join();
+    }
+    if (message.installedFirmwareSignature.length !== 0) {
+      writer.uint32(66).bytes(message.installedFirmwareSignature);
+    }
+    if (message.offlineFirmwareSignature.length !== 0) {
+      writer.uint32(74).bytes(message.offlineFirmwareSignature);
     }
     return writer;
   },
@@ -611,6 +645,22 @@ export const CommonAPIGetSystemInfoResponse: MessageFns<CommonAPIGetSystemInfoRe
           message.complianceInformation = ComplianceInformation.decode(reader, reader.uint32());
           continue;
         }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.installedFirmwareSignature = reader.bytes();
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.offlineFirmwareSignature = reader.bytes();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -630,6 +680,12 @@ export const CommonAPIGetSystemInfoResponse: MessageFns<CommonAPIGetSystemInfoRe
       complianceInformation: isSet(object.complianceInformation)
         ? ComplianceInformation.fromJSON(object.complianceInformation)
         : undefined,
+      installedFirmwareSignature: isSet(object.installedFirmwareSignature)
+        ? bytesFromBase64(object.installedFirmwareSignature)
+        : new Uint8Array(0),
+      offlineFirmwareSignature: isSet(object.offlineFirmwareSignature)
+        ? bytesFromBase64(object.offlineFirmwareSignature)
+        : new Uint8Array(0),
     };
   },
 
@@ -652,6 +708,12 @@ export const CommonAPIGetSystemInfoResponse: MessageFns<CommonAPIGetSystemInfoRe
     }
     if (message.complianceInformation !== undefined) {
       obj.complianceInformation = ComplianceInformation.toJSON(message.complianceInformation);
+    }
+    if (message.installedFirmwareSignature !== undefined) {
+      obj.installedFirmwareSignature = base64FromBytes(message.installedFirmwareSignature);
+    }
+    if (message.offlineFirmwareSignature !== undefined) {
+      obj.offlineFirmwareSignature = base64FromBytes(message.offlineFirmwareSignature);
     }
     return obj;
   },
@@ -678,6 +740,8 @@ export const CommonAPIGetSystemInfoResponse: MessageFns<CommonAPIGetSystemInfoRe
       (object.complianceInformation !== undefined && object.complianceInformation !== null)
         ? ComplianceInformation.fromPartial(object.complianceInformation)
         : undefined;
+    message.installedFirmwareSignature = object.installedFirmwareSignature ?? new Uint8Array(0);
+    message.offlineFirmwareSignature = object.offlineFirmwareSignature ?? new Uint8Array(0);
     return message;
   },
 };
@@ -3607,6 +3671,383 @@ export const CommonAPIGetTcpdumpInfoResponse: MessageFns<CommonAPIGetTcpdumpInfo
   },
 };
 
+function createBaseCommonAPIRegisterRequest(): CommonAPIRegisterRequest {
+  return { request: undefined };
+}
+
+export const CommonAPIRegisterRequest: MessageFns<CommonAPIRegisterRequest> = {
+  encode(message: CommonAPIRegisterRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.request !== undefined) {
+      RegistrationRequest.encode(message.request, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CommonAPIRegisterRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCommonAPIRegisterRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.request = RegistrationRequest.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CommonAPIRegisterRequest {
+    return { request: isSet(object.request) ? RegistrationRequest.fromJSON(object.request) : undefined };
+  },
+
+  toJSON(message: CommonAPIRegisterRequest): unknown {
+    const obj: any = {};
+    if (message.request !== undefined) {
+      obj.request = RegistrationRequest.toJSON(message.request);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CommonAPIRegisterRequest>, I>>(base?: I): CommonAPIRegisterRequest {
+    return CommonAPIRegisterRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CommonAPIRegisterRequest>, I>>(object: I): CommonAPIRegisterRequest {
+    const message = createBaseCommonAPIRegisterRequest();
+    message.request = (object.request !== undefined && object.request !== null)
+      ? RegistrationRequest.fromPartial(object.request)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseCommonAPIRegisterResponse(): CommonAPIRegisterResponse {
+  return { failure: 0, response: undefined };
+}
+
+export const CommonAPIRegisterResponse: MessageFns<CommonAPIRegisterResponse> = {
+  encode(message: CommonAPIRegisterResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.failure !== 0) {
+      writer.uint32(8).int32(message.failure);
+    }
+    if (message.response !== undefined) {
+      RegistrationResponse.encode(message.response, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CommonAPIRegisterResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCommonAPIRegisterResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.failure = reader.int32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.response = RegistrationResponse.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CommonAPIRegisterResponse {
+    return {
+      failure: isSet(object.failure) ? globalThis.Number(object.failure) : 0,
+      response: isSet(object.response) ? RegistrationResponse.fromJSON(object.response) : undefined,
+    };
+  },
+
+  toJSON(message: CommonAPIRegisterResponse): unknown {
+    const obj: any = {};
+    if (message.failure !== undefined) {
+      obj.failure = Math.round(message.failure);
+    }
+    if (message.response !== undefined) {
+      obj.response = RegistrationResponse.toJSON(message.response);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CommonAPIRegisterResponse>, I>>(base?: I): CommonAPIRegisterResponse {
+    return CommonAPIRegisterResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CommonAPIRegisterResponse>, I>>(object: I): CommonAPIRegisterResponse {
+    const message = createBaseCommonAPIRegisterResponse();
+    message.failure = object.failure ?? 0;
+    message.response = (object.response !== undefined && object.response !== null)
+      ? RegistrationResponse.fromPartial(object.response)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseCommonAPIRetrieveSiteUuidRequest(): CommonAPIRetrieveSiteUuidRequest {
+  return {};
+}
+
+export const CommonAPIRetrieveSiteUuidRequest: MessageFns<CommonAPIRetrieveSiteUuidRequest> = {
+  encode(_: CommonAPIRetrieveSiteUuidRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CommonAPIRetrieveSiteUuidRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCommonAPIRetrieveSiteUuidRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): CommonAPIRetrieveSiteUuidRequest {
+    return {};
+  },
+
+  toJSON(_: CommonAPIRetrieveSiteUuidRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CommonAPIRetrieveSiteUuidRequest>, I>>(
+    base?: I,
+  ): CommonAPIRetrieveSiteUuidRequest {
+    return CommonAPIRetrieveSiteUuidRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CommonAPIRetrieveSiteUuidRequest>, I>>(
+    _: I,
+  ): CommonAPIRetrieveSiteUuidRequest {
+    const message = createBaseCommonAPIRetrieveSiteUuidRequest();
+    return message;
+  },
+};
+
+function createBaseCommonAPIRetrieveSiteUuidResponse(): CommonAPIRetrieveSiteUuidResponse {
+  return { response: undefined };
+}
+
+export const CommonAPIRetrieveSiteUuidResponse: MessageFns<CommonAPIRetrieveSiteUuidResponse> = {
+  encode(message: CommonAPIRetrieveSiteUuidResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.response !== undefined) {
+      AssetSiteUuidOfDeviceResponse.encode(message.response, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CommonAPIRetrieveSiteUuidResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCommonAPIRetrieveSiteUuidResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.response = AssetSiteUuidOfDeviceResponse.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CommonAPIRetrieveSiteUuidResponse {
+    return { response: isSet(object.response) ? AssetSiteUuidOfDeviceResponse.fromJSON(object.response) : undefined };
+  },
+
+  toJSON(message: CommonAPIRetrieveSiteUuidResponse): unknown {
+    const obj: any = {};
+    if (message.response !== undefined) {
+      obj.response = AssetSiteUuidOfDeviceResponse.toJSON(message.response);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CommonAPIRetrieveSiteUuidResponse>, I>>(
+    base?: I,
+  ): CommonAPIRetrieveSiteUuidResponse {
+    return CommonAPIRetrieveSiteUuidResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CommonAPIRetrieveSiteUuidResponse>, I>>(
+    object: I,
+  ): CommonAPIRetrieveSiteUuidResponse {
+    const message = createBaseCommonAPIRetrieveSiteUuidResponse();
+    message.response = (object.response !== undefined && object.response !== null)
+      ? AssetSiteUuidOfDeviceResponse.fromPartial(object.response)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseCommonAPIRetrieveSiteSuggestionRequest(): CommonAPIRetrieveSiteSuggestionRequest {
+  return { request: undefined };
+}
+
+export const CommonAPIRetrieveSiteSuggestionRequest: MessageFns<CommonAPIRetrieveSiteSuggestionRequest> = {
+  encode(message: CommonAPIRetrieveSiteSuggestionRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.request !== undefined) {
+      SiteSuggestionRequest.encode(message.request, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CommonAPIRetrieveSiteSuggestionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCommonAPIRetrieveSiteSuggestionRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.request = SiteSuggestionRequest.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CommonAPIRetrieveSiteSuggestionRequest {
+    return { request: isSet(object.request) ? SiteSuggestionRequest.fromJSON(object.request) : undefined };
+  },
+
+  toJSON(message: CommonAPIRetrieveSiteSuggestionRequest): unknown {
+    const obj: any = {};
+    if (message.request !== undefined) {
+      obj.request = SiteSuggestionRequest.toJSON(message.request);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CommonAPIRetrieveSiteSuggestionRequest>, I>>(
+    base?: I,
+  ): CommonAPIRetrieveSiteSuggestionRequest {
+    return CommonAPIRetrieveSiteSuggestionRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CommonAPIRetrieveSiteSuggestionRequest>, I>>(
+    object: I,
+  ): CommonAPIRetrieveSiteSuggestionRequest {
+    const message = createBaseCommonAPIRetrieveSiteSuggestionRequest();
+    message.request = (object.request !== undefined && object.request !== null)
+      ? SiteSuggestionRequest.fromPartial(object.request)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseCommonAPIRetrieveSiteSuggestionResponse(): CommonAPIRetrieveSiteSuggestionResponse {
+  return { response: undefined };
+}
+
+export const CommonAPIRetrieveSiteSuggestionResponse: MessageFns<CommonAPIRetrieveSiteSuggestionResponse> = {
+  encode(message: CommonAPIRetrieveSiteSuggestionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.response !== undefined) {
+      SiteSuggestionResponse.encode(message.response, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CommonAPIRetrieveSiteSuggestionResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCommonAPIRetrieveSiteSuggestionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.response = SiteSuggestionResponse.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CommonAPIRetrieveSiteSuggestionResponse {
+    return { response: isSet(object.response) ? SiteSuggestionResponse.fromJSON(object.response) : undefined };
+  },
+
+  toJSON(message: CommonAPIRetrieveSiteSuggestionResponse): unknown {
+    const obj: any = {};
+    if (message.response !== undefined) {
+      obj.response = SiteSuggestionResponse.toJSON(message.response);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CommonAPIRetrieveSiteSuggestionResponse>, I>>(
+    base?: I,
+  ): CommonAPIRetrieveSiteSuggestionResponse {
+    return CommonAPIRetrieveSiteSuggestionResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CommonAPIRetrieveSiteSuggestionResponse>, I>>(
+    object: I,
+  ): CommonAPIRetrieveSiteSuggestionResponse {
+    const message = createBaseCommonAPIRetrieveSiteSuggestionResponse();
+    message.response = (object.response !== undefined && object.response !== null)
+      ? SiteSuggestionResponse.fromPartial(object.response)
+      : undefined;
+    return message;
+  },
+};
+
 function createBaseCommonMessages(): CommonMessages {
   return {
     errorResponse: undefined,
@@ -3648,6 +4089,12 @@ function createBaseCommonMessages(): CommonMessages {
     prepareRegistrationPayloadResponse: undefined,
     performUpdateFromLocallyAvailablePackagesRequest: undefined,
     performUpdateFromLocallyAvailablePackagesResponse: undefined,
+    registerRequest: undefined,
+    registerResponse: undefined,
+    retrieveSiteUuidRequest: undefined,
+    retrieveSiteUuidResponse: undefined,
+    retrieveSiteSuggestionRequest: undefined,
+    retrieveSiteSuggestionResponse: undefined,
     startTcpdumpRequest: undefined,
     startTcpdumpResponse: undefined,
     stopTcpdumpRequest: undefined,
@@ -3802,6 +4249,26 @@ export const CommonMessages: MessageFns<CommonMessages> = {
         message.performUpdateFromLocallyAvailablePackagesResponse,
         writer.uint32(314).fork(),
       ).join();
+    }
+    if (message.registerRequest !== undefined) {
+      CommonAPIRegisterRequest.encode(message.registerRequest, writer.uint32(322).fork()).join();
+    }
+    if (message.registerResponse !== undefined) {
+      CommonAPIRegisterResponse.encode(message.registerResponse, writer.uint32(330).fork()).join();
+    }
+    if (message.retrieveSiteUuidRequest !== undefined) {
+      CommonAPIRetrieveSiteUuidRequest.encode(message.retrieveSiteUuidRequest, writer.uint32(338).fork()).join();
+    }
+    if (message.retrieveSiteUuidResponse !== undefined) {
+      CommonAPIRetrieveSiteUuidResponse.encode(message.retrieveSiteUuidResponse, writer.uint32(346).fork()).join();
+    }
+    if (message.retrieveSiteSuggestionRequest !== undefined) {
+      CommonAPIRetrieveSiteSuggestionRequest.encode(message.retrieveSiteSuggestionRequest, writer.uint32(354).fork())
+        .join();
+    }
+    if (message.retrieveSiteSuggestionResponse !== undefined) {
+      CommonAPIRetrieveSiteSuggestionResponse.encode(message.retrieveSiteSuggestionResponse, writer.uint32(362).fork())
+        .join();
     }
     if (message.startTcpdumpRequest !== undefined) {
       CommonAPIStartTcpdumpRequest.encode(message.startTcpdumpRequest, writer.uint32(370).fork()).join();
@@ -4160,6 +4627,60 @@ export const CommonMessages: MessageFns<CommonMessages> = {
             CommonAPIPerformUpdateFromLocallyAvailablePackagesResponse.decode(reader, reader.uint32());
           continue;
         }
+        case 40: {
+          if (tag !== 322) {
+            break;
+          }
+
+          message.registerRequest = CommonAPIRegisterRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 41: {
+          if (tag !== 330) {
+            break;
+          }
+
+          message.registerResponse = CommonAPIRegisterResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 42: {
+          if (tag !== 338) {
+            break;
+          }
+
+          message.retrieveSiteUuidRequest = CommonAPIRetrieveSiteUuidRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 43: {
+          if (tag !== 346) {
+            break;
+          }
+
+          message.retrieveSiteUuidResponse = CommonAPIRetrieveSiteUuidResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 44: {
+          if (tag !== 354) {
+            break;
+          }
+
+          message.retrieveSiteSuggestionRequest = CommonAPIRetrieveSiteSuggestionRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 45: {
+          if (tag !== 362) {
+            break;
+          }
+
+          message.retrieveSiteSuggestionResponse = CommonAPIRetrieveSiteSuggestionResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
         case 46: {
           if (tag !== 370) {
             break;
@@ -4346,6 +4867,24 @@ export const CommonMessages: MessageFns<CommonMessages> = {
           object.performUpdateFromLocallyAvailablePackagesResponse,
         )
         : undefined,
+      registerRequest: isSet(object.registerRequest)
+        ? CommonAPIRegisterRequest.fromJSON(object.registerRequest)
+        : undefined,
+      registerResponse: isSet(object.registerResponse)
+        ? CommonAPIRegisterResponse.fromJSON(object.registerResponse)
+        : undefined,
+      retrieveSiteUuidRequest: isSet(object.retrieveSiteUuidRequest)
+        ? CommonAPIRetrieveSiteUuidRequest.fromJSON(object.retrieveSiteUuidRequest)
+        : undefined,
+      retrieveSiteUuidResponse: isSet(object.retrieveSiteUuidResponse)
+        ? CommonAPIRetrieveSiteUuidResponse.fromJSON(object.retrieveSiteUuidResponse)
+        : undefined,
+      retrieveSiteSuggestionRequest: isSet(object.retrieveSiteSuggestionRequest)
+        ? CommonAPIRetrieveSiteSuggestionRequest.fromJSON(object.retrieveSiteSuggestionRequest)
+        : undefined,
+      retrieveSiteSuggestionResponse: isSet(object.retrieveSiteSuggestionResponse)
+        ? CommonAPIRetrieveSiteSuggestionResponse.fromJSON(object.retrieveSiteSuggestionResponse)
+        : undefined,
       startTcpdumpRequest: isSet(object.startTcpdumpRequest)
         ? CommonAPIStartTcpdumpRequest.fromJSON(object.startTcpdumpRequest)
         : undefined,
@@ -4507,6 +5046,28 @@ export const CommonMessages: MessageFns<CommonMessages> = {
     if (message.performUpdateFromLocallyAvailablePackagesResponse !== undefined) {
       obj.performUpdateFromLocallyAvailablePackagesResponse = CommonAPIPerformUpdateFromLocallyAvailablePackagesResponse
         .toJSON(message.performUpdateFromLocallyAvailablePackagesResponse);
+    }
+    if (message.registerRequest !== undefined) {
+      obj.registerRequest = CommonAPIRegisterRequest.toJSON(message.registerRequest);
+    }
+    if (message.registerResponse !== undefined) {
+      obj.registerResponse = CommonAPIRegisterResponse.toJSON(message.registerResponse);
+    }
+    if (message.retrieveSiteUuidRequest !== undefined) {
+      obj.retrieveSiteUuidRequest = CommonAPIRetrieveSiteUuidRequest.toJSON(message.retrieveSiteUuidRequest);
+    }
+    if (message.retrieveSiteUuidResponse !== undefined) {
+      obj.retrieveSiteUuidResponse = CommonAPIRetrieveSiteUuidResponse.toJSON(message.retrieveSiteUuidResponse);
+    }
+    if (message.retrieveSiteSuggestionRequest !== undefined) {
+      obj.retrieveSiteSuggestionRequest = CommonAPIRetrieveSiteSuggestionRequest.toJSON(
+        message.retrieveSiteSuggestionRequest,
+      );
+    }
+    if (message.retrieveSiteSuggestionResponse !== undefined) {
+      obj.retrieveSiteSuggestionResponse = CommonAPIRetrieveSiteSuggestionResponse.toJSON(
+        message.retrieveSiteSuggestionResponse,
+      );
     }
     if (message.startTcpdumpRequest !== undefined) {
       obj.startTcpdumpRequest = CommonAPIStartTcpdumpRequest.toJSON(message.startTcpdumpRequest);
@@ -4694,6 +5255,28 @@ export const CommonMessages: MessageFns<CommonMessages> = {
         ? CommonAPIPerformUpdateFromLocallyAvailablePackagesResponse.fromPartial(
           object.performUpdateFromLocallyAvailablePackagesResponse,
         )
+        : undefined;
+    message.registerRequest = (object.registerRequest !== undefined && object.registerRequest !== null)
+      ? CommonAPIRegisterRequest.fromPartial(object.registerRequest)
+      : undefined;
+    message.registerResponse = (object.registerResponse !== undefined && object.registerResponse !== null)
+      ? CommonAPIRegisterResponse.fromPartial(object.registerResponse)
+      : undefined;
+    message.retrieveSiteUuidRequest =
+      (object.retrieveSiteUuidRequest !== undefined && object.retrieveSiteUuidRequest !== null)
+        ? CommonAPIRetrieveSiteUuidRequest.fromPartial(object.retrieveSiteUuidRequest)
+        : undefined;
+    message.retrieveSiteUuidResponse =
+      (object.retrieveSiteUuidResponse !== undefined && object.retrieveSiteUuidResponse !== null)
+        ? CommonAPIRetrieveSiteUuidResponse.fromPartial(object.retrieveSiteUuidResponse)
+        : undefined;
+    message.retrieveSiteSuggestionRequest =
+      (object.retrieveSiteSuggestionRequest !== undefined && object.retrieveSiteSuggestionRequest !== null)
+        ? CommonAPIRetrieveSiteSuggestionRequest.fromPartial(object.retrieveSiteSuggestionRequest)
+        : undefined;
+    message.retrieveSiteSuggestionResponse =
+      (object.retrieveSiteSuggestionResponse !== undefined && object.retrieveSiteSuggestionResponse !== null)
+        ? CommonAPIRetrieveSiteSuggestionResponse.fromPartial(object.retrieveSiteSuggestionResponse)
         : undefined;
     message.startTcpdumpRequest = (object.startTcpdumpRequest !== undefined && object.startTcpdumpRequest !== null)
       ? CommonAPIStartTcpdumpRequest.fromPartial(object.startTcpdumpRequest)

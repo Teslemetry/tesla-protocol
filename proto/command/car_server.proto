@@ -157,16 +157,20 @@ message VehicleAction {
     FetchKeysInfoAction fetchKeysInfoAction = 142;  // TESLEMETRY-EXT
     DeleteDashcamClipsAction deleteDashcamClipsAction = 144;  // TESLEMETRY-EXT
     FormatUSBAction formatUsbAction = 146;  // TESLEMETRY-EXT
-    SetUpkeepUsernameAction setUpkeepUsernameAction = 147;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    SetUpkeepUsernameAction setUpkeepUsernameAction = 147;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     BandwidthTest bandwidthTest = 149;  // TESLEMETRY-EXT
     SetPhoneSettingPreferencesAction setPhoneSettingPreferencesAction = 151;  // TESLEMETRY-EXT
     CancelVehicleDataSubscription cancelVehicleDataSubscription = 171;  // TESLEMETRY-EXT
-    PrepareMobileUploadAction prepareMobileUploadAction = 177;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
-    PutMobileUploadChunkAction putMobileUploadChunkAction = 178;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
-    DisplayStateAction displayStateAction = 180;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
-    DrivingSetCruiseSpeedLimitAction drivingSetCruiseSpeedLimitAction = 694177;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
-    SetDeckLightAction setDeckLightAction = 698038;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    PrepareMobileUploadAction prepareMobileUploadAction = 177;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    PutMobileUploadChunkAction putMobileUploadChunkAction = 178;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    DisplayStateAction displayStateAction = 180;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    DrivingSetCruiseSpeedLimitAction drivingSetCruiseSpeedLimitAction = 694177;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    SetDeckLightAction setDeckLightAction = 698038;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    SetKeepOnCabin12vPortAction setKeepOnCabin12vPortAction = 721262;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    SetKeepOnCabin48vPortAction setKeepOnCabin48vPortAction = 721263;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
   }
+  // Asks the vehicle not to send the routine success reply to this action.  // TESLEMETRY-EXT
+  bool dropNominalSuccessResponses = 185;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 message GetVehicleData {
@@ -195,10 +199,13 @@ message GetVehicleData {
   GetSuspensionState getSuspensionState = 23;  // TESLEMETRY-EXT
   GetChildPresenceDetectionState getChildPresenceDetectionState = 25;  // TESLEMETRY-EXT
   GetDisplayState getDisplayState = 31;  // TESLEMETRY-EXT
+  GetKeepOnAccessoryPortsState getKeepOnAccessoryPortsState = 34;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 // ===== TESLEMETRY-EXT BEGIN =====
 message GetGuiSettings {}
+
+message GetKeepOnAccessoryPortsState {}
 
 message GetLegacyVehicleState {}
 
@@ -256,8 +263,7 @@ message MobileUploadParams {
 message PrepareMobileUploadAction {
   MobileUploadParams uploadParams = 1;
   MobileImageUploadParams imageParams = 2;
-  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered.
-  bool field_3 = 3;
+  bool apply = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle
   bool overwriteOldestIfFull = 4;
 }
 
@@ -316,13 +322,13 @@ message DogModeLiveActivityData {
   // encrypted envelope whose message type this repo does not publish.
   message DogModeImageData {
     bytes wrappedKey = 1;
-    bytes encryptedImage = 2;  // name not recovered
+    bytes image = 2;
   }
 
   DisabledReason disabledReason = 1;
   DogModeImageData interiorImage = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle
-  string field_3 = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
-  google.protobuf.Timestamp field_4 = 4;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+  string vin = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle
+  google.protobuf.Timestamp timestamp = 4;  // UNCONFIRMED: not yet confirmed on a live vehicle
   float insideTemperatureCelsius = 5;
   ClimateState.DogModeState faultState = 6;
   SetTemperatureUnitAction.Unit temperatureUnit = 7;
@@ -388,13 +394,13 @@ message Response {
 
 // ===== TESLEMETRY-EXT BEGIN =====
 message VehicleDataSubscriptionResponse {
-  string unknown = 3;
+  string error = 3;
   PiiKeyResponse pii_key_response = 4;
 }
 
 message VitalsSubscriptionResponse {
   int32 session_id = 1;
-  string unknown = 2;
+  string error = 2;
 }
 
 message PiiKeyResponse {
@@ -404,7 +410,7 @@ message PiiKeyResponse {
 }
 
 message PseudonymSyncResponse {
-  string unknown = 1;
+  string pseudonym = 1;
 }
 
 message NavigationRouteResponse {
@@ -419,7 +425,7 @@ message NavigationRouteResponse {
     float offset_to_dest = 1;
     NavigationRouteResponse.TrafficStatus traffic_status = 2;
   }
-  string unknown = 1;
+  string route = 1;
   repeated TrafficDetail traffic_detail = 2;
 }
 
@@ -438,7 +444,7 @@ message AddManagedChargingSiteResponse {
 
 message RequestTeslaAuthCommand {
   string client_id = 1;
-  string unknown = 2;
+  string scope = 2;
   bool return_scoped_token = 3;
 }
 
@@ -451,8 +457,8 @@ message GetMessagesResponse {
 }
 
 message Profile {
-  string unknown_1 = 1;
-  string unknown_2 = 2;
+  string uuid = 1;
+  string name = 2;
 }
 
 message GetLocalProfilesResponse {
@@ -460,8 +466,8 @@ message GetLocalProfilesResponse {
 }
 
 message KeyInfo {
-  string unknown_1 = 1;
-  string unknown_2 = 2;
+  string name = 1;
+  string model = 2;
   bytes public_key = 3;
   google.protobuf.Timestamp last_seen = 4;
   Keys.Role role = 5;
@@ -540,6 +546,7 @@ enum VehicleDataFields {
   suspension_state = 23;
   child_presence_detection_state = 24;
   display_state = 30;
+  keep_on_accessory_ports_state = 33;
   legacy_vehicle_state_media_info = 6072;
 }
 // ===== TESLEMETRY-EXT END =====
@@ -966,6 +973,7 @@ message VehicleDataSubscription {
   int32 suspension_state_max_update_rate_ms = 18;
   int32 child_presence_detection_state_max_update_rate_ms = 19;
   int32 display_state_max_update_rate_ms = 28;  // TESLEMETRY-EXT
+  int32 keep_on_accessory_ports_state_max_update_rate_ms = 31;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 message VehicleDataAck {
@@ -1489,7 +1497,7 @@ message SetPhoneSettingPreferencesAction {
   }
 
   FontSize font_size = 1;
-  string field_2 = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+  string language = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle
   PhoneUnitPreferences unit_preferences = 3;
 }
 
@@ -1497,7 +1505,7 @@ message CancelVehicleDataSubscription {}
 
 // UNCONFIRMED: not yet confirmed on a live vehicle.
 message SetUpkeepUsernameAction {
-  string username = 1;  // name not recovered
+  string username = 1;
 }
 
 // Sets the cruise-control speed limit reported back as
@@ -1509,6 +1517,18 @@ message DrivingSetCruiseSpeedLimitAction {
 
 // UNCONFIRMED: not yet confirmed on a live vehicle.
 message SetDeckLightAction {
-  bool on = 1;  // name not recovered
+  bool on = 1;
+}
+
+// Keeps the 12 V cabin accessory socket powered (or not).
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message SetKeepOnCabin12vPortAction {
+  KeepOnAccessoryPortRequest keepOnMode = 1;
+}
+
+// Keeps the 48 V cabin accessory socket powered (or not).
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message SetKeepOnCabin48vPortAction {
+  KeepOnAccessoryPortRequest keepOnMode = 1;
 }
 // ===== TESLEMETRY-EXT END =====
