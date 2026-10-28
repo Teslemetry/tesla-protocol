@@ -2075,26 +2075,580 @@ class ShiftState(_message.Message):
     SNA: _common_pb2.Void
     def __init__(self, Invalid: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., P: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., R: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., N: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SNA: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
+class VehicleBadging(_message.Message):
+    __slots__ = ("Base", "Founder", "Signature", "Performance", "LaunchSeries", "SignatureSeries")
+    BASE_FIELD_NUMBER: _ClassVar[int]
+    FOUNDER_FIELD_NUMBER: _ClassVar[int]
+    SIGNATURE_FIELD_NUMBER: _ClassVar[int]
+    PERFORMANCE_FIELD_NUMBER: _ClassVar[int]
+    LAUNCHSERIES_FIELD_NUMBER: _ClassVar[int]
+    SIGNATURESERIES_FIELD_NUMBER: _ClassVar[int]
+    Base: _common_pb2.Void
+    Founder: _common_pb2.Void
+    Signature: _common_pb2.Void
+    Performance: _common_pb2.Void
+    LaunchSeries: _common_pb2.Void
+    SignatureSeries: _common_pb2.Void
+    def __init__(self, Base: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Founder: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Signature: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Performance: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., LaunchSeries: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SignatureSeries: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+
+class CarTrim(_message.Message):
+    __slots__ = ("Trim40", "OBSOLETETrim50", "OBSOLETETrim50D", "Trim60", "Trim60D", "Trim70", "Trim70D", "Trim75", "Trim75D", "TrimP75D", "Trim85", "TrimP85", "TrimP85Plus", "Trim85D", "TrimP85D", "Trim90", "TrimP90", "TrimP90Plus", "Trim90D", "TrimP90D", "Trim100", "TrimP100", "Trim100D", "TrimP100D", "Trim50", "Trim50D", "Trim62", "Trim62D", "Trim74", "Trim74D", "TrimP74D", "TrimDefault", "TrimCyberbeast", "TrimInvalid")
+    TRIM40_FIELD_NUMBER: _ClassVar[int]
+    OBSOLETETRIM50_FIELD_NUMBER: _ClassVar[int]
+    OBSOLETETRIM50D_FIELD_NUMBER: _ClassVar[int]
+    TRIM60_FIELD_NUMBER: _ClassVar[int]
+    TRIM60D_FIELD_NUMBER: _ClassVar[int]
+    TRIM70_FIELD_NUMBER: _ClassVar[int]
+    TRIM70D_FIELD_NUMBER: _ClassVar[int]
+    TRIM75_FIELD_NUMBER: _ClassVar[int]
+    TRIM75D_FIELD_NUMBER: _ClassVar[int]
+    TRIMP75D_FIELD_NUMBER: _ClassVar[int]
+    TRIM85_FIELD_NUMBER: _ClassVar[int]
+    TRIMP85_FIELD_NUMBER: _ClassVar[int]
+    TRIMP85PLUS_FIELD_NUMBER: _ClassVar[int]
+    TRIM85D_FIELD_NUMBER: _ClassVar[int]
+    TRIMP85D_FIELD_NUMBER: _ClassVar[int]
+    TRIM90_FIELD_NUMBER: _ClassVar[int]
+    TRIMP90_FIELD_NUMBER: _ClassVar[int]
+    TRIMP90PLUS_FIELD_NUMBER: _ClassVar[int]
+    TRIM90D_FIELD_NUMBER: _ClassVar[int]
+    TRIMP90D_FIELD_NUMBER: _ClassVar[int]
+    TRIM100_FIELD_NUMBER: _ClassVar[int]
+    TRIMP100_FIELD_NUMBER: _ClassVar[int]
+    TRIM100D_FIELD_NUMBER: _ClassVar[int]
+    TRIMP100D_FIELD_NUMBER: _ClassVar[int]
+    TRIM50_FIELD_NUMBER: _ClassVar[int]
+    TRIM50D_FIELD_NUMBER: _ClassVar[int]
+    TRIM62_FIELD_NUMBER: _ClassVar[int]
+    TRIM62D_FIELD_NUMBER: _ClassVar[int]
+    TRIM74_FIELD_NUMBER: _ClassVar[int]
+    TRIM74D_FIELD_NUMBER: _ClassVar[int]
+    TRIMP74D_FIELD_NUMBER: _ClassVar[int]
+    TRIMDEFAULT_FIELD_NUMBER: _ClassVar[int]
+    TRIMCYBERBEAST_FIELD_NUMBER: _ClassVar[int]
+    TRIMINVALID_FIELD_NUMBER: _ClassVar[int]
+    Trim40: _common_pb2.Void
+    OBSOLETETrim50: _common_pb2.Void
+    OBSOLETETrim50D: _common_pb2.Void
+    Trim60: _common_pb2.Void
+    Trim60D: _common_pb2.Void
+    Trim70: _common_pb2.Void
+    Trim70D: _common_pb2.Void
+    Trim75: _common_pb2.Void
+    Trim75D: _common_pb2.Void
+    TrimP75D: _common_pb2.Void
+    Trim85: _common_pb2.Void
+    TrimP85: _common_pb2.Void
+    TrimP85Plus: _common_pb2.Void
+    Trim85D: _common_pb2.Void
+    TrimP85D: _common_pb2.Void
+    Trim90: _common_pb2.Void
+    TrimP90: _common_pb2.Void
+    TrimP90Plus: _common_pb2.Void
+    Trim90D: _common_pb2.Void
+    TrimP90D: _common_pb2.Void
+    Trim100: _common_pb2.Void
+    TrimP100: _common_pb2.Void
+    Trim100D: _common_pb2.Void
+    TrimP100D: _common_pb2.Void
+    Trim50: _common_pb2.Void
+    Trim50D: _common_pb2.Void
+    Trim62: _common_pb2.Void
+    Trim62D: _common_pb2.Void
+    Trim74: _common_pb2.Void
+    Trim74D: _common_pb2.Void
+    TrimP74D: _common_pb2.Void
+    TrimDefault: _common_pb2.Void
+    TrimCyberbeast: _common_pb2.Void
+    TrimInvalid: _common_pb2.Void
+    def __init__(self, Trim40: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., OBSOLETETrim50: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., OBSOLETETrim50D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim60: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim60D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim70: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim70D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim75: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim75D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP75D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim85: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP85: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP85Plus: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim85D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP85D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim90: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP90: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP90Plus: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim90D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP90D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim100: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP100: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim100D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP100D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim50: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim50D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim62: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim62D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim74: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim74D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP74D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimDefault: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimCyberbeast: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimInvalid: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+
+class SunRoofType(_message.Message):
+    __slots__ = ("Gen1", "Gen2")
+    NONE_FIELD_NUMBER: _ClassVar[int]
+    GEN1_FIELD_NUMBER: _ClassVar[int]
+    GEN2_FIELD_NUMBER: _ClassVar[int]
+    Gen1: _common_pb2.Void
+    Gen2: _common_pb2.Void
+    def __init__(self, Gen1: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Gen2: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+
+class WheelType(_message.Message):
+    __slots__ = ("Unknown", "ZeroG20Gunpowder", "Pinwheel18", "Pinwheel18CapKit", "Stiletto19", "Stiletto20", "Stiletto20DarkStaggered", "Stiletto20DarkSquare", "Gemini19Square", "Gemini19Staggered", "Induction20Black", "UberTurbine21Black", "Apollo19", "Apollo19CapKit", "ZeroG19Gunpowder", "Cardenio19", "Default", "NewTurbine22Black", "Cyberstream", "Arachnid21", "Base19", "Silver21", "Charcoal21", "Silver21Euro", "Aero19", "Charcoal21Euro", "Super21Gray", "Super21Silver", "Turbine19", "Turbine19Dark", "AeroTurbine19", "AeroTurbine19Black", "Helix20", "AeroTurbine20", "Turbine22", "Cyclone19Dark", "AeroTurbine20Dark", "Turbine22Dark", "Arachnid21Silver", "Arachnid21Black", "Arachnid21Grey", "Slipstream20Carbon", "Slipstream20Dark", "Slipstream19Carbon", "TwinTurbine21Silver", "TwinTurbine21Carbon", "Tempest19SonicSilver", "PinwheelRefresh18", "StilettoRefresh19", "UberTurbine20Gunpowder", "Glider18", "Helix19", "Wishbone20Staggered", "CtBase20", "CtPremium20", "CtBase18", "Apollo19MetallicShadow", "Wishbone19Staggered", "Crossflow19", "HelixV220", "Standard19", "Halo22", "Riptide20", "Cypress21", "MachinaV219", "ArachnidV221", "E4118", "D5018", "HelixV220Dark", "UberHelix20")
+    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    ZEROG20GUNPOWDER_FIELD_NUMBER: _ClassVar[int]
+    PINWHEEL18_FIELD_NUMBER: _ClassVar[int]
+    PINWHEEL18CAPKIT_FIELD_NUMBER: _ClassVar[int]
+    STILETTO19_FIELD_NUMBER: _ClassVar[int]
+    STILETTO20_FIELD_NUMBER: _ClassVar[int]
+    STILETTO20DARKSTAGGERED_FIELD_NUMBER: _ClassVar[int]
+    STILETTO20DARKSQUARE_FIELD_NUMBER: _ClassVar[int]
+    GEMINI19SQUARE_FIELD_NUMBER: _ClassVar[int]
+    GEMINI19STAGGERED_FIELD_NUMBER: _ClassVar[int]
+    INDUCTION20BLACK_FIELD_NUMBER: _ClassVar[int]
+    UBERTURBINE21BLACK_FIELD_NUMBER: _ClassVar[int]
+    APOLLO19_FIELD_NUMBER: _ClassVar[int]
+    APOLLO19CAPKIT_FIELD_NUMBER: _ClassVar[int]
+    ZEROG19GUNPOWDER_FIELD_NUMBER: _ClassVar[int]
+    CARDENIO19_FIELD_NUMBER: _ClassVar[int]
+    DEFAULT_FIELD_NUMBER: _ClassVar[int]
+    NEWTURBINE22BLACK_FIELD_NUMBER: _ClassVar[int]
+    CYBERSTREAM_FIELD_NUMBER: _ClassVar[int]
+    ARACHNID21_FIELD_NUMBER: _ClassVar[int]
+    BASE19_FIELD_NUMBER: _ClassVar[int]
+    SILVER21_FIELD_NUMBER: _ClassVar[int]
+    CHARCOAL21_FIELD_NUMBER: _ClassVar[int]
+    SILVER21EURO_FIELD_NUMBER: _ClassVar[int]
+    AERO19_FIELD_NUMBER: _ClassVar[int]
+    CHARCOAL21EURO_FIELD_NUMBER: _ClassVar[int]
+    SUPER21GRAY_FIELD_NUMBER: _ClassVar[int]
+    SUPER21SILVER_FIELD_NUMBER: _ClassVar[int]
+    TURBINE19_FIELD_NUMBER: _ClassVar[int]
+    TURBINE19DARK_FIELD_NUMBER: _ClassVar[int]
+    AEROTURBINE19_FIELD_NUMBER: _ClassVar[int]
+    AEROTURBINE19BLACK_FIELD_NUMBER: _ClassVar[int]
+    HELIX20_FIELD_NUMBER: _ClassVar[int]
+    AEROTURBINE20_FIELD_NUMBER: _ClassVar[int]
+    TURBINE22_FIELD_NUMBER: _ClassVar[int]
+    CYCLONE19DARK_FIELD_NUMBER: _ClassVar[int]
+    AEROTURBINE20DARK_FIELD_NUMBER: _ClassVar[int]
+    TURBINE22DARK_FIELD_NUMBER: _ClassVar[int]
+    ARACHNID21SILVER_FIELD_NUMBER: _ClassVar[int]
+    ARACHNID21BLACK_FIELD_NUMBER: _ClassVar[int]
+    ARACHNID21GREY_FIELD_NUMBER: _ClassVar[int]
+    SLIPSTREAM20CARBON_FIELD_NUMBER: _ClassVar[int]
+    SLIPSTREAM20DARK_FIELD_NUMBER: _ClassVar[int]
+    SLIPSTREAM19CARBON_FIELD_NUMBER: _ClassVar[int]
+    TWINTURBINE21SILVER_FIELD_NUMBER: _ClassVar[int]
+    TWINTURBINE21CARBON_FIELD_NUMBER: _ClassVar[int]
+    TEMPEST19SONICSILVER_FIELD_NUMBER: _ClassVar[int]
+    PINWHEELREFRESH18_FIELD_NUMBER: _ClassVar[int]
+    STILETTOREFRESH19_FIELD_NUMBER: _ClassVar[int]
+    UBERTURBINE20GUNPOWDER_FIELD_NUMBER: _ClassVar[int]
+    GLIDER18_FIELD_NUMBER: _ClassVar[int]
+    HELIX19_FIELD_NUMBER: _ClassVar[int]
+    WISHBONE20STAGGERED_FIELD_NUMBER: _ClassVar[int]
+    CTBASE20_FIELD_NUMBER: _ClassVar[int]
+    CTPREMIUM20_FIELD_NUMBER: _ClassVar[int]
+    CTBASE18_FIELD_NUMBER: _ClassVar[int]
+    APOLLO19METALLICSHADOW_FIELD_NUMBER: _ClassVar[int]
+    WISHBONE19STAGGERED_FIELD_NUMBER: _ClassVar[int]
+    CROSSFLOW19_FIELD_NUMBER: _ClassVar[int]
+    HELIXV220_FIELD_NUMBER: _ClassVar[int]
+    STANDARD19_FIELD_NUMBER: _ClassVar[int]
+    HALO22_FIELD_NUMBER: _ClassVar[int]
+    RIPTIDE20_FIELD_NUMBER: _ClassVar[int]
+    CYPRESS21_FIELD_NUMBER: _ClassVar[int]
+    MACHINAV219_FIELD_NUMBER: _ClassVar[int]
+    ARACHNIDV221_FIELD_NUMBER: _ClassVar[int]
+    E4118_FIELD_NUMBER: _ClassVar[int]
+    D5018_FIELD_NUMBER: _ClassVar[int]
+    HELIXV220DARK_FIELD_NUMBER: _ClassVar[int]
+    UBERHELIX20_FIELD_NUMBER: _ClassVar[int]
+    Unknown: _common_pb2.Void
+    ZeroG20Gunpowder: _common_pb2.Void
+    Pinwheel18: _common_pb2.Void
+    Pinwheel18CapKit: _common_pb2.Void
+    Stiletto19: _common_pb2.Void
+    Stiletto20: _common_pb2.Void
+    Stiletto20DarkStaggered: _common_pb2.Void
+    Stiletto20DarkSquare: _common_pb2.Void
+    Gemini19Square: _common_pb2.Void
+    Gemini19Staggered: _common_pb2.Void
+    Induction20Black: _common_pb2.Void
+    UberTurbine21Black: _common_pb2.Void
+    Apollo19: _common_pb2.Void
+    Apollo19CapKit: _common_pb2.Void
+    ZeroG19Gunpowder: _common_pb2.Void
+    Cardenio19: _common_pb2.Void
+    Default: _common_pb2.Void
+    NewTurbine22Black: _common_pb2.Void
+    Cyberstream: _common_pb2.Void
+    Arachnid21: _common_pb2.Void
+    Base19: _common_pb2.Void
+    Silver21: _common_pb2.Void
+    Charcoal21: _common_pb2.Void
+    Silver21Euro: _common_pb2.Void
+    Aero19: _common_pb2.Void
+    Charcoal21Euro: _common_pb2.Void
+    Super21Gray: _common_pb2.Void
+    Super21Silver: _common_pb2.Void
+    Turbine19: _common_pb2.Void
+    Turbine19Dark: _common_pb2.Void
+    AeroTurbine19: _common_pb2.Void
+    AeroTurbine19Black: _common_pb2.Void
+    Helix20: _common_pb2.Void
+    AeroTurbine20: _common_pb2.Void
+    Turbine22: _common_pb2.Void
+    Cyclone19Dark: _common_pb2.Void
+    AeroTurbine20Dark: _common_pb2.Void
+    Turbine22Dark: _common_pb2.Void
+    Arachnid21Silver: _common_pb2.Void
+    Arachnid21Black: _common_pb2.Void
+    Arachnid21Grey: _common_pb2.Void
+    Slipstream20Carbon: _common_pb2.Void
+    Slipstream20Dark: _common_pb2.Void
+    Slipstream19Carbon: _common_pb2.Void
+    TwinTurbine21Silver: _common_pb2.Void
+    TwinTurbine21Carbon: _common_pb2.Void
+    Tempest19SonicSilver: _common_pb2.Void
+    PinwheelRefresh18: _common_pb2.Void
+    StilettoRefresh19: _common_pb2.Void
+    UberTurbine20Gunpowder: _common_pb2.Void
+    Glider18: _common_pb2.Void
+    Helix19: _common_pb2.Void
+    Wishbone20Staggered: _common_pb2.Void
+    CtBase20: _common_pb2.Void
+    CtPremium20: _common_pb2.Void
+    CtBase18: _common_pb2.Void
+    Apollo19MetallicShadow: _common_pb2.Void
+    Wishbone19Staggered: _common_pb2.Void
+    Crossflow19: _common_pb2.Void
+    HelixV220: _common_pb2.Void
+    Standard19: _common_pb2.Void
+    Halo22: _common_pb2.Void
+    Riptide20: _common_pb2.Void
+    Cypress21: _common_pb2.Void
+    MachinaV219: _common_pb2.Void
+    ArachnidV221: _common_pb2.Void
+    E4118: _common_pb2.Void
+    D5018: _common_pb2.Void
+    HelixV220Dark: _common_pb2.Void
+    UberHelix20: _common_pb2.Void
+    def __init__(self, Unknown: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., ZeroG20Gunpowder: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Pinwheel18: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Pinwheel18CapKit: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Stiletto19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Stiletto20: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Stiletto20DarkStaggered: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Stiletto20DarkSquare: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Gemini19Square: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Gemini19Staggered: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Induction20Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., UberTurbine21Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Apollo19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Apollo19CapKit: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., ZeroG19Gunpowder: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Cardenio19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Default: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., NewTurbine22Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Cyberstream: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Arachnid21: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Base19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Silver21: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Charcoal21: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Silver21Euro: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Aero19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Charcoal21Euro: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Super21Gray: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Super21Silver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Turbine19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Turbine19Dark: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., AeroTurbine19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., AeroTurbine19Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Helix20: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., AeroTurbine20: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Turbine22: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Cyclone19Dark: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., AeroTurbine20Dark: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Turbine22Dark: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Arachnid21Silver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Arachnid21Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Arachnid21Grey: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Slipstream20Carbon: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Slipstream20Dark: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Slipstream19Carbon: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TwinTurbine21Silver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TwinTurbine21Carbon: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Tempest19SonicSilver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., PinwheelRefresh18: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., StilettoRefresh19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., UberTurbine20Gunpowder: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Glider18: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Helix19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Wishbone20Staggered: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CtBase20: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CtPremium20: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CtBase18: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Apollo19MetallicShadow: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Wishbone19Staggered: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Crossflow19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., HelixV220: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Standard19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Halo22: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Riptide20: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Cypress21: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MachinaV219: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., ArachnidV221: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., E4118: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., D5018: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., HelixV220Dark: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., UberHelix20: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+
+class SpoilerType(_message.Message):
+    __slots__ = ("Passive", "Active")
+    NONE_FIELD_NUMBER: _ClassVar[int]
+    PASSIVE_FIELD_NUMBER: _ClassVar[int]
+    ACTIVE_FIELD_NUMBER: _ClassVar[int]
+    Passive: _common_pb2.Void
+    Active: _common_pb2.Void
+    def __init__(self, Passive: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Active: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+
+class RoofColor(_message.Message):
+    __slots__ = ("Glass", "Black", "Colored")
+    NONE_FIELD_NUMBER: _ClassVar[int]
+    GLASS_FIELD_NUMBER: _ClassVar[int]
+    BLACK_FIELD_NUMBER: _ClassVar[int]
+    COLORED_FIELD_NUMBER: _ClassVar[int]
+    Glass: _common_pb2.Void
+    Black: _common_pb2.Void
+    Colored: _common_pb2.Void
+    def __init__(self, Glass: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Colored: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+
+class ExteriorColor(_message.Message):
+    __slots__ = ("Unknown", "RedMulticoat", "SolidBlack", "SilverMetallic", "MidnightSilver", "DeepBlue", "PearlWhite", "DefaultColor", "Black", "White", "Silver", "Grey", "Blue", "Green", "Brown", "Pearl", "SigRed", "Red", "SteelGrey", "MetallicBlack", "TitaniumCopper", "SignatureBlue", "MidnightCherryRed", "Quicksilver", "UltraRed", "StealthGrey", "LunarSilver", "GlacierBlue", "DiamondBlack", "FrostBlue", "SilkRoadSilver", "MarineBlue", "GarnetRed", "CoastalBlue")
+    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    REDMULTICOAT_FIELD_NUMBER: _ClassVar[int]
+    SOLIDBLACK_FIELD_NUMBER: _ClassVar[int]
+    SILVERMETALLIC_FIELD_NUMBER: _ClassVar[int]
+    MIDNIGHTSILVER_FIELD_NUMBER: _ClassVar[int]
+    DEEPBLUE_FIELD_NUMBER: _ClassVar[int]
+    PEARLWHITE_FIELD_NUMBER: _ClassVar[int]
+    DEFAULTCOLOR_FIELD_NUMBER: _ClassVar[int]
+    BLACK_FIELD_NUMBER: _ClassVar[int]
+    WHITE_FIELD_NUMBER: _ClassVar[int]
+    SILVER_FIELD_NUMBER: _ClassVar[int]
+    GREY_FIELD_NUMBER: _ClassVar[int]
+    BLUE_FIELD_NUMBER: _ClassVar[int]
+    GREEN_FIELD_NUMBER: _ClassVar[int]
+    BROWN_FIELD_NUMBER: _ClassVar[int]
+    PEARL_FIELD_NUMBER: _ClassVar[int]
+    SIGRED_FIELD_NUMBER: _ClassVar[int]
+    RED_FIELD_NUMBER: _ClassVar[int]
+    STEELGREY_FIELD_NUMBER: _ClassVar[int]
+    METALLICBLACK_FIELD_NUMBER: _ClassVar[int]
+    TITANIUMCOPPER_FIELD_NUMBER: _ClassVar[int]
+    SIGNATUREBLUE_FIELD_NUMBER: _ClassVar[int]
+    MIDNIGHTCHERRYRED_FIELD_NUMBER: _ClassVar[int]
+    QUICKSILVER_FIELD_NUMBER: _ClassVar[int]
+    ULTRARED_FIELD_NUMBER: _ClassVar[int]
+    STEALTHGREY_FIELD_NUMBER: _ClassVar[int]
+    LUNARSILVER_FIELD_NUMBER: _ClassVar[int]
+    GLACIERBLUE_FIELD_NUMBER: _ClassVar[int]
+    DIAMONDBLACK_FIELD_NUMBER: _ClassVar[int]
+    FROSTBLUE_FIELD_NUMBER: _ClassVar[int]
+    SILKROADSILVER_FIELD_NUMBER: _ClassVar[int]
+    MARINEBLUE_FIELD_NUMBER: _ClassVar[int]
+    GARNETRED_FIELD_NUMBER: _ClassVar[int]
+    COASTALBLUE_FIELD_NUMBER: _ClassVar[int]
+    Unknown: _common_pb2.Void
+    RedMulticoat: _common_pb2.Void
+    SolidBlack: _common_pb2.Void
+    SilverMetallic: _common_pb2.Void
+    MidnightSilver: _common_pb2.Void
+    DeepBlue: _common_pb2.Void
+    PearlWhite: _common_pb2.Void
+    DefaultColor: _common_pb2.Void
+    Black: _common_pb2.Void
+    White: _common_pb2.Void
+    Silver: _common_pb2.Void
+    Grey: _common_pb2.Void
+    Blue: _common_pb2.Void
+    Green: _common_pb2.Void
+    Brown: _common_pb2.Void
+    Pearl: _common_pb2.Void
+    SigRed: _common_pb2.Void
+    Red: _common_pb2.Void
+    SteelGrey: _common_pb2.Void
+    MetallicBlack: _common_pb2.Void
+    TitaniumCopper: _common_pb2.Void
+    SignatureBlue: _common_pb2.Void
+    MidnightCherryRed: _common_pb2.Void
+    Quicksilver: _common_pb2.Void
+    UltraRed: _common_pb2.Void
+    StealthGrey: _common_pb2.Void
+    LunarSilver: _common_pb2.Void
+    GlacierBlue: _common_pb2.Void
+    DiamondBlack: _common_pb2.Void
+    FrostBlue: _common_pb2.Void
+    SilkRoadSilver: _common_pb2.Void
+    MarineBlue: _common_pb2.Void
+    GarnetRed: _common_pb2.Void
+    CoastalBlue: _common_pb2.Void
+    def __init__(self, Unknown: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., RedMulticoat: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SolidBlack: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SilverMetallic: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MidnightSilver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., DeepBlue: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., PearlWhite: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., DefaultColor: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., White: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Silver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Grey: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Blue: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Green: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Brown: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Pearl: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SigRed: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Red: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SteelGrey: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MetallicBlack: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TitaniumCopper: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SignatureBlue: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MidnightCherryRed: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Quicksilver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., UltraRed: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., StealthGrey: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., LunarSilver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., GlacierBlue: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., DiamondBlack: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FrostBlue: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SilkRoadSilver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MarineBlue: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., GarnetRed: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CoastalBlue: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+
+class RearSeatHeaters(_message.Message):
+    __slots__ = ("Base", "Executive", "Gentherm", "BaseModelX")
+    NONE_FIELD_NUMBER: _ClassVar[int]
+    BASE_FIELD_NUMBER: _ClassVar[int]
+    EXECUTIVE_FIELD_NUMBER: _ClassVar[int]
+    GENTHERM_FIELD_NUMBER: _ClassVar[int]
+    BASEMODELX_FIELD_NUMBER: _ClassVar[int]
+    Base: _common_pb2.Void
+    Executive: _common_pb2.Void
+    Gentherm: _common_pb2.Void
+    BaseModelX: _common_pb2.Void
+    def __init__(self, Base: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Executive: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Gentherm: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., BaseModelX: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+
+class SeatType(_message.Message):
+    __slots__ = ("Base", "Recaro", "TeslaMsGen1")
+    BASE_FIELD_NUMBER: _ClassVar[int]
+    RECARO_FIELD_NUMBER: _ClassVar[int]
+    TESLAMSGEN1_FIELD_NUMBER: _ClassVar[int]
+    Base: _common_pb2.Void
+    Recaro: _common_pb2.Void
+    TeslaMsGen1: _common_pb2.Void
+    def __init__(self, Base: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Recaro: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TeslaMsGen1: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+
+class RearSeatType(_message.Message):
+    __slots__ = ("Base", "Recaro", "Executive", "TwoSeat", "FoldFlat", "FoldFlatMotorized", "TwoSeatConsole", "FoldFlatTwoMotor", "FoldFlatTwoMotorHall", "FoldFlatHallBuckles")
+    BASE_FIELD_NUMBER: _ClassVar[int]
+    RECARO_FIELD_NUMBER: _ClassVar[int]
+    EXECUTIVE_FIELD_NUMBER: _ClassVar[int]
+    TWOSEAT_FIELD_NUMBER: _ClassVar[int]
+    FOLDFLAT_FIELD_NUMBER: _ClassVar[int]
+    FOLDFLATMOTORIZED_FIELD_NUMBER: _ClassVar[int]
+    TWOSEATCONSOLE_FIELD_NUMBER: _ClassVar[int]
+    FOLDFLATTWOMOTOR_FIELD_NUMBER: _ClassVar[int]
+    FOLDFLATTWOMOTORHALL_FIELD_NUMBER: _ClassVar[int]
+    FOLDFLATHALLBUCKLES_FIELD_NUMBER: _ClassVar[int]
+    Base: _common_pb2.Void
+    Recaro: _common_pb2.Void
+    Executive: _common_pb2.Void
+    TwoSeat: _common_pb2.Void
+    FoldFlat: _common_pb2.Void
+    FoldFlatMotorized: _common_pb2.Void
+    TwoSeatConsole: _common_pb2.Void
+    FoldFlatTwoMotor: _common_pb2.Void
+    FoldFlatTwoMotorHall: _common_pb2.Void
+    FoldFlatHallBuckles: _common_pb2.Void
+    def __init__(self, Base: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Recaro: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Executive: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TwoSeat: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FoldFlat: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FoldFlatMotorized: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TwoSeatConsole: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FoldFlatTwoMotor: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FoldFlatTwoMotorHall: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FoldFlatHallBuckles: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+
+class ThirdRowSeatType(_message.Message):
+    __slots__ = ("FuturisFoldFlat", "FuturisNoFoldFlat", "FlatFold")
+    NONE_FIELD_NUMBER: _ClassVar[int]
+    FUTURISFOLDFLAT_FIELD_NUMBER: _ClassVar[int]
+    FUTURISNOFOLDFLAT_FIELD_NUMBER: _ClassVar[int]
+    FLATFOLD_FIELD_NUMBER: _ClassVar[int]
+    FuturisFoldFlat: _common_pb2.Void
+    FuturisNoFoldFlat: _common_pb2.Void
+    FlatFold: _common_pb2.Void
+    def __init__(self, FuturisFoldFlat: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FuturisNoFoldFlat: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FlatFold: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+
+class ChargePortType(_message.Message):
+    __slots__ = ("US", "EU", "GB", "CCS")
+    US_FIELD_NUMBER: _ClassVar[int]
+    EU_FIELD_NUMBER: _ClassVar[int]
+    GB_FIELD_NUMBER: _ClassVar[int]
+    CCS_FIELD_NUMBER: _ClassVar[int]
+    US: _common_pb2.Void
+    EU: _common_pb2.Void
+    GB: _common_pb2.Void
+    CCS: _common_pb2.Void
+    def __init__(self, US: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., EU: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., GB: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CCS: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+
+class RearDriveUnit(_message.Message):
+    __slots__ = ("LargeRear", "SmallRear", "PM216MOSFET", "PM216IGBT", "CorianderSingle", "CorianderDual", "PermanentMagnet", "InductionDual")
+    NONE_FIELD_NUMBER: _ClassVar[int]
+    LARGEREAR_FIELD_NUMBER: _ClassVar[int]
+    SMALLREAR_FIELD_NUMBER: _ClassVar[int]
+    PM216MOSFET_FIELD_NUMBER: _ClassVar[int]
+    PM216IGBT_FIELD_NUMBER: _ClassVar[int]
+    CORIANDERSINGLE_FIELD_NUMBER: _ClassVar[int]
+    CORIANDERDUAL_FIELD_NUMBER: _ClassVar[int]
+    PERMANENTMAGNET_FIELD_NUMBER: _ClassVar[int]
+    INDUCTIONDUAL_FIELD_NUMBER: _ClassVar[int]
+    LargeRear: _common_pb2.Void
+    SmallRear: _common_pb2.Void
+    PM216MOSFET: _common_pb2.Void
+    PM216IGBT: _common_pb2.Void
+    CorianderSingle: _common_pb2.Void
+    CorianderDual: _common_pb2.Void
+    PermanentMagnet: _common_pb2.Void
+    InductionDual: _common_pb2.Void
+    def __init__(self, LargeRear: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SmallRear: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., PM216MOSFET: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., PM216IGBT: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CorianderSingle: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CorianderDual: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., PermanentMagnet: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., InductionDual: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+
+class EfficiencyPackage(_message.Message):
+    __slots__ = ("Default", "M3SRPlus2020", "M3LR2020", "M3LRPerformance2020", "M3SRPlus2020Q4GFSH", "MY2020", "M32021", "MY2021", "SX2020", "S2", "SX2020H2", "M3SRPlus2021Q3GFSH", "M3SRPlus2021Q3Fremont", "MYSRPlus2021Q3GFSH", "MYSRPlus2022Q1TX", "MYRWDEU2022", "M3Poppyseed2024", "M32023GFSHExport", "MY2023GFSHExport", "MY2024", "MS2024", "MX2024", "MY2023SRRWD", "MY2024C", "MY2024GFSHExportSRRWD", "M3Poppyseed2024C", "M32025", "MY2025", "M32025B", "MY2025B", "MS2025", "MX2025", "MYRefresh2025ROW", "MYStandard2025", "MYRefresh2025CN", "MS2026", "MX2026", "MY2025M53", "M32025M53", "MY2025CNPlus", "MS2026B", "M32026B", "MY2026US")
+    DEFAULT_FIELD_NUMBER: _ClassVar[int]
+    M3SRPLUS2020_FIELD_NUMBER: _ClassVar[int]
+    M3LR2020_FIELD_NUMBER: _ClassVar[int]
+    M3LRPERFORMANCE2020_FIELD_NUMBER: _ClassVar[int]
+    M3SRPLUS2020Q4GFSH_FIELD_NUMBER: _ClassVar[int]
+    MY2020_FIELD_NUMBER: _ClassVar[int]
+    M32021_FIELD_NUMBER: _ClassVar[int]
+    MY2021_FIELD_NUMBER: _ClassVar[int]
+    SX2020_FIELD_NUMBER: _ClassVar[int]
+    S2_FIELD_NUMBER: _ClassVar[int]
+    SX2020H2_FIELD_NUMBER: _ClassVar[int]
+    M3SRPLUS2021Q3GFSH_FIELD_NUMBER: _ClassVar[int]
+    M3SRPLUS2021Q3FREMONT_FIELD_NUMBER: _ClassVar[int]
+    MYSRPLUS2021Q3GFSH_FIELD_NUMBER: _ClassVar[int]
+    MYSRPLUS2022Q1TX_FIELD_NUMBER: _ClassVar[int]
+    MYRWDEU2022_FIELD_NUMBER: _ClassVar[int]
+    M3POPPYSEED2024_FIELD_NUMBER: _ClassVar[int]
+    M32023GFSHEXPORT_FIELD_NUMBER: _ClassVar[int]
+    MY2023GFSHEXPORT_FIELD_NUMBER: _ClassVar[int]
+    MY2024_FIELD_NUMBER: _ClassVar[int]
+    MS2024_FIELD_NUMBER: _ClassVar[int]
+    MX2024_FIELD_NUMBER: _ClassVar[int]
+    MY2023SRRWD_FIELD_NUMBER: _ClassVar[int]
+    MY2024C_FIELD_NUMBER: _ClassVar[int]
+    MY2024GFSHEXPORTSRRWD_FIELD_NUMBER: _ClassVar[int]
+    M3POPPYSEED2024C_FIELD_NUMBER: _ClassVar[int]
+    M32025_FIELD_NUMBER: _ClassVar[int]
+    MY2025_FIELD_NUMBER: _ClassVar[int]
+    M32025B_FIELD_NUMBER: _ClassVar[int]
+    MY2025B_FIELD_NUMBER: _ClassVar[int]
+    MS2025_FIELD_NUMBER: _ClassVar[int]
+    MX2025_FIELD_NUMBER: _ClassVar[int]
+    MYREFRESH2025ROW_FIELD_NUMBER: _ClassVar[int]
+    MYSTANDARD2025_FIELD_NUMBER: _ClassVar[int]
+    MYREFRESH2025CN_FIELD_NUMBER: _ClassVar[int]
+    MS2026_FIELD_NUMBER: _ClassVar[int]
+    MX2026_FIELD_NUMBER: _ClassVar[int]
+    MY2025M53_FIELD_NUMBER: _ClassVar[int]
+    M32025M53_FIELD_NUMBER: _ClassVar[int]
+    MY2025CNPLUS_FIELD_NUMBER: _ClassVar[int]
+    MS2026B_FIELD_NUMBER: _ClassVar[int]
+    M32026B_FIELD_NUMBER: _ClassVar[int]
+    MY2026US_FIELD_NUMBER: _ClassVar[int]
+    Default: _common_pb2.Void
+    M3SRPlus2020: _common_pb2.Void
+    M3LR2020: _common_pb2.Void
+    M3LRPerformance2020: _common_pb2.Void
+    M3SRPlus2020Q4GFSH: _common_pb2.Void
+    MY2020: _common_pb2.Void
+    M32021: _common_pb2.Void
+    MY2021: _common_pb2.Void
+    SX2020: _common_pb2.Void
+    S2: _common_pb2.Void
+    SX2020H2: _common_pb2.Void
+    M3SRPlus2021Q3GFSH: _common_pb2.Void
+    M3SRPlus2021Q3Fremont: _common_pb2.Void
+    MYSRPlus2021Q3GFSH: _common_pb2.Void
+    MYSRPlus2022Q1TX: _common_pb2.Void
+    MYRWDEU2022: _common_pb2.Void
+    M3Poppyseed2024: _common_pb2.Void
+    M32023GFSHExport: _common_pb2.Void
+    MY2023GFSHExport: _common_pb2.Void
+    MY2024: _common_pb2.Void
+    MS2024: _common_pb2.Void
+    MX2024: _common_pb2.Void
+    MY2023SRRWD: _common_pb2.Void
+    MY2024C: _common_pb2.Void
+    MY2024GFSHExportSRRWD: _common_pb2.Void
+    M3Poppyseed2024C: _common_pb2.Void
+    M32025: _common_pb2.Void
+    MY2025: _common_pb2.Void
+    M32025B: _common_pb2.Void
+    MY2025B: _common_pb2.Void
+    MS2025: _common_pb2.Void
+    MX2025: _common_pb2.Void
+    MYRefresh2025ROW: _common_pb2.Void
+    MYStandard2025: _common_pb2.Void
+    MYRefresh2025CN: _common_pb2.Void
+    MS2026: _common_pb2.Void
+    MX2026: _common_pb2.Void
+    MY2025M53: _common_pb2.Void
+    M32025M53: _common_pb2.Void
+    MY2025CNPlus: _common_pb2.Void
+    MS2026B: _common_pb2.Void
+    M32026B: _common_pb2.Void
+    MY2026US: _common_pb2.Void
+    def __init__(self, Default: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., M3SRPlus2020: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., M3LR2020: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., M3LRPerformance2020: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., M3SRPlus2020Q4GFSH: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MY2020: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., M32021: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MY2021: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SX2020: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., S2: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SX2020H2: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., M3SRPlus2021Q3GFSH: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., M3SRPlus2021Q3Fremont: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MYSRPlus2021Q3GFSH: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MYSRPlus2022Q1TX: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MYRWDEU2022: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., M3Poppyseed2024: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., M32023GFSHExport: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MY2023GFSHExport: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MY2024: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MS2024: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MX2024: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MY2023SRRWD: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MY2024C: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MY2024GFSHExportSRRWD: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., M3Poppyseed2024C: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., M32025: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MY2025: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., M32025B: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MY2025B: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MS2025: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MX2025: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MYRefresh2025ROW: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MYStandard2025: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MYRefresh2025CN: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MS2026: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MX2026: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MY2025M53: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., M32025M53: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MY2025CNPlus: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MS2026B: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., M32026B: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MY2026US: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+
 class GuiSettings(_message.Message):
-    __slots__ = ("timestamp", "gui_24_hour_time", "show_range_units", "gui_tirepressure_units")
+    __slots__ = ("gui_distance_units", "gui_temperature_units", "gui_charge_rate_units", "gui_range_display", "timestamp", "gui_24_hour_time", "show_range_units", "gui_tirepressure_units")
     class TirePressureUnit(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         TirePressureUnitPsi: _ClassVar[GuiSettings.TirePressureUnit]
         TirePressureUnitBar: _ClassVar[GuiSettings.TirePressureUnit]
     TirePressureUnitPsi: GuiSettings.TirePressureUnit
     TirePressureUnitBar: GuiSettings.TirePressureUnit
+    class SpeedUnit(_message.Message):
+        __slots__ = ("KilometersPerHour", "MilesPerHour")
+        KILOMETERSPERHOUR_FIELD_NUMBER: _ClassVar[int]
+        MILESPERHOUR_FIELD_NUMBER: _ClassVar[int]
+        KilometersPerHour: _common_pb2.Void
+        MilesPerHour: _common_pb2.Void
+        def __init__(self, KilometersPerHour: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MilesPerHour: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+    class TemperatureUnit(_message.Message):
+        __slots__ = ("TemperatureF", "TemperatureC")
+        TEMPERATUREF_FIELD_NUMBER: _ClassVar[int]
+        TEMPERATUREC_FIELD_NUMBER: _ClassVar[int]
+        TemperatureF: _common_pb2.Void
+        TemperatureC: _common_pb2.Void
+        def __init__(self, TemperatureF: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TemperatureC: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+    class ChargeRateUnit(_message.Message):
+        __slots__ = ("Invalid", "KilometersPerHour", "MilesPerHour", "KW")
+        INVALID_FIELD_NUMBER: _ClassVar[int]
+        KILOMETERSPERHOUR_FIELD_NUMBER: _ClassVar[int]
+        MILESPERHOUR_FIELD_NUMBER: _ClassVar[int]
+        KW_FIELD_NUMBER: _ClassVar[int]
+        Invalid: _common_pb2.Void
+        KilometersPerHour: _common_pb2.Void
+        MilesPerHour: _common_pb2.Void
+        KW: _common_pb2.Void
+        def __init__(self, Invalid: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., KilometersPerHour: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MilesPerHour: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., KW: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+    class RangeDisplay(_message.Message):
+        __slots__ = ("Ideal", "Rated")
+        IDEAL_FIELD_NUMBER: _ClassVar[int]
+        RATED_FIELD_NUMBER: _ClassVar[int]
+        Ideal: _common_pb2.Void
+        Rated: _common_pb2.Void
+        def __init__(self, Ideal: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Rated: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+    GUI_DISTANCE_UNITS_FIELD_NUMBER: _ClassVar[int]
+    GUI_TEMPERATURE_UNITS_FIELD_NUMBER: _ClassVar[int]
+    GUI_CHARGE_RATE_UNITS_FIELD_NUMBER: _ClassVar[int]
+    GUI_RANGE_DISPLAY_FIELD_NUMBER: _ClassVar[int]
     TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     GUI_24_HOUR_TIME_FIELD_NUMBER: _ClassVar[int]
     SHOW_RANGE_UNITS_FIELD_NUMBER: _ClassVar[int]
     GUI_TIREPRESSURE_UNITS_FIELD_NUMBER: _ClassVar[int]
+    gui_distance_units: GuiSettings.SpeedUnit
+    gui_temperature_units: GuiSettings.TemperatureUnit
+    gui_charge_rate_units: GuiSettings.ChargeRateUnit
+    gui_range_display: GuiSettings.RangeDisplay
     timestamp: _timestamp_pb2.Timestamp
     gui_24_hour_time: bool
     show_range_units: bool
     gui_tirepressure_units: GuiSettings.TirePressureUnit
-    def __init__(self, timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., gui_24_hour_time: _Optional[bool] = ..., show_range_units: _Optional[bool] = ..., gui_tirepressure_units: _Optional[_Union[GuiSettings.TirePressureUnit, str]] = ...) -> None: ...
+    def __init__(self, gui_distance_units: _Optional[_Union[GuiSettings.SpeedUnit, _Mapping]] = ..., gui_temperature_units: _Optional[_Union[GuiSettings.TemperatureUnit, _Mapping]] = ..., gui_charge_rate_units: _Optional[_Union[GuiSettings.ChargeRateUnit, _Mapping]] = ..., gui_range_display: _Optional[_Union[GuiSettings.RangeDisplay, _Mapping]] = ..., timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., gui_24_hour_time: _Optional[bool] = ..., show_range_units: _Optional[bool] = ..., gui_tirepressure_units: _Optional[_Union[GuiSettings.TirePressureUnit, str]] = ...) -> None: ...
 
 class VehicleConfig(_message.Message):
-    __slots__ = ("interior_trim_type", "exterior_trim_type", "red_brake_calipers", "use_range_badging", "range_plus_badging", "has_ludicrous_mode", "can_actuate_trunks", "has_air_suspension", "ece_restrictions", "eu_vehicle", "motorized_charge_port", "can_accept_navigation_requests", "key_version", "mobile_enabled", "default_charge_to_max", "steering_wheel_heater_installed", "sentry_mode_supported", "homelink_supported", "webcam_supported", "bioweapon_mode_supported", "dashcam_clip_save_supported", "has_pws", "utc_offset", "has_seat_cooling", "paint_color_override", "tpms_pressures_supported", "vehicle_badging", "exterior_trim_override", "headlamp_type", "aux_park_lamps", "is_raven", "has_auto_seat_climate", "has_front_row_seat_heaters", "has_third_row_seat_heaters", "supports_qr_pairing", "disable_window_vent_close", "webcam_selfie_supported", "cop_user_set_temp_supported", "has_auto_stw_heat", "rearlight_type", "rear_seat_heater_type", "webcam_grid_supported", "has_tesla_badge", "has_tesla_wordmark", "fascia_type", "accessory_lightbar_type", "sentry_preview_supported", "seat_trim_type", "drivetrain_type", "lightshow_supported", "mobile_dashcam_viewer_version", "has_premium_connectivity", "car_wrap_enabled", "supports_ride_height", "supports_set_arrival_energy", "supports_pillar_camera_metadata", "chassis_type", "is_china_vehicle", "is_using_unreal_apviz", "supports_flexible_dashcam_bitrate", "front_fascia_camera_type", "turn_indicator_control_type", "has_rear_display", "window_tint_color", "interior_upper_trim_type", "badging_material_type", "webcam_interior_only", "country_code", "bed_lighting_type", "rear_light_hardware_variant", "autopilot_base", "autopilot_override_state", "autopilot_override_expire_time", "supports_dynamic_environments", "wheel_caps_on")
+    __slots__ = ("car_special_type", "car_trim", "car_type", "sun_roof_installed", "wheel_type", "spoiler_type", "roof_color", "exterior_color", "rear_seat_heaters", "seat_type", "rear_seat_type", "third_row_seat_type", "charge_port_type", "timestamp", "interior_trim_type", "driver_assist", "performance_package", "front_drive_unit", "rear_drive_unit", "efficiency_package", "exterior_trim_type", "steering_wheel_type", "red_brake_calipers", "use_range_badging", "range_plus_badging", "has_ludicrous_mode", "can_actuate_trunks", "has_air_suspension", "rhd", "plg", "ece_restrictions", "eu_vehicle", "motorized_charge_port", "can_accept_navigation_requests", "key_version", "mobile_enabled", "default_charge_to_max", "steering_wheel_heater_installed", "sentry_mode_supported", "homelink_supported", "webcam_supported", "bioweapon_mode_supported", "dashcam_clip_save_supported", "has_pws", "utc_offset", "has_seat_cooling", "paint_color_override", "tpms_pressures_supported", "vehicle_badging", "exterior_trim_override", "headlamp_type", "aux_park_lamps", "is_raven", "has_auto_seat_climate", "has_front_row_seat_heaters", "has_third_row_seat_heaters", "supports_qr_pairing", "vin", "disable_window_vent_close", "webcam_selfie_supported", "cop_user_set_temp_supported", "has_auto_stw_heat", "rearlight_type", "rear_seat_heater_type", "webcam_grid_supported", "has_tesla_badge", "has_tesla_wordmark", "fascia_type", "accessory_lightbar_type", "sentry_preview_supported", "seat_trim_type", "drivetrain_type", "lightshow_supported", "mobile_dashcam_viewer_version", "has_premium_connectivity", "car_wrap_enabled", "supports_ride_height", "supports_set_arrival_energy", "supports_pillar_camera_metadata", "chassis_type", "is_china_vehicle", "is_using_unreal_apviz", "supports_flexible_dashcam_bitrate", "front_fascia_camera_type", "turn_indicator_control_type", "has_rear_display", "window_tint_color", "interior_upper_trim_type", "badging_material_type", "webcam_interior_only", "country_code", "bed_lighting_type", "rear_light_hardware_variant", "autopilot_base", "autopilot_override_state", "autopilot_override_expire_time", "supports_dynamic_environments", "wheel_caps_on")
     class AuxParkLamps_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         AuxParkLampsNaBase: _ClassVar[VehicleConfig.AuxParkLamps_E]
@@ -2187,12 +2741,79 @@ class VehicleConfig(_message.Message):
     TurnIndicatorControlTypeUnknown: VehicleConfig.TurnIndicatorControlType
     TurnIndicatorControlTypeSingleDetentStalk: VehicleConfig.TurnIndicatorControlType
     TurnIndicatorControlTypeSWSButton: VehicleConfig.TurnIndicatorControlType
+    class CarType(_message.Message):
+        __slots__ = ("CarTypeModelS", "CarTypeModelX", "CarTypeModelS2", "CarTypeModel3", "CarTypeModelY", "CarTypeSemiTruck", "CarTypeLychee", "CarTypeTamarind", "CarTypeCybertruck", "CarTypeSemiTruckV2")
+        CARTYPEMODELS_FIELD_NUMBER: _ClassVar[int]
+        CARTYPEMODELX_FIELD_NUMBER: _ClassVar[int]
+        CARTYPEMODELS2_FIELD_NUMBER: _ClassVar[int]
+        CARTYPEMODEL3_FIELD_NUMBER: _ClassVar[int]
+        CARTYPEMODELY_FIELD_NUMBER: _ClassVar[int]
+        CARTYPESEMITRUCK_FIELD_NUMBER: _ClassVar[int]
+        CARTYPELYCHEE_FIELD_NUMBER: _ClassVar[int]
+        CARTYPETAMARIND_FIELD_NUMBER: _ClassVar[int]
+        CARTYPECYBERTRUCK_FIELD_NUMBER: _ClassVar[int]
+        CARTYPESEMITRUCKV2_FIELD_NUMBER: _ClassVar[int]
+        CarTypeModelS: _common_pb2.Void
+        CarTypeModelX: _common_pb2.Void
+        CarTypeModelS2: _common_pb2.Void
+        CarTypeModel3: _common_pb2.Void
+        CarTypeModelY: _common_pb2.Void
+        CarTypeSemiTruck: _common_pb2.Void
+        CarTypeLychee: _common_pb2.Void
+        CarTypeTamarind: _common_pb2.Void
+        CarTypeCybertruck: _common_pb2.Void
+        CarTypeSemiTruckV2: _common_pb2.Void
+        def __init__(self, CarTypeModelS: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeModelX: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeModelS2: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeModel3: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeModelY: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeSemiTruck: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeLychee: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeTamarind: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeCybertruck: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeSemiTruckV2: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+    class DriverAssist(_message.Message):
+        __slots__ = ("MonoCam", "ParkerPascal", "ParkerPascal25", "TeslaAP3")
+        NONE_FIELD_NUMBER: _ClassVar[int]
+        MONOCAM_FIELD_NUMBER: _ClassVar[int]
+        PARKERPASCAL_FIELD_NUMBER: _ClassVar[int]
+        PARKERPASCAL25_FIELD_NUMBER: _ClassVar[int]
+        TESLAAP3_FIELD_NUMBER: _ClassVar[int]
+        MonoCam: _common_pb2.Void
+        ParkerPascal: _common_pb2.Void
+        ParkerPascal25: _common_pb2.Void
+        TeslaAP3: _common_pb2.Void
+        def __init__(self, MonoCam: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., ParkerPascal: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., ParkerPascal25: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TeslaAP3: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+    class PerformancePackage(_message.Message):
+        __slots__ = ("Base", "Performance", "BasePlus")
+        NONE_FIELD_NUMBER: _ClassVar[int]
+        BASE_FIELD_NUMBER: _ClassVar[int]
+        PERFORMANCE_FIELD_NUMBER: _ClassVar[int]
+        BASEPLUS_FIELD_NUMBER: _ClassVar[int]
+        Base: _common_pb2.Void
+        Performance: _common_pb2.Void
+        BasePlus: _common_pb2.Void
+        def __init__(self, Base: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Performance: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., BasePlus: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+    class FrontDriveUnit(_message.Message):
+        __slots__ = ("NoneOrSmall", "PermanentMagnet")
+        NONEORSMALL_FIELD_NUMBER: _ClassVar[int]
+        PERMANENTMAGNET_FIELD_NUMBER: _ClassVar[int]
+        NoneOrSmall: _common_pb2.Void
+        PermanentMagnet: _common_pb2.Void
+        def __init__(self, NoneOrSmall: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., PermanentMagnet: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+    class SteeringWheelType(_message.Message):
+        __slots__ = ("Unknown", "Round", "Yoke", "Squircle")
+        UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+        ROUND_FIELD_NUMBER: _ClassVar[int]
+        YOKE_FIELD_NUMBER: _ClassVar[int]
+        SQUIRCLE_FIELD_NUMBER: _ClassVar[int]
+        Unknown: _common_pb2.Void
+        Round: _common_pb2.Void
+        Yoke: _common_pb2.Void
+        Squircle: _common_pb2.Void
+        def __init__(self, Unknown: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Round: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Yoke: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Squircle: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
     class InteriorTrimType(_message.Message):
-        __slots__ = ("BLACKCONSOLE2", "WHITECONSOLE2", "ALLBLACK", "BLACKANDWHITE", "WALNUTCREAM", "WALNUTWHITE", "EBONYBLACK", "CARBONCREAM", "CARBONWHITE", "CARBONBLACK", "TACTICALGREY")
+        __slots__ = ("UNKNOWN", "BLACK", "WHITE", "BLACKCONSOLE2", "WHITECONSOLE2", "ALLBLACK", "BLACKANDWHITE", "CREAM", "WALNUTCREAM", "WALNUTWHITE", "EBONYBLACK", "CARBONCREAM", "CARBONWHITE", "CARBONBLACK", "TACTICALGREY")
+        UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+        BLACK_FIELD_NUMBER: _ClassVar[int]
+        WHITE_FIELD_NUMBER: _ClassVar[int]
         BLACKCONSOLE2_FIELD_NUMBER: _ClassVar[int]
         WHITECONSOLE2_FIELD_NUMBER: _ClassVar[int]
         ALLBLACK_FIELD_NUMBER: _ClassVar[int]
         BLACKANDWHITE_FIELD_NUMBER: _ClassVar[int]
+        CREAM_FIELD_NUMBER: _ClassVar[int]
         WALNUTCREAM_FIELD_NUMBER: _ClassVar[int]
         WALNUTWHITE_FIELD_NUMBER: _ClassVar[int]
         EBONYBLACK_FIELD_NUMBER: _ClassVar[int]
@@ -2200,10 +2821,14 @@ class VehicleConfig(_message.Message):
         CARBONWHITE_FIELD_NUMBER: _ClassVar[int]
         CARBONBLACK_FIELD_NUMBER: _ClassVar[int]
         TACTICALGREY_FIELD_NUMBER: _ClassVar[int]
+        UNKNOWN: _common_pb2.Void
+        BLACK: _common_pb2.Void
+        WHITE: _common_pb2.Void
         BLACKCONSOLE2: _common_pb2.Void
         WHITECONSOLE2: _common_pb2.Void
         ALLBLACK: _common_pb2.Void
         BLACKANDWHITE: _common_pb2.Void
+        CREAM: _common_pb2.Void
         WALNUTCREAM: _common_pb2.Void
         WALNUTWHITE: _common_pb2.Void
         EBONYBLACK: _common_pb2.Void
@@ -2211,22 +2836,46 @@ class VehicleConfig(_message.Message):
         CARBONWHITE: _common_pb2.Void
         CARBONBLACK: _common_pb2.Void
         TACTICALGREY: _common_pb2.Void
-        def __init__(self, BLACKCONSOLE2: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., WHITECONSOLE2: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., ALLBLACK: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., BLACKANDWHITE: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., WALNUTCREAM: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., WALNUTWHITE: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., EBONYBLACK: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CARBONCREAM: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CARBONWHITE: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CARBONBLACK: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TACTICALGREY: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+        def __init__(self, UNKNOWN: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., BLACK: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., WHITE: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., BLACKCONSOLE2: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., WHITECONSOLE2: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., ALLBLACK: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., BLACKANDWHITE: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CREAM: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., WALNUTCREAM: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., WALNUTWHITE: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., EBONYBLACK: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CARBONCREAM: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CARBONWHITE: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CARBONBLACK: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TACTICALGREY: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
     class ExteriorTrimType(_message.Message):
-        __slots__ = ("STANDARDCHROME", "SATINBLACK")
+        __slots__ = ("UNKNOWN", "STANDARDCHROME", "SATINBLACK")
+        UNKNOWN_FIELD_NUMBER: _ClassVar[int]
         STANDARDCHROME_FIELD_NUMBER: _ClassVar[int]
         SATINBLACK_FIELD_NUMBER: _ClassVar[int]
+        UNKNOWN: _common_pb2.Void
         STANDARDCHROME: _common_pb2.Void
         SATINBLACK: _common_pb2.Void
-        def __init__(self, STANDARDCHROME: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SATINBLACK: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+        def __init__(self, UNKNOWN: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., STANDARDCHROME: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SATINBLACK: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
+    CAR_SPECIAL_TYPE_FIELD_NUMBER: _ClassVar[int]
+    CAR_TRIM_FIELD_NUMBER: _ClassVar[int]
+    CAR_TYPE_FIELD_NUMBER: _ClassVar[int]
+    SUN_ROOF_INSTALLED_FIELD_NUMBER: _ClassVar[int]
+    WHEEL_TYPE_FIELD_NUMBER: _ClassVar[int]
+    SPOILER_TYPE_FIELD_NUMBER: _ClassVar[int]
+    ROOF_COLOR_FIELD_NUMBER: _ClassVar[int]
+    EXTERIOR_COLOR_FIELD_NUMBER: _ClassVar[int]
+    REAR_SEAT_HEATERS_FIELD_NUMBER: _ClassVar[int]
+    SEAT_TYPE_FIELD_NUMBER: _ClassVar[int]
+    REAR_SEAT_TYPE_FIELD_NUMBER: _ClassVar[int]
+    THIRD_ROW_SEAT_TYPE_FIELD_NUMBER: _ClassVar[int]
+    CHARGE_PORT_TYPE_FIELD_NUMBER: _ClassVar[int]
+    TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     INTERIOR_TRIM_TYPE_FIELD_NUMBER: _ClassVar[int]
+    DRIVER_ASSIST_FIELD_NUMBER: _ClassVar[int]
+    PERFORMANCE_PACKAGE_FIELD_NUMBER: _ClassVar[int]
+    FRONT_DRIVE_UNIT_FIELD_NUMBER: _ClassVar[int]
+    REAR_DRIVE_UNIT_FIELD_NUMBER: _ClassVar[int]
+    EFFICIENCY_PACKAGE_FIELD_NUMBER: _ClassVar[int]
     EXTERIOR_TRIM_TYPE_FIELD_NUMBER: _ClassVar[int]
+    STEERING_WHEEL_TYPE_FIELD_NUMBER: _ClassVar[int]
     RED_BRAKE_CALIPERS_FIELD_NUMBER: _ClassVar[int]
     USE_RANGE_BADGING_FIELD_NUMBER: _ClassVar[int]
     RANGE_PLUS_BADGING_FIELD_NUMBER: _ClassVar[int]
     HAS_LUDICROUS_MODE_FIELD_NUMBER: _ClassVar[int]
     CAN_ACTUATE_TRUNKS_FIELD_NUMBER: _ClassVar[int]
     HAS_AIR_SUSPENSION_FIELD_NUMBER: _ClassVar[int]
+    RHD_FIELD_NUMBER: _ClassVar[int]
+    PLG_FIELD_NUMBER: _ClassVar[int]
     ECE_RESTRICTIONS_FIELD_NUMBER: _ClassVar[int]
     EU_VEHICLE_FIELD_NUMBER: _ClassVar[int]
     MOTORIZED_CHARGE_PORT_FIELD_NUMBER: _ClassVar[int]
@@ -2254,6 +2903,7 @@ class VehicleConfig(_message.Message):
     HAS_FRONT_ROW_SEAT_HEATERS_FIELD_NUMBER: _ClassVar[int]
     HAS_THIRD_ROW_SEAT_HEATERS_FIELD_NUMBER: _ClassVar[int]
     SUPPORTS_QR_PAIRING_FIELD_NUMBER: _ClassVar[int]
+    VIN_FIELD_NUMBER: _ClassVar[int]
     DISABLE_WINDOW_VENT_CLOSE_FIELD_NUMBER: _ClassVar[int]
     WEBCAM_SELFIE_SUPPORTED_FIELD_NUMBER: _ClassVar[int]
     COP_USER_SET_TEMP_SUPPORTED_FIELD_NUMBER: _ClassVar[int]
@@ -2294,14 +2944,36 @@ class VehicleConfig(_message.Message):
     AUTOPILOT_OVERRIDE_EXPIRE_TIME_FIELD_NUMBER: _ClassVar[int]
     SUPPORTS_DYNAMIC_ENVIRONMENTS_FIELD_NUMBER: _ClassVar[int]
     WHEEL_CAPS_ON_FIELD_NUMBER: _ClassVar[int]
+    car_special_type: VehicleBadging
+    car_trim: CarTrim
+    car_type: VehicleConfig.CarType
+    sun_roof_installed: SunRoofType
+    wheel_type: WheelType
+    spoiler_type: SpoilerType
+    roof_color: RoofColor
+    exterior_color: ExteriorColor
+    rear_seat_heaters: RearSeatHeaters
+    seat_type: SeatType
+    rear_seat_type: RearSeatType
+    third_row_seat_type: ThirdRowSeatType
+    charge_port_type: ChargePortType
+    timestamp: _timestamp_pb2.Timestamp
     interior_trim_type: VehicleConfig.InteriorTrimType
+    driver_assist: VehicleConfig.DriverAssist
+    performance_package: VehicleConfig.PerformancePackage
+    front_drive_unit: VehicleConfig.FrontDriveUnit
+    rear_drive_unit: RearDriveUnit
+    efficiency_package: EfficiencyPackage
     exterior_trim_type: VehicleConfig.ExteriorTrimType
+    steering_wheel_type: VehicleConfig.SteeringWheelType
     red_brake_calipers: bool
     use_range_badging: bool
     range_plus_badging: bool
     has_ludicrous_mode: bool
     can_actuate_trunks: bool
     has_air_suspension: bool
+    rhd: bool
+    plg: bool
     ece_restrictions: bool
     eu_vehicle: bool
     motorized_charge_port: bool
@@ -2329,6 +3001,7 @@ class VehicleConfig(_message.Message):
     has_front_row_seat_heaters: bool
     has_third_row_seat_heaters: bool
     supports_qr_pairing: bool
+    vin: str
     disable_window_vent_close: bool
     webcam_selfie_supported: bool
     cop_user_set_temp_supported: bool
@@ -2369,7 +3042,7 @@ class VehicleConfig(_message.Message):
     autopilot_override_expire_time: int
     supports_dynamic_environments: bool
     wheel_caps_on: bool
-    def __init__(self, interior_trim_type: _Optional[_Union[VehicleConfig.InteriorTrimType, _Mapping]] = ..., exterior_trim_type: _Optional[_Union[VehicleConfig.ExteriorTrimType, _Mapping]] = ..., red_brake_calipers: _Optional[bool] = ..., use_range_badging: _Optional[bool] = ..., range_plus_badging: _Optional[bool] = ..., has_ludicrous_mode: _Optional[bool] = ..., can_actuate_trunks: _Optional[bool] = ..., has_air_suspension: _Optional[bool] = ..., ece_restrictions: _Optional[bool] = ..., eu_vehicle: _Optional[bool] = ..., motorized_charge_port: _Optional[bool] = ..., can_accept_navigation_requests: _Optional[bool] = ..., key_version: _Optional[int] = ..., mobile_enabled: _Optional[bool] = ..., default_charge_to_max: _Optional[bool] = ..., steering_wheel_heater_installed: _Optional[bool] = ..., sentry_mode_supported: _Optional[bool] = ..., homelink_supported: _Optional[bool] = ..., webcam_supported: _Optional[bool] = ..., bioweapon_mode_supported: _Optional[bool] = ..., dashcam_clip_save_supported: _Optional[bool] = ..., has_pws: _Optional[bool] = ..., utc_offset: _Optional[int] = ..., has_seat_cooling: _Optional[bool] = ..., paint_color_override: _Optional[str] = ..., tpms_pressures_supported: _Optional[bool] = ..., vehicle_badging: _Optional[int] = ..., exterior_trim_override: _Optional[str] = ..., headlamp_type: _Optional[_Union[VehicleConfig.HeadlampType_E, str]] = ..., aux_park_lamps: _Optional[_Union[VehicleConfig.AuxParkLamps_E, str]] = ..., is_raven: _Optional[bool] = ..., has_auto_seat_climate: _Optional[bool] = ..., has_front_row_seat_heaters: _Optional[bool] = ..., has_third_row_seat_heaters: _Optional[bool] = ..., supports_qr_pairing: _Optional[bool] = ..., disable_window_vent_close: _Optional[bool] = ..., webcam_selfie_supported: _Optional[bool] = ..., cop_user_set_temp_supported: _Optional[bool] = ..., has_auto_stw_heat: _Optional[bool] = ..., rearlight_type: _Optional[_Union[VehicleConfig.RearLightType, str]] = ..., rear_seat_heater_type: _Optional[_Union[_common_pb2.RearSeatHeaterType, str]] = ..., webcam_grid_supported: _Optional[bool] = ..., has_tesla_badge: _Optional[bool] = ..., has_tesla_wordmark: _Optional[bool] = ..., fascia_type: _Optional[_Union[_common_pb2.FasciaType, str]] = ..., accessory_lightbar_type: _Optional[_Union[_common_pb2.AccessoryLightbarType, str]] = ..., sentry_preview_supported: _Optional[bool] = ..., seat_trim_type: _Optional[_Union[VehicleConfig.SeatTrimType, str]] = ..., drivetrain_type: _Optional[_Union[VehicleConfig.DrivetrainType, str]] = ..., lightshow_supported: _Optional[bool] = ..., mobile_dashcam_viewer_version: _Optional[int] = ..., has_premium_connectivity: _Optional[bool] = ..., car_wrap_enabled: _Optional[bool] = ..., supports_ride_height: _Optional[bool] = ..., supports_set_arrival_energy: _Optional[bool] = ..., supports_pillar_camera_metadata: _Optional[bool] = ..., chassis_type: _Optional[_Union[_common_pb2.ChassisType, str]] = ..., is_china_vehicle: _Optional[bool] = ..., is_using_unreal_apviz: _Optional[bool] = ..., supports_flexible_dashcam_bitrate: _Optional[bool] = ..., front_fascia_camera_type: _Optional[_Union[VehicleConfig.FrontFasciaCameraType, str]] = ..., turn_indicator_control_type: _Optional[_Union[VehicleConfig.TurnIndicatorControlType, str]] = ..., has_rear_display: _Optional[bool] = ..., window_tint_color: _Optional[str] = ..., interior_upper_trim_type: _Optional[_Union[VehicleConfig.InteriorUpperTrimType, str]] = ..., badging_material_type: _Optional[_Union[VehicleConfig.BadgingMaterialType, str]] = ..., webcam_interior_only: _Optional[bool] = ..., country_code: _Optional[str] = ..., bed_lighting_type: _Optional[_Union[VehicleConfig.BedLightingType, str]] = ..., rear_light_hardware_variant: _Optional[_Union[VehicleConfig.RearLightHardwareVariant, str]] = ..., autopilot_base: _Optional[_Union[AutopilotBase, str]] = ..., autopilot_override_state: _Optional[_Union[AutopilotOverrideState, str]] = ..., autopilot_override_expire_time: _Optional[int] = ..., supports_dynamic_environments: _Optional[bool] = ..., wheel_caps_on: _Optional[bool] = ...) -> None: ...
+    def __init__(self, car_special_type: _Optional[_Union[VehicleBadging, _Mapping]] = ..., car_trim: _Optional[_Union[CarTrim, _Mapping]] = ..., car_type: _Optional[_Union[VehicleConfig.CarType, _Mapping]] = ..., sun_roof_installed: _Optional[_Union[SunRoofType, _Mapping]] = ..., wheel_type: _Optional[_Union[WheelType, _Mapping]] = ..., spoiler_type: _Optional[_Union[SpoilerType, _Mapping]] = ..., roof_color: _Optional[_Union[RoofColor, _Mapping]] = ..., exterior_color: _Optional[_Union[ExteriorColor, _Mapping]] = ..., rear_seat_heaters: _Optional[_Union[RearSeatHeaters, _Mapping]] = ..., seat_type: _Optional[_Union[SeatType, _Mapping]] = ..., rear_seat_type: _Optional[_Union[RearSeatType, _Mapping]] = ..., third_row_seat_type: _Optional[_Union[ThirdRowSeatType, _Mapping]] = ..., charge_port_type: _Optional[_Union[ChargePortType, _Mapping]] = ..., timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., interior_trim_type: _Optional[_Union[VehicleConfig.InteriorTrimType, _Mapping]] = ..., driver_assist: _Optional[_Union[VehicleConfig.DriverAssist, _Mapping]] = ..., performance_package: _Optional[_Union[VehicleConfig.PerformancePackage, _Mapping]] = ..., front_drive_unit: _Optional[_Union[VehicleConfig.FrontDriveUnit, _Mapping]] = ..., rear_drive_unit: _Optional[_Union[RearDriveUnit, _Mapping]] = ..., efficiency_package: _Optional[_Union[EfficiencyPackage, _Mapping]] = ..., exterior_trim_type: _Optional[_Union[VehicleConfig.ExteriorTrimType, _Mapping]] = ..., steering_wheel_type: _Optional[_Union[VehicleConfig.SteeringWheelType, _Mapping]] = ..., red_brake_calipers: _Optional[bool] = ..., use_range_badging: _Optional[bool] = ..., range_plus_badging: _Optional[bool] = ..., has_ludicrous_mode: _Optional[bool] = ..., can_actuate_trunks: _Optional[bool] = ..., has_air_suspension: _Optional[bool] = ..., rhd: _Optional[bool] = ..., plg: _Optional[bool] = ..., ece_restrictions: _Optional[bool] = ..., eu_vehicle: _Optional[bool] = ..., motorized_charge_port: _Optional[bool] = ..., can_accept_navigation_requests: _Optional[bool] = ..., key_version: _Optional[int] = ..., mobile_enabled: _Optional[bool] = ..., default_charge_to_max: _Optional[bool] = ..., steering_wheel_heater_installed: _Optional[bool] = ..., sentry_mode_supported: _Optional[bool] = ..., homelink_supported: _Optional[bool] = ..., webcam_supported: _Optional[bool] = ..., bioweapon_mode_supported: _Optional[bool] = ..., dashcam_clip_save_supported: _Optional[bool] = ..., has_pws: _Optional[bool] = ..., utc_offset: _Optional[int] = ..., has_seat_cooling: _Optional[bool] = ..., paint_color_override: _Optional[str] = ..., tpms_pressures_supported: _Optional[bool] = ..., vehicle_badging: _Optional[int] = ..., exterior_trim_override: _Optional[str] = ..., headlamp_type: _Optional[_Union[VehicleConfig.HeadlampType_E, str]] = ..., aux_park_lamps: _Optional[_Union[VehicleConfig.AuxParkLamps_E, str]] = ..., is_raven: _Optional[bool] = ..., has_auto_seat_climate: _Optional[bool] = ..., has_front_row_seat_heaters: _Optional[bool] = ..., has_third_row_seat_heaters: _Optional[bool] = ..., supports_qr_pairing: _Optional[bool] = ..., vin: _Optional[str] = ..., disable_window_vent_close: _Optional[bool] = ..., webcam_selfie_supported: _Optional[bool] = ..., cop_user_set_temp_supported: _Optional[bool] = ..., has_auto_stw_heat: _Optional[bool] = ..., rearlight_type: _Optional[_Union[VehicleConfig.RearLightType, str]] = ..., rear_seat_heater_type: _Optional[_Union[_common_pb2.RearSeatHeaterType, str]] = ..., webcam_grid_supported: _Optional[bool] = ..., has_tesla_badge: _Optional[bool] = ..., has_tesla_wordmark: _Optional[bool] = ..., fascia_type: _Optional[_Union[_common_pb2.FasciaType, str]] = ..., accessory_lightbar_type: _Optional[_Union[_common_pb2.AccessoryLightbarType, str]] = ..., sentry_preview_supported: _Optional[bool] = ..., seat_trim_type: _Optional[_Union[VehicleConfig.SeatTrimType, str]] = ..., drivetrain_type: _Optional[_Union[VehicleConfig.DrivetrainType, str]] = ..., lightshow_supported: _Optional[bool] = ..., mobile_dashcam_viewer_version: _Optional[int] = ..., has_premium_connectivity: _Optional[bool] = ..., car_wrap_enabled: _Optional[bool] = ..., supports_ride_height: _Optional[bool] = ..., supports_set_arrival_energy: _Optional[bool] = ..., supports_pillar_camera_metadata: _Optional[bool] = ..., chassis_type: _Optional[_Union[_common_pb2.ChassisType, str]] = ..., is_china_vehicle: _Optional[bool] = ..., is_using_unreal_apviz: _Optional[bool] = ..., supports_flexible_dashcam_bitrate: _Optional[bool] = ..., front_fascia_camera_type: _Optional[_Union[VehicleConfig.FrontFasciaCameraType, str]] = ..., turn_indicator_control_type: _Optional[_Union[VehicleConfig.TurnIndicatorControlType, str]] = ..., has_rear_display: _Optional[bool] = ..., window_tint_color: _Optional[str] = ..., interior_upper_trim_type: _Optional[_Union[VehicleConfig.InteriorUpperTrimType, str]] = ..., badging_material_type: _Optional[_Union[VehicleConfig.BadgingMaterialType, str]] = ..., webcam_interior_only: _Optional[bool] = ..., country_code: _Optional[str] = ..., bed_lighting_type: _Optional[_Union[VehicleConfig.BedLightingType, str]] = ..., rear_light_hardware_variant: _Optional[_Union[VehicleConfig.RearLightHardwareVariant, str]] = ..., autopilot_base: _Optional[_Union[AutopilotBase, str]] = ..., autopilot_override_state: _Optional[_Union[AutopilotOverrideState, str]] = ..., autopilot_override_expire_time: _Optional[int] = ..., supports_dynamic_environments: _Optional[bool] = ..., wheel_caps_on: _Optional[bool] = ...) -> None: ...
 
 class ParkedAccessoryState(_message.Message):
     __slots__ = ("tent_mode_request", "horizon_leveling_state", "front_zone_light_request", "rear_zone_light_request", "truck_bed_lights_brightness", "truck_bed_lights_auto_brightness", "truck_bed_lights_auto_state", "truck_bed_lights_controls_disabled", "accessory_lightbar_middle_on", "accessory_lightbar_ditch_on", "accessory_lightbar_brightness", "accessory_lightbar_low", "accessory_lightbar_med", "accessory_lightbar_high", "has_tent_mode", "timestamp")

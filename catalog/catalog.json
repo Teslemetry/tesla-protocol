@@ -346,9 +346,9 @@
         "typescript": "packages/typescript/src/command",
         "python": "packages/python/tesla_protocol/command"
       },
-      "messages": 348,
+      "messages": 371,
       "enums": 107,
-      "fields": 1652,
+      "fields": 1951,
       "files": [
         {
           "package": "CarServer",
@@ -19830,9 +19830,2079 @@
               "nested_enums": []
             },
             {
+              "fqn": ".CarServer.VehicleBadging",
+              "name": "VehicleBadging",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "Base",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "Founder",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "Signature",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 4,
+                  "name": "Performance",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 5,
+                  "name": "LaunchSeries",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 6,
+                  "name": "SignatureSeries",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
+              ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.CarTrim",
+              "name": "CarTrim",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "Trim40",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "OBSOLETETrim50",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "OBSOLETETrim50D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 4,
+                  "name": "Trim60",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 5,
+                  "name": "Trim60D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 6,
+                  "name": "Trim70",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 7,
+                  "name": "Trim70D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 8,
+                  "name": "Trim75",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 9,
+                  "name": "Trim75D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 10,
+                  "name": "TrimP75D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 11,
+                  "name": "Trim85",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 12,
+                  "name": "TrimP85",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 13,
+                  "name": "TrimP85Plus",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 14,
+                  "name": "Trim85D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 15,
+                  "name": "TrimP85D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 16,
+                  "name": "Trim90",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 17,
+                  "name": "TrimP90",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 18,
+                  "name": "TrimP90Plus",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 19,
+                  "name": "Trim90D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 20,
+                  "name": "TrimP90D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 21,
+                  "name": "Trim100",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 22,
+                  "name": "TrimP100",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 23,
+                  "name": "Trim100D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 24,
+                  "name": "TrimP100D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 25,
+                  "name": "Trim50",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 26,
+                  "name": "Trim50D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 27,
+                  "name": "Trim62",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 28,
+                  "name": "Trim62D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 29,
+                  "name": "Trim74",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 30,
+                  "name": "Trim74D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 31,
+                  "name": "TrimP74D",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 32,
+                  "name": "TrimDefault",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 34,
+                  "name": "TrimCyberbeast",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 255,
+                  "name": "TrimInvalid",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
+              ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.SunRoofType",
+              "name": "SunRoofType",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "None",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "Gen1",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "Gen2",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
+              ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.WheelType",
+              "name": "WheelType",
+              "fields": [
+                {
+                  "number": 3,
+                  "name": "Unknown",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 4,
+                  "name": "ZeroG20Gunpowder",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 5,
+                  "name": "Pinwheel18",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 6,
+                  "name": "Pinwheel18CapKit",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 7,
+                  "name": "Stiletto19",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 8,
+                  "name": "Stiletto20",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 9,
+                  "name": "Stiletto20DarkStaggered",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 10,
+                  "name": "Stiletto20DarkSquare",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 11,
+                  "name": "Gemini19Square",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 12,
+                  "name": "Gemini19Staggered",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 13,
+                  "name": "Induction20Black",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 14,
+                  "name": "UberTurbine21Black",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 15,
+                  "name": "Apollo19",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 16,
+                  "name": "Apollo19CapKit",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 17,
+                  "name": "ZeroG19Gunpowder",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 18,
+                  "name": "Cardenio19",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 19,
+                  "name": "Default",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 20,
+                  "name": "NewTurbine22Black",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 21,
+                  "name": "Cyberstream",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 22,
+                  "name": "Arachnid21",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 23,
+                  "name": "Base19",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 24,
+                  "name": "Silver21",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 25,
+                  "name": "Charcoal21",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 26,
+                  "name": "Silver21Euro",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 27,
+                  "name": "Aero19",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 28,
+                  "name": "Charcoal21Euro",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 29,
+                  "name": "Super21Gray",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 30,
+                  "name": "Super21Silver",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 31,
+                  "name": "Turbine19",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 32,
+                  "name": "Turbine19Dark",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 33,
+                  "name": "AeroTurbine19",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 34,
+                  "name": "AeroTurbine19Black",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 35,
+                  "name": "Helix20",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 36,
+                  "name": "AeroTurbine20",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 37,
+                  "name": "Turbine22",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 38,
+                  "name": "Cyclone19Dark",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 39,
+                  "name": "AeroTurbine20Dark",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 40,
+                  "name": "Turbine22Dark",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 41,
+                  "name": "Arachnid21Silver",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 42,
+                  "name": "Arachnid21Black",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 43,
+                  "name": "Arachnid21Grey",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 44,
+                  "name": "Slipstream20Carbon",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 45,
+                  "name": "Slipstream20Dark",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 46,
+                  "name": "Slipstream19Carbon",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 47,
+                  "name": "TwinTurbine21Silver",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 48,
+                  "name": "TwinTurbine21Carbon",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 49,
+                  "name": "Tempest19SonicSilver",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 50,
+                  "name": "PinwheelRefresh18",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 51,
+                  "name": "StilettoRefresh19",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 52,
+                  "name": "UberTurbine20Gunpowder",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 53,
+                  "name": "Glider18",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 54,
+                  "name": "Helix19",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 56,
+                  "name": "Wishbone20Staggered",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 57,
+                  "name": "CtBase20",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 58,
+                  "name": "CtPremium20",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 59,
+                  "name": "CtBase18",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 60,
+                  "name": "Apollo19MetallicShadow",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 61,
+                  "name": "Wishbone19Staggered",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 62,
+                  "name": "Crossflow19",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 63,
+                  "name": "HelixV220",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 64,
+                  "name": "Standard19",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 65,
+                  "name": "Halo22",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 66,
+                  "name": "Riptide20",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 67,
+                  "name": "Cypress21",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 68,
+                  "name": "MachinaV219",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 69,
+                  "name": "ArachnidV221",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 70,
+                  "name": "E4118",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 71,
+                  "name": "D5018",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 72,
+                  "name": "HelixV220Dark",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 73,
+                  "name": "UberHelix20",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
+              ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.SpoilerType",
+              "name": "SpoilerType",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "None",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "Passive",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "Active",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
+              ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.RoofColor",
+              "name": "RoofColor",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "None",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "Glass",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "Black",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 4,
+                  "name": "Colored",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
+              ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.ExteriorColor",
+              "name": "ExteriorColor",
+              "fields": [
+                {
+                  "number": 3,
+                  "name": "Unknown",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 4,
+                  "name": "RedMulticoat",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 5,
+                  "name": "SolidBlack",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 6,
+                  "name": "SilverMetallic",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 7,
+                  "name": "MidnightSilver",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 8,
+                  "name": "DeepBlue",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 9,
+                  "name": "PearlWhite",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 10,
+                  "name": "DefaultColor",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 11,
+                  "name": "Black",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 12,
+                  "name": "White",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 13,
+                  "name": "Silver",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 14,
+                  "name": "Grey",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 15,
+                  "name": "Blue",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 16,
+                  "name": "Green",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 17,
+                  "name": "Brown",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 18,
+                  "name": "Pearl",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 19,
+                  "name": "SigRed",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 20,
+                  "name": "Red",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 21,
+                  "name": "SteelGrey",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 22,
+                  "name": "MetallicBlack",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 23,
+                  "name": "TitaniumCopper",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 24,
+                  "name": "SignatureBlue",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 25,
+                  "name": "MidnightCherryRed",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 26,
+                  "name": "Quicksilver",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 27,
+                  "name": "UltraRed",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 28,
+                  "name": "StealthGrey",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 29,
+                  "name": "LunarSilver",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 30,
+                  "name": "GlacierBlue",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 31,
+                  "name": "DiamondBlack",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 32,
+                  "name": "FrostBlue",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 33,
+                  "name": "SilkRoadSilver",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 34,
+                  "name": "MarineBlue",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 35,
+                  "name": "GarnetRed",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 36,
+                  "name": "CoastalBlue",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
+              ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.RearSeatHeaters",
+              "name": "RearSeatHeaters",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "None",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "Base",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "Executive",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 4,
+                  "name": "Gentherm",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 5,
+                  "name": "BaseModelX",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
+              ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.SeatType",
+              "name": "SeatType",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "Base",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "Recaro",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "TeslaMsGen1",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
+              ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.RearSeatType",
+              "name": "RearSeatType",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "Base",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "Recaro",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "Executive",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 4,
+                  "name": "TwoSeat",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 5,
+                  "name": "FoldFlat",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 6,
+                  "name": "FoldFlatMotorized",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 7,
+                  "name": "TwoSeatConsole",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 8,
+                  "name": "FoldFlatTwoMotor",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 9,
+                  "name": "FoldFlatTwoMotorHall",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 10,
+                  "name": "FoldFlatHallBuckles",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
+              ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.ThirdRowSeatType",
+              "name": "ThirdRowSeatType",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "None",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "FuturisFoldFlat",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "FuturisNoFoldFlat",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 4,
+                  "name": "FlatFold",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
+              ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.ChargePortType",
+              "name": "ChargePortType",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "US",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "EU",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "GB",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 4,
+                  "name": "CCS",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
+              ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.RearDriveUnit",
+              "name": "RearDriveUnit",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "None",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "LargeRear",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "SmallRear",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 4,
+                  "name": "PM216MOSFET",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 5,
+                  "name": "PM216IGBT",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 6,
+                  "name": "CorianderSingle",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 7,
+                  "name": "CorianderDual",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 8,
+                  "name": "PermanentMagnet",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 9,
+                  "name": "InductionDual",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
+              ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.EfficiencyPackage",
+              "name": "EfficiencyPackage",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "Default",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 2,
+                  "name": "M3SRPlus2020",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 3,
+                  "name": "M3LR2020",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 4,
+                  "name": "M3LRPerformance2020",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 5,
+                  "name": "M3SRPlus2020Q4GFSH",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 6,
+                  "name": "MY2020",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 7,
+                  "name": "M32021",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 8,
+                  "name": "MY2021",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 9,
+                  "name": "SX2020",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 10,
+                  "name": "S2",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 11,
+                  "name": "SX2020H2",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 12,
+                  "name": "M3SRPlus2021Q3GFSH",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 13,
+                  "name": "M3SRPlus2021Q3Fremont",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 14,
+                  "name": "MYSRPlus2021Q3GFSH",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 15,
+                  "name": "MYSRPlus2022Q1TX",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 16,
+                  "name": "MYRWDEU2022",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 17,
+                  "name": "M3Poppyseed2024",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 18,
+                  "name": "M32023GFSHExport",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 19,
+                  "name": "MY2023GFSHExport",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 20,
+                  "name": "MY2024",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 22,
+                  "name": "MS2024",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 23,
+                  "name": "MX2024",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 24,
+                  "name": "MY2023SRRWD",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 27,
+                  "name": "MY2024C",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 28,
+                  "name": "MY2024GFSHExportSRRWD",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 29,
+                  "name": "M3Poppyseed2024C",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 30,
+                  "name": "M32025",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 31,
+                  "name": "MY2025",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 32,
+                  "name": "M32025B",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 33,
+                  "name": "MY2025B",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 34,
+                  "name": "MS2025",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 35,
+                  "name": "MX2025",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 36,
+                  "name": "MYRefresh2025ROW",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 37,
+                  "name": "MYStandard2025",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 38,
+                  "name": "MYRefresh2025CN",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 39,
+                  "name": "MS2026",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 40,
+                  "name": "MX2026",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 41,
+                  "name": "MY2025M53",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 42,
+                  "name": "M32025M53",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 43,
+                  "name": "MY2025CNPlus",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 44,
+                  "name": "MS2026B",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 45,
+                  "name": "M32026B",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                },
+                {
+                  "number": 46,
+                  "name": "MY2026US",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "type"
+                }
+              ],
+              "oneofs": [
+                "type"
+              ],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
               "fqn": ".CarServer.GuiSettings",
               "name": "GuiSettings",
               "fields": [
+                {
+                  "number": 1,
+                  "name": "gui_distance_units",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.GuiSettings.SpeedUnit",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "gui_temperature_units",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.GuiSettings.TemperatureUnit",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "gui_charge_rate_units",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.GuiSettings.ChargeRateUnit",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 5,
+                  "name": "gui_range_display",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.GuiSettings.RangeDisplay",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
                 {
                   "number": 7,
                   "name": "timestamp",
@@ -19873,7 +21943,140 @@
               ],
               "reserved_ranges": [],
               "reserved_names": [],
-              "nested_messages": [],
+              "nested_messages": [
+                {
+                  "fqn": ".CarServer.GuiSettings.SpeedUnit",
+                  "name": "SpeedUnit",
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "KilometersPerHour",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 2,
+                      "name": "MilesPerHour",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    }
+                  ],
+                  "oneofs": [
+                    "type"
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": [],
+                  "nested_messages": [],
+                  "nested_enums": []
+                },
+                {
+                  "fqn": ".CarServer.GuiSettings.TemperatureUnit",
+                  "name": "TemperatureUnit",
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "TemperatureF",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 2,
+                      "name": "TemperatureC",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    }
+                  ],
+                  "oneofs": [
+                    "type"
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": [],
+                  "nested_messages": [],
+                  "nested_enums": []
+                },
+                {
+                  "fqn": ".CarServer.GuiSettings.ChargeRateUnit",
+                  "name": "ChargeRateUnit",
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "Invalid",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 2,
+                      "name": "KilometersPerHour",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 3,
+                      "name": "MilesPerHour",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 4,
+                      "name": "KW",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    }
+                  ],
+                  "oneofs": [
+                    "type"
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": [],
+                  "nested_messages": [],
+                  "nested_enums": []
+                },
+                {
+                  "fqn": ".CarServer.GuiSettings.RangeDisplay",
+                  "name": "RangeDisplay",
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "Ideal",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 2,
+                      "name": "Rated",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    }
+                  ],
+                  "oneofs": [
+                    "type"
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": [],
+                  "nested_messages": [],
+                  "nested_enums": []
+                }
+              ],
               "nested_enums": [
                 {
                   "fqn": ".CarServer.GuiSettings.TirePressureUnit",
@@ -19898,6 +22101,118 @@
               "name": "VehicleConfig",
               "fields": [
                 {
+                  "number": 1,
+                  "name": "car_special_type",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.VehicleBadging",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "car_trim",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.CarTrim",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 7,
+                  "name": "car_type",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.VehicleConfig.CarType",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 8,
+                  "name": "sun_roof_installed",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SunRoofType",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 9,
+                  "name": "wheel_type",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.WheelType",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 11,
+                  "name": "spoiler_type",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SpoilerType",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 12,
+                  "name": "roof_color",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.RoofColor",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 13,
+                  "name": "exterior_color",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.ExteriorColor",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 16,
+                  "name": "rear_seat_heaters",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.RearSeatHeaters",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 17,
+                  "name": "seat_type",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.SeatType",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 18,
+                  "name": "rear_seat_type",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.RearSeatType",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 19,
+                  "name": "third_row_seat_type",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.ThirdRowSeatType",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 23,
+                  "name": "charge_port_type",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.ChargePortType",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 27,
+                  "name": "timestamp",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".google.protobuf.Timestamp",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 28,
                   "name": "interior_trim_type",
                   "type": "TYPE_MESSAGE",
@@ -19906,10 +22221,58 @@
                   "oneof": null
                 },
                 {
+                  "number": 29,
+                  "name": "driver_assist",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.VehicleConfig.DriverAssist",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 30,
+                  "name": "performance_package",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.VehicleConfig.PerformancePackage",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 31,
+                  "name": "front_drive_unit",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.VehicleConfig.FrontDriveUnit",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 32,
+                  "name": "rear_drive_unit",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.RearDriveUnit",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 33,
+                  "name": "efficiency_package",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.EfficiencyPackage",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 35,
                   "name": "exterior_trim_type",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".CarServer.VehicleConfig.ExteriorTrimType",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 40,
+                  "name": "steering_wheel_type",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.VehicleConfig.SteeringWheelType",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
@@ -19960,6 +22323,22 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": "optional_has_air_suspension"
+                },
+                {
+                  "number": 114,
+                  "name": "rhd",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_rhd"
+                },
+                {
+                  "number": 115,
+                  "name": "plg",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_plg"
                 },
                 {
                   "number": 120,
@@ -20176,6 +22555,14 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": "optional_supports_qr_pairing"
+                },
+                {
+                  "number": 160,
+                  "name": "vin",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_vin"
                 },
                 {
                   "number": 161,
@@ -20505,6 +22892,8 @@
                 "optional_has_ludicrous_mode",
                 "optional_can_actuate_trunks",
                 "optional_has_air_suspension",
+                "optional_rhd",
+                "optional_plg",
                 "optional_ece_restrictions",
                 "optional_eu_vehicle",
                 "optional_motorized_charge_port",
@@ -20532,6 +22921,7 @@
                 "optional_has_front_row_seat_heaters",
                 "optional_has_third_row_seat_heaters",
                 "optional_supports_qr_pairing",
+                "optional_vin",
                 "optional_disable_window_vent_close",
                 "optional_webcam_selfie_supported",
                 "optional_cop_user_set_temp_supported",
@@ -20575,9 +22965,298 @@
               "reserved_names": [],
               "nested_messages": [
                 {
+                  "fqn": ".CarServer.VehicleConfig.CarType",
+                  "name": "CarType",
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "CarTypeModelS",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 2,
+                      "name": "CarTypeModelX",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 3,
+                      "name": "CarTypeModelS2",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 4,
+                      "name": "CarTypeModel3",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 5,
+                      "name": "CarTypeModelY",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 6,
+                      "name": "CarTypeSemiTruck",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 7,
+                      "name": "CarTypeLychee",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 8,
+                      "name": "CarTypeTamarind",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 9,
+                      "name": "CarTypeCybertruck",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 11,
+                      "name": "CarTypeSemiTruckV2",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    }
+                  ],
+                  "oneofs": [
+                    "type"
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": [],
+                  "nested_messages": [],
+                  "nested_enums": []
+                },
+                {
+                  "fqn": ".CarServer.VehicleConfig.DriverAssist",
+                  "name": "DriverAssist",
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "None",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 2,
+                      "name": "MonoCam",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 3,
+                      "name": "ParkerPascal",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 4,
+                      "name": "ParkerPascal25",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 5,
+                      "name": "TeslaAP3",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    }
+                  ],
+                  "oneofs": [
+                    "type"
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": [],
+                  "nested_messages": [],
+                  "nested_enums": []
+                },
+                {
+                  "fqn": ".CarServer.VehicleConfig.PerformancePackage",
+                  "name": "PerformancePackage",
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "None",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 2,
+                      "name": "Base",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 3,
+                      "name": "Performance",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 4,
+                      "name": "BasePlus",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    }
+                  ],
+                  "oneofs": [
+                    "type"
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": [],
+                  "nested_messages": [],
+                  "nested_enums": []
+                },
+                {
+                  "fqn": ".CarServer.VehicleConfig.FrontDriveUnit",
+                  "name": "FrontDriveUnit",
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "NoneOrSmall",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 2,
+                      "name": "PermanentMagnet",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    }
+                  ],
+                  "oneofs": [
+                    "type"
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": [],
+                  "nested_messages": [],
+                  "nested_enums": []
+                },
+                {
+                  "fqn": ".CarServer.VehicleConfig.SteeringWheelType",
+                  "name": "SteeringWheelType",
+                  "fields": [
+                    {
+                      "number": 1,
+                      "name": "Unknown",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 2,
+                      "name": "Round",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 3,
+                      "name": "Yoke",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 4,
+                      "name": "Squircle",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    }
+                  ],
+                  "oneofs": [
+                    "type"
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": [],
+                  "nested_messages": [],
+                  "nested_enums": []
+                },
+                {
                   "fqn": ".CarServer.VehicleConfig.InteriorTrimType",
                   "name": "InteriorTrimType",
                   "fields": [
+                    {
+                      "number": 3,
+                      "name": "UNKNOWN",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 4,
+                      "name": "BLACK",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 5,
+                      "name": "WHITE",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
                     {
                       "number": 6,
                       "name": "BLACKCONSOLE2",
@@ -20605,6 +23284,14 @@
                     {
                       "number": 9,
                       "name": "BLACKANDWHITE",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
+                    {
+                      "number": 10,
+                      "name": "CREAM",
                       "type": "TYPE_MESSAGE",
                       "type_name": ".CarServer.Void",
                       "label": "LABEL_OPTIONAL",
@@ -20679,6 +23366,14 @@
                   "fqn": ".CarServer.VehicleConfig.ExteriorTrimType",
                   "name": "ExteriorTrimType",
                   "fields": [
+                    {
+                      "number": 2,
+                      "name": "UNKNOWN",
+                      "type": "TYPE_MESSAGE",
+                      "type_name": ".CarServer.Void",
+                      "label": "LABEL_OPTIONAL",
+                      "oneof": "type"
+                    },
                     {
                       "number": 3,
                       "name": "STANDARDCHROME",
@@ -45765,9 +48460,9 @@
   "totals": {
     "source_files": 39,
     "groups": 7,
-    "messages": 909,
+    "messages": 932,
     "enums": 255,
-    "fields": 3060
+    "fields": 3359
   },
   "registration": {
     "consistent": true,

@@ -1222,12 +1222,367 @@ enum MediaSourceType {
 }
 
 // ===== TESLEMETRY-EXT BEGIN =====
+// Void-oneof vehicle configuration types used by VehicleConfig.
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message VehicleBadging {
+    oneof type {
+        Void Base = 1;
+        Void Founder = 2;
+        Void Signature = 3;
+        Void Performance = 4;
+        Void LaunchSeries = 5;
+        Void SignatureSeries = 6;
+    }
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message CarTrim {
+    oneof type {
+        Void Trim40 = 1;
+        Void OBSOLETETrim50 = 2;
+        Void OBSOLETETrim50D = 3;
+        Void Trim60 = 4;
+        Void Trim60D = 5;
+        Void Trim70 = 6;
+        Void Trim70D = 7;
+        Void Trim75 = 8;
+        Void Trim75D = 9;
+        Void TrimP75D = 10;
+        Void Trim85 = 11;
+        Void TrimP85 = 12;
+        Void TrimP85Plus = 13;
+        Void Trim85D = 14;
+        Void TrimP85D = 15;
+        Void Trim90 = 16;
+        Void TrimP90 = 17;
+        Void TrimP90Plus = 18;
+        Void Trim90D = 19;
+        Void TrimP90D = 20;
+        Void Trim100 = 21;
+        Void TrimP100 = 22;
+        Void Trim100D = 23;
+        Void TrimP100D = 24;
+        Void Trim50 = 25;
+        Void Trim50D = 26;
+        Void Trim62 = 27;
+        Void Trim62D = 28;
+        Void Trim74 = 29;
+        Void Trim74D = 30;
+        Void TrimP74D = 31;
+        Void TrimDefault = 32;
+        Void TrimCyberbeast = 34;
+        Void TrimInvalid = 255;
+    }
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message SunRoofType {
+    oneof type {
+        Void None = 1;
+        Void Gen1 = 2;
+        Void Gen2 = 3;
+    }
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message WheelType {
+    oneof type {
+        Void Unknown = 3;
+        Void ZeroG20Gunpowder = 4;
+        Void Pinwheel18 = 5;
+        Void Pinwheel18CapKit = 6;
+        Void Stiletto19 = 7;
+        Void Stiletto20 = 8;
+        Void Stiletto20DarkStaggered = 9;
+        Void Stiletto20DarkSquare = 10;
+        Void Gemini19Square = 11;
+        Void Gemini19Staggered = 12;
+        Void Induction20Black = 13;
+        Void UberTurbine21Black = 14;
+        Void Apollo19 = 15;
+        Void Apollo19CapKit = 16;
+        Void ZeroG19Gunpowder = 17;
+        Void Cardenio19 = 18;
+        Void Default = 19;
+        Void NewTurbine22Black = 20;
+        Void Cyberstream = 21;
+        Void Arachnid21 = 22;
+        Void Base19 = 23;
+        Void Silver21 = 24;
+        Void Charcoal21 = 25;
+        Void Silver21Euro = 26;
+        Void Aero19 = 27;
+        Void Charcoal21Euro = 28;
+        Void Super21Gray = 29;
+        Void Super21Silver = 30;
+        Void Turbine19 = 31;
+        Void Turbine19Dark = 32;
+        Void AeroTurbine19 = 33;
+        Void AeroTurbine19Black = 34;
+        Void Helix20 = 35;
+        Void AeroTurbine20 = 36;
+        Void Turbine22 = 37;
+        Void Cyclone19Dark = 38;
+        Void AeroTurbine20Dark = 39;
+        Void Turbine22Dark = 40;
+        Void Arachnid21Silver = 41;
+        Void Arachnid21Black = 42;
+        Void Arachnid21Grey = 43;
+        Void Slipstream20Carbon = 44;
+        Void Slipstream20Dark = 45;
+        Void Slipstream19Carbon = 46;
+        Void TwinTurbine21Silver = 47;
+        Void TwinTurbine21Carbon = 48;
+        Void Tempest19SonicSilver = 49;
+        Void PinwheelRefresh18 = 50;
+        Void StilettoRefresh19 = 51;
+        Void UberTurbine20Gunpowder = 52;
+        Void Glider18 = 53;
+        Void Helix19 = 54;
+        Void Wishbone20Staggered = 56;
+        Void CtBase20 = 57;
+        Void CtPremium20 = 58;
+        Void CtBase18 = 59;
+        Void Apollo19MetallicShadow = 60;
+        Void Wishbone19Staggered = 61;
+        Void Crossflow19 = 62;
+        Void HelixV220 = 63;
+        Void Standard19 = 64;
+        Void Halo22 = 65;
+        Void Riptide20 = 66;
+        Void Cypress21 = 67;
+        Void MachinaV219 = 68;
+        Void ArachnidV221 = 69;
+        Void E4118 = 70;
+        Void D5018 = 71;
+        Void HelixV220Dark = 72;
+        Void UberHelix20 = 73;
+    }
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message SpoilerType {
+    oneof type {
+        Void None = 1;
+        Void Passive = 2;
+        Void Active = 3;
+    }
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message RoofColor {
+    oneof type {
+        Void None = 1;
+        Void Glass = 2;
+        Void Black = 3;
+        Void Colored = 4;
+    }
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message ExteriorColor {
+    oneof type {
+        Void Unknown = 3;
+        Void RedMulticoat = 4;
+        Void SolidBlack = 5;
+        Void SilverMetallic = 6;
+        Void MidnightSilver = 7;
+        Void DeepBlue = 8;
+        Void PearlWhite = 9;
+        Void DefaultColor = 10;
+        Void Black = 11;
+        Void White = 12;
+        Void Silver = 13;
+        Void Grey = 14;
+        Void Blue = 15;
+        Void Green = 16;
+        Void Brown = 17;
+        Void Pearl = 18;
+        Void SigRed = 19;
+        Void Red = 20;
+        Void SteelGrey = 21;
+        Void MetallicBlack = 22;
+        Void TitaniumCopper = 23;
+        Void SignatureBlue = 24;
+        Void MidnightCherryRed = 25;
+        Void Quicksilver = 26;
+        Void UltraRed = 27;
+        Void StealthGrey = 28;
+        Void LunarSilver = 29;
+        Void GlacierBlue = 30;
+        Void DiamondBlack = 31;
+        Void FrostBlue = 32;
+        Void SilkRoadSilver = 33;
+        Void MarineBlue = 34;
+        Void GarnetRed = 35;
+        Void CoastalBlue = 36;
+    }
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message RearSeatHeaters {
+    oneof type {
+        Void None = 1;
+        Void Base = 2;
+        Void Executive = 3;
+        Void Gentherm = 4;
+        Void BaseModelX = 5;
+    }
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message SeatType {
+    oneof type {
+        Void Base = 1;
+        Void Recaro = 2;
+        Void TeslaMsGen1 = 3;
+    }
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message RearSeatType {
+    oneof type {
+        Void Base = 1;
+        Void Recaro = 2;
+        Void Executive = 3;
+        Void TwoSeat = 4;
+        Void FoldFlat = 5;
+        Void FoldFlatMotorized = 6;
+        Void TwoSeatConsole = 7;
+        Void FoldFlatTwoMotor = 8;
+        Void FoldFlatTwoMotorHall = 9;
+        Void FoldFlatHallBuckles = 10;
+    }
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message ThirdRowSeatType {
+    oneof type {
+        Void None = 1;
+        Void FuturisFoldFlat = 2;
+        Void FuturisNoFoldFlat = 3;
+        Void FlatFold = 4;
+    }
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message ChargePortType {
+    oneof type {
+        Void US = 1;
+        Void EU = 2;
+        Void GB = 3;
+        Void CCS = 4;
+    }
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message RearDriveUnit {
+    oneof type {
+        Void None = 1;
+        Void LargeRear = 2;
+        Void SmallRear = 3;
+        Void PM216MOSFET = 4;
+        Void PM216IGBT = 5;
+        Void CorianderSingle = 6;
+        Void CorianderDual = 7;
+        Void PermanentMagnet = 8;
+        Void InductionDual = 9;
+    }
+}
+
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message EfficiencyPackage {
+    oneof type {
+        Void Default = 1;
+        Void M3SRPlus2020 = 2;
+        Void M3LR2020 = 3;
+        Void M3LRPerformance2020 = 4;
+        Void M3SRPlus2020Q4GFSH = 5;
+        Void MY2020 = 6;
+        Void M32021 = 7;
+        Void MY2021 = 8;
+        Void SX2020 = 9;
+        Void S2 = 10;
+        Void SX2020H2 = 11;
+        Void M3SRPlus2021Q3GFSH = 12;
+        Void M3SRPlus2021Q3Fremont = 13;
+        Void MYSRPlus2021Q3GFSH = 14;
+        Void MYSRPlus2022Q1TX = 15;
+        Void MYRWDEU2022 = 16;
+        Void M3Poppyseed2024 = 17;
+        Void M32023GFSHExport = 18;
+        Void MY2023GFSHExport = 19;
+        Void MY2024 = 20;
+        Void MS2024 = 22;
+        Void MX2024 = 23;
+        Void MY2023SRRWD = 24;
+        Void MY2024C = 27;
+        Void MY2024GFSHExportSRRWD = 28;
+        Void M3Poppyseed2024C = 29;
+        Void M32025 = 30;
+        Void MY2025 = 31;
+        Void M32025B = 32;
+        Void MY2025B = 33;
+        Void MS2025 = 34;
+        Void MX2025 = 35;
+        Void MYRefresh2025ROW = 36;
+        Void MYStandard2025 = 37;
+        Void MYRefresh2025CN = 38;
+        Void MS2026 = 39;
+        Void MX2026 = 40;
+        Void MY2025M53 = 41;
+        Void M32025M53 = 42;
+        Void MY2025CNPlus = 43;
+        Void MS2026B = 44;
+        Void M32026B = 45;
+        Void MY2026US = 46;
+    }
+}
+
 message GuiSettings {
     enum TirePressureUnit {
         TirePressureUnitPsi = 0;
         TirePressureUnitBar = 1;
     }
 
+    // UNCONFIRMED: not yet confirmed on a live vehicle.
+    message SpeedUnit {
+        oneof type {
+            Void KilometersPerHour = 1;
+            Void MilesPerHour = 2;
+        }
+    }
+
+    // UNCONFIRMED: not yet confirmed on a live vehicle.
+    message TemperatureUnit {
+        oneof type {
+            Void TemperatureF = 1;
+            Void TemperatureC = 2;
+        }
+    }
+
+    // UNCONFIRMED: not yet confirmed on a live vehicle.
+    message ChargeRateUnit {
+        oneof type {
+            Void Invalid = 1;
+            Void KilometersPerHour = 2;
+            Void MilesPerHour = 3;
+            Void KW = 4;
+        }
+    }
+
+    // UNCONFIRMED: not yet confirmed on a live vehicle.
+    message RangeDisplay {
+        oneof type {
+            Void Ideal = 1;
+            Void Rated = 2;
+        }
+    }
+
+    SpeedUnit gui_distance_units = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    TemperatureUnit gui_temperature_units = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    ChargeRateUnit gui_charge_rate_units = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    RangeDisplay gui_range_display = 5;  // UNCONFIRMED: not yet confirmed on a live vehicle
     google.protobuf.Timestamp timestamp = 7;
 
     oneof optional_gui_24_hour_time { bool gui_24_hour_time = 104; }
@@ -1304,12 +1659,71 @@ message VehicleConfig {
         TurnIndicatorControlTypeSWSButton = 2;
     }
 
+    // UNCONFIRMED: not yet confirmed on a live vehicle.
+    message CarType {
+        oneof type {
+            Void CarTypeModelS = 1;
+            Void CarTypeModelX = 2;
+            Void CarTypeModelS2 = 3;
+            Void CarTypeModel3 = 4;
+            Void CarTypeModelY = 5;
+            Void CarTypeSemiTruck = 6;
+            Void CarTypeLychee = 7;
+            Void CarTypeTamarind = 8;
+            Void CarTypeCybertruck = 9;
+            Void CarTypeSemiTruckV2 = 11;
+        }
+    }
+
+    // UNCONFIRMED: not yet confirmed on a live vehicle.
+    message DriverAssist {
+        oneof type {
+            Void None = 1;
+            Void MonoCam = 2;
+            Void ParkerPascal = 3;
+            Void ParkerPascal25 = 4;
+            Void TeslaAP3 = 5;
+        }
+    }
+
+    // UNCONFIRMED: not yet confirmed on a live vehicle.
+    message PerformancePackage {
+        oneof type {
+            Void None = 1;
+            Void Base = 2;
+            Void Performance = 3;
+            Void BasePlus = 4;
+        }
+    }
+
+    // UNCONFIRMED: not yet confirmed on a live vehicle.
+    message FrontDriveUnit {
+        oneof type {
+            Void NoneOrSmall = 1;
+            Void PermanentMagnet = 2;
+        }
+    }
+
+    // UNCONFIRMED: not yet confirmed on a live vehicle.
+    message SteeringWheelType {
+        oneof type {
+            Void Unknown = 1;
+            Void Round = 2;
+            Void Yoke = 3;
+            Void Squircle = 4;
+        }
+    }
+
     message InteriorTrimType {
         oneof type {
+            Void UNKNOWN = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle
+            Void BLACK = 4;  // UNCONFIRMED: not yet confirmed on a live vehicle
+            Void WHITE = 5;  // UNCONFIRMED: not yet confirmed on a live vehicle
             Void BLACKCONSOLE2 = 6;
             Void WHITECONSOLE2 = 7;
             Void ALLBLACK = 8;
             Void BLACKANDWHITE = 9;
+            Void CREAM = 10;  // UNCONFIRMED: not yet confirmed on a live vehicle
             Void WALNUTCREAM = 12;
             Void WALNUTWHITE = 13;
             Void EBONYBLACK = 14;
@@ -1322,19 +1736,42 @@ message VehicleConfig {
 
     message ExteriorTrimType {
         oneof type {
+            Void UNKNOWN = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle
             Void STANDARDCHROME = 3;
             Void SATINBLACK = 4;
         }
     }
 
+    VehicleBadging car_special_type = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    CarTrim car_trim = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    CarType car_type = 7;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    SunRoofType sun_roof_installed = 8;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    WheelType wheel_type = 9;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    SpoilerType spoiler_type = 11;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    RoofColor roof_color = 12;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    ExteriorColor exterior_color = 13;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    RearSeatHeaters rear_seat_heaters = 16;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    SeatType seat_type = 17;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    RearSeatType rear_seat_type = 18;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    ThirdRowSeatType third_row_seat_type = 19;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    ChargePortType charge_port_type = 23;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    google.protobuf.Timestamp timestamp = 27;  // UNCONFIRMED: not yet confirmed on a live vehicle
     InteriorTrimType interior_trim_type = 28;
+    DriverAssist driver_assist = 29;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    PerformancePackage performance_package = 30;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    FrontDriveUnit front_drive_unit = 31;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    RearDriveUnit rear_drive_unit = 32;  // UNCONFIRMED: not yet confirmed on a live vehicle
+    EfficiencyPackage efficiency_package = 33;  // UNCONFIRMED: not yet confirmed on a live vehicle
     ExteriorTrimType exterior_trim_type = 35;
+    SteeringWheelType steering_wheel_type = 40;  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_red_brake_calipers { bool red_brake_calipers = 61; }
     oneof optional_use_range_badging { bool use_range_badging = 103; }
     oneof optional_range_plus_badging { bool range_plus_badging = 104; }
     oneof optional_has_ludicrous_mode { bool has_ludicrous_mode = 105; }
     oneof optional_can_actuate_trunks { bool can_actuate_trunks = 106; }
     oneof optional_has_air_suspension { bool has_air_suspension = 110; }
+    oneof optional_rhd { bool rhd = 114; }  // UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_plg { bool plg = 115; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_ece_restrictions { bool ece_restrictions = 120; }
     oneof optional_eu_vehicle { bool eu_vehicle = 121; }
     oneof optional_motorized_charge_port { bool motorized_charge_port = 122; }
@@ -1362,6 +1799,7 @@ message VehicleConfig {
     oneof optional_has_front_row_seat_heaters { bool has_front_row_seat_heaters = 157; }
     oneof optional_has_third_row_seat_heaters { bool has_third_row_seat_heaters = 158; }
     oneof optional_supports_qr_pairing { bool supports_qr_pairing = 159; }
+    oneof optional_vin { string vin = 160; }  // UNCONFIRMED: not yet confirmed on a live vehicle
     oneof optional_disable_window_vent_close { bool disable_window_vent_close = 161; }
     oneof optional_webcam_selfie_supported { bool webcam_selfie_supported = 162; }
     oneof optional_cop_user_set_temp_supported { bool cop_user_set_temp_supported = 163; }

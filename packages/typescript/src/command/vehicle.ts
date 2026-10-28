@@ -3148,8 +3148,313 @@ export interface ShiftState {
   SNA?: Void | undefined;
 }
 
-/** ===== TESLEMETRY-EXT BEGIN ===== */
+/**
+ * ===== TESLEMETRY-EXT BEGIN =====
+ * Void-oneof vehicle configuration types used by VehicleConfig.
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export interface VehicleBadging {
+  Base?: Void | undefined;
+  Founder?: Void | undefined;
+  Signature?: Void | undefined;
+  Performance?: Void | undefined;
+  LaunchSeries?: Void | undefined;
+  SignatureSeries?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface CarTrim {
+  Trim40?: Void | undefined;
+  OBSOLETETrim50?: Void | undefined;
+  OBSOLETETrim50D?: Void | undefined;
+  Trim60?: Void | undefined;
+  Trim60D?: Void | undefined;
+  Trim70?: Void | undefined;
+  Trim70D?: Void | undefined;
+  Trim75?: Void | undefined;
+  Trim75D?: Void | undefined;
+  TrimP75D?: Void | undefined;
+  Trim85?: Void | undefined;
+  TrimP85?: Void | undefined;
+  TrimP85Plus?: Void | undefined;
+  Trim85D?: Void | undefined;
+  TrimP85D?: Void | undefined;
+  Trim90?: Void | undefined;
+  TrimP90?: Void | undefined;
+  TrimP90Plus?: Void | undefined;
+  Trim90D?: Void | undefined;
+  TrimP90D?: Void | undefined;
+  Trim100?: Void | undefined;
+  TrimP100?: Void | undefined;
+  Trim100D?: Void | undefined;
+  TrimP100D?: Void | undefined;
+  Trim50?: Void | undefined;
+  Trim50D?: Void | undefined;
+  Trim62?: Void | undefined;
+  Trim62D?: Void | undefined;
+  Trim74?: Void | undefined;
+  Trim74D?: Void | undefined;
+  TrimP74D?: Void | undefined;
+  TrimDefault?: Void | undefined;
+  TrimCyberbeast?: Void | undefined;
+  TrimInvalid?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface SunRoofType {
+  None?: Void | undefined;
+  Gen1?: Void | undefined;
+  Gen2?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface WheelType {
+  Unknown?: Void | undefined;
+  ZeroG20Gunpowder?: Void | undefined;
+  Pinwheel18?: Void | undefined;
+  Pinwheel18CapKit?: Void | undefined;
+  Stiletto19?: Void | undefined;
+  Stiletto20?: Void | undefined;
+  Stiletto20DarkStaggered?: Void | undefined;
+  Stiletto20DarkSquare?: Void | undefined;
+  Gemini19Square?: Void | undefined;
+  Gemini19Staggered?: Void | undefined;
+  Induction20Black?: Void | undefined;
+  UberTurbine21Black?: Void | undefined;
+  Apollo19?: Void | undefined;
+  Apollo19CapKit?: Void | undefined;
+  ZeroG19Gunpowder?: Void | undefined;
+  Cardenio19?: Void | undefined;
+  Default?: Void | undefined;
+  NewTurbine22Black?: Void | undefined;
+  Cyberstream?: Void | undefined;
+  Arachnid21?: Void | undefined;
+  Base19?: Void | undefined;
+  Silver21?: Void | undefined;
+  Charcoal21?: Void | undefined;
+  Silver21Euro?: Void | undefined;
+  Aero19?: Void | undefined;
+  Charcoal21Euro?: Void | undefined;
+  Super21Gray?: Void | undefined;
+  Super21Silver?: Void | undefined;
+  Turbine19?: Void | undefined;
+  Turbine19Dark?: Void | undefined;
+  AeroTurbine19?: Void | undefined;
+  AeroTurbine19Black?: Void | undefined;
+  Helix20?: Void | undefined;
+  AeroTurbine20?: Void | undefined;
+  Turbine22?: Void | undefined;
+  Cyclone19Dark?: Void | undefined;
+  AeroTurbine20Dark?: Void | undefined;
+  Turbine22Dark?: Void | undefined;
+  Arachnid21Silver?: Void | undefined;
+  Arachnid21Black?: Void | undefined;
+  Arachnid21Grey?: Void | undefined;
+  Slipstream20Carbon?: Void | undefined;
+  Slipstream20Dark?: Void | undefined;
+  Slipstream19Carbon?: Void | undefined;
+  TwinTurbine21Silver?: Void | undefined;
+  TwinTurbine21Carbon?: Void | undefined;
+  Tempest19SonicSilver?: Void | undefined;
+  PinwheelRefresh18?: Void | undefined;
+  StilettoRefresh19?: Void | undefined;
+  UberTurbine20Gunpowder?: Void | undefined;
+  Glider18?: Void | undefined;
+  Helix19?: Void | undefined;
+  Wishbone20Staggered?: Void | undefined;
+  CtBase20?: Void | undefined;
+  CtPremium20?: Void | undefined;
+  CtBase18?: Void | undefined;
+  Apollo19MetallicShadow?: Void | undefined;
+  Wishbone19Staggered?: Void | undefined;
+  Crossflow19?: Void | undefined;
+  HelixV220?: Void | undefined;
+  Standard19?: Void | undefined;
+  Halo22?: Void | undefined;
+  Riptide20?: Void | undefined;
+  Cypress21?: Void | undefined;
+  MachinaV219?: Void | undefined;
+  ArachnidV221?: Void | undefined;
+  E4118?: Void | undefined;
+  D5018?: Void | undefined;
+  HelixV220Dark?: Void | undefined;
+  UberHelix20?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface SpoilerType {
+  None?: Void | undefined;
+  Passive?: Void | undefined;
+  Active?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface RoofColor {
+  None?: Void | undefined;
+  Glass?: Void | undefined;
+  Black?: Void | undefined;
+  Colored?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface ExteriorColor {
+  Unknown?: Void | undefined;
+  RedMulticoat?: Void | undefined;
+  SolidBlack?: Void | undefined;
+  SilverMetallic?: Void | undefined;
+  MidnightSilver?: Void | undefined;
+  DeepBlue?: Void | undefined;
+  PearlWhite?: Void | undefined;
+  DefaultColor?: Void | undefined;
+  Black?: Void | undefined;
+  White?: Void | undefined;
+  Silver?: Void | undefined;
+  Grey?: Void | undefined;
+  Blue?: Void | undefined;
+  Green?: Void | undefined;
+  Brown?: Void | undefined;
+  Pearl?: Void | undefined;
+  SigRed?: Void | undefined;
+  Red?: Void | undefined;
+  SteelGrey?: Void | undefined;
+  MetallicBlack?: Void | undefined;
+  TitaniumCopper?: Void | undefined;
+  SignatureBlue?: Void | undefined;
+  MidnightCherryRed?: Void | undefined;
+  Quicksilver?: Void | undefined;
+  UltraRed?: Void | undefined;
+  StealthGrey?: Void | undefined;
+  LunarSilver?: Void | undefined;
+  GlacierBlue?: Void | undefined;
+  DiamondBlack?: Void | undefined;
+  FrostBlue?: Void | undefined;
+  SilkRoadSilver?: Void | undefined;
+  MarineBlue?: Void | undefined;
+  GarnetRed?: Void | undefined;
+  CoastalBlue?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface RearSeatHeaters {
+  None?: Void | undefined;
+  Base?: Void | undefined;
+  Executive?: Void | undefined;
+  Gentherm?: Void | undefined;
+  BaseModelX?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface SeatType {
+  Base?: Void | undefined;
+  Recaro?: Void | undefined;
+  TeslaMsGen1?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface RearSeatType {
+  Base?: Void | undefined;
+  Recaro?: Void | undefined;
+  Executive?: Void | undefined;
+  TwoSeat?: Void | undefined;
+  FoldFlat?: Void | undefined;
+  FoldFlatMotorized?: Void | undefined;
+  TwoSeatConsole?: Void | undefined;
+  FoldFlatTwoMotor?: Void | undefined;
+  FoldFlatTwoMotorHall?: Void | undefined;
+  FoldFlatHallBuckles?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface ThirdRowSeatType {
+  None?: Void | undefined;
+  FuturisFoldFlat?: Void | undefined;
+  FuturisNoFoldFlat?: Void | undefined;
+  FlatFold?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface ChargePortType {
+  US?: Void | undefined;
+  EU?: Void | undefined;
+  GB?: Void | undefined;
+  CCS?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface RearDriveUnit {
+  None?: Void | undefined;
+  LargeRear?: Void | undefined;
+  SmallRear?: Void | undefined;
+  PM216MOSFET?: Void | undefined;
+  PM216IGBT?: Void | undefined;
+  CorianderSingle?: Void | undefined;
+  CorianderDual?: Void | undefined;
+  PermanentMagnet?: Void | undefined;
+  InductionDual?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface EfficiencyPackage {
+  Default?: Void | undefined;
+  M3SRPlus2020?: Void | undefined;
+  M3LR2020?: Void | undefined;
+  M3LRPerformance2020?: Void | undefined;
+  M3SRPlus2020Q4GFSH?: Void | undefined;
+  MY2020?: Void | undefined;
+  M32021?: Void | undefined;
+  MY2021?: Void | undefined;
+  SX2020?: Void | undefined;
+  S2?: Void | undefined;
+  SX2020H2?: Void | undefined;
+  M3SRPlus2021Q3GFSH?: Void | undefined;
+  M3SRPlus2021Q3Fremont?: Void | undefined;
+  MYSRPlus2021Q3GFSH?: Void | undefined;
+  MYSRPlus2022Q1TX?: Void | undefined;
+  MYRWDEU2022?: Void | undefined;
+  M3Poppyseed2024?: Void | undefined;
+  M32023GFSHExport?: Void | undefined;
+  MY2023GFSHExport?: Void | undefined;
+  MY2024?: Void | undefined;
+  MS2024?: Void | undefined;
+  MX2024?: Void | undefined;
+  MY2023SRRWD?: Void | undefined;
+  MY2024C?: Void | undefined;
+  MY2024GFSHExportSRRWD?: Void | undefined;
+  M3Poppyseed2024C?: Void | undefined;
+  M32025?: Void | undefined;
+  MY2025?: Void | undefined;
+  M32025B?: Void | undefined;
+  MY2025B?: Void | undefined;
+  MS2025?: Void | undefined;
+  MX2025?: Void | undefined;
+  MYRefresh2025ROW?: Void | undefined;
+  MYStandard2025?: Void | undefined;
+  MYRefresh2025CN?: Void | undefined;
+  MS2026?: Void | undefined;
+  MX2026?: Void | undefined;
+  MY2025M53?: Void | undefined;
+  M32025M53?: Void | undefined;
+  MY2025CNPlus?: Void | undefined;
+  MS2026B?: Void | undefined;
+  M32026B?: Void | undefined;
+  MY2026US?: Void | undefined;
+}
+
 export interface GuiSettings {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  guiDistanceUnits:
+    | GuiSettings_SpeedUnit
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  guiTemperatureUnits:
+    | GuiSettings_TemperatureUnit
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  guiChargeRateUnits:
+    | GuiSettings_ChargeRateUnit
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  guiRangeDisplay: GuiSettings_RangeDisplay | undefined;
   timestamp: Date | undefined;
   gui24HourTime?: boolean | undefined;
   showRangeUnits?: boolean | undefined;
@@ -3189,15 +3494,121 @@ export function guiSettings_TirePressureUnitToJSON(object: GuiSettings_TirePress
   }
 }
 
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface GuiSettings_SpeedUnit {
+  KilometersPerHour?: Void | undefined;
+  MilesPerHour?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface GuiSettings_TemperatureUnit {
+  TemperatureF?: Void | undefined;
+  TemperatureC?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface GuiSettings_ChargeRateUnit {
+  Invalid?: Void | undefined;
+  KilometersPerHour?: Void | undefined;
+  MilesPerHour?: Void | undefined;
+  KW?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface GuiSettings_RangeDisplay {
+  Ideal?: Void | undefined;
+  Rated?: Void | undefined;
+}
+
 export interface VehicleConfig {
-  interiorTrimType: VehicleConfig_InteriorTrimType | undefined;
-  exteriorTrimType: VehicleConfig_ExteriorTrimType | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  carSpecialType:
+    | VehicleBadging
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  carTrim:
+    | CarTrim
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  carType:
+    | VehicleConfig_CarType
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  sunRoofInstalled:
+    | SunRoofType
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  wheelType:
+    | WheelType
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  spoilerType:
+    | SpoilerType
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  roofColor:
+    | RoofColor
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  exteriorColor:
+    | ExteriorColor
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  rearSeatHeaters:
+    | RearSeatHeaters
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  seatType:
+    | SeatType
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  rearSeatType:
+    | RearSeatType
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  thirdRowSeatType:
+    | ThirdRowSeatType
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  chargePortType:
+    | ChargePortType
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  timestamp: Date | undefined;
+  interiorTrimType:
+    | VehicleConfig_InteriorTrimType
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  driverAssist:
+    | VehicleConfig_DriverAssist
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  performancePackage:
+    | VehicleConfig_PerformancePackage
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  frontDriveUnit:
+    | VehicleConfig_FrontDriveUnit
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  rearDriveUnit:
+    | RearDriveUnit
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  efficiencyPackage: EfficiencyPackage | undefined;
+  exteriorTrimType:
+    | VehicleConfig_ExteriorTrimType
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  steeringWheelType: VehicleConfig_SteeringWheelType | undefined;
   redBrakeCalipers?: boolean | undefined;
   useRangeBadging?: boolean | undefined;
   rangePlusBadging?: boolean | undefined;
   hasLudicrousMode?: boolean | undefined;
   canActuateTrunks?: boolean | undefined;
   hasAirSuspension?: boolean | undefined;
+  rhd?: boolean | undefined;
+  plg?: boolean | undefined;
   eceRestrictions?: boolean | undefined;
   euVehicle?: boolean | undefined;
   motorizedChargePort?: boolean | undefined;
@@ -3225,6 +3636,7 @@ export interface VehicleConfig {
   hasFrontRowSeatHeaters?: boolean | undefined;
   hasThirdRowSeatHeaters?: boolean | undefined;
   supportsQrPairing?: boolean | undefined;
+  vin?: string | undefined;
   disableWindowVentClose?: boolean | undefined;
   webcamSelfieSupported?: boolean | undefined;
   copUserSetTempSupported?: boolean | undefined;
@@ -3708,11 +4120,70 @@ export function vehicleConfig_TurnIndicatorControlTypeToJSON(object: VehicleConf
   }
 }
 
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface VehicleConfig_CarType {
+  CarTypeModelS?: Void | undefined;
+  CarTypeModelX?: Void | undefined;
+  CarTypeModelS2?: Void | undefined;
+  CarTypeModel3?: Void | undefined;
+  CarTypeModelY?: Void | undefined;
+  CarTypeSemiTruck?: Void | undefined;
+  CarTypeLychee?: Void | undefined;
+  CarTypeTamarind?: Void | undefined;
+  CarTypeCybertruck?: Void | undefined;
+  CarTypeSemiTruckV2?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface VehicleConfig_DriverAssist {
+  None?: Void | undefined;
+  MonoCam?: Void | undefined;
+  ParkerPascal?: Void | undefined;
+  ParkerPascal25?: Void | undefined;
+  TeslaAP3?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface VehicleConfig_PerformancePackage {
+  None?: Void | undefined;
+  Base?: Void | undefined;
+  Performance?: Void | undefined;
+  BasePlus?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface VehicleConfig_FrontDriveUnit {
+  NoneOrSmall?: Void | undefined;
+  PermanentMagnet?: Void | undefined;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
+export interface VehicleConfig_SteeringWheelType {
+  Unknown?: Void | undefined;
+  Round?: Void | undefined;
+  Yoke?: Void | undefined;
+  Squircle?: Void | undefined;
+}
+
 export interface VehicleConfig_InteriorTrimType {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  UNKNOWN?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  BLACK?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  WHITE?: Void | undefined;
   BLACKCONSOLE2?: Void | undefined;
   WHITECONSOLE2?: Void | undefined;
   ALLBLACK?: Void | undefined;
-  BLACKANDWHITE?: Void | undefined;
+  BLACKANDWHITE?:
+    | Void
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  CREAM?: Void | undefined;
   WALNUTCREAM?: Void | undefined;
   WALNUTWHITE?: Void | undefined;
   EBONYBLACK?: Void | undefined;
@@ -3723,6 +4194,8 @@ export interface VehicleConfig_InteriorTrimType {
 }
 
 export interface VehicleConfig_ExteriorTrimType {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  UNKNOWN?: Void | undefined;
   STANDARDCHROME?: Void | undefined;
   SATINBLACK?: Void | undefined;
 }
@@ -18285,12 +18758,4995 @@ export const ShiftState: MessageFns<ShiftState> = {
   },
 };
 
+function createBaseVehicleBadging(): VehicleBadging {
+  return {
+    Base: undefined,
+    Founder: undefined,
+    Signature: undefined,
+    Performance: undefined,
+    LaunchSeries: undefined,
+    SignatureSeries: undefined,
+  };
+}
+
+export const VehicleBadging: MessageFns<VehicleBadging> = {
+  encode(message: VehicleBadging, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Base !== undefined) {
+      Void.encode(message.Base, writer.uint32(10).fork()).join();
+    }
+    if (message.Founder !== undefined) {
+      Void.encode(message.Founder, writer.uint32(18).fork()).join();
+    }
+    if (message.Signature !== undefined) {
+      Void.encode(message.Signature, writer.uint32(26).fork()).join();
+    }
+    if (message.Performance !== undefined) {
+      Void.encode(message.Performance, writer.uint32(34).fork()).join();
+    }
+    if (message.LaunchSeries !== undefined) {
+      Void.encode(message.LaunchSeries, writer.uint32(42).fork()).join();
+    }
+    if (message.SignatureSeries !== undefined) {
+      Void.encode(message.SignatureSeries, writer.uint32(50).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): VehicleBadging {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVehicleBadging();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Base = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Founder = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Signature = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.Performance = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.LaunchSeries = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.SignatureSeries = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): VehicleBadging {
+    return {
+      Base: isSet(object.Base) ? Void.fromJSON(object.Base) : undefined,
+      Founder: isSet(object.Founder) ? Void.fromJSON(object.Founder) : undefined,
+      Signature: isSet(object.Signature) ? Void.fromJSON(object.Signature) : undefined,
+      Performance: isSet(object.Performance) ? Void.fromJSON(object.Performance) : undefined,
+      LaunchSeries: isSet(object.LaunchSeries) ? Void.fromJSON(object.LaunchSeries) : undefined,
+      SignatureSeries: isSet(object.SignatureSeries) ? Void.fromJSON(object.SignatureSeries) : undefined,
+    };
+  },
+
+  toJSON(message: VehicleBadging): unknown {
+    const obj: any = {};
+    if (message.Base !== undefined) {
+      obj.Base = Void.toJSON(message.Base);
+    }
+    if (message.Founder !== undefined) {
+      obj.Founder = Void.toJSON(message.Founder);
+    }
+    if (message.Signature !== undefined) {
+      obj.Signature = Void.toJSON(message.Signature);
+    }
+    if (message.Performance !== undefined) {
+      obj.Performance = Void.toJSON(message.Performance);
+    }
+    if (message.LaunchSeries !== undefined) {
+      obj.LaunchSeries = Void.toJSON(message.LaunchSeries);
+    }
+    if (message.SignatureSeries !== undefined) {
+      obj.SignatureSeries = Void.toJSON(message.SignatureSeries);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<VehicleBadging>, I>>(base?: I): VehicleBadging {
+    return VehicleBadging.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<VehicleBadging>, I>>(object: I): VehicleBadging {
+    const message = createBaseVehicleBadging();
+    message.Base = (object.Base !== undefined && object.Base !== null) ? Void.fromPartial(object.Base) : undefined;
+    message.Founder = (object.Founder !== undefined && object.Founder !== null)
+      ? Void.fromPartial(object.Founder)
+      : undefined;
+    message.Signature = (object.Signature !== undefined && object.Signature !== null)
+      ? Void.fromPartial(object.Signature)
+      : undefined;
+    message.Performance = (object.Performance !== undefined && object.Performance !== null)
+      ? Void.fromPartial(object.Performance)
+      : undefined;
+    message.LaunchSeries = (object.LaunchSeries !== undefined && object.LaunchSeries !== null)
+      ? Void.fromPartial(object.LaunchSeries)
+      : undefined;
+    message.SignatureSeries = (object.SignatureSeries !== undefined && object.SignatureSeries !== null)
+      ? Void.fromPartial(object.SignatureSeries)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseCarTrim(): CarTrim {
+  return {
+    Trim40: undefined,
+    OBSOLETETrim50: undefined,
+    OBSOLETETrim50D: undefined,
+    Trim60: undefined,
+    Trim60D: undefined,
+    Trim70: undefined,
+    Trim70D: undefined,
+    Trim75: undefined,
+    Trim75D: undefined,
+    TrimP75D: undefined,
+    Trim85: undefined,
+    TrimP85: undefined,
+    TrimP85Plus: undefined,
+    Trim85D: undefined,
+    TrimP85D: undefined,
+    Trim90: undefined,
+    TrimP90: undefined,
+    TrimP90Plus: undefined,
+    Trim90D: undefined,
+    TrimP90D: undefined,
+    Trim100: undefined,
+    TrimP100: undefined,
+    Trim100D: undefined,
+    TrimP100D: undefined,
+    Trim50: undefined,
+    Trim50D: undefined,
+    Trim62: undefined,
+    Trim62D: undefined,
+    Trim74: undefined,
+    Trim74D: undefined,
+    TrimP74D: undefined,
+    TrimDefault: undefined,
+    TrimCyberbeast: undefined,
+    TrimInvalid: undefined,
+  };
+}
+
+export const CarTrim: MessageFns<CarTrim> = {
+  encode(message: CarTrim, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Trim40 !== undefined) {
+      Void.encode(message.Trim40, writer.uint32(10).fork()).join();
+    }
+    if (message.OBSOLETETrim50 !== undefined) {
+      Void.encode(message.OBSOLETETrim50, writer.uint32(18).fork()).join();
+    }
+    if (message.OBSOLETETrim50D !== undefined) {
+      Void.encode(message.OBSOLETETrim50D, writer.uint32(26).fork()).join();
+    }
+    if (message.Trim60 !== undefined) {
+      Void.encode(message.Trim60, writer.uint32(34).fork()).join();
+    }
+    if (message.Trim60D !== undefined) {
+      Void.encode(message.Trim60D, writer.uint32(42).fork()).join();
+    }
+    if (message.Trim70 !== undefined) {
+      Void.encode(message.Trim70, writer.uint32(50).fork()).join();
+    }
+    if (message.Trim70D !== undefined) {
+      Void.encode(message.Trim70D, writer.uint32(58).fork()).join();
+    }
+    if (message.Trim75 !== undefined) {
+      Void.encode(message.Trim75, writer.uint32(66).fork()).join();
+    }
+    if (message.Trim75D !== undefined) {
+      Void.encode(message.Trim75D, writer.uint32(74).fork()).join();
+    }
+    if (message.TrimP75D !== undefined) {
+      Void.encode(message.TrimP75D, writer.uint32(82).fork()).join();
+    }
+    if (message.Trim85 !== undefined) {
+      Void.encode(message.Trim85, writer.uint32(90).fork()).join();
+    }
+    if (message.TrimP85 !== undefined) {
+      Void.encode(message.TrimP85, writer.uint32(98).fork()).join();
+    }
+    if (message.TrimP85Plus !== undefined) {
+      Void.encode(message.TrimP85Plus, writer.uint32(106).fork()).join();
+    }
+    if (message.Trim85D !== undefined) {
+      Void.encode(message.Trim85D, writer.uint32(114).fork()).join();
+    }
+    if (message.TrimP85D !== undefined) {
+      Void.encode(message.TrimP85D, writer.uint32(122).fork()).join();
+    }
+    if (message.Trim90 !== undefined) {
+      Void.encode(message.Trim90, writer.uint32(130).fork()).join();
+    }
+    if (message.TrimP90 !== undefined) {
+      Void.encode(message.TrimP90, writer.uint32(138).fork()).join();
+    }
+    if (message.TrimP90Plus !== undefined) {
+      Void.encode(message.TrimP90Plus, writer.uint32(146).fork()).join();
+    }
+    if (message.Trim90D !== undefined) {
+      Void.encode(message.Trim90D, writer.uint32(154).fork()).join();
+    }
+    if (message.TrimP90D !== undefined) {
+      Void.encode(message.TrimP90D, writer.uint32(162).fork()).join();
+    }
+    if (message.Trim100 !== undefined) {
+      Void.encode(message.Trim100, writer.uint32(170).fork()).join();
+    }
+    if (message.TrimP100 !== undefined) {
+      Void.encode(message.TrimP100, writer.uint32(178).fork()).join();
+    }
+    if (message.Trim100D !== undefined) {
+      Void.encode(message.Trim100D, writer.uint32(186).fork()).join();
+    }
+    if (message.TrimP100D !== undefined) {
+      Void.encode(message.TrimP100D, writer.uint32(194).fork()).join();
+    }
+    if (message.Trim50 !== undefined) {
+      Void.encode(message.Trim50, writer.uint32(202).fork()).join();
+    }
+    if (message.Trim50D !== undefined) {
+      Void.encode(message.Trim50D, writer.uint32(210).fork()).join();
+    }
+    if (message.Trim62 !== undefined) {
+      Void.encode(message.Trim62, writer.uint32(218).fork()).join();
+    }
+    if (message.Trim62D !== undefined) {
+      Void.encode(message.Trim62D, writer.uint32(226).fork()).join();
+    }
+    if (message.Trim74 !== undefined) {
+      Void.encode(message.Trim74, writer.uint32(234).fork()).join();
+    }
+    if (message.Trim74D !== undefined) {
+      Void.encode(message.Trim74D, writer.uint32(242).fork()).join();
+    }
+    if (message.TrimP74D !== undefined) {
+      Void.encode(message.TrimP74D, writer.uint32(250).fork()).join();
+    }
+    if (message.TrimDefault !== undefined) {
+      Void.encode(message.TrimDefault, writer.uint32(258).fork()).join();
+    }
+    if (message.TrimCyberbeast !== undefined) {
+      Void.encode(message.TrimCyberbeast, writer.uint32(274).fork()).join();
+    }
+    if (message.TrimInvalid !== undefined) {
+      Void.encode(message.TrimInvalid, writer.uint32(2042).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CarTrim {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCarTrim();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Trim40 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.OBSOLETETrim50 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.OBSOLETETrim50D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.Trim60 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.Trim60D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.Trim70 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.Trim70D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.Trim75 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.Trim75D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.TrimP75D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.Trim85 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 12: {
+          if (tag !== 98) {
+            break;
+          }
+
+          message.TrimP85 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 13: {
+          if (tag !== 106) {
+            break;
+          }
+
+          message.TrimP85Plus = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 14: {
+          if (tag !== 114) {
+            break;
+          }
+
+          message.Trim85D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 15: {
+          if (tag !== 122) {
+            break;
+          }
+
+          message.TrimP85D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 16: {
+          if (tag !== 130) {
+            break;
+          }
+
+          message.Trim90 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 17: {
+          if (tag !== 138) {
+            break;
+          }
+
+          message.TrimP90 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 18: {
+          if (tag !== 146) {
+            break;
+          }
+
+          message.TrimP90Plus = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 19: {
+          if (tag !== 154) {
+            break;
+          }
+
+          message.Trim90D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 20: {
+          if (tag !== 162) {
+            break;
+          }
+
+          message.TrimP90D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 21: {
+          if (tag !== 170) {
+            break;
+          }
+
+          message.Trim100 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 22: {
+          if (tag !== 178) {
+            break;
+          }
+
+          message.TrimP100 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 23: {
+          if (tag !== 186) {
+            break;
+          }
+
+          message.Trim100D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 24: {
+          if (tag !== 194) {
+            break;
+          }
+
+          message.TrimP100D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 25: {
+          if (tag !== 202) {
+            break;
+          }
+
+          message.Trim50 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 26: {
+          if (tag !== 210) {
+            break;
+          }
+
+          message.Trim50D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 27: {
+          if (tag !== 218) {
+            break;
+          }
+
+          message.Trim62 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 28: {
+          if (tag !== 226) {
+            break;
+          }
+
+          message.Trim62D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 29: {
+          if (tag !== 234) {
+            break;
+          }
+
+          message.Trim74 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 30: {
+          if (tag !== 242) {
+            break;
+          }
+
+          message.Trim74D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 31: {
+          if (tag !== 250) {
+            break;
+          }
+
+          message.TrimP74D = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 32: {
+          if (tag !== 258) {
+            break;
+          }
+
+          message.TrimDefault = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 34: {
+          if (tag !== 274) {
+            break;
+          }
+
+          message.TrimCyberbeast = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 255: {
+          if (tag !== 2042) {
+            break;
+          }
+
+          message.TrimInvalid = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CarTrim {
+    return {
+      Trim40: isSet(object.Trim40) ? Void.fromJSON(object.Trim40) : undefined,
+      OBSOLETETrim50: isSet(object.OBSOLETETrim50) ? Void.fromJSON(object.OBSOLETETrim50) : undefined,
+      OBSOLETETrim50D: isSet(object.OBSOLETETrim50D) ? Void.fromJSON(object.OBSOLETETrim50D) : undefined,
+      Trim60: isSet(object.Trim60) ? Void.fromJSON(object.Trim60) : undefined,
+      Trim60D: isSet(object.Trim60D) ? Void.fromJSON(object.Trim60D) : undefined,
+      Trim70: isSet(object.Trim70) ? Void.fromJSON(object.Trim70) : undefined,
+      Trim70D: isSet(object.Trim70D) ? Void.fromJSON(object.Trim70D) : undefined,
+      Trim75: isSet(object.Trim75) ? Void.fromJSON(object.Trim75) : undefined,
+      Trim75D: isSet(object.Trim75D) ? Void.fromJSON(object.Trim75D) : undefined,
+      TrimP75D: isSet(object.TrimP75D) ? Void.fromJSON(object.TrimP75D) : undefined,
+      Trim85: isSet(object.Trim85) ? Void.fromJSON(object.Trim85) : undefined,
+      TrimP85: isSet(object.TrimP85) ? Void.fromJSON(object.TrimP85) : undefined,
+      TrimP85Plus: isSet(object.TrimP85Plus) ? Void.fromJSON(object.TrimP85Plus) : undefined,
+      Trim85D: isSet(object.Trim85D) ? Void.fromJSON(object.Trim85D) : undefined,
+      TrimP85D: isSet(object.TrimP85D) ? Void.fromJSON(object.TrimP85D) : undefined,
+      Trim90: isSet(object.Trim90) ? Void.fromJSON(object.Trim90) : undefined,
+      TrimP90: isSet(object.TrimP90) ? Void.fromJSON(object.TrimP90) : undefined,
+      TrimP90Plus: isSet(object.TrimP90Plus) ? Void.fromJSON(object.TrimP90Plus) : undefined,
+      Trim90D: isSet(object.Trim90D) ? Void.fromJSON(object.Trim90D) : undefined,
+      TrimP90D: isSet(object.TrimP90D) ? Void.fromJSON(object.TrimP90D) : undefined,
+      Trim100: isSet(object.Trim100) ? Void.fromJSON(object.Trim100) : undefined,
+      TrimP100: isSet(object.TrimP100) ? Void.fromJSON(object.TrimP100) : undefined,
+      Trim100D: isSet(object.Trim100D) ? Void.fromJSON(object.Trim100D) : undefined,
+      TrimP100D: isSet(object.TrimP100D) ? Void.fromJSON(object.TrimP100D) : undefined,
+      Trim50: isSet(object.Trim50) ? Void.fromJSON(object.Trim50) : undefined,
+      Trim50D: isSet(object.Trim50D) ? Void.fromJSON(object.Trim50D) : undefined,
+      Trim62: isSet(object.Trim62) ? Void.fromJSON(object.Trim62) : undefined,
+      Trim62D: isSet(object.Trim62D) ? Void.fromJSON(object.Trim62D) : undefined,
+      Trim74: isSet(object.Trim74) ? Void.fromJSON(object.Trim74) : undefined,
+      Trim74D: isSet(object.Trim74D) ? Void.fromJSON(object.Trim74D) : undefined,
+      TrimP74D: isSet(object.TrimP74D) ? Void.fromJSON(object.TrimP74D) : undefined,
+      TrimDefault: isSet(object.TrimDefault) ? Void.fromJSON(object.TrimDefault) : undefined,
+      TrimCyberbeast: isSet(object.TrimCyberbeast) ? Void.fromJSON(object.TrimCyberbeast) : undefined,
+      TrimInvalid: isSet(object.TrimInvalid) ? Void.fromJSON(object.TrimInvalid) : undefined,
+    };
+  },
+
+  toJSON(message: CarTrim): unknown {
+    const obj: any = {};
+    if (message.Trim40 !== undefined) {
+      obj.Trim40 = Void.toJSON(message.Trim40);
+    }
+    if (message.OBSOLETETrim50 !== undefined) {
+      obj.OBSOLETETrim50 = Void.toJSON(message.OBSOLETETrim50);
+    }
+    if (message.OBSOLETETrim50D !== undefined) {
+      obj.OBSOLETETrim50D = Void.toJSON(message.OBSOLETETrim50D);
+    }
+    if (message.Trim60 !== undefined) {
+      obj.Trim60 = Void.toJSON(message.Trim60);
+    }
+    if (message.Trim60D !== undefined) {
+      obj.Trim60D = Void.toJSON(message.Trim60D);
+    }
+    if (message.Trim70 !== undefined) {
+      obj.Trim70 = Void.toJSON(message.Trim70);
+    }
+    if (message.Trim70D !== undefined) {
+      obj.Trim70D = Void.toJSON(message.Trim70D);
+    }
+    if (message.Trim75 !== undefined) {
+      obj.Trim75 = Void.toJSON(message.Trim75);
+    }
+    if (message.Trim75D !== undefined) {
+      obj.Trim75D = Void.toJSON(message.Trim75D);
+    }
+    if (message.TrimP75D !== undefined) {
+      obj.TrimP75D = Void.toJSON(message.TrimP75D);
+    }
+    if (message.Trim85 !== undefined) {
+      obj.Trim85 = Void.toJSON(message.Trim85);
+    }
+    if (message.TrimP85 !== undefined) {
+      obj.TrimP85 = Void.toJSON(message.TrimP85);
+    }
+    if (message.TrimP85Plus !== undefined) {
+      obj.TrimP85Plus = Void.toJSON(message.TrimP85Plus);
+    }
+    if (message.Trim85D !== undefined) {
+      obj.Trim85D = Void.toJSON(message.Trim85D);
+    }
+    if (message.TrimP85D !== undefined) {
+      obj.TrimP85D = Void.toJSON(message.TrimP85D);
+    }
+    if (message.Trim90 !== undefined) {
+      obj.Trim90 = Void.toJSON(message.Trim90);
+    }
+    if (message.TrimP90 !== undefined) {
+      obj.TrimP90 = Void.toJSON(message.TrimP90);
+    }
+    if (message.TrimP90Plus !== undefined) {
+      obj.TrimP90Plus = Void.toJSON(message.TrimP90Plus);
+    }
+    if (message.Trim90D !== undefined) {
+      obj.Trim90D = Void.toJSON(message.Trim90D);
+    }
+    if (message.TrimP90D !== undefined) {
+      obj.TrimP90D = Void.toJSON(message.TrimP90D);
+    }
+    if (message.Trim100 !== undefined) {
+      obj.Trim100 = Void.toJSON(message.Trim100);
+    }
+    if (message.TrimP100 !== undefined) {
+      obj.TrimP100 = Void.toJSON(message.TrimP100);
+    }
+    if (message.Trim100D !== undefined) {
+      obj.Trim100D = Void.toJSON(message.Trim100D);
+    }
+    if (message.TrimP100D !== undefined) {
+      obj.TrimP100D = Void.toJSON(message.TrimP100D);
+    }
+    if (message.Trim50 !== undefined) {
+      obj.Trim50 = Void.toJSON(message.Trim50);
+    }
+    if (message.Trim50D !== undefined) {
+      obj.Trim50D = Void.toJSON(message.Trim50D);
+    }
+    if (message.Trim62 !== undefined) {
+      obj.Trim62 = Void.toJSON(message.Trim62);
+    }
+    if (message.Trim62D !== undefined) {
+      obj.Trim62D = Void.toJSON(message.Trim62D);
+    }
+    if (message.Trim74 !== undefined) {
+      obj.Trim74 = Void.toJSON(message.Trim74);
+    }
+    if (message.Trim74D !== undefined) {
+      obj.Trim74D = Void.toJSON(message.Trim74D);
+    }
+    if (message.TrimP74D !== undefined) {
+      obj.TrimP74D = Void.toJSON(message.TrimP74D);
+    }
+    if (message.TrimDefault !== undefined) {
+      obj.TrimDefault = Void.toJSON(message.TrimDefault);
+    }
+    if (message.TrimCyberbeast !== undefined) {
+      obj.TrimCyberbeast = Void.toJSON(message.TrimCyberbeast);
+    }
+    if (message.TrimInvalid !== undefined) {
+      obj.TrimInvalid = Void.toJSON(message.TrimInvalid);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CarTrim>, I>>(base?: I): CarTrim {
+    return CarTrim.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CarTrim>, I>>(object: I): CarTrim {
+    const message = createBaseCarTrim();
+    message.Trim40 = (object.Trim40 !== undefined && object.Trim40 !== null)
+      ? Void.fromPartial(object.Trim40)
+      : undefined;
+    message.OBSOLETETrim50 = (object.OBSOLETETrim50 !== undefined && object.OBSOLETETrim50 !== null)
+      ? Void.fromPartial(object.OBSOLETETrim50)
+      : undefined;
+    message.OBSOLETETrim50D = (object.OBSOLETETrim50D !== undefined && object.OBSOLETETrim50D !== null)
+      ? Void.fromPartial(object.OBSOLETETrim50D)
+      : undefined;
+    message.Trim60 = (object.Trim60 !== undefined && object.Trim60 !== null)
+      ? Void.fromPartial(object.Trim60)
+      : undefined;
+    message.Trim60D = (object.Trim60D !== undefined && object.Trim60D !== null)
+      ? Void.fromPartial(object.Trim60D)
+      : undefined;
+    message.Trim70 = (object.Trim70 !== undefined && object.Trim70 !== null)
+      ? Void.fromPartial(object.Trim70)
+      : undefined;
+    message.Trim70D = (object.Trim70D !== undefined && object.Trim70D !== null)
+      ? Void.fromPartial(object.Trim70D)
+      : undefined;
+    message.Trim75 = (object.Trim75 !== undefined && object.Trim75 !== null)
+      ? Void.fromPartial(object.Trim75)
+      : undefined;
+    message.Trim75D = (object.Trim75D !== undefined && object.Trim75D !== null)
+      ? Void.fromPartial(object.Trim75D)
+      : undefined;
+    message.TrimP75D = (object.TrimP75D !== undefined && object.TrimP75D !== null)
+      ? Void.fromPartial(object.TrimP75D)
+      : undefined;
+    message.Trim85 = (object.Trim85 !== undefined && object.Trim85 !== null)
+      ? Void.fromPartial(object.Trim85)
+      : undefined;
+    message.TrimP85 = (object.TrimP85 !== undefined && object.TrimP85 !== null)
+      ? Void.fromPartial(object.TrimP85)
+      : undefined;
+    message.TrimP85Plus = (object.TrimP85Plus !== undefined && object.TrimP85Plus !== null)
+      ? Void.fromPartial(object.TrimP85Plus)
+      : undefined;
+    message.Trim85D = (object.Trim85D !== undefined && object.Trim85D !== null)
+      ? Void.fromPartial(object.Trim85D)
+      : undefined;
+    message.TrimP85D = (object.TrimP85D !== undefined && object.TrimP85D !== null)
+      ? Void.fromPartial(object.TrimP85D)
+      : undefined;
+    message.Trim90 = (object.Trim90 !== undefined && object.Trim90 !== null)
+      ? Void.fromPartial(object.Trim90)
+      : undefined;
+    message.TrimP90 = (object.TrimP90 !== undefined && object.TrimP90 !== null)
+      ? Void.fromPartial(object.TrimP90)
+      : undefined;
+    message.TrimP90Plus = (object.TrimP90Plus !== undefined && object.TrimP90Plus !== null)
+      ? Void.fromPartial(object.TrimP90Plus)
+      : undefined;
+    message.Trim90D = (object.Trim90D !== undefined && object.Trim90D !== null)
+      ? Void.fromPartial(object.Trim90D)
+      : undefined;
+    message.TrimP90D = (object.TrimP90D !== undefined && object.TrimP90D !== null)
+      ? Void.fromPartial(object.TrimP90D)
+      : undefined;
+    message.Trim100 = (object.Trim100 !== undefined && object.Trim100 !== null)
+      ? Void.fromPartial(object.Trim100)
+      : undefined;
+    message.TrimP100 = (object.TrimP100 !== undefined && object.TrimP100 !== null)
+      ? Void.fromPartial(object.TrimP100)
+      : undefined;
+    message.Trim100D = (object.Trim100D !== undefined && object.Trim100D !== null)
+      ? Void.fromPartial(object.Trim100D)
+      : undefined;
+    message.TrimP100D = (object.TrimP100D !== undefined && object.TrimP100D !== null)
+      ? Void.fromPartial(object.TrimP100D)
+      : undefined;
+    message.Trim50 = (object.Trim50 !== undefined && object.Trim50 !== null)
+      ? Void.fromPartial(object.Trim50)
+      : undefined;
+    message.Trim50D = (object.Trim50D !== undefined && object.Trim50D !== null)
+      ? Void.fromPartial(object.Trim50D)
+      : undefined;
+    message.Trim62 = (object.Trim62 !== undefined && object.Trim62 !== null)
+      ? Void.fromPartial(object.Trim62)
+      : undefined;
+    message.Trim62D = (object.Trim62D !== undefined && object.Trim62D !== null)
+      ? Void.fromPartial(object.Trim62D)
+      : undefined;
+    message.Trim74 = (object.Trim74 !== undefined && object.Trim74 !== null)
+      ? Void.fromPartial(object.Trim74)
+      : undefined;
+    message.Trim74D = (object.Trim74D !== undefined && object.Trim74D !== null)
+      ? Void.fromPartial(object.Trim74D)
+      : undefined;
+    message.TrimP74D = (object.TrimP74D !== undefined && object.TrimP74D !== null)
+      ? Void.fromPartial(object.TrimP74D)
+      : undefined;
+    message.TrimDefault = (object.TrimDefault !== undefined && object.TrimDefault !== null)
+      ? Void.fromPartial(object.TrimDefault)
+      : undefined;
+    message.TrimCyberbeast = (object.TrimCyberbeast !== undefined && object.TrimCyberbeast !== null)
+      ? Void.fromPartial(object.TrimCyberbeast)
+      : undefined;
+    message.TrimInvalid = (object.TrimInvalid !== undefined && object.TrimInvalid !== null)
+      ? Void.fromPartial(object.TrimInvalid)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseSunRoofType(): SunRoofType {
+  return { None: undefined, Gen1: undefined, Gen2: undefined };
+}
+
+export const SunRoofType: MessageFns<SunRoofType> = {
+  encode(message: SunRoofType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.None !== undefined) {
+      Void.encode(message.None, writer.uint32(10).fork()).join();
+    }
+    if (message.Gen1 !== undefined) {
+      Void.encode(message.Gen1, writer.uint32(18).fork()).join();
+    }
+    if (message.Gen2 !== undefined) {
+      Void.encode(message.Gen2, writer.uint32(26).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SunRoofType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSunRoofType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.None = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Gen1 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Gen2 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SunRoofType {
+    return {
+      None: isSet(object.None) ? Void.fromJSON(object.None) : undefined,
+      Gen1: isSet(object.Gen1) ? Void.fromJSON(object.Gen1) : undefined,
+      Gen2: isSet(object.Gen2) ? Void.fromJSON(object.Gen2) : undefined,
+    };
+  },
+
+  toJSON(message: SunRoofType): unknown {
+    const obj: any = {};
+    if (message.None !== undefined) {
+      obj.None = Void.toJSON(message.None);
+    }
+    if (message.Gen1 !== undefined) {
+      obj.Gen1 = Void.toJSON(message.Gen1);
+    }
+    if (message.Gen2 !== undefined) {
+      obj.Gen2 = Void.toJSON(message.Gen2);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SunRoofType>, I>>(base?: I): SunRoofType {
+    return SunRoofType.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SunRoofType>, I>>(object: I): SunRoofType {
+    const message = createBaseSunRoofType();
+    message.None = (object.None !== undefined && object.None !== null) ? Void.fromPartial(object.None) : undefined;
+    message.Gen1 = (object.Gen1 !== undefined && object.Gen1 !== null) ? Void.fromPartial(object.Gen1) : undefined;
+    message.Gen2 = (object.Gen2 !== undefined && object.Gen2 !== null) ? Void.fromPartial(object.Gen2) : undefined;
+    return message;
+  },
+};
+
+function createBaseWheelType(): WheelType {
+  return {
+    Unknown: undefined,
+    ZeroG20Gunpowder: undefined,
+    Pinwheel18: undefined,
+    Pinwheel18CapKit: undefined,
+    Stiletto19: undefined,
+    Stiletto20: undefined,
+    Stiletto20DarkStaggered: undefined,
+    Stiletto20DarkSquare: undefined,
+    Gemini19Square: undefined,
+    Gemini19Staggered: undefined,
+    Induction20Black: undefined,
+    UberTurbine21Black: undefined,
+    Apollo19: undefined,
+    Apollo19CapKit: undefined,
+    ZeroG19Gunpowder: undefined,
+    Cardenio19: undefined,
+    Default: undefined,
+    NewTurbine22Black: undefined,
+    Cyberstream: undefined,
+    Arachnid21: undefined,
+    Base19: undefined,
+    Silver21: undefined,
+    Charcoal21: undefined,
+    Silver21Euro: undefined,
+    Aero19: undefined,
+    Charcoal21Euro: undefined,
+    Super21Gray: undefined,
+    Super21Silver: undefined,
+    Turbine19: undefined,
+    Turbine19Dark: undefined,
+    AeroTurbine19: undefined,
+    AeroTurbine19Black: undefined,
+    Helix20: undefined,
+    AeroTurbine20: undefined,
+    Turbine22: undefined,
+    Cyclone19Dark: undefined,
+    AeroTurbine20Dark: undefined,
+    Turbine22Dark: undefined,
+    Arachnid21Silver: undefined,
+    Arachnid21Black: undefined,
+    Arachnid21Grey: undefined,
+    Slipstream20Carbon: undefined,
+    Slipstream20Dark: undefined,
+    Slipstream19Carbon: undefined,
+    TwinTurbine21Silver: undefined,
+    TwinTurbine21Carbon: undefined,
+    Tempest19SonicSilver: undefined,
+    PinwheelRefresh18: undefined,
+    StilettoRefresh19: undefined,
+    UberTurbine20Gunpowder: undefined,
+    Glider18: undefined,
+    Helix19: undefined,
+    Wishbone20Staggered: undefined,
+    CtBase20: undefined,
+    CtPremium20: undefined,
+    CtBase18: undefined,
+    Apollo19MetallicShadow: undefined,
+    Wishbone19Staggered: undefined,
+    Crossflow19: undefined,
+    HelixV220: undefined,
+    Standard19: undefined,
+    Halo22: undefined,
+    Riptide20: undefined,
+    Cypress21: undefined,
+    MachinaV219: undefined,
+    ArachnidV221: undefined,
+    E4118: undefined,
+    D5018: undefined,
+    HelixV220Dark: undefined,
+    UberHelix20: undefined,
+  };
+}
+
+export const WheelType: MessageFns<WheelType> = {
+  encode(message: WheelType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Unknown !== undefined) {
+      Void.encode(message.Unknown, writer.uint32(26).fork()).join();
+    }
+    if (message.ZeroG20Gunpowder !== undefined) {
+      Void.encode(message.ZeroG20Gunpowder, writer.uint32(34).fork()).join();
+    }
+    if (message.Pinwheel18 !== undefined) {
+      Void.encode(message.Pinwheel18, writer.uint32(42).fork()).join();
+    }
+    if (message.Pinwheel18CapKit !== undefined) {
+      Void.encode(message.Pinwheel18CapKit, writer.uint32(50).fork()).join();
+    }
+    if (message.Stiletto19 !== undefined) {
+      Void.encode(message.Stiletto19, writer.uint32(58).fork()).join();
+    }
+    if (message.Stiletto20 !== undefined) {
+      Void.encode(message.Stiletto20, writer.uint32(66).fork()).join();
+    }
+    if (message.Stiletto20DarkStaggered !== undefined) {
+      Void.encode(message.Stiletto20DarkStaggered, writer.uint32(74).fork()).join();
+    }
+    if (message.Stiletto20DarkSquare !== undefined) {
+      Void.encode(message.Stiletto20DarkSquare, writer.uint32(82).fork()).join();
+    }
+    if (message.Gemini19Square !== undefined) {
+      Void.encode(message.Gemini19Square, writer.uint32(90).fork()).join();
+    }
+    if (message.Gemini19Staggered !== undefined) {
+      Void.encode(message.Gemini19Staggered, writer.uint32(98).fork()).join();
+    }
+    if (message.Induction20Black !== undefined) {
+      Void.encode(message.Induction20Black, writer.uint32(106).fork()).join();
+    }
+    if (message.UberTurbine21Black !== undefined) {
+      Void.encode(message.UberTurbine21Black, writer.uint32(114).fork()).join();
+    }
+    if (message.Apollo19 !== undefined) {
+      Void.encode(message.Apollo19, writer.uint32(122).fork()).join();
+    }
+    if (message.Apollo19CapKit !== undefined) {
+      Void.encode(message.Apollo19CapKit, writer.uint32(130).fork()).join();
+    }
+    if (message.ZeroG19Gunpowder !== undefined) {
+      Void.encode(message.ZeroG19Gunpowder, writer.uint32(138).fork()).join();
+    }
+    if (message.Cardenio19 !== undefined) {
+      Void.encode(message.Cardenio19, writer.uint32(146).fork()).join();
+    }
+    if (message.Default !== undefined) {
+      Void.encode(message.Default, writer.uint32(154).fork()).join();
+    }
+    if (message.NewTurbine22Black !== undefined) {
+      Void.encode(message.NewTurbine22Black, writer.uint32(162).fork()).join();
+    }
+    if (message.Cyberstream !== undefined) {
+      Void.encode(message.Cyberstream, writer.uint32(170).fork()).join();
+    }
+    if (message.Arachnid21 !== undefined) {
+      Void.encode(message.Arachnid21, writer.uint32(178).fork()).join();
+    }
+    if (message.Base19 !== undefined) {
+      Void.encode(message.Base19, writer.uint32(186).fork()).join();
+    }
+    if (message.Silver21 !== undefined) {
+      Void.encode(message.Silver21, writer.uint32(194).fork()).join();
+    }
+    if (message.Charcoal21 !== undefined) {
+      Void.encode(message.Charcoal21, writer.uint32(202).fork()).join();
+    }
+    if (message.Silver21Euro !== undefined) {
+      Void.encode(message.Silver21Euro, writer.uint32(210).fork()).join();
+    }
+    if (message.Aero19 !== undefined) {
+      Void.encode(message.Aero19, writer.uint32(218).fork()).join();
+    }
+    if (message.Charcoal21Euro !== undefined) {
+      Void.encode(message.Charcoal21Euro, writer.uint32(226).fork()).join();
+    }
+    if (message.Super21Gray !== undefined) {
+      Void.encode(message.Super21Gray, writer.uint32(234).fork()).join();
+    }
+    if (message.Super21Silver !== undefined) {
+      Void.encode(message.Super21Silver, writer.uint32(242).fork()).join();
+    }
+    if (message.Turbine19 !== undefined) {
+      Void.encode(message.Turbine19, writer.uint32(250).fork()).join();
+    }
+    if (message.Turbine19Dark !== undefined) {
+      Void.encode(message.Turbine19Dark, writer.uint32(258).fork()).join();
+    }
+    if (message.AeroTurbine19 !== undefined) {
+      Void.encode(message.AeroTurbine19, writer.uint32(266).fork()).join();
+    }
+    if (message.AeroTurbine19Black !== undefined) {
+      Void.encode(message.AeroTurbine19Black, writer.uint32(274).fork()).join();
+    }
+    if (message.Helix20 !== undefined) {
+      Void.encode(message.Helix20, writer.uint32(282).fork()).join();
+    }
+    if (message.AeroTurbine20 !== undefined) {
+      Void.encode(message.AeroTurbine20, writer.uint32(290).fork()).join();
+    }
+    if (message.Turbine22 !== undefined) {
+      Void.encode(message.Turbine22, writer.uint32(298).fork()).join();
+    }
+    if (message.Cyclone19Dark !== undefined) {
+      Void.encode(message.Cyclone19Dark, writer.uint32(306).fork()).join();
+    }
+    if (message.AeroTurbine20Dark !== undefined) {
+      Void.encode(message.AeroTurbine20Dark, writer.uint32(314).fork()).join();
+    }
+    if (message.Turbine22Dark !== undefined) {
+      Void.encode(message.Turbine22Dark, writer.uint32(322).fork()).join();
+    }
+    if (message.Arachnid21Silver !== undefined) {
+      Void.encode(message.Arachnid21Silver, writer.uint32(330).fork()).join();
+    }
+    if (message.Arachnid21Black !== undefined) {
+      Void.encode(message.Arachnid21Black, writer.uint32(338).fork()).join();
+    }
+    if (message.Arachnid21Grey !== undefined) {
+      Void.encode(message.Arachnid21Grey, writer.uint32(346).fork()).join();
+    }
+    if (message.Slipstream20Carbon !== undefined) {
+      Void.encode(message.Slipstream20Carbon, writer.uint32(354).fork()).join();
+    }
+    if (message.Slipstream20Dark !== undefined) {
+      Void.encode(message.Slipstream20Dark, writer.uint32(362).fork()).join();
+    }
+    if (message.Slipstream19Carbon !== undefined) {
+      Void.encode(message.Slipstream19Carbon, writer.uint32(370).fork()).join();
+    }
+    if (message.TwinTurbine21Silver !== undefined) {
+      Void.encode(message.TwinTurbine21Silver, writer.uint32(378).fork()).join();
+    }
+    if (message.TwinTurbine21Carbon !== undefined) {
+      Void.encode(message.TwinTurbine21Carbon, writer.uint32(386).fork()).join();
+    }
+    if (message.Tempest19SonicSilver !== undefined) {
+      Void.encode(message.Tempest19SonicSilver, writer.uint32(394).fork()).join();
+    }
+    if (message.PinwheelRefresh18 !== undefined) {
+      Void.encode(message.PinwheelRefresh18, writer.uint32(402).fork()).join();
+    }
+    if (message.StilettoRefresh19 !== undefined) {
+      Void.encode(message.StilettoRefresh19, writer.uint32(410).fork()).join();
+    }
+    if (message.UberTurbine20Gunpowder !== undefined) {
+      Void.encode(message.UberTurbine20Gunpowder, writer.uint32(418).fork()).join();
+    }
+    if (message.Glider18 !== undefined) {
+      Void.encode(message.Glider18, writer.uint32(426).fork()).join();
+    }
+    if (message.Helix19 !== undefined) {
+      Void.encode(message.Helix19, writer.uint32(434).fork()).join();
+    }
+    if (message.Wishbone20Staggered !== undefined) {
+      Void.encode(message.Wishbone20Staggered, writer.uint32(450).fork()).join();
+    }
+    if (message.CtBase20 !== undefined) {
+      Void.encode(message.CtBase20, writer.uint32(458).fork()).join();
+    }
+    if (message.CtPremium20 !== undefined) {
+      Void.encode(message.CtPremium20, writer.uint32(466).fork()).join();
+    }
+    if (message.CtBase18 !== undefined) {
+      Void.encode(message.CtBase18, writer.uint32(474).fork()).join();
+    }
+    if (message.Apollo19MetallicShadow !== undefined) {
+      Void.encode(message.Apollo19MetallicShadow, writer.uint32(482).fork()).join();
+    }
+    if (message.Wishbone19Staggered !== undefined) {
+      Void.encode(message.Wishbone19Staggered, writer.uint32(490).fork()).join();
+    }
+    if (message.Crossflow19 !== undefined) {
+      Void.encode(message.Crossflow19, writer.uint32(498).fork()).join();
+    }
+    if (message.HelixV220 !== undefined) {
+      Void.encode(message.HelixV220, writer.uint32(506).fork()).join();
+    }
+    if (message.Standard19 !== undefined) {
+      Void.encode(message.Standard19, writer.uint32(514).fork()).join();
+    }
+    if (message.Halo22 !== undefined) {
+      Void.encode(message.Halo22, writer.uint32(522).fork()).join();
+    }
+    if (message.Riptide20 !== undefined) {
+      Void.encode(message.Riptide20, writer.uint32(530).fork()).join();
+    }
+    if (message.Cypress21 !== undefined) {
+      Void.encode(message.Cypress21, writer.uint32(538).fork()).join();
+    }
+    if (message.MachinaV219 !== undefined) {
+      Void.encode(message.MachinaV219, writer.uint32(546).fork()).join();
+    }
+    if (message.ArachnidV221 !== undefined) {
+      Void.encode(message.ArachnidV221, writer.uint32(554).fork()).join();
+    }
+    if (message.E4118 !== undefined) {
+      Void.encode(message.E4118, writer.uint32(562).fork()).join();
+    }
+    if (message.D5018 !== undefined) {
+      Void.encode(message.D5018, writer.uint32(570).fork()).join();
+    }
+    if (message.HelixV220Dark !== undefined) {
+      Void.encode(message.HelixV220Dark, writer.uint32(578).fork()).join();
+    }
+    if (message.UberHelix20 !== undefined) {
+      Void.encode(message.UberHelix20, writer.uint32(586).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WheelType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWheelType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Unknown = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.ZeroG20Gunpowder = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.Pinwheel18 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.Pinwheel18CapKit = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.Stiletto19 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.Stiletto20 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.Stiletto20DarkStaggered = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.Stiletto20DarkSquare = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.Gemini19Square = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 12: {
+          if (tag !== 98) {
+            break;
+          }
+
+          message.Gemini19Staggered = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 13: {
+          if (tag !== 106) {
+            break;
+          }
+
+          message.Induction20Black = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 14: {
+          if (tag !== 114) {
+            break;
+          }
+
+          message.UberTurbine21Black = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 15: {
+          if (tag !== 122) {
+            break;
+          }
+
+          message.Apollo19 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 16: {
+          if (tag !== 130) {
+            break;
+          }
+
+          message.Apollo19CapKit = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 17: {
+          if (tag !== 138) {
+            break;
+          }
+
+          message.ZeroG19Gunpowder = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 18: {
+          if (tag !== 146) {
+            break;
+          }
+
+          message.Cardenio19 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 19: {
+          if (tag !== 154) {
+            break;
+          }
+
+          message.Default = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 20: {
+          if (tag !== 162) {
+            break;
+          }
+
+          message.NewTurbine22Black = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 21: {
+          if (tag !== 170) {
+            break;
+          }
+
+          message.Cyberstream = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 22: {
+          if (tag !== 178) {
+            break;
+          }
+
+          message.Arachnid21 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 23: {
+          if (tag !== 186) {
+            break;
+          }
+
+          message.Base19 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 24: {
+          if (tag !== 194) {
+            break;
+          }
+
+          message.Silver21 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 25: {
+          if (tag !== 202) {
+            break;
+          }
+
+          message.Charcoal21 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 26: {
+          if (tag !== 210) {
+            break;
+          }
+
+          message.Silver21Euro = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 27: {
+          if (tag !== 218) {
+            break;
+          }
+
+          message.Aero19 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 28: {
+          if (tag !== 226) {
+            break;
+          }
+
+          message.Charcoal21Euro = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 29: {
+          if (tag !== 234) {
+            break;
+          }
+
+          message.Super21Gray = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 30: {
+          if (tag !== 242) {
+            break;
+          }
+
+          message.Super21Silver = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 31: {
+          if (tag !== 250) {
+            break;
+          }
+
+          message.Turbine19 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 32: {
+          if (tag !== 258) {
+            break;
+          }
+
+          message.Turbine19Dark = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 33: {
+          if (tag !== 266) {
+            break;
+          }
+
+          message.AeroTurbine19 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 34: {
+          if (tag !== 274) {
+            break;
+          }
+
+          message.AeroTurbine19Black = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 35: {
+          if (tag !== 282) {
+            break;
+          }
+
+          message.Helix20 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 36: {
+          if (tag !== 290) {
+            break;
+          }
+
+          message.AeroTurbine20 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 37: {
+          if (tag !== 298) {
+            break;
+          }
+
+          message.Turbine22 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 38: {
+          if (tag !== 306) {
+            break;
+          }
+
+          message.Cyclone19Dark = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 39: {
+          if (tag !== 314) {
+            break;
+          }
+
+          message.AeroTurbine20Dark = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 40: {
+          if (tag !== 322) {
+            break;
+          }
+
+          message.Turbine22Dark = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 41: {
+          if (tag !== 330) {
+            break;
+          }
+
+          message.Arachnid21Silver = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 42: {
+          if (tag !== 338) {
+            break;
+          }
+
+          message.Arachnid21Black = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 43: {
+          if (tag !== 346) {
+            break;
+          }
+
+          message.Arachnid21Grey = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 44: {
+          if (tag !== 354) {
+            break;
+          }
+
+          message.Slipstream20Carbon = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 45: {
+          if (tag !== 362) {
+            break;
+          }
+
+          message.Slipstream20Dark = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 46: {
+          if (tag !== 370) {
+            break;
+          }
+
+          message.Slipstream19Carbon = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 47: {
+          if (tag !== 378) {
+            break;
+          }
+
+          message.TwinTurbine21Silver = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 48: {
+          if (tag !== 386) {
+            break;
+          }
+
+          message.TwinTurbine21Carbon = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 49: {
+          if (tag !== 394) {
+            break;
+          }
+
+          message.Tempest19SonicSilver = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 50: {
+          if (tag !== 402) {
+            break;
+          }
+
+          message.PinwheelRefresh18 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 51: {
+          if (tag !== 410) {
+            break;
+          }
+
+          message.StilettoRefresh19 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 52: {
+          if (tag !== 418) {
+            break;
+          }
+
+          message.UberTurbine20Gunpowder = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 53: {
+          if (tag !== 426) {
+            break;
+          }
+
+          message.Glider18 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 54: {
+          if (tag !== 434) {
+            break;
+          }
+
+          message.Helix19 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 56: {
+          if (tag !== 450) {
+            break;
+          }
+
+          message.Wishbone20Staggered = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 57: {
+          if (tag !== 458) {
+            break;
+          }
+
+          message.CtBase20 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 58: {
+          if (tag !== 466) {
+            break;
+          }
+
+          message.CtPremium20 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 59: {
+          if (tag !== 474) {
+            break;
+          }
+
+          message.CtBase18 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 60: {
+          if (tag !== 482) {
+            break;
+          }
+
+          message.Apollo19MetallicShadow = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 61: {
+          if (tag !== 490) {
+            break;
+          }
+
+          message.Wishbone19Staggered = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 62: {
+          if (tag !== 498) {
+            break;
+          }
+
+          message.Crossflow19 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 63: {
+          if (tag !== 506) {
+            break;
+          }
+
+          message.HelixV220 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 64: {
+          if (tag !== 514) {
+            break;
+          }
+
+          message.Standard19 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 65: {
+          if (tag !== 522) {
+            break;
+          }
+
+          message.Halo22 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 66: {
+          if (tag !== 530) {
+            break;
+          }
+
+          message.Riptide20 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 67: {
+          if (tag !== 538) {
+            break;
+          }
+
+          message.Cypress21 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 68: {
+          if (tag !== 546) {
+            break;
+          }
+
+          message.MachinaV219 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 69: {
+          if (tag !== 554) {
+            break;
+          }
+
+          message.ArachnidV221 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 70: {
+          if (tag !== 562) {
+            break;
+          }
+
+          message.E4118 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 71: {
+          if (tag !== 570) {
+            break;
+          }
+
+          message.D5018 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 72: {
+          if (tag !== 578) {
+            break;
+          }
+
+          message.HelixV220Dark = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 73: {
+          if (tag !== 586) {
+            break;
+          }
+
+          message.UberHelix20 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WheelType {
+    return {
+      Unknown: isSet(object.Unknown) ? Void.fromJSON(object.Unknown) : undefined,
+      ZeroG20Gunpowder: isSet(object.ZeroG20Gunpowder) ? Void.fromJSON(object.ZeroG20Gunpowder) : undefined,
+      Pinwheel18: isSet(object.Pinwheel18) ? Void.fromJSON(object.Pinwheel18) : undefined,
+      Pinwheel18CapKit: isSet(object.Pinwheel18CapKit) ? Void.fromJSON(object.Pinwheel18CapKit) : undefined,
+      Stiletto19: isSet(object.Stiletto19) ? Void.fromJSON(object.Stiletto19) : undefined,
+      Stiletto20: isSet(object.Stiletto20) ? Void.fromJSON(object.Stiletto20) : undefined,
+      Stiletto20DarkStaggered: isSet(object.Stiletto20DarkStaggered)
+        ? Void.fromJSON(object.Stiletto20DarkStaggered)
+        : undefined,
+      Stiletto20DarkSquare: isSet(object.Stiletto20DarkSquare) ? Void.fromJSON(object.Stiletto20DarkSquare) : undefined,
+      Gemini19Square: isSet(object.Gemini19Square) ? Void.fromJSON(object.Gemini19Square) : undefined,
+      Gemini19Staggered: isSet(object.Gemini19Staggered) ? Void.fromJSON(object.Gemini19Staggered) : undefined,
+      Induction20Black: isSet(object.Induction20Black) ? Void.fromJSON(object.Induction20Black) : undefined,
+      UberTurbine21Black: isSet(object.UberTurbine21Black) ? Void.fromJSON(object.UberTurbine21Black) : undefined,
+      Apollo19: isSet(object.Apollo19) ? Void.fromJSON(object.Apollo19) : undefined,
+      Apollo19CapKit: isSet(object.Apollo19CapKit) ? Void.fromJSON(object.Apollo19CapKit) : undefined,
+      ZeroG19Gunpowder: isSet(object.ZeroG19Gunpowder) ? Void.fromJSON(object.ZeroG19Gunpowder) : undefined,
+      Cardenio19: isSet(object.Cardenio19) ? Void.fromJSON(object.Cardenio19) : undefined,
+      Default: isSet(object.Default) ? Void.fromJSON(object.Default) : undefined,
+      NewTurbine22Black: isSet(object.NewTurbine22Black) ? Void.fromJSON(object.NewTurbine22Black) : undefined,
+      Cyberstream: isSet(object.Cyberstream) ? Void.fromJSON(object.Cyberstream) : undefined,
+      Arachnid21: isSet(object.Arachnid21) ? Void.fromJSON(object.Arachnid21) : undefined,
+      Base19: isSet(object.Base19) ? Void.fromJSON(object.Base19) : undefined,
+      Silver21: isSet(object.Silver21) ? Void.fromJSON(object.Silver21) : undefined,
+      Charcoal21: isSet(object.Charcoal21) ? Void.fromJSON(object.Charcoal21) : undefined,
+      Silver21Euro: isSet(object.Silver21Euro) ? Void.fromJSON(object.Silver21Euro) : undefined,
+      Aero19: isSet(object.Aero19) ? Void.fromJSON(object.Aero19) : undefined,
+      Charcoal21Euro: isSet(object.Charcoal21Euro) ? Void.fromJSON(object.Charcoal21Euro) : undefined,
+      Super21Gray: isSet(object.Super21Gray) ? Void.fromJSON(object.Super21Gray) : undefined,
+      Super21Silver: isSet(object.Super21Silver) ? Void.fromJSON(object.Super21Silver) : undefined,
+      Turbine19: isSet(object.Turbine19) ? Void.fromJSON(object.Turbine19) : undefined,
+      Turbine19Dark: isSet(object.Turbine19Dark) ? Void.fromJSON(object.Turbine19Dark) : undefined,
+      AeroTurbine19: isSet(object.AeroTurbine19) ? Void.fromJSON(object.AeroTurbine19) : undefined,
+      AeroTurbine19Black: isSet(object.AeroTurbine19Black) ? Void.fromJSON(object.AeroTurbine19Black) : undefined,
+      Helix20: isSet(object.Helix20) ? Void.fromJSON(object.Helix20) : undefined,
+      AeroTurbine20: isSet(object.AeroTurbine20) ? Void.fromJSON(object.AeroTurbine20) : undefined,
+      Turbine22: isSet(object.Turbine22) ? Void.fromJSON(object.Turbine22) : undefined,
+      Cyclone19Dark: isSet(object.Cyclone19Dark) ? Void.fromJSON(object.Cyclone19Dark) : undefined,
+      AeroTurbine20Dark: isSet(object.AeroTurbine20Dark) ? Void.fromJSON(object.AeroTurbine20Dark) : undefined,
+      Turbine22Dark: isSet(object.Turbine22Dark) ? Void.fromJSON(object.Turbine22Dark) : undefined,
+      Arachnid21Silver: isSet(object.Arachnid21Silver) ? Void.fromJSON(object.Arachnid21Silver) : undefined,
+      Arachnid21Black: isSet(object.Arachnid21Black) ? Void.fromJSON(object.Arachnid21Black) : undefined,
+      Arachnid21Grey: isSet(object.Arachnid21Grey) ? Void.fromJSON(object.Arachnid21Grey) : undefined,
+      Slipstream20Carbon: isSet(object.Slipstream20Carbon) ? Void.fromJSON(object.Slipstream20Carbon) : undefined,
+      Slipstream20Dark: isSet(object.Slipstream20Dark) ? Void.fromJSON(object.Slipstream20Dark) : undefined,
+      Slipstream19Carbon: isSet(object.Slipstream19Carbon) ? Void.fromJSON(object.Slipstream19Carbon) : undefined,
+      TwinTurbine21Silver: isSet(object.TwinTurbine21Silver) ? Void.fromJSON(object.TwinTurbine21Silver) : undefined,
+      TwinTurbine21Carbon: isSet(object.TwinTurbine21Carbon) ? Void.fromJSON(object.TwinTurbine21Carbon) : undefined,
+      Tempest19SonicSilver: isSet(object.Tempest19SonicSilver) ? Void.fromJSON(object.Tempest19SonicSilver) : undefined,
+      PinwheelRefresh18: isSet(object.PinwheelRefresh18) ? Void.fromJSON(object.PinwheelRefresh18) : undefined,
+      StilettoRefresh19: isSet(object.StilettoRefresh19) ? Void.fromJSON(object.StilettoRefresh19) : undefined,
+      UberTurbine20Gunpowder: isSet(object.UberTurbine20Gunpowder)
+        ? Void.fromJSON(object.UberTurbine20Gunpowder)
+        : undefined,
+      Glider18: isSet(object.Glider18) ? Void.fromJSON(object.Glider18) : undefined,
+      Helix19: isSet(object.Helix19) ? Void.fromJSON(object.Helix19) : undefined,
+      Wishbone20Staggered: isSet(object.Wishbone20Staggered) ? Void.fromJSON(object.Wishbone20Staggered) : undefined,
+      CtBase20: isSet(object.CtBase20) ? Void.fromJSON(object.CtBase20) : undefined,
+      CtPremium20: isSet(object.CtPremium20) ? Void.fromJSON(object.CtPremium20) : undefined,
+      CtBase18: isSet(object.CtBase18) ? Void.fromJSON(object.CtBase18) : undefined,
+      Apollo19MetallicShadow: isSet(object.Apollo19MetallicShadow)
+        ? Void.fromJSON(object.Apollo19MetallicShadow)
+        : undefined,
+      Wishbone19Staggered: isSet(object.Wishbone19Staggered) ? Void.fromJSON(object.Wishbone19Staggered) : undefined,
+      Crossflow19: isSet(object.Crossflow19) ? Void.fromJSON(object.Crossflow19) : undefined,
+      HelixV220: isSet(object.HelixV220) ? Void.fromJSON(object.HelixV220) : undefined,
+      Standard19: isSet(object.Standard19) ? Void.fromJSON(object.Standard19) : undefined,
+      Halo22: isSet(object.Halo22) ? Void.fromJSON(object.Halo22) : undefined,
+      Riptide20: isSet(object.Riptide20) ? Void.fromJSON(object.Riptide20) : undefined,
+      Cypress21: isSet(object.Cypress21) ? Void.fromJSON(object.Cypress21) : undefined,
+      MachinaV219: isSet(object.MachinaV219) ? Void.fromJSON(object.MachinaV219) : undefined,
+      ArachnidV221: isSet(object.ArachnidV221) ? Void.fromJSON(object.ArachnidV221) : undefined,
+      E4118: isSet(object.E4118) ? Void.fromJSON(object.E4118) : undefined,
+      D5018: isSet(object.D5018) ? Void.fromJSON(object.D5018) : undefined,
+      HelixV220Dark: isSet(object.HelixV220Dark) ? Void.fromJSON(object.HelixV220Dark) : undefined,
+      UberHelix20: isSet(object.UberHelix20) ? Void.fromJSON(object.UberHelix20) : undefined,
+    };
+  },
+
+  toJSON(message: WheelType): unknown {
+    const obj: any = {};
+    if (message.Unknown !== undefined) {
+      obj.Unknown = Void.toJSON(message.Unknown);
+    }
+    if (message.ZeroG20Gunpowder !== undefined) {
+      obj.ZeroG20Gunpowder = Void.toJSON(message.ZeroG20Gunpowder);
+    }
+    if (message.Pinwheel18 !== undefined) {
+      obj.Pinwheel18 = Void.toJSON(message.Pinwheel18);
+    }
+    if (message.Pinwheel18CapKit !== undefined) {
+      obj.Pinwheel18CapKit = Void.toJSON(message.Pinwheel18CapKit);
+    }
+    if (message.Stiletto19 !== undefined) {
+      obj.Stiletto19 = Void.toJSON(message.Stiletto19);
+    }
+    if (message.Stiletto20 !== undefined) {
+      obj.Stiletto20 = Void.toJSON(message.Stiletto20);
+    }
+    if (message.Stiletto20DarkStaggered !== undefined) {
+      obj.Stiletto20DarkStaggered = Void.toJSON(message.Stiletto20DarkStaggered);
+    }
+    if (message.Stiletto20DarkSquare !== undefined) {
+      obj.Stiletto20DarkSquare = Void.toJSON(message.Stiletto20DarkSquare);
+    }
+    if (message.Gemini19Square !== undefined) {
+      obj.Gemini19Square = Void.toJSON(message.Gemini19Square);
+    }
+    if (message.Gemini19Staggered !== undefined) {
+      obj.Gemini19Staggered = Void.toJSON(message.Gemini19Staggered);
+    }
+    if (message.Induction20Black !== undefined) {
+      obj.Induction20Black = Void.toJSON(message.Induction20Black);
+    }
+    if (message.UberTurbine21Black !== undefined) {
+      obj.UberTurbine21Black = Void.toJSON(message.UberTurbine21Black);
+    }
+    if (message.Apollo19 !== undefined) {
+      obj.Apollo19 = Void.toJSON(message.Apollo19);
+    }
+    if (message.Apollo19CapKit !== undefined) {
+      obj.Apollo19CapKit = Void.toJSON(message.Apollo19CapKit);
+    }
+    if (message.ZeroG19Gunpowder !== undefined) {
+      obj.ZeroG19Gunpowder = Void.toJSON(message.ZeroG19Gunpowder);
+    }
+    if (message.Cardenio19 !== undefined) {
+      obj.Cardenio19 = Void.toJSON(message.Cardenio19);
+    }
+    if (message.Default !== undefined) {
+      obj.Default = Void.toJSON(message.Default);
+    }
+    if (message.NewTurbine22Black !== undefined) {
+      obj.NewTurbine22Black = Void.toJSON(message.NewTurbine22Black);
+    }
+    if (message.Cyberstream !== undefined) {
+      obj.Cyberstream = Void.toJSON(message.Cyberstream);
+    }
+    if (message.Arachnid21 !== undefined) {
+      obj.Arachnid21 = Void.toJSON(message.Arachnid21);
+    }
+    if (message.Base19 !== undefined) {
+      obj.Base19 = Void.toJSON(message.Base19);
+    }
+    if (message.Silver21 !== undefined) {
+      obj.Silver21 = Void.toJSON(message.Silver21);
+    }
+    if (message.Charcoal21 !== undefined) {
+      obj.Charcoal21 = Void.toJSON(message.Charcoal21);
+    }
+    if (message.Silver21Euro !== undefined) {
+      obj.Silver21Euro = Void.toJSON(message.Silver21Euro);
+    }
+    if (message.Aero19 !== undefined) {
+      obj.Aero19 = Void.toJSON(message.Aero19);
+    }
+    if (message.Charcoal21Euro !== undefined) {
+      obj.Charcoal21Euro = Void.toJSON(message.Charcoal21Euro);
+    }
+    if (message.Super21Gray !== undefined) {
+      obj.Super21Gray = Void.toJSON(message.Super21Gray);
+    }
+    if (message.Super21Silver !== undefined) {
+      obj.Super21Silver = Void.toJSON(message.Super21Silver);
+    }
+    if (message.Turbine19 !== undefined) {
+      obj.Turbine19 = Void.toJSON(message.Turbine19);
+    }
+    if (message.Turbine19Dark !== undefined) {
+      obj.Turbine19Dark = Void.toJSON(message.Turbine19Dark);
+    }
+    if (message.AeroTurbine19 !== undefined) {
+      obj.AeroTurbine19 = Void.toJSON(message.AeroTurbine19);
+    }
+    if (message.AeroTurbine19Black !== undefined) {
+      obj.AeroTurbine19Black = Void.toJSON(message.AeroTurbine19Black);
+    }
+    if (message.Helix20 !== undefined) {
+      obj.Helix20 = Void.toJSON(message.Helix20);
+    }
+    if (message.AeroTurbine20 !== undefined) {
+      obj.AeroTurbine20 = Void.toJSON(message.AeroTurbine20);
+    }
+    if (message.Turbine22 !== undefined) {
+      obj.Turbine22 = Void.toJSON(message.Turbine22);
+    }
+    if (message.Cyclone19Dark !== undefined) {
+      obj.Cyclone19Dark = Void.toJSON(message.Cyclone19Dark);
+    }
+    if (message.AeroTurbine20Dark !== undefined) {
+      obj.AeroTurbine20Dark = Void.toJSON(message.AeroTurbine20Dark);
+    }
+    if (message.Turbine22Dark !== undefined) {
+      obj.Turbine22Dark = Void.toJSON(message.Turbine22Dark);
+    }
+    if (message.Arachnid21Silver !== undefined) {
+      obj.Arachnid21Silver = Void.toJSON(message.Arachnid21Silver);
+    }
+    if (message.Arachnid21Black !== undefined) {
+      obj.Arachnid21Black = Void.toJSON(message.Arachnid21Black);
+    }
+    if (message.Arachnid21Grey !== undefined) {
+      obj.Arachnid21Grey = Void.toJSON(message.Arachnid21Grey);
+    }
+    if (message.Slipstream20Carbon !== undefined) {
+      obj.Slipstream20Carbon = Void.toJSON(message.Slipstream20Carbon);
+    }
+    if (message.Slipstream20Dark !== undefined) {
+      obj.Slipstream20Dark = Void.toJSON(message.Slipstream20Dark);
+    }
+    if (message.Slipstream19Carbon !== undefined) {
+      obj.Slipstream19Carbon = Void.toJSON(message.Slipstream19Carbon);
+    }
+    if (message.TwinTurbine21Silver !== undefined) {
+      obj.TwinTurbine21Silver = Void.toJSON(message.TwinTurbine21Silver);
+    }
+    if (message.TwinTurbine21Carbon !== undefined) {
+      obj.TwinTurbine21Carbon = Void.toJSON(message.TwinTurbine21Carbon);
+    }
+    if (message.Tempest19SonicSilver !== undefined) {
+      obj.Tempest19SonicSilver = Void.toJSON(message.Tempest19SonicSilver);
+    }
+    if (message.PinwheelRefresh18 !== undefined) {
+      obj.PinwheelRefresh18 = Void.toJSON(message.PinwheelRefresh18);
+    }
+    if (message.StilettoRefresh19 !== undefined) {
+      obj.StilettoRefresh19 = Void.toJSON(message.StilettoRefresh19);
+    }
+    if (message.UberTurbine20Gunpowder !== undefined) {
+      obj.UberTurbine20Gunpowder = Void.toJSON(message.UberTurbine20Gunpowder);
+    }
+    if (message.Glider18 !== undefined) {
+      obj.Glider18 = Void.toJSON(message.Glider18);
+    }
+    if (message.Helix19 !== undefined) {
+      obj.Helix19 = Void.toJSON(message.Helix19);
+    }
+    if (message.Wishbone20Staggered !== undefined) {
+      obj.Wishbone20Staggered = Void.toJSON(message.Wishbone20Staggered);
+    }
+    if (message.CtBase20 !== undefined) {
+      obj.CtBase20 = Void.toJSON(message.CtBase20);
+    }
+    if (message.CtPremium20 !== undefined) {
+      obj.CtPremium20 = Void.toJSON(message.CtPremium20);
+    }
+    if (message.CtBase18 !== undefined) {
+      obj.CtBase18 = Void.toJSON(message.CtBase18);
+    }
+    if (message.Apollo19MetallicShadow !== undefined) {
+      obj.Apollo19MetallicShadow = Void.toJSON(message.Apollo19MetallicShadow);
+    }
+    if (message.Wishbone19Staggered !== undefined) {
+      obj.Wishbone19Staggered = Void.toJSON(message.Wishbone19Staggered);
+    }
+    if (message.Crossflow19 !== undefined) {
+      obj.Crossflow19 = Void.toJSON(message.Crossflow19);
+    }
+    if (message.HelixV220 !== undefined) {
+      obj.HelixV220 = Void.toJSON(message.HelixV220);
+    }
+    if (message.Standard19 !== undefined) {
+      obj.Standard19 = Void.toJSON(message.Standard19);
+    }
+    if (message.Halo22 !== undefined) {
+      obj.Halo22 = Void.toJSON(message.Halo22);
+    }
+    if (message.Riptide20 !== undefined) {
+      obj.Riptide20 = Void.toJSON(message.Riptide20);
+    }
+    if (message.Cypress21 !== undefined) {
+      obj.Cypress21 = Void.toJSON(message.Cypress21);
+    }
+    if (message.MachinaV219 !== undefined) {
+      obj.MachinaV219 = Void.toJSON(message.MachinaV219);
+    }
+    if (message.ArachnidV221 !== undefined) {
+      obj.ArachnidV221 = Void.toJSON(message.ArachnidV221);
+    }
+    if (message.E4118 !== undefined) {
+      obj.E4118 = Void.toJSON(message.E4118);
+    }
+    if (message.D5018 !== undefined) {
+      obj.D5018 = Void.toJSON(message.D5018);
+    }
+    if (message.HelixV220Dark !== undefined) {
+      obj.HelixV220Dark = Void.toJSON(message.HelixV220Dark);
+    }
+    if (message.UberHelix20 !== undefined) {
+      obj.UberHelix20 = Void.toJSON(message.UberHelix20);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WheelType>, I>>(base?: I): WheelType {
+    return WheelType.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WheelType>, I>>(object: I): WheelType {
+    const message = createBaseWheelType();
+    message.Unknown = (object.Unknown !== undefined && object.Unknown !== null)
+      ? Void.fromPartial(object.Unknown)
+      : undefined;
+    message.ZeroG20Gunpowder = (object.ZeroG20Gunpowder !== undefined && object.ZeroG20Gunpowder !== null)
+      ? Void.fromPartial(object.ZeroG20Gunpowder)
+      : undefined;
+    message.Pinwheel18 = (object.Pinwheel18 !== undefined && object.Pinwheel18 !== null)
+      ? Void.fromPartial(object.Pinwheel18)
+      : undefined;
+    message.Pinwheel18CapKit = (object.Pinwheel18CapKit !== undefined && object.Pinwheel18CapKit !== null)
+      ? Void.fromPartial(object.Pinwheel18CapKit)
+      : undefined;
+    message.Stiletto19 = (object.Stiletto19 !== undefined && object.Stiletto19 !== null)
+      ? Void.fromPartial(object.Stiletto19)
+      : undefined;
+    message.Stiletto20 = (object.Stiletto20 !== undefined && object.Stiletto20 !== null)
+      ? Void.fromPartial(object.Stiletto20)
+      : undefined;
+    message.Stiletto20DarkStaggered =
+      (object.Stiletto20DarkStaggered !== undefined && object.Stiletto20DarkStaggered !== null)
+        ? Void.fromPartial(object.Stiletto20DarkStaggered)
+        : undefined;
+    message.Stiletto20DarkSquare = (object.Stiletto20DarkSquare !== undefined && object.Stiletto20DarkSquare !== null)
+      ? Void.fromPartial(object.Stiletto20DarkSquare)
+      : undefined;
+    message.Gemini19Square = (object.Gemini19Square !== undefined && object.Gemini19Square !== null)
+      ? Void.fromPartial(object.Gemini19Square)
+      : undefined;
+    message.Gemini19Staggered = (object.Gemini19Staggered !== undefined && object.Gemini19Staggered !== null)
+      ? Void.fromPartial(object.Gemini19Staggered)
+      : undefined;
+    message.Induction20Black = (object.Induction20Black !== undefined && object.Induction20Black !== null)
+      ? Void.fromPartial(object.Induction20Black)
+      : undefined;
+    message.UberTurbine21Black = (object.UberTurbine21Black !== undefined && object.UberTurbine21Black !== null)
+      ? Void.fromPartial(object.UberTurbine21Black)
+      : undefined;
+    message.Apollo19 = (object.Apollo19 !== undefined && object.Apollo19 !== null)
+      ? Void.fromPartial(object.Apollo19)
+      : undefined;
+    message.Apollo19CapKit = (object.Apollo19CapKit !== undefined && object.Apollo19CapKit !== null)
+      ? Void.fromPartial(object.Apollo19CapKit)
+      : undefined;
+    message.ZeroG19Gunpowder = (object.ZeroG19Gunpowder !== undefined && object.ZeroG19Gunpowder !== null)
+      ? Void.fromPartial(object.ZeroG19Gunpowder)
+      : undefined;
+    message.Cardenio19 = (object.Cardenio19 !== undefined && object.Cardenio19 !== null)
+      ? Void.fromPartial(object.Cardenio19)
+      : undefined;
+    message.Default = (object.Default !== undefined && object.Default !== null)
+      ? Void.fromPartial(object.Default)
+      : undefined;
+    message.NewTurbine22Black = (object.NewTurbine22Black !== undefined && object.NewTurbine22Black !== null)
+      ? Void.fromPartial(object.NewTurbine22Black)
+      : undefined;
+    message.Cyberstream = (object.Cyberstream !== undefined && object.Cyberstream !== null)
+      ? Void.fromPartial(object.Cyberstream)
+      : undefined;
+    message.Arachnid21 = (object.Arachnid21 !== undefined && object.Arachnid21 !== null)
+      ? Void.fromPartial(object.Arachnid21)
+      : undefined;
+    message.Base19 = (object.Base19 !== undefined && object.Base19 !== null)
+      ? Void.fromPartial(object.Base19)
+      : undefined;
+    message.Silver21 = (object.Silver21 !== undefined && object.Silver21 !== null)
+      ? Void.fromPartial(object.Silver21)
+      : undefined;
+    message.Charcoal21 = (object.Charcoal21 !== undefined && object.Charcoal21 !== null)
+      ? Void.fromPartial(object.Charcoal21)
+      : undefined;
+    message.Silver21Euro = (object.Silver21Euro !== undefined && object.Silver21Euro !== null)
+      ? Void.fromPartial(object.Silver21Euro)
+      : undefined;
+    message.Aero19 = (object.Aero19 !== undefined && object.Aero19 !== null)
+      ? Void.fromPartial(object.Aero19)
+      : undefined;
+    message.Charcoal21Euro = (object.Charcoal21Euro !== undefined && object.Charcoal21Euro !== null)
+      ? Void.fromPartial(object.Charcoal21Euro)
+      : undefined;
+    message.Super21Gray = (object.Super21Gray !== undefined && object.Super21Gray !== null)
+      ? Void.fromPartial(object.Super21Gray)
+      : undefined;
+    message.Super21Silver = (object.Super21Silver !== undefined && object.Super21Silver !== null)
+      ? Void.fromPartial(object.Super21Silver)
+      : undefined;
+    message.Turbine19 = (object.Turbine19 !== undefined && object.Turbine19 !== null)
+      ? Void.fromPartial(object.Turbine19)
+      : undefined;
+    message.Turbine19Dark = (object.Turbine19Dark !== undefined && object.Turbine19Dark !== null)
+      ? Void.fromPartial(object.Turbine19Dark)
+      : undefined;
+    message.AeroTurbine19 = (object.AeroTurbine19 !== undefined && object.AeroTurbine19 !== null)
+      ? Void.fromPartial(object.AeroTurbine19)
+      : undefined;
+    message.AeroTurbine19Black = (object.AeroTurbine19Black !== undefined && object.AeroTurbine19Black !== null)
+      ? Void.fromPartial(object.AeroTurbine19Black)
+      : undefined;
+    message.Helix20 = (object.Helix20 !== undefined && object.Helix20 !== null)
+      ? Void.fromPartial(object.Helix20)
+      : undefined;
+    message.AeroTurbine20 = (object.AeroTurbine20 !== undefined && object.AeroTurbine20 !== null)
+      ? Void.fromPartial(object.AeroTurbine20)
+      : undefined;
+    message.Turbine22 = (object.Turbine22 !== undefined && object.Turbine22 !== null)
+      ? Void.fromPartial(object.Turbine22)
+      : undefined;
+    message.Cyclone19Dark = (object.Cyclone19Dark !== undefined && object.Cyclone19Dark !== null)
+      ? Void.fromPartial(object.Cyclone19Dark)
+      : undefined;
+    message.AeroTurbine20Dark = (object.AeroTurbine20Dark !== undefined && object.AeroTurbine20Dark !== null)
+      ? Void.fromPartial(object.AeroTurbine20Dark)
+      : undefined;
+    message.Turbine22Dark = (object.Turbine22Dark !== undefined && object.Turbine22Dark !== null)
+      ? Void.fromPartial(object.Turbine22Dark)
+      : undefined;
+    message.Arachnid21Silver = (object.Arachnid21Silver !== undefined && object.Arachnid21Silver !== null)
+      ? Void.fromPartial(object.Arachnid21Silver)
+      : undefined;
+    message.Arachnid21Black = (object.Arachnid21Black !== undefined && object.Arachnid21Black !== null)
+      ? Void.fromPartial(object.Arachnid21Black)
+      : undefined;
+    message.Arachnid21Grey = (object.Arachnid21Grey !== undefined && object.Arachnid21Grey !== null)
+      ? Void.fromPartial(object.Arachnid21Grey)
+      : undefined;
+    message.Slipstream20Carbon = (object.Slipstream20Carbon !== undefined && object.Slipstream20Carbon !== null)
+      ? Void.fromPartial(object.Slipstream20Carbon)
+      : undefined;
+    message.Slipstream20Dark = (object.Slipstream20Dark !== undefined && object.Slipstream20Dark !== null)
+      ? Void.fromPartial(object.Slipstream20Dark)
+      : undefined;
+    message.Slipstream19Carbon = (object.Slipstream19Carbon !== undefined && object.Slipstream19Carbon !== null)
+      ? Void.fromPartial(object.Slipstream19Carbon)
+      : undefined;
+    message.TwinTurbine21Silver = (object.TwinTurbine21Silver !== undefined && object.TwinTurbine21Silver !== null)
+      ? Void.fromPartial(object.TwinTurbine21Silver)
+      : undefined;
+    message.TwinTurbine21Carbon = (object.TwinTurbine21Carbon !== undefined && object.TwinTurbine21Carbon !== null)
+      ? Void.fromPartial(object.TwinTurbine21Carbon)
+      : undefined;
+    message.Tempest19SonicSilver = (object.Tempest19SonicSilver !== undefined && object.Tempest19SonicSilver !== null)
+      ? Void.fromPartial(object.Tempest19SonicSilver)
+      : undefined;
+    message.PinwheelRefresh18 = (object.PinwheelRefresh18 !== undefined && object.PinwheelRefresh18 !== null)
+      ? Void.fromPartial(object.PinwheelRefresh18)
+      : undefined;
+    message.StilettoRefresh19 = (object.StilettoRefresh19 !== undefined && object.StilettoRefresh19 !== null)
+      ? Void.fromPartial(object.StilettoRefresh19)
+      : undefined;
+    message.UberTurbine20Gunpowder =
+      (object.UberTurbine20Gunpowder !== undefined && object.UberTurbine20Gunpowder !== null)
+        ? Void.fromPartial(object.UberTurbine20Gunpowder)
+        : undefined;
+    message.Glider18 = (object.Glider18 !== undefined && object.Glider18 !== null)
+      ? Void.fromPartial(object.Glider18)
+      : undefined;
+    message.Helix19 = (object.Helix19 !== undefined && object.Helix19 !== null)
+      ? Void.fromPartial(object.Helix19)
+      : undefined;
+    message.Wishbone20Staggered = (object.Wishbone20Staggered !== undefined && object.Wishbone20Staggered !== null)
+      ? Void.fromPartial(object.Wishbone20Staggered)
+      : undefined;
+    message.CtBase20 = (object.CtBase20 !== undefined && object.CtBase20 !== null)
+      ? Void.fromPartial(object.CtBase20)
+      : undefined;
+    message.CtPremium20 = (object.CtPremium20 !== undefined && object.CtPremium20 !== null)
+      ? Void.fromPartial(object.CtPremium20)
+      : undefined;
+    message.CtBase18 = (object.CtBase18 !== undefined && object.CtBase18 !== null)
+      ? Void.fromPartial(object.CtBase18)
+      : undefined;
+    message.Apollo19MetallicShadow =
+      (object.Apollo19MetallicShadow !== undefined && object.Apollo19MetallicShadow !== null)
+        ? Void.fromPartial(object.Apollo19MetallicShadow)
+        : undefined;
+    message.Wishbone19Staggered = (object.Wishbone19Staggered !== undefined && object.Wishbone19Staggered !== null)
+      ? Void.fromPartial(object.Wishbone19Staggered)
+      : undefined;
+    message.Crossflow19 = (object.Crossflow19 !== undefined && object.Crossflow19 !== null)
+      ? Void.fromPartial(object.Crossflow19)
+      : undefined;
+    message.HelixV220 = (object.HelixV220 !== undefined && object.HelixV220 !== null)
+      ? Void.fromPartial(object.HelixV220)
+      : undefined;
+    message.Standard19 = (object.Standard19 !== undefined && object.Standard19 !== null)
+      ? Void.fromPartial(object.Standard19)
+      : undefined;
+    message.Halo22 = (object.Halo22 !== undefined && object.Halo22 !== null)
+      ? Void.fromPartial(object.Halo22)
+      : undefined;
+    message.Riptide20 = (object.Riptide20 !== undefined && object.Riptide20 !== null)
+      ? Void.fromPartial(object.Riptide20)
+      : undefined;
+    message.Cypress21 = (object.Cypress21 !== undefined && object.Cypress21 !== null)
+      ? Void.fromPartial(object.Cypress21)
+      : undefined;
+    message.MachinaV219 = (object.MachinaV219 !== undefined && object.MachinaV219 !== null)
+      ? Void.fromPartial(object.MachinaV219)
+      : undefined;
+    message.ArachnidV221 = (object.ArachnidV221 !== undefined && object.ArachnidV221 !== null)
+      ? Void.fromPartial(object.ArachnidV221)
+      : undefined;
+    message.E4118 = (object.E4118 !== undefined && object.E4118 !== null) ? Void.fromPartial(object.E4118) : undefined;
+    message.D5018 = (object.D5018 !== undefined && object.D5018 !== null) ? Void.fromPartial(object.D5018) : undefined;
+    message.HelixV220Dark = (object.HelixV220Dark !== undefined && object.HelixV220Dark !== null)
+      ? Void.fromPartial(object.HelixV220Dark)
+      : undefined;
+    message.UberHelix20 = (object.UberHelix20 !== undefined && object.UberHelix20 !== null)
+      ? Void.fromPartial(object.UberHelix20)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseSpoilerType(): SpoilerType {
+  return { None: undefined, Passive: undefined, Active: undefined };
+}
+
+export const SpoilerType: MessageFns<SpoilerType> = {
+  encode(message: SpoilerType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.None !== undefined) {
+      Void.encode(message.None, writer.uint32(10).fork()).join();
+    }
+    if (message.Passive !== undefined) {
+      Void.encode(message.Passive, writer.uint32(18).fork()).join();
+    }
+    if (message.Active !== undefined) {
+      Void.encode(message.Active, writer.uint32(26).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SpoilerType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSpoilerType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.None = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Passive = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Active = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SpoilerType {
+    return {
+      None: isSet(object.None) ? Void.fromJSON(object.None) : undefined,
+      Passive: isSet(object.Passive) ? Void.fromJSON(object.Passive) : undefined,
+      Active: isSet(object.Active) ? Void.fromJSON(object.Active) : undefined,
+    };
+  },
+
+  toJSON(message: SpoilerType): unknown {
+    const obj: any = {};
+    if (message.None !== undefined) {
+      obj.None = Void.toJSON(message.None);
+    }
+    if (message.Passive !== undefined) {
+      obj.Passive = Void.toJSON(message.Passive);
+    }
+    if (message.Active !== undefined) {
+      obj.Active = Void.toJSON(message.Active);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SpoilerType>, I>>(base?: I): SpoilerType {
+    return SpoilerType.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SpoilerType>, I>>(object: I): SpoilerType {
+    const message = createBaseSpoilerType();
+    message.None = (object.None !== undefined && object.None !== null) ? Void.fromPartial(object.None) : undefined;
+    message.Passive = (object.Passive !== undefined && object.Passive !== null)
+      ? Void.fromPartial(object.Passive)
+      : undefined;
+    message.Active = (object.Active !== undefined && object.Active !== null)
+      ? Void.fromPartial(object.Active)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseRoofColor(): RoofColor {
+  return { None: undefined, Glass: undefined, Black: undefined, Colored: undefined };
+}
+
+export const RoofColor: MessageFns<RoofColor> = {
+  encode(message: RoofColor, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.None !== undefined) {
+      Void.encode(message.None, writer.uint32(10).fork()).join();
+    }
+    if (message.Glass !== undefined) {
+      Void.encode(message.Glass, writer.uint32(18).fork()).join();
+    }
+    if (message.Black !== undefined) {
+      Void.encode(message.Black, writer.uint32(26).fork()).join();
+    }
+    if (message.Colored !== undefined) {
+      Void.encode(message.Colored, writer.uint32(34).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): RoofColor {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRoofColor();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.None = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Glass = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Black = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.Colored = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): RoofColor {
+    return {
+      None: isSet(object.None) ? Void.fromJSON(object.None) : undefined,
+      Glass: isSet(object.Glass) ? Void.fromJSON(object.Glass) : undefined,
+      Black: isSet(object.Black) ? Void.fromJSON(object.Black) : undefined,
+      Colored: isSet(object.Colored) ? Void.fromJSON(object.Colored) : undefined,
+    };
+  },
+
+  toJSON(message: RoofColor): unknown {
+    const obj: any = {};
+    if (message.None !== undefined) {
+      obj.None = Void.toJSON(message.None);
+    }
+    if (message.Glass !== undefined) {
+      obj.Glass = Void.toJSON(message.Glass);
+    }
+    if (message.Black !== undefined) {
+      obj.Black = Void.toJSON(message.Black);
+    }
+    if (message.Colored !== undefined) {
+      obj.Colored = Void.toJSON(message.Colored);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<RoofColor>, I>>(base?: I): RoofColor {
+    return RoofColor.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<RoofColor>, I>>(object: I): RoofColor {
+    const message = createBaseRoofColor();
+    message.None = (object.None !== undefined && object.None !== null) ? Void.fromPartial(object.None) : undefined;
+    message.Glass = (object.Glass !== undefined && object.Glass !== null) ? Void.fromPartial(object.Glass) : undefined;
+    message.Black = (object.Black !== undefined && object.Black !== null) ? Void.fromPartial(object.Black) : undefined;
+    message.Colored = (object.Colored !== undefined && object.Colored !== null)
+      ? Void.fromPartial(object.Colored)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseExteriorColor(): ExteriorColor {
+  return {
+    Unknown: undefined,
+    RedMulticoat: undefined,
+    SolidBlack: undefined,
+    SilverMetallic: undefined,
+    MidnightSilver: undefined,
+    DeepBlue: undefined,
+    PearlWhite: undefined,
+    DefaultColor: undefined,
+    Black: undefined,
+    White: undefined,
+    Silver: undefined,
+    Grey: undefined,
+    Blue: undefined,
+    Green: undefined,
+    Brown: undefined,
+    Pearl: undefined,
+    SigRed: undefined,
+    Red: undefined,
+    SteelGrey: undefined,
+    MetallicBlack: undefined,
+    TitaniumCopper: undefined,
+    SignatureBlue: undefined,
+    MidnightCherryRed: undefined,
+    Quicksilver: undefined,
+    UltraRed: undefined,
+    StealthGrey: undefined,
+    LunarSilver: undefined,
+    GlacierBlue: undefined,
+    DiamondBlack: undefined,
+    FrostBlue: undefined,
+    SilkRoadSilver: undefined,
+    MarineBlue: undefined,
+    GarnetRed: undefined,
+    CoastalBlue: undefined,
+  };
+}
+
+export const ExteriorColor: MessageFns<ExteriorColor> = {
+  encode(message: ExteriorColor, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Unknown !== undefined) {
+      Void.encode(message.Unknown, writer.uint32(26).fork()).join();
+    }
+    if (message.RedMulticoat !== undefined) {
+      Void.encode(message.RedMulticoat, writer.uint32(34).fork()).join();
+    }
+    if (message.SolidBlack !== undefined) {
+      Void.encode(message.SolidBlack, writer.uint32(42).fork()).join();
+    }
+    if (message.SilverMetallic !== undefined) {
+      Void.encode(message.SilverMetallic, writer.uint32(50).fork()).join();
+    }
+    if (message.MidnightSilver !== undefined) {
+      Void.encode(message.MidnightSilver, writer.uint32(58).fork()).join();
+    }
+    if (message.DeepBlue !== undefined) {
+      Void.encode(message.DeepBlue, writer.uint32(66).fork()).join();
+    }
+    if (message.PearlWhite !== undefined) {
+      Void.encode(message.PearlWhite, writer.uint32(74).fork()).join();
+    }
+    if (message.DefaultColor !== undefined) {
+      Void.encode(message.DefaultColor, writer.uint32(82).fork()).join();
+    }
+    if (message.Black !== undefined) {
+      Void.encode(message.Black, writer.uint32(90).fork()).join();
+    }
+    if (message.White !== undefined) {
+      Void.encode(message.White, writer.uint32(98).fork()).join();
+    }
+    if (message.Silver !== undefined) {
+      Void.encode(message.Silver, writer.uint32(106).fork()).join();
+    }
+    if (message.Grey !== undefined) {
+      Void.encode(message.Grey, writer.uint32(114).fork()).join();
+    }
+    if (message.Blue !== undefined) {
+      Void.encode(message.Blue, writer.uint32(122).fork()).join();
+    }
+    if (message.Green !== undefined) {
+      Void.encode(message.Green, writer.uint32(130).fork()).join();
+    }
+    if (message.Brown !== undefined) {
+      Void.encode(message.Brown, writer.uint32(138).fork()).join();
+    }
+    if (message.Pearl !== undefined) {
+      Void.encode(message.Pearl, writer.uint32(146).fork()).join();
+    }
+    if (message.SigRed !== undefined) {
+      Void.encode(message.SigRed, writer.uint32(154).fork()).join();
+    }
+    if (message.Red !== undefined) {
+      Void.encode(message.Red, writer.uint32(162).fork()).join();
+    }
+    if (message.SteelGrey !== undefined) {
+      Void.encode(message.SteelGrey, writer.uint32(170).fork()).join();
+    }
+    if (message.MetallicBlack !== undefined) {
+      Void.encode(message.MetallicBlack, writer.uint32(178).fork()).join();
+    }
+    if (message.TitaniumCopper !== undefined) {
+      Void.encode(message.TitaniumCopper, writer.uint32(186).fork()).join();
+    }
+    if (message.SignatureBlue !== undefined) {
+      Void.encode(message.SignatureBlue, writer.uint32(194).fork()).join();
+    }
+    if (message.MidnightCherryRed !== undefined) {
+      Void.encode(message.MidnightCherryRed, writer.uint32(202).fork()).join();
+    }
+    if (message.Quicksilver !== undefined) {
+      Void.encode(message.Quicksilver, writer.uint32(210).fork()).join();
+    }
+    if (message.UltraRed !== undefined) {
+      Void.encode(message.UltraRed, writer.uint32(218).fork()).join();
+    }
+    if (message.StealthGrey !== undefined) {
+      Void.encode(message.StealthGrey, writer.uint32(226).fork()).join();
+    }
+    if (message.LunarSilver !== undefined) {
+      Void.encode(message.LunarSilver, writer.uint32(234).fork()).join();
+    }
+    if (message.GlacierBlue !== undefined) {
+      Void.encode(message.GlacierBlue, writer.uint32(242).fork()).join();
+    }
+    if (message.DiamondBlack !== undefined) {
+      Void.encode(message.DiamondBlack, writer.uint32(250).fork()).join();
+    }
+    if (message.FrostBlue !== undefined) {
+      Void.encode(message.FrostBlue, writer.uint32(258).fork()).join();
+    }
+    if (message.SilkRoadSilver !== undefined) {
+      Void.encode(message.SilkRoadSilver, writer.uint32(266).fork()).join();
+    }
+    if (message.MarineBlue !== undefined) {
+      Void.encode(message.MarineBlue, writer.uint32(274).fork()).join();
+    }
+    if (message.GarnetRed !== undefined) {
+      Void.encode(message.GarnetRed, writer.uint32(282).fork()).join();
+    }
+    if (message.CoastalBlue !== undefined) {
+      Void.encode(message.CoastalBlue, writer.uint32(290).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ExteriorColor {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseExteriorColor();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Unknown = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.RedMulticoat = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.SolidBlack = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.SilverMetallic = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.MidnightSilver = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.DeepBlue = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.PearlWhite = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.DefaultColor = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.Black = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 12: {
+          if (tag !== 98) {
+            break;
+          }
+
+          message.White = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 13: {
+          if (tag !== 106) {
+            break;
+          }
+
+          message.Silver = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 14: {
+          if (tag !== 114) {
+            break;
+          }
+
+          message.Grey = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 15: {
+          if (tag !== 122) {
+            break;
+          }
+
+          message.Blue = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 16: {
+          if (tag !== 130) {
+            break;
+          }
+
+          message.Green = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 17: {
+          if (tag !== 138) {
+            break;
+          }
+
+          message.Brown = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 18: {
+          if (tag !== 146) {
+            break;
+          }
+
+          message.Pearl = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 19: {
+          if (tag !== 154) {
+            break;
+          }
+
+          message.SigRed = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 20: {
+          if (tag !== 162) {
+            break;
+          }
+
+          message.Red = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 21: {
+          if (tag !== 170) {
+            break;
+          }
+
+          message.SteelGrey = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 22: {
+          if (tag !== 178) {
+            break;
+          }
+
+          message.MetallicBlack = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 23: {
+          if (tag !== 186) {
+            break;
+          }
+
+          message.TitaniumCopper = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 24: {
+          if (tag !== 194) {
+            break;
+          }
+
+          message.SignatureBlue = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 25: {
+          if (tag !== 202) {
+            break;
+          }
+
+          message.MidnightCherryRed = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 26: {
+          if (tag !== 210) {
+            break;
+          }
+
+          message.Quicksilver = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 27: {
+          if (tag !== 218) {
+            break;
+          }
+
+          message.UltraRed = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 28: {
+          if (tag !== 226) {
+            break;
+          }
+
+          message.StealthGrey = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 29: {
+          if (tag !== 234) {
+            break;
+          }
+
+          message.LunarSilver = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 30: {
+          if (tag !== 242) {
+            break;
+          }
+
+          message.GlacierBlue = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 31: {
+          if (tag !== 250) {
+            break;
+          }
+
+          message.DiamondBlack = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 32: {
+          if (tag !== 258) {
+            break;
+          }
+
+          message.FrostBlue = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 33: {
+          if (tag !== 266) {
+            break;
+          }
+
+          message.SilkRoadSilver = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 34: {
+          if (tag !== 274) {
+            break;
+          }
+
+          message.MarineBlue = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 35: {
+          if (tag !== 282) {
+            break;
+          }
+
+          message.GarnetRed = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 36: {
+          if (tag !== 290) {
+            break;
+          }
+
+          message.CoastalBlue = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ExteriorColor {
+    return {
+      Unknown: isSet(object.Unknown) ? Void.fromJSON(object.Unknown) : undefined,
+      RedMulticoat: isSet(object.RedMulticoat) ? Void.fromJSON(object.RedMulticoat) : undefined,
+      SolidBlack: isSet(object.SolidBlack) ? Void.fromJSON(object.SolidBlack) : undefined,
+      SilverMetallic: isSet(object.SilverMetallic) ? Void.fromJSON(object.SilverMetallic) : undefined,
+      MidnightSilver: isSet(object.MidnightSilver) ? Void.fromJSON(object.MidnightSilver) : undefined,
+      DeepBlue: isSet(object.DeepBlue) ? Void.fromJSON(object.DeepBlue) : undefined,
+      PearlWhite: isSet(object.PearlWhite) ? Void.fromJSON(object.PearlWhite) : undefined,
+      DefaultColor: isSet(object.DefaultColor) ? Void.fromJSON(object.DefaultColor) : undefined,
+      Black: isSet(object.Black) ? Void.fromJSON(object.Black) : undefined,
+      White: isSet(object.White) ? Void.fromJSON(object.White) : undefined,
+      Silver: isSet(object.Silver) ? Void.fromJSON(object.Silver) : undefined,
+      Grey: isSet(object.Grey) ? Void.fromJSON(object.Grey) : undefined,
+      Blue: isSet(object.Blue) ? Void.fromJSON(object.Blue) : undefined,
+      Green: isSet(object.Green) ? Void.fromJSON(object.Green) : undefined,
+      Brown: isSet(object.Brown) ? Void.fromJSON(object.Brown) : undefined,
+      Pearl: isSet(object.Pearl) ? Void.fromJSON(object.Pearl) : undefined,
+      SigRed: isSet(object.SigRed) ? Void.fromJSON(object.SigRed) : undefined,
+      Red: isSet(object.Red) ? Void.fromJSON(object.Red) : undefined,
+      SteelGrey: isSet(object.SteelGrey) ? Void.fromJSON(object.SteelGrey) : undefined,
+      MetallicBlack: isSet(object.MetallicBlack) ? Void.fromJSON(object.MetallicBlack) : undefined,
+      TitaniumCopper: isSet(object.TitaniumCopper) ? Void.fromJSON(object.TitaniumCopper) : undefined,
+      SignatureBlue: isSet(object.SignatureBlue) ? Void.fromJSON(object.SignatureBlue) : undefined,
+      MidnightCherryRed: isSet(object.MidnightCherryRed) ? Void.fromJSON(object.MidnightCherryRed) : undefined,
+      Quicksilver: isSet(object.Quicksilver) ? Void.fromJSON(object.Quicksilver) : undefined,
+      UltraRed: isSet(object.UltraRed) ? Void.fromJSON(object.UltraRed) : undefined,
+      StealthGrey: isSet(object.StealthGrey) ? Void.fromJSON(object.StealthGrey) : undefined,
+      LunarSilver: isSet(object.LunarSilver) ? Void.fromJSON(object.LunarSilver) : undefined,
+      GlacierBlue: isSet(object.GlacierBlue) ? Void.fromJSON(object.GlacierBlue) : undefined,
+      DiamondBlack: isSet(object.DiamondBlack) ? Void.fromJSON(object.DiamondBlack) : undefined,
+      FrostBlue: isSet(object.FrostBlue) ? Void.fromJSON(object.FrostBlue) : undefined,
+      SilkRoadSilver: isSet(object.SilkRoadSilver) ? Void.fromJSON(object.SilkRoadSilver) : undefined,
+      MarineBlue: isSet(object.MarineBlue) ? Void.fromJSON(object.MarineBlue) : undefined,
+      GarnetRed: isSet(object.GarnetRed) ? Void.fromJSON(object.GarnetRed) : undefined,
+      CoastalBlue: isSet(object.CoastalBlue) ? Void.fromJSON(object.CoastalBlue) : undefined,
+    };
+  },
+
+  toJSON(message: ExteriorColor): unknown {
+    const obj: any = {};
+    if (message.Unknown !== undefined) {
+      obj.Unknown = Void.toJSON(message.Unknown);
+    }
+    if (message.RedMulticoat !== undefined) {
+      obj.RedMulticoat = Void.toJSON(message.RedMulticoat);
+    }
+    if (message.SolidBlack !== undefined) {
+      obj.SolidBlack = Void.toJSON(message.SolidBlack);
+    }
+    if (message.SilverMetallic !== undefined) {
+      obj.SilverMetallic = Void.toJSON(message.SilverMetallic);
+    }
+    if (message.MidnightSilver !== undefined) {
+      obj.MidnightSilver = Void.toJSON(message.MidnightSilver);
+    }
+    if (message.DeepBlue !== undefined) {
+      obj.DeepBlue = Void.toJSON(message.DeepBlue);
+    }
+    if (message.PearlWhite !== undefined) {
+      obj.PearlWhite = Void.toJSON(message.PearlWhite);
+    }
+    if (message.DefaultColor !== undefined) {
+      obj.DefaultColor = Void.toJSON(message.DefaultColor);
+    }
+    if (message.Black !== undefined) {
+      obj.Black = Void.toJSON(message.Black);
+    }
+    if (message.White !== undefined) {
+      obj.White = Void.toJSON(message.White);
+    }
+    if (message.Silver !== undefined) {
+      obj.Silver = Void.toJSON(message.Silver);
+    }
+    if (message.Grey !== undefined) {
+      obj.Grey = Void.toJSON(message.Grey);
+    }
+    if (message.Blue !== undefined) {
+      obj.Blue = Void.toJSON(message.Blue);
+    }
+    if (message.Green !== undefined) {
+      obj.Green = Void.toJSON(message.Green);
+    }
+    if (message.Brown !== undefined) {
+      obj.Brown = Void.toJSON(message.Brown);
+    }
+    if (message.Pearl !== undefined) {
+      obj.Pearl = Void.toJSON(message.Pearl);
+    }
+    if (message.SigRed !== undefined) {
+      obj.SigRed = Void.toJSON(message.SigRed);
+    }
+    if (message.Red !== undefined) {
+      obj.Red = Void.toJSON(message.Red);
+    }
+    if (message.SteelGrey !== undefined) {
+      obj.SteelGrey = Void.toJSON(message.SteelGrey);
+    }
+    if (message.MetallicBlack !== undefined) {
+      obj.MetallicBlack = Void.toJSON(message.MetallicBlack);
+    }
+    if (message.TitaniumCopper !== undefined) {
+      obj.TitaniumCopper = Void.toJSON(message.TitaniumCopper);
+    }
+    if (message.SignatureBlue !== undefined) {
+      obj.SignatureBlue = Void.toJSON(message.SignatureBlue);
+    }
+    if (message.MidnightCherryRed !== undefined) {
+      obj.MidnightCherryRed = Void.toJSON(message.MidnightCherryRed);
+    }
+    if (message.Quicksilver !== undefined) {
+      obj.Quicksilver = Void.toJSON(message.Quicksilver);
+    }
+    if (message.UltraRed !== undefined) {
+      obj.UltraRed = Void.toJSON(message.UltraRed);
+    }
+    if (message.StealthGrey !== undefined) {
+      obj.StealthGrey = Void.toJSON(message.StealthGrey);
+    }
+    if (message.LunarSilver !== undefined) {
+      obj.LunarSilver = Void.toJSON(message.LunarSilver);
+    }
+    if (message.GlacierBlue !== undefined) {
+      obj.GlacierBlue = Void.toJSON(message.GlacierBlue);
+    }
+    if (message.DiamondBlack !== undefined) {
+      obj.DiamondBlack = Void.toJSON(message.DiamondBlack);
+    }
+    if (message.FrostBlue !== undefined) {
+      obj.FrostBlue = Void.toJSON(message.FrostBlue);
+    }
+    if (message.SilkRoadSilver !== undefined) {
+      obj.SilkRoadSilver = Void.toJSON(message.SilkRoadSilver);
+    }
+    if (message.MarineBlue !== undefined) {
+      obj.MarineBlue = Void.toJSON(message.MarineBlue);
+    }
+    if (message.GarnetRed !== undefined) {
+      obj.GarnetRed = Void.toJSON(message.GarnetRed);
+    }
+    if (message.CoastalBlue !== undefined) {
+      obj.CoastalBlue = Void.toJSON(message.CoastalBlue);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ExteriorColor>, I>>(base?: I): ExteriorColor {
+    return ExteriorColor.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ExteriorColor>, I>>(object: I): ExteriorColor {
+    const message = createBaseExteriorColor();
+    message.Unknown = (object.Unknown !== undefined && object.Unknown !== null)
+      ? Void.fromPartial(object.Unknown)
+      : undefined;
+    message.RedMulticoat = (object.RedMulticoat !== undefined && object.RedMulticoat !== null)
+      ? Void.fromPartial(object.RedMulticoat)
+      : undefined;
+    message.SolidBlack = (object.SolidBlack !== undefined && object.SolidBlack !== null)
+      ? Void.fromPartial(object.SolidBlack)
+      : undefined;
+    message.SilverMetallic = (object.SilverMetallic !== undefined && object.SilverMetallic !== null)
+      ? Void.fromPartial(object.SilverMetallic)
+      : undefined;
+    message.MidnightSilver = (object.MidnightSilver !== undefined && object.MidnightSilver !== null)
+      ? Void.fromPartial(object.MidnightSilver)
+      : undefined;
+    message.DeepBlue = (object.DeepBlue !== undefined && object.DeepBlue !== null)
+      ? Void.fromPartial(object.DeepBlue)
+      : undefined;
+    message.PearlWhite = (object.PearlWhite !== undefined && object.PearlWhite !== null)
+      ? Void.fromPartial(object.PearlWhite)
+      : undefined;
+    message.DefaultColor = (object.DefaultColor !== undefined && object.DefaultColor !== null)
+      ? Void.fromPartial(object.DefaultColor)
+      : undefined;
+    message.Black = (object.Black !== undefined && object.Black !== null) ? Void.fromPartial(object.Black) : undefined;
+    message.White = (object.White !== undefined && object.White !== null) ? Void.fromPartial(object.White) : undefined;
+    message.Silver = (object.Silver !== undefined && object.Silver !== null)
+      ? Void.fromPartial(object.Silver)
+      : undefined;
+    message.Grey = (object.Grey !== undefined && object.Grey !== null) ? Void.fromPartial(object.Grey) : undefined;
+    message.Blue = (object.Blue !== undefined && object.Blue !== null) ? Void.fromPartial(object.Blue) : undefined;
+    message.Green = (object.Green !== undefined && object.Green !== null) ? Void.fromPartial(object.Green) : undefined;
+    message.Brown = (object.Brown !== undefined && object.Brown !== null) ? Void.fromPartial(object.Brown) : undefined;
+    message.Pearl = (object.Pearl !== undefined && object.Pearl !== null) ? Void.fromPartial(object.Pearl) : undefined;
+    message.SigRed = (object.SigRed !== undefined && object.SigRed !== null)
+      ? Void.fromPartial(object.SigRed)
+      : undefined;
+    message.Red = (object.Red !== undefined && object.Red !== null) ? Void.fromPartial(object.Red) : undefined;
+    message.SteelGrey = (object.SteelGrey !== undefined && object.SteelGrey !== null)
+      ? Void.fromPartial(object.SteelGrey)
+      : undefined;
+    message.MetallicBlack = (object.MetallicBlack !== undefined && object.MetallicBlack !== null)
+      ? Void.fromPartial(object.MetallicBlack)
+      : undefined;
+    message.TitaniumCopper = (object.TitaniumCopper !== undefined && object.TitaniumCopper !== null)
+      ? Void.fromPartial(object.TitaniumCopper)
+      : undefined;
+    message.SignatureBlue = (object.SignatureBlue !== undefined && object.SignatureBlue !== null)
+      ? Void.fromPartial(object.SignatureBlue)
+      : undefined;
+    message.MidnightCherryRed = (object.MidnightCherryRed !== undefined && object.MidnightCherryRed !== null)
+      ? Void.fromPartial(object.MidnightCherryRed)
+      : undefined;
+    message.Quicksilver = (object.Quicksilver !== undefined && object.Quicksilver !== null)
+      ? Void.fromPartial(object.Quicksilver)
+      : undefined;
+    message.UltraRed = (object.UltraRed !== undefined && object.UltraRed !== null)
+      ? Void.fromPartial(object.UltraRed)
+      : undefined;
+    message.StealthGrey = (object.StealthGrey !== undefined && object.StealthGrey !== null)
+      ? Void.fromPartial(object.StealthGrey)
+      : undefined;
+    message.LunarSilver = (object.LunarSilver !== undefined && object.LunarSilver !== null)
+      ? Void.fromPartial(object.LunarSilver)
+      : undefined;
+    message.GlacierBlue = (object.GlacierBlue !== undefined && object.GlacierBlue !== null)
+      ? Void.fromPartial(object.GlacierBlue)
+      : undefined;
+    message.DiamondBlack = (object.DiamondBlack !== undefined && object.DiamondBlack !== null)
+      ? Void.fromPartial(object.DiamondBlack)
+      : undefined;
+    message.FrostBlue = (object.FrostBlue !== undefined && object.FrostBlue !== null)
+      ? Void.fromPartial(object.FrostBlue)
+      : undefined;
+    message.SilkRoadSilver = (object.SilkRoadSilver !== undefined && object.SilkRoadSilver !== null)
+      ? Void.fromPartial(object.SilkRoadSilver)
+      : undefined;
+    message.MarineBlue = (object.MarineBlue !== undefined && object.MarineBlue !== null)
+      ? Void.fromPartial(object.MarineBlue)
+      : undefined;
+    message.GarnetRed = (object.GarnetRed !== undefined && object.GarnetRed !== null)
+      ? Void.fromPartial(object.GarnetRed)
+      : undefined;
+    message.CoastalBlue = (object.CoastalBlue !== undefined && object.CoastalBlue !== null)
+      ? Void.fromPartial(object.CoastalBlue)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseRearSeatHeaters(): RearSeatHeaters {
+  return { None: undefined, Base: undefined, Executive: undefined, Gentherm: undefined, BaseModelX: undefined };
+}
+
+export const RearSeatHeaters: MessageFns<RearSeatHeaters> = {
+  encode(message: RearSeatHeaters, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.None !== undefined) {
+      Void.encode(message.None, writer.uint32(10).fork()).join();
+    }
+    if (message.Base !== undefined) {
+      Void.encode(message.Base, writer.uint32(18).fork()).join();
+    }
+    if (message.Executive !== undefined) {
+      Void.encode(message.Executive, writer.uint32(26).fork()).join();
+    }
+    if (message.Gentherm !== undefined) {
+      Void.encode(message.Gentherm, writer.uint32(34).fork()).join();
+    }
+    if (message.BaseModelX !== undefined) {
+      Void.encode(message.BaseModelX, writer.uint32(42).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): RearSeatHeaters {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRearSeatHeaters();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.None = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Base = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Executive = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.Gentherm = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.BaseModelX = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): RearSeatHeaters {
+    return {
+      None: isSet(object.None) ? Void.fromJSON(object.None) : undefined,
+      Base: isSet(object.Base) ? Void.fromJSON(object.Base) : undefined,
+      Executive: isSet(object.Executive) ? Void.fromJSON(object.Executive) : undefined,
+      Gentherm: isSet(object.Gentherm) ? Void.fromJSON(object.Gentherm) : undefined,
+      BaseModelX: isSet(object.BaseModelX) ? Void.fromJSON(object.BaseModelX) : undefined,
+    };
+  },
+
+  toJSON(message: RearSeatHeaters): unknown {
+    const obj: any = {};
+    if (message.None !== undefined) {
+      obj.None = Void.toJSON(message.None);
+    }
+    if (message.Base !== undefined) {
+      obj.Base = Void.toJSON(message.Base);
+    }
+    if (message.Executive !== undefined) {
+      obj.Executive = Void.toJSON(message.Executive);
+    }
+    if (message.Gentherm !== undefined) {
+      obj.Gentherm = Void.toJSON(message.Gentherm);
+    }
+    if (message.BaseModelX !== undefined) {
+      obj.BaseModelX = Void.toJSON(message.BaseModelX);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<RearSeatHeaters>, I>>(base?: I): RearSeatHeaters {
+    return RearSeatHeaters.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<RearSeatHeaters>, I>>(object: I): RearSeatHeaters {
+    const message = createBaseRearSeatHeaters();
+    message.None = (object.None !== undefined && object.None !== null) ? Void.fromPartial(object.None) : undefined;
+    message.Base = (object.Base !== undefined && object.Base !== null) ? Void.fromPartial(object.Base) : undefined;
+    message.Executive = (object.Executive !== undefined && object.Executive !== null)
+      ? Void.fromPartial(object.Executive)
+      : undefined;
+    message.Gentherm = (object.Gentherm !== undefined && object.Gentherm !== null)
+      ? Void.fromPartial(object.Gentherm)
+      : undefined;
+    message.BaseModelX = (object.BaseModelX !== undefined && object.BaseModelX !== null)
+      ? Void.fromPartial(object.BaseModelX)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseSeatType(): SeatType {
+  return { Base: undefined, Recaro: undefined, TeslaMsGen1: undefined };
+}
+
+export const SeatType: MessageFns<SeatType> = {
+  encode(message: SeatType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Base !== undefined) {
+      Void.encode(message.Base, writer.uint32(10).fork()).join();
+    }
+    if (message.Recaro !== undefined) {
+      Void.encode(message.Recaro, writer.uint32(18).fork()).join();
+    }
+    if (message.TeslaMsGen1 !== undefined) {
+      Void.encode(message.TeslaMsGen1, writer.uint32(26).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SeatType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSeatType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Base = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Recaro = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.TeslaMsGen1 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SeatType {
+    return {
+      Base: isSet(object.Base) ? Void.fromJSON(object.Base) : undefined,
+      Recaro: isSet(object.Recaro) ? Void.fromJSON(object.Recaro) : undefined,
+      TeslaMsGen1: isSet(object.TeslaMsGen1) ? Void.fromJSON(object.TeslaMsGen1) : undefined,
+    };
+  },
+
+  toJSON(message: SeatType): unknown {
+    const obj: any = {};
+    if (message.Base !== undefined) {
+      obj.Base = Void.toJSON(message.Base);
+    }
+    if (message.Recaro !== undefined) {
+      obj.Recaro = Void.toJSON(message.Recaro);
+    }
+    if (message.TeslaMsGen1 !== undefined) {
+      obj.TeslaMsGen1 = Void.toJSON(message.TeslaMsGen1);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SeatType>, I>>(base?: I): SeatType {
+    return SeatType.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SeatType>, I>>(object: I): SeatType {
+    const message = createBaseSeatType();
+    message.Base = (object.Base !== undefined && object.Base !== null) ? Void.fromPartial(object.Base) : undefined;
+    message.Recaro = (object.Recaro !== undefined && object.Recaro !== null)
+      ? Void.fromPartial(object.Recaro)
+      : undefined;
+    message.TeslaMsGen1 = (object.TeslaMsGen1 !== undefined && object.TeslaMsGen1 !== null)
+      ? Void.fromPartial(object.TeslaMsGen1)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseRearSeatType(): RearSeatType {
+  return {
+    Base: undefined,
+    Recaro: undefined,
+    Executive: undefined,
+    TwoSeat: undefined,
+    FoldFlat: undefined,
+    FoldFlatMotorized: undefined,
+    TwoSeatConsole: undefined,
+    FoldFlatTwoMotor: undefined,
+    FoldFlatTwoMotorHall: undefined,
+    FoldFlatHallBuckles: undefined,
+  };
+}
+
+export const RearSeatType: MessageFns<RearSeatType> = {
+  encode(message: RearSeatType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Base !== undefined) {
+      Void.encode(message.Base, writer.uint32(10).fork()).join();
+    }
+    if (message.Recaro !== undefined) {
+      Void.encode(message.Recaro, writer.uint32(18).fork()).join();
+    }
+    if (message.Executive !== undefined) {
+      Void.encode(message.Executive, writer.uint32(26).fork()).join();
+    }
+    if (message.TwoSeat !== undefined) {
+      Void.encode(message.TwoSeat, writer.uint32(34).fork()).join();
+    }
+    if (message.FoldFlat !== undefined) {
+      Void.encode(message.FoldFlat, writer.uint32(42).fork()).join();
+    }
+    if (message.FoldFlatMotorized !== undefined) {
+      Void.encode(message.FoldFlatMotorized, writer.uint32(50).fork()).join();
+    }
+    if (message.TwoSeatConsole !== undefined) {
+      Void.encode(message.TwoSeatConsole, writer.uint32(58).fork()).join();
+    }
+    if (message.FoldFlatTwoMotor !== undefined) {
+      Void.encode(message.FoldFlatTwoMotor, writer.uint32(66).fork()).join();
+    }
+    if (message.FoldFlatTwoMotorHall !== undefined) {
+      Void.encode(message.FoldFlatTwoMotorHall, writer.uint32(74).fork()).join();
+    }
+    if (message.FoldFlatHallBuckles !== undefined) {
+      Void.encode(message.FoldFlatHallBuckles, writer.uint32(82).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): RearSeatType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRearSeatType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Base = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Recaro = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Executive = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.TwoSeat = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.FoldFlat = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.FoldFlatMotorized = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.TwoSeatConsole = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.FoldFlatTwoMotor = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.FoldFlatTwoMotorHall = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.FoldFlatHallBuckles = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): RearSeatType {
+    return {
+      Base: isSet(object.Base) ? Void.fromJSON(object.Base) : undefined,
+      Recaro: isSet(object.Recaro) ? Void.fromJSON(object.Recaro) : undefined,
+      Executive: isSet(object.Executive) ? Void.fromJSON(object.Executive) : undefined,
+      TwoSeat: isSet(object.TwoSeat) ? Void.fromJSON(object.TwoSeat) : undefined,
+      FoldFlat: isSet(object.FoldFlat) ? Void.fromJSON(object.FoldFlat) : undefined,
+      FoldFlatMotorized: isSet(object.FoldFlatMotorized) ? Void.fromJSON(object.FoldFlatMotorized) : undefined,
+      TwoSeatConsole: isSet(object.TwoSeatConsole) ? Void.fromJSON(object.TwoSeatConsole) : undefined,
+      FoldFlatTwoMotor: isSet(object.FoldFlatTwoMotor) ? Void.fromJSON(object.FoldFlatTwoMotor) : undefined,
+      FoldFlatTwoMotorHall: isSet(object.FoldFlatTwoMotorHall) ? Void.fromJSON(object.FoldFlatTwoMotorHall) : undefined,
+      FoldFlatHallBuckles: isSet(object.FoldFlatHallBuckles) ? Void.fromJSON(object.FoldFlatHallBuckles) : undefined,
+    };
+  },
+
+  toJSON(message: RearSeatType): unknown {
+    const obj: any = {};
+    if (message.Base !== undefined) {
+      obj.Base = Void.toJSON(message.Base);
+    }
+    if (message.Recaro !== undefined) {
+      obj.Recaro = Void.toJSON(message.Recaro);
+    }
+    if (message.Executive !== undefined) {
+      obj.Executive = Void.toJSON(message.Executive);
+    }
+    if (message.TwoSeat !== undefined) {
+      obj.TwoSeat = Void.toJSON(message.TwoSeat);
+    }
+    if (message.FoldFlat !== undefined) {
+      obj.FoldFlat = Void.toJSON(message.FoldFlat);
+    }
+    if (message.FoldFlatMotorized !== undefined) {
+      obj.FoldFlatMotorized = Void.toJSON(message.FoldFlatMotorized);
+    }
+    if (message.TwoSeatConsole !== undefined) {
+      obj.TwoSeatConsole = Void.toJSON(message.TwoSeatConsole);
+    }
+    if (message.FoldFlatTwoMotor !== undefined) {
+      obj.FoldFlatTwoMotor = Void.toJSON(message.FoldFlatTwoMotor);
+    }
+    if (message.FoldFlatTwoMotorHall !== undefined) {
+      obj.FoldFlatTwoMotorHall = Void.toJSON(message.FoldFlatTwoMotorHall);
+    }
+    if (message.FoldFlatHallBuckles !== undefined) {
+      obj.FoldFlatHallBuckles = Void.toJSON(message.FoldFlatHallBuckles);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<RearSeatType>, I>>(base?: I): RearSeatType {
+    return RearSeatType.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<RearSeatType>, I>>(object: I): RearSeatType {
+    const message = createBaseRearSeatType();
+    message.Base = (object.Base !== undefined && object.Base !== null) ? Void.fromPartial(object.Base) : undefined;
+    message.Recaro = (object.Recaro !== undefined && object.Recaro !== null)
+      ? Void.fromPartial(object.Recaro)
+      : undefined;
+    message.Executive = (object.Executive !== undefined && object.Executive !== null)
+      ? Void.fromPartial(object.Executive)
+      : undefined;
+    message.TwoSeat = (object.TwoSeat !== undefined && object.TwoSeat !== null)
+      ? Void.fromPartial(object.TwoSeat)
+      : undefined;
+    message.FoldFlat = (object.FoldFlat !== undefined && object.FoldFlat !== null)
+      ? Void.fromPartial(object.FoldFlat)
+      : undefined;
+    message.FoldFlatMotorized = (object.FoldFlatMotorized !== undefined && object.FoldFlatMotorized !== null)
+      ? Void.fromPartial(object.FoldFlatMotorized)
+      : undefined;
+    message.TwoSeatConsole = (object.TwoSeatConsole !== undefined && object.TwoSeatConsole !== null)
+      ? Void.fromPartial(object.TwoSeatConsole)
+      : undefined;
+    message.FoldFlatTwoMotor = (object.FoldFlatTwoMotor !== undefined && object.FoldFlatTwoMotor !== null)
+      ? Void.fromPartial(object.FoldFlatTwoMotor)
+      : undefined;
+    message.FoldFlatTwoMotorHall = (object.FoldFlatTwoMotorHall !== undefined && object.FoldFlatTwoMotorHall !== null)
+      ? Void.fromPartial(object.FoldFlatTwoMotorHall)
+      : undefined;
+    message.FoldFlatHallBuckles = (object.FoldFlatHallBuckles !== undefined && object.FoldFlatHallBuckles !== null)
+      ? Void.fromPartial(object.FoldFlatHallBuckles)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseThirdRowSeatType(): ThirdRowSeatType {
+  return { None: undefined, FuturisFoldFlat: undefined, FuturisNoFoldFlat: undefined, FlatFold: undefined };
+}
+
+export const ThirdRowSeatType: MessageFns<ThirdRowSeatType> = {
+  encode(message: ThirdRowSeatType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.None !== undefined) {
+      Void.encode(message.None, writer.uint32(10).fork()).join();
+    }
+    if (message.FuturisFoldFlat !== undefined) {
+      Void.encode(message.FuturisFoldFlat, writer.uint32(18).fork()).join();
+    }
+    if (message.FuturisNoFoldFlat !== undefined) {
+      Void.encode(message.FuturisNoFoldFlat, writer.uint32(26).fork()).join();
+    }
+    if (message.FlatFold !== undefined) {
+      Void.encode(message.FlatFold, writer.uint32(34).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ThirdRowSeatType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseThirdRowSeatType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.None = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.FuturisFoldFlat = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.FuturisNoFoldFlat = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.FlatFold = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ThirdRowSeatType {
+    return {
+      None: isSet(object.None) ? Void.fromJSON(object.None) : undefined,
+      FuturisFoldFlat: isSet(object.FuturisFoldFlat) ? Void.fromJSON(object.FuturisFoldFlat) : undefined,
+      FuturisNoFoldFlat: isSet(object.FuturisNoFoldFlat) ? Void.fromJSON(object.FuturisNoFoldFlat) : undefined,
+      FlatFold: isSet(object.FlatFold) ? Void.fromJSON(object.FlatFold) : undefined,
+    };
+  },
+
+  toJSON(message: ThirdRowSeatType): unknown {
+    const obj: any = {};
+    if (message.None !== undefined) {
+      obj.None = Void.toJSON(message.None);
+    }
+    if (message.FuturisFoldFlat !== undefined) {
+      obj.FuturisFoldFlat = Void.toJSON(message.FuturisFoldFlat);
+    }
+    if (message.FuturisNoFoldFlat !== undefined) {
+      obj.FuturisNoFoldFlat = Void.toJSON(message.FuturisNoFoldFlat);
+    }
+    if (message.FlatFold !== undefined) {
+      obj.FlatFold = Void.toJSON(message.FlatFold);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ThirdRowSeatType>, I>>(base?: I): ThirdRowSeatType {
+    return ThirdRowSeatType.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ThirdRowSeatType>, I>>(object: I): ThirdRowSeatType {
+    const message = createBaseThirdRowSeatType();
+    message.None = (object.None !== undefined && object.None !== null) ? Void.fromPartial(object.None) : undefined;
+    message.FuturisFoldFlat = (object.FuturisFoldFlat !== undefined && object.FuturisFoldFlat !== null)
+      ? Void.fromPartial(object.FuturisFoldFlat)
+      : undefined;
+    message.FuturisNoFoldFlat = (object.FuturisNoFoldFlat !== undefined && object.FuturisNoFoldFlat !== null)
+      ? Void.fromPartial(object.FuturisNoFoldFlat)
+      : undefined;
+    message.FlatFold = (object.FlatFold !== undefined && object.FlatFold !== null)
+      ? Void.fromPartial(object.FlatFold)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseChargePortType(): ChargePortType {
+  return { US: undefined, EU: undefined, GB: undefined, CCS: undefined };
+}
+
+export const ChargePortType: MessageFns<ChargePortType> = {
+  encode(message: ChargePortType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.US !== undefined) {
+      Void.encode(message.US, writer.uint32(10).fork()).join();
+    }
+    if (message.EU !== undefined) {
+      Void.encode(message.EU, writer.uint32(18).fork()).join();
+    }
+    if (message.GB !== undefined) {
+      Void.encode(message.GB, writer.uint32(26).fork()).join();
+    }
+    if (message.CCS !== undefined) {
+      Void.encode(message.CCS, writer.uint32(34).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ChargePortType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseChargePortType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.US = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.EU = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.GB = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.CCS = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ChargePortType {
+    return {
+      US: isSet(object.US) ? Void.fromJSON(object.US) : undefined,
+      EU: isSet(object.EU) ? Void.fromJSON(object.EU) : undefined,
+      GB: isSet(object.GB) ? Void.fromJSON(object.GB) : undefined,
+      CCS: isSet(object.CCS) ? Void.fromJSON(object.CCS) : undefined,
+    };
+  },
+
+  toJSON(message: ChargePortType): unknown {
+    const obj: any = {};
+    if (message.US !== undefined) {
+      obj.US = Void.toJSON(message.US);
+    }
+    if (message.EU !== undefined) {
+      obj.EU = Void.toJSON(message.EU);
+    }
+    if (message.GB !== undefined) {
+      obj.GB = Void.toJSON(message.GB);
+    }
+    if (message.CCS !== undefined) {
+      obj.CCS = Void.toJSON(message.CCS);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ChargePortType>, I>>(base?: I): ChargePortType {
+    return ChargePortType.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ChargePortType>, I>>(object: I): ChargePortType {
+    const message = createBaseChargePortType();
+    message.US = (object.US !== undefined && object.US !== null) ? Void.fromPartial(object.US) : undefined;
+    message.EU = (object.EU !== undefined && object.EU !== null) ? Void.fromPartial(object.EU) : undefined;
+    message.GB = (object.GB !== undefined && object.GB !== null) ? Void.fromPartial(object.GB) : undefined;
+    message.CCS = (object.CCS !== undefined && object.CCS !== null) ? Void.fromPartial(object.CCS) : undefined;
+    return message;
+  },
+};
+
+function createBaseRearDriveUnit(): RearDriveUnit {
+  return {
+    None: undefined,
+    LargeRear: undefined,
+    SmallRear: undefined,
+    PM216MOSFET: undefined,
+    PM216IGBT: undefined,
+    CorianderSingle: undefined,
+    CorianderDual: undefined,
+    PermanentMagnet: undefined,
+    InductionDual: undefined,
+  };
+}
+
+export const RearDriveUnit: MessageFns<RearDriveUnit> = {
+  encode(message: RearDriveUnit, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.None !== undefined) {
+      Void.encode(message.None, writer.uint32(10).fork()).join();
+    }
+    if (message.LargeRear !== undefined) {
+      Void.encode(message.LargeRear, writer.uint32(18).fork()).join();
+    }
+    if (message.SmallRear !== undefined) {
+      Void.encode(message.SmallRear, writer.uint32(26).fork()).join();
+    }
+    if (message.PM216MOSFET !== undefined) {
+      Void.encode(message.PM216MOSFET, writer.uint32(34).fork()).join();
+    }
+    if (message.PM216IGBT !== undefined) {
+      Void.encode(message.PM216IGBT, writer.uint32(42).fork()).join();
+    }
+    if (message.CorianderSingle !== undefined) {
+      Void.encode(message.CorianderSingle, writer.uint32(50).fork()).join();
+    }
+    if (message.CorianderDual !== undefined) {
+      Void.encode(message.CorianderDual, writer.uint32(58).fork()).join();
+    }
+    if (message.PermanentMagnet !== undefined) {
+      Void.encode(message.PermanentMagnet, writer.uint32(66).fork()).join();
+    }
+    if (message.InductionDual !== undefined) {
+      Void.encode(message.InductionDual, writer.uint32(74).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): RearDriveUnit {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRearDriveUnit();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.None = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.LargeRear = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.SmallRear = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.PM216MOSFET = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.PM216IGBT = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.CorianderSingle = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.CorianderDual = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.PermanentMagnet = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.InductionDual = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): RearDriveUnit {
+    return {
+      None: isSet(object.None) ? Void.fromJSON(object.None) : undefined,
+      LargeRear: isSet(object.LargeRear) ? Void.fromJSON(object.LargeRear) : undefined,
+      SmallRear: isSet(object.SmallRear) ? Void.fromJSON(object.SmallRear) : undefined,
+      PM216MOSFET: isSet(object.PM216MOSFET) ? Void.fromJSON(object.PM216MOSFET) : undefined,
+      PM216IGBT: isSet(object.PM216IGBT) ? Void.fromJSON(object.PM216IGBT) : undefined,
+      CorianderSingle: isSet(object.CorianderSingle) ? Void.fromJSON(object.CorianderSingle) : undefined,
+      CorianderDual: isSet(object.CorianderDual) ? Void.fromJSON(object.CorianderDual) : undefined,
+      PermanentMagnet: isSet(object.PermanentMagnet) ? Void.fromJSON(object.PermanentMagnet) : undefined,
+      InductionDual: isSet(object.InductionDual) ? Void.fromJSON(object.InductionDual) : undefined,
+    };
+  },
+
+  toJSON(message: RearDriveUnit): unknown {
+    const obj: any = {};
+    if (message.None !== undefined) {
+      obj.None = Void.toJSON(message.None);
+    }
+    if (message.LargeRear !== undefined) {
+      obj.LargeRear = Void.toJSON(message.LargeRear);
+    }
+    if (message.SmallRear !== undefined) {
+      obj.SmallRear = Void.toJSON(message.SmallRear);
+    }
+    if (message.PM216MOSFET !== undefined) {
+      obj.PM216MOSFET = Void.toJSON(message.PM216MOSFET);
+    }
+    if (message.PM216IGBT !== undefined) {
+      obj.PM216IGBT = Void.toJSON(message.PM216IGBT);
+    }
+    if (message.CorianderSingle !== undefined) {
+      obj.CorianderSingle = Void.toJSON(message.CorianderSingle);
+    }
+    if (message.CorianderDual !== undefined) {
+      obj.CorianderDual = Void.toJSON(message.CorianderDual);
+    }
+    if (message.PermanentMagnet !== undefined) {
+      obj.PermanentMagnet = Void.toJSON(message.PermanentMagnet);
+    }
+    if (message.InductionDual !== undefined) {
+      obj.InductionDual = Void.toJSON(message.InductionDual);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<RearDriveUnit>, I>>(base?: I): RearDriveUnit {
+    return RearDriveUnit.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<RearDriveUnit>, I>>(object: I): RearDriveUnit {
+    const message = createBaseRearDriveUnit();
+    message.None = (object.None !== undefined && object.None !== null) ? Void.fromPartial(object.None) : undefined;
+    message.LargeRear = (object.LargeRear !== undefined && object.LargeRear !== null)
+      ? Void.fromPartial(object.LargeRear)
+      : undefined;
+    message.SmallRear = (object.SmallRear !== undefined && object.SmallRear !== null)
+      ? Void.fromPartial(object.SmallRear)
+      : undefined;
+    message.PM216MOSFET = (object.PM216MOSFET !== undefined && object.PM216MOSFET !== null)
+      ? Void.fromPartial(object.PM216MOSFET)
+      : undefined;
+    message.PM216IGBT = (object.PM216IGBT !== undefined && object.PM216IGBT !== null)
+      ? Void.fromPartial(object.PM216IGBT)
+      : undefined;
+    message.CorianderSingle = (object.CorianderSingle !== undefined && object.CorianderSingle !== null)
+      ? Void.fromPartial(object.CorianderSingle)
+      : undefined;
+    message.CorianderDual = (object.CorianderDual !== undefined && object.CorianderDual !== null)
+      ? Void.fromPartial(object.CorianderDual)
+      : undefined;
+    message.PermanentMagnet = (object.PermanentMagnet !== undefined && object.PermanentMagnet !== null)
+      ? Void.fromPartial(object.PermanentMagnet)
+      : undefined;
+    message.InductionDual = (object.InductionDual !== undefined && object.InductionDual !== null)
+      ? Void.fromPartial(object.InductionDual)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseEfficiencyPackage(): EfficiencyPackage {
+  return {
+    Default: undefined,
+    M3SRPlus2020: undefined,
+    M3LR2020: undefined,
+    M3LRPerformance2020: undefined,
+    M3SRPlus2020Q4GFSH: undefined,
+    MY2020: undefined,
+    M32021: undefined,
+    MY2021: undefined,
+    SX2020: undefined,
+    S2: undefined,
+    SX2020H2: undefined,
+    M3SRPlus2021Q3GFSH: undefined,
+    M3SRPlus2021Q3Fremont: undefined,
+    MYSRPlus2021Q3GFSH: undefined,
+    MYSRPlus2022Q1TX: undefined,
+    MYRWDEU2022: undefined,
+    M3Poppyseed2024: undefined,
+    M32023GFSHExport: undefined,
+    MY2023GFSHExport: undefined,
+    MY2024: undefined,
+    MS2024: undefined,
+    MX2024: undefined,
+    MY2023SRRWD: undefined,
+    MY2024C: undefined,
+    MY2024GFSHExportSRRWD: undefined,
+    M3Poppyseed2024C: undefined,
+    M32025: undefined,
+    MY2025: undefined,
+    M32025B: undefined,
+    MY2025B: undefined,
+    MS2025: undefined,
+    MX2025: undefined,
+    MYRefresh2025ROW: undefined,
+    MYStandard2025: undefined,
+    MYRefresh2025CN: undefined,
+    MS2026: undefined,
+    MX2026: undefined,
+    MY2025M53: undefined,
+    M32025M53: undefined,
+    MY2025CNPlus: undefined,
+    MS2026B: undefined,
+    M32026B: undefined,
+    MY2026US: undefined,
+  };
+}
+
+export const EfficiencyPackage: MessageFns<EfficiencyPackage> = {
+  encode(message: EfficiencyPackage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Default !== undefined) {
+      Void.encode(message.Default, writer.uint32(10).fork()).join();
+    }
+    if (message.M3SRPlus2020 !== undefined) {
+      Void.encode(message.M3SRPlus2020, writer.uint32(18).fork()).join();
+    }
+    if (message.M3LR2020 !== undefined) {
+      Void.encode(message.M3LR2020, writer.uint32(26).fork()).join();
+    }
+    if (message.M3LRPerformance2020 !== undefined) {
+      Void.encode(message.M3LRPerformance2020, writer.uint32(34).fork()).join();
+    }
+    if (message.M3SRPlus2020Q4GFSH !== undefined) {
+      Void.encode(message.M3SRPlus2020Q4GFSH, writer.uint32(42).fork()).join();
+    }
+    if (message.MY2020 !== undefined) {
+      Void.encode(message.MY2020, writer.uint32(50).fork()).join();
+    }
+    if (message.M32021 !== undefined) {
+      Void.encode(message.M32021, writer.uint32(58).fork()).join();
+    }
+    if (message.MY2021 !== undefined) {
+      Void.encode(message.MY2021, writer.uint32(66).fork()).join();
+    }
+    if (message.SX2020 !== undefined) {
+      Void.encode(message.SX2020, writer.uint32(74).fork()).join();
+    }
+    if (message.S2 !== undefined) {
+      Void.encode(message.S2, writer.uint32(82).fork()).join();
+    }
+    if (message.SX2020H2 !== undefined) {
+      Void.encode(message.SX2020H2, writer.uint32(90).fork()).join();
+    }
+    if (message.M3SRPlus2021Q3GFSH !== undefined) {
+      Void.encode(message.M3SRPlus2021Q3GFSH, writer.uint32(98).fork()).join();
+    }
+    if (message.M3SRPlus2021Q3Fremont !== undefined) {
+      Void.encode(message.M3SRPlus2021Q3Fremont, writer.uint32(106).fork()).join();
+    }
+    if (message.MYSRPlus2021Q3GFSH !== undefined) {
+      Void.encode(message.MYSRPlus2021Q3GFSH, writer.uint32(114).fork()).join();
+    }
+    if (message.MYSRPlus2022Q1TX !== undefined) {
+      Void.encode(message.MYSRPlus2022Q1TX, writer.uint32(122).fork()).join();
+    }
+    if (message.MYRWDEU2022 !== undefined) {
+      Void.encode(message.MYRWDEU2022, writer.uint32(130).fork()).join();
+    }
+    if (message.M3Poppyseed2024 !== undefined) {
+      Void.encode(message.M3Poppyseed2024, writer.uint32(138).fork()).join();
+    }
+    if (message.M32023GFSHExport !== undefined) {
+      Void.encode(message.M32023GFSHExport, writer.uint32(146).fork()).join();
+    }
+    if (message.MY2023GFSHExport !== undefined) {
+      Void.encode(message.MY2023GFSHExport, writer.uint32(154).fork()).join();
+    }
+    if (message.MY2024 !== undefined) {
+      Void.encode(message.MY2024, writer.uint32(162).fork()).join();
+    }
+    if (message.MS2024 !== undefined) {
+      Void.encode(message.MS2024, writer.uint32(178).fork()).join();
+    }
+    if (message.MX2024 !== undefined) {
+      Void.encode(message.MX2024, writer.uint32(186).fork()).join();
+    }
+    if (message.MY2023SRRWD !== undefined) {
+      Void.encode(message.MY2023SRRWD, writer.uint32(194).fork()).join();
+    }
+    if (message.MY2024C !== undefined) {
+      Void.encode(message.MY2024C, writer.uint32(218).fork()).join();
+    }
+    if (message.MY2024GFSHExportSRRWD !== undefined) {
+      Void.encode(message.MY2024GFSHExportSRRWD, writer.uint32(226).fork()).join();
+    }
+    if (message.M3Poppyseed2024C !== undefined) {
+      Void.encode(message.M3Poppyseed2024C, writer.uint32(234).fork()).join();
+    }
+    if (message.M32025 !== undefined) {
+      Void.encode(message.M32025, writer.uint32(242).fork()).join();
+    }
+    if (message.MY2025 !== undefined) {
+      Void.encode(message.MY2025, writer.uint32(250).fork()).join();
+    }
+    if (message.M32025B !== undefined) {
+      Void.encode(message.M32025B, writer.uint32(258).fork()).join();
+    }
+    if (message.MY2025B !== undefined) {
+      Void.encode(message.MY2025B, writer.uint32(266).fork()).join();
+    }
+    if (message.MS2025 !== undefined) {
+      Void.encode(message.MS2025, writer.uint32(274).fork()).join();
+    }
+    if (message.MX2025 !== undefined) {
+      Void.encode(message.MX2025, writer.uint32(282).fork()).join();
+    }
+    if (message.MYRefresh2025ROW !== undefined) {
+      Void.encode(message.MYRefresh2025ROW, writer.uint32(290).fork()).join();
+    }
+    if (message.MYStandard2025 !== undefined) {
+      Void.encode(message.MYStandard2025, writer.uint32(298).fork()).join();
+    }
+    if (message.MYRefresh2025CN !== undefined) {
+      Void.encode(message.MYRefresh2025CN, writer.uint32(306).fork()).join();
+    }
+    if (message.MS2026 !== undefined) {
+      Void.encode(message.MS2026, writer.uint32(314).fork()).join();
+    }
+    if (message.MX2026 !== undefined) {
+      Void.encode(message.MX2026, writer.uint32(322).fork()).join();
+    }
+    if (message.MY2025M53 !== undefined) {
+      Void.encode(message.MY2025M53, writer.uint32(330).fork()).join();
+    }
+    if (message.M32025M53 !== undefined) {
+      Void.encode(message.M32025M53, writer.uint32(338).fork()).join();
+    }
+    if (message.MY2025CNPlus !== undefined) {
+      Void.encode(message.MY2025CNPlus, writer.uint32(346).fork()).join();
+    }
+    if (message.MS2026B !== undefined) {
+      Void.encode(message.MS2026B, writer.uint32(354).fork()).join();
+    }
+    if (message.M32026B !== undefined) {
+      Void.encode(message.M32026B, writer.uint32(362).fork()).join();
+    }
+    if (message.MY2026US !== undefined) {
+      Void.encode(message.MY2026US, writer.uint32(370).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EfficiencyPackage {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEfficiencyPackage();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Default = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.M3SRPlus2020 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.M3LR2020 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.M3LRPerformance2020 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.M3SRPlus2020Q4GFSH = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.MY2020 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.M32021 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.MY2021 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.SX2020 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.S2 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.SX2020H2 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 12: {
+          if (tag !== 98) {
+            break;
+          }
+
+          message.M3SRPlus2021Q3GFSH = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 13: {
+          if (tag !== 106) {
+            break;
+          }
+
+          message.M3SRPlus2021Q3Fremont = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 14: {
+          if (tag !== 114) {
+            break;
+          }
+
+          message.MYSRPlus2021Q3GFSH = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 15: {
+          if (tag !== 122) {
+            break;
+          }
+
+          message.MYSRPlus2022Q1TX = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 16: {
+          if (tag !== 130) {
+            break;
+          }
+
+          message.MYRWDEU2022 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 17: {
+          if (tag !== 138) {
+            break;
+          }
+
+          message.M3Poppyseed2024 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 18: {
+          if (tag !== 146) {
+            break;
+          }
+
+          message.M32023GFSHExport = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 19: {
+          if (tag !== 154) {
+            break;
+          }
+
+          message.MY2023GFSHExport = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 20: {
+          if (tag !== 162) {
+            break;
+          }
+
+          message.MY2024 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 22: {
+          if (tag !== 178) {
+            break;
+          }
+
+          message.MS2024 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 23: {
+          if (tag !== 186) {
+            break;
+          }
+
+          message.MX2024 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 24: {
+          if (tag !== 194) {
+            break;
+          }
+
+          message.MY2023SRRWD = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 27: {
+          if (tag !== 218) {
+            break;
+          }
+
+          message.MY2024C = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 28: {
+          if (tag !== 226) {
+            break;
+          }
+
+          message.MY2024GFSHExportSRRWD = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 29: {
+          if (tag !== 234) {
+            break;
+          }
+
+          message.M3Poppyseed2024C = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 30: {
+          if (tag !== 242) {
+            break;
+          }
+
+          message.M32025 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 31: {
+          if (tag !== 250) {
+            break;
+          }
+
+          message.MY2025 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 32: {
+          if (tag !== 258) {
+            break;
+          }
+
+          message.M32025B = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 33: {
+          if (tag !== 266) {
+            break;
+          }
+
+          message.MY2025B = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 34: {
+          if (tag !== 274) {
+            break;
+          }
+
+          message.MS2025 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 35: {
+          if (tag !== 282) {
+            break;
+          }
+
+          message.MX2025 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 36: {
+          if (tag !== 290) {
+            break;
+          }
+
+          message.MYRefresh2025ROW = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 37: {
+          if (tag !== 298) {
+            break;
+          }
+
+          message.MYStandard2025 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 38: {
+          if (tag !== 306) {
+            break;
+          }
+
+          message.MYRefresh2025CN = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 39: {
+          if (tag !== 314) {
+            break;
+          }
+
+          message.MS2026 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 40: {
+          if (tag !== 322) {
+            break;
+          }
+
+          message.MX2026 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 41: {
+          if (tag !== 330) {
+            break;
+          }
+
+          message.MY2025M53 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 42: {
+          if (tag !== 338) {
+            break;
+          }
+
+          message.M32025M53 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 43: {
+          if (tag !== 346) {
+            break;
+          }
+
+          message.MY2025CNPlus = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 44: {
+          if (tag !== 354) {
+            break;
+          }
+
+          message.MS2026B = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 45: {
+          if (tag !== 362) {
+            break;
+          }
+
+          message.M32026B = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 46: {
+          if (tag !== 370) {
+            break;
+          }
+
+          message.MY2026US = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EfficiencyPackage {
+    return {
+      Default: isSet(object.Default) ? Void.fromJSON(object.Default) : undefined,
+      M3SRPlus2020: isSet(object.M3SRPlus2020) ? Void.fromJSON(object.M3SRPlus2020) : undefined,
+      M3LR2020: isSet(object.M3LR2020) ? Void.fromJSON(object.M3LR2020) : undefined,
+      M3LRPerformance2020: isSet(object.M3LRPerformance2020) ? Void.fromJSON(object.M3LRPerformance2020) : undefined,
+      M3SRPlus2020Q4GFSH: isSet(object.M3SRPlus2020Q4GFSH) ? Void.fromJSON(object.M3SRPlus2020Q4GFSH) : undefined,
+      MY2020: isSet(object.MY2020) ? Void.fromJSON(object.MY2020) : undefined,
+      M32021: isSet(object.M32021) ? Void.fromJSON(object.M32021) : undefined,
+      MY2021: isSet(object.MY2021) ? Void.fromJSON(object.MY2021) : undefined,
+      SX2020: isSet(object.SX2020) ? Void.fromJSON(object.SX2020) : undefined,
+      S2: isSet(object.S2) ? Void.fromJSON(object.S2) : undefined,
+      SX2020H2: isSet(object.SX2020H2) ? Void.fromJSON(object.SX2020H2) : undefined,
+      M3SRPlus2021Q3GFSH: isSet(object.M3SRPlus2021Q3GFSH) ? Void.fromJSON(object.M3SRPlus2021Q3GFSH) : undefined,
+      M3SRPlus2021Q3Fremont: isSet(object.M3SRPlus2021Q3Fremont)
+        ? Void.fromJSON(object.M3SRPlus2021Q3Fremont)
+        : undefined,
+      MYSRPlus2021Q3GFSH: isSet(object.MYSRPlus2021Q3GFSH) ? Void.fromJSON(object.MYSRPlus2021Q3GFSH) : undefined,
+      MYSRPlus2022Q1TX: isSet(object.MYSRPlus2022Q1TX) ? Void.fromJSON(object.MYSRPlus2022Q1TX) : undefined,
+      MYRWDEU2022: isSet(object.MYRWDEU2022) ? Void.fromJSON(object.MYRWDEU2022) : undefined,
+      M3Poppyseed2024: isSet(object.M3Poppyseed2024) ? Void.fromJSON(object.M3Poppyseed2024) : undefined,
+      M32023GFSHExport: isSet(object.M32023GFSHExport) ? Void.fromJSON(object.M32023GFSHExport) : undefined,
+      MY2023GFSHExport: isSet(object.MY2023GFSHExport) ? Void.fromJSON(object.MY2023GFSHExport) : undefined,
+      MY2024: isSet(object.MY2024) ? Void.fromJSON(object.MY2024) : undefined,
+      MS2024: isSet(object.MS2024) ? Void.fromJSON(object.MS2024) : undefined,
+      MX2024: isSet(object.MX2024) ? Void.fromJSON(object.MX2024) : undefined,
+      MY2023SRRWD: isSet(object.MY2023SRRWD) ? Void.fromJSON(object.MY2023SRRWD) : undefined,
+      MY2024C: isSet(object.MY2024C) ? Void.fromJSON(object.MY2024C) : undefined,
+      MY2024GFSHExportSRRWD: isSet(object.MY2024GFSHExportSRRWD)
+        ? Void.fromJSON(object.MY2024GFSHExportSRRWD)
+        : undefined,
+      M3Poppyseed2024C: isSet(object.M3Poppyseed2024C) ? Void.fromJSON(object.M3Poppyseed2024C) : undefined,
+      M32025: isSet(object.M32025) ? Void.fromJSON(object.M32025) : undefined,
+      MY2025: isSet(object.MY2025) ? Void.fromJSON(object.MY2025) : undefined,
+      M32025B: isSet(object.M32025B) ? Void.fromJSON(object.M32025B) : undefined,
+      MY2025B: isSet(object.MY2025B) ? Void.fromJSON(object.MY2025B) : undefined,
+      MS2025: isSet(object.MS2025) ? Void.fromJSON(object.MS2025) : undefined,
+      MX2025: isSet(object.MX2025) ? Void.fromJSON(object.MX2025) : undefined,
+      MYRefresh2025ROW: isSet(object.MYRefresh2025ROW) ? Void.fromJSON(object.MYRefresh2025ROW) : undefined,
+      MYStandard2025: isSet(object.MYStandard2025) ? Void.fromJSON(object.MYStandard2025) : undefined,
+      MYRefresh2025CN: isSet(object.MYRefresh2025CN) ? Void.fromJSON(object.MYRefresh2025CN) : undefined,
+      MS2026: isSet(object.MS2026) ? Void.fromJSON(object.MS2026) : undefined,
+      MX2026: isSet(object.MX2026) ? Void.fromJSON(object.MX2026) : undefined,
+      MY2025M53: isSet(object.MY2025M53) ? Void.fromJSON(object.MY2025M53) : undefined,
+      M32025M53: isSet(object.M32025M53) ? Void.fromJSON(object.M32025M53) : undefined,
+      MY2025CNPlus: isSet(object.MY2025CNPlus) ? Void.fromJSON(object.MY2025CNPlus) : undefined,
+      MS2026B: isSet(object.MS2026B) ? Void.fromJSON(object.MS2026B) : undefined,
+      M32026B: isSet(object.M32026B) ? Void.fromJSON(object.M32026B) : undefined,
+      MY2026US: isSet(object.MY2026US) ? Void.fromJSON(object.MY2026US) : undefined,
+    };
+  },
+
+  toJSON(message: EfficiencyPackage): unknown {
+    const obj: any = {};
+    if (message.Default !== undefined) {
+      obj.Default = Void.toJSON(message.Default);
+    }
+    if (message.M3SRPlus2020 !== undefined) {
+      obj.M3SRPlus2020 = Void.toJSON(message.M3SRPlus2020);
+    }
+    if (message.M3LR2020 !== undefined) {
+      obj.M3LR2020 = Void.toJSON(message.M3LR2020);
+    }
+    if (message.M3LRPerformance2020 !== undefined) {
+      obj.M3LRPerformance2020 = Void.toJSON(message.M3LRPerformance2020);
+    }
+    if (message.M3SRPlus2020Q4GFSH !== undefined) {
+      obj.M3SRPlus2020Q4GFSH = Void.toJSON(message.M3SRPlus2020Q4GFSH);
+    }
+    if (message.MY2020 !== undefined) {
+      obj.MY2020 = Void.toJSON(message.MY2020);
+    }
+    if (message.M32021 !== undefined) {
+      obj.M32021 = Void.toJSON(message.M32021);
+    }
+    if (message.MY2021 !== undefined) {
+      obj.MY2021 = Void.toJSON(message.MY2021);
+    }
+    if (message.SX2020 !== undefined) {
+      obj.SX2020 = Void.toJSON(message.SX2020);
+    }
+    if (message.S2 !== undefined) {
+      obj.S2 = Void.toJSON(message.S2);
+    }
+    if (message.SX2020H2 !== undefined) {
+      obj.SX2020H2 = Void.toJSON(message.SX2020H2);
+    }
+    if (message.M3SRPlus2021Q3GFSH !== undefined) {
+      obj.M3SRPlus2021Q3GFSH = Void.toJSON(message.M3SRPlus2021Q3GFSH);
+    }
+    if (message.M3SRPlus2021Q3Fremont !== undefined) {
+      obj.M3SRPlus2021Q3Fremont = Void.toJSON(message.M3SRPlus2021Q3Fremont);
+    }
+    if (message.MYSRPlus2021Q3GFSH !== undefined) {
+      obj.MYSRPlus2021Q3GFSH = Void.toJSON(message.MYSRPlus2021Q3GFSH);
+    }
+    if (message.MYSRPlus2022Q1TX !== undefined) {
+      obj.MYSRPlus2022Q1TX = Void.toJSON(message.MYSRPlus2022Q1TX);
+    }
+    if (message.MYRWDEU2022 !== undefined) {
+      obj.MYRWDEU2022 = Void.toJSON(message.MYRWDEU2022);
+    }
+    if (message.M3Poppyseed2024 !== undefined) {
+      obj.M3Poppyseed2024 = Void.toJSON(message.M3Poppyseed2024);
+    }
+    if (message.M32023GFSHExport !== undefined) {
+      obj.M32023GFSHExport = Void.toJSON(message.M32023GFSHExport);
+    }
+    if (message.MY2023GFSHExport !== undefined) {
+      obj.MY2023GFSHExport = Void.toJSON(message.MY2023GFSHExport);
+    }
+    if (message.MY2024 !== undefined) {
+      obj.MY2024 = Void.toJSON(message.MY2024);
+    }
+    if (message.MS2024 !== undefined) {
+      obj.MS2024 = Void.toJSON(message.MS2024);
+    }
+    if (message.MX2024 !== undefined) {
+      obj.MX2024 = Void.toJSON(message.MX2024);
+    }
+    if (message.MY2023SRRWD !== undefined) {
+      obj.MY2023SRRWD = Void.toJSON(message.MY2023SRRWD);
+    }
+    if (message.MY2024C !== undefined) {
+      obj.MY2024C = Void.toJSON(message.MY2024C);
+    }
+    if (message.MY2024GFSHExportSRRWD !== undefined) {
+      obj.MY2024GFSHExportSRRWD = Void.toJSON(message.MY2024GFSHExportSRRWD);
+    }
+    if (message.M3Poppyseed2024C !== undefined) {
+      obj.M3Poppyseed2024C = Void.toJSON(message.M3Poppyseed2024C);
+    }
+    if (message.M32025 !== undefined) {
+      obj.M32025 = Void.toJSON(message.M32025);
+    }
+    if (message.MY2025 !== undefined) {
+      obj.MY2025 = Void.toJSON(message.MY2025);
+    }
+    if (message.M32025B !== undefined) {
+      obj.M32025B = Void.toJSON(message.M32025B);
+    }
+    if (message.MY2025B !== undefined) {
+      obj.MY2025B = Void.toJSON(message.MY2025B);
+    }
+    if (message.MS2025 !== undefined) {
+      obj.MS2025 = Void.toJSON(message.MS2025);
+    }
+    if (message.MX2025 !== undefined) {
+      obj.MX2025 = Void.toJSON(message.MX2025);
+    }
+    if (message.MYRefresh2025ROW !== undefined) {
+      obj.MYRefresh2025ROW = Void.toJSON(message.MYRefresh2025ROW);
+    }
+    if (message.MYStandard2025 !== undefined) {
+      obj.MYStandard2025 = Void.toJSON(message.MYStandard2025);
+    }
+    if (message.MYRefresh2025CN !== undefined) {
+      obj.MYRefresh2025CN = Void.toJSON(message.MYRefresh2025CN);
+    }
+    if (message.MS2026 !== undefined) {
+      obj.MS2026 = Void.toJSON(message.MS2026);
+    }
+    if (message.MX2026 !== undefined) {
+      obj.MX2026 = Void.toJSON(message.MX2026);
+    }
+    if (message.MY2025M53 !== undefined) {
+      obj.MY2025M53 = Void.toJSON(message.MY2025M53);
+    }
+    if (message.M32025M53 !== undefined) {
+      obj.M32025M53 = Void.toJSON(message.M32025M53);
+    }
+    if (message.MY2025CNPlus !== undefined) {
+      obj.MY2025CNPlus = Void.toJSON(message.MY2025CNPlus);
+    }
+    if (message.MS2026B !== undefined) {
+      obj.MS2026B = Void.toJSON(message.MS2026B);
+    }
+    if (message.M32026B !== undefined) {
+      obj.M32026B = Void.toJSON(message.M32026B);
+    }
+    if (message.MY2026US !== undefined) {
+      obj.MY2026US = Void.toJSON(message.MY2026US);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EfficiencyPackage>, I>>(base?: I): EfficiencyPackage {
+    return EfficiencyPackage.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EfficiencyPackage>, I>>(object: I): EfficiencyPackage {
+    const message = createBaseEfficiencyPackage();
+    message.Default = (object.Default !== undefined && object.Default !== null)
+      ? Void.fromPartial(object.Default)
+      : undefined;
+    message.M3SRPlus2020 = (object.M3SRPlus2020 !== undefined && object.M3SRPlus2020 !== null)
+      ? Void.fromPartial(object.M3SRPlus2020)
+      : undefined;
+    message.M3LR2020 = (object.M3LR2020 !== undefined && object.M3LR2020 !== null)
+      ? Void.fromPartial(object.M3LR2020)
+      : undefined;
+    message.M3LRPerformance2020 = (object.M3LRPerformance2020 !== undefined && object.M3LRPerformance2020 !== null)
+      ? Void.fromPartial(object.M3LRPerformance2020)
+      : undefined;
+    message.M3SRPlus2020Q4GFSH = (object.M3SRPlus2020Q4GFSH !== undefined && object.M3SRPlus2020Q4GFSH !== null)
+      ? Void.fromPartial(object.M3SRPlus2020Q4GFSH)
+      : undefined;
+    message.MY2020 = (object.MY2020 !== undefined && object.MY2020 !== null)
+      ? Void.fromPartial(object.MY2020)
+      : undefined;
+    message.M32021 = (object.M32021 !== undefined && object.M32021 !== null)
+      ? Void.fromPartial(object.M32021)
+      : undefined;
+    message.MY2021 = (object.MY2021 !== undefined && object.MY2021 !== null)
+      ? Void.fromPartial(object.MY2021)
+      : undefined;
+    message.SX2020 = (object.SX2020 !== undefined && object.SX2020 !== null)
+      ? Void.fromPartial(object.SX2020)
+      : undefined;
+    message.S2 = (object.S2 !== undefined && object.S2 !== null) ? Void.fromPartial(object.S2) : undefined;
+    message.SX2020H2 = (object.SX2020H2 !== undefined && object.SX2020H2 !== null)
+      ? Void.fromPartial(object.SX2020H2)
+      : undefined;
+    message.M3SRPlus2021Q3GFSH = (object.M3SRPlus2021Q3GFSH !== undefined && object.M3SRPlus2021Q3GFSH !== null)
+      ? Void.fromPartial(object.M3SRPlus2021Q3GFSH)
+      : undefined;
+    message.M3SRPlus2021Q3Fremont =
+      (object.M3SRPlus2021Q3Fremont !== undefined && object.M3SRPlus2021Q3Fremont !== null)
+        ? Void.fromPartial(object.M3SRPlus2021Q3Fremont)
+        : undefined;
+    message.MYSRPlus2021Q3GFSH = (object.MYSRPlus2021Q3GFSH !== undefined && object.MYSRPlus2021Q3GFSH !== null)
+      ? Void.fromPartial(object.MYSRPlus2021Q3GFSH)
+      : undefined;
+    message.MYSRPlus2022Q1TX = (object.MYSRPlus2022Q1TX !== undefined && object.MYSRPlus2022Q1TX !== null)
+      ? Void.fromPartial(object.MYSRPlus2022Q1TX)
+      : undefined;
+    message.MYRWDEU2022 = (object.MYRWDEU2022 !== undefined && object.MYRWDEU2022 !== null)
+      ? Void.fromPartial(object.MYRWDEU2022)
+      : undefined;
+    message.M3Poppyseed2024 = (object.M3Poppyseed2024 !== undefined && object.M3Poppyseed2024 !== null)
+      ? Void.fromPartial(object.M3Poppyseed2024)
+      : undefined;
+    message.M32023GFSHExport = (object.M32023GFSHExport !== undefined && object.M32023GFSHExport !== null)
+      ? Void.fromPartial(object.M32023GFSHExport)
+      : undefined;
+    message.MY2023GFSHExport = (object.MY2023GFSHExport !== undefined && object.MY2023GFSHExport !== null)
+      ? Void.fromPartial(object.MY2023GFSHExport)
+      : undefined;
+    message.MY2024 = (object.MY2024 !== undefined && object.MY2024 !== null)
+      ? Void.fromPartial(object.MY2024)
+      : undefined;
+    message.MS2024 = (object.MS2024 !== undefined && object.MS2024 !== null)
+      ? Void.fromPartial(object.MS2024)
+      : undefined;
+    message.MX2024 = (object.MX2024 !== undefined && object.MX2024 !== null)
+      ? Void.fromPartial(object.MX2024)
+      : undefined;
+    message.MY2023SRRWD = (object.MY2023SRRWD !== undefined && object.MY2023SRRWD !== null)
+      ? Void.fromPartial(object.MY2023SRRWD)
+      : undefined;
+    message.MY2024C = (object.MY2024C !== undefined && object.MY2024C !== null)
+      ? Void.fromPartial(object.MY2024C)
+      : undefined;
+    message.MY2024GFSHExportSRRWD =
+      (object.MY2024GFSHExportSRRWD !== undefined && object.MY2024GFSHExportSRRWD !== null)
+        ? Void.fromPartial(object.MY2024GFSHExportSRRWD)
+        : undefined;
+    message.M3Poppyseed2024C = (object.M3Poppyseed2024C !== undefined && object.M3Poppyseed2024C !== null)
+      ? Void.fromPartial(object.M3Poppyseed2024C)
+      : undefined;
+    message.M32025 = (object.M32025 !== undefined && object.M32025 !== null)
+      ? Void.fromPartial(object.M32025)
+      : undefined;
+    message.MY2025 = (object.MY2025 !== undefined && object.MY2025 !== null)
+      ? Void.fromPartial(object.MY2025)
+      : undefined;
+    message.M32025B = (object.M32025B !== undefined && object.M32025B !== null)
+      ? Void.fromPartial(object.M32025B)
+      : undefined;
+    message.MY2025B = (object.MY2025B !== undefined && object.MY2025B !== null)
+      ? Void.fromPartial(object.MY2025B)
+      : undefined;
+    message.MS2025 = (object.MS2025 !== undefined && object.MS2025 !== null)
+      ? Void.fromPartial(object.MS2025)
+      : undefined;
+    message.MX2025 = (object.MX2025 !== undefined && object.MX2025 !== null)
+      ? Void.fromPartial(object.MX2025)
+      : undefined;
+    message.MYRefresh2025ROW = (object.MYRefresh2025ROW !== undefined && object.MYRefresh2025ROW !== null)
+      ? Void.fromPartial(object.MYRefresh2025ROW)
+      : undefined;
+    message.MYStandard2025 = (object.MYStandard2025 !== undefined && object.MYStandard2025 !== null)
+      ? Void.fromPartial(object.MYStandard2025)
+      : undefined;
+    message.MYRefresh2025CN = (object.MYRefresh2025CN !== undefined && object.MYRefresh2025CN !== null)
+      ? Void.fromPartial(object.MYRefresh2025CN)
+      : undefined;
+    message.MS2026 = (object.MS2026 !== undefined && object.MS2026 !== null)
+      ? Void.fromPartial(object.MS2026)
+      : undefined;
+    message.MX2026 = (object.MX2026 !== undefined && object.MX2026 !== null)
+      ? Void.fromPartial(object.MX2026)
+      : undefined;
+    message.MY2025M53 = (object.MY2025M53 !== undefined && object.MY2025M53 !== null)
+      ? Void.fromPartial(object.MY2025M53)
+      : undefined;
+    message.M32025M53 = (object.M32025M53 !== undefined && object.M32025M53 !== null)
+      ? Void.fromPartial(object.M32025M53)
+      : undefined;
+    message.MY2025CNPlus = (object.MY2025CNPlus !== undefined && object.MY2025CNPlus !== null)
+      ? Void.fromPartial(object.MY2025CNPlus)
+      : undefined;
+    message.MS2026B = (object.MS2026B !== undefined && object.MS2026B !== null)
+      ? Void.fromPartial(object.MS2026B)
+      : undefined;
+    message.M32026B = (object.M32026B !== undefined && object.M32026B !== null)
+      ? Void.fromPartial(object.M32026B)
+      : undefined;
+    message.MY2026US = (object.MY2026US !== undefined && object.MY2026US !== null)
+      ? Void.fromPartial(object.MY2026US)
+      : undefined;
+    return message;
+  },
+};
+
 function createBaseGuiSettings(): GuiSettings {
-  return { timestamp: undefined, gui24HourTime: undefined, showRangeUnits: undefined, guiTirepressureUnits: undefined };
+  return {
+    guiDistanceUnits: undefined,
+    guiTemperatureUnits: undefined,
+    guiChargeRateUnits: undefined,
+    guiRangeDisplay: undefined,
+    timestamp: undefined,
+    gui24HourTime: undefined,
+    showRangeUnits: undefined,
+    guiTirepressureUnits: undefined,
+  };
 }
 
 export const GuiSettings: MessageFns<GuiSettings> = {
   encode(message: GuiSettings, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.guiDistanceUnits !== undefined) {
+      GuiSettings_SpeedUnit.encode(message.guiDistanceUnits, writer.uint32(10).fork()).join();
+    }
+    if (message.guiTemperatureUnits !== undefined) {
+      GuiSettings_TemperatureUnit.encode(message.guiTemperatureUnits, writer.uint32(18).fork()).join();
+    }
+    if (message.guiChargeRateUnits !== undefined) {
+      GuiSettings_ChargeRateUnit.encode(message.guiChargeRateUnits, writer.uint32(26).fork()).join();
+    }
+    if (message.guiRangeDisplay !== undefined) {
+      GuiSettings_RangeDisplay.encode(message.guiRangeDisplay, writer.uint32(42).fork()).join();
+    }
     if (message.timestamp !== undefined) {
       Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(58).fork()).join();
     }
@@ -18313,6 +23769,38 @@ export const GuiSettings: MessageFns<GuiSettings> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.guiDistanceUnits = GuiSettings_SpeedUnit.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.guiTemperatureUnits = GuiSettings_TemperatureUnit.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.guiChargeRateUnits = GuiSettings_ChargeRateUnit.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.guiRangeDisplay = GuiSettings_RangeDisplay.decode(reader, reader.uint32());
+          continue;
+        }
         case 7: {
           if (tag !== 58) {
             break;
@@ -18356,6 +23844,18 @@ export const GuiSettings: MessageFns<GuiSettings> = {
 
   fromJSON(object: any): GuiSettings {
     return {
+      guiDistanceUnits: isSet(object.guiDistanceUnits)
+        ? GuiSettings_SpeedUnit.fromJSON(object.guiDistanceUnits)
+        : undefined,
+      guiTemperatureUnits: isSet(object.guiTemperatureUnits)
+        ? GuiSettings_TemperatureUnit.fromJSON(object.guiTemperatureUnits)
+        : undefined,
+      guiChargeRateUnits: isSet(object.guiChargeRateUnits)
+        ? GuiSettings_ChargeRateUnit.fromJSON(object.guiChargeRateUnits)
+        : undefined,
+      guiRangeDisplay: isSet(object.guiRangeDisplay)
+        ? GuiSettings_RangeDisplay.fromJSON(object.guiRangeDisplay)
+        : undefined,
       timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
       gui24HourTime: isSet(object.gui24HourTime) ? globalThis.Boolean(object.gui24HourTime) : undefined,
       showRangeUnits: isSet(object.showRangeUnits) ? globalThis.Boolean(object.showRangeUnits) : undefined,
@@ -18367,6 +23867,18 @@ export const GuiSettings: MessageFns<GuiSettings> = {
 
   toJSON(message: GuiSettings): unknown {
     const obj: any = {};
+    if (message.guiDistanceUnits !== undefined) {
+      obj.guiDistanceUnits = GuiSettings_SpeedUnit.toJSON(message.guiDistanceUnits);
+    }
+    if (message.guiTemperatureUnits !== undefined) {
+      obj.guiTemperatureUnits = GuiSettings_TemperatureUnit.toJSON(message.guiTemperatureUnits);
+    }
+    if (message.guiChargeRateUnits !== undefined) {
+      obj.guiChargeRateUnits = GuiSettings_ChargeRateUnit.toJSON(message.guiChargeRateUnits);
+    }
+    if (message.guiRangeDisplay !== undefined) {
+      obj.guiRangeDisplay = GuiSettings_RangeDisplay.toJSON(message.guiRangeDisplay);
+    }
     if (message.timestamp !== undefined) {
       obj.timestamp = message.timestamp.toISOString();
     }
@@ -18387,6 +23899,18 @@ export const GuiSettings: MessageFns<GuiSettings> = {
   },
   fromPartial<I extends Exact<DeepPartial<GuiSettings>, I>>(object: I): GuiSettings {
     const message = createBaseGuiSettings();
+    message.guiDistanceUnits = (object.guiDistanceUnits !== undefined && object.guiDistanceUnits !== null)
+      ? GuiSettings_SpeedUnit.fromPartial(object.guiDistanceUnits)
+      : undefined;
+    message.guiTemperatureUnits = (object.guiTemperatureUnits !== undefined && object.guiTemperatureUnits !== null)
+      ? GuiSettings_TemperatureUnit.fromPartial(object.guiTemperatureUnits)
+      : undefined;
+    message.guiChargeRateUnits = (object.guiChargeRateUnits !== undefined && object.guiChargeRateUnits !== null)
+      ? GuiSettings_ChargeRateUnit.fromPartial(object.guiChargeRateUnits)
+      : undefined;
+    message.guiRangeDisplay = (object.guiRangeDisplay !== undefined && object.guiRangeDisplay !== null)
+      ? GuiSettings_RangeDisplay.fromPartial(object.guiRangeDisplay)
+      : undefined;
     message.timestamp = object.timestamp ?? undefined;
     message.gui24HourTime = object.gui24HourTime ?? undefined;
     message.showRangeUnits = object.showRangeUnits ?? undefined;
@@ -18395,16 +23919,388 @@ export const GuiSettings: MessageFns<GuiSettings> = {
   },
 };
 
+function createBaseGuiSettings_SpeedUnit(): GuiSettings_SpeedUnit {
+  return { KilometersPerHour: undefined, MilesPerHour: undefined };
+}
+
+export const GuiSettings_SpeedUnit: MessageFns<GuiSettings_SpeedUnit> = {
+  encode(message: GuiSettings_SpeedUnit, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.KilometersPerHour !== undefined) {
+      Void.encode(message.KilometersPerHour, writer.uint32(10).fork()).join();
+    }
+    if (message.MilesPerHour !== undefined) {
+      Void.encode(message.MilesPerHour, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GuiSettings_SpeedUnit {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGuiSettings_SpeedUnit();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.KilometersPerHour = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.MilesPerHour = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GuiSettings_SpeedUnit {
+    return {
+      KilometersPerHour: isSet(object.KilometersPerHour) ? Void.fromJSON(object.KilometersPerHour) : undefined,
+      MilesPerHour: isSet(object.MilesPerHour) ? Void.fromJSON(object.MilesPerHour) : undefined,
+    };
+  },
+
+  toJSON(message: GuiSettings_SpeedUnit): unknown {
+    const obj: any = {};
+    if (message.KilometersPerHour !== undefined) {
+      obj.KilometersPerHour = Void.toJSON(message.KilometersPerHour);
+    }
+    if (message.MilesPerHour !== undefined) {
+      obj.MilesPerHour = Void.toJSON(message.MilesPerHour);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GuiSettings_SpeedUnit>, I>>(base?: I): GuiSettings_SpeedUnit {
+    return GuiSettings_SpeedUnit.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GuiSettings_SpeedUnit>, I>>(object: I): GuiSettings_SpeedUnit {
+    const message = createBaseGuiSettings_SpeedUnit();
+    message.KilometersPerHour = (object.KilometersPerHour !== undefined && object.KilometersPerHour !== null)
+      ? Void.fromPartial(object.KilometersPerHour)
+      : undefined;
+    message.MilesPerHour = (object.MilesPerHour !== undefined && object.MilesPerHour !== null)
+      ? Void.fromPartial(object.MilesPerHour)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseGuiSettings_TemperatureUnit(): GuiSettings_TemperatureUnit {
+  return { TemperatureF: undefined, TemperatureC: undefined };
+}
+
+export const GuiSettings_TemperatureUnit: MessageFns<GuiSettings_TemperatureUnit> = {
+  encode(message: GuiSettings_TemperatureUnit, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.TemperatureF !== undefined) {
+      Void.encode(message.TemperatureF, writer.uint32(10).fork()).join();
+    }
+    if (message.TemperatureC !== undefined) {
+      Void.encode(message.TemperatureC, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GuiSettings_TemperatureUnit {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGuiSettings_TemperatureUnit();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.TemperatureF = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.TemperatureC = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GuiSettings_TemperatureUnit {
+    return {
+      TemperatureF: isSet(object.TemperatureF) ? Void.fromJSON(object.TemperatureF) : undefined,
+      TemperatureC: isSet(object.TemperatureC) ? Void.fromJSON(object.TemperatureC) : undefined,
+    };
+  },
+
+  toJSON(message: GuiSettings_TemperatureUnit): unknown {
+    const obj: any = {};
+    if (message.TemperatureF !== undefined) {
+      obj.TemperatureF = Void.toJSON(message.TemperatureF);
+    }
+    if (message.TemperatureC !== undefined) {
+      obj.TemperatureC = Void.toJSON(message.TemperatureC);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GuiSettings_TemperatureUnit>, I>>(base?: I): GuiSettings_TemperatureUnit {
+    return GuiSettings_TemperatureUnit.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GuiSettings_TemperatureUnit>, I>>(object: I): GuiSettings_TemperatureUnit {
+    const message = createBaseGuiSettings_TemperatureUnit();
+    message.TemperatureF = (object.TemperatureF !== undefined && object.TemperatureF !== null)
+      ? Void.fromPartial(object.TemperatureF)
+      : undefined;
+    message.TemperatureC = (object.TemperatureC !== undefined && object.TemperatureC !== null)
+      ? Void.fromPartial(object.TemperatureC)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseGuiSettings_ChargeRateUnit(): GuiSettings_ChargeRateUnit {
+  return { Invalid: undefined, KilometersPerHour: undefined, MilesPerHour: undefined, KW: undefined };
+}
+
+export const GuiSettings_ChargeRateUnit: MessageFns<GuiSettings_ChargeRateUnit> = {
+  encode(message: GuiSettings_ChargeRateUnit, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Invalid !== undefined) {
+      Void.encode(message.Invalid, writer.uint32(10).fork()).join();
+    }
+    if (message.KilometersPerHour !== undefined) {
+      Void.encode(message.KilometersPerHour, writer.uint32(18).fork()).join();
+    }
+    if (message.MilesPerHour !== undefined) {
+      Void.encode(message.MilesPerHour, writer.uint32(26).fork()).join();
+    }
+    if (message.KW !== undefined) {
+      Void.encode(message.KW, writer.uint32(34).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GuiSettings_ChargeRateUnit {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGuiSettings_ChargeRateUnit();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Invalid = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.KilometersPerHour = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.MilesPerHour = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.KW = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GuiSettings_ChargeRateUnit {
+    return {
+      Invalid: isSet(object.Invalid) ? Void.fromJSON(object.Invalid) : undefined,
+      KilometersPerHour: isSet(object.KilometersPerHour) ? Void.fromJSON(object.KilometersPerHour) : undefined,
+      MilesPerHour: isSet(object.MilesPerHour) ? Void.fromJSON(object.MilesPerHour) : undefined,
+      KW: isSet(object.KW) ? Void.fromJSON(object.KW) : undefined,
+    };
+  },
+
+  toJSON(message: GuiSettings_ChargeRateUnit): unknown {
+    const obj: any = {};
+    if (message.Invalid !== undefined) {
+      obj.Invalid = Void.toJSON(message.Invalid);
+    }
+    if (message.KilometersPerHour !== undefined) {
+      obj.KilometersPerHour = Void.toJSON(message.KilometersPerHour);
+    }
+    if (message.MilesPerHour !== undefined) {
+      obj.MilesPerHour = Void.toJSON(message.MilesPerHour);
+    }
+    if (message.KW !== undefined) {
+      obj.KW = Void.toJSON(message.KW);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GuiSettings_ChargeRateUnit>, I>>(base?: I): GuiSettings_ChargeRateUnit {
+    return GuiSettings_ChargeRateUnit.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GuiSettings_ChargeRateUnit>, I>>(object: I): GuiSettings_ChargeRateUnit {
+    const message = createBaseGuiSettings_ChargeRateUnit();
+    message.Invalid = (object.Invalid !== undefined && object.Invalid !== null)
+      ? Void.fromPartial(object.Invalid)
+      : undefined;
+    message.KilometersPerHour = (object.KilometersPerHour !== undefined && object.KilometersPerHour !== null)
+      ? Void.fromPartial(object.KilometersPerHour)
+      : undefined;
+    message.MilesPerHour = (object.MilesPerHour !== undefined && object.MilesPerHour !== null)
+      ? Void.fromPartial(object.MilesPerHour)
+      : undefined;
+    message.KW = (object.KW !== undefined && object.KW !== null) ? Void.fromPartial(object.KW) : undefined;
+    return message;
+  },
+};
+
+function createBaseGuiSettings_RangeDisplay(): GuiSettings_RangeDisplay {
+  return { Ideal: undefined, Rated: undefined };
+}
+
+export const GuiSettings_RangeDisplay: MessageFns<GuiSettings_RangeDisplay> = {
+  encode(message: GuiSettings_RangeDisplay, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Ideal !== undefined) {
+      Void.encode(message.Ideal, writer.uint32(10).fork()).join();
+    }
+    if (message.Rated !== undefined) {
+      Void.encode(message.Rated, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GuiSettings_RangeDisplay {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGuiSettings_RangeDisplay();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Ideal = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Rated = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GuiSettings_RangeDisplay {
+    return {
+      Ideal: isSet(object.Ideal) ? Void.fromJSON(object.Ideal) : undefined,
+      Rated: isSet(object.Rated) ? Void.fromJSON(object.Rated) : undefined,
+    };
+  },
+
+  toJSON(message: GuiSettings_RangeDisplay): unknown {
+    const obj: any = {};
+    if (message.Ideal !== undefined) {
+      obj.Ideal = Void.toJSON(message.Ideal);
+    }
+    if (message.Rated !== undefined) {
+      obj.Rated = Void.toJSON(message.Rated);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GuiSettings_RangeDisplay>, I>>(base?: I): GuiSettings_RangeDisplay {
+    return GuiSettings_RangeDisplay.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GuiSettings_RangeDisplay>, I>>(object: I): GuiSettings_RangeDisplay {
+    const message = createBaseGuiSettings_RangeDisplay();
+    message.Ideal = (object.Ideal !== undefined && object.Ideal !== null) ? Void.fromPartial(object.Ideal) : undefined;
+    message.Rated = (object.Rated !== undefined && object.Rated !== null) ? Void.fromPartial(object.Rated) : undefined;
+    return message;
+  },
+};
+
 function createBaseVehicleConfig(): VehicleConfig {
   return {
+    carSpecialType: undefined,
+    carTrim: undefined,
+    carType: undefined,
+    sunRoofInstalled: undefined,
+    wheelType: undefined,
+    spoilerType: undefined,
+    roofColor: undefined,
+    exteriorColor: undefined,
+    rearSeatHeaters: undefined,
+    seatType: undefined,
+    rearSeatType: undefined,
+    thirdRowSeatType: undefined,
+    chargePortType: undefined,
+    timestamp: undefined,
     interiorTrimType: undefined,
+    driverAssist: undefined,
+    performancePackage: undefined,
+    frontDriveUnit: undefined,
+    rearDriveUnit: undefined,
+    efficiencyPackage: undefined,
     exteriorTrimType: undefined,
+    steeringWheelType: undefined,
     redBrakeCalipers: undefined,
     useRangeBadging: undefined,
     rangePlusBadging: undefined,
     hasLudicrousMode: undefined,
     canActuateTrunks: undefined,
     hasAirSuspension: undefined,
+    rhd: undefined,
+    plg: undefined,
     eceRestrictions: undefined,
     euVehicle: undefined,
     motorizedChargePort: undefined,
@@ -18432,6 +24328,7 @@ function createBaseVehicleConfig(): VehicleConfig {
     hasFrontRowSeatHeaters: undefined,
     hasThirdRowSeatHeaters: undefined,
     supportsQrPairing: undefined,
+    vin: undefined,
     disableWindowVentClose: undefined,
     webcamSelfieSupported: undefined,
     copUserSetTempSupported: undefined,
@@ -18477,11 +24374,71 @@ function createBaseVehicleConfig(): VehicleConfig {
 
 export const VehicleConfig: MessageFns<VehicleConfig> = {
   encode(message: VehicleConfig, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.carSpecialType !== undefined) {
+      VehicleBadging.encode(message.carSpecialType, writer.uint32(10).fork()).join();
+    }
+    if (message.carTrim !== undefined) {
+      CarTrim.encode(message.carTrim, writer.uint32(18).fork()).join();
+    }
+    if (message.carType !== undefined) {
+      VehicleConfig_CarType.encode(message.carType, writer.uint32(58).fork()).join();
+    }
+    if (message.sunRoofInstalled !== undefined) {
+      SunRoofType.encode(message.sunRoofInstalled, writer.uint32(66).fork()).join();
+    }
+    if (message.wheelType !== undefined) {
+      WheelType.encode(message.wheelType, writer.uint32(74).fork()).join();
+    }
+    if (message.spoilerType !== undefined) {
+      SpoilerType.encode(message.spoilerType, writer.uint32(90).fork()).join();
+    }
+    if (message.roofColor !== undefined) {
+      RoofColor.encode(message.roofColor, writer.uint32(98).fork()).join();
+    }
+    if (message.exteriorColor !== undefined) {
+      ExteriorColor.encode(message.exteriorColor, writer.uint32(106).fork()).join();
+    }
+    if (message.rearSeatHeaters !== undefined) {
+      RearSeatHeaters.encode(message.rearSeatHeaters, writer.uint32(130).fork()).join();
+    }
+    if (message.seatType !== undefined) {
+      SeatType.encode(message.seatType, writer.uint32(138).fork()).join();
+    }
+    if (message.rearSeatType !== undefined) {
+      RearSeatType.encode(message.rearSeatType, writer.uint32(146).fork()).join();
+    }
+    if (message.thirdRowSeatType !== undefined) {
+      ThirdRowSeatType.encode(message.thirdRowSeatType, writer.uint32(154).fork()).join();
+    }
+    if (message.chargePortType !== undefined) {
+      ChargePortType.encode(message.chargePortType, writer.uint32(186).fork()).join();
+    }
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(218).fork()).join();
+    }
     if (message.interiorTrimType !== undefined) {
       VehicleConfig_InteriorTrimType.encode(message.interiorTrimType, writer.uint32(226).fork()).join();
     }
+    if (message.driverAssist !== undefined) {
+      VehicleConfig_DriverAssist.encode(message.driverAssist, writer.uint32(234).fork()).join();
+    }
+    if (message.performancePackage !== undefined) {
+      VehicleConfig_PerformancePackage.encode(message.performancePackage, writer.uint32(242).fork()).join();
+    }
+    if (message.frontDriveUnit !== undefined) {
+      VehicleConfig_FrontDriveUnit.encode(message.frontDriveUnit, writer.uint32(250).fork()).join();
+    }
+    if (message.rearDriveUnit !== undefined) {
+      RearDriveUnit.encode(message.rearDriveUnit, writer.uint32(258).fork()).join();
+    }
+    if (message.efficiencyPackage !== undefined) {
+      EfficiencyPackage.encode(message.efficiencyPackage, writer.uint32(266).fork()).join();
+    }
     if (message.exteriorTrimType !== undefined) {
       VehicleConfig_ExteriorTrimType.encode(message.exteriorTrimType, writer.uint32(282).fork()).join();
+    }
+    if (message.steeringWheelType !== undefined) {
+      VehicleConfig_SteeringWheelType.encode(message.steeringWheelType, writer.uint32(322).fork()).join();
     }
     if (message.redBrakeCalipers !== undefined) {
       writer.uint32(488).bool(message.redBrakeCalipers);
@@ -18500,6 +24457,12 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
     }
     if (message.hasAirSuspension !== undefined) {
       writer.uint32(880).bool(message.hasAirSuspension);
+    }
+    if (message.rhd !== undefined) {
+      writer.uint32(912).bool(message.rhd);
+    }
+    if (message.plg !== undefined) {
+      writer.uint32(920).bool(message.plg);
     }
     if (message.eceRestrictions !== undefined) {
       writer.uint32(960).bool(message.eceRestrictions);
@@ -18581,6 +24544,9 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
     }
     if (message.supportsQrPairing !== undefined) {
       writer.uint32(1272).bool(message.supportsQrPairing);
+    }
+    if (message.vin !== undefined) {
+      writer.uint32(1282).string(message.vin);
     }
     if (message.disableWindowVentClose !== undefined) {
       writer.uint32(1288).bool(message.disableWindowVentClose);
@@ -18712,6 +24678,118 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.carSpecialType = VehicleBadging.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.carTrim = CarTrim.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.carType = VehicleConfig_CarType.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.sunRoofInstalled = SunRoofType.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.wheelType = WheelType.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.spoilerType = SpoilerType.decode(reader, reader.uint32());
+          continue;
+        }
+        case 12: {
+          if (tag !== 98) {
+            break;
+          }
+
+          message.roofColor = RoofColor.decode(reader, reader.uint32());
+          continue;
+        }
+        case 13: {
+          if (tag !== 106) {
+            break;
+          }
+
+          message.exteriorColor = ExteriorColor.decode(reader, reader.uint32());
+          continue;
+        }
+        case 16: {
+          if (tag !== 130) {
+            break;
+          }
+
+          message.rearSeatHeaters = RearSeatHeaters.decode(reader, reader.uint32());
+          continue;
+        }
+        case 17: {
+          if (tag !== 138) {
+            break;
+          }
+
+          message.seatType = SeatType.decode(reader, reader.uint32());
+          continue;
+        }
+        case 18: {
+          if (tag !== 146) {
+            break;
+          }
+
+          message.rearSeatType = RearSeatType.decode(reader, reader.uint32());
+          continue;
+        }
+        case 19: {
+          if (tag !== 154) {
+            break;
+          }
+
+          message.thirdRowSeatType = ThirdRowSeatType.decode(reader, reader.uint32());
+          continue;
+        }
+        case 23: {
+          if (tag !== 186) {
+            break;
+          }
+
+          message.chargePortType = ChargePortType.decode(reader, reader.uint32());
+          continue;
+        }
+        case 27: {
+          if (tag !== 218) {
+            break;
+          }
+
+          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          continue;
+        }
         case 28: {
           if (tag !== 226) {
             break;
@@ -18720,12 +24798,60 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
           message.interiorTrimType = VehicleConfig_InteriorTrimType.decode(reader, reader.uint32());
           continue;
         }
+        case 29: {
+          if (tag !== 234) {
+            break;
+          }
+
+          message.driverAssist = VehicleConfig_DriverAssist.decode(reader, reader.uint32());
+          continue;
+        }
+        case 30: {
+          if (tag !== 242) {
+            break;
+          }
+
+          message.performancePackage = VehicleConfig_PerformancePackage.decode(reader, reader.uint32());
+          continue;
+        }
+        case 31: {
+          if (tag !== 250) {
+            break;
+          }
+
+          message.frontDriveUnit = VehicleConfig_FrontDriveUnit.decode(reader, reader.uint32());
+          continue;
+        }
+        case 32: {
+          if (tag !== 258) {
+            break;
+          }
+
+          message.rearDriveUnit = RearDriveUnit.decode(reader, reader.uint32());
+          continue;
+        }
+        case 33: {
+          if (tag !== 266) {
+            break;
+          }
+
+          message.efficiencyPackage = EfficiencyPackage.decode(reader, reader.uint32());
+          continue;
+        }
         case 35: {
           if (tag !== 282) {
             break;
           }
 
           message.exteriorTrimType = VehicleConfig_ExteriorTrimType.decode(reader, reader.uint32());
+          continue;
+        }
+        case 40: {
+          if (tag !== 322) {
+            break;
+          }
+
+          message.steeringWheelType = VehicleConfig_SteeringWheelType.decode(reader, reader.uint32());
           continue;
         }
         case 61: {
@@ -18774,6 +24900,22 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
           }
 
           message.hasAirSuspension = reader.bool();
+          continue;
+        }
+        case 114: {
+          if (tag !== 912) {
+            break;
+          }
+
+          message.rhd = reader.bool();
+          continue;
+        }
+        case 115: {
+          if (tag !== 920) {
+            break;
+          }
+
+          message.plg = reader.bool();
           continue;
         }
         case 120: {
@@ -18990,6 +25132,14 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
           }
 
           message.supportsQrPairing = reader.bool();
+          continue;
+        }
+        case 160: {
+          if (tag !== 1282) {
+            break;
+          }
+
+          message.vin = reader.string();
           continue;
         }
         case 161: {
@@ -19323,11 +25473,39 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
 
   fromJSON(object: any): VehicleConfig {
     return {
+      carSpecialType: isSet(object.carSpecialType) ? VehicleBadging.fromJSON(object.carSpecialType) : undefined,
+      carTrim: isSet(object.carTrim) ? CarTrim.fromJSON(object.carTrim) : undefined,
+      carType: isSet(object.carType) ? VehicleConfig_CarType.fromJSON(object.carType) : undefined,
+      sunRoofInstalled: isSet(object.sunRoofInstalled) ? SunRoofType.fromJSON(object.sunRoofInstalled) : undefined,
+      wheelType: isSet(object.wheelType) ? WheelType.fromJSON(object.wheelType) : undefined,
+      spoilerType: isSet(object.spoilerType) ? SpoilerType.fromJSON(object.spoilerType) : undefined,
+      roofColor: isSet(object.roofColor) ? RoofColor.fromJSON(object.roofColor) : undefined,
+      exteriorColor: isSet(object.exteriorColor) ? ExteriorColor.fromJSON(object.exteriorColor) : undefined,
+      rearSeatHeaters: isSet(object.rearSeatHeaters) ? RearSeatHeaters.fromJSON(object.rearSeatHeaters) : undefined,
+      seatType: isSet(object.seatType) ? SeatType.fromJSON(object.seatType) : undefined,
+      rearSeatType: isSet(object.rearSeatType) ? RearSeatType.fromJSON(object.rearSeatType) : undefined,
+      thirdRowSeatType: isSet(object.thirdRowSeatType) ? ThirdRowSeatType.fromJSON(object.thirdRowSeatType) : undefined,
+      chargePortType: isSet(object.chargePortType) ? ChargePortType.fromJSON(object.chargePortType) : undefined,
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
       interiorTrimType: isSet(object.interiorTrimType)
         ? VehicleConfig_InteriorTrimType.fromJSON(object.interiorTrimType)
         : undefined,
+      driverAssist: isSet(object.driverAssist) ? VehicleConfig_DriverAssist.fromJSON(object.driverAssist) : undefined,
+      performancePackage: isSet(object.performancePackage)
+        ? VehicleConfig_PerformancePackage.fromJSON(object.performancePackage)
+        : undefined,
+      frontDriveUnit: isSet(object.frontDriveUnit)
+        ? VehicleConfig_FrontDriveUnit.fromJSON(object.frontDriveUnit)
+        : undefined,
+      rearDriveUnit: isSet(object.rearDriveUnit) ? RearDriveUnit.fromJSON(object.rearDriveUnit) : undefined,
+      efficiencyPackage: isSet(object.efficiencyPackage)
+        ? EfficiencyPackage.fromJSON(object.efficiencyPackage)
+        : undefined,
       exteriorTrimType: isSet(object.exteriorTrimType)
         ? VehicleConfig_ExteriorTrimType.fromJSON(object.exteriorTrimType)
+        : undefined,
+      steeringWheelType: isSet(object.steeringWheelType)
+        ? VehicleConfig_SteeringWheelType.fromJSON(object.steeringWheelType)
         : undefined,
       redBrakeCalipers: isSet(object.redBrakeCalipers) ? globalThis.Boolean(object.redBrakeCalipers) : undefined,
       useRangeBadging: isSet(object.useRangeBadging) ? globalThis.Boolean(object.useRangeBadging) : undefined,
@@ -19335,6 +25513,8 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
       hasLudicrousMode: isSet(object.hasLudicrousMode) ? globalThis.Boolean(object.hasLudicrousMode) : undefined,
       canActuateTrunks: isSet(object.canActuateTrunks) ? globalThis.Boolean(object.canActuateTrunks) : undefined,
       hasAirSuspension: isSet(object.hasAirSuspension) ? globalThis.Boolean(object.hasAirSuspension) : undefined,
+      rhd: isSet(object.rhd) ? globalThis.Boolean(object.rhd) : undefined,
+      plg: isSet(object.plg) ? globalThis.Boolean(object.plg) : undefined,
       eceRestrictions: isSet(object.eceRestrictions) ? globalThis.Boolean(object.eceRestrictions) : undefined,
       euVehicle: isSet(object.euVehicle) ? globalThis.Boolean(object.euVehicle) : undefined,
       motorizedChargePort: isSet(object.motorizedChargePort)
@@ -19382,6 +25562,7 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
         ? globalThis.Boolean(object.hasThirdRowSeatHeaters)
         : undefined,
       supportsQrPairing: isSet(object.supportsQrPairing) ? globalThis.Boolean(object.supportsQrPairing) : undefined,
+      vin: isSet(object.vin) ? globalThis.String(object.vin) : undefined,
       disableWindowVentClose: isSet(object.disableWindowVentClose)
         ? globalThis.Boolean(object.disableWindowVentClose)
         : undefined,
@@ -19473,11 +25654,71 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
 
   toJSON(message: VehicleConfig): unknown {
     const obj: any = {};
+    if (message.carSpecialType !== undefined) {
+      obj.carSpecialType = VehicleBadging.toJSON(message.carSpecialType);
+    }
+    if (message.carTrim !== undefined) {
+      obj.carTrim = CarTrim.toJSON(message.carTrim);
+    }
+    if (message.carType !== undefined) {
+      obj.carType = VehicleConfig_CarType.toJSON(message.carType);
+    }
+    if (message.sunRoofInstalled !== undefined) {
+      obj.sunRoofInstalled = SunRoofType.toJSON(message.sunRoofInstalled);
+    }
+    if (message.wheelType !== undefined) {
+      obj.wheelType = WheelType.toJSON(message.wheelType);
+    }
+    if (message.spoilerType !== undefined) {
+      obj.spoilerType = SpoilerType.toJSON(message.spoilerType);
+    }
+    if (message.roofColor !== undefined) {
+      obj.roofColor = RoofColor.toJSON(message.roofColor);
+    }
+    if (message.exteriorColor !== undefined) {
+      obj.exteriorColor = ExteriorColor.toJSON(message.exteriorColor);
+    }
+    if (message.rearSeatHeaters !== undefined) {
+      obj.rearSeatHeaters = RearSeatHeaters.toJSON(message.rearSeatHeaters);
+    }
+    if (message.seatType !== undefined) {
+      obj.seatType = SeatType.toJSON(message.seatType);
+    }
+    if (message.rearSeatType !== undefined) {
+      obj.rearSeatType = RearSeatType.toJSON(message.rearSeatType);
+    }
+    if (message.thirdRowSeatType !== undefined) {
+      obj.thirdRowSeatType = ThirdRowSeatType.toJSON(message.thirdRowSeatType);
+    }
+    if (message.chargePortType !== undefined) {
+      obj.chargePortType = ChargePortType.toJSON(message.chargePortType);
+    }
+    if (message.timestamp !== undefined) {
+      obj.timestamp = message.timestamp.toISOString();
+    }
     if (message.interiorTrimType !== undefined) {
       obj.interiorTrimType = VehicleConfig_InteriorTrimType.toJSON(message.interiorTrimType);
     }
+    if (message.driverAssist !== undefined) {
+      obj.driverAssist = VehicleConfig_DriverAssist.toJSON(message.driverAssist);
+    }
+    if (message.performancePackage !== undefined) {
+      obj.performancePackage = VehicleConfig_PerformancePackage.toJSON(message.performancePackage);
+    }
+    if (message.frontDriveUnit !== undefined) {
+      obj.frontDriveUnit = VehicleConfig_FrontDriveUnit.toJSON(message.frontDriveUnit);
+    }
+    if (message.rearDriveUnit !== undefined) {
+      obj.rearDriveUnit = RearDriveUnit.toJSON(message.rearDriveUnit);
+    }
+    if (message.efficiencyPackage !== undefined) {
+      obj.efficiencyPackage = EfficiencyPackage.toJSON(message.efficiencyPackage);
+    }
     if (message.exteriorTrimType !== undefined) {
       obj.exteriorTrimType = VehicleConfig_ExteriorTrimType.toJSON(message.exteriorTrimType);
+    }
+    if (message.steeringWheelType !== undefined) {
+      obj.steeringWheelType = VehicleConfig_SteeringWheelType.toJSON(message.steeringWheelType);
     }
     if (message.redBrakeCalipers !== undefined) {
       obj.redBrakeCalipers = message.redBrakeCalipers;
@@ -19496,6 +25737,12 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
     }
     if (message.hasAirSuspension !== undefined) {
       obj.hasAirSuspension = message.hasAirSuspension;
+    }
+    if (message.rhd !== undefined) {
+      obj.rhd = message.rhd;
+    }
+    if (message.plg !== undefined) {
+      obj.plg = message.plg;
     }
     if (message.eceRestrictions !== undefined) {
       obj.eceRestrictions = message.eceRestrictions;
@@ -19577,6 +25824,9 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
     }
     if (message.supportsQrPairing !== undefined) {
       obj.supportsQrPairing = message.supportsQrPairing;
+    }
+    if (message.vin !== undefined) {
+      obj.vin = message.vin;
     }
     if (message.disableWindowVentClose !== undefined) {
       obj.disableWindowVentClose = message.disableWindowVentClose;
@@ -19706,11 +25956,69 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
   },
   fromPartial<I extends Exact<DeepPartial<VehicleConfig>, I>>(object: I): VehicleConfig {
     const message = createBaseVehicleConfig();
+    message.carSpecialType = (object.carSpecialType !== undefined && object.carSpecialType !== null)
+      ? VehicleBadging.fromPartial(object.carSpecialType)
+      : undefined;
+    message.carTrim = (object.carTrim !== undefined && object.carTrim !== null)
+      ? CarTrim.fromPartial(object.carTrim)
+      : undefined;
+    message.carType = (object.carType !== undefined && object.carType !== null)
+      ? VehicleConfig_CarType.fromPartial(object.carType)
+      : undefined;
+    message.sunRoofInstalled = (object.sunRoofInstalled !== undefined && object.sunRoofInstalled !== null)
+      ? SunRoofType.fromPartial(object.sunRoofInstalled)
+      : undefined;
+    message.wheelType = (object.wheelType !== undefined && object.wheelType !== null)
+      ? WheelType.fromPartial(object.wheelType)
+      : undefined;
+    message.spoilerType = (object.spoilerType !== undefined && object.spoilerType !== null)
+      ? SpoilerType.fromPartial(object.spoilerType)
+      : undefined;
+    message.roofColor = (object.roofColor !== undefined && object.roofColor !== null)
+      ? RoofColor.fromPartial(object.roofColor)
+      : undefined;
+    message.exteriorColor = (object.exteriorColor !== undefined && object.exteriorColor !== null)
+      ? ExteriorColor.fromPartial(object.exteriorColor)
+      : undefined;
+    message.rearSeatHeaters = (object.rearSeatHeaters !== undefined && object.rearSeatHeaters !== null)
+      ? RearSeatHeaters.fromPartial(object.rearSeatHeaters)
+      : undefined;
+    message.seatType = (object.seatType !== undefined && object.seatType !== null)
+      ? SeatType.fromPartial(object.seatType)
+      : undefined;
+    message.rearSeatType = (object.rearSeatType !== undefined && object.rearSeatType !== null)
+      ? RearSeatType.fromPartial(object.rearSeatType)
+      : undefined;
+    message.thirdRowSeatType = (object.thirdRowSeatType !== undefined && object.thirdRowSeatType !== null)
+      ? ThirdRowSeatType.fromPartial(object.thirdRowSeatType)
+      : undefined;
+    message.chargePortType = (object.chargePortType !== undefined && object.chargePortType !== null)
+      ? ChargePortType.fromPartial(object.chargePortType)
+      : undefined;
+    message.timestamp = object.timestamp ?? undefined;
     message.interiorTrimType = (object.interiorTrimType !== undefined && object.interiorTrimType !== null)
       ? VehicleConfig_InteriorTrimType.fromPartial(object.interiorTrimType)
       : undefined;
+    message.driverAssist = (object.driverAssist !== undefined && object.driverAssist !== null)
+      ? VehicleConfig_DriverAssist.fromPartial(object.driverAssist)
+      : undefined;
+    message.performancePackage = (object.performancePackage !== undefined && object.performancePackage !== null)
+      ? VehicleConfig_PerformancePackage.fromPartial(object.performancePackage)
+      : undefined;
+    message.frontDriveUnit = (object.frontDriveUnit !== undefined && object.frontDriveUnit !== null)
+      ? VehicleConfig_FrontDriveUnit.fromPartial(object.frontDriveUnit)
+      : undefined;
+    message.rearDriveUnit = (object.rearDriveUnit !== undefined && object.rearDriveUnit !== null)
+      ? RearDriveUnit.fromPartial(object.rearDriveUnit)
+      : undefined;
+    message.efficiencyPackage = (object.efficiencyPackage !== undefined && object.efficiencyPackage !== null)
+      ? EfficiencyPackage.fromPartial(object.efficiencyPackage)
+      : undefined;
     message.exteriorTrimType = (object.exteriorTrimType !== undefined && object.exteriorTrimType !== null)
       ? VehicleConfig_ExteriorTrimType.fromPartial(object.exteriorTrimType)
+      : undefined;
+    message.steeringWheelType = (object.steeringWheelType !== undefined && object.steeringWheelType !== null)
+      ? VehicleConfig_SteeringWheelType.fromPartial(object.steeringWheelType)
       : undefined;
     message.redBrakeCalipers = object.redBrakeCalipers ?? undefined;
     message.useRangeBadging = object.useRangeBadging ?? undefined;
@@ -19718,6 +26026,8 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
     message.hasLudicrousMode = object.hasLudicrousMode ?? undefined;
     message.canActuateTrunks = object.canActuateTrunks ?? undefined;
     message.hasAirSuspension = object.hasAirSuspension ?? undefined;
+    message.rhd = object.rhd ?? undefined;
+    message.plg = object.plg ?? undefined;
     message.eceRestrictions = object.eceRestrictions ?? undefined;
     message.euVehicle = object.euVehicle ?? undefined;
     message.motorizedChargePort = object.motorizedChargePort ?? undefined;
@@ -19745,6 +26055,7 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
     message.hasFrontRowSeatHeaters = object.hasFrontRowSeatHeaters ?? undefined;
     message.hasThirdRowSeatHeaters = object.hasThirdRowSeatHeaters ?? undefined;
     message.supportsQrPairing = object.supportsQrPairing ?? undefined;
+    message.vin = object.vin ?? undefined;
     message.disableWindowVentClose = object.disableWindowVentClose ?? undefined;
     message.webcamSelfieSupported = object.webcamSelfieSupported ?? undefined;
     message.copUserSetTempSupported = object.copUserSetTempSupported ?? undefined;
@@ -19789,12 +26100,699 @@ export const VehicleConfig: MessageFns<VehicleConfig> = {
   },
 };
 
+function createBaseVehicleConfig_CarType(): VehicleConfig_CarType {
+  return {
+    CarTypeModelS: undefined,
+    CarTypeModelX: undefined,
+    CarTypeModelS2: undefined,
+    CarTypeModel3: undefined,
+    CarTypeModelY: undefined,
+    CarTypeSemiTruck: undefined,
+    CarTypeLychee: undefined,
+    CarTypeTamarind: undefined,
+    CarTypeCybertruck: undefined,
+    CarTypeSemiTruckV2: undefined,
+  };
+}
+
+export const VehicleConfig_CarType: MessageFns<VehicleConfig_CarType> = {
+  encode(message: VehicleConfig_CarType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.CarTypeModelS !== undefined) {
+      Void.encode(message.CarTypeModelS, writer.uint32(10).fork()).join();
+    }
+    if (message.CarTypeModelX !== undefined) {
+      Void.encode(message.CarTypeModelX, writer.uint32(18).fork()).join();
+    }
+    if (message.CarTypeModelS2 !== undefined) {
+      Void.encode(message.CarTypeModelS2, writer.uint32(26).fork()).join();
+    }
+    if (message.CarTypeModel3 !== undefined) {
+      Void.encode(message.CarTypeModel3, writer.uint32(34).fork()).join();
+    }
+    if (message.CarTypeModelY !== undefined) {
+      Void.encode(message.CarTypeModelY, writer.uint32(42).fork()).join();
+    }
+    if (message.CarTypeSemiTruck !== undefined) {
+      Void.encode(message.CarTypeSemiTruck, writer.uint32(50).fork()).join();
+    }
+    if (message.CarTypeLychee !== undefined) {
+      Void.encode(message.CarTypeLychee, writer.uint32(58).fork()).join();
+    }
+    if (message.CarTypeTamarind !== undefined) {
+      Void.encode(message.CarTypeTamarind, writer.uint32(66).fork()).join();
+    }
+    if (message.CarTypeCybertruck !== undefined) {
+      Void.encode(message.CarTypeCybertruck, writer.uint32(74).fork()).join();
+    }
+    if (message.CarTypeSemiTruckV2 !== undefined) {
+      Void.encode(message.CarTypeSemiTruckV2, writer.uint32(90).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): VehicleConfig_CarType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVehicleConfig_CarType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.CarTypeModelS = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.CarTypeModelX = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.CarTypeModelS2 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.CarTypeModel3 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.CarTypeModelY = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.CarTypeSemiTruck = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 7: {
+          if (tag !== 58) {
+            break;
+          }
+
+          message.CarTypeLychee = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.CarTypeTamarind = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.CarTypeCybertruck = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.CarTypeSemiTruckV2 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): VehicleConfig_CarType {
+    return {
+      CarTypeModelS: isSet(object.CarTypeModelS) ? Void.fromJSON(object.CarTypeModelS) : undefined,
+      CarTypeModelX: isSet(object.CarTypeModelX) ? Void.fromJSON(object.CarTypeModelX) : undefined,
+      CarTypeModelS2: isSet(object.CarTypeModelS2) ? Void.fromJSON(object.CarTypeModelS2) : undefined,
+      CarTypeModel3: isSet(object.CarTypeModel3) ? Void.fromJSON(object.CarTypeModel3) : undefined,
+      CarTypeModelY: isSet(object.CarTypeModelY) ? Void.fromJSON(object.CarTypeModelY) : undefined,
+      CarTypeSemiTruck: isSet(object.CarTypeSemiTruck) ? Void.fromJSON(object.CarTypeSemiTruck) : undefined,
+      CarTypeLychee: isSet(object.CarTypeLychee) ? Void.fromJSON(object.CarTypeLychee) : undefined,
+      CarTypeTamarind: isSet(object.CarTypeTamarind) ? Void.fromJSON(object.CarTypeTamarind) : undefined,
+      CarTypeCybertruck: isSet(object.CarTypeCybertruck) ? Void.fromJSON(object.CarTypeCybertruck) : undefined,
+      CarTypeSemiTruckV2: isSet(object.CarTypeSemiTruckV2) ? Void.fromJSON(object.CarTypeSemiTruckV2) : undefined,
+    };
+  },
+
+  toJSON(message: VehicleConfig_CarType): unknown {
+    const obj: any = {};
+    if (message.CarTypeModelS !== undefined) {
+      obj.CarTypeModelS = Void.toJSON(message.CarTypeModelS);
+    }
+    if (message.CarTypeModelX !== undefined) {
+      obj.CarTypeModelX = Void.toJSON(message.CarTypeModelX);
+    }
+    if (message.CarTypeModelS2 !== undefined) {
+      obj.CarTypeModelS2 = Void.toJSON(message.CarTypeModelS2);
+    }
+    if (message.CarTypeModel3 !== undefined) {
+      obj.CarTypeModel3 = Void.toJSON(message.CarTypeModel3);
+    }
+    if (message.CarTypeModelY !== undefined) {
+      obj.CarTypeModelY = Void.toJSON(message.CarTypeModelY);
+    }
+    if (message.CarTypeSemiTruck !== undefined) {
+      obj.CarTypeSemiTruck = Void.toJSON(message.CarTypeSemiTruck);
+    }
+    if (message.CarTypeLychee !== undefined) {
+      obj.CarTypeLychee = Void.toJSON(message.CarTypeLychee);
+    }
+    if (message.CarTypeTamarind !== undefined) {
+      obj.CarTypeTamarind = Void.toJSON(message.CarTypeTamarind);
+    }
+    if (message.CarTypeCybertruck !== undefined) {
+      obj.CarTypeCybertruck = Void.toJSON(message.CarTypeCybertruck);
+    }
+    if (message.CarTypeSemiTruckV2 !== undefined) {
+      obj.CarTypeSemiTruckV2 = Void.toJSON(message.CarTypeSemiTruckV2);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<VehicleConfig_CarType>, I>>(base?: I): VehicleConfig_CarType {
+    return VehicleConfig_CarType.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<VehicleConfig_CarType>, I>>(object: I): VehicleConfig_CarType {
+    const message = createBaseVehicleConfig_CarType();
+    message.CarTypeModelS = (object.CarTypeModelS !== undefined && object.CarTypeModelS !== null)
+      ? Void.fromPartial(object.CarTypeModelS)
+      : undefined;
+    message.CarTypeModelX = (object.CarTypeModelX !== undefined && object.CarTypeModelX !== null)
+      ? Void.fromPartial(object.CarTypeModelX)
+      : undefined;
+    message.CarTypeModelS2 = (object.CarTypeModelS2 !== undefined && object.CarTypeModelS2 !== null)
+      ? Void.fromPartial(object.CarTypeModelS2)
+      : undefined;
+    message.CarTypeModel3 = (object.CarTypeModel3 !== undefined && object.CarTypeModel3 !== null)
+      ? Void.fromPartial(object.CarTypeModel3)
+      : undefined;
+    message.CarTypeModelY = (object.CarTypeModelY !== undefined && object.CarTypeModelY !== null)
+      ? Void.fromPartial(object.CarTypeModelY)
+      : undefined;
+    message.CarTypeSemiTruck = (object.CarTypeSemiTruck !== undefined && object.CarTypeSemiTruck !== null)
+      ? Void.fromPartial(object.CarTypeSemiTruck)
+      : undefined;
+    message.CarTypeLychee = (object.CarTypeLychee !== undefined && object.CarTypeLychee !== null)
+      ? Void.fromPartial(object.CarTypeLychee)
+      : undefined;
+    message.CarTypeTamarind = (object.CarTypeTamarind !== undefined && object.CarTypeTamarind !== null)
+      ? Void.fromPartial(object.CarTypeTamarind)
+      : undefined;
+    message.CarTypeCybertruck = (object.CarTypeCybertruck !== undefined && object.CarTypeCybertruck !== null)
+      ? Void.fromPartial(object.CarTypeCybertruck)
+      : undefined;
+    message.CarTypeSemiTruckV2 = (object.CarTypeSemiTruckV2 !== undefined && object.CarTypeSemiTruckV2 !== null)
+      ? Void.fromPartial(object.CarTypeSemiTruckV2)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseVehicleConfig_DriverAssist(): VehicleConfig_DriverAssist {
+  return {
+    None: undefined,
+    MonoCam: undefined,
+    ParkerPascal: undefined,
+    ParkerPascal25: undefined,
+    TeslaAP3: undefined,
+  };
+}
+
+export const VehicleConfig_DriverAssist: MessageFns<VehicleConfig_DriverAssist> = {
+  encode(message: VehicleConfig_DriverAssist, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.None !== undefined) {
+      Void.encode(message.None, writer.uint32(10).fork()).join();
+    }
+    if (message.MonoCam !== undefined) {
+      Void.encode(message.MonoCam, writer.uint32(18).fork()).join();
+    }
+    if (message.ParkerPascal !== undefined) {
+      Void.encode(message.ParkerPascal, writer.uint32(26).fork()).join();
+    }
+    if (message.ParkerPascal25 !== undefined) {
+      Void.encode(message.ParkerPascal25, writer.uint32(34).fork()).join();
+    }
+    if (message.TeslaAP3 !== undefined) {
+      Void.encode(message.TeslaAP3, writer.uint32(42).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): VehicleConfig_DriverAssist {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVehicleConfig_DriverAssist();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.None = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.MonoCam = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.ParkerPascal = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.ParkerPascal25 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.TeslaAP3 = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): VehicleConfig_DriverAssist {
+    return {
+      None: isSet(object.None) ? Void.fromJSON(object.None) : undefined,
+      MonoCam: isSet(object.MonoCam) ? Void.fromJSON(object.MonoCam) : undefined,
+      ParkerPascal: isSet(object.ParkerPascal) ? Void.fromJSON(object.ParkerPascal) : undefined,
+      ParkerPascal25: isSet(object.ParkerPascal25) ? Void.fromJSON(object.ParkerPascal25) : undefined,
+      TeslaAP3: isSet(object.TeslaAP3) ? Void.fromJSON(object.TeslaAP3) : undefined,
+    };
+  },
+
+  toJSON(message: VehicleConfig_DriverAssist): unknown {
+    const obj: any = {};
+    if (message.None !== undefined) {
+      obj.None = Void.toJSON(message.None);
+    }
+    if (message.MonoCam !== undefined) {
+      obj.MonoCam = Void.toJSON(message.MonoCam);
+    }
+    if (message.ParkerPascal !== undefined) {
+      obj.ParkerPascal = Void.toJSON(message.ParkerPascal);
+    }
+    if (message.ParkerPascal25 !== undefined) {
+      obj.ParkerPascal25 = Void.toJSON(message.ParkerPascal25);
+    }
+    if (message.TeslaAP3 !== undefined) {
+      obj.TeslaAP3 = Void.toJSON(message.TeslaAP3);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<VehicleConfig_DriverAssist>, I>>(base?: I): VehicleConfig_DriverAssist {
+    return VehicleConfig_DriverAssist.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<VehicleConfig_DriverAssist>, I>>(object: I): VehicleConfig_DriverAssist {
+    const message = createBaseVehicleConfig_DriverAssist();
+    message.None = (object.None !== undefined && object.None !== null) ? Void.fromPartial(object.None) : undefined;
+    message.MonoCam = (object.MonoCam !== undefined && object.MonoCam !== null)
+      ? Void.fromPartial(object.MonoCam)
+      : undefined;
+    message.ParkerPascal = (object.ParkerPascal !== undefined && object.ParkerPascal !== null)
+      ? Void.fromPartial(object.ParkerPascal)
+      : undefined;
+    message.ParkerPascal25 = (object.ParkerPascal25 !== undefined && object.ParkerPascal25 !== null)
+      ? Void.fromPartial(object.ParkerPascal25)
+      : undefined;
+    message.TeslaAP3 = (object.TeslaAP3 !== undefined && object.TeslaAP3 !== null)
+      ? Void.fromPartial(object.TeslaAP3)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseVehicleConfig_PerformancePackage(): VehicleConfig_PerformancePackage {
+  return { None: undefined, Base: undefined, Performance: undefined, BasePlus: undefined };
+}
+
+export const VehicleConfig_PerformancePackage: MessageFns<VehicleConfig_PerformancePackage> = {
+  encode(message: VehicleConfig_PerformancePackage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.None !== undefined) {
+      Void.encode(message.None, writer.uint32(10).fork()).join();
+    }
+    if (message.Base !== undefined) {
+      Void.encode(message.Base, writer.uint32(18).fork()).join();
+    }
+    if (message.Performance !== undefined) {
+      Void.encode(message.Performance, writer.uint32(26).fork()).join();
+    }
+    if (message.BasePlus !== undefined) {
+      Void.encode(message.BasePlus, writer.uint32(34).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): VehicleConfig_PerformancePackage {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVehicleConfig_PerformancePackage();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.None = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Base = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Performance = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.BasePlus = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): VehicleConfig_PerformancePackage {
+    return {
+      None: isSet(object.None) ? Void.fromJSON(object.None) : undefined,
+      Base: isSet(object.Base) ? Void.fromJSON(object.Base) : undefined,
+      Performance: isSet(object.Performance) ? Void.fromJSON(object.Performance) : undefined,
+      BasePlus: isSet(object.BasePlus) ? Void.fromJSON(object.BasePlus) : undefined,
+    };
+  },
+
+  toJSON(message: VehicleConfig_PerformancePackage): unknown {
+    const obj: any = {};
+    if (message.None !== undefined) {
+      obj.None = Void.toJSON(message.None);
+    }
+    if (message.Base !== undefined) {
+      obj.Base = Void.toJSON(message.Base);
+    }
+    if (message.Performance !== undefined) {
+      obj.Performance = Void.toJSON(message.Performance);
+    }
+    if (message.BasePlus !== undefined) {
+      obj.BasePlus = Void.toJSON(message.BasePlus);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<VehicleConfig_PerformancePackage>, I>>(
+    base?: I,
+  ): VehicleConfig_PerformancePackage {
+    return VehicleConfig_PerformancePackage.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<VehicleConfig_PerformancePackage>, I>>(
+    object: I,
+  ): VehicleConfig_PerformancePackage {
+    const message = createBaseVehicleConfig_PerformancePackage();
+    message.None = (object.None !== undefined && object.None !== null) ? Void.fromPartial(object.None) : undefined;
+    message.Base = (object.Base !== undefined && object.Base !== null) ? Void.fromPartial(object.Base) : undefined;
+    message.Performance = (object.Performance !== undefined && object.Performance !== null)
+      ? Void.fromPartial(object.Performance)
+      : undefined;
+    message.BasePlus = (object.BasePlus !== undefined && object.BasePlus !== null)
+      ? Void.fromPartial(object.BasePlus)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseVehicleConfig_FrontDriveUnit(): VehicleConfig_FrontDriveUnit {
+  return { NoneOrSmall: undefined, PermanentMagnet: undefined };
+}
+
+export const VehicleConfig_FrontDriveUnit: MessageFns<VehicleConfig_FrontDriveUnit> = {
+  encode(message: VehicleConfig_FrontDriveUnit, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.NoneOrSmall !== undefined) {
+      Void.encode(message.NoneOrSmall, writer.uint32(10).fork()).join();
+    }
+    if (message.PermanentMagnet !== undefined) {
+      Void.encode(message.PermanentMagnet, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): VehicleConfig_FrontDriveUnit {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVehicleConfig_FrontDriveUnit();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.NoneOrSmall = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.PermanentMagnet = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): VehicleConfig_FrontDriveUnit {
+    return {
+      NoneOrSmall: isSet(object.NoneOrSmall) ? Void.fromJSON(object.NoneOrSmall) : undefined,
+      PermanentMagnet: isSet(object.PermanentMagnet) ? Void.fromJSON(object.PermanentMagnet) : undefined,
+    };
+  },
+
+  toJSON(message: VehicleConfig_FrontDriveUnit): unknown {
+    const obj: any = {};
+    if (message.NoneOrSmall !== undefined) {
+      obj.NoneOrSmall = Void.toJSON(message.NoneOrSmall);
+    }
+    if (message.PermanentMagnet !== undefined) {
+      obj.PermanentMagnet = Void.toJSON(message.PermanentMagnet);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<VehicleConfig_FrontDriveUnit>, I>>(base?: I): VehicleConfig_FrontDriveUnit {
+    return VehicleConfig_FrontDriveUnit.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<VehicleConfig_FrontDriveUnit>, I>>(object: I): VehicleConfig_FrontDriveUnit {
+    const message = createBaseVehicleConfig_FrontDriveUnit();
+    message.NoneOrSmall = (object.NoneOrSmall !== undefined && object.NoneOrSmall !== null)
+      ? Void.fromPartial(object.NoneOrSmall)
+      : undefined;
+    message.PermanentMagnet = (object.PermanentMagnet !== undefined && object.PermanentMagnet !== null)
+      ? Void.fromPartial(object.PermanentMagnet)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseVehicleConfig_SteeringWheelType(): VehicleConfig_SteeringWheelType {
+  return { Unknown: undefined, Round: undefined, Yoke: undefined, Squircle: undefined };
+}
+
+export const VehicleConfig_SteeringWheelType: MessageFns<VehicleConfig_SteeringWheelType> = {
+  encode(message: VehicleConfig_SteeringWheelType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.Unknown !== undefined) {
+      Void.encode(message.Unknown, writer.uint32(10).fork()).join();
+    }
+    if (message.Round !== undefined) {
+      Void.encode(message.Round, writer.uint32(18).fork()).join();
+    }
+    if (message.Yoke !== undefined) {
+      Void.encode(message.Yoke, writer.uint32(26).fork()).join();
+    }
+    if (message.Squircle !== undefined) {
+      Void.encode(message.Squircle, writer.uint32(34).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): VehicleConfig_SteeringWheelType {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVehicleConfig_SteeringWheelType();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.Unknown = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.Round = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.Yoke = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.Squircle = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): VehicleConfig_SteeringWheelType {
+    return {
+      Unknown: isSet(object.Unknown) ? Void.fromJSON(object.Unknown) : undefined,
+      Round: isSet(object.Round) ? Void.fromJSON(object.Round) : undefined,
+      Yoke: isSet(object.Yoke) ? Void.fromJSON(object.Yoke) : undefined,
+      Squircle: isSet(object.Squircle) ? Void.fromJSON(object.Squircle) : undefined,
+    };
+  },
+
+  toJSON(message: VehicleConfig_SteeringWheelType): unknown {
+    const obj: any = {};
+    if (message.Unknown !== undefined) {
+      obj.Unknown = Void.toJSON(message.Unknown);
+    }
+    if (message.Round !== undefined) {
+      obj.Round = Void.toJSON(message.Round);
+    }
+    if (message.Yoke !== undefined) {
+      obj.Yoke = Void.toJSON(message.Yoke);
+    }
+    if (message.Squircle !== undefined) {
+      obj.Squircle = Void.toJSON(message.Squircle);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<VehicleConfig_SteeringWheelType>, I>>(base?: I): VehicleConfig_SteeringWheelType {
+    return VehicleConfig_SteeringWheelType.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<VehicleConfig_SteeringWheelType>, I>>(
+    object: I,
+  ): VehicleConfig_SteeringWheelType {
+    const message = createBaseVehicleConfig_SteeringWheelType();
+    message.Unknown = (object.Unknown !== undefined && object.Unknown !== null)
+      ? Void.fromPartial(object.Unknown)
+      : undefined;
+    message.Round = (object.Round !== undefined && object.Round !== null) ? Void.fromPartial(object.Round) : undefined;
+    message.Yoke = (object.Yoke !== undefined && object.Yoke !== null) ? Void.fromPartial(object.Yoke) : undefined;
+    message.Squircle = (object.Squircle !== undefined && object.Squircle !== null)
+      ? Void.fromPartial(object.Squircle)
+      : undefined;
+    return message;
+  },
+};
+
 function createBaseVehicleConfig_InteriorTrimType(): VehicleConfig_InteriorTrimType {
   return {
+    UNKNOWN: undefined,
+    BLACK: undefined,
+    WHITE: undefined,
     BLACKCONSOLE2: undefined,
     WHITECONSOLE2: undefined,
     ALLBLACK: undefined,
     BLACKANDWHITE: undefined,
+    CREAM: undefined,
     WALNUTCREAM: undefined,
     WALNUTWHITE: undefined,
     EBONYBLACK: undefined,
@@ -19807,6 +26805,15 @@ function createBaseVehicleConfig_InteriorTrimType(): VehicleConfig_InteriorTrimT
 
 export const VehicleConfig_InteriorTrimType: MessageFns<VehicleConfig_InteriorTrimType> = {
   encode(message: VehicleConfig_InteriorTrimType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.UNKNOWN !== undefined) {
+      Void.encode(message.UNKNOWN, writer.uint32(26).fork()).join();
+    }
+    if (message.BLACK !== undefined) {
+      Void.encode(message.BLACK, writer.uint32(34).fork()).join();
+    }
+    if (message.WHITE !== undefined) {
+      Void.encode(message.WHITE, writer.uint32(42).fork()).join();
+    }
     if (message.BLACKCONSOLE2 !== undefined) {
       Void.encode(message.BLACKCONSOLE2, writer.uint32(50).fork()).join();
     }
@@ -19818,6 +26825,9 @@ export const VehicleConfig_InteriorTrimType: MessageFns<VehicleConfig_InteriorTr
     }
     if (message.BLACKANDWHITE !== undefined) {
       Void.encode(message.BLACKANDWHITE, writer.uint32(74).fork()).join();
+    }
+    if (message.CREAM !== undefined) {
+      Void.encode(message.CREAM, writer.uint32(82).fork()).join();
     }
     if (message.WALNUTCREAM !== undefined) {
       Void.encode(message.WALNUTCREAM, writer.uint32(98).fork()).join();
@@ -19850,6 +26860,30 @@ export const VehicleConfig_InteriorTrimType: MessageFns<VehicleConfig_InteriorTr
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.UNKNOWN = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.BLACK = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.WHITE = Void.decode(reader, reader.uint32());
+          continue;
+        }
         case 6: {
           if (tag !== 50) {
             break;
@@ -19880,6 +26914,14 @@ export const VehicleConfig_InteriorTrimType: MessageFns<VehicleConfig_InteriorTr
           }
 
           message.BLACKANDWHITE = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.CREAM = Void.decode(reader, reader.uint32());
           continue;
         }
         case 12: {
@@ -19949,10 +26991,14 @@ export const VehicleConfig_InteriorTrimType: MessageFns<VehicleConfig_InteriorTr
 
   fromJSON(object: any): VehicleConfig_InteriorTrimType {
     return {
+      UNKNOWN: isSet(object.UNKNOWN) ? Void.fromJSON(object.UNKNOWN) : undefined,
+      BLACK: isSet(object.BLACK) ? Void.fromJSON(object.BLACK) : undefined,
+      WHITE: isSet(object.WHITE) ? Void.fromJSON(object.WHITE) : undefined,
       BLACKCONSOLE2: isSet(object.BLACKCONSOLE2) ? Void.fromJSON(object.BLACKCONSOLE2) : undefined,
       WHITECONSOLE2: isSet(object.WHITECONSOLE2) ? Void.fromJSON(object.WHITECONSOLE2) : undefined,
       ALLBLACK: isSet(object.ALLBLACK) ? Void.fromJSON(object.ALLBLACK) : undefined,
       BLACKANDWHITE: isSet(object.BLACKANDWHITE) ? Void.fromJSON(object.BLACKANDWHITE) : undefined,
+      CREAM: isSet(object.CREAM) ? Void.fromJSON(object.CREAM) : undefined,
       WALNUTCREAM: isSet(object.WALNUTCREAM) ? Void.fromJSON(object.WALNUTCREAM) : undefined,
       WALNUTWHITE: isSet(object.WALNUTWHITE) ? Void.fromJSON(object.WALNUTWHITE) : undefined,
       EBONYBLACK: isSet(object.EBONYBLACK) ? Void.fromJSON(object.EBONYBLACK) : undefined,
@@ -19965,6 +27011,15 @@ export const VehicleConfig_InteriorTrimType: MessageFns<VehicleConfig_InteriorTr
 
   toJSON(message: VehicleConfig_InteriorTrimType): unknown {
     const obj: any = {};
+    if (message.UNKNOWN !== undefined) {
+      obj.UNKNOWN = Void.toJSON(message.UNKNOWN);
+    }
+    if (message.BLACK !== undefined) {
+      obj.BLACK = Void.toJSON(message.BLACK);
+    }
+    if (message.WHITE !== undefined) {
+      obj.WHITE = Void.toJSON(message.WHITE);
+    }
     if (message.BLACKCONSOLE2 !== undefined) {
       obj.BLACKCONSOLE2 = Void.toJSON(message.BLACKCONSOLE2);
     }
@@ -19976,6 +27031,9 @@ export const VehicleConfig_InteriorTrimType: MessageFns<VehicleConfig_InteriorTr
     }
     if (message.BLACKANDWHITE !== undefined) {
       obj.BLACKANDWHITE = Void.toJSON(message.BLACKANDWHITE);
+    }
+    if (message.CREAM !== undefined) {
+      obj.CREAM = Void.toJSON(message.CREAM);
     }
     if (message.WALNUTCREAM !== undefined) {
       obj.WALNUTCREAM = Void.toJSON(message.WALNUTCREAM);
@@ -20008,6 +27066,11 @@ export const VehicleConfig_InteriorTrimType: MessageFns<VehicleConfig_InteriorTr
     object: I,
   ): VehicleConfig_InteriorTrimType {
     const message = createBaseVehicleConfig_InteriorTrimType();
+    message.UNKNOWN = (object.UNKNOWN !== undefined && object.UNKNOWN !== null)
+      ? Void.fromPartial(object.UNKNOWN)
+      : undefined;
+    message.BLACK = (object.BLACK !== undefined && object.BLACK !== null) ? Void.fromPartial(object.BLACK) : undefined;
+    message.WHITE = (object.WHITE !== undefined && object.WHITE !== null) ? Void.fromPartial(object.WHITE) : undefined;
     message.BLACKCONSOLE2 = (object.BLACKCONSOLE2 !== undefined && object.BLACKCONSOLE2 !== null)
       ? Void.fromPartial(object.BLACKCONSOLE2)
       : undefined;
@@ -20020,6 +27083,7 @@ export const VehicleConfig_InteriorTrimType: MessageFns<VehicleConfig_InteriorTr
     message.BLACKANDWHITE = (object.BLACKANDWHITE !== undefined && object.BLACKANDWHITE !== null)
       ? Void.fromPartial(object.BLACKANDWHITE)
       : undefined;
+    message.CREAM = (object.CREAM !== undefined && object.CREAM !== null) ? Void.fromPartial(object.CREAM) : undefined;
     message.WALNUTCREAM = (object.WALNUTCREAM !== undefined && object.WALNUTCREAM !== null)
       ? Void.fromPartial(object.WALNUTCREAM)
       : undefined;
@@ -20046,11 +27110,14 @@ export const VehicleConfig_InteriorTrimType: MessageFns<VehicleConfig_InteriorTr
 };
 
 function createBaseVehicleConfig_ExteriorTrimType(): VehicleConfig_ExteriorTrimType {
-  return { STANDARDCHROME: undefined, SATINBLACK: undefined };
+  return { UNKNOWN: undefined, STANDARDCHROME: undefined, SATINBLACK: undefined };
 }
 
 export const VehicleConfig_ExteriorTrimType: MessageFns<VehicleConfig_ExteriorTrimType> = {
   encode(message: VehicleConfig_ExteriorTrimType, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.UNKNOWN !== undefined) {
+      Void.encode(message.UNKNOWN, writer.uint32(18).fork()).join();
+    }
     if (message.STANDARDCHROME !== undefined) {
       Void.encode(message.STANDARDCHROME, writer.uint32(26).fork()).join();
     }
@@ -20067,6 +27134,14 @@ export const VehicleConfig_ExteriorTrimType: MessageFns<VehicleConfig_ExteriorTr
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.UNKNOWN = Void.decode(reader, reader.uint32());
+          continue;
+        }
         case 3: {
           if (tag !== 26) {
             break;
@@ -20094,6 +27169,7 @@ export const VehicleConfig_ExteriorTrimType: MessageFns<VehicleConfig_ExteriorTr
 
   fromJSON(object: any): VehicleConfig_ExteriorTrimType {
     return {
+      UNKNOWN: isSet(object.UNKNOWN) ? Void.fromJSON(object.UNKNOWN) : undefined,
       STANDARDCHROME: isSet(object.STANDARDCHROME) ? Void.fromJSON(object.STANDARDCHROME) : undefined,
       SATINBLACK: isSet(object.SATINBLACK) ? Void.fromJSON(object.SATINBLACK) : undefined,
     };
@@ -20101,6 +27177,9 @@ export const VehicleConfig_ExteriorTrimType: MessageFns<VehicleConfig_ExteriorTr
 
   toJSON(message: VehicleConfig_ExteriorTrimType): unknown {
     const obj: any = {};
+    if (message.UNKNOWN !== undefined) {
+      obj.UNKNOWN = Void.toJSON(message.UNKNOWN);
+    }
     if (message.STANDARDCHROME !== undefined) {
       obj.STANDARDCHROME = Void.toJSON(message.STANDARDCHROME);
     }
@@ -20117,6 +27196,9 @@ export const VehicleConfig_ExteriorTrimType: MessageFns<VehicleConfig_ExteriorTr
     object: I,
   ): VehicleConfig_ExteriorTrimType {
     const message = createBaseVehicleConfig_ExteriorTrimType();
+    message.UNKNOWN = (object.UNKNOWN !== undefined && object.UNKNOWN !== null)
+      ? Void.fromPartial(object.UNKNOWN)
+      : undefined;
     message.STANDARDCHROME = (object.STANDARDCHROME !== undefined && object.STANDARDCHROME !== null)
       ? Void.fromPartial(object.STANDARDCHROME)
       : undefined;
