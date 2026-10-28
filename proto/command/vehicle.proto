@@ -1278,7 +1278,7 @@ message CarTrim {
 // UNCONFIRMED: not yet confirmed on a live vehicle.
 message SunRoofType {
     oneof type {
-        Void None = 1;
+        Void None_ = 1;
         Void Gen1 = 2;
         Void Gen2 = 3;
     }
@@ -1363,7 +1363,7 @@ message WheelType {
 // UNCONFIRMED: not yet confirmed on a live vehicle.
 message SpoilerType {
     oneof type {
-        Void None = 1;
+        Void None_ = 1;
         Void Passive = 2;
         Void Active = 3;
     }
@@ -1372,7 +1372,7 @@ message SpoilerType {
 // UNCONFIRMED: not yet confirmed on a live vehicle.
 message RoofColor {
     oneof type {
-        Void None = 1;
+        Void None_ = 1;
         Void Glass = 2;
         Void Black = 3;
         Void Colored = 4;
@@ -1422,7 +1422,7 @@ message ExteriorColor {
 // UNCONFIRMED: not yet confirmed on a live vehicle.
 message RearSeatHeaters {
     oneof type {
-        Void None = 1;
+        Void None_ = 1;
         Void Base = 2;
         Void Executive = 3;
         Void Gentherm = 4;
@@ -1458,7 +1458,7 @@ message RearSeatType {
 // UNCONFIRMED: not yet confirmed on a live vehicle.
 message ThirdRowSeatType {
     oneof type {
-        Void None = 1;
+        Void None_ = 1;
         Void FuturisFoldFlat = 2;
         Void FuturisNoFoldFlat = 3;
         Void FlatFold = 4;
@@ -1478,7 +1478,7 @@ message ChargePortType {
 // UNCONFIRMED: not yet confirmed on a live vehicle.
 message RearDriveUnit {
     oneof type {
-        Void None = 1;
+        Void None_ = 1;
         Void LargeRear = 2;
         Void SmallRear = 3;
         Void PM216MOSFET = 4;
@@ -1678,7 +1678,7 @@ message VehicleConfig {
     // UNCONFIRMED: not yet confirmed on a live vehicle.
     message DriverAssist {
         oneof type {
-            Void None = 1;
+            Void None_ = 1;
             Void MonoCam = 2;
             Void ParkerPascal = 3;
             Void ParkerPascal25 = 4;
@@ -1689,7 +1689,7 @@ message VehicleConfig {
     // UNCONFIRMED: not yet confirmed on a live vehicle.
     message PerformancePackage {
         oneof type {
-            Void None = 1;
+            Void None_ = 1;
             Void Base = 2;
             Void Performance = 3;
             Void BasePlus = 4;

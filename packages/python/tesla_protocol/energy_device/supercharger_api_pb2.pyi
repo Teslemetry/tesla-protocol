@@ -88,13 +88,14 @@ class EcuFirmwareModuleUpdateResult(_message.Message):
     def __init__(self, ecu_module: _Optional[str] = ..., module_update_status: _Optional[_Union[EcuFirmwareModuleUpdateStatus, _Mapping]] = ...) -> None: ...
 
 class EcuFirmwareModuleUpdateStatus(_message.Message):
-    __slots__ = ("fail", "skipped")
-    PASS_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("pass_", "fail", "skipped")
+    PASS__FIELD_NUMBER: _ClassVar[int]
     FAIL_FIELD_NUMBER: _ClassVar[int]
     SKIPPED_FIELD_NUMBER: _ClassVar[int]
+    pass_: EcuFirmwareModuleUpdateStatusPass
     fail: EcuFirmwareModuleUpdateStatusFail
     skipped: EcuFirmwareModuleUpdateStatusSkipped
-    def __init__(self, fail: _Optional[_Union[EcuFirmwareModuleUpdateStatusFail, _Mapping]] = ..., skipped: _Optional[_Union[EcuFirmwareModuleUpdateStatusSkipped, _Mapping]] = ..., **kwargs) -> None: ...
+    def __init__(self, pass_: _Optional[_Union[EcuFirmwareModuleUpdateStatusPass, _Mapping]] = ..., fail: _Optional[_Union[EcuFirmwareModuleUpdateStatusFail, _Mapping]] = ..., skipped: _Optional[_Union[EcuFirmwareModuleUpdateStatusSkipped, _Mapping]] = ...) -> None: ...
 
 class EcuFirmwareModuleUpdateStatusFail(_message.Message):
     __slots__ = ("reason", "pre_update_version", "post_update_version")
@@ -173,11 +174,12 @@ class EcuFirmwareUpdateResult(_message.Message):
     def __init__(self, system_update_status: _Optional[_Union[EcuFirmwareUpdateStatus, _Mapping]] = ..., default: _Optional[_Mapping[str, EcuFirmwareUpdateAttempts]] = ...) -> None: ...
 
 class EcuFirmwareUpdateStatus(_message.Message):
-    __slots__ = ("fail",)
-    PASS_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("pass_", "fail")
+    PASS__FIELD_NUMBER: _ClassVar[int]
     FAIL_FIELD_NUMBER: _ClassVar[int]
+    pass_: EcuFirmwareUpdateStatusPass
     fail: EcuFirmwareUpdateStatusFail
-    def __init__(self, fail: _Optional[_Union[EcuFirmwareUpdateStatusFail, _Mapping]] = ..., **kwargs) -> None: ...
+    def __init__(self, pass_: _Optional[_Union[EcuFirmwareUpdateStatusPass, _Mapping]] = ..., fail: _Optional[_Union[EcuFirmwareUpdateStatusFail, _Mapping]] = ...) -> None: ...
 
 class EcuFirmwareUpdateStatusFail(_message.Message):
     __slots__ = ("reason",)

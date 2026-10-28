@@ -59,7 +59,7 @@ message EcuFirmwareModuleUpdateResult {
 }
 
 message EcuFirmwareModuleUpdateStatus {
-  EcuFirmwareModuleUpdateStatusPass pass = 1;
+  EcuFirmwareModuleUpdateStatusPass pass_ = 1;
   EcuFirmwareModuleUpdateStatusFail fail = 2;
   EcuFirmwareModuleUpdateStatusSkipped skipped = 3;
 }
@@ -104,7 +104,7 @@ message EcuFirmwareUpdateResult {
 }
 
 message EcuFirmwareUpdateStatus {
-  EcuFirmwareUpdateStatusPass pass = 2;
+  EcuFirmwareUpdateStatusPass pass_ = 2;
   EcuFirmwareUpdateStatusFail fail = 3;
 }
 

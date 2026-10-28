@@ -2164,13 +2164,14 @@ class CarTrim(_message.Message):
     def __init__(self, Trim40: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., OBSOLETETrim50: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., OBSOLETETrim50D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim60: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim60D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim70: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim70D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim75: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim75D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP75D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim85: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP85: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP85Plus: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim85D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP85D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim90: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP90: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP90Plus: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim90D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP90D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim100: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP100: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim100D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP100D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim50: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim50D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim62: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim62D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim74: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Trim74D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimP74D: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimDefault: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimCyberbeast: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TrimInvalid: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
 class SunRoofType(_message.Message):
-    __slots__ = ("Gen1", "Gen2")
-    NONE_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("None_", "Gen1", "Gen2")
+    NONE__FIELD_NUMBER: _ClassVar[int]
     GEN1_FIELD_NUMBER: _ClassVar[int]
     GEN2_FIELD_NUMBER: _ClassVar[int]
+    None_: _common_pb2.Void
     Gen1: _common_pb2.Void
     Gen2: _common_pb2.Void
-    def __init__(self, Gen1: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Gen2: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+    def __init__(self, None_: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Gen1: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Gen2: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
 class WheelType(_message.Message):
     __slots__ = ("Unknown", "ZeroG20Gunpowder", "Pinwheel18", "Pinwheel18CapKit", "Stiletto19", "Stiletto20", "Stiletto20DarkStaggered", "Stiletto20DarkSquare", "Gemini19Square", "Gemini19Staggered", "Induction20Black", "UberTurbine21Black", "Apollo19", "Apollo19CapKit", "ZeroG19Gunpowder", "Cardenio19", "Default", "NewTurbine22Black", "Cyberstream", "Arachnid21", "Base19", "Silver21", "Charcoal21", "Silver21Euro", "Aero19", "Charcoal21Euro", "Super21Gray", "Super21Silver", "Turbine19", "Turbine19Dark", "AeroTurbine19", "AeroTurbine19Black", "Helix20", "AeroTurbine20", "Turbine22", "Cyclone19Dark", "AeroTurbine20Dark", "Turbine22Dark", "Arachnid21Silver", "Arachnid21Black", "Arachnid21Grey", "Slipstream20Carbon", "Slipstream20Dark", "Slipstream19Carbon", "TwinTurbine21Silver", "TwinTurbine21Carbon", "Tempest19SonicSilver", "PinwheelRefresh18", "StilettoRefresh19", "UberTurbine20Gunpowder", "Glider18", "Helix19", "Wishbone20Staggered", "CtBase20", "CtPremium20", "CtBase18", "Apollo19MetallicShadow", "Wishbone19Staggered", "Crossflow19", "HelixV220", "Standard19", "Halo22", "Riptide20", "Cypress21", "MachinaV219", "ArachnidV221", "E4118", "D5018", "HelixV220Dark", "UberHelix20")
@@ -2317,24 +2318,26 @@ class WheelType(_message.Message):
     def __init__(self, Unknown: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., ZeroG20Gunpowder: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Pinwheel18: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Pinwheel18CapKit: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Stiletto19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Stiletto20: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Stiletto20DarkStaggered: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Stiletto20DarkSquare: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Gemini19Square: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Gemini19Staggered: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Induction20Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., UberTurbine21Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Apollo19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Apollo19CapKit: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., ZeroG19Gunpowder: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Cardenio19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Default: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., NewTurbine22Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Cyberstream: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Arachnid21: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Base19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Silver21: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Charcoal21: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Silver21Euro: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Aero19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Charcoal21Euro: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Super21Gray: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Super21Silver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Turbine19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Turbine19Dark: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., AeroTurbine19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., AeroTurbine19Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Helix20: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., AeroTurbine20: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Turbine22: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Cyclone19Dark: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., AeroTurbine20Dark: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Turbine22Dark: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Arachnid21Silver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Arachnid21Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Arachnid21Grey: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Slipstream20Carbon: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Slipstream20Dark: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Slipstream19Carbon: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TwinTurbine21Silver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TwinTurbine21Carbon: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Tempest19SonicSilver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., PinwheelRefresh18: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., StilettoRefresh19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., UberTurbine20Gunpowder: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Glider18: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Helix19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Wishbone20Staggered: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CtBase20: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CtPremium20: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CtBase18: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Apollo19MetallicShadow: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Wishbone19Staggered: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Crossflow19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., HelixV220: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Standard19: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Halo22: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Riptide20: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Cypress21: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MachinaV219: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., ArachnidV221: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., E4118: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., D5018: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., HelixV220Dark: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., UberHelix20: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
 class SpoilerType(_message.Message):
-    __slots__ = ("Passive", "Active")
-    NONE_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("None_", "Passive", "Active")
+    NONE__FIELD_NUMBER: _ClassVar[int]
     PASSIVE_FIELD_NUMBER: _ClassVar[int]
     ACTIVE_FIELD_NUMBER: _ClassVar[int]
+    None_: _common_pb2.Void
     Passive: _common_pb2.Void
     Active: _common_pb2.Void
-    def __init__(self, Passive: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Active: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+    def __init__(self, None_: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Passive: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Active: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
 class RoofColor(_message.Message):
-    __slots__ = ("Glass", "Black", "Colored")
-    NONE_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("None_", "Glass", "Black", "Colored")
+    NONE__FIELD_NUMBER: _ClassVar[int]
     GLASS_FIELD_NUMBER: _ClassVar[int]
     BLACK_FIELD_NUMBER: _ClassVar[int]
     COLORED_FIELD_NUMBER: _ClassVar[int]
+    None_: _common_pb2.Void
     Glass: _common_pb2.Void
     Black: _common_pb2.Void
     Colored: _common_pb2.Void
-    def __init__(self, Glass: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Colored: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+    def __init__(self, None_: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Glass: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Colored: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
 class ExteriorColor(_message.Message):
     __slots__ = ("Unknown", "RedMulticoat", "SolidBlack", "SilverMetallic", "MidnightSilver", "DeepBlue", "PearlWhite", "DefaultColor", "Black", "White", "Silver", "Grey", "Blue", "Green", "Brown", "Pearl", "SigRed", "Red", "SteelGrey", "MetallicBlack", "TitaniumCopper", "SignatureBlue", "MidnightCherryRed", "Quicksilver", "UltraRed", "StealthGrey", "LunarSilver", "GlacierBlue", "DiamondBlack", "FrostBlue", "SilkRoadSilver", "MarineBlue", "GarnetRed", "CoastalBlue")
@@ -2409,17 +2412,18 @@ class ExteriorColor(_message.Message):
     def __init__(self, Unknown: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., RedMulticoat: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SolidBlack: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SilverMetallic: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MidnightSilver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., DeepBlue: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., PearlWhite: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., DefaultColor: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Black: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., White: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Silver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Grey: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Blue: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Green: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Brown: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Pearl: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SigRed: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Red: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SteelGrey: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MetallicBlack: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TitaniumCopper: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SignatureBlue: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MidnightCherryRed: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Quicksilver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., UltraRed: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., StealthGrey: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., LunarSilver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., GlacierBlue: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., DiamondBlack: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FrostBlue: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SilkRoadSilver: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MarineBlue: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., GarnetRed: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CoastalBlue: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
 class RearSeatHeaters(_message.Message):
-    __slots__ = ("Base", "Executive", "Gentherm", "BaseModelX")
-    NONE_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("None_", "Base", "Executive", "Gentherm", "BaseModelX")
+    NONE__FIELD_NUMBER: _ClassVar[int]
     BASE_FIELD_NUMBER: _ClassVar[int]
     EXECUTIVE_FIELD_NUMBER: _ClassVar[int]
     GENTHERM_FIELD_NUMBER: _ClassVar[int]
     BASEMODELX_FIELD_NUMBER: _ClassVar[int]
+    None_: _common_pb2.Void
     Base: _common_pb2.Void
     Executive: _common_pb2.Void
     Gentherm: _common_pb2.Void
     BaseModelX: _common_pb2.Void
-    def __init__(self, Base: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Executive: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Gentherm: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., BaseModelX: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+    def __init__(self, None_: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Base: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Executive: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Gentherm: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., BaseModelX: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
 class SeatType(_message.Message):
     __slots__ = ("Base", "Recaro", "TeslaMsGen1")
@@ -2456,15 +2460,16 @@ class RearSeatType(_message.Message):
     def __init__(self, Base: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Recaro: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Executive: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TwoSeat: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FoldFlat: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FoldFlatMotorized: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TwoSeatConsole: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FoldFlatTwoMotor: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FoldFlatTwoMotorHall: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FoldFlatHallBuckles: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
 class ThirdRowSeatType(_message.Message):
-    __slots__ = ("FuturisFoldFlat", "FuturisNoFoldFlat", "FlatFold")
-    NONE_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("None_", "FuturisFoldFlat", "FuturisNoFoldFlat", "FlatFold")
+    NONE__FIELD_NUMBER: _ClassVar[int]
     FUTURISFOLDFLAT_FIELD_NUMBER: _ClassVar[int]
     FUTURISNOFOLDFLAT_FIELD_NUMBER: _ClassVar[int]
     FLATFOLD_FIELD_NUMBER: _ClassVar[int]
+    None_: _common_pb2.Void
     FuturisFoldFlat: _common_pb2.Void
     FuturisNoFoldFlat: _common_pb2.Void
     FlatFold: _common_pb2.Void
-    def __init__(self, FuturisFoldFlat: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FuturisNoFoldFlat: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FlatFold: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+    def __init__(self, None_: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FuturisFoldFlat: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FuturisNoFoldFlat: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., FlatFold: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
 class ChargePortType(_message.Message):
     __slots__ = ("US", "EU", "GB", "CCS")
@@ -2479,8 +2484,8 @@ class ChargePortType(_message.Message):
     def __init__(self, US: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., EU: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., GB: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CCS: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
 class RearDriveUnit(_message.Message):
-    __slots__ = ("LargeRear", "SmallRear", "PM216MOSFET", "PM216IGBT", "CorianderSingle", "CorianderDual", "PermanentMagnet", "InductionDual")
-    NONE_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("None_", "LargeRear", "SmallRear", "PM216MOSFET", "PM216IGBT", "CorianderSingle", "CorianderDual", "PermanentMagnet", "InductionDual")
+    NONE__FIELD_NUMBER: _ClassVar[int]
     LARGEREAR_FIELD_NUMBER: _ClassVar[int]
     SMALLREAR_FIELD_NUMBER: _ClassVar[int]
     PM216MOSFET_FIELD_NUMBER: _ClassVar[int]
@@ -2489,6 +2494,7 @@ class RearDriveUnit(_message.Message):
     CORIANDERDUAL_FIELD_NUMBER: _ClassVar[int]
     PERMANENTMAGNET_FIELD_NUMBER: _ClassVar[int]
     INDUCTIONDUAL_FIELD_NUMBER: _ClassVar[int]
+    None_: _common_pb2.Void
     LargeRear: _common_pb2.Void
     SmallRear: _common_pb2.Void
     PM216MOSFET: _common_pb2.Void
@@ -2497,7 +2503,7 @@ class RearDriveUnit(_message.Message):
     CorianderDual: _common_pb2.Void
     PermanentMagnet: _common_pb2.Void
     InductionDual: _common_pb2.Void
-    def __init__(self, LargeRear: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SmallRear: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., PM216MOSFET: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., PM216IGBT: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CorianderSingle: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CorianderDual: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., PermanentMagnet: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., InductionDual: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+    def __init__(self, None_: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., LargeRear: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., SmallRear: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., PM216MOSFET: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., PM216IGBT: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CorianderSingle: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CorianderDual: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., PermanentMagnet: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., InductionDual: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
 
 class EfficiencyPackage(_message.Message):
     __slots__ = ("Default", "M3SRPlus2020", "M3LR2020", "M3LRPerformance2020", "M3SRPlus2020Q4GFSH", "MY2020", "M32021", "MY2021", "SX2020", "S2", "SX2020H2", "M3SRPlus2021Q3GFSH", "M3SRPlus2021Q3Fremont", "MYSRPlus2021Q3GFSH", "MYSRPlus2022Q1TX", "MYRWDEU2022", "M3Poppyseed2024", "M32023GFSHExport", "MY2023GFSHExport", "MY2024", "MS2024", "MX2024", "MY2023SRRWD", "MY2024C", "MY2024GFSHExportSRRWD", "M3Poppyseed2024C", "M32025", "MY2025", "M32025B", "MY2025B", "MS2025", "MX2025", "MYRefresh2025ROW", "MYStandard2025", "MYRefresh2025CN", "MS2026", "MX2026", "MY2025M53", "M32025M53", "MY2025CNPlus", "MS2026B", "M32026B", "MY2026US")
@@ -2765,27 +2771,29 @@ class VehicleConfig(_message.Message):
         CarTypeSemiTruckV2: _common_pb2.Void
         def __init__(self, CarTypeModelS: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeModelX: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeModelS2: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeModel3: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeModelY: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeSemiTruck: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeLychee: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeTamarind: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeCybertruck: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., CarTypeSemiTruckV2: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
     class DriverAssist(_message.Message):
-        __slots__ = ("MonoCam", "ParkerPascal", "ParkerPascal25", "TeslaAP3")
-        NONE_FIELD_NUMBER: _ClassVar[int]
+        __slots__ = ("None_", "MonoCam", "ParkerPascal", "ParkerPascal25", "TeslaAP3")
+        NONE__FIELD_NUMBER: _ClassVar[int]
         MONOCAM_FIELD_NUMBER: _ClassVar[int]
         PARKERPASCAL_FIELD_NUMBER: _ClassVar[int]
         PARKERPASCAL25_FIELD_NUMBER: _ClassVar[int]
         TESLAAP3_FIELD_NUMBER: _ClassVar[int]
+        None_: _common_pb2.Void
         MonoCam: _common_pb2.Void
         ParkerPascal: _common_pb2.Void
         ParkerPascal25: _common_pb2.Void
         TeslaAP3: _common_pb2.Void
-        def __init__(self, MonoCam: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., ParkerPascal: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., ParkerPascal25: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TeslaAP3: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+        def __init__(self, None_: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., MonoCam: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., ParkerPascal: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., ParkerPascal25: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., TeslaAP3: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
     class PerformancePackage(_message.Message):
-        __slots__ = ("Base", "Performance", "BasePlus")
-        NONE_FIELD_NUMBER: _ClassVar[int]
+        __slots__ = ("None_", "Base", "Performance", "BasePlus")
+        NONE__FIELD_NUMBER: _ClassVar[int]
         BASE_FIELD_NUMBER: _ClassVar[int]
         PERFORMANCE_FIELD_NUMBER: _ClassVar[int]
         BASEPLUS_FIELD_NUMBER: _ClassVar[int]
+        None_: _common_pb2.Void
         Base: _common_pb2.Void
         Performance: _common_pb2.Void
         BasePlus: _common_pb2.Void
-        def __init__(self, Base: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Performance: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., BasePlus: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., **kwargs) -> None: ...
+        def __init__(self, None_: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Base: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., Performance: _Optional[_Union[_common_pb2.Void, _Mapping]] = ..., BasePlus: _Optional[_Union[_common_pb2.Void, _Mapping]] = ...) -> None: ...
     class FrontDriveUnit(_message.Message):
         __slots__ = ("NoneOrSmall", "PermanentMagnet")
         NONEORSMALL_FIELD_NUMBER: _ClassVar[int]
