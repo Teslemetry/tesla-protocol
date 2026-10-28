@@ -20,6 +20,8 @@ import { IntraSiteMessages } from "./intra_site_api.js";
 import { LocalAuthMessages } from "./local_auth_api.js";
 import { NeurioMeterMessages } from "./neurio_meter_api.js";
 import { PVIMessages } from "./pvi_api.js";
+import { RegistrationMessages } from "./registration_api.js";
+import { SuperchargerMessages } from "./supercharger_api.js";
 import { TEGMessages } from "./teg_api.js";
 import { WCMessages } from "./wall_connector.js";
 
@@ -202,6 +204,12 @@ export interface Participant {
   teslaService?: TeslaService | undefined;
   local?: LocalParticipant | undefined;
   authorizedClient?: AuthorizedClientType | undefined;
+  proxiedDevice?: ProxiedDevice | undefined;
+}
+
+export interface ProxiedDevice {
+  proxyDin: string;
+  targetDin: string;
 }
 
 export interface RegistrationPayload {
@@ -224,6 +232,8 @@ export interface MessageEnvelope {
   authorization?: AuthorizationMessages | undefined;
   filestore?: FileStoreMessages | undefined;
   graphql?: GraphQLMessages | undefined;
+  supercharger?: SuperchargerMessages | undefined;
+  registration?: RegistrationMessages | undefined;
 }
 
 function createBaseExternalAuth(): ExternalAuth {
@@ -363,7 +373,13 @@ export const AuthEnvelope: MessageFns<AuthEnvelope> = {
 };
 
 function createBaseParticipant(): Participant {
-  return { din: undefined, teslaService: undefined, local: undefined, authorizedClient: undefined };
+  return {
+    din: undefined,
+    teslaService: undefined,
+    local: undefined,
+    authorizedClient: undefined,
+    proxiedDevice: undefined,
+  };
 }
 
 export const Participant: MessageFns<Participant> = {
@@ -379,6 +395,9 @@ export const Participant: MessageFns<Participant> = {
     }
     if (message.authorizedClient !== undefined) {
       writer.uint32(32).int32(message.authorizedClient);
+    }
+    if (message.proxiedDevice !== undefined) {
+      ProxiedDevice.encode(message.proxiedDevice, writer.uint32(42).fork()).join();
     }
     return writer;
   },
@@ -422,6 +441,14 @@ export const Participant: MessageFns<Participant> = {
           message.authorizedClient = reader.int32() as any;
           continue;
         }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.proxiedDevice = ProxiedDevice.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -439,6 +466,7 @@ export const Participant: MessageFns<Participant> = {
       authorizedClient: isSet(object.authorizedClient)
         ? authorizedClientTypeFromJSON(object.authorizedClient)
         : undefined,
+      proxiedDevice: isSet(object.proxiedDevice) ? ProxiedDevice.fromJSON(object.proxiedDevice) : undefined,
     };
   },
 
@@ -456,6 +484,9 @@ export const Participant: MessageFns<Participant> = {
     if (message.authorizedClient !== undefined) {
       obj.authorizedClient = authorizedClientTypeToJSON(message.authorizedClient);
     }
+    if (message.proxiedDevice !== undefined) {
+      obj.proxiedDevice = ProxiedDevice.toJSON(message.proxiedDevice);
+    }
     return obj;
   },
 
@@ -468,6 +499,85 @@ export const Participant: MessageFns<Participant> = {
     message.teslaService = object.teslaService ?? undefined;
     message.local = object.local ?? undefined;
     message.authorizedClient = object.authorizedClient ?? undefined;
+    message.proxiedDevice = (object.proxiedDevice !== undefined && object.proxiedDevice !== null)
+      ? ProxiedDevice.fromPartial(object.proxiedDevice)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseProxiedDevice(): ProxiedDevice {
+  return { proxyDin: "", targetDin: "" };
+}
+
+export const ProxiedDevice: MessageFns<ProxiedDevice> = {
+  encode(message: ProxiedDevice, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.proxyDin !== "") {
+      writer.uint32(10).string(message.proxyDin);
+    }
+    if (message.targetDin !== "") {
+      writer.uint32(18).string(message.targetDin);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ProxiedDevice {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseProxiedDevice();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.proxyDin = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.targetDin = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ProxiedDevice {
+    return {
+      proxyDin: isSet(object.proxyDin) ? globalThis.String(object.proxyDin) : "",
+      targetDin: isSet(object.targetDin) ? globalThis.String(object.targetDin) : "",
+    };
+  },
+
+  toJSON(message: ProxiedDevice): unknown {
+    const obj: any = {};
+    if (message.proxyDin !== undefined) {
+      obj.proxyDin = message.proxyDin;
+    }
+    if (message.targetDin !== undefined) {
+      obj.targetDin = message.targetDin;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ProxiedDevice>, I>>(base?: I): ProxiedDevice {
+    return ProxiedDevice.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ProxiedDevice>, I>>(object: I): ProxiedDevice {
+    const message = createBaseProxiedDevice();
+    message.proxyDin = object.proxyDin ?? "";
+    message.targetDin = object.targetDin ?? "";
     return message;
   },
 };
@@ -566,6 +676,8 @@ function createBaseMessageEnvelope(): MessageEnvelope {
     authorization: undefined,
     filestore: undefined,
     graphql: undefined,
+    supercharger: undefined,
+    registration: undefined,
   };
 }
 
@@ -612,6 +724,12 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
     }
     if (message.graphql !== undefined) {
       GraphQLMessages.encode(message.graphql, writer.uint32(130).fork()).join();
+    }
+    if (message.supercharger !== undefined) {
+      SuperchargerMessages.encode(message.supercharger, writer.uint32(138).fork()).join();
+    }
+    if (message.registration !== undefined) {
+      RegistrationMessages.encode(message.registration, writer.uint32(146).fork()).join();
     }
     return writer;
   },
@@ -735,6 +853,22 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
           message.graphql = GraphQLMessages.decode(reader, reader.uint32());
           continue;
         }
+        case 17: {
+          if (tag !== 138) {
+            break;
+          }
+
+          message.supercharger = SuperchargerMessages.decode(reader, reader.uint32());
+          continue;
+        }
+        case 18: {
+          if (tag !== 146) {
+            break;
+          }
+
+          message.registration = RegistrationMessages.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -760,6 +894,8 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
       authorization: isSet(object.authorization) ? AuthorizationMessages.fromJSON(object.authorization) : undefined,
       filestore: isSet(object.filestore) ? FileStoreMessages.fromJSON(object.filestore) : undefined,
       graphql: isSet(object.graphql) ? GraphQLMessages.fromJSON(object.graphql) : undefined,
+      supercharger: isSet(object.supercharger) ? SuperchargerMessages.fromJSON(object.supercharger) : undefined,
+      registration: isSet(object.registration) ? RegistrationMessages.fromJSON(object.registration) : undefined,
     };
   },
 
@@ -807,6 +943,12 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
     if (message.graphql !== undefined) {
       obj.graphql = GraphQLMessages.toJSON(message.graphql);
     }
+    if (message.supercharger !== undefined) {
+      obj.supercharger = SuperchargerMessages.toJSON(message.supercharger);
+    }
+    if (message.registration !== undefined) {
+      obj.registration = RegistrationMessages.toJSON(message.registration);
+    }
     return obj;
   },
 
@@ -848,6 +990,12 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
       : undefined;
     message.graphql = (object.graphql !== undefined && object.graphql !== null)
       ? GraphQLMessages.fromPartial(object.graphql)
+      : undefined;
+    message.supercharger = (object.supercharger !== undefined && object.supercharger !== null)
+      ? SuperchargerMessages.fromPartial(object.supercharger)
+      : undefined;
+    message.registration = (object.registration !== undefined && object.registration !== null)
+      ? RegistrationMessages.fromPartial(object.registration)
       : undefined;
     return message;
   },

@@ -1,0 +1,223 @@
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "SuperchargerApi";
+
+import "google/protobuf/wrappers.proto";
+
+// Supercharger site equipment, carried at MessageEnvelope.supercharger.
+
+enum ConnectedKioskError {
+  CONNECTED_KIOSK_ERROR_INVALID = 0;
+  CONNECTED_KIOSK_ERROR_SITEMANAGER_STARTED = 1;
+  CONNECTED_KIOSK_ERROR_UNEXPECTED_ERROR = 2;
+}
+
+enum EcuFirmwareUpdateStage {
+  ECU_FIRMWARE_UPDATE_STAGE_INVALID = 0;
+  ECU_FIRMWARE_UPDATE_STAGE_WAITING = 1;
+  ECU_FIRMWARE_UPDATE_STAGE_GET_DEVICE_INFO = 2;
+  ECU_FIRMWARE_UPDATE_STAGE_CHECK_BL_UPDATE_REQUIRED = 3;
+  ECU_FIRMWARE_UPDATE_STAGE_UPDATE_BL = 4;
+  ECU_FIRMWARE_UPDATE_STAGE_CHECK_APP_UPDATE_REQUIRED = 5;
+  ECU_FIRMWARE_UPDATE_STAGE_UPDATE_APP = 6;
+  ECU_FIRMWARE_UPDATE_STAGE_UPDATE_SUBCOMPONENTS = 7;
+  ECU_FIRMWARE_UPDATE_STAGE_PASS = 8;
+  ECU_FIRMWARE_UPDATE_STAGE_FAIL = 9;
+}
+
+enum SetDcMeterCommissionedError {
+  SET_DC_METER_COMMISSIONED_ERROR_INVALID = 0;
+  SET_DC_METER_COMMISSIONED_ERROR_INVALID_POST_ID = 1;
+  SET_DC_METER_COMMISSIONED_ERROR_DC_METER_NOT_INSTALLED = 2;
+  SET_DC_METER_COMMISSIONED_ERROR_UNAVAILABLE = 3;
+  SET_DC_METER_COMMISSIONED_ERROR_SECURITY_UNLOCK_FAILED = 4;
+  SET_DC_METER_COMMISSIONED_ERROR_WRITE_FAILED = 5;
+}
+
+message ConnectedKiosk {
+  VerifoneKiosk verifone_kiosk = 1;
+}
+
+message DcMeterCommissioningStatus {
+  uint32 post_id = 1;
+  google.protobuf.BoolValue installed = 2;
+  google.protobuf.BoolValue commissioned = 3;
+}
+
+message DeviceIDAndSerialNumber {
+  string serial_number = 1;
+  string device_id = 2;
+}
+
+message EcuFirmwareModuleUpdateResult {
+  string ecu_module = 1;
+  EcuFirmwareModuleUpdateStatus module_update_status = 2;
+}
+
+message EcuFirmwareModuleUpdateStatus {
+  EcuFirmwareModuleUpdateStatusPass pass = 1;
+  EcuFirmwareModuleUpdateStatusFail fail = 2;
+  EcuFirmwareModuleUpdateStatusSkipped skipped = 3;
+}
+
+message EcuFirmwareModuleUpdateStatusFail {
+  google.protobuf.StringValue reason = 1;
+  google.protobuf.StringValue pre_update_version = 2;
+  google.protobuf.StringValue post_update_version = 3;
+}
+
+message EcuFirmwareModuleUpdateStatusPass {
+  google.protobuf.StringValue pre_update_version = 1;
+  google.protobuf.StringValue post_update_version = 2;
+}
+
+message EcuFirmwareModuleUpdateStatusSkipped {
+  google.protobuf.StringValue reason = 1;
+}
+
+message EcuFirmwareUpdateAttempts {
+  repeated EcuFirmwareUpdateEcuResult attempts = 1;
+}
+
+message EcuFirmwareUpdateEcuResult {
+  string ecu_name = 1;
+  repeated EcuFirmwareModuleUpdateResult module_update_results = 2;
+}
+
+message EcuFirmwareUpdateInProgress {
+  map<string, EcuFirmwareUpdateNodeProgress> default = 1;
+}
+
+message EcuFirmwareUpdateNodeProgress {
+  string node_path = 1;
+  EcuFirmwareUpdateStage stage = 2;
+  string message = 3;
+}
+
+message EcuFirmwareUpdateResult {
+  EcuFirmwareUpdateStatus system_update_status = 1;
+  map<string, EcuFirmwareUpdateAttempts> default = 2;
+}
+
+message EcuFirmwareUpdateStatus {
+  EcuFirmwareUpdateStatusPass pass = 2;
+  EcuFirmwareUpdateStatusFail fail = 3;
+}
+
+message EcuFirmwareUpdateStatusFail {
+  string reason = 1;
+}
+
+message EcuFirmwareUpdateStatusPass {
+}
+
+message PayterPostStatus {
+  uint32 post_index = 1;
+  string serial_number = 2;
+  bool activated = 3;
+}
+
+message SuperchargerAPIGetConnectedKiosksRequest {
+}
+
+message SuperchargerAPIGetConnectedKiosksResponse {
+  ConnectedKioskError error = 1;
+  repeated ConnectedKiosk connected_kiosks = 2;
+}
+
+message SuperchargerAPIGetDcMetersCommissioningRequest {
+}
+
+message SuperchargerAPIGetDcMetersCommissioningResponse {
+  repeated DcMeterCommissioningStatus dc_meters = 1;
+  int32 error = 2;  // may be an enum; values not yet known
+}
+
+message SuperchargerAPIGetEcuFirmwareUpdateProgressRequest {
+}
+
+message SuperchargerAPIGetEcuFirmwareUpdateProgressResponse {
+  EcuFirmwareUpdateResult finished = 1;
+  EcuFirmwareUpdateInProgress in_progress = 2;
+}
+
+message SuperchargerAPIGetPayterPostStatusRequest {
+}
+
+message SuperchargerAPIGetPayterPostStatusResponse {
+  repeated PayterPostStatus payter_devices = 1;
+}
+
+message SuperchargerAPIGetVerifoneKioskDeviceIdsRequest {
+}
+
+message SuperchargerAPIGetVerifoneKioskDeviceIdsResponse {
+  repeated DeviceIDAndSerialNumber device_ids = 1;
+}
+
+message SuperchargerAPIOdinCommandRequest {
+  string command = 1;
+  bytes args = 2;
+}
+
+message SuperchargerAPIOdinCommandResponse {
+  bytes response = 1;
+  string error = 2;
+}
+
+message SuperchargerAPISetDcMeterCommissionedRequest {
+  uint32 post_id = 1;
+}
+
+message SuperchargerAPISetDcMeterCommissionedResponse {
+  bool success = 1;
+  SetDcMeterCommissionedError error = 2;
+  string error_message = 3;
+}
+
+message SuperchargerAPIUnlockMagicDockRequest {
+  string cabinet_id = 1;
+  uint32 post_id = 2;
+}
+
+message SuperchargerAPIUnlockMagicDockResponse {
+}
+
+message SuperchargerAPIUpdateFollowersRequest {
+  repeated string dins = 1;
+}
+
+message SuperchargerAPIUpdateFollowersResponse {
+}
+
+message SuperchargerMessages {
+  oneof message {
+    SuperchargerAPIUnlockMagicDockRequest unlock_magic_dock_request = 1;
+    SuperchargerAPIUnlockMagicDockResponse unlock_magic_dock_response = 2;
+    SuperchargerAPIGetConnectedKiosksRequest get_connected_kiosks_request = 3;
+    SuperchargerAPIGetConnectedKiosksResponse get_connected_kiosks_response = 4;
+    SuperchargerAPIGetVerifoneKioskDeviceIdsRequest get_verifone_kiosk_device_ids_request = 5;
+    SuperchargerAPIGetVerifoneKioskDeviceIdsResponse get_verifone_kiosk_device_ids_response = 6;
+    SuperchargerAPIUpdateFollowersRequest update_followers_request = 7;
+    SuperchargerAPIUpdateFollowersResponse update_followers_response = 8;
+    SuperchargerAPIGetDcMetersCommissioningRequest get_dc_meters_commissioning_request = 9;
+    SuperchargerAPIGetDcMetersCommissioningResponse get_dc_meters_commissioning_response = 10;
+    SuperchargerAPISetDcMeterCommissionedRequest set_dc_meter_commissioned_request = 11;
+    SuperchargerAPISetDcMeterCommissionedResponse set_dc_meter_commissioned_response = 12;
+    SuperchargerAPIOdinCommandRequest odin_command_request = 13;
+    SuperchargerAPIOdinCommandResponse odin_command_response = 14;
+    SuperchargerAPIGetPayterPostStatusRequest get_payter_post_status_request = 15;
+    SuperchargerAPIGetPayterPostStatusResponse get_payter_post_status_response = 16;
+    SuperchargerAPIGetEcuFirmwareUpdateProgressRequest get_ecu_firmware_update_progress_request = 17;
+    SuperchargerAPIGetEcuFirmwareUpdateProgressResponse get_ecu_firmware_update_progress_response = 18;
+  }
+}
+
+message VerifoneKiosk {
+  string serial_number = 1;
+  string subject_key_identifer = 2;
+}

@@ -166,8 +166,8 @@ class RepoIntegrationTests(unittest.TestCase):
 
     def test_status_proto_import_only_is_excluded_from_totals_but_catalogued(self):
         energy_device = next(g for g in self.catalog["groups"] if g["name"] == "energy_device")
-        self.assertEqual(energy_device["source_files"], 20)
-        self.assertEqual(energy_device["compiled_top_level_inputs"], 19)
+        self.assertEqual(energy_device["source_files"], 22)
+        self.assertEqual(energy_device["compiled_top_level_inputs"], 21)
         import_only = [f for f in energy_device["files"] if not f["compiled_top_level_input"]]
         self.assertEqual(len(import_only), 1)
         self.assertEqual(import_only[0]["path"], "proto/energy_device/google/rpc/status.proto")
@@ -182,11 +182,11 @@ class RepoIntegrationTests(unittest.TestCase):
         # proto/ is authoritative: these document the current surface size so an
         # unintended change shows up, they don't freeze it. Update on purpose.
         totals = self.catalog["totals"]
-        self.assertEqual(totals["source_files"], 39)
+        self.assertEqual(totals["source_files"], 41)
         self.assertEqual(totals["groups"], 7)
-        self.assertEqual(totals["messages"], 938)
-        self.assertEqual(totals["enums"], 261)
-        self.assertEqual(totals["fields"], 3382)
+        self.assertEqual(totals["messages"], 1019)
+        self.assertEqual(totals["enums"], 271)
+        self.assertEqual(totals["fields"], 3588)
 
     def test_rebuild_is_deterministic(self):
         second = build_catalog.build_catalog()

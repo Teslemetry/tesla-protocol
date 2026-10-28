@@ -12,6 +12,7 @@ import "networking.proto";
 import "device.proto";
 import "update.proto";
 import "error.proto";
+import "registration_api.proto";
 
 message CommonAPIGetSystemInfoRequest {
 }
@@ -27,8 +28,6 @@ message ComplianceInformation {
   repeated RadioLegalInformation radio_legal_information = 1;
 }
 
-// Tags 8 and 9 carry bytes. One of them is installed_firmware_signature;
-// which one is not known, so both stay unmodelled.
 message CommonAPIGetSystemInfoResponse {
   reserved 4;
   EcuId device_id                              = 1;
@@ -37,6 +36,8 @@ message CommonAPIGetSystemInfoResponse {
   SystemUpdate system_update                   = 5;
   DeviceType device_type                       = 6;
   ComplianceInformation compliance_information = 7;
+  bytes installed_firmware_signature           = 8;
+  bytes offline_firmware_signature             = 9;
 }
 
 message CommonAPISetLocalSiteConfigRequest {
@@ -220,6 +221,30 @@ message CommonAPIGetTcpdumpInfoResponse {
   int64 disk_quota          = 2;
 }
 
+message CommonAPIRegisterRequest {
+  RegistrationRequest request = 1;
+}
+
+message CommonAPIRegisterResponse {
+  int32 failure = 1;  // may be an enum; values not yet known
+  RegistrationResponse response = 2;
+}
+
+message CommonAPIRetrieveSiteUuidRequest {
+}
+
+message CommonAPIRetrieveSiteUuidResponse {
+  AssetSiteUuidOfDeviceResponse response = 1;
+}
+
+message CommonAPIRetrieveSiteSuggestionRequest {
+  SiteSuggestionRequest request = 1;
+}
+
+message CommonAPIRetrieveSiteSuggestionResponse {
+  SiteSuggestionResponse response = 1;
+}
+
 message CommonMessages {
   ErrorResponse error_response                                                                                             = 1;
   oneof message {
@@ -261,14 +286,12 @@ message CommonMessages {
     CommonAPIPrepareRegistrationPayloadResponse prepare_registration_payload_response                                      = 37;
     CommonAPIPerformUpdateFromLocallyAvailablePackagesRequest perform_update_from_locally_available_packages_request       = 38;
     CommonAPIPerformUpdateFromLocallyAvailablePackagesResponse perform_update_from_locally_available_packages_response     = 39;
-    // Tags 40-45 carry request/response payloads whose bodies are types from a
-    // separate, not-yet-modeled proto package; left unmodeled here.
-    //CommonAPIRegisterRequest registration_request                                                                          = 40;
-    //CommonAPIRegisterResponse registration_response                                                                        = 41;
-    //CommonAPIRetrieveSiteUuidRequest retrieve_site_uuid_request                                                            = 42;
-    //CommonAPIRetrieveSiteUuidResponse retrieve_site_uuid_response                                                          = 43;
-    //CommonAPIRetrieveSiteSuggestionRequest retrieve_site_suggestion_request                                                = 44;
-    //CommonAPIRetrieveSiteSuggestionResponse retrieve_site_suggestion_response                                              = 45;
+    CommonAPIRegisterRequest register_request                                                                               = 40;
+    CommonAPIRegisterResponse register_response                                                                             = 41;
+    CommonAPIRetrieveSiteUuidRequest retrieve_site_uuid_request                                                             = 42;
+    CommonAPIRetrieveSiteUuidResponse retrieve_site_uuid_response                                                           = 43;
+    CommonAPIRetrieveSiteSuggestionRequest retrieve_site_suggestion_request                                                 = 44;
+    CommonAPIRetrieveSiteSuggestionResponse retrieve_site_suggestion_response                                               = 45;
     CommonAPIStartTcpdumpRequest start_tcpdump_request                                                                      = 46;
     CommonAPIStartTcpdumpResponse start_tcpdump_response                                                                    = 47;
     CommonAPIStopTcpdumpRequest stop_tcpdump_request                                                                        = 48;

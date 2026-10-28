@@ -12,6 +12,7 @@ import { Timestamp } from "./google/protobuf/timestamp.js";
 import { FloatValue } from "./google/protobuf/wrappers.js";
 import { NetworkInterface, WifiConfig } from "./networking.js";
 import { NeurioMeterInterface } from "./neurio_meter_api.js";
+import { RegistrationResponse, WCCommercialRegistrationRequest } from "./registration_api.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
@@ -624,6 +625,7 @@ export enum WCThirdPartyVehicleMode {
   WC_THIRD_PARTY_VEHICLE_MODE_DISABLED = 2,
   WC_THIRD_PARTY_VEHICLE_MODE_DISABLED_NO_ROADSTER = 3,
   WC_THIRD_PARTY_VEHICLE_MODE_VIN_ALLOW_LIST = 4,
+  WC_THIRD_PARTY_VEHICLE_MODE_COMPATIBILITY = 5,
   UNRECOGNIZED = -1,
 }
 
@@ -644,6 +646,9 @@ export function wCThirdPartyVehicleModeFromJSON(object: any): WCThirdPartyVehicl
     case 4:
     case "WC_THIRD_PARTY_VEHICLE_MODE_VIN_ALLOW_LIST":
       return WCThirdPartyVehicleMode.WC_THIRD_PARTY_VEHICLE_MODE_VIN_ALLOW_LIST;
+    case 5:
+    case "WC_THIRD_PARTY_VEHICLE_MODE_COMPATIBILITY":
+      return WCThirdPartyVehicleMode.WC_THIRD_PARTY_VEHICLE_MODE_COMPATIBILITY;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -663,6 +668,8 @@ export function wCThirdPartyVehicleModeToJSON(object: WCThirdPartyVehicleMode): 
       return "WC_THIRD_PARTY_VEHICLE_MODE_DISABLED_NO_ROADSTER";
     case WCThirdPartyVehicleMode.WC_THIRD_PARTY_VEHICLE_MODE_VIN_ALLOW_LIST:
       return "WC_THIRD_PARTY_VEHICLE_MODE_VIN_ALLOW_LIST";
+    case WCThirdPartyVehicleMode.WC_THIRD_PARTY_VEHICLE_MODE_COMPATIBILITY:
+      return "WC_THIRD_PARTY_VEHICLE_MODE_COMPATIBILITY";
     case WCThirdPartyVehicleMode.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -684,6 +691,9 @@ export enum WCEvseNotReadyReason {
   WC_EVSE_NOT_READY_REASON_ACCESS_CONTROL_LIST = 11,
   WC_EVSE_NOT_READY_REASON_PAY_PER_USE = 12,
   WC_EVSE_NOT_READY_REASON_THIRD_PARTY_VEHICLE = 13,
+  WC_EVSE_NOT_READY_REASON_VF_TRIPPED = 14,
+  WC_EVSE_NOT_READY_REASON_V2G = 15,
+  WC_EVSE_NOT_READY_REASON_V2HPW = 16,
   UNRECOGNIZED = -1,
 }
 
@@ -731,6 +741,15 @@ export function wCEvseNotReadyReasonFromJSON(object: any): WCEvseNotReadyReason 
     case 13:
     case "WC_EVSE_NOT_READY_REASON_THIRD_PARTY_VEHICLE":
       return WCEvseNotReadyReason.WC_EVSE_NOT_READY_REASON_THIRD_PARTY_VEHICLE;
+    case 14:
+    case "WC_EVSE_NOT_READY_REASON_VF_TRIPPED":
+      return WCEvseNotReadyReason.WC_EVSE_NOT_READY_REASON_VF_TRIPPED;
+    case 15:
+    case "WC_EVSE_NOT_READY_REASON_V2G":
+      return WCEvseNotReadyReason.WC_EVSE_NOT_READY_REASON_V2G;
+    case 16:
+    case "WC_EVSE_NOT_READY_REASON_V2HPW":
+      return WCEvseNotReadyReason.WC_EVSE_NOT_READY_REASON_V2HPW;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -768,6 +787,12 @@ export function wCEvseNotReadyReasonToJSON(object: WCEvseNotReadyReason): string
       return "WC_EVSE_NOT_READY_REASON_PAY_PER_USE";
     case WCEvseNotReadyReason.WC_EVSE_NOT_READY_REASON_THIRD_PARTY_VEHICLE:
       return "WC_EVSE_NOT_READY_REASON_THIRD_PARTY_VEHICLE";
+    case WCEvseNotReadyReason.WC_EVSE_NOT_READY_REASON_VF_TRIPPED:
+      return "WC_EVSE_NOT_READY_REASON_VF_TRIPPED";
+    case WCEvseNotReadyReason.WC_EVSE_NOT_READY_REASON_V2G:
+      return "WC_EVSE_NOT_READY_REASON_V2G";
+    case WCEvseNotReadyReason.WC_EVSE_NOT_READY_REASON_V2HPW:
+      return "WC_EVSE_NOT_READY_REASON_V2HPW";
     case WCEvseNotReadyReason.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -1869,19 +1894,13 @@ export interface WCAPIPushSmartChargingCommandRequest {
 export interface WCAPIPushSmartChargingCommandResponse {
 }
 
-/**
- * Field 1 (request) is a type from a separate, not-yet-modeled proto
- * package; left unmodeled here.
- */
 export interface WCAPIRegisterCommercialRequest {
+  request: WCCommercialRegistrationRequest | undefined;
 }
 
 export interface WCAPIRegisterCommercialResponse {
-  /**
-   * Field 2 (response) is a type from a separate, not-yet-modeled proto
-   * package; left unmodeled here.
-   */
   failure: number;
+  response: RegistrationResponse | undefined;
 }
 
 export interface WCAPIPushPowershareCommandRequest {
@@ -10247,11 +10266,14 @@ export const WCAPIPushSmartChargingCommandResponse: MessageFns<WCAPIPushSmartCha
 };
 
 function createBaseWCAPIRegisterCommercialRequest(): WCAPIRegisterCommercialRequest {
-  return {};
+  return { request: undefined };
 }
 
 export const WCAPIRegisterCommercialRequest: MessageFns<WCAPIRegisterCommercialRequest> = {
-  encode(_: WCAPIRegisterCommercialRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: WCAPIRegisterCommercialRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.request !== undefined) {
+      WCCommercialRegistrationRequest.encode(message.request, writer.uint32(10).fork()).join();
+    }
     return writer;
   },
 
@@ -10262,6 +10284,14 @@ export const WCAPIRegisterCommercialRequest: MessageFns<WCAPIRegisterCommercialR
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.request = WCCommercialRegistrationRequest.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -10271,32 +10301,43 @@ export const WCAPIRegisterCommercialRequest: MessageFns<WCAPIRegisterCommercialR
     return message;
   },
 
-  fromJSON(_: any): WCAPIRegisterCommercialRequest {
-    return {};
+  fromJSON(object: any): WCAPIRegisterCommercialRequest {
+    return { request: isSet(object.request) ? WCCommercialRegistrationRequest.fromJSON(object.request) : undefined };
   },
 
-  toJSON(_: WCAPIRegisterCommercialRequest): unknown {
+  toJSON(message: WCAPIRegisterCommercialRequest): unknown {
     const obj: any = {};
+    if (message.request !== undefined) {
+      obj.request = WCCommercialRegistrationRequest.toJSON(message.request);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<WCAPIRegisterCommercialRequest>, I>>(base?: I): WCAPIRegisterCommercialRequest {
     return WCAPIRegisterCommercialRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<WCAPIRegisterCommercialRequest>, I>>(_: I): WCAPIRegisterCommercialRequest {
+  fromPartial<I extends Exact<DeepPartial<WCAPIRegisterCommercialRequest>, I>>(
+    object: I,
+  ): WCAPIRegisterCommercialRequest {
     const message = createBaseWCAPIRegisterCommercialRequest();
+    message.request = (object.request !== undefined && object.request !== null)
+      ? WCCommercialRegistrationRequest.fromPartial(object.request)
+      : undefined;
     return message;
   },
 };
 
 function createBaseWCAPIRegisterCommercialResponse(): WCAPIRegisterCommercialResponse {
-  return { failure: 0 };
+  return { failure: 0, response: undefined };
 }
 
 export const WCAPIRegisterCommercialResponse: MessageFns<WCAPIRegisterCommercialResponse> = {
   encode(message: WCAPIRegisterCommercialResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.failure !== 0) {
       writer.uint32(8).int32(message.failure);
+    }
+    if (message.response !== undefined) {
+      RegistrationResponse.encode(message.response, writer.uint32(18).fork()).join();
     }
     return writer;
   },
@@ -10316,6 +10357,14 @@ export const WCAPIRegisterCommercialResponse: MessageFns<WCAPIRegisterCommercial
           message.failure = reader.int32();
           continue;
         }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.response = RegistrationResponse.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -10326,13 +10375,19 @@ export const WCAPIRegisterCommercialResponse: MessageFns<WCAPIRegisterCommercial
   },
 
   fromJSON(object: any): WCAPIRegisterCommercialResponse {
-    return { failure: isSet(object.failure) ? globalThis.Number(object.failure) : 0 };
+    return {
+      failure: isSet(object.failure) ? globalThis.Number(object.failure) : 0,
+      response: isSet(object.response) ? RegistrationResponse.fromJSON(object.response) : undefined,
+    };
   },
 
   toJSON(message: WCAPIRegisterCommercialResponse): unknown {
     const obj: any = {};
     if (message.failure !== undefined) {
       obj.failure = Math.round(message.failure);
+    }
+    if (message.response !== undefined) {
+      obj.response = RegistrationResponse.toJSON(message.response);
     }
     return obj;
   },
@@ -10345,6 +10400,9 @@ export const WCAPIRegisterCommercialResponse: MessageFns<WCAPIRegisterCommercial
   ): WCAPIRegisterCommercialResponse {
     const message = createBaseWCAPIRegisterCommercialResponse();
     message.failure = object.failure ?? 0;
+    message.response = (object.response !== undefined && object.response !== null)
+      ? RegistrationResponse.fromPartial(object.response)
+      : undefined;
     return message;
   },
 };

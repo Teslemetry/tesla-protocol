@@ -6,6 +6,7 @@ from tesla_protocol.energy_device import device_pb2 as _device_pb2
 from tesla_protocol.energy_device import networking_pb2 as _networking_pb2
 from tesla_protocol.energy_device import energy_pb2 as _energy_pb2
 from tesla_protocol.energy_device import neurio_meter_api_pb2 as _neurio_meter_api_pb2
+from tesla_protocol.energy_device import registration_api_pb2 as _registration_api_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
@@ -117,6 +118,7 @@ class WCThirdPartyVehicleMode(int, metaclass=_enum_type_wrapper.EnumTypeWrapper)
     WC_THIRD_PARTY_VEHICLE_MODE_DISABLED: _ClassVar[WCThirdPartyVehicleMode]
     WC_THIRD_PARTY_VEHICLE_MODE_DISABLED_NO_ROADSTER: _ClassVar[WCThirdPartyVehicleMode]
     WC_THIRD_PARTY_VEHICLE_MODE_VIN_ALLOW_LIST: _ClassVar[WCThirdPartyVehicleMode]
+    WC_THIRD_PARTY_VEHICLE_MODE_COMPATIBILITY: _ClassVar[WCThirdPartyVehicleMode]
 
 class WCEvseNotReadyReason(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -134,6 +136,9 @@ class WCEvseNotReadyReason(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     WC_EVSE_NOT_READY_REASON_ACCESS_CONTROL_LIST: _ClassVar[WCEvseNotReadyReason]
     WC_EVSE_NOT_READY_REASON_PAY_PER_USE: _ClassVar[WCEvseNotReadyReason]
     WC_EVSE_NOT_READY_REASON_THIRD_PARTY_VEHICLE: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_VF_TRIPPED: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_V2G: _ClassVar[WCEvseNotReadyReason]
+    WC_EVSE_NOT_READY_REASON_V2HPW: _ClassVar[WCEvseNotReadyReason]
 
 class WCOcppStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -292,6 +297,7 @@ WC_THIRD_PARTY_VEHICLE_MODE_ENABLED: WCThirdPartyVehicleMode
 WC_THIRD_PARTY_VEHICLE_MODE_DISABLED: WCThirdPartyVehicleMode
 WC_THIRD_PARTY_VEHICLE_MODE_DISABLED_NO_ROADSTER: WCThirdPartyVehicleMode
 WC_THIRD_PARTY_VEHICLE_MODE_VIN_ALLOW_LIST: WCThirdPartyVehicleMode
+WC_THIRD_PARTY_VEHICLE_MODE_COMPATIBILITY: WCThirdPartyVehicleMode
 WC_EVSE_NOT_READY_REASON_INVALID: WCEvseNotReadyReason
 WC_EVSE_NOT_READY_REASON_COLD_LOAD_PICKUP: WCEvseNotReadyReason
 WC_EVSE_NOT_READY_REASON_HANDLE_BUTTON: WCEvseNotReadyReason
@@ -306,6 +312,9 @@ WC_EVSE_NOT_READY_REASON_OCPP_NO_CHARGE: WCEvseNotReadyReason
 WC_EVSE_NOT_READY_REASON_ACCESS_CONTROL_LIST: WCEvseNotReadyReason
 WC_EVSE_NOT_READY_REASON_PAY_PER_USE: WCEvseNotReadyReason
 WC_EVSE_NOT_READY_REASON_THIRD_PARTY_VEHICLE: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_VF_TRIPPED: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_V2G: WCEvseNotReadyReason
+WC_EVSE_NOT_READY_REASON_V2HPW: WCEvseNotReadyReason
 WC_OCPP_STATUS_INVALID: WCOcppStatus
 WC_OCPP_STATUS_UNCONFIGURED: WCOcppStatus
 WC_OCPP_STATUS_INCOMPLETE_CONFIGURATION: WCOcppStatus
@@ -1183,14 +1192,18 @@ class WCAPIPushSmartChargingCommandResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class WCAPIRegisterCommercialRequest(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("request",)
+    REQUEST_FIELD_NUMBER: _ClassVar[int]
+    request: _registration_api_pb2.WCCommercialRegistrationRequest
+    def __init__(self, request: _Optional[_Union[_registration_api_pb2.WCCommercialRegistrationRequest, _Mapping]] = ...) -> None: ...
 
 class WCAPIRegisterCommercialResponse(_message.Message):
-    __slots__ = ("failure",)
+    __slots__ = ("failure", "response")
     FAILURE_FIELD_NUMBER: _ClassVar[int]
+    RESPONSE_FIELD_NUMBER: _ClassVar[int]
     failure: int
-    def __init__(self, failure: _Optional[int] = ...) -> None: ...
+    response: _registration_api_pb2.RegistrationResponse
+    def __init__(self, failure: _Optional[int] = ..., response: _Optional[_Union[_registration_api_pb2.RegistrationResponse, _Mapping]] = ...) -> None: ...
 
 class WCAPIPushPowershareCommandRequest(_message.Message):
     __slots__ = ("site_vehicle_request", "site_evse_request", "inverter_config", "ttl_seconds")

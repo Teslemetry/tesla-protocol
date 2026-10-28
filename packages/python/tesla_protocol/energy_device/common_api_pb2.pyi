@@ -6,6 +6,7 @@ from tesla_protocol.energy_device import networking_pb2 as _networking_pb2
 from tesla_protocol.energy_device import device_pb2 as _device_pb2
 from tesla_protocol.energy_device import update_pb2 as _update_pb2
 from tesla_protocol.energy_device import error_pb2 as _error_pb2
+from tesla_protocol.energy_device import registration_api_pb2 as _registration_api_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
@@ -37,20 +38,24 @@ class ComplianceInformation(_message.Message):
     def __init__(self, radio_legal_information: _Optional[_Iterable[_Union[RadioLegalInformation, _Mapping]]] = ...) -> None: ...
 
 class CommonAPIGetSystemInfoResponse(_message.Message):
-    __slots__ = ("device_id", "din", "firmware_version", "system_update", "device_type", "compliance_information")
+    __slots__ = ("device_id", "din", "firmware_version", "system_update", "device_type", "compliance_information", "installed_firmware_signature", "offline_firmware_signature")
     DEVICE_ID_FIELD_NUMBER: _ClassVar[int]
     DIN_FIELD_NUMBER: _ClassVar[int]
     FIRMWARE_VERSION_FIELD_NUMBER: _ClassVar[int]
     SYSTEM_UPDATE_FIELD_NUMBER: _ClassVar[int]
     DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
     COMPLIANCE_INFORMATION_FIELD_NUMBER: _ClassVar[int]
+    INSTALLED_FIRMWARE_SIGNATURE_FIELD_NUMBER: _ClassVar[int]
+    OFFLINE_FIRMWARE_SIGNATURE_FIELD_NUMBER: _ClassVar[int]
     device_id: _device_pb2.EcuId
     din: str
     firmware_version: _update_pb2.FirmwareVersion
     system_update: _update_pb2.SystemUpdate
     device_type: _device_pb2.DeviceType
     compliance_information: ComplianceInformation
-    def __init__(self, device_id: _Optional[_Union[_device_pb2.EcuId, _Mapping]] = ..., din: _Optional[str] = ..., firmware_version: _Optional[_Union[_update_pb2.FirmwareVersion, _Mapping]] = ..., system_update: _Optional[_Union[_update_pb2.SystemUpdate, _Mapping]] = ..., device_type: _Optional[_Union[_device_pb2.DeviceType, str]] = ..., compliance_information: _Optional[_Union[ComplianceInformation, _Mapping]] = ...) -> None: ...
+    installed_firmware_signature: bytes
+    offline_firmware_signature: bytes
+    def __init__(self, device_id: _Optional[_Union[_device_pb2.EcuId, _Mapping]] = ..., din: _Optional[str] = ..., firmware_version: _Optional[_Union[_update_pb2.FirmwareVersion, _Mapping]] = ..., system_update: _Optional[_Union[_update_pb2.SystemUpdate, _Mapping]] = ..., device_type: _Optional[_Union[_device_pb2.DeviceType, str]] = ..., compliance_information: _Optional[_Union[ComplianceInformation, _Mapping]] = ..., installed_firmware_signature: _Optional[bytes] = ..., offline_firmware_signature: _Optional[bytes] = ...) -> None: ...
 
 class CommonAPISetLocalSiteConfigRequest(_message.Message):
     __slots__ = ()
@@ -328,8 +333,44 @@ class CommonAPIGetTcpdumpInfoResponse(_message.Message):
     disk_quota: int
     def __init__(self, list: _Optional[_Iterable[_Union[TcpdumpInfo, _Mapping]]] = ..., disk_quota: _Optional[int] = ...) -> None: ...
 
+class CommonAPIRegisterRequest(_message.Message):
+    __slots__ = ("request",)
+    REQUEST_FIELD_NUMBER: _ClassVar[int]
+    request: _registration_api_pb2.RegistrationRequest
+    def __init__(self, request: _Optional[_Union[_registration_api_pb2.RegistrationRequest, _Mapping]] = ...) -> None: ...
+
+class CommonAPIRegisterResponse(_message.Message):
+    __slots__ = ("failure", "response")
+    FAILURE_FIELD_NUMBER: _ClassVar[int]
+    RESPONSE_FIELD_NUMBER: _ClassVar[int]
+    failure: int
+    response: _registration_api_pb2.RegistrationResponse
+    def __init__(self, failure: _Optional[int] = ..., response: _Optional[_Union[_registration_api_pb2.RegistrationResponse, _Mapping]] = ...) -> None: ...
+
+class CommonAPIRetrieveSiteUuidRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class CommonAPIRetrieveSiteUuidResponse(_message.Message):
+    __slots__ = ("response",)
+    RESPONSE_FIELD_NUMBER: _ClassVar[int]
+    response: _registration_api_pb2.AssetSiteUuidOfDeviceResponse
+    def __init__(self, response: _Optional[_Union[_registration_api_pb2.AssetSiteUuidOfDeviceResponse, _Mapping]] = ...) -> None: ...
+
+class CommonAPIRetrieveSiteSuggestionRequest(_message.Message):
+    __slots__ = ("request",)
+    REQUEST_FIELD_NUMBER: _ClassVar[int]
+    request: _registration_api_pb2.SiteSuggestionRequest
+    def __init__(self, request: _Optional[_Union[_registration_api_pb2.SiteSuggestionRequest, _Mapping]] = ...) -> None: ...
+
+class CommonAPIRetrieveSiteSuggestionResponse(_message.Message):
+    __slots__ = ("response",)
+    RESPONSE_FIELD_NUMBER: _ClassVar[int]
+    response: _registration_api_pb2.SiteSuggestionResponse
+    def __init__(self, response: _Optional[_Union[_registration_api_pb2.SiteSuggestionResponse, _Mapping]] = ...) -> None: ...
+
 class CommonMessages(_message.Message):
-    __slots__ = ("error_response", "get_system_info_request", "get_system_info_response", "set_local_site_config_request", "set_local_site_config_response", "perform_update_request", "perform_update_response", "factory_reset_request", "factory_reset_response", "wifi_scan_request", "wifi_scan_response", "configure_wifi_request", "configure_wifi_response", "check_for_update_request", "check_for_update_response", "clear_update_request", "clear_update_response", "device_cert_request", "device_cert_response", "configure_wifi_with_encrypted_password_request", "configure_wifi_with_encrypted_password_response", "get_networking_status_request", "get_networking_status_response", "get_cellular_info_request", "get_cellular_info_response", "configure_ethernet_request", "configure_ethernet_response", "forget_wifi_network_request", "forget_wifi_network_response", "check_internet_request", "check_internet_response", "check_for_update_urgency_request", "check_for_update_urgency_response", "negotiate_update_with_locally_available_packages_request", "negotiate_update_with_locally_available_packages_response", "prepare_registration_payload_request", "prepare_registration_payload_response", "perform_update_from_locally_available_packages_request", "perform_update_from_locally_available_packages_response", "start_tcpdump_request", "start_tcpdump_response", "stop_tcpdump_request", "stop_tcpdump_response", "get_tcpdump_info_request", "get_tcpdump_info_response")
+    __slots__ = ("error_response", "get_system_info_request", "get_system_info_response", "set_local_site_config_request", "set_local_site_config_response", "perform_update_request", "perform_update_response", "factory_reset_request", "factory_reset_response", "wifi_scan_request", "wifi_scan_response", "configure_wifi_request", "configure_wifi_response", "check_for_update_request", "check_for_update_response", "clear_update_request", "clear_update_response", "device_cert_request", "device_cert_response", "configure_wifi_with_encrypted_password_request", "configure_wifi_with_encrypted_password_response", "get_networking_status_request", "get_networking_status_response", "get_cellular_info_request", "get_cellular_info_response", "configure_ethernet_request", "configure_ethernet_response", "forget_wifi_network_request", "forget_wifi_network_response", "check_internet_request", "check_internet_response", "check_for_update_urgency_request", "check_for_update_urgency_response", "negotiate_update_with_locally_available_packages_request", "negotiate_update_with_locally_available_packages_response", "prepare_registration_payload_request", "prepare_registration_payload_response", "perform_update_from_locally_available_packages_request", "perform_update_from_locally_available_packages_response", "register_request", "register_response", "retrieve_site_uuid_request", "retrieve_site_uuid_response", "retrieve_site_suggestion_request", "retrieve_site_suggestion_response", "start_tcpdump_request", "start_tcpdump_response", "stop_tcpdump_request", "stop_tcpdump_response", "get_tcpdump_info_request", "get_tcpdump_info_response")
     ERROR_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     GET_SYSTEM_INFO_REQUEST_FIELD_NUMBER: _ClassVar[int]
     GET_SYSTEM_INFO_RESPONSE_FIELD_NUMBER: _ClassVar[int]
@@ -369,6 +410,12 @@ class CommonMessages(_message.Message):
     PREPARE_REGISTRATION_PAYLOAD_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     PERFORM_UPDATE_FROM_LOCALLY_AVAILABLE_PACKAGES_REQUEST_FIELD_NUMBER: _ClassVar[int]
     PERFORM_UPDATE_FROM_LOCALLY_AVAILABLE_PACKAGES_RESPONSE_FIELD_NUMBER: _ClassVar[int]
+    REGISTER_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    REGISTER_RESPONSE_FIELD_NUMBER: _ClassVar[int]
+    RETRIEVE_SITE_UUID_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    RETRIEVE_SITE_UUID_RESPONSE_FIELD_NUMBER: _ClassVar[int]
+    RETRIEVE_SITE_SUGGESTION_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    RETRIEVE_SITE_SUGGESTION_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     START_TCPDUMP_REQUEST_FIELD_NUMBER: _ClassVar[int]
     START_TCPDUMP_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     STOP_TCPDUMP_REQUEST_FIELD_NUMBER: _ClassVar[int]
@@ -414,10 +461,16 @@ class CommonMessages(_message.Message):
     prepare_registration_payload_response: CommonAPIPrepareRegistrationPayloadResponse
     perform_update_from_locally_available_packages_request: CommonAPIPerformUpdateFromLocallyAvailablePackagesRequest
     perform_update_from_locally_available_packages_response: CommonAPIPerformUpdateFromLocallyAvailablePackagesResponse
+    register_request: CommonAPIRegisterRequest
+    register_response: CommonAPIRegisterResponse
+    retrieve_site_uuid_request: CommonAPIRetrieveSiteUuidRequest
+    retrieve_site_uuid_response: CommonAPIRetrieveSiteUuidResponse
+    retrieve_site_suggestion_request: CommonAPIRetrieveSiteSuggestionRequest
+    retrieve_site_suggestion_response: CommonAPIRetrieveSiteSuggestionResponse
     start_tcpdump_request: CommonAPIStartTcpdumpRequest
     start_tcpdump_response: CommonAPIStartTcpdumpResponse
     stop_tcpdump_request: CommonAPIStopTcpdumpRequest
     stop_tcpdump_response: CommonAPIStopTcpdumpResponse
     get_tcpdump_info_request: CommonAPIGetTcpdumpInfoRequest
     get_tcpdump_info_response: CommonAPIGetTcpdumpInfoResponse
-    def __init__(self, error_response: _Optional[_Union[_error_pb2.ErrorResponse, _Mapping]] = ..., get_system_info_request: _Optional[_Union[CommonAPIGetSystemInfoRequest, _Mapping]] = ..., get_system_info_response: _Optional[_Union[CommonAPIGetSystemInfoResponse, _Mapping]] = ..., set_local_site_config_request: _Optional[_Union[CommonAPISetLocalSiteConfigRequest, _Mapping]] = ..., set_local_site_config_response: _Optional[_Union[CommonAPISetLocalSiteConfigResponse, _Mapping]] = ..., perform_update_request: _Optional[_Union[CommonAPIPerformUpdateRequest, _Mapping]] = ..., perform_update_response: _Optional[_Union[CommonAPIPerformUpdateResponse, _Mapping]] = ..., factory_reset_request: _Optional[_Union[CommonAPIFactoryResetRequest, _Mapping]] = ..., factory_reset_response: _Optional[_Union[CommonAPIFactoryResetResponse, _Mapping]] = ..., wifi_scan_request: _Optional[_Union[CommonAPIWifiScanRequest, _Mapping]] = ..., wifi_scan_response: _Optional[_Union[CommonAPIWifiScanResponse, _Mapping]] = ..., configure_wifi_request: _Optional[_Union[CommonAPIConfigureWifiRequest, _Mapping]] = ..., configure_wifi_response: _Optional[_Union[CommonAPIConfigureWifiResponse, _Mapping]] = ..., check_for_update_request: _Optional[_Union[CommonAPICheckForUpdateRequest, _Mapping]] = ..., check_for_update_response: _Optional[_Union[CommonAPICheckForUpdateResponse, _Mapping]] = ..., clear_update_request: _Optional[_Union[CommonAPIClearUpdateRequest, _Mapping]] = ..., clear_update_response: _Optional[_Union[CommonAPIClearUpdateResponse, _Mapping]] = ..., device_cert_request: _Optional[_Union[CommonAPIDeviceCertRequest, _Mapping]] = ..., device_cert_response: _Optional[_Union[CommonAPIDeviceCertResponse, _Mapping]] = ..., configure_wifi_with_encrypted_password_request: _Optional[_Union[CommonAPIConfigureWifiWithEncryptedPasswordRequest, _Mapping]] = ..., configure_wifi_with_encrypted_password_response: _Optional[_Union[CommonAPIConfigureWifiWithEncryptedPasswordResponse, _Mapping]] = ..., get_networking_status_request: _Optional[_Union[CommonAPIGetNetworkingStatusRequest, _Mapping]] = ..., get_networking_status_response: _Optional[_Union[CommonAPIGetNetworkingStatusResponse, _Mapping]] = ..., get_cellular_info_request: _Optional[_Union[CommonAPIGetCellularInfoRequest, _Mapping]] = ..., get_cellular_info_response: _Optional[_Union[CommonAPIGetCellularInfoResponse, _Mapping]] = ..., configure_ethernet_request: _Optional[_Union[CommonAPIConfigureEthernetRequest, _Mapping]] = ..., configure_ethernet_response: _Optional[_Union[CommonAPIConfigureEthernetResponse, _Mapping]] = ..., forget_wifi_network_request: _Optional[_Union[CommonAPIForgetWifiNetworkRequest, _Mapping]] = ..., forget_wifi_network_response: _Optional[_Union[CommonAPIForgetWifiNetworkResponse, _Mapping]] = ..., check_internet_request: _Optional[_Union[CommonAPICheckInternetRequest, _Mapping]] = ..., check_internet_response: _Optional[_Union[CommonAPICheckInternetResponse, _Mapping]] = ..., check_for_update_urgency_request: _Optional[_Union[CommonAPICheckForUpdateUrgencyRequest, _Mapping]] = ..., check_for_update_urgency_response: _Optional[_Union[CommonAPICheckForUpdateUrgencyResponse, _Mapping]] = ..., negotiate_update_with_locally_available_packages_request: _Optional[_Union[CommonAPINegotiateUpdateWithLocallyAvailablePackagesRequest, _Mapping]] = ..., negotiate_update_with_locally_available_packages_response: _Optional[_Union[CommonAPINegotiateUpdateWithLocallyAvailablePackagesResponse, _Mapping]] = ..., prepare_registration_payload_request: _Optional[_Union[CommonAPIPrepareRegistrationPayloadRequest, _Mapping]] = ..., prepare_registration_payload_response: _Optional[_Union[CommonAPIPrepareRegistrationPayloadResponse, _Mapping]] = ..., perform_update_from_locally_available_packages_request: _Optional[_Union[CommonAPIPerformUpdateFromLocallyAvailablePackagesRequest, _Mapping]] = ..., perform_update_from_locally_available_packages_response: _Optional[_Union[CommonAPIPerformUpdateFromLocallyAvailablePackagesResponse, _Mapping]] = ..., start_tcpdump_request: _Optional[_Union[CommonAPIStartTcpdumpRequest, _Mapping]] = ..., start_tcpdump_response: _Optional[_Union[CommonAPIStartTcpdumpResponse, _Mapping]] = ..., stop_tcpdump_request: _Optional[_Union[CommonAPIStopTcpdumpRequest, _Mapping]] = ..., stop_tcpdump_response: _Optional[_Union[CommonAPIStopTcpdumpResponse, _Mapping]] = ..., get_tcpdump_info_request: _Optional[_Union[CommonAPIGetTcpdumpInfoRequest, _Mapping]] = ..., get_tcpdump_info_response: _Optional[_Union[CommonAPIGetTcpdumpInfoResponse, _Mapping]] = ...) -> None: ...
+    def __init__(self, error_response: _Optional[_Union[_error_pb2.ErrorResponse, _Mapping]] = ..., get_system_info_request: _Optional[_Union[CommonAPIGetSystemInfoRequest, _Mapping]] = ..., get_system_info_response: _Optional[_Union[CommonAPIGetSystemInfoResponse, _Mapping]] = ..., set_local_site_config_request: _Optional[_Union[CommonAPISetLocalSiteConfigRequest, _Mapping]] = ..., set_local_site_config_response: _Optional[_Union[CommonAPISetLocalSiteConfigResponse, _Mapping]] = ..., perform_update_request: _Optional[_Union[CommonAPIPerformUpdateRequest, _Mapping]] = ..., perform_update_response: _Optional[_Union[CommonAPIPerformUpdateResponse, _Mapping]] = ..., factory_reset_request: _Optional[_Union[CommonAPIFactoryResetRequest, _Mapping]] = ..., factory_reset_response: _Optional[_Union[CommonAPIFactoryResetResponse, _Mapping]] = ..., wifi_scan_request: _Optional[_Union[CommonAPIWifiScanRequest, _Mapping]] = ..., wifi_scan_response: _Optional[_Union[CommonAPIWifiScanResponse, _Mapping]] = ..., configure_wifi_request: _Optional[_Union[CommonAPIConfigureWifiRequest, _Mapping]] = ..., configure_wifi_response: _Optional[_Union[CommonAPIConfigureWifiResponse, _Mapping]] = ..., check_for_update_request: _Optional[_Union[CommonAPICheckForUpdateRequest, _Mapping]] = ..., check_for_update_response: _Optional[_Union[CommonAPICheckForUpdateResponse, _Mapping]] = ..., clear_update_request: _Optional[_Union[CommonAPIClearUpdateRequest, _Mapping]] = ..., clear_update_response: _Optional[_Union[CommonAPIClearUpdateResponse, _Mapping]] = ..., device_cert_request: _Optional[_Union[CommonAPIDeviceCertRequest, _Mapping]] = ..., device_cert_response: _Optional[_Union[CommonAPIDeviceCertResponse, _Mapping]] = ..., configure_wifi_with_encrypted_password_request: _Optional[_Union[CommonAPIConfigureWifiWithEncryptedPasswordRequest, _Mapping]] = ..., configure_wifi_with_encrypted_password_response: _Optional[_Union[CommonAPIConfigureWifiWithEncryptedPasswordResponse, _Mapping]] = ..., get_networking_status_request: _Optional[_Union[CommonAPIGetNetworkingStatusRequest, _Mapping]] = ..., get_networking_status_response: _Optional[_Union[CommonAPIGetNetworkingStatusResponse, _Mapping]] = ..., get_cellular_info_request: _Optional[_Union[CommonAPIGetCellularInfoRequest, _Mapping]] = ..., get_cellular_info_response: _Optional[_Union[CommonAPIGetCellularInfoResponse, _Mapping]] = ..., configure_ethernet_request: _Optional[_Union[CommonAPIConfigureEthernetRequest, _Mapping]] = ..., configure_ethernet_response: _Optional[_Union[CommonAPIConfigureEthernetResponse, _Mapping]] = ..., forget_wifi_network_request: _Optional[_Union[CommonAPIForgetWifiNetworkRequest, _Mapping]] = ..., forget_wifi_network_response: _Optional[_Union[CommonAPIForgetWifiNetworkResponse, _Mapping]] = ..., check_internet_request: _Optional[_Union[CommonAPICheckInternetRequest, _Mapping]] = ..., check_internet_response: _Optional[_Union[CommonAPICheckInternetResponse, _Mapping]] = ..., check_for_update_urgency_request: _Optional[_Union[CommonAPICheckForUpdateUrgencyRequest, _Mapping]] = ..., check_for_update_urgency_response: _Optional[_Union[CommonAPICheckForUpdateUrgencyResponse, _Mapping]] = ..., negotiate_update_with_locally_available_packages_request: _Optional[_Union[CommonAPINegotiateUpdateWithLocallyAvailablePackagesRequest, _Mapping]] = ..., negotiate_update_with_locally_available_packages_response: _Optional[_Union[CommonAPINegotiateUpdateWithLocallyAvailablePackagesResponse, _Mapping]] = ..., prepare_registration_payload_request: _Optional[_Union[CommonAPIPrepareRegistrationPayloadRequest, _Mapping]] = ..., prepare_registration_payload_response: _Optional[_Union[CommonAPIPrepareRegistrationPayloadResponse, _Mapping]] = ..., perform_update_from_locally_available_packages_request: _Optional[_Union[CommonAPIPerformUpdateFromLocallyAvailablePackagesRequest, _Mapping]] = ..., perform_update_from_locally_available_packages_response: _Optional[_Union[CommonAPIPerformUpdateFromLocallyAvailablePackagesResponse, _Mapping]] = ..., register_request: _Optional[_Union[CommonAPIRegisterRequest, _Mapping]] = ..., register_response: _Optional[_Union[CommonAPIRegisterResponse, _Mapping]] = ..., retrieve_site_uuid_request: _Optional[_Union[CommonAPIRetrieveSiteUuidRequest, _Mapping]] = ..., retrieve_site_uuid_response: _Optional[_Union[CommonAPIRetrieveSiteUuidResponse, _Mapping]] = ..., retrieve_site_suggestion_request: _Optional[_Union[CommonAPIRetrieveSiteSuggestionRequest, _Mapping]] = ..., retrieve_site_suggestion_response: _Optional[_Union[CommonAPIRetrieveSiteSuggestionResponse, _Mapping]] = ..., start_tcpdump_request: _Optional[_Union[CommonAPIStartTcpdumpRequest, _Mapping]] = ..., start_tcpdump_response: _Optional[_Union[CommonAPIStartTcpdumpResponse, _Mapping]] = ..., stop_tcpdump_request: _Optional[_Union[CommonAPIStopTcpdumpRequest, _Mapping]] = ..., stop_tcpdump_response: _Optional[_Union[CommonAPIStopTcpdumpResponse, _Mapping]] = ..., get_tcpdump_info_request: _Optional[_Union[CommonAPIGetTcpdumpInfoRequest, _Mapping]] = ..., get_tcpdump_info_response: _Optional[_Union[CommonAPIGetTcpdumpInfoResponse, _Mapping]] = ...) -> None: ...

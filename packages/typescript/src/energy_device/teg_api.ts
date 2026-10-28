@@ -13,6 +13,13 @@ import {
 import { DeviceType, deviceTypeFromJSON, deviceTypeToJSON, Din } from "./device.js";
 import { Timestamp } from "./google/protobuf/timestamp.js";
 import { NetworkInterface, WifiConfig } from "./networking.js";
+import {
+  AssetSiteUuidOfDeviceResponse,
+  RegistrationRequest,
+  RegistrationResponse,
+  SiteSuggestionRequest,
+  SiteSuggestionResponse,
+} from "./registration_api.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
@@ -267,19 +274,13 @@ export interface TEGAPIDetectWiredMetersRequest {
 export interface TEGAPIDetectWiredMetersResponse {
 }
 
-/**
- * Field 1 (registration_request) is a type from a separate, not-yet-modeled
- * proto package; left unmodeled here.
- */
 export interface TEGAPIRegisterRequest {
+  registrationRequest: RegistrationRequest | undefined;
 }
 
 export interface TEGAPIRegisterResponse {
-  /**
-   * Field 2 (registration_response) is a type from a separate, not-yet-modeled
-   * proto package; left unmodeled here.
-   */
   failure: number;
+  registrationResponse: RegistrationResponse | undefined;
 }
 
 export interface TEGAPITriggerPowerwall2PhaseDetectionRequest {
@@ -810,25 +811,16 @@ export interface TEGAPIClearPowerwall3LockoutAlertsResponse {
 export interface TEGAPIRetrieveSiteUuidRequest {
 }
 
-/**
- * Field 1 (response) is a type from a separate, not-yet-modeled proto
- * package; left unmodeled here.
- */
 export interface TEGAPIRetrieveSiteUuidResponse {
+  response: AssetSiteUuidOfDeviceResponse | undefined;
 }
 
-/**
- * Field 1 (request) is a type from a separate, not-yet-modeled proto
- * package; left unmodeled here.
- */
 export interface TEGAPIRetrieveSiteSuggestionRequest {
+  request: SiteSuggestionRequest | undefined;
 }
 
-/**
- * Field 1 (response) is a type from a separate, not-yet-modeled proto
- * package; left unmodeled here.
- */
 export interface TEGAPIRetrieveSiteSuggestionResponse {
+  response: SiteSuggestionResponse | undefined;
 }
 
 export interface TEGMessages {
@@ -2286,11 +2278,14 @@ export const TEGAPIDetectWiredMetersResponse: MessageFns<TEGAPIDetectWiredMeters
 };
 
 function createBaseTEGAPIRegisterRequest(): TEGAPIRegisterRequest {
-  return {};
+  return { registrationRequest: undefined };
 }
 
 export const TEGAPIRegisterRequest: MessageFns<TEGAPIRegisterRequest> = {
-  encode(_: TEGAPIRegisterRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: TEGAPIRegisterRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.registrationRequest !== undefined) {
+      RegistrationRequest.encode(message.registrationRequest, writer.uint32(10).fork()).join();
+    }
     return writer;
   },
 
@@ -2301,6 +2296,14 @@ export const TEGAPIRegisterRequest: MessageFns<TEGAPIRegisterRequest> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.registrationRequest = RegistrationRequest.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2310,32 +2313,45 @@ export const TEGAPIRegisterRequest: MessageFns<TEGAPIRegisterRequest> = {
     return message;
   },
 
-  fromJSON(_: any): TEGAPIRegisterRequest {
-    return {};
+  fromJSON(object: any): TEGAPIRegisterRequest {
+    return {
+      registrationRequest: isSet(object.registrationRequest)
+        ? RegistrationRequest.fromJSON(object.registrationRequest)
+        : undefined,
+    };
   },
 
-  toJSON(_: TEGAPIRegisterRequest): unknown {
+  toJSON(message: TEGAPIRegisterRequest): unknown {
     const obj: any = {};
+    if (message.registrationRequest !== undefined) {
+      obj.registrationRequest = RegistrationRequest.toJSON(message.registrationRequest);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<TEGAPIRegisterRequest>, I>>(base?: I): TEGAPIRegisterRequest {
     return TEGAPIRegisterRequest.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TEGAPIRegisterRequest>, I>>(_: I): TEGAPIRegisterRequest {
+  fromPartial<I extends Exact<DeepPartial<TEGAPIRegisterRequest>, I>>(object: I): TEGAPIRegisterRequest {
     const message = createBaseTEGAPIRegisterRequest();
+    message.registrationRequest = (object.registrationRequest !== undefined && object.registrationRequest !== null)
+      ? RegistrationRequest.fromPartial(object.registrationRequest)
+      : undefined;
     return message;
   },
 };
 
 function createBaseTEGAPIRegisterResponse(): TEGAPIRegisterResponse {
-  return { failure: 0 };
+  return { failure: 0, registrationResponse: undefined };
 }
 
 export const TEGAPIRegisterResponse: MessageFns<TEGAPIRegisterResponse> = {
   encode(message: TEGAPIRegisterResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.failure !== 0) {
       writer.uint32(8).int32(message.failure);
+    }
+    if (message.registrationResponse !== undefined) {
+      RegistrationResponse.encode(message.registrationResponse, writer.uint32(18).fork()).join();
     }
     return writer;
   },
@@ -2355,6 +2371,14 @@ export const TEGAPIRegisterResponse: MessageFns<TEGAPIRegisterResponse> = {
           message.failure = reader.int32();
           continue;
         }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.registrationResponse = RegistrationResponse.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2365,13 +2389,21 @@ export const TEGAPIRegisterResponse: MessageFns<TEGAPIRegisterResponse> = {
   },
 
   fromJSON(object: any): TEGAPIRegisterResponse {
-    return { failure: isSet(object.failure) ? globalThis.Number(object.failure) : 0 };
+    return {
+      failure: isSet(object.failure) ? globalThis.Number(object.failure) : 0,
+      registrationResponse: isSet(object.registrationResponse)
+        ? RegistrationResponse.fromJSON(object.registrationResponse)
+        : undefined,
+    };
   },
 
   toJSON(message: TEGAPIRegisterResponse): unknown {
     const obj: any = {};
     if (message.failure !== undefined) {
       obj.failure = Math.round(message.failure);
+    }
+    if (message.registrationResponse !== undefined) {
+      obj.registrationResponse = RegistrationResponse.toJSON(message.registrationResponse);
     }
     return obj;
   },
@@ -2382,6 +2414,9 @@ export const TEGAPIRegisterResponse: MessageFns<TEGAPIRegisterResponse> = {
   fromPartial<I extends Exact<DeepPartial<TEGAPIRegisterResponse>, I>>(object: I): TEGAPIRegisterResponse {
     const message = createBaseTEGAPIRegisterResponse();
     message.failure = object.failure ?? 0;
+    message.registrationResponse = (object.registrationResponse !== undefined && object.registrationResponse !== null)
+      ? RegistrationResponse.fromPartial(object.registrationResponse)
+      : undefined;
     return message;
   },
 };
@@ -7473,11 +7508,14 @@ export const TEGAPIRetrieveSiteUuidRequest: MessageFns<TEGAPIRetrieveSiteUuidReq
 };
 
 function createBaseTEGAPIRetrieveSiteUuidResponse(): TEGAPIRetrieveSiteUuidResponse {
-  return {};
+  return { response: undefined };
 }
 
 export const TEGAPIRetrieveSiteUuidResponse: MessageFns<TEGAPIRetrieveSiteUuidResponse> = {
-  encode(_: TEGAPIRetrieveSiteUuidResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: TEGAPIRetrieveSiteUuidResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.response !== undefined) {
+      AssetSiteUuidOfDeviceResponse.encode(message.response, writer.uint32(10).fork()).join();
+    }
     return writer;
   },
 
@@ -7488,6 +7526,14 @@ export const TEGAPIRetrieveSiteUuidResponse: MessageFns<TEGAPIRetrieveSiteUuidRe
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.response = AssetSiteUuidOfDeviceResponse.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -7497,30 +7543,41 @@ export const TEGAPIRetrieveSiteUuidResponse: MessageFns<TEGAPIRetrieveSiteUuidRe
     return message;
   },
 
-  fromJSON(_: any): TEGAPIRetrieveSiteUuidResponse {
-    return {};
+  fromJSON(object: any): TEGAPIRetrieveSiteUuidResponse {
+    return { response: isSet(object.response) ? AssetSiteUuidOfDeviceResponse.fromJSON(object.response) : undefined };
   },
 
-  toJSON(_: TEGAPIRetrieveSiteUuidResponse): unknown {
+  toJSON(message: TEGAPIRetrieveSiteUuidResponse): unknown {
     const obj: any = {};
+    if (message.response !== undefined) {
+      obj.response = AssetSiteUuidOfDeviceResponse.toJSON(message.response);
+    }
     return obj;
   },
 
   create<I extends Exact<DeepPartial<TEGAPIRetrieveSiteUuidResponse>, I>>(base?: I): TEGAPIRetrieveSiteUuidResponse {
     return TEGAPIRetrieveSiteUuidResponse.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<TEGAPIRetrieveSiteUuidResponse>, I>>(_: I): TEGAPIRetrieveSiteUuidResponse {
+  fromPartial<I extends Exact<DeepPartial<TEGAPIRetrieveSiteUuidResponse>, I>>(
+    object: I,
+  ): TEGAPIRetrieveSiteUuidResponse {
     const message = createBaseTEGAPIRetrieveSiteUuidResponse();
+    message.response = (object.response !== undefined && object.response !== null)
+      ? AssetSiteUuidOfDeviceResponse.fromPartial(object.response)
+      : undefined;
     return message;
   },
 };
 
 function createBaseTEGAPIRetrieveSiteSuggestionRequest(): TEGAPIRetrieveSiteSuggestionRequest {
-  return {};
+  return { request: undefined };
 }
 
 export const TEGAPIRetrieveSiteSuggestionRequest: MessageFns<TEGAPIRetrieveSiteSuggestionRequest> = {
-  encode(_: TEGAPIRetrieveSiteSuggestionRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: TEGAPIRetrieveSiteSuggestionRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.request !== undefined) {
+      SiteSuggestionRequest.encode(message.request, writer.uint32(10).fork()).join();
+    }
     return writer;
   },
 
@@ -7531,6 +7588,14 @@ export const TEGAPIRetrieveSiteSuggestionRequest: MessageFns<TEGAPIRetrieveSiteS
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.request = SiteSuggestionRequest.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -7540,12 +7605,15 @@ export const TEGAPIRetrieveSiteSuggestionRequest: MessageFns<TEGAPIRetrieveSiteS
     return message;
   },
 
-  fromJSON(_: any): TEGAPIRetrieveSiteSuggestionRequest {
-    return {};
+  fromJSON(object: any): TEGAPIRetrieveSiteSuggestionRequest {
+    return { request: isSet(object.request) ? SiteSuggestionRequest.fromJSON(object.request) : undefined };
   },
 
-  toJSON(_: TEGAPIRetrieveSiteSuggestionRequest): unknown {
+  toJSON(message: TEGAPIRetrieveSiteSuggestionRequest): unknown {
     const obj: any = {};
+    if (message.request !== undefined) {
+      obj.request = SiteSuggestionRequest.toJSON(message.request);
+    }
     return obj;
   },
 
@@ -7555,19 +7623,25 @@ export const TEGAPIRetrieveSiteSuggestionRequest: MessageFns<TEGAPIRetrieveSiteS
     return TEGAPIRetrieveSiteSuggestionRequest.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<TEGAPIRetrieveSiteSuggestionRequest>, I>>(
-    _: I,
+    object: I,
   ): TEGAPIRetrieveSiteSuggestionRequest {
     const message = createBaseTEGAPIRetrieveSiteSuggestionRequest();
+    message.request = (object.request !== undefined && object.request !== null)
+      ? SiteSuggestionRequest.fromPartial(object.request)
+      : undefined;
     return message;
   },
 };
 
 function createBaseTEGAPIRetrieveSiteSuggestionResponse(): TEGAPIRetrieveSiteSuggestionResponse {
-  return {};
+  return { response: undefined };
 }
 
 export const TEGAPIRetrieveSiteSuggestionResponse: MessageFns<TEGAPIRetrieveSiteSuggestionResponse> = {
-  encode(_: TEGAPIRetrieveSiteSuggestionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: TEGAPIRetrieveSiteSuggestionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.response !== undefined) {
+      SiteSuggestionResponse.encode(message.response, writer.uint32(10).fork()).join();
+    }
     return writer;
   },
 
@@ -7578,6 +7652,14 @@ export const TEGAPIRetrieveSiteSuggestionResponse: MessageFns<TEGAPIRetrieveSite
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.response = SiteSuggestionResponse.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -7587,12 +7669,15 @@ export const TEGAPIRetrieveSiteSuggestionResponse: MessageFns<TEGAPIRetrieveSite
     return message;
   },
 
-  fromJSON(_: any): TEGAPIRetrieveSiteSuggestionResponse {
-    return {};
+  fromJSON(object: any): TEGAPIRetrieveSiteSuggestionResponse {
+    return { response: isSet(object.response) ? SiteSuggestionResponse.fromJSON(object.response) : undefined };
   },
 
-  toJSON(_: TEGAPIRetrieveSiteSuggestionResponse): unknown {
+  toJSON(message: TEGAPIRetrieveSiteSuggestionResponse): unknown {
     const obj: any = {};
+    if (message.response !== undefined) {
+      obj.response = SiteSuggestionResponse.toJSON(message.response);
+    }
     return obj;
   },
 
@@ -7602,9 +7687,12 @@ export const TEGAPIRetrieveSiteSuggestionResponse: MessageFns<TEGAPIRetrieveSite
     return TEGAPIRetrieveSiteSuggestionResponse.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<TEGAPIRetrieveSiteSuggestionResponse>, I>>(
-    _: I,
+    object: I,
   ): TEGAPIRetrieveSiteSuggestionResponse {
     const message = createBaseTEGAPIRetrieveSiteSuggestionResponse();
+    message.response = (object.response !== undefined && object.response !== null)
+      ? SiteSuggestionResponse.fromPartial(object.response)
+      : undefined;
     return message;
   },
 };

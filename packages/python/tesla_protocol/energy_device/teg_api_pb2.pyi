@@ -4,6 +4,7 @@ from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from tesla_protocol.energy_device import device_pb2 as _device_pb2
 from tesla_protocol.energy_device import networking_pb2 as _networking_pb2
 from tesla_protocol.energy_device import common_api_pb2 as _common_api_pb2
+from tesla_protocol.energy_device import registration_api_pb2 as _registration_api_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
@@ -181,14 +182,18 @@ class TEGAPIDetectWiredMetersResponse(_message.Message):
     def __init__(self) -> None: ...
 
 class TEGAPIRegisterRequest(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("registration_request",)
+    REGISTRATION_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    registration_request: _registration_api_pb2.RegistrationRequest
+    def __init__(self, registration_request: _Optional[_Union[_registration_api_pb2.RegistrationRequest, _Mapping]] = ...) -> None: ...
 
 class TEGAPIRegisterResponse(_message.Message):
-    __slots__ = ("failure",)
+    __slots__ = ("failure", "registration_response")
     FAILURE_FIELD_NUMBER: _ClassVar[int]
+    REGISTRATION_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     failure: int
-    def __init__(self, failure: _Optional[int] = ...) -> None: ...
+    registration_response: _registration_api_pb2.RegistrationResponse
+    def __init__(self, failure: _Optional[int] = ..., registration_response: _Optional[_Union[_registration_api_pb2.RegistrationResponse, _Mapping]] = ...) -> None: ...
 
 class TEGAPITriggerPowerwall2PhaseDetectionRequest(_message.Message):
     __slots__ = ("powerwalls",)
@@ -697,16 +702,22 @@ class TEGAPIRetrieveSiteUuidRequest(_message.Message):
     def __init__(self) -> None: ...
 
 class TEGAPIRetrieveSiteUuidResponse(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("response",)
+    RESPONSE_FIELD_NUMBER: _ClassVar[int]
+    response: _registration_api_pb2.AssetSiteUuidOfDeviceResponse
+    def __init__(self, response: _Optional[_Union[_registration_api_pb2.AssetSiteUuidOfDeviceResponse, _Mapping]] = ...) -> None: ...
 
 class TEGAPIRetrieveSiteSuggestionRequest(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("request",)
+    REQUEST_FIELD_NUMBER: _ClassVar[int]
+    request: _registration_api_pb2.SiteSuggestionRequest
+    def __init__(self, request: _Optional[_Union[_registration_api_pb2.SiteSuggestionRequest, _Mapping]] = ...) -> None: ...
 
 class TEGAPIRetrieveSiteSuggestionResponse(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("response",)
+    RESPONSE_FIELD_NUMBER: _ClassVar[int]
+    response: _registration_api_pb2.SiteSuggestionResponse
+    def __init__(self, response: _Optional[_Union[_registration_api_pb2.SiteSuggestionResponse, _Mapping]] = ...) -> None: ...
 
 class TEGMessages(_message.Message):
     __slots__ = ("get_config_request", "get_config_response", "set_island_mode_request", "set_island_mode_response", "trigger_islanding_black_start_request", "trigger_islanding_black_start_response", "trigger_asset_manifest_upload_request", "trigger_asset_manifest_upload_response", "trigger_powerwall2_enumeration_request", "trigger_powerwall2_enumeration_response", "trigger_es_can_firmware_update_request", "trigger_es_can_firmware_update_response", "register_request", "register_response", "trigger_powerwall2_phase_detection_request", "trigger_powerwall2_phase_detection_response", "reset_powerwall2_phase_detection_request", "reset_powerwall2_phase_detection_response", "force_wifi_scan_request", "force_wifi_scan_response", "start_powerwall2_inverter_self_tests_request", "start_powerwall2_inverter_self_tests_response", "stop_powerwall2_inverter_self_tests_request", "stop_powerwall2_inverter_self_tests_response", "start_powerwall2_bubble_shed_request", "start_powerwall2_bubble_shed_response", "clear_solar_inverter_alerts_request", "clear_solar_inverter_alerts_response", "get_wifi_config_with_credentials_request", "get_wifi_config_with_credentials_response", "disable_batteries_request", "disable_batteries_response", "trigger_p_w3_can_firmware_update_request", "trigger_p_w3_can_firmware_update_response", "trigger_powerwall3_enumeration_request", "trigger_powerwall3_enumeration_response", "dispatch_battery_power_request", "dispatch_battery_power_response", "detect_wired_meters_request", "detect_wired_meters_response", "bypass_battery_soe_adjustment_constraints_request", "bypass_battery_soe_adjustment_constraints_response", "ensure_certificate_request", "ensure_certificate_response", "schedule_manual_backup_event_request", "schedule_manual_backup_event_response", "cancel_manual_backup_event_request", "cancel_manual_backup_event_response", "get_backup_events_request", "get_backup_events_response", "get_csms_properties_request", "get_csms_properties_response", "configure_ocpp_request", "configure_ocpp_response", "retrieve_site_uuid_request", "retrieve_site_uuid_response", "retrieve_site_suggestion_request", "retrieve_site_suggestion_response", "start_protection_trip_self_test_request", "start_protection_trip_self_test_response", "stop_protection_trip_self_test_request", "stop_protection_trip_self_test_response", "provision_eaton_smart_breaker_request", "provision_eaton_smart_breaker_response", "identify_eaton_smart_breaker_request", "identify_eaton_smart_breaker_response", "trigger_pvac_fan_self_test_request", "trigger_pvac_fan_self_test_response", "proxy_prepare_registration_payload_request", "proxy_prepare_registration_payload_response", "trigger_wallbox_vehicle_absent_self_test_request", "trigger_wallbox_vehicle_absent_self_test_response", "customer_reset_request", "customer_reset_response", "delay_battery_calibration_request", "delay_battery_calibration_response", "get_delay_battery_calibration_status_request", "get_delay_battery_calibration_status_response", "get_controllable_device_programs_request", "get_controllable_device_programs_response", "update_controllable_device_programs_request", "update_controllable_device_programs_response", "delete_controllable_device_programs_request", "delete_controllable_device_programs_response", "clear_powerwall3_lockout_alerts_request", "clear_powerwall3_lockout_alerts_response")

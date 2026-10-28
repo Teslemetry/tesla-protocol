@@ -14,6 +14,8 @@ class UpdateStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     UPDATE_STATUS_DOWNLOADING: _ClassVar[UpdateStatus]
     UPDATE_STATUS_DOWNLOADED: _ClassVar[UpdateStatus]
     UPDATE_STATUS_STAGED: _ClassVar[UpdateStatus]
+    UPDATE_STATUS_COMMITTING: _ClassVar[UpdateStatus]
+    UPDATE_STATUS_CHECKING: _ClassVar[UpdateStatus]
 
 class UpdateHandshakeResult(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -33,6 +35,8 @@ UPDATE_STATUS_IDLE: UpdateStatus
 UPDATE_STATUS_DOWNLOADING: UpdateStatus
 UPDATE_STATUS_DOWNLOADED: UpdateStatus
 UPDATE_STATUS_STAGED: UpdateStatus
+UPDATE_STATUS_COMMITTING: UpdateStatus
+UPDATE_STATUS_CHECKING: UpdateStatus
 UPDATE_HANDSHAKE_RESULT_INVALID: UpdateHandshakeResult
 UPDATE_HANDSHAKE_RESULT_UNDERWAY: UpdateHandshakeResult
 UPDATE_HANDSHAKE_RESULT_FAILED: UpdateHandshakeResult

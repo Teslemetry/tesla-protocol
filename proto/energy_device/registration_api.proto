@@ -1,0 +1,301 @@
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "RegistrationApi";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/wrappers.proto";
+import "device.proto";
+import "update.proto";
+
+// Device registration: the payloads of CommonMessages 40-45, the TEG and
+// Wall Connector register and site-lookup calls, and MessageEnvelope.registration.
+
+enum ProjectAccessType {
+  PROJECT_ACCESS_TYPE_INVALID = 0;
+  PROJECT_ACCESS_TYPE_SERVICE = 1;
+  PROJECT_ACCESS_TYPE_MANUFACTURING = 2;
+  PROJECT_ACCESS_TYPE_ENGINEERING = 3;
+  PROJECT_ACCESS_TYPE_PRIVATE = 4;
+  PROJECT_ACCESS_TYPE_PUBLIC = 5;
+}
+
+enum PropertyType {
+  PROPERTY_TYPE_INVALID = 0;
+  PROPERTY_TYPE_SHOPPING_MALL_CENTER = 1;
+  PROPERTY_TYPE_RESTAURANT = 2;
+  PROPERTY_TYPE_GAS_STATION = 3;
+  PROPERTY_TYPE_SERVICE_PLAZA_REST_AREA = 4;
+  PROPERTY_TYPE_HOTEL_RESORT_TOURIST_COMPLEX = 5;
+  PROPERTY_TYPE_GROCERY_STORE = 6;
+  PROPERTY_TYPE_TESLA_STORE_SERVICE_CENTER = 7;
+  PROPERTY_TYPE_OFFICE = 8;
+  PROPERTY_TYPE_RESIDENTIAL_BUILDING = 9;
+  PROPERTY_TYPE_PARKING_GARAGE_PUBLIC_PARKING_LOT = 10;
+  PROPERTY_TYPE_BANK = 11;
+  PROPERTY_TYPE_AIRPORT = 12;
+  PROPERTY_TYPE_CITY_VISITOR_CENTER_CITY_PROPERTY = 13;
+  PROPERTY_TYPE_MUSEUM_AMUSEMENT_ATTRACTION = 14;
+  PROPERTY_TYPE_UNIVERSITY_SCHOOL = 15;
+  PROPERTY_TYPE_WINERY = 16;
+  PROPERTY_TYPE_AUTOMOTIVE = 17;
+  PROPERTY_TYPE_MIXED_USE = 18;
+  PROPERTY_TYPE_RECREATION = 19;
+  PROPERTY_TYPE_RENTAL_PROPERTY = 20;
+  PROPERTY_TYPE_WORKPLACE = 21;
+}
+
+enum RegistrationDeviceType {
+  REGISTRATION_DEVICE_TYPE_INVALID = 0;
+  REGISTRATION_DEVICE_TYPE_POWERWALL = 1;
+  REGISTRATION_DEVICE_TYPE_POWERWALL_EXPANSION = 2;
+  REGISTRATION_DEVICE_TYPE_PV_INVERTER = 3;
+  REGISTRATION_DEVICE_TYPE_WALL_CONNECTOR = 4;
+  REGISTRATION_DEVICE_TYPE_POWERWALL_3 = 5;
+  REGISTRATION_DEVICE_TYPE_POWERWALL_3_EXPANSION = 6;
+}
+
+enum RegistrationSiteRelationshipType {
+  REGISTRATION_SITE_RELATIONSHIP_TYPE_INVALID = 0;
+  REGISTRATION_SITE_RELATIONSHIP_TYPE_OWNER = 1;
+  REGISTRATION_SITE_RELATIONSHIP_TYPE_INSTALLER = 2;
+  REGISTRATION_SITE_RELATIONSHIP_TYPE_FINANCIER = 3;
+  REGISTRATION_SITE_RELATIONSHIP_TYPE_SERVICER = 4;
+}
+
+enum RegistrationSource {
+  REGISTRATION_SOURCE_INVALID = 0;
+  REGISTRATION_SOURCE_AUTOCONFIG = 1;
+  REGISTRATION_SOURCE_INSTALLER = 2;
+  REGISTRATION_SOURCE_CUSTOMER = 3;
+}
+
+enum RegistrationStatus {
+  REGISTRATION_STATUS_INVALID = 0;
+  REGISTRATION_STATUS_MISSING_INFO = 1;
+  REGISTRATION_STATUS_UNDERWAY = 2;
+  REGISTRATION_STATUS_ALREADY_REGISTERED = 3;
+  REGISTRATION_STATUS_FAILED = 4;
+  REGISTRATION_STATUS_RETRY_WITH_NO_FURTHER_ACTION = 5;
+}
+
+enum WCLoadSharingType {
+  WC_LOAD_SHARING_TYPE_INVALID = 0;
+  WC_LOAD_SHARING_TYPE_LEADER = 1;
+  WC_LOAD_SHARING_TYPE_FOLLOWER = 2;
+}
+
+message AnonymizedSiteDetails {
+  repeated DeviceDetail device_details = 1;
+  google.protobuf.StringValue city = 2;
+  google.protobuf.StringValue zip = 3;
+}
+
+message AssetSiteDetailsResponse {
+  repeated DeviceDetail devices = 1;
+}
+
+message AssetSiteUuidOfDeviceResponse {
+  google.protobuf.StringValue asset_site_uuid = 1;
+}
+
+message CommercialChargingDetails {
+  PropertyType property_type = 1;
+  ProjectAccessType project_access_type = 2;
+  google.protobuf.StringValue destination_phone_number = 3;
+  google.protobuf.StringValue destination_website = 4;
+}
+
+message CommercialChargingDeviceProperties {
+  int32 main_service_size = 1;  // may be an enum; values not yet known
+  int32 nominal_voltage = 2;  // may be an enum; values not yet known
+  bool load_sharing = 3;
+  int32 max_output = 4;  // may be an enum; values not yet known
+  google.protobuf.FloatValue latitude = 5;
+  google.protobuf.FloatValue longitude = 6;
+  google.protobuf.Int32Value label = 7;
+  google.protobuf.Int32Value rssi = 8;
+  int32 power_type = 9;  // may be an enum; values not yet known
+  int32 connector_type = 10;  // may be an enum; values not yet known
+  WCLoadSharingType load_sharing_type = 11;
+}
+
+message CommercialChargingSiteInfo {
+  CustomerSiteAddress site_address = 1;
+  google.protobuf.StringValue warp_site_name = 2;
+  CommercialChargingDetails commercial_charging_details = 3;
+  string site_owner_email = 4;
+}
+
+message CustomerInfo {
+  UUIDv4 sso_id = 1;
+  string email = 2;
+  string given_name = 3;
+  string family_name = 4;
+}
+
+message CustomerLegalConsent {
+  google.protobuf.BoolValue privacy_notice = 1;
+  google.protobuf.BoolValue limited_warranty = 2;
+  google.protobuf.BoolValue grid_services = 3;
+  google.protobuf.BoolValue marketing = 4;
+}
+
+message CustomerSiteAddress {
+  string street = 1;
+  string city = 2;
+  string state = 3;
+  string zip = 4;
+  string country = 5;
+  string phone = 6;
+}
+
+message DeactivateDeviceRequest {
+  repeated string dins = 1;
+  string installer_tesla_auth_bearer_token = 2;
+}
+
+message DeviceDetail {
+  RegistrationDeviceType device_type = 1;
+  string fallback_description = 2;
+  string din = 3;
+}
+
+message InstallationInfo {
+  string installation_guid = 1;
+}
+
+message InstallerInfo {
+  string email = 1;
+  UUIDv4 account_master_id = 2;
+  google.protobuf.StringValue company_name = 3;
+  google.protobuf.StringValue phone = 4;
+}
+
+message InstallerLocation {
+  float latitude = 1;
+  float longitude = 2;
+}
+
+message PartDetail {
+  string part_number = 1;
+  string serial_number = 2;
+  string part_type = 3;
+  google.protobuf.StringValue manufacturer = 4;
+}
+
+message PartnerInfo {
+  UUIDv4 account_master_id = 1;
+  RegistrationSiteRelationshipType site_relationship_type = 2;
+}
+
+message RegistrationAPIDeactivateDeviceRequest {
+  DeactivateDeviceRequest request = 1;
+}
+
+message RegistrationAPIDeactivateDeviceResponse {
+}
+
+message RegistrationAPIPrepareRegistrationPayloadRequest {
+  bytes customer_registration_info = 1;
+}
+
+message RegistrationAPIPrepareRegistrationPayloadResponse {
+  DeviceSignedPayload signed_registration_payload = 1;
+}
+
+message RegistrationAPIRegisterRequest {
+  RegistrationRequest request = 1;
+}
+
+message RegistrationAPIRegisterResponse {
+  int32 failure = 1;  // may be an enum; values not yet known
+  RegistrationResponse response = 2;
+}
+
+message RegistrationAPIRetrieveAssetSiteDetailsRequest {
+}
+
+message RegistrationAPIRetrieveAssetSiteDetailsResponse {
+  AssetSiteDetailsResponse response = 1;
+}
+
+message RegistrationAPIRetrieveSiteSuggestionRequest {
+  SiteSuggestionRequest request = 1;
+}
+
+message RegistrationAPIRetrieveSiteSuggestionResponse {
+  SiteSuggestionResponse response = 1;
+}
+
+message RegistrationAPIRetrieveSiteUuidRequest {
+}
+
+message RegistrationAPIRetrieveSiteUuidResponse {
+  AssetSiteUuidOfDeviceResponse response = 1;
+}
+
+message RegistrationMessages {
+  oneof message {
+    RegistrationAPIPrepareRegistrationPayloadRequest prepare_registration_payload_request = 1;
+    RegistrationAPIPrepareRegistrationPayloadResponse prepare_registration_payload_response = 2;
+    RegistrationAPIRegisterRequest register_request = 3;
+    RegistrationAPIRegisterResponse register_response = 4;
+    RegistrationAPIRetrieveSiteUuidRequest retrieve_site_uuid_request = 5;
+    RegistrationAPIRetrieveSiteUuidResponse retrieve_site_uuid_response = 6;
+    RegistrationAPIRetrieveSiteSuggestionRequest retrieve_site_suggestion_request = 7;
+    RegistrationAPIRetrieveSiteSuggestionResponse retrieve_site_suggestion_response = 8;
+    RegistrationAPIRetrieveAssetSiteDetailsRequest retrieve_asset_site_details_request = 9;
+    RegistrationAPIRetrieveAssetSiteDetailsResponse retrieve_asset_site_details_response = 10;
+    RegistrationAPIDeactivateDeviceRequest deactivate_device_request = 11;
+    RegistrationAPIDeactivateDeviceResponse deactivate_device_response = 12;
+  }
+}
+
+message RegistrationRequest {
+  FirmwareVersion version = 1;
+  repeated PartDetail part_details = 2;
+  uint32 attempt = 3;
+  RegistrationSource registration_source = 4;
+  InstallerInfo installer = 5;
+  CustomerInfo customer = 6;
+  CustomerSiteAddress site_address = 7;
+  CustomerLegalConsent legal_consent = 8;
+  InstallationInfo installation_info = 9;
+  google.protobuf.StringValue asset_site_id = 10;
+  repeated PartnerInfo additional_partners = 11;
+}
+
+message RegistrationResponse {
+  RegistrationStatus status = 1;
+  uint32 retry_delay_s = 2;
+  google.protobuf.Timestamp status_time = 3;
+  google.protobuf.StringValue asset_site_id = 4;
+}
+
+message SiteSuggestion {
+  string asset_site_uuid = 1;
+  AnonymizedSiteDetails anonymized_site_details = 2;
+}
+
+message SiteSuggestionRequest {
+  string lookup = 1;
+  InstallerLocation installer_location = 2;
+  string installer_tesla_auth_bearer_token = 3;
+}
+
+message SiteSuggestionResponse {
+  repeated SiteSuggestion site_suggestions = 1;
+}
+
+message WCCommercialRegistrationRequest {
+  CommercialChargingDeviceProperties device_properties = 1;
+  UUIDv4 asset_site_id = 2;
+  CommercialChargingSiteInfo site_info = 3;
+  InstallerInfo installer_info = 4;
+  bool installation_completed = 5;
+  google.protobuf.StringValue site_owner_email = 6;
+}
