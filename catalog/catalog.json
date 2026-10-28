@@ -346,9 +346,9 @@
         "typescript": "packages/typescript/src/command",
         "python": "packages/python/tesla_protocol/command"
       },
-      "messages": 371,
-      "enums": 107,
-      "fields": 1951,
+      "messages": 377,
+      "enums": 113,
+      "fields": 1974,
       "files": [
         {
           "package": "CarServer",
@@ -11311,6 +11311,22 @@
                   "oneof": null
                 },
                 {
+                  "number": 3,
+                  "name": "permissions",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".VCSEC.WhitelistKeyPermission_E",
+                  "label": "LABEL_REPEATED",
+                  "oneof": null
+                },
+                {
+                  "number": 5,
+                  "name": "secondsEntryRemainsActive",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
                   "number": 7,
                   "name": "keyRole",
                   "type": "TYPE_ENUM",
@@ -11455,6 +11471,14 @@
                   "type": "TYPE_MESSAGE",
                   "type_name": ".VCSEC.PublicKey",
                   "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "permission",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".VCSEC.WhitelistKeyPermission_E",
+                  "label": "LABEL_REPEATED",
                   "oneof": null
                 },
                 {
@@ -12031,6 +12055,192 @@
               "nested_enums": []
             },
             {
+              "fqn": ".VCSEC.KeyLocationStatus",
+              "name": "KeyLocationStatus",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "keyCloseToCenterConsoleWithHighProbability",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".VCSEC.KeyLocationStatus_E",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".VCSEC.PersonalizationInformation",
+              "name": "PersonalizationInformation",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "vin",
+                  "type": "TYPE_BYTES",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".VCSEC.Capabilities",
+              "name": "Capabilities",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "chargePortOpen",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "chargePortClose",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".VCSEC.KeyStatus",
+              "name": "KeyStatus",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "keyId",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".VCSEC.KeyIdentifier",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "nfcPresence",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".VCSEC.NFCPresence",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "blePresence",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".VCSEC.BLEPresence",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "publicKey",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".VCSEC.PublicKey",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 5,
+                  "name": "keyFormFactor",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".VCSEC.KeyFormFactor",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 6,
+                  "name": "slot",
+                  "type": "TYPE_UINT32",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 7,
+                  "name": "role",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".Keys.Role",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".VCSEC.KeyStatusInfo",
+              "name": "KeyStatusInfo",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "keyStatuses",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".VCSEC.KeyStatus",
+                  "label": "LABEL_REPEATED",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "requestSource",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".VCSEC.RequestSource_E",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "QRCodeStatus",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".VCSEC.QRCodeStatus_E",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".VCSEC.ActiveKey",
+              "name": "ActiveKey",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "activeKey",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".VCSEC.KeyIdentifier",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
               "fqn": ".VCSEC.VehicleStatus",
               "name": "VehicleStatus",
               "fields": [
@@ -12089,6 +12299,14 @@
                   "type_name": ".VCSEC.Gear_E",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
+                },
+                {
+                  "number": 8,
+                  "name": "keyLocationStatus",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".VCSEC.KeyLocationStatus",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
                 }
               ],
               "oneofs": [],
@@ -12126,6 +12344,14 @@
                   "oneof": "sub_message"
                 },
                 {
+                  "number": 5,
+                  "name": "personalizationInformation",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".VCSEC.PersonalizationInformation",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sub_message"
+                },
+                {
                   "number": 16,
                   "name": "whitelistInfo",
                   "type": "TYPE_MESSAGE",
@@ -12138,6 +12364,30 @@
                   "name": "whitelistEntryInfo",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".VCSEC.WhitelistEntryInfo",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sub_message"
+                },
+                {
+                  "number": 19,
+                  "name": "capabilities",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".VCSEC.Capabilities",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sub_message"
+                },
+                {
+                  "number": 21,
+                  "name": "keyStatusInfo",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".VCSEC.KeyStatusInfo",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "sub_message"
+                },
+                {
+                  "number": 22,
+                  "name": "activeKey",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".VCSEC.ActiveKey",
                   "label": "LABEL_OPTIONAL",
                   "oneof": "sub_message"
                 },
@@ -12928,6 +13178,154 @@
                 {
                   "number": 4,
                   "name": "GEAR_NEUTRAL"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".VCSEC.WhitelistKeyPermission_E",
+              "name": "WhitelistKeyPermission_E",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "WHITELISTKEYPERMISSION_ADD_TO_WHITELIST"
+                },
+                {
+                  "number": 1,
+                  "name": "WHITELISTKEYPERMISSION_LOCAL_UNLOCK"
+                },
+                {
+                  "number": 2,
+                  "name": "WHITELISTKEYPERMISSION_LOCAL_DRIVE"
+                },
+                {
+                  "number": 3,
+                  "name": "WHITELISTKEYPERMISSION_REMOTE_UNLOCK"
+                },
+                {
+                  "number": 4,
+                  "name": "WHITELISTKEYPERMISSION_REMOTE_DRIVE"
+                },
+                {
+                  "number": 5,
+                  "name": "WHITELISTKEYPERMISSION_CHANGE_PERMISSIONS"
+                },
+                {
+                  "number": 6,
+                  "name": "WHITELISTKEYPERMISSION_REMOVE_FROM_WHITELIST"
+                },
+                {
+                  "number": 7,
+                  "name": "WHITELISTKEYPERMISSION_REMOVE_SELF_FROM_WHITELIST"
+                },
+                {
+                  "number": 8,
+                  "name": "WHITELISTKEYPERMISSION_MODIFY_FLEET_RESERVED_SLOTS"
+                },
+                {
+                  "number": 31,
+                  "name": "WHITELISTKEYPERMISSION_UNKNOWN"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".VCSEC.KeyLocationStatus_E",
+              "name": "KeyLocationStatus_E",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "KEY_LOCATION_UNKNOWN"
+                },
+                {
+                  "number": 1,
+                  "name": "KEY_LOCATION_NOT_PRESENT"
+                },
+                {
+                  "number": 2,
+                  "name": "KEY_LOCATION_PRESENT"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".VCSEC.NFCPresence",
+              "name": "NFCPresence",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "NFC_PRESENCE_NOT_PRESENT"
+                },
+                {
+                  "number": 1,
+                  "name": "NFC_PRESENCE_PRESENT_AT_B_PILLAR"
+                },
+                {
+                  "number": 2,
+                  "name": "NFC_PRESENCE_PRESENT_AT_CENTER_CONSOLE"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".VCSEC.BLEPresence",
+              "name": "BLEPresence",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "BLE_PRESENCE_NOT_PRESENT"
+                },
+                {
+                  "number": 1,
+                  "name": "BLE_PRESENCE_PRESENT"
+                },
+                {
+                  "number": 2,
+                  "name": "BLE_PRESENCE_CONNECTED_NOT_PRESENT"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".VCSEC.RequestSource_E",
+              "name": "RequestSource_E",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "REQUEST_SOURCE_NOT_POPULATED"
+                },
+                {
+                  "number": 1,
+                  "name": "REQUEST_SOURCE_BLE"
+                },
+                {
+                  "number": 2,
+                  "name": "REQUEST_SOURCE_OTHER"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".VCSEC.QRCodeStatus_E",
+              "name": "QRCodeStatus_E",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "QR_CODE_STATUS_UNKNOWN"
+                },
+                {
+                  "number": 1,
+                  "name": "QR_CODE_STATUS_DISPLAYED"
+                },
+                {
+                  "number": 2,
+                  "name": "QR_CODE_STATUS_NOT_DISPLAYED"
                 }
               ],
               "reserved_ranges": [],
@@ -48460,9 +48858,9 @@
   "totals": {
     "source_files": 39,
     "groups": 7,
-    "messages": 932,
-    "enums": 255,
-    "fields": 3359
+    "messages": 938,
+    "enums": 261,
+    "fields": 3382
   },
   "registration": {
     "consistent": true,

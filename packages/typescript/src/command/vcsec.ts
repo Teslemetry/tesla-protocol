@@ -1387,6 +1387,287 @@ export function gearEToJSON(object: GearE): string {
   }
 }
 
+/**
+ * ===== TESLEMETRY-EXT BEGIN =====
+ * Information-request responses and key-permission types.
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export enum WhitelistKeyPermissionE {
+  WHITELISTKEYPERMISSION_ADD_TO_WHITELIST = 0,
+  WHITELISTKEYPERMISSION_LOCAL_UNLOCK = 1,
+  WHITELISTKEYPERMISSION_LOCAL_DRIVE = 2,
+  WHITELISTKEYPERMISSION_REMOTE_UNLOCK = 3,
+  WHITELISTKEYPERMISSION_REMOTE_DRIVE = 4,
+  WHITELISTKEYPERMISSION_CHANGE_PERMISSIONS = 5,
+  WHITELISTKEYPERMISSION_REMOVE_FROM_WHITELIST = 6,
+  WHITELISTKEYPERMISSION_REMOVE_SELF_FROM_WHITELIST = 7,
+  WHITELISTKEYPERMISSION_MODIFY_FLEET_RESERVED_SLOTS = 8,
+  WHITELISTKEYPERMISSION_UNKNOWN = 31,
+  UNRECOGNIZED = -1,
+}
+
+export function whitelistKeyPermissionEFromJSON(object: any): WhitelistKeyPermissionE {
+  switch (object) {
+    case 0:
+    case "WHITELISTKEYPERMISSION_ADD_TO_WHITELIST":
+      return WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_ADD_TO_WHITELIST;
+    case 1:
+    case "WHITELISTKEYPERMISSION_LOCAL_UNLOCK":
+      return WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_LOCAL_UNLOCK;
+    case 2:
+    case "WHITELISTKEYPERMISSION_LOCAL_DRIVE":
+      return WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_LOCAL_DRIVE;
+    case 3:
+    case "WHITELISTKEYPERMISSION_REMOTE_UNLOCK":
+      return WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_REMOTE_UNLOCK;
+    case 4:
+    case "WHITELISTKEYPERMISSION_REMOTE_DRIVE":
+      return WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_REMOTE_DRIVE;
+    case 5:
+    case "WHITELISTKEYPERMISSION_CHANGE_PERMISSIONS":
+      return WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_CHANGE_PERMISSIONS;
+    case 6:
+    case "WHITELISTKEYPERMISSION_REMOVE_FROM_WHITELIST":
+      return WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_REMOVE_FROM_WHITELIST;
+    case 7:
+    case "WHITELISTKEYPERMISSION_REMOVE_SELF_FROM_WHITELIST":
+      return WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_REMOVE_SELF_FROM_WHITELIST;
+    case 8:
+    case "WHITELISTKEYPERMISSION_MODIFY_FLEET_RESERVED_SLOTS":
+      return WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_MODIFY_FLEET_RESERVED_SLOTS;
+    case 31:
+    case "WHITELISTKEYPERMISSION_UNKNOWN":
+      return WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_UNKNOWN;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return WhitelistKeyPermissionE.UNRECOGNIZED;
+  }
+}
+
+export function whitelistKeyPermissionEToJSON(object: WhitelistKeyPermissionE): string {
+  switch (object) {
+    case WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_ADD_TO_WHITELIST:
+      return "WHITELISTKEYPERMISSION_ADD_TO_WHITELIST";
+    case WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_LOCAL_UNLOCK:
+      return "WHITELISTKEYPERMISSION_LOCAL_UNLOCK";
+    case WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_LOCAL_DRIVE:
+      return "WHITELISTKEYPERMISSION_LOCAL_DRIVE";
+    case WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_REMOTE_UNLOCK:
+      return "WHITELISTKEYPERMISSION_REMOTE_UNLOCK";
+    case WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_REMOTE_DRIVE:
+      return "WHITELISTKEYPERMISSION_REMOTE_DRIVE";
+    case WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_CHANGE_PERMISSIONS:
+      return "WHITELISTKEYPERMISSION_CHANGE_PERMISSIONS";
+    case WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_REMOVE_FROM_WHITELIST:
+      return "WHITELISTKEYPERMISSION_REMOVE_FROM_WHITELIST";
+    case WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_REMOVE_SELF_FROM_WHITELIST:
+      return "WHITELISTKEYPERMISSION_REMOVE_SELF_FROM_WHITELIST";
+    case WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_MODIFY_FLEET_RESERVED_SLOTS:
+      return "WHITELISTKEYPERMISSION_MODIFY_FLEET_RESERVED_SLOTS";
+    case WhitelistKeyPermissionE.WHITELISTKEYPERMISSION_UNKNOWN:
+      return "WHITELISTKEYPERMISSION_UNKNOWN";
+    case WhitelistKeyPermissionE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum KeyLocationStatusE {
+  KEY_LOCATION_UNKNOWN = 0,
+  KEY_LOCATION_NOT_PRESENT = 1,
+  KEY_LOCATION_PRESENT = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function keyLocationStatusEFromJSON(object: any): KeyLocationStatusE {
+  switch (object) {
+    case 0:
+    case "KEY_LOCATION_UNKNOWN":
+      return KeyLocationStatusE.KEY_LOCATION_UNKNOWN;
+    case 1:
+    case "KEY_LOCATION_NOT_PRESENT":
+      return KeyLocationStatusE.KEY_LOCATION_NOT_PRESENT;
+    case 2:
+    case "KEY_LOCATION_PRESENT":
+      return KeyLocationStatusE.KEY_LOCATION_PRESENT;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return KeyLocationStatusE.UNRECOGNIZED;
+  }
+}
+
+export function keyLocationStatusEToJSON(object: KeyLocationStatusE): string {
+  switch (object) {
+    case KeyLocationStatusE.KEY_LOCATION_UNKNOWN:
+      return "KEY_LOCATION_UNKNOWN";
+    case KeyLocationStatusE.KEY_LOCATION_NOT_PRESENT:
+      return "KEY_LOCATION_NOT_PRESENT";
+    case KeyLocationStatusE.KEY_LOCATION_PRESENT:
+      return "KEY_LOCATION_PRESENT";
+    case KeyLocationStatusE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum NFCPresence {
+  NFC_PRESENCE_NOT_PRESENT = 0,
+  NFC_PRESENCE_PRESENT_AT_B_PILLAR = 1,
+  NFC_PRESENCE_PRESENT_AT_CENTER_CONSOLE = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function nFCPresenceFromJSON(object: any): NFCPresence {
+  switch (object) {
+    case 0:
+    case "NFC_PRESENCE_NOT_PRESENT":
+      return NFCPresence.NFC_PRESENCE_NOT_PRESENT;
+    case 1:
+    case "NFC_PRESENCE_PRESENT_AT_B_PILLAR":
+      return NFCPresence.NFC_PRESENCE_PRESENT_AT_B_PILLAR;
+    case 2:
+    case "NFC_PRESENCE_PRESENT_AT_CENTER_CONSOLE":
+      return NFCPresence.NFC_PRESENCE_PRESENT_AT_CENTER_CONSOLE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return NFCPresence.UNRECOGNIZED;
+  }
+}
+
+export function nFCPresenceToJSON(object: NFCPresence): string {
+  switch (object) {
+    case NFCPresence.NFC_PRESENCE_NOT_PRESENT:
+      return "NFC_PRESENCE_NOT_PRESENT";
+    case NFCPresence.NFC_PRESENCE_PRESENT_AT_B_PILLAR:
+      return "NFC_PRESENCE_PRESENT_AT_B_PILLAR";
+    case NFCPresence.NFC_PRESENCE_PRESENT_AT_CENTER_CONSOLE:
+      return "NFC_PRESENCE_PRESENT_AT_CENTER_CONSOLE";
+    case NFCPresence.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum BLEPresence {
+  BLE_PRESENCE_NOT_PRESENT = 0,
+  BLE_PRESENCE_PRESENT = 1,
+  BLE_PRESENCE_CONNECTED_NOT_PRESENT = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function bLEPresenceFromJSON(object: any): BLEPresence {
+  switch (object) {
+    case 0:
+    case "BLE_PRESENCE_NOT_PRESENT":
+      return BLEPresence.BLE_PRESENCE_NOT_PRESENT;
+    case 1:
+    case "BLE_PRESENCE_PRESENT":
+      return BLEPresence.BLE_PRESENCE_PRESENT;
+    case 2:
+    case "BLE_PRESENCE_CONNECTED_NOT_PRESENT":
+      return BLEPresence.BLE_PRESENCE_CONNECTED_NOT_PRESENT;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return BLEPresence.UNRECOGNIZED;
+  }
+}
+
+export function bLEPresenceToJSON(object: BLEPresence): string {
+  switch (object) {
+    case BLEPresence.BLE_PRESENCE_NOT_PRESENT:
+      return "BLE_PRESENCE_NOT_PRESENT";
+    case BLEPresence.BLE_PRESENCE_PRESENT:
+      return "BLE_PRESENCE_PRESENT";
+    case BLEPresence.BLE_PRESENCE_CONNECTED_NOT_PRESENT:
+      return "BLE_PRESENCE_CONNECTED_NOT_PRESENT";
+    case BLEPresence.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum RequestSourceE {
+  REQUEST_SOURCE_NOT_POPULATED = 0,
+  REQUEST_SOURCE_BLE = 1,
+  REQUEST_SOURCE_OTHER = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function requestSourceEFromJSON(object: any): RequestSourceE {
+  switch (object) {
+    case 0:
+    case "REQUEST_SOURCE_NOT_POPULATED":
+      return RequestSourceE.REQUEST_SOURCE_NOT_POPULATED;
+    case 1:
+    case "REQUEST_SOURCE_BLE":
+      return RequestSourceE.REQUEST_SOURCE_BLE;
+    case 2:
+    case "REQUEST_SOURCE_OTHER":
+      return RequestSourceE.REQUEST_SOURCE_OTHER;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return RequestSourceE.UNRECOGNIZED;
+  }
+}
+
+export function requestSourceEToJSON(object: RequestSourceE): string {
+  switch (object) {
+    case RequestSourceE.REQUEST_SOURCE_NOT_POPULATED:
+      return "REQUEST_SOURCE_NOT_POPULATED";
+    case RequestSourceE.REQUEST_SOURCE_BLE:
+      return "REQUEST_SOURCE_BLE";
+    case RequestSourceE.REQUEST_SOURCE_OTHER:
+      return "REQUEST_SOURCE_OTHER";
+    case RequestSourceE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum QRCodeStatusE {
+  QR_CODE_STATUS_UNKNOWN = 0,
+  QR_CODE_STATUS_DISPLAYED = 1,
+  QR_CODE_STATUS_NOT_DISPLAYED = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function qRCodeStatusEFromJSON(object: any): QRCodeStatusE {
+  switch (object) {
+    case 0:
+    case "QR_CODE_STATUS_UNKNOWN":
+      return QRCodeStatusE.QR_CODE_STATUS_UNKNOWN;
+    case 1:
+    case "QR_CODE_STATUS_DISPLAYED":
+      return QRCodeStatusE.QR_CODE_STATUS_DISPLAYED;
+    case 2:
+    case "QR_CODE_STATUS_NOT_DISPLAYED":
+      return QRCodeStatusE.QR_CODE_STATUS_NOT_DISPLAYED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return QRCodeStatusE.UNRECOGNIZED;
+  }
+}
+
+export function qRCodeStatusEToJSON(object: QRCodeStatusE): string {
+  switch (object) {
+    case QRCodeStatusE.QR_CODE_STATUS_UNKNOWN:
+      return "QR_CODE_STATUS_UNKNOWN";
+    case QRCodeStatusE.QR_CODE_STATUS_DISPLAYED:
+      return "QR_CODE_STATUS_DISPLAYED";
+    case QRCodeStatusE.QR_CODE_STATUS_NOT_DISPLAYED:
+      return "QR_CODE_STATUS_NOT_DISPLAYED";
+    case QRCodeStatusE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface SignedMessage {
   protobufMessageAsBytes: Uint8Array;
   signatureType: SignatureType;
@@ -1419,6 +1700,10 @@ export interface WhitelistEntryInfo {
   publicKey: PublicKey | undefined;
   metadataForKey: KeyMetadata | undefined;
   slot: number;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  permissions: WhitelistKeyPermissionE[];
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  secondsEntryRemainsActive: number;
   keyRole: Role;
 }
 
@@ -1441,7 +1726,11 @@ export interface ClosureMoveRequest {
 }
 
 export interface PermissionChange {
-  key: PublicKey | undefined;
+  key:
+    | PublicKey
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  permission: WhitelistKeyPermissionE[];
   secondsToBeActive: number;
   keyRole: Role;
 }
@@ -1552,6 +1841,43 @@ export interface DetailedClosureStatus {
   tonneauPercentOpen: number;
 }
 
+export interface KeyLocationStatus {
+  keyCloseToCenterConsoleWithHighProbability: KeyLocationStatusE;
+}
+
+/** Reply to INFORMATION_REQUEST_TYPE_GET_PERSONALIZATION_INFO. */
+export interface PersonalizationInformation {
+  vin: Uint8Array;
+}
+
+/** Reply to INFORMATION_REQUEST_TYPE_GET_CAPABILITIES. */
+export interface Capabilities {
+  chargePortOpen: boolean;
+  chargePortClose: boolean;
+}
+
+export interface KeyStatus {
+  keyId: KeyIdentifier | undefined;
+  nfcPresence: NFCPresence;
+  blePresence: BLEPresence;
+  publicKey: PublicKey | undefined;
+  keyFormFactor: KeyFormFactor;
+  slot: number;
+  role: Role;
+}
+
+/** Reply to INFORMATION_REQUEST_TYPE_GET_KEYSTATUS_INFO. */
+export interface KeyStatusInfo {
+  keyStatuses: KeyStatus[];
+  requestSource: RequestSourceE;
+  QRCodeStatus: QRCodeStatusE;
+}
+
+/** Reply to INFORMATION_REQUEST_TYPE_GET_ACTIVE_KEY. */
+export interface ActiveKey {
+  activeKey: KeyIdentifier | undefined;
+}
+
 export interface VehicleStatus {
   closureStatuses: ClosureStatuses | undefined;
   vehicleLockState: VehicleLockStateE;
@@ -1564,6 +1890,8 @@ export interface VehicleStatus {
   uiDesire: UIDesireE;
   /** TESLEMETRY-EXT */
   gear: GearE;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  keyLocationStatus: KeyLocationStatus | undefined;
 }
 
 export interface FromVCSECMessage {
@@ -1572,9 +1900,25 @@ export interface FromVCSECMessage {
     | undefined;
   /** TESLEMETRY-EXT */
   authenticationRequest?: AuthenticationRequest | undefined;
-  commandStatus?: CommandStatus | undefined;
+  commandStatus?:
+    | CommandStatus
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  personalizationInformation?: PersonalizationInformation | undefined;
   whitelistInfo?: WhitelistInfo | undefined;
-  whitelistEntryInfo?: WhitelistEntryInfo | undefined;
+  whitelistEntryInfo?:
+    | WhitelistEntryInfo
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  capabilities?:
+    | Capabilities
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  keyStatusInfo?:
+    | KeyStatusInfo
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  activeKey?: ActiveKey | undefined;
   nominalError?: NominalError | undefined;
 }
 
@@ -1985,7 +2329,15 @@ export const WhitelistInfo: MessageFns<WhitelistInfo> = {
 };
 
 function createBaseWhitelistEntryInfo(): WhitelistEntryInfo {
-  return { keyId: undefined, publicKey: undefined, metadataForKey: undefined, slot: 0, keyRole: 0 };
+  return {
+    keyId: undefined,
+    publicKey: undefined,
+    metadataForKey: undefined,
+    slot: 0,
+    permissions: [],
+    secondsEntryRemainsActive: 0,
+    keyRole: 0,
+  };
 }
 
 export const WhitelistEntryInfo: MessageFns<WhitelistEntryInfo> = {
@@ -2001,6 +2353,14 @@ export const WhitelistEntryInfo: MessageFns<WhitelistEntryInfo> = {
     }
     if (message.slot !== 0) {
       writer.uint32(48).uint32(message.slot);
+    }
+    writer.uint32(26).fork();
+    for (const v of message.permissions) {
+      writer.int32(v);
+    }
+    writer.join();
+    if (message.secondsEntryRemainsActive !== 0) {
+      writer.uint32(40).uint32(message.secondsEntryRemainsActive);
     }
     if (message.keyRole !== 0) {
       writer.uint32(56).int32(message.keyRole);
@@ -2047,6 +2407,32 @@ export const WhitelistEntryInfo: MessageFns<WhitelistEntryInfo> = {
           message.slot = reader.uint32();
           continue;
         }
+        case 3: {
+          if (tag === 24) {
+            message.permissions.push(reader.int32() as any);
+
+            continue;
+          }
+
+          if (tag === 26) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.permissions.push(reader.int32() as any);
+            }
+
+            continue;
+          }
+
+          break;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.secondsEntryRemainsActive = reader.uint32();
+          continue;
+        }
         case 7: {
           if (tag !== 56) {
             break;
@@ -2070,6 +2456,12 @@ export const WhitelistEntryInfo: MessageFns<WhitelistEntryInfo> = {
       publicKey: isSet(object.publicKey) ? PublicKey.fromJSON(object.publicKey) : undefined,
       metadataForKey: isSet(object.metadataForKey) ? KeyMetadata.fromJSON(object.metadataForKey) : undefined,
       slot: isSet(object.slot) ? globalThis.Number(object.slot) : 0,
+      permissions: globalThis.Array.isArray(object?.permissions)
+        ? object.permissions.map((e: any) => whitelistKeyPermissionEFromJSON(e))
+        : [],
+      secondsEntryRemainsActive: isSet(object.secondsEntryRemainsActive)
+        ? globalThis.Number(object.secondsEntryRemainsActive)
+        : 0,
       keyRole: isSet(object.keyRole) ? roleFromJSON(object.keyRole) : 0,
     };
   },
@@ -2087,6 +2479,12 @@ export const WhitelistEntryInfo: MessageFns<WhitelistEntryInfo> = {
     }
     if (message.slot !== undefined) {
       obj.slot = Math.round(message.slot);
+    }
+    if (message.permissions?.length) {
+      obj.permissions = message.permissions.map((e) => whitelistKeyPermissionEToJSON(e));
+    }
+    if (message.secondsEntryRemainsActive !== undefined) {
+      obj.secondsEntryRemainsActive = Math.round(message.secondsEntryRemainsActive);
     }
     if (message.keyRole !== undefined) {
       obj.keyRole = roleToJSON(message.keyRole);
@@ -2109,6 +2507,8 @@ export const WhitelistEntryInfo: MessageFns<WhitelistEntryInfo> = {
       ? KeyMetadata.fromPartial(object.metadataForKey)
       : undefined;
     message.slot = object.slot ?? 0;
+    message.permissions = object.permissions?.map((e) => e) || [];
+    message.secondsEntryRemainsActive = object.secondsEntryRemainsActive ?? 0;
     message.keyRole = object.keyRole ?? 0;
     return message;
   },
@@ -2408,7 +2808,7 @@ export const ClosureMoveRequest: MessageFns<ClosureMoveRequest> = {
 };
 
 function createBasePermissionChange(): PermissionChange {
-  return { key: undefined, secondsToBeActive: 0, keyRole: 0 };
+  return { key: undefined, permission: [], secondsToBeActive: 0, keyRole: 0 };
 }
 
 export const PermissionChange: MessageFns<PermissionChange> = {
@@ -2416,6 +2816,11 @@ export const PermissionChange: MessageFns<PermissionChange> = {
     if (message.key !== undefined) {
       PublicKey.encode(message.key, writer.uint32(10).fork()).join();
     }
+    writer.uint32(18).fork();
+    for (const v of message.permission) {
+      writer.int32(v);
+    }
+    writer.join();
     if (message.secondsToBeActive !== 0) {
       writer.uint32(24).uint32(message.secondsToBeActive);
     }
@@ -2439,6 +2844,24 @@ export const PermissionChange: MessageFns<PermissionChange> = {
 
           message.key = PublicKey.decode(reader, reader.uint32());
           continue;
+        }
+        case 2: {
+          if (tag === 16) {
+            message.permission.push(reader.int32() as any);
+
+            continue;
+          }
+
+          if (tag === 18) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.permission.push(reader.int32() as any);
+            }
+
+            continue;
+          }
+
+          break;
         }
         case 3: {
           if (tag !== 24) {
@@ -2468,6 +2891,9 @@ export const PermissionChange: MessageFns<PermissionChange> = {
   fromJSON(object: any): PermissionChange {
     return {
       key: isSet(object.key) ? PublicKey.fromJSON(object.key) : undefined,
+      permission: globalThis.Array.isArray(object?.permission)
+        ? object.permission.map((e: any) => whitelistKeyPermissionEFromJSON(e))
+        : [],
       secondsToBeActive: isSet(object.secondsToBeActive) ? globalThis.Number(object.secondsToBeActive) : 0,
       keyRole: isSet(object.keyRole) ? roleFromJSON(object.keyRole) : 0,
     };
@@ -2477,6 +2903,9 @@ export const PermissionChange: MessageFns<PermissionChange> = {
     const obj: any = {};
     if (message.key !== undefined) {
       obj.key = PublicKey.toJSON(message.key);
+    }
+    if (message.permission?.length) {
+      obj.permission = message.permission.map((e) => whitelistKeyPermissionEToJSON(e));
     }
     if (message.secondsToBeActive !== undefined) {
       obj.secondsToBeActive = Math.round(message.secondsToBeActive);
@@ -2493,6 +2922,7 @@ export const PermissionChange: MessageFns<PermissionChange> = {
   fromPartial<I extends Exact<DeepPartial<PermissionChange>, I>>(object: I): PermissionChange {
     const message = createBasePermissionChange();
     message.key = (object.key !== undefined && object.key !== null) ? PublicKey.fromPartial(object.key) : undefined;
+    message.permission = object.permission?.map((e) => e) || [];
     message.secondsToBeActive = object.secondsToBeActive ?? 0;
     message.keyRole = object.keyRole ?? 0;
     return message;
@@ -3959,6 +4389,518 @@ export const DetailedClosureStatus: MessageFns<DetailedClosureStatus> = {
   },
 };
 
+function createBaseKeyLocationStatus(): KeyLocationStatus {
+  return { keyCloseToCenterConsoleWithHighProbability: 0 };
+}
+
+export const KeyLocationStatus: MessageFns<KeyLocationStatus> = {
+  encode(message: KeyLocationStatus, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.keyCloseToCenterConsoleWithHighProbability !== 0) {
+      writer.uint32(8).int32(message.keyCloseToCenterConsoleWithHighProbability);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): KeyLocationStatus {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseKeyLocationStatus();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.keyCloseToCenterConsoleWithHighProbability = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): KeyLocationStatus {
+    return {
+      keyCloseToCenterConsoleWithHighProbability: isSet(object.keyCloseToCenterConsoleWithHighProbability)
+        ? keyLocationStatusEFromJSON(object.keyCloseToCenterConsoleWithHighProbability)
+        : 0,
+    };
+  },
+
+  toJSON(message: KeyLocationStatus): unknown {
+    const obj: any = {};
+    if (message.keyCloseToCenterConsoleWithHighProbability !== undefined) {
+      obj.keyCloseToCenterConsoleWithHighProbability = keyLocationStatusEToJSON(
+        message.keyCloseToCenterConsoleWithHighProbability,
+      );
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<KeyLocationStatus>, I>>(base?: I): KeyLocationStatus {
+    return KeyLocationStatus.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<KeyLocationStatus>, I>>(object: I): KeyLocationStatus {
+    const message = createBaseKeyLocationStatus();
+    message.keyCloseToCenterConsoleWithHighProbability = object.keyCloseToCenterConsoleWithHighProbability ?? 0;
+    return message;
+  },
+};
+
+function createBasePersonalizationInformation(): PersonalizationInformation {
+  return { vin: new Uint8Array(0) };
+}
+
+export const PersonalizationInformation: MessageFns<PersonalizationInformation> = {
+  encode(message: PersonalizationInformation, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.vin.length !== 0) {
+      writer.uint32(10).bytes(message.vin);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PersonalizationInformation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePersonalizationInformation();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.vin = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PersonalizationInformation {
+    return { vin: isSet(object.vin) ? bytesFromBase64(object.vin) : new Uint8Array(0) };
+  },
+
+  toJSON(message: PersonalizationInformation): unknown {
+    const obj: any = {};
+    if (message.vin !== undefined) {
+      obj.vin = base64FromBytes(message.vin);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<PersonalizationInformation>, I>>(base?: I): PersonalizationInformation {
+    return PersonalizationInformation.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<PersonalizationInformation>, I>>(object: I): PersonalizationInformation {
+    const message = createBasePersonalizationInformation();
+    message.vin = object.vin ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseCapabilities(): Capabilities {
+  return { chargePortOpen: false, chargePortClose: false };
+}
+
+export const Capabilities: MessageFns<Capabilities> = {
+  encode(message: Capabilities, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.chargePortOpen !== false) {
+      writer.uint32(8).bool(message.chargePortOpen);
+    }
+    if (message.chargePortClose !== false) {
+      writer.uint32(16).bool(message.chargePortClose);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): Capabilities {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCapabilities();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.chargePortOpen = reader.bool();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.chargePortClose = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Capabilities {
+    return {
+      chargePortOpen: isSet(object.chargePortOpen) ? globalThis.Boolean(object.chargePortOpen) : false,
+      chargePortClose: isSet(object.chargePortClose) ? globalThis.Boolean(object.chargePortClose) : false,
+    };
+  },
+
+  toJSON(message: Capabilities): unknown {
+    const obj: any = {};
+    if (message.chargePortOpen !== undefined) {
+      obj.chargePortOpen = message.chargePortOpen;
+    }
+    if (message.chargePortClose !== undefined) {
+      obj.chargePortClose = message.chargePortClose;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Capabilities>, I>>(base?: I): Capabilities {
+    return Capabilities.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Capabilities>, I>>(object: I): Capabilities {
+    const message = createBaseCapabilities();
+    message.chargePortOpen = object.chargePortOpen ?? false;
+    message.chargePortClose = object.chargePortClose ?? false;
+    return message;
+  },
+};
+
+function createBaseKeyStatus(): KeyStatus {
+  return { keyId: undefined, nfcPresence: 0, blePresence: 0, publicKey: undefined, keyFormFactor: 0, slot: 0, role: 0 };
+}
+
+export const KeyStatus: MessageFns<KeyStatus> = {
+  encode(message: KeyStatus, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.keyId !== undefined) {
+      KeyIdentifier.encode(message.keyId, writer.uint32(10).fork()).join();
+    }
+    if (message.nfcPresence !== 0) {
+      writer.uint32(16).int32(message.nfcPresence);
+    }
+    if (message.blePresence !== 0) {
+      writer.uint32(24).int32(message.blePresence);
+    }
+    if (message.publicKey !== undefined) {
+      PublicKey.encode(message.publicKey, writer.uint32(34).fork()).join();
+    }
+    if (message.keyFormFactor !== 0) {
+      writer.uint32(40).int32(message.keyFormFactor);
+    }
+    if (message.slot !== 0) {
+      writer.uint32(48).uint32(message.slot);
+    }
+    if (message.role !== 0) {
+      writer.uint32(56).int32(message.role);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): KeyStatus {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseKeyStatus();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.keyId = KeyIdentifier.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.nfcPresence = reader.int32() as any;
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.blePresence = reader.int32() as any;
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.publicKey = PublicKey.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.keyFormFactor = reader.int32() as any;
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.slot = reader.uint32();
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.role = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): KeyStatus {
+    return {
+      keyId: isSet(object.keyId) ? KeyIdentifier.fromJSON(object.keyId) : undefined,
+      nfcPresence: isSet(object.nfcPresence) ? nFCPresenceFromJSON(object.nfcPresence) : 0,
+      blePresence: isSet(object.blePresence) ? bLEPresenceFromJSON(object.blePresence) : 0,
+      publicKey: isSet(object.publicKey) ? PublicKey.fromJSON(object.publicKey) : undefined,
+      keyFormFactor: isSet(object.keyFormFactor) ? keyFormFactorFromJSON(object.keyFormFactor) : 0,
+      slot: isSet(object.slot) ? globalThis.Number(object.slot) : 0,
+      role: isSet(object.role) ? roleFromJSON(object.role) : 0,
+    };
+  },
+
+  toJSON(message: KeyStatus): unknown {
+    const obj: any = {};
+    if (message.keyId !== undefined) {
+      obj.keyId = KeyIdentifier.toJSON(message.keyId);
+    }
+    if (message.nfcPresence !== undefined) {
+      obj.nfcPresence = nFCPresenceToJSON(message.nfcPresence);
+    }
+    if (message.blePresence !== undefined) {
+      obj.blePresence = bLEPresenceToJSON(message.blePresence);
+    }
+    if (message.publicKey !== undefined) {
+      obj.publicKey = PublicKey.toJSON(message.publicKey);
+    }
+    if (message.keyFormFactor !== undefined) {
+      obj.keyFormFactor = keyFormFactorToJSON(message.keyFormFactor);
+    }
+    if (message.slot !== undefined) {
+      obj.slot = Math.round(message.slot);
+    }
+    if (message.role !== undefined) {
+      obj.role = roleToJSON(message.role);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<KeyStatus>, I>>(base?: I): KeyStatus {
+    return KeyStatus.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<KeyStatus>, I>>(object: I): KeyStatus {
+    const message = createBaseKeyStatus();
+    message.keyId = (object.keyId !== undefined && object.keyId !== null)
+      ? KeyIdentifier.fromPartial(object.keyId)
+      : undefined;
+    message.nfcPresence = object.nfcPresence ?? 0;
+    message.blePresence = object.blePresence ?? 0;
+    message.publicKey = (object.publicKey !== undefined && object.publicKey !== null)
+      ? PublicKey.fromPartial(object.publicKey)
+      : undefined;
+    message.keyFormFactor = object.keyFormFactor ?? 0;
+    message.slot = object.slot ?? 0;
+    message.role = object.role ?? 0;
+    return message;
+  },
+};
+
+function createBaseKeyStatusInfo(): KeyStatusInfo {
+  return { keyStatuses: [], requestSource: 0, QRCodeStatus: 0 };
+}
+
+export const KeyStatusInfo: MessageFns<KeyStatusInfo> = {
+  encode(message: KeyStatusInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.keyStatuses) {
+      KeyStatus.encode(v!, writer.uint32(10).fork()).join();
+    }
+    if (message.requestSource !== 0) {
+      writer.uint32(16).int32(message.requestSource);
+    }
+    if (message.QRCodeStatus !== 0) {
+      writer.uint32(24).int32(message.QRCodeStatus);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): KeyStatusInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseKeyStatusInfo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.keyStatuses.push(KeyStatus.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.requestSource = reader.int32() as any;
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.QRCodeStatus = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): KeyStatusInfo {
+    return {
+      keyStatuses: globalThis.Array.isArray(object?.keyStatuses)
+        ? object.keyStatuses.map((e: any) => KeyStatus.fromJSON(e))
+        : [],
+      requestSource: isSet(object.requestSource) ? requestSourceEFromJSON(object.requestSource) : 0,
+      QRCodeStatus: isSet(object.QRCodeStatus) ? qRCodeStatusEFromJSON(object.QRCodeStatus) : 0,
+    };
+  },
+
+  toJSON(message: KeyStatusInfo): unknown {
+    const obj: any = {};
+    if (message.keyStatuses?.length) {
+      obj.keyStatuses = message.keyStatuses.map((e) => KeyStatus.toJSON(e));
+    }
+    if (message.requestSource !== undefined) {
+      obj.requestSource = requestSourceEToJSON(message.requestSource);
+    }
+    if (message.QRCodeStatus !== undefined) {
+      obj.QRCodeStatus = qRCodeStatusEToJSON(message.QRCodeStatus);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<KeyStatusInfo>, I>>(base?: I): KeyStatusInfo {
+    return KeyStatusInfo.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<KeyStatusInfo>, I>>(object: I): KeyStatusInfo {
+    const message = createBaseKeyStatusInfo();
+    message.keyStatuses = object.keyStatuses?.map((e) => KeyStatus.fromPartial(e)) || [];
+    message.requestSource = object.requestSource ?? 0;
+    message.QRCodeStatus = object.QRCodeStatus ?? 0;
+    return message;
+  },
+};
+
+function createBaseActiveKey(): ActiveKey {
+  return { activeKey: undefined };
+}
+
+export const ActiveKey: MessageFns<ActiveKey> = {
+  encode(message: ActiveKey, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.activeKey !== undefined) {
+      KeyIdentifier.encode(message.activeKey, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ActiveKey {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseActiveKey();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.activeKey = KeyIdentifier.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ActiveKey {
+    return { activeKey: isSet(object.activeKey) ? KeyIdentifier.fromJSON(object.activeKey) : undefined };
+  },
+
+  toJSON(message: ActiveKey): unknown {
+    const obj: any = {};
+    if (message.activeKey !== undefined) {
+      obj.activeKey = KeyIdentifier.toJSON(message.activeKey);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ActiveKey>, I>>(base?: I): ActiveKey {
+    return ActiveKey.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ActiveKey>, I>>(object: I): ActiveKey {
+    const message = createBaseActiveKey();
+    message.activeKey = (object.activeKey !== undefined && object.activeKey !== null)
+      ? KeyIdentifier.fromPartial(object.activeKey)
+      : undefined;
+    return message;
+  },
+};
+
 function createBaseVehicleStatus(): VehicleStatus {
   return {
     closureStatuses: undefined,
@@ -3968,6 +4910,7 @@ function createBaseVehicleStatus(): VehicleStatus {
     detailedClosureStatus: undefined,
     uiDesire: 0,
     gear: 0,
+    keyLocationStatus: undefined,
   };
 }
 
@@ -3993,6 +4936,9 @@ export const VehicleStatus: MessageFns<VehicleStatus> = {
     }
     if (message.gear !== 0) {
       writer.uint32(56).int32(message.gear);
+    }
+    if (message.keyLocationStatus !== undefined) {
+      KeyLocationStatus.encode(message.keyLocationStatus, writer.uint32(66).fork()).join();
     }
     return writer;
   },
@@ -4060,6 +5006,14 @@ export const VehicleStatus: MessageFns<VehicleStatus> = {
           message.gear = reader.int32() as any;
           continue;
         }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.keyLocationStatus = KeyLocationStatus.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -4080,6 +5034,9 @@ export const VehicleStatus: MessageFns<VehicleStatus> = {
         : undefined,
       uiDesire: isSet(object.uiDesire) ? uIDesireEFromJSON(object.uiDesire) : 0,
       gear: isSet(object.gear) ? gearEFromJSON(object.gear) : 0,
+      keyLocationStatus: isSet(object.keyLocationStatus)
+        ? KeyLocationStatus.fromJSON(object.keyLocationStatus)
+        : undefined,
     };
   },
 
@@ -4106,6 +5063,9 @@ export const VehicleStatus: MessageFns<VehicleStatus> = {
     if (message.gear !== undefined) {
       obj.gear = gearEToJSON(message.gear);
     }
+    if (message.keyLocationStatus !== undefined) {
+      obj.keyLocationStatus = KeyLocationStatus.toJSON(message.keyLocationStatus);
+    }
     return obj;
   },
 
@@ -4126,6 +5086,9 @@ export const VehicleStatus: MessageFns<VehicleStatus> = {
         : undefined;
     message.uiDesire = object.uiDesire ?? 0;
     message.gear = object.gear ?? 0;
+    message.keyLocationStatus = (object.keyLocationStatus !== undefined && object.keyLocationStatus !== null)
+      ? KeyLocationStatus.fromPartial(object.keyLocationStatus)
+      : undefined;
     return message;
   },
 };
@@ -4135,8 +5098,12 @@ function createBaseFromVCSECMessage(): FromVCSECMessage {
     vehicleStatus: undefined,
     authenticationRequest: undefined,
     commandStatus: undefined,
+    personalizationInformation: undefined,
     whitelistInfo: undefined,
     whitelistEntryInfo: undefined,
+    capabilities: undefined,
+    keyStatusInfo: undefined,
+    activeKey: undefined,
     nominalError: undefined,
   };
 }
@@ -4152,11 +5119,23 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
     if (message.commandStatus !== undefined) {
       CommandStatus.encode(message.commandStatus, writer.uint32(34).fork()).join();
     }
+    if (message.personalizationInformation !== undefined) {
+      PersonalizationInformation.encode(message.personalizationInformation, writer.uint32(42).fork()).join();
+    }
     if (message.whitelistInfo !== undefined) {
       WhitelistInfo.encode(message.whitelistInfo, writer.uint32(130).fork()).join();
     }
     if (message.whitelistEntryInfo !== undefined) {
       WhitelistEntryInfo.encode(message.whitelistEntryInfo, writer.uint32(138).fork()).join();
+    }
+    if (message.capabilities !== undefined) {
+      Capabilities.encode(message.capabilities, writer.uint32(154).fork()).join();
+    }
+    if (message.keyStatusInfo !== undefined) {
+      KeyStatusInfo.encode(message.keyStatusInfo, writer.uint32(170).fork()).join();
+    }
+    if (message.activeKey !== undefined) {
+      ActiveKey.encode(message.activeKey, writer.uint32(178).fork()).join();
     }
     if (message.nominalError !== undefined) {
       NominalError.encode(message.nominalError, writer.uint32(370).fork()).join();
@@ -4195,6 +5174,14 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
           message.commandStatus = CommandStatus.decode(reader, reader.uint32());
           continue;
         }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.personalizationInformation = PersonalizationInformation.decode(reader, reader.uint32());
+          continue;
+        }
         case 16: {
           if (tag !== 130) {
             break;
@@ -4209,6 +5196,30 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
           }
 
           message.whitelistEntryInfo = WhitelistEntryInfo.decode(reader, reader.uint32());
+          continue;
+        }
+        case 19: {
+          if (tag !== 154) {
+            break;
+          }
+
+          message.capabilities = Capabilities.decode(reader, reader.uint32());
+          continue;
+        }
+        case 21: {
+          if (tag !== 170) {
+            break;
+          }
+
+          message.keyStatusInfo = KeyStatusInfo.decode(reader, reader.uint32());
+          continue;
+        }
+        case 22: {
+          if (tag !== 178) {
+            break;
+          }
+
+          message.activeKey = ActiveKey.decode(reader, reader.uint32());
           continue;
         }
         case 46: {
@@ -4235,10 +5246,16 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
         ? AuthenticationRequest.fromJSON(object.authenticationRequest)
         : undefined,
       commandStatus: isSet(object.commandStatus) ? CommandStatus.fromJSON(object.commandStatus) : undefined,
+      personalizationInformation: isSet(object.personalizationInformation)
+        ? PersonalizationInformation.fromJSON(object.personalizationInformation)
+        : undefined,
       whitelistInfo: isSet(object.whitelistInfo) ? WhitelistInfo.fromJSON(object.whitelistInfo) : undefined,
       whitelistEntryInfo: isSet(object.whitelistEntryInfo)
         ? WhitelistEntryInfo.fromJSON(object.whitelistEntryInfo)
         : undefined,
+      capabilities: isSet(object.capabilities) ? Capabilities.fromJSON(object.capabilities) : undefined,
+      keyStatusInfo: isSet(object.keyStatusInfo) ? KeyStatusInfo.fromJSON(object.keyStatusInfo) : undefined,
+      activeKey: isSet(object.activeKey) ? ActiveKey.fromJSON(object.activeKey) : undefined,
       nominalError: isSet(object.nominalError) ? NominalError.fromJSON(object.nominalError) : undefined,
     };
   },
@@ -4254,11 +5271,23 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
     if (message.commandStatus !== undefined) {
       obj.commandStatus = CommandStatus.toJSON(message.commandStatus);
     }
+    if (message.personalizationInformation !== undefined) {
+      obj.personalizationInformation = PersonalizationInformation.toJSON(message.personalizationInformation);
+    }
     if (message.whitelistInfo !== undefined) {
       obj.whitelistInfo = WhitelistInfo.toJSON(message.whitelistInfo);
     }
     if (message.whitelistEntryInfo !== undefined) {
       obj.whitelistEntryInfo = WhitelistEntryInfo.toJSON(message.whitelistEntryInfo);
+    }
+    if (message.capabilities !== undefined) {
+      obj.capabilities = Capabilities.toJSON(message.capabilities);
+    }
+    if (message.keyStatusInfo !== undefined) {
+      obj.keyStatusInfo = KeyStatusInfo.toJSON(message.keyStatusInfo);
+    }
+    if (message.activeKey !== undefined) {
+      obj.activeKey = ActiveKey.toJSON(message.activeKey);
     }
     if (message.nominalError !== undefined) {
       obj.nominalError = NominalError.toJSON(message.nominalError);
@@ -4281,11 +5310,24 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
     message.commandStatus = (object.commandStatus !== undefined && object.commandStatus !== null)
       ? CommandStatus.fromPartial(object.commandStatus)
       : undefined;
+    message.personalizationInformation =
+      (object.personalizationInformation !== undefined && object.personalizationInformation !== null)
+        ? PersonalizationInformation.fromPartial(object.personalizationInformation)
+        : undefined;
     message.whitelistInfo = (object.whitelistInfo !== undefined && object.whitelistInfo !== null)
       ? WhitelistInfo.fromPartial(object.whitelistInfo)
       : undefined;
     message.whitelistEntryInfo = (object.whitelistEntryInfo !== undefined && object.whitelistEntryInfo !== null)
       ? WhitelistEntryInfo.fromPartial(object.whitelistEntryInfo)
+      : undefined;
+    message.capabilities = (object.capabilities !== undefined && object.capabilities !== null)
+      ? Capabilities.fromPartial(object.capabilities)
+      : undefined;
+    message.keyStatusInfo = (object.keyStatusInfo !== undefined && object.keyStatusInfo !== null)
+      ? KeyStatusInfo.fromPartial(object.keyStatusInfo)
+      : undefined;
+    message.activeKey = (object.activeKey !== undefined && object.activeKey !== null)
+      ? ActiveKey.fromPartial(object.activeKey)
       : undefined;
     message.nominalError = (object.nominalError !== undefined && object.nominalError !== null)
       ? NominalError.fromPartial(object.nominalError)

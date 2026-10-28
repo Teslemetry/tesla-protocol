@@ -91,6 +91,8 @@ message WhitelistEntryInfo {
     PublicKey                               publicKey = 2;
     KeyMetadata                             metadataForKey = 4;
     uint32                                  slot = 6;
+    repeated WhitelistKeyPermission_E       permissions = 3;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    uint32                                  secondsEntryRemainsActive = 5;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     Keys.Role                               keyRole = 7;
 }
 
@@ -145,6 +147,7 @@ message ClosureMoveRequest {
 
 message PermissionChange {
     PublicKey key               = 1;
+    repeated WhitelistKeyPermission_E permission = 2;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     uint32    secondsToBeActive = 3;
     Keys.Role keyRole           = 4;
 }
@@ -393,6 +396,90 @@ enum Gear_E {  // TESLEMETRY-EXT
     GEAR_NEUTRAL = 4;
 }
 
+// ===== TESLEMETRY-EXT BEGIN =====
+// Information-request responses and key-permission types.
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+enum WhitelistKeyPermission_E {
+    WHITELISTKEYPERMISSION_ADD_TO_WHITELIST = 0;
+    WHITELISTKEYPERMISSION_LOCAL_UNLOCK = 1;
+    WHITELISTKEYPERMISSION_LOCAL_DRIVE = 2;
+    WHITELISTKEYPERMISSION_REMOTE_UNLOCK = 3;
+    WHITELISTKEYPERMISSION_REMOTE_DRIVE = 4;
+    WHITELISTKEYPERMISSION_CHANGE_PERMISSIONS = 5;
+    WHITELISTKEYPERMISSION_REMOVE_FROM_WHITELIST = 6;
+    WHITELISTKEYPERMISSION_REMOVE_SELF_FROM_WHITELIST = 7;
+    WHITELISTKEYPERMISSION_MODIFY_FLEET_RESERVED_SLOTS = 8;
+    WHITELISTKEYPERMISSION_UNKNOWN = 31;
+}
+
+enum KeyLocationStatus_E {
+    KEY_LOCATION_UNKNOWN = 0;
+    KEY_LOCATION_NOT_PRESENT = 1;
+    KEY_LOCATION_PRESENT = 2;
+}
+
+message KeyLocationStatus {
+    KeyLocationStatus_E keyCloseToCenterConsoleWithHighProbability = 1;
+}
+
+enum NFCPresence {
+    NFC_PRESENCE_NOT_PRESENT = 0;
+    NFC_PRESENCE_PRESENT_AT_B_PILLAR = 1;
+    NFC_PRESENCE_PRESENT_AT_CENTER_CONSOLE = 2;
+}
+
+enum BLEPresence {
+    BLE_PRESENCE_NOT_PRESENT = 0;
+    BLE_PRESENCE_PRESENT = 1;
+    BLE_PRESENCE_CONNECTED_NOT_PRESENT = 2;
+}
+
+enum RequestSource_E {
+    REQUEST_SOURCE_NOT_POPULATED = 0;
+    REQUEST_SOURCE_BLE = 1;
+    REQUEST_SOURCE_OTHER = 2;
+}
+
+enum QRCodeStatus_E {
+    QR_CODE_STATUS_UNKNOWN = 0;
+    QR_CODE_STATUS_DISPLAYED = 1;
+    QR_CODE_STATUS_NOT_DISPLAYED = 2;
+}
+
+// Reply to INFORMATION_REQUEST_TYPE_GET_PERSONALIZATION_INFO.
+message PersonalizationInformation {
+    bytes vin = 1;
+}
+
+// Reply to INFORMATION_REQUEST_TYPE_GET_CAPABILITIES.
+message Capabilities {
+    bool chargePortOpen = 1;
+    bool chargePortClose = 2;
+}
+
+message KeyStatus {
+    KeyIdentifier   keyId = 1;
+    NFCPresence     nfcPresence = 2;
+    BLEPresence     blePresence = 3;
+    PublicKey       publicKey = 4;
+    KeyFormFactor   keyFormFactor = 5;
+    uint32          slot = 6;
+    Keys.Role       role = 7;
+}
+
+// Reply to INFORMATION_REQUEST_TYPE_GET_KEYSTATUS_INFO.
+message KeyStatusInfo {
+    repeated KeyStatus keyStatuses = 1;
+    RequestSource_E    requestSource = 2;
+    QRCodeStatus_E     QRCodeStatus = 3;
+}
+
+// Reply to INFORMATION_REQUEST_TYPE_GET_ACTIVE_KEY.
+message ActiveKey {
+    KeyIdentifier activeKey = 1;
+}
+// ===== TESLEMETRY-EXT END =====
+
 message VehicleStatus {
     ClosureStatuses        closureStatuses = 1;
     VehicleLockState_E     vehicleLockState = 2;
@@ -401,6 +488,7 @@ message VehicleStatus {
     DetailedClosureStatus  detailedClosureStatus = 5;
     UIDesire_E             uiDesire = 6;  // TESLEMETRY-EXT
     Gear_E                 gear = 7;  // TESLEMETRY-EXT
+    KeyLocationStatus      keyLocationStatus = 8;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 message FromVCSECMessage {
@@ -409,8 +497,12 @@ message FromVCSECMessage {
         VehicleStatus               vehicleStatus = 1;
         AuthenticationRequest       authenticationRequest = 3;  // TESLEMETRY-EXT
         CommandStatus               commandStatus = 4;
+        PersonalizationInformation  personalizationInformation = 5;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
         WhitelistInfo               whitelistInfo = 16;
         WhitelistEntryInfo          whitelistEntryInfo = 17;
+        Capabilities                capabilities = 19;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+        KeyStatusInfo               keyStatusInfo = 21;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+        ActiveKey                   activeKey = 22;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
         Errors.NominalError         nominalError = 46;
     }
 }

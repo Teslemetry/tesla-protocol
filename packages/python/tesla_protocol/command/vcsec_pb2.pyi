@@ -217,6 +217,49 @@ class Gear_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     GEAR_DRIVE: _ClassVar[Gear_E]
     GEAR_REVERSE: _ClassVar[Gear_E]
     GEAR_NEUTRAL: _ClassVar[Gear_E]
+
+class WhitelistKeyPermission_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    WHITELISTKEYPERMISSION_ADD_TO_WHITELIST: _ClassVar[WhitelistKeyPermission_E]
+    WHITELISTKEYPERMISSION_LOCAL_UNLOCK: _ClassVar[WhitelistKeyPermission_E]
+    WHITELISTKEYPERMISSION_LOCAL_DRIVE: _ClassVar[WhitelistKeyPermission_E]
+    WHITELISTKEYPERMISSION_REMOTE_UNLOCK: _ClassVar[WhitelistKeyPermission_E]
+    WHITELISTKEYPERMISSION_REMOTE_DRIVE: _ClassVar[WhitelistKeyPermission_E]
+    WHITELISTKEYPERMISSION_CHANGE_PERMISSIONS: _ClassVar[WhitelistKeyPermission_E]
+    WHITELISTKEYPERMISSION_REMOVE_FROM_WHITELIST: _ClassVar[WhitelistKeyPermission_E]
+    WHITELISTKEYPERMISSION_REMOVE_SELF_FROM_WHITELIST: _ClassVar[WhitelistKeyPermission_E]
+    WHITELISTKEYPERMISSION_MODIFY_FLEET_RESERVED_SLOTS: _ClassVar[WhitelistKeyPermission_E]
+    WHITELISTKEYPERMISSION_UNKNOWN: _ClassVar[WhitelistKeyPermission_E]
+
+class KeyLocationStatus_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    KEY_LOCATION_UNKNOWN: _ClassVar[KeyLocationStatus_E]
+    KEY_LOCATION_NOT_PRESENT: _ClassVar[KeyLocationStatus_E]
+    KEY_LOCATION_PRESENT: _ClassVar[KeyLocationStatus_E]
+
+class NFCPresence(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    NFC_PRESENCE_NOT_PRESENT: _ClassVar[NFCPresence]
+    NFC_PRESENCE_PRESENT_AT_B_PILLAR: _ClassVar[NFCPresence]
+    NFC_PRESENCE_PRESENT_AT_CENTER_CONSOLE: _ClassVar[NFCPresence]
+
+class BLEPresence(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    BLE_PRESENCE_NOT_PRESENT: _ClassVar[BLEPresence]
+    BLE_PRESENCE_PRESENT: _ClassVar[BLEPresence]
+    BLE_PRESENCE_CONNECTED_NOT_PRESENT: _ClassVar[BLEPresence]
+
+class RequestSource_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    REQUEST_SOURCE_NOT_POPULATED: _ClassVar[RequestSource_E]
+    REQUEST_SOURCE_BLE: _ClassVar[RequestSource_E]
+    REQUEST_SOURCE_OTHER: _ClassVar[RequestSource_E]
+
+class QRCodeStatus_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    QR_CODE_STATUS_UNKNOWN: _ClassVar[QRCodeStatus_E]
+    QR_CODE_STATUS_DISPLAYED: _ClassVar[QRCodeStatus_E]
+    QR_CODE_STATUS_NOT_DISPLAYED: _ClassVar[QRCodeStatus_E]
 SIGNATURE_TYPE_NONE: SignatureType
 SIGNATURE_TYPE_ECDSA: SignatureType
 SIGNATURE_TYPE_PRESENT_KEY: SignatureType
@@ -375,6 +418,31 @@ GEAR_PARK: Gear_E
 GEAR_DRIVE: Gear_E
 GEAR_REVERSE: Gear_E
 GEAR_NEUTRAL: Gear_E
+WHITELISTKEYPERMISSION_ADD_TO_WHITELIST: WhitelistKeyPermission_E
+WHITELISTKEYPERMISSION_LOCAL_UNLOCK: WhitelistKeyPermission_E
+WHITELISTKEYPERMISSION_LOCAL_DRIVE: WhitelistKeyPermission_E
+WHITELISTKEYPERMISSION_REMOTE_UNLOCK: WhitelistKeyPermission_E
+WHITELISTKEYPERMISSION_REMOTE_DRIVE: WhitelistKeyPermission_E
+WHITELISTKEYPERMISSION_CHANGE_PERMISSIONS: WhitelistKeyPermission_E
+WHITELISTKEYPERMISSION_REMOVE_FROM_WHITELIST: WhitelistKeyPermission_E
+WHITELISTKEYPERMISSION_REMOVE_SELF_FROM_WHITELIST: WhitelistKeyPermission_E
+WHITELISTKEYPERMISSION_MODIFY_FLEET_RESERVED_SLOTS: WhitelistKeyPermission_E
+WHITELISTKEYPERMISSION_UNKNOWN: WhitelistKeyPermission_E
+KEY_LOCATION_UNKNOWN: KeyLocationStatus_E
+KEY_LOCATION_NOT_PRESENT: KeyLocationStatus_E
+KEY_LOCATION_PRESENT: KeyLocationStatus_E
+NFC_PRESENCE_NOT_PRESENT: NFCPresence
+NFC_PRESENCE_PRESENT_AT_B_PILLAR: NFCPresence
+NFC_PRESENCE_PRESENT_AT_CENTER_CONSOLE: NFCPresence
+BLE_PRESENCE_NOT_PRESENT: BLEPresence
+BLE_PRESENCE_PRESENT: BLEPresence
+BLE_PRESENCE_CONNECTED_NOT_PRESENT: BLEPresence
+REQUEST_SOURCE_NOT_POPULATED: RequestSource_E
+REQUEST_SOURCE_BLE: RequestSource_E
+REQUEST_SOURCE_OTHER: RequestSource_E
+QR_CODE_STATUS_UNKNOWN: QRCodeStatus_E
+QR_CODE_STATUS_DISPLAYED: QRCodeStatus_E
+QR_CODE_STATUS_NOT_DISPLAYED: QRCodeStatus_E
 
 class SignedMessage(_message.Message):
     __slots__ = ("protobufMessageAsBytes", "signatureType")
@@ -419,18 +487,22 @@ class WhitelistInfo(_message.Message):
     def __init__(self, numberOfEntries: _Optional[int] = ..., whitelistEntries: _Optional[_Iterable[_Union[KeyIdentifier, _Mapping]]] = ..., slotMask: _Optional[int] = ...) -> None: ...
 
 class WhitelistEntryInfo(_message.Message):
-    __slots__ = ("keyId", "publicKey", "metadataForKey", "slot", "keyRole")
+    __slots__ = ("keyId", "publicKey", "metadataForKey", "slot", "permissions", "secondsEntryRemainsActive", "keyRole")
     KEYID_FIELD_NUMBER: _ClassVar[int]
     PUBLICKEY_FIELD_NUMBER: _ClassVar[int]
     METADATAFORKEY_FIELD_NUMBER: _ClassVar[int]
     SLOT_FIELD_NUMBER: _ClassVar[int]
+    PERMISSIONS_FIELD_NUMBER: _ClassVar[int]
+    SECONDSENTRYREMAINSACTIVE_FIELD_NUMBER: _ClassVar[int]
     KEYROLE_FIELD_NUMBER: _ClassVar[int]
     keyId: KeyIdentifier
     publicKey: PublicKey
     metadataForKey: KeyMetadata
     slot: int
+    permissions: _containers.RepeatedScalarFieldContainer[WhitelistKeyPermission_E]
+    secondsEntryRemainsActive: int
     keyRole: _keys_pb2.Role
-    def __init__(self, keyId: _Optional[_Union[KeyIdentifier, _Mapping]] = ..., publicKey: _Optional[_Union[PublicKey, _Mapping]] = ..., metadataForKey: _Optional[_Union[KeyMetadata, _Mapping]] = ..., slot: _Optional[int] = ..., keyRole: _Optional[_Union[_keys_pb2.Role, str]] = ...) -> None: ...
+    def __init__(self, keyId: _Optional[_Union[KeyIdentifier, _Mapping]] = ..., publicKey: _Optional[_Union[PublicKey, _Mapping]] = ..., metadataForKey: _Optional[_Union[KeyMetadata, _Mapping]] = ..., slot: _Optional[int] = ..., permissions: _Optional[_Iterable[_Union[WhitelistKeyPermission_E, str]]] = ..., secondsEntryRemainsActive: _Optional[int] = ..., keyRole: _Optional[_Union[_keys_pb2.Role, str]] = ...) -> None: ...
 
 class InformationRequest(_message.Message):
     __slots__ = ("informationRequestType", "keyId", "publicKey", "slot")
@@ -465,14 +537,16 @@ class ClosureMoveRequest(_message.Message):
     def __init__(self, frontDriverDoor: _Optional[_Union[ClosureMoveType_E, str]] = ..., frontPassengerDoor: _Optional[_Union[ClosureMoveType_E, str]] = ..., rearDriverDoor: _Optional[_Union[ClosureMoveType_E, str]] = ..., rearPassengerDoor: _Optional[_Union[ClosureMoveType_E, str]] = ..., rearTrunk: _Optional[_Union[ClosureMoveType_E, str]] = ..., frontTrunk: _Optional[_Union[ClosureMoveType_E, str]] = ..., chargePort: _Optional[_Union[ClosureMoveType_E, str]] = ..., tonneau: _Optional[_Union[ClosureMoveType_E, str]] = ...) -> None: ...
 
 class PermissionChange(_message.Message):
-    __slots__ = ("key", "secondsToBeActive", "keyRole")
+    __slots__ = ("key", "permission", "secondsToBeActive", "keyRole")
     KEY_FIELD_NUMBER: _ClassVar[int]
+    PERMISSION_FIELD_NUMBER: _ClassVar[int]
     SECONDSTOBEACTIVE_FIELD_NUMBER: _ClassVar[int]
     KEYROLE_FIELD_NUMBER: _ClassVar[int]
     key: PublicKey
+    permission: _containers.RepeatedScalarFieldContainer[WhitelistKeyPermission_E]
     secondsToBeActive: int
     keyRole: _keys_pb2.Role
-    def __init__(self, key: _Optional[_Union[PublicKey, _Mapping]] = ..., secondsToBeActive: _Optional[int] = ..., keyRole: _Optional[_Union[_keys_pb2.Role, str]] = ...) -> None: ...
+    def __init__(self, key: _Optional[_Union[PublicKey, _Mapping]] = ..., permission: _Optional[_Iterable[_Union[WhitelistKeyPermission_E, str]]] = ..., secondsToBeActive: _Optional[int] = ..., keyRole: _Optional[_Union[_keys_pb2.Role, str]] = ...) -> None: ...
 
 class ReplaceKey(_message.Message):
     __slots__ = ("publicKeyToReplace", "slotToReplace", "keyToAdd", "keyRole", "impermanent")
@@ -619,8 +693,62 @@ class DetailedClosureStatus(_message.Message):
     tonneauPercentOpen: int
     def __init__(self, tonneauPercentOpen: _Optional[int] = ...) -> None: ...
 
+class KeyLocationStatus(_message.Message):
+    __slots__ = ("keyCloseToCenterConsoleWithHighProbability",)
+    KEYCLOSETOCENTERCONSOLEWITHHIGHPROBABILITY_FIELD_NUMBER: _ClassVar[int]
+    keyCloseToCenterConsoleWithHighProbability: KeyLocationStatus_E
+    def __init__(self, keyCloseToCenterConsoleWithHighProbability: _Optional[_Union[KeyLocationStatus_E, str]] = ...) -> None: ...
+
+class PersonalizationInformation(_message.Message):
+    __slots__ = ("vin",)
+    VIN_FIELD_NUMBER: _ClassVar[int]
+    vin: bytes
+    def __init__(self, vin: _Optional[bytes] = ...) -> None: ...
+
+class Capabilities(_message.Message):
+    __slots__ = ("chargePortOpen", "chargePortClose")
+    CHARGEPORTOPEN_FIELD_NUMBER: _ClassVar[int]
+    CHARGEPORTCLOSE_FIELD_NUMBER: _ClassVar[int]
+    chargePortOpen: bool
+    chargePortClose: bool
+    def __init__(self, chargePortOpen: _Optional[bool] = ..., chargePortClose: _Optional[bool] = ...) -> None: ...
+
+class KeyStatus(_message.Message):
+    __slots__ = ("keyId", "nfcPresence", "blePresence", "publicKey", "keyFormFactor", "slot", "role")
+    KEYID_FIELD_NUMBER: _ClassVar[int]
+    NFCPRESENCE_FIELD_NUMBER: _ClassVar[int]
+    BLEPRESENCE_FIELD_NUMBER: _ClassVar[int]
+    PUBLICKEY_FIELD_NUMBER: _ClassVar[int]
+    KEYFORMFACTOR_FIELD_NUMBER: _ClassVar[int]
+    SLOT_FIELD_NUMBER: _ClassVar[int]
+    ROLE_FIELD_NUMBER: _ClassVar[int]
+    keyId: KeyIdentifier
+    nfcPresence: NFCPresence
+    blePresence: BLEPresence
+    publicKey: PublicKey
+    keyFormFactor: KeyFormFactor
+    slot: int
+    role: _keys_pb2.Role
+    def __init__(self, keyId: _Optional[_Union[KeyIdentifier, _Mapping]] = ..., nfcPresence: _Optional[_Union[NFCPresence, str]] = ..., blePresence: _Optional[_Union[BLEPresence, str]] = ..., publicKey: _Optional[_Union[PublicKey, _Mapping]] = ..., keyFormFactor: _Optional[_Union[KeyFormFactor, str]] = ..., slot: _Optional[int] = ..., role: _Optional[_Union[_keys_pb2.Role, str]] = ...) -> None: ...
+
+class KeyStatusInfo(_message.Message):
+    __slots__ = ("keyStatuses", "requestSource", "QRCodeStatus")
+    KEYSTATUSES_FIELD_NUMBER: _ClassVar[int]
+    REQUESTSOURCE_FIELD_NUMBER: _ClassVar[int]
+    QRCODESTATUS_FIELD_NUMBER: _ClassVar[int]
+    keyStatuses: _containers.RepeatedCompositeFieldContainer[KeyStatus]
+    requestSource: RequestSource_E
+    QRCodeStatus: QRCodeStatus_E
+    def __init__(self, keyStatuses: _Optional[_Iterable[_Union[KeyStatus, _Mapping]]] = ..., requestSource: _Optional[_Union[RequestSource_E, str]] = ..., QRCodeStatus: _Optional[_Union[QRCodeStatus_E, str]] = ...) -> None: ...
+
+class ActiveKey(_message.Message):
+    __slots__ = ("activeKey",)
+    ACTIVEKEY_FIELD_NUMBER: _ClassVar[int]
+    activeKey: KeyIdentifier
+    def __init__(self, activeKey: _Optional[_Union[KeyIdentifier, _Mapping]] = ...) -> None: ...
+
 class VehicleStatus(_message.Message):
-    __slots__ = ("closureStatuses", "vehicleLockState", "vehicleSleepStatus", "userPresence", "detailedClosureStatus", "uiDesire", "gear")
+    __slots__ = ("closureStatuses", "vehicleLockState", "vehicleSleepStatus", "userPresence", "detailedClosureStatus", "uiDesire", "gear", "keyLocationStatus")
     CLOSURESTATUSES_FIELD_NUMBER: _ClassVar[int]
     VEHICLELOCKSTATE_FIELD_NUMBER: _ClassVar[int]
     VEHICLESLEEPSTATUS_FIELD_NUMBER: _ClassVar[int]
@@ -628,6 +756,7 @@ class VehicleStatus(_message.Message):
     DETAILEDCLOSURESTATUS_FIELD_NUMBER: _ClassVar[int]
     UIDESIRE_FIELD_NUMBER: _ClassVar[int]
     GEAR_FIELD_NUMBER: _ClassVar[int]
+    KEYLOCATIONSTATUS_FIELD_NUMBER: _ClassVar[int]
     closureStatuses: ClosureStatuses
     vehicleLockState: VehicleLockState_E
     vehicleSleepStatus: VehicleSleepStatus_E
@@ -635,20 +764,29 @@ class VehicleStatus(_message.Message):
     detailedClosureStatus: DetailedClosureStatus
     uiDesire: UIDesire_E
     gear: Gear_E
-    def __init__(self, closureStatuses: _Optional[_Union[ClosureStatuses, _Mapping]] = ..., vehicleLockState: _Optional[_Union[VehicleLockState_E, str]] = ..., vehicleSleepStatus: _Optional[_Union[VehicleSleepStatus_E, str]] = ..., userPresence: _Optional[_Union[UserPresence_E, str]] = ..., detailedClosureStatus: _Optional[_Union[DetailedClosureStatus, _Mapping]] = ..., uiDesire: _Optional[_Union[UIDesire_E, str]] = ..., gear: _Optional[_Union[Gear_E, str]] = ...) -> None: ...
+    keyLocationStatus: KeyLocationStatus
+    def __init__(self, closureStatuses: _Optional[_Union[ClosureStatuses, _Mapping]] = ..., vehicleLockState: _Optional[_Union[VehicleLockState_E, str]] = ..., vehicleSleepStatus: _Optional[_Union[VehicleSleepStatus_E, str]] = ..., userPresence: _Optional[_Union[UserPresence_E, str]] = ..., detailedClosureStatus: _Optional[_Union[DetailedClosureStatus, _Mapping]] = ..., uiDesire: _Optional[_Union[UIDesire_E, str]] = ..., gear: _Optional[_Union[Gear_E, str]] = ..., keyLocationStatus: _Optional[_Union[KeyLocationStatus, _Mapping]] = ...) -> None: ...
 
 class FromVCSECMessage(_message.Message):
-    __slots__ = ("vehicleStatus", "authenticationRequest", "commandStatus", "whitelistInfo", "whitelistEntryInfo", "nominalError")
+    __slots__ = ("vehicleStatus", "authenticationRequest", "commandStatus", "personalizationInformation", "whitelistInfo", "whitelistEntryInfo", "capabilities", "keyStatusInfo", "activeKey", "nominalError")
     VEHICLESTATUS_FIELD_NUMBER: _ClassVar[int]
     AUTHENTICATIONREQUEST_FIELD_NUMBER: _ClassVar[int]
     COMMANDSTATUS_FIELD_NUMBER: _ClassVar[int]
+    PERSONALIZATIONINFORMATION_FIELD_NUMBER: _ClassVar[int]
     WHITELISTINFO_FIELD_NUMBER: _ClassVar[int]
     WHITELISTENTRYINFO_FIELD_NUMBER: _ClassVar[int]
+    CAPABILITIES_FIELD_NUMBER: _ClassVar[int]
+    KEYSTATUSINFO_FIELD_NUMBER: _ClassVar[int]
+    ACTIVEKEY_FIELD_NUMBER: _ClassVar[int]
     NOMINALERROR_FIELD_NUMBER: _ClassVar[int]
     vehicleStatus: VehicleStatus
     authenticationRequest: AuthenticationRequest
     commandStatus: CommandStatus
+    personalizationInformation: PersonalizationInformation
     whitelistInfo: WhitelistInfo
     whitelistEntryInfo: WhitelistEntryInfo
+    capabilities: Capabilities
+    keyStatusInfo: KeyStatusInfo
+    activeKey: ActiveKey
     nominalError: _errors_pb2.NominalError
-    def __init__(self, vehicleStatus: _Optional[_Union[VehicleStatus, _Mapping]] = ..., authenticationRequest: _Optional[_Union[AuthenticationRequest, _Mapping]] = ..., commandStatus: _Optional[_Union[CommandStatus, _Mapping]] = ..., whitelistInfo: _Optional[_Union[WhitelistInfo, _Mapping]] = ..., whitelistEntryInfo: _Optional[_Union[WhitelistEntryInfo, _Mapping]] = ..., nominalError: _Optional[_Union[_errors_pb2.NominalError, _Mapping]] = ...) -> None: ...
+    def __init__(self, vehicleStatus: _Optional[_Union[VehicleStatus, _Mapping]] = ..., authenticationRequest: _Optional[_Union[AuthenticationRequest, _Mapping]] = ..., commandStatus: _Optional[_Union[CommandStatus, _Mapping]] = ..., personalizationInformation: _Optional[_Union[PersonalizationInformation, _Mapping]] = ..., whitelistInfo: _Optional[_Union[WhitelistInfo, _Mapping]] = ..., whitelistEntryInfo: _Optional[_Union[WhitelistEntryInfo, _Mapping]] = ..., capabilities: _Optional[_Union[Capabilities, _Mapping]] = ..., keyStatusInfo: _Optional[_Union[KeyStatusInfo, _Mapping]] = ..., activeKey: _Optional[_Union[ActiveKey, _Mapping]] = ..., nominalError: _Optional[_Union[_errors_pb2.NominalError, _Mapping]] = ...) -> None: ...
