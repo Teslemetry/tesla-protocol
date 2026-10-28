@@ -3120,20 +3120,20 @@ class SohState(_message.Message):
         soh_time_remaining: float
         def __init__(self, soh_test_phase: _Optional[_Union[SohState.SohTestPhase, _Mapping]] = ..., soh_time_estimate: _Optional[float] = ..., soh_time_remaining: _Optional[float] = ...) -> None: ...
     class SohResult(_message.Message):
-        __slots__ = ("field_3", "soh_calibrated", "soh_last_test_time", "soh_health_result", "soh_distance_since_soh_test", "soh_regulated")
-        FIELD_3_FIELD_NUMBER: _ClassVar[int]
+        __slots__ = ("soh", "soh_calibrated", "soh_last_test_time", "soh_health_result", "soh_distance_since_soh_test", "soh_regulated")
+        SOH_FIELD_NUMBER: _ClassVar[int]
         SOH_CALIBRATED_FIELD_NUMBER: _ClassVar[int]
         SOH_LAST_TEST_TIME_FIELD_NUMBER: _ClassVar[int]
         SOH_HEALTH_RESULT_FIELD_NUMBER: _ClassVar[int]
         SOH_DISTANCE_SINCE_SOH_TEST_FIELD_NUMBER: _ClassVar[int]
         SOH_REGULATED_FIELD_NUMBER: _ClassVar[int]
-        field_3: float
+        soh: float
         soh_calibrated: bool
         soh_last_test_time: int
         soh_health_result: SohState.WarrantyServiceResult
         soh_distance_since_soh_test: int
         soh_regulated: bool
-        def __init__(self, field_3: _Optional[float] = ..., soh_calibrated: _Optional[bool] = ..., soh_last_test_time: _Optional[int] = ..., soh_health_result: _Optional[_Union[SohState.WarrantyServiceResult, str]] = ..., soh_distance_since_soh_test: _Optional[int] = ..., soh_regulated: _Optional[bool] = ...) -> None: ...
+        def __init__(self, soh: _Optional[float] = ..., soh_calibrated: _Optional[bool] = ..., soh_last_test_time: _Optional[int] = ..., soh_health_result: _Optional[_Union[SohState.WarrantyServiceResult, str]] = ..., soh_distance_since_soh_test: _Optional[int] = ..., soh_regulated: _Optional[bool] = ...) -> None: ...
     SOH_TEST_STATE_FIELD_NUMBER: _ClassVar[int]
     SOH_TEST_END_MODE_FIELD_NUMBER: _ClassVar[int]
     SOH_RESULT_FIELD_NUMBER: _ClassVar[int]

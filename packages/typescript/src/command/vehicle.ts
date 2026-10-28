@@ -4292,7 +4292,7 @@ export interface SohState_SohTestState {
 }
 
 export interface SohState_SohResult {
-  field3?: number | undefined;
+  soh?: number | undefined;
   sohCalibrated?: boolean | undefined;
   sohLastTestTime?: number | undefined;
   sohHealthResult?: SohState_WarrantyServiceResult | undefined;
@@ -27960,7 +27960,7 @@ export const SohState_SohTestState: MessageFns<SohState_SohTestState> = {
 
 function createBaseSohState_SohResult(): SohState_SohResult {
   return {
-    field3: undefined,
+    soh: undefined,
     sohCalibrated: undefined,
     sohLastTestTime: undefined,
     sohHealthResult: undefined,
@@ -27971,8 +27971,8 @@ function createBaseSohState_SohResult(): SohState_SohResult {
 
 export const SohState_SohResult: MessageFns<SohState_SohResult> = {
   encode(message: SohState_SohResult, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.field3 !== undefined) {
-      writer.uint32(29).float(message.field3);
+    if (message.soh !== undefined) {
+      writer.uint32(29).float(message.soh);
     }
     if (message.sohCalibrated !== undefined) {
       writer.uint32(32).bool(message.sohCalibrated);
@@ -28004,7 +28004,7 @@ export const SohState_SohResult: MessageFns<SohState_SohResult> = {
             break;
           }
 
-          message.field3 = reader.float();
+          message.soh = reader.float();
           continue;
         }
         case 4: {
@@ -28058,7 +28058,7 @@ export const SohState_SohResult: MessageFns<SohState_SohResult> = {
 
   fromJSON(object: any): SohState_SohResult {
     return {
-      field3: isSet(object.field3) ? globalThis.Number(object.field3) : undefined,
+      soh: isSet(object.soh) ? globalThis.Number(object.soh) : undefined,
       sohCalibrated: isSet(object.sohCalibrated) ? globalThis.Boolean(object.sohCalibrated) : undefined,
       sohLastTestTime: isSet(object.sohLastTestTime) ? globalThis.Number(object.sohLastTestTime) : undefined,
       sohHealthResult: isSet(object.sohHealthResult)
@@ -28073,8 +28073,8 @@ export const SohState_SohResult: MessageFns<SohState_SohResult> = {
 
   toJSON(message: SohState_SohResult): unknown {
     const obj: any = {};
-    if (message.field3 !== undefined) {
-      obj.field3 = message.field3;
+    if (message.soh !== undefined) {
+      obj.soh = message.soh;
     }
     if (message.sohCalibrated !== undefined) {
       obj.sohCalibrated = message.sohCalibrated;
@@ -28099,7 +28099,7 @@ export const SohState_SohResult: MessageFns<SohState_SohResult> = {
   },
   fromPartial<I extends Exact<DeepPartial<SohState_SohResult>, I>>(object: I): SohState_SohResult {
     const message = createBaseSohState_SohResult();
-    message.field3 = object.field3 ?? undefined;
+    message.soh = object.soh ?? undefined;
     message.sohCalibrated = object.sohCalibrated ?? undefined;
     message.sohLastTestTime = object.sohLastTestTime ?? undefined;
     message.sohHealthResult = object.sohHealthResult ?? undefined;

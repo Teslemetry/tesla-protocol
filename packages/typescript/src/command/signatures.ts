@@ -311,16 +311,13 @@ export interface PresentKeySignatureData {
   authToken: Uint8Array;
 }
 
-/**
- * UNCONFIRMED: not yet confirmed on a live vehicle.
- * Names of fields 1, 2, 4 and 5 not recovered.
- */
+/** UNCONFIRMED: not yet confirmed on a live vehicle. */
 export interface AESGCMDetachedSignatureData {
-  epoch: Uint8Array;
+  nonce: Uint8Array;
   counter: number;
   expiresAt: number;
-  nonce: Uint8Array;
   tag: Uint8Array;
+  prefix: Uint8Array;
 }
 
 /**
@@ -374,8 +371,8 @@ export interface SessionInfo {
   clockTime: number;
   status: SessionInfoStatus;
   handle: number;
-  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
-  field7: number;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  flags: number;
 }
 
 function createBaseKeyIdentity(): KeyIdentity {
@@ -747,13 +744,13 @@ export const PresentKeySignatureData: MessageFns<PresentKeySignatureData> = {
 };
 
 function createBaseAESGCMDetachedSignatureData(): AESGCMDetachedSignatureData {
-  return { epoch: new Uint8Array(0), counter: 0, expiresAt: 0, nonce: new Uint8Array(0), tag: new Uint8Array(0) };
+  return { nonce: new Uint8Array(0), counter: 0, expiresAt: 0, tag: new Uint8Array(0), prefix: new Uint8Array(0) };
 }
 
 export const AESGCMDetachedSignatureData: MessageFns<AESGCMDetachedSignatureData> = {
   encode(message: AESGCMDetachedSignatureData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.epoch.length !== 0) {
-      writer.uint32(10).bytes(message.epoch);
+    if (message.nonce.length !== 0) {
+      writer.uint32(10).bytes(message.nonce);
     }
     if (message.counter !== 0) {
       writer.uint32(16).uint32(message.counter);
@@ -761,11 +758,11 @@ export const AESGCMDetachedSignatureData: MessageFns<AESGCMDetachedSignatureData
     if (message.expiresAt !== 0) {
       writer.uint32(29).fixed32(message.expiresAt);
     }
-    if (message.nonce.length !== 0) {
-      writer.uint32(34).bytes(message.nonce);
-    }
     if (message.tag.length !== 0) {
-      writer.uint32(42).bytes(message.tag);
+      writer.uint32(34).bytes(message.tag);
+    }
+    if (message.prefix.length !== 0) {
+      writer.uint32(42).bytes(message.prefix);
     }
     return writer;
   },
@@ -782,7 +779,7 @@ export const AESGCMDetachedSignatureData: MessageFns<AESGCMDetachedSignatureData
             break;
           }
 
-          message.epoch = reader.bytes();
+          message.nonce = reader.bytes();
           continue;
         }
         case 2: {
@@ -806,7 +803,7 @@ export const AESGCMDetachedSignatureData: MessageFns<AESGCMDetachedSignatureData
             break;
           }
 
-          message.nonce = reader.bytes();
+          message.tag = reader.bytes();
           continue;
         }
         case 5: {
@@ -814,7 +811,7 @@ export const AESGCMDetachedSignatureData: MessageFns<AESGCMDetachedSignatureData
             break;
           }
 
-          message.tag = reader.bytes();
+          message.prefix = reader.bytes();
           continue;
         }
       }
@@ -828,18 +825,18 @@ export const AESGCMDetachedSignatureData: MessageFns<AESGCMDetachedSignatureData
 
   fromJSON(object: any): AESGCMDetachedSignatureData {
     return {
-      epoch: isSet(object.epoch) ? bytesFromBase64(object.epoch) : new Uint8Array(0),
+      nonce: isSet(object.nonce) ? bytesFromBase64(object.nonce) : new Uint8Array(0),
       counter: isSet(object.counter) ? globalThis.Number(object.counter) : 0,
       expiresAt: isSet(object.expiresAt) ? globalThis.Number(object.expiresAt) : 0,
-      nonce: isSet(object.nonce) ? bytesFromBase64(object.nonce) : new Uint8Array(0),
       tag: isSet(object.tag) ? bytesFromBase64(object.tag) : new Uint8Array(0),
+      prefix: isSet(object.prefix) ? bytesFromBase64(object.prefix) : new Uint8Array(0),
     };
   },
 
   toJSON(message: AESGCMDetachedSignatureData): unknown {
     const obj: any = {};
-    if (message.epoch !== undefined) {
-      obj.epoch = base64FromBytes(message.epoch);
+    if (message.nonce !== undefined) {
+      obj.nonce = base64FromBytes(message.nonce);
     }
     if (message.counter !== undefined) {
       obj.counter = Math.round(message.counter);
@@ -847,11 +844,11 @@ export const AESGCMDetachedSignatureData: MessageFns<AESGCMDetachedSignatureData
     if (message.expiresAt !== undefined) {
       obj.expiresAt = Math.round(message.expiresAt);
     }
-    if (message.nonce !== undefined) {
-      obj.nonce = base64FromBytes(message.nonce);
-    }
     if (message.tag !== undefined) {
       obj.tag = base64FromBytes(message.tag);
+    }
+    if (message.prefix !== undefined) {
+      obj.prefix = base64FromBytes(message.prefix);
     }
     return obj;
   },
@@ -861,11 +858,11 @@ export const AESGCMDetachedSignatureData: MessageFns<AESGCMDetachedSignatureData
   },
   fromPartial<I extends Exact<DeepPartial<AESGCMDetachedSignatureData>, I>>(object: I): AESGCMDetachedSignatureData {
     const message = createBaseAESGCMDetachedSignatureData();
-    message.epoch = object.epoch ?? new Uint8Array(0);
+    message.nonce = object.nonce ?? new Uint8Array(0);
     message.counter = object.counter ?? 0;
     message.expiresAt = object.expiresAt ?? 0;
-    message.nonce = object.nonce ?? new Uint8Array(0);
     message.tag = object.tag ?? new Uint8Array(0);
+    message.prefix = object.prefix ?? new Uint8Array(0);
     return message;
   },
 };
@@ -1396,7 +1393,7 @@ function createBaseSessionInfo(): SessionInfo {
     clockTime: 0,
     status: 0,
     handle: 0,
-    field7: 0,
+    flags: 0,
   };
 }
 
@@ -1420,8 +1417,8 @@ export const SessionInfo: MessageFns<SessionInfo> = {
     if (message.handle !== 0) {
       writer.uint32(48).uint32(message.handle);
     }
-    if (message.field7 !== 0) {
-      writer.uint32(56).uint32(message.field7);
+    if (message.flags !== 0) {
+      writer.uint32(56).uint32(message.flags);
     }
     return writer;
   },
@@ -1486,7 +1483,7 @@ export const SessionInfo: MessageFns<SessionInfo> = {
             break;
           }
 
-          message.field7 = reader.uint32();
+          message.flags = reader.uint32();
           continue;
         }
       }
@@ -1506,7 +1503,7 @@ export const SessionInfo: MessageFns<SessionInfo> = {
       clockTime: isSet(object.clockTime) ? globalThis.Number(object.clockTime) : 0,
       status: isSet(object.status) ? sessionInfoStatusFromJSON(object.status) : 0,
       handle: isSet(object.handle) ? globalThis.Number(object.handle) : 0,
-      field7: isSet(object.field7) ? globalThis.Number(object.field7) : 0,
+      flags: isSet(object.flags) ? globalThis.Number(object.flags) : 0,
     };
   },
 
@@ -1530,8 +1527,8 @@ export const SessionInfo: MessageFns<SessionInfo> = {
     if (message.handle !== undefined) {
       obj.handle = Math.round(message.handle);
     }
-    if (message.field7 !== undefined) {
-      obj.field7 = Math.round(message.field7);
+    if (message.flags !== undefined) {
+      obj.flags = Math.round(message.flags);
     }
     return obj;
   },
@@ -1547,7 +1544,7 @@ export const SessionInfo: MessageFns<SessionInfo> = {
     message.clockTime = object.clockTime ?? 0;
     message.status = object.status ?? 0;
     message.handle = object.handle ?? 0;
-    message.field7 = object.field7 ?? 0;
+    message.flags = object.flags ?? 0;
     return message;
   },
 };

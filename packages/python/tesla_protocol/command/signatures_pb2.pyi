@@ -115,18 +115,18 @@ class Present_Key_Signature_Data(_message.Message):
     def __init__(self, auth_token: _Optional[bytes] = ...) -> None: ...
 
 class AES_GCM_Detached_Signature_Data(_message.Message):
-    __slots__ = ("epoch", "counter", "expires_at", "nonce", "tag")
-    EPOCH_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("nonce", "counter", "expires_at", "tag", "prefix")
+    NONCE_FIELD_NUMBER: _ClassVar[int]
     COUNTER_FIELD_NUMBER: _ClassVar[int]
     EXPIRES_AT_FIELD_NUMBER: _ClassVar[int]
-    NONCE_FIELD_NUMBER: _ClassVar[int]
     TAG_FIELD_NUMBER: _ClassVar[int]
-    epoch: bytes
+    PREFIX_FIELD_NUMBER: _ClassVar[int]
+    nonce: bytes
     counter: int
     expires_at: int
-    nonce: bytes
     tag: bytes
-    def __init__(self, epoch: _Optional[bytes] = ..., counter: _Optional[int] = ..., expires_at: _Optional[int] = ..., nonce: _Optional[bytes] = ..., tag: _Optional[bytes] = ...) -> None: ...
+    prefix: bytes
+    def __init__(self, nonce: _Optional[bytes] = ..., counter: _Optional[int] = ..., expires_at: _Optional[int] = ..., tag: _Optional[bytes] = ..., prefix: _Optional[bytes] = ...) -> None: ...
 
 class Certificate_ECDSA_Signature_Data(_message.Message):
     __slots__ = ("certificate_chain_der", "signature")
@@ -181,19 +181,19 @@ class GetSessionInfoRequest(_message.Message):
     def __init__(self, key_identity: _Optional[_Union[KeyIdentity, _Mapping]] = ...) -> None: ...
 
 class SessionInfo(_message.Message):
-    __slots__ = ("counter", "publicKey", "epoch", "clock_time", "status", "handle", "field_7")
+    __slots__ = ("counter", "publicKey", "epoch", "clock_time", "status", "handle", "flags")
     COUNTER_FIELD_NUMBER: _ClassVar[int]
     PUBLICKEY_FIELD_NUMBER: _ClassVar[int]
     EPOCH_FIELD_NUMBER: _ClassVar[int]
     CLOCK_TIME_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
     HANDLE_FIELD_NUMBER: _ClassVar[int]
-    FIELD_7_FIELD_NUMBER: _ClassVar[int]
+    FLAGS_FIELD_NUMBER: _ClassVar[int]
     counter: int
     publicKey: bytes
     epoch: bytes
     clock_time: int
     status: Session_Info_Status
     handle: int
-    field_7: int
-    def __init__(self, counter: _Optional[int] = ..., publicKey: _Optional[bytes] = ..., epoch: _Optional[bytes] = ..., clock_time: _Optional[int] = ..., status: _Optional[_Union[Session_Info_Status, str]] = ..., handle: _Optional[int] = ..., field_7: _Optional[int] = ...) -> None: ...
+    flags: int
+    def __init__(self, counter: _Optional[int] = ..., publicKey: _Optional[bytes] = ..., epoch: _Optional[bytes] = ..., clock_time: _Optional[int] = ..., status: _Optional[_Union[Session_Info_Status, str]] = ..., handle: _Optional[int] = ..., flags: _Optional[int] = ...) -> None: ...

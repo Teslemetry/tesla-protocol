@@ -79,13 +79,12 @@ message Present_Key_Signature_Data {
 }
 
 // UNCONFIRMED: not yet confirmed on a live vehicle.
-// Names of fields 1, 2, 4 and 5 not recovered.
 message AES_GCM_Detached_Signature_Data {
-    bytes   epoch       = 1;
+    bytes   nonce       = 1;
     uint32  counter     = 2;
     fixed32 expires_at  = 3;
-    bytes   nonce       = 4;
-    bytes   tag         = 5;
+    bytes   tag         = 4;
+    bytes   prefix      = 5;
 }
 
 // Signs with a key vouched for by a DER certificate chain.
@@ -139,5 +138,5 @@ message SessionInfo {
     fixed32 clock_time         = 4;
     Session_Info_Status status = 5;
     uint32  handle             = 6;
-    uint32  field_7            = 7;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    uint32  flags              = 7;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }

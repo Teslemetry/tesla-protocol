@@ -263,8 +263,7 @@ message MobileUploadParams {
 message PrepareMobileUploadAction {
   MobileUploadParams uploadParams = 1;
   MobileImageUploadParams imageParams = 2;
-  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered.
-  bool field_3 = 3;
+  bool apply = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle
   bool overwriteOldestIfFull = 4;
 }
 
@@ -323,13 +322,13 @@ message DogModeLiveActivityData {
   // encrypted envelope whose message type this repo does not publish.
   message DogModeImageData {
     bytes wrappedKey = 1;
-    bytes encryptedImage = 2;  // name not recovered
+    bytes image = 2;
   }
 
   DisabledReason disabledReason = 1;
   DogModeImageData interiorImage = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle
-  string field_3 = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
-  google.protobuf.Timestamp field_4 = 4;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+  string vin = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle
+  google.protobuf.Timestamp timestamp = 4;  // UNCONFIRMED: not yet confirmed on a live vehicle
   float insideTemperatureCelsius = 5;
   ClimateState.DogModeState faultState = 6;
   SetTemperatureUnitAction.Unit temperatureUnit = 7;
@@ -395,13 +394,13 @@ message Response {
 
 // ===== TESLEMETRY-EXT BEGIN =====
 message VehicleDataSubscriptionResponse {
-  string unknown = 3;
+  string error = 3;
   PiiKeyResponse pii_key_response = 4;
 }
 
 message VitalsSubscriptionResponse {
   int32 session_id = 1;
-  string unknown = 2;
+  string error = 2;
 }
 
 message PiiKeyResponse {
@@ -411,7 +410,7 @@ message PiiKeyResponse {
 }
 
 message PseudonymSyncResponse {
-  string unknown = 1;
+  string pseudonym = 1;
 }
 
 message NavigationRouteResponse {
@@ -426,7 +425,7 @@ message NavigationRouteResponse {
     float offset_to_dest = 1;
     NavigationRouteResponse.TrafficStatus traffic_status = 2;
   }
-  string unknown = 1;
+  string route = 1;
   repeated TrafficDetail traffic_detail = 2;
 }
 
@@ -445,7 +444,7 @@ message AddManagedChargingSiteResponse {
 
 message RequestTeslaAuthCommand {
   string client_id = 1;
-  string unknown = 2;
+  string scope = 2;
   bool return_scoped_token = 3;
 }
 
@@ -458,8 +457,8 @@ message GetMessagesResponse {
 }
 
 message Profile {
-  string unknown_1 = 1;
-  string unknown_2 = 2;
+  string uuid = 1;
+  string name = 2;
 }
 
 message GetLocalProfilesResponse {
@@ -467,8 +466,8 @@ message GetLocalProfilesResponse {
 }
 
 message KeyInfo {
-  string unknown_1 = 1;
-  string unknown_2 = 2;
+  string name = 1;
+  string model = 2;
   bytes public_key = 3;
   google.protobuf.Timestamp last_seen = 4;
   Keys.Role role = 5;
@@ -1498,7 +1497,7 @@ message SetPhoneSettingPreferencesAction {
   }
 
   FontSize font_size = 1;
-  string field_2 = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+  string language = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle
   PhoneUnitPreferences unit_preferences = 3;
 }
 

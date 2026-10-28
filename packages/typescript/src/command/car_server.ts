@@ -828,8 +828,8 @@ export interface PrepareMobileUploadAction {
   imageParams:
     | MobileImageUploadParams
     | undefined;
-  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered. */
-  field3: boolean;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  apply: boolean;
   overwriteOldestIfFull: boolean;
 }
 
@@ -1019,10 +1019,10 @@ export interface DogModeLiveActivityData {
   interiorImage:
     | DogModeLiveActivityData_DogModeImageData
     | undefined;
-  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
-  field3: string;
-  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
-  field4: Date | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  vin: string;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  timestamp: Date | undefined;
   insideTemperatureCelsius: number;
   faultState: ClimateState_DogModeState;
   temperatureUnit: SetTemperatureUnitAction_Unit;
@@ -1080,8 +1080,7 @@ export function dogModeLiveActivityData_DisabledReasonToJSON(object: DogModeLive
  */
 export interface DogModeLiveActivityData_DogModeImageData {
   wrappedKey: Uint8Array;
-  /** name not recovered */
-  encryptedImage: Uint8Array;
+  image: Uint8Array;
 }
 
 export interface GetTirePressureState {
@@ -1200,13 +1199,13 @@ export interface Response {
 
 /** ===== TESLEMETRY-EXT BEGIN ===== */
 export interface VehicleDataSubscriptionResponse {
-  unknown: string;
+  error: string;
   piiKeyResponse: PiiKeyResponse | undefined;
 }
 
 export interface VitalsSubscriptionResponse {
   sessionId: number;
-  unknown: string;
+  error: string;
 }
 
 export interface PiiKeyResponse {
@@ -1216,11 +1215,11 @@ export interface PiiKeyResponse {
 }
 
 export interface PseudonymSyncResponse {
-  unknown: string;
+  pseudonym: string;
 }
 
 export interface NavigationRouteResponse {
-  unknown: string;
+  route: string;
   trafficDetail: NavigationRouteResponse_TrafficDetail[];
 }
 
@@ -1297,7 +1296,7 @@ export interface AddManagedChargingSiteResponse {
 
 export interface RequestTeslaAuthCommand {
   clientId: string;
-  unknown: string;
+  scope: string;
   returnScopedToken: boolean;
 }
 
@@ -1310,8 +1309,8 @@ export interface GetMessagesResponse {
 }
 
 export interface Profile {
-  unknown1: string;
-  unknown2: string;
+  uuid: string;
+  name: string;
 }
 
 export interface GetLocalProfilesResponse {
@@ -1319,8 +1318,8 @@ export interface GetLocalProfilesResponse {
 }
 
 export interface KeyInfo {
-  unknown1: string;
-  unknown2: string;
+  name: string;
+  model: string;
   publicKey: Uint8Array;
   lastSeen: Date | undefined;
   role: Role;
@@ -3134,8 +3133,8 @@ export interface PhoneUnitPreferences {
 
 export interface SetPhoneSettingPreferencesAction {
   fontSize: SetPhoneSettingPreferencesAction_FontSize;
-  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
-  field2: string;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle */
+  language: string;
   unitPreferences: PhoneUnitPreferences | undefined;
 }
 
@@ -8007,7 +8006,7 @@ export const MobileUploadParams: MessageFns<MobileUploadParams> = {
 };
 
 function createBasePrepareMobileUploadAction(): PrepareMobileUploadAction {
-  return { uploadParams: undefined, imageParams: undefined, field3: false, overwriteOldestIfFull: false };
+  return { uploadParams: undefined, imageParams: undefined, apply: false, overwriteOldestIfFull: false };
 }
 
 export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = {
@@ -8018,8 +8017,8 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
     if (message.imageParams !== undefined) {
       MobileImageUploadParams.encode(message.imageParams, writer.uint32(18).fork()).join();
     }
-    if (message.field3 !== false) {
-      writer.uint32(24).bool(message.field3);
+    if (message.apply !== false) {
+      writer.uint32(24).bool(message.apply);
     }
     if (message.overwriteOldestIfFull !== false) {
       writer.uint32(32).bool(message.overwriteOldestIfFull);
@@ -8055,7 +8054,7 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
             break;
           }
 
-          message.field3 = reader.bool();
+          message.apply = reader.bool();
           continue;
         }
         case 4: {
@@ -8079,7 +8078,7 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
     return {
       uploadParams: isSet(object.uploadParams) ? MobileUploadParams.fromJSON(object.uploadParams) : undefined,
       imageParams: isSet(object.imageParams) ? MobileImageUploadParams.fromJSON(object.imageParams) : undefined,
-      field3: isSet(object.field3) ? globalThis.Boolean(object.field3) : false,
+      apply: isSet(object.apply) ? globalThis.Boolean(object.apply) : false,
       overwriteOldestIfFull: isSet(object.overwriteOldestIfFull)
         ? globalThis.Boolean(object.overwriteOldestIfFull)
         : false,
@@ -8094,8 +8093,8 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
     if (message.imageParams !== undefined) {
       obj.imageParams = MobileImageUploadParams.toJSON(message.imageParams);
     }
-    if (message.field3 !== undefined) {
-      obj.field3 = message.field3;
+    if (message.apply !== undefined) {
+      obj.apply = message.apply;
     }
     if (message.overwriteOldestIfFull !== undefined) {
       obj.overwriteOldestIfFull = message.overwriteOldestIfFull;
@@ -8114,7 +8113,7 @@ export const PrepareMobileUploadAction: MessageFns<PrepareMobileUploadAction> = 
     message.imageParams = (object.imageParams !== undefined && object.imageParams !== null)
       ? MobileImageUploadParams.fromPartial(object.imageParams)
       : undefined;
-    message.field3 = object.field3 ?? false;
+    message.apply = object.apply ?? false;
     message.overwriteOldestIfFull = object.overwriteOldestIfFull ?? false;
     return message;
   },
@@ -8384,8 +8383,8 @@ function createBaseDogModeLiveActivityData(): DogModeLiveActivityData {
   return {
     disabledReason: 0,
     interiorImage: undefined,
-    field3: "",
-    field4: undefined,
+    vin: "",
+    timestamp: undefined,
     insideTemperatureCelsius: 0,
     faultState: 0,
     temperatureUnit: 0,
@@ -8401,11 +8400,11 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
     if (message.interiorImage !== undefined) {
       DogModeLiveActivityData_DogModeImageData.encode(message.interiorImage, writer.uint32(18).fork()).join();
     }
-    if (message.field3 !== "") {
-      writer.uint32(26).string(message.field3);
+    if (message.vin !== "") {
+      writer.uint32(26).string(message.vin);
     }
-    if (message.field4 !== undefined) {
-      Timestamp.encode(toTimestamp(message.field4), writer.uint32(34).fork()).join();
+    if (message.timestamp !== undefined) {
+      Timestamp.encode(toTimestamp(message.timestamp), writer.uint32(34).fork()).join();
     }
     if (message.insideTemperatureCelsius !== 0) {
       writer.uint32(45).float(message.insideTemperatureCelsius);
@@ -8450,7 +8449,7 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
             break;
           }
 
-          message.field3 = reader.string();
+          message.vin = reader.string();
           continue;
         }
         case 4: {
@@ -8458,7 +8457,7 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
             break;
           }
 
-          message.field4 = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          message.timestamp = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
           continue;
         }
         case 5: {
@@ -8510,8 +8509,8 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
       interiorImage: isSet(object.interiorImage)
         ? DogModeLiveActivityData_DogModeImageData.fromJSON(object.interiorImage)
         : undefined,
-      field3: isSet(object.field3) ? globalThis.String(object.field3) : "",
-      field4: isSet(object.field4) ? fromJsonTimestamp(object.field4) : undefined,
+      vin: isSet(object.vin) ? globalThis.String(object.vin) : "",
+      timestamp: isSet(object.timestamp) ? fromJsonTimestamp(object.timestamp) : undefined,
       insideTemperatureCelsius: isSet(object.insideTemperatureCelsius)
         ? globalThis.Number(object.insideTemperatureCelsius)
         : 0,
@@ -8531,11 +8530,11 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
     if (message.interiorImage !== undefined) {
       obj.interiorImage = DogModeLiveActivityData_DogModeImageData.toJSON(message.interiorImage);
     }
-    if (message.field3 !== undefined) {
-      obj.field3 = message.field3;
+    if (message.vin !== undefined) {
+      obj.vin = message.vin;
     }
-    if (message.field4 !== undefined) {
-      obj.field4 = message.field4.toISOString();
+    if (message.timestamp !== undefined) {
+      obj.timestamp = message.timestamp.toISOString();
     }
     if (message.insideTemperatureCelsius !== undefined) {
       obj.insideTemperatureCelsius = message.insideTemperatureCelsius;
@@ -8561,8 +8560,8 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
     message.interiorImage = (object.interiorImage !== undefined && object.interiorImage !== null)
       ? DogModeLiveActivityData_DogModeImageData.fromPartial(object.interiorImage)
       : undefined;
-    message.field3 = object.field3 ?? "";
-    message.field4 = object.field4 ?? undefined;
+    message.vin = object.vin ?? "";
+    message.timestamp = object.timestamp ?? undefined;
     message.insideTemperatureCelsius = object.insideTemperatureCelsius ?? 0;
     message.faultState = object.faultState ?? 0;
     message.temperatureUnit = object.temperatureUnit ?? 0;
@@ -8572,7 +8571,7 @@ export const DogModeLiveActivityData: MessageFns<DogModeLiveActivityData> = {
 };
 
 function createBaseDogModeLiveActivityData_DogModeImageData(): DogModeLiveActivityData_DogModeImageData {
-  return { wrappedKey: new Uint8Array(0), encryptedImage: new Uint8Array(0) };
+  return { wrappedKey: new Uint8Array(0), image: new Uint8Array(0) };
 }
 
 export const DogModeLiveActivityData_DogModeImageData: MessageFns<DogModeLiveActivityData_DogModeImageData> = {
@@ -8580,8 +8579,8 @@ export const DogModeLiveActivityData_DogModeImageData: MessageFns<DogModeLiveAct
     if (message.wrappedKey.length !== 0) {
       writer.uint32(10).bytes(message.wrappedKey);
     }
-    if (message.encryptedImage.length !== 0) {
-      writer.uint32(18).bytes(message.encryptedImage);
+    if (message.image.length !== 0) {
+      writer.uint32(18).bytes(message.image);
     }
     return writer;
   },
@@ -8606,7 +8605,7 @@ export const DogModeLiveActivityData_DogModeImageData: MessageFns<DogModeLiveAct
             break;
           }
 
-          message.encryptedImage = reader.bytes();
+          message.image = reader.bytes();
           continue;
         }
       }
@@ -8621,7 +8620,7 @@ export const DogModeLiveActivityData_DogModeImageData: MessageFns<DogModeLiveAct
   fromJSON(object: any): DogModeLiveActivityData_DogModeImageData {
     return {
       wrappedKey: isSet(object.wrappedKey) ? bytesFromBase64(object.wrappedKey) : new Uint8Array(0),
-      encryptedImage: isSet(object.encryptedImage) ? bytesFromBase64(object.encryptedImage) : new Uint8Array(0),
+      image: isSet(object.image) ? bytesFromBase64(object.image) : new Uint8Array(0),
     };
   },
 
@@ -8630,8 +8629,8 @@ export const DogModeLiveActivityData_DogModeImageData: MessageFns<DogModeLiveAct
     if (message.wrappedKey !== undefined) {
       obj.wrappedKey = base64FromBytes(message.wrappedKey);
     }
-    if (message.encryptedImage !== undefined) {
-      obj.encryptedImage = base64FromBytes(message.encryptedImage);
+    if (message.image !== undefined) {
+      obj.image = base64FromBytes(message.image);
     }
     return obj;
   },
@@ -8646,7 +8645,7 @@ export const DogModeLiveActivityData_DogModeImageData: MessageFns<DogModeLiveAct
   ): DogModeLiveActivityData_DogModeImageData {
     const message = createBaseDogModeLiveActivityData_DogModeImageData();
     message.wrappedKey = object.wrappedKey ?? new Uint8Array(0);
-    message.encryptedImage = object.encryptedImage ?? new Uint8Array(0);
+    message.image = object.image ?? new Uint8Array(0);
     return message;
   },
 };
@@ -9738,13 +9737,13 @@ export const Response: MessageFns<Response> = {
 };
 
 function createBaseVehicleDataSubscriptionResponse(): VehicleDataSubscriptionResponse {
-  return { unknown: "", piiKeyResponse: undefined };
+  return { error: "", piiKeyResponse: undefined };
 }
 
 export const VehicleDataSubscriptionResponse: MessageFns<VehicleDataSubscriptionResponse> = {
   encode(message: VehicleDataSubscriptionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.unknown !== "") {
-      writer.uint32(26).string(message.unknown);
+    if (message.error !== "") {
+      writer.uint32(26).string(message.error);
     }
     if (message.piiKeyResponse !== undefined) {
       PiiKeyResponse.encode(message.piiKeyResponse, writer.uint32(34).fork()).join();
@@ -9764,7 +9763,7 @@ export const VehicleDataSubscriptionResponse: MessageFns<VehicleDataSubscription
             break;
           }
 
-          message.unknown = reader.string();
+          message.error = reader.string();
           continue;
         }
         case 4: {
@@ -9786,15 +9785,15 @@ export const VehicleDataSubscriptionResponse: MessageFns<VehicleDataSubscription
 
   fromJSON(object: any): VehicleDataSubscriptionResponse {
     return {
-      unknown: isSet(object.unknown) ? globalThis.String(object.unknown) : "",
+      error: isSet(object.error) ? globalThis.String(object.error) : "",
       piiKeyResponse: isSet(object.piiKeyResponse) ? PiiKeyResponse.fromJSON(object.piiKeyResponse) : undefined,
     };
   },
 
   toJSON(message: VehicleDataSubscriptionResponse): unknown {
     const obj: any = {};
-    if (message.unknown !== undefined) {
-      obj.unknown = message.unknown;
+    if (message.error !== undefined) {
+      obj.error = message.error;
     }
     if (message.piiKeyResponse !== undefined) {
       obj.piiKeyResponse = PiiKeyResponse.toJSON(message.piiKeyResponse);
@@ -9809,7 +9808,7 @@ export const VehicleDataSubscriptionResponse: MessageFns<VehicleDataSubscription
     object: I,
   ): VehicleDataSubscriptionResponse {
     const message = createBaseVehicleDataSubscriptionResponse();
-    message.unknown = object.unknown ?? "";
+    message.error = object.error ?? "";
     message.piiKeyResponse = (object.piiKeyResponse !== undefined && object.piiKeyResponse !== null)
       ? PiiKeyResponse.fromPartial(object.piiKeyResponse)
       : undefined;
@@ -9818,7 +9817,7 @@ export const VehicleDataSubscriptionResponse: MessageFns<VehicleDataSubscription
 };
 
 function createBaseVitalsSubscriptionResponse(): VitalsSubscriptionResponse {
-  return { sessionId: 0, unknown: "" };
+  return { sessionId: 0, error: "" };
 }
 
 export const VitalsSubscriptionResponse: MessageFns<VitalsSubscriptionResponse> = {
@@ -9826,8 +9825,8 @@ export const VitalsSubscriptionResponse: MessageFns<VitalsSubscriptionResponse> 
     if (message.sessionId !== 0) {
       writer.uint32(8).int32(message.sessionId);
     }
-    if (message.unknown !== "") {
-      writer.uint32(18).string(message.unknown);
+    if (message.error !== "") {
+      writer.uint32(18).string(message.error);
     }
     return writer;
   },
@@ -9852,7 +9851,7 @@ export const VitalsSubscriptionResponse: MessageFns<VitalsSubscriptionResponse> 
             break;
           }
 
-          message.unknown = reader.string();
+          message.error = reader.string();
           continue;
         }
       }
@@ -9867,7 +9866,7 @@ export const VitalsSubscriptionResponse: MessageFns<VitalsSubscriptionResponse> 
   fromJSON(object: any): VitalsSubscriptionResponse {
     return {
       sessionId: isSet(object.sessionId) ? globalThis.Number(object.sessionId) : 0,
-      unknown: isSet(object.unknown) ? globalThis.String(object.unknown) : "",
+      error: isSet(object.error) ? globalThis.String(object.error) : "",
     };
   },
 
@@ -9876,8 +9875,8 @@ export const VitalsSubscriptionResponse: MessageFns<VitalsSubscriptionResponse> 
     if (message.sessionId !== undefined) {
       obj.sessionId = Math.round(message.sessionId);
     }
-    if (message.unknown !== undefined) {
-      obj.unknown = message.unknown;
+    if (message.error !== undefined) {
+      obj.error = message.error;
     }
     return obj;
   },
@@ -9888,7 +9887,7 @@ export const VitalsSubscriptionResponse: MessageFns<VitalsSubscriptionResponse> 
   fromPartial<I extends Exact<DeepPartial<VitalsSubscriptionResponse>, I>>(object: I): VitalsSubscriptionResponse {
     const message = createBaseVitalsSubscriptionResponse();
     message.sessionId = object.sessionId ?? 0;
-    message.unknown = object.unknown ?? "";
+    message.error = object.error ?? "";
     return message;
   },
 };
@@ -9988,13 +9987,13 @@ export const PiiKeyResponse: MessageFns<PiiKeyResponse> = {
 };
 
 function createBasePseudonymSyncResponse(): PseudonymSyncResponse {
-  return { unknown: "" };
+  return { pseudonym: "" };
 }
 
 export const PseudonymSyncResponse: MessageFns<PseudonymSyncResponse> = {
   encode(message: PseudonymSyncResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.unknown !== "") {
-      writer.uint32(10).string(message.unknown);
+    if (message.pseudonym !== "") {
+      writer.uint32(10).string(message.pseudonym);
     }
     return writer;
   },
@@ -10011,7 +10010,7 @@ export const PseudonymSyncResponse: MessageFns<PseudonymSyncResponse> = {
             break;
           }
 
-          message.unknown = reader.string();
+          message.pseudonym = reader.string();
           continue;
         }
       }
@@ -10024,13 +10023,13 @@ export const PseudonymSyncResponse: MessageFns<PseudonymSyncResponse> = {
   },
 
   fromJSON(object: any): PseudonymSyncResponse {
-    return { unknown: isSet(object.unknown) ? globalThis.String(object.unknown) : "" };
+    return { pseudonym: isSet(object.pseudonym) ? globalThis.String(object.pseudonym) : "" };
   },
 
   toJSON(message: PseudonymSyncResponse): unknown {
     const obj: any = {};
-    if (message.unknown !== undefined) {
-      obj.unknown = message.unknown;
+    if (message.pseudonym !== undefined) {
+      obj.pseudonym = message.pseudonym;
     }
     return obj;
   },
@@ -10040,19 +10039,19 @@ export const PseudonymSyncResponse: MessageFns<PseudonymSyncResponse> = {
   },
   fromPartial<I extends Exact<DeepPartial<PseudonymSyncResponse>, I>>(object: I): PseudonymSyncResponse {
     const message = createBasePseudonymSyncResponse();
-    message.unknown = object.unknown ?? "";
+    message.pseudonym = object.pseudonym ?? "";
     return message;
   },
 };
 
 function createBaseNavigationRouteResponse(): NavigationRouteResponse {
-  return { unknown: "", trafficDetail: [] };
+  return { route: "", trafficDetail: [] };
 }
 
 export const NavigationRouteResponse: MessageFns<NavigationRouteResponse> = {
   encode(message: NavigationRouteResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.unknown !== "") {
-      writer.uint32(10).string(message.unknown);
+    if (message.route !== "") {
+      writer.uint32(10).string(message.route);
     }
     for (const v of message.trafficDetail) {
       NavigationRouteResponse_TrafficDetail.encode(v!, writer.uint32(18).fork()).join();
@@ -10072,7 +10071,7 @@ export const NavigationRouteResponse: MessageFns<NavigationRouteResponse> = {
             break;
           }
 
-          message.unknown = reader.string();
+          message.route = reader.string();
           continue;
         }
         case 2: {
@@ -10094,7 +10093,7 @@ export const NavigationRouteResponse: MessageFns<NavigationRouteResponse> = {
 
   fromJSON(object: any): NavigationRouteResponse {
     return {
-      unknown: isSet(object.unknown) ? globalThis.String(object.unknown) : "",
+      route: isSet(object.route) ? globalThis.String(object.route) : "",
       trafficDetail: globalThis.Array.isArray(object?.trafficDetail)
         ? object.trafficDetail.map((e: any) => NavigationRouteResponse_TrafficDetail.fromJSON(e))
         : [],
@@ -10103,8 +10102,8 @@ export const NavigationRouteResponse: MessageFns<NavigationRouteResponse> = {
 
   toJSON(message: NavigationRouteResponse): unknown {
     const obj: any = {};
-    if (message.unknown !== undefined) {
-      obj.unknown = message.unknown;
+    if (message.route !== undefined) {
+      obj.route = message.route;
     }
     if (message.trafficDetail?.length) {
       obj.trafficDetail = message.trafficDetail.map((e) => NavigationRouteResponse_TrafficDetail.toJSON(e));
@@ -10117,7 +10116,7 @@ export const NavigationRouteResponse: MessageFns<NavigationRouteResponse> = {
   },
   fromPartial<I extends Exact<DeepPartial<NavigationRouteResponse>, I>>(object: I): NavigationRouteResponse {
     const message = createBaseNavigationRouteResponse();
-    message.unknown = object.unknown ?? "";
+    message.route = object.route ?? "";
     message.trafficDetail = object.trafficDetail?.map((e) => NavigationRouteResponse_TrafficDetail.fromPartial(e)) ||
       [];
     return message;
@@ -10451,7 +10450,7 @@ export const AddManagedChargingSiteResponse: MessageFns<AddManagedChargingSiteRe
 };
 
 function createBaseRequestTeslaAuthCommand(): RequestTeslaAuthCommand {
-  return { clientId: "", unknown: "", returnScopedToken: false };
+  return { clientId: "", scope: "", returnScopedToken: false };
 }
 
 export const RequestTeslaAuthCommand: MessageFns<RequestTeslaAuthCommand> = {
@@ -10459,8 +10458,8 @@ export const RequestTeslaAuthCommand: MessageFns<RequestTeslaAuthCommand> = {
     if (message.clientId !== "") {
       writer.uint32(10).string(message.clientId);
     }
-    if (message.unknown !== "") {
-      writer.uint32(18).string(message.unknown);
+    if (message.scope !== "") {
+      writer.uint32(18).string(message.scope);
     }
     if (message.returnScopedToken !== false) {
       writer.uint32(24).bool(message.returnScopedToken);
@@ -10488,7 +10487,7 @@ export const RequestTeslaAuthCommand: MessageFns<RequestTeslaAuthCommand> = {
             break;
           }
 
-          message.unknown = reader.string();
+          message.scope = reader.string();
           continue;
         }
         case 3: {
@@ -10511,7 +10510,7 @@ export const RequestTeslaAuthCommand: MessageFns<RequestTeslaAuthCommand> = {
   fromJSON(object: any): RequestTeslaAuthCommand {
     return {
       clientId: isSet(object.clientId) ? globalThis.String(object.clientId) : "",
-      unknown: isSet(object.unknown) ? globalThis.String(object.unknown) : "",
+      scope: isSet(object.scope) ? globalThis.String(object.scope) : "",
       returnScopedToken: isSet(object.returnScopedToken) ? globalThis.Boolean(object.returnScopedToken) : false,
     };
   },
@@ -10521,8 +10520,8 @@ export const RequestTeslaAuthCommand: MessageFns<RequestTeslaAuthCommand> = {
     if (message.clientId !== undefined) {
       obj.clientId = message.clientId;
     }
-    if (message.unknown !== undefined) {
-      obj.unknown = message.unknown;
+    if (message.scope !== undefined) {
+      obj.scope = message.scope;
     }
     if (message.returnScopedToken !== undefined) {
       obj.returnScopedToken = message.returnScopedToken;
@@ -10536,7 +10535,7 @@ export const RequestTeslaAuthCommand: MessageFns<RequestTeslaAuthCommand> = {
   fromPartial<I extends Exact<DeepPartial<RequestTeslaAuthCommand>, I>>(object: I): RequestTeslaAuthCommand {
     const message = createBaseRequestTeslaAuthCommand();
     message.clientId = object.clientId ?? "";
-    message.unknown = object.unknown ?? "";
+    message.scope = object.scope ?? "";
     message.returnScopedToken = object.returnScopedToken ?? false;
     return message;
   },
@@ -10670,16 +10669,16 @@ export const GetMessagesResponse: MessageFns<GetMessagesResponse> = {
 };
 
 function createBaseProfile(): Profile {
-  return { unknown1: "", unknown2: "" };
+  return { uuid: "", name: "" };
 }
 
 export const Profile: MessageFns<Profile> = {
   encode(message: Profile, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.unknown1 !== "") {
-      writer.uint32(10).string(message.unknown1);
+    if (message.uuid !== "") {
+      writer.uint32(10).string(message.uuid);
     }
-    if (message.unknown2 !== "") {
-      writer.uint32(18).string(message.unknown2);
+    if (message.name !== "") {
+      writer.uint32(18).string(message.name);
     }
     return writer;
   },
@@ -10696,7 +10695,7 @@ export const Profile: MessageFns<Profile> = {
             break;
           }
 
-          message.unknown1 = reader.string();
+          message.uuid = reader.string();
           continue;
         }
         case 2: {
@@ -10704,7 +10703,7 @@ export const Profile: MessageFns<Profile> = {
             break;
           }
 
-          message.unknown2 = reader.string();
+          message.name = reader.string();
           continue;
         }
       }
@@ -10718,18 +10717,18 @@ export const Profile: MessageFns<Profile> = {
 
   fromJSON(object: any): Profile {
     return {
-      unknown1: isSet(object.unknown1) ? globalThis.String(object.unknown1) : "",
-      unknown2: isSet(object.unknown2) ? globalThis.String(object.unknown2) : "",
+      uuid: isSet(object.uuid) ? globalThis.String(object.uuid) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
     };
   },
 
   toJSON(message: Profile): unknown {
     const obj: any = {};
-    if (message.unknown1 !== undefined) {
-      obj.unknown1 = message.unknown1;
+    if (message.uuid !== undefined) {
+      obj.uuid = message.uuid;
     }
-    if (message.unknown2 !== undefined) {
-      obj.unknown2 = message.unknown2;
+    if (message.name !== undefined) {
+      obj.name = message.name;
     }
     return obj;
   },
@@ -10739,8 +10738,8 @@ export const Profile: MessageFns<Profile> = {
   },
   fromPartial<I extends Exact<DeepPartial<Profile>, I>>(object: I): Profile {
     const message = createBaseProfile();
-    message.unknown1 = object.unknown1 ?? "";
-    message.unknown2 = object.unknown2 ?? "";
+    message.uuid = object.uuid ?? "";
+    message.name = object.name ?? "";
     return message;
   },
 };
@@ -10806,16 +10805,16 @@ export const GetLocalProfilesResponse: MessageFns<GetLocalProfilesResponse> = {
 };
 
 function createBaseKeyInfo(): KeyInfo {
-  return { unknown1: "", unknown2: "", publicKey: new Uint8Array(0), lastSeen: undefined, role: 0, formFactor: 0 };
+  return { name: "", model: "", publicKey: new Uint8Array(0), lastSeen: undefined, role: 0, formFactor: 0 };
 }
 
 export const KeyInfo: MessageFns<KeyInfo> = {
   encode(message: KeyInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.unknown1 !== "") {
-      writer.uint32(10).string(message.unknown1);
+    if (message.name !== "") {
+      writer.uint32(10).string(message.name);
     }
-    if (message.unknown2 !== "") {
-      writer.uint32(18).string(message.unknown2);
+    if (message.model !== "") {
+      writer.uint32(18).string(message.model);
     }
     if (message.publicKey.length !== 0) {
       writer.uint32(26).bytes(message.publicKey);
@@ -10844,7 +10843,7 @@ export const KeyInfo: MessageFns<KeyInfo> = {
             break;
           }
 
-          message.unknown1 = reader.string();
+          message.name = reader.string();
           continue;
         }
         case 2: {
@@ -10852,7 +10851,7 @@ export const KeyInfo: MessageFns<KeyInfo> = {
             break;
           }
 
-          message.unknown2 = reader.string();
+          message.model = reader.string();
           continue;
         }
         case 3: {
@@ -10898,8 +10897,8 @@ export const KeyInfo: MessageFns<KeyInfo> = {
 
   fromJSON(object: any): KeyInfo {
     return {
-      unknown1: isSet(object.unknown1) ? globalThis.String(object.unknown1) : "",
-      unknown2: isSet(object.unknown2) ? globalThis.String(object.unknown2) : "",
+      name: isSet(object.name) ? globalThis.String(object.name) : "",
+      model: isSet(object.model) ? globalThis.String(object.model) : "",
       publicKey: isSet(object.publicKey) ? bytesFromBase64(object.publicKey) : new Uint8Array(0),
       lastSeen: isSet(object.lastSeen) ? fromJsonTimestamp(object.lastSeen) : undefined,
       role: isSet(object.role) ? roleFromJSON(object.role) : 0,
@@ -10909,11 +10908,11 @@ export const KeyInfo: MessageFns<KeyInfo> = {
 
   toJSON(message: KeyInfo): unknown {
     const obj: any = {};
-    if (message.unknown1 !== undefined) {
-      obj.unknown1 = message.unknown1;
+    if (message.name !== undefined) {
+      obj.name = message.name;
     }
-    if (message.unknown2 !== undefined) {
-      obj.unknown2 = message.unknown2;
+    if (message.model !== undefined) {
+      obj.model = message.model;
     }
     if (message.publicKey !== undefined) {
       obj.publicKey = base64FromBytes(message.publicKey);
@@ -10935,8 +10934,8 @@ export const KeyInfo: MessageFns<KeyInfo> = {
   },
   fromPartial<I extends Exact<DeepPartial<KeyInfo>, I>>(object: I): KeyInfo {
     const message = createBaseKeyInfo();
-    message.unknown1 = object.unknown1 ?? "";
-    message.unknown2 = object.unknown2 ?? "";
+    message.name = object.name ?? "";
+    message.model = object.model ?? "";
     message.publicKey = object.publicKey ?? new Uint8Array(0);
     message.lastSeen = object.lastSeen ?? undefined;
     message.role = object.role ?? 0;
@@ -23726,7 +23725,7 @@ export const PhoneUnitPreferences: MessageFns<PhoneUnitPreferences> = {
 };
 
 function createBaseSetPhoneSettingPreferencesAction(): SetPhoneSettingPreferencesAction {
-  return { fontSize: 0, field2: "", unitPreferences: undefined };
+  return { fontSize: 0, language: "", unitPreferences: undefined };
 }
 
 export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPreferencesAction> = {
@@ -23734,8 +23733,8 @@ export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPrefere
     if (message.fontSize !== 0) {
       writer.uint32(8).int32(message.fontSize);
     }
-    if (message.field2 !== "") {
-      writer.uint32(18).string(message.field2);
+    if (message.language !== "") {
+      writer.uint32(18).string(message.language);
     }
     if (message.unitPreferences !== undefined) {
       PhoneUnitPreferences.encode(message.unitPreferences, writer.uint32(26).fork()).join();
@@ -23763,7 +23762,7 @@ export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPrefere
             break;
           }
 
-          message.field2 = reader.string();
+          message.language = reader.string();
           continue;
         }
         case 3: {
@@ -23786,7 +23785,7 @@ export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPrefere
   fromJSON(object: any): SetPhoneSettingPreferencesAction {
     return {
       fontSize: isSet(object.fontSize) ? setPhoneSettingPreferencesAction_FontSizeFromJSON(object.fontSize) : 0,
-      field2: isSet(object.field2) ? globalThis.String(object.field2) : "",
+      language: isSet(object.language) ? globalThis.String(object.language) : "",
       unitPreferences: isSet(object.unitPreferences)
         ? PhoneUnitPreferences.fromJSON(object.unitPreferences)
         : undefined,
@@ -23798,8 +23797,8 @@ export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPrefere
     if (message.fontSize !== undefined) {
       obj.fontSize = setPhoneSettingPreferencesAction_FontSizeToJSON(message.fontSize);
     }
-    if (message.field2 !== undefined) {
-      obj.field2 = message.field2;
+    if (message.language !== undefined) {
+      obj.language = message.language;
     }
     if (message.unitPreferences !== undefined) {
       obj.unitPreferences = PhoneUnitPreferences.toJSON(message.unitPreferences);
@@ -23817,7 +23816,7 @@ export const SetPhoneSettingPreferencesAction: MessageFns<SetPhoneSettingPrefere
   ): SetPhoneSettingPreferencesAction {
     const message = createBaseSetPhoneSettingPreferencesAction();
     message.fontSize = object.fontSize ?? 0;
-    message.field2 = object.field2 ?? "";
+    message.language = object.language ?? "";
     message.unitPreferences = (object.unitPreferences !== undefined && object.unitPreferences !== null)
       ? PhoneUnitPreferences.fromPartial(object.unitPreferences)
       : undefined;

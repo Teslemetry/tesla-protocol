@@ -1894,7 +1894,7 @@ message SohState {
     }
 
     message SohResult {
-        oneof optional_field_3 { float field_3 = 3; }  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+        oneof optional_soh { float soh = 3; }  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
         oneof optional_soh_calibrated { bool soh_calibrated = 4; }
         oneof optional_soh_last_test_time { uint32 soh_last_test_time = 5; }
         oneof optional_soh_health_result { WarrantyServiceResult soh_health_result = 6; }

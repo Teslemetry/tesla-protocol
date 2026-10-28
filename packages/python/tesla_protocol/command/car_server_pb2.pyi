@@ -524,16 +524,16 @@ class MobileUploadParams(_message.Message):
     def __init__(self, totalSize: _Optional[int] = ..., contentSha256: _Optional[bytes] = ...) -> None: ...
 
 class PrepareMobileUploadAction(_message.Message):
-    __slots__ = ("uploadParams", "imageParams", "field_3", "overwriteOldestIfFull")
+    __slots__ = ("uploadParams", "imageParams", "apply", "overwriteOldestIfFull")
     UPLOADPARAMS_FIELD_NUMBER: _ClassVar[int]
     IMAGEPARAMS_FIELD_NUMBER: _ClassVar[int]
-    FIELD_3_FIELD_NUMBER: _ClassVar[int]
+    APPLY_FIELD_NUMBER: _ClassVar[int]
     OVERWRITEOLDESTIFFULL_FIELD_NUMBER: _ClassVar[int]
     uploadParams: MobileUploadParams
     imageParams: MobileImageUploadParams
-    field_3: bool
+    apply: bool
     overwriteOldestIfFull: bool
-    def __init__(self, uploadParams: _Optional[_Union[MobileUploadParams, _Mapping]] = ..., imageParams: _Optional[_Union[MobileImageUploadParams, _Mapping]] = ..., field_3: _Optional[bool] = ..., overwriteOldestIfFull: _Optional[bool] = ...) -> None: ...
+    def __init__(self, uploadParams: _Optional[_Union[MobileUploadParams, _Mapping]] = ..., imageParams: _Optional[_Union[MobileImageUploadParams, _Mapping]] = ..., apply: _Optional[bool] = ..., overwriteOldestIfFull: _Optional[bool] = ...) -> None: ...
 
 class PrepareMobileUploadResponse(_message.Message):
     __slots__ = ("status", "uploadId", "maxChunkSize")
@@ -608,7 +608,7 @@ class PutMobileUploadChunkResponse(_message.Message):
     def __init__(self, status: _Optional[_Union[PutMobileUploadChunkResponse.Status, str]] = ..., resourceId: _Optional[bytes] = ...) -> None: ...
 
 class DogModeLiveActivityData(_message.Message):
-    __slots__ = ("disabledReason", "interiorImage", "field_3", "field_4", "insideTemperatureCelsius", "faultState", "temperatureUnit", "batteryLevel")
+    __slots__ = ("disabledReason", "interiorImage", "vin", "timestamp", "insideTemperatureCelsius", "faultState", "temperatureUnit", "batteryLevel")
     class DisabledReason(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         REASON_UNKNOWN: _ClassVar[DogModeLiveActivityData.DisabledReason]
@@ -620,29 +620,29 @@ class DogModeLiveActivityData(_message.Message):
     REASON_TOGGLE_OFF: DogModeLiveActivityData.DisabledReason
     REASON_DISALLOWED_COUNTRY: DogModeLiveActivityData.DisabledReason
     class DogModeImageData(_message.Message):
-        __slots__ = ("wrappedKey", "encryptedImage")
+        __slots__ = ("wrappedKey", "image")
         WRAPPEDKEY_FIELD_NUMBER: _ClassVar[int]
-        ENCRYPTEDIMAGE_FIELD_NUMBER: _ClassVar[int]
+        IMAGE_FIELD_NUMBER: _ClassVar[int]
         wrappedKey: bytes
-        encryptedImage: bytes
-        def __init__(self, wrappedKey: _Optional[bytes] = ..., encryptedImage: _Optional[bytes] = ...) -> None: ...
+        image: bytes
+        def __init__(self, wrappedKey: _Optional[bytes] = ..., image: _Optional[bytes] = ...) -> None: ...
     DISABLEDREASON_FIELD_NUMBER: _ClassVar[int]
     INTERIORIMAGE_FIELD_NUMBER: _ClassVar[int]
-    FIELD_3_FIELD_NUMBER: _ClassVar[int]
-    FIELD_4_FIELD_NUMBER: _ClassVar[int]
+    VIN_FIELD_NUMBER: _ClassVar[int]
+    TIMESTAMP_FIELD_NUMBER: _ClassVar[int]
     INSIDETEMPERATURECELSIUS_FIELD_NUMBER: _ClassVar[int]
     FAULTSTATE_FIELD_NUMBER: _ClassVar[int]
     TEMPERATUREUNIT_FIELD_NUMBER: _ClassVar[int]
     BATTERYLEVEL_FIELD_NUMBER: _ClassVar[int]
     disabledReason: DogModeLiveActivityData.DisabledReason
     interiorImage: DogModeLiveActivityData.DogModeImageData
-    field_3: str
-    field_4: _timestamp_pb2.Timestamp
+    vin: str
+    timestamp: _timestamp_pb2.Timestamp
     insideTemperatureCelsius: float
     faultState: _vehicle_pb2.ClimateState.DogModeState
     temperatureUnit: SetTemperatureUnitAction.Unit
     batteryLevel: float
-    def __init__(self, disabledReason: _Optional[_Union[DogModeLiveActivityData.DisabledReason, str]] = ..., interiorImage: _Optional[_Union[DogModeLiveActivityData.DogModeImageData, _Mapping]] = ..., field_3: _Optional[str] = ..., field_4: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., insideTemperatureCelsius: _Optional[float] = ..., faultState: _Optional[_Union[_vehicle_pb2.ClimateState.DogModeState, str]] = ..., temperatureUnit: _Optional[_Union[SetTemperatureUnitAction.Unit, str]] = ..., batteryLevel: _Optional[float] = ...) -> None: ...
+    def __init__(self, disabledReason: _Optional[_Union[DogModeLiveActivityData.DisabledReason, str]] = ..., interiorImage: _Optional[_Union[DogModeLiveActivityData.DogModeImageData, _Mapping]] = ..., vin: _Optional[str] = ..., timestamp: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., insideTemperatureCelsius: _Optional[float] = ..., faultState: _Optional[_Union[_vehicle_pb2.ClimateState.DogModeState, str]] = ..., temperatureUnit: _Optional[_Union[SetTemperatureUnitAction.Unit, str]] = ..., batteryLevel: _Optional[float] = ...) -> None: ...
 
 class GetTirePressureState(_message.Message):
     __slots__ = ()
@@ -747,20 +747,20 @@ class Response(_message.Message):
     def __init__(self, actionStatus: _Optional[_Union[ActionStatus, _Mapping]] = ..., vehicleData: _Optional[_Union[_vehicle_pb2.VehicleData, _Mapping]] = ..., getSessionInfoResponse: _Optional[_Union[_signatures_pb2.SessionInfo, _Mapping]] = ..., streamMessage: _Optional[_Union[StreamMessage, _Mapping]] = ..., getNearbyChargingSites: _Optional[_Union[NearbyChargingSites, _Mapping]] = ..., vehicleDataSubscriptionResponse: _Optional[_Union[VehicleDataSubscriptionResponse, _Mapping]] = ..., vitalsSubscriptionResponse: _Optional[_Union[VitalsSubscriptionResponse, _Mapping]] = ..., ping: _Optional[_Union[Ping, _Mapping]] = ..., piiKeyResponse: _Optional[_Union[PiiKeyResponse, _Mapping]] = ..., pseudonymSyncResponse: _Optional[_Union[PseudonymSyncResponse, _Mapping]] = ..., getRateTariffResponse: _Optional[_Union[GetRateTariffResponse, _Mapping]] = ..., navigationRouteResponse: _Optional[_Union[NavigationRouteResponse, _Mapping]] = ..., getManagedChargingSitesResponse: _Optional[_Union[GetManagedChargingSitesResponse, _Mapping]] = ..., getChargeOnSolarFeatureResponse: _Optional[_Union[GetChargeOnSolarFeatureResponse, _Mapping]] = ..., addManagedChargingSiteResponse: _Optional[_Union[AddManagedChargingSiteResponse, _Mapping]] = ..., getMessagesResponse: _Optional[_Union[GetMessagesResponse, _Mapping]] = ..., getLocalProfilesResponse: _Optional[_Union[GetLocalProfilesResponse, _Mapping]] = ..., keysInfoResponse: _Optional[_Union[KeysInfoResponse, _Mapping]] = ..., bandwidthTestResponse: _Optional[_Union[BandwidthTestResponse, _Mapping]] = ..., prepareMobileUploadResponse: _Optional[_Union[PrepareMobileUploadResponse, _Mapping]] = ..., putMobileUploadChunkResponse: _Optional[_Union[PutMobileUploadChunkResponse, _Mapping]] = ...) -> None: ...
 
 class VehicleDataSubscriptionResponse(_message.Message):
-    __slots__ = ("unknown", "pii_key_response")
-    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("error", "pii_key_response")
+    ERROR_FIELD_NUMBER: _ClassVar[int]
     PII_KEY_RESPONSE_FIELD_NUMBER: _ClassVar[int]
-    unknown: str
+    error: str
     pii_key_response: PiiKeyResponse
-    def __init__(self, unknown: _Optional[str] = ..., pii_key_response: _Optional[_Union[PiiKeyResponse, _Mapping]] = ...) -> None: ...
+    def __init__(self, error: _Optional[str] = ..., pii_key_response: _Optional[_Union[PiiKeyResponse, _Mapping]] = ...) -> None: ...
 
 class VitalsSubscriptionResponse(_message.Message):
-    __slots__ = ("session_id", "unknown")
+    __slots__ = ("session_id", "error")
     SESSION_ID_FIELD_NUMBER: _ClassVar[int]
-    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    ERROR_FIELD_NUMBER: _ClassVar[int]
     session_id: int
-    unknown: str
-    def __init__(self, session_id: _Optional[int] = ..., unknown: _Optional[str] = ...) -> None: ...
+    error: str
+    def __init__(self, session_id: _Optional[int] = ..., error: _Optional[str] = ...) -> None: ...
 
 class PiiKeyResponse(_message.Message):
     __slots__ = ("encrypted_pii_key", "pii_key_expiration", "subscriber_public_key_expiration")
@@ -773,13 +773,13 @@ class PiiKeyResponse(_message.Message):
     def __init__(self, encrypted_pii_key: _Optional[bytes] = ..., pii_key_expiration: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., subscriber_public_key_expiration: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
 
 class PseudonymSyncResponse(_message.Message):
-    __slots__ = ("unknown",)
-    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
-    unknown: str
-    def __init__(self, unknown: _Optional[str] = ...) -> None: ...
+    __slots__ = ("pseudonym",)
+    PSEUDONYM_FIELD_NUMBER: _ClassVar[int]
+    pseudonym: str
+    def __init__(self, pseudonym: _Optional[str] = ...) -> None: ...
 
 class NavigationRouteResponse(_message.Message):
-    __slots__ = ("unknown", "traffic_detail")
+    __slots__ = ("route", "traffic_detail")
     class TrafficStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         TS_NO_DATA: _ClassVar[NavigationRouteResponse.TrafficStatus]
@@ -799,11 +799,11 @@ class NavigationRouteResponse(_message.Message):
         offset_to_dest: float
         traffic_status: NavigationRouteResponse.TrafficStatus
         def __init__(self, offset_to_dest: _Optional[float] = ..., traffic_status: _Optional[_Union[NavigationRouteResponse.TrafficStatus, str]] = ...) -> None: ...
-    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    ROUTE_FIELD_NUMBER: _ClassVar[int]
     TRAFFIC_DETAIL_FIELD_NUMBER: _ClassVar[int]
-    unknown: str
+    route: str
     traffic_detail: _containers.RepeatedCompositeFieldContainer[NavigationRouteResponse.TrafficDetail]
-    def __init__(self, unknown: _Optional[str] = ..., traffic_detail: _Optional[_Iterable[_Union[NavigationRouteResponse.TrafficDetail, _Mapping]]] = ...) -> None: ...
+    def __init__(self, route: _Optional[str] = ..., traffic_detail: _Optional[_Iterable[_Union[NavigationRouteResponse.TrafficDetail, _Mapping]]] = ...) -> None: ...
 
 class GetManagedChargingSitesResponse(_message.Message):
     __slots__ = ("sites",)
@@ -828,14 +828,14 @@ class AddManagedChargingSiteResponse(_message.Message):
     def __init__(self, added_or_updated: _Optional[_Union[ManagedChargingSiteAddedOrUpdated, _Mapping]] = ..., existing_site_nearby: _Optional[_Union[ExistingManagedChargingSiteNearby, _Mapping]] = ...) -> None: ...
 
 class RequestTeslaAuthCommand(_message.Message):
-    __slots__ = ("client_id", "unknown", "return_scoped_token")
+    __slots__ = ("client_id", "scope", "return_scoped_token")
     CLIENT_ID_FIELD_NUMBER: _ClassVar[int]
-    UNKNOWN_FIELD_NUMBER: _ClassVar[int]
+    SCOPE_FIELD_NUMBER: _ClassVar[int]
     RETURN_SCOPED_TOKEN_FIELD_NUMBER: _ClassVar[int]
     client_id: str
-    unknown: str
+    scope: str
     return_scoped_token: bool
-    def __init__(self, client_id: _Optional[str] = ..., unknown: _Optional[str] = ..., return_scoped_token: _Optional[bool] = ...) -> None: ...
+    def __init__(self, client_id: _Optional[str] = ..., scope: _Optional[str] = ..., return_scoped_token: _Optional[bool] = ...) -> None: ...
 
 class MobileAppMessage(_message.Message):
     __slots__ = ("request_tesla_auth_command",)
@@ -850,12 +850,12 @@ class GetMessagesResponse(_message.Message):
     def __init__(self, mobile_app_messages: _Optional[_Iterable[_Union[MobileAppMessage, _Mapping]]] = ...) -> None: ...
 
 class Profile(_message.Message):
-    __slots__ = ("unknown_1", "unknown_2")
-    UNKNOWN_1_FIELD_NUMBER: _ClassVar[int]
-    UNKNOWN_2_FIELD_NUMBER: _ClassVar[int]
-    unknown_1: str
-    unknown_2: str
-    def __init__(self, unknown_1: _Optional[str] = ..., unknown_2: _Optional[str] = ...) -> None: ...
+    __slots__ = ("uuid", "name")
+    UUID_FIELD_NUMBER: _ClassVar[int]
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    uuid: str
+    name: str
+    def __init__(self, uuid: _Optional[str] = ..., name: _Optional[str] = ...) -> None: ...
 
 class GetLocalProfilesResponse(_message.Message):
     __slots__ = ("profiles",)
@@ -864,20 +864,20 @@ class GetLocalProfilesResponse(_message.Message):
     def __init__(self, profiles: _Optional[_Iterable[_Union[Profile, _Mapping]]] = ...) -> None: ...
 
 class KeyInfo(_message.Message):
-    __slots__ = ("unknown_1", "unknown_2", "public_key", "last_seen", "role", "form_factor")
-    UNKNOWN_1_FIELD_NUMBER: _ClassVar[int]
-    UNKNOWN_2_FIELD_NUMBER: _ClassVar[int]
+    __slots__ = ("name", "model", "public_key", "last_seen", "role", "form_factor")
+    NAME_FIELD_NUMBER: _ClassVar[int]
+    MODEL_FIELD_NUMBER: _ClassVar[int]
     PUBLIC_KEY_FIELD_NUMBER: _ClassVar[int]
     LAST_SEEN_FIELD_NUMBER: _ClassVar[int]
     ROLE_FIELD_NUMBER: _ClassVar[int]
     FORM_FACTOR_FIELD_NUMBER: _ClassVar[int]
-    unknown_1: str
-    unknown_2: str
+    name: str
+    model: str
     public_key: bytes
     last_seen: _timestamp_pb2.Timestamp
     role: _keys_pb2.Role
     form_factor: _vcsec_pb2.KeyFormFactor
-    def __init__(self, unknown_1: _Optional[str] = ..., unknown_2: _Optional[str] = ..., public_key: _Optional[bytes] = ..., last_seen: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., role: _Optional[_Union[_keys_pb2.Role, str]] = ..., form_factor: _Optional[_Union[_vcsec_pb2.KeyFormFactor, str]] = ...) -> None: ...
+    def __init__(self, name: _Optional[str] = ..., model: _Optional[str] = ..., public_key: _Optional[bytes] = ..., last_seen: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., role: _Optional[_Union[_keys_pb2.Role, str]] = ..., form_factor: _Optional[_Union[_vcsec_pb2.KeyFormFactor, str]] = ...) -> None: ...
 
 class KeysInfoResponse(_message.Message):
     __slots__ = ("keys_info",)
@@ -2352,7 +2352,7 @@ class PhoneUnitPreferences(_message.Message):
     def __init__(self, distance_unit: _Optional[_Union[SetDistanceUnitAction.Unit, str]] = ..., temperature_unit: _Optional[_Union[SetTemperatureUnitAction.Unit, str]] = ...) -> None: ...
 
 class SetPhoneSettingPreferencesAction(_message.Message):
-    __slots__ = ("font_size", "field_2", "unit_preferences")
+    __slots__ = ("font_size", "language", "unit_preferences")
     class FontSize(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
         __slots__ = ()
         FONT_SIZE_STANDARD: _ClassVar[SetPhoneSettingPreferencesAction.FontSize]
@@ -2360,12 +2360,12 @@ class SetPhoneSettingPreferencesAction(_message.Message):
     FONT_SIZE_STANDARD: SetPhoneSettingPreferencesAction.FontSize
     FONT_SIZE_LARGE: SetPhoneSettingPreferencesAction.FontSize
     FONT_SIZE_FIELD_NUMBER: _ClassVar[int]
-    FIELD_2_FIELD_NUMBER: _ClassVar[int]
+    LANGUAGE_FIELD_NUMBER: _ClassVar[int]
     UNIT_PREFERENCES_FIELD_NUMBER: _ClassVar[int]
     font_size: SetPhoneSettingPreferencesAction.FontSize
-    field_2: str
+    language: str
     unit_preferences: PhoneUnitPreferences
-    def __init__(self, font_size: _Optional[_Union[SetPhoneSettingPreferencesAction.FontSize, str]] = ..., field_2: _Optional[str] = ..., unit_preferences: _Optional[_Union[PhoneUnitPreferences, _Mapping]] = ...) -> None: ...
+    def __init__(self, font_size: _Optional[_Union[SetPhoneSettingPreferencesAction.FontSize, str]] = ..., language: _Optional[str] = ..., unit_preferences: _Optional[_Union[PhoneUnitPreferences, _Mapping]] = ...) -> None: ...
 
 class CancelVehicleDataSubscription(_message.Message):
     __slots__ = ()

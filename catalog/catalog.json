@@ -2060,7 +2060,7 @@
                 },
                 {
                   "number": 3,
-                  "name": "field_3",
+                  "name": "apply",
                   "type": "TYPE_BOOL",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -2298,7 +2298,7 @@
                 },
                 {
                   "number": 3,
-                  "name": "field_3",
+                  "name": "vin",
                   "type": "TYPE_STRING",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -2306,7 +2306,7 @@
                 },
                 {
                   "number": 4,
-                  "name": "field_4",
+                  "name": "timestamp",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".google.protobuf.Timestamp",
                   "label": "LABEL_OPTIONAL",
@@ -2363,7 +2363,7 @@
                     },
                     {
                       "number": 2,
-                      "name": "encryptedImage",
+                      "name": "image",
                       "type": "TYPE_BYTES",
                       "type_name": null,
                       "label": "LABEL_OPTIONAL",
@@ -2747,7 +2747,7 @@
               "fields": [
                 {
                   "number": 3,
-                  "name": "unknown",
+                  "name": "error",
                   "type": "TYPE_STRING",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -2782,7 +2782,7 @@
                 },
                 {
                   "number": 2,
-                  "name": "unknown",
+                  "name": "error",
                   "type": "TYPE_STRING",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -2836,7 +2836,7 @@
               "fields": [
                 {
                   "number": 1,
-                  "name": "unknown",
+                  "name": "pseudonym",
                   "type": "TYPE_STRING",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -2855,7 +2855,7 @@
               "fields": [
                 {
                   "number": 1,
-                  "name": "unknown",
+                  "name": "route",
                   "type": "TYPE_STRING",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -3013,7 +3013,7 @@
                 },
                 {
                   "number": 2,
-                  "name": "unknown",
+                  "name": "scope",
                   "type": "TYPE_STRING",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -3078,7 +3078,7 @@
               "fields": [
                 {
                   "number": 1,
-                  "name": "unknown_1",
+                  "name": "uuid",
                   "type": "TYPE_STRING",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -3086,7 +3086,7 @@
                 },
                 {
                   "number": 2,
-                  "name": "unknown_2",
+                  "name": "name",
                   "type": "TYPE_STRING",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -3124,7 +3124,7 @@
               "fields": [
                 {
                   "number": 1,
-                  "name": "unknown_1",
+                  "name": "name",
                   "type": "TYPE_STRING",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -3132,7 +3132,7 @@
                 },
                 {
                   "number": 2,
-                  "name": "unknown_2",
+                  "name": "model",
                   "type": "TYPE_STRING",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -8117,7 +8117,7 @@
                 },
                 {
                   "number": 2,
-                  "name": "field_2",
+                  "name": "language",
                   "type": "TYPE_STRING",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -10195,7 +10195,7 @@
               "fields": [
                 {
                   "number": 1,
-                  "name": "epoch",
+                  "name": "nonce",
                   "type": "TYPE_BYTES",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -10219,7 +10219,7 @@
                 },
                 {
                   "number": 4,
-                  "name": "nonce",
+                  "name": "tag",
                   "type": "TYPE_BYTES",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -10227,7 +10227,7 @@
                 },
                 {
                   "number": 5,
-                  "name": "tag",
+                  "name": "prefix",
                   "type": "TYPE_BYTES",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -10484,7 +10484,7 @@
                 },
                 {
                   "number": 7,
-                  "name": "field_7",
+                  "name": "flags",
                   "type": "TYPE_UINT32",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -24343,11 +24343,11 @@
                   "fields": [
                     {
                       "number": 3,
-                      "name": "field_3",
+                      "name": "soh",
                       "type": "TYPE_FLOAT",
                       "type_name": null,
                       "label": "LABEL_OPTIONAL",
-                      "oneof": "optional_field_3"
+                      "oneof": "optional_soh"
                     },
                     {
                       "number": 4,
@@ -24391,7 +24391,7 @@
                     }
                   ],
                   "oneofs": [
-                    "optional_field_3",
+                    "optional_soh",
                     "optional_soh_calibrated",
                     "optional_soh_last_test_time",
                     "optional_soh_health_result",
