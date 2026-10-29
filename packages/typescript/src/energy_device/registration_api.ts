@@ -6,7 +6,16 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { DeviceSignedPayload, UUIDv4 } from "./device.js";
+import {
+  DeviceSignedPayload,
+  DeviceType,
+  deviceTypeFromJSON,
+  deviceTypeToJSON,
+  TEGDeviceType,
+  tEGDeviceTypeFromJSON,
+  tEGDeviceTypeToJSON,
+  UUIDv4,
+} from "./device.js";
 import { Timestamp } from "./google/protobuf/timestamp.js";
 import { BoolValue, FloatValue, Int32Value, StringValue } from "./google/protobuf/wrappers.js";
 import { FirmwareVersion } from "./update.js";
@@ -231,6 +240,8 @@ export enum RegistrationDeviceType {
   REGISTRATION_DEVICE_TYPE_WALL_CONNECTOR = 4,
   REGISTRATION_DEVICE_TYPE_POWERWALL_3 = 5,
   REGISTRATION_DEVICE_TYPE_POWERWALL_3_EXPANSION = 6,
+  /** REGISTRATION_DEVICE_TYPE_OPTIMUS_CHARGER - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  REGISTRATION_DEVICE_TYPE_OPTIMUS_CHARGER = 7,
   UNRECOGNIZED = -1,
 }
 
@@ -257,6 +268,9 @@ export function registrationDeviceTypeFromJSON(object: any): RegistrationDeviceT
     case 6:
     case "REGISTRATION_DEVICE_TYPE_POWERWALL_3_EXPANSION":
       return RegistrationDeviceType.REGISTRATION_DEVICE_TYPE_POWERWALL_3_EXPANSION;
+    case 7:
+    case "REGISTRATION_DEVICE_TYPE_OPTIMUS_CHARGER":
+      return RegistrationDeviceType.REGISTRATION_DEVICE_TYPE_OPTIMUS_CHARGER;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -280,6 +294,8 @@ export function registrationDeviceTypeToJSON(object: RegistrationDeviceType): st
       return "REGISTRATION_DEVICE_TYPE_POWERWALL_3";
     case RegistrationDeviceType.REGISTRATION_DEVICE_TYPE_POWERWALL_3_EXPANSION:
       return "REGISTRATION_DEVICE_TYPE_POWERWALL_3_EXPANSION";
+    case RegistrationDeviceType.REGISTRATION_DEVICE_TYPE_OPTIMUS_CHARGER:
+      return "REGISTRATION_DEVICE_TYPE_OPTIMUS_CHARGER";
     case RegistrationDeviceType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -478,6 +494,170 @@ export function wCLoadSharingTypeToJSON(object: WCLoadSharingType): string {
   }
 }
 
+/** ===== TESLEMETRY-EXT BEGIN ===== */
+export enum MarketType {
+  MARKET_TYPE_INVALID = 0,
+  MARKET_TYPE_COMMERCIAL = 1,
+  MARKET_TYPE_RESIDENTIAL = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function marketTypeFromJSON(object: any): MarketType {
+  switch (object) {
+    case 0:
+    case "MARKET_TYPE_INVALID":
+      return MarketType.MARKET_TYPE_INVALID;
+    case 1:
+    case "MARKET_TYPE_COMMERCIAL":
+      return MarketType.MARKET_TYPE_COMMERCIAL;
+    case 2:
+    case "MARKET_TYPE_RESIDENTIAL":
+      return MarketType.MARKET_TYPE_RESIDENTIAL;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return MarketType.UNRECOGNIZED;
+  }
+}
+
+export function marketTypeToJSON(object: MarketType): string {
+  switch (object) {
+    case MarketType.MARKET_TYPE_INVALID:
+      return "MARKET_TYPE_INVALID";
+    case MarketType.MARKET_TYPE_COMMERCIAL:
+      return "MARKET_TYPE_COMMERCIAL";
+    case MarketType.MARKET_TYPE_RESIDENTIAL:
+      return "MARKET_TYPE_RESIDENTIAL";
+    case MarketType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum RegistrationFailure {
+  REGISTRATION_FAILURE_INVALID = 0,
+  REGISTRATION_FAILURE_DEVICES = 1,
+  REGISTRATION_FAILURE_NETWORK = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function registrationFailureFromJSON(object: any): RegistrationFailure {
+  switch (object) {
+    case 0:
+    case "REGISTRATION_FAILURE_INVALID":
+      return RegistrationFailure.REGISTRATION_FAILURE_INVALID;
+    case 1:
+    case "REGISTRATION_FAILURE_DEVICES":
+      return RegistrationFailure.REGISTRATION_FAILURE_DEVICES;
+    case 2:
+    case "REGISTRATION_FAILURE_NETWORK":
+      return RegistrationFailure.REGISTRATION_FAILURE_NETWORK;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return RegistrationFailure.UNRECOGNIZED;
+  }
+}
+
+export function registrationFailureToJSON(object: RegistrationFailure): string {
+  switch (object) {
+    case RegistrationFailure.REGISTRATION_FAILURE_INVALID:
+      return "REGISTRATION_FAILURE_INVALID";
+    case RegistrationFailure.REGISTRATION_FAILURE_DEVICES:
+      return "REGISTRATION_FAILURE_DEVICES";
+    case RegistrationFailure.REGISTRATION_FAILURE_NETWORK:
+      return "REGISTRATION_FAILURE_NETWORK";
+    case RegistrationFailure.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum SiteRegistrationStatus {
+  SITE_REGISTRATION_STATUS_INVALID = 0,
+  SITE_REGISTRATION_STATUS_REGISTERED = 1,
+  SITE_REGISTRATION_STATUS_ABANDONED = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function siteRegistrationStatusFromJSON(object: any): SiteRegistrationStatus {
+  switch (object) {
+    case 0:
+    case "SITE_REGISTRATION_STATUS_INVALID":
+      return SiteRegistrationStatus.SITE_REGISTRATION_STATUS_INVALID;
+    case 1:
+    case "SITE_REGISTRATION_STATUS_REGISTERED":
+      return SiteRegistrationStatus.SITE_REGISTRATION_STATUS_REGISTERED;
+    case 2:
+    case "SITE_REGISTRATION_STATUS_ABANDONED":
+      return SiteRegistrationStatus.SITE_REGISTRATION_STATUS_ABANDONED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return SiteRegistrationStatus.UNRECOGNIZED;
+  }
+}
+
+export function siteRegistrationStatusToJSON(object: SiteRegistrationStatus): string {
+  switch (object) {
+    case SiteRegistrationStatus.SITE_REGISTRATION_STATUS_INVALID:
+      return "SITE_REGISTRATION_STATUS_INVALID";
+    case SiteRegistrationStatus.SITE_REGISTRATION_STATUS_REGISTERED:
+      return "SITE_REGISTRATION_STATUS_REGISTERED";
+    case SiteRegistrationStatus.SITE_REGISTRATION_STATUS_ABANDONED:
+      return "SITE_REGISTRATION_STATUS_ABANDONED";
+    case SiteRegistrationStatus.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface AssetSiteDetailsRequest {
+  installerTeslaAuthBearerToken: string;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface AssetSiteUuidOfDeviceRequest {
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface CustomerRegistrationInfo {
+  customerId: UUIDv4 | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface DeviceInfo {
+  din: string;
+  firmwareVersion: FirmwareVersion | undefined;
+  deviceType: DeviceType;
+  tegDeviceType: TEGDeviceType;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface DeactivateDeviceResponse {
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface SiteInfo {
+  siteAddress: CustomerSiteAddress | undefined;
+  warpSiteName: string | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface RegistrationRequestWithPartDetails {
+  registrationRequest: RegistrationRequest | undefined;
+  partDetails: PartDetail[];
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface WCCommercialRegistrationRequestWithPartDetails {
+  registrationRequest: WCCommercialRegistrationRequest | undefined;
+  partDetails: PartDetail[];
+}
+
 export interface AnonymizedSiteDetails {
   deviceDetails: DeviceDetail[];
   city: string | undefined;
@@ -559,6 +739,8 @@ export interface DeviceDetail {
   deviceType: RegistrationDeviceType;
   fallbackDescription: string;
   din: string;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  tegDeviceType: TEGDeviceType;
 }
 
 export interface InstallationInfo {
@@ -663,6 +845,10 @@ export interface RegistrationRequest {
   installationInfo: InstallationInfo | undefined;
   assetSiteId: string | undefined;
   additionalPartners: PartnerInfo[];
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  marketType: MarketType;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  potentialSiteUuid: string | undefined;
 }
 
 export interface RegistrationResponse {
@@ -695,6 +881,579 @@ export interface WCCommercialRegistrationRequest {
   installationCompleted: boolean;
   siteOwnerEmail: string | undefined;
 }
+
+function createBaseAssetSiteDetailsRequest(): AssetSiteDetailsRequest {
+  return { installerTeslaAuthBearerToken: "" };
+}
+
+export const AssetSiteDetailsRequest: MessageFns<AssetSiteDetailsRequest> = {
+  encode(message: AssetSiteDetailsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.installerTeslaAuthBearerToken !== "") {
+      writer.uint32(10).string(message.installerTeslaAuthBearerToken);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AssetSiteDetailsRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAssetSiteDetailsRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.installerTeslaAuthBearerToken = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AssetSiteDetailsRequest {
+    return {
+      installerTeslaAuthBearerToken: isSet(object.installerTeslaAuthBearerToken)
+        ? globalThis.String(object.installerTeslaAuthBearerToken)
+        : "",
+    };
+  },
+
+  toJSON(message: AssetSiteDetailsRequest): unknown {
+    const obj: any = {};
+    if (message.installerTeslaAuthBearerToken !== undefined) {
+      obj.installerTeslaAuthBearerToken = message.installerTeslaAuthBearerToken;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AssetSiteDetailsRequest>, I>>(base?: I): AssetSiteDetailsRequest {
+    return AssetSiteDetailsRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AssetSiteDetailsRequest>, I>>(object: I): AssetSiteDetailsRequest {
+    const message = createBaseAssetSiteDetailsRequest();
+    message.installerTeslaAuthBearerToken = object.installerTeslaAuthBearerToken ?? "";
+    return message;
+  },
+};
+
+function createBaseAssetSiteUuidOfDeviceRequest(): AssetSiteUuidOfDeviceRequest {
+  return {};
+}
+
+export const AssetSiteUuidOfDeviceRequest: MessageFns<AssetSiteUuidOfDeviceRequest> = {
+  encode(_: AssetSiteUuidOfDeviceRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AssetSiteUuidOfDeviceRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAssetSiteUuidOfDeviceRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): AssetSiteUuidOfDeviceRequest {
+    return {};
+  },
+
+  toJSON(_: AssetSiteUuidOfDeviceRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AssetSiteUuidOfDeviceRequest>, I>>(base?: I): AssetSiteUuidOfDeviceRequest {
+    return AssetSiteUuidOfDeviceRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AssetSiteUuidOfDeviceRequest>, I>>(_: I): AssetSiteUuidOfDeviceRequest {
+    const message = createBaseAssetSiteUuidOfDeviceRequest();
+    return message;
+  },
+};
+
+function createBaseCustomerRegistrationInfo(): CustomerRegistrationInfo {
+  return { customerId: undefined };
+}
+
+export const CustomerRegistrationInfo: MessageFns<CustomerRegistrationInfo> = {
+  encode(message: CustomerRegistrationInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.customerId !== undefined) {
+      UUIDv4.encode(message.customerId, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CustomerRegistrationInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCustomerRegistrationInfo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.customerId = UUIDv4.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CustomerRegistrationInfo {
+    return { customerId: isSet(object.customerId) ? UUIDv4.fromJSON(object.customerId) : undefined };
+  },
+
+  toJSON(message: CustomerRegistrationInfo): unknown {
+    const obj: any = {};
+    if (message.customerId !== undefined) {
+      obj.customerId = UUIDv4.toJSON(message.customerId);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CustomerRegistrationInfo>, I>>(base?: I): CustomerRegistrationInfo {
+    return CustomerRegistrationInfo.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CustomerRegistrationInfo>, I>>(object: I): CustomerRegistrationInfo {
+    const message = createBaseCustomerRegistrationInfo();
+    message.customerId = (object.customerId !== undefined && object.customerId !== null)
+      ? UUIDv4.fromPartial(object.customerId)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseDeviceInfo(): DeviceInfo {
+  return { din: "", firmwareVersion: undefined, deviceType: 0, tegDeviceType: 0 };
+}
+
+export const DeviceInfo: MessageFns<DeviceInfo> = {
+  encode(message: DeviceInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.din !== "") {
+      writer.uint32(10).string(message.din);
+    }
+    if (message.firmwareVersion !== undefined) {
+      FirmwareVersion.encode(message.firmwareVersion, writer.uint32(18).fork()).join();
+    }
+    if (message.deviceType !== 0) {
+      writer.uint32(24).int32(message.deviceType);
+    }
+    if (message.tegDeviceType !== 0) {
+      writer.uint32(800).int32(message.tegDeviceType);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): DeviceInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDeviceInfo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.din = reader.string();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.firmwareVersion = FirmwareVersion.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.deviceType = reader.int32() as any;
+          continue;
+        }
+        case 100: {
+          if (tag !== 800) {
+            break;
+          }
+
+          message.tegDeviceType = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DeviceInfo {
+    return {
+      din: isSet(object.din) ? globalThis.String(object.din) : "",
+      firmwareVersion: isSet(object.firmwareVersion) ? FirmwareVersion.fromJSON(object.firmwareVersion) : undefined,
+      deviceType: isSet(object.deviceType) ? deviceTypeFromJSON(object.deviceType) : 0,
+      tegDeviceType: isSet(object.tegDeviceType) ? tEGDeviceTypeFromJSON(object.tegDeviceType) : 0,
+    };
+  },
+
+  toJSON(message: DeviceInfo): unknown {
+    const obj: any = {};
+    if (message.din !== undefined) {
+      obj.din = message.din;
+    }
+    if (message.firmwareVersion !== undefined) {
+      obj.firmwareVersion = FirmwareVersion.toJSON(message.firmwareVersion);
+    }
+    if (message.deviceType !== undefined) {
+      obj.deviceType = deviceTypeToJSON(message.deviceType);
+    }
+    if (message.tegDeviceType !== undefined) {
+      obj.tegDeviceType = tEGDeviceTypeToJSON(message.tegDeviceType);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DeviceInfo>, I>>(base?: I): DeviceInfo {
+    return DeviceInfo.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<DeviceInfo>, I>>(object: I): DeviceInfo {
+    const message = createBaseDeviceInfo();
+    message.din = object.din ?? "";
+    message.firmwareVersion = (object.firmwareVersion !== undefined && object.firmwareVersion !== null)
+      ? FirmwareVersion.fromPartial(object.firmwareVersion)
+      : undefined;
+    message.deviceType = object.deviceType ?? 0;
+    message.tegDeviceType = object.tegDeviceType ?? 0;
+    return message;
+  },
+};
+
+function createBaseDeactivateDeviceResponse(): DeactivateDeviceResponse {
+  return {};
+}
+
+export const DeactivateDeviceResponse: MessageFns<DeactivateDeviceResponse> = {
+  encode(_: DeactivateDeviceResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): DeactivateDeviceResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDeactivateDeviceResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): DeactivateDeviceResponse {
+    return {};
+  },
+
+  toJSON(_: DeactivateDeviceResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DeactivateDeviceResponse>, I>>(base?: I): DeactivateDeviceResponse {
+    return DeactivateDeviceResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<DeactivateDeviceResponse>, I>>(_: I): DeactivateDeviceResponse {
+    const message = createBaseDeactivateDeviceResponse();
+    return message;
+  },
+};
+
+function createBaseSiteInfo(): SiteInfo {
+  return { siteAddress: undefined, warpSiteName: undefined };
+}
+
+export const SiteInfo: MessageFns<SiteInfo> = {
+  encode(message: SiteInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.siteAddress !== undefined) {
+      CustomerSiteAddress.encode(message.siteAddress, writer.uint32(10).fork()).join();
+    }
+    if (message.warpSiteName !== undefined) {
+      StringValue.encode({ value: message.warpSiteName! }, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SiteInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSiteInfo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.siteAddress = CustomerSiteAddress.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.warpSiteName = StringValue.decode(reader, reader.uint32()).value;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SiteInfo {
+    return {
+      siteAddress: isSet(object.siteAddress) ? CustomerSiteAddress.fromJSON(object.siteAddress) : undefined,
+      warpSiteName: isSet(object.warpSiteName) ? String(object.warpSiteName) : undefined,
+    };
+  },
+
+  toJSON(message: SiteInfo): unknown {
+    const obj: any = {};
+    if (message.siteAddress !== undefined) {
+      obj.siteAddress = CustomerSiteAddress.toJSON(message.siteAddress);
+    }
+    if (message.warpSiteName !== undefined) {
+      obj.warpSiteName = message.warpSiteName;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SiteInfo>, I>>(base?: I): SiteInfo {
+    return SiteInfo.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SiteInfo>, I>>(object: I): SiteInfo {
+    const message = createBaseSiteInfo();
+    message.siteAddress = (object.siteAddress !== undefined && object.siteAddress !== null)
+      ? CustomerSiteAddress.fromPartial(object.siteAddress)
+      : undefined;
+    message.warpSiteName = object.warpSiteName ?? undefined;
+    return message;
+  },
+};
+
+function createBaseRegistrationRequestWithPartDetails(): RegistrationRequestWithPartDetails {
+  return { registrationRequest: undefined, partDetails: [] };
+}
+
+export const RegistrationRequestWithPartDetails: MessageFns<RegistrationRequestWithPartDetails> = {
+  encode(message: RegistrationRequestWithPartDetails, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.registrationRequest !== undefined) {
+      RegistrationRequest.encode(message.registrationRequest, writer.uint32(10).fork()).join();
+    }
+    for (const v of message.partDetails) {
+      PartDetail.encode(v!, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): RegistrationRequestWithPartDetails {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseRegistrationRequestWithPartDetails();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.registrationRequest = RegistrationRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.partDetails.push(PartDetail.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): RegistrationRequestWithPartDetails {
+    return {
+      registrationRequest: isSet(object.registrationRequest)
+        ? RegistrationRequest.fromJSON(object.registrationRequest)
+        : undefined,
+      partDetails: globalThis.Array.isArray(object?.partDetails)
+        ? object.partDetails.map((e: any) => PartDetail.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: RegistrationRequestWithPartDetails): unknown {
+    const obj: any = {};
+    if (message.registrationRequest !== undefined) {
+      obj.registrationRequest = RegistrationRequest.toJSON(message.registrationRequest);
+    }
+    if (message.partDetails?.length) {
+      obj.partDetails = message.partDetails.map((e) => PartDetail.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<RegistrationRequestWithPartDetails>, I>>(
+    base?: I,
+  ): RegistrationRequestWithPartDetails {
+    return RegistrationRequestWithPartDetails.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<RegistrationRequestWithPartDetails>, I>>(
+    object: I,
+  ): RegistrationRequestWithPartDetails {
+    const message = createBaseRegistrationRequestWithPartDetails();
+    message.registrationRequest = (object.registrationRequest !== undefined && object.registrationRequest !== null)
+      ? RegistrationRequest.fromPartial(object.registrationRequest)
+      : undefined;
+    message.partDetails = object.partDetails?.map((e) => PartDetail.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseWCCommercialRegistrationRequestWithPartDetails(): WCCommercialRegistrationRequestWithPartDetails {
+  return { registrationRequest: undefined, partDetails: [] };
+}
+
+export const WCCommercialRegistrationRequestWithPartDetails: MessageFns<
+  WCCommercialRegistrationRequestWithPartDetails
+> = {
+  encode(
+    message: WCCommercialRegistrationRequestWithPartDetails,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.registrationRequest !== undefined) {
+      WCCommercialRegistrationRequest.encode(message.registrationRequest, writer.uint32(10).fork()).join();
+    }
+    for (const v of message.partDetails) {
+      PartDetail.encode(v!, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WCCommercialRegistrationRequestWithPartDetails {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWCCommercialRegistrationRequestWithPartDetails();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.registrationRequest = WCCommercialRegistrationRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.partDetails.push(PartDetail.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WCCommercialRegistrationRequestWithPartDetails {
+    return {
+      registrationRequest: isSet(object.registrationRequest)
+        ? WCCommercialRegistrationRequest.fromJSON(object.registrationRequest)
+        : undefined,
+      partDetails: globalThis.Array.isArray(object?.partDetails)
+        ? object.partDetails.map((e: any) => PartDetail.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: WCCommercialRegistrationRequestWithPartDetails): unknown {
+    const obj: any = {};
+    if (message.registrationRequest !== undefined) {
+      obj.registrationRequest = WCCommercialRegistrationRequest.toJSON(message.registrationRequest);
+    }
+    if (message.partDetails?.length) {
+      obj.partDetails = message.partDetails.map((e) => PartDetail.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WCCommercialRegistrationRequestWithPartDetails>, I>>(
+    base?: I,
+  ): WCCommercialRegistrationRequestWithPartDetails {
+    return WCCommercialRegistrationRequestWithPartDetails.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WCCommercialRegistrationRequestWithPartDetails>, I>>(
+    object: I,
+  ): WCCommercialRegistrationRequestWithPartDetails {
+    const message = createBaseWCCommercialRegistrationRequestWithPartDetails();
+    message.registrationRequest = (object.registrationRequest !== undefined && object.registrationRequest !== null)
+      ? WCCommercialRegistrationRequest.fromPartial(object.registrationRequest)
+      : undefined;
+    message.partDetails = object.partDetails?.map((e) => PartDetail.fromPartial(e)) || [];
+    return message;
+  },
+};
 
 function createBaseAnonymizedSiteDetails(): AnonymizedSiteDetails {
   return { deviceDetails: [], city: undefined, zip: undefined };
@@ -1808,7 +2567,7 @@ export const DeactivateDeviceRequest: MessageFns<DeactivateDeviceRequest> = {
 };
 
 function createBaseDeviceDetail(): DeviceDetail {
-  return { deviceType: 0, fallbackDescription: "", din: "" };
+  return { deviceType: 0, fallbackDescription: "", din: "", tegDeviceType: 0 };
 }
 
 export const DeviceDetail: MessageFns<DeviceDetail> = {
@@ -1821,6 +2580,9 @@ export const DeviceDetail: MessageFns<DeviceDetail> = {
     }
     if (message.din !== "") {
       writer.uint32(26).string(message.din);
+    }
+    if (message.tegDeviceType !== 0) {
+      writer.uint32(32).int32(message.tegDeviceType);
     }
     return writer;
   },
@@ -1856,6 +2618,14 @@ export const DeviceDetail: MessageFns<DeviceDetail> = {
           message.din = reader.string();
           continue;
         }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.tegDeviceType = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1870,6 +2640,7 @@ export const DeviceDetail: MessageFns<DeviceDetail> = {
       deviceType: isSet(object.deviceType) ? registrationDeviceTypeFromJSON(object.deviceType) : 0,
       fallbackDescription: isSet(object.fallbackDescription) ? globalThis.String(object.fallbackDescription) : "",
       din: isSet(object.din) ? globalThis.String(object.din) : "",
+      tegDeviceType: isSet(object.tegDeviceType) ? tEGDeviceTypeFromJSON(object.tegDeviceType) : 0,
     };
   },
 
@@ -1884,6 +2655,9 @@ export const DeviceDetail: MessageFns<DeviceDetail> = {
     if (message.din !== undefined) {
       obj.din = message.din;
     }
+    if (message.tegDeviceType !== undefined) {
+      obj.tegDeviceType = tEGDeviceTypeToJSON(message.tegDeviceType);
+    }
     return obj;
   },
 
@@ -1895,6 +2669,7 @@ export const DeviceDetail: MessageFns<DeviceDetail> = {
     message.deviceType = object.deviceType ?? 0;
     message.fallbackDescription = object.fallbackDescription ?? "";
     message.din = object.din ?? "";
+    message.tegDeviceType = object.tegDeviceType ?? 0;
     return message;
   },
 };
@@ -3461,6 +4236,8 @@ function createBaseRegistrationRequest(): RegistrationRequest {
     installationInfo: undefined,
     assetSiteId: undefined,
     additionalPartners: [],
+    marketType: 0,
+    potentialSiteUuid: undefined,
   };
 }
 
@@ -3498,6 +4275,12 @@ export const RegistrationRequest: MessageFns<RegistrationRequest> = {
     }
     for (const v of message.additionalPartners) {
       PartnerInfo.encode(v!, writer.uint32(90).fork()).join();
+    }
+    if (message.marketType !== 0) {
+      writer.uint32(96).int32(message.marketType);
+    }
+    if (message.potentialSiteUuid !== undefined) {
+      StringValue.encode({ value: message.potentialSiteUuid! }, writer.uint32(106).fork()).join();
     }
     return writer;
   },
@@ -3597,6 +4380,22 @@ export const RegistrationRequest: MessageFns<RegistrationRequest> = {
           message.additionalPartners.push(PartnerInfo.decode(reader, reader.uint32()));
           continue;
         }
+        case 12: {
+          if (tag !== 96) {
+            break;
+          }
+
+          message.marketType = reader.int32() as any;
+          continue;
+        }
+        case 13: {
+          if (tag !== 106) {
+            break;
+          }
+
+          message.potentialSiteUuid = StringValue.decode(reader, reader.uint32()).value;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -3623,6 +4422,8 @@ export const RegistrationRequest: MessageFns<RegistrationRequest> = {
       additionalPartners: globalThis.Array.isArray(object?.additionalPartners)
         ? object.additionalPartners.map((e: any) => PartnerInfo.fromJSON(e))
         : [],
+      marketType: isSet(object.marketType) ? marketTypeFromJSON(object.marketType) : 0,
+      potentialSiteUuid: isSet(object.potentialSiteUuid) ? String(object.potentialSiteUuid) : undefined,
     };
   },
 
@@ -3661,6 +4462,12 @@ export const RegistrationRequest: MessageFns<RegistrationRequest> = {
     if (message.additionalPartners?.length) {
       obj.additionalPartners = message.additionalPartners.map((e) => PartnerInfo.toJSON(e));
     }
+    if (message.marketType !== undefined) {
+      obj.marketType = marketTypeToJSON(message.marketType);
+    }
+    if (message.potentialSiteUuid !== undefined) {
+      obj.potentialSiteUuid = message.potentialSiteUuid;
+    }
     return obj;
   },
 
@@ -3692,6 +4499,8 @@ export const RegistrationRequest: MessageFns<RegistrationRequest> = {
       : undefined;
     message.assetSiteId = object.assetSiteId ?? undefined;
     message.additionalPartners = object.additionalPartners?.map((e) => PartnerInfo.fromPartial(e)) || [];
+    message.marketType = object.marketType ?? 0;
+    message.potentialSiteUuid = object.potentialSiteUuid ?? undefined;
     return message;
   },
 };

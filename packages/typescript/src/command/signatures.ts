@@ -280,6 +280,37 @@ export function sessionInfoStatusToJSON(object: SessionInfoStatus): string {
   }
 }
 
+/**
+ * ===== TESLEMETRY-EXT BEGIN =====
+ * Bit positions in SessionInfo.flags.
+ */
+export enum SessionInfoFlags {
+  SESSION_INFO_FLAG_SUPPORTS_DETACHED_ENCRYPTION = 0,
+  UNRECOGNIZED = -1,
+}
+
+export function sessionInfoFlagsFromJSON(object: any): SessionInfoFlags {
+  switch (object) {
+    case 0:
+    case "SESSION_INFO_FLAG_SUPPORTS_DETACHED_ENCRYPTION":
+      return SessionInfoFlags.SESSION_INFO_FLAG_SUPPORTS_DETACHED_ENCRYPTION;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return SessionInfoFlags.UNRECOGNIZED;
+  }
+}
+
+export function sessionInfoFlagsToJSON(object: SessionInfoFlags): string {
+  switch (object) {
+    case SessionInfoFlags.SESSION_INFO_FLAG_SUPPORTS_DETACHED_ENCRYPTION:
+      return "SESSION_INFO_FLAG_SUPPORTS_DETACHED_ENCRYPTION";
+    case SessionInfoFlags.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface KeyIdentity {
   publicKey?: Uint8Array | undefined;
   handle?:
@@ -371,7 +402,7 @@ export interface SessionInfo {
   clockTime: number;
   status: SessionInfoStatus;
   handle: number;
-  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; bitmask of 1 << SessionInfoFlags */
   flags: number;
 }
 

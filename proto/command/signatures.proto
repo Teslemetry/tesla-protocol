@@ -131,6 +131,13 @@ enum Session_Info_Status {
 }
 
 
+// ===== TESLEMETRY-EXT BEGIN =====
+// Bit positions in SessionInfo.flags.
+enum SessionInfoFlags {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    SESSION_INFO_FLAG_SUPPORTS_DETACHED_ENCRYPTION = 0;
+}
+// ===== TESLEMETRY-EXT END =====
+
 message SessionInfo {
     uint32  counter            = 1;
     bytes   publicKey          = 2;
@@ -138,5 +145,5 @@ message SessionInfo {
     fixed32 clock_time         = 4;
     Session_Info_Status status = 5;
     uint32  handle             = 6;
-    uint32  flags              = 7;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    uint32  flags              = 7;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; bitmask of 1 << SessionInfoFlags
 }

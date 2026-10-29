@@ -189,6 +189,12 @@ export enum TEGDeviceType {
   TEG_DEVICE_TYPE_TEG_PVI = 8,
   TEG_DEVICE_TYPE_TACO_GATEWAY3V = 9,
   TEG_DEVICE_TYPE_TACO_WALLBOX = 10,
+  /** TEG_DEVICE_TYPE_TULIP - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  TEG_DEVICE_TYPE_TULIP = 11,
+  /** TEG_DEVICE_TYPE_DYNAMO - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  TEG_DEVICE_TYPE_DYNAMO = 12,
+  /** TEG_DEVICE_TYPE_SMC_SUPERCHARGER - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  TEG_DEVICE_TYPE_SMC_SUPERCHARGER = 13,
   UNRECOGNIZED = -1,
 }
 
@@ -227,6 +233,15 @@ export function tEGDeviceTypeFromJSON(object: any): TEGDeviceType {
     case 10:
     case "TEG_DEVICE_TYPE_TACO_WALLBOX":
       return TEGDeviceType.TEG_DEVICE_TYPE_TACO_WALLBOX;
+    case 11:
+    case "TEG_DEVICE_TYPE_TULIP":
+      return TEGDeviceType.TEG_DEVICE_TYPE_TULIP;
+    case 12:
+    case "TEG_DEVICE_TYPE_DYNAMO":
+      return TEGDeviceType.TEG_DEVICE_TYPE_DYNAMO;
+    case 13:
+    case "TEG_DEVICE_TYPE_SMC_SUPERCHARGER":
+      return TEGDeviceType.TEG_DEVICE_TYPE_SMC_SUPERCHARGER;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -258,7 +273,47 @@ export function tEGDeviceTypeToJSON(object: TEGDeviceType): string {
       return "TEG_DEVICE_TYPE_TACO_GATEWAY3V";
     case TEGDeviceType.TEG_DEVICE_TYPE_TACO_WALLBOX:
       return "TEG_DEVICE_TYPE_TACO_WALLBOX";
+    case TEGDeviceType.TEG_DEVICE_TYPE_TULIP:
+      return "TEG_DEVICE_TYPE_TULIP";
+    case TEGDeviceType.TEG_DEVICE_TYPE_DYNAMO:
+      return "TEG_DEVICE_TYPE_DYNAMO";
+    case TEGDeviceType.TEG_DEVICE_TYPE_SMC_SUPERCHARGER:
+      return "TEG_DEVICE_TYPE_SMC_SUPERCHARGER";
     case TEGDeviceType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** ===== TESLEMETRY-EXT BEGIN ===== */
+export enum BranchCircuitDeviceType {
+  BRANCH_CIRCUIT_DEVICE_TYPE_INVALID = 0,
+  BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function branchCircuitDeviceTypeFromJSON(object: any): BranchCircuitDeviceType {
+  switch (object) {
+    case 0:
+    case "BRANCH_CIRCUIT_DEVICE_TYPE_INVALID":
+      return BranchCircuitDeviceType.BRANCH_CIRCUIT_DEVICE_TYPE_INVALID;
+    case 1:
+    case "BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER":
+      return BranchCircuitDeviceType.BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return BranchCircuitDeviceType.UNRECOGNIZED;
+  }
+}
+
+export function branchCircuitDeviceTypeToJSON(object: BranchCircuitDeviceType): string {
+  switch (object) {
+    case BranchCircuitDeviceType.BRANCH_CIRCUIT_DEVICE_TYPE_INVALID:
+      return "BRANCH_CIRCUIT_DEVICE_TYPE_INVALID";
+    case BranchCircuitDeviceType.BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER:
+      return "BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER";
+    case BranchCircuitDeviceType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
@@ -268,6 +323,8 @@ export enum iPMDeviceType {
   IPM_DEVICE_TYPE_INVALID = 0,
   IPM_DEVICE_TYPE_POWERPACK3 = 1,
   IPM_DEVICE_TYPE_SUPERCHARGER4 = 2,
+  /** IPM_DEVICE_TYPE_MEGACHARGER - TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  IPM_DEVICE_TYPE_MEGACHARGER = 3,
   UNRECOGNIZED = -1,
 }
 
@@ -282,6 +339,9 @@ export function iPMDeviceTypeFromJSON(object: any): iPMDeviceType {
     case 2:
     case "IPM_DEVICE_TYPE_SUPERCHARGER4":
       return iPMDeviceType.IPM_DEVICE_TYPE_SUPERCHARGER4;
+    case 3:
+    case "IPM_DEVICE_TYPE_MEGACHARGER":
+      return iPMDeviceType.IPM_DEVICE_TYPE_MEGACHARGER;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -297,6 +357,8 @@ export function iPMDeviceTypeToJSON(object: iPMDeviceType): string {
       return "IPM_DEVICE_TYPE_POWERPACK3";
     case iPMDeviceType.IPM_DEVICE_TYPE_SUPERCHARGER4:
       return "IPM_DEVICE_TYPE_SUPERCHARGER4";
+    case iPMDeviceType.IPM_DEVICE_TYPE_MEGACHARGER:
+      return "IPM_DEVICE_TYPE_MEGACHARGER";
     case iPMDeviceType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

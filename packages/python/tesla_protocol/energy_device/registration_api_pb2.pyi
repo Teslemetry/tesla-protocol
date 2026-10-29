@@ -56,6 +56,7 @@ class RegistrationDeviceType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     REGISTRATION_DEVICE_TYPE_WALL_CONNECTOR: _ClassVar[RegistrationDeviceType]
     REGISTRATION_DEVICE_TYPE_POWERWALL_3: _ClassVar[RegistrationDeviceType]
     REGISTRATION_DEVICE_TYPE_POWERWALL_3_EXPANSION: _ClassVar[RegistrationDeviceType]
+    REGISTRATION_DEVICE_TYPE_OPTIMUS_CHARGER: _ClassVar[RegistrationDeviceType]
 
 class RegistrationSiteRelationshipType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -86,6 +87,24 @@ class WCLoadSharingType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     WC_LOAD_SHARING_TYPE_INVALID: _ClassVar[WCLoadSharingType]
     WC_LOAD_SHARING_TYPE_LEADER: _ClassVar[WCLoadSharingType]
     WC_LOAD_SHARING_TYPE_FOLLOWER: _ClassVar[WCLoadSharingType]
+
+class MarketType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    MARKET_TYPE_INVALID: _ClassVar[MarketType]
+    MARKET_TYPE_COMMERCIAL: _ClassVar[MarketType]
+    MARKET_TYPE_RESIDENTIAL: _ClassVar[MarketType]
+
+class RegistrationFailure(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    REGISTRATION_FAILURE_INVALID: _ClassVar[RegistrationFailure]
+    REGISTRATION_FAILURE_DEVICES: _ClassVar[RegistrationFailure]
+    REGISTRATION_FAILURE_NETWORK: _ClassVar[RegistrationFailure]
+
+class SiteRegistrationStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SITE_REGISTRATION_STATUS_INVALID: _ClassVar[SiteRegistrationStatus]
+    SITE_REGISTRATION_STATUS_REGISTERED: _ClassVar[SiteRegistrationStatus]
+    SITE_REGISTRATION_STATUS_ABANDONED: _ClassVar[SiteRegistrationStatus]
 PROJECT_ACCESS_TYPE_INVALID: ProjectAccessType
 PROJECT_ACCESS_TYPE_SERVICE: ProjectAccessType
 PROJECT_ACCESS_TYPE_MANUFACTURING: ProjectAccessType
@@ -121,6 +140,7 @@ REGISTRATION_DEVICE_TYPE_PV_INVERTER: RegistrationDeviceType
 REGISTRATION_DEVICE_TYPE_WALL_CONNECTOR: RegistrationDeviceType
 REGISTRATION_DEVICE_TYPE_POWERWALL_3: RegistrationDeviceType
 REGISTRATION_DEVICE_TYPE_POWERWALL_3_EXPANSION: RegistrationDeviceType
+REGISTRATION_DEVICE_TYPE_OPTIMUS_CHARGER: RegistrationDeviceType
 REGISTRATION_SITE_RELATIONSHIP_TYPE_INVALID: RegistrationSiteRelationshipType
 REGISTRATION_SITE_RELATIONSHIP_TYPE_OWNER: RegistrationSiteRelationshipType
 REGISTRATION_SITE_RELATIONSHIP_TYPE_INSTALLER: RegistrationSiteRelationshipType
@@ -139,6 +159,71 @@ REGISTRATION_STATUS_RETRY_WITH_NO_FURTHER_ACTION: RegistrationStatus
 WC_LOAD_SHARING_TYPE_INVALID: WCLoadSharingType
 WC_LOAD_SHARING_TYPE_LEADER: WCLoadSharingType
 WC_LOAD_SHARING_TYPE_FOLLOWER: WCLoadSharingType
+MARKET_TYPE_INVALID: MarketType
+MARKET_TYPE_COMMERCIAL: MarketType
+MARKET_TYPE_RESIDENTIAL: MarketType
+REGISTRATION_FAILURE_INVALID: RegistrationFailure
+REGISTRATION_FAILURE_DEVICES: RegistrationFailure
+REGISTRATION_FAILURE_NETWORK: RegistrationFailure
+SITE_REGISTRATION_STATUS_INVALID: SiteRegistrationStatus
+SITE_REGISTRATION_STATUS_REGISTERED: SiteRegistrationStatus
+SITE_REGISTRATION_STATUS_ABANDONED: SiteRegistrationStatus
+
+class AssetSiteDetailsRequest(_message.Message):
+    __slots__ = ("installer_tesla_auth_bearer_token",)
+    INSTALLER_TESLA_AUTH_BEARER_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    installer_tesla_auth_bearer_token: str
+    def __init__(self, installer_tesla_auth_bearer_token: _Optional[str] = ...) -> None: ...
+
+class AssetSiteUuidOfDeviceRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class CustomerRegistrationInfo(_message.Message):
+    __slots__ = ("customer_id",)
+    CUSTOMER_ID_FIELD_NUMBER: _ClassVar[int]
+    customer_id: _device_pb2.UUIDv4
+    def __init__(self, customer_id: _Optional[_Union[_device_pb2.UUIDv4, _Mapping]] = ...) -> None: ...
+
+class DeviceInfo(_message.Message):
+    __slots__ = ("din", "firmware_version", "device_type", "teg_device_type")
+    DIN_FIELD_NUMBER: _ClassVar[int]
+    FIRMWARE_VERSION_FIELD_NUMBER: _ClassVar[int]
+    DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
+    TEG_DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
+    din: str
+    firmware_version: _update_pb2.FirmwareVersion
+    device_type: _device_pb2.DeviceType
+    teg_device_type: _device_pb2.TEGDeviceType
+    def __init__(self, din: _Optional[str] = ..., firmware_version: _Optional[_Union[_update_pb2.FirmwareVersion, _Mapping]] = ..., device_type: _Optional[_Union[_device_pb2.DeviceType, str]] = ..., teg_device_type: _Optional[_Union[_device_pb2.TEGDeviceType, str]] = ...) -> None: ...
+
+class DeactivateDeviceResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
+class SiteInfo(_message.Message):
+    __slots__ = ("site_address", "warp_site_name")
+    SITE_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    WARP_SITE_NAME_FIELD_NUMBER: _ClassVar[int]
+    site_address: CustomerSiteAddress
+    warp_site_name: _wrappers_pb2.StringValue
+    def __init__(self, site_address: _Optional[_Union[CustomerSiteAddress, _Mapping]] = ..., warp_site_name: _Optional[_Union[_wrappers_pb2.StringValue, _Mapping]] = ...) -> None: ...
+
+class RegistrationRequestWithPartDetails(_message.Message):
+    __slots__ = ("registration_request", "part_details")
+    REGISTRATION_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    PART_DETAILS_FIELD_NUMBER: _ClassVar[int]
+    registration_request: RegistrationRequest
+    part_details: _containers.RepeatedCompositeFieldContainer[PartDetail]
+    def __init__(self, registration_request: _Optional[_Union[RegistrationRequest, _Mapping]] = ..., part_details: _Optional[_Iterable[_Union[PartDetail, _Mapping]]] = ...) -> None: ...
+
+class WCCommercialRegistrationRequestWithPartDetails(_message.Message):
+    __slots__ = ("registration_request", "part_details")
+    REGISTRATION_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    PART_DETAILS_FIELD_NUMBER: _ClassVar[int]
+    registration_request: WCCommercialRegistrationRequest
+    part_details: _containers.RepeatedCompositeFieldContainer[PartDetail]
+    def __init__(self, registration_request: _Optional[_Union[WCCommercialRegistrationRequest, _Mapping]] = ..., part_details: _Optional[_Iterable[_Union[PartDetail, _Mapping]]] = ...) -> None: ...
 
 class AnonymizedSiteDetails(_message.Message):
     __slots__ = ("device_details", "city", "zip")
@@ -261,14 +346,16 @@ class DeactivateDeviceRequest(_message.Message):
     def __init__(self, dins: _Optional[_Iterable[str]] = ..., installer_tesla_auth_bearer_token: _Optional[str] = ...) -> None: ...
 
 class DeviceDetail(_message.Message):
-    __slots__ = ("device_type", "fallback_description", "din")
+    __slots__ = ("device_type", "fallback_description", "din", "teg_device_type")
     DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
     FALLBACK_DESCRIPTION_FIELD_NUMBER: _ClassVar[int]
     DIN_FIELD_NUMBER: _ClassVar[int]
+    TEG_DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
     device_type: RegistrationDeviceType
     fallback_description: str
     din: str
-    def __init__(self, device_type: _Optional[_Union[RegistrationDeviceType, str]] = ..., fallback_description: _Optional[str] = ..., din: _Optional[str] = ...) -> None: ...
+    teg_device_type: _device_pb2.TEGDeviceType
+    def __init__(self, device_type: _Optional[_Union[RegistrationDeviceType, str]] = ..., fallback_description: _Optional[str] = ..., din: _Optional[str] = ..., teg_device_type: _Optional[_Union[_device_pb2.TEGDeviceType, str]] = ...) -> None: ...
 
 class InstallationInfo(_message.Message):
     __slots__ = ("installation_guid",)
@@ -413,7 +500,7 @@ class RegistrationMessages(_message.Message):
     def __init__(self, prepare_registration_payload_request: _Optional[_Union[RegistrationAPIPrepareRegistrationPayloadRequest, _Mapping]] = ..., prepare_registration_payload_response: _Optional[_Union[RegistrationAPIPrepareRegistrationPayloadResponse, _Mapping]] = ..., register_request: _Optional[_Union[RegistrationAPIRegisterRequest, _Mapping]] = ..., register_response: _Optional[_Union[RegistrationAPIRegisterResponse, _Mapping]] = ..., retrieve_site_uuid_request: _Optional[_Union[RegistrationAPIRetrieveSiteUuidRequest, _Mapping]] = ..., retrieve_site_uuid_response: _Optional[_Union[RegistrationAPIRetrieveSiteUuidResponse, _Mapping]] = ..., retrieve_site_suggestion_request: _Optional[_Union[RegistrationAPIRetrieveSiteSuggestionRequest, _Mapping]] = ..., retrieve_site_suggestion_response: _Optional[_Union[RegistrationAPIRetrieveSiteSuggestionResponse, _Mapping]] = ..., retrieve_asset_site_details_request: _Optional[_Union[RegistrationAPIRetrieveAssetSiteDetailsRequest, _Mapping]] = ..., retrieve_asset_site_details_response: _Optional[_Union[RegistrationAPIRetrieveAssetSiteDetailsResponse, _Mapping]] = ..., deactivate_device_request: _Optional[_Union[RegistrationAPIDeactivateDeviceRequest, _Mapping]] = ..., deactivate_device_response: _Optional[_Union[RegistrationAPIDeactivateDeviceResponse, _Mapping]] = ...) -> None: ...
 
 class RegistrationRequest(_message.Message):
-    __slots__ = ("version", "part_details", "attempt", "registration_source", "installer", "customer", "site_address", "legal_consent", "installation_info", "asset_site_id", "additional_partners")
+    __slots__ = ("version", "part_details", "attempt", "registration_source", "installer", "customer", "site_address", "legal_consent", "installation_info", "asset_site_id", "additional_partners", "market_type", "potential_site_uuid")
     VERSION_FIELD_NUMBER: _ClassVar[int]
     PART_DETAILS_FIELD_NUMBER: _ClassVar[int]
     ATTEMPT_FIELD_NUMBER: _ClassVar[int]
@@ -425,6 +512,8 @@ class RegistrationRequest(_message.Message):
     INSTALLATION_INFO_FIELD_NUMBER: _ClassVar[int]
     ASSET_SITE_ID_FIELD_NUMBER: _ClassVar[int]
     ADDITIONAL_PARTNERS_FIELD_NUMBER: _ClassVar[int]
+    MARKET_TYPE_FIELD_NUMBER: _ClassVar[int]
+    POTENTIAL_SITE_UUID_FIELD_NUMBER: _ClassVar[int]
     version: _update_pb2.FirmwareVersion
     part_details: _containers.RepeatedCompositeFieldContainer[PartDetail]
     attempt: int
@@ -436,7 +525,9 @@ class RegistrationRequest(_message.Message):
     installation_info: InstallationInfo
     asset_site_id: _wrappers_pb2.StringValue
     additional_partners: _containers.RepeatedCompositeFieldContainer[PartnerInfo]
-    def __init__(self, version: _Optional[_Union[_update_pb2.FirmwareVersion, _Mapping]] = ..., part_details: _Optional[_Iterable[_Union[PartDetail, _Mapping]]] = ..., attempt: _Optional[int] = ..., registration_source: _Optional[_Union[RegistrationSource, str]] = ..., installer: _Optional[_Union[InstallerInfo, _Mapping]] = ..., customer: _Optional[_Union[CustomerInfo, _Mapping]] = ..., site_address: _Optional[_Union[CustomerSiteAddress, _Mapping]] = ..., legal_consent: _Optional[_Union[CustomerLegalConsent, _Mapping]] = ..., installation_info: _Optional[_Union[InstallationInfo, _Mapping]] = ..., asset_site_id: _Optional[_Union[_wrappers_pb2.StringValue, _Mapping]] = ..., additional_partners: _Optional[_Iterable[_Union[PartnerInfo, _Mapping]]] = ...) -> None: ...
+    market_type: MarketType
+    potential_site_uuid: _wrappers_pb2.StringValue
+    def __init__(self, version: _Optional[_Union[_update_pb2.FirmwareVersion, _Mapping]] = ..., part_details: _Optional[_Iterable[_Union[PartDetail, _Mapping]]] = ..., attempt: _Optional[int] = ..., registration_source: _Optional[_Union[RegistrationSource, str]] = ..., installer: _Optional[_Union[InstallerInfo, _Mapping]] = ..., customer: _Optional[_Union[CustomerInfo, _Mapping]] = ..., site_address: _Optional[_Union[CustomerSiteAddress, _Mapping]] = ..., legal_consent: _Optional[_Union[CustomerLegalConsent, _Mapping]] = ..., installation_info: _Optional[_Union[InstallationInfo, _Mapping]] = ..., asset_site_id: _Optional[_Union[_wrappers_pb2.StringValue, _Mapping]] = ..., additional_partners: _Optional[_Iterable[_Union[PartnerInfo, _Mapping]]] = ..., market_type: _Optional[_Union[MarketType, str]] = ..., potential_site_uuid: _Optional[_Union[_wrappers_pb2.StringValue, _Mapping]] = ...) -> None: ...
 
 class RegistrationResponse(_message.Message):
     __slots__ = ("status", "retry_delay_s", "status_time", "asset_site_id")

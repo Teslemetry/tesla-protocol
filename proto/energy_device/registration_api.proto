@@ -56,6 +56,7 @@ enum RegistrationDeviceType {
   REGISTRATION_DEVICE_TYPE_WALL_CONNECTOR = 4;
   REGISTRATION_DEVICE_TYPE_POWERWALL_3 = 5;
   REGISTRATION_DEVICE_TYPE_POWERWALL_3_EXPANSION = 6;
+  REGISTRATION_DEVICE_TYPE_OPTIMUS_CHARGER = 7;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 enum RegistrationSiteRelationshipType {
@@ -87,6 +88,52 @@ enum WCLoadSharingType {
   WC_LOAD_SHARING_TYPE_LEADER = 1;
   WC_LOAD_SHARING_TYPE_FOLLOWER = 2;
 }
+
+// ===== TESLEMETRY-EXT BEGIN =====
+enum MarketType {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+  MARKET_TYPE_INVALID     = 0;
+  MARKET_TYPE_COMMERCIAL  = 1;
+  MARKET_TYPE_RESIDENTIAL = 2;
+}
+enum RegistrationFailure {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+  REGISTRATION_FAILURE_INVALID = 0;
+  REGISTRATION_FAILURE_DEVICES = 1;
+  REGISTRATION_FAILURE_NETWORK = 2;
+}
+enum SiteRegistrationStatus {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+  SITE_REGISTRATION_STATUS_INVALID    = 0;
+  SITE_REGISTRATION_STATUS_REGISTERED = 1;
+  SITE_REGISTRATION_STATUS_ABANDONED  = 2;
+}
+message AssetSiteDetailsRequest {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+  string installer_tesla_auth_bearer_token = 1;
+}
+message AssetSiteUuidOfDeviceRequest {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+}
+message CustomerRegistrationInfo {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+  UUIDv4 customer_id = 1;
+}
+message DeviceInfo {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+  string din = 1;
+  FirmwareVersion firmware_version = 2;
+  DeviceType device_type = 3;
+  TEGDeviceType teg_device_type = 100;
+}
+message DeactivateDeviceResponse {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+}
+message SiteInfo {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+  CustomerSiteAddress site_address = 1;
+  google.protobuf.StringValue warp_site_name = 2;
+}
+message RegistrationRequestWithPartDetails {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+  RegistrationRequest registration_request = 1;
+  repeated PartDetail part_details = 2;
+}
+message WCCommercialRegistrationRequestWithPartDetails {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+  WCCommercialRegistrationRequest registration_request = 1;
+  repeated PartDetail part_details = 2;
+}
+// ===== TESLEMETRY-EXT END =====
 
 message AnonymizedSiteDetails {
   repeated DeviceDetail device_details = 1;
@@ -162,6 +209,7 @@ message DeviceDetail {
   RegistrationDeviceType device_type = 1;
   string fallback_description = 2;
   string din = 3;
+  TEGDeviceType teg_device_type = 4;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 message InstallationInfo {
@@ -267,6 +315,8 @@ message RegistrationRequest {
   InstallationInfo installation_info = 9;
   google.protobuf.StringValue asset_site_id = 10;
   repeated PartnerInfo additional_partners = 11;
+  MarketType market_type = 12;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+  google.protobuf.StringValue potential_site_uuid = 13;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 message RegistrationResponse {
