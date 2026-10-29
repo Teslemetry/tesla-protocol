@@ -283,6 +283,7 @@ export function sessionInfoStatusToJSON(object: SessionInfoStatus): string {
 /**
  * ===== TESLEMETRY-EXT BEGIN =====
  * Bit positions in SessionInfo.flags.
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
  */
 export enum SessionInfoFlags {
   SESSION_INFO_FLAG_SUPPORTS_DETACHED_ENCRYPTION = 0,

@@ -133,7 +133,8 @@ enum Session_Info_Status {
 
 // ===== TESLEMETRY-EXT BEGIN =====
 // Bit positions in SessionInfo.flags.
-enum SessionInfoFlags {  // UNCONFIRMED: not yet confirmed on a live vehicle
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+enum SessionInfoFlags {
     SESSION_INFO_FLAG_SUPPORTS_DETACHED_ENCRYPTION = 0;
 }
 // ===== TESLEMETRY-EXT END =====
