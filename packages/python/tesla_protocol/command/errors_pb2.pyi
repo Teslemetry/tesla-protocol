@@ -30,17 +30,17 @@ GENERICERROR_KEY_NOT_FOUND: GenericError_E
 GENERICERROR_NOT_SUPPORTED: GenericError_E
 
 class KeyNotFoundContext(_message.Message):
-    __slots__ = ("public_key", "handle")
-    PUBLIC_KEY_FIELD_NUMBER: _ClassVar[int]
-    HANDLE_FIELD_NUMBER: _ClassVar[int]
-    public_key: bytes
-    handle: int
-    def __init__(self, public_key: _Optional[bytes] = ..., handle: _Optional[int] = ...) -> None: ...
+    __slots__ = ("publicKey", "slot")
+    PUBLICKEY_FIELD_NUMBER: _ClassVar[int]
+    SLOT_FIELD_NUMBER: _ClassVar[int]
+    publicKey: bytes
+    slot: int
+    def __init__(self, publicKey: _Optional[bytes] = ..., slot: _Optional[int] = ...) -> None: ...
 
 class NominalError(_message.Message):
-    __slots__ = ("genericError", "keyNotFoundContext")
+    __slots__ = ("genericError", "keyNotFound")
     GENERICERROR_FIELD_NUMBER: _ClassVar[int]
-    KEYNOTFOUNDCONTEXT_FIELD_NUMBER: _ClassVar[int]
+    KEYNOTFOUND_FIELD_NUMBER: _ClassVar[int]
     genericError: GenericError_E
-    keyNotFoundContext: KeyNotFoundContext
-    def __init__(self, genericError: _Optional[_Union[GenericError_E, str]] = ..., keyNotFoundContext: _Optional[_Union[KeyNotFoundContext, _Mapping]] = ...) -> None: ...
+    keyNotFound: KeyNotFoundContext
+    def __init__(self, genericError: _Optional[_Union[GenericError_E, str]] = ..., keyNotFound: _Optional[_Union[KeyNotFoundContext, _Mapping]] = ...) -> None: ...

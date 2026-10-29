@@ -44,23 +44,21 @@ enum TEGDeviceType {
   TEG_DEVICE_TYPE_TEG_PVI          = 8;
   TEG_DEVICE_TYPE_TACO_GATEWAY3V   = 9;
   TEG_DEVICE_TYPE_TACO_WALLBOX     = 10;
-  TEG_DEVICE_TYPE_TULIP            = 11;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
-  TEG_DEVICE_TYPE_DYNAMO           = 12;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
-  TEG_DEVICE_TYPE_SMC_SUPERCHARGER = 13;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+  TEG_DEVICE_TYPE_TULIP            = 11;
+  TEG_DEVICE_TYPE_DYNAMO           = 12;
+  TEG_DEVICE_TYPE_SMC_SUPERCHARGER = 13;
 }
 
-// ===== TESLEMETRY-EXT BEGIN =====
-enum BranchCircuitDeviceType {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
-  BRANCH_CIRCUIT_DEVICE_TYPE_INVALID       = 0;
-  BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER = 1;
-}
-// ===== TESLEMETRY-EXT END =====
-
-enum iPMDeviceType {
+enum IPMDeviceType {
   IPM_DEVICE_TYPE_INVALID       = 0;
   IPM_DEVICE_TYPE_POWERPACK3    = 1;
   IPM_DEVICE_TYPE_SUPERCHARGER4 = 2;
-  IPM_DEVICE_TYPE_MEGACHARGER   = 3;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+  IPM_DEVICE_TYPE_MEGACHARGER   = 3;
+}
+
+enum BranchCircuitDeviceType {
+  BRANCH_CIRCUIT_DEVICE_TYPE_INVALID       = 0;
+  BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER = 1;
 }
 
 message Din {
@@ -94,5 +92,5 @@ message DeviceSignedPayload {
 
 message EncryptedMessage {
   Cipher cipher     = 1;
-  bytes cipher_text = 2;
+  bytes ciphertext = 2;
 }

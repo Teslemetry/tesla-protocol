@@ -40,12 +40,12 @@ class AccumulatedEnergy(_message.Message):
     def __init__(self, energy_wh: _Optional[float] = ..., accumulation_type: _Optional[_Union[EnergyAccumulationType, str]] = ..., period_s: _Optional[_Union[_wrappers_pb2.UInt64Value, _Mapping]] = ...) -> None: ...
 
 class GridComplianceStatus(_message.Message):
-    __slots__ = ("grid_state", "qualifiying_time_remaining_s")
+    __slots__ = ("grid_state", "qualifying_time_remaining_s")
     GRID_STATE_FIELD_NUMBER: _ClassVar[int]
-    QUALIFIYING_TIME_REMAINING_S_FIELD_NUMBER: _ClassVar[int]
+    QUALIFYING_TIME_REMAINING_S_FIELD_NUMBER: _ClassVar[int]
     grid_state: GridState
-    qualifiying_time_remaining_s: _wrappers_pb2.FloatValue
-    def __init__(self, grid_state: _Optional[_Union[GridState, str]] = ..., qualifiying_time_remaining_s: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ...) -> None: ...
+    qualifying_time_remaining_s: _wrappers_pb2.FloatValue
+    def __init__(self, grid_state: _Optional[_Union[GridState, str]] = ..., qualifying_time_remaining_s: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ...) -> None: ...
 
 class InstACMeasurement(_message.Message):
     __slots__ = ("voltage_vrms", "frequency_hz", "current_arms", "real_power_w", "reactive_power_var", "apparent_power_va")

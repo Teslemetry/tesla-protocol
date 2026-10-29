@@ -25,7 +25,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)tesla_protocol/energy_device/energy.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\x1a\x1egoogle/protobuf/wrappers.proto\"\xb6\x01\n\x11\x41\x63\x63umulatedEnergy\x12\x11\n\tenergy_wh\x18\x01 \x01(\x02\x12^\n\x11\x61\x63\x63umulation_type\x18\x02 \x01(\x0e\x32\x43.tesla_protocol.tesla.proto.energy_device.v1.EnergyAccumulationType\x12.\n\x08period_s\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\"\xa5\x01\n\x14GridComplianceStatus\x12J\n\ngrid_state\x18\x01 \x01(\x0e\x32\x36.tesla_protocol.tesla.proto.energy_device.v1.GridState\x12\x41\n\x1cqualifiying_time_remaining_s\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.FloatValue\"\x96\x02\n\x11InstACMeasurement\x12\x14\n\x0cvoltage_vrms\x18\x01 \x01(\x02\x12\x14\n\x0c\x66requency_hz\x18\x02 \x01(\x02\x12\x31\n\x0c\x63urrent_arms\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.FloatValue\x12\x31\n\x0creal_power_w\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.FloatValue\x12\x37\n\x12reactive_power_var\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.FloatValue\x12\x36\n\x11\x61pparent_power_va\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.FloatValue\"V\n\x11InstDCMeasurement\x12\x11\n\tvoltage_v\x18\x01 \x01(\x02\x12.\n\tcurrent_a\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.FloatValue\"&\n\x08\x41lertLog\x12\x11\n\x04\x64\x61ta\x18\x01 \x01(\x04H\x00\x88\x01\x01\x42\x07\n\x05_data\")\n\x0b\x41lertMatrix\x12\x11\n\x04\x64\x61ta\x18\x01 \x01(\x04H\x00\x88\x01\x01\x42\x07\n\x05_data*\xaf\x01\n\x16\x45nergyAccumulationType\x12$\n ENERGY_ACCUMULATION_TYPE_INVALID\x10\x00\x12%\n!ENERGY_ACCUMULATION_TYPE_LIFETIME\x10\x01\x12\"\n\x1e\x45NERGY_ACCUMULATION_TYPE_TODAY\x10\x02\x12$\n ENERGY_ACCUMULATION_TYPE_SESSION\x10\x03*t\n\tGridState\x12\x16\n\x12GRID_STATE_INVALID\x10\x00\x12\x1a\n\x16GRID_STATE_UNCOMPLIANT\x10\x01\x12\x19\n\x15GRID_STATE_QUALIFYING\x10\x02\x12\x18\n\x14GRID_STATE_COMPLIANT\x10\x03\x42z\n$com.tesla.generated.energy_device.v1B\x06\x45nergyZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)tesla_protocol/energy_device/energy.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\x1a\x1egoogle/protobuf/wrappers.proto\"\xb6\x01\n\x11\x41\x63\x63umulatedEnergy\x12\x11\n\tenergy_wh\x18\x01 \x01(\x02\x12^\n\x11\x61\x63\x63umulation_type\x18\x02 \x01(\x0e\x32\x43.tesla_protocol.tesla.proto.energy_device.v1.EnergyAccumulationType\x12.\n\x08period_s\x18\x03 \x01(\x0b\x32\x1c.google.protobuf.UInt64Value\"\xa4\x01\n\x14GridComplianceStatus\x12J\n\ngrid_state\x18\x01 \x01(\x0e\x32\x36.tesla_protocol.tesla.proto.energy_device.v1.GridState\x12@\n\x1bqualifying_time_remaining_s\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.FloatValue\"\x96\x02\n\x11InstACMeasurement\x12\x14\n\x0cvoltage_vrms\x18\x01 \x01(\x02\x12\x14\n\x0c\x66requency_hz\x18\x02 \x01(\x02\x12\x31\n\x0c\x63urrent_arms\x18\x03 \x01(\x0b\x32\x1b.google.protobuf.FloatValue\x12\x31\n\x0creal_power_w\x18\x04 \x01(\x0b\x32\x1b.google.protobuf.FloatValue\x12\x37\n\x12reactive_power_var\x18\x05 \x01(\x0b\x32\x1b.google.protobuf.FloatValue\x12\x36\n\x11\x61pparent_power_va\x18\x06 \x01(\x0b\x32\x1b.google.protobuf.FloatValue\"V\n\x11InstDCMeasurement\x12\x11\n\tvoltage_v\x18\x01 \x01(\x02\x12.\n\tcurrent_a\x18\x02 \x01(\x0b\x32\x1b.google.protobuf.FloatValue\"&\n\x08\x41lertLog\x12\x11\n\x04\x64\x61ta\x18\x01 \x01(\x04H\x00\x88\x01\x01\x42\x07\n\x05_data\")\n\x0b\x41lertMatrix\x12\x11\n\x04\x64\x61ta\x18\x01 \x01(\x04H\x00\x88\x01\x01\x42\x07\n\x05_data*\xaf\x01\n\x16\x45nergyAccumulationType\x12$\n ENERGY_ACCUMULATION_TYPE_INVALID\x10\x00\x12%\n!ENERGY_ACCUMULATION_TYPE_LIFETIME\x10\x01\x12\"\n\x1e\x45NERGY_ACCUMULATION_TYPE_TODAY\x10\x02\x12$\n ENERGY_ACCUMULATION_TYPE_SESSION\x10\x03*t\n\tGridState\x12\x16\n\x12GRID_STATE_INVALID\x10\x00\x12\x1a\n\x16GRID_STATE_UNCOMPLIANT\x10\x01\x12\x19\n\x15GRID_STATE_QUALIFYING\x10\x02\x12\x18\n\x14GRID_STATE_COMPLIANT\x10\x03\x42z\n$com.tesla.generated.energy_device.v1B\x06\x45nergyZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,20 +33,20 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'tesla_protocol.energy_devic
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n$com.tesla.generated.energy_device.v1B\006EnergyZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1'
-  _globals['_ENERGYACCUMULATIONTYPE']._serialized_start=928
-  _globals['_ENERGYACCUMULATIONTYPE']._serialized_end=1103
-  _globals['_GRIDSTATE']._serialized_start=1105
-  _globals['_GRIDSTATE']._serialized_end=1221
+  _globals['_ENERGYACCUMULATIONTYPE']._serialized_start=927
+  _globals['_ENERGYACCUMULATIONTYPE']._serialized_end=1102
+  _globals['_GRIDSTATE']._serialized_start=1104
+  _globals['_GRIDSTATE']._serialized_end=1220
   _globals['_ACCUMULATEDENERGY']._serialized_start=123
   _globals['_ACCUMULATEDENERGY']._serialized_end=305
   _globals['_GRIDCOMPLIANCESTATUS']._serialized_start=308
-  _globals['_GRIDCOMPLIANCESTATUS']._serialized_end=473
-  _globals['_INSTACMEASUREMENT']._serialized_start=476
-  _globals['_INSTACMEASUREMENT']._serialized_end=754
-  _globals['_INSTDCMEASUREMENT']._serialized_start=756
-  _globals['_INSTDCMEASUREMENT']._serialized_end=842
-  _globals['_ALERTLOG']._serialized_start=844
-  _globals['_ALERTLOG']._serialized_end=882
-  _globals['_ALERTMATRIX']._serialized_start=884
-  _globals['_ALERTMATRIX']._serialized_end=925
+  _globals['_GRIDCOMPLIANCESTATUS']._serialized_end=472
+  _globals['_INSTACMEASUREMENT']._serialized_start=475
+  _globals['_INSTACMEASUREMENT']._serialized_end=753
+  _globals['_INSTDCMEASUREMENT']._serialized_start=755
+  _globals['_INSTDCMEASUREMENT']._serialized_end=841
+  _globals['_ALERTLOG']._serialized_start=843
+  _globals['_ALERTLOG']._serialized_end=881
+  _globals['_ALERTMATRIX']._serialized_start=883
+  _globals['_ALERTMATRIX']._serialized_end=924
 # @@protoc_insertion_point(module_scope)

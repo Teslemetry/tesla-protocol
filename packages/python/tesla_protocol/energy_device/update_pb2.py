@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)tesla_protocol/energy_device/update.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\"3\n\x0f\x46irmwareVersion\x12\x0f\n\x07version\x18\x01 \x01(\t\x12\x0f\n\x07githash\x18\x02 \x01(\x0c\"\xb7\x01\n\x13ServerStagedPackage\x12\x14\n\x0c\x64ownload_url\x18\x01 \x01(\t\x12\x12\n\npackage_id\x18\x02 \x01(\x04\x12\x19\n\x11package_signature\x18\x03 \x01(\x0c\x12[\n\x15server_staged_version\x18\x04 \x01(\x0b\x32<.tesla_protocol.tesla.proto.energy_device.v1.FirmwareVersion\"\xa3\x03\n\x0cSystemUpdate\x12\x18\n\x10handshake_result\x18\x01 \x01(\x05\x12\x15\n\rupdate_status\x18\x02 \x01(\x05\x12[\n\x15server_staged_version\x18\x03 \x01(\x0b\x32<.tesla_protocol.tesla.proto.energy_device.v1.FirmwareVersion\x12\x13\n\x0btotal_bytes\x18\x04 \x01(\x04\x12\x14\n\x0c\x62ytes_offset\x18\x05 \x01(\x04\x12\"\n\x1a\x65stimated_bytes_per_second\x18\x06 \x01(\x04\x12 \n\x18last_handshake_timestamp\x18\x07 \x01(\x04\x12\x1a\n\x12last_update_result\x18\x08 \x01(\x05\x12`\n\x16server_staged_packages\x18\t \x03(\x0b\x32@.tesla_protocol.tesla.proto.energy_device.v1.ServerStagedPackage\x12\x16\n\x0eis_sideloading\x18\n \x01(\x08\"x\n\x0f\x41\x63\x63\x65ptedPackage\x12\x12\n\npackage_id\x18\x01 \x01(\x04\x12\x19\n\x11package_signature\x18\x02 \x01(\x0c\x12\x17\n\x0fupload_endpoint\x18\x03 \x01(\t\x12\x1d\n\x15will_attempt_download\x18\x04 \x01(\x08\"w\n\x17LocallyAvailablePackage\x12\x12\n\npackage_id\x18\x01 \x01(\x04\x12\x19\n\x11package_signature\x18\x02 \x01(\x0c\x12\x17\n\x0f\x66ile_size_bytes\x18\x03 \x01(\x04\x12\x14\n\x0c\x64ownload_url\x18\x04 \x01(\t*\xd2\x01\n\x0cUpdateStatus\x12\x19\n\x15UPDATE_STATUS_INVALID\x10\x00\x12\x16\n\x12UPDATE_STATUS_IDLE\x10\x01\x12\x1d\n\x19UPDATE_STATUS_DOWNLOADING\x10\x02\x12\x1c\n\x18UPDATE_STATUS_DOWNLOADED\x10\x03\x12\x18\n\x14UPDATE_STATUS_STAGED\x10\x04\x12\x1c\n\x18UPDATE_STATUS_COMMITTING\x10\x05\x12\x1a\n\x16UPDATE_STATUS_CHECKING\x10\x06*\xdd\x01\n\x15UpdateHandshakeResult\x12#\n\x1fUPDATE_HANDSHAKE_RESULT_INVALID\x10\x00\x12$\n UPDATE_HANDSHAKE_RESULT_UNDERWAY\x10\x01\x12\"\n\x1eUPDATE_HANDSHAKE_RESULT_FAILED\x10\x02\x12*\n&UPDATE_HANDSHAKE_RESULT_NON_ACTIONABLE\x10\x03\x12)\n%UPDATE_HANDSHAKE_RESULT_UPDATE_STAGED\x10\x04*s\n\x10LastUpdateResult\x12\x1e\n\x1aLAST_UPDATE_RESULT_INVALID\x10\x00\x12\x1d\n\x19LAST_UPDATE_RESULT_FAILED\x10\x01\x12 \n\x1cLAST_UPDATE_RESULT_SUCCEEDED\x10\x02\x42z\n$com.tesla.generated.energy_device.v1B\x06UpdateZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)tesla_protocol/energy_device/update.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\"3\n\x0f\x46irmwareVersion\x12\x0f\n\x07version\x18\x01 \x01(\t\x12\x0f\n\x07githash\x18\x02 \x01(\x0c\"\xb7\x01\n\x13ServerStagedPackage\x12\x14\n\x0c\x64ownload_url\x18\x01 \x01(\t\x12\x12\n\npackage_id\x18\x02 \x01(\x04\x12\x19\n\x11package_signature\x18\x03 \x01(\x0c\x12[\n\x15server_staged_version\x18\x04 \x01(\x0b\x32<.tesla_protocol.tesla.proto.energy_device.v1.FirmwareVersion\"\xe1\x04\n\x0cSystemUpdate\x12\\\n\x10handshake_result\x18\x01 \x01(\x0e\x32\x42.tesla_protocol.tesla.proto.energy_device.v1.UpdateHandshakeResult\x12P\n\rupdate_status\x18\x02 \x01(\x0e\x32\x39.tesla_protocol.tesla.proto.energy_device.v1.UpdateStatus\x12[\n\x15server_staged_version\x18\x03 \x01(\x0b\x32<.tesla_protocol.tesla.proto.energy_device.v1.FirmwareVersion\x12\x13\n\x0btotal_bytes\x18\x04 \x01(\x04\x12\x14\n\x0c\x62ytes_offset\x18\x05 \x01(\x04\x12\"\n\x1a\x65stimated_bytes_per_second\x18\x06 \x01(\x04\x12 \n\x18last_handshake_timestamp\x18\x07 \x01(\x04\x12Y\n\x12last_update_result\x18\x08 \x01(\x0e\x32=.tesla_protocol.tesla.proto.energy_device.v1.LastUpdateResult\x12`\n\x16server_staged_packages\x18\t \x03(\x0b\x32@.tesla_protocol.tesla.proto.energy_device.v1.ServerStagedPackage\x12\x16\n\x0eis_sideloading\x18\n \x01(\x08\"x\n\x0f\x41\x63\x63\x65ptedPackage\x12\x12\n\npackage_id\x18\x01 \x01(\x04\x12\x19\n\x11package_signature\x18\x02 \x01(\x0c\x12\x17\n\x0fupload_endpoint\x18\x03 \x01(\t\x12\x1d\n\x15will_attempt_download\x18\x04 \x01(\x08\"w\n\x17LocallyAvailablePackage\x12\x12\n\npackage_id\x18\x01 \x01(\x04\x12\x19\n\x11package_signature\x18\x02 \x01(\x0c\x12\x17\n\x0f\x66ile_size_bytes\x18\x03 \x01(\x04\x12\x14\n\x0c\x64ownload_url\x18\x04 \x01(\t*\xd2\x01\n\x0cUpdateStatus\x12\x19\n\x15UPDATE_STATUS_INVALID\x10\x00\x12\x16\n\x12UPDATE_STATUS_IDLE\x10\x01\x12\x1d\n\x19UPDATE_STATUS_DOWNLOADING\x10\x02\x12\x1c\n\x18UPDATE_STATUS_DOWNLOADED\x10\x03\x12\x18\n\x14UPDATE_STATUS_STAGED\x10\x04\x12\x1c\n\x18UPDATE_STATUS_COMMITTING\x10\x05\x12\x1a\n\x16UPDATE_STATUS_CHECKING\x10\x06*\xdd\x01\n\x15UpdateHandshakeResult\x12#\n\x1fUPDATE_HANDSHAKE_RESULT_INVALID\x10\x00\x12$\n UPDATE_HANDSHAKE_RESULT_UNDERWAY\x10\x01\x12\"\n\x1eUPDATE_HANDSHAKE_RESULT_FAILED\x10\x02\x12*\n&UPDATE_HANDSHAKE_RESULT_NON_ACTIONABLE\x10\x03\x12)\n%UPDATE_HANDSHAKE_RESULT_UPDATE_STAGED\x10\x04*s\n\x10LastUpdateResult\x12\x1e\n\x1aLAST_UPDATE_RESULT_INVALID\x10\x00\x12\x1d\n\x19LAST_UPDATE_RESULT_FAILED\x10\x01\x12 \n\x1cLAST_UPDATE_RESULT_SUCCEEDED\x10\x02\x42z\n$com.tesla.generated.energy_device.v1B\x06UpdateZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,20 +32,20 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'tesla_protocol.energy_devic
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n$com.tesla.generated.energy_device.v1B\006UpdateZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1'
-  _globals['_UPDATESTATUS']._serialized_start=995
-  _globals['_UPDATESTATUS']._serialized_end=1205
-  _globals['_UPDATEHANDSHAKERESULT']._serialized_start=1208
-  _globals['_UPDATEHANDSHAKERESULT']._serialized_end=1429
-  _globals['_LASTUPDATERESULT']._serialized_start=1431
-  _globals['_LASTUPDATERESULT']._serialized_end=1546
+  _globals['_UPDATESTATUS']._serialized_start=1185
+  _globals['_UPDATESTATUS']._serialized_end=1395
+  _globals['_UPDATEHANDSHAKERESULT']._serialized_start=1398
+  _globals['_UPDATEHANDSHAKERESULT']._serialized_end=1619
+  _globals['_LASTUPDATERESULT']._serialized_start=1621
+  _globals['_LASTUPDATERESULT']._serialized_end=1736
   _globals['_FIRMWAREVERSION']._serialized_start=90
   _globals['_FIRMWAREVERSION']._serialized_end=141
   _globals['_SERVERSTAGEDPACKAGE']._serialized_start=144
   _globals['_SERVERSTAGEDPACKAGE']._serialized_end=327
   _globals['_SYSTEMUPDATE']._serialized_start=330
-  _globals['_SYSTEMUPDATE']._serialized_end=749
-  _globals['_ACCEPTEDPACKAGE']._serialized_start=751
-  _globals['_ACCEPTEDPACKAGE']._serialized_end=871
-  _globals['_LOCALLYAVAILABLEPACKAGE']._serialized_start=873
-  _globals['_LOCALLYAVAILABLEPACKAGE']._serialized_end=992
+  _globals['_SYSTEMUPDATE']._serialized_end=939
+  _globals['_ACCEPTEDPACKAGE']._serialized_start=941
+  _globals['_ACCEPTEDPACKAGE']._serialized_end=1061
+  _globals['_LOCALLYAVAILABLEPACKAGE']._serialized_start=1063
+  _globals['_LOCALLYAVAILABLEPACKAGE']._serialized_end=1182
 # @@protoc_insertion_point(module_scope)

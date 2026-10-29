@@ -175,14 +175,14 @@ export interface ServerStagedPackage {
 }
 
 export interface SystemUpdate {
-  handshakeResult: number;
-  updateStatus: number;
+  handshakeResult: UpdateHandshakeResult;
+  updateStatus: UpdateStatus;
   serverStagedVersion: FirmwareVersion | undefined;
   totalBytes: number;
   bytesOffset: number;
   estimatedBytesPerSecond: number;
   lastHandshakeTimestamp: number;
-  lastUpdateResult: number;
+  lastUpdateResult: LastUpdateResult;
   serverStagedPackages: ServerStagedPackage[];
   isSideloading: boolean;
 }
@@ -451,7 +451,7 @@ export const SystemUpdate: MessageFns<SystemUpdate> = {
             break;
           }
 
-          message.handshakeResult = reader.int32();
+          message.handshakeResult = reader.int32() as any;
           continue;
         }
         case 2: {
@@ -459,7 +459,7 @@ export const SystemUpdate: MessageFns<SystemUpdate> = {
             break;
           }
 
-          message.updateStatus = reader.int32();
+          message.updateStatus = reader.int32() as any;
           continue;
         }
         case 3: {
@@ -507,7 +507,7 @@ export const SystemUpdate: MessageFns<SystemUpdate> = {
             break;
           }
 
-          message.lastUpdateResult = reader.int32();
+          message.lastUpdateResult = reader.int32() as any;
           continue;
         }
         case 9: {
@@ -537,8 +537,8 @@ export const SystemUpdate: MessageFns<SystemUpdate> = {
 
   fromJSON(object: any): SystemUpdate {
     return {
-      handshakeResult: isSet(object.handshakeResult) ? globalThis.Number(object.handshakeResult) : 0,
-      updateStatus: isSet(object.updateStatus) ? globalThis.Number(object.updateStatus) : 0,
+      handshakeResult: isSet(object.handshakeResult) ? updateHandshakeResultFromJSON(object.handshakeResult) : 0,
+      updateStatus: isSet(object.updateStatus) ? updateStatusFromJSON(object.updateStatus) : 0,
       serverStagedVersion: isSet(object.serverStagedVersion)
         ? FirmwareVersion.fromJSON(object.serverStagedVersion)
         : undefined,
@@ -550,7 +550,7 @@ export const SystemUpdate: MessageFns<SystemUpdate> = {
       lastHandshakeTimestamp: isSet(object.lastHandshakeTimestamp)
         ? globalThis.Number(object.lastHandshakeTimestamp)
         : 0,
-      lastUpdateResult: isSet(object.lastUpdateResult) ? globalThis.Number(object.lastUpdateResult) : 0,
+      lastUpdateResult: isSet(object.lastUpdateResult) ? lastUpdateResultFromJSON(object.lastUpdateResult) : 0,
       serverStagedPackages: globalThis.Array.isArray(object?.serverStagedPackages)
         ? object.serverStagedPackages.map((e: any) => ServerStagedPackage.fromJSON(e))
         : [],
@@ -561,10 +561,10 @@ export const SystemUpdate: MessageFns<SystemUpdate> = {
   toJSON(message: SystemUpdate): unknown {
     const obj: any = {};
     if (message.handshakeResult !== undefined) {
-      obj.handshakeResult = Math.round(message.handshakeResult);
+      obj.handshakeResult = updateHandshakeResultToJSON(message.handshakeResult);
     }
     if (message.updateStatus !== undefined) {
-      obj.updateStatus = Math.round(message.updateStatus);
+      obj.updateStatus = updateStatusToJSON(message.updateStatus);
     }
     if (message.serverStagedVersion !== undefined) {
       obj.serverStagedVersion = FirmwareVersion.toJSON(message.serverStagedVersion);
@@ -582,7 +582,7 @@ export const SystemUpdate: MessageFns<SystemUpdate> = {
       obj.lastHandshakeTimestamp = Math.round(message.lastHandshakeTimestamp);
     }
     if (message.lastUpdateResult !== undefined) {
-      obj.lastUpdateResult = Math.round(message.lastUpdateResult);
+      obj.lastUpdateResult = lastUpdateResultToJSON(message.lastUpdateResult);
     }
     if (message.serverStagedPackages?.length) {
       obj.serverStagedPackages = message.serverStagedPackages.map((e) => ServerStagedPackage.toJSON(e));

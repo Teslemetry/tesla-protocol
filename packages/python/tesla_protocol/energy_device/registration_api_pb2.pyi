@@ -4,6 +4,7 @@ from google.protobuf import timestamp_pb2 as _timestamp_pb2
 from google.protobuf import wrappers_pb2 as _wrappers_pb2
 from tesla_protocol.energy_device import device_pb2 as _device_pb2
 from tesla_protocol.energy_device import update_pb2 as _update_pb2
+from tesla_protocol.energy_device import neurio_meter_api_pb2 as _neurio_meter_api_pb2
 from google.protobuf.internal import containers as _containers
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
@@ -169,62 +170,6 @@ SITE_REGISTRATION_STATUS_INVALID: SiteRegistrationStatus
 SITE_REGISTRATION_STATUS_REGISTERED: SiteRegistrationStatus
 SITE_REGISTRATION_STATUS_ABANDONED: SiteRegistrationStatus
 
-class AssetSiteDetailsRequest(_message.Message):
-    __slots__ = ("installer_tesla_auth_bearer_token",)
-    INSTALLER_TESLA_AUTH_BEARER_TOKEN_FIELD_NUMBER: _ClassVar[int]
-    installer_tesla_auth_bearer_token: str
-    def __init__(self, installer_tesla_auth_bearer_token: _Optional[str] = ...) -> None: ...
-
-class AssetSiteUuidOfDeviceRequest(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
-
-class CustomerRegistrationInfo(_message.Message):
-    __slots__ = ("customer_id",)
-    CUSTOMER_ID_FIELD_NUMBER: _ClassVar[int]
-    customer_id: _device_pb2.UUIDv4
-    def __init__(self, customer_id: _Optional[_Union[_device_pb2.UUIDv4, _Mapping]] = ...) -> None: ...
-
-class DeviceInfo(_message.Message):
-    __slots__ = ("din", "firmware_version", "device_type", "teg_device_type")
-    DIN_FIELD_NUMBER: _ClassVar[int]
-    FIRMWARE_VERSION_FIELD_NUMBER: _ClassVar[int]
-    DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
-    TEG_DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
-    din: str
-    firmware_version: _update_pb2.FirmwareVersion
-    device_type: _device_pb2.DeviceType
-    teg_device_type: _device_pb2.TEGDeviceType
-    def __init__(self, din: _Optional[str] = ..., firmware_version: _Optional[_Union[_update_pb2.FirmwareVersion, _Mapping]] = ..., device_type: _Optional[_Union[_device_pb2.DeviceType, str]] = ..., teg_device_type: _Optional[_Union[_device_pb2.TEGDeviceType, str]] = ...) -> None: ...
-
-class DeactivateDeviceResponse(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
-
-class SiteInfo(_message.Message):
-    __slots__ = ("site_address", "warp_site_name")
-    SITE_ADDRESS_FIELD_NUMBER: _ClassVar[int]
-    WARP_SITE_NAME_FIELD_NUMBER: _ClassVar[int]
-    site_address: CustomerSiteAddress
-    warp_site_name: _wrappers_pb2.StringValue
-    def __init__(self, site_address: _Optional[_Union[CustomerSiteAddress, _Mapping]] = ..., warp_site_name: _Optional[_Union[_wrappers_pb2.StringValue, _Mapping]] = ...) -> None: ...
-
-class RegistrationRequestWithPartDetails(_message.Message):
-    __slots__ = ("registration_request", "part_details")
-    REGISTRATION_REQUEST_FIELD_NUMBER: _ClassVar[int]
-    PART_DETAILS_FIELD_NUMBER: _ClassVar[int]
-    registration_request: RegistrationRequest
-    part_details: _containers.RepeatedCompositeFieldContainer[PartDetail]
-    def __init__(self, registration_request: _Optional[_Union[RegistrationRequest, _Mapping]] = ..., part_details: _Optional[_Iterable[_Union[PartDetail, _Mapping]]] = ...) -> None: ...
-
-class WCCommercialRegistrationRequestWithPartDetails(_message.Message):
-    __slots__ = ("registration_request", "part_details")
-    REGISTRATION_REQUEST_FIELD_NUMBER: _ClassVar[int]
-    PART_DETAILS_FIELD_NUMBER: _ClassVar[int]
-    registration_request: WCCommercialRegistrationRequest
-    part_details: _containers.RepeatedCompositeFieldContainer[PartDetail]
-    def __init__(self, registration_request: _Optional[_Union[WCCommercialRegistrationRequest, _Mapping]] = ..., part_details: _Optional[_Iterable[_Union[PartDetail, _Mapping]]] = ...) -> None: ...
-
 class AnonymizedSiteDetails(_message.Message):
     __slots__ = ("device_details", "city", "zip")
     DEVICE_DETAILS_FIELD_NUMBER: _ClassVar[int]
@@ -235,11 +180,21 @@ class AnonymizedSiteDetails(_message.Message):
     zip: _wrappers_pb2.StringValue
     def __init__(self, device_details: _Optional[_Iterable[_Union[DeviceDetail, _Mapping]]] = ..., city: _Optional[_Union[_wrappers_pb2.StringValue, _Mapping]] = ..., zip: _Optional[_Union[_wrappers_pb2.StringValue, _Mapping]] = ...) -> None: ...
 
+class AssetSiteDetailsRequest(_message.Message):
+    __slots__ = ("installer_tesla_auth_bearer_token",)
+    INSTALLER_TESLA_AUTH_BEARER_TOKEN_FIELD_NUMBER: _ClassVar[int]
+    installer_tesla_auth_bearer_token: str
+    def __init__(self, installer_tesla_auth_bearer_token: _Optional[str] = ...) -> None: ...
+
 class AssetSiteDetailsResponse(_message.Message):
     __slots__ = ("devices",)
     DEVICES_FIELD_NUMBER: _ClassVar[int]
     devices: _containers.RepeatedCompositeFieldContainer[DeviceDetail]
     def __init__(self, devices: _Optional[_Iterable[_Union[DeviceDetail, _Mapping]]] = ...) -> None: ...
+
+class AssetSiteUuidOfDeviceRequest(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
 
 class AssetSiteUuidOfDeviceResponse(_message.Message):
     __slots__ = ("asset_site_uuid",)
@@ -280,10 +235,10 @@ class CommercialChargingDeviceProperties(_message.Message):
     longitude: _wrappers_pb2.FloatValue
     label: _wrappers_pb2.Int32Value
     rssi: _wrappers_pb2.Int32Value
-    power_type: int
-    connector_type: int
+    power_type: _neurio_meter_api_pb2.PowerType
+    connector_type: _neurio_meter_api_pb2.ConnectorType
     load_sharing_type: WCLoadSharingType
-    def __init__(self, main_service_size: _Optional[int] = ..., nominal_voltage: _Optional[int] = ..., load_sharing: _Optional[bool] = ..., max_output: _Optional[int] = ..., latitude: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ..., longitude: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ..., label: _Optional[_Union[_wrappers_pb2.Int32Value, _Mapping]] = ..., rssi: _Optional[_Union[_wrappers_pb2.Int32Value, _Mapping]] = ..., power_type: _Optional[int] = ..., connector_type: _Optional[int] = ..., load_sharing_type: _Optional[_Union[WCLoadSharingType, str]] = ...) -> None: ...
+    def __init__(self, main_service_size: _Optional[int] = ..., nominal_voltage: _Optional[int] = ..., load_sharing: _Optional[bool] = ..., max_output: _Optional[int] = ..., latitude: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ..., longitude: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ..., label: _Optional[_Union[_wrappers_pb2.Int32Value, _Mapping]] = ..., rssi: _Optional[_Union[_wrappers_pb2.Int32Value, _Mapping]] = ..., power_type: _Optional[_Union[_neurio_meter_api_pb2.PowerType, str]] = ..., connector_type: _Optional[_Union[_neurio_meter_api_pb2.ConnectorType, str]] = ..., load_sharing_type: _Optional[_Union[WCLoadSharingType, str]] = ...) -> None: ...
 
 class CommercialChargingSiteInfo(_message.Message):
     __slots__ = ("site_address", "warp_site_name", "commercial_charging_details", "site_owner_email")
@@ -308,6 +263,12 @@ class CustomerInfo(_message.Message):
     given_name: str
     family_name: str
     def __init__(self, sso_id: _Optional[_Union[_device_pb2.UUIDv4, _Mapping]] = ..., email: _Optional[str] = ..., given_name: _Optional[str] = ..., family_name: _Optional[str] = ...) -> None: ...
+
+class CustomerRegistrationInfo(_message.Message):
+    __slots__ = ("customer_id",)
+    CUSTOMER_ID_FIELD_NUMBER: _ClassVar[int]
+    customer_id: _device_pb2.UUIDv4
+    def __init__(self, customer_id: _Optional[_Union[_device_pb2.UUIDv4, _Mapping]] = ...) -> None: ...
 
 class CustomerLegalConsent(_message.Message):
     __slots__ = ("privacy_notice", "limited_warranty", "grid_services", "marketing")
@@ -345,6 +306,10 @@ class DeactivateDeviceRequest(_message.Message):
     installer_tesla_auth_bearer_token: str
     def __init__(self, dins: _Optional[_Iterable[str]] = ..., installer_tesla_auth_bearer_token: _Optional[str] = ...) -> None: ...
 
+class DeactivateDeviceResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
 class DeviceDetail(_message.Message):
     __slots__ = ("device_type", "fallback_description", "din", "teg_device_type")
     DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
@@ -356,6 +321,18 @@ class DeviceDetail(_message.Message):
     din: str
     teg_device_type: _device_pb2.TEGDeviceType
     def __init__(self, device_type: _Optional[_Union[RegistrationDeviceType, str]] = ..., fallback_description: _Optional[str] = ..., din: _Optional[str] = ..., teg_device_type: _Optional[_Union[_device_pb2.TEGDeviceType, str]] = ...) -> None: ...
+
+class DeviceInfo(_message.Message):
+    __slots__ = ("din", "firmware_version", "device_type", "teg_device_type")
+    DIN_FIELD_NUMBER: _ClassVar[int]
+    FIRMWARE_VERSION_FIELD_NUMBER: _ClassVar[int]
+    DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
+    TEG_DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
+    din: str
+    firmware_version: _update_pb2.FirmwareVersion
+    device_type: _device_pb2.DeviceType
+    teg_device_type: _device_pb2.TEGDeviceType
+    def __init__(self, din: _Optional[str] = ..., firmware_version: _Optional[_Union[_update_pb2.FirmwareVersion, _Mapping]] = ..., device_type: _Optional[_Union[_device_pb2.DeviceType, str]] = ..., teg_device_type: _Optional[_Union[_device_pb2.TEGDeviceType, str]] = ...) -> None: ...
 
 class InstallationInfo(_message.Message):
     __slots__ = ("installation_guid",)
@@ -400,8 +377,8 @@ class PartnerInfo(_message.Message):
     ACCOUNT_MASTER_ID_FIELD_NUMBER: _ClassVar[int]
     SITE_RELATIONSHIP_TYPE_FIELD_NUMBER: _ClassVar[int]
     account_master_id: _device_pb2.UUIDv4
-    site_relationship_type: RegistrationSiteRelationshipType
-    def __init__(self, account_master_id: _Optional[_Union[_device_pb2.UUIDv4, _Mapping]] = ..., site_relationship_type: _Optional[_Union[RegistrationSiteRelationshipType, str]] = ...) -> None: ...
+    site_relationship_type: _containers.RepeatedScalarFieldContainer[RegistrationSiteRelationshipType]
+    def __init__(self, account_master_id: _Optional[_Union[_device_pb2.UUIDv4, _Mapping]] = ..., site_relationship_type: _Optional[_Iterable[_Union[RegistrationSiteRelationshipType, str]]] = ...) -> None: ...
 
 class RegistrationAPIDeactivateDeviceRequest(_message.Message):
     __slots__ = ("request",)
@@ -435,9 +412,9 @@ class RegistrationAPIRegisterResponse(_message.Message):
     __slots__ = ("failure", "response")
     FAILURE_FIELD_NUMBER: _ClassVar[int]
     RESPONSE_FIELD_NUMBER: _ClassVar[int]
-    failure: int
+    failure: RegistrationFailure
     response: RegistrationResponse
-    def __init__(self, failure: _Optional[int] = ..., response: _Optional[_Union[RegistrationResponse, _Mapping]] = ...) -> None: ...
+    def __init__(self, failure: _Optional[_Union[RegistrationFailure, str]] = ..., response: _Optional[_Union[RegistrationResponse, _Mapping]] = ...) -> None: ...
 
 class RegistrationAPIRetrieveAssetSiteDetailsRequest(_message.Message):
     __slots__ = ()
@@ -529,6 +506,14 @@ class RegistrationRequest(_message.Message):
     potential_site_uuid: _wrappers_pb2.StringValue
     def __init__(self, version: _Optional[_Union[_update_pb2.FirmwareVersion, _Mapping]] = ..., part_details: _Optional[_Iterable[_Union[PartDetail, _Mapping]]] = ..., attempt: _Optional[int] = ..., registration_source: _Optional[_Union[RegistrationSource, str]] = ..., installer: _Optional[_Union[InstallerInfo, _Mapping]] = ..., customer: _Optional[_Union[CustomerInfo, _Mapping]] = ..., site_address: _Optional[_Union[CustomerSiteAddress, _Mapping]] = ..., legal_consent: _Optional[_Union[CustomerLegalConsent, _Mapping]] = ..., installation_info: _Optional[_Union[InstallationInfo, _Mapping]] = ..., asset_site_id: _Optional[_Union[_wrappers_pb2.StringValue, _Mapping]] = ..., additional_partners: _Optional[_Iterable[_Union[PartnerInfo, _Mapping]]] = ..., market_type: _Optional[_Union[MarketType, str]] = ..., potential_site_uuid: _Optional[_Union[_wrappers_pb2.StringValue, _Mapping]] = ...) -> None: ...
 
+class RegistrationRequestWithPartDetails(_message.Message):
+    __slots__ = ("registration_request", "part_details")
+    REGISTRATION_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    PART_DETAILS_FIELD_NUMBER: _ClassVar[int]
+    registration_request: RegistrationRequest
+    part_details: _containers.RepeatedCompositeFieldContainer[PartDetail]
+    def __init__(self, registration_request: _Optional[_Union[RegistrationRequest, _Mapping]] = ..., part_details: _Optional[_Iterable[_Union[PartDetail, _Mapping]]] = ...) -> None: ...
+
 class RegistrationResponse(_message.Message):
     __slots__ = ("status", "retry_delay_s", "status_time", "asset_site_id")
     STATUS_FIELD_NUMBER: _ClassVar[int]
@@ -540,6 +525,14 @@ class RegistrationResponse(_message.Message):
     status_time: _timestamp_pb2.Timestamp
     asset_site_id: _wrappers_pb2.StringValue
     def __init__(self, status: _Optional[_Union[RegistrationStatus, str]] = ..., retry_delay_s: _Optional[int] = ..., status_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., asset_site_id: _Optional[_Union[_wrappers_pb2.StringValue, _Mapping]] = ...) -> None: ...
+
+class SiteInfo(_message.Message):
+    __slots__ = ("site_address", "warp_site_name")
+    SITE_ADDRESS_FIELD_NUMBER: _ClassVar[int]
+    WARP_SITE_NAME_FIELD_NUMBER: _ClassVar[int]
+    site_address: CustomerSiteAddress
+    warp_site_name: _wrappers_pb2.StringValue
+    def __init__(self, site_address: _Optional[_Union[CustomerSiteAddress, _Mapping]] = ..., warp_site_name: _Optional[_Union[_wrappers_pb2.StringValue, _Mapping]] = ...) -> None: ...
 
 class SiteSuggestion(_message.Message):
     __slots__ = ("asset_site_uuid", "anonymized_site_details")
@@ -580,3 +573,11 @@ class WCCommercialRegistrationRequest(_message.Message):
     installation_completed: bool
     site_owner_email: _wrappers_pb2.StringValue
     def __init__(self, device_properties: _Optional[_Union[CommercialChargingDeviceProperties, _Mapping]] = ..., asset_site_id: _Optional[_Union[_device_pb2.UUIDv4, _Mapping]] = ..., site_info: _Optional[_Union[CommercialChargingSiteInfo, _Mapping]] = ..., installer_info: _Optional[_Union[InstallerInfo, _Mapping]] = ..., installation_completed: _Optional[bool] = ..., site_owner_email: _Optional[_Union[_wrappers_pb2.StringValue, _Mapping]] = ...) -> None: ...
+
+class WCCommercialRegistrationRequestWithPartDetails(_message.Message):
+    __slots__ = ("registration_request", "part_details")
+    REGISTRATION_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    PART_DETAILS_FIELD_NUMBER: _ClassVar[int]
+    registration_request: WCCommercialRegistrationRequest
+    part_details: _containers.RepeatedCompositeFieldContainer[PartDetail]
+    def __init__(self, registration_request: _Optional[_Union[WCCommercialRegistrationRequest, _Mapping]] = ..., part_details: _Optional[_Iterable[_Union[PartDetail, _Mapping]]] = ...) -> None: ...

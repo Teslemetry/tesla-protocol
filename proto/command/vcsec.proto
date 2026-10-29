@@ -486,7 +486,7 @@ message VehicleStatus {
     VehicleSleepStatus_E   vehicleSleepStatus = 3;
     UserPresence_E         userPresence = 4;
     DetailedClosureStatus  detailedClosureStatus = 5;
-    UIDesire_E             uiDesire = 6;  // TESLEMETRY-EXT
+    UIDesire_E             UIDesire = 6;  // TESLEMETRY-EXT
     Gear_E                 gear = 7;  // TESLEMETRY-EXT
     KeyLocationStatus      keyLocationStatus = 8;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }

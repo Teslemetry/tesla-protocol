@@ -136,16 +136,16 @@ class WifiConfig(_message.Message):
     def __init__(self, ssid: _Optional[str] = ..., password: _Optional[_Union[WifiPassword, _Mapping]] = ..., security_type: _Optional[_Union[WifiNetworkSecurityType, str]] = ...) -> None: ...
 
 class WifiNetwork(_message.Message):
-    __slots__ = ("ssid", "rssiValue", "rssi", "securityType")
+    __slots__ = ("ssid", "rssi_value", "rssi", "security_type")
     SSID_FIELD_NUMBER: _ClassVar[int]
-    RSSIVALUE_FIELD_NUMBER: _ClassVar[int]
+    RSSI_VALUE_FIELD_NUMBER: _ClassVar[int]
     RSSI_FIELD_NUMBER: _ClassVar[int]
-    SECURITYTYPE_FIELD_NUMBER: _ClassVar[int]
+    SECURITY_TYPE_FIELD_NUMBER: _ClassVar[int]
     ssid: str
-    rssiValue: int
+    rssi_value: int
     rssi: Rssi
-    securityType: WifiNetworkSecurityType
-    def __init__(self, ssid: _Optional[str] = ..., rssiValue: _Optional[int] = ..., rssi: _Optional[_Union[Rssi, _Mapping]] = ..., securityType: _Optional[_Union[WifiNetworkSecurityType, str]] = ...) -> None: ...
+    security_type: WifiNetworkSecurityType
+    def __init__(self, ssid: _Optional[str] = ..., rssi_value: _Optional[int] = ..., rssi: _Optional[_Union[Rssi, _Mapping]] = ..., security_type: _Optional[_Union[WifiNetworkSecurityType, str]] = ...) -> None: ...
 
 class NetworkInterfaceIPv4Config(_message.Message):
     __slots__ = ("dhcp_enabled", "address", "subnet_mask", "gateway", "dns")

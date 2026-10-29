@@ -101,30 +101,30 @@ export function genericErrorEToJSON(object: GenericErrorE): string {
 
 /**
  * ===== TESLEMETRY-EXT BEGIN =====
- * UNCONFIRMED: not yet confirmed on a live vehicle; names not recovered.
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
  */
 export interface KeyNotFoundContext {
-  publicKey: Uint8Array;
-  handle: number;
+  publicKey?: Uint8Array | undefined;
+  slot?: number | undefined;
 }
 
 export interface NominalError {
   genericError: GenericErrorE;
-  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
-  keyNotFoundContext: KeyNotFoundContext | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  keyNotFound?: KeyNotFoundContext | undefined;
 }
 
 function createBaseKeyNotFoundContext(): KeyNotFoundContext {
-  return { publicKey: new Uint8Array(0), handle: 0 };
+  return { publicKey: undefined, slot: undefined };
 }
 
 export const KeyNotFoundContext: MessageFns<KeyNotFoundContext> = {
   encode(message: KeyNotFoundContext, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.publicKey.length !== 0) {
+    if (message.publicKey !== undefined) {
       writer.uint32(10).bytes(message.publicKey);
     }
-    if (message.handle !== 0) {
-      writer.uint32(16).uint32(message.handle);
+    if (message.slot !== undefined) {
+      writer.uint32(16).uint32(message.slot);
     }
     return writer;
   },
@@ -149,7 +149,7 @@ export const KeyNotFoundContext: MessageFns<KeyNotFoundContext> = {
             break;
           }
 
-          message.handle = reader.uint32();
+          message.slot = reader.uint32();
           continue;
         }
       }
@@ -163,8 +163,8 @@ export const KeyNotFoundContext: MessageFns<KeyNotFoundContext> = {
 
   fromJSON(object: any): KeyNotFoundContext {
     return {
-      publicKey: isSet(object.publicKey) ? bytesFromBase64(object.publicKey) : new Uint8Array(0),
-      handle: isSet(object.handle) ? globalThis.Number(object.handle) : 0,
+      publicKey: isSet(object.publicKey) ? bytesFromBase64(object.publicKey) : undefined,
+      slot: isSet(object.slot) ? globalThis.Number(object.slot) : undefined,
     };
   },
 
@@ -173,8 +173,8 @@ export const KeyNotFoundContext: MessageFns<KeyNotFoundContext> = {
     if (message.publicKey !== undefined) {
       obj.publicKey = base64FromBytes(message.publicKey);
     }
-    if (message.handle !== undefined) {
-      obj.handle = Math.round(message.handle);
+    if (message.slot !== undefined) {
+      obj.slot = Math.round(message.slot);
     }
     return obj;
   },
@@ -184,14 +184,14 @@ export const KeyNotFoundContext: MessageFns<KeyNotFoundContext> = {
   },
   fromPartial<I extends Exact<DeepPartial<KeyNotFoundContext>, I>>(object: I): KeyNotFoundContext {
     const message = createBaseKeyNotFoundContext();
-    message.publicKey = object.publicKey ?? new Uint8Array(0);
-    message.handle = object.handle ?? 0;
+    message.publicKey = object.publicKey ?? undefined;
+    message.slot = object.slot ?? undefined;
     return message;
   },
 };
 
 function createBaseNominalError(): NominalError {
-  return { genericError: 0, keyNotFoundContext: undefined };
+  return { genericError: 0, keyNotFound: undefined };
 }
 
 export const NominalError: MessageFns<NominalError> = {
@@ -199,8 +199,8 @@ export const NominalError: MessageFns<NominalError> = {
     if (message.genericError !== 0) {
       writer.uint32(8).int32(message.genericError);
     }
-    if (message.keyNotFoundContext !== undefined) {
-      KeyNotFoundContext.encode(message.keyNotFoundContext, writer.uint32(66).fork()).join();
+    if (message.keyNotFound !== undefined) {
+      KeyNotFoundContext.encode(message.keyNotFound, writer.uint32(66).fork()).join();
     }
     return writer;
   },
@@ -225,7 +225,7 @@ export const NominalError: MessageFns<NominalError> = {
             break;
           }
 
-          message.keyNotFoundContext = KeyNotFoundContext.decode(reader, reader.uint32());
+          message.keyNotFound = KeyNotFoundContext.decode(reader, reader.uint32());
           continue;
         }
       }
@@ -240,9 +240,7 @@ export const NominalError: MessageFns<NominalError> = {
   fromJSON(object: any): NominalError {
     return {
       genericError: isSet(object.genericError) ? genericErrorEFromJSON(object.genericError) : 0,
-      keyNotFoundContext: isSet(object.keyNotFoundContext)
-        ? KeyNotFoundContext.fromJSON(object.keyNotFoundContext)
-        : undefined,
+      keyNotFound: isSet(object.keyNotFound) ? KeyNotFoundContext.fromJSON(object.keyNotFound) : undefined,
     };
   },
 
@@ -251,8 +249,8 @@ export const NominalError: MessageFns<NominalError> = {
     if (message.genericError !== undefined) {
       obj.genericError = genericErrorEToJSON(message.genericError);
     }
-    if (message.keyNotFoundContext !== undefined) {
-      obj.keyNotFoundContext = KeyNotFoundContext.toJSON(message.keyNotFoundContext);
+    if (message.keyNotFound !== undefined) {
+      obj.keyNotFound = KeyNotFoundContext.toJSON(message.keyNotFound);
     }
     return obj;
   },
@@ -263,8 +261,8 @@ export const NominalError: MessageFns<NominalError> = {
   fromPartial<I extends Exact<DeepPartial<NominalError>, I>>(object: I): NominalError {
     const message = createBaseNominalError();
     message.genericError = object.genericError ?? 0;
-    message.keyNotFoundContext = (object.keyNotFoundContext !== undefined && object.keyNotFoundContext !== null)
-      ? KeyNotFoundContext.fromPartial(object.keyNotFoundContext)
+    message.keyNotFound = (object.keyNotFound !== undefined && object.keyNotFound !== null)
+      ? KeyNotFoundContext.fromPartial(object.keyNotFound)
       : undefined;
     return message;
   },

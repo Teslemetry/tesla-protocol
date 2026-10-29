@@ -53,9 +53,9 @@ message WifiConfig {
 
 message WifiNetwork {
   string ssid                          = 1;
-  sint32 rssiValue                     = 2;
+  sint32 rssi_value                    = 2;
   Rssi rssi                            = 3;
-  WifiNetworkSecurityType securityType = 4;
+  WifiNetworkSecurityType security_type = 4;
 }
 
 message NetworkInterfaceIPv4Config {

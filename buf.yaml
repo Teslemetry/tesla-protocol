@@ -24,17 +24,27 @@ breaking:
   # trips this rule every time, so it's excepted repo-wide rather than per-PR.
   except:
     - RESERVED_MESSAGE_NO_DELETE
-  # Temporary: this major release corrects placeholder and mis-guessed field
-  # names in command/ (same tags, new names). These rules flag that. Delete this
-  # block in the first PR after this release is published.
+  # Temporary: this major release corrects field names (same tags, new names),
+  # moves fields into oneofs, gives int32 fields their enum types and makes
+  # PartnerInfo.site_relationship_type repeated. These rules flag that. Delete
+  # this block in the first PR after this release is published.
   ignore_only:
     FIELD_SAME_JSON_NAME:
-      - proto/command/car_server.proto
-      - proto/command/signatures.proto
-      - proto/command/vehicle.proto
+      - proto/command/errors.proto
+      - proto/command/vcsec.proto
+      - proto/energy_device/device.proto
+      - proto/energy_device/energy.proto
     FIELD_SAME_NAME:
-      - proto/command/car_server.proto
-      - proto/command/signatures.proto
-      - proto/command/vehicle.proto
+      - proto/command/errors.proto
+      - proto/command/vcsec.proto
+      - proto/energy_device/device.proto
+      - proto/energy_device/energy.proto
+      - proto/energy_device/networking.proto
     FIELD_SAME_ONEOF:
-      - proto/command/vehicle.proto
+      - proto/command/errors.proto
+    FIELD_WIRE_JSON_COMPATIBLE_TYPE:
+      - proto/energy_device/common_api.proto
+      - proto/energy_device/registration_api.proto
+      - proto/energy_device/update.proto
+    FIELD_WIRE_JSON_COMPATIBLE_CARDINALITY:
+      - proto/energy_device/registration_api.proto

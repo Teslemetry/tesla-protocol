@@ -109,7 +109,7 @@ export interface AccumulatedEnergy {
 
 export interface GridComplianceStatus {
   gridState: GridState;
-  qualifiyingTimeRemainingS: number | undefined;
+  qualifyingTimeRemainingS: number | undefined;
 }
 
 export interface InstACMeasurement {
@@ -241,7 +241,7 @@ export const AccumulatedEnergy: MessageFns<AccumulatedEnergy> = {
 };
 
 function createBaseGridComplianceStatus(): GridComplianceStatus {
-  return { gridState: 0, qualifiyingTimeRemainingS: undefined };
+  return { gridState: 0, qualifyingTimeRemainingS: undefined };
 }
 
 export const GridComplianceStatus: MessageFns<GridComplianceStatus> = {
@@ -249,8 +249,8 @@ export const GridComplianceStatus: MessageFns<GridComplianceStatus> = {
     if (message.gridState !== 0) {
       writer.uint32(8).int32(message.gridState);
     }
-    if (message.qualifiyingTimeRemainingS !== undefined) {
-      FloatValue.encode({ value: message.qualifiyingTimeRemainingS! }, writer.uint32(18).fork()).join();
+    if (message.qualifyingTimeRemainingS !== undefined) {
+      FloatValue.encode({ value: message.qualifyingTimeRemainingS! }, writer.uint32(18).fork()).join();
     }
     return writer;
   },
@@ -275,7 +275,7 @@ export const GridComplianceStatus: MessageFns<GridComplianceStatus> = {
             break;
           }
 
-          message.qualifiyingTimeRemainingS = FloatValue.decode(reader, reader.uint32()).value;
+          message.qualifyingTimeRemainingS = FloatValue.decode(reader, reader.uint32()).value;
           continue;
         }
       }
@@ -290,8 +290,8 @@ export const GridComplianceStatus: MessageFns<GridComplianceStatus> = {
   fromJSON(object: any): GridComplianceStatus {
     return {
       gridState: isSet(object.gridState) ? gridStateFromJSON(object.gridState) : 0,
-      qualifiyingTimeRemainingS: isSet(object.qualifiyingTimeRemainingS)
-        ? Number(object.qualifiyingTimeRemainingS)
+      qualifyingTimeRemainingS: isSet(object.qualifyingTimeRemainingS)
+        ? Number(object.qualifyingTimeRemainingS)
         : undefined,
     };
   },
@@ -301,8 +301,8 @@ export const GridComplianceStatus: MessageFns<GridComplianceStatus> = {
     if (message.gridState !== undefined) {
       obj.gridState = gridStateToJSON(message.gridState);
     }
-    if (message.qualifiyingTimeRemainingS !== undefined) {
-      obj.qualifiyingTimeRemainingS = message.qualifiyingTimeRemainingS;
+    if (message.qualifyingTimeRemainingS !== undefined) {
+      obj.qualifyingTimeRemainingS = message.qualifyingTimeRemainingS;
     }
     return obj;
   },
@@ -313,7 +313,7 @@ export const GridComplianceStatus: MessageFns<GridComplianceStatus> = {
   fromPartial<I extends Exact<DeepPartial<GridComplianceStatus>, I>>(object: I): GridComplianceStatus {
     const message = createBaseGridComplianceStatus();
     message.gridState = object.gridState ?? 0;
-    message.qualifiyingTimeRemainingS = object.qualifiyingTimeRemainingS ?? undefined;
+    message.qualifyingTimeRemainingS = object.qualifyingTimeRemainingS ?? undefined;
     return message;
   },
 };
