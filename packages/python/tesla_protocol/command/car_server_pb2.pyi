@@ -49,6 +49,12 @@ class VehicleDataFields(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     display_state: _ClassVar[VehicleDataFields]
     keep_on_accessory_ports_state: _ClassVar[VehicleDataFields]
     legacy_vehicle_state_media_info: _ClassVar[VehicleDataFields]
+
+class RemoteNavTripOrder_E(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    RemoteNavTripOrderReplace: _ClassVar[RemoteNavTripOrder_E]
+    RemoteNavTripOrderPrepend: _ClassVar[RemoteNavTripOrder_E]
+    RemoteNavTripOrderAppend: _ClassVar[RemoteNavTripOrder_E]
 OPERATIONSTATUS_OK: OperationStatus_E
 OPERATIONSTATUS_ERROR: OperationStatus_E
 NOTHING: VehicleDataFields
@@ -78,6 +84,9 @@ child_presence_detection_state: VehicleDataFields
 display_state: VehicleDataFields
 keep_on_accessory_ports_state: VehicleDataFields
 legacy_vehicle_state_media_info: VehicleDataFields
+RemoteNavTripOrderReplace: RemoteNavTripOrder_E
+RemoteNavTripOrderPrepend: RemoteNavTripOrder_E
+RemoteNavTripOrderAppend: RemoteNavTripOrder_E
 
 class Action(_message.Message):
     __slots__ = ("vehicleAction",)
@@ -1507,26 +1516,16 @@ class NavigationRequest(_message.Message):
     DESTINATION_FIELD_NUMBER: _ClassVar[int]
     ORDER_FIELD_NUMBER: _ClassVar[int]
     destination: str
-    order: int
-    def __init__(self, destination: _Optional[str] = ..., order: _Optional[int] = ...) -> None: ...
+    order: RemoteNavTripOrder_E
+    def __init__(self, destination: _Optional[str] = ..., order: _Optional[_Union[RemoteNavTripOrder_E, str]] = ...) -> None: ...
 
 class NavigationSuperchargerRequest(_message.Message):
     __slots__ = ("id", "remote_nav_trip_order")
-    class RemoteNavTripOrder(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-        __slots__ = ()
-        REMOTE_NAV_TRIP_ORDER_UNKNOWN: _ClassVar[NavigationSuperchargerRequest.RemoteNavTripOrder]
-        REMOTE_NAV_TRIP_ORDER_REPLACE: _ClassVar[NavigationSuperchargerRequest.RemoteNavTripOrder]
-        REMOTE_NAV_TRIP_ORDER_PREPEND: _ClassVar[NavigationSuperchargerRequest.RemoteNavTripOrder]
-        REMOTE_NAV_TRIP_ORDER_APPEND: _ClassVar[NavigationSuperchargerRequest.RemoteNavTripOrder]
-    REMOTE_NAV_TRIP_ORDER_UNKNOWN: NavigationSuperchargerRequest.RemoteNavTripOrder
-    REMOTE_NAV_TRIP_ORDER_REPLACE: NavigationSuperchargerRequest.RemoteNavTripOrder
-    REMOTE_NAV_TRIP_ORDER_PREPEND: NavigationSuperchargerRequest.RemoteNavTripOrder
-    REMOTE_NAV_TRIP_ORDER_APPEND: NavigationSuperchargerRequest.RemoteNavTripOrder
     ID_FIELD_NUMBER: _ClassVar[int]
     REMOTE_NAV_TRIP_ORDER_FIELD_NUMBER: _ClassVar[int]
     id: int
-    remote_nav_trip_order: NavigationSuperchargerRequest.RemoteNavTripOrder
-    def __init__(self, id: _Optional[int] = ..., remote_nav_trip_order: _Optional[_Union[NavigationSuperchargerRequest.RemoteNavTripOrder, str]] = ...) -> None: ...
+    remote_nav_trip_order: RemoteNavTripOrder_E
+    def __init__(self, id: _Optional[int] = ..., remote_nav_trip_order: _Optional[_Union[RemoteNavTripOrder_E, str]] = ...) -> None: ...
 
 class UiSetUpcomingCalendarEntries(_message.Message):
     __slots__ = ("calendar_data",)
@@ -1645,23 +1644,13 @@ class PseudonymSyncRequest(_message.Message):
 
 class NavigationGpsRequest(_message.Message):
     __slots__ = ("lat", "lon", "order")
-    class RemoteNavTripOrder(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-        __slots__ = ()
-        REMOTE_NAV_TRIP_ORDER_UNKNOWN: _ClassVar[NavigationGpsRequest.RemoteNavTripOrder]
-        REMOTE_NAV_TRIP_ORDER_REPLACE: _ClassVar[NavigationGpsRequest.RemoteNavTripOrder]
-        REMOTE_NAV_TRIP_ORDER_PREPEND: _ClassVar[NavigationGpsRequest.RemoteNavTripOrder]
-        REMOTE_NAV_TRIP_ORDER_APPEND: _ClassVar[NavigationGpsRequest.RemoteNavTripOrder]
-    REMOTE_NAV_TRIP_ORDER_UNKNOWN: NavigationGpsRequest.RemoteNavTripOrder
-    REMOTE_NAV_TRIP_ORDER_REPLACE: NavigationGpsRequest.RemoteNavTripOrder
-    REMOTE_NAV_TRIP_ORDER_PREPEND: NavigationGpsRequest.RemoteNavTripOrder
-    REMOTE_NAV_TRIP_ORDER_APPEND: NavigationGpsRequest.RemoteNavTripOrder
     LAT_FIELD_NUMBER: _ClassVar[int]
     LON_FIELD_NUMBER: _ClassVar[int]
     ORDER_FIELD_NUMBER: _ClassVar[int]
     lat: float
     lon: float
-    order: NavigationGpsRequest.RemoteNavTripOrder
-    def __init__(self, lat: _Optional[float] = ..., lon: _Optional[float] = ..., order: _Optional[_Union[NavigationGpsRequest.RemoteNavTripOrder, str]] = ...) -> None: ...
+    order: RemoteNavTripOrder_E
+    def __init__(self, lat: _Optional[float] = ..., lon: _Optional[float] = ..., order: _Optional[_Union[RemoteNavTripOrder_E, str]] = ...) -> None: ...
 
 class SetRateTariffRequest(_message.Message):
     __slots__ = ("code", "name", "utility", "currency", "daily_charges", "monthly_charges", "monthly_minimum_bill", "demand_charges", "daily_demand_charges", "energy_charges", "max_applicable_demand", "min_applicable_demand", "seasons", "tariff")
@@ -2109,16 +2098,6 @@ class TeslaAuthResponseAction(_message.Message):
 
 class NavigationGpsDestinationRequest(_message.Message):
     __slots__ = ("lat", "lon", "destination", "order")
-    class RemoteNavTripOrder(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-        __slots__ = ()
-        REMOTE_NAV_TRIP_ORDER_UNKNOWN: _ClassVar[NavigationGpsDestinationRequest.RemoteNavTripOrder]
-        REMOTE_NAV_TRIP_ORDER_REPLACE: _ClassVar[NavigationGpsDestinationRequest.RemoteNavTripOrder]
-        REMOTE_NAV_TRIP_ORDER_PREPEND: _ClassVar[NavigationGpsDestinationRequest.RemoteNavTripOrder]
-        REMOTE_NAV_TRIP_ORDER_APPEND: _ClassVar[NavigationGpsDestinationRequest.RemoteNavTripOrder]
-    REMOTE_NAV_TRIP_ORDER_UNKNOWN: NavigationGpsDestinationRequest.RemoteNavTripOrder
-    REMOTE_NAV_TRIP_ORDER_REPLACE: NavigationGpsDestinationRequest.RemoteNavTripOrder
-    REMOTE_NAV_TRIP_ORDER_PREPEND: NavigationGpsDestinationRequest.RemoteNavTripOrder
-    REMOTE_NAV_TRIP_ORDER_APPEND: NavigationGpsDestinationRequest.RemoteNavTripOrder
     LAT_FIELD_NUMBER: _ClassVar[int]
     LON_FIELD_NUMBER: _ClassVar[int]
     DESTINATION_FIELD_NUMBER: _ClassVar[int]
@@ -2126,8 +2105,8 @@ class NavigationGpsDestinationRequest(_message.Message):
     lat: float
     lon: float
     destination: str
-    order: NavigationGpsDestinationRequest.RemoteNavTripOrder
-    def __init__(self, lat: _Optional[float] = ..., lon: _Optional[float] = ..., destination: _Optional[str] = ..., order: _Optional[_Union[NavigationGpsDestinationRequest.RemoteNavTripOrder, str]] = ...) -> None: ...
+    order: RemoteNavTripOrder_E
+    def __init__(self, lat: _Optional[float] = ..., lon: _Optional[float] = ..., destination: _Optional[str] = ..., order: _Optional[_Union[RemoteNavTripOrder_E, str]] = ...) -> None: ...
 
 class ParentalControlsClearPinAction(_message.Message):
     __slots__ = ("pin",)

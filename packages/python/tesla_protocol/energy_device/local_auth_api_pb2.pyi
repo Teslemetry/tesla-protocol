@@ -7,6 +7,12 @@ from typing import ClassVar as _ClassVar, Optional as _Optional, Union as _Union
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
+class LocalParticipant(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    LOCAL_PARTICIPANT_INVALID: _ClassVar[LocalParticipant]
+    LOCAL_PARTICIPANT_INSTALLER: _ClassVar[LocalParticipant]
+    LOCAL_PARTICIPANT_CUSTOMER: _ClassVar[LocalParticipant]
+
 class LocalAuthResult(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     LOCAL_AUTH_RESULT_INVALID: _ClassVar[LocalAuthResult]
@@ -15,6 +21,9 @@ class LocalAuthResult(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     LOCAL_AUTH_RESULT_INVALID_PASSWORD: _ClassVar[LocalAuthResult]
     LOCAL_AUTH_RESULT_PRESENCE_PROOF_REQUIRED: _ClassVar[LocalAuthResult]
     LOCAL_AUTH_RESULT_PRESENCE_PROOF_TIMED_OUT: _ClassVar[LocalAuthResult]
+LOCAL_PARTICIPANT_INVALID: LocalParticipant
+LOCAL_PARTICIPANT_INSTALLER: LocalParticipant
+LOCAL_PARTICIPANT_CUSTOMER: LocalParticipant
 LOCAL_AUTH_RESULT_INVALID: LocalAuthResult
 LOCAL_AUTH_RESULT_SUCCESS: LocalAuthResult
 LOCAL_AUTH_RESULT_INVALID_PARAMETERS: LocalAuthResult
@@ -39,10 +48,10 @@ class LocalAuthAPILoginRequest(_message.Message):
     PARTICIPANT_FIELD_NUMBER: _ClassVar[int]
     EMAIL_FIELD_NUMBER: _ClassVar[int]
     PASSWORD_FIELD_NUMBER: _ClassVar[int]
-    participant: int
+    participant: LocalParticipant
     email: str
     password: _networking_pb2.WifiPassword
-    def __init__(self, participant: _Optional[int] = ..., email: _Optional[str] = ..., password: _Optional[_Union[_networking_pb2.WifiPassword, _Mapping]] = ...) -> None: ...
+    def __init__(self, participant: _Optional[_Union[LocalParticipant, str]] = ..., email: _Optional[str] = ..., password: _Optional[_Union[_networking_pb2.WifiPassword, _Mapping]] = ...) -> None: ...
 
 class LocalAuthAPILoginResponse(_message.Message):
     __slots__ = ("result",)

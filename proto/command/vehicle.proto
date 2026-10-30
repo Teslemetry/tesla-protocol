@@ -132,6 +132,13 @@ message ClosuresState {
     double cruise_speed_limit_mph = 30;  // TESLEMETRY-EXT
 
     google.protobuf.Timestamp timestamp = 2000;
+    reserved 12;  // TESLEMETRY-EXT obsolete: sunRoofPercentOpenOBSOLETE (int32)
+    reserved 13;  // TESLEMETRY-EXT obsolete: lockedOBSOLETE (bool)
+    reserved 14;  // TESLEMETRY-EXT obsolete: isUserPresentOBSOLETE (bool)
+    reserved 16;  // TESLEMETRY-EXT obsolete: remoteStartOBSOLETE (bool)
+    reserved 17;  // TESLEMETRY-EXT obsolete: valetModeOBSOLETE (bool)
+    reserved 18;  // TESLEMETRY-EXT obsolete: valetPinNeededOBSOLETE (bool)
+    reserved 20;  // TESLEMETRY-EXT obsolete: sentryModeAvailableOBSOLETE (bool)
 }
 
 message ChargeScheduleState {
@@ -158,6 +165,11 @@ message SpeedLimitMode {
     oneof optional_max_limit_mph { float max_limit_mph = 106; }
     oneof optional_min_limit_mph { float min_limit_mph = 107; }
     oneof optional_current_limit_mph { float current_limit_mph = 108; }
+    reserved 3;  // TESLEMETRY-EXT obsolete: activeOBSOLETE (bool)
+    reserved 4;  // TESLEMETRY-EXT obsolete: pinCodeSetOBSOLETE (bool)
+    reserved 6;  // TESLEMETRY-EXT obsolete: maxLimitMphOBSOLETE (float)
+    reserved 7;  // TESLEMETRY-EXT obsolete: minLimitMphOBSOLETE (float)
+    reserved 8;  // TESLEMETRY-EXT obsolete: currentLimitMphOBSOLETE (float)
 }
 
 message ParentalControlsSettings {
@@ -206,6 +218,7 @@ message SoftwareUpdateState {
     google.protobuf.Timestamp timestamp = 108;
 
     oneof optional_auto_scheduled { bool auto_scheduled = 109; }  // TESLEMETRY-EXT
+    reserved 7;  // TESLEMETRY-EXT obsolete: versionOBSOLETE (string)
 }
 
 
@@ -251,6 +264,8 @@ message DriveState {
     FsdLast7DaysUsage fsd_last_7_days_usage = 23;  // TESLEMETRY-EXT
     oneof optional_rainbow_road_enabled { bool rainbow_road_enabled = 24; }  // TESLEMETRY-EXT
     oneof optional_fsd_active { bool fsd_active = 25; }  // TESLEMETRY-EXT
+    reserved 5;  // TESLEMETRY-EXT obsolete: odometerInHundredthsOfAMileOBSOLETE (int32)
+    reserved 6;  // TESLEMETRY-EXT obsolete: speedFloatOBSOLETE (float)
 }
 
 message ChargeState {
@@ -484,6 +499,43 @@ message ChargeState {
     oneof optional_convenience_features { uint32 convenience_features = 193; }  // TESLEMETRY-EXT
     oneof optional_keep_accessory_power_mode { bool keep_accessory_power_mode = 194; }  // TESLEMETRY-EXT
     oneof optional_should_hide_range_info { bool should_hide_range_info = 198; }  // TESLEMETRY-EXT
+    reserved 11;  // TESLEMETRY-EXT obsolete: batteryRangeOBSOLETE (float)
+    reserved 12;  // TESLEMETRY-EXT obsolete: estBatteryRangeOBSOLETE (float)
+    reserved 13;  // TESLEMETRY-EXT obsolete: idealBatteryRangeOBSOLETE (float)
+    reserved 14;  // TESLEMETRY-EXT obsolete: batteryLevelOBSOLETE (int32)
+    reserved 15;  // TESLEMETRY-EXT obsolete: usableBatteryLevelOBSOLETE (int32)
+    reserved 16;  // TESLEMETRY-EXT obsolete: chargeEnergyAddedOBSOLETE (float)
+    reserved 17;  // TESLEMETRY-EXT obsolete: chargeMilesAddedRatedOBSOLETE (float)
+    reserved 18;  // TESLEMETRY-EXT obsolete: chargeMilesAddedIdealOBSOLETE (float)
+    reserved 19;  // TESLEMETRY-EXT obsolete: chargerVoltageOBSOLETE (int32)
+    reserved 20;  // TESLEMETRY-EXT obsolete: chargerPilotCurrentOBSOLETE (int32)
+    reserved 21;  // TESLEMETRY-EXT obsolete: chargerActualCurrentOBSOLETE (int32)
+    reserved 22;  // TESLEMETRY-EXT obsolete: chargerPowerOBSOLETE (int32)
+    reserved 23;  // TESLEMETRY-EXT obsolete: minutesToFullChargeOBSOLETE (int32)
+    reserved 25;  // TESLEMETRY-EXT obsolete: tripChargingOBSOLETE (bool)
+    reserved 26;  // TESLEMETRY-EXT obsolete: chargeRateMphOBSOLETE (int32)
+    reserved 27;  // TESLEMETRY-EXT obsolete: chargePortDoorOpenOBSOLETE (bool)
+    reserved 29;  // TESLEMETRY-EXT obsolete: scheduledChargingStartTimeOBSOLETE (uint64)
+    reserved 30;  // TESLEMETRY-EXT obsolete: scheduledChargingPendingOBSOLETE (bool)
+    reserved 32;  // TESLEMETRY-EXT obsolete: userChargeEnableRequestOBSOLETE (bool)
+    reserved 33;  // TESLEMETRY-EXT obsolete: chargeEnableRequestOBSOLETE (bool)
+    reserved 34;  // TESLEMETRY-EXT obsolete: chargerPhasesOBSOLETE (int32)
+    reserved 36;  // TESLEMETRY-EXT obsolete: chargePortColdWeatherModeOBSOLETE (bool)
+    reserved 37;  // TESLEMETRY-EXT obsolete: chargeCurrentRequestOBSOLETE (int32)
+    reserved 38;  // TESLEMETRY-EXT obsolete: chargeCurrentRequestMaxOBSOLETE (int32)
+    reserved 39;  // TESLEMETRY-EXT obsolete: managedChargingActiveOBSOLETE (bool)
+    reserved 40;  // TESLEMETRY-EXT obsolete: managedChargingUserCanceledOBSOLETE (bool)
+    reserved 41;  // TESLEMETRY-EXT obsolete: managedChargingStartTimeOBSOLETE (uint64)
+    reserved 47;  // TESLEMETRY-EXT obsolete: offPeakHoursEndTimeOBSOLETE (uint32)
+    reserved 48;  // TESLEMETRY-EXT obsolete: scheduledChargingModeOBSOLETE (ScheduledChargingMode)
+    reserved 49;  // TESLEMETRY-EXT obsolete: chargingAmpsOBSOLETE (int32)
+    reserved 50;  // TESLEMETRY-EXT obsolete: scheduledChargingStartTimeMinutesOBSOLETE (uint32)
+    reserved 51;  // TESLEMETRY-EXT obsolete: scheduledDepartureTimeMinutesOBSOLETE (uint32)
+    reserved 52;  // TESLEMETRY-EXT obsolete: preconditioningEnabledOBSOLETE (bool)
+    reserved 53;  // TESLEMETRY-EXT obsolete: scheduledChargingStartTimeAppOBSOLETE (sint32)
+    reserved 54;  // TESLEMETRY-EXT obsolete: superchargerSessionTripPlannerOBSOLETE (bool)
+    reserved 55;  // TESLEMETRY-EXT obsolete: chargePortColorOBSOLETE (ChargePortColor_E)
+    reserved 56;  // TESLEMETRY-EXT obsolete: chargeRateMphFloatOBSOLETE (float)
 }
 
 message ManagedChargingState {
@@ -611,6 +663,13 @@ message LocationState {
     oneof optional_geo_hw_raw_latitude_d { double geo_hw_raw_latitude_d = 126; }  // TESLEMETRY-EXT
     oneof optional_geo_hw_raw_longitude_d { double geo_hw_raw_longitude_d = 127; }  // TESLEMETRY-EXT
     oneof optional_geo_horizontal_accuracy { float geo_horizontal_accuracy = 128; }  // TESLEMETRY-EXT
+    reserved 3;  // TESLEMETRY-EXT obsolete: headingOBSOLETE (uint32)
+    reserved 4;  // TESLEMETRY-EXT obsolete: gpsAsOfOBSOLETE (uint64)
+    reserved 5;  // TESLEMETRY-EXT obsolete: nativeLocationSupportedOBSOLETE (bool)
+    reserved 6;  // TESLEMETRY-EXT obsolete: nativeLatitudeOBSOLETE (float)
+    reserved 7;  // TESLEMETRY-EXT obsolete: nativeLongitudeOBSOLETE (float)
+    reserved 9;  // TESLEMETRY-EXT obsolete: correctedLatitudeOBSOLETE (float)
+    reserved 10;  // TESLEMETRY-EXT obsolete: correctedLongitudeOBSOLETE (float)
 } // LocationState
 
 
@@ -729,6 +788,37 @@ message VehicleState {
     // Autopilot entitlement is VehicleConfig 196-198, not part of this message.  // TESLEMETRY-EXT
     reserved 196, 197, 198;  // TESLEMETRY-EXT
     reserved "autopilot_base", "autopilot_override_state", "autopilot_override_expire_time";  // TESLEMETRY-EXT
+    reserved 8;  // TESLEMETRY-EXT obsolete: carVersionOBSOLETE (string)
+    reserved 9;  // TESLEMETRY-EXT obsolete: detailedVersionOBSOLETE (string)
+    reserved 10;  // TESLEMETRY-EXT obsolete: autopilotHashOBSOLETE (string)
+    reserved 18;  // TESLEMETRY-EXT obsolete: vehicleNameOBSOLETE (string)
+    reserved 20;  // TESLEMETRY-EXT obsolete: notificationsSupportedOBSOLETE (bool)
+    reserved 21;  // TESLEMETRY-EXT obsolete: remoteStartSupportedOBSOLETE (bool)
+    reserved 22;  // TESLEMETRY-EXT obsolete: remoteStartEnabledOBSOLETE (bool)
+    reserved 31;  // TESLEMETRY-EXT obsolete: lastAutoparkErrorOBSOLETE (string)
+    reserved 33;  // TESLEMETRY-EXT obsolete: homelinkDeviceCountOBSOLETE (uint32)
+    reserved 35;  // TESLEMETRY-EXT obsolete: smartSummonAvailableOBSOLETE (bool)
+    reserved 36;  // TESLEMETRY-EXT obsolete: summonStandbyModeEnabledOBSOLETE (bool)
+    reserved 41;  // TESLEMETRY-EXT obsolete: patsyModeOBSOLETE (bool)
+    reserved 42;  // TESLEMETRY-EXT obsolete: webcamAvailableOBSOLETE (bool)
+    reserved 44;  // TESLEMETRY-EXT obsolete: vehicleSelfTestRequestedOBSOLETE (bool)
+    reserved 45;  // TESLEMETRY-EXT obsolete: vehicleSelfTestProgressOBSOLETE (uint32)
+    reserved 48;  // TESLEMETRY-EXT obsolete: calendarSupportedOBSOLETE (bool)
+    reserved 49;  // TESLEMETRY-EXT obsolete: dashcamClipSaveAvailableOBSOLETE (bool)
+    reserved 50;  // TESLEMETRY-EXT obsolete: dashcamStateOBSOLETE (DashCamState)
+    reserved 51;  // TESLEMETRY-EXT obsolete: tpmsPressureFlOBSOLETE (float)
+    reserved 52;  // TESLEMETRY-EXT obsolete: tpmsPressureFrOBSOLETE (float)
+    reserved 53;  // TESLEMETRY-EXT obsolete: tpmsPressureRlOBSOLETE (float)
+    reserved 54;  // TESLEMETRY-EXT obsolete: tpmsPressureRrOBSOLETE (float)
+    reserved 56;  // TESLEMETRY-EXT obsolete: serviceModeOBSOLETE (bool)
+    reserved 57;  // TESLEMETRY-EXT obsolete: serviceModePlusOBSOLETE (bool)
+    reserved 62;  // TESLEMETRY-EXT obsolete: tpmsHardWarningFlOBSOLETE (bool)
+    reserved 63;  // TESLEMETRY-EXT obsolete: tpmsHardWarningFrOBSOLETE (bool)
+    reserved 64;  // TESLEMETRY-EXT obsolete: tpmsHardWarningRlOBSOLETE (bool)
+    reserved 65;  // TESLEMETRY-EXT obsolete: tpmsHardWarningRrOBSOLETE (bool)
+    reserved 66;  // TESLEMETRY-EXT obsolete: tpmsSoftWarningFlOBSOLETE (bool)
+    reserved 70;  // TESLEMETRY-EXT obsolete: tpmsRcpFrontValueOBSOLETE (float)
+    reserved 71;  // TESLEMETRY-EXT obsolete: tpmsRcpRearValueOBSOLETE (float)
 }
 
 // ===== TESLEMETRY-EXT BEGIN =====
@@ -866,6 +956,7 @@ enum DashCamState {
 
 message LegacyMediaState {
     oneof optional_remote_control_enabled { bool remote_control_enabled = 101; }
+    reserved 1;  // TESLEMETRY-EXT obsolete: remoteControlEnabledOBSOLETE (bool)
 }
 
 message LegacyMediaInfo {
@@ -1013,6 +1104,40 @@ message ClimateState {
     oneof optional_seat_fan_second_row_left { int32 seat_fan_second_row_left = 152; } // Values in 'SeatCoolingLevel_E'.  // TESLEMETRY-EXT
     oneof optional_seat_fan_second_row_right { int32 seat_fan_second_row_right = 153; } // Values in 'SeatCoolingLevel_E'.  // TESLEMETRY-EXT
     oneof optional_dog_mode_state { DogModeState dog_mode_state = 154; }  // TESLEMETRY-EXT
+    reserved 7;  // TESLEMETRY-EXT obsolete: isFrontDefrosterOnOBSOLETE (bool)
+    reserved 8;  // TESLEMETRY-EXT obsolete: isRearDefrosterOnOBSOLETE (bool)
+    reserved 9;  // TESLEMETRY-EXT obsolete: fanStatusOBSOLETE (int32)
+    reserved 10;  // TESLEMETRY-EXT obsolete: isClimateOnOBSOLETE (bool)
+    reserved 11;  // TESLEMETRY-EXT obsolete: minAvailTempCelsiusOBSOLETE (float)
+    reserved 12;  // TESLEMETRY-EXT obsolete: maxAvailTempCelsiusOBSOLETE (float)
+    reserved 13;  // TESLEMETRY-EXT obsolete: seatHeaterLeftOBSOLETE (int32)
+    reserved 14;  // TESLEMETRY-EXT obsolete: seatHeaterRightOBSOLETE (int32)
+    reserved 15;  // TESLEMETRY-EXT obsolete: seatHeaterRearLeftOBSOLETE (int32)
+    reserved 16;  // TESLEMETRY-EXT obsolete: seatHeaterRearRightOBSOLETE (int32)
+    reserved 17;  // TESLEMETRY-EXT obsolete: seatHeaterRearCenterOBSOLETE (int32)
+    reserved 18;  // TESLEMETRY-EXT obsolete: seatHeaterRearRightBackOBSOLETE (int32)
+    reserved 19;  // TESLEMETRY-EXT obsolete: seatHeaterRearLeftBackOBSOLETE (int32)
+    reserved 20;  // TESLEMETRY-EXT obsolete: seatHeaterThirdRowRightOBSOLETE (int32)
+    reserved 21;  // TESLEMETRY-EXT obsolete: seatHeaterThirdRowLeftOBSOLETE (int32)
+    reserved 22;  // TESLEMETRY-EXT obsolete: batteryHeaterOBSOLETE (bool)
+    reserved 23;  // TESLEMETRY-EXT obsolete: batteryHeaterNoPowerOBSOLETE (bool)
+    reserved 25;  // TESLEMETRY-EXT obsolete: steeringWheelHeaterOBSOLETE (bool)
+    reserved 26;  // TESLEMETRY-EXT obsolete: wiperBladeHeaterOBSOLETE (bool)
+    reserved 27;  // TESLEMETRY-EXT obsolete: sideMirrorHeatersOBSOLETE (bool)
+    reserved 28;  // TESLEMETRY-EXT obsolete: isPreconditioningOBSOLETE (bool)
+    reserved 29;  // TESLEMETRY-EXT obsolete: remoteHeaterControlEnabledOBSOLETE (bool)
+    reserved 34;  // TESLEMETRY-EXT obsolete: bioweaponModeOnOBSOLETE (bool)
+    reserved 36;  // TESLEMETRY-EXT obsolete: isAutoConditioningOnOBSOLETE (bool)
+    reserved 37;  // TESLEMETRY-EXT obsolete: autoSeatClimateLeftOBSOLETE (bool)
+    reserved 38;  // TESLEMETRY-EXT obsolete: autoSeatClimateRightOBSOLETE (bool)
+    reserved 39;  // TESLEMETRY-EXT obsolete: seatFanFrontLeftOBSOLETE (int32)
+    reserved 40;  // TESLEMETRY-EXT obsolete: seatFanFrontRightOBSOLETE (int32)
+    reserved 41;  // TESLEMETRY-EXT obsolete: allowCabinOverheatProtectionOBSOLETE (bool)
+    reserved 42;  // TESLEMETRY-EXT obsolete: supportsFanOnlyCabinOverheatProtectionOBSOLETE (bool)
+    reserved 43;  // TESLEMETRY-EXT obsolete: cabinOverheatProtectionOBSOLETE (CabinOverheatProtection_E)
+    reserved 44;  // TESLEMETRY-EXT obsolete: cabinOverheatProtectionActivelyCoolingOBSOLETE (bool)
+    reserved 45;  // TESLEMETRY-EXT obsolete: copActivationTempOBSOLETE (float)
+    reserved 50;  // TESLEMETRY-EXT obsolete: hvacAutoRequestOBSOLETE (HvacAutoRequest)
 }
 
 message TirePressureState {
@@ -1588,6 +1713,8 @@ message GuiSettings {
     oneof optional_gui_24_hour_time { bool gui_24_hour_time = 104; }
     oneof optional_show_range_units { bool show_range_units = 106; }
     oneof optional_gui_tirepressure_units { TirePressureUnit gui_tirepressure_units = 108; }
+    reserved 6;  // TESLEMETRY-EXT obsolete: showRangeUnitsOBSOLETE (bool)
+    reserved 8;  // TESLEMETRY-EXT obsolete: guiTirepressureUnitsOBSOLETE (TirePressureUnit)
 }
 
 message VehicleConfig {
@@ -1840,6 +1967,34 @@ message VehicleConfig {
     oneof optional_autopilot_override_expire_time { int64 autopilot_override_expire_time = 198; }
     oneof optional_supports_dynamic_environments { bool supports_dynamic_environments = 199; }  // TESLEMETRY-EXT
     oneof optional_wheel_caps_on { bool wheel_caps_on = 200; }  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    reserved 20;  // TESLEMETRY-EXT obsolete: eceRestrictionsOBSOLETE (bool)
+    reserved 21;  // TESLEMETRY-EXT obsolete: euVehicleOBSOLETE (bool)
+    reserved 22;  // TESLEMETRY-EXT obsolete: motorizedChargePortOBSOLETE (bool)
+    reserved 24;  // TESLEMETRY-EXT obsolete: canAcceptNavigationRequestsOBSOLETE (bool)
+    reserved 25;  // TESLEMETRY-EXT obsolete: keyVersionOBSOLETE (uint32)
+    reserved 26;  // TESLEMETRY-EXT obsolete: mobileEnabledOBSOLETE (bool)
+    reserved 34;  // TESLEMETRY-EXT obsolete: defaultChargeToMaxOBSOLETE (bool)
+    reserved 36;  // TESLEMETRY-EXT obsolete: steeringWheelHeaterInstalledOBSOLETE (bool)
+    reserved 37;  // TESLEMETRY-EXT obsolete: sentryModeSupportedOBSOLETE (bool)
+    reserved 38;  // TESLEMETRY-EXT obsolete: homelinkSupportedOBSOLETE (bool)
+    reserved 39;  // TESLEMETRY-EXT obsolete: webcamSupportedOBSOLETE (bool)
+    reserved 41;  // TESLEMETRY-EXT obsolete: bioweaponModeSupportedOBSOLETE (bool)
+    reserved 42;  // TESLEMETRY-EXT obsolete: dashcamClipSaveSupportedOBSOLETE (bool)
+    reserved 43;  // TESLEMETRY-EXT obsolete: hasPwsOBSOLETE (bool)
+    reserved 44;  // TESLEMETRY-EXT obsolete: utcOffsetOBSOLETE (sint32)
+    reserved 45;  // TESLEMETRY-EXT obsolete: hasSeatCoolingOBSOLETE (bool)
+    reserved 46;  // TESLEMETRY-EXT obsolete: paintColorOverrideOBSOLETE (string)
+    reserved 47;  // TESLEMETRY-EXT obsolete: tpmsPressuresSupportedOBSOLETE (bool)
+    reserved 48;  // TESLEMETRY-EXT obsolete: vehicleBadgingOBSOLETE (uint32)
+    reserved 49;  // TESLEMETRY-EXT obsolete: exteriorTrimOverrideOBSOLETE (string)
+    reserved 50;  // TESLEMETRY-EXT obsolete: headlampTypeOBSOLETE (HeadlampType_E)
+    reserved 54;  // TESLEMETRY-EXT obsolete: auxParkLampsOBSOLETE (AuxParkLamps_E)
+    reserved 55;  // TESLEMETRY-EXT obsolete: isRavenOBSOLETE (bool)
+    reserved 56;  // TESLEMETRY-EXT obsolete: hasAutoSeatClimateOBSOLETE (bool)
+    reserved 57;  // TESLEMETRY-EXT obsolete: hasFrontRowSeatHeatersOBSOLETE (bool)
+    reserved 58;  // TESLEMETRY-EXT obsolete: hasThirdRowSeatHeatersOBSOLETE (bool)
+    reserved 59;  // TESLEMETRY-EXT obsolete: supportsQrPairingOBSOLETE (bool)
+    reserved 60;  // TESLEMETRY-EXT obsolete: vinOBSOLETE (string)
 }
 
 message ParkedAccessoryState {

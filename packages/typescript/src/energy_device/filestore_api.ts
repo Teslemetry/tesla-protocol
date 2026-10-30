@@ -86,7 +86,7 @@ export function fileStoreAPIDomainToJSON(object: FileStoreAPIDomain): string {
 
 export interface FileStoreAPIFile {
   name: string;
-  blob: Uint8Array;
+  blob?: Uint8Array | undefined;
 }
 
 export interface FileStoreAPIForceWriteFileRequest {
@@ -130,7 +130,7 @@ export interface FileStoreMessages {
 }
 
 function createBaseFileStoreAPIFile(): FileStoreAPIFile {
-  return { name: "", blob: new Uint8Array(0) };
+  return { name: "", blob: undefined };
 }
 
 export const FileStoreAPIFile: MessageFns<FileStoreAPIFile> = {
@@ -138,7 +138,7 @@ export const FileStoreAPIFile: MessageFns<FileStoreAPIFile> = {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
-    if (message.blob.length !== 0) {
+    if (message.blob !== undefined) {
       writer.uint32(802).bytes(message.blob);
     }
     return writer;
@@ -179,7 +179,7 @@ export const FileStoreAPIFile: MessageFns<FileStoreAPIFile> = {
   fromJSON(object: any): FileStoreAPIFile {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      blob: isSet(object.blob) ? bytesFromBase64(object.blob) : new Uint8Array(0),
+      blob: isSet(object.blob) ? bytesFromBase64(object.blob) : undefined,
     };
   },
 
@@ -200,7 +200,7 @@ export const FileStoreAPIFile: MessageFns<FileStoreAPIFile> = {
   fromPartial<I extends Exact<DeepPartial<FileStoreAPIFile>, I>>(object: I): FileStoreAPIFile {
     const message = createBaseFileStoreAPIFile();
     message.name = object.name ?? "";
-    message.blob = object.blob ?? new Uint8Array(0);
+    message.blob = object.blob ?? undefined;
     return message;
   },
 };

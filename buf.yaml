@@ -3,7 +3,6 @@ modules:
   - path: proto/command
   - path: proto/telemetry
   - path: proto/energy_device
-  - path: proto/energy_command
   - path: proto/teslapower
   - path: proto/charging
   - path: proto/dashcam
@@ -25,26 +24,51 @@ breaking:
   except:
     - RESERVED_MESSAGE_NO_DELETE
   # Temporary: this major release corrects field names (same tags, new names),
-  # moves fields into oneofs, gives int32 fields their enum types and makes
-  # PartnerInfo.site_relationship_type repeated. These rules flag that. Delete
-  # this block in the first PR after this release is published.
+  # moves fields into oneofs, gives fields their enum and message types,
+  # corrects energy_device wire types, renumbers WCLifetimeStats to tags 1-10
+  # and makes PartnerInfo.site_relationship_type repeated. These rules flag
+  # that. Delete this block in the first PR after this release is published.
   ignore_only:
+    FIELD_NO_DELETE_UNLESS_NAME_RESERVED:
+      - proto/energy_device/wall_connector.proto
+    FIELD_NO_DELETE_UNLESS_NUMBER_RESERVED:
+      - proto/energy_device/wall_connector.proto
     FIELD_SAME_JSON_NAME:
       - proto/command/errors.proto
       - proto/command/vcsec.proto
       - proto/energy_device/device.proto
       - proto/energy_device/energy.proto
+      - proto/energy_device/supercharger_api.proto
+      - proto/energy_device/teg_api.proto
+      - proto/energy_device/wall_connector.proto
     FIELD_SAME_NAME:
       - proto/command/errors.proto
       - proto/command/vcsec.proto
       - proto/energy_device/device.proto
       - proto/energy_device/energy.proto
       - proto/energy_device/networking.proto
+      - proto/energy_device/supercharger_api.proto
+      - proto/energy_device/teg_api.proto
+      - proto/energy_device/wall_connector.proto
     FIELD_SAME_ONEOF:
       - proto/command/errors.proto
-    FIELD_WIRE_JSON_COMPATIBLE_TYPE:
       - proto/energy_device/common_api.proto
+      - proto/energy_device/filestore_api.proto
+      - proto/energy_device/pvi_api.proto
       - proto/energy_device/registration_api.proto
+      - proto/energy_device/teg_api.proto
       - proto/energy_device/update.proto
+      - proto/energy_device/wall_connector.proto
+    FIELD_WIRE_JSON_COMPATIBLE_TYPE:
+      - proto/command/car_server.proto
+      - proto/energy_device/common_api.proto
+      - proto/energy_device/energy.proto
+      - proto/energy_device/local_auth_api.proto
+      - proto/energy_device/neurio_meter_api.proto
+      - proto/energy_device/registration_api.proto
+      - proto/energy_device/supercharger_api.proto
+      - proto/energy_device/teg_api.proto
+      - proto/energy_device/update.proto
+      - proto/energy_device/wall_connector.proto
     FIELD_WIRE_JSON_COMPATIBLE_CARDINALITY:
       - proto/energy_device/registration_api.proto

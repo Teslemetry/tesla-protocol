@@ -1,0 +1,80 @@
+syntax = "proto3";
+
+package tesla.proto.energy_telemetry.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energy_telemetry/v1";
+option java_package = "com.tesla.generated.energy_telemetry.v1";
+option java_outer_classname = "EnergyTelemetry";
+
+import "google/protobuf/timestamp.proto";
+
+message DeviceAlertRecord {
+  int64 timestamp = 1;
+  string interface_type = 2;
+  string interface_instance = 3;
+  string bus_id = 4;
+  string bc_part_number = 5;
+  string bc_serial_number = 6;
+  string ecu_part_number = 7;
+  string ecu_serial_number = 8;
+  string ecu_type = 9;
+  string git_hash = 10;
+  string alert_name = 11;
+  string decoded_alert = 12;
+  uint64 alert_raw = 13;
+  bool alert_is_fault = 14;
+}
+
+message DeviceTelemetryRecord {
+  int64 timestamp = 1;
+  string interface_type = 2;
+  string interface_instance = 3;
+  string bus_id = 4;
+  string bc_part_number = 5;
+  string bc_serial_number = 6;
+  string ecu_part_number = 7;
+  string ecu_serial_number = 8;
+  string ecu_type = 9;
+  string git_hash = 10;
+  string signal_name = 11;
+  float signal_value = 12;
+  string signal_value_text = 13;
+  string signal_unit = 14;
+}
+
+message LogRecord {
+  google.protobuf.Timestamp time = 1;
+  string ecu_type = 2;
+  string githash = 3;
+  repeated Signal signal = 4;
+  uint32 version_major = 5;
+  uint32 version_minor = 6;
+  uint32 version_patch = 7;
+  uint32 version_dev = 8;
+}
+
+message MP2LogRecord {
+  google.protobuf.Timestamp time = 1;
+  string interface_type = 2;
+  string interface_instance = 3;
+  string bus_id = 4;
+  string bc_part_number = 5;
+  string bc_serial_number = 6;
+  string ecu_part_number = 7;
+  string ecu_serial_number = 8;
+  string ecu_type = 9;
+  string git_hash = 10;
+  repeated Signal signal = 11;
+  uint32 version_major = 12;
+  uint32 version_minor = 13;
+  uint32 version_patch = 14;
+  uint32 version_dev = 15;
+}
+
+message Signal {
+  string signal_name = 1;
+  string signal_unit = 2;
+  int32 signal_value_integer = 3;
+  float signal_value = 4;
+  string signal_value_text = 5;
+}

@@ -4,28 +4,22 @@
   "outer_field": { "name": "vehicleAction", "tag": 2, "type": "CarServer.VehicleAction" },
   "cases": [
     {
-      "name": "navigation_supercharger_request_unknown",
-      "vehicle_action_field": { "name": "navigationSuperchargerRequest", "tag": 22, "type": "CarServer.NavigationSuperchargerRequest" },
-      "payload": { "remote_nav_trip_order": "REMOTE_NAV_TRIP_ORDER_UNKNOWN", "remote_nav_trip_order_number": 0 },
-      "hex": "1203b20100"
-    },
-    {
       "name": "navigation_supercharger_request_replace",
       "vehicle_action_field": { "name": "navigationSuperchargerRequest", "tag": 22, "type": "CarServer.NavigationSuperchargerRequest" },
-      "payload": { "remote_nav_trip_order": "REMOTE_NAV_TRIP_ORDER_REPLACE", "remote_nav_trip_order_number": 1 },
-      "hex": "1205b201021001"
+      "payload": { "remote_nav_trip_order": "RemoteNavTripOrderReplace", "remote_nav_trip_order_number": 0 },
+      "hex": "1203b20100"
     },
     {
       "name": "navigation_supercharger_request_prepend",
       "vehicle_action_field": { "name": "navigationSuperchargerRequest", "tag": 22, "type": "CarServer.NavigationSuperchargerRequest" },
-      "payload": { "remote_nav_trip_order": "REMOTE_NAV_TRIP_ORDER_PREPEND", "remote_nav_trip_order_number": 2 },
-      "hex": "1205b201021002"
+      "payload": { "remote_nav_trip_order": "RemoteNavTripOrderPrepend", "remote_nav_trip_order_number": 1 },
+      "hex": "1205b201021001"
     },
     {
       "name": "navigation_supercharger_request_append",
       "vehicle_action_field": { "name": "navigationSuperchargerRequest", "tag": 22, "type": "CarServer.NavigationSuperchargerRequest" },
-      "payload": { "remote_nav_trip_order": "REMOTE_NAV_TRIP_ORDER_APPEND", "remote_nav_trip_order_number": 3 },
-      "hex": "1205b201021003"
+      "payload": { "remote_nav_trip_order": "RemoteNavTripOrderAppend", "remote_nav_trip_order_number": 2 },
+      "hex": "1205b201021002"
     }
   ]
 }

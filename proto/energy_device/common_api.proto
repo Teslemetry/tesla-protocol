@@ -246,8 +246,8 @@ message CommonAPIRetrieveSiteSuggestionResponse {
 }
 
 message CommonMessages {
-  ErrorResponse error_response                                                                                             = 1;
   oneof message {
+    ErrorResponse error_response                                                                                             = 1;
     CommonAPIGetSystemInfoRequest get_system_info_request                                                                  = 2;
     CommonAPIGetSystemInfoResponse get_system_info_response                                                                = 3;
     CommonAPISetLocalSiteConfigRequest set_local_site_config_request                                                       = 4;

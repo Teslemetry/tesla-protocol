@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n0tesla_protocol/energy_device/filestore_api.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\".\n\x10\x46ileStoreAPIFile\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0c\n\x04\x62lob\x18\x64 \x01(\x0c\"\xc1\x01\n!FileStoreAPIForceWriteFileRequest\x12O\n\x06\x64omain\x18\x01 \x01(\x0e\x32?.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIDomain\x12K\n\x04\x66ile\x18\x02 \x01(\x0b\x32=.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIFile\"2\n\"FileStoreAPIForceWriteFileResponse\x12\x0c\n\x04hash\x18\x01 \x01(\x0c\"\xcb\x01\n\x1d\x46ileStoreAPIUpdateFileRequest\x12O\n\x06\x64omain\x18\x01 \x01(\x0e\x32?.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIDomain\x12K\n\x04\x66ile\x18\x02 \x01(\x0b\x32=.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIFile\x12\x0c\n\x04hash\x18\x03 \x01(\x0c\"{\n\x1e\x46ileStoreAPIUpdateFileResponse\x12K\n\x04\x66ile\x18\x01 \x01(\x0b\x32=.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIFile\x12\x0c\n\x04hash\x18\x02 \x01(\x0c\"\x97\x01\n\x1b\x46ileStoreAPIReadFileRequest\x12O\n\x06\x64omain\x18\x01 \x01(\x0e\x32?.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIDomain\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x19\n\x11if_different_hash\x18\x03 \x01(\x0c\"y\n\x1c\x46ileStoreAPIReadFileResponse\x12K\n\x04\x66ile\x18\x01 \x01(\x0b\x32=.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIFile\x12\x0c\n\x04hash\x18\x02 \x01(\x0c\"\xb0\x05\n\x11\x46ileStoreMessages\x12\x65\n\x11read_file_request\x18\x01 \x01(\x0b\x32H.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIReadFileRequestH\x00\x12g\n\x12read_file_response\x18\x02 \x01(\x0b\x32I.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIReadFileResponseH\x00\x12r\n\x18\x66orce_write_file_request\x18\x03 \x01(\x0b\x32N.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIForceWriteFileRequestH\x00\x12t\n\x19\x66orce_write_file_response\x18\x04 \x01(\x0b\x32O.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIForceWriteFileResponseH\x00\x12i\n\x13update_file_request\x18\x05 \x01(\x0b\x32J.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIUpdateFileRequestH\x00\x12k\n\x14update_file_response\x18\x06 \x01(\x0b\x32K.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIUpdateFileResponseH\x00\x42\t\n\x07message*\xa6\x03\n\x12\x46ileStoreAPIDomain\x12!\n\x1d\x46ILE_STORE_API_DOMAIN_INVALID\x10\x00\x12%\n!FILE_STORE_API_DOMAIN_CONFIG_JSON\x10\x01\x12/\n+FILE_STORE_API_DOMAIN_GRID_CODE_REGIONS_CSV\x10\x02\x12\x32\n.FILE_STORE_API_DOMAIN_CERTIFIED_INSTALLERS_CSV\x10\x03\x12,\n(FILE_STORE_API_DOMAIN_SUPERCHARGER_FILES\x10\x04\x12*\n&FILE_STORE_API_DOMAIN_OPTICASTER_FILES\x10\x05\x12(\n$FILE_STORE_API_DOMAIN_WALLBOX_CONFIG\x10\x06\x12+\n\'FILE_STORE_API_DOMAIN_OCPP_CSMS_ROOT_CA\x10\x07\x12\x30\n,FILE_STORE_API_DOMAIN_OPTIMUS_CHARGER_CONFIG\x10\tB\x80\x01\n$com.tesla.generated.energy_device.v1B\x0c\x46ileStoreApiZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n0tesla_protocol/energy_device/filestore_api.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\";\n\x10\x46ileStoreAPIFile\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\x0e\n\x04\x62lob\x18\x64 \x01(\x0cH\x00\x42\t\n\x07\x63ontent\"\xc1\x01\n!FileStoreAPIForceWriteFileRequest\x12O\n\x06\x64omain\x18\x01 \x01(\x0e\x32?.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIDomain\x12K\n\x04\x66ile\x18\x02 \x01(\x0b\x32=.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIFile\"2\n\"FileStoreAPIForceWriteFileResponse\x12\x0c\n\x04hash\x18\x01 \x01(\x0c\"\xcb\x01\n\x1d\x46ileStoreAPIUpdateFileRequest\x12O\n\x06\x64omain\x18\x01 \x01(\x0e\x32?.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIDomain\x12K\n\x04\x66ile\x18\x02 \x01(\x0b\x32=.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIFile\x12\x0c\n\x04hash\x18\x03 \x01(\x0c\"{\n\x1e\x46ileStoreAPIUpdateFileResponse\x12K\n\x04\x66ile\x18\x01 \x01(\x0b\x32=.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIFile\x12\x0c\n\x04hash\x18\x02 \x01(\x0c\"\x97\x01\n\x1b\x46ileStoreAPIReadFileRequest\x12O\n\x06\x64omain\x18\x01 \x01(\x0e\x32?.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIDomain\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x19\n\x11if_different_hash\x18\x03 \x01(\x0c\"y\n\x1c\x46ileStoreAPIReadFileResponse\x12K\n\x04\x66ile\x18\x01 \x01(\x0b\x32=.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIFile\x12\x0c\n\x04hash\x18\x02 \x01(\x0c\"\xb0\x05\n\x11\x46ileStoreMessages\x12\x65\n\x11read_file_request\x18\x01 \x01(\x0b\x32H.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIReadFileRequestH\x00\x12g\n\x12read_file_response\x18\x02 \x01(\x0b\x32I.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIReadFileResponseH\x00\x12r\n\x18\x66orce_write_file_request\x18\x03 \x01(\x0b\x32N.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIForceWriteFileRequestH\x00\x12t\n\x19\x66orce_write_file_response\x18\x04 \x01(\x0b\x32O.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIForceWriteFileResponseH\x00\x12i\n\x13update_file_request\x18\x05 \x01(\x0b\x32J.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIUpdateFileRequestH\x00\x12k\n\x14update_file_response\x18\x06 \x01(\x0b\x32K.tesla_protocol.tesla.proto.energy_device.v1.FileStoreAPIUpdateFileResponseH\x00\x42\t\n\x07message*\xa6\x03\n\x12\x46ileStoreAPIDomain\x12!\n\x1d\x46ILE_STORE_API_DOMAIN_INVALID\x10\x00\x12%\n!FILE_STORE_API_DOMAIN_CONFIG_JSON\x10\x01\x12/\n+FILE_STORE_API_DOMAIN_GRID_CODE_REGIONS_CSV\x10\x02\x12\x32\n.FILE_STORE_API_DOMAIN_CERTIFIED_INSTALLERS_CSV\x10\x03\x12,\n(FILE_STORE_API_DOMAIN_SUPERCHARGER_FILES\x10\x04\x12*\n&FILE_STORE_API_DOMAIN_OPTICASTER_FILES\x10\x05\x12(\n$FILE_STORE_API_DOMAIN_WALLBOX_CONFIG\x10\x06\x12+\n\'FILE_STORE_API_DOMAIN_OCPP_CSMS_ROOT_CA\x10\x07\x12\x30\n,FILE_STORE_API_DOMAIN_OPTIMUS_CHARGER_CONFIG\x10\tB\x80\x01\n$com.tesla.generated.energy_device.v1B\x0c\x46ileStoreApiZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,22 +32,22 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'tesla_protocol.energy_devic
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n$com.tesla.generated.energy_device.v1B\014FileStoreApiZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1'
-  _globals['_FILESTOREAPIDOMAIN']._serialized_start=1693
-  _globals['_FILESTOREAPIDOMAIN']._serialized_end=2115
+  _globals['_FILESTOREAPIDOMAIN']._serialized_start=1706
+  _globals['_FILESTOREAPIDOMAIN']._serialized_end=2128
   _globals['_FILESTOREAPIFILE']._serialized_start=97
-  _globals['_FILESTOREAPIFILE']._serialized_end=143
-  _globals['_FILESTOREAPIFORCEWRITEFILEREQUEST']._serialized_start=146
-  _globals['_FILESTOREAPIFORCEWRITEFILEREQUEST']._serialized_end=339
-  _globals['_FILESTOREAPIFORCEWRITEFILERESPONSE']._serialized_start=341
-  _globals['_FILESTOREAPIFORCEWRITEFILERESPONSE']._serialized_end=391
-  _globals['_FILESTOREAPIUPDATEFILEREQUEST']._serialized_start=394
-  _globals['_FILESTOREAPIUPDATEFILEREQUEST']._serialized_end=597
-  _globals['_FILESTOREAPIUPDATEFILERESPONSE']._serialized_start=599
-  _globals['_FILESTOREAPIUPDATEFILERESPONSE']._serialized_end=722
-  _globals['_FILESTOREAPIREADFILEREQUEST']._serialized_start=725
-  _globals['_FILESTOREAPIREADFILEREQUEST']._serialized_end=876
-  _globals['_FILESTOREAPIREADFILERESPONSE']._serialized_start=878
-  _globals['_FILESTOREAPIREADFILERESPONSE']._serialized_end=999
-  _globals['_FILESTOREMESSAGES']._serialized_start=1002
-  _globals['_FILESTOREMESSAGES']._serialized_end=1690
+  _globals['_FILESTOREAPIFILE']._serialized_end=156
+  _globals['_FILESTOREAPIFORCEWRITEFILEREQUEST']._serialized_start=159
+  _globals['_FILESTOREAPIFORCEWRITEFILEREQUEST']._serialized_end=352
+  _globals['_FILESTOREAPIFORCEWRITEFILERESPONSE']._serialized_start=354
+  _globals['_FILESTOREAPIFORCEWRITEFILERESPONSE']._serialized_end=404
+  _globals['_FILESTOREAPIUPDATEFILEREQUEST']._serialized_start=407
+  _globals['_FILESTOREAPIUPDATEFILEREQUEST']._serialized_end=610
+  _globals['_FILESTOREAPIUPDATEFILERESPONSE']._serialized_start=612
+  _globals['_FILESTOREAPIUPDATEFILERESPONSE']._serialized_end=735
+  _globals['_FILESTOREAPIREADFILEREQUEST']._serialized_start=738
+  _globals['_FILESTOREAPIREADFILEREQUEST']._serialized_end=889
+  _globals['_FILESTOREAPIREADFILERESPONSE']._serialized_start=891
+  _globals['_FILESTOREAPIREADFILERESPONSE']._serialized_end=1012
+  _globals['_FILESTOREMESSAGES']._serialized_start=1015
+  _globals['_FILESTOREMESSAGES']._serialized_end=1703
 # @@protoc_insertion_point(module_scope)

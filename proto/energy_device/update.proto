@@ -58,8 +58,10 @@ message SystemUpdate {
 message AcceptedPackage {
   uint64 package_id           = 1;
   bytes package_signature     = 2;
-  string upload_endpoint      = 3;
-  bool will_attempt_download = 4;
+  oneof sideloading_method {
+    string upload_endpoint      = 3;
+    bool will_attempt_download = 4;
+  }
 }
 
 message LocallyAvailablePackage {

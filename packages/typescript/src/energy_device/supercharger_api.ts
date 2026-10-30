@@ -187,6 +187,45 @@ export function setDcMeterCommissionedErrorToJSON(object: SetDcMeterCommissioned
   }
 }
 
+export enum DcMeterCommissioningError {
+  DC_METER_COMMISSIONING_ERROR_INVALID = 0,
+  DC_METER_COMMISSIONING_ERROR_UNAVAILABLE = 1,
+  DC_METER_COMMISSIONING_ERROR_TIMEOUT = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function dcMeterCommissioningErrorFromJSON(object: any): DcMeterCommissioningError {
+  switch (object) {
+    case 0:
+    case "DC_METER_COMMISSIONING_ERROR_INVALID":
+      return DcMeterCommissioningError.DC_METER_COMMISSIONING_ERROR_INVALID;
+    case 1:
+    case "DC_METER_COMMISSIONING_ERROR_UNAVAILABLE":
+      return DcMeterCommissioningError.DC_METER_COMMISSIONING_ERROR_UNAVAILABLE;
+    case 2:
+    case "DC_METER_COMMISSIONING_ERROR_TIMEOUT":
+      return DcMeterCommissioningError.DC_METER_COMMISSIONING_ERROR_TIMEOUT;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return DcMeterCommissioningError.UNRECOGNIZED;
+  }
+}
+
+export function dcMeterCommissioningErrorToJSON(object: DcMeterCommissioningError): string {
+  switch (object) {
+    case DcMeterCommissioningError.DC_METER_COMMISSIONING_ERROR_INVALID:
+      return "DC_METER_COMMISSIONING_ERROR_INVALID";
+    case DcMeterCommissioningError.DC_METER_COMMISSIONING_ERROR_UNAVAILABLE:
+      return "DC_METER_COMMISSIONING_ERROR_UNAVAILABLE";
+    case DcMeterCommissioningError.DC_METER_COMMISSIONING_ERROR_TIMEOUT:
+      return "DC_METER_COMMISSIONING_ERROR_TIMEOUT";
+    case DcMeterCommissioningError.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface ConnectedKiosk {
   verifoneKiosk: VerifoneKiosk | undefined;
 }
@@ -238,10 +277,10 @@ export interface EcuFirmwareUpdateEcuResult {
 }
 
 export interface EcuFirmwareUpdateInProgress {
-  default: { [key: string]: EcuFirmwareUpdateNodeProgress };
+  nodeProgresses: { [key: string]: EcuFirmwareUpdateNodeProgress };
 }
 
-export interface EcuFirmwareUpdateInProgress_DefaultEntry {
+export interface EcuFirmwareUpdateInProgress_NodeProgressesEntry {
   key: string;
   value: EcuFirmwareUpdateNodeProgress | undefined;
 }
@@ -254,10 +293,10 @@ export interface EcuFirmwareUpdateNodeProgress {
 
 export interface EcuFirmwareUpdateResult {
   systemUpdateStatus: EcuFirmwareUpdateStatus | undefined;
-  default: { [key: string]: EcuFirmwareUpdateAttempts };
+  ecuUpdateResults: { [key: string]: EcuFirmwareUpdateAttempts };
 }
 
-export interface EcuFirmwareUpdateResult_DefaultEntry {
+export interface EcuFirmwareUpdateResult_EcuUpdateResultsEntry {
   key: string;
   value: EcuFirmwareUpdateAttempts | undefined;
 }
@@ -293,8 +332,7 @@ export interface SuperchargerAPIGetDcMetersCommissioningRequest {
 
 export interface SuperchargerAPIGetDcMetersCommissioningResponse {
   dcMeters: DcMeterCommissioningStatus[];
-  /** may be an enum; values not yet known */
-  error: number;
+  error: DcMeterCommissioningError;
 }
 
 export interface SuperchargerAPIGetEcuFirmwareUpdateProgressRequest {
@@ -1170,13 +1208,14 @@ export const EcuFirmwareUpdateEcuResult: MessageFns<EcuFirmwareUpdateEcuResult> 
 };
 
 function createBaseEcuFirmwareUpdateInProgress(): EcuFirmwareUpdateInProgress {
-  return { default: {} };
+  return { nodeProgresses: {} };
 }
 
 export const EcuFirmwareUpdateInProgress: MessageFns<EcuFirmwareUpdateInProgress> = {
   encode(message: EcuFirmwareUpdateInProgress, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    Object.entries(message.default).forEach(([key, value]) => {
-      EcuFirmwareUpdateInProgress_DefaultEntry.encode({ key: key as any, value }, writer.uint32(10).fork()).join();
+    Object.entries(message.nodeProgresses).forEach(([key, value]) => {
+      EcuFirmwareUpdateInProgress_NodeProgressesEntry.encode({ key: key as any, value }, writer.uint32(10).fork())
+        .join();
     });
     return writer;
   },
@@ -1193,9 +1232,9 @@ export const EcuFirmwareUpdateInProgress: MessageFns<EcuFirmwareUpdateInProgress
             break;
           }
 
-          const entry1 = EcuFirmwareUpdateInProgress_DefaultEntry.decode(reader, reader.uint32());
+          const entry1 = EcuFirmwareUpdateInProgress_NodeProgressesEntry.decode(reader, reader.uint32());
           if (entry1.value !== undefined) {
-            message.default[entry1.key] = entry1.value;
+            message.nodeProgresses[entry1.key] = entry1.value;
           }
           continue;
         }
@@ -1210,8 +1249,8 @@ export const EcuFirmwareUpdateInProgress: MessageFns<EcuFirmwareUpdateInProgress
 
   fromJSON(object: any): EcuFirmwareUpdateInProgress {
     return {
-      default: isObject(object.default)
-        ? Object.entries(object.default).reduce<{ [key: string]: EcuFirmwareUpdateNodeProgress }>(
+      nodeProgresses: isObject(object.nodeProgresses)
+        ? Object.entries(object.nodeProgresses).reduce<{ [key: string]: EcuFirmwareUpdateNodeProgress }>(
           (acc, [key, value]) => {
             acc[key] = EcuFirmwareUpdateNodeProgress.fromJSON(value);
             return acc;
@@ -1224,12 +1263,12 @@ export const EcuFirmwareUpdateInProgress: MessageFns<EcuFirmwareUpdateInProgress
 
   toJSON(message: EcuFirmwareUpdateInProgress): unknown {
     const obj: any = {};
-    if (message.default) {
-      const entries = Object.entries(message.default);
+    if (message.nodeProgresses) {
+      const entries = Object.entries(message.nodeProgresses);
       if (entries.length > 0) {
-        obj.default = {};
+        obj.nodeProgresses = {};
         entries.forEach(([k, v]) => {
-          obj.default[k] = EcuFirmwareUpdateNodeProgress.toJSON(v);
+          obj.nodeProgresses[k] = EcuFirmwareUpdateNodeProgress.toJSON(v);
         });
       }
     }
@@ -1241,25 +1280,29 @@ export const EcuFirmwareUpdateInProgress: MessageFns<EcuFirmwareUpdateInProgress
   },
   fromPartial<I extends Exact<DeepPartial<EcuFirmwareUpdateInProgress>, I>>(object: I): EcuFirmwareUpdateInProgress {
     const message = createBaseEcuFirmwareUpdateInProgress();
-    message.default = Object.entries(object.default ?? {}).reduce<{ [key: string]: EcuFirmwareUpdateNodeProgress }>(
-      (acc, [key, value]) => {
-        if (value !== undefined) {
-          acc[key] = EcuFirmwareUpdateNodeProgress.fromPartial(value);
-        }
-        return acc;
-      },
-      {},
-    );
+    message.nodeProgresses = Object.entries(object.nodeProgresses ?? {}).reduce<
+      { [key: string]: EcuFirmwareUpdateNodeProgress }
+    >((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = EcuFirmwareUpdateNodeProgress.fromPartial(value);
+      }
+      return acc;
+    }, {});
     return message;
   },
 };
 
-function createBaseEcuFirmwareUpdateInProgress_DefaultEntry(): EcuFirmwareUpdateInProgress_DefaultEntry {
+function createBaseEcuFirmwareUpdateInProgress_NodeProgressesEntry(): EcuFirmwareUpdateInProgress_NodeProgressesEntry {
   return { key: "", value: undefined };
 }
 
-export const EcuFirmwareUpdateInProgress_DefaultEntry: MessageFns<EcuFirmwareUpdateInProgress_DefaultEntry> = {
-  encode(message: EcuFirmwareUpdateInProgress_DefaultEntry, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+export const EcuFirmwareUpdateInProgress_NodeProgressesEntry: MessageFns<
+  EcuFirmwareUpdateInProgress_NodeProgressesEntry
+> = {
+  encode(
+    message: EcuFirmwareUpdateInProgress_NodeProgressesEntry,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -1269,10 +1312,10 @@ export const EcuFirmwareUpdateInProgress_DefaultEntry: MessageFns<EcuFirmwareUpd
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): EcuFirmwareUpdateInProgress_DefaultEntry {
+  decode(input: BinaryReader | Uint8Array, length?: number): EcuFirmwareUpdateInProgress_NodeProgressesEntry {
     const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
     const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseEcuFirmwareUpdateInProgress_DefaultEntry();
+    const message = createBaseEcuFirmwareUpdateInProgress_NodeProgressesEntry();
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
@@ -1301,14 +1344,14 @@ export const EcuFirmwareUpdateInProgress_DefaultEntry: MessageFns<EcuFirmwareUpd
     return message;
   },
 
-  fromJSON(object: any): EcuFirmwareUpdateInProgress_DefaultEntry {
+  fromJSON(object: any): EcuFirmwareUpdateInProgress_NodeProgressesEntry {
     return {
       key: isSet(object.key) ? globalThis.String(object.key) : "",
       value: isSet(object.value) ? EcuFirmwareUpdateNodeProgress.fromJSON(object.value) : undefined,
     };
   },
 
-  toJSON(message: EcuFirmwareUpdateInProgress_DefaultEntry): unknown {
+  toJSON(message: EcuFirmwareUpdateInProgress_NodeProgressesEntry): unknown {
     const obj: any = {};
     if (message.key !== undefined) {
       obj.key = message.key;
@@ -1319,15 +1362,15 @@ export const EcuFirmwareUpdateInProgress_DefaultEntry: MessageFns<EcuFirmwareUpd
     return obj;
   },
 
-  create<I extends Exact<DeepPartial<EcuFirmwareUpdateInProgress_DefaultEntry>, I>>(
+  create<I extends Exact<DeepPartial<EcuFirmwareUpdateInProgress_NodeProgressesEntry>, I>>(
     base?: I,
-  ): EcuFirmwareUpdateInProgress_DefaultEntry {
-    return EcuFirmwareUpdateInProgress_DefaultEntry.fromPartial(base ?? ({} as any));
+  ): EcuFirmwareUpdateInProgress_NodeProgressesEntry {
+    return EcuFirmwareUpdateInProgress_NodeProgressesEntry.fromPartial(base ?? ({} as any));
   },
-  fromPartial<I extends Exact<DeepPartial<EcuFirmwareUpdateInProgress_DefaultEntry>, I>>(
+  fromPartial<I extends Exact<DeepPartial<EcuFirmwareUpdateInProgress_NodeProgressesEntry>, I>>(
     object: I,
-  ): EcuFirmwareUpdateInProgress_DefaultEntry {
-    const message = createBaseEcuFirmwareUpdateInProgress_DefaultEntry();
+  ): EcuFirmwareUpdateInProgress_NodeProgressesEntry {
+    const message = createBaseEcuFirmwareUpdateInProgress_NodeProgressesEntry();
     message.key = object.key ?? "";
     message.value = (object.value !== undefined && object.value !== null)
       ? EcuFirmwareUpdateNodeProgress.fromPartial(object.value)
@@ -1431,7 +1474,7 @@ export const EcuFirmwareUpdateNodeProgress: MessageFns<EcuFirmwareUpdateNodeProg
 };
 
 function createBaseEcuFirmwareUpdateResult(): EcuFirmwareUpdateResult {
-  return { systemUpdateStatus: undefined, default: {} };
+  return { systemUpdateStatus: undefined, ecuUpdateResults: {} };
 }
 
 export const EcuFirmwareUpdateResult: MessageFns<EcuFirmwareUpdateResult> = {
@@ -1439,8 +1482,8 @@ export const EcuFirmwareUpdateResult: MessageFns<EcuFirmwareUpdateResult> = {
     if (message.systemUpdateStatus !== undefined) {
       EcuFirmwareUpdateStatus.encode(message.systemUpdateStatus, writer.uint32(10).fork()).join();
     }
-    Object.entries(message.default).forEach(([key, value]) => {
-      EcuFirmwareUpdateResult_DefaultEntry.encode({ key: key as any, value }, writer.uint32(18).fork()).join();
+    Object.entries(message.ecuUpdateResults).forEach(([key, value]) => {
+      EcuFirmwareUpdateResult_EcuUpdateResultsEntry.encode({ key: key as any, value }, writer.uint32(18).fork()).join();
     });
     return writer;
   },
@@ -1465,9 +1508,9 @@ export const EcuFirmwareUpdateResult: MessageFns<EcuFirmwareUpdateResult> = {
             break;
           }
 
-          const entry2 = EcuFirmwareUpdateResult_DefaultEntry.decode(reader, reader.uint32());
+          const entry2 = EcuFirmwareUpdateResult_EcuUpdateResultsEntry.decode(reader, reader.uint32());
           if (entry2.value !== undefined) {
-            message.default[entry2.key] = entry2.value;
+            message.ecuUpdateResults[entry2.key] = entry2.value;
           }
           continue;
         }
@@ -1485,11 +1528,14 @@ export const EcuFirmwareUpdateResult: MessageFns<EcuFirmwareUpdateResult> = {
       systemUpdateStatus: isSet(object.systemUpdateStatus)
         ? EcuFirmwareUpdateStatus.fromJSON(object.systemUpdateStatus)
         : undefined,
-      default: isObject(object.default)
-        ? Object.entries(object.default).reduce<{ [key: string]: EcuFirmwareUpdateAttempts }>((acc, [key, value]) => {
-          acc[key] = EcuFirmwareUpdateAttempts.fromJSON(value);
-          return acc;
-        }, {})
+      ecuUpdateResults: isObject(object.ecuUpdateResults)
+        ? Object.entries(object.ecuUpdateResults).reduce<{ [key: string]: EcuFirmwareUpdateAttempts }>(
+          (acc, [key, value]) => {
+            acc[key] = EcuFirmwareUpdateAttempts.fromJSON(value);
+            return acc;
+          },
+          {},
+        )
         : {},
     };
   },
@@ -1499,12 +1545,12 @@ export const EcuFirmwareUpdateResult: MessageFns<EcuFirmwareUpdateResult> = {
     if (message.systemUpdateStatus !== undefined) {
       obj.systemUpdateStatus = EcuFirmwareUpdateStatus.toJSON(message.systemUpdateStatus);
     }
-    if (message.default) {
-      const entries = Object.entries(message.default);
+    if (message.ecuUpdateResults) {
+      const entries = Object.entries(message.ecuUpdateResults);
       if (entries.length > 0) {
-        obj.default = {};
+        obj.ecuUpdateResults = {};
         entries.forEach(([k, v]) => {
-          obj.default[k] = EcuFirmwareUpdateAttempts.toJSON(v);
+          obj.ecuUpdateResults[k] = EcuFirmwareUpdateAttempts.toJSON(v);
         });
       }
     }
@@ -1519,100 +1565,103 @@ export const EcuFirmwareUpdateResult: MessageFns<EcuFirmwareUpdateResult> = {
     message.systemUpdateStatus = (object.systemUpdateStatus !== undefined && object.systemUpdateStatus !== null)
       ? EcuFirmwareUpdateStatus.fromPartial(object.systemUpdateStatus)
       : undefined;
-    message.default = Object.entries(object.default ?? {}).reduce<{ [key: string]: EcuFirmwareUpdateAttempts }>(
-      (acc, [key, value]) => {
-        if (value !== undefined) {
-          acc[key] = EcuFirmwareUpdateAttempts.fromPartial(value);
-        }
-        return acc;
-      },
-      {},
-    );
+    message.ecuUpdateResults = Object.entries(object.ecuUpdateResults ?? {}).reduce<
+      { [key: string]: EcuFirmwareUpdateAttempts }
+    >((acc, [key, value]) => {
+      if (value !== undefined) {
+        acc[key] = EcuFirmwareUpdateAttempts.fromPartial(value);
+      }
+      return acc;
+    }, {});
     return message;
   },
 };
 
-function createBaseEcuFirmwareUpdateResult_DefaultEntry(): EcuFirmwareUpdateResult_DefaultEntry {
+function createBaseEcuFirmwareUpdateResult_EcuUpdateResultsEntry(): EcuFirmwareUpdateResult_EcuUpdateResultsEntry {
   return { key: "", value: undefined };
 }
 
-export const EcuFirmwareUpdateResult_DefaultEntry: MessageFns<EcuFirmwareUpdateResult_DefaultEntry> = {
-  encode(message: EcuFirmwareUpdateResult_DefaultEntry, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.key !== "") {
-      writer.uint32(10).string(message.key);
-    }
-    if (message.value !== undefined) {
-      EcuFirmwareUpdateAttempts.encode(message.value, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): EcuFirmwareUpdateResult_DefaultEntry {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    const end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseEcuFirmwareUpdateResult_DefaultEntry();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.key = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.value = EcuFirmwareUpdateAttempts.decode(reader, reader.uint32());
-          continue;
-        }
+export const EcuFirmwareUpdateResult_EcuUpdateResultsEntry: MessageFns<EcuFirmwareUpdateResult_EcuUpdateResultsEntry> =
+  {
+    encode(
+      message: EcuFirmwareUpdateResult_EcuUpdateResultsEntry,
+      writer: BinaryWriter = new BinaryWriter(),
+    ): BinaryWriter {
+      if (message.key !== "") {
+        writer.uint32(10).string(message.key);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.value !== undefined) {
+        EcuFirmwareUpdateAttempts.encode(message.value, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): EcuFirmwareUpdateResult_DefaultEntry {
-    return {
-      key: isSet(object.key) ? globalThis.String(object.key) : "",
-      value: isSet(object.value) ? EcuFirmwareUpdateAttempts.fromJSON(object.value) : undefined,
-    };
-  },
+    decode(input: BinaryReader | Uint8Array, length?: number): EcuFirmwareUpdateResult_EcuUpdateResultsEntry {
+      const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+      const end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseEcuFirmwareUpdateResult_EcuUpdateResultsEntry();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: EcuFirmwareUpdateResult_DefaultEntry): unknown {
-    const obj: any = {};
-    if (message.key !== undefined) {
-      obj.key = message.key;
-    }
-    if (message.value !== undefined) {
-      obj.value = EcuFirmwareUpdateAttempts.toJSON(message.value);
-    }
-    return obj;
-  },
+            message.key = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create<I extends Exact<DeepPartial<EcuFirmwareUpdateResult_DefaultEntry>, I>>(
-    base?: I,
-  ): EcuFirmwareUpdateResult_DefaultEntry {
-    return EcuFirmwareUpdateResult_DefaultEntry.fromPartial(base ?? ({} as any));
-  },
-  fromPartial<I extends Exact<DeepPartial<EcuFirmwareUpdateResult_DefaultEntry>, I>>(
-    object: I,
-  ): EcuFirmwareUpdateResult_DefaultEntry {
-    const message = createBaseEcuFirmwareUpdateResult_DefaultEntry();
-    message.key = object.key ?? "";
-    message.value = (object.value !== undefined && object.value !== null)
-      ? EcuFirmwareUpdateAttempts.fromPartial(object.value)
-      : undefined;
-    return message;
-  },
-};
+            message.value = EcuFirmwareUpdateAttempts.decode(reader, reader.uint32());
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): EcuFirmwareUpdateResult_EcuUpdateResultsEntry {
+      return {
+        key: isSet(object.key) ? globalThis.String(object.key) : "",
+        value: isSet(object.value) ? EcuFirmwareUpdateAttempts.fromJSON(object.value) : undefined,
+      };
+    },
+
+    toJSON(message: EcuFirmwareUpdateResult_EcuUpdateResultsEntry): unknown {
+      const obj: any = {};
+      if (message.key !== undefined) {
+        obj.key = message.key;
+      }
+      if (message.value !== undefined) {
+        obj.value = EcuFirmwareUpdateAttempts.toJSON(message.value);
+      }
+      return obj;
+    },
+
+    create<I extends Exact<DeepPartial<EcuFirmwareUpdateResult_EcuUpdateResultsEntry>, I>>(
+      base?: I,
+    ): EcuFirmwareUpdateResult_EcuUpdateResultsEntry {
+      return EcuFirmwareUpdateResult_EcuUpdateResultsEntry.fromPartial(base ?? ({} as any));
+    },
+    fromPartial<I extends Exact<DeepPartial<EcuFirmwareUpdateResult_EcuUpdateResultsEntry>, I>>(
+      object: I,
+    ): EcuFirmwareUpdateResult_EcuUpdateResultsEntry {
+      const message = createBaseEcuFirmwareUpdateResult_EcuUpdateResultsEntry();
+      message.key = object.key ?? "";
+      message.value = (object.value !== undefined && object.value !== null)
+        ? EcuFirmwareUpdateAttempts.fromPartial(object.value)
+        : undefined;
+      return message;
+    },
+  };
 
 function createBaseEcuFirmwareUpdateStatus(): EcuFirmwareUpdateStatus {
   return { pass: undefined, fail: undefined };
@@ -2105,7 +2154,7 @@ export const SuperchargerAPIGetDcMetersCommissioningResponse: MessageFns<
             break;
           }
 
-          message.error = reader.int32();
+          message.error = reader.int32() as any;
           continue;
         }
       }
@@ -2122,7 +2171,7 @@ export const SuperchargerAPIGetDcMetersCommissioningResponse: MessageFns<
       dcMeters: globalThis.Array.isArray(object?.dcMeters)
         ? object.dcMeters.map((e: any) => DcMeterCommissioningStatus.fromJSON(e))
         : [],
-      error: isSet(object.error) ? globalThis.Number(object.error) : 0,
+      error: isSet(object.error) ? dcMeterCommissioningErrorFromJSON(object.error) : 0,
     };
   },
 
@@ -2132,7 +2181,7 @@ export const SuperchargerAPIGetDcMetersCommissioningResponse: MessageFns<
       obj.dcMeters = message.dcMeters.map((e) => DcMeterCommissioningStatus.toJSON(e));
     }
     if (message.error !== undefined) {
-      obj.error = Math.round(message.error);
+      obj.error = dcMeterCommissioningErrorToJSON(message.error);
     }
     return obj;
   },

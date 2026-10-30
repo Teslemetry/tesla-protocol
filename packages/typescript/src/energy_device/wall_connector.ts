@@ -12,7 +12,13 @@ import { Timestamp } from "./google/protobuf/timestamp.js";
 import { FloatValue } from "./google/protobuf/wrappers.js";
 import { NetworkInterface, WifiConfig } from "./networking.js";
 import { NeurioMeterInterface } from "./neurio_meter_api.js";
-import { RegistrationResponse, WCCommercialRegistrationRequest } from "./registration_api.js";
+import {
+  RegistrationFailure,
+  registrationFailureFromJSON,
+  registrationFailureToJSON,
+  RegistrationResponse,
+  WCCommercialRegistrationRequest,
+} from "./registration_api.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
@@ -1440,8 +1446,8 @@ export interface WCLoadSharingConductorLimitConfig {
 }
 
 export interface WCLoadSharingSettings {
-  fixedLimit: WCLoadSharingFixedLimitConfig | undefined;
-  conductorLimit: WCLoadSharingConductorLimitConfig | undefined;
+  fixedLimit?: WCLoadSharingFixedLimitConfig | undefined;
+  conductorLimit?: WCLoadSharingConductorLimitConfig | undefined;
 }
 
 export interface WCLoadSharingLimits {
@@ -1455,7 +1461,7 @@ export interface WCLoadSharingNetworkStatus {
 export interface WCLoadSharingConfig {
   version: number;
   participantDins: Din[];
-  fixedLimit: WCLoadSharingFixedLimitConfig | undefined;
+  fixedLimit?: WCLoadSharingFixedLimitConfig | undefined;
   settings: WCLoadSharingSettings | undefined;
   chargingEnabled: boolean;
 }
@@ -1470,15 +1476,15 @@ export interface WCOperationalSettingsConfig {
 }
 
 export interface WCMeterInterface {
-  neurio: NeurioMeterInterface | undefined;
+  neurio?: NeurioMeterInterface | undefined;
 }
 
 export interface WCDryContactConfig {
   enabled: boolean;
   defaultState: WCDryContactDefaultState;
-  disableCharging: boolean;
-  maxCurrentAmps: number;
-  germany14a: boolean;
+  disableCharging?: boolean | undefined;
+  maxCurrentAmps?: number | undefined;
+  germany14a?: boolean | undefined;
 }
 
 export interface WCTimeZoneTransition {
@@ -1655,7 +1661,7 @@ export interface WCAPIGetConfigResponse {
   wifiConfig: WifiConfig | undefined;
   wifi: NetworkInterface | undefined;
   meters: WCMeterInterface[];
-  chargeSchedule: WCChargeScheduleConfig | undefined;
+  chargeSchedule: WCChargeScheduleConfigStatus | undefined;
   ocppSettings: WCOcppSettings | undefined;
   vehicleToHome: WCVehicleToHomeConfig | undefined;
   timeSource: WCTimeSource;
@@ -1899,7 +1905,7 @@ export interface WCAPIRegisterCommercialRequest {
 }
 
 export interface WCAPIRegisterCommercialResponse {
-  failure: number;
+  failure: RegistrationFailure;
   response: RegistrationResponse | undefined;
 }
 
@@ -2669,34 +2675,34 @@ function createBaseWCLifetimeStats(): WCLifetimeStats {
 export const WCLifetimeStats: MessageFns<WCLifetimeStats> = {
   encode(message: WCLifetimeStats, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.uptimeS !== 0) {
-      writer.uint32(24).uint64(message.uptimeS);
+      writer.uint32(8).uint64(message.uptimeS);
     }
     if (message.alertCount !== 0) {
-      writer.uint32(32).uint32(message.alertCount);
+      writer.uint32(16).uint32(message.alertCount);
     }
     if (message.contactorCycles !== 0) {
-      writer.uint32(40).uint32(message.contactorCycles);
+      writer.uint32(24).uint32(message.contactorCycles);
     }
     if (message.contactorCyclesLoaded !== 0) {
-      writer.uint32(48).uint32(message.contactorCyclesLoaded);
+      writer.uint32(32).uint32(message.contactorCyclesLoaded);
     }
     if (message.connectorCycles !== 0) {
-      writer.uint32(56).uint32(message.connectorCycles);
+      writer.uint32(40).uint32(message.connectorCycles);
     }
     if (message.thermalFoldbacks !== 0) {
-      writer.uint32(64).uint32(message.thermalFoldbacks);
+      writer.uint32(48).uint32(message.thermalFoldbacks);
     }
     if (message.avgStartupTempC !== 0) {
-      writer.uint32(77).float(message.avgStartupTempC);
+      writer.uint32(61).float(message.avgStartupTempC);
     }
     if (message.chargeStarts !== 0) {
-      writer.uint32(80).uint32(message.chargeStarts);
+      writer.uint32(64).uint32(message.chargeStarts);
     }
     if (message.chargingTimeS !== 0) {
-      writer.uint32(88).uint64(message.chargingTimeS);
+      writer.uint32(72).uint64(message.chargingTimeS);
     }
     if (message.chargingEnergy !== undefined) {
-      AccumulatedEnergy.encode(message.chargingEnergy, writer.uint32(98).fork()).join();
+      AccumulatedEnergy.encode(message.chargingEnergy, writer.uint32(82).fork()).join();
     }
     return writer;
   },
@@ -2708,12 +2714,28 @@ export const WCLifetimeStats: MessageFns<WCLifetimeStats> = {
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.uptimeS = longToNumber(reader.uint64());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.alertCount = reader.uint32();
+          continue;
+        }
         case 3: {
           if (tag !== 24) {
             break;
           }
 
-          message.uptimeS = longToNumber(reader.uint64());
+          message.contactorCycles = reader.uint32();
           continue;
         }
         case 4: {
@@ -2721,7 +2743,7 @@ export const WCLifetimeStats: MessageFns<WCLifetimeStats> = {
             break;
           }
 
-          message.alertCount = reader.uint32();
+          message.contactorCyclesLoaded = reader.uint32();
           continue;
         }
         case 5: {
@@ -2729,7 +2751,7 @@ export const WCLifetimeStats: MessageFns<WCLifetimeStats> = {
             break;
           }
 
-          message.contactorCycles = reader.uint32();
+          message.connectorCycles = reader.uint32();
           continue;
         }
         case 6: {
@@ -2737,15 +2759,15 @@ export const WCLifetimeStats: MessageFns<WCLifetimeStats> = {
             break;
           }
 
-          message.contactorCyclesLoaded = reader.uint32();
+          message.thermalFoldbacks = reader.uint32();
           continue;
         }
         case 7: {
-          if (tag !== 56) {
+          if (tag !== 61) {
             break;
           }
 
-          message.connectorCycles = reader.uint32();
+          message.avgStartupTempC = reader.float();
           continue;
         }
         case 8: {
@@ -2753,35 +2775,19 @@ export const WCLifetimeStats: MessageFns<WCLifetimeStats> = {
             break;
           }
 
-          message.thermalFoldbacks = reader.uint32();
-          continue;
-        }
-        case 9: {
-          if (tag !== 77) {
-            break;
-          }
-
-          message.avgStartupTempC = reader.float();
-          continue;
-        }
-        case 10: {
-          if (tag !== 80) {
-            break;
-          }
-
           message.chargeStarts = reader.uint32();
           continue;
         }
-        case 11: {
-          if (tag !== 88) {
+        case 9: {
+          if (tag !== 72) {
             break;
           }
 
           message.chargingTimeS = longToNumber(reader.uint64());
           continue;
         }
-        case 12: {
-          if (tag !== 98) {
+        case 10: {
+          if (tag !== 82) {
             break;
           }
 
@@ -3537,7 +3543,13 @@ export const WCMeterInterface: MessageFns<WCMeterInterface> = {
 };
 
 function createBaseWCDryContactConfig(): WCDryContactConfig {
-  return { enabled: false, defaultState: 0, disableCharging: false, maxCurrentAmps: 0, germany14a: false };
+  return {
+    enabled: false,
+    defaultState: 0,
+    disableCharging: undefined,
+    maxCurrentAmps: undefined,
+    germany14a: undefined,
+  };
 }
 
 export const WCDryContactConfig: MessageFns<WCDryContactConfig> = {
@@ -3548,13 +3560,13 @@ export const WCDryContactConfig: MessageFns<WCDryContactConfig> = {
     if (message.defaultState !== 0) {
       writer.uint32(16).int32(message.defaultState);
     }
-    if (message.disableCharging !== false) {
+    if (message.disableCharging !== undefined) {
       writer.uint32(24).bool(message.disableCharging);
     }
-    if (message.maxCurrentAmps !== 0) {
+    if (message.maxCurrentAmps !== undefined) {
       writer.uint32(32).uint32(message.maxCurrentAmps);
     }
-    if (message.germany14a !== false) {
+    if (message.germany14a !== undefined) {
       writer.uint32(40).bool(message.germany14a);
     }
     return writer;
@@ -3620,9 +3632,9 @@ export const WCDryContactConfig: MessageFns<WCDryContactConfig> = {
     return {
       enabled: isSet(object.enabled) ? globalThis.Boolean(object.enabled) : false,
       defaultState: isSet(object.defaultState) ? wCDryContactDefaultStateFromJSON(object.defaultState) : 0,
-      disableCharging: isSet(object.disableCharging) ? globalThis.Boolean(object.disableCharging) : false,
-      maxCurrentAmps: isSet(object.maxCurrentAmps) ? globalThis.Number(object.maxCurrentAmps) : 0,
-      germany14a: isSet(object.germany14a) ? globalThis.Boolean(object.germany14a) : false,
+      disableCharging: isSet(object.disableCharging) ? globalThis.Boolean(object.disableCharging) : undefined,
+      maxCurrentAmps: isSet(object.maxCurrentAmps) ? globalThis.Number(object.maxCurrentAmps) : undefined,
+      germany14a: isSet(object.germany14a) ? globalThis.Boolean(object.germany14a) : undefined,
     };
   },
 
@@ -3653,9 +3665,9 @@ export const WCDryContactConfig: MessageFns<WCDryContactConfig> = {
     const message = createBaseWCDryContactConfig();
     message.enabled = object.enabled ?? false;
     message.defaultState = object.defaultState ?? 0;
-    message.disableCharging = object.disableCharging ?? false;
-    message.maxCurrentAmps = object.maxCurrentAmps ?? 0;
-    message.germany14a = object.germany14a ?? false;
+    message.disableCharging = object.disableCharging ?? undefined;
+    message.maxCurrentAmps = object.maxCurrentAmps ?? undefined;
+    message.germany14a = object.germany14a ?? undefined;
     return message;
   },
 };
@@ -6337,7 +6349,7 @@ export const WCAPIGetConfigResponse: MessageFns<WCAPIGetConfigResponse> = {
       WCMeterInterface.encode(v!, writer.uint32(34).fork()).join();
     }
     if (message.chargeSchedule !== undefined) {
-      WCChargeScheduleConfig.encode(message.chargeSchedule, writer.uint32(42).fork()).join();
+      WCChargeScheduleConfigStatus.encode(message.chargeSchedule, writer.uint32(42).fork()).join();
     }
     if (message.ocppSettings !== undefined) {
       WCOcppSettings.encode(message.ocppSettings, writer.uint32(50).fork()).join();
@@ -6395,7 +6407,7 @@ export const WCAPIGetConfigResponse: MessageFns<WCAPIGetConfigResponse> = {
             break;
           }
 
-          message.chargeSchedule = WCChargeScheduleConfig.decode(reader, reader.uint32());
+          message.chargeSchedule = WCChargeScheduleConfigStatus.decode(reader, reader.uint32());
           continue;
         }
         case 6: {
@@ -6439,7 +6451,9 @@ export const WCAPIGetConfigResponse: MessageFns<WCAPIGetConfigResponse> = {
       meters: globalThis.Array.isArray(object?.meters)
         ? object.meters.map((e: any) => WCMeterInterface.fromJSON(e))
         : [],
-      chargeSchedule: isSet(object.chargeSchedule) ? WCChargeScheduleConfig.fromJSON(object.chargeSchedule) : undefined,
+      chargeSchedule: isSet(object.chargeSchedule)
+        ? WCChargeScheduleConfigStatus.fromJSON(object.chargeSchedule)
+        : undefined,
       ocppSettings: isSet(object.ocppSettings) ? WCOcppSettings.fromJSON(object.ocppSettings) : undefined,
       vehicleToHome: isSet(object.vehicleToHome) ? WCVehicleToHomeConfig.fromJSON(object.vehicleToHome) : undefined,
       timeSource: isSet(object.timeSource) ? wCTimeSourceFromJSON(object.timeSource) : 0,
@@ -6461,7 +6475,7 @@ export const WCAPIGetConfigResponse: MessageFns<WCAPIGetConfigResponse> = {
       obj.meters = message.meters.map((e) => WCMeterInterface.toJSON(e));
     }
     if (message.chargeSchedule !== undefined) {
-      obj.chargeSchedule = WCChargeScheduleConfig.toJSON(message.chargeSchedule);
+      obj.chargeSchedule = WCChargeScheduleConfigStatus.toJSON(message.chargeSchedule);
     }
     if (message.ocppSettings !== undefined) {
       obj.ocppSettings = WCOcppSettings.toJSON(message.ocppSettings);
@@ -6491,7 +6505,7 @@ export const WCAPIGetConfigResponse: MessageFns<WCAPIGetConfigResponse> = {
       : undefined;
     message.meters = object.meters?.map((e) => WCMeterInterface.fromPartial(e)) || [];
     message.chargeSchedule = (object.chargeSchedule !== undefined && object.chargeSchedule !== null)
-      ? WCChargeScheduleConfig.fromPartial(object.chargeSchedule)
+      ? WCChargeScheduleConfigStatus.fromPartial(object.chargeSchedule)
       : undefined;
     message.ocppSettings = (object.ocppSettings !== undefined && object.ocppSettings !== null)
       ? WCOcppSettings.fromPartial(object.ocppSettings)
@@ -10354,7 +10368,7 @@ export const WCAPIRegisterCommercialResponse: MessageFns<WCAPIRegisterCommercial
             break;
           }
 
-          message.failure = reader.int32();
+          message.failure = reader.int32() as any;
           continue;
         }
         case 2: {
@@ -10376,7 +10390,7 @@ export const WCAPIRegisterCommercialResponse: MessageFns<WCAPIRegisterCommercial
 
   fromJSON(object: any): WCAPIRegisterCommercialResponse {
     return {
-      failure: isSet(object.failure) ? globalThis.Number(object.failure) : 0,
+      failure: isSet(object.failure) ? registrationFailureFromJSON(object.failure) : 0,
       response: isSet(object.response) ? RegistrationResponse.fromJSON(object.response) : undefined,
     };
   },
@@ -10384,7 +10398,7 @@ export const WCAPIRegisterCommercialResponse: MessageFns<WCAPIRegisterCommercial
   toJSON(message: WCAPIRegisterCommercialResponse): unknown {
     const obj: any = {};
     if (message.failure !== undefined) {
-      obj.failure = Math.round(message.failure);
+      obj.failure = registrationFailureToJSON(message.failure);
     }
     if (message.response !== undefined) {
       obj.response = RegistrationResponse.toJSON(message.response);

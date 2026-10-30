@@ -10,6 +10,7 @@ option go_package = "github.com/teslamotors/vehicle-command/pkg/protocol/protobu
 
 import "keys.proto";
 import "errors.proto";
+import "signatures.proto";
 
 enum SignatureType
 {
@@ -23,10 +24,15 @@ enum SignatureType
 message SignedMessage {
     bytes protobufMessageAsBytes = 2;
     SignatureType signatureType = 3;
+    bytes token = 1;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    bytes signature = 4;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    bytes keyId = 5;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    uint32 counter = 6;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 message ToVCSECMessage {
     SignedMessage signedMessage = 1;
+    UnsignedMessage unsignedMessage = 2;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 message KeyIdentifier {
@@ -176,8 +182,10 @@ message WhitelistOperation {
         bool               removeAllImpermanentKeys = 16;
 
         ReplaceKey         replaceKey = 17;
+    PublicKey setInfotainmentKey = 18;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     }
     KeyMetadata  metadataForKey = 6;
+    bytes sessionID = 10;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
 enum OperationStatus_E
@@ -335,7 +343,26 @@ message UnsignedMessage {
         ClosureMoveRequest           closureMoveRequest = 4;
         WhitelistOperation           WhitelistOperation = 16;
         AutonomyCommand              autonomyCommand = 66;  // TESLEMETRY-EXT
+    KeyMetadata setMetaDataForKey = 22;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    Activity_E deviceActivity = 35;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    Signatures.GetSessionInfoRequest getEpochSessionInfo = 36;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    DeviceMotion deviceMotion = 39;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    AppDeviceInfo appDeviceInfo = 40;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    GetReaderKey getReaderKey = 41;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    NISessionResponse NISessionResponse = 42;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    NISessionStopped NISessionStopped = 43;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    AppEventLog appEventLog = 54;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    ServiceDiagnosticRequest serviceDiagnosticRequest = 55;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    NIBatchResponse NIBatchResponse = 56;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    ProvisionIdentity provisionIdentity = 57;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    ChangeOperationMode changeOperationMode = 61;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    CPDResponse cpdResponse = 62;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    SecurityControl securityControl = 71;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     }
+    PersonalizationInformation personalizationInformation = 25;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    FiraCapabilities field_58 = 58;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    FiraResponse field_59 = 59;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    AppStateEvent field_60 = 60;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
 }
 
 enum ClosureState_E {
@@ -504,5 +531,840 @@ message FromVCSECMessage {
         KeyStatusInfo               keyStatusInfo = 21;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
         ActiveKey                   activeKey = 22;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
         Errors.NominalError         nominalError = 46;
+    SessionInfo sessionInfo = 2;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    UnknownKeyInfo unknownKeyInfo = 23;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    GenealogyRequest_E genealogyRequest = 31;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    IMURequest_E imuRequest = 33;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    UnsecureNotification unsecureNotification = 39;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    Signatures.SessionInfo epochSessionInfo = 40;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    AppDeviceInfoRequest_E appDeviceInfoRequest = 44;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    Alert alert = 45;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    NISessionRequest NISessionRequest = 47;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    NISessionStop NISessionStop = 48;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    NIBatchRequest NIBatchRequest = 53;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    CPDMessage CPDMessage = 55;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    NIStatusUpdate NIStatusUpdate = 56;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     }
 }
+
+// ===== TESLEMETRY-EXT BEGIN =====
+enum Activity_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    ACTIVITY_NONE = 0;
+    ACTIVITY_STATIONARY = 1;
+    ACTIVITY_MOTION = 2;
+    ACTIVITY_SIGNIFICANT_MOTION = 3;
+}
+
+enum AlertConfirmation {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    ALERT_CONFIRMATION_NONE = 0;
+    ALERT_CONFIRMATION_PEER_REMOVED_INFORMATION = 1;
+}
+
+enum AppDeviceInfoRequest_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    APP_DEVICE_INFO_REQUEST_NONE = 0;
+    APP_DEVICE_INFO_REQUEST_GET_MODEL_NUMBER = 1;
+    APP_DEVICE_INFO_REQUEST_ONCHANGE_BATTERY_STATE = 2;
+}
+
+enum AppOperatingSystem {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    UNKNOWN = 0;
+    ANDROID = 1;
+    IOS = 2;
+    WATCHOS = 3;
+    HARMONY_NEXT = 4;
+}
+
+enum BLEAdditionalTRIMApplied_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    BLE_ADDITIONAL_TRIM_APPLIED_NONE = 0;
+    BLE_ADDITIONAL_TRIM_APPLIED_APPLIED = 1;
+    BLE_ADDITIONAL_TRIM_APPLIED_NOT_APPLIED = 2;
+}
+
+enum BLEEndpoint_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    BLE_ENDPOINT_NONE = 0;
+    BLE_ENDPOINT_CENTER = 1;
+    BLE_ENDPOINT_FRONT = 2;
+    BLE_ENDPOINT_LEFT = 3;
+    BLE_ENDPOINT_RIGHT = 4;
+    BLE_ENDPOINT_REAR = 5;
+    BLE_ENDPOINT_REAR_LEFT = 6;
+    BLE_ENDPOINT_REAR_RIGHT = 7;
+    BLE_ENDPOINT_NFC_CRADLE = 8;
+    BLE_ENDPOINT_FRONT_LEFT = 9;
+    BLE_ENDPOINT_FRONT_RIGHT = 10;
+    BLE_ENDPOINT_SECONDARY_CENTER = 11;
+}
+
+enum BatteryState_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    BATTERY_STATE_UNKNOWN = 0;
+    BATTERY_STATE_UNPLUGGED = 1;
+    BATTERY_STATE_CHARGING = 2;
+    BATTERY_STATE_FULL = 3;
+}
+
+enum CBManagerAuthorization {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    CBMANAGERAUTHORIZATION_UNKNOWN = 0;
+    CBMANAGERAUTHORIZATION_ALWAYS = 1;
+    CBMANAGERAUTHORIZATION_DENIED = 2;
+    CBMANAGERAUTHORIZATION_NOTDETERMINED = 3;
+    CBMANAGERAUTHORIZATION_RESTRICTED = 4;
+}
+
+enum CBManagerState {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    CBMANAGERSTATE_UNKNOWN = 0;
+    CBMANAGERSTATE_POWEREDOFF = 1;
+    CBMANAGERSTATE_POWEREDON = 2;
+    CBMANAGERSTATE_RESETTING = 3;
+    CBMANAGERSTATE_UNAUTHORIZED = 4;
+    CBMANAGERSTATE_UNSUPPORTED = 5;
+}
+
+enum CPDNotificationResponse_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    CPD_NOTIFICATION_RESPONSE_SNA = 0;
+    CPD_NOTIFICATION_RESPONSE_INITIAL_WARNING_RECEIVED = 1;
+    CPD_NOTIFICATION_RESPONSE_ESCALATED_WARNING_RECEIVED = 2;
+    CPD_NOTIFICATION_RESPONSE_ERROR = 3;
+}
+
+enum CPDNotification_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    CPD_NOTIFICATION_NONE = 0;
+    CPD_NOTIFICATION_INITIAL_WARNING = 1;
+    CPD_NOTIFICATION_ESCALATED_WARNING = 2;
+}
+
+enum DeviceTarget {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    UNKNOWN_TARGET = 0;
+    DEVELOPMENT_TARGET = 1;
+    PRODUCTION_TARGET = 2;
+}
+
+enum Device_Motion_Confidence {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    DEVICE_MOTION_CONFIDENCE_UNKNOWN = 0;
+    DEVICE_MOTION_CONFIDENCE_LOW = 1;
+    DEVICE_MOTION_CONFIDENCE_MEDIUM = 2;
+    DEVICE_MOTION_CONFIDENCE_HIGH = 3;
+}
+
+enum Device_Motion_State {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    DEVICE_MOTION_UNKNOWN = 0;
+    DEVICE_MOTION_STATIONARY = 1;
+    DEVICE_MOTION_WALKING = 2;
+    DEVICE_MOTION_RUNNING = 3;
+    DEVICE_MOTION_AUTOMOTIVE = 4;
+    DEVICE_MOTION_CYCLING = 5;
+}
+
+enum FiraError_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    FIRAERROR_UNKNOWN = 0;
+    FIRAERROR_UWB_HARDWARE_NOT_AVAILABLE = 1;
+    FIRAERROR_ILLEGAL_ARGUMENT = 2;
+    FIRAERROR_ILLEGAL_STATE = 3;
+    FIRAERROR_SERVICE_VERSION_UPDATE_REQUIRED = 4;
+    FIRAERROR_SERVICE_DISABLED = 5;
+    FIRAERROR_SIGN_IN_REQUIRED = 6;
+    FIRAERROR_INVALID_ACCOUNT = 7;
+    FIRAERROR_RESOLUTION_REQUIRED = 8;
+    FIRAERROR_NETWORK_ERROR = 9;
+    FIRAERROR_INTERNAL_ERROR = 10;
+    FIRAERROR_DEVELOPER_ERROR = 11;
+    FIRAERROR_ERROR = 12;
+    FIRAERROR_INTERRUPTED = 13;
+    FIRAERROR_TIMEOUT = 14;
+    FIRAERROR_CANCELED = 15;
+    FIRAERROR_API_NOT_CONNECTED = 16;
+    FIRAERROR_STATUS_ERROR = 17;
+    FIRAERROR_SERVICE_NOT_AVAILABLE = 18;
+    FIRAERROR_NULL_RANGING_DEVICE = 19;
+    FIRAERROR_INVALID_API_CALL = 20;
+    FIRAERROR_RANGING_ALREADY_STARTED = 21;
+    FIRAERROR_UWB_SYSTEM_CALLBACK_FAILURE = 22;
+    FIRAERROR_RANGING_UNKNOWN = 23;
+    FIRAERROR_RANGING_INTERRUPTED = 24;
+    FIRAERROR_RANGING_INTERNAL_ERROR = 25;
+    FIRAERROR_RANGING_TIMEOUT = 26;
+    FIRAERROR_RANGING_CANCELED = 27;
+    FIRAERROR_RANGING_DEAD_CLIENT = 28;
+    FIRAERROR_COROUTINE_TASK_EXECUTION_EXCEPTION = 29;
+    FIRAERROR_COROUTINE_TASK_INTERRUPTED_EXCEPTION = 30;
+    FIRAERROR_NOT_SELECTED = 31;
+}
+
+enum FiraRangingType {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    RANGING_TYPE_UNKNOWN = 0;
+    MULTICAST_DS_TWR = 1;
+    UNICAST_DS_TWR = 2;
+}
+
+enum FiraSTSMode {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    STS_UNKNOWN = 0;
+    STATIC = 1;
+    PROVISIONED = 2;
+    PROVISIONED_INDIVIDUAL = 3;
+    DYNAMIC = 4;
+    DYNAMIC_INDIVIDUAL = 5;
+}
+
+enum GATTServicesBitMask {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    GATTSERVICESBITMASK_PHONE_KEY_SERVICE = 0;
+    GATTSERVICESBITMASK_FROM_VEHICLE_CHAR = 1;
+    GATTSERVICESBITMASK_TO_VEHICLE_CHAR = 2;
+    GATTSERVICESBITMASK_VERSION_CHAR = 3;
+    GATTSERVICESBITMASK_BONDING_SERVICE = 4;
+    GATTSERVICESBITMASK_BONDING_CHAR = 5;
+}
+
+enum GenealogyRequest_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    GENEALOGYREQUEST_NONE = 0;
+    GENEALOGYREQUEST_READ = 1;
+    GENEALOGYREQUEST_KEYFOBINFO_READ = 2;
+    GENEALOGYREQUEST_TPWHEELUNITINFO_READ = 3;
+}
+
+enum GenealogyStatus_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    GENEALOGY_STATUS_NONE = 0;
+    GENEALOGY_STATUS_NOT_WRITTEN = 1;
+    GENEALOGY_STATUS_WRITE_SUCCESS = 2;
+    GENEALOGY_STATUS_WRITE_FAILURE = 3;
+    GENEALOGY_STATUS_READ_SUCCESS = 4;
+    GENEALOGY_STATUS_READ_FAILURE = 5;
+    GENEALOGY_STATUS_CRC_FAILURE = 6;
+}
+
+enum GetReaderKeyCommand {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    GET_READER_KEY_COMMAND_UNKNOWN = 0;
+    GET_READER_KEY_COMMAND_START_LOOKING = 1;
+    GET_READER_KEY_COMMAND_STOP_LOOKING = 2;
+}
+
+enum HandlePulled_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    HANDLE_PULLED_FRONT_DRIVER_DOOR = 0;
+    HANDLE_PULLED_FRONT_PASSENGER_DOOR = 1;
+    HANDLE_PULLED_REAR_DRIVER_DOOR = 2;
+    HANDLE_PULLED_REAR_PASSENGER_DOOR = 3;
+    HANDLE_PULLED_TRUNK = 4;
+    HANDLE_PULLED_CHARGE_PORT = 5;
+    HANDLE_PULLED_FRONT_DRIVER_AUTO_PRESENT_DOOR = 6;
+    HANDLE_PULLED_FRONT_PASSENGER_AUTO_PRESENT_DOOR = 7;
+    HANDLE_PULLED_OTHER = 8;
+    HANDLE_PULLED_FRUNK = 9;
+}
+
+enum IMURequest_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    IMU_REQUEST_NONE = 0;
+    IMU_REQUEST_GET_SLEEP_STATE = 1;
+    IMU_REQUEST_ENABLE_CONTINUOUS_ACTIVITY_UPDATE = 2;
+    IMU_REQUEST_DISABLE_CONTINUOUS_ACTIVITY_UPDATE = 3;
+}
+
+enum LocationPermission {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    LOCATION_PERMISSION_UNKNOWN = 0;
+    LOCATION_PERMISSION_ASK_NEXT_TIME_OR_WHEN_I_SHARE = 1;
+    LOCATION_PERMISSION_WHILE_USING_THE_APP = 2;
+    LOCATION_PERMISSION_ALWAYS = 3;
+    LOCATION_PERMISSION_NEVER = 4;
+}
+
+enum NIError_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    ERROR_UNKNOWN = 0;
+    ERROR_SESSION_LIMIT_EXCEEDED = 1;
+    ERROR_INVALID_CONFIGURATION = 2;
+    ERROR_RESOURCE_USAGE_TIMEOUT = 3;
+    ERROR_SESSION_FAILED = 4;
+    ERROR_UNSUPPORTED_PLATFORM = 5;
+    ERROR_USER_DID_NOT_ALLOW = 6;
+    ERROR_BLE_PEER_UNAVAILABLE = 7;
+    ERROR_VEHICLE_NOT_SELECTED_FOR_RANGING = 8;
+}
+
+enum NISessionStatus_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    NI_SESSION_STATUS_UNKNOWN = 0;
+    NI_SESSION_STATUS_ACTIVE = 1;
+    NI_SESSION_STATUS_INACTIVE = 2;
+    NI_SESSION_STATUS_ERROR = 3;
+    NI_SESSION_STATUS_UNAVAILABLE = 4;
+}
+
+enum OperationMode_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    OPERATION_MODE_UNKNOWN = 0;
+    OPERATION_MODE_OWNER = 1;
+    OPERATION_MODE_FLEET = 2;
+}
+
+enum PeripheralState {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    PERIPHERALSTATE_SNA = 0;
+    PERIPHERALSTATE_DISCONNECTED = 1;
+    PERIPHERALSTATE_CONNECTED = 2;
+    PERIPHERALSTATE_CONNECTING = 3;
+    PERIPHERALSTATE_DISCONNECTING = 4;
+}
+
+enum PhoneThermalState_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    PHONE_THERMAL_STATE_UNKNOWN = 0;
+    PHONE_THERMAL_STATE_NOMINAL = 1;
+    PHONE_THERMAL_STATE_FAIR = 2;
+    PHONE_THERMAL_STATE_LIGHT = 3;
+    PHONE_THERMAL_STATE_MODERATE = 4;
+    PHONE_THERMAL_STATE_SERIOUS = 5;
+    PHONE_THERMAL_STATE_SEVERE = 6;
+    PHONE_THERMAL_STATE_CRITICAL = 7;
+    PHONE_THERMAL_STATE_EMERGENCY = 8;
+    PHONE_THERMAL_STATE_SHUTDOWN = 9;
+}
+
+enum RangingConfigType_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    RANGINGCONFIGTYPE_UNDEFINED = 0;
+    RANGINGCONFIGTYPE_APPLE_UNICAST_BACKGROUND = 1;
+    RANGINGCONFIGTYPE_APPLE_UNICAST_FOREGROUND = 2;
+    RANGINGCONFIGTYPE_APPLE_MULTICAST_BACKGROUND = 3;
+    RANGINGCONFIGTYPE_APPLE_MULTICAST_FOREGROUND = 4;
+}
+
+enum RangingUpdateRate {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    RANGING_UPDATE_RATE_UNKNOWN = 0;
+    RANGING_UPDATE_RATE_AUTOMATIC = 1;
+    RANGING_UPDATE_RATE_INFREQUENT = 2;
+    RANGING_UPDATE_RATE_FREQUENT = 3;
+}
+
+enum SleepManagerCommand_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    SLEEPMANAGER_COMMAND_NONE = 0;
+    SLEEPMANAGER_GET_STATS = 1;
+    SLEEPMANAGER_RESET_STATS = 2;
+}
+
+enum UIRequest_E {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    UI_REQUEST_NONE = 0;
+    UI_REQUEST_GET_VEHICLE_BLE_NICK_NAME = 1;
+}
+
+enum UWBAvailability {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    UWB_AVAILABILITY_UNKNOWN = 0;
+    UWB_AVAILABILITY_AVAILABLE = 1;
+    UWB_AVAILABILITY_UNAVAILABLE_UNSUPPORTED_DEVICE = 2;
+    UWB_AVAILABILITY_UNAVAILABLE_PERMISSION_DENIED = 3;
+    UWB_AVAILABILITY_UNAVAILABLE = 4;
+    UWB_AVAILABILITY_UNAVAILABLE_DISABLED_BY_USER = 5;
+}
+
+enum UpdaterLocation {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    UPDATER_LOCATION_NONE = 0;
+    UPDATER_LOCATION_APPLICATION = 1;
+    UPDATER_LOCATION_BOOTLOADER = 2;
+    UPDATER_LOCATION_SECONDARY_APPLICATION = 3;
+    UPDATER_LOCATION_APPLICATION_IN_EXTERNAL_FLASH = 4;
+}
+
+enum UpdaterStatusCode {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    UPDATER_STATUS_CODE_ERROR = 0;
+    UPDATER_STATUS_CODE_WAIT = 1;
+    UPDATER_STATUS_CODE_BLOCK_STAGED = 2;
+    UPDATER_STATUS_CODE_IMAGE_STAGED = 3;
+    UPDATER_STATUS_CODE_CRC_CHECK_SUCCESS = 4;
+    UPDATER_STATUS_CODE_CRC_CHECK_FAIL = 5;
+    UPDATER_STATUS_CODE_HASH_FAIL = 6;
+    UPDATER_STATUS_CODE_SIGNATURE_FAIL = 7;
+    UPDATER_STATUS_CODE_ERROR_HASH_RESTORE_FAIL = 8;
+    UPDATER_STATUS_CODE_LOCATION_SET = 9;
+}
+
+enum iBeaconState {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    IBEACON_STATE_SNA = 0;
+    IBEACON_STATE_INSIDE = 1;
+    IBEACON_STATE_OUTSIDE = 2;
+}
+
+enum iOS_AppState {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    IOS_APPSTATE_SNA = 0;
+    IOS_APPSTATE_INACTIVE = 1;
+    IOS_APPSTATE_ACTIVE = 2;
+    IOS_APPSTATE_BACKGROUND = 3;
+}
+
+enum iOS_CoreBTATTErrorCode {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    IOS_COREBTATTERRORCODE_SNA = 0;
+    IOS_COREBTATTERRORCODE_SUCCESS = 1;
+    IOS_COREBTATTERRORCODE_READ_NOT_PERMITTED = 2;
+    IOS_COREBTATTERRORCODE_WRITE_NOT_PERMITTED = 3;
+    IOS_COREBTATTERRORCODE_INVALID_PDU = 4;
+    IOS_COREBTATTERRORCODE_INSUFFICIENT_AUTHENTICATION = 5;
+    IOS_COREBTATTERRORCODE_REQUEST_NOT_SUPPORTED = 6;
+    IOS_COREBTATTERRORCODE_INVALID_OFFSET = 7;
+    IOS_COREBTATTERRORCODE_INSUFFICIENT_AUTHORIZATION = 8;
+    IOS_COREBTATTERRORCODE_PREPARE_QUEUE_FULL = 9;
+    IOS_COREBTATTERRORCODE_ATT_NOT_FOUND = 10;
+    IOS_COREBTATTERRORCODE_ATT_NOT_LONG = 11;
+    IOS_COREBTATTERRORCODE_INSUFFICIENT_ENCRYPTION_KEY_SIZE = 12;
+    IOS_COREBTATTERRORCODE_INVALID_ATT_VALUE_LENGTH = 13;
+    IOS_COREBTATTERRORCODE_UNLIKELY_ERROR = 14;
+    IOS_COREBTATTERRORCODE_INSUFFICIENT_ENCRYPTION = 15;
+    IOS_COREBTATTERRORCODE_UNSUPPORTED_GROUP_TYPE = 16;
+    IOS_COREBTATTERRORCODE_INSUFFICIENT_RESOURCES = 17;
+}
+
+enum iOS_CoreBTError {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    IOS_COREBTERROR_SNA = 0;
+    IOS_COREBTERROR_UNKNOWN = 1;
+    IOS_COREBTERROR_INVALID_PARAMETERS = 2;
+    IOS_COREBTERROR_INVALID_HANDLE = 3;
+    IOS_COREBTERROR_NOT_CONNECTED = 4;
+    IOS_COREBTERROR_OUT_OF_SPACE = 5;
+    IOS_COREBTERROR_OPERATION_CANCELLED = 6;
+    IOS_COREBTERROR_CONNECTION_TIMEOUT = 7;
+    IOS_COREBTERROR_PERIPHERAL_DISCONNECTED = 8;
+    IOS_COREBTERROR_UUID_NOT_ALLOWED = 9;
+    IOS_COREBTERROR_ALREADY_ADVERTISING = 10;
+    IOS_COREBTERROR_CONNECTION_FAILED = 11;
+    IOS_COREBTERROR_CONNECTION_LIMIT_REACHED = 12;
+    IOS_COREBTERROR_OPERATION_NOT_SUPPORTED = 13;
+    IOS_COREBTERROR_UNKNOWN_DEVICE = 14;
+    IOS_COREBTERROR_ENCRYPTIONTIMEDOUT = 15;
+    IOS_COREBTERROR_LEGATTEXCEEDEDBACKGROUNDNOTIFICATIONLIMIT = 16;
+    IOS_COREBTERROR_LEGATTNEARBACKGROUNDNOTIFICATIONLIMIT = 17;
+    IOS_COREBTERROR_PEERREMOVEDPAIRINGINFORMATION = 18;
+    IOS_COREBTERROR_TOOMANYLEPAIREDDEVICES = 19;
+}
+
+enum iOS_LaunchReason {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    IOS_LAUNCHREASON_SNA = 0;
+    IOS_LAUNCHREASON_FOREGROUND = 1;
+    IOS_LAUNCHREASON_BLUETOOTH = 2;
+    IOS_LAUNCHREASON_BEACON = 3;
+    IOS_LAUNCHREASON_NOTIFICATION = 4;
+    IOS_LAUNCHREASON_URL = 5;
+    IOS_LAUNCHREASON_SHORTCUT = 6;
+}
+
+message Alert {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof sub_message {
+        AlertHandlePulledWithoutAuth alertHandlePulledWithoutAuth = 1;
+        AlertConfirmation alertConfirmation = 2;
+    }
+}
+
+message AlertHandlePulledWithoutAuth {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    uint32 timeSinceAlertSet_ms = 1;
+    HandlePulled_E handlePulled = 2;
+    uint32 connectionCount = 3;
+    bool unknownDevicePresent = 4;
+    bool authRequested = 5;
+    repeated HandlePulledWithoutAuthDeviceSpecificPayload deviceSpecificPayload = 6;
+}
+
+message AppDeviceInfo {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    bytes hardware_model_sha256 = 1;
+    AppOperatingSystem os = 2;
+    UWBAvailability UWBAvailable = 3;
+    PhoneVersionInfo phoneVersion = 4;
+    bool batchedNISessionsSupported = 5;
+    uint32 batteryLevelPercent = 6;
+    BatteryState_E batteryState = 7;
+    PhoneThermalState_E thermalState = 8;
+    bool lowPowerMode = 9;
+}
+
+message AppEventBondingStarted {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+}
+
+message AppEventLog {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    fixed32 timestamp = 1;
+    oneof event {
+        AppEventPeerRemovedPairingInformation peerRemovedPairingInformation = 2;
+        PhoneLogForHandlePulledWithoutAuthentication phoneLogForHandlePulledWithoutAuthentication = 3;
+        AppEventBondingStarted bondingStarted = 5;
+    }
+}
+
+message AppEventPeerRemovedPairingInformation {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    KeyIdentifier keyId = 1;
+}
+
+message AppStateEvent {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    WatchAppStateEvent field_1 = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+}
+
+message CPDMessage {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    CPDNotification_E CPDNotification = 1;
+}
+
+message CPDResponse {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    CPDNotificationResponse_E CPDNotificationResponse = 1;
+}
+
+message ChangeOperationMode {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    OperationMode_E operationMode = 1;
+}
+
+message CodeDescriptor {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    UpdaterLocation codeDescriptorLocation = 1;
+    uint32 version = 2;
+    bytes codeDescriptorBytes = 3;
+}
+
+message DelaySleepRequest {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    uint32 delayTime_ms = 1;
+}
+
+message DeviceMotion {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    repeated Device_Motion_State states = 1;
+    Device_Motion_Confidence confidence = 2;
+}
+
+message FiraCapabilities {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    uint32 field_1 = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    uint32 field_2 = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    uint32 field_3 = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    uint32 field_4 = 4;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    repeated uint32 field_5 = 5;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    uint32 field_6 = 6;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    bool field_7 = 7;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+}
+
+message FiraRequest {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    repeated FiraSessionRequest field_1 = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+}
+
+message FiraResponse {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    repeated FiraSessionResponse field_1 = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    uint32 field_2 = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    KeyIdentifier field_3 = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+}
+
+message FiraSessionData {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    bytes field_1 = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    uint32 field_2 = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    uint32 field_3 = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    uint32 field_4 = 4;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    bytes field_5 = 5;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    bytes field_6 = 6;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+}
+
+message FiraSessionRequest {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    uint32 field_1 = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    FiraRangingType field_2 = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    bytes field_3 = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    uint32 field_5 = 5;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    uint32 field_6 = 6;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    FiraSTSMode field_7 = 7;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    bytes field_8 = 8;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    RangingUpdateRate field_9 = 9;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    uint32 field_10 = 10;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+}
+
+message FiraSessionResponse {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    uint32 field_1 = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    FiraSessionData field_2 = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    FiraError_E field_3 = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+}
+
+message FirmwareInfo {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    DeviceTarget deviceTarget = 1;
+    uint32 versionCounter = 2;
+}
+
+message FromUIMessage {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof sub_message {
+        UnsignedMessageUI unsignedMessage = 2;
+    }
+}
+
+message FromVCSECMessage_ResponseMessage {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof sub_message {
+        Errors.NominalError nominalError = 46;
+    }
+}
+
+message Genealogy {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    bytes serialNumber = 1;
+    bytes partNumber = 2;
+}
+
+message GenealogyResponse {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    Genealogy currentGenealogy = 1;
+    GenealogyStatus_E status = 2;
+}
+
+message GetCodeDescriptor {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    UpdaterLocation location = 1;
+}
+
+message GetReaderKey {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    GetReaderKeyCommand command = 1;
+}
+
+message HandlePulledWithoutAuthDeviceSpecificPayload {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    uint32 keyChannel = 1;
+    AuthenticationLevel_E authenticationLevel = 2;
+    bool present = 3;
+    sint32 RSSILeft = 4;
+    sint32 RSSIRight = 5;
+    sint32 RSSIRear = 6;
+    sint32 RSSICenter = 7;
+    sint32 RSSIFront = 8;
+    sint32 RSSISecondary = 9;
+    sint32 RSSINFCCradle = 10;
+    sint32 RSSIRearLeft = 11;
+    sint32 RSSIRearRight = 12;
+    bool highThreshLeftPresent = 13;
+    bool highThreshRightPresent = 14;
+    bool highThreshCenterPresent = 15;
+    bool highThreshFrontPresent = 16;
+    bool highThreshRearPresent = 17;
+    bool highThreshRearLeftPresent = 18;
+    bool highThreshRearRightPresent = 19;
+    bool highThreshSecondaryPresent = 20;
+    bool highThreshNFCPresent = 21;
+    bool sortedDeltaBayesLeftPresent = 22;
+    bool sortedDeltaBayesRightPresent = 23;
+    bool rawDeltaBayesLeftPresent = 24;
+    bool rawDeltaBayesRightPresent = 25;
+}
+
+message NIBatchRequest {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    repeated NISessionRequest requests = 1;
+}
+
+message NIBatchResponse {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    repeated NISessionResponse responses = 1;
+    KeyIdentifier keyId = 2;
+    uint32 field_3 = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    RangingConfigType_E field_4 = 4;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+}
+
+message NIConfigurationData {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    bytes data = 1;
+}
+
+message NISessionRequest {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    BLEEndpoint_E sessionId = 1;
+    bytes accessoryConfigurationData = 2;
+}
+
+message NISessionResponse {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    BLEEndpoint_E sessionId = 1;
+    oneof response {
+        NIConfigurationData NIConfigurationData = 2;
+        NIError_E errorCode = 3;
+    }
+}
+
+message NISessionStatus {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    BLEEndpoint_E sessionId = 1;
+    NISessionStatus_E status = 2;
+}
+
+message NISessionStop {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    repeated BLEEndpoint_E sessionId = 1;
+}
+
+message NISessionStopped {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    repeated BLEEndpoint_E sessionId = 1;
+}
+
+message NIStatusUpdate {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    repeated NISessionStatus sessionStatus = 1;
+}
+
+message PhoneKeyTelemetry_Android {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    enum PhoneKeyPermissionsBitfield {
+        BLUETOOTH_SCAN = 0;
+        BLUETOOTH_CONNECT = 1;
+        ACCESS_FINE_LOCATION = 2;
+        LEGACY_BLUETOOTH = 3;
+        LEGACY_BLUETOOTH_ADMIN = 4;
+        UWB_RANGING = 5;
+        BATTERY_OPTIMIZATION = 6;
+        IMU_ENABLED = 7;
+    }
+    enum ServiceRunningState {
+        SERVICERUNNINGSTATE_SNA = 0;
+        SERVICERUNNINGSTATE_BACKGROUND = 1;
+        SERVICERUNNINGSTATE_FOREGROUND = 2;
+        SERVICERUNNINGSTATE_OFF = 3;
+    }
+    enum ServiceStartReason {
+        SERVICE_START_REASON_SNA = 0;
+        SERVICE_START_REASON_JS = 1;
+        SERVICE_START_REASON_BOOT_COMPLETE = 2;
+        SERVICE_START_REASON_MI_BEACON = 3;
+        SERVICE_START_REASON_HONOR_WALLET = 4;
+        SERVICE_START_REASON_OPPO_WALLET = 5;
+        SERVICE_START_REASON_VIVO_WALLET = 6;
+        SERVICE_START_REASON_PACKAGE_REPLACED = 10;
+    }
+    fixed32 permissionsBitmask = 1;
+    PhoneKeyTelemetry_Android.ServiceRunningState serviceRunningState = 2;
+    sint32 runningState_timeSince_S = 3;
+    sint32 processStartTime_timeSince_S = 4;
+    sint32 osStartTime_timeSince_S = 5;
+    sint32 screenOnReceiver_timeSince_S = 6;
+    sint32 bootReceiver_timeSince_S = 7;
+    PhoneKeyTelemetry_Android.ServiceStartReason serviceStartReason = 8;
+}
+
+message PhoneKeyTelemetry_iOS {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    iBeaconState iBeaconState = 1;
+    sint32 iBeaconState_timeSince_S = 2;
+    CBManagerState CBManagerState = 3;
+    sint32 CBManagerState_timeSince_S = 4;
+    CBManagerAuthorization CBManagerAuthorization = 5;
+    sint32 CBManagerAuthorization_timeSince_S = 6;
+    iOS_CoreBTError CoreBTError = 7;
+    sint32 CoreBTError_timeSince_S = 8;
+    iOS_CoreBTATTErrorCode CoreBTATTErrorCode = 9;
+    sint32 CoreBTATTError_timeSince_S = 10;
+    iOS_LaunchReason launchReason = 11;
+    sint32 launchReason_timeSince_S = 12;
+    iOS_AppState appState = 13;
+}
+
+message PhoneLogForHandlePulledWithoutAuthentication {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    sint32 timeSinceBLESwitchEnableInSeconds = 1;
+    sint32 timeSinceAppLaunchInSeconds = 2;
+    sint32 timeSinceBeaconInSeconds = 3;
+    sint32 timeSinceConnectInSeconds = 4;
+    sint32 timeSinceForegroundInSeconds = 5;
+    sint32 timeSinceBackgroundInSeconds = 6;
+    LocationPermission locationPermission = 7;
+    bool remoteStartIssued = 8;
+    PeripheralState peripheralState = 11;
+    uint32 GATTDiscoveryBitmask = 12;
+    sint32 timeSinceLastMessageCurrentSession = 13;
+    sint32 timeSinceLastMessageAckCurrentSession = 14;
+    oneof OS_telemetry {
+        PhoneKeyTelemetry_iOS iOS = 9;
+        PhoneKeyTelemetry_Android android = 10;
+    }
+}
+
+message PhoneVersionInfo {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    uint32 os_version_major = 1;
+    uint32 os_version_minor = 2;
+    uint32 os_version_patch = 3;
+    uint32 app_version_major = 4;
+    uint32 app_version_minor = 5;
+    uint32 app_version_patch = 6;
+}
+
+message ProvisionIdentity {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    bytes identity = 1;
+}
+
+message SecurityControl {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    enum ImmobilizationControl_E {
+        IMMOBILIZATION_CONTROL_NONE = 0;
+        IMMOBILIZATION_CONTROL_IMMOBILIZE_VEHICLE = 1;
+        IMMOBILIZATION_CONTROL_MOBILIZE_VEHICLE = 2;
+    }
+    SecurityControl.ImmobilizationControl_E immobilizationControl = 1;
+}
+
+message ServiceDiagnosticRequest {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    bool enterServiceModePlus = 1;
+}
+
+message SessionInfo {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    bytes token = 1;
+    uint32 counter = 2;
+    bytes publicKey = 3;
+}
+
+message SetUpdaterLocation {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    UpdaterLocation updaterLocation = 1;
+}
+
+message SleepManagerRequest {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof sub_message {
+        DelaySleepRequest delaySleepRequest = 1;
+        SleepManagerCommand_E sleepManagerCommand = 2;
+    }
+}
+
+message SleepManagerStats {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    uint32 totalCPUTime = 1;
+    uint32 totalAwakeTime = 2;
+    BLEAdditionalTRIMApplied_E isBLETrimApplied = 3;
+}
+
+message StageBlock {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    uint32 blockAddress = 1;
+    bytes blockToStage = 2;
+}
+
+message ToUIMessage {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof sub_message {
+        CommandStatus commandStatus = 4;
+        WhitelistInfo whitelistInfo = 16;
+        WhitelistEntryInfo whitelistEntryInfo = 17;
+        KeyStatusInfo keyStatusInfo = 21;
+        UnknownKeyInfo unknownKeyInfo = 23;
+        UIRequest_E UIRequest = 24;
+    }
+}
+
+message ToVCSECMessageV0Protocol {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof sub_message {
+        SignedMessage signedMessage = 1;
+        bytes unsignedMessageAsBytes = 2;
+    }
+}
+
+message UnknownKeyInfo {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    KeyStatus keyStatus = 1;
+    PublicKey publicKey = 2;
+    KeyFormFactor keyFormFactor = 3;
+}
+
+message UnsecureNotification {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    bool notifyUser = 1;
+    ClosureStatuses closureStatuses = 2;
+}
+
+message UnsignedMessageUI {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof sub_message {
+        InformationRequest InformationRequest = 1;
+        RKEAction_E RKEAction = 2;
+        WhitelistOperation WhitelistOperation = 16;
+        VehicleBLENickName BLENickName = 51;
+    }
+}
+
+message UpdaterCommand {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof sub_message {
+        GetCodeDescriptor getCodeDescriptor = 1;
+        SetUpdaterLocation setUpdaterLocation = 2;
+        StageBlock stageBlock = 3;
+        VerifyAndInstallApp verifyAndInstallApp = 4;
+        bytes firmwareInfo = 5;
+    }
+}
+
+message UpdaterResponse {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof sub_message {
+        CodeDescriptor codeDescriptorMessage = 1;
+        UpdaterStatus updaterStatus = 2;
+    }
+}
+
+message UpdaterStatus {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    UpdaterStatusCode statusCode = 1;
+    UpdaterLocation location = 2;
+    uint32 nextAddressNumber = 3;
+}
+
+message VehicleBLENickName {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    bytes nickName = 1;
+}
+
+message VerifyAndInstallApp {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    bytes sha256 = 1;
+    bytes rValue = 2;
+    bytes sValue = 3;
+}
+
+message WatchAppStateEvent {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    iOS_AppState field_1 = 1;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    bool field_2 = 2;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    bool field_3 = 3;  // UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    uint32 batteryLevelPercent = 4;
+}
+// ===== TESLEMETRY-EXT END =====

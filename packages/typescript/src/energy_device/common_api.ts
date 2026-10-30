@@ -281,7 +281,7 @@ export interface CommonAPIRetrieveSiteSuggestionResponse {
 }
 
 export interface CommonMessages {
-  errorResponse: ErrorResponse | undefined;
+  errorResponse?: ErrorResponse | undefined;
   getSystemInfoRequest?: CommonAPIGetSystemInfoRequest | undefined;
   getSystemInfoResponse?: CommonAPIGetSystemInfoResponse | undefined;
   setLocalSiteConfigRequest?: CommonAPISetLocalSiteConfigRequest | undefined;

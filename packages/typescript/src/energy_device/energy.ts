@@ -6,7 +6,7 @@
 
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
-import { FloatValue, UInt64Value } from "./google/protobuf/wrappers.js";
+import { FloatValue, UInt32Value, UInt64Value } from "./google/protobuf/wrappers.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
@@ -250,7 +250,7 @@ export const GridComplianceStatus: MessageFns<GridComplianceStatus> = {
       writer.uint32(8).int32(message.gridState);
     }
     if (message.qualifyingTimeRemainingS !== undefined) {
-      FloatValue.encode({ value: message.qualifyingTimeRemainingS! }, writer.uint32(18).fork()).join();
+      UInt32Value.encode({ value: message.qualifyingTimeRemainingS! }, writer.uint32(18).fork()).join();
     }
     return writer;
   },
@@ -275,7 +275,7 @@ export const GridComplianceStatus: MessageFns<GridComplianceStatus> = {
             break;
           }
 
-          message.qualifyingTimeRemainingS = FloatValue.decode(reader, reader.uint32()).value;
+          message.qualifyingTimeRemainingS = UInt32Value.decode(reader, reader.uint32()).value;
           continue;
         }
       }
@@ -548,7 +548,7 @@ function createBaseAlertLog(): AlertLog {
 export const AlertLog: MessageFns<AlertLog> = {
   encode(message: AlertLog, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.data !== undefined) {
-      writer.uint32(8).uint64(message.data);
+      writer.uint32(9).fixed64(message.data);
     }
     return writer;
   },
@@ -561,11 +561,11 @@ export const AlertLog: MessageFns<AlertLog> = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
-          if (tag !== 8) {
+          if (tag !== 9) {
             break;
           }
 
-          message.data = longToNumber(reader.uint64());
+          message.data = longToNumber(reader.fixed64());
           continue;
         }
       }
@@ -606,7 +606,7 @@ function createBaseAlertMatrix(): AlertMatrix {
 export const AlertMatrix: MessageFns<AlertMatrix> = {
   encode(message: AlertMatrix, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.data !== undefined) {
-      writer.uint32(8).uint64(message.data);
+      writer.uint32(9).fixed64(message.data);
     }
     return writer;
   },
@@ -619,11 +619,11 @@ export const AlertMatrix: MessageFns<AlertMatrix> = {
       const tag = reader.uint32();
       switch (tag >>> 3) {
         case 1: {
-          if (tag !== 8) {
+          if (tag !== 9) {
             break;
           }
 
-          message.data = longToNumber(reader.uint64());
+          message.data = longToNumber(reader.fixed64());
           continue;
         }
       }

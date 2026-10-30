@@ -15,6 +15,9 @@ import { Timestamp } from "./google/protobuf/timestamp.js";
 import { NetworkInterface, WifiConfig } from "./networking.js";
 import {
   AssetSiteUuidOfDeviceResponse,
+  RegistrationFailure,
+  registrationFailureFromJSON,
+  registrationFailureToJSON,
   RegistrationRequest,
   RegistrationResponse,
   SiteSuggestionRequest,
@@ -188,6 +191,45 @@ export function canvasSiteStatusToJSON(object: CanvasSiteStatus): string {
   }
 }
 
+export enum TEGRegistrationFailure {
+  TEG_REGISTRATION_FAILURE_INVALID = 0,
+  TEG_REGISTRATION_FAILURE_DEVICES = 1,
+  TEG_REGISTRATION_FAILURE_NETWORK = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function tEGRegistrationFailureFromJSON(object: any): TEGRegistrationFailure {
+  switch (object) {
+    case 0:
+    case "TEG_REGISTRATION_FAILURE_INVALID":
+      return TEGRegistrationFailure.TEG_REGISTRATION_FAILURE_INVALID;
+    case 1:
+    case "TEG_REGISTRATION_FAILURE_DEVICES":
+      return TEGRegistrationFailure.TEG_REGISTRATION_FAILURE_DEVICES;
+    case 2:
+    case "TEG_REGISTRATION_FAILURE_NETWORK":
+      return TEGRegistrationFailure.TEG_REGISTRATION_FAILURE_NETWORK;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return TEGRegistrationFailure.UNRECOGNIZED;
+  }
+}
+
+export function tEGRegistrationFailureToJSON(object: TEGRegistrationFailure): string {
+  switch (object) {
+    case TEGRegistrationFailure.TEG_REGISTRATION_FAILURE_INVALID:
+      return "TEG_REGISTRATION_FAILURE_INVALID";
+    case TEGRegistrationFailure.TEG_REGISTRATION_FAILURE_DEVICES:
+      return "TEG_REGISTRATION_FAILURE_DEVICES";
+    case TEGRegistrationFailure.TEG_REGISTRATION_FAILURE_NETWORK:
+      return "TEG_REGISTRATION_FAILURE_NETWORK";
+    case TEGRegistrationFailure.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface TEGSettings {
 }
 
@@ -261,8 +303,8 @@ export interface TEGAPIDispatchBatteryPowerRequestRealPowerCommand {
 }
 
 export interface TEGAPIDispatchBatteryPowerRequest {
-  resumeDeviceMode: TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode | undefined;
-  realPower: TEGAPIDispatchBatteryPowerRequestRealPowerCommand | undefined;
+  resumeDeviceMode?: TEGAPIDispatchBatteryPowerRequestResumeDeviceOperatingMode | undefined;
+  realPower?: TEGAPIDispatchBatteryPowerRequestRealPowerCommand | undefined;
 }
 
 export interface TEGAPIDispatchBatteryPowerResponse {
@@ -279,7 +321,7 @@ export interface TEGAPIRegisterRequest {
 }
 
 export interface TEGAPIRegisterResponse {
-  failure: number;
+  failure: RegistrationFailure;
   registrationResponse: RegistrationResponse | undefined;
 }
 
@@ -374,10 +416,10 @@ export interface TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy {
 
 export interface TEGAPIEnsureCertificateRequest {
   forceRenew: boolean;
-  csipSouthAustraliaPowerNetworks: TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks | undefined;
-  csipCitipowerPowercorUnited: TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited | undefined;
-  csipAusnet: TEGAPIEnsureCertificateRequestCSIPAusNet | undefined;
-  csipJemena: TEGAPIEnsureCertificateRequestCSIPJemena | undefined;
+  csipSouthAustraliaPowerNetworks?: TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks | undefined;
+  csipCitipowerPowercorUnited?: TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited | undefined;
+  csipAusnet?: TEGAPIEnsureCertificateRequestCSIPAusNet | undefined;
+  csipJemena?: TEGAPIEnsureCertificateRequestCSIPJemena | undefined;
   csipEnergexErgonEnergyQld: TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD | undefined;
   csipWesternPowerSynergy: TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy | undefined;
 }
@@ -395,7 +437,7 @@ export interface ControlEventSchedulingInfo {
 export interface BackupEvent {
   id: string;
   name: string;
-  shedulingInfo: ControlEventSchedulingInfo | undefined;
+  schedulingInfo: ControlEventSchedulingInfo | undefined;
 }
 
 export interface ManualBackupEvent {
@@ -767,9 +809,9 @@ export function controllableDeviceProgramScheduleBoundary_StateOfEnergyToJSON(
 }
 
 export interface ControllableDeviceProgramSchedule {
-  start: Date | undefined;
-  end: Date | undefined;
-  expiry: Date | undefined;
+  start: ControllableDeviceProgramScheduleBoundary | undefined;
+  end: ControllableDeviceProgramScheduleBoundary | undefined;
+  expiry: ControllableDeviceProgramScheduleBoundary | undefined;
 }
 
 export interface ControllableDeviceProgram {
@@ -2368,7 +2410,7 @@ export const TEGAPIRegisterResponse: MessageFns<TEGAPIRegisterResponse> = {
             break;
           }
 
-          message.failure = reader.int32();
+          message.failure = reader.int32() as any;
           continue;
         }
         case 2: {
@@ -2390,7 +2432,7 @@ export const TEGAPIRegisterResponse: MessageFns<TEGAPIRegisterResponse> = {
 
   fromJSON(object: any): TEGAPIRegisterResponse {
     return {
-      failure: isSet(object.failure) ? globalThis.Number(object.failure) : 0,
+      failure: isSet(object.failure) ? registrationFailureFromJSON(object.failure) : 0,
       registrationResponse: isSet(object.registrationResponse)
         ? RegistrationResponse.fromJSON(object.registrationResponse)
         : undefined,
@@ -2400,7 +2442,7 @@ export const TEGAPIRegisterResponse: MessageFns<TEGAPIRegisterResponse> = {
   toJSON(message: TEGAPIRegisterResponse): unknown {
     const obj: any = {};
     if (message.failure !== undefined) {
-      obj.failure = Math.round(message.failure);
+      obj.failure = registrationFailureToJSON(message.failure);
     }
     if (message.registrationResponse !== undefined) {
       obj.registrationResponse = RegistrationResponse.toJSON(message.registrationResponse);
@@ -4245,7 +4287,7 @@ export const ControlEventSchedulingInfo: MessageFns<ControlEventSchedulingInfo> 
 };
 
 function createBaseBackupEvent(): BackupEvent {
-  return { id: "", name: "", shedulingInfo: undefined };
+  return { id: "", name: "", schedulingInfo: undefined };
 }
 
 export const BackupEvent: MessageFns<BackupEvent> = {
@@ -4256,8 +4298,8 @@ export const BackupEvent: MessageFns<BackupEvent> = {
     if (message.name !== "") {
       writer.uint32(18).string(message.name);
     }
-    if (message.shedulingInfo !== undefined) {
-      ControlEventSchedulingInfo.encode(message.shedulingInfo, writer.uint32(26).fork()).join();
+    if (message.schedulingInfo !== undefined) {
+      ControlEventSchedulingInfo.encode(message.schedulingInfo, writer.uint32(26).fork()).join();
     }
     return writer;
   },
@@ -4290,7 +4332,7 @@ export const BackupEvent: MessageFns<BackupEvent> = {
             break;
           }
 
-          message.shedulingInfo = ControlEventSchedulingInfo.decode(reader, reader.uint32());
+          message.schedulingInfo = ControlEventSchedulingInfo.decode(reader, reader.uint32());
           continue;
         }
       }
@@ -4306,8 +4348,8 @@ export const BackupEvent: MessageFns<BackupEvent> = {
     return {
       id: isSet(object.id) ? globalThis.String(object.id) : "",
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      shedulingInfo: isSet(object.shedulingInfo)
-        ? ControlEventSchedulingInfo.fromJSON(object.shedulingInfo)
+      schedulingInfo: isSet(object.schedulingInfo)
+        ? ControlEventSchedulingInfo.fromJSON(object.schedulingInfo)
         : undefined,
     };
   },
@@ -4320,8 +4362,8 @@ export const BackupEvent: MessageFns<BackupEvent> = {
     if (message.name !== undefined) {
       obj.name = message.name;
     }
-    if (message.shedulingInfo !== undefined) {
-      obj.shedulingInfo = ControlEventSchedulingInfo.toJSON(message.shedulingInfo);
+    if (message.schedulingInfo !== undefined) {
+      obj.schedulingInfo = ControlEventSchedulingInfo.toJSON(message.schedulingInfo);
     }
     return obj;
   },
@@ -4333,8 +4375,8 @@ export const BackupEvent: MessageFns<BackupEvent> = {
     const message = createBaseBackupEvent();
     message.id = object.id ?? "";
     message.name = object.name ?? "";
-    message.shedulingInfo = (object.shedulingInfo !== undefined && object.shedulingInfo !== null)
-      ? ControlEventSchedulingInfo.fromPartial(object.shedulingInfo)
+    message.schedulingInfo = (object.schedulingInfo !== undefined && object.schedulingInfo !== null)
+      ? ControlEventSchedulingInfo.fromPartial(object.schedulingInfo)
       : undefined;
     return message;
   },
@@ -6777,13 +6819,13 @@ function createBaseControllableDeviceProgramSchedule(): ControllableDeviceProgra
 export const ControllableDeviceProgramSchedule: MessageFns<ControllableDeviceProgramSchedule> = {
   encode(message: ControllableDeviceProgramSchedule, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.start !== undefined) {
-      Timestamp.encode(toTimestamp(message.start), writer.uint32(10).fork()).join();
+      ControllableDeviceProgramScheduleBoundary.encode(message.start, writer.uint32(10).fork()).join();
     }
     if (message.end !== undefined) {
-      Timestamp.encode(toTimestamp(message.end), writer.uint32(18).fork()).join();
+      ControllableDeviceProgramScheduleBoundary.encode(message.end, writer.uint32(18).fork()).join();
     }
     if (message.expiry !== undefined) {
-      Timestamp.encode(toTimestamp(message.expiry), writer.uint32(26).fork()).join();
+      ControllableDeviceProgramScheduleBoundary.encode(message.expiry, writer.uint32(26).fork()).join();
     }
     return writer;
   },
@@ -6800,7 +6842,7 @@ export const ControllableDeviceProgramSchedule: MessageFns<ControllableDevicePro
             break;
           }
 
-          message.start = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          message.start = ControllableDeviceProgramScheduleBoundary.decode(reader, reader.uint32());
           continue;
         }
         case 2: {
@@ -6808,7 +6850,7 @@ export const ControllableDeviceProgramSchedule: MessageFns<ControllableDevicePro
             break;
           }
 
-          message.end = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          message.end = ControllableDeviceProgramScheduleBoundary.decode(reader, reader.uint32());
           continue;
         }
         case 3: {
@@ -6816,7 +6858,7 @@ export const ControllableDeviceProgramSchedule: MessageFns<ControllableDevicePro
             break;
           }
 
-          message.expiry = fromTimestamp(Timestamp.decode(reader, reader.uint32()));
+          message.expiry = ControllableDeviceProgramScheduleBoundary.decode(reader, reader.uint32());
           continue;
         }
       }
@@ -6830,22 +6872,22 @@ export const ControllableDeviceProgramSchedule: MessageFns<ControllableDevicePro
 
   fromJSON(object: any): ControllableDeviceProgramSchedule {
     return {
-      start: isSet(object.start) ? fromJsonTimestamp(object.start) : undefined,
-      end: isSet(object.end) ? fromJsonTimestamp(object.end) : undefined,
-      expiry: isSet(object.expiry) ? fromJsonTimestamp(object.expiry) : undefined,
+      start: isSet(object.start) ? ControllableDeviceProgramScheduleBoundary.fromJSON(object.start) : undefined,
+      end: isSet(object.end) ? ControllableDeviceProgramScheduleBoundary.fromJSON(object.end) : undefined,
+      expiry: isSet(object.expiry) ? ControllableDeviceProgramScheduleBoundary.fromJSON(object.expiry) : undefined,
     };
   },
 
   toJSON(message: ControllableDeviceProgramSchedule): unknown {
     const obj: any = {};
     if (message.start !== undefined) {
-      obj.start = message.start.toISOString();
+      obj.start = ControllableDeviceProgramScheduleBoundary.toJSON(message.start);
     }
     if (message.end !== undefined) {
-      obj.end = message.end.toISOString();
+      obj.end = ControllableDeviceProgramScheduleBoundary.toJSON(message.end);
     }
     if (message.expiry !== undefined) {
-      obj.expiry = message.expiry.toISOString();
+      obj.expiry = ControllableDeviceProgramScheduleBoundary.toJSON(message.expiry);
     }
     return obj;
   },
@@ -6859,9 +6901,15 @@ export const ControllableDeviceProgramSchedule: MessageFns<ControllableDevicePro
     object: I,
   ): ControllableDeviceProgramSchedule {
     const message = createBaseControllableDeviceProgramSchedule();
-    message.start = object.start ?? undefined;
-    message.end = object.end ?? undefined;
-    message.expiry = object.expiry ?? undefined;
+    message.start = (object.start !== undefined && object.start !== null)
+      ? ControllableDeviceProgramScheduleBoundary.fromPartial(object.start)
+      : undefined;
+    message.end = (object.end !== undefined && object.end !== null)
+      ? ControllableDeviceProgramScheduleBoundary.fromPartial(object.end)
+      : undefined;
+    message.expiry = (object.expiry !== undefined && object.expiry !== null)
+      ? ControllableDeviceProgramScheduleBoundary.fromPartial(object.expiry)
+      : undefined;
     return message;
   },
 };

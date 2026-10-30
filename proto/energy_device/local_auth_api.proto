@@ -8,6 +8,12 @@ option java_outer_classname = "LocalAuthApi";
 
 import "networking.proto";
 
+enum LocalParticipant {
+  LOCAL_PARTICIPANT_INVALID   = 0;
+  LOCAL_PARTICIPANT_INSTALLER = 1;
+  LOCAL_PARTICIPANT_CUSTOMER  = 2;
+}
+
 enum LocalAuthResult {
   LOCAL_AUTH_RESULT_INVALID                  = 0;
   LOCAL_AUTH_RESULT_SUCCESS                  = 1;
@@ -26,7 +32,7 @@ message LocalAuthAPIRequiredFactorsResponse {
 }
 
 message LocalAuthAPILoginRequest {
-  int32 participant     = 1; // enum-valued; kept scalar to avoid an import cycle
+  LocalParticipant participant     = 1;
   string email          = 2;
   WifiPassword password = 3;
 }

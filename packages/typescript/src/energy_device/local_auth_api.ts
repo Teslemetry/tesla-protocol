@@ -10,6 +10,45 @@ import { WifiPassword } from "./networking.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
+export enum LocalParticipant {
+  LOCAL_PARTICIPANT_INVALID = 0,
+  LOCAL_PARTICIPANT_INSTALLER = 1,
+  LOCAL_PARTICIPANT_CUSTOMER = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function localParticipantFromJSON(object: any): LocalParticipant {
+  switch (object) {
+    case 0:
+    case "LOCAL_PARTICIPANT_INVALID":
+      return LocalParticipant.LOCAL_PARTICIPANT_INVALID;
+    case 1:
+    case "LOCAL_PARTICIPANT_INSTALLER":
+      return LocalParticipant.LOCAL_PARTICIPANT_INSTALLER;
+    case 2:
+    case "LOCAL_PARTICIPANT_CUSTOMER":
+      return LocalParticipant.LOCAL_PARTICIPANT_CUSTOMER;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return LocalParticipant.UNRECOGNIZED;
+  }
+}
+
+export function localParticipantToJSON(object: LocalParticipant): string {
+  switch (object) {
+    case LocalParticipant.LOCAL_PARTICIPANT_INVALID:
+      return "LOCAL_PARTICIPANT_INVALID";
+    case LocalParticipant.LOCAL_PARTICIPANT_INSTALLER:
+      return "LOCAL_PARTICIPANT_INSTALLER";
+    case LocalParticipant.LOCAL_PARTICIPANT_CUSTOMER:
+      return "LOCAL_PARTICIPANT_CUSTOMER";
+    case LocalParticipant.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export enum LocalAuthResult {
   LOCAL_AUTH_RESULT_INVALID = 0,
   LOCAL_AUTH_RESULT_SUCCESS = 1,
@@ -76,8 +115,7 @@ export interface LocalAuthAPIRequiredFactorsResponse {
 }
 
 export interface LocalAuthAPILoginRequest {
-  /** enum-valued; kept scalar to avoid an import cycle */
-  participant: number;
+  participant: LocalParticipant;
   email: string;
   password: WifiPassword | undefined;
 }
@@ -267,7 +305,7 @@ export const LocalAuthAPILoginRequest: MessageFns<LocalAuthAPILoginRequest> = {
             break;
           }
 
-          message.participant = reader.int32();
+          message.participant = reader.int32() as any;
           continue;
         }
         case 2: {
@@ -297,7 +335,7 @@ export const LocalAuthAPILoginRequest: MessageFns<LocalAuthAPILoginRequest> = {
 
   fromJSON(object: any): LocalAuthAPILoginRequest {
     return {
-      participant: isSet(object.participant) ? globalThis.Number(object.participant) : 0,
+      participant: isSet(object.participant) ? localParticipantFromJSON(object.participant) : 0,
       email: isSet(object.email) ? globalThis.String(object.email) : "",
       password: isSet(object.password) ? WifiPassword.fromJSON(object.password) : undefined,
     };
@@ -306,7 +344,7 @@ export const LocalAuthAPILoginRequest: MessageFns<LocalAuthAPILoginRequest> = {
   toJSON(message: LocalAuthAPILoginRequest): unknown {
     const obj: any = {};
     if (message.participant !== undefined) {
-      obj.participant = Math.round(message.participant);
+      obj.participant = localParticipantToJSON(message.participant);
     }
     if (message.email !== undefined) {
       obj.email = message.email;

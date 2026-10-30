@@ -8,6 +8,7 @@
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import { NominalError } from "./errors.js";
 import { Role, roleFromJSON, roleToJSON } from "./keys.js";
+import { GetSessionInfoRequest, SessionInfo as SessionInfo1 } from "./signatures.js";
 
 export const protobufPackage = "VCSEC";
 
@@ -1668,13 +1669,2505 @@ export function qRCodeStatusEToJSON(object: QRCodeStatusE): string {
   }
 }
 
+/** ===== TESLEMETRY-EXT BEGIN ===== */
+export enum ActivityE {
+  ACTIVITY_NONE = 0,
+  ACTIVITY_STATIONARY = 1,
+  ACTIVITY_MOTION = 2,
+  ACTIVITY_SIGNIFICANT_MOTION = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function activityEFromJSON(object: any): ActivityE {
+  switch (object) {
+    case 0:
+    case "ACTIVITY_NONE":
+      return ActivityE.ACTIVITY_NONE;
+    case 1:
+    case "ACTIVITY_STATIONARY":
+      return ActivityE.ACTIVITY_STATIONARY;
+    case 2:
+    case "ACTIVITY_MOTION":
+      return ActivityE.ACTIVITY_MOTION;
+    case 3:
+    case "ACTIVITY_SIGNIFICANT_MOTION":
+      return ActivityE.ACTIVITY_SIGNIFICANT_MOTION;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ActivityE.UNRECOGNIZED;
+  }
+}
+
+export function activityEToJSON(object: ActivityE): string {
+  switch (object) {
+    case ActivityE.ACTIVITY_NONE:
+      return "ACTIVITY_NONE";
+    case ActivityE.ACTIVITY_STATIONARY:
+      return "ACTIVITY_STATIONARY";
+    case ActivityE.ACTIVITY_MOTION:
+      return "ACTIVITY_MOTION";
+    case ActivityE.ACTIVITY_SIGNIFICANT_MOTION:
+      return "ACTIVITY_SIGNIFICANT_MOTION";
+    case ActivityE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum AlertConfirmation {
+  ALERT_CONFIRMATION_NONE = 0,
+  ALERT_CONFIRMATION_PEER_REMOVED_INFORMATION = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function alertConfirmationFromJSON(object: any): AlertConfirmation {
+  switch (object) {
+    case 0:
+    case "ALERT_CONFIRMATION_NONE":
+      return AlertConfirmation.ALERT_CONFIRMATION_NONE;
+    case 1:
+    case "ALERT_CONFIRMATION_PEER_REMOVED_INFORMATION":
+      return AlertConfirmation.ALERT_CONFIRMATION_PEER_REMOVED_INFORMATION;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return AlertConfirmation.UNRECOGNIZED;
+  }
+}
+
+export function alertConfirmationToJSON(object: AlertConfirmation): string {
+  switch (object) {
+    case AlertConfirmation.ALERT_CONFIRMATION_NONE:
+      return "ALERT_CONFIRMATION_NONE";
+    case AlertConfirmation.ALERT_CONFIRMATION_PEER_REMOVED_INFORMATION:
+      return "ALERT_CONFIRMATION_PEER_REMOVED_INFORMATION";
+    case AlertConfirmation.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum AppDeviceInfoRequestE {
+  APP_DEVICE_INFO_REQUEST_NONE = 0,
+  APP_DEVICE_INFO_REQUEST_GET_MODEL_NUMBER = 1,
+  APP_DEVICE_INFO_REQUEST_ONCHANGE_BATTERY_STATE = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function appDeviceInfoRequestEFromJSON(object: any): AppDeviceInfoRequestE {
+  switch (object) {
+    case 0:
+    case "APP_DEVICE_INFO_REQUEST_NONE":
+      return AppDeviceInfoRequestE.APP_DEVICE_INFO_REQUEST_NONE;
+    case 1:
+    case "APP_DEVICE_INFO_REQUEST_GET_MODEL_NUMBER":
+      return AppDeviceInfoRequestE.APP_DEVICE_INFO_REQUEST_GET_MODEL_NUMBER;
+    case 2:
+    case "APP_DEVICE_INFO_REQUEST_ONCHANGE_BATTERY_STATE":
+      return AppDeviceInfoRequestE.APP_DEVICE_INFO_REQUEST_ONCHANGE_BATTERY_STATE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return AppDeviceInfoRequestE.UNRECOGNIZED;
+  }
+}
+
+export function appDeviceInfoRequestEToJSON(object: AppDeviceInfoRequestE): string {
+  switch (object) {
+    case AppDeviceInfoRequestE.APP_DEVICE_INFO_REQUEST_NONE:
+      return "APP_DEVICE_INFO_REQUEST_NONE";
+    case AppDeviceInfoRequestE.APP_DEVICE_INFO_REQUEST_GET_MODEL_NUMBER:
+      return "APP_DEVICE_INFO_REQUEST_GET_MODEL_NUMBER";
+    case AppDeviceInfoRequestE.APP_DEVICE_INFO_REQUEST_ONCHANGE_BATTERY_STATE:
+      return "APP_DEVICE_INFO_REQUEST_ONCHANGE_BATTERY_STATE";
+    case AppDeviceInfoRequestE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum AppOperatingSystem {
+  UNKNOWN = 0,
+  ANDROID = 1,
+  IOS = 2,
+  WATCHOS = 3,
+  HARMONY_NEXT = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function appOperatingSystemFromJSON(object: any): AppOperatingSystem {
+  switch (object) {
+    case 0:
+    case "UNKNOWN":
+      return AppOperatingSystem.UNKNOWN;
+    case 1:
+    case "ANDROID":
+      return AppOperatingSystem.ANDROID;
+    case 2:
+    case "IOS":
+      return AppOperatingSystem.IOS;
+    case 3:
+    case "WATCHOS":
+      return AppOperatingSystem.WATCHOS;
+    case 4:
+    case "HARMONY_NEXT":
+      return AppOperatingSystem.HARMONY_NEXT;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return AppOperatingSystem.UNRECOGNIZED;
+  }
+}
+
+export function appOperatingSystemToJSON(object: AppOperatingSystem): string {
+  switch (object) {
+    case AppOperatingSystem.UNKNOWN:
+      return "UNKNOWN";
+    case AppOperatingSystem.ANDROID:
+      return "ANDROID";
+    case AppOperatingSystem.IOS:
+      return "IOS";
+    case AppOperatingSystem.WATCHOS:
+      return "WATCHOS";
+    case AppOperatingSystem.HARMONY_NEXT:
+      return "HARMONY_NEXT";
+    case AppOperatingSystem.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum BLEAdditionalTRIMAppliedE {
+  BLE_ADDITIONAL_TRIM_APPLIED_NONE = 0,
+  BLE_ADDITIONAL_TRIM_APPLIED_APPLIED = 1,
+  BLE_ADDITIONAL_TRIM_APPLIED_NOT_APPLIED = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function bLEAdditionalTRIMAppliedEFromJSON(object: any): BLEAdditionalTRIMAppliedE {
+  switch (object) {
+    case 0:
+    case "BLE_ADDITIONAL_TRIM_APPLIED_NONE":
+      return BLEAdditionalTRIMAppliedE.BLE_ADDITIONAL_TRIM_APPLIED_NONE;
+    case 1:
+    case "BLE_ADDITIONAL_TRIM_APPLIED_APPLIED":
+      return BLEAdditionalTRIMAppliedE.BLE_ADDITIONAL_TRIM_APPLIED_APPLIED;
+    case 2:
+    case "BLE_ADDITIONAL_TRIM_APPLIED_NOT_APPLIED":
+      return BLEAdditionalTRIMAppliedE.BLE_ADDITIONAL_TRIM_APPLIED_NOT_APPLIED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return BLEAdditionalTRIMAppliedE.UNRECOGNIZED;
+  }
+}
+
+export function bLEAdditionalTRIMAppliedEToJSON(object: BLEAdditionalTRIMAppliedE): string {
+  switch (object) {
+    case BLEAdditionalTRIMAppliedE.BLE_ADDITIONAL_TRIM_APPLIED_NONE:
+      return "BLE_ADDITIONAL_TRIM_APPLIED_NONE";
+    case BLEAdditionalTRIMAppliedE.BLE_ADDITIONAL_TRIM_APPLIED_APPLIED:
+      return "BLE_ADDITIONAL_TRIM_APPLIED_APPLIED";
+    case BLEAdditionalTRIMAppliedE.BLE_ADDITIONAL_TRIM_APPLIED_NOT_APPLIED:
+      return "BLE_ADDITIONAL_TRIM_APPLIED_NOT_APPLIED";
+    case BLEAdditionalTRIMAppliedE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum BLEEndpointE {
+  BLE_ENDPOINT_NONE = 0,
+  BLE_ENDPOINT_CENTER = 1,
+  BLE_ENDPOINT_FRONT = 2,
+  BLE_ENDPOINT_LEFT = 3,
+  BLE_ENDPOINT_RIGHT = 4,
+  BLE_ENDPOINT_REAR = 5,
+  BLE_ENDPOINT_REAR_LEFT = 6,
+  BLE_ENDPOINT_REAR_RIGHT = 7,
+  BLE_ENDPOINT_NFC_CRADLE = 8,
+  BLE_ENDPOINT_FRONT_LEFT = 9,
+  BLE_ENDPOINT_FRONT_RIGHT = 10,
+  BLE_ENDPOINT_SECONDARY_CENTER = 11,
+  UNRECOGNIZED = -1,
+}
+
+export function bLEEndpointEFromJSON(object: any): BLEEndpointE {
+  switch (object) {
+    case 0:
+    case "BLE_ENDPOINT_NONE":
+      return BLEEndpointE.BLE_ENDPOINT_NONE;
+    case 1:
+    case "BLE_ENDPOINT_CENTER":
+      return BLEEndpointE.BLE_ENDPOINT_CENTER;
+    case 2:
+    case "BLE_ENDPOINT_FRONT":
+      return BLEEndpointE.BLE_ENDPOINT_FRONT;
+    case 3:
+    case "BLE_ENDPOINT_LEFT":
+      return BLEEndpointE.BLE_ENDPOINT_LEFT;
+    case 4:
+    case "BLE_ENDPOINT_RIGHT":
+      return BLEEndpointE.BLE_ENDPOINT_RIGHT;
+    case 5:
+    case "BLE_ENDPOINT_REAR":
+      return BLEEndpointE.BLE_ENDPOINT_REAR;
+    case 6:
+    case "BLE_ENDPOINT_REAR_LEFT":
+      return BLEEndpointE.BLE_ENDPOINT_REAR_LEFT;
+    case 7:
+    case "BLE_ENDPOINT_REAR_RIGHT":
+      return BLEEndpointE.BLE_ENDPOINT_REAR_RIGHT;
+    case 8:
+    case "BLE_ENDPOINT_NFC_CRADLE":
+      return BLEEndpointE.BLE_ENDPOINT_NFC_CRADLE;
+    case 9:
+    case "BLE_ENDPOINT_FRONT_LEFT":
+      return BLEEndpointE.BLE_ENDPOINT_FRONT_LEFT;
+    case 10:
+    case "BLE_ENDPOINT_FRONT_RIGHT":
+      return BLEEndpointE.BLE_ENDPOINT_FRONT_RIGHT;
+    case 11:
+    case "BLE_ENDPOINT_SECONDARY_CENTER":
+      return BLEEndpointE.BLE_ENDPOINT_SECONDARY_CENTER;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return BLEEndpointE.UNRECOGNIZED;
+  }
+}
+
+export function bLEEndpointEToJSON(object: BLEEndpointE): string {
+  switch (object) {
+    case BLEEndpointE.BLE_ENDPOINT_NONE:
+      return "BLE_ENDPOINT_NONE";
+    case BLEEndpointE.BLE_ENDPOINT_CENTER:
+      return "BLE_ENDPOINT_CENTER";
+    case BLEEndpointE.BLE_ENDPOINT_FRONT:
+      return "BLE_ENDPOINT_FRONT";
+    case BLEEndpointE.BLE_ENDPOINT_LEFT:
+      return "BLE_ENDPOINT_LEFT";
+    case BLEEndpointE.BLE_ENDPOINT_RIGHT:
+      return "BLE_ENDPOINT_RIGHT";
+    case BLEEndpointE.BLE_ENDPOINT_REAR:
+      return "BLE_ENDPOINT_REAR";
+    case BLEEndpointE.BLE_ENDPOINT_REAR_LEFT:
+      return "BLE_ENDPOINT_REAR_LEFT";
+    case BLEEndpointE.BLE_ENDPOINT_REAR_RIGHT:
+      return "BLE_ENDPOINT_REAR_RIGHT";
+    case BLEEndpointE.BLE_ENDPOINT_NFC_CRADLE:
+      return "BLE_ENDPOINT_NFC_CRADLE";
+    case BLEEndpointE.BLE_ENDPOINT_FRONT_LEFT:
+      return "BLE_ENDPOINT_FRONT_LEFT";
+    case BLEEndpointE.BLE_ENDPOINT_FRONT_RIGHT:
+      return "BLE_ENDPOINT_FRONT_RIGHT";
+    case BLEEndpointE.BLE_ENDPOINT_SECONDARY_CENTER:
+      return "BLE_ENDPOINT_SECONDARY_CENTER";
+    case BLEEndpointE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum BatteryStateE {
+  BATTERY_STATE_UNKNOWN = 0,
+  BATTERY_STATE_UNPLUGGED = 1,
+  BATTERY_STATE_CHARGING = 2,
+  BATTERY_STATE_FULL = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function batteryStateEFromJSON(object: any): BatteryStateE {
+  switch (object) {
+    case 0:
+    case "BATTERY_STATE_UNKNOWN":
+      return BatteryStateE.BATTERY_STATE_UNKNOWN;
+    case 1:
+    case "BATTERY_STATE_UNPLUGGED":
+      return BatteryStateE.BATTERY_STATE_UNPLUGGED;
+    case 2:
+    case "BATTERY_STATE_CHARGING":
+      return BatteryStateE.BATTERY_STATE_CHARGING;
+    case 3:
+    case "BATTERY_STATE_FULL":
+      return BatteryStateE.BATTERY_STATE_FULL;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return BatteryStateE.UNRECOGNIZED;
+  }
+}
+
+export function batteryStateEToJSON(object: BatteryStateE): string {
+  switch (object) {
+    case BatteryStateE.BATTERY_STATE_UNKNOWN:
+      return "BATTERY_STATE_UNKNOWN";
+    case BatteryStateE.BATTERY_STATE_UNPLUGGED:
+      return "BATTERY_STATE_UNPLUGGED";
+    case BatteryStateE.BATTERY_STATE_CHARGING:
+      return "BATTERY_STATE_CHARGING";
+    case BatteryStateE.BATTERY_STATE_FULL:
+      return "BATTERY_STATE_FULL";
+    case BatteryStateE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum CBManagerAuthorization {
+  CBMANAGERAUTHORIZATION_UNKNOWN = 0,
+  CBMANAGERAUTHORIZATION_ALWAYS = 1,
+  CBMANAGERAUTHORIZATION_DENIED = 2,
+  CBMANAGERAUTHORIZATION_NOTDETERMINED = 3,
+  CBMANAGERAUTHORIZATION_RESTRICTED = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function cBManagerAuthorizationFromJSON(object: any): CBManagerAuthorization {
+  switch (object) {
+    case 0:
+    case "CBMANAGERAUTHORIZATION_UNKNOWN":
+      return CBManagerAuthorization.CBMANAGERAUTHORIZATION_UNKNOWN;
+    case 1:
+    case "CBMANAGERAUTHORIZATION_ALWAYS":
+      return CBManagerAuthorization.CBMANAGERAUTHORIZATION_ALWAYS;
+    case 2:
+    case "CBMANAGERAUTHORIZATION_DENIED":
+      return CBManagerAuthorization.CBMANAGERAUTHORIZATION_DENIED;
+    case 3:
+    case "CBMANAGERAUTHORIZATION_NOTDETERMINED":
+      return CBManagerAuthorization.CBMANAGERAUTHORIZATION_NOTDETERMINED;
+    case 4:
+    case "CBMANAGERAUTHORIZATION_RESTRICTED":
+      return CBManagerAuthorization.CBMANAGERAUTHORIZATION_RESTRICTED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return CBManagerAuthorization.UNRECOGNIZED;
+  }
+}
+
+export function cBManagerAuthorizationToJSON(object: CBManagerAuthorization): string {
+  switch (object) {
+    case CBManagerAuthorization.CBMANAGERAUTHORIZATION_UNKNOWN:
+      return "CBMANAGERAUTHORIZATION_UNKNOWN";
+    case CBManagerAuthorization.CBMANAGERAUTHORIZATION_ALWAYS:
+      return "CBMANAGERAUTHORIZATION_ALWAYS";
+    case CBManagerAuthorization.CBMANAGERAUTHORIZATION_DENIED:
+      return "CBMANAGERAUTHORIZATION_DENIED";
+    case CBManagerAuthorization.CBMANAGERAUTHORIZATION_NOTDETERMINED:
+      return "CBMANAGERAUTHORIZATION_NOTDETERMINED";
+    case CBManagerAuthorization.CBMANAGERAUTHORIZATION_RESTRICTED:
+      return "CBMANAGERAUTHORIZATION_RESTRICTED";
+    case CBManagerAuthorization.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum CBManagerState {
+  CBMANAGERSTATE_UNKNOWN = 0,
+  CBMANAGERSTATE_POWEREDOFF = 1,
+  CBMANAGERSTATE_POWEREDON = 2,
+  CBMANAGERSTATE_RESETTING = 3,
+  CBMANAGERSTATE_UNAUTHORIZED = 4,
+  CBMANAGERSTATE_UNSUPPORTED = 5,
+  UNRECOGNIZED = -1,
+}
+
+export function cBManagerStateFromJSON(object: any): CBManagerState {
+  switch (object) {
+    case 0:
+    case "CBMANAGERSTATE_UNKNOWN":
+      return CBManagerState.CBMANAGERSTATE_UNKNOWN;
+    case 1:
+    case "CBMANAGERSTATE_POWEREDOFF":
+      return CBManagerState.CBMANAGERSTATE_POWEREDOFF;
+    case 2:
+    case "CBMANAGERSTATE_POWEREDON":
+      return CBManagerState.CBMANAGERSTATE_POWEREDON;
+    case 3:
+    case "CBMANAGERSTATE_RESETTING":
+      return CBManagerState.CBMANAGERSTATE_RESETTING;
+    case 4:
+    case "CBMANAGERSTATE_UNAUTHORIZED":
+      return CBManagerState.CBMANAGERSTATE_UNAUTHORIZED;
+    case 5:
+    case "CBMANAGERSTATE_UNSUPPORTED":
+      return CBManagerState.CBMANAGERSTATE_UNSUPPORTED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return CBManagerState.UNRECOGNIZED;
+  }
+}
+
+export function cBManagerStateToJSON(object: CBManagerState): string {
+  switch (object) {
+    case CBManagerState.CBMANAGERSTATE_UNKNOWN:
+      return "CBMANAGERSTATE_UNKNOWN";
+    case CBManagerState.CBMANAGERSTATE_POWEREDOFF:
+      return "CBMANAGERSTATE_POWEREDOFF";
+    case CBManagerState.CBMANAGERSTATE_POWEREDON:
+      return "CBMANAGERSTATE_POWEREDON";
+    case CBManagerState.CBMANAGERSTATE_RESETTING:
+      return "CBMANAGERSTATE_RESETTING";
+    case CBManagerState.CBMANAGERSTATE_UNAUTHORIZED:
+      return "CBMANAGERSTATE_UNAUTHORIZED";
+    case CBManagerState.CBMANAGERSTATE_UNSUPPORTED:
+      return "CBMANAGERSTATE_UNSUPPORTED";
+    case CBManagerState.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum CPDNotificationResponseE {
+  CPD_NOTIFICATION_RESPONSE_SNA = 0,
+  CPD_NOTIFICATION_RESPONSE_INITIAL_WARNING_RECEIVED = 1,
+  CPD_NOTIFICATION_RESPONSE_ESCALATED_WARNING_RECEIVED = 2,
+  CPD_NOTIFICATION_RESPONSE_ERROR = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function cPDNotificationResponseEFromJSON(object: any): CPDNotificationResponseE {
+  switch (object) {
+    case 0:
+    case "CPD_NOTIFICATION_RESPONSE_SNA":
+      return CPDNotificationResponseE.CPD_NOTIFICATION_RESPONSE_SNA;
+    case 1:
+    case "CPD_NOTIFICATION_RESPONSE_INITIAL_WARNING_RECEIVED":
+      return CPDNotificationResponseE.CPD_NOTIFICATION_RESPONSE_INITIAL_WARNING_RECEIVED;
+    case 2:
+    case "CPD_NOTIFICATION_RESPONSE_ESCALATED_WARNING_RECEIVED":
+      return CPDNotificationResponseE.CPD_NOTIFICATION_RESPONSE_ESCALATED_WARNING_RECEIVED;
+    case 3:
+    case "CPD_NOTIFICATION_RESPONSE_ERROR":
+      return CPDNotificationResponseE.CPD_NOTIFICATION_RESPONSE_ERROR;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return CPDNotificationResponseE.UNRECOGNIZED;
+  }
+}
+
+export function cPDNotificationResponseEToJSON(object: CPDNotificationResponseE): string {
+  switch (object) {
+    case CPDNotificationResponseE.CPD_NOTIFICATION_RESPONSE_SNA:
+      return "CPD_NOTIFICATION_RESPONSE_SNA";
+    case CPDNotificationResponseE.CPD_NOTIFICATION_RESPONSE_INITIAL_WARNING_RECEIVED:
+      return "CPD_NOTIFICATION_RESPONSE_INITIAL_WARNING_RECEIVED";
+    case CPDNotificationResponseE.CPD_NOTIFICATION_RESPONSE_ESCALATED_WARNING_RECEIVED:
+      return "CPD_NOTIFICATION_RESPONSE_ESCALATED_WARNING_RECEIVED";
+    case CPDNotificationResponseE.CPD_NOTIFICATION_RESPONSE_ERROR:
+      return "CPD_NOTIFICATION_RESPONSE_ERROR";
+    case CPDNotificationResponseE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum CPDNotificationE {
+  CPD_NOTIFICATION_NONE = 0,
+  CPD_NOTIFICATION_INITIAL_WARNING = 1,
+  CPD_NOTIFICATION_ESCALATED_WARNING = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function cPDNotificationEFromJSON(object: any): CPDNotificationE {
+  switch (object) {
+    case 0:
+    case "CPD_NOTIFICATION_NONE":
+      return CPDNotificationE.CPD_NOTIFICATION_NONE;
+    case 1:
+    case "CPD_NOTIFICATION_INITIAL_WARNING":
+      return CPDNotificationE.CPD_NOTIFICATION_INITIAL_WARNING;
+    case 2:
+    case "CPD_NOTIFICATION_ESCALATED_WARNING":
+      return CPDNotificationE.CPD_NOTIFICATION_ESCALATED_WARNING;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return CPDNotificationE.UNRECOGNIZED;
+  }
+}
+
+export function cPDNotificationEToJSON(object: CPDNotificationE): string {
+  switch (object) {
+    case CPDNotificationE.CPD_NOTIFICATION_NONE:
+      return "CPD_NOTIFICATION_NONE";
+    case CPDNotificationE.CPD_NOTIFICATION_INITIAL_WARNING:
+      return "CPD_NOTIFICATION_INITIAL_WARNING";
+    case CPDNotificationE.CPD_NOTIFICATION_ESCALATED_WARNING:
+      return "CPD_NOTIFICATION_ESCALATED_WARNING";
+    case CPDNotificationE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum DeviceTarget {
+  UNKNOWN_TARGET = 0,
+  DEVELOPMENT_TARGET = 1,
+  PRODUCTION_TARGET = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function deviceTargetFromJSON(object: any): DeviceTarget {
+  switch (object) {
+    case 0:
+    case "UNKNOWN_TARGET":
+      return DeviceTarget.UNKNOWN_TARGET;
+    case 1:
+    case "DEVELOPMENT_TARGET":
+      return DeviceTarget.DEVELOPMENT_TARGET;
+    case 2:
+    case "PRODUCTION_TARGET":
+      return DeviceTarget.PRODUCTION_TARGET;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return DeviceTarget.UNRECOGNIZED;
+  }
+}
+
+export function deviceTargetToJSON(object: DeviceTarget): string {
+  switch (object) {
+    case DeviceTarget.UNKNOWN_TARGET:
+      return "UNKNOWN_TARGET";
+    case DeviceTarget.DEVELOPMENT_TARGET:
+      return "DEVELOPMENT_TARGET";
+    case DeviceTarget.PRODUCTION_TARGET:
+      return "PRODUCTION_TARGET";
+    case DeviceTarget.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum DeviceMotionConfidence {
+  DEVICE_MOTION_CONFIDENCE_UNKNOWN = 0,
+  DEVICE_MOTION_CONFIDENCE_LOW = 1,
+  DEVICE_MOTION_CONFIDENCE_MEDIUM = 2,
+  DEVICE_MOTION_CONFIDENCE_HIGH = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function deviceMotionConfidenceFromJSON(object: any): DeviceMotionConfidence {
+  switch (object) {
+    case 0:
+    case "DEVICE_MOTION_CONFIDENCE_UNKNOWN":
+      return DeviceMotionConfidence.DEVICE_MOTION_CONFIDENCE_UNKNOWN;
+    case 1:
+    case "DEVICE_MOTION_CONFIDENCE_LOW":
+      return DeviceMotionConfidence.DEVICE_MOTION_CONFIDENCE_LOW;
+    case 2:
+    case "DEVICE_MOTION_CONFIDENCE_MEDIUM":
+      return DeviceMotionConfidence.DEVICE_MOTION_CONFIDENCE_MEDIUM;
+    case 3:
+    case "DEVICE_MOTION_CONFIDENCE_HIGH":
+      return DeviceMotionConfidence.DEVICE_MOTION_CONFIDENCE_HIGH;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return DeviceMotionConfidence.UNRECOGNIZED;
+  }
+}
+
+export function deviceMotionConfidenceToJSON(object: DeviceMotionConfidence): string {
+  switch (object) {
+    case DeviceMotionConfidence.DEVICE_MOTION_CONFIDENCE_UNKNOWN:
+      return "DEVICE_MOTION_CONFIDENCE_UNKNOWN";
+    case DeviceMotionConfidence.DEVICE_MOTION_CONFIDENCE_LOW:
+      return "DEVICE_MOTION_CONFIDENCE_LOW";
+    case DeviceMotionConfidence.DEVICE_MOTION_CONFIDENCE_MEDIUM:
+      return "DEVICE_MOTION_CONFIDENCE_MEDIUM";
+    case DeviceMotionConfidence.DEVICE_MOTION_CONFIDENCE_HIGH:
+      return "DEVICE_MOTION_CONFIDENCE_HIGH";
+    case DeviceMotionConfidence.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum DeviceMotionState {
+  DEVICE_MOTION_UNKNOWN = 0,
+  DEVICE_MOTION_STATIONARY = 1,
+  DEVICE_MOTION_WALKING = 2,
+  DEVICE_MOTION_RUNNING = 3,
+  DEVICE_MOTION_AUTOMOTIVE = 4,
+  DEVICE_MOTION_CYCLING = 5,
+  UNRECOGNIZED = -1,
+}
+
+export function deviceMotionStateFromJSON(object: any): DeviceMotionState {
+  switch (object) {
+    case 0:
+    case "DEVICE_MOTION_UNKNOWN":
+      return DeviceMotionState.DEVICE_MOTION_UNKNOWN;
+    case 1:
+    case "DEVICE_MOTION_STATIONARY":
+      return DeviceMotionState.DEVICE_MOTION_STATIONARY;
+    case 2:
+    case "DEVICE_MOTION_WALKING":
+      return DeviceMotionState.DEVICE_MOTION_WALKING;
+    case 3:
+    case "DEVICE_MOTION_RUNNING":
+      return DeviceMotionState.DEVICE_MOTION_RUNNING;
+    case 4:
+    case "DEVICE_MOTION_AUTOMOTIVE":
+      return DeviceMotionState.DEVICE_MOTION_AUTOMOTIVE;
+    case 5:
+    case "DEVICE_MOTION_CYCLING":
+      return DeviceMotionState.DEVICE_MOTION_CYCLING;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return DeviceMotionState.UNRECOGNIZED;
+  }
+}
+
+export function deviceMotionStateToJSON(object: DeviceMotionState): string {
+  switch (object) {
+    case DeviceMotionState.DEVICE_MOTION_UNKNOWN:
+      return "DEVICE_MOTION_UNKNOWN";
+    case DeviceMotionState.DEVICE_MOTION_STATIONARY:
+      return "DEVICE_MOTION_STATIONARY";
+    case DeviceMotionState.DEVICE_MOTION_WALKING:
+      return "DEVICE_MOTION_WALKING";
+    case DeviceMotionState.DEVICE_MOTION_RUNNING:
+      return "DEVICE_MOTION_RUNNING";
+    case DeviceMotionState.DEVICE_MOTION_AUTOMOTIVE:
+      return "DEVICE_MOTION_AUTOMOTIVE";
+    case DeviceMotionState.DEVICE_MOTION_CYCLING:
+      return "DEVICE_MOTION_CYCLING";
+    case DeviceMotionState.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum FiraErrorE {
+  FIRAERROR_UNKNOWN = 0,
+  FIRAERROR_UWB_HARDWARE_NOT_AVAILABLE = 1,
+  FIRAERROR_ILLEGAL_ARGUMENT = 2,
+  FIRAERROR_ILLEGAL_STATE = 3,
+  FIRAERROR_SERVICE_VERSION_UPDATE_REQUIRED = 4,
+  FIRAERROR_SERVICE_DISABLED = 5,
+  FIRAERROR_SIGN_IN_REQUIRED = 6,
+  FIRAERROR_INVALID_ACCOUNT = 7,
+  FIRAERROR_RESOLUTION_REQUIRED = 8,
+  FIRAERROR_NETWORK_ERROR = 9,
+  FIRAERROR_INTERNAL_ERROR = 10,
+  FIRAERROR_DEVELOPER_ERROR = 11,
+  FIRAERROR_ERROR = 12,
+  FIRAERROR_INTERRUPTED = 13,
+  FIRAERROR_TIMEOUT = 14,
+  FIRAERROR_CANCELED = 15,
+  FIRAERROR_API_NOT_CONNECTED = 16,
+  FIRAERROR_STATUS_ERROR = 17,
+  FIRAERROR_SERVICE_NOT_AVAILABLE = 18,
+  FIRAERROR_NULL_RANGING_DEVICE = 19,
+  FIRAERROR_INVALID_API_CALL = 20,
+  FIRAERROR_RANGING_ALREADY_STARTED = 21,
+  FIRAERROR_UWB_SYSTEM_CALLBACK_FAILURE = 22,
+  FIRAERROR_RANGING_UNKNOWN = 23,
+  FIRAERROR_RANGING_INTERRUPTED = 24,
+  FIRAERROR_RANGING_INTERNAL_ERROR = 25,
+  FIRAERROR_RANGING_TIMEOUT = 26,
+  FIRAERROR_RANGING_CANCELED = 27,
+  FIRAERROR_RANGING_DEAD_CLIENT = 28,
+  FIRAERROR_COROUTINE_TASK_EXECUTION_EXCEPTION = 29,
+  FIRAERROR_COROUTINE_TASK_INTERRUPTED_EXCEPTION = 30,
+  FIRAERROR_NOT_SELECTED = 31,
+  UNRECOGNIZED = -1,
+}
+
+export function firaErrorEFromJSON(object: any): FiraErrorE {
+  switch (object) {
+    case 0:
+    case "FIRAERROR_UNKNOWN":
+      return FiraErrorE.FIRAERROR_UNKNOWN;
+    case 1:
+    case "FIRAERROR_UWB_HARDWARE_NOT_AVAILABLE":
+      return FiraErrorE.FIRAERROR_UWB_HARDWARE_NOT_AVAILABLE;
+    case 2:
+    case "FIRAERROR_ILLEGAL_ARGUMENT":
+      return FiraErrorE.FIRAERROR_ILLEGAL_ARGUMENT;
+    case 3:
+    case "FIRAERROR_ILLEGAL_STATE":
+      return FiraErrorE.FIRAERROR_ILLEGAL_STATE;
+    case 4:
+    case "FIRAERROR_SERVICE_VERSION_UPDATE_REQUIRED":
+      return FiraErrorE.FIRAERROR_SERVICE_VERSION_UPDATE_REQUIRED;
+    case 5:
+    case "FIRAERROR_SERVICE_DISABLED":
+      return FiraErrorE.FIRAERROR_SERVICE_DISABLED;
+    case 6:
+    case "FIRAERROR_SIGN_IN_REQUIRED":
+      return FiraErrorE.FIRAERROR_SIGN_IN_REQUIRED;
+    case 7:
+    case "FIRAERROR_INVALID_ACCOUNT":
+      return FiraErrorE.FIRAERROR_INVALID_ACCOUNT;
+    case 8:
+    case "FIRAERROR_RESOLUTION_REQUIRED":
+      return FiraErrorE.FIRAERROR_RESOLUTION_REQUIRED;
+    case 9:
+    case "FIRAERROR_NETWORK_ERROR":
+      return FiraErrorE.FIRAERROR_NETWORK_ERROR;
+    case 10:
+    case "FIRAERROR_INTERNAL_ERROR":
+      return FiraErrorE.FIRAERROR_INTERNAL_ERROR;
+    case 11:
+    case "FIRAERROR_DEVELOPER_ERROR":
+      return FiraErrorE.FIRAERROR_DEVELOPER_ERROR;
+    case 12:
+    case "FIRAERROR_ERROR":
+      return FiraErrorE.FIRAERROR_ERROR;
+    case 13:
+    case "FIRAERROR_INTERRUPTED":
+      return FiraErrorE.FIRAERROR_INTERRUPTED;
+    case 14:
+    case "FIRAERROR_TIMEOUT":
+      return FiraErrorE.FIRAERROR_TIMEOUT;
+    case 15:
+    case "FIRAERROR_CANCELED":
+      return FiraErrorE.FIRAERROR_CANCELED;
+    case 16:
+    case "FIRAERROR_API_NOT_CONNECTED":
+      return FiraErrorE.FIRAERROR_API_NOT_CONNECTED;
+    case 17:
+    case "FIRAERROR_STATUS_ERROR":
+      return FiraErrorE.FIRAERROR_STATUS_ERROR;
+    case 18:
+    case "FIRAERROR_SERVICE_NOT_AVAILABLE":
+      return FiraErrorE.FIRAERROR_SERVICE_NOT_AVAILABLE;
+    case 19:
+    case "FIRAERROR_NULL_RANGING_DEVICE":
+      return FiraErrorE.FIRAERROR_NULL_RANGING_DEVICE;
+    case 20:
+    case "FIRAERROR_INVALID_API_CALL":
+      return FiraErrorE.FIRAERROR_INVALID_API_CALL;
+    case 21:
+    case "FIRAERROR_RANGING_ALREADY_STARTED":
+      return FiraErrorE.FIRAERROR_RANGING_ALREADY_STARTED;
+    case 22:
+    case "FIRAERROR_UWB_SYSTEM_CALLBACK_FAILURE":
+      return FiraErrorE.FIRAERROR_UWB_SYSTEM_CALLBACK_FAILURE;
+    case 23:
+    case "FIRAERROR_RANGING_UNKNOWN":
+      return FiraErrorE.FIRAERROR_RANGING_UNKNOWN;
+    case 24:
+    case "FIRAERROR_RANGING_INTERRUPTED":
+      return FiraErrorE.FIRAERROR_RANGING_INTERRUPTED;
+    case 25:
+    case "FIRAERROR_RANGING_INTERNAL_ERROR":
+      return FiraErrorE.FIRAERROR_RANGING_INTERNAL_ERROR;
+    case 26:
+    case "FIRAERROR_RANGING_TIMEOUT":
+      return FiraErrorE.FIRAERROR_RANGING_TIMEOUT;
+    case 27:
+    case "FIRAERROR_RANGING_CANCELED":
+      return FiraErrorE.FIRAERROR_RANGING_CANCELED;
+    case 28:
+    case "FIRAERROR_RANGING_DEAD_CLIENT":
+      return FiraErrorE.FIRAERROR_RANGING_DEAD_CLIENT;
+    case 29:
+    case "FIRAERROR_COROUTINE_TASK_EXECUTION_EXCEPTION":
+      return FiraErrorE.FIRAERROR_COROUTINE_TASK_EXECUTION_EXCEPTION;
+    case 30:
+    case "FIRAERROR_COROUTINE_TASK_INTERRUPTED_EXCEPTION":
+      return FiraErrorE.FIRAERROR_COROUTINE_TASK_INTERRUPTED_EXCEPTION;
+    case 31:
+    case "FIRAERROR_NOT_SELECTED":
+      return FiraErrorE.FIRAERROR_NOT_SELECTED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FiraErrorE.UNRECOGNIZED;
+  }
+}
+
+export function firaErrorEToJSON(object: FiraErrorE): string {
+  switch (object) {
+    case FiraErrorE.FIRAERROR_UNKNOWN:
+      return "FIRAERROR_UNKNOWN";
+    case FiraErrorE.FIRAERROR_UWB_HARDWARE_NOT_AVAILABLE:
+      return "FIRAERROR_UWB_HARDWARE_NOT_AVAILABLE";
+    case FiraErrorE.FIRAERROR_ILLEGAL_ARGUMENT:
+      return "FIRAERROR_ILLEGAL_ARGUMENT";
+    case FiraErrorE.FIRAERROR_ILLEGAL_STATE:
+      return "FIRAERROR_ILLEGAL_STATE";
+    case FiraErrorE.FIRAERROR_SERVICE_VERSION_UPDATE_REQUIRED:
+      return "FIRAERROR_SERVICE_VERSION_UPDATE_REQUIRED";
+    case FiraErrorE.FIRAERROR_SERVICE_DISABLED:
+      return "FIRAERROR_SERVICE_DISABLED";
+    case FiraErrorE.FIRAERROR_SIGN_IN_REQUIRED:
+      return "FIRAERROR_SIGN_IN_REQUIRED";
+    case FiraErrorE.FIRAERROR_INVALID_ACCOUNT:
+      return "FIRAERROR_INVALID_ACCOUNT";
+    case FiraErrorE.FIRAERROR_RESOLUTION_REQUIRED:
+      return "FIRAERROR_RESOLUTION_REQUIRED";
+    case FiraErrorE.FIRAERROR_NETWORK_ERROR:
+      return "FIRAERROR_NETWORK_ERROR";
+    case FiraErrorE.FIRAERROR_INTERNAL_ERROR:
+      return "FIRAERROR_INTERNAL_ERROR";
+    case FiraErrorE.FIRAERROR_DEVELOPER_ERROR:
+      return "FIRAERROR_DEVELOPER_ERROR";
+    case FiraErrorE.FIRAERROR_ERROR:
+      return "FIRAERROR_ERROR";
+    case FiraErrorE.FIRAERROR_INTERRUPTED:
+      return "FIRAERROR_INTERRUPTED";
+    case FiraErrorE.FIRAERROR_TIMEOUT:
+      return "FIRAERROR_TIMEOUT";
+    case FiraErrorE.FIRAERROR_CANCELED:
+      return "FIRAERROR_CANCELED";
+    case FiraErrorE.FIRAERROR_API_NOT_CONNECTED:
+      return "FIRAERROR_API_NOT_CONNECTED";
+    case FiraErrorE.FIRAERROR_STATUS_ERROR:
+      return "FIRAERROR_STATUS_ERROR";
+    case FiraErrorE.FIRAERROR_SERVICE_NOT_AVAILABLE:
+      return "FIRAERROR_SERVICE_NOT_AVAILABLE";
+    case FiraErrorE.FIRAERROR_NULL_RANGING_DEVICE:
+      return "FIRAERROR_NULL_RANGING_DEVICE";
+    case FiraErrorE.FIRAERROR_INVALID_API_CALL:
+      return "FIRAERROR_INVALID_API_CALL";
+    case FiraErrorE.FIRAERROR_RANGING_ALREADY_STARTED:
+      return "FIRAERROR_RANGING_ALREADY_STARTED";
+    case FiraErrorE.FIRAERROR_UWB_SYSTEM_CALLBACK_FAILURE:
+      return "FIRAERROR_UWB_SYSTEM_CALLBACK_FAILURE";
+    case FiraErrorE.FIRAERROR_RANGING_UNKNOWN:
+      return "FIRAERROR_RANGING_UNKNOWN";
+    case FiraErrorE.FIRAERROR_RANGING_INTERRUPTED:
+      return "FIRAERROR_RANGING_INTERRUPTED";
+    case FiraErrorE.FIRAERROR_RANGING_INTERNAL_ERROR:
+      return "FIRAERROR_RANGING_INTERNAL_ERROR";
+    case FiraErrorE.FIRAERROR_RANGING_TIMEOUT:
+      return "FIRAERROR_RANGING_TIMEOUT";
+    case FiraErrorE.FIRAERROR_RANGING_CANCELED:
+      return "FIRAERROR_RANGING_CANCELED";
+    case FiraErrorE.FIRAERROR_RANGING_DEAD_CLIENT:
+      return "FIRAERROR_RANGING_DEAD_CLIENT";
+    case FiraErrorE.FIRAERROR_COROUTINE_TASK_EXECUTION_EXCEPTION:
+      return "FIRAERROR_COROUTINE_TASK_EXECUTION_EXCEPTION";
+    case FiraErrorE.FIRAERROR_COROUTINE_TASK_INTERRUPTED_EXCEPTION:
+      return "FIRAERROR_COROUTINE_TASK_INTERRUPTED_EXCEPTION";
+    case FiraErrorE.FIRAERROR_NOT_SELECTED:
+      return "FIRAERROR_NOT_SELECTED";
+    case FiraErrorE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum FiraRangingType {
+  RANGING_TYPE_UNKNOWN = 0,
+  MULTICAST_DS_TWR = 1,
+  UNICAST_DS_TWR = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function firaRangingTypeFromJSON(object: any): FiraRangingType {
+  switch (object) {
+    case 0:
+    case "RANGING_TYPE_UNKNOWN":
+      return FiraRangingType.RANGING_TYPE_UNKNOWN;
+    case 1:
+    case "MULTICAST_DS_TWR":
+      return FiraRangingType.MULTICAST_DS_TWR;
+    case 2:
+    case "UNICAST_DS_TWR":
+      return FiraRangingType.UNICAST_DS_TWR;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FiraRangingType.UNRECOGNIZED;
+  }
+}
+
+export function firaRangingTypeToJSON(object: FiraRangingType): string {
+  switch (object) {
+    case FiraRangingType.RANGING_TYPE_UNKNOWN:
+      return "RANGING_TYPE_UNKNOWN";
+    case FiraRangingType.MULTICAST_DS_TWR:
+      return "MULTICAST_DS_TWR";
+    case FiraRangingType.UNICAST_DS_TWR:
+      return "UNICAST_DS_TWR";
+    case FiraRangingType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum FiraSTSMode {
+  STS_UNKNOWN = 0,
+  STATIC = 1,
+  PROVISIONED = 2,
+  PROVISIONED_INDIVIDUAL = 3,
+  DYNAMIC = 4,
+  DYNAMIC_INDIVIDUAL = 5,
+  UNRECOGNIZED = -1,
+}
+
+export function firaSTSModeFromJSON(object: any): FiraSTSMode {
+  switch (object) {
+    case 0:
+    case "STS_UNKNOWN":
+      return FiraSTSMode.STS_UNKNOWN;
+    case 1:
+    case "STATIC":
+      return FiraSTSMode.STATIC;
+    case 2:
+    case "PROVISIONED":
+      return FiraSTSMode.PROVISIONED;
+    case 3:
+    case "PROVISIONED_INDIVIDUAL":
+      return FiraSTSMode.PROVISIONED_INDIVIDUAL;
+    case 4:
+    case "DYNAMIC":
+      return FiraSTSMode.DYNAMIC;
+    case 5:
+    case "DYNAMIC_INDIVIDUAL":
+      return FiraSTSMode.DYNAMIC_INDIVIDUAL;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return FiraSTSMode.UNRECOGNIZED;
+  }
+}
+
+export function firaSTSModeToJSON(object: FiraSTSMode): string {
+  switch (object) {
+    case FiraSTSMode.STS_UNKNOWN:
+      return "STS_UNKNOWN";
+    case FiraSTSMode.STATIC:
+      return "STATIC";
+    case FiraSTSMode.PROVISIONED:
+      return "PROVISIONED";
+    case FiraSTSMode.PROVISIONED_INDIVIDUAL:
+      return "PROVISIONED_INDIVIDUAL";
+    case FiraSTSMode.DYNAMIC:
+      return "DYNAMIC";
+    case FiraSTSMode.DYNAMIC_INDIVIDUAL:
+      return "DYNAMIC_INDIVIDUAL";
+    case FiraSTSMode.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum GATTServicesBitMask {
+  GATTSERVICESBITMASK_PHONE_KEY_SERVICE = 0,
+  GATTSERVICESBITMASK_FROM_VEHICLE_CHAR = 1,
+  GATTSERVICESBITMASK_TO_VEHICLE_CHAR = 2,
+  GATTSERVICESBITMASK_VERSION_CHAR = 3,
+  GATTSERVICESBITMASK_BONDING_SERVICE = 4,
+  GATTSERVICESBITMASK_BONDING_CHAR = 5,
+  UNRECOGNIZED = -1,
+}
+
+export function gATTServicesBitMaskFromJSON(object: any): GATTServicesBitMask {
+  switch (object) {
+    case 0:
+    case "GATTSERVICESBITMASK_PHONE_KEY_SERVICE":
+      return GATTServicesBitMask.GATTSERVICESBITMASK_PHONE_KEY_SERVICE;
+    case 1:
+    case "GATTSERVICESBITMASK_FROM_VEHICLE_CHAR":
+      return GATTServicesBitMask.GATTSERVICESBITMASK_FROM_VEHICLE_CHAR;
+    case 2:
+    case "GATTSERVICESBITMASK_TO_VEHICLE_CHAR":
+      return GATTServicesBitMask.GATTSERVICESBITMASK_TO_VEHICLE_CHAR;
+    case 3:
+    case "GATTSERVICESBITMASK_VERSION_CHAR":
+      return GATTServicesBitMask.GATTSERVICESBITMASK_VERSION_CHAR;
+    case 4:
+    case "GATTSERVICESBITMASK_BONDING_SERVICE":
+      return GATTServicesBitMask.GATTSERVICESBITMASK_BONDING_SERVICE;
+    case 5:
+    case "GATTSERVICESBITMASK_BONDING_CHAR":
+      return GATTServicesBitMask.GATTSERVICESBITMASK_BONDING_CHAR;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return GATTServicesBitMask.UNRECOGNIZED;
+  }
+}
+
+export function gATTServicesBitMaskToJSON(object: GATTServicesBitMask): string {
+  switch (object) {
+    case GATTServicesBitMask.GATTSERVICESBITMASK_PHONE_KEY_SERVICE:
+      return "GATTSERVICESBITMASK_PHONE_KEY_SERVICE";
+    case GATTServicesBitMask.GATTSERVICESBITMASK_FROM_VEHICLE_CHAR:
+      return "GATTSERVICESBITMASK_FROM_VEHICLE_CHAR";
+    case GATTServicesBitMask.GATTSERVICESBITMASK_TO_VEHICLE_CHAR:
+      return "GATTSERVICESBITMASK_TO_VEHICLE_CHAR";
+    case GATTServicesBitMask.GATTSERVICESBITMASK_VERSION_CHAR:
+      return "GATTSERVICESBITMASK_VERSION_CHAR";
+    case GATTServicesBitMask.GATTSERVICESBITMASK_BONDING_SERVICE:
+      return "GATTSERVICESBITMASK_BONDING_SERVICE";
+    case GATTServicesBitMask.GATTSERVICESBITMASK_BONDING_CHAR:
+      return "GATTSERVICESBITMASK_BONDING_CHAR";
+    case GATTServicesBitMask.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum GenealogyRequestE {
+  GENEALOGYREQUEST_NONE = 0,
+  GENEALOGYREQUEST_READ = 1,
+  GENEALOGYREQUEST_KEYFOBINFO_READ = 2,
+  GENEALOGYREQUEST_TPWHEELUNITINFO_READ = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function genealogyRequestEFromJSON(object: any): GenealogyRequestE {
+  switch (object) {
+    case 0:
+    case "GENEALOGYREQUEST_NONE":
+      return GenealogyRequestE.GENEALOGYREQUEST_NONE;
+    case 1:
+    case "GENEALOGYREQUEST_READ":
+      return GenealogyRequestE.GENEALOGYREQUEST_READ;
+    case 2:
+    case "GENEALOGYREQUEST_KEYFOBINFO_READ":
+      return GenealogyRequestE.GENEALOGYREQUEST_KEYFOBINFO_READ;
+    case 3:
+    case "GENEALOGYREQUEST_TPWHEELUNITINFO_READ":
+      return GenealogyRequestE.GENEALOGYREQUEST_TPWHEELUNITINFO_READ;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return GenealogyRequestE.UNRECOGNIZED;
+  }
+}
+
+export function genealogyRequestEToJSON(object: GenealogyRequestE): string {
+  switch (object) {
+    case GenealogyRequestE.GENEALOGYREQUEST_NONE:
+      return "GENEALOGYREQUEST_NONE";
+    case GenealogyRequestE.GENEALOGYREQUEST_READ:
+      return "GENEALOGYREQUEST_READ";
+    case GenealogyRequestE.GENEALOGYREQUEST_KEYFOBINFO_READ:
+      return "GENEALOGYREQUEST_KEYFOBINFO_READ";
+    case GenealogyRequestE.GENEALOGYREQUEST_TPWHEELUNITINFO_READ:
+      return "GENEALOGYREQUEST_TPWHEELUNITINFO_READ";
+    case GenealogyRequestE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum GenealogyStatusE {
+  GENEALOGY_STATUS_NONE = 0,
+  GENEALOGY_STATUS_NOT_WRITTEN = 1,
+  GENEALOGY_STATUS_WRITE_SUCCESS = 2,
+  GENEALOGY_STATUS_WRITE_FAILURE = 3,
+  GENEALOGY_STATUS_READ_SUCCESS = 4,
+  GENEALOGY_STATUS_READ_FAILURE = 5,
+  GENEALOGY_STATUS_CRC_FAILURE = 6,
+  UNRECOGNIZED = -1,
+}
+
+export function genealogyStatusEFromJSON(object: any): GenealogyStatusE {
+  switch (object) {
+    case 0:
+    case "GENEALOGY_STATUS_NONE":
+      return GenealogyStatusE.GENEALOGY_STATUS_NONE;
+    case 1:
+    case "GENEALOGY_STATUS_NOT_WRITTEN":
+      return GenealogyStatusE.GENEALOGY_STATUS_NOT_WRITTEN;
+    case 2:
+    case "GENEALOGY_STATUS_WRITE_SUCCESS":
+      return GenealogyStatusE.GENEALOGY_STATUS_WRITE_SUCCESS;
+    case 3:
+    case "GENEALOGY_STATUS_WRITE_FAILURE":
+      return GenealogyStatusE.GENEALOGY_STATUS_WRITE_FAILURE;
+    case 4:
+    case "GENEALOGY_STATUS_READ_SUCCESS":
+      return GenealogyStatusE.GENEALOGY_STATUS_READ_SUCCESS;
+    case 5:
+    case "GENEALOGY_STATUS_READ_FAILURE":
+      return GenealogyStatusE.GENEALOGY_STATUS_READ_FAILURE;
+    case 6:
+    case "GENEALOGY_STATUS_CRC_FAILURE":
+      return GenealogyStatusE.GENEALOGY_STATUS_CRC_FAILURE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return GenealogyStatusE.UNRECOGNIZED;
+  }
+}
+
+export function genealogyStatusEToJSON(object: GenealogyStatusE): string {
+  switch (object) {
+    case GenealogyStatusE.GENEALOGY_STATUS_NONE:
+      return "GENEALOGY_STATUS_NONE";
+    case GenealogyStatusE.GENEALOGY_STATUS_NOT_WRITTEN:
+      return "GENEALOGY_STATUS_NOT_WRITTEN";
+    case GenealogyStatusE.GENEALOGY_STATUS_WRITE_SUCCESS:
+      return "GENEALOGY_STATUS_WRITE_SUCCESS";
+    case GenealogyStatusE.GENEALOGY_STATUS_WRITE_FAILURE:
+      return "GENEALOGY_STATUS_WRITE_FAILURE";
+    case GenealogyStatusE.GENEALOGY_STATUS_READ_SUCCESS:
+      return "GENEALOGY_STATUS_READ_SUCCESS";
+    case GenealogyStatusE.GENEALOGY_STATUS_READ_FAILURE:
+      return "GENEALOGY_STATUS_READ_FAILURE";
+    case GenealogyStatusE.GENEALOGY_STATUS_CRC_FAILURE:
+      return "GENEALOGY_STATUS_CRC_FAILURE";
+    case GenealogyStatusE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum GetReaderKeyCommand {
+  GET_READER_KEY_COMMAND_UNKNOWN = 0,
+  GET_READER_KEY_COMMAND_START_LOOKING = 1,
+  GET_READER_KEY_COMMAND_STOP_LOOKING = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function getReaderKeyCommandFromJSON(object: any): GetReaderKeyCommand {
+  switch (object) {
+    case 0:
+    case "GET_READER_KEY_COMMAND_UNKNOWN":
+      return GetReaderKeyCommand.GET_READER_KEY_COMMAND_UNKNOWN;
+    case 1:
+    case "GET_READER_KEY_COMMAND_START_LOOKING":
+      return GetReaderKeyCommand.GET_READER_KEY_COMMAND_START_LOOKING;
+    case 2:
+    case "GET_READER_KEY_COMMAND_STOP_LOOKING":
+      return GetReaderKeyCommand.GET_READER_KEY_COMMAND_STOP_LOOKING;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return GetReaderKeyCommand.UNRECOGNIZED;
+  }
+}
+
+export function getReaderKeyCommandToJSON(object: GetReaderKeyCommand): string {
+  switch (object) {
+    case GetReaderKeyCommand.GET_READER_KEY_COMMAND_UNKNOWN:
+      return "GET_READER_KEY_COMMAND_UNKNOWN";
+    case GetReaderKeyCommand.GET_READER_KEY_COMMAND_START_LOOKING:
+      return "GET_READER_KEY_COMMAND_START_LOOKING";
+    case GetReaderKeyCommand.GET_READER_KEY_COMMAND_STOP_LOOKING:
+      return "GET_READER_KEY_COMMAND_STOP_LOOKING";
+    case GetReaderKeyCommand.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum HandlePulledE {
+  HANDLE_PULLED_FRONT_DRIVER_DOOR = 0,
+  HANDLE_PULLED_FRONT_PASSENGER_DOOR = 1,
+  HANDLE_PULLED_REAR_DRIVER_DOOR = 2,
+  HANDLE_PULLED_REAR_PASSENGER_DOOR = 3,
+  HANDLE_PULLED_TRUNK = 4,
+  HANDLE_PULLED_CHARGE_PORT = 5,
+  HANDLE_PULLED_FRONT_DRIVER_AUTO_PRESENT_DOOR = 6,
+  HANDLE_PULLED_FRONT_PASSENGER_AUTO_PRESENT_DOOR = 7,
+  HANDLE_PULLED_OTHER = 8,
+  HANDLE_PULLED_FRUNK = 9,
+  UNRECOGNIZED = -1,
+}
+
+export function handlePulledEFromJSON(object: any): HandlePulledE {
+  switch (object) {
+    case 0:
+    case "HANDLE_PULLED_FRONT_DRIVER_DOOR":
+      return HandlePulledE.HANDLE_PULLED_FRONT_DRIVER_DOOR;
+    case 1:
+    case "HANDLE_PULLED_FRONT_PASSENGER_DOOR":
+      return HandlePulledE.HANDLE_PULLED_FRONT_PASSENGER_DOOR;
+    case 2:
+    case "HANDLE_PULLED_REAR_DRIVER_DOOR":
+      return HandlePulledE.HANDLE_PULLED_REAR_DRIVER_DOOR;
+    case 3:
+    case "HANDLE_PULLED_REAR_PASSENGER_DOOR":
+      return HandlePulledE.HANDLE_PULLED_REAR_PASSENGER_DOOR;
+    case 4:
+    case "HANDLE_PULLED_TRUNK":
+      return HandlePulledE.HANDLE_PULLED_TRUNK;
+    case 5:
+    case "HANDLE_PULLED_CHARGE_PORT":
+      return HandlePulledE.HANDLE_PULLED_CHARGE_PORT;
+    case 6:
+    case "HANDLE_PULLED_FRONT_DRIVER_AUTO_PRESENT_DOOR":
+      return HandlePulledE.HANDLE_PULLED_FRONT_DRIVER_AUTO_PRESENT_DOOR;
+    case 7:
+    case "HANDLE_PULLED_FRONT_PASSENGER_AUTO_PRESENT_DOOR":
+      return HandlePulledE.HANDLE_PULLED_FRONT_PASSENGER_AUTO_PRESENT_DOOR;
+    case 8:
+    case "HANDLE_PULLED_OTHER":
+      return HandlePulledE.HANDLE_PULLED_OTHER;
+    case 9:
+    case "HANDLE_PULLED_FRUNK":
+      return HandlePulledE.HANDLE_PULLED_FRUNK;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return HandlePulledE.UNRECOGNIZED;
+  }
+}
+
+export function handlePulledEToJSON(object: HandlePulledE): string {
+  switch (object) {
+    case HandlePulledE.HANDLE_PULLED_FRONT_DRIVER_DOOR:
+      return "HANDLE_PULLED_FRONT_DRIVER_DOOR";
+    case HandlePulledE.HANDLE_PULLED_FRONT_PASSENGER_DOOR:
+      return "HANDLE_PULLED_FRONT_PASSENGER_DOOR";
+    case HandlePulledE.HANDLE_PULLED_REAR_DRIVER_DOOR:
+      return "HANDLE_PULLED_REAR_DRIVER_DOOR";
+    case HandlePulledE.HANDLE_PULLED_REAR_PASSENGER_DOOR:
+      return "HANDLE_PULLED_REAR_PASSENGER_DOOR";
+    case HandlePulledE.HANDLE_PULLED_TRUNK:
+      return "HANDLE_PULLED_TRUNK";
+    case HandlePulledE.HANDLE_PULLED_CHARGE_PORT:
+      return "HANDLE_PULLED_CHARGE_PORT";
+    case HandlePulledE.HANDLE_PULLED_FRONT_DRIVER_AUTO_PRESENT_DOOR:
+      return "HANDLE_PULLED_FRONT_DRIVER_AUTO_PRESENT_DOOR";
+    case HandlePulledE.HANDLE_PULLED_FRONT_PASSENGER_AUTO_PRESENT_DOOR:
+      return "HANDLE_PULLED_FRONT_PASSENGER_AUTO_PRESENT_DOOR";
+    case HandlePulledE.HANDLE_PULLED_OTHER:
+      return "HANDLE_PULLED_OTHER";
+    case HandlePulledE.HANDLE_PULLED_FRUNK:
+      return "HANDLE_PULLED_FRUNK";
+    case HandlePulledE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum IMURequestE {
+  IMU_REQUEST_NONE = 0,
+  IMU_REQUEST_GET_SLEEP_STATE = 1,
+  IMU_REQUEST_ENABLE_CONTINUOUS_ACTIVITY_UPDATE = 2,
+  IMU_REQUEST_DISABLE_CONTINUOUS_ACTIVITY_UPDATE = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function iMURequestEFromJSON(object: any): IMURequestE {
+  switch (object) {
+    case 0:
+    case "IMU_REQUEST_NONE":
+      return IMURequestE.IMU_REQUEST_NONE;
+    case 1:
+    case "IMU_REQUEST_GET_SLEEP_STATE":
+      return IMURequestE.IMU_REQUEST_GET_SLEEP_STATE;
+    case 2:
+    case "IMU_REQUEST_ENABLE_CONTINUOUS_ACTIVITY_UPDATE":
+      return IMURequestE.IMU_REQUEST_ENABLE_CONTINUOUS_ACTIVITY_UPDATE;
+    case 3:
+    case "IMU_REQUEST_DISABLE_CONTINUOUS_ACTIVITY_UPDATE":
+      return IMURequestE.IMU_REQUEST_DISABLE_CONTINUOUS_ACTIVITY_UPDATE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return IMURequestE.UNRECOGNIZED;
+  }
+}
+
+export function iMURequestEToJSON(object: IMURequestE): string {
+  switch (object) {
+    case IMURequestE.IMU_REQUEST_NONE:
+      return "IMU_REQUEST_NONE";
+    case IMURequestE.IMU_REQUEST_GET_SLEEP_STATE:
+      return "IMU_REQUEST_GET_SLEEP_STATE";
+    case IMURequestE.IMU_REQUEST_ENABLE_CONTINUOUS_ACTIVITY_UPDATE:
+      return "IMU_REQUEST_ENABLE_CONTINUOUS_ACTIVITY_UPDATE";
+    case IMURequestE.IMU_REQUEST_DISABLE_CONTINUOUS_ACTIVITY_UPDATE:
+      return "IMU_REQUEST_DISABLE_CONTINUOUS_ACTIVITY_UPDATE";
+    case IMURequestE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum LocationPermission {
+  LOCATION_PERMISSION_UNKNOWN = 0,
+  LOCATION_PERMISSION_ASK_NEXT_TIME_OR_WHEN_I_SHARE = 1,
+  LOCATION_PERMISSION_WHILE_USING_THE_APP = 2,
+  LOCATION_PERMISSION_ALWAYS = 3,
+  LOCATION_PERMISSION_NEVER = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function locationPermissionFromJSON(object: any): LocationPermission {
+  switch (object) {
+    case 0:
+    case "LOCATION_PERMISSION_UNKNOWN":
+      return LocationPermission.LOCATION_PERMISSION_UNKNOWN;
+    case 1:
+    case "LOCATION_PERMISSION_ASK_NEXT_TIME_OR_WHEN_I_SHARE":
+      return LocationPermission.LOCATION_PERMISSION_ASK_NEXT_TIME_OR_WHEN_I_SHARE;
+    case 2:
+    case "LOCATION_PERMISSION_WHILE_USING_THE_APP":
+      return LocationPermission.LOCATION_PERMISSION_WHILE_USING_THE_APP;
+    case 3:
+    case "LOCATION_PERMISSION_ALWAYS":
+      return LocationPermission.LOCATION_PERMISSION_ALWAYS;
+    case 4:
+    case "LOCATION_PERMISSION_NEVER":
+      return LocationPermission.LOCATION_PERMISSION_NEVER;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return LocationPermission.UNRECOGNIZED;
+  }
+}
+
+export function locationPermissionToJSON(object: LocationPermission): string {
+  switch (object) {
+    case LocationPermission.LOCATION_PERMISSION_UNKNOWN:
+      return "LOCATION_PERMISSION_UNKNOWN";
+    case LocationPermission.LOCATION_PERMISSION_ASK_NEXT_TIME_OR_WHEN_I_SHARE:
+      return "LOCATION_PERMISSION_ASK_NEXT_TIME_OR_WHEN_I_SHARE";
+    case LocationPermission.LOCATION_PERMISSION_WHILE_USING_THE_APP:
+      return "LOCATION_PERMISSION_WHILE_USING_THE_APP";
+    case LocationPermission.LOCATION_PERMISSION_ALWAYS:
+      return "LOCATION_PERMISSION_ALWAYS";
+    case LocationPermission.LOCATION_PERMISSION_NEVER:
+      return "LOCATION_PERMISSION_NEVER";
+    case LocationPermission.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum NIErrorE {
+  ERROR_UNKNOWN = 0,
+  ERROR_SESSION_LIMIT_EXCEEDED = 1,
+  ERROR_INVALID_CONFIGURATION = 2,
+  ERROR_RESOURCE_USAGE_TIMEOUT = 3,
+  ERROR_SESSION_FAILED = 4,
+  ERROR_UNSUPPORTED_PLATFORM = 5,
+  ERROR_USER_DID_NOT_ALLOW = 6,
+  ERROR_BLE_PEER_UNAVAILABLE = 7,
+  ERROR_VEHICLE_NOT_SELECTED_FOR_RANGING = 8,
+  UNRECOGNIZED = -1,
+}
+
+export function nIErrorEFromJSON(object: any): NIErrorE {
+  switch (object) {
+    case 0:
+    case "ERROR_UNKNOWN":
+      return NIErrorE.ERROR_UNKNOWN;
+    case 1:
+    case "ERROR_SESSION_LIMIT_EXCEEDED":
+      return NIErrorE.ERROR_SESSION_LIMIT_EXCEEDED;
+    case 2:
+    case "ERROR_INVALID_CONFIGURATION":
+      return NIErrorE.ERROR_INVALID_CONFIGURATION;
+    case 3:
+    case "ERROR_RESOURCE_USAGE_TIMEOUT":
+      return NIErrorE.ERROR_RESOURCE_USAGE_TIMEOUT;
+    case 4:
+    case "ERROR_SESSION_FAILED":
+      return NIErrorE.ERROR_SESSION_FAILED;
+    case 5:
+    case "ERROR_UNSUPPORTED_PLATFORM":
+      return NIErrorE.ERROR_UNSUPPORTED_PLATFORM;
+    case 6:
+    case "ERROR_USER_DID_NOT_ALLOW":
+      return NIErrorE.ERROR_USER_DID_NOT_ALLOW;
+    case 7:
+    case "ERROR_BLE_PEER_UNAVAILABLE":
+      return NIErrorE.ERROR_BLE_PEER_UNAVAILABLE;
+    case 8:
+    case "ERROR_VEHICLE_NOT_SELECTED_FOR_RANGING":
+      return NIErrorE.ERROR_VEHICLE_NOT_SELECTED_FOR_RANGING;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return NIErrorE.UNRECOGNIZED;
+  }
+}
+
+export function nIErrorEToJSON(object: NIErrorE): string {
+  switch (object) {
+    case NIErrorE.ERROR_UNKNOWN:
+      return "ERROR_UNKNOWN";
+    case NIErrorE.ERROR_SESSION_LIMIT_EXCEEDED:
+      return "ERROR_SESSION_LIMIT_EXCEEDED";
+    case NIErrorE.ERROR_INVALID_CONFIGURATION:
+      return "ERROR_INVALID_CONFIGURATION";
+    case NIErrorE.ERROR_RESOURCE_USAGE_TIMEOUT:
+      return "ERROR_RESOURCE_USAGE_TIMEOUT";
+    case NIErrorE.ERROR_SESSION_FAILED:
+      return "ERROR_SESSION_FAILED";
+    case NIErrorE.ERROR_UNSUPPORTED_PLATFORM:
+      return "ERROR_UNSUPPORTED_PLATFORM";
+    case NIErrorE.ERROR_USER_DID_NOT_ALLOW:
+      return "ERROR_USER_DID_NOT_ALLOW";
+    case NIErrorE.ERROR_BLE_PEER_UNAVAILABLE:
+      return "ERROR_BLE_PEER_UNAVAILABLE";
+    case NIErrorE.ERROR_VEHICLE_NOT_SELECTED_FOR_RANGING:
+      return "ERROR_VEHICLE_NOT_SELECTED_FOR_RANGING";
+    case NIErrorE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum NISessionStatusE {
+  NI_SESSION_STATUS_UNKNOWN = 0,
+  NI_SESSION_STATUS_ACTIVE = 1,
+  NI_SESSION_STATUS_INACTIVE = 2,
+  NI_SESSION_STATUS_ERROR = 3,
+  NI_SESSION_STATUS_UNAVAILABLE = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function nISessionStatusEFromJSON(object: any): NISessionStatusE {
+  switch (object) {
+    case 0:
+    case "NI_SESSION_STATUS_UNKNOWN":
+      return NISessionStatusE.NI_SESSION_STATUS_UNKNOWN;
+    case 1:
+    case "NI_SESSION_STATUS_ACTIVE":
+      return NISessionStatusE.NI_SESSION_STATUS_ACTIVE;
+    case 2:
+    case "NI_SESSION_STATUS_INACTIVE":
+      return NISessionStatusE.NI_SESSION_STATUS_INACTIVE;
+    case 3:
+    case "NI_SESSION_STATUS_ERROR":
+      return NISessionStatusE.NI_SESSION_STATUS_ERROR;
+    case 4:
+    case "NI_SESSION_STATUS_UNAVAILABLE":
+      return NISessionStatusE.NI_SESSION_STATUS_UNAVAILABLE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return NISessionStatusE.UNRECOGNIZED;
+  }
+}
+
+export function nISessionStatusEToJSON(object: NISessionStatusE): string {
+  switch (object) {
+    case NISessionStatusE.NI_SESSION_STATUS_UNKNOWN:
+      return "NI_SESSION_STATUS_UNKNOWN";
+    case NISessionStatusE.NI_SESSION_STATUS_ACTIVE:
+      return "NI_SESSION_STATUS_ACTIVE";
+    case NISessionStatusE.NI_SESSION_STATUS_INACTIVE:
+      return "NI_SESSION_STATUS_INACTIVE";
+    case NISessionStatusE.NI_SESSION_STATUS_ERROR:
+      return "NI_SESSION_STATUS_ERROR";
+    case NISessionStatusE.NI_SESSION_STATUS_UNAVAILABLE:
+      return "NI_SESSION_STATUS_UNAVAILABLE";
+    case NISessionStatusE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum OperationModeE {
+  OPERATION_MODE_UNKNOWN = 0,
+  OPERATION_MODE_OWNER = 1,
+  OPERATION_MODE_FLEET = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function operationModeEFromJSON(object: any): OperationModeE {
+  switch (object) {
+    case 0:
+    case "OPERATION_MODE_UNKNOWN":
+      return OperationModeE.OPERATION_MODE_UNKNOWN;
+    case 1:
+    case "OPERATION_MODE_OWNER":
+      return OperationModeE.OPERATION_MODE_OWNER;
+    case 2:
+    case "OPERATION_MODE_FLEET":
+      return OperationModeE.OPERATION_MODE_FLEET;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return OperationModeE.UNRECOGNIZED;
+  }
+}
+
+export function operationModeEToJSON(object: OperationModeE): string {
+  switch (object) {
+    case OperationModeE.OPERATION_MODE_UNKNOWN:
+      return "OPERATION_MODE_UNKNOWN";
+    case OperationModeE.OPERATION_MODE_OWNER:
+      return "OPERATION_MODE_OWNER";
+    case OperationModeE.OPERATION_MODE_FLEET:
+      return "OPERATION_MODE_FLEET";
+    case OperationModeE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum PeripheralState {
+  PERIPHERALSTATE_SNA = 0,
+  PERIPHERALSTATE_DISCONNECTED = 1,
+  PERIPHERALSTATE_CONNECTED = 2,
+  PERIPHERALSTATE_CONNECTING = 3,
+  PERIPHERALSTATE_DISCONNECTING = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function peripheralStateFromJSON(object: any): PeripheralState {
+  switch (object) {
+    case 0:
+    case "PERIPHERALSTATE_SNA":
+      return PeripheralState.PERIPHERALSTATE_SNA;
+    case 1:
+    case "PERIPHERALSTATE_DISCONNECTED":
+      return PeripheralState.PERIPHERALSTATE_DISCONNECTED;
+    case 2:
+    case "PERIPHERALSTATE_CONNECTED":
+      return PeripheralState.PERIPHERALSTATE_CONNECTED;
+    case 3:
+    case "PERIPHERALSTATE_CONNECTING":
+      return PeripheralState.PERIPHERALSTATE_CONNECTING;
+    case 4:
+    case "PERIPHERALSTATE_DISCONNECTING":
+      return PeripheralState.PERIPHERALSTATE_DISCONNECTING;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return PeripheralState.UNRECOGNIZED;
+  }
+}
+
+export function peripheralStateToJSON(object: PeripheralState): string {
+  switch (object) {
+    case PeripheralState.PERIPHERALSTATE_SNA:
+      return "PERIPHERALSTATE_SNA";
+    case PeripheralState.PERIPHERALSTATE_DISCONNECTED:
+      return "PERIPHERALSTATE_DISCONNECTED";
+    case PeripheralState.PERIPHERALSTATE_CONNECTED:
+      return "PERIPHERALSTATE_CONNECTED";
+    case PeripheralState.PERIPHERALSTATE_CONNECTING:
+      return "PERIPHERALSTATE_CONNECTING";
+    case PeripheralState.PERIPHERALSTATE_DISCONNECTING:
+      return "PERIPHERALSTATE_DISCONNECTING";
+    case PeripheralState.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum PhoneThermalStateE {
+  PHONE_THERMAL_STATE_UNKNOWN = 0,
+  PHONE_THERMAL_STATE_NOMINAL = 1,
+  PHONE_THERMAL_STATE_FAIR = 2,
+  PHONE_THERMAL_STATE_LIGHT = 3,
+  PHONE_THERMAL_STATE_MODERATE = 4,
+  PHONE_THERMAL_STATE_SERIOUS = 5,
+  PHONE_THERMAL_STATE_SEVERE = 6,
+  PHONE_THERMAL_STATE_CRITICAL = 7,
+  PHONE_THERMAL_STATE_EMERGENCY = 8,
+  PHONE_THERMAL_STATE_SHUTDOWN = 9,
+  UNRECOGNIZED = -1,
+}
+
+export function phoneThermalStateEFromJSON(object: any): PhoneThermalStateE {
+  switch (object) {
+    case 0:
+    case "PHONE_THERMAL_STATE_UNKNOWN":
+      return PhoneThermalStateE.PHONE_THERMAL_STATE_UNKNOWN;
+    case 1:
+    case "PHONE_THERMAL_STATE_NOMINAL":
+      return PhoneThermalStateE.PHONE_THERMAL_STATE_NOMINAL;
+    case 2:
+    case "PHONE_THERMAL_STATE_FAIR":
+      return PhoneThermalStateE.PHONE_THERMAL_STATE_FAIR;
+    case 3:
+    case "PHONE_THERMAL_STATE_LIGHT":
+      return PhoneThermalStateE.PHONE_THERMAL_STATE_LIGHT;
+    case 4:
+    case "PHONE_THERMAL_STATE_MODERATE":
+      return PhoneThermalStateE.PHONE_THERMAL_STATE_MODERATE;
+    case 5:
+    case "PHONE_THERMAL_STATE_SERIOUS":
+      return PhoneThermalStateE.PHONE_THERMAL_STATE_SERIOUS;
+    case 6:
+    case "PHONE_THERMAL_STATE_SEVERE":
+      return PhoneThermalStateE.PHONE_THERMAL_STATE_SEVERE;
+    case 7:
+    case "PHONE_THERMAL_STATE_CRITICAL":
+      return PhoneThermalStateE.PHONE_THERMAL_STATE_CRITICAL;
+    case 8:
+    case "PHONE_THERMAL_STATE_EMERGENCY":
+      return PhoneThermalStateE.PHONE_THERMAL_STATE_EMERGENCY;
+    case 9:
+    case "PHONE_THERMAL_STATE_SHUTDOWN":
+      return PhoneThermalStateE.PHONE_THERMAL_STATE_SHUTDOWN;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return PhoneThermalStateE.UNRECOGNIZED;
+  }
+}
+
+export function phoneThermalStateEToJSON(object: PhoneThermalStateE): string {
+  switch (object) {
+    case PhoneThermalStateE.PHONE_THERMAL_STATE_UNKNOWN:
+      return "PHONE_THERMAL_STATE_UNKNOWN";
+    case PhoneThermalStateE.PHONE_THERMAL_STATE_NOMINAL:
+      return "PHONE_THERMAL_STATE_NOMINAL";
+    case PhoneThermalStateE.PHONE_THERMAL_STATE_FAIR:
+      return "PHONE_THERMAL_STATE_FAIR";
+    case PhoneThermalStateE.PHONE_THERMAL_STATE_LIGHT:
+      return "PHONE_THERMAL_STATE_LIGHT";
+    case PhoneThermalStateE.PHONE_THERMAL_STATE_MODERATE:
+      return "PHONE_THERMAL_STATE_MODERATE";
+    case PhoneThermalStateE.PHONE_THERMAL_STATE_SERIOUS:
+      return "PHONE_THERMAL_STATE_SERIOUS";
+    case PhoneThermalStateE.PHONE_THERMAL_STATE_SEVERE:
+      return "PHONE_THERMAL_STATE_SEVERE";
+    case PhoneThermalStateE.PHONE_THERMAL_STATE_CRITICAL:
+      return "PHONE_THERMAL_STATE_CRITICAL";
+    case PhoneThermalStateE.PHONE_THERMAL_STATE_EMERGENCY:
+      return "PHONE_THERMAL_STATE_EMERGENCY";
+    case PhoneThermalStateE.PHONE_THERMAL_STATE_SHUTDOWN:
+      return "PHONE_THERMAL_STATE_SHUTDOWN";
+    case PhoneThermalStateE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum RangingConfigTypeE {
+  RANGINGCONFIGTYPE_UNDEFINED = 0,
+  RANGINGCONFIGTYPE_APPLE_UNICAST_BACKGROUND = 1,
+  RANGINGCONFIGTYPE_APPLE_UNICAST_FOREGROUND = 2,
+  RANGINGCONFIGTYPE_APPLE_MULTICAST_BACKGROUND = 3,
+  RANGINGCONFIGTYPE_APPLE_MULTICAST_FOREGROUND = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function rangingConfigTypeEFromJSON(object: any): RangingConfigTypeE {
+  switch (object) {
+    case 0:
+    case "RANGINGCONFIGTYPE_UNDEFINED":
+      return RangingConfigTypeE.RANGINGCONFIGTYPE_UNDEFINED;
+    case 1:
+    case "RANGINGCONFIGTYPE_APPLE_UNICAST_BACKGROUND":
+      return RangingConfigTypeE.RANGINGCONFIGTYPE_APPLE_UNICAST_BACKGROUND;
+    case 2:
+    case "RANGINGCONFIGTYPE_APPLE_UNICAST_FOREGROUND":
+      return RangingConfigTypeE.RANGINGCONFIGTYPE_APPLE_UNICAST_FOREGROUND;
+    case 3:
+    case "RANGINGCONFIGTYPE_APPLE_MULTICAST_BACKGROUND":
+      return RangingConfigTypeE.RANGINGCONFIGTYPE_APPLE_MULTICAST_BACKGROUND;
+    case 4:
+    case "RANGINGCONFIGTYPE_APPLE_MULTICAST_FOREGROUND":
+      return RangingConfigTypeE.RANGINGCONFIGTYPE_APPLE_MULTICAST_FOREGROUND;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return RangingConfigTypeE.UNRECOGNIZED;
+  }
+}
+
+export function rangingConfigTypeEToJSON(object: RangingConfigTypeE): string {
+  switch (object) {
+    case RangingConfigTypeE.RANGINGCONFIGTYPE_UNDEFINED:
+      return "RANGINGCONFIGTYPE_UNDEFINED";
+    case RangingConfigTypeE.RANGINGCONFIGTYPE_APPLE_UNICAST_BACKGROUND:
+      return "RANGINGCONFIGTYPE_APPLE_UNICAST_BACKGROUND";
+    case RangingConfigTypeE.RANGINGCONFIGTYPE_APPLE_UNICAST_FOREGROUND:
+      return "RANGINGCONFIGTYPE_APPLE_UNICAST_FOREGROUND";
+    case RangingConfigTypeE.RANGINGCONFIGTYPE_APPLE_MULTICAST_BACKGROUND:
+      return "RANGINGCONFIGTYPE_APPLE_MULTICAST_BACKGROUND";
+    case RangingConfigTypeE.RANGINGCONFIGTYPE_APPLE_MULTICAST_FOREGROUND:
+      return "RANGINGCONFIGTYPE_APPLE_MULTICAST_FOREGROUND";
+    case RangingConfigTypeE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum RangingUpdateRate {
+  RANGING_UPDATE_RATE_UNKNOWN = 0,
+  RANGING_UPDATE_RATE_AUTOMATIC = 1,
+  RANGING_UPDATE_RATE_INFREQUENT = 2,
+  RANGING_UPDATE_RATE_FREQUENT = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function rangingUpdateRateFromJSON(object: any): RangingUpdateRate {
+  switch (object) {
+    case 0:
+    case "RANGING_UPDATE_RATE_UNKNOWN":
+      return RangingUpdateRate.RANGING_UPDATE_RATE_UNKNOWN;
+    case 1:
+    case "RANGING_UPDATE_RATE_AUTOMATIC":
+      return RangingUpdateRate.RANGING_UPDATE_RATE_AUTOMATIC;
+    case 2:
+    case "RANGING_UPDATE_RATE_INFREQUENT":
+      return RangingUpdateRate.RANGING_UPDATE_RATE_INFREQUENT;
+    case 3:
+    case "RANGING_UPDATE_RATE_FREQUENT":
+      return RangingUpdateRate.RANGING_UPDATE_RATE_FREQUENT;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return RangingUpdateRate.UNRECOGNIZED;
+  }
+}
+
+export function rangingUpdateRateToJSON(object: RangingUpdateRate): string {
+  switch (object) {
+    case RangingUpdateRate.RANGING_UPDATE_RATE_UNKNOWN:
+      return "RANGING_UPDATE_RATE_UNKNOWN";
+    case RangingUpdateRate.RANGING_UPDATE_RATE_AUTOMATIC:
+      return "RANGING_UPDATE_RATE_AUTOMATIC";
+    case RangingUpdateRate.RANGING_UPDATE_RATE_INFREQUENT:
+      return "RANGING_UPDATE_RATE_INFREQUENT";
+    case RangingUpdateRate.RANGING_UPDATE_RATE_FREQUENT:
+      return "RANGING_UPDATE_RATE_FREQUENT";
+    case RangingUpdateRate.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum SleepManagerCommandE {
+  SLEEPMANAGER_COMMAND_NONE = 0,
+  SLEEPMANAGER_GET_STATS = 1,
+  SLEEPMANAGER_RESET_STATS = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function sleepManagerCommandEFromJSON(object: any): SleepManagerCommandE {
+  switch (object) {
+    case 0:
+    case "SLEEPMANAGER_COMMAND_NONE":
+      return SleepManagerCommandE.SLEEPMANAGER_COMMAND_NONE;
+    case 1:
+    case "SLEEPMANAGER_GET_STATS":
+      return SleepManagerCommandE.SLEEPMANAGER_GET_STATS;
+    case 2:
+    case "SLEEPMANAGER_RESET_STATS":
+      return SleepManagerCommandE.SLEEPMANAGER_RESET_STATS;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return SleepManagerCommandE.UNRECOGNIZED;
+  }
+}
+
+export function sleepManagerCommandEToJSON(object: SleepManagerCommandE): string {
+  switch (object) {
+    case SleepManagerCommandE.SLEEPMANAGER_COMMAND_NONE:
+      return "SLEEPMANAGER_COMMAND_NONE";
+    case SleepManagerCommandE.SLEEPMANAGER_GET_STATS:
+      return "SLEEPMANAGER_GET_STATS";
+    case SleepManagerCommandE.SLEEPMANAGER_RESET_STATS:
+      return "SLEEPMANAGER_RESET_STATS";
+    case SleepManagerCommandE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum UIRequestE {
+  UI_REQUEST_NONE = 0,
+  UI_REQUEST_GET_VEHICLE_BLE_NICK_NAME = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function uIRequestEFromJSON(object: any): UIRequestE {
+  switch (object) {
+    case 0:
+    case "UI_REQUEST_NONE":
+      return UIRequestE.UI_REQUEST_NONE;
+    case 1:
+    case "UI_REQUEST_GET_VEHICLE_BLE_NICK_NAME":
+      return UIRequestE.UI_REQUEST_GET_VEHICLE_BLE_NICK_NAME;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return UIRequestE.UNRECOGNIZED;
+  }
+}
+
+export function uIRequestEToJSON(object: UIRequestE): string {
+  switch (object) {
+    case UIRequestE.UI_REQUEST_NONE:
+      return "UI_REQUEST_NONE";
+    case UIRequestE.UI_REQUEST_GET_VEHICLE_BLE_NICK_NAME:
+      return "UI_REQUEST_GET_VEHICLE_BLE_NICK_NAME";
+    case UIRequestE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum UWBAvailability {
+  UWB_AVAILABILITY_UNKNOWN = 0,
+  UWB_AVAILABILITY_AVAILABLE = 1,
+  UWB_AVAILABILITY_UNAVAILABLE_UNSUPPORTED_DEVICE = 2,
+  UWB_AVAILABILITY_UNAVAILABLE_PERMISSION_DENIED = 3,
+  UWB_AVAILABILITY_UNAVAILABLE = 4,
+  UWB_AVAILABILITY_UNAVAILABLE_DISABLED_BY_USER = 5,
+  UNRECOGNIZED = -1,
+}
+
+export function uWBAvailabilityFromJSON(object: any): UWBAvailability {
+  switch (object) {
+    case 0:
+    case "UWB_AVAILABILITY_UNKNOWN":
+      return UWBAvailability.UWB_AVAILABILITY_UNKNOWN;
+    case 1:
+    case "UWB_AVAILABILITY_AVAILABLE":
+      return UWBAvailability.UWB_AVAILABILITY_AVAILABLE;
+    case 2:
+    case "UWB_AVAILABILITY_UNAVAILABLE_UNSUPPORTED_DEVICE":
+      return UWBAvailability.UWB_AVAILABILITY_UNAVAILABLE_UNSUPPORTED_DEVICE;
+    case 3:
+    case "UWB_AVAILABILITY_UNAVAILABLE_PERMISSION_DENIED":
+      return UWBAvailability.UWB_AVAILABILITY_UNAVAILABLE_PERMISSION_DENIED;
+    case 4:
+    case "UWB_AVAILABILITY_UNAVAILABLE":
+      return UWBAvailability.UWB_AVAILABILITY_UNAVAILABLE;
+    case 5:
+    case "UWB_AVAILABILITY_UNAVAILABLE_DISABLED_BY_USER":
+      return UWBAvailability.UWB_AVAILABILITY_UNAVAILABLE_DISABLED_BY_USER;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return UWBAvailability.UNRECOGNIZED;
+  }
+}
+
+export function uWBAvailabilityToJSON(object: UWBAvailability): string {
+  switch (object) {
+    case UWBAvailability.UWB_AVAILABILITY_UNKNOWN:
+      return "UWB_AVAILABILITY_UNKNOWN";
+    case UWBAvailability.UWB_AVAILABILITY_AVAILABLE:
+      return "UWB_AVAILABILITY_AVAILABLE";
+    case UWBAvailability.UWB_AVAILABILITY_UNAVAILABLE_UNSUPPORTED_DEVICE:
+      return "UWB_AVAILABILITY_UNAVAILABLE_UNSUPPORTED_DEVICE";
+    case UWBAvailability.UWB_AVAILABILITY_UNAVAILABLE_PERMISSION_DENIED:
+      return "UWB_AVAILABILITY_UNAVAILABLE_PERMISSION_DENIED";
+    case UWBAvailability.UWB_AVAILABILITY_UNAVAILABLE:
+      return "UWB_AVAILABILITY_UNAVAILABLE";
+    case UWBAvailability.UWB_AVAILABILITY_UNAVAILABLE_DISABLED_BY_USER:
+      return "UWB_AVAILABILITY_UNAVAILABLE_DISABLED_BY_USER";
+    case UWBAvailability.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum UpdaterLocation {
+  UPDATER_LOCATION_NONE = 0,
+  UPDATER_LOCATION_APPLICATION = 1,
+  UPDATER_LOCATION_BOOTLOADER = 2,
+  UPDATER_LOCATION_SECONDARY_APPLICATION = 3,
+  UPDATER_LOCATION_APPLICATION_IN_EXTERNAL_FLASH = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function updaterLocationFromJSON(object: any): UpdaterLocation {
+  switch (object) {
+    case 0:
+    case "UPDATER_LOCATION_NONE":
+      return UpdaterLocation.UPDATER_LOCATION_NONE;
+    case 1:
+    case "UPDATER_LOCATION_APPLICATION":
+      return UpdaterLocation.UPDATER_LOCATION_APPLICATION;
+    case 2:
+    case "UPDATER_LOCATION_BOOTLOADER":
+      return UpdaterLocation.UPDATER_LOCATION_BOOTLOADER;
+    case 3:
+    case "UPDATER_LOCATION_SECONDARY_APPLICATION":
+      return UpdaterLocation.UPDATER_LOCATION_SECONDARY_APPLICATION;
+    case 4:
+    case "UPDATER_LOCATION_APPLICATION_IN_EXTERNAL_FLASH":
+      return UpdaterLocation.UPDATER_LOCATION_APPLICATION_IN_EXTERNAL_FLASH;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return UpdaterLocation.UNRECOGNIZED;
+  }
+}
+
+export function updaterLocationToJSON(object: UpdaterLocation): string {
+  switch (object) {
+    case UpdaterLocation.UPDATER_LOCATION_NONE:
+      return "UPDATER_LOCATION_NONE";
+    case UpdaterLocation.UPDATER_LOCATION_APPLICATION:
+      return "UPDATER_LOCATION_APPLICATION";
+    case UpdaterLocation.UPDATER_LOCATION_BOOTLOADER:
+      return "UPDATER_LOCATION_BOOTLOADER";
+    case UpdaterLocation.UPDATER_LOCATION_SECONDARY_APPLICATION:
+      return "UPDATER_LOCATION_SECONDARY_APPLICATION";
+    case UpdaterLocation.UPDATER_LOCATION_APPLICATION_IN_EXTERNAL_FLASH:
+      return "UPDATER_LOCATION_APPLICATION_IN_EXTERNAL_FLASH";
+    case UpdaterLocation.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum UpdaterStatusCode {
+  UPDATER_STATUS_CODE_ERROR = 0,
+  UPDATER_STATUS_CODE_WAIT = 1,
+  UPDATER_STATUS_CODE_BLOCK_STAGED = 2,
+  UPDATER_STATUS_CODE_IMAGE_STAGED = 3,
+  UPDATER_STATUS_CODE_CRC_CHECK_SUCCESS = 4,
+  UPDATER_STATUS_CODE_CRC_CHECK_FAIL = 5,
+  UPDATER_STATUS_CODE_HASH_FAIL = 6,
+  UPDATER_STATUS_CODE_SIGNATURE_FAIL = 7,
+  UPDATER_STATUS_CODE_ERROR_HASH_RESTORE_FAIL = 8,
+  UPDATER_STATUS_CODE_LOCATION_SET = 9,
+  UNRECOGNIZED = -1,
+}
+
+export function updaterStatusCodeFromJSON(object: any): UpdaterStatusCode {
+  switch (object) {
+    case 0:
+    case "UPDATER_STATUS_CODE_ERROR":
+      return UpdaterStatusCode.UPDATER_STATUS_CODE_ERROR;
+    case 1:
+    case "UPDATER_STATUS_CODE_WAIT":
+      return UpdaterStatusCode.UPDATER_STATUS_CODE_WAIT;
+    case 2:
+    case "UPDATER_STATUS_CODE_BLOCK_STAGED":
+      return UpdaterStatusCode.UPDATER_STATUS_CODE_BLOCK_STAGED;
+    case 3:
+    case "UPDATER_STATUS_CODE_IMAGE_STAGED":
+      return UpdaterStatusCode.UPDATER_STATUS_CODE_IMAGE_STAGED;
+    case 4:
+    case "UPDATER_STATUS_CODE_CRC_CHECK_SUCCESS":
+      return UpdaterStatusCode.UPDATER_STATUS_CODE_CRC_CHECK_SUCCESS;
+    case 5:
+    case "UPDATER_STATUS_CODE_CRC_CHECK_FAIL":
+      return UpdaterStatusCode.UPDATER_STATUS_CODE_CRC_CHECK_FAIL;
+    case 6:
+    case "UPDATER_STATUS_CODE_HASH_FAIL":
+      return UpdaterStatusCode.UPDATER_STATUS_CODE_HASH_FAIL;
+    case 7:
+    case "UPDATER_STATUS_CODE_SIGNATURE_FAIL":
+      return UpdaterStatusCode.UPDATER_STATUS_CODE_SIGNATURE_FAIL;
+    case 8:
+    case "UPDATER_STATUS_CODE_ERROR_HASH_RESTORE_FAIL":
+      return UpdaterStatusCode.UPDATER_STATUS_CODE_ERROR_HASH_RESTORE_FAIL;
+    case 9:
+    case "UPDATER_STATUS_CODE_LOCATION_SET":
+      return UpdaterStatusCode.UPDATER_STATUS_CODE_LOCATION_SET;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return UpdaterStatusCode.UNRECOGNIZED;
+  }
+}
+
+export function updaterStatusCodeToJSON(object: UpdaterStatusCode): string {
+  switch (object) {
+    case UpdaterStatusCode.UPDATER_STATUS_CODE_ERROR:
+      return "UPDATER_STATUS_CODE_ERROR";
+    case UpdaterStatusCode.UPDATER_STATUS_CODE_WAIT:
+      return "UPDATER_STATUS_CODE_WAIT";
+    case UpdaterStatusCode.UPDATER_STATUS_CODE_BLOCK_STAGED:
+      return "UPDATER_STATUS_CODE_BLOCK_STAGED";
+    case UpdaterStatusCode.UPDATER_STATUS_CODE_IMAGE_STAGED:
+      return "UPDATER_STATUS_CODE_IMAGE_STAGED";
+    case UpdaterStatusCode.UPDATER_STATUS_CODE_CRC_CHECK_SUCCESS:
+      return "UPDATER_STATUS_CODE_CRC_CHECK_SUCCESS";
+    case UpdaterStatusCode.UPDATER_STATUS_CODE_CRC_CHECK_FAIL:
+      return "UPDATER_STATUS_CODE_CRC_CHECK_FAIL";
+    case UpdaterStatusCode.UPDATER_STATUS_CODE_HASH_FAIL:
+      return "UPDATER_STATUS_CODE_HASH_FAIL";
+    case UpdaterStatusCode.UPDATER_STATUS_CODE_SIGNATURE_FAIL:
+      return "UPDATER_STATUS_CODE_SIGNATURE_FAIL";
+    case UpdaterStatusCode.UPDATER_STATUS_CODE_ERROR_HASH_RESTORE_FAIL:
+      return "UPDATER_STATUS_CODE_ERROR_HASH_RESTORE_FAIL";
+    case UpdaterStatusCode.UPDATER_STATUS_CODE_LOCATION_SET:
+      return "UPDATER_STATUS_CODE_LOCATION_SET";
+    case UpdaterStatusCode.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum iBeaconState {
+  IBEACON_STATE_SNA = 0,
+  IBEACON_STATE_INSIDE = 1,
+  IBEACON_STATE_OUTSIDE = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function iBeaconStateFromJSON(object: any): iBeaconState {
+  switch (object) {
+    case 0:
+    case "IBEACON_STATE_SNA":
+      return iBeaconState.IBEACON_STATE_SNA;
+    case 1:
+    case "IBEACON_STATE_INSIDE":
+      return iBeaconState.IBEACON_STATE_INSIDE;
+    case 2:
+    case "IBEACON_STATE_OUTSIDE":
+      return iBeaconState.IBEACON_STATE_OUTSIDE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return iBeaconState.UNRECOGNIZED;
+  }
+}
+
+export function iBeaconStateToJSON(object: iBeaconState): string {
+  switch (object) {
+    case iBeaconState.IBEACON_STATE_SNA:
+      return "IBEACON_STATE_SNA";
+    case iBeaconState.IBEACON_STATE_INSIDE:
+      return "IBEACON_STATE_INSIDE";
+    case iBeaconState.IBEACON_STATE_OUTSIDE:
+      return "IBEACON_STATE_OUTSIDE";
+    case iBeaconState.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum iOSAppState {
+  IOS_APPSTATE_SNA = 0,
+  IOS_APPSTATE_INACTIVE = 1,
+  IOS_APPSTATE_ACTIVE = 2,
+  IOS_APPSTATE_BACKGROUND = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function iOSAppStateFromJSON(object: any): iOSAppState {
+  switch (object) {
+    case 0:
+    case "IOS_APPSTATE_SNA":
+      return iOSAppState.IOS_APPSTATE_SNA;
+    case 1:
+    case "IOS_APPSTATE_INACTIVE":
+      return iOSAppState.IOS_APPSTATE_INACTIVE;
+    case 2:
+    case "IOS_APPSTATE_ACTIVE":
+      return iOSAppState.IOS_APPSTATE_ACTIVE;
+    case 3:
+    case "IOS_APPSTATE_BACKGROUND":
+      return iOSAppState.IOS_APPSTATE_BACKGROUND;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return iOSAppState.UNRECOGNIZED;
+  }
+}
+
+export function iOSAppStateToJSON(object: iOSAppState): string {
+  switch (object) {
+    case iOSAppState.IOS_APPSTATE_SNA:
+      return "IOS_APPSTATE_SNA";
+    case iOSAppState.IOS_APPSTATE_INACTIVE:
+      return "IOS_APPSTATE_INACTIVE";
+    case iOSAppState.IOS_APPSTATE_ACTIVE:
+      return "IOS_APPSTATE_ACTIVE";
+    case iOSAppState.IOS_APPSTATE_BACKGROUND:
+      return "IOS_APPSTATE_BACKGROUND";
+    case iOSAppState.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum iOSCoreBTATTErrorCode {
+  IOS_COREBTATTERRORCODE_SNA = 0,
+  IOS_COREBTATTERRORCODE_SUCCESS = 1,
+  IOS_COREBTATTERRORCODE_READ_NOT_PERMITTED = 2,
+  IOS_COREBTATTERRORCODE_WRITE_NOT_PERMITTED = 3,
+  IOS_COREBTATTERRORCODE_INVALID_PDU = 4,
+  IOS_COREBTATTERRORCODE_INSUFFICIENT_AUTHENTICATION = 5,
+  IOS_COREBTATTERRORCODE_REQUEST_NOT_SUPPORTED = 6,
+  IOS_COREBTATTERRORCODE_INVALID_OFFSET = 7,
+  IOS_COREBTATTERRORCODE_INSUFFICIENT_AUTHORIZATION = 8,
+  IOS_COREBTATTERRORCODE_PREPARE_QUEUE_FULL = 9,
+  IOS_COREBTATTERRORCODE_ATT_NOT_FOUND = 10,
+  IOS_COREBTATTERRORCODE_ATT_NOT_LONG = 11,
+  IOS_COREBTATTERRORCODE_INSUFFICIENT_ENCRYPTION_KEY_SIZE = 12,
+  IOS_COREBTATTERRORCODE_INVALID_ATT_VALUE_LENGTH = 13,
+  IOS_COREBTATTERRORCODE_UNLIKELY_ERROR = 14,
+  IOS_COREBTATTERRORCODE_INSUFFICIENT_ENCRYPTION = 15,
+  IOS_COREBTATTERRORCODE_UNSUPPORTED_GROUP_TYPE = 16,
+  IOS_COREBTATTERRORCODE_INSUFFICIENT_RESOURCES = 17,
+  UNRECOGNIZED = -1,
+}
+
+export function iOSCoreBTATTErrorCodeFromJSON(object: any): iOSCoreBTATTErrorCode {
+  switch (object) {
+    case 0:
+    case "IOS_COREBTATTERRORCODE_SNA":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_SNA;
+    case 1:
+    case "IOS_COREBTATTERRORCODE_SUCCESS":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_SUCCESS;
+    case 2:
+    case "IOS_COREBTATTERRORCODE_READ_NOT_PERMITTED":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_READ_NOT_PERMITTED;
+    case 3:
+    case "IOS_COREBTATTERRORCODE_WRITE_NOT_PERMITTED":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_WRITE_NOT_PERMITTED;
+    case 4:
+    case "IOS_COREBTATTERRORCODE_INVALID_PDU":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INVALID_PDU;
+    case 5:
+    case "IOS_COREBTATTERRORCODE_INSUFFICIENT_AUTHENTICATION":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INSUFFICIENT_AUTHENTICATION;
+    case 6:
+    case "IOS_COREBTATTERRORCODE_REQUEST_NOT_SUPPORTED":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_REQUEST_NOT_SUPPORTED;
+    case 7:
+    case "IOS_COREBTATTERRORCODE_INVALID_OFFSET":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INVALID_OFFSET;
+    case 8:
+    case "IOS_COREBTATTERRORCODE_INSUFFICIENT_AUTHORIZATION":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INSUFFICIENT_AUTHORIZATION;
+    case 9:
+    case "IOS_COREBTATTERRORCODE_PREPARE_QUEUE_FULL":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_PREPARE_QUEUE_FULL;
+    case 10:
+    case "IOS_COREBTATTERRORCODE_ATT_NOT_FOUND":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_ATT_NOT_FOUND;
+    case 11:
+    case "IOS_COREBTATTERRORCODE_ATT_NOT_LONG":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_ATT_NOT_LONG;
+    case 12:
+    case "IOS_COREBTATTERRORCODE_INSUFFICIENT_ENCRYPTION_KEY_SIZE":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INSUFFICIENT_ENCRYPTION_KEY_SIZE;
+    case 13:
+    case "IOS_COREBTATTERRORCODE_INVALID_ATT_VALUE_LENGTH":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INVALID_ATT_VALUE_LENGTH;
+    case 14:
+    case "IOS_COREBTATTERRORCODE_UNLIKELY_ERROR":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_UNLIKELY_ERROR;
+    case 15:
+    case "IOS_COREBTATTERRORCODE_INSUFFICIENT_ENCRYPTION":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INSUFFICIENT_ENCRYPTION;
+    case 16:
+    case "IOS_COREBTATTERRORCODE_UNSUPPORTED_GROUP_TYPE":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_UNSUPPORTED_GROUP_TYPE;
+    case 17:
+    case "IOS_COREBTATTERRORCODE_INSUFFICIENT_RESOURCES":
+      return iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INSUFFICIENT_RESOURCES;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return iOSCoreBTATTErrorCode.UNRECOGNIZED;
+  }
+}
+
+export function iOSCoreBTATTErrorCodeToJSON(object: iOSCoreBTATTErrorCode): string {
+  switch (object) {
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_SNA:
+      return "IOS_COREBTATTERRORCODE_SNA";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_SUCCESS:
+      return "IOS_COREBTATTERRORCODE_SUCCESS";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_READ_NOT_PERMITTED:
+      return "IOS_COREBTATTERRORCODE_READ_NOT_PERMITTED";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_WRITE_NOT_PERMITTED:
+      return "IOS_COREBTATTERRORCODE_WRITE_NOT_PERMITTED";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INVALID_PDU:
+      return "IOS_COREBTATTERRORCODE_INVALID_PDU";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INSUFFICIENT_AUTHENTICATION:
+      return "IOS_COREBTATTERRORCODE_INSUFFICIENT_AUTHENTICATION";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_REQUEST_NOT_SUPPORTED:
+      return "IOS_COREBTATTERRORCODE_REQUEST_NOT_SUPPORTED";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INVALID_OFFSET:
+      return "IOS_COREBTATTERRORCODE_INVALID_OFFSET";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INSUFFICIENT_AUTHORIZATION:
+      return "IOS_COREBTATTERRORCODE_INSUFFICIENT_AUTHORIZATION";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_PREPARE_QUEUE_FULL:
+      return "IOS_COREBTATTERRORCODE_PREPARE_QUEUE_FULL";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_ATT_NOT_FOUND:
+      return "IOS_COREBTATTERRORCODE_ATT_NOT_FOUND";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_ATT_NOT_LONG:
+      return "IOS_COREBTATTERRORCODE_ATT_NOT_LONG";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INSUFFICIENT_ENCRYPTION_KEY_SIZE:
+      return "IOS_COREBTATTERRORCODE_INSUFFICIENT_ENCRYPTION_KEY_SIZE";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INVALID_ATT_VALUE_LENGTH:
+      return "IOS_COREBTATTERRORCODE_INVALID_ATT_VALUE_LENGTH";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_UNLIKELY_ERROR:
+      return "IOS_COREBTATTERRORCODE_UNLIKELY_ERROR";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INSUFFICIENT_ENCRYPTION:
+      return "IOS_COREBTATTERRORCODE_INSUFFICIENT_ENCRYPTION";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_UNSUPPORTED_GROUP_TYPE:
+      return "IOS_COREBTATTERRORCODE_UNSUPPORTED_GROUP_TYPE";
+    case iOSCoreBTATTErrorCode.IOS_COREBTATTERRORCODE_INSUFFICIENT_RESOURCES:
+      return "IOS_COREBTATTERRORCODE_INSUFFICIENT_RESOURCES";
+    case iOSCoreBTATTErrorCode.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum iOSCoreBTError {
+  IOS_COREBTERROR_SNA = 0,
+  IOS_COREBTERROR_UNKNOWN = 1,
+  IOS_COREBTERROR_INVALID_PARAMETERS = 2,
+  IOS_COREBTERROR_INVALID_HANDLE = 3,
+  IOS_COREBTERROR_NOT_CONNECTED = 4,
+  IOS_COREBTERROR_OUT_OF_SPACE = 5,
+  IOS_COREBTERROR_OPERATION_CANCELLED = 6,
+  IOS_COREBTERROR_CONNECTION_TIMEOUT = 7,
+  IOS_COREBTERROR_PERIPHERAL_DISCONNECTED = 8,
+  IOS_COREBTERROR_UUID_NOT_ALLOWED = 9,
+  IOS_COREBTERROR_ALREADY_ADVERTISING = 10,
+  IOS_COREBTERROR_CONNECTION_FAILED = 11,
+  IOS_COREBTERROR_CONNECTION_LIMIT_REACHED = 12,
+  IOS_COREBTERROR_OPERATION_NOT_SUPPORTED = 13,
+  IOS_COREBTERROR_UNKNOWN_DEVICE = 14,
+  IOS_COREBTERROR_ENCRYPTIONTIMEDOUT = 15,
+  IOS_COREBTERROR_LEGATTEXCEEDEDBACKGROUNDNOTIFICATIONLIMIT = 16,
+  IOS_COREBTERROR_LEGATTNEARBACKGROUNDNOTIFICATIONLIMIT = 17,
+  IOS_COREBTERROR_PEERREMOVEDPAIRINGINFORMATION = 18,
+  IOS_COREBTERROR_TOOMANYLEPAIREDDEVICES = 19,
+  UNRECOGNIZED = -1,
+}
+
+export function iOSCoreBTErrorFromJSON(object: any): iOSCoreBTError {
+  switch (object) {
+    case 0:
+    case "IOS_COREBTERROR_SNA":
+      return iOSCoreBTError.IOS_COREBTERROR_SNA;
+    case 1:
+    case "IOS_COREBTERROR_UNKNOWN":
+      return iOSCoreBTError.IOS_COREBTERROR_UNKNOWN;
+    case 2:
+    case "IOS_COREBTERROR_INVALID_PARAMETERS":
+      return iOSCoreBTError.IOS_COREBTERROR_INVALID_PARAMETERS;
+    case 3:
+    case "IOS_COREBTERROR_INVALID_HANDLE":
+      return iOSCoreBTError.IOS_COREBTERROR_INVALID_HANDLE;
+    case 4:
+    case "IOS_COREBTERROR_NOT_CONNECTED":
+      return iOSCoreBTError.IOS_COREBTERROR_NOT_CONNECTED;
+    case 5:
+    case "IOS_COREBTERROR_OUT_OF_SPACE":
+      return iOSCoreBTError.IOS_COREBTERROR_OUT_OF_SPACE;
+    case 6:
+    case "IOS_COREBTERROR_OPERATION_CANCELLED":
+      return iOSCoreBTError.IOS_COREBTERROR_OPERATION_CANCELLED;
+    case 7:
+    case "IOS_COREBTERROR_CONNECTION_TIMEOUT":
+      return iOSCoreBTError.IOS_COREBTERROR_CONNECTION_TIMEOUT;
+    case 8:
+    case "IOS_COREBTERROR_PERIPHERAL_DISCONNECTED":
+      return iOSCoreBTError.IOS_COREBTERROR_PERIPHERAL_DISCONNECTED;
+    case 9:
+    case "IOS_COREBTERROR_UUID_NOT_ALLOWED":
+      return iOSCoreBTError.IOS_COREBTERROR_UUID_NOT_ALLOWED;
+    case 10:
+    case "IOS_COREBTERROR_ALREADY_ADVERTISING":
+      return iOSCoreBTError.IOS_COREBTERROR_ALREADY_ADVERTISING;
+    case 11:
+    case "IOS_COREBTERROR_CONNECTION_FAILED":
+      return iOSCoreBTError.IOS_COREBTERROR_CONNECTION_FAILED;
+    case 12:
+    case "IOS_COREBTERROR_CONNECTION_LIMIT_REACHED":
+      return iOSCoreBTError.IOS_COREBTERROR_CONNECTION_LIMIT_REACHED;
+    case 13:
+    case "IOS_COREBTERROR_OPERATION_NOT_SUPPORTED":
+      return iOSCoreBTError.IOS_COREBTERROR_OPERATION_NOT_SUPPORTED;
+    case 14:
+    case "IOS_COREBTERROR_UNKNOWN_DEVICE":
+      return iOSCoreBTError.IOS_COREBTERROR_UNKNOWN_DEVICE;
+    case 15:
+    case "IOS_COREBTERROR_ENCRYPTIONTIMEDOUT":
+      return iOSCoreBTError.IOS_COREBTERROR_ENCRYPTIONTIMEDOUT;
+    case 16:
+    case "IOS_COREBTERROR_LEGATTEXCEEDEDBACKGROUNDNOTIFICATIONLIMIT":
+      return iOSCoreBTError.IOS_COREBTERROR_LEGATTEXCEEDEDBACKGROUNDNOTIFICATIONLIMIT;
+    case 17:
+    case "IOS_COREBTERROR_LEGATTNEARBACKGROUNDNOTIFICATIONLIMIT":
+      return iOSCoreBTError.IOS_COREBTERROR_LEGATTNEARBACKGROUNDNOTIFICATIONLIMIT;
+    case 18:
+    case "IOS_COREBTERROR_PEERREMOVEDPAIRINGINFORMATION":
+      return iOSCoreBTError.IOS_COREBTERROR_PEERREMOVEDPAIRINGINFORMATION;
+    case 19:
+    case "IOS_COREBTERROR_TOOMANYLEPAIREDDEVICES":
+      return iOSCoreBTError.IOS_COREBTERROR_TOOMANYLEPAIREDDEVICES;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return iOSCoreBTError.UNRECOGNIZED;
+  }
+}
+
+export function iOSCoreBTErrorToJSON(object: iOSCoreBTError): string {
+  switch (object) {
+    case iOSCoreBTError.IOS_COREBTERROR_SNA:
+      return "IOS_COREBTERROR_SNA";
+    case iOSCoreBTError.IOS_COREBTERROR_UNKNOWN:
+      return "IOS_COREBTERROR_UNKNOWN";
+    case iOSCoreBTError.IOS_COREBTERROR_INVALID_PARAMETERS:
+      return "IOS_COREBTERROR_INVALID_PARAMETERS";
+    case iOSCoreBTError.IOS_COREBTERROR_INVALID_HANDLE:
+      return "IOS_COREBTERROR_INVALID_HANDLE";
+    case iOSCoreBTError.IOS_COREBTERROR_NOT_CONNECTED:
+      return "IOS_COREBTERROR_NOT_CONNECTED";
+    case iOSCoreBTError.IOS_COREBTERROR_OUT_OF_SPACE:
+      return "IOS_COREBTERROR_OUT_OF_SPACE";
+    case iOSCoreBTError.IOS_COREBTERROR_OPERATION_CANCELLED:
+      return "IOS_COREBTERROR_OPERATION_CANCELLED";
+    case iOSCoreBTError.IOS_COREBTERROR_CONNECTION_TIMEOUT:
+      return "IOS_COREBTERROR_CONNECTION_TIMEOUT";
+    case iOSCoreBTError.IOS_COREBTERROR_PERIPHERAL_DISCONNECTED:
+      return "IOS_COREBTERROR_PERIPHERAL_DISCONNECTED";
+    case iOSCoreBTError.IOS_COREBTERROR_UUID_NOT_ALLOWED:
+      return "IOS_COREBTERROR_UUID_NOT_ALLOWED";
+    case iOSCoreBTError.IOS_COREBTERROR_ALREADY_ADVERTISING:
+      return "IOS_COREBTERROR_ALREADY_ADVERTISING";
+    case iOSCoreBTError.IOS_COREBTERROR_CONNECTION_FAILED:
+      return "IOS_COREBTERROR_CONNECTION_FAILED";
+    case iOSCoreBTError.IOS_COREBTERROR_CONNECTION_LIMIT_REACHED:
+      return "IOS_COREBTERROR_CONNECTION_LIMIT_REACHED";
+    case iOSCoreBTError.IOS_COREBTERROR_OPERATION_NOT_SUPPORTED:
+      return "IOS_COREBTERROR_OPERATION_NOT_SUPPORTED";
+    case iOSCoreBTError.IOS_COREBTERROR_UNKNOWN_DEVICE:
+      return "IOS_COREBTERROR_UNKNOWN_DEVICE";
+    case iOSCoreBTError.IOS_COREBTERROR_ENCRYPTIONTIMEDOUT:
+      return "IOS_COREBTERROR_ENCRYPTIONTIMEDOUT";
+    case iOSCoreBTError.IOS_COREBTERROR_LEGATTEXCEEDEDBACKGROUNDNOTIFICATIONLIMIT:
+      return "IOS_COREBTERROR_LEGATTEXCEEDEDBACKGROUNDNOTIFICATIONLIMIT";
+    case iOSCoreBTError.IOS_COREBTERROR_LEGATTNEARBACKGROUNDNOTIFICATIONLIMIT:
+      return "IOS_COREBTERROR_LEGATTNEARBACKGROUNDNOTIFICATIONLIMIT";
+    case iOSCoreBTError.IOS_COREBTERROR_PEERREMOVEDPAIRINGINFORMATION:
+      return "IOS_COREBTERROR_PEERREMOVEDPAIRINGINFORMATION";
+    case iOSCoreBTError.IOS_COREBTERROR_TOOMANYLEPAIREDDEVICES:
+      return "IOS_COREBTERROR_TOOMANYLEPAIREDDEVICES";
+    case iOSCoreBTError.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum iOSLaunchReason {
+  IOS_LAUNCHREASON_SNA = 0,
+  IOS_LAUNCHREASON_FOREGROUND = 1,
+  IOS_LAUNCHREASON_BLUETOOTH = 2,
+  IOS_LAUNCHREASON_BEACON = 3,
+  IOS_LAUNCHREASON_NOTIFICATION = 4,
+  IOS_LAUNCHREASON_URL = 5,
+  IOS_LAUNCHREASON_SHORTCUT = 6,
+  UNRECOGNIZED = -1,
+}
+
+export function iOSLaunchReasonFromJSON(object: any): iOSLaunchReason {
+  switch (object) {
+    case 0:
+    case "IOS_LAUNCHREASON_SNA":
+      return iOSLaunchReason.IOS_LAUNCHREASON_SNA;
+    case 1:
+    case "IOS_LAUNCHREASON_FOREGROUND":
+      return iOSLaunchReason.IOS_LAUNCHREASON_FOREGROUND;
+    case 2:
+    case "IOS_LAUNCHREASON_BLUETOOTH":
+      return iOSLaunchReason.IOS_LAUNCHREASON_BLUETOOTH;
+    case 3:
+    case "IOS_LAUNCHREASON_BEACON":
+      return iOSLaunchReason.IOS_LAUNCHREASON_BEACON;
+    case 4:
+    case "IOS_LAUNCHREASON_NOTIFICATION":
+      return iOSLaunchReason.IOS_LAUNCHREASON_NOTIFICATION;
+    case 5:
+    case "IOS_LAUNCHREASON_URL":
+      return iOSLaunchReason.IOS_LAUNCHREASON_URL;
+    case 6:
+    case "IOS_LAUNCHREASON_SHORTCUT":
+      return iOSLaunchReason.IOS_LAUNCHREASON_SHORTCUT;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return iOSLaunchReason.UNRECOGNIZED;
+  }
+}
+
+export function iOSLaunchReasonToJSON(object: iOSLaunchReason): string {
+  switch (object) {
+    case iOSLaunchReason.IOS_LAUNCHREASON_SNA:
+      return "IOS_LAUNCHREASON_SNA";
+    case iOSLaunchReason.IOS_LAUNCHREASON_FOREGROUND:
+      return "IOS_LAUNCHREASON_FOREGROUND";
+    case iOSLaunchReason.IOS_LAUNCHREASON_BLUETOOTH:
+      return "IOS_LAUNCHREASON_BLUETOOTH";
+    case iOSLaunchReason.IOS_LAUNCHREASON_BEACON:
+      return "IOS_LAUNCHREASON_BEACON";
+    case iOSLaunchReason.IOS_LAUNCHREASON_NOTIFICATION:
+      return "IOS_LAUNCHREASON_NOTIFICATION";
+    case iOSLaunchReason.IOS_LAUNCHREASON_URL:
+      return "IOS_LAUNCHREASON_URL";
+    case iOSLaunchReason.IOS_LAUNCHREASON_SHORTCUT:
+      return "IOS_LAUNCHREASON_SHORTCUT";
+    case iOSLaunchReason.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface SignedMessage {
   protobufMessageAsBytes: Uint8Array;
   signatureType: SignatureType;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  token: Uint8Array;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  signature: Uint8Array;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  keyId: Uint8Array;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  counter: number;
 }
 
 export interface ToVCSECMessage {
-  signedMessage: SignedMessage | undefined;
+  signedMessage:
+    | SignedMessage
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  unsignedMessage: UnsignedMessage | undefined;
 }
 
 export interface KeyIdentifier {
@@ -1753,8 +4246,16 @@ export interface WhitelistOperation {
   addImpermanentKey?: PermissionChange | undefined;
   addImpermanentKeyAndRemoveExisting?: PermissionChange | undefined;
   removeAllImpermanentKeys?: boolean | undefined;
-  replaceKey?: ReplaceKey | undefined;
-  metadataForKey: KeyMetadata | undefined;
+  replaceKey?:
+    | ReplaceKey
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  setInfotainmentKey?: PublicKey | undefined;
+  metadataForKey:
+    | KeyMetadata
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  sessionID: Uint8Array;
 }
 
 export interface WhitelistOperationStatus {
@@ -1823,7 +4324,83 @@ export interface UnsignedMessage {
     | WhitelistOperation
     | undefined;
   /** TESLEMETRY-EXT */
-  autonomyCommand?: AutonomyCommand | undefined;
+  autonomyCommand?:
+    | AutonomyCommand
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  setMetaDataForKey?:
+    | KeyMetadata
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  deviceActivity?:
+    | ActivityE
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  getEpochSessionInfo?:
+    | GetSessionInfoRequest
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  deviceMotion?:
+    | DeviceMotion
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  appDeviceInfo?:
+    | AppDeviceInfo
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  getReaderKey?:
+    | GetReaderKey
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  NISessionResponse?:
+    | NISessionResponse
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  NISessionStopped?:
+    | NISessionStopped
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  appEventLog?:
+    | AppEventLog
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  serviceDiagnosticRequest?:
+    | ServiceDiagnosticRequest
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  NIBatchResponse?:
+    | NIBatchResponse
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  provisionIdentity?:
+    | ProvisionIdentity
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  changeOperationMode?:
+    | ChangeOperationMode
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  cpdResponse?:
+    | CPDResponse
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  securityControl?:
+    | SecurityControl
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  personalizationInformation:
+    | PersonalizationInformation
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field58:
+    | FiraCapabilities
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field59:
+    | FiraResponse
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field60: AppStateEvent | undefined;
 }
 
 export interface ClosureStatuses {
@@ -1919,11 +4496,781 @@ export interface FromVCSECMessage {
     | undefined;
   /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
   activeKey?: ActiveKey | undefined;
+  nominalError?:
+    | NominalError
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  sessionInfo?:
+    | SessionInfo
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  unknownKeyInfo?:
+    | UnknownKeyInfo
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  genealogyRequest?:
+    | GenealogyRequestE
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  imuRequest?:
+    | IMURequestE
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  unsecureNotification?:
+    | UnsecureNotification
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  epochSessionInfo?:
+    | SessionInfo1
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  appDeviceInfoRequest?:
+    | AppDeviceInfoRequestE
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  alert?:
+    | Alert
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  NISessionRequest?:
+    | NISessionRequest
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  NISessionStop?:
+    | NISessionStop
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  NIBatchRequest?:
+    | NIBatchRequest
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  CPDMessage?:
+    | CPDMessage
+    | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  NIStatusUpdate?: NIStatusUpdate | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface Alert {
+  alertHandlePulledWithoutAuth?: AlertHandlePulledWithoutAuth | undefined;
+  alertConfirmation?: AlertConfirmation | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface AlertHandlePulledWithoutAuth {
+  timeSinceAlertSetMs: number;
+  handlePulled: HandlePulledE;
+  connectionCount: number;
+  unknownDevicePresent: boolean;
+  authRequested: boolean;
+  deviceSpecificPayload: HandlePulledWithoutAuthDeviceSpecificPayload[];
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface AppDeviceInfo {
+  hardwareModelSha256: Uint8Array;
+  os: AppOperatingSystem;
+  UWBAvailable: UWBAvailability;
+  phoneVersion: PhoneVersionInfo | undefined;
+  batchedNISessionsSupported: boolean;
+  batteryLevelPercent: number;
+  batteryState: BatteryStateE;
+  thermalState: PhoneThermalStateE;
+  lowPowerMode: boolean;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface AppEventBondingStarted {
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface AppEventLog {
+  timestamp: number;
+  peerRemovedPairingInformation?: AppEventPeerRemovedPairingInformation | undefined;
+  phoneLogForHandlePulledWithoutAuthentication?: PhoneLogForHandlePulledWithoutAuthentication | undefined;
+  bondingStarted?: AppEventBondingStarted | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface AppEventPeerRemovedPairingInformation {
+  keyId: KeyIdentifier | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface AppStateEvent {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field1: WatchAppStateEvent | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface CPDMessage {
+  CPDNotification: CPDNotificationE;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface CPDResponse {
+  CPDNotificationResponse: CPDNotificationResponseE;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface ChangeOperationMode {
+  operationMode: OperationModeE;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface CodeDescriptor {
+  codeDescriptorLocation: UpdaterLocation;
+  version: number;
+  codeDescriptorBytes: Uint8Array;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface DelaySleepRequest {
+  delayTimeMs: number;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface DeviceMotion {
+  states: DeviceMotionState[];
+  confidence: DeviceMotionConfidence;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface FiraCapabilities {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field1: number;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field2: number;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field3: number;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field4: number;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field5: number[];
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field6: number;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field7: boolean;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface FiraRequest {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field1: FiraSessionRequest[];
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface FiraResponse {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field1: FiraSessionResponse[];
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field2: number;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field3: KeyIdentifier | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface FiraSessionData {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field1: Uint8Array;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field2: number;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field3: number;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field4: number;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field5: Uint8Array;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field6: Uint8Array;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface FiraSessionRequest {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field1: number;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field2: FiraRangingType;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field3: Uint8Array;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field5: number;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field6: number;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field7: FiraSTSMode;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field8: Uint8Array;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field9: RangingUpdateRate;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field10: number;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface FiraSessionResponse {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field1: number;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field2:
+    | FiraSessionData
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field3: FiraErrorE;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface FirmwareInfo {
+  deviceTarget: DeviceTarget;
+  versionCounter: number;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface FromUIMessage {
+  unsignedMessage?: UnsignedMessageUI | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface FromVCSECMessageResponseMessage {
   nominalError?: NominalError | undefined;
 }
 
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface Genealogy {
+  serialNumber: Uint8Array;
+  partNumber: Uint8Array;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface GenealogyResponse {
+  currentGenealogy: Genealogy | undefined;
+  status: GenealogyStatusE;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface GetCodeDescriptor {
+  location: UpdaterLocation;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface GetReaderKey {
+  command: GetReaderKeyCommand;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface HandlePulledWithoutAuthDeviceSpecificPayload {
+  keyChannel: number;
+  authenticationLevel: AuthenticationLevelE;
+  present: boolean;
+  RSSILeft: number;
+  RSSIRight: number;
+  RSSIRear: number;
+  RSSICenter: number;
+  RSSIFront: number;
+  RSSISecondary: number;
+  RSSINFCCradle: number;
+  RSSIRearLeft: number;
+  RSSIRearRight: number;
+  highThreshLeftPresent: boolean;
+  highThreshRightPresent: boolean;
+  highThreshCenterPresent: boolean;
+  highThreshFrontPresent: boolean;
+  highThreshRearPresent: boolean;
+  highThreshRearLeftPresent: boolean;
+  highThreshRearRightPresent: boolean;
+  highThreshSecondaryPresent: boolean;
+  highThreshNFCPresent: boolean;
+  sortedDeltaBayesLeftPresent: boolean;
+  sortedDeltaBayesRightPresent: boolean;
+  rawDeltaBayesLeftPresent: boolean;
+  rawDeltaBayesRightPresent: boolean;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface NIBatchRequest {
+  requests: NISessionRequest[];
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface NIBatchResponse {
+  responses: NISessionResponse[];
+  keyId:
+    | KeyIdentifier
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field3: number;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field4: RangingConfigTypeE;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface NIConfigurationData {
+  data: Uint8Array;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface NISessionRequest {
+  sessionId: BLEEndpointE;
+  accessoryConfigurationData: Uint8Array;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface NISessionResponse {
+  sessionId: BLEEndpointE;
+  NIConfigurationData?: NIConfigurationData | undefined;
+  errorCode?: NIErrorE | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface NISessionStatus {
+  sessionId: BLEEndpointE;
+  status: NISessionStatusE;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface NISessionStop {
+  sessionId: BLEEndpointE[];
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface NISessionStopped {
+  sessionId: BLEEndpointE[];
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface NIStatusUpdate {
+  sessionStatus: NISessionStatus[];
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface PhoneKeyTelemetryAndroid {
+  permissionsBitmask: number;
+  serviceRunningState: PhoneKeyTelemetryAndroid_ServiceRunningState;
+  runningStateTimeSinceS: number;
+  processStartTimeTimeSinceS: number;
+  osStartTimeTimeSinceS: number;
+  screenOnReceiverTimeSinceS: number;
+  bootReceiverTimeSinceS: number;
+  serviceStartReason: PhoneKeyTelemetryAndroid_ServiceStartReason;
+}
+
+export enum PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield {
+  BLUETOOTH_SCAN = 0,
+  BLUETOOTH_CONNECT = 1,
+  ACCESS_FINE_LOCATION = 2,
+  LEGACY_BLUETOOTH = 3,
+  LEGACY_BLUETOOTH_ADMIN = 4,
+  UWB_RANGING = 5,
+  BATTERY_OPTIMIZATION = 6,
+  IMU_ENABLED = 7,
+  UNRECOGNIZED = -1,
+}
+
+export function phoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfieldFromJSON(
+  object: any,
+): PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield {
+  switch (object) {
+    case 0:
+    case "BLUETOOTH_SCAN":
+      return PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.BLUETOOTH_SCAN;
+    case 1:
+    case "BLUETOOTH_CONNECT":
+      return PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.BLUETOOTH_CONNECT;
+    case 2:
+    case "ACCESS_FINE_LOCATION":
+      return PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.ACCESS_FINE_LOCATION;
+    case 3:
+    case "LEGACY_BLUETOOTH":
+      return PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.LEGACY_BLUETOOTH;
+    case 4:
+    case "LEGACY_BLUETOOTH_ADMIN":
+      return PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.LEGACY_BLUETOOTH_ADMIN;
+    case 5:
+    case "UWB_RANGING":
+      return PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.UWB_RANGING;
+    case 6:
+    case "BATTERY_OPTIMIZATION":
+      return PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.BATTERY_OPTIMIZATION;
+    case 7:
+    case "IMU_ENABLED":
+      return PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.IMU_ENABLED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.UNRECOGNIZED;
+  }
+}
+
+export function phoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfieldToJSON(
+  object: PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield,
+): string {
+  switch (object) {
+    case PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.BLUETOOTH_SCAN:
+      return "BLUETOOTH_SCAN";
+    case PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.BLUETOOTH_CONNECT:
+      return "BLUETOOTH_CONNECT";
+    case PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.ACCESS_FINE_LOCATION:
+      return "ACCESS_FINE_LOCATION";
+    case PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.LEGACY_BLUETOOTH:
+      return "LEGACY_BLUETOOTH";
+    case PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.LEGACY_BLUETOOTH_ADMIN:
+      return "LEGACY_BLUETOOTH_ADMIN";
+    case PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.UWB_RANGING:
+      return "UWB_RANGING";
+    case PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.BATTERY_OPTIMIZATION:
+      return "BATTERY_OPTIMIZATION";
+    case PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.IMU_ENABLED:
+      return "IMU_ENABLED";
+    case PhoneKeyTelemetryAndroid_PhoneKeyPermissionsBitfield.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum PhoneKeyTelemetryAndroid_ServiceRunningState {
+  SERVICERUNNINGSTATE_SNA = 0,
+  SERVICERUNNINGSTATE_BACKGROUND = 1,
+  SERVICERUNNINGSTATE_FOREGROUND = 2,
+  SERVICERUNNINGSTATE_OFF = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function phoneKeyTelemetryAndroid_ServiceRunningStateFromJSON(
+  object: any,
+): PhoneKeyTelemetryAndroid_ServiceRunningState {
+  switch (object) {
+    case 0:
+    case "SERVICERUNNINGSTATE_SNA":
+      return PhoneKeyTelemetryAndroid_ServiceRunningState.SERVICERUNNINGSTATE_SNA;
+    case 1:
+    case "SERVICERUNNINGSTATE_BACKGROUND":
+      return PhoneKeyTelemetryAndroid_ServiceRunningState.SERVICERUNNINGSTATE_BACKGROUND;
+    case 2:
+    case "SERVICERUNNINGSTATE_FOREGROUND":
+      return PhoneKeyTelemetryAndroid_ServiceRunningState.SERVICERUNNINGSTATE_FOREGROUND;
+    case 3:
+    case "SERVICERUNNINGSTATE_OFF":
+      return PhoneKeyTelemetryAndroid_ServiceRunningState.SERVICERUNNINGSTATE_OFF;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return PhoneKeyTelemetryAndroid_ServiceRunningState.UNRECOGNIZED;
+  }
+}
+
+export function phoneKeyTelemetryAndroid_ServiceRunningStateToJSON(
+  object: PhoneKeyTelemetryAndroid_ServiceRunningState,
+): string {
+  switch (object) {
+    case PhoneKeyTelemetryAndroid_ServiceRunningState.SERVICERUNNINGSTATE_SNA:
+      return "SERVICERUNNINGSTATE_SNA";
+    case PhoneKeyTelemetryAndroid_ServiceRunningState.SERVICERUNNINGSTATE_BACKGROUND:
+      return "SERVICERUNNINGSTATE_BACKGROUND";
+    case PhoneKeyTelemetryAndroid_ServiceRunningState.SERVICERUNNINGSTATE_FOREGROUND:
+      return "SERVICERUNNINGSTATE_FOREGROUND";
+    case PhoneKeyTelemetryAndroid_ServiceRunningState.SERVICERUNNINGSTATE_OFF:
+      return "SERVICERUNNINGSTATE_OFF";
+    case PhoneKeyTelemetryAndroid_ServiceRunningState.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum PhoneKeyTelemetryAndroid_ServiceStartReason {
+  SERVICE_START_REASON_SNA = 0,
+  SERVICE_START_REASON_JS = 1,
+  SERVICE_START_REASON_BOOT_COMPLETE = 2,
+  SERVICE_START_REASON_MI_BEACON = 3,
+  SERVICE_START_REASON_HONOR_WALLET = 4,
+  SERVICE_START_REASON_OPPO_WALLET = 5,
+  SERVICE_START_REASON_VIVO_WALLET = 6,
+  SERVICE_START_REASON_PACKAGE_REPLACED = 10,
+  UNRECOGNIZED = -1,
+}
+
+export function phoneKeyTelemetryAndroid_ServiceStartReasonFromJSON(
+  object: any,
+): PhoneKeyTelemetryAndroid_ServiceStartReason {
+  switch (object) {
+    case 0:
+    case "SERVICE_START_REASON_SNA":
+      return PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_SNA;
+    case 1:
+    case "SERVICE_START_REASON_JS":
+      return PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_JS;
+    case 2:
+    case "SERVICE_START_REASON_BOOT_COMPLETE":
+      return PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_BOOT_COMPLETE;
+    case 3:
+    case "SERVICE_START_REASON_MI_BEACON":
+      return PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_MI_BEACON;
+    case 4:
+    case "SERVICE_START_REASON_HONOR_WALLET":
+      return PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_HONOR_WALLET;
+    case 5:
+    case "SERVICE_START_REASON_OPPO_WALLET":
+      return PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_OPPO_WALLET;
+    case 6:
+    case "SERVICE_START_REASON_VIVO_WALLET":
+      return PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_VIVO_WALLET;
+    case 10:
+    case "SERVICE_START_REASON_PACKAGE_REPLACED":
+      return PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_PACKAGE_REPLACED;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return PhoneKeyTelemetryAndroid_ServiceStartReason.UNRECOGNIZED;
+  }
+}
+
+export function phoneKeyTelemetryAndroid_ServiceStartReasonToJSON(
+  object: PhoneKeyTelemetryAndroid_ServiceStartReason,
+): string {
+  switch (object) {
+    case PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_SNA:
+      return "SERVICE_START_REASON_SNA";
+    case PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_JS:
+      return "SERVICE_START_REASON_JS";
+    case PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_BOOT_COMPLETE:
+      return "SERVICE_START_REASON_BOOT_COMPLETE";
+    case PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_MI_BEACON:
+      return "SERVICE_START_REASON_MI_BEACON";
+    case PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_HONOR_WALLET:
+      return "SERVICE_START_REASON_HONOR_WALLET";
+    case PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_OPPO_WALLET:
+      return "SERVICE_START_REASON_OPPO_WALLET";
+    case PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_VIVO_WALLET:
+      return "SERVICE_START_REASON_VIVO_WALLET";
+    case PhoneKeyTelemetryAndroid_ServiceStartReason.SERVICE_START_REASON_PACKAGE_REPLACED:
+      return "SERVICE_START_REASON_PACKAGE_REPLACED";
+    case PhoneKeyTelemetryAndroid_ServiceStartReason.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface PhoneKeyTelemetryIOS {
+  iBeaconState: iBeaconState;
+  iBeaconStateTimeSinceS: number;
+  CBManagerState: CBManagerState;
+  CBManagerStateTimeSinceS: number;
+  CBManagerAuthorization: CBManagerAuthorization;
+  CBManagerAuthorizationTimeSinceS: number;
+  CoreBTError: iOSCoreBTError;
+  CoreBTErrorTimeSinceS: number;
+  CoreBTATTErrorCode: iOSCoreBTATTErrorCode;
+  CoreBTATTErrorTimeSinceS: number;
+  launchReason: iOSLaunchReason;
+  launchReasonTimeSinceS: number;
+  appState: iOSAppState;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface PhoneLogForHandlePulledWithoutAuthentication {
+  timeSinceBLESwitchEnableInSeconds: number;
+  timeSinceAppLaunchInSeconds: number;
+  timeSinceBeaconInSeconds: number;
+  timeSinceConnectInSeconds: number;
+  timeSinceForegroundInSeconds: number;
+  timeSinceBackgroundInSeconds: number;
+  locationPermission: LocationPermission;
+  remoteStartIssued: boolean;
+  peripheralState: PeripheralState;
+  GATTDiscoveryBitmask: number;
+  timeSinceLastMessageCurrentSession: number;
+  timeSinceLastMessageAckCurrentSession: number;
+  iOS?: PhoneKeyTelemetryIOS | undefined;
+  android?: PhoneKeyTelemetryAndroid | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface PhoneVersionInfo {
+  osVersionMajor: number;
+  osVersionMinor: number;
+  osVersionPatch: number;
+  appVersionMajor: number;
+  appVersionMinor: number;
+  appVersionPatch: number;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface ProvisionIdentity {
+  identity: Uint8Array;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface SecurityControl {
+  immobilizationControl: SecurityControl_ImmobilizationControlE;
+}
+
+export enum SecurityControl_ImmobilizationControlE {
+  IMMOBILIZATION_CONTROL_NONE = 0,
+  IMMOBILIZATION_CONTROL_IMMOBILIZE_VEHICLE = 1,
+  IMMOBILIZATION_CONTROL_MOBILIZE_VEHICLE = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function securityControl_ImmobilizationControlEFromJSON(object: any): SecurityControl_ImmobilizationControlE {
+  switch (object) {
+    case 0:
+    case "IMMOBILIZATION_CONTROL_NONE":
+      return SecurityControl_ImmobilizationControlE.IMMOBILIZATION_CONTROL_NONE;
+    case 1:
+    case "IMMOBILIZATION_CONTROL_IMMOBILIZE_VEHICLE":
+      return SecurityControl_ImmobilizationControlE.IMMOBILIZATION_CONTROL_IMMOBILIZE_VEHICLE;
+    case 2:
+    case "IMMOBILIZATION_CONTROL_MOBILIZE_VEHICLE":
+      return SecurityControl_ImmobilizationControlE.IMMOBILIZATION_CONTROL_MOBILIZE_VEHICLE;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return SecurityControl_ImmobilizationControlE.UNRECOGNIZED;
+  }
+}
+
+export function securityControl_ImmobilizationControlEToJSON(object: SecurityControl_ImmobilizationControlE): string {
+  switch (object) {
+    case SecurityControl_ImmobilizationControlE.IMMOBILIZATION_CONTROL_NONE:
+      return "IMMOBILIZATION_CONTROL_NONE";
+    case SecurityControl_ImmobilizationControlE.IMMOBILIZATION_CONTROL_IMMOBILIZE_VEHICLE:
+      return "IMMOBILIZATION_CONTROL_IMMOBILIZE_VEHICLE";
+    case SecurityControl_ImmobilizationControlE.IMMOBILIZATION_CONTROL_MOBILIZE_VEHICLE:
+      return "IMMOBILIZATION_CONTROL_MOBILIZE_VEHICLE";
+    case SecurityControl_ImmobilizationControlE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface ServiceDiagnosticRequest {
+  enterServiceModePlus: boolean;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface SessionInfo {
+  token: Uint8Array;
+  counter: number;
+  publicKey: Uint8Array;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface SetUpdaterLocation {
+  updaterLocation: UpdaterLocation;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface SleepManagerRequest {
+  delaySleepRequest?: DelaySleepRequest | undefined;
+  sleepManagerCommand?: SleepManagerCommandE | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface SleepManagerStats {
+  totalCPUTime: number;
+  totalAwakeTime: number;
+  isBLETrimApplied: BLEAdditionalTRIMAppliedE;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface StageBlock {
+  blockAddress: number;
+  blockToStage: Uint8Array;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface ToUIMessage {
+  commandStatus?: CommandStatus | undefined;
+  whitelistInfo?: WhitelistInfo | undefined;
+  whitelistEntryInfo?: WhitelistEntryInfo | undefined;
+  keyStatusInfo?: KeyStatusInfo | undefined;
+  unknownKeyInfo?: UnknownKeyInfo | undefined;
+  UIRequest?: UIRequestE | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface ToVCSECMessageV0Protocol {
+  signedMessage?: SignedMessage | undefined;
+  unsignedMessageAsBytes?: Uint8Array | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface UnknownKeyInfo {
+  keyStatus: KeyStatus | undefined;
+  publicKey: PublicKey | undefined;
+  keyFormFactor: KeyFormFactor;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface UnsecureNotification {
+  notifyUser: boolean;
+  closureStatuses: ClosureStatuses | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface UnsignedMessageUI {
+  InformationRequest?: InformationRequest | undefined;
+  RKEAction?: RKEActionE | undefined;
+  WhitelistOperation?: WhitelistOperation | undefined;
+  BLENickName?: VehicleBLENickName | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface UpdaterCommand {
+  getCodeDescriptor?: GetCodeDescriptor | undefined;
+  setUpdaterLocation?: SetUpdaterLocation | undefined;
+  stageBlock?: StageBlock | undefined;
+  verifyAndInstallApp?: VerifyAndInstallApp | undefined;
+  firmwareInfo?: Uint8Array | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface UpdaterResponse {
+  codeDescriptorMessage?: CodeDescriptor | undefined;
+  updaterStatus?: UpdaterStatus | undefined;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface UpdaterStatus {
+  statusCode: UpdaterStatusCode;
+  location: UpdaterLocation;
+  nextAddressNumber: number;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface VehicleBLENickName {
+  nickName: Uint8Array;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface VerifyAndInstallApp {
+  sha256: Uint8Array;
+  rValue: Uint8Array;
+  sValue: Uint8Array;
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export interface WatchAppStateEvent {
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field1: iOSAppState;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field2: boolean;
+  /** UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered */
+  field3: boolean;
+  batteryLevelPercent: number;
+}
+
 function createBaseSignedMessage(): SignedMessage {
-  return { protobufMessageAsBytes: new Uint8Array(0), signatureType: 0 };
+  return {
+    protobufMessageAsBytes: new Uint8Array(0),
+    signatureType: 0,
+    token: new Uint8Array(0),
+    signature: new Uint8Array(0),
+    keyId: new Uint8Array(0),
+    counter: 0,
+  };
 }
 
 export const SignedMessage: MessageFns<SignedMessage> = {
@@ -1933,6 +5280,18 @@ export const SignedMessage: MessageFns<SignedMessage> = {
     }
     if (message.signatureType !== 0) {
       writer.uint32(24).int32(message.signatureType);
+    }
+    if (message.token.length !== 0) {
+      writer.uint32(10).bytes(message.token);
+    }
+    if (message.signature.length !== 0) {
+      writer.uint32(34).bytes(message.signature);
+    }
+    if (message.keyId.length !== 0) {
+      writer.uint32(42).bytes(message.keyId);
+    }
+    if (message.counter !== 0) {
+      writer.uint32(48).uint32(message.counter);
     }
     return writer;
   },
@@ -1960,6 +5319,38 @@ export const SignedMessage: MessageFns<SignedMessage> = {
           message.signatureType = reader.int32() as any;
           continue;
         }
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.token = reader.bytes();
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.signature = reader.bytes();
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.keyId = reader.bytes();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.counter = reader.uint32();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1975,6 +5366,10 @@ export const SignedMessage: MessageFns<SignedMessage> = {
         ? bytesFromBase64(object.protobufMessageAsBytes)
         : new Uint8Array(0),
       signatureType: isSet(object.signatureType) ? signatureTypeFromJSON(object.signatureType) : 0,
+      token: isSet(object.token) ? bytesFromBase64(object.token) : new Uint8Array(0),
+      signature: isSet(object.signature) ? bytesFromBase64(object.signature) : new Uint8Array(0),
+      keyId: isSet(object.keyId) ? bytesFromBase64(object.keyId) : new Uint8Array(0),
+      counter: isSet(object.counter) ? globalThis.Number(object.counter) : 0,
     };
   },
 
@@ -1986,6 +5381,18 @@ export const SignedMessage: MessageFns<SignedMessage> = {
     if (message.signatureType !== undefined) {
       obj.signatureType = signatureTypeToJSON(message.signatureType);
     }
+    if (message.token !== undefined) {
+      obj.token = base64FromBytes(message.token);
+    }
+    if (message.signature !== undefined) {
+      obj.signature = base64FromBytes(message.signature);
+    }
+    if (message.keyId !== undefined) {
+      obj.keyId = base64FromBytes(message.keyId);
+    }
+    if (message.counter !== undefined) {
+      obj.counter = Math.round(message.counter);
+    }
     return obj;
   },
 
@@ -1996,18 +5403,25 @@ export const SignedMessage: MessageFns<SignedMessage> = {
     const message = createBaseSignedMessage();
     message.protobufMessageAsBytes = object.protobufMessageAsBytes ?? new Uint8Array(0);
     message.signatureType = object.signatureType ?? 0;
+    message.token = object.token ?? new Uint8Array(0);
+    message.signature = object.signature ?? new Uint8Array(0);
+    message.keyId = object.keyId ?? new Uint8Array(0);
+    message.counter = object.counter ?? 0;
     return message;
   },
 };
 
 function createBaseToVCSECMessage(): ToVCSECMessage {
-  return { signedMessage: undefined };
+  return { signedMessage: undefined, unsignedMessage: undefined };
 }
 
 export const ToVCSECMessage: MessageFns<ToVCSECMessage> = {
   encode(message: ToVCSECMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
     if (message.signedMessage !== undefined) {
       SignedMessage.encode(message.signedMessage, writer.uint32(10).fork()).join();
+    }
+    if (message.unsignedMessage !== undefined) {
+      UnsignedMessage.encode(message.unsignedMessage, writer.uint32(18).fork()).join();
     }
     return writer;
   },
@@ -2027,6 +5441,14 @@ export const ToVCSECMessage: MessageFns<ToVCSECMessage> = {
           message.signedMessage = SignedMessage.decode(reader, reader.uint32());
           continue;
         }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.unsignedMessage = UnsignedMessage.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2037,13 +5459,19 @@ export const ToVCSECMessage: MessageFns<ToVCSECMessage> = {
   },
 
   fromJSON(object: any): ToVCSECMessage {
-    return { signedMessage: isSet(object.signedMessage) ? SignedMessage.fromJSON(object.signedMessage) : undefined };
+    return {
+      signedMessage: isSet(object.signedMessage) ? SignedMessage.fromJSON(object.signedMessage) : undefined,
+      unsignedMessage: isSet(object.unsignedMessage) ? UnsignedMessage.fromJSON(object.unsignedMessage) : undefined,
+    };
   },
 
   toJSON(message: ToVCSECMessage): unknown {
     const obj: any = {};
     if (message.signedMessage !== undefined) {
       obj.signedMessage = SignedMessage.toJSON(message.signedMessage);
+    }
+    if (message.unsignedMessage !== undefined) {
+      obj.unsignedMessage = UnsignedMessage.toJSON(message.unsignedMessage);
     }
     return obj;
   },
@@ -2055,6 +5483,9 @@ export const ToVCSECMessage: MessageFns<ToVCSECMessage> = {
     const message = createBaseToVCSECMessage();
     message.signedMessage = (object.signedMessage !== undefined && object.signedMessage !== null)
       ? SignedMessage.fromPartial(object.signedMessage)
+      : undefined;
+    message.unsignedMessage = (object.unsignedMessage !== undefined && object.unsignedMessage !== null)
+      ? UnsignedMessage.fromPartial(object.unsignedMessage)
       : undefined;
     return message;
   },
@@ -3075,7 +6506,9 @@ function createBaseWhitelistOperation(): WhitelistOperation {
     addImpermanentKeyAndRemoveExisting: undefined,
     removeAllImpermanentKeys: undefined,
     replaceKey: undefined,
+    setInfotainmentKey: undefined,
     metadataForKey: undefined,
+    sessionID: new Uint8Array(0),
   };
 }
 
@@ -3111,8 +6544,14 @@ export const WhitelistOperation: MessageFns<WhitelistOperation> = {
     if (message.replaceKey !== undefined) {
       ReplaceKey.encode(message.replaceKey, writer.uint32(138).fork()).join();
     }
+    if (message.setInfotainmentKey !== undefined) {
+      PublicKey.encode(message.setInfotainmentKey, writer.uint32(146).fork()).join();
+    }
     if (message.metadataForKey !== undefined) {
       KeyMetadata.encode(message.metadataForKey, writer.uint32(50).fork()).join();
+    }
+    if (message.sessionID.length !== 0) {
+      writer.uint32(82).bytes(message.sessionID);
     }
     return writer;
   },
@@ -3204,12 +6643,28 @@ export const WhitelistOperation: MessageFns<WhitelistOperation> = {
           message.replaceKey = ReplaceKey.decode(reader, reader.uint32());
           continue;
         }
+        case 18: {
+          if (tag !== 146) {
+            break;
+          }
+
+          message.setInfotainmentKey = PublicKey.decode(reader, reader.uint32());
+          continue;
+        }
         case 6: {
           if (tag !== 50) {
             break;
           }
 
           message.metadataForKey = KeyMetadata.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.sessionID = reader.bytes();
           continue;
         }
       }
@@ -3251,7 +6706,9 @@ export const WhitelistOperation: MessageFns<WhitelistOperation> = {
         ? globalThis.Boolean(object.removeAllImpermanentKeys)
         : undefined,
       replaceKey: isSet(object.replaceKey) ? ReplaceKey.fromJSON(object.replaceKey) : undefined,
+      setInfotainmentKey: isSet(object.setInfotainmentKey) ? PublicKey.fromJSON(object.setInfotainmentKey) : undefined,
       metadataForKey: isSet(object.metadataForKey) ? KeyMetadata.fromJSON(object.metadataForKey) : undefined,
+      sessionID: isSet(object.sessionID) ? bytesFromBase64(object.sessionID) : new Uint8Array(0),
     };
   },
 
@@ -3287,8 +6744,14 @@ export const WhitelistOperation: MessageFns<WhitelistOperation> = {
     if (message.replaceKey !== undefined) {
       obj.replaceKey = ReplaceKey.toJSON(message.replaceKey);
     }
+    if (message.setInfotainmentKey !== undefined) {
+      obj.setInfotainmentKey = PublicKey.toJSON(message.setInfotainmentKey);
+    }
     if (message.metadataForKey !== undefined) {
       obj.metadataForKey = KeyMetadata.toJSON(message.metadataForKey);
+    }
+    if (message.sessionID !== undefined) {
+      obj.sessionID = base64FromBytes(message.sessionID);
     }
     return obj;
   },
@@ -3333,9 +6796,13 @@ export const WhitelistOperation: MessageFns<WhitelistOperation> = {
     message.replaceKey = (object.replaceKey !== undefined && object.replaceKey !== null)
       ? ReplaceKey.fromPartial(object.replaceKey)
       : undefined;
+    message.setInfotainmentKey = (object.setInfotainmentKey !== undefined && object.setInfotainmentKey !== null)
+      ? PublicKey.fromPartial(object.setInfotainmentKey)
+      : undefined;
     message.metadataForKey = (object.metadataForKey !== undefined && object.metadataForKey !== null)
       ? KeyMetadata.fromPartial(object.metadataForKey)
       : undefined;
+    message.sessionID = object.sessionID ?? new Uint8Array(0);
     return message;
   },
 };
@@ -3992,6 +7459,25 @@ function createBaseUnsignedMessage(): UnsignedMessage {
     closureMoveRequest: undefined,
     WhitelistOperation: undefined,
     autonomyCommand: undefined,
+    setMetaDataForKey: undefined,
+    deviceActivity: undefined,
+    getEpochSessionInfo: undefined,
+    deviceMotion: undefined,
+    appDeviceInfo: undefined,
+    getReaderKey: undefined,
+    NISessionResponse: undefined,
+    NISessionStopped: undefined,
+    appEventLog: undefined,
+    serviceDiagnosticRequest: undefined,
+    NIBatchResponse: undefined,
+    provisionIdentity: undefined,
+    changeOperationMode: undefined,
+    cpdResponse: undefined,
+    securityControl: undefined,
+    personalizationInformation: undefined,
+    field58: undefined,
+    field59: undefined,
+    field60: undefined,
   };
 }
 
@@ -4014,6 +7500,63 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
     }
     if (message.autonomyCommand !== undefined) {
       AutonomyCommand.encode(message.autonomyCommand, writer.uint32(530).fork()).join();
+    }
+    if (message.setMetaDataForKey !== undefined) {
+      KeyMetadata.encode(message.setMetaDataForKey, writer.uint32(178).fork()).join();
+    }
+    if (message.deviceActivity !== undefined) {
+      writer.uint32(280).int32(message.deviceActivity);
+    }
+    if (message.getEpochSessionInfo !== undefined) {
+      GetSessionInfoRequest.encode(message.getEpochSessionInfo, writer.uint32(290).fork()).join();
+    }
+    if (message.deviceMotion !== undefined) {
+      DeviceMotion.encode(message.deviceMotion, writer.uint32(314).fork()).join();
+    }
+    if (message.appDeviceInfo !== undefined) {
+      AppDeviceInfo.encode(message.appDeviceInfo, writer.uint32(322).fork()).join();
+    }
+    if (message.getReaderKey !== undefined) {
+      GetReaderKey.encode(message.getReaderKey, writer.uint32(330).fork()).join();
+    }
+    if (message.NISessionResponse !== undefined) {
+      NISessionResponse.encode(message.NISessionResponse, writer.uint32(338).fork()).join();
+    }
+    if (message.NISessionStopped !== undefined) {
+      NISessionStopped.encode(message.NISessionStopped, writer.uint32(346).fork()).join();
+    }
+    if (message.appEventLog !== undefined) {
+      AppEventLog.encode(message.appEventLog, writer.uint32(434).fork()).join();
+    }
+    if (message.serviceDiagnosticRequest !== undefined) {
+      ServiceDiagnosticRequest.encode(message.serviceDiagnosticRequest, writer.uint32(442).fork()).join();
+    }
+    if (message.NIBatchResponse !== undefined) {
+      NIBatchResponse.encode(message.NIBatchResponse, writer.uint32(450).fork()).join();
+    }
+    if (message.provisionIdentity !== undefined) {
+      ProvisionIdentity.encode(message.provisionIdentity, writer.uint32(458).fork()).join();
+    }
+    if (message.changeOperationMode !== undefined) {
+      ChangeOperationMode.encode(message.changeOperationMode, writer.uint32(490).fork()).join();
+    }
+    if (message.cpdResponse !== undefined) {
+      CPDResponse.encode(message.cpdResponse, writer.uint32(498).fork()).join();
+    }
+    if (message.securityControl !== undefined) {
+      SecurityControl.encode(message.securityControl, writer.uint32(570).fork()).join();
+    }
+    if (message.personalizationInformation !== undefined) {
+      PersonalizationInformation.encode(message.personalizationInformation, writer.uint32(202).fork()).join();
+    }
+    if (message.field58 !== undefined) {
+      FiraCapabilities.encode(message.field58, writer.uint32(466).fork()).join();
+    }
+    if (message.field59 !== undefined) {
+      FiraResponse.encode(message.field59, writer.uint32(474).fork()).join();
+    }
+    if (message.field60 !== undefined) {
+      AppStateEvent.encode(message.field60, writer.uint32(482).fork()).join();
     }
     return writer;
   },
@@ -4073,6 +7616,158 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
           message.autonomyCommand = AutonomyCommand.decode(reader, reader.uint32());
           continue;
         }
+        case 22: {
+          if (tag !== 178) {
+            break;
+          }
+
+          message.setMetaDataForKey = KeyMetadata.decode(reader, reader.uint32());
+          continue;
+        }
+        case 35: {
+          if (tag !== 280) {
+            break;
+          }
+
+          message.deviceActivity = reader.int32() as any;
+          continue;
+        }
+        case 36: {
+          if (tag !== 290) {
+            break;
+          }
+
+          message.getEpochSessionInfo = GetSessionInfoRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 39: {
+          if (tag !== 314) {
+            break;
+          }
+
+          message.deviceMotion = DeviceMotion.decode(reader, reader.uint32());
+          continue;
+        }
+        case 40: {
+          if (tag !== 322) {
+            break;
+          }
+
+          message.appDeviceInfo = AppDeviceInfo.decode(reader, reader.uint32());
+          continue;
+        }
+        case 41: {
+          if (tag !== 330) {
+            break;
+          }
+
+          message.getReaderKey = GetReaderKey.decode(reader, reader.uint32());
+          continue;
+        }
+        case 42: {
+          if (tag !== 338) {
+            break;
+          }
+
+          message.NISessionResponse = NISessionResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 43: {
+          if (tag !== 346) {
+            break;
+          }
+
+          message.NISessionStopped = NISessionStopped.decode(reader, reader.uint32());
+          continue;
+        }
+        case 54: {
+          if (tag !== 434) {
+            break;
+          }
+
+          message.appEventLog = AppEventLog.decode(reader, reader.uint32());
+          continue;
+        }
+        case 55: {
+          if (tag !== 442) {
+            break;
+          }
+
+          message.serviceDiagnosticRequest = ServiceDiagnosticRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 56: {
+          if (tag !== 450) {
+            break;
+          }
+
+          message.NIBatchResponse = NIBatchResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 57: {
+          if (tag !== 458) {
+            break;
+          }
+
+          message.provisionIdentity = ProvisionIdentity.decode(reader, reader.uint32());
+          continue;
+        }
+        case 61: {
+          if (tag !== 490) {
+            break;
+          }
+
+          message.changeOperationMode = ChangeOperationMode.decode(reader, reader.uint32());
+          continue;
+        }
+        case 62: {
+          if (tag !== 498) {
+            break;
+          }
+
+          message.cpdResponse = CPDResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 71: {
+          if (tag !== 570) {
+            break;
+          }
+
+          message.securityControl = SecurityControl.decode(reader, reader.uint32());
+          continue;
+        }
+        case 25: {
+          if (tag !== 202) {
+            break;
+          }
+
+          message.personalizationInformation = PersonalizationInformation.decode(reader, reader.uint32());
+          continue;
+        }
+        case 58: {
+          if (tag !== 466) {
+            break;
+          }
+
+          message.field58 = FiraCapabilities.decode(reader, reader.uint32());
+          continue;
+        }
+        case 59: {
+          if (tag !== 474) {
+            break;
+          }
+
+          message.field59 = FiraResponse.decode(reader, reader.uint32());
+          continue;
+        }
+        case 60: {
+          if (tag !== 482) {
+            break;
+          }
+
+          message.field60 = AppStateEvent.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -4098,6 +7793,37 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
         ? WhitelistOperation.fromJSON(object.WhitelistOperation)
         : undefined,
       autonomyCommand: isSet(object.autonomyCommand) ? AutonomyCommand.fromJSON(object.autonomyCommand) : undefined,
+      setMetaDataForKey: isSet(object.setMetaDataForKey) ? KeyMetadata.fromJSON(object.setMetaDataForKey) : undefined,
+      deviceActivity: isSet(object.deviceActivity) ? activityEFromJSON(object.deviceActivity) : undefined,
+      getEpochSessionInfo: isSet(object.getEpochSessionInfo)
+        ? GetSessionInfoRequest.fromJSON(object.getEpochSessionInfo)
+        : undefined,
+      deviceMotion: isSet(object.deviceMotion) ? DeviceMotion.fromJSON(object.deviceMotion) : undefined,
+      appDeviceInfo: isSet(object.appDeviceInfo) ? AppDeviceInfo.fromJSON(object.appDeviceInfo) : undefined,
+      getReaderKey: isSet(object.getReaderKey) ? GetReaderKey.fromJSON(object.getReaderKey) : undefined,
+      NISessionResponse: isSet(object.NISessionResponse)
+        ? NISessionResponse.fromJSON(object.NISessionResponse)
+        : undefined,
+      NISessionStopped: isSet(object.NISessionStopped) ? NISessionStopped.fromJSON(object.NISessionStopped) : undefined,
+      appEventLog: isSet(object.appEventLog) ? AppEventLog.fromJSON(object.appEventLog) : undefined,
+      serviceDiagnosticRequest: isSet(object.serviceDiagnosticRequest)
+        ? ServiceDiagnosticRequest.fromJSON(object.serviceDiagnosticRequest)
+        : undefined,
+      NIBatchResponse: isSet(object.NIBatchResponse) ? NIBatchResponse.fromJSON(object.NIBatchResponse) : undefined,
+      provisionIdentity: isSet(object.provisionIdentity)
+        ? ProvisionIdentity.fromJSON(object.provisionIdentity)
+        : undefined,
+      changeOperationMode: isSet(object.changeOperationMode)
+        ? ChangeOperationMode.fromJSON(object.changeOperationMode)
+        : undefined,
+      cpdResponse: isSet(object.cpdResponse) ? CPDResponse.fromJSON(object.cpdResponse) : undefined,
+      securityControl: isSet(object.securityControl) ? SecurityControl.fromJSON(object.securityControl) : undefined,
+      personalizationInformation: isSet(object.personalizationInformation)
+        ? PersonalizationInformation.fromJSON(object.personalizationInformation)
+        : undefined,
+      field58: isSet(object.field58) ? FiraCapabilities.fromJSON(object.field58) : undefined,
+      field59: isSet(object.field59) ? FiraResponse.fromJSON(object.field59) : undefined,
+      field60: isSet(object.field60) ? AppStateEvent.fromJSON(object.field60) : undefined,
     };
   },
 
@@ -4120,6 +7846,63 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
     }
     if (message.autonomyCommand !== undefined) {
       obj.autonomyCommand = AutonomyCommand.toJSON(message.autonomyCommand);
+    }
+    if (message.setMetaDataForKey !== undefined) {
+      obj.setMetaDataForKey = KeyMetadata.toJSON(message.setMetaDataForKey);
+    }
+    if (message.deviceActivity !== undefined) {
+      obj.deviceActivity = activityEToJSON(message.deviceActivity);
+    }
+    if (message.getEpochSessionInfo !== undefined) {
+      obj.getEpochSessionInfo = GetSessionInfoRequest.toJSON(message.getEpochSessionInfo);
+    }
+    if (message.deviceMotion !== undefined) {
+      obj.deviceMotion = DeviceMotion.toJSON(message.deviceMotion);
+    }
+    if (message.appDeviceInfo !== undefined) {
+      obj.appDeviceInfo = AppDeviceInfo.toJSON(message.appDeviceInfo);
+    }
+    if (message.getReaderKey !== undefined) {
+      obj.getReaderKey = GetReaderKey.toJSON(message.getReaderKey);
+    }
+    if (message.NISessionResponse !== undefined) {
+      obj.NISessionResponse = NISessionResponse.toJSON(message.NISessionResponse);
+    }
+    if (message.NISessionStopped !== undefined) {
+      obj.NISessionStopped = NISessionStopped.toJSON(message.NISessionStopped);
+    }
+    if (message.appEventLog !== undefined) {
+      obj.appEventLog = AppEventLog.toJSON(message.appEventLog);
+    }
+    if (message.serviceDiagnosticRequest !== undefined) {
+      obj.serviceDiagnosticRequest = ServiceDiagnosticRequest.toJSON(message.serviceDiagnosticRequest);
+    }
+    if (message.NIBatchResponse !== undefined) {
+      obj.NIBatchResponse = NIBatchResponse.toJSON(message.NIBatchResponse);
+    }
+    if (message.provisionIdentity !== undefined) {
+      obj.provisionIdentity = ProvisionIdentity.toJSON(message.provisionIdentity);
+    }
+    if (message.changeOperationMode !== undefined) {
+      obj.changeOperationMode = ChangeOperationMode.toJSON(message.changeOperationMode);
+    }
+    if (message.cpdResponse !== undefined) {
+      obj.cpdResponse = CPDResponse.toJSON(message.cpdResponse);
+    }
+    if (message.securityControl !== undefined) {
+      obj.securityControl = SecurityControl.toJSON(message.securityControl);
+    }
+    if (message.personalizationInformation !== undefined) {
+      obj.personalizationInformation = PersonalizationInformation.toJSON(message.personalizationInformation);
+    }
+    if (message.field58 !== undefined) {
+      obj.field58 = FiraCapabilities.toJSON(message.field58);
+    }
+    if (message.field59 !== undefined) {
+      obj.field59 = FiraResponse.toJSON(message.field59);
+    }
+    if (message.field60 !== undefined) {
+      obj.field60 = AppStateEvent.toJSON(message.field60);
     }
     return obj;
   },
@@ -4145,6 +7928,63 @@ export const UnsignedMessage: MessageFns<UnsignedMessage> = {
       : undefined;
     message.autonomyCommand = (object.autonomyCommand !== undefined && object.autonomyCommand !== null)
       ? AutonomyCommand.fromPartial(object.autonomyCommand)
+      : undefined;
+    message.setMetaDataForKey = (object.setMetaDataForKey !== undefined && object.setMetaDataForKey !== null)
+      ? KeyMetadata.fromPartial(object.setMetaDataForKey)
+      : undefined;
+    message.deviceActivity = object.deviceActivity ?? undefined;
+    message.getEpochSessionInfo = (object.getEpochSessionInfo !== undefined && object.getEpochSessionInfo !== null)
+      ? GetSessionInfoRequest.fromPartial(object.getEpochSessionInfo)
+      : undefined;
+    message.deviceMotion = (object.deviceMotion !== undefined && object.deviceMotion !== null)
+      ? DeviceMotion.fromPartial(object.deviceMotion)
+      : undefined;
+    message.appDeviceInfo = (object.appDeviceInfo !== undefined && object.appDeviceInfo !== null)
+      ? AppDeviceInfo.fromPartial(object.appDeviceInfo)
+      : undefined;
+    message.getReaderKey = (object.getReaderKey !== undefined && object.getReaderKey !== null)
+      ? GetReaderKey.fromPartial(object.getReaderKey)
+      : undefined;
+    message.NISessionResponse = (object.NISessionResponse !== undefined && object.NISessionResponse !== null)
+      ? NISessionResponse.fromPartial(object.NISessionResponse)
+      : undefined;
+    message.NISessionStopped = (object.NISessionStopped !== undefined && object.NISessionStopped !== null)
+      ? NISessionStopped.fromPartial(object.NISessionStopped)
+      : undefined;
+    message.appEventLog = (object.appEventLog !== undefined && object.appEventLog !== null)
+      ? AppEventLog.fromPartial(object.appEventLog)
+      : undefined;
+    message.serviceDiagnosticRequest =
+      (object.serviceDiagnosticRequest !== undefined && object.serviceDiagnosticRequest !== null)
+        ? ServiceDiagnosticRequest.fromPartial(object.serviceDiagnosticRequest)
+        : undefined;
+    message.NIBatchResponse = (object.NIBatchResponse !== undefined && object.NIBatchResponse !== null)
+      ? NIBatchResponse.fromPartial(object.NIBatchResponse)
+      : undefined;
+    message.provisionIdentity = (object.provisionIdentity !== undefined && object.provisionIdentity !== null)
+      ? ProvisionIdentity.fromPartial(object.provisionIdentity)
+      : undefined;
+    message.changeOperationMode = (object.changeOperationMode !== undefined && object.changeOperationMode !== null)
+      ? ChangeOperationMode.fromPartial(object.changeOperationMode)
+      : undefined;
+    message.cpdResponse = (object.cpdResponse !== undefined && object.cpdResponse !== null)
+      ? CPDResponse.fromPartial(object.cpdResponse)
+      : undefined;
+    message.securityControl = (object.securityControl !== undefined && object.securityControl !== null)
+      ? SecurityControl.fromPartial(object.securityControl)
+      : undefined;
+    message.personalizationInformation =
+      (object.personalizationInformation !== undefined && object.personalizationInformation !== null)
+        ? PersonalizationInformation.fromPartial(object.personalizationInformation)
+        : undefined;
+    message.field58 = (object.field58 !== undefined && object.field58 !== null)
+      ? FiraCapabilities.fromPartial(object.field58)
+      : undefined;
+    message.field59 = (object.field59 !== undefined && object.field59 !== null)
+      ? FiraResponse.fromPartial(object.field59)
+      : undefined;
+    message.field60 = (object.field60 !== undefined && object.field60 !== null)
+      ? AppStateEvent.fromPartial(object.field60)
       : undefined;
     return message;
   },
@@ -5105,6 +8945,19 @@ function createBaseFromVCSECMessage(): FromVCSECMessage {
     keyStatusInfo: undefined,
     activeKey: undefined,
     nominalError: undefined,
+    sessionInfo: undefined,
+    unknownKeyInfo: undefined,
+    genealogyRequest: undefined,
+    imuRequest: undefined,
+    unsecureNotification: undefined,
+    epochSessionInfo: undefined,
+    appDeviceInfoRequest: undefined,
+    alert: undefined,
+    NISessionRequest: undefined,
+    NISessionStop: undefined,
+    NIBatchRequest: undefined,
+    CPDMessage: undefined,
+    NIStatusUpdate: undefined,
   };
 }
 
@@ -5139,6 +8992,45 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
     }
     if (message.nominalError !== undefined) {
       NominalError.encode(message.nominalError, writer.uint32(370).fork()).join();
+    }
+    if (message.sessionInfo !== undefined) {
+      SessionInfo.encode(message.sessionInfo, writer.uint32(18).fork()).join();
+    }
+    if (message.unknownKeyInfo !== undefined) {
+      UnknownKeyInfo.encode(message.unknownKeyInfo, writer.uint32(186).fork()).join();
+    }
+    if (message.genealogyRequest !== undefined) {
+      writer.uint32(248).int32(message.genealogyRequest);
+    }
+    if (message.imuRequest !== undefined) {
+      writer.uint32(264).int32(message.imuRequest);
+    }
+    if (message.unsecureNotification !== undefined) {
+      UnsecureNotification.encode(message.unsecureNotification, writer.uint32(314).fork()).join();
+    }
+    if (message.epochSessionInfo !== undefined) {
+      SessionInfo1.encode(message.epochSessionInfo, writer.uint32(322).fork()).join();
+    }
+    if (message.appDeviceInfoRequest !== undefined) {
+      writer.uint32(352).int32(message.appDeviceInfoRequest);
+    }
+    if (message.alert !== undefined) {
+      Alert.encode(message.alert, writer.uint32(362).fork()).join();
+    }
+    if (message.NISessionRequest !== undefined) {
+      NISessionRequest.encode(message.NISessionRequest, writer.uint32(378).fork()).join();
+    }
+    if (message.NISessionStop !== undefined) {
+      NISessionStop.encode(message.NISessionStop, writer.uint32(386).fork()).join();
+    }
+    if (message.NIBatchRequest !== undefined) {
+      NIBatchRequest.encode(message.NIBatchRequest, writer.uint32(426).fork()).join();
+    }
+    if (message.CPDMessage !== undefined) {
+      CPDMessage.encode(message.CPDMessage, writer.uint32(442).fork()).join();
+    }
+    if (message.NIStatusUpdate !== undefined) {
+      NIStatusUpdate.encode(message.NIStatusUpdate, writer.uint32(450).fork()).join();
     }
     return writer;
   },
@@ -5230,6 +9122,110 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
           message.nominalError = NominalError.decode(reader, reader.uint32());
           continue;
         }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.sessionInfo = SessionInfo.decode(reader, reader.uint32());
+          continue;
+        }
+        case 23: {
+          if (tag !== 186) {
+            break;
+          }
+
+          message.unknownKeyInfo = UnknownKeyInfo.decode(reader, reader.uint32());
+          continue;
+        }
+        case 31: {
+          if (tag !== 248) {
+            break;
+          }
+
+          message.genealogyRequest = reader.int32() as any;
+          continue;
+        }
+        case 33: {
+          if (tag !== 264) {
+            break;
+          }
+
+          message.imuRequest = reader.int32() as any;
+          continue;
+        }
+        case 39: {
+          if (tag !== 314) {
+            break;
+          }
+
+          message.unsecureNotification = UnsecureNotification.decode(reader, reader.uint32());
+          continue;
+        }
+        case 40: {
+          if (tag !== 322) {
+            break;
+          }
+
+          message.epochSessionInfo = SessionInfo1.decode(reader, reader.uint32());
+          continue;
+        }
+        case 44: {
+          if (tag !== 352) {
+            break;
+          }
+
+          message.appDeviceInfoRequest = reader.int32() as any;
+          continue;
+        }
+        case 45: {
+          if (tag !== 362) {
+            break;
+          }
+
+          message.alert = Alert.decode(reader, reader.uint32());
+          continue;
+        }
+        case 47: {
+          if (tag !== 378) {
+            break;
+          }
+
+          message.NISessionRequest = NISessionRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 48: {
+          if (tag !== 386) {
+            break;
+          }
+
+          message.NISessionStop = NISessionStop.decode(reader, reader.uint32());
+          continue;
+        }
+        case 53: {
+          if (tag !== 426) {
+            break;
+          }
+
+          message.NIBatchRequest = NIBatchRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 55: {
+          if (tag !== 442) {
+            break;
+          }
+
+          message.CPDMessage = CPDMessage.decode(reader, reader.uint32());
+          continue;
+        }
+        case 56: {
+          if (tag !== 450) {
+            break;
+          }
+
+          message.NIStatusUpdate = NIStatusUpdate.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -5257,6 +9253,23 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
       keyStatusInfo: isSet(object.keyStatusInfo) ? KeyStatusInfo.fromJSON(object.keyStatusInfo) : undefined,
       activeKey: isSet(object.activeKey) ? ActiveKey.fromJSON(object.activeKey) : undefined,
       nominalError: isSet(object.nominalError) ? NominalError.fromJSON(object.nominalError) : undefined,
+      sessionInfo: isSet(object.sessionInfo) ? SessionInfo.fromJSON(object.sessionInfo) : undefined,
+      unknownKeyInfo: isSet(object.unknownKeyInfo) ? UnknownKeyInfo.fromJSON(object.unknownKeyInfo) : undefined,
+      genealogyRequest: isSet(object.genealogyRequest) ? genealogyRequestEFromJSON(object.genealogyRequest) : undefined,
+      imuRequest: isSet(object.imuRequest) ? iMURequestEFromJSON(object.imuRequest) : undefined,
+      unsecureNotification: isSet(object.unsecureNotification)
+        ? UnsecureNotification.fromJSON(object.unsecureNotification)
+        : undefined,
+      epochSessionInfo: isSet(object.epochSessionInfo) ? SessionInfo1.fromJSON(object.epochSessionInfo) : undefined,
+      appDeviceInfoRequest: isSet(object.appDeviceInfoRequest)
+        ? appDeviceInfoRequestEFromJSON(object.appDeviceInfoRequest)
+        : undefined,
+      alert: isSet(object.alert) ? Alert.fromJSON(object.alert) : undefined,
+      NISessionRequest: isSet(object.NISessionRequest) ? NISessionRequest.fromJSON(object.NISessionRequest) : undefined,
+      NISessionStop: isSet(object.NISessionStop) ? NISessionStop.fromJSON(object.NISessionStop) : undefined,
+      NIBatchRequest: isSet(object.NIBatchRequest) ? NIBatchRequest.fromJSON(object.NIBatchRequest) : undefined,
+      CPDMessage: isSet(object.CPDMessage) ? CPDMessage.fromJSON(object.CPDMessage) : undefined,
+      NIStatusUpdate: isSet(object.NIStatusUpdate) ? NIStatusUpdate.fromJSON(object.NIStatusUpdate) : undefined,
     };
   },
 
@@ -5291,6 +9304,45 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
     }
     if (message.nominalError !== undefined) {
       obj.nominalError = NominalError.toJSON(message.nominalError);
+    }
+    if (message.sessionInfo !== undefined) {
+      obj.sessionInfo = SessionInfo.toJSON(message.sessionInfo);
+    }
+    if (message.unknownKeyInfo !== undefined) {
+      obj.unknownKeyInfo = UnknownKeyInfo.toJSON(message.unknownKeyInfo);
+    }
+    if (message.genealogyRequest !== undefined) {
+      obj.genealogyRequest = genealogyRequestEToJSON(message.genealogyRequest);
+    }
+    if (message.imuRequest !== undefined) {
+      obj.imuRequest = iMURequestEToJSON(message.imuRequest);
+    }
+    if (message.unsecureNotification !== undefined) {
+      obj.unsecureNotification = UnsecureNotification.toJSON(message.unsecureNotification);
+    }
+    if (message.epochSessionInfo !== undefined) {
+      obj.epochSessionInfo = SessionInfo1.toJSON(message.epochSessionInfo);
+    }
+    if (message.appDeviceInfoRequest !== undefined) {
+      obj.appDeviceInfoRequest = appDeviceInfoRequestEToJSON(message.appDeviceInfoRequest);
+    }
+    if (message.alert !== undefined) {
+      obj.alert = Alert.toJSON(message.alert);
+    }
+    if (message.NISessionRequest !== undefined) {
+      obj.NISessionRequest = NISessionRequest.toJSON(message.NISessionRequest);
+    }
+    if (message.NISessionStop !== undefined) {
+      obj.NISessionStop = NISessionStop.toJSON(message.NISessionStop);
+    }
+    if (message.NIBatchRequest !== undefined) {
+      obj.NIBatchRequest = NIBatchRequest.toJSON(message.NIBatchRequest);
+    }
+    if (message.CPDMessage !== undefined) {
+      obj.CPDMessage = CPDMessage.toJSON(message.CPDMessage);
+    }
+    if (message.NIStatusUpdate !== undefined) {
+      obj.NIStatusUpdate = NIStatusUpdate.toJSON(message.NIStatusUpdate);
     }
     return obj;
   },
@@ -5332,6 +9384,6258 @@ export const FromVCSECMessage: MessageFns<FromVCSECMessage> = {
     message.nominalError = (object.nominalError !== undefined && object.nominalError !== null)
       ? NominalError.fromPartial(object.nominalError)
       : undefined;
+    message.sessionInfo = (object.sessionInfo !== undefined && object.sessionInfo !== null)
+      ? SessionInfo.fromPartial(object.sessionInfo)
+      : undefined;
+    message.unknownKeyInfo = (object.unknownKeyInfo !== undefined && object.unknownKeyInfo !== null)
+      ? UnknownKeyInfo.fromPartial(object.unknownKeyInfo)
+      : undefined;
+    message.genealogyRequest = object.genealogyRequest ?? undefined;
+    message.imuRequest = object.imuRequest ?? undefined;
+    message.unsecureNotification = (object.unsecureNotification !== undefined && object.unsecureNotification !== null)
+      ? UnsecureNotification.fromPartial(object.unsecureNotification)
+      : undefined;
+    message.epochSessionInfo = (object.epochSessionInfo !== undefined && object.epochSessionInfo !== null)
+      ? SessionInfo1.fromPartial(object.epochSessionInfo)
+      : undefined;
+    message.appDeviceInfoRequest = object.appDeviceInfoRequest ?? undefined;
+    message.alert = (object.alert !== undefined && object.alert !== null) ? Alert.fromPartial(object.alert) : undefined;
+    message.NISessionRequest = (object.NISessionRequest !== undefined && object.NISessionRequest !== null)
+      ? NISessionRequest.fromPartial(object.NISessionRequest)
+      : undefined;
+    message.NISessionStop = (object.NISessionStop !== undefined && object.NISessionStop !== null)
+      ? NISessionStop.fromPartial(object.NISessionStop)
+      : undefined;
+    message.NIBatchRequest = (object.NIBatchRequest !== undefined && object.NIBatchRequest !== null)
+      ? NIBatchRequest.fromPartial(object.NIBatchRequest)
+      : undefined;
+    message.CPDMessage = (object.CPDMessage !== undefined && object.CPDMessage !== null)
+      ? CPDMessage.fromPartial(object.CPDMessage)
+      : undefined;
+    message.NIStatusUpdate = (object.NIStatusUpdate !== undefined && object.NIStatusUpdate !== null)
+      ? NIStatusUpdate.fromPartial(object.NIStatusUpdate)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseAlert(): Alert {
+  return { alertHandlePulledWithoutAuth: undefined, alertConfirmation: undefined };
+}
+
+export const Alert: MessageFns<Alert> = {
+  encode(message: Alert, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.alertHandlePulledWithoutAuth !== undefined) {
+      AlertHandlePulledWithoutAuth.encode(message.alertHandlePulledWithoutAuth, writer.uint32(10).fork()).join();
+    }
+    if (message.alertConfirmation !== undefined) {
+      writer.uint32(16).int32(message.alertConfirmation);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): Alert {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAlert();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.alertHandlePulledWithoutAuth = AlertHandlePulledWithoutAuth.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.alertConfirmation = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Alert {
+    return {
+      alertHandlePulledWithoutAuth: isSet(object.alertHandlePulledWithoutAuth)
+        ? AlertHandlePulledWithoutAuth.fromJSON(object.alertHandlePulledWithoutAuth)
+        : undefined,
+      alertConfirmation: isSet(object.alertConfirmation)
+        ? alertConfirmationFromJSON(object.alertConfirmation)
+        : undefined,
+    };
+  },
+
+  toJSON(message: Alert): unknown {
+    const obj: any = {};
+    if (message.alertHandlePulledWithoutAuth !== undefined) {
+      obj.alertHandlePulledWithoutAuth = AlertHandlePulledWithoutAuth.toJSON(message.alertHandlePulledWithoutAuth);
+    }
+    if (message.alertConfirmation !== undefined) {
+      obj.alertConfirmation = alertConfirmationToJSON(message.alertConfirmation);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Alert>, I>>(base?: I): Alert {
+    return Alert.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Alert>, I>>(object: I): Alert {
+    const message = createBaseAlert();
+    message.alertHandlePulledWithoutAuth =
+      (object.alertHandlePulledWithoutAuth !== undefined && object.alertHandlePulledWithoutAuth !== null)
+        ? AlertHandlePulledWithoutAuth.fromPartial(object.alertHandlePulledWithoutAuth)
+        : undefined;
+    message.alertConfirmation = object.alertConfirmation ?? undefined;
+    return message;
+  },
+};
+
+function createBaseAlertHandlePulledWithoutAuth(): AlertHandlePulledWithoutAuth {
+  return {
+    timeSinceAlertSetMs: 0,
+    handlePulled: 0,
+    connectionCount: 0,
+    unknownDevicePresent: false,
+    authRequested: false,
+    deviceSpecificPayload: [],
+  };
+}
+
+export const AlertHandlePulledWithoutAuth: MessageFns<AlertHandlePulledWithoutAuth> = {
+  encode(message: AlertHandlePulledWithoutAuth, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.timeSinceAlertSetMs !== 0) {
+      writer.uint32(8).uint32(message.timeSinceAlertSetMs);
+    }
+    if (message.handlePulled !== 0) {
+      writer.uint32(16).int32(message.handlePulled);
+    }
+    if (message.connectionCount !== 0) {
+      writer.uint32(24).uint32(message.connectionCount);
+    }
+    if (message.unknownDevicePresent !== false) {
+      writer.uint32(32).bool(message.unknownDevicePresent);
+    }
+    if (message.authRequested !== false) {
+      writer.uint32(40).bool(message.authRequested);
+    }
+    for (const v of message.deviceSpecificPayload) {
+      HandlePulledWithoutAuthDeviceSpecificPayload.encode(v!, writer.uint32(50).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AlertHandlePulledWithoutAuth {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAlertHandlePulledWithoutAuth();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.timeSinceAlertSetMs = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.handlePulled = reader.int32() as any;
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.connectionCount = reader.uint32();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.unknownDevicePresent = reader.bool();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.authRequested = reader.bool();
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.deviceSpecificPayload.push(
+            HandlePulledWithoutAuthDeviceSpecificPayload.decode(reader, reader.uint32()),
+          );
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AlertHandlePulledWithoutAuth {
+    return {
+      timeSinceAlertSetMs: isSet(object.timeSinceAlertSetMs) ? globalThis.Number(object.timeSinceAlertSetMs) : 0,
+      handlePulled: isSet(object.handlePulled) ? handlePulledEFromJSON(object.handlePulled) : 0,
+      connectionCount: isSet(object.connectionCount) ? globalThis.Number(object.connectionCount) : 0,
+      unknownDevicePresent: isSet(object.unknownDevicePresent)
+        ? globalThis.Boolean(object.unknownDevicePresent)
+        : false,
+      authRequested: isSet(object.authRequested) ? globalThis.Boolean(object.authRequested) : false,
+      deviceSpecificPayload: globalThis.Array.isArray(object?.deviceSpecificPayload)
+        ? object.deviceSpecificPayload.map((e: any) => HandlePulledWithoutAuthDeviceSpecificPayload.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: AlertHandlePulledWithoutAuth): unknown {
+    const obj: any = {};
+    if (message.timeSinceAlertSetMs !== undefined) {
+      obj.timeSinceAlertSetMs = Math.round(message.timeSinceAlertSetMs);
+    }
+    if (message.handlePulled !== undefined) {
+      obj.handlePulled = handlePulledEToJSON(message.handlePulled);
+    }
+    if (message.connectionCount !== undefined) {
+      obj.connectionCount = Math.round(message.connectionCount);
+    }
+    if (message.unknownDevicePresent !== undefined) {
+      obj.unknownDevicePresent = message.unknownDevicePresent;
+    }
+    if (message.authRequested !== undefined) {
+      obj.authRequested = message.authRequested;
+    }
+    if (message.deviceSpecificPayload?.length) {
+      obj.deviceSpecificPayload = message.deviceSpecificPayload.map((e) =>
+        HandlePulledWithoutAuthDeviceSpecificPayload.toJSON(e)
+      );
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AlertHandlePulledWithoutAuth>, I>>(base?: I): AlertHandlePulledWithoutAuth {
+    return AlertHandlePulledWithoutAuth.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AlertHandlePulledWithoutAuth>, I>>(object: I): AlertHandlePulledWithoutAuth {
+    const message = createBaseAlertHandlePulledWithoutAuth();
+    message.timeSinceAlertSetMs = object.timeSinceAlertSetMs ?? 0;
+    message.handlePulled = object.handlePulled ?? 0;
+    message.connectionCount = object.connectionCount ?? 0;
+    message.unknownDevicePresent = object.unknownDevicePresent ?? false;
+    message.authRequested = object.authRequested ?? false;
+    message.deviceSpecificPayload =
+      object.deviceSpecificPayload?.map((e) => HandlePulledWithoutAuthDeviceSpecificPayload.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseAppDeviceInfo(): AppDeviceInfo {
+  return {
+    hardwareModelSha256: new Uint8Array(0),
+    os: 0,
+    UWBAvailable: 0,
+    phoneVersion: undefined,
+    batchedNISessionsSupported: false,
+    batteryLevelPercent: 0,
+    batteryState: 0,
+    thermalState: 0,
+    lowPowerMode: false,
+  };
+}
+
+export const AppDeviceInfo: MessageFns<AppDeviceInfo> = {
+  encode(message: AppDeviceInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.hardwareModelSha256.length !== 0) {
+      writer.uint32(10).bytes(message.hardwareModelSha256);
+    }
+    if (message.os !== 0) {
+      writer.uint32(16).int32(message.os);
+    }
+    if (message.UWBAvailable !== 0) {
+      writer.uint32(24).int32(message.UWBAvailable);
+    }
+    if (message.phoneVersion !== undefined) {
+      PhoneVersionInfo.encode(message.phoneVersion, writer.uint32(34).fork()).join();
+    }
+    if (message.batchedNISessionsSupported !== false) {
+      writer.uint32(40).bool(message.batchedNISessionsSupported);
+    }
+    if (message.batteryLevelPercent !== 0) {
+      writer.uint32(48).uint32(message.batteryLevelPercent);
+    }
+    if (message.batteryState !== 0) {
+      writer.uint32(56).int32(message.batteryState);
+    }
+    if (message.thermalState !== 0) {
+      writer.uint32(64).int32(message.thermalState);
+    }
+    if (message.lowPowerMode !== false) {
+      writer.uint32(72).bool(message.lowPowerMode);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AppDeviceInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAppDeviceInfo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.hardwareModelSha256 = reader.bytes();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.os = reader.int32() as any;
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.UWBAvailable = reader.int32() as any;
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.phoneVersion = PhoneVersionInfo.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.batchedNISessionsSupported = reader.bool();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.batteryLevelPercent = reader.uint32();
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.batteryState = reader.int32() as any;
+          continue;
+        }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.thermalState = reader.int32() as any;
+          continue;
+        }
+        case 9: {
+          if (tag !== 72) {
+            break;
+          }
+
+          message.lowPowerMode = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AppDeviceInfo {
+    return {
+      hardwareModelSha256: isSet(object.hardwareModelSha256)
+        ? bytesFromBase64(object.hardwareModelSha256)
+        : new Uint8Array(0),
+      os: isSet(object.os) ? appOperatingSystemFromJSON(object.os) : 0,
+      UWBAvailable: isSet(object.UWBAvailable) ? uWBAvailabilityFromJSON(object.UWBAvailable) : 0,
+      phoneVersion: isSet(object.phoneVersion) ? PhoneVersionInfo.fromJSON(object.phoneVersion) : undefined,
+      batchedNISessionsSupported: isSet(object.batchedNISessionsSupported)
+        ? globalThis.Boolean(object.batchedNISessionsSupported)
+        : false,
+      batteryLevelPercent: isSet(object.batteryLevelPercent) ? globalThis.Number(object.batteryLevelPercent) : 0,
+      batteryState: isSet(object.batteryState) ? batteryStateEFromJSON(object.batteryState) : 0,
+      thermalState: isSet(object.thermalState) ? phoneThermalStateEFromJSON(object.thermalState) : 0,
+      lowPowerMode: isSet(object.lowPowerMode) ? globalThis.Boolean(object.lowPowerMode) : false,
+    };
+  },
+
+  toJSON(message: AppDeviceInfo): unknown {
+    const obj: any = {};
+    if (message.hardwareModelSha256 !== undefined) {
+      obj.hardwareModelSha256 = base64FromBytes(message.hardwareModelSha256);
+    }
+    if (message.os !== undefined) {
+      obj.os = appOperatingSystemToJSON(message.os);
+    }
+    if (message.UWBAvailable !== undefined) {
+      obj.UWBAvailable = uWBAvailabilityToJSON(message.UWBAvailable);
+    }
+    if (message.phoneVersion !== undefined) {
+      obj.phoneVersion = PhoneVersionInfo.toJSON(message.phoneVersion);
+    }
+    if (message.batchedNISessionsSupported !== undefined) {
+      obj.batchedNISessionsSupported = message.batchedNISessionsSupported;
+    }
+    if (message.batteryLevelPercent !== undefined) {
+      obj.batteryLevelPercent = Math.round(message.batteryLevelPercent);
+    }
+    if (message.batteryState !== undefined) {
+      obj.batteryState = batteryStateEToJSON(message.batteryState);
+    }
+    if (message.thermalState !== undefined) {
+      obj.thermalState = phoneThermalStateEToJSON(message.thermalState);
+    }
+    if (message.lowPowerMode !== undefined) {
+      obj.lowPowerMode = message.lowPowerMode;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AppDeviceInfo>, I>>(base?: I): AppDeviceInfo {
+    return AppDeviceInfo.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AppDeviceInfo>, I>>(object: I): AppDeviceInfo {
+    const message = createBaseAppDeviceInfo();
+    message.hardwareModelSha256 = object.hardwareModelSha256 ?? new Uint8Array(0);
+    message.os = object.os ?? 0;
+    message.UWBAvailable = object.UWBAvailable ?? 0;
+    message.phoneVersion = (object.phoneVersion !== undefined && object.phoneVersion !== null)
+      ? PhoneVersionInfo.fromPartial(object.phoneVersion)
+      : undefined;
+    message.batchedNISessionsSupported = object.batchedNISessionsSupported ?? false;
+    message.batteryLevelPercent = object.batteryLevelPercent ?? 0;
+    message.batteryState = object.batteryState ?? 0;
+    message.thermalState = object.thermalState ?? 0;
+    message.lowPowerMode = object.lowPowerMode ?? false;
+    return message;
+  },
+};
+
+function createBaseAppEventBondingStarted(): AppEventBondingStarted {
+  return {};
+}
+
+export const AppEventBondingStarted: MessageFns<AppEventBondingStarted> = {
+  encode(_: AppEventBondingStarted, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AppEventBondingStarted {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAppEventBondingStarted();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): AppEventBondingStarted {
+    return {};
+  },
+
+  toJSON(_: AppEventBondingStarted): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AppEventBondingStarted>, I>>(base?: I): AppEventBondingStarted {
+    return AppEventBondingStarted.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AppEventBondingStarted>, I>>(_: I): AppEventBondingStarted {
+    const message = createBaseAppEventBondingStarted();
+    return message;
+  },
+};
+
+function createBaseAppEventLog(): AppEventLog {
+  return {
+    timestamp: 0,
+    peerRemovedPairingInformation: undefined,
+    phoneLogForHandlePulledWithoutAuthentication: undefined,
+    bondingStarted: undefined,
+  };
+}
+
+export const AppEventLog: MessageFns<AppEventLog> = {
+  encode(message: AppEventLog, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.timestamp !== 0) {
+      writer.uint32(13).fixed32(message.timestamp);
+    }
+    if (message.peerRemovedPairingInformation !== undefined) {
+      AppEventPeerRemovedPairingInformation.encode(message.peerRemovedPairingInformation, writer.uint32(18).fork())
+        .join();
+    }
+    if (message.phoneLogForHandlePulledWithoutAuthentication !== undefined) {
+      PhoneLogForHandlePulledWithoutAuthentication.encode(
+        message.phoneLogForHandlePulledWithoutAuthentication,
+        writer.uint32(26).fork(),
+      ).join();
+    }
+    if (message.bondingStarted !== undefined) {
+      AppEventBondingStarted.encode(message.bondingStarted, writer.uint32(42).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AppEventLog {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAppEventLog();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 13) {
+            break;
+          }
+
+          message.timestamp = reader.fixed32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.peerRemovedPairingInformation = AppEventPeerRemovedPairingInformation.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.phoneLogForHandlePulledWithoutAuthentication = PhoneLogForHandlePulledWithoutAuthentication.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.bondingStarted = AppEventBondingStarted.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AppEventLog {
+    return {
+      timestamp: isSet(object.timestamp) ? globalThis.Number(object.timestamp) : 0,
+      peerRemovedPairingInformation: isSet(object.peerRemovedPairingInformation)
+        ? AppEventPeerRemovedPairingInformation.fromJSON(object.peerRemovedPairingInformation)
+        : undefined,
+      phoneLogForHandlePulledWithoutAuthentication: isSet(object.phoneLogForHandlePulledWithoutAuthentication)
+        ? PhoneLogForHandlePulledWithoutAuthentication.fromJSON(object.phoneLogForHandlePulledWithoutAuthentication)
+        : undefined,
+      bondingStarted: isSet(object.bondingStarted) ? AppEventBondingStarted.fromJSON(object.bondingStarted) : undefined,
+    };
+  },
+
+  toJSON(message: AppEventLog): unknown {
+    const obj: any = {};
+    if (message.timestamp !== undefined) {
+      obj.timestamp = Math.round(message.timestamp);
+    }
+    if (message.peerRemovedPairingInformation !== undefined) {
+      obj.peerRemovedPairingInformation = AppEventPeerRemovedPairingInformation.toJSON(
+        message.peerRemovedPairingInformation,
+      );
+    }
+    if (message.phoneLogForHandlePulledWithoutAuthentication !== undefined) {
+      obj.phoneLogForHandlePulledWithoutAuthentication = PhoneLogForHandlePulledWithoutAuthentication.toJSON(
+        message.phoneLogForHandlePulledWithoutAuthentication,
+      );
+    }
+    if (message.bondingStarted !== undefined) {
+      obj.bondingStarted = AppEventBondingStarted.toJSON(message.bondingStarted);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AppEventLog>, I>>(base?: I): AppEventLog {
+    return AppEventLog.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AppEventLog>, I>>(object: I): AppEventLog {
+    const message = createBaseAppEventLog();
+    message.timestamp = object.timestamp ?? 0;
+    message.peerRemovedPairingInformation =
+      (object.peerRemovedPairingInformation !== undefined && object.peerRemovedPairingInformation !== null)
+        ? AppEventPeerRemovedPairingInformation.fromPartial(object.peerRemovedPairingInformation)
+        : undefined;
+    message.phoneLogForHandlePulledWithoutAuthentication =
+      (object.phoneLogForHandlePulledWithoutAuthentication !== undefined &&
+          object.phoneLogForHandlePulledWithoutAuthentication !== null)
+        ? PhoneLogForHandlePulledWithoutAuthentication.fromPartial(object.phoneLogForHandlePulledWithoutAuthentication)
+        : undefined;
+    message.bondingStarted = (object.bondingStarted !== undefined && object.bondingStarted !== null)
+      ? AppEventBondingStarted.fromPartial(object.bondingStarted)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseAppEventPeerRemovedPairingInformation(): AppEventPeerRemovedPairingInformation {
+  return { keyId: undefined };
+}
+
+export const AppEventPeerRemovedPairingInformation: MessageFns<AppEventPeerRemovedPairingInformation> = {
+  encode(message: AppEventPeerRemovedPairingInformation, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.keyId !== undefined) {
+      KeyIdentifier.encode(message.keyId, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AppEventPeerRemovedPairingInformation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAppEventPeerRemovedPairingInformation();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.keyId = KeyIdentifier.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AppEventPeerRemovedPairingInformation {
+    return { keyId: isSet(object.keyId) ? KeyIdentifier.fromJSON(object.keyId) : undefined };
+  },
+
+  toJSON(message: AppEventPeerRemovedPairingInformation): unknown {
+    const obj: any = {};
+    if (message.keyId !== undefined) {
+      obj.keyId = KeyIdentifier.toJSON(message.keyId);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AppEventPeerRemovedPairingInformation>, I>>(
+    base?: I,
+  ): AppEventPeerRemovedPairingInformation {
+    return AppEventPeerRemovedPairingInformation.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AppEventPeerRemovedPairingInformation>, I>>(
+    object: I,
+  ): AppEventPeerRemovedPairingInformation {
+    const message = createBaseAppEventPeerRemovedPairingInformation();
+    message.keyId = (object.keyId !== undefined && object.keyId !== null)
+      ? KeyIdentifier.fromPartial(object.keyId)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseAppStateEvent(): AppStateEvent {
+  return { field1: undefined };
+}
+
+export const AppStateEvent: MessageFns<AppStateEvent> = {
+  encode(message: AppStateEvent, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.field1 !== undefined) {
+      WatchAppStateEvent.encode(message.field1, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): AppStateEvent {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseAppStateEvent();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.field1 = WatchAppStateEvent.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): AppStateEvent {
+    return { field1: isSet(object.field1) ? WatchAppStateEvent.fromJSON(object.field1) : undefined };
+  },
+
+  toJSON(message: AppStateEvent): unknown {
+    const obj: any = {};
+    if (message.field1 !== undefined) {
+      obj.field1 = WatchAppStateEvent.toJSON(message.field1);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<AppStateEvent>, I>>(base?: I): AppStateEvent {
+    return AppStateEvent.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<AppStateEvent>, I>>(object: I): AppStateEvent {
+    const message = createBaseAppStateEvent();
+    message.field1 = (object.field1 !== undefined && object.field1 !== null)
+      ? WatchAppStateEvent.fromPartial(object.field1)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseCPDMessage(): CPDMessage {
+  return { CPDNotification: 0 };
+}
+
+export const CPDMessage: MessageFns<CPDMessage> = {
+  encode(message: CPDMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.CPDNotification !== 0) {
+      writer.uint32(8).int32(message.CPDNotification);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CPDMessage {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCPDMessage();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.CPDNotification = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CPDMessage {
+    return { CPDNotification: isSet(object.CPDNotification) ? cPDNotificationEFromJSON(object.CPDNotification) : 0 };
+  },
+
+  toJSON(message: CPDMessage): unknown {
+    const obj: any = {};
+    if (message.CPDNotification !== undefined) {
+      obj.CPDNotification = cPDNotificationEToJSON(message.CPDNotification);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CPDMessage>, I>>(base?: I): CPDMessage {
+    return CPDMessage.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CPDMessage>, I>>(object: I): CPDMessage {
+    const message = createBaseCPDMessage();
+    message.CPDNotification = object.CPDNotification ?? 0;
+    return message;
+  },
+};
+
+function createBaseCPDResponse(): CPDResponse {
+  return { CPDNotificationResponse: 0 };
+}
+
+export const CPDResponse: MessageFns<CPDResponse> = {
+  encode(message: CPDResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.CPDNotificationResponse !== 0) {
+      writer.uint32(8).int32(message.CPDNotificationResponse);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CPDResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCPDResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.CPDNotificationResponse = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CPDResponse {
+    return {
+      CPDNotificationResponse: isSet(object.CPDNotificationResponse)
+        ? cPDNotificationResponseEFromJSON(object.CPDNotificationResponse)
+        : 0,
+    };
+  },
+
+  toJSON(message: CPDResponse): unknown {
+    const obj: any = {};
+    if (message.CPDNotificationResponse !== undefined) {
+      obj.CPDNotificationResponse = cPDNotificationResponseEToJSON(message.CPDNotificationResponse);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CPDResponse>, I>>(base?: I): CPDResponse {
+    return CPDResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CPDResponse>, I>>(object: I): CPDResponse {
+    const message = createBaseCPDResponse();
+    message.CPDNotificationResponse = object.CPDNotificationResponse ?? 0;
+    return message;
+  },
+};
+
+function createBaseChangeOperationMode(): ChangeOperationMode {
+  return { operationMode: 0 };
+}
+
+export const ChangeOperationMode: MessageFns<ChangeOperationMode> = {
+  encode(message: ChangeOperationMode, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.operationMode !== 0) {
+      writer.uint32(8).int32(message.operationMode);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ChangeOperationMode {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseChangeOperationMode();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.operationMode = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ChangeOperationMode {
+    return { operationMode: isSet(object.operationMode) ? operationModeEFromJSON(object.operationMode) : 0 };
+  },
+
+  toJSON(message: ChangeOperationMode): unknown {
+    const obj: any = {};
+    if (message.operationMode !== undefined) {
+      obj.operationMode = operationModeEToJSON(message.operationMode);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ChangeOperationMode>, I>>(base?: I): ChangeOperationMode {
+    return ChangeOperationMode.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ChangeOperationMode>, I>>(object: I): ChangeOperationMode {
+    const message = createBaseChangeOperationMode();
+    message.operationMode = object.operationMode ?? 0;
+    return message;
+  },
+};
+
+function createBaseCodeDescriptor(): CodeDescriptor {
+  return { codeDescriptorLocation: 0, version: 0, codeDescriptorBytes: new Uint8Array(0) };
+}
+
+export const CodeDescriptor: MessageFns<CodeDescriptor> = {
+  encode(message: CodeDescriptor, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.codeDescriptorLocation !== 0) {
+      writer.uint32(8).int32(message.codeDescriptorLocation);
+    }
+    if (message.version !== 0) {
+      writer.uint32(16).uint32(message.version);
+    }
+    if (message.codeDescriptorBytes.length !== 0) {
+      writer.uint32(26).bytes(message.codeDescriptorBytes);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): CodeDescriptor {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseCodeDescriptor();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.codeDescriptorLocation = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.version = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.codeDescriptorBytes = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): CodeDescriptor {
+    return {
+      codeDescriptorLocation: isSet(object.codeDescriptorLocation)
+        ? updaterLocationFromJSON(object.codeDescriptorLocation)
+        : 0,
+      version: isSet(object.version) ? globalThis.Number(object.version) : 0,
+      codeDescriptorBytes: isSet(object.codeDescriptorBytes)
+        ? bytesFromBase64(object.codeDescriptorBytes)
+        : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: CodeDescriptor): unknown {
+    const obj: any = {};
+    if (message.codeDescriptorLocation !== undefined) {
+      obj.codeDescriptorLocation = updaterLocationToJSON(message.codeDescriptorLocation);
+    }
+    if (message.version !== undefined) {
+      obj.version = Math.round(message.version);
+    }
+    if (message.codeDescriptorBytes !== undefined) {
+      obj.codeDescriptorBytes = base64FromBytes(message.codeDescriptorBytes);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<CodeDescriptor>, I>>(base?: I): CodeDescriptor {
+    return CodeDescriptor.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<CodeDescriptor>, I>>(object: I): CodeDescriptor {
+    const message = createBaseCodeDescriptor();
+    message.codeDescriptorLocation = object.codeDescriptorLocation ?? 0;
+    message.version = object.version ?? 0;
+    message.codeDescriptorBytes = object.codeDescriptorBytes ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseDelaySleepRequest(): DelaySleepRequest {
+  return { delayTimeMs: 0 };
+}
+
+export const DelaySleepRequest: MessageFns<DelaySleepRequest> = {
+  encode(message: DelaySleepRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.delayTimeMs !== 0) {
+      writer.uint32(8).uint32(message.delayTimeMs);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): DelaySleepRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDelaySleepRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.delayTimeMs = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DelaySleepRequest {
+    return { delayTimeMs: isSet(object.delayTimeMs) ? globalThis.Number(object.delayTimeMs) : 0 };
+  },
+
+  toJSON(message: DelaySleepRequest): unknown {
+    const obj: any = {};
+    if (message.delayTimeMs !== undefined) {
+      obj.delayTimeMs = Math.round(message.delayTimeMs);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DelaySleepRequest>, I>>(base?: I): DelaySleepRequest {
+    return DelaySleepRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<DelaySleepRequest>, I>>(object: I): DelaySleepRequest {
+    const message = createBaseDelaySleepRequest();
+    message.delayTimeMs = object.delayTimeMs ?? 0;
+    return message;
+  },
+};
+
+function createBaseDeviceMotion(): DeviceMotion {
+  return { states: [], confidence: 0 };
+}
+
+export const DeviceMotion: MessageFns<DeviceMotion> = {
+  encode(message: DeviceMotion, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    writer.uint32(10).fork();
+    for (const v of message.states) {
+      writer.int32(v);
+    }
+    writer.join();
+    if (message.confidence !== 0) {
+      writer.uint32(16).int32(message.confidence);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): DeviceMotion {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseDeviceMotion();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag === 8) {
+            message.states.push(reader.int32() as any);
+
+            continue;
+          }
+
+          if (tag === 10) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.states.push(reader.int32() as any);
+            }
+
+            continue;
+          }
+
+          break;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.confidence = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): DeviceMotion {
+    return {
+      states: globalThis.Array.isArray(object?.states)
+        ? object.states.map((e: any) => deviceMotionStateFromJSON(e))
+        : [],
+      confidence: isSet(object.confidence) ? deviceMotionConfidenceFromJSON(object.confidence) : 0,
+    };
+  },
+
+  toJSON(message: DeviceMotion): unknown {
+    const obj: any = {};
+    if (message.states?.length) {
+      obj.states = message.states.map((e) => deviceMotionStateToJSON(e));
+    }
+    if (message.confidence !== undefined) {
+      obj.confidence = deviceMotionConfidenceToJSON(message.confidence);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<DeviceMotion>, I>>(base?: I): DeviceMotion {
+    return DeviceMotion.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<DeviceMotion>, I>>(object: I): DeviceMotion {
+    const message = createBaseDeviceMotion();
+    message.states = object.states?.map((e) => e) || [];
+    message.confidence = object.confidence ?? 0;
+    return message;
+  },
+};
+
+function createBaseFiraCapabilities(): FiraCapabilities {
+  return { field1: 0, field2: 0, field3: 0, field4: 0, field5: [], field6: 0, field7: false };
+}
+
+export const FiraCapabilities: MessageFns<FiraCapabilities> = {
+  encode(message: FiraCapabilities, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.field1 !== 0) {
+      writer.uint32(8).uint32(message.field1);
+    }
+    if (message.field2 !== 0) {
+      writer.uint32(16).uint32(message.field2);
+    }
+    if (message.field3 !== 0) {
+      writer.uint32(24).uint32(message.field3);
+    }
+    if (message.field4 !== 0) {
+      writer.uint32(32).uint32(message.field4);
+    }
+    writer.uint32(42).fork();
+    for (const v of message.field5) {
+      writer.uint32(v);
+    }
+    writer.join();
+    if (message.field6 !== 0) {
+      writer.uint32(48).uint32(message.field6);
+    }
+    if (message.field7 !== false) {
+      writer.uint32(56).bool(message.field7);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FiraCapabilities {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFiraCapabilities();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.field1 = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.field2 = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.field3 = reader.uint32();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.field4 = reader.uint32();
+          continue;
+        }
+        case 5: {
+          if (tag === 40) {
+            message.field5.push(reader.uint32());
+
+            continue;
+          }
+
+          if (tag === 42) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.field5.push(reader.uint32());
+            }
+
+            continue;
+          }
+
+          break;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.field6 = reader.uint32();
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.field7 = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FiraCapabilities {
+    return {
+      field1: isSet(object.field1) ? globalThis.Number(object.field1) : 0,
+      field2: isSet(object.field2) ? globalThis.Number(object.field2) : 0,
+      field3: isSet(object.field3) ? globalThis.Number(object.field3) : 0,
+      field4: isSet(object.field4) ? globalThis.Number(object.field4) : 0,
+      field5: globalThis.Array.isArray(object?.field5) ? object.field5.map((e: any) => globalThis.Number(e)) : [],
+      field6: isSet(object.field6) ? globalThis.Number(object.field6) : 0,
+      field7: isSet(object.field7) ? globalThis.Boolean(object.field7) : false,
+    };
+  },
+
+  toJSON(message: FiraCapabilities): unknown {
+    const obj: any = {};
+    if (message.field1 !== undefined) {
+      obj.field1 = Math.round(message.field1);
+    }
+    if (message.field2 !== undefined) {
+      obj.field2 = Math.round(message.field2);
+    }
+    if (message.field3 !== undefined) {
+      obj.field3 = Math.round(message.field3);
+    }
+    if (message.field4 !== undefined) {
+      obj.field4 = Math.round(message.field4);
+    }
+    if (message.field5?.length) {
+      obj.field5 = message.field5.map((e) => Math.round(e));
+    }
+    if (message.field6 !== undefined) {
+      obj.field6 = Math.round(message.field6);
+    }
+    if (message.field7 !== undefined) {
+      obj.field7 = message.field7;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FiraCapabilities>, I>>(base?: I): FiraCapabilities {
+    return FiraCapabilities.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FiraCapabilities>, I>>(object: I): FiraCapabilities {
+    const message = createBaseFiraCapabilities();
+    message.field1 = object.field1 ?? 0;
+    message.field2 = object.field2 ?? 0;
+    message.field3 = object.field3 ?? 0;
+    message.field4 = object.field4 ?? 0;
+    message.field5 = object.field5?.map((e) => e) || [];
+    message.field6 = object.field6 ?? 0;
+    message.field7 = object.field7 ?? false;
+    return message;
+  },
+};
+
+function createBaseFiraRequest(): FiraRequest {
+  return { field1: [] };
+}
+
+export const FiraRequest: MessageFns<FiraRequest> = {
+  encode(message: FiraRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.field1) {
+      FiraSessionRequest.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FiraRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFiraRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.field1.push(FiraSessionRequest.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FiraRequest {
+    return {
+      field1: globalThis.Array.isArray(object?.field1)
+        ? object.field1.map((e: any) => FiraSessionRequest.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: FiraRequest): unknown {
+    const obj: any = {};
+    if (message.field1?.length) {
+      obj.field1 = message.field1.map((e) => FiraSessionRequest.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FiraRequest>, I>>(base?: I): FiraRequest {
+    return FiraRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FiraRequest>, I>>(object: I): FiraRequest {
+    const message = createBaseFiraRequest();
+    message.field1 = object.field1?.map((e) => FiraSessionRequest.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseFiraResponse(): FiraResponse {
+  return { field1: [], field2: 0, field3: undefined };
+}
+
+export const FiraResponse: MessageFns<FiraResponse> = {
+  encode(message: FiraResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.field1) {
+      FiraSessionResponse.encode(v!, writer.uint32(10).fork()).join();
+    }
+    if (message.field2 !== 0) {
+      writer.uint32(16).uint32(message.field2);
+    }
+    if (message.field3 !== undefined) {
+      KeyIdentifier.encode(message.field3, writer.uint32(26).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FiraResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFiraResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.field1.push(FiraSessionResponse.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.field2 = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.field3 = KeyIdentifier.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FiraResponse {
+    return {
+      field1: globalThis.Array.isArray(object?.field1)
+        ? object.field1.map((e: any) => FiraSessionResponse.fromJSON(e))
+        : [],
+      field2: isSet(object.field2) ? globalThis.Number(object.field2) : 0,
+      field3: isSet(object.field3) ? KeyIdentifier.fromJSON(object.field3) : undefined,
+    };
+  },
+
+  toJSON(message: FiraResponse): unknown {
+    const obj: any = {};
+    if (message.field1?.length) {
+      obj.field1 = message.field1.map((e) => FiraSessionResponse.toJSON(e));
+    }
+    if (message.field2 !== undefined) {
+      obj.field2 = Math.round(message.field2);
+    }
+    if (message.field3 !== undefined) {
+      obj.field3 = KeyIdentifier.toJSON(message.field3);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FiraResponse>, I>>(base?: I): FiraResponse {
+    return FiraResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FiraResponse>, I>>(object: I): FiraResponse {
+    const message = createBaseFiraResponse();
+    message.field1 = object.field1?.map((e) => FiraSessionResponse.fromPartial(e)) || [];
+    message.field2 = object.field2 ?? 0;
+    message.field3 = (object.field3 !== undefined && object.field3 !== null)
+      ? KeyIdentifier.fromPartial(object.field3)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseFiraSessionData(): FiraSessionData {
+  return {
+    field1: new Uint8Array(0),
+    field2: 0,
+    field3: 0,
+    field4: 0,
+    field5: new Uint8Array(0),
+    field6: new Uint8Array(0),
+  };
+}
+
+export const FiraSessionData: MessageFns<FiraSessionData> = {
+  encode(message: FiraSessionData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.field1.length !== 0) {
+      writer.uint32(10).bytes(message.field1);
+    }
+    if (message.field2 !== 0) {
+      writer.uint32(16).uint32(message.field2);
+    }
+    if (message.field3 !== 0) {
+      writer.uint32(24).uint32(message.field3);
+    }
+    if (message.field4 !== 0) {
+      writer.uint32(32).uint32(message.field4);
+    }
+    if (message.field5.length !== 0) {
+      writer.uint32(42).bytes(message.field5);
+    }
+    if (message.field6.length !== 0) {
+      writer.uint32(50).bytes(message.field6);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FiraSessionData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFiraSessionData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.field1 = reader.bytes();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.field2 = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.field3 = reader.uint32();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.field4 = reader.uint32();
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.field5 = reader.bytes();
+          continue;
+        }
+        case 6: {
+          if (tag !== 50) {
+            break;
+          }
+
+          message.field6 = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FiraSessionData {
+    return {
+      field1: isSet(object.field1) ? bytesFromBase64(object.field1) : new Uint8Array(0),
+      field2: isSet(object.field2) ? globalThis.Number(object.field2) : 0,
+      field3: isSet(object.field3) ? globalThis.Number(object.field3) : 0,
+      field4: isSet(object.field4) ? globalThis.Number(object.field4) : 0,
+      field5: isSet(object.field5) ? bytesFromBase64(object.field5) : new Uint8Array(0),
+      field6: isSet(object.field6) ? bytesFromBase64(object.field6) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: FiraSessionData): unknown {
+    const obj: any = {};
+    if (message.field1 !== undefined) {
+      obj.field1 = base64FromBytes(message.field1);
+    }
+    if (message.field2 !== undefined) {
+      obj.field2 = Math.round(message.field2);
+    }
+    if (message.field3 !== undefined) {
+      obj.field3 = Math.round(message.field3);
+    }
+    if (message.field4 !== undefined) {
+      obj.field4 = Math.round(message.field4);
+    }
+    if (message.field5 !== undefined) {
+      obj.field5 = base64FromBytes(message.field5);
+    }
+    if (message.field6 !== undefined) {
+      obj.field6 = base64FromBytes(message.field6);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FiraSessionData>, I>>(base?: I): FiraSessionData {
+    return FiraSessionData.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FiraSessionData>, I>>(object: I): FiraSessionData {
+    const message = createBaseFiraSessionData();
+    message.field1 = object.field1 ?? new Uint8Array(0);
+    message.field2 = object.field2 ?? 0;
+    message.field3 = object.field3 ?? 0;
+    message.field4 = object.field4 ?? 0;
+    message.field5 = object.field5 ?? new Uint8Array(0);
+    message.field6 = object.field6 ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseFiraSessionRequest(): FiraSessionRequest {
+  return {
+    field1: 0,
+    field2: 0,
+    field3: new Uint8Array(0),
+    field5: 0,
+    field6: 0,
+    field7: 0,
+    field8: new Uint8Array(0),
+    field9: 0,
+    field10: 0,
+  };
+}
+
+export const FiraSessionRequest: MessageFns<FiraSessionRequest> = {
+  encode(message: FiraSessionRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.field1 !== 0) {
+      writer.uint32(8).uint32(message.field1);
+    }
+    if (message.field2 !== 0) {
+      writer.uint32(16).int32(message.field2);
+    }
+    if (message.field3.length !== 0) {
+      writer.uint32(26).bytes(message.field3);
+    }
+    if (message.field5 !== 0) {
+      writer.uint32(40).uint32(message.field5);
+    }
+    if (message.field6 !== 0) {
+      writer.uint32(48).uint32(message.field6);
+    }
+    if (message.field7 !== 0) {
+      writer.uint32(56).int32(message.field7);
+    }
+    if (message.field8.length !== 0) {
+      writer.uint32(66).bytes(message.field8);
+    }
+    if (message.field9 !== 0) {
+      writer.uint32(72).int32(message.field9);
+    }
+    if (message.field10 !== 0) {
+      writer.uint32(80).uint32(message.field10);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FiraSessionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFiraSessionRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.field1 = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.field2 = reader.int32() as any;
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.field3 = reader.bytes();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.field5 = reader.uint32();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.field6 = reader.uint32();
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.field7 = reader.int32() as any;
+          continue;
+        }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.field8 = reader.bytes();
+          continue;
+        }
+        case 9: {
+          if (tag !== 72) {
+            break;
+          }
+
+          message.field9 = reader.int32() as any;
+          continue;
+        }
+        case 10: {
+          if (tag !== 80) {
+            break;
+          }
+
+          message.field10 = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FiraSessionRequest {
+    return {
+      field1: isSet(object.field1) ? globalThis.Number(object.field1) : 0,
+      field2: isSet(object.field2) ? firaRangingTypeFromJSON(object.field2) : 0,
+      field3: isSet(object.field3) ? bytesFromBase64(object.field3) : new Uint8Array(0),
+      field5: isSet(object.field5) ? globalThis.Number(object.field5) : 0,
+      field6: isSet(object.field6) ? globalThis.Number(object.field6) : 0,
+      field7: isSet(object.field7) ? firaSTSModeFromJSON(object.field7) : 0,
+      field8: isSet(object.field8) ? bytesFromBase64(object.field8) : new Uint8Array(0),
+      field9: isSet(object.field9) ? rangingUpdateRateFromJSON(object.field9) : 0,
+      field10: isSet(object.field10) ? globalThis.Number(object.field10) : 0,
+    };
+  },
+
+  toJSON(message: FiraSessionRequest): unknown {
+    const obj: any = {};
+    if (message.field1 !== undefined) {
+      obj.field1 = Math.round(message.field1);
+    }
+    if (message.field2 !== undefined) {
+      obj.field2 = firaRangingTypeToJSON(message.field2);
+    }
+    if (message.field3 !== undefined) {
+      obj.field3 = base64FromBytes(message.field3);
+    }
+    if (message.field5 !== undefined) {
+      obj.field5 = Math.round(message.field5);
+    }
+    if (message.field6 !== undefined) {
+      obj.field6 = Math.round(message.field6);
+    }
+    if (message.field7 !== undefined) {
+      obj.field7 = firaSTSModeToJSON(message.field7);
+    }
+    if (message.field8 !== undefined) {
+      obj.field8 = base64FromBytes(message.field8);
+    }
+    if (message.field9 !== undefined) {
+      obj.field9 = rangingUpdateRateToJSON(message.field9);
+    }
+    if (message.field10 !== undefined) {
+      obj.field10 = Math.round(message.field10);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FiraSessionRequest>, I>>(base?: I): FiraSessionRequest {
+    return FiraSessionRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FiraSessionRequest>, I>>(object: I): FiraSessionRequest {
+    const message = createBaseFiraSessionRequest();
+    message.field1 = object.field1 ?? 0;
+    message.field2 = object.field2 ?? 0;
+    message.field3 = object.field3 ?? new Uint8Array(0);
+    message.field5 = object.field5 ?? 0;
+    message.field6 = object.field6 ?? 0;
+    message.field7 = object.field7 ?? 0;
+    message.field8 = object.field8 ?? new Uint8Array(0);
+    message.field9 = object.field9 ?? 0;
+    message.field10 = object.field10 ?? 0;
+    return message;
+  },
+};
+
+function createBaseFiraSessionResponse(): FiraSessionResponse {
+  return { field1: 0, field2: undefined, field3: 0 };
+}
+
+export const FiraSessionResponse: MessageFns<FiraSessionResponse> = {
+  encode(message: FiraSessionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.field1 !== 0) {
+      writer.uint32(8).uint32(message.field1);
+    }
+    if (message.field2 !== undefined) {
+      FiraSessionData.encode(message.field2, writer.uint32(18).fork()).join();
+    }
+    if (message.field3 !== 0) {
+      writer.uint32(24).int32(message.field3);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FiraSessionResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFiraSessionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.field1 = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.field2 = FiraSessionData.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.field3 = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FiraSessionResponse {
+    return {
+      field1: isSet(object.field1) ? globalThis.Number(object.field1) : 0,
+      field2: isSet(object.field2) ? FiraSessionData.fromJSON(object.field2) : undefined,
+      field3: isSet(object.field3) ? firaErrorEFromJSON(object.field3) : 0,
+    };
+  },
+
+  toJSON(message: FiraSessionResponse): unknown {
+    const obj: any = {};
+    if (message.field1 !== undefined) {
+      obj.field1 = Math.round(message.field1);
+    }
+    if (message.field2 !== undefined) {
+      obj.field2 = FiraSessionData.toJSON(message.field2);
+    }
+    if (message.field3 !== undefined) {
+      obj.field3 = firaErrorEToJSON(message.field3);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FiraSessionResponse>, I>>(base?: I): FiraSessionResponse {
+    return FiraSessionResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FiraSessionResponse>, I>>(object: I): FiraSessionResponse {
+    const message = createBaseFiraSessionResponse();
+    message.field1 = object.field1 ?? 0;
+    message.field2 = (object.field2 !== undefined && object.field2 !== null)
+      ? FiraSessionData.fromPartial(object.field2)
+      : undefined;
+    message.field3 = object.field3 ?? 0;
+    return message;
+  },
+};
+
+function createBaseFirmwareInfo(): FirmwareInfo {
+  return { deviceTarget: 0, versionCounter: 0 };
+}
+
+export const FirmwareInfo: MessageFns<FirmwareInfo> = {
+  encode(message: FirmwareInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.deviceTarget !== 0) {
+      writer.uint32(8).int32(message.deviceTarget);
+    }
+    if (message.versionCounter !== 0) {
+      writer.uint32(16).uint32(message.versionCounter);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FirmwareInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFirmwareInfo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.deviceTarget = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.versionCounter = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FirmwareInfo {
+    return {
+      deviceTarget: isSet(object.deviceTarget) ? deviceTargetFromJSON(object.deviceTarget) : 0,
+      versionCounter: isSet(object.versionCounter) ? globalThis.Number(object.versionCounter) : 0,
+    };
+  },
+
+  toJSON(message: FirmwareInfo): unknown {
+    const obj: any = {};
+    if (message.deviceTarget !== undefined) {
+      obj.deviceTarget = deviceTargetToJSON(message.deviceTarget);
+    }
+    if (message.versionCounter !== undefined) {
+      obj.versionCounter = Math.round(message.versionCounter);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FirmwareInfo>, I>>(base?: I): FirmwareInfo {
+    return FirmwareInfo.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FirmwareInfo>, I>>(object: I): FirmwareInfo {
+    const message = createBaseFirmwareInfo();
+    message.deviceTarget = object.deviceTarget ?? 0;
+    message.versionCounter = object.versionCounter ?? 0;
+    return message;
+  },
+};
+
+function createBaseFromUIMessage(): FromUIMessage {
+  return { unsignedMessage: undefined };
+}
+
+export const FromUIMessage: MessageFns<FromUIMessage> = {
+  encode(message: FromUIMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.unsignedMessage !== undefined) {
+      UnsignedMessageUI.encode(message.unsignedMessage, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FromUIMessage {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFromUIMessage();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.unsignedMessage = UnsignedMessageUI.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FromUIMessage {
+    return {
+      unsignedMessage: isSet(object.unsignedMessage) ? UnsignedMessageUI.fromJSON(object.unsignedMessage) : undefined,
+    };
+  },
+
+  toJSON(message: FromUIMessage): unknown {
+    const obj: any = {};
+    if (message.unsignedMessage !== undefined) {
+      obj.unsignedMessage = UnsignedMessageUI.toJSON(message.unsignedMessage);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FromUIMessage>, I>>(base?: I): FromUIMessage {
+    return FromUIMessage.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FromUIMessage>, I>>(object: I): FromUIMessage {
+    const message = createBaseFromUIMessage();
+    message.unsignedMessage = (object.unsignedMessage !== undefined && object.unsignedMessage !== null)
+      ? UnsignedMessageUI.fromPartial(object.unsignedMessage)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseFromVCSECMessageResponseMessage(): FromVCSECMessageResponseMessage {
+  return { nominalError: undefined };
+}
+
+export const FromVCSECMessageResponseMessage: MessageFns<FromVCSECMessageResponseMessage> = {
+  encode(message: FromVCSECMessageResponseMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.nominalError !== undefined) {
+      NominalError.encode(message.nominalError, writer.uint32(370).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): FromVCSECMessageResponseMessage {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseFromVCSECMessageResponseMessage();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 46: {
+          if (tag !== 370) {
+            break;
+          }
+
+          message.nominalError = NominalError.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): FromVCSECMessageResponseMessage {
+    return { nominalError: isSet(object.nominalError) ? NominalError.fromJSON(object.nominalError) : undefined };
+  },
+
+  toJSON(message: FromVCSECMessageResponseMessage): unknown {
+    const obj: any = {};
+    if (message.nominalError !== undefined) {
+      obj.nominalError = NominalError.toJSON(message.nominalError);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<FromVCSECMessageResponseMessage>, I>>(base?: I): FromVCSECMessageResponseMessage {
+    return FromVCSECMessageResponseMessage.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<FromVCSECMessageResponseMessage>, I>>(
+    object: I,
+  ): FromVCSECMessageResponseMessage {
+    const message = createBaseFromVCSECMessageResponseMessage();
+    message.nominalError = (object.nominalError !== undefined && object.nominalError !== null)
+      ? NominalError.fromPartial(object.nominalError)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseGenealogy(): Genealogy {
+  return { serialNumber: new Uint8Array(0), partNumber: new Uint8Array(0) };
+}
+
+export const Genealogy: MessageFns<Genealogy> = {
+  encode(message: Genealogy, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.serialNumber.length !== 0) {
+      writer.uint32(10).bytes(message.serialNumber);
+    }
+    if (message.partNumber.length !== 0) {
+      writer.uint32(18).bytes(message.partNumber);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): Genealogy {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGenealogy();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.serialNumber = reader.bytes();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.partNumber = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): Genealogy {
+    return {
+      serialNumber: isSet(object.serialNumber) ? bytesFromBase64(object.serialNumber) : new Uint8Array(0),
+      partNumber: isSet(object.partNumber) ? bytesFromBase64(object.partNumber) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: Genealogy): unknown {
+    const obj: any = {};
+    if (message.serialNumber !== undefined) {
+      obj.serialNumber = base64FromBytes(message.serialNumber);
+    }
+    if (message.partNumber !== undefined) {
+      obj.partNumber = base64FromBytes(message.partNumber);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<Genealogy>, I>>(base?: I): Genealogy {
+    return Genealogy.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<Genealogy>, I>>(object: I): Genealogy {
+    const message = createBaseGenealogy();
+    message.serialNumber = object.serialNumber ?? new Uint8Array(0);
+    message.partNumber = object.partNumber ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseGenealogyResponse(): GenealogyResponse {
+  return { currentGenealogy: undefined, status: 0 };
+}
+
+export const GenealogyResponse: MessageFns<GenealogyResponse> = {
+  encode(message: GenealogyResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.currentGenealogy !== undefined) {
+      Genealogy.encode(message.currentGenealogy, writer.uint32(10).fork()).join();
+    }
+    if (message.status !== 0) {
+      writer.uint32(16).int32(message.status);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GenealogyResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGenealogyResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.currentGenealogy = Genealogy.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.status = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GenealogyResponse {
+    return {
+      currentGenealogy: isSet(object.currentGenealogy) ? Genealogy.fromJSON(object.currentGenealogy) : undefined,
+      status: isSet(object.status) ? genealogyStatusEFromJSON(object.status) : 0,
+    };
+  },
+
+  toJSON(message: GenealogyResponse): unknown {
+    const obj: any = {};
+    if (message.currentGenealogy !== undefined) {
+      obj.currentGenealogy = Genealogy.toJSON(message.currentGenealogy);
+    }
+    if (message.status !== undefined) {
+      obj.status = genealogyStatusEToJSON(message.status);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GenealogyResponse>, I>>(base?: I): GenealogyResponse {
+    return GenealogyResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GenealogyResponse>, I>>(object: I): GenealogyResponse {
+    const message = createBaseGenealogyResponse();
+    message.currentGenealogy = (object.currentGenealogy !== undefined && object.currentGenealogy !== null)
+      ? Genealogy.fromPartial(object.currentGenealogy)
+      : undefined;
+    message.status = object.status ?? 0;
+    return message;
+  },
+};
+
+function createBaseGetCodeDescriptor(): GetCodeDescriptor {
+  return { location: 0 };
+}
+
+export const GetCodeDescriptor: MessageFns<GetCodeDescriptor> = {
+  encode(message: GetCodeDescriptor, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.location !== 0) {
+      writer.uint32(8).int32(message.location);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GetCodeDescriptor {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetCodeDescriptor();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.location = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetCodeDescriptor {
+    return { location: isSet(object.location) ? updaterLocationFromJSON(object.location) : 0 };
+  },
+
+  toJSON(message: GetCodeDescriptor): unknown {
+    const obj: any = {};
+    if (message.location !== undefined) {
+      obj.location = updaterLocationToJSON(message.location);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetCodeDescriptor>, I>>(base?: I): GetCodeDescriptor {
+    return GetCodeDescriptor.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetCodeDescriptor>, I>>(object: I): GetCodeDescriptor {
+    const message = createBaseGetCodeDescriptor();
+    message.location = object.location ?? 0;
+    return message;
+  },
+};
+
+function createBaseGetReaderKey(): GetReaderKey {
+  return { command: 0 };
+}
+
+export const GetReaderKey: MessageFns<GetReaderKey> = {
+  encode(message: GetReaderKey, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.command !== 0) {
+      writer.uint32(8).int32(message.command);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): GetReaderKey {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseGetReaderKey();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.command = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): GetReaderKey {
+    return { command: isSet(object.command) ? getReaderKeyCommandFromJSON(object.command) : 0 };
+  },
+
+  toJSON(message: GetReaderKey): unknown {
+    const obj: any = {};
+    if (message.command !== undefined) {
+      obj.command = getReaderKeyCommandToJSON(message.command);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<GetReaderKey>, I>>(base?: I): GetReaderKey {
+    return GetReaderKey.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<GetReaderKey>, I>>(object: I): GetReaderKey {
+    const message = createBaseGetReaderKey();
+    message.command = object.command ?? 0;
+    return message;
+  },
+};
+
+function createBaseHandlePulledWithoutAuthDeviceSpecificPayload(): HandlePulledWithoutAuthDeviceSpecificPayload {
+  return {
+    keyChannel: 0,
+    authenticationLevel: 0,
+    present: false,
+    RSSILeft: 0,
+    RSSIRight: 0,
+    RSSIRear: 0,
+    RSSICenter: 0,
+    RSSIFront: 0,
+    RSSISecondary: 0,
+    RSSINFCCradle: 0,
+    RSSIRearLeft: 0,
+    RSSIRearRight: 0,
+    highThreshLeftPresent: false,
+    highThreshRightPresent: false,
+    highThreshCenterPresent: false,
+    highThreshFrontPresent: false,
+    highThreshRearPresent: false,
+    highThreshRearLeftPresent: false,
+    highThreshRearRightPresent: false,
+    highThreshSecondaryPresent: false,
+    highThreshNFCPresent: false,
+    sortedDeltaBayesLeftPresent: false,
+    sortedDeltaBayesRightPresent: false,
+    rawDeltaBayesLeftPresent: false,
+    rawDeltaBayesRightPresent: false,
+  };
+}
+
+export const HandlePulledWithoutAuthDeviceSpecificPayload: MessageFns<HandlePulledWithoutAuthDeviceSpecificPayload> = {
+  encode(
+    message: HandlePulledWithoutAuthDeviceSpecificPayload,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.keyChannel !== 0) {
+      writer.uint32(8).uint32(message.keyChannel);
+    }
+    if (message.authenticationLevel !== 0) {
+      writer.uint32(16).int32(message.authenticationLevel);
+    }
+    if (message.present !== false) {
+      writer.uint32(24).bool(message.present);
+    }
+    if (message.RSSILeft !== 0) {
+      writer.uint32(32).sint32(message.RSSILeft);
+    }
+    if (message.RSSIRight !== 0) {
+      writer.uint32(40).sint32(message.RSSIRight);
+    }
+    if (message.RSSIRear !== 0) {
+      writer.uint32(48).sint32(message.RSSIRear);
+    }
+    if (message.RSSICenter !== 0) {
+      writer.uint32(56).sint32(message.RSSICenter);
+    }
+    if (message.RSSIFront !== 0) {
+      writer.uint32(64).sint32(message.RSSIFront);
+    }
+    if (message.RSSISecondary !== 0) {
+      writer.uint32(72).sint32(message.RSSISecondary);
+    }
+    if (message.RSSINFCCradle !== 0) {
+      writer.uint32(80).sint32(message.RSSINFCCradle);
+    }
+    if (message.RSSIRearLeft !== 0) {
+      writer.uint32(88).sint32(message.RSSIRearLeft);
+    }
+    if (message.RSSIRearRight !== 0) {
+      writer.uint32(96).sint32(message.RSSIRearRight);
+    }
+    if (message.highThreshLeftPresent !== false) {
+      writer.uint32(104).bool(message.highThreshLeftPresent);
+    }
+    if (message.highThreshRightPresent !== false) {
+      writer.uint32(112).bool(message.highThreshRightPresent);
+    }
+    if (message.highThreshCenterPresent !== false) {
+      writer.uint32(120).bool(message.highThreshCenterPresent);
+    }
+    if (message.highThreshFrontPresent !== false) {
+      writer.uint32(128).bool(message.highThreshFrontPresent);
+    }
+    if (message.highThreshRearPresent !== false) {
+      writer.uint32(136).bool(message.highThreshRearPresent);
+    }
+    if (message.highThreshRearLeftPresent !== false) {
+      writer.uint32(144).bool(message.highThreshRearLeftPresent);
+    }
+    if (message.highThreshRearRightPresent !== false) {
+      writer.uint32(152).bool(message.highThreshRearRightPresent);
+    }
+    if (message.highThreshSecondaryPresent !== false) {
+      writer.uint32(160).bool(message.highThreshSecondaryPresent);
+    }
+    if (message.highThreshNFCPresent !== false) {
+      writer.uint32(168).bool(message.highThreshNFCPresent);
+    }
+    if (message.sortedDeltaBayesLeftPresent !== false) {
+      writer.uint32(176).bool(message.sortedDeltaBayesLeftPresent);
+    }
+    if (message.sortedDeltaBayesRightPresent !== false) {
+      writer.uint32(184).bool(message.sortedDeltaBayesRightPresent);
+    }
+    if (message.rawDeltaBayesLeftPresent !== false) {
+      writer.uint32(192).bool(message.rawDeltaBayesLeftPresent);
+    }
+    if (message.rawDeltaBayesRightPresent !== false) {
+      writer.uint32(200).bool(message.rawDeltaBayesRightPresent);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): HandlePulledWithoutAuthDeviceSpecificPayload {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseHandlePulledWithoutAuthDeviceSpecificPayload();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.keyChannel = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.authenticationLevel = reader.int32() as any;
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.present = reader.bool();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.RSSILeft = reader.sint32();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.RSSIRight = reader.sint32();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.RSSIRear = reader.sint32();
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.RSSICenter = reader.sint32();
+          continue;
+        }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.RSSIFront = reader.sint32();
+          continue;
+        }
+        case 9: {
+          if (tag !== 72) {
+            break;
+          }
+
+          message.RSSISecondary = reader.sint32();
+          continue;
+        }
+        case 10: {
+          if (tag !== 80) {
+            break;
+          }
+
+          message.RSSINFCCradle = reader.sint32();
+          continue;
+        }
+        case 11: {
+          if (tag !== 88) {
+            break;
+          }
+
+          message.RSSIRearLeft = reader.sint32();
+          continue;
+        }
+        case 12: {
+          if (tag !== 96) {
+            break;
+          }
+
+          message.RSSIRearRight = reader.sint32();
+          continue;
+        }
+        case 13: {
+          if (tag !== 104) {
+            break;
+          }
+
+          message.highThreshLeftPresent = reader.bool();
+          continue;
+        }
+        case 14: {
+          if (tag !== 112) {
+            break;
+          }
+
+          message.highThreshRightPresent = reader.bool();
+          continue;
+        }
+        case 15: {
+          if (tag !== 120) {
+            break;
+          }
+
+          message.highThreshCenterPresent = reader.bool();
+          continue;
+        }
+        case 16: {
+          if (tag !== 128) {
+            break;
+          }
+
+          message.highThreshFrontPresent = reader.bool();
+          continue;
+        }
+        case 17: {
+          if (tag !== 136) {
+            break;
+          }
+
+          message.highThreshRearPresent = reader.bool();
+          continue;
+        }
+        case 18: {
+          if (tag !== 144) {
+            break;
+          }
+
+          message.highThreshRearLeftPresent = reader.bool();
+          continue;
+        }
+        case 19: {
+          if (tag !== 152) {
+            break;
+          }
+
+          message.highThreshRearRightPresent = reader.bool();
+          continue;
+        }
+        case 20: {
+          if (tag !== 160) {
+            break;
+          }
+
+          message.highThreshSecondaryPresent = reader.bool();
+          continue;
+        }
+        case 21: {
+          if (tag !== 168) {
+            break;
+          }
+
+          message.highThreshNFCPresent = reader.bool();
+          continue;
+        }
+        case 22: {
+          if (tag !== 176) {
+            break;
+          }
+
+          message.sortedDeltaBayesLeftPresent = reader.bool();
+          continue;
+        }
+        case 23: {
+          if (tag !== 184) {
+            break;
+          }
+
+          message.sortedDeltaBayesRightPresent = reader.bool();
+          continue;
+        }
+        case 24: {
+          if (tag !== 192) {
+            break;
+          }
+
+          message.rawDeltaBayesLeftPresent = reader.bool();
+          continue;
+        }
+        case 25: {
+          if (tag !== 200) {
+            break;
+          }
+
+          message.rawDeltaBayesRightPresent = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): HandlePulledWithoutAuthDeviceSpecificPayload {
+    return {
+      keyChannel: isSet(object.keyChannel) ? globalThis.Number(object.keyChannel) : 0,
+      authenticationLevel: isSet(object.authenticationLevel)
+        ? authenticationLevelEFromJSON(object.authenticationLevel)
+        : 0,
+      present: isSet(object.present) ? globalThis.Boolean(object.present) : false,
+      RSSILeft: isSet(object.RSSILeft) ? globalThis.Number(object.RSSILeft) : 0,
+      RSSIRight: isSet(object.RSSIRight) ? globalThis.Number(object.RSSIRight) : 0,
+      RSSIRear: isSet(object.RSSIRear) ? globalThis.Number(object.RSSIRear) : 0,
+      RSSICenter: isSet(object.RSSICenter) ? globalThis.Number(object.RSSICenter) : 0,
+      RSSIFront: isSet(object.RSSIFront) ? globalThis.Number(object.RSSIFront) : 0,
+      RSSISecondary: isSet(object.RSSISecondary) ? globalThis.Number(object.RSSISecondary) : 0,
+      RSSINFCCradle: isSet(object.RSSINFCCradle) ? globalThis.Number(object.RSSINFCCradle) : 0,
+      RSSIRearLeft: isSet(object.RSSIRearLeft) ? globalThis.Number(object.RSSIRearLeft) : 0,
+      RSSIRearRight: isSet(object.RSSIRearRight) ? globalThis.Number(object.RSSIRearRight) : 0,
+      highThreshLeftPresent: isSet(object.highThreshLeftPresent)
+        ? globalThis.Boolean(object.highThreshLeftPresent)
+        : false,
+      highThreshRightPresent: isSet(object.highThreshRightPresent)
+        ? globalThis.Boolean(object.highThreshRightPresent)
+        : false,
+      highThreshCenterPresent: isSet(object.highThreshCenterPresent)
+        ? globalThis.Boolean(object.highThreshCenterPresent)
+        : false,
+      highThreshFrontPresent: isSet(object.highThreshFrontPresent)
+        ? globalThis.Boolean(object.highThreshFrontPresent)
+        : false,
+      highThreshRearPresent: isSet(object.highThreshRearPresent)
+        ? globalThis.Boolean(object.highThreshRearPresent)
+        : false,
+      highThreshRearLeftPresent: isSet(object.highThreshRearLeftPresent)
+        ? globalThis.Boolean(object.highThreshRearLeftPresent)
+        : false,
+      highThreshRearRightPresent: isSet(object.highThreshRearRightPresent)
+        ? globalThis.Boolean(object.highThreshRearRightPresent)
+        : false,
+      highThreshSecondaryPresent: isSet(object.highThreshSecondaryPresent)
+        ? globalThis.Boolean(object.highThreshSecondaryPresent)
+        : false,
+      highThreshNFCPresent: isSet(object.highThreshNFCPresent)
+        ? globalThis.Boolean(object.highThreshNFCPresent)
+        : false,
+      sortedDeltaBayesLeftPresent: isSet(object.sortedDeltaBayesLeftPresent)
+        ? globalThis.Boolean(object.sortedDeltaBayesLeftPresent)
+        : false,
+      sortedDeltaBayesRightPresent: isSet(object.sortedDeltaBayesRightPresent)
+        ? globalThis.Boolean(object.sortedDeltaBayesRightPresent)
+        : false,
+      rawDeltaBayesLeftPresent: isSet(object.rawDeltaBayesLeftPresent)
+        ? globalThis.Boolean(object.rawDeltaBayesLeftPresent)
+        : false,
+      rawDeltaBayesRightPresent: isSet(object.rawDeltaBayesRightPresent)
+        ? globalThis.Boolean(object.rawDeltaBayesRightPresent)
+        : false,
+    };
+  },
+
+  toJSON(message: HandlePulledWithoutAuthDeviceSpecificPayload): unknown {
+    const obj: any = {};
+    if (message.keyChannel !== undefined) {
+      obj.keyChannel = Math.round(message.keyChannel);
+    }
+    if (message.authenticationLevel !== undefined) {
+      obj.authenticationLevel = authenticationLevelEToJSON(message.authenticationLevel);
+    }
+    if (message.present !== undefined) {
+      obj.present = message.present;
+    }
+    if (message.RSSILeft !== undefined) {
+      obj.RSSILeft = Math.round(message.RSSILeft);
+    }
+    if (message.RSSIRight !== undefined) {
+      obj.RSSIRight = Math.round(message.RSSIRight);
+    }
+    if (message.RSSIRear !== undefined) {
+      obj.RSSIRear = Math.round(message.RSSIRear);
+    }
+    if (message.RSSICenter !== undefined) {
+      obj.RSSICenter = Math.round(message.RSSICenter);
+    }
+    if (message.RSSIFront !== undefined) {
+      obj.RSSIFront = Math.round(message.RSSIFront);
+    }
+    if (message.RSSISecondary !== undefined) {
+      obj.RSSISecondary = Math.round(message.RSSISecondary);
+    }
+    if (message.RSSINFCCradle !== undefined) {
+      obj.RSSINFCCradle = Math.round(message.RSSINFCCradle);
+    }
+    if (message.RSSIRearLeft !== undefined) {
+      obj.RSSIRearLeft = Math.round(message.RSSIRearLeft);
+    }
+    if (message.RSSIRearRight !== undefined) {
+      obj.RSSIRearRight = Math.round(message.RSSIRearRight);
+    }
+    if (message.highThreshLeftPresent !== undefined) {
+      obj.highThreshLeftPresent = message.highThreshLeftPresent;
+    }
+    if (message.highThreshRightPresent !== undefined) {
+      obj.highThreshRightPresent = message.highThreshRightPresent;
+    }
+    if (message.highThreshCenterPresent !== undefined) {
+      obj.highThreshCenterPresent = message.highThreshCenterPresent;
+    }
+    if (message.highThreshFrontPresent !== undefined) {
+      obj.highThreshFrontPresent = message.highThreshFrontPresent;
+    }
+    if (message.highThreshRearPresent !== undefined) {
+      obj.highThreshRearPresent = message.highThreshRearPresent;
+    }
+    if (message.highThreshRearLeftPresent !== undefined) {
+      obj.highThreshRearLeftPresent = message.highThreshRearLeftPresent;
+    }
+    if (message.highThreshRearRightPresent !== undefined) {
+      obj.highThreshRearRightPresent = message.highThreshRearRightPresent;
+    }
+    if (message.highThreshSecondaryPresent !== undefined) {
+      obj.highThreshSecondaryPresent = message.highThreshSecondaryPresent;
+    }
+    if (message.highThreshNFCPresent !== undefined) {
+      obj.highThreshNFCPresent = message.highThreshNFCPresent;
+    }
+    if (message.sortedDeltaBayesLeftPresent !== undefined) {
+      obj.sortedDeltaBayesLeftPresent = message.sortedDeltaBayesLeftPresent;
+    }
+    if (message.sortedDeltaBayesRightPresent !== undefined) {
+      obj.sortedDeltaBayesRightPresent = message.sortedDeltaBayesRightPresent;
+    }
+    if (message.rawDeltaBayesLeftPresent !== undefined) {
+      obj.rawDeltaBayesLeftPresent = message.rawDeltaBayesLeftPresent;
+    }
+    if (message.rawDeltaBayesRightPresent !== undefined) {
+      obj.rawDeltaBayesRightPresent = message.rawDeltaBayesRightPresent;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<HandlePulledWithoutAuthDeviceSpecificPayload>, I>>(
+    base?: I,
+  ): HandlePulledWithoutAuthDeviceSpecificPayload {
+    return HandlePulledWithoutAuthDeviceSpecificPayload.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<HandlePulledWithoutAuthDeviceSpecificPayload>, I>>(
+    object: I,
+  ): HandlePulledWithoutAuthDeviceSpecificPayload {
+    const message = createBaseHandlePulledWithoutAuthDeviceSpecificPayload();
+    message.keyChannel = object.keyChannel ?? 0;
+    message.authenticationLevel = object.authenticationLevel ?? 0;
+    message.present = object.present ?? false;
+    message.RSSILeft = object.RSSILeft ?? 0;
+    message.RSSIRight = object.RSSIRight ?? 0;
+    message.RSSIRear = object.RSSIRear ?? 0;
+    message.RSSICenter = object.RSSICenter ?? 0;
+    message.RSSIFront = object.RSSIFront ?? 0;
+    message.RSSISecondary = object.RSSISecondary ?? 0;
+    message.RSSINFCCradle = object.RSSINFCCradle ?? 0;
+    message.RSSIRearLeft = object.RSSIRearLeft ?? 0;
+    message.RSSIRearRight = object.RSSIRearRight ?? 0;
+    message.highThreshLeftPresent = object.highThreshLeftPresent ?? false;
+    message.highThreshRightPresent = object.highThreshRightPresent ?? false;
+    message.highThreshCenterPresent = object.highThreshCenterPresent ?? false;
+    message.highThreshFrontPresent = object.highThreshFrontPresent ?? false;
+    message.highThreshRearPresent = object.highThreshRearPresent ?? false;
+    message.highThreshRearLeftPresent = object.highThreshRearLeftPresent ?? false;
+    message.highThreshRearRightPresent = object.highThreshRearRightPresent ?? false;
+    message.highThreshSecondaryPresent = object.highThreshSecondaryPresent ?? false;
+    message.highThreshNFCPresent = object.highThreshNFCPresent ?? false;
+    message.sortedDeltaBayesLeftPresent = object.sortedDeltaBayesLeftPresent ?? false;
+    message.sortedDeltaBayesRightPresent = object.sortedDeltaBayesRightPresent ?? false;
+    message.rawDeltaBayesLeftPresent = object.rawDeltaBayesLeftPresent ?? false;
+    message.rawDeltaBayesRightPresent = object.rawDeltaBayesRightPresent ?? false;
+    return message;
+  },
+};
+
+function createBaseNIBatchRequest(): NIBatchRequest {
+  return { requests: [] };
+}
+
+export const NIBatchRequest: MessageFns<NIBatchRequest> = {
+  encode(message: NIBatchRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.requests) {
+      NISessionRequest.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): NIBatchRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseNIBatchRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.requests.push(NISessionRequest.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): NIBatchRequest {
+    return {
+      requests: globalThis.Array.isArray(object?.requests)
+        ? object.requests.map((e: any) => NISessionRequest.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: NIBatchRequest): unknown {
+    const obj: any = {};
+    if (message.requests?.length) {
+      obj.requests = message.requests.map((e) => NISessionRequest.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<NIBatchRequest>, I>>(base?: I): NIBatchRequest {
+    return NIBatchRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<NIBatchRequest>, I>>(object: I): NIBatchRequest {
+    const message = createBaseNIBatchRequest();
+    message.requests = object.requests?.map((e) => NISessionRequest.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBaseNIBatchResponse(): NIBatchResponse {
+  return { responses: [], keyId: undefined, field3: 0, field4: 0 };
+}
+
+export const NIBatchResponse: MessageFns<NIBatchResponse> = {
+  encode(message: NIBatchResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.responses) {
+      NISessionResponse.encode(v!, writer.uint32(10).fork()).join();
+    }
+    if (message.keyId !== undefined) {
+      KeyIdentifier.encode(message.keyId, writer.uint32(18).fork()).join();
+    }
+    if (message.field3 !== 0) {
+      writer.uint32(24).uint32(message.field3);
+    }
+    if (message.field4 !== 0) {
+      writer.uint32(32).int32(message.field4);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): NIBatchResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseNIBatchResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.responses.push(NISessionResponse.decode(reader, reader.uint32()));
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.keyId = KeyIdentifier.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.field3 = reader.uint32();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.field4 = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): NIBatchResponse {
+    return {
+      responses: globalThis.Array.isArray(object?.responses)
+        ? object.responses.map((e: any) => NISessionResponse.fromJSON(e))
+        : [],
+      keyId: isSet(object.keyId) ? KeyIdentifier.fromJSON(object.keyId) : undefined,
+      field3: isSet(object.field3) ? globalThis.Number(object.field3) : 0,
+      field4: isSet(object.field4) ? rangingConfigTypeEFromJSON(object.field4) : 0,
+    };
+  },
+
+  toJSON(message: NIBatchResponse): unknown {
+    const obj: any = {};
+    if (message.responses?.length) {
+      obj.responses = message.responses.map((e) => NISessionResponse.toJSON(e));
+    }
+    if (message.keyId !== undefined) {
+      obj.keyId = KeyIdentifier.toJSON(message.keyId);
+    }
+    if (message.field3 !== undefined) {
+      obj.field3 = Math.round(message.field3);
+    }
+    if (message.field4 !== undefined) {
+      obj.field4 = rangingConfigTypeEToJSON(message.field4);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<NIBatchResponse>, I>>(base?: I): NIBatchResponse {
+    return NIBatchResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<NIBatchResponse>, I>>(object: I): NIBatchResponse {
+    const message = createBaseNIBatchResponse();
+    message.responses = object.responses?.map((e) => NISessionResponse.fromPartial(e)) || [];
+    message.keyId = (object.keyId !== undefined && object.keyId !== null)
+      ? KeyIdentifier.fromPartial(object.keyId)
+      : undefined;
+    message.field3 = object.field3 ?? 0;
+    message.field4 = object.field4 ?? 0;
+    return message;
+  },
+};
+
+function createBaseNIConfigurationData(): NIConfigurationData {
+  return { data: new Uint8Array(0) };
+}
+
+export const NIConfigurationData: MessageFns<NIConfigurationData> = {
+  encode(message: NIConfigurationData, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.data.length !== 0) {
+      writer.uint32(10).bytes(message.data);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): NIConfigurationData {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseNIConfigurationData();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.data = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): NIConfigurationData {
+    return { data: isSet(object.data) ? bytesFromBase64(object.data) : new Uint8Array(0) };
+  },
+
+  toJSON(message: NIConfigurationData): unknown {
+    const obj: any = {};
+    if (message.data !== undefined) {
+      obj.data = base64FromBytes(message.data);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<NIConfigurationData>, I>>(base?: I): NIConfigurationData {
+    return NIConfigurationData.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<NIConfigurationData>, I>>(object: I): NIConfigurationData {
+    const message = createBaseNIConfigurationData();
+    message.data = object.data ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseNISessionRequest(): NISessionRequest {
+  return { sessionId: 0, accessoryConfigurationData: new Uint8Array(0) };
+}
+
+export const NISessionRequest: MessageFns<NISessionRequest> = {
+  encode(message: NISessionRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.sessionId !== 0) {
+      writer.uint32(8).int32(message.sessionId);
+    }
+    if (message.accessoryConfigurationData.length !== 0) {
+      writer.uint32(18).bytes(message.accessoryConfigurationData);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): NISessionRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseNISessionRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.sessionId = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.accessoryConfigurationData = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): NISessionRequest {
+    return {
+      sessionId: isSet(object.sessionId) ? bLEEndpointEFromJSON(object.sessionId) : 0,
+      accessoryConfigurationData: isSet(object.accessoryConfigurationData)
+        ? bytesFromBase64(object.accessoryConfigurationData)
+        : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: NISessionRequest): unknown {
+    const obj: any = {};
+    if (message.sessionId !== undefined) {
+      obj.sessionId = bLEEndpointEToJSON(message.sessionId);
+    }
+    if (message.accessoryConfigurationData !== undefined) {
+      obj.accessoryConfigurationData = base64FromBytes(message.accessoryConfigurationData);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<NISessionRequest>, I>>(base?: I): NISessionRequest {
+    return NISessionRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<NISessionRequest>, I>>(object: I): NISessionRequest {
+    const message = createBaseNISessionRequest();
+    message.sessionId = object.sessionId ?? 0;
+    message.accessoryConfigurationData = object.accessoryConfigurationData ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseNISessionResponse(): NISessionResponse {
+  return { sessionId: 0, NIConfigurationData: undefined, errorCode: undefined };
+}
+
+export const NISessionResponse: MessageFns<NISessionResponse> = {
+  encode(message: NISessionResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.sessionId !== 0) {
+      writer.uint32(8).int32(message.sessionId);
+    }
+    if (message.NIConfigurationData !== undefined) {
+      NIConfigurationData.encode(message.NIConfigurationData, writer.uint32(18).fork()).join();
+    }
+    if (message.errorCode !== undefined) {
+      writer.uint32(24).int32(message.errorCode);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): NISessionResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseNISessionResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.sessionId = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.NIConfigurationData = NIConfigurationData.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.errorCode = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): NISessionResponse {
+    return {
+      sessionId: isSet(object.sessionId) ? bLEEndpointEFromJSON(object.sessionId) : 0,
+      NIConfigurationData: isSet(object.NIConfigurationData)
+        ? NIConfigurationData.fromJSON(object.NIConfigurationData)
+        : undefined,
+      errorCode: isSet(object.errorCode) ? nIErrorEFromJSON(object.errorCode) : undefined,
+    };
+  },
+
+  toJSON(message: NISessionResponse): unknown {
+    const obj: any = {};
+    if (message.sessionId !== undefined) {
+      obj.sessionId = bLEEndpointEToJSON(message.sessionId);
+    }
+    if (message.NIConfigurationData !== undefined) {
+      obj.NIConfigurationData = NIConfigurationData.toJSON(message.NIConfigurationData);
+    }
+    if (message.errorCode !== undefined) {
+      obj.errorCode = nIErrorEToJSON(message.errorCode);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<NISessionResponse>, I>>(base?: I): NISessionResponse {
+    return NISessionResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<NISessionResponse>, I>>(object: I): NISessionResponse {
+    const message = createBaseNISessionResponse();
+    message.sessionId = object.sessionId ?? 0;
+    message.NIConfigurationData = (object.NIConfigurationData !== undefined && object.NIConfigurationData !== null)
+      ? NIConfigurationData.fromPartial(object.NIConfigurationData)
+      : undefined;
+    message.errorCode = object.errorCode ?? undefined;
+    return message;
+  },
+};
+
+function createBaseNISessionStatus(): NISessionStatus {
+  return { sessionId: 0, status: 0 };
+}
+
+export const NISessionStatus: MessageFns<NISessionStatus> = {
+  encode(message: NISessionStatus, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.sessionId !== 0) {
+      writer.uint32(8).int32(message.sessionId);
+    }
+    if (message.status !== 0) {
+      writer.uint32(16).int32(message.status);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): NISessionStatus {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseNISessionStatus();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.sessionId = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.status = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): NISessionStatus {
+    return {
+      sessionId: isSet(object.sessionId) ? bLEEndpointEFromJSON(object.sessionId) : 0,
+      status: isSet(object.status) ? nISessionStatusEFromJSON(object.status) : 0,
+    };
+  },
+
+  toJSON(message: NISessionStatus): unknown {
+    const obj: any = {};
+    if (message.sessionId !== undefined) {
+      obj.sessionId = bLEEndpointEToJSON(message.sessionId);
+    }
+    if (message.status !== undefined) {
+      obj.status = nISessionStatusEToJSON(message.status);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<NISessionStatus>, I>>(base?: I): NISessionStatus {
+    return NISessionStatus.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<NISessionStatus>, I>>(object: I): NISessionStatus {
+    const message = createBaseNISessionStatus();
+    message.sessionId = object.sessionId ?? 0;
+    message.status = object.status ?? 0;
+    return message;
+  },
+};
+
+function createBaseNISessionStop(): NISessionStop {
+  return { sessionId: [] };
+}
+
+export const NISessionStop: MessageFns<NISessionStop> = {
+  encode(message: NISessionStop, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    writer.uint32(10).fork();
+    for (const v of message.sessionId) {
+      writer.int32(v);
+    }
+    writer.join();
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): NISessionStop {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseNISessionStop();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag === 8) {
+            message.sessionId.push(reader.int32() as any);
+
+            continue;
+          }
+
+          if (tag === 10) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.sessionId.push(reader.int32() as any);
+            }
+
+            continue;
+          }
+
+          break;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): NISessionStop {
+    return {
+      sessionId: globalThis.Array.isArray(object?.sessionId)
+        ? object.sessionId.map((e: any) => bLEEndpointEFromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: NISessionStop): unknown {
+    const obj: any = {};
+    if (message.sessionId?.length) {
+      obj.sessionId = message.sessionId.map((e) => bLEEndpointEToJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<NISessionStop>, I>>(base?: I): NISessionStop {
+    return NISessionStop.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<NISessionStop>, I>>(object: I): NISessionStop {
+    const message = createBaseNISessionStop();
+    message.sessionId = object.sessionId?.map((e) => e) || [];
+    return message;
+  },
+};
+
+function createBaseNISessionStopped(): NISessionStopped {
+  return { sessionId: [] };
+}
+
+export const NISessionStopped: MessageFns<NISessionStopped> = {
+  encode(message: NISessionStopped, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    writer.uint32(10).fork();
+    for (const v of message.sessionId) {
+      writer.int32(v);
+    }
+    writer.join();
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): NISessionStopped {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseNISessionStopped();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag === 8) {
+            message.sessionId.push(reader.int32() as any);
+
+            continue;
+          }
+
+          if (tag === 10) {
+            const end2 = reader.uint32() + reader.pos;
+            while (reader.pos < end2) {
+              message.sessionId.push(reader.int32() as any);
+            }
+
+            continue;
+          }
+
+          break;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): NISessionStopped {
+    return {
+      sessionId: globalThis.Array.isArray(object?.sessionId)
+        ? object.sessionId.map((e: any) => bLEEndpointEFromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: NISessionStopped): unknown {
+    const obj: any = {};
+    if (message.sessionId?.length) {
+      obj.sessionId = message.sessionId.map((e) => bLEEndpointEToJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<NISessionStopped>, I>>(base?: I): NISessionStopped {
+    return NISessionStopped.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<NISessionStopped>, I>>(object: I): NISessionStopped {
+    const message = createBaseNISessionStopped();
+    message.sessionId = object.sessionId?.map((e) => e) || [];
+    return message;
+  },
+};
+
+function createBaseNIStatusUpdate(): NIStatusUpdate {
+  return { sessionStatus: [] };
+}
+
+export const NIStatusUpdate: MessageFns<NIStatusUpdate> = {
+  encode(message: NIStatusUpdate, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    for (const v of message.sessionStatus) {
+      NISessionStatus.encode(v!, writer.uint32(10).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): NIStatusUpdate {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseNIStatusUpdate();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.sessionStatus.push(NISessionStatus.decode(reader, reader.uint32()));
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): NIStatusUpdate {
+    return {
+      sessionStatus: globalThis.Array.isArray(object?.sessionStatus)
+        ? object.sessionStatus.map((e: any) => NISessionStatus.fromJSON(e))
+        : [],
+    };
+  },
+
+  toJSON(message: NIStatusUpdate): unknown {
+    const obj: any = {};
+    if (message.sessionStatus?.length) {
+      obj.sessionStatus = message.sessionStatus.map((e) => NISessionStatus.toJSON(e));
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<NIStatusUpdate>, I>>(base?: I): NIStatusUpdate {
+    return NIStatusUpdate.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<NIStatusUpdate>, I>>(object: I): NIStatusUpdate {
+    const message = createBaseNIStatusUpdate();
+    message.sessionStatus = object.sessionStatus?.map((e) => NISessionStatus.fromPartial(e)) || [];
+    return message;
+  },
+};
+
+function createBasePhoneKeyTelemetryAndroid(): PhoneKeyTelemetryAndroid {
+  return {
+    permissionsBitmask: 0,
+    serviceRunningState: 0,
+    runningStateTimeSinceS: 0,
+    processStartTimeTimeSinceS: 0,
+    osStartTimeTimeSinceS: 0,
+    screenOnReceiverTimeSinceS: 0,
+    bootReceiverTimeSinceS: 0,
+    serviceStartReason: 0,
+  };
+}
+
+export const PhoneKeyTelemetryAndroid: MessageFns<PhoneKeyTelemetryAndroid> = {
+  encode(message: PhoneKeyTelemetryAndroid, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.permissionsBitmask !== 0) {
+      writer.uint32(13).fixed32(message.permissionsBitmask);
+    }
+    if (message.serviceRunningState !== 0) {
+      writer.uint32(16).int32(message.serviceRunningState);
+    }
+    if (message.runningStateTimeSinceS !== 0) {
+      writer.uint32(24).sint32(message.runningStateTimeSinceS);
+    }
+    if (message.processStartTimeTimeSinceS !== 0) {
+      writer.uint32(32).sint32(message.processStartTimeTimeSinceS);
+    }
+    if (message.osStartTimeTimeSinceS !== 0) {
+      writer.uint32(40).sint32(message.osStartTimeTimeSinceS);
+    }
+    if (message.screenOnReceiverTimeSinceS !== 0) {
+      writer.uint32(48).sint32(message.screenOnReceiverTimeSinceS);
+    }
+    if (message.bootReceiverTimeSinceS !== 0) {
+      writer.uint32(56).sint32(message.bootReceiverTimeSinceS);
+    }
+    if (message.serviceStartReason !== 0) {
+      writer.uint32(64).int32(message.serviceStartReason);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PhoneKeyTelemetryAndroid {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePhoneKeyTelemetryAndroid();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 13) {
+            break;
+          }
+
+          message.permissionsBitmask = reader.fixed32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.serviceRunningState = reader.int32() as any;
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.runningStateTimeSinceS = reader.sint32();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.processStartTimeTimeSinceS = reader.sint32();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.osStartTimeTimeSinceS = reader.sint32();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.screenOnReceiverTimeSinceS = reader.sint32();
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.bootReceiverTimeSinceS = reader.sint32();
+          continue;
+        }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.serviceStartReason = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PhoneKeyTelemetryAndroid {
+    return {
+      permissionsBitmask: isSet(object.permissionsBitmask) ? globalThis.Number(object.permissionsBitmask) : 0,
+      serviceRunningState: isSet(object.serviceRunningState)
+        ? phoneKeyTelemetryAndroid_ServiceRunningStateFromJSON(object.serviceRunningState)
+        : 0,
+      runningStateTimeSinceS: isSet(object.runningStateTimeSinceS)
+        ? globalThis.Number(object.runningStateTimeSinceS)
+        : 0,
+      processStartTimeTimeSinceS: isSet(object.processStartTimeTimeSinceS)
+        ? globalThis.Number(object.processStartTimeTimeSinceS)
+        : 0,
+      osStartTimeTimeSinceS: isSet(object.osStartTimeTimeSinceS) ? globalThis.Number(object.osStartTimeTimeSinceS) : 0,
+      screenOnReceiverTimeSinceS: isSet(object.screenOnReceiverTimeSinceS)
+        ? globalThis.Number(object.screenOnReceiverTimeSinceS)
+        : 0,
+      bootReceiverTimeSinceS: isSet(object.bootReceiverTimeSinceS)
+        ? globalThis.Number(object.bootReceiverTimeSinceS)
+        : 0,
+      serviceStartReason: isSet(object.serviceStartReason)
+        ? phoneKeyTelemetryAndroid_ServiceStartReasonFromJSON(object.serviceStartReason)
+        : 0,
+    };
+  },
+
+  toJSON(message: PhoneKeyTelemetryAndroid): unknown {
+    const obj: any = {};
+    if (message.permissionsBitmask !== undefined) {
+      obj.permissionsBitmask = Math.round(message.permissionsBitmask);
+    }
+    if (message.serviceRunningState !== undefined) {
+      obj.serviceRunningState = phoneKeyTelemetryAndroid_ServiceRunningStateToJSON(message.serviceRunningState);
+    }
+    if (message.runningStateTimeSinceS !== undefined) {
+      obj.runningStateTimeSinceS = Math.round(message.runningStateTimeSinceS);
+    }
+    if (message.processStartTimeTimeSinceS !== undefined) {
+      obj.processStartTimeTimeSinceS = Math.round(message.processStartTimeTimeSinceS);
+    }
+    if (message.osStartTimeTimeSinceS !== undefined) {
+      obj.osStartTimeTimeSinceS = Math.round(message.osStartTimeTimeSinceS);
+    }
+    if (message.screenOnReceiverTimeSinceS !== undefined) {
+      obj.screenOnReceiverTimeSinceS = Math.round(message.screenOnReceiverTimeSinceS);
+    }
+    if (message.bootReceiverTimeSinceS !== undefined) {
+      obj.bootReceiverTimeSinceS = Math.round(message.bootReceiverTimeSinceS);
+    }
+    if (message.serviceStartReason !== undefined) {
+      obj.serviceStartReason = phoneKeyTelemetryAndroid_ServiceStartReasonToJSON(message.serviceStartReason);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<PhoneKeyTelemetryAndroid>, I>>(base?: I): PhoneKeyTelemetryAndroid {
+    return PhoneKeyTelemetryAndroid.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<PhoneKeyTelemetryAndroid>, I>>(object: I): PhoneKeyTelemetryAndroid {
+    const message = createBasePhoneKeyTelemetryAndroid();
+    message.permissionsBitmask = object.permissionsBitmask ?? 0;
+    message.serviceRunningState = object.serviceRunningState ?? 0;
+    message.runningStateTimeSinceS = object.runningStateTimeSinceS ?? 0;
+    message.processStartTimeTimeSinceS = object.processStartTimeTimeSinceS ?? 0;
+    message.osStartTimeTimeSinceS = object.osStartTimeTimeSinceS ?? 0;
+    message.screenOnReceiverTimeSinceS = object.screenOnReceiverTimeSinceS ?? 0;
+    message.bootReceiverTimeSinceS = object.bootReceiverTimeSinceS ?? 0;
+    message.serviceStartReason = object.serviceStartReason ?? 0;
+    return message;
+  },
+};
+
+function createBasePhoneKeyTelemetryIOS(): PhoneKeyTelemetryIOS {
+  return {
+    iBeaconState: 0,
+    iBeaconStateTimeSinceS: 0,
+    CBManagerState: 0,
+    CBManagerStateTimeSinceS: 0,
+    CBManagerAuthorization: 0,
+    CBManagerAuthorizationTimeSinceS: 0,
+    CoreBTError: 0,
+    CoreBTErrorTimeSinceS: 0,
+    CoreBTATTErrorCode: 0,
+    CoreBTATTErrorTimeSinceS: 0,
+    launchReason: 0,
+    launchReasonTimeSinceS: 0,
+    appState: 0,
+  };
+}
+
+export const PhoneKeyTelemetryIOS: MessageFns<PhoneKeyTelemetryIOS> = {
+  encode(message: PhoneKeyTelemetryIOS, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.iBeaconState !== 0) {
+      writer.uint32(8).int32(message.iBeaconState);
+    }
+    if (message.iBeaconStateTimeSinceS !== 0) {
+      writer.uint32(16).sint32(message.iBeaconStateTimeSinceS);
+    }
+    if (message.CBManagerState !== 0) {
+      writer.uint32(24).int32(message.CBManagerState);
+    }
+    if (message.CBManagerStateTimeSinceS !== 0) {
+      writer.uint32(32).sint32(message.CBManagerStateTimeSinceS);
+    }
+    if (message.CBManagerAuthorization !== 0) {
+      writer.uint32(40).int32(message.CBManagerAuthorization);
+    }
+    if (message.CBManagerAuthorizationTimeSinceS !== 0) {
+      writer.uint32(48).sint32(message.CBManagerAuthorizationTimeSinceS);
+    }
+    if (message.CoreBTError !== 0) {
+      writer.uint32(56).int32(message.CoreBTError);
+    }
+    if (message.CoreBTErrorTimeSinceS !== 0) {
+      writer.uint32(64).sint32(message.CoreBTErrorTimeSinceS);
+    }
+    if (message.CoreBTATTErrorCode !== 0) {
+      writer.uint32(72).int32(message.CoreBTATTErrorCode);
+    }
+    if (message.CoreBTATTErrorTimeSinceS !== 0) {
+      writer.uint32(80).sint32(message.CoreBTATTErrorTimeSinceS);
+    }
+    if (message.launchReason !== 0) {
+      writer.uint32(88).int32(message.launchReason);
+    }
+    if (message.launchReasonTimeSinceS !== 0) {
+      writer.uint32(96).sint32(message.launchReasonTimeSinceS);
+    }
+    if (message.appState !== 0) {
+      writer.uint32(104).int32(message.appState);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PhoneKeyTelemetryIOS {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePhoneKeyTelemetryIOS();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.iBeaconState = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.iBeaconStateTimeSinceS = reader.sint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.CBManagerState = reader.int32() as any;
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.CBManagerStateTimeSinceS = reader.sint32();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.CBManagerAuthorization = reader.int32() as any;
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.CBManagerAuthorizationTimeSinceS = reader.sint32();
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.CoreBTError = reader.int32() as any;
+          continue;
+        }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.CoreBTErrorTimeSinceS = reader.sint32();
+          continue;
+        }
+        case 9: {
+          if (tag !== 72) {
+            break;
+          }
+
+          message.CoreBTATTErrorCode = reader.int32() as any;
+          continue;
+        }
+        case 10: {
+          if (tag !== 80) {
+            break;
+          }
+
+          message.CoreBTATTErrorTimeSinceS = reader.sint32();
+          continue;
+        }
+        case 11: {
+          if (tag !== 88) {
+            break;
+          }
+
+          message.launchReason = reader.int32() as any;
+          continue;
+        }
+        case 12: {
+          if (tag !== 96) {
+            break;
+          }
+
+          message.launchReasonTimeSinceS = reader.sint32();
+          continue;
+        }
+        case 13: {
+          if (tag !== 104) {
+            break;
+          }
+
+          message.appState = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PhoneKeyTelemetryIOS {
+    return {
+      iBeaconState: isSet(object.iBeaconState) ? iBeaconStateFromJSON(object.iBeaconState) : 0,
+      iBeaconStateTimeSinceS: isSet(object.iBeaconStateTimeSinceS)
+        ? globalThis.Number(object.iBeaconStateTimeSinceS)
+        : 0,
+      CBManagerState: isSet(object.CBManagerState) ? cBManagerStateFromJSON(object.CBManagerState) : 0,
+      CBManagerStateTimeSinceS: isSet(object.CBManagerStateTimeSinceS)
+        ? globalThis.Number(object.CBManagerStateTimeSinceS)
+        : 0,
+      CBManagerAuthorization: isSet(object.CBManagerAuthorization)
+        ? cBManagerAuthorizationFromJSON(object.CBManagerAuthorization)
+        : 0,
+      CBManagerAuthorizationTimeSinceS: isSet(object.CBManagerAuthorizationTimeSinceS)
+        ? globalThis.Number(object.CBManagerAuthorizationTimeSinceS)
+        : 0,
+      CoreBTError: isSet(object.CoreBTError) ? iOSCoreBTErrorFromJSON(object.CoreBTError) : 0,
+      CoreBTErrorTimeSinceS: isSet(object.CoreBTErrorTimeSinceS) ? globalThis.Number(object.CoreBTErrorTimeSinceS) : 0,
+      CoreBTATTErrorCode: isSet(object.CoreBTATTErrorCode)
+        ? iOSCoreBTATTErrorCodeFromJSON(object.CoreBTATTErrorCode)
+        : 0,
+      CoreBTATTErrorTimeSinceS: isSet(object.CoreBTATTErrorTimeSinceS)
+        ? globalThis.Number(object.CoreBTATTErrorTimeSinceS)
+        : 0,
+      launchReason: isSet(object.launchReason) ? iOSLaunchReasonFromJSON(object.launchReason) : 0,
+      launchReasonTimeSinceS: isSet(object.launchReasonTimeSinceS)
+        ? globalThis.Number(object.launchReasonTimeSinceS)
+        : 0,
+      appState: isSet(object.appState) ? iOSAppStateFromJSON(object.appState) : 0,
+    };
+  },
+
+  toJSON(message: PhoneKeyTelemetryIOS): unknown {
+    const obj: any = {};
+    if (message.iBeaconState !== undefined) {
+      obj.iBeaconState = iBeaconStateToJSON(message.iBeaconState);
+    }
+    if (message.iBeaconStateTimeSinceS !== undefined) {
+      obj.iBeaconStateTimeSinceS = Math.round(message.iBeaconStateTimeSinceS);
+    }
+    if (message.CBManagerState !== undefined) {
+      obj.CBManagerState = cBManagerStateToJSON(message.CBManagerState);
+    }
+    if (message.CBManagerStateTimeSinceS !== undefined) {
+      obj.CBManagerStateTimeSinceS = Math.round(message.CBManagerStateTimeSinceS);
+    }
+    if (message.CBManagerAuthorization !== undefined) {
+      obj.CBManagerAuthorization = cBManagerAuthorizationToJSON(message.CBManagerAuthorization);
+    }
+    if (message.CBManagerAuthorizationTimeSinceS !== undefined) {
+      obj.CBManagerAuthorizationTimeSinceS = Math.round(message.CBManagerAuthorizationTimeSinceS);
+    }
+    if (message.CoreBTError !== undefined) {
+      obj.CoreBTError = iOSCoreBTErrorToJSON(message.CoreBTError);
+    }
+    if (message.CoreBTErrorTimeSinceS !== undefined) {
+      obj.CoreBTErrorTimeSinceS = Math.round(message.CoreBTErrorTimeSinceS);
+    }
+    if (message.CoreBTATTErrorCode !== undefined) {
+      obj.CoreBTATTErrorCode = iOSCoreBTATTErrorCodeToJSON(message.CoreBTATTErrorCode);
+    }
+    if (message.CoreBTATTErrorTimeSinceS !== undefined) {
+      obj.CoreBTATTErrorTimeSinceS = Math.round(message.CoreBTATTErrorTimeSinceS);
+    }
+    if (message.launchReason !== undefined) {
+      obj.launchReason = iOSLaunchReasonToJSON(message.launchReason);
+    }
+    if (message.launchReasonTimeSinceS !== undefined) {
+      obj.launchReasonTimeSinceS = Math.round(message.launchReasonTimeSinceS);
+    }
+    if (message.appState !== undefined) {
+      obj.appState = iOSAppStateToJSON(message.appState);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<PhoneKeyTelemetryIOS>, I>>(base?: I): PhoneKeyTelemetryIOS {
+    return PhoneKeyTelemetryIOS.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<PhoneKeyTelemetryIOS>, I>>(object: I): PhoneKeyTelemetryIOS {
+    const message = createBasePhoneKeyTelemetryIOS();
+    message.iBeaconState = object.iBeaconState ?? 0;
+    message.iBeaconStateTimeSinceS = object.iBeaconStateTimeSinceS ?? 0;
+    message.CBManagerState = object.CBManagerState ?? 0;
+    message.CBManagerStateTimeSinceS = object.CBManagerStateTimeSinceS ?? 0;
+    message.CBManagerAuthorization = object.CBManagerAuthorization ?? 0;
+    message.CBManagerAuthorizationTimeSinceS = object.CBManagerAuthorizationTimeSinceS ?? 0;
+    message.CoreBTError = object.CoreBTError ?? 0;
+    message.CoreBTErrorTimeSinceS = object.CoreBTErrorTimeSinceS ?? 0;
+    message.CoreBTATTErrorCode = object.CoreBTATTErrorCode ?? 0;
+    message.CoreBTATTErrorTimeSinceS = object.CoreBTATTErrorTimeSinceS ?? 0;
+    message.launchReason = object.launchReason ?? 0;
+    message.launchReasonTimeSinceS = object.launchReasonTimeSinceS ?? 0;
+    message.appState = object.appState ?? 0;
+    return message;
+  },
+};
+
+function createBasePhoneLogForHandlePulledWithoutAuthentication(): PhoneLogForHandlePulledWithoutAuthentication {
+  return {
+    timeSinceBLESwitchEnableInSeconds: 0,
+    timeSinceAppLaunchInSeconds: 0,
+    timeSinceBeaconInSeconds: 0,
+    timeSinceConnectInSeconds: 0,
+    timeSinceForegroundInSeconds: 0,
+    timeSinceBackgroundInSeconds: 0,
+    locationPermission: 0,
+    remoteStartIssued: false,
+    peripheralState: 0,
+    GATTDiscoveryBitmask: 0,
+    timeSinceLastMessageCurrentSession: 0,
+    timeSinceLastMessageAckCurrentSession: 0,
+    iOS: undefined,
+    android: undefined,
+  };
+}
+
+export const PhoneLogForHandlePulledWithoutAuthentication: MessageFns<PhoneLogForHandlePulledWithoutAuthentication> = {
+  encode(
+    message: PhoneLogForHandlePulledWithoutAuthentication,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.timeSinceBLESwitchEnableInSeconds !== 0) {
+      writer.uint32(8).sint32(message.timeSinceBLESwitchEnableInSeconds);
+    }
+    if (message.timeSinceAppLaunchInSeconds !== 0) {
+      writer.uint32(16).sint32(message.timeSinceAppLaunchInSeconds);
+    }
+    if (message.timeSinceBeaconInSeconds !== 0) {
+      writer.uint32(24).sint32(message.timeSinceBeaconInSeconds);
+    }
+    if (message.timeSinceConnectInSeconds !== 0) {
+      writer.uint32(32).sint32(message.timeSinceConnectInSeconds);
+    }
+    if (message.timeSinceForegroundInSeconds !== 0) {
+      writer.uint32(40).sint32(message.timeSinceForegroundInSeconds);
+    }
+    if (message.timeSinceBackgroundInSeconds !== 0) {
+      writer.uint32(48).sint32(message.timeSinceBackgroundInSeconds);
+    }
+    if (message.locationPermission !== 0) {
+      writer.uint32(56).int32(message.locationPermission);
+    }
+    if (message.remoteStartIssued !== false) {
+      writer.uint32(64).bool(message.remoteStartIssued);
+    }
+    if (message.peripheralState !== 0) {
+      writer.uint32(88).int32(message.peripheralState);
+    }
+    if (message.GATTDiscoveryBitmask !== 0) {
+      writer.uint32(96).uint32(message.GATTDiscoveryBitmask);
+    }
+    if (message.timeSinceLastMessageCurrentSession !== 0) {
+      writer.uint32(104).sint32(message.timeSinceLastMessageCurrentSession);
+    }
+    if (message.timeSinceLastMessageAckCurrentSession !== 0) {
+      writer.uint32(112).sint32(message.timeSinceLastMessageAckCurrentSession);
+    }
+    if (message.iOS !== undefined) {
+      PhoneKeyTelemetryIOS.encode(message.iOS, writer.uint32(74).fork()).join();
+    }
+    if (message.android !== undefined) {
+      PhoneKeyTelemetryAndroid.encode(message.android, writer.uint32(82).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PhoneLogForHandlePulledWithoutAuthentication {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePhoneLogForHandlePulledWithoutAuthentication();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.timeSinceBLESwitchEnableInSeconds = reader.sint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.timeSinceAppLaunchInSeconds = reader.sint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.timeSinceBeaconInSeconds = reader.sint32();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.timeSinceConnectInSeconds = reader.sint32();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.timeSinceForegroundInSeconds = reader.sint32();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.timeSinceBackgroundInSeconds = reader.sint32();
+          continue;
+        }
+        case 7: {
+          if (tag !== 56) {
+            break;
+          }
+
+          message.locationPermission = reader.int32() as any;
+          continue;
+        }
+        case 8: {
+          if (tag !== 64) {
+            break;
+          }
+
+          message.remoteStartIssued = reader.bool();
+          continue;
+        }
+        case 11: {
+          if (tag !== 88) {
+            break;
+          }
+
+          message.peripheralState = reader.int32() as any;
+          continue;
+        }
+        case 12: {
+          if (tag !== 96) {
+            break;
+          }
+
+          message.GATTDiscoveryBitmask = reader.uint32();
+          continue;
+        }
+        case 13: {
+          if (tag !== 104) {
+            break;
+          }
+
+          message.timeSinceLastMessageCurrentSession = reader.sint32();
+          continue;
+        }
+        case 14: {
+          if (tag !== 112) {
+            break;
+          }
+
+          message.timeSinceLastMessageAckCurrentSession = reader.sint32();
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.iOS = PhoneKeyTelemetryIOS.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.android = PhoneKeyTelemetryAndroid.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PhoneLogForHandlePulledWithoutAuthentication {
+    return {
+      timeSinceBLESwitchEnableInSeconds: isSet(object.timeSinceBLESwitchEnableInSeconds)
+        ? globalThis.Number(object.timeSinceBLESwitchEnableInSeconds)
+        : 0,
+      timeSinceAppLaunchInSeconds: isSet(object.timeSinceAppLaunchInSeconds)
+        ? globalThis.Number(object.timeSinceAppLaunchInSeconds)
+        : 0,
+      timeSinceBeaconInSeconds: isSet(object.timeSinceBeaconInSeconds)
+        ? globalThis.Number(object.timeSinceBeaconInSeconds)
+        : 0,
+      timeSinceConnectInSeconds: isSet(object.timeSinceConnectInSeconds)
+        ? globalThis.Number(object.timeSinceConnectInSeconds)
+        : 0,
+      timeSinceForegroundInSeconds: isSet(object.timeSinceForegroundInSeconds)
+        ? globalThis.Number(object.timeSinceForegroundInSeconds)
+        : 0,
+      timeSinceBackgroundInSeconds: isSet(object.timeSinceBackgroundInSeconds)
+        ? globalThis.Number(object.timeSinceBackgroundInSeconds)
+        : 0,
+      locationPermission: isSet(object.locationPermission) ? locationPermissionFromJSON(object.locationPermission) : 0,
+      remoteStartIssued: isSet(object.remoteStartIssued) ? globalThis.Boolean(object.remoteStartIssued) : false,
+      peripheralState: isSet(object.peripheralState) ? peripheralStateFromJSON(object.peripheralState) : 0,
+      GATTDiscoveryBitmask: isSet(object.GATTDiscoveryBitmask) ? globalThis.Number(object.GATTDiscoveryBitmask) : 0,
+      timeSinceLastMessageCurrentSession: isSet(object.timeSinceLastMessageCurrentSession)
+        ? globalThis.Number(object.timeSinceLastMessageCurrentSession)
+        : 0,
+      timeSinceLastMessageAckCurrentSession: isSet(object.timeSinceLastMessageAckCurrentSession)
+        ? globalThis.Number(object.timeSinceLastMessageAckCurrentSession)
+        : 0,
+      iOS: isSet(object.iOS) ? PhoneKeyTelemetryIOS.fromJSON(object.iOS) : undefined,
+      android: isSet(object.android) ? PhoneKeyTelemetryAndroid.fromJSON(object.android) : undefined,
+    };
+  },
+
+  toJSON(message: PhoneLogForHandlePulledWithoutAuthentication): unknown {
+    const obj: any = {};
+    if (message.timeSinceBLESwitchEnableInSeconds !== undefined) {
+      obj.timeSinceBLESwitchEnableInSeconds = Math.round(message.timeSinceBLESwitchEnableInSeconds);
+    }
+    if (message.timeSinceAppLaunchInSeconds !== undefined) {
+      obj.timeSinceAppLaunchInSeconds = Math.round(message.timeSinceAppLaunchInSeconds);
+    }
+    if (message.timeSinceBeaconInSeconds !== undefined) {
+      obj.timeSinceBeaconInSeconds = Math.round(message.timeSinceBeaconInSeconds);
+    }
+    if (message.timeSinceConnectInSeconds !== undefined) {
+      obj.timeSinceConnectInSeconds = Math.round(message.timeSinceConnectInSeconds);
+    }
+    if (message.timeSinceForegroundInSeconds !== undefined) {
+      obj.timeSinceForegroundInSeconds = Math.round(message.timeSinceForegroundInSeconds);
+    }
+    if (message.timeSinceBackgroundInSeconds !== undefined) {
+      obj.timeSinceBackgroundInSeconds = Math.round(message.timeSinceBackgroundInSeconds);
+    }
+    if (message.locationPermission !== undefined) {
+      obj.locationPermission = locationPermissionToJSON(message.locationPermission);
+    }
+    if (message.remoteStartIssued !== undefined) {
+      obj.remoteStartIssued = message.remoteStartIssued;
+    }
+    if (message.peripheralState !== undefined) {
+      obj.peripheralState = peripheralStateToJSON(message.peripheralState);
+    }
+    if (message.GATTDiscoveryBitmask !== undefined) {
+      obj.GATTDiscoveryBitmask = Math.round(message.GATTDiscoveryBitmask);
+    }
+    if (message.timeSinceLastMessageCurrentSession !== undefined) {
+      obj.timeSinceLastMessageCurrentSession = Math.round(message.timeSinceLastMessageCurrentSession);
+    }
+    if (message.timeSinceLastMessageAckCurrentSession !== undefined) {
+      obj.timeSinceLastMessageAckCurrentSession = Math.round(message.timeSinceLastMessageAckCurrentSession);
+    }
+    if (message.iOS !== undefined) {
+      obj.iOS = PhoneKeyTelemetryIOS.toJSON(message.iOS);
+    }
+    if (message.android !== undefined) {
+      obj.android = PhoneKeyTelemetryAndroid.toJSON(message.android);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<PhoneLogForHandlePulledWithoutAuthentication>, I>>(
+    base?: I,
+  ): PhoneLogForHandlePulledWithoutAuthentication {
+    return PhoneLogForHandlePulledWithoutAuthentication.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<PhoneLogForHandlePulledWithoutAuthentication>, I>>(
+    object: I,
+  ): PhoneLogForHandlePulledWithoutAuthentication {
+    const message = createBasePhoneLogForHandlePulledWithoutAuthentication();
+    message.timeSinceBLESwitchEnableInSeconds = object.timeSinceBLESwitchEnableInSeconds ?? 0;
+    message.timeSinceAppLaunchInSeconds = object.timeSinceAppLaunchInSeconds ?? 0;
+    message.timeSinceBeaconInSeconds = object.timeSinceBeaconInSeconds ?? 0;
+    message.timeSinceConnectInSeconds = object.timeSinceConnectInSeconds ?? 0;
+    message.timeSinceForegroundInSeconds = object.timeSinceForegroundInSeconds ?? 0;
+    message.timeSinceBackgroundInSeconds = object.timeSinceBackgroundInSeconds ?? 0;
+    message.locationPermission = object.locationPermission ?? 0;
+    message.remoteStartIssued = object.remoteStartIssued ?? false;
+    message.peripheralState = object.peripheralState ?? 0;
+    message.GATTDiscoveryBitmask = object.GATTDiscoveryBitmask ?? 0;
+    message.timeSinceLastMessageCurrentSession = object.timeSinceLastMessageCurrentSession ?? 0;
+    message.timeSinceLastMessageAckCurrentSession = object.timeSinceLastMessageAckCurrentSession ?? 0;
+    message.iOS = (object.iOS !== undefined && object.iOS !== null)
+      ? PhoneKeyTelemetryIOS.fromPartial(object.iOS)
+      : undefined;
+    message.android = (object.android !== undefined && object.android !== null)
+      ? PhoneKeyTelemetryAndroid.fromPartial(object.android)
+      : undefined;
+    return message;
+  },
+};
+
+function createBasePhoneVersionInfo(): PhoneVersionInfo {
+  return {
+    osVersionMajor: 0,
+    osVersionMinor: 0,
+    osVersionPatch: 0,
+    appVersionMajor: 0,
+    appVersionMinor: 0,
+    appVersionPatch: 0,
+  };
+}
+
+export const PhoneVersionInfo: MessageFns<PhoneVersionInfo> = {
+  encode(message: PhoneVersionInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.osVersionMajor !== 0) {
+      writer.uint32(8).uint32(message.osVersionMajor);
+    }
+    if (message.osVersionMinor !== 0) {
+      writer.uint32(16).uint32(message.osVersionMinor);
+    }
+    if (message.osVersionPatch !== 0) {
+      writer.uint32(24).uint32(message.osVersionPatch);
+    }
+    if (message.appVersionMajor !== 0) {
+      writer.uint32(32).uint32(message.appVersionMajor);
+    }
+    if (message.appVersionMinor !== 0) {
+      writer.uint32(40).uint32(message.appVersionMinor);
+    }
+    if (message.appVersionPatch !== 0) {
+      writer.uint32(48).uint32(message.appVersionPatch);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): PhoneVersionInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBasePhoneVersionInfo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.osVersionMajor = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.osVersionMinor = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.osVersionPatch = reader.uint32();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.appVersionMajor = reader.uint32();
+          continue;
+        }
+        case 5: {
+          if (tag !== 40) {
+            break;
+          }
+
+          message.appVersionMinor = reader.uint32();
+          continue;
+        }
+        case 6: {
+          if (tag !== 48) {
+            break;
+          }
+
+          message.appVersionPatch = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): PhoneVersionInfo {
+    return {
+      osVersionMajor: isSet(object.osVersionMajor) ? globalThis.Number(object.osVersionMajor) : 0,
+      osVersionMinor: isSet(object.osVersionMinor) ? globalThis.Number(object.osVersionMinor) : 0,
+      osVersionPatch: isSet(object.osVersionPatch) ? globalThis.Number(object.osVersionPatch) : 0,
+      appVersionMajor: isSet(object.appVersionMajor) ? globalThis.Number(object.appVersionMajor) : 0,
+      appVersionMinor: isSet(object.appVersionMinor) ? globalThis.Number(object.appVersionMinor) : 0,
+      appVersionPatch: isSet(object.appVersionPatch) ? globalThis.Number(object.appVersionPatch) : 0,
+    };
+  },
+
+  toJSON(message: PhoneVersionInfo): unknown {
+    const obj: any = {};
+    if (message.osVersionMajor !== undefined) {
+      obj.osVersionMajor = Math.round(message.osVersionMajor);
+    }
+    if (message.osVersionMinor !== undefined) {
+      obj.osVersionMinor = Math.round(message.osVersionMinor);
+    }
+    if (message.osVersionPatch !== undefined) {
+      obj.osVersionPatch = Math.round(message.osVersionPatch);
+    }
+    if (message.appVersionMajor !== undefined) {
+      obj.appVersionMajor = Math.round(message.appVersionMajor);
+    }
+    if (message.appVersionMinor !== undefined) {
+      obj.appVersionMinor = Math.round(message.appVersionMinor);
+    }
+    if (message.appVersionPatch !== undefined) {
+      obj.appVersionPatch = Math.round(message.appVersionPatch);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<PhoneVersionInfo>, I>>(base?: I): PhoneVersionInfo {
+    return PhoneVersionInfo.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<PhoneVersionInfo>, I>>(object: I): PhoneVersionInfo {
+    const message = createBasePhoneVersionInfo();
+    message.osVersionMajor = object.osVersionMajor ?? 0;
+    message.osVersionMinor = object.osVersionMinor ?? 0;
+    message.osVersionPatch = object.osVersionPatch ?? 0;
+    message.appVersionMajor = object.appVersionMajor ?? 0;
+    message.appVersionMinor = object.appVersionMinor ?? 0;
+    message.appVersionPatch = object.appVersionPatch ?? 0;
+    return message;
+  },
+};
+
+function createBaseProvisionIdentity(): ProvisionIdentity {
+  return { identity: new Uint8Array(0) };
+}
+
+export const ProvisionIdentity: MessageFns<ProvisionIdentity> = {
+  encode(message: ProvisionIdentity, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.identity.length !== 0) {
+      writer.uint32(10).bytes(message.identity);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ProvisionIdentity {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseProvisionIdentity();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.identity = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ProvisionIdentity {
+    return { identity: isSet(object.identity) ? bytesFromBase64(object.identity) : new Uint8Array(0) };
+  },
+
+  toJSON(message: ProvisionIdentity): unknown {
+    const obj: any = {};
+    if (message.identity !== undefined) {
+      obj.identity = base64FromBytes(message.identity);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ProvisionIdentity>, I>>(base?: I): ProvisionIdentity {
+    return ProvisionIdentity.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ProvisionIdentity>, I>>(object: I): ProvisionIdentity {
+    const message = createBaseProvisionIdentity();
+    message.identity = object.identity ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseSecurityControl(): SecurityControl {
+  return { immobilizationControl: 0 };
+}
+
+export const SecurityControl: MessageFns<SecurityControl> = {
+  encode(message: SecurityControl, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.immobilizationControl !== 0) {
+      writer.uint32(8).int32(message.immobilizationControl);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SecurityControl {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSecurityControl();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.immobilizationControl = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SecurityControl {
+    return {
+      immobilizationControl: isSet(object.immobilizationControl)
+        ? securityControl_ImmobilizationControlEFromJSON(object.immobilizationControl)
+        : 0,
+    };
+  },
+
+  toJSON(message: SecurityControl): unknown {
+    const obj: any = {};
+    if (message.immobilizationControl !== undefined) {
+      obj.immobilizationControl = securityControl_ImmobilizationControlEToJSON(message.immobilizationControl);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SecurityControl>, I>>(base?: I): SecurityControl {
+    return SecurityControl.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SecurityControl>, I>>(object: I): SecurityControl {
+    const message = createBaseSecurityControl();
+    message.immobilizationControl = object.immobilizationControl ?? 0;
+    return message;
+  },
+};
+
+function createBaseServiceDiagnosticRequest(): ServiceDiagnosticRequest {
+  return { enterServiceModePlus: false };
+}
+
+export const ServiceDiagnosticRequest: MessageFns<ServiceDiagnosticRequest> = {
+  encode(message: ServiceDiagnosticRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.enterServiceModePlus !== false) {
+      writer.uint32(8).bool(message.enterServiceModePlus);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ServiceDiagnosticRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseServiceDiagnosticRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.enterServiceModePlus = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ServiceDiagnosticRequest {
+    return {
+      enterServiceModePlus: isSet(object.enterServiceModePlus)
+        ? globalThis.Boolean(object.enterServiceModePlus)
+        : false,
+    };
+  },
+
+  toJSON(message: ServiceDiagnosticRequest): unknown {
+    const obj: any = {};
+    if (message.enterServiceModePlus !== undefined) {
+      obj.enterServiceModePlus = message.enterServiceModePlus;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ServiceDiagnosticRequest>, I>>(base?: I): ServiceDiagnosticRequest {
+    return ServiceDiagnosticRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ServiceDiagnosticRequest>, I>>(object: I): ServiceDiagnosticRequest {
+    const message = createBaseServiceDiagnosticRequest();
+    message.enterServiceModePlus = object.enterServiceModePlus ?? false;
+    return message;
+  },
+};
+
+function createBaseSessionInfo(): SessionInfo {
+  return { token: new Uint8Array(0), counter: 0, publicKey: new Uint8Array(0) };
+}
+
+export const SessionInfo: MessageFns<SessionInfo> = {
+  encode(message: SessionInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.token.length !== 0) {
+      writer.uint32(10).bytes(message.token);
+    }
+    if (message.counter !== 0) {
+      writer.uint32(16).uint32(message.counter);
+    }
+    if (message.publicKey.length !== 0) {
+      writer.uint32(26).bytes(message.publicKey);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SessionInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSessionInfo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.token = reader.bytes();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.counter = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.publicKey = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SessionInfo {
+    return {
+      token: isSet(object.token) ? bytesFromBase64(object.token) : new Uint8Array(0),
+      counter: isSet(object.counter) ? globalThis.Number(object.counter) : 0,
+      publicKey: isSet(object.publicKey) ? bytesFromBase64(object.publicKey) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: SessionInfo): unknown {
+    const obj: any = {};
+    if (message.token !== undefined) {
+      obj.token = base64FromBytes(message.token);
+    }
+    if (message.counter !== undefined) {
+      obj.counter = Math.round(message.counter);
+    }
+    if (message.publicKey !== undefined) {
+      obj.publicKey = base64FromBytes(message.publicKey);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SessionInfo>, I>>(base?: I): SessionInfo {
+    return SessionInfo.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SessionInfo>, I>>(object: I): SessionInfo {
+    const message = createBaseSessionInfo();
+    message.token = object.token ?? new Uint8Array(0);
+    message.counter = object.counter ?? 0;
+    message.publicKey = object.publicKey ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseSetUpdaterLocation(): SetUpdaterLocation {
+  return { updaterLocation: 0 };
+}
+
+export const SetUpdaterLocation: MessageFns<SetUpdaterLocation> = {
+  encode(message: SetUpdaterLocation, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.updaterLocation !== 0) {
+      writer.uint32(8).int32(message.updaterLocation);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SetUpdaterLocation {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSetUpdaterLocation();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.updaterLocation = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SetUpdaterLocation {
+    return { updaterLocation: isSet(object.updaterLocation) ? updaterLocationFromJSON(object.updaterLocation) : 0 };
+  },
+
+  toJSON(message: SetUpdaterLocation): unknown {
+    const obj: any = {};
+    if (message.updaterLocation !== undefined) {
+      obj.updaterLocation = updaterLocationToJSON(message.updaterLocation);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SetUpdaterLocation>, I>>(base?: I): SetUpdaterLocation {
+    return SetUpdaterLocation.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SetUpdaterLocation>, I>>(object: I): SetUpdaterLocation {
+    const message = createBaseSetUpdaterLocation();
+    message.updaterLocation = object.updaterLocation ?? 0;
+    return message;
+  },
+};
+
+function createBaseSleepManagerRequest(): SleepManagerRequest {
+  return { delaySleepRequest: undefined, sleepManagerCommand: undefined };
+}
+
+export const SleepManagerRequest: MessageFns<SleepManagerRequest> = {
+  encode(message: SleepManagerRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.delaySleepRequest !== undefined) {
+      DelaySleepRequest.encode(message.delaySleepRequest, writer.uint32(10).fork()).join();
+    }
+    if (message.sleepManagerCommand !== undefined) {
+      writer.uint32(16).int32(message.sleepManagerCommand);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SleepManagerRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSleepManagerRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.delaySleepRequest = DelaySleepRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.sleepManagerCommand = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SleepManagerRequest {
+    return {
+      delaySleepRequest: isSet(object.delaySleepRequest)
+        ? DelaySleepRequest.fromJSON(object.delaySleepRequest)
+        : undefined,
+      sleepManagerCommand: isSet(object.sleepManagerCommand)
+        ? sleepManagerCommandEFromJSON(object.sleepManagerCommand)
+        : undefined,
+    };
+  },
+
+  toJSON(message: SleepManagerRequest): unknown {
+    const obj: any = {};
+    if (message.delaySleepRequest !== undefined) {
+      obj.delaySleepRequest = DelaySleepRequest.toJSON(message.delaySleepRequest);
+    }
+    if (message.sleepManagerCommand !== undefined) {
+      obj.sleepManagerCommand = sleepManagerCommandEToJSON(message.sleepManagerCommand);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SleepManagerRequest>, I>>(base?: I): SleepManagerRequest {
+    return SleepManagerRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SleepManagerRequest>, I>>(object: I): SleepManagerRequest {
+    const message = createBaseSleepManagerRequest();
+    message.delaySleepRequest = (object.delaySleepRequest !== undefined && object.delaySleepRequest !== null)
+      ? DelaySleepRequest.fromPartial(object.delaySleepRequest)
+      : undefined;
+    message.sleepManagerCommand = object.sleepManagerCommand ?? undefined;
+    return message;
+  },
+};
+
+function createBaseSleepManagerStats(): SleepManagerStats {
+  return { totalCPUTime: 0, totalAwakeTime: 0, isBLETrimApplied: 0 };
+}
+
+export const SleepManagerStats: MessageFns<SleepManagerStats> = {
+  encode(message: SleepManagerStats, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.totalCPUTime !== 0) {
+      writer.uint32(8).uint32(message.totalCPUTime);
+    }
+    if (message.totalAwakeTime !== 0) {
+      writer.uint32(16).uint32(message.totalAwakeTime);
+    }
+    if (message.isBLETrimApplied !== 0) {
+      writer.uint32(24).int32(message.isBLETrimApplied);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SleepManagerStats {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSleepManagerStats();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.totalCPUTime = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.totalAwakeTime = reader.uint32();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.isBLETrimApplied = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SleepManagerStats {
+    return {
+      totalCPUTime: isSet(object.totalCPUTime) ? globalThis.Number(object.totalCPUTime) : 0,
+      totalAwakeTime: isSet(object.totalAwakeTime) ? globalThis.Number(object.totalAwakeTime) : 0,
+      isBLETrimApplied: isSet(object.isBLETrimApplied) ? bLEAdditionalTRIMAppliedEFromJSON(object.isBLETrimApplied) : 0,
+    };
+  },
+
+  toJSON(message: SleepManagerStats): unknown {
+    const obj: any = {};
+    if (message.totalCPUTime !== undefined) {
+      obj.totalCPUTime = Math.round(message.totalCPUTime);
+    }
+    if (message.totalAwakeTime !== undefined) {
+      obj.totalAwakeTime = Math.round(message.totalAwakeTime);
+    }
+    if (message.isBLETrimApplied !== undefined) {
+      obj.isBLETrimApplied = bLEAdditionalTRIMAppliedEToJSON(message.isBLETrimApplied);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SleepManagerStats>, I>>(base?: I): SleepManagerStats {
+    return SleepManagerStats.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SleepManagerStats>, I>>(object: I): SleepManagerStats {
+    const message = createBaseSleepManagerStats();
+    message.totalCPUTime = object.totalCPUTime ?? 0;
+    message.totalAwakeTime = object.totalAwakeTime ?? 0;
+    message.isBLETrimApplied = object.isBLETrimApplied ?? 0;
+    return message;
+  },
+};
+
+function createBaseStageBlock(): StageBlock {
+  return { blockAddress: 0, blockToStage: new Uint8Array(0) };
+}
+
+export const StageBlock: MessageFns<StageBlock> = {
+  encode(message: StageBlock, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.blockAddress !== 0) {
+      writer.uint32(8).uint32(message.blockAddress);
+    }
+    if (message.blockToStage.length !== 0) {
+      writer.uint32(18).bytes(message.blockToStage);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): StageBlock {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseStageBlock();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.blockAddress = reader.uint32();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.blockToStage = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): StageBlock {
+    return {
+      blockAddress: isSet(object.blockAddress) ? globalThis.Number(object.blockAddress) : 0,
+      blockToStage: isSet(object.blockToStage) ? bytesFromBase64(object.blockToStage) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: StageBlock): unknown {
+    const obj: any = {};
+    if (message.blockAddress !== undefined) {
+      obj.blockAddress = Math.round(message.blockAddress);
+    }
+    if (message.blockToStage !== undefined) {
+      obj.blockToStage = base64FromBytes(message.blockToStage);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<StageBlock>, I>>(base?: I): StageBlock {
+    return StageBlock.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<StageBlock>, I>>(object: I): StageBlock {
+    const message = createBaseStageBlock();
+    message.blockAddress = object.blockAddress ?? 0;
+    message.blockToStage = object.blockToStage ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseToUIMessage(): ToUIMessage {
+  return {
+    commandStatus: undefined,
+    whitelistInfo: undefined,
+    whitelistEntryInfo: undefined,
+    keyStatusInfo: undefined,
+    unknownKeyInfo: undefined,
+    UIRequest: undefined,
+  };
+}
+
+export const ToUIMessage: MessageFns<ToUIMessage> = {
+  encode(message: ToUIMessage, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.commandStatus !== undefined) {
+      CommandStatus.encode(message.commandStatus, writer.uint32(34).fork()).join();
+    }
+    if (message.whitelistInfo !== undefined) {
+      WhitelistInfo.encode(message.whitelistInfo, writer.uint32(130).fork()).join();
+    }
+    if (message.whitelistEntryInfo !== undefined) {
+      WhitelistEntryInfo.encode(message.whitelistEntryInfo, writer.uint32(138).fork()).join();
+    }
+    if (message.keyStatusInfo !== undefined) {
+      KeyStatusInfo.encode(message.keyStatusInfo, writer.uint32(170).fork()).join();
+    }
+    if (message.unknownKeyInfo !== undefined) {
+      UnknownKeyInfo.encode(message.unknownKeyInfo, writer.uint32(186).fork()).join();
+    }
+    if (message.UIRequest !== undefined) {
+      writer.uint32(192).int32(message.UIRequest);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ToUIMessage {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseToUIMessage();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.commandStatus = CommandStatus.decode(reader, reader.uint32());
+          continue;
+        }
+        case 16: {
+          if (tag !== 130) {
+            break;
+          }
+
+          message.whitelistInfo = WhitelistInfo.decode(reader, reader.uint32());
+          continue;
+        }
+        case 17: {
+          if (tag !== 138) {
+            break;
+          }
+
+          message.whitelistEntryInfo = WhitelistEntryInfo.decode(reader, reader.uint32());
+          continue;
+        }
+        case 21: {
+          if (tag !== 170) {
+            break;
+          }
+
+          message.keyStatusInfo = KeyStatusInfo.decode(reader, reader.uint32());
+          continue;
+        }
+        case 23: {
+          if (tag !== 186) {
+            break;
+          }
+
+          message.unknownKeyInfo = UnknownKeyInfo.decode(reader, reader.uint32());
+          continue;
+        }
+        case 24: {
+          if (tag !== 192) {
+            break;
+          }
+
+          message.UIRequest = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ToUIMessage {
+    return {
+      commandStatus: isSet(object.commandStatus) ? CommandStatus.fromJSON(object.commandStatus) : undefined,
+      whitelistInfo: isSet(object.whitelistInfo) ? WhitelistInfo.fromJSON(object.whitelistInfo) : undefined,
+      whitelistEntryInfo: isSet(object.whitelistEntryInfo)
+        ? WhitelistEntryInfo.fromJSON(object.whitelistEntryInfo)
+        : undefined,
+      keyStatusInfo: isSet(object.keyStatusInfo) ? KeyStatusInfo.fromJSON(object.keyStatusInfo) : undefined,
+      unknownKeyInfo: isSet(object.unknownKeyInfo) ? UnknownKeyInfo.fromJSON(object.unknownKeyInfo) : undefined,
+      UIRequest: isSet(object.UIRequest) ? uIRequestEFromJSON(object.UIRequest) : undefined,
+    };
+  },
+
+  toJSON(message: ToUIMessage): unknown {
+    const obj: any = {};
+    if (message.commandStatus !== undefined) {
+      obj.commandStatus = CommandStatus.toJSON(message.commandStatus);
+    }
+    if (message.whitelistInfo !== undefined) {
+      obj.whitelistInfo = WhitelistInfo.toJSON(message.whitelistInfo);
+    }
+    if (message.whitelistEntryInfo !== undefined) {
+      obj.whitelistEntryInfo = WhitelistEntryInfo.toJSON(message.whitelistEntryInfo);
+    }
+    if (message.keyStatusInfo !== undefined) {
+      obj.keyStatusInfo = KeyStatusInfo.toJSON(message.keyStatusInfo);
+    }
+    if (message.unknownKeyInfo !== undefined) {
+      obj.unknownKeyInfo = UnknownKeyInfo.toJSON(message.unknownKeyInfo);
+    }
+    if (message.UIRequest !== undefined) {
+      obj.UIRequest = uIRequestEToJSON(message.UIRequest);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ToUIMessage>, I>>(base?: I): ToUIMessage {
+    return ToUIMessage.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ToUIMessage>, I>>(object: I): ToUIMessage {
+    const message = createBaseToUIMessage();
+    message.commandStatus = (object.commandStatus !== undefined && object.commandStatus !== null)
+      ? CommandStatus.fromPartial(object.commandStatus)
+      : undefined;
+    message.whitelistInfo = (object.whitelistInfo !== undefined && object.whitelistInfo !== null)
+      ? WhitelistInfo.fromPartial(object.whitelistInfo)
+      : undefined;
+    message.whitelistEntryInfo = (object.whitelistEntryInfo !== undefined && object.whitelistEntryInfo !== null)
+      ? WhitelistEntryInfo.fromPartial(object.whitelistEntryInfo)
+      : undefined;
+    message.keyStatusInfo = (object.keyStatusInfo !== undefined && object.keyStatusInfo !== null)
+      ? KeyStatusInfo.fromPartial(object.keyStatusInfo)
+      : undefined;
+    message.unknownKeyInfo = (object.unknownKeyInfo !== undefined && object.unknownKeyInfo !== null)
+      ? UnknownKeyInfo.fromPartial(object.unknownKeyInfo)
+      : undefined;
+    message.UIRequest = object.UIRequest ?? undefined;
+    return message;
+  },
+};
+
+function createBaseToVCSECMessageV0Protocol(): ToVCSECMessageV0Protocol {
+  return { signedMessage: undefined, unsignedMessageAsBytes: undefined };
+}
+
+export const ToVCSECMessageV0Protocol: MessageFns<ToVCSECMessageV0Protocol> = {
+  encode(message: ToVCSECMessageV0Protocol, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.signedMessage !== undefined) {
+      SignedMessage.encode(message.signedMessage, writer.uint32(10).fork()).join();
+    }
+    if (message.unsignedMessageAsBytes !== undefined) {
+      writer.uint32(18).bytes(message.unsignedMessageAsBytes);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ToVCSECMessageV0Protocol {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseToVCSECMessageV0Protocol();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.signedMessage = SignedMessage.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.unsignedMessageAsBytes = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ToVCSECMessageV0Protocol {
+    return {
+      signedMessage: isSet(object.signedMessage) ? SignedMessage.fromJSON(object.signedMessage) : undefined,
+      unsignedMessageAsBytes: isSet(object.unsignedMessageAsBytes)
+        ? bytesFromBase64(object.unsignedMessageAsBytes)
+        : undefined,
+    };
+  },
+
+  toJSON(message: ToVCSECMessageV0Protocol): unknown {
+    const obj: any = {};
+    if (message.signedMessage !== undefined) {
+      obj.signedMessage = SignedMessage.toJSON(message.signedMessage);
+    }
+    if (message.unsignedMessageAsBytes !== undefined) {
+      obj.unsignedMessageAsBytes = base64FromBytes(message.unsignedMessageAsBytes);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ToVCSECMessageV0Protocol>, I>>(base?: I): ToVCSECMessageV0Protocol {
+    return ToVCSECMessageV0Protocol.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ToVCSECMessageV0Protocol>, I>>(object: I): ToVCSECMessageV0Protocol {
+    const message = createBaseToVCSECMessageV0Protocol();
+    message.signedMessage = (object.signedMessage !== undefined && object.signedMessage !== null)
+      ? SignedMessage.fromPartial(object.signedMessage)
+      : undefined;
+    message.unsignedMessageAsBytes = object.unsignedMessageAsBytes ?? undefined;
+    return message;
+  },
+};
+
+function createBaseUnknownKeyInfo(): UnknownKeyInfo {
+  return { keyStatus: undefined, publicKey: undefined, keyFormFactor: 0 };
+}
+
+export const UnknownKeyInfo: MessageFns<UnknownKeyInfo> = {
+  encode(message: UnknownKeyInfo, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.keyStatus !== undefined) {
+      KeyStatus.encode(message.keyStatus, writer.uint32(10).fork()).join();
+    }
+    if (message.publicKey !== undefined) {
+      PublicKey.encode(message.publicKey, writer.uint32(18).fork()).join();
+    }
+    if (message.keyFormFactor !== 0) {
+      writer.uint32(24).int32(message.keyFormFactor);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UnknownKeyInfo {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUnknownKeyInfo();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.keyStatus = KeyStatus.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.publicKey = PublicKey.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.keyFormFactor = reader.int32() as any;
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UnknownKeyInfo {
+    return {
+      keyStatus: isSet(object.keyStatus) ? KeyStatus.fromJSON(object.keyStatus) : undefined,
+      publicKey: isSet(object.publicKey) ? PublicKey.fromJSON(object.publicKey) : undefined,
+      keyFormFactor: isSet(object.keyFormFactor) ? keyFormFactorFromJSON(object.keyFormFactor) : 0,
+    };
+  },
+
+  toJSON(message: UnknownKeyInfo): unknown {
+    const obj: any = {};
+    if (message.keyStatus !== undefined) {
+      obj.keyStatus = KeyStatus.toJSON(message.keyStatus);
+    }
+    if (message.publicKey !== undefined) {
+      obj.publicKey = PublicKey.toJSON(message.publicKey);
+    }
+    if (message.keyFormFactor !== undefined) {
+      obj.keyFormFactor = keyFormFactorToJSON(message.keyFormFactor);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UnknownKeyInfo>, I>>(base?: I): UnknownKeyInfo {
+    return UnknownKeyInfo.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UnknownKeyInfo>, I>>(object: I): UnknownKeyInfo {
+    const message = createBaseUnknownKeyInfo();
+    message.keyStatus = (object.keyStatus !== undefined && object.keyStatus !== null)
+      ? KeyStatus.fromPartial(object.keyStatus)
+      : undefined;
+    message.publicKey = (object.publicKey !== undefined && object.publicKey !== null)
+      ? PublicKey.fromPartial(object.publicKey)
+      : undefined;
+    message.keyFormFactor = object.keyFormFactor ?? 0;
+    return message;
+  },
+};
+
+function createBaseUnsecureNotification(): UnsecureNotification {
+  return { notifyUser: false, closureStatuses: undefined };
+}
+
+export const UnsecureNotification: MessageFns<UnsecureNotification> = {
+  encode(message: UnsecureNotification, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.notifyUser !== false) {
+      writer.uint32(8).bool(message.notifyUser);
+    }
+    if (message.closureStatuses !== undefined) {
+      ClosureStatuses.encode(message.closureStatuses, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UnsecureNotification {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUnsecureNotification();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.notifyUser = reader.bool();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.closureStatuses = ClosureStatuses.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UnsecureNotification {
+    return {
+      notifyUser: isSet(object.notifyUser) ? globalThis.Boolean(object.notifyUser) : false,
+      closureStatuses: isSet(object.closureStatuses) ? ClosureStatuses.fromJSON(object.closureStatuses) : undefined,
+    };
+  },
+
+  toJSON(message: UnsecureNotification): unknown {
+    const obj: any = {};
+    if (message.notifyUser !== undefined) {
+      obj.notifyUser = message.notifyUser;
+    }
+    if (message.closureStatuses !== undefined) {
+      obj.closureStatuses = ClosureStatuses.toJSON(message.closureStatuses);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UnsecureNotification>, I>>(base?: I): UnsecureNotification {
+    return UnsecureNotification.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UnsecureNotification>, I>>(object: I): UnsecureNotification {
+    const message = createBaseUnsecureNotification();
+    message.notifyUser = object.notifyUser ?? false;
+    message.closureStatuses = (object.closureStatuses !== undefined && object.closureStatuses !== null)
+      ? ClosureStatuses.fromPartial(object.closureStatuses)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseUnsignedMessageUI(): UnsignedMessageUI {
+  return { InformationRequest: undefined, RKEAction: undefined, WhitelistOperation: undefined, BLENickName: undefined };
+}
+
+export const UnsignedMessageUI: MessageFns<UnsignedMessageUI> = {
+  encode(message: UnsignedMessageUI, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.InformationRequest !== undefined) {
+      InformationRequest.encode(message.InformationRequest, writer.uint32(10).fork()).join();
+    }
+    if (message.RKEAction !== undefined) {
+      writer.uint32(16).int32(message.RKEAction);
+    }
+    if (message.WhitelistOperation !== undefined) {
+      WhitelistOperation.encode(message.WhitelistOperation, writer.uint32(130).fork()).join();
+    }
+    if (message.BLENickName !== undefined) {
+      VehicleBLENickName.encode(message.BLENickName, writer.uint32(410).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UnsignedMessageUI {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUnsignedMessageUI();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.InformationRequest = InformationRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.RKEAction = reader.int32() as any;
+          continue;
+        }
+        case 16: {
+          if (tag !== 130) {
+            break;
+          }
+
+          message.WhitelistOperation = WhitelistOperation.decode(reader, reader.uint32());
+          continue;
+        }
+        case 51: {
+          if (tag !== 410) {
+            break;
+          }
+
+          message.BLENickName = VehicleBLENickName.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UnsignedMessageUI {
+    return {
+      InformationRequest: isSet(object.InformationRequest)
+        ? InformationRequest.fromJSON(object.InformationRequest)
+        : undefined,
+      RKEAction: isSet(object.RKEAction) ? rKEActionEFromJSON(object.RKEAction) : undefined,
+      WhitelistOperation: isSet(object.WhitelistOperation)
+        ? WhitelistOperation.fromJSON(object.WhitelistOperation)
+        : undefined,
+      BLENickName: isSet(object.BLENickName) ? VehicleBLENickName.fromJSON(object.BLENickName) : undefined,
+    };
+  },
+
+  toJSON(message: UnsignedMessageUI): unknown {
+    const obj: any = {};
+    if (message.InformationRequest !== undefined) {
+      obj.InformationRequest = InformationRequest.toJSON(message.InformationRequest);
+    }
+    if (message.RKEAction !== undefined) {
+      obj.RKEAction = rKEActionEToJSON(message.RKEAction);
+    }
+    if (message.WhitelistOperation !== undefined) {
+      obj.WhitelistOperation = WhitelistOperation.toJSON(message.WhitelistOperation);
+    }
+    if (message.BLENickName !== undefined) {
+      obj.BLENickName = VehicleBLENickName.toJSON(message.BLENickName);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UnsignedMessageUI>, I>>(base?: I): UnsignedMessageUI {
+    return UnsignedMessageUI.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UnsignedMessageUI>, I>>(object: I): UnsignedMessageUI {
+    const message = createBaseUnsignedMessageUI();
+    message.InformationRequest = (object.InformationRequest !== undefined && object.InformationRequest !== null)
+      ? InformationRequest.fromPartial(object.InformationRequest)
+      : undefined;
+    message.RKEAction = object.RKEAction ?? undefined;
+    message.WhitelistOperation = (object.WhitelistOperation !== undefined && object.WhitelistOperation !== null)
+      ? WhitelistOperation.fromPartial(object.WhitelistOperation)
+      : undefined;
+    message.BLENickName = (object.BLENickName !== undefined && object.BLENickName !== null)
+      ? VehicleBLENickName.fromPartial(object.BLENickName)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseUpdaterCommand(): UpdaterCommand {
+  return {
+    getCodeDescriptor: undefined,
+    setUpdaterLocation: undefined,
+    stageBlock: undefined,
+    verifyAndInstallApp: undefined,
+    firmwareInfo: undefined,
+  };
+}
+
+export const UpdaterCommand: MessageFns<UpdaterCommand> = {
+  encode(message: UpdaterCommand, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.getCodeDescriptor !== undefined) {
+      GetCodeDescriptor.encode(message.getCodeDescriptor, writer.uint32(10).fork()).join();
+    }
+    if (message.setUpdaterLocation !== undefined) {
+      SetUpdaterLocation.encode(message.setUpdaterLocation, writer.uint32(18).fork()).join();
+    }
+    if (message.stageBlock !== undefined) {
+      StageBlock.encode(message.stageBlock, writer.uint32(26).fork()).join();
+    }
+    if (message.verifyAndInstallApp !== undefined) {
+      VerifyAndInstallApp.encode(message.verifyAndInstallApp, writer.uint32(34).fork()).join();
+    }
+    if (message.firmwareInfo !== undefined) {
+      writer.uint32(42).bytes(message.firmwareInfo);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UpdaterCommand {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUpdaterCommand();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.getCodeDescriptor = GetCodeDescriptor.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.setUpdaterLocation = SetUpdaterLocation.decode(reader, reader.uint32());
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.stageBlock = StageBlock.decode(reader, reader.uint32());
+          continue;
+        }
+        case 4: {
+          if (tag !== 34) {
+            break;
+          }
+
+          message.verifyAndInstallApp = VerifyAndInstallApp.decode(reader, reader.uint32());
+          continue;
+        }
+        case 5: {
+          if (tag !== 42) {
+            break;
+          }
+
+          message.firmwareInfo = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UpdaterCommand {
+    return {
+      getCodeDescriptor: isSet(object.getCodeDescriptor)
+        ? GetCodeDescriptor.fromJSON(object.getCodeDescriptor)
+        : undefined,
+      setUpdaterLocation: isSet(object.setUpdaterLocation)
+        ? SetUpdaterLocation.fromJSON(object.setUpdaterLocation)
+        : undefined,
+      stageBlock: isSet(object.stageBlock) ? StageBlock.fromJSON(object.stageBlock) : undefined,
+      verifyAndInstallApp: isSet(object.verifyAndInstallApp)
+        ? VerifyAndInstallApp.fromJSON(object.verifyAndInstallApp)
+        : undefined,
+      firmwareInfo: isSet(object.firmwareInfo) ? bytesFromBase64(object.firmwareInfo) : undefined,
+    };
+  },
+
+  toJSON(message: UpdaterCommand): unknown {
+    const obj: any = {};
+    if (message.getCodeDescriptor !== undefined) {
+      obj.getCodeDescriptor = GetCodeDescriptor.toJSON(message.getCodeDescriptor);
+    }
+    if (message.setUpdaterLocation !== undefined) {
+      obj.setUpdaterLocation = SetUpdaterLocation.toJSON(message.setUpdaterLocation);
+    }
+    if (message.stageBlock !== undefined) {
+      obj.stageBlock = StageBlock.toJSON(message.stageBlock);
+    }
+    if (message.verifyAndInstallApp !== undefined) {
+      obj.verifyAndInstallApp = VerifyAndInstallApp.toJSON(message.verifyAndInstallApp);
+    }
+    if (message.firmwareInfo !== undefined) {
+      obj.firmwareInfo = base64FromBytes(message.firmwareInfo);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UpdaterCommand>, I>>(base?: I): UpdaterCommand {
+    return UpdaterCommand.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UpdaterCommand>, I>>(object: I): UpdaterCommand {
+    const message = createBaseUpdaterCommand();
+    message.getCodeDescriptor = (object.getCodeDescriptor !== undefined && object.getCodeDescriptor !== null)
+      ? GetCodeDescriptor.fromPartial(object.getCodeDescriptor)
+      : undefined;
+    message.setUpdaterLocation = (object.setUpdaterLocation !== undefined && object.setUpdaterLocation !== null)
+      ? SetUpdaterLocation.fromPartial(object.setUpdaterLocation)
+      : undefined;
+    message.stageBlock = (object.stageBlock !== undefined && object.stageBlock !== null)
+      ? StageBlock.fromPartial(object.stageBlock)
+      : undefined;
+    message.verifyAndInstallApp = (object.verifyAndInstallApp !== undefined && object.verifyAndInstallApp !== null)
+      ? VerifyAndInstallApp.fromPartial(object.verifyAndInstallApp)
+      : undefined;
+    message.firmwareInfo = object.firmwareInfo ?? undefined;
+    return message;
+  },
+};
+
+function createBaseUpdaterResponse(): UpdaterResponse {
+  return { codeDescriptorMessage: undefined, updaterStatus: undefined };
+}
+
+export const UpdaterResponse: MessageFns<UpdaterResponse> = {
+  encode(message: UpdaterResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.codeDescriptorMessage !== undefined) {
+      CodeDescriptor.encode(message.codeDescriptorMessage, writer.uint32(10).fork()).join();
+    }
+    if (message.updaterStatus !== undefined) {
+      UpdaterStatus.encode(message.updaterStatus, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UpdaterResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUpdaterResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.codeDescriptorMessage = CodeDescriptor.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.updaterStatus = UpdaterStatus.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UpdaterResponse {
+    return {
+      codeDescriptorMessage: isSet(object.codeDescriptorMessage)
+        ? CodeDescriptor.fromJSON(object.codeDescriptorMessage)
+        : undefined,
+      updaterStatus: isSet(object.updaterStatus) ? UpdaterStatus.fromJSON(object.updaterStatus) : undefined,
+    };
+  },
+
+  toJSON(message: UpdaterResponse): unknown {
+    const obj: any = {};
+    if (message.codeDescriptorMessage !== undefined) {
+      obj.codeDescriptorMessage = CodeDescriptor.toJSON(message.codeDescriptorMessage);
+    }
+    if (message.updaterStatus !== undefined) {
+      obj.updaterStatus = UpdaterStatus.toJSON(message.updaterStatus);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UpdaterResponse>, I>>(base?: I): UpdaterResponse {
+    return UpdaterResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UpdaterResponse>, I>>(object: I): UpdaterResponse {
+    const message = createBaseUpdaterResponse();
+    message.codeDescriptorMessage =
+      (object.codeDescriptorMessage !== undefined && object.codeDescriptorMessage !== null)
+        ? CodeDescriptor.fromPartial(object.codeDescriptorMessage)
+        : undefined;
+    message.updaterStatus = (object.updaterStatus !== undefined && object.updaterStatus !== null)
+      ? UpdaterStatus.fromPartial(object.updaterStatus)
+      : undefined;
+    return message;
+  },
+};
+
+function createBaseUpdaterStatus(): UpdaterStatus {
+  return { statusCode: 0, location: 0, nextAddressNumber: 0 };
+}
+
+export const UpdaterStatus: MessageFns<UpdaterStatus> = {
+  encode(message: UpdaterStatus, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.statusCode !== 0) {
+      writer.uint32(8).int32(message.statusCode);
+    }
+    if (message.location !== 0) {
+      writer.uint32(16).int32(message.location);
+    }
+    if (message.nextAddressNumber !== 0) {
+      writer.uint32(24).uint32(message.nextAddressNumber);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): UpdaterStatus {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseUpdaterStatus();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.statusCode = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.location = reader.int32() as any;
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.nextAddressNumber = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): UpdaterStatus {
+    return {
+      statusCode: isSet(object.statusCode) ? updaterStatusCodeFromJSON(object.statusCode) : 0,
+      location: isSet(object.location) ? updaterLocationFromJSON(object.location) : 0,
+      nextAddressNumber: isSet(object.nextAddressNumber) ? globalThis.Number(object.nextAddressNumber) : 0,
+    };
+  },
+
+  toJSON(message: UpdaterStatus): unknown {
+    const obj: any = {};
+    if (message.statusCode !== undefined) {
+      obj.statusCode = updaterStatusCodeToJSON(message.statusCode);
+    }
+    if (message.location !== undefined) {
+      obj.location = updaterLocationToJSON(message.location);
+    }
+    if (message.nextAddressNumber !== undefined) {
+      obj.nextAddressNumber = Math.round(message.nextAddressNumber);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<UpdaterStatus>, I>>(base?: I): UpdaterStatus {
+    return UpdaterStatus.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<UpdaterStatus>, I>>(object: I): UpdaterStatus {
+    const message = createBaseUpdaterStatus();
+    message.statusCode = object.statusCode ?? 0;
+    message.location = object.location ?? 0;
+    message.nextAddressNumber = object.nextAddressNumber ?? 0;
+    return message;
+  },
+};
+
+function createBaseVehicleBLENickName(): VehicleBLENickName {
+  return { nickName: new Uint8Array(0) };
+}
+
+export const VehicleBLENickName: MessageFns<VehicleBLENickName> = {
+  encode(message: VehicleBLENickName, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.nickName.length !== 0) {
+      writer.uint32(10).bytes(message.nickName);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): VehicleBLENickName {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVehicleBLENickName();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.nickName = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): VehicleBLENickName {
+    return { nickName: isSet(object.nickName) ? bytesFromBase64(object.nickName) : new Uint8Array(0) };
+  },
+
+  toJSON(message: VehicleBLENickName): unknown {
+    const obj: any = {};
+    if (message.nickName !== undefined) {
+      obj.nickName = base64FromBytes(message.nickName);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<VehicleBLENickName>, I>>(base?: I): VehicleBLENickName {
+    return VehicleBLENickName.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<VehicleBLENickName>, I>>(object: I): VehicleBLENickName {
+    const message = createBaseVehicleBLENickName();
+    message.nickName = object.nickName ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseVerifyAndInstallApp(): VerifyAndInstallApp {
+  return { sha256: new Uint8Array(0), rValue: new Uint8Array(0), sValue: new Uint8Array(0) };
+}
+
+export const VerifyAndInstallApp: MessageFns<VerifyAndInstallApp> = {
+  encode(message: VerifyAndInstallApp, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.sha256.length !== 0) {
+      writer.uint32(10).bytes(message.sha256);
+    }
+    if (message.rValue.length !== 0) {
+      writer.uint32(18).bytes(message.rValue);
+    }
+    if (message.sValue.length !== 0) {
+      writer.uint32(26).bytes(message.sValue);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): VerifyAndInstallApp {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseVerifyAndInstallApp();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.sha256 = reader.bytes();
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.rValue = reader.bytes();
+          continue;
+        }
+        case 3: {
+          if (tag !== 26) {
+            break;
+          }
+
+          message.sValue = reader.bytes();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): VerifyAndInstallApp {
+    return {
+      sha256: isSet(object.sha256) ? bytesFromBase64(object.sha256) : new Uint8Array(0),
+      rValue: isSet(object.rValue) ? bytesFromBase64(object.rValue) : new Uint8Array(0),
+      sValue: isSet(object.sValue) ? bytesFromBase64(object.sValue) : new Uint8Array(0),
+    };
+  },
+
+  toJSON(message: VerifyAndInstallApp): unknown {
+    const obj: any = {};
+    if (message.sha256 !== undefined) {
+      obj.sha256 = base64FromBytes(message.sha256);
+    }
+    if (message.rValue !== undefined) {
+      obj.rValue = base64FromBytes(message.rValue);
+    }
+    if (message.sValue !== undefined) {
+      obj.sValue = base64FromBytes(message.sValue);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<VerifyAndInstallApp>, I>>(base?: I): VerifyAndInstallApp {
+    return VerifyAndInstallApp.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<VerifyAndInstallApp>, I>>(object: I): VerifyAndInstallApp {
+    const message = createBaseVerifyAndInstallApp();
+    message.sha256 = object.sha256 ?? new Uint8Array(0);
+    message.rValue = object.rValue ?? new Uint8Array(0);
+    message.sValue = object.sValue ?? new Uint8Array(0);
+    return message;
+  },
+};
+
+function createBaseWatchAppStateEvent(): WatchAppStateEvent {
+  return { field1: 0, field2: false, field3: false, batteryLevelPercent: 0 };
+}
+
+export const WatchAppStateEvent: MessageFns<WatchAppStateEvent> = {
+  encode(message: WatchAppStateEvent, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.field1 !== 0) {
+      writer.uint32(8).int32(message.field1);
+    }
+    if (message.field2 !== false) {
+      writer.uint32(16).bool(message.field2);
+    }
+    if (message.field3 !== false) {
+      writer.uint32(24).bool(message.field3);
+    }
+    if (message.batteryLevelPercent !== 0) {
+      writer.uint32(32).uint32(message.batteryLevelPercent);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): WatchAppStateEvent {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseWatchAppStateEvent();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 8) {
+            break;
+          }
+
+          message.field1 = reader.int32() as any;
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.field2 = reader.bool();
+          continue;
+        }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.field3 = reader.bool();
+          continue;
+        }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.batteryLevelPercent = reader.uint32();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): WatchAppStateEvent {
+    return {
+      field1: isSet(object.field1) ? iOSAppStateFromJSON(object.field1) : 0,
+      field2: isSet(object.field2) ? globalThis.Boolean(object.field2) : false,
+      field3: isSet(object.field3) ? globalThis.Boolean(object.field3) : false,
+      batteryLevelPercent: isSet(object.batteryLevelPercent) ? globalThis.Number(object.batteryLevelPercent) : 0,
+    };
+  },
+
+  toJSON(message: WatchAppStateEvent): unknown {
+    const obj: any = {};
+    if (message.field1 !== undefined) {
+      obj.field1 = iOSAppStateToJSON(message.field1);
+    }
+    if (message.field2 !== undefined) {
+      obj.field2 = message.field2;
+    }
+    if (message.field3 !== undefined) {
+      obj.field3 = message.field3;
+    }
+    if (message.batteryLevelPercent !== undefined) {
+      obj.batteryLevelPercent = Math.round(message.batteryLevelPercent);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<WatchAppStateEvent>, I>>(base?: I): WatchAppStateEvent {
+    return WatchAppStateEvent.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<WatchAppStateEvent>, I>>(object: I): WatchAppStateEvent {
+    const message = createBaseWatchAppStateEvent();
+    message.field1 = object.field1 ?? 0;
+    message.field2 = object.field2 ?? false;
+    message.field3 = object.field3 ?? false;
+    message.batteryLevelPercent = object.batteryLevelPercent ?? 0;
     return message;
   },
 };

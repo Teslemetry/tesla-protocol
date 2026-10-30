@@ -81,7 +81,9 @@ message PVInverterLifetimeStats {
 }
 
 message PVMeterInterface {
-  NeurioMeterInterface neurio = 1;
+  oneof meter_interface {
+    NeurioMeterInterface neurio = 1;
+  }
 }
 
 message PVGridCodeConfig {

@@ -17,13 +17,20 @@ import { EnergySiteNetMessages } from "./energy_site_net.js";
 import { FileStoreMessages } from "./filestore_api.js";
 import { GraphQLMessages } from "./graphql_api.js";
 import { IntraSiteMessages } from "./intra_site_api.js";
-import { LocalAuthMessages } from "./local_auth_api.js";
+import {
+  LocalAuthMessages,
+  LocalParticipant,
+  localParticipantFromJSON,
+  localParticipantToJSON,
+} from "./local_auth_api.js";
 import { NeurioMeterMessages } from "./neurio_meter_api.js";
 import { PVIMessages } from "./pvi_api.js";
 import { RegistrationMessages } from "./registration_api.js";
+import { SMMessages } from "./sm_api.js";
 import { SuperchargerMessages } from "./supercharger_api.js";
 import { TEGMessages } from "./teg_api.js";
 import { WCMessages } from "./wall_connector.js";
+import { WMSAMessages } from "./wmsa_api.js";
 
 export const protobufPackage = "tesla.proto.energy_device.v1";
 
@@ -100,45 +107,6 @@ export function teslaServiceToJSON(object: TeslaService): string {
     case TeslaService.TESLA_SERVICE_COMMAND:
       return "TESLA_SERVICE_COMMAND";
     case TeslaService.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
-}
-
-export enum LocalParticipant {
-  LOCAL_PARTICIPANT_INVALID = 0,
-  LOCAL_PARTICIPANT_INSTALLER = 1,
-  LOCAL_PARTICIPANT_CUSTOMER = 2,
-  UNRECOGNIZED = -1,
-}
-
-export function localParticipantFromJSON(object: any): LocalParticipant {
-  switch (object) {
-    case 0:
-    case "LOCAL_PARTICIPANT_INVALID":
-      return LocalParticipant.LOCAL_PARTICIPANT_INVALID;
-    case 1:
-    case "LOCAL_PARTICIPANT_INSTALLER":
-      return LocalParticipant.LOCAL_PARTICIPANT_INSTALLER;
-    case 2:
-    case "LOCAL_PARTICIPANT_CUSTOMER":
-      return LocalParticipant.LOCAL_PARTICIPANT_CUSTOMER;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return LocalParticipant.UNRECOGNIZED;
-  }
-}
-
-export function localParticipantToJSON(object: LocalParticipant): string {
-  switch (object) {
-    case LocalParticipant.LOCAL_PARTICIPANT_INVALID:
-      return "LOCAL_PARTICIPANT_INVALID";
-    case LocalParticipant.LOCAL_PARTICIPANT_INSTALLER:
-      return "LOCAL_PARTICIPANT_INSTALLER";
-    case LocalParticipant.LOCAL_PARTICIPANT_CUSTOMER:
-      return "LOCAL_PARTICIPANT_CUSTOMER";
-    case LocalParticipant.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
@@ -228,7 +196,23 @@ export interface MessageEnvelope {
   localauth?: LocalAuthMessages | undefined;
   neuriometer?: NeurioMeterMessages | undefined;
   energysitenet?: EnergySiteNetMessages | undefined;
-  intrasite?: IntraSiteMessages | undefined;
+  intrasite?:
+    | IntraSiteMessages
+    | undefined;
+  /**
+   * older device firmware only
+   *
+   * @deprecated
+   */
+  wmsa?:
+    | WMSAMessages
+    | undefined;
+  /**
+   * older device firmware only
+   *
+   * @deprecated
+   */
+  sm?: SMMessages | undefined;
   authorization?: AuthorizationMessages | undefined;
   filestore?: FileStoreMessages | undefined;
   graphql?: GraphQLMessages | undefined;
@@ -673,6 +657,8 @@ function createBaseMessageEnvelope(): MessageEnvelope {
     neuriometer: undefined,
     energysitenet: undefined,
     intrasite: undefined,
+    wmsa: undefined,
+    sm: undefined,
     authorization: undefined,
     filestore: undefined,
     graphql: undefined,
@@ -715,6 +701,12 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
     }
     if (message.intrasite !== undefined) {
       IntraSiteMessages.encode(message.intrasite, writer.uint32(90).fork()).join();
+    }
+    if (message.wmsa !== undefined) {
+      WMSAMessages.encode(message.wmsa, writer.uint32(106).fork()).join();
+    }
+    if (message.sm !== undefined) {
+      SMMessages.encode(message.sm, writer.uint32(114).fork()).join();
     }
     if (message.authorization !== undefined) {
       AuthorizationMessages.encode(message.authorization, writer.uint32(98).fork()).join();
@@ -829,6 +821,22 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
           message.intrasite = IntraSiteMessages.decode(reader, reader.uint32());
           continue;
         }
+        case 13: {
+          if (tag !== 106) {
+            break;
+          }
+
+          message.wmsa = WMSAMessages.decode(reader, reader.uint32());
+          continue;
+        }
+        case 14: {
+          if (tag !== 114) {
+            break;
+          }
+
+          message.sm = SMMessages.decode(reader, reader.uint32());
+          continue;
+        }
         case 12: {
           if (tag !== 98) {
             break;
@@ -891,6 +899,8 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
       neuriometer: isSet(object.neuriometer) ? NeurioMeterMessages.fromJSON(object.neuriometer) : undefined,
       energysitenet: isSet(object.energysitenet) ? EnergySiteNetMessages.fromJSON(object.energysitenet) : undefined,
       intrasite: isSet(object.intrasite) ? IntraSiteMessages.fromJSON(object.intrasite) : undefined,
+      wmsa: isSet(object.wmsa) ? WMSAMessages.fromJSON(object.wmsa) : undefined,
+      sm: isSet(object.sm) ? SMMessages.fromJSON(object.sm) : undefined,
       authorization: isSet(object.authorization) ? AuthorizationMessages.fromJSON(object.authorization) : undefined,
       filestore: isSet(object.filestore) ? FileStoreMessages.fromJSON(object.filestore) : undefined,
       graphql: isSet(object.graphql) ? GraphQLMessages.fromJSON(object.graphql) : undefined,
@@ -933,6 +943,12 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
     }
     if (message.intrasite !== undefined) {
       obj.intrasite = IntraSiteMessages.toJSON(message.intrasite);
+    }
+    if (message.wmsa !== undefined) {
+      obj.wmsa = WMSAMessages.toJSON(message.wmsa);
+    }
+    if (message.sm !== undefined) {
+      obj.sm = SMMessages.toJSON(message.sm);
     }
     if (message.authorization !== undefined) {
       obj.authorization = AuthorizationMessages.toJSON(message.authorization);
@@ -982,6 +998,10 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
     message.intrasite = (object.intrasite !== undefined && object.intrasite !== null)
       ? IntraSiteMessages.fromPartial(object.intrasite)
       : undefined;
+    message.wmsa = (object.wmsa !== undefined && object.wmsa !== null)
+      ? WMSAMessages.fromPartial(object.wmsa)
+      : undefined;
+    message.sm = (object.sm !== undefined && object.sm !== null) ? SMMessages.fromPartial(object.sm) : undefined;
     message.authorization = (object.authorization !== undefined && object.authorization !== null)
       ? AuthorizationMessages.fromPartial(object.authorization)
       : undefined;

@@ -1,0 +1,115 @@
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "WmsaApi";
+
+import "energy.proto";
+import "update.proto";
+import "device.proto";
+
+// WMSA (MessageEnvelope.wmsa = 13), used by older device firmware only.
+
+enum IslandGridConnected {
+  ISLAND_GRID_CONNECTED_INVALID = 0;
+  ISLAND_GRID_CONNECTED_ISLANDED = 1;
+  ISLAND_GRID_CONNECTED_CONNECTED = 2;
+}
+
+enum IslandRxEnableAdjustableFreqCheck {
+  ISLAND_RX_ENABLE_ADJUSTABLE_FREQ_CHECK_INVALID = 0;
+  ISLAND_RX_ENABLE_ADJUSTABLE_FREQ_CHECK_NORMAL = 1;
+  ISLAND_RX_ENABLE_ADJUSTABLE_FREQ_CHECK_PERMISSIVE = 2;
+  ISLAND_RX_ENABLE_ADJUSTABLE_FREQ_CHECK_RESTRICTIVE = 3;
+  ISLAND_RX_ENABLE_ADJUSTABLE_FREQ_CHECK_SNA = 4;
+}
+
+enum IslandRxRelayCommand {
+  ISLAND_RX_RELAY_COMMAND_INVALID = 0;
+  ISLAND_RX_RELAY_COMMAND_NO_CHANGE = 1;
+  ISLAND_RX_RELAY_COMMAND_OPEN = 2;
+  ISLAND_RX_RELAY_COMMAND_CLOSE = 3;
+}
+
+message IslandACMeasurements {
+  repeated IslandACPhaseMeasuremets phase = 1;
+  int32 grid_state = 2;
+  bool ready_for_synchronization = 4;
+  float l1l2_phase_delta_deg = 5;
+  float l1l3_phase_delta_deg = 6;
+  float l2l3_phase_delta_deg = 7;
+  int32 grid_connected = 8;
+  bool delay_open = 9;
+  float learned_nominal_voltage_pu = 10;
+}
+
+message IslandACPhaseMeasuremets {
+  float vl_to_ref_main_vrms = 1;
+  float freq_main_hz = 2;
+  float vl_to_ref_load_vrms = 3;
+  float freq_load_hz = 4;
+  float phase_main_load_deg = 5;
+  bool microgrid_ok = 6;
+  float grid_resistance = 7;
+  float grid_reactance = 8;
+}
+
+message IslandRxCommand {
+  int32 relay_command = 1;
+  bool disable_close = 2;
+  bool disable_trip = 3;
+  int32 enable_adjustable_freq_check = 4;
+}
+
+message MeterMeasurements {
+  repeated MeterPhaseMeasurements phase = 1;
+  AccumulatedEnergy lifetime_total_energy_import_wh = 2;
+  AccumulatedEnergy lifetime_total_energy_export_wh = 3;
+  float grid_voltage_l1l2_vrms = 4;
+}
+
+message MeterPhaseMeasurements {
+  InstACMeasurement phase_measurements = 1;
+  AccumulatedEnergy lifetime_phase_energy_import_wh = 2;
+  AccumulatedEnergy lifetime_phase_energy_export_wh = 3;
+}
+
+message WMSAAPIGetInfoRequest {
+}
+
+message WMSAAPIGetInfoResponse {
+  WmsaInfoMessage wmsa_info = 1;
+}
+
+message WMSAAPIPushIslandRxCommandRequest {
+  IslandRxCommand island_rx = 1;
+}
+
+message WMSAAPIPushIslandRxCommandResponse {
+}
+
+message WMSAMessages {
+  WMSAAPIPushIslandRxCommandRequest push_island_rx_command_request = 1;
+  WMSAAPIPushIslandRxCommandResponse push_island_rx_command_response = 2;
+  WMSAAPIGetInfoRequest get_info_request = 3;
+  WMSAAPIGetInfoResponse get_info_response = 4;
+}
+
+message WmsaInfoMessage {
+  uint32 app_crc = 1;
+  FirmwareVersion fw_version = 2;
+  uint32 build_config_id = 3;
+  uint32 component_id = 4;
+  EcuId ecu_id = 5;
+  uint32 pcba_id = 6;
+  uint32 assembly_id = 7;
+  uint32 usage_id = 8;
+  uint32 subusage_id = 9;
+}
+
+message WmsaStatus {
+  MeterMeasurements meter = 1;
+  IslandACMeasurements island = 2;
+}

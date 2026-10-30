@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "SmApi";
+
+import "energy.proto";
+import "wmsa_api.proto";
+import "energy_telemetry.proto";
+
+// SM (MessageEnvelope.sm = 14), used by older device firmware only.
+
+message SMAPILogSignalsRequest {
+  tesla.proto.energy_telemetry.v1.LogRecord log_record = 1;
+}
+
+message SMAPILogSignalsResponse {
+}
+
+message SMAPIPushWmsaAlertLogRequest {
+  AlertLog log = 1;
+}
+
+message SMAPIPushWmsaAlertLogResponse {
+}
+
+message SMAPIPushWmsaAlertMatrixRequest {
+  AlertMatrix matrix = 1;
+}
+
+message SMAPIPushWmsaAlertMatrixResponse {
+}
+
+message SMAPIPushWmsaStatusRequest {
+  WmsaStatus wmsa_status = 1;
+}
+
+message SMAPIPushWmsaStatusResponse {
+}
+
+message SMMessages {
+  SMAPIPushWmsaStatusRequest push_wmsa_status_request = 1;
+  SMAPIPushWmsaStatusResponse push_wmsa_status_response = 2;
+  SMAPIPushWmsaAlertLogRequest push_wmsa_alert_log_request = 3;
+  SMAPIPushWmsaAlertLogResponse push_wmsa_alert_log_response = 4;
+  SMAPIPushWmsaAlertMatrixRequest push_wmsa_alert_matrix_request = 5;
+  SMAPIPushWmsaAlertMatrixResponse push_wmsa_alert_matrix_response = 6;
+  SMAPILogSignalsRequest log_signals_request = 7;
+  SMAPILogSignalsResponse log_signals_response = 8;
+}

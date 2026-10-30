@@ -20,7 +20,9 @@ enum FileStoreAPIDomain {
 
 message FileStoreAPIFile {
   string name = 1;
-  bytes blob  = 100;
+  oneof content {
+    bytes blob  = 100;
+  }
 }
 
 message FileStoreAPIForceWriteFileRequest {

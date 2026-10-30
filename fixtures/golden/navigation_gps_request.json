@@ -17,7 +17,7 @@
       "payload": {
         "lat": 37.5,
         "lon": -122.25,
-        "order": "REMOTE_NAV_TRIP_ORDER_UNKNOWN",
+        "order": "RemoteNavTripOrderReplace",
         "order_number": 0
       },
       "hex": "1215aa0312090000000000c04240110000000000905ec0"
@@ -32,7 +32,7 @@
       "payload": {
         "lat": 0.0,
         "lon": 0.0,
-        "order": "REMOTE_NAV_TRIP_ORDER_UNKNOWN",
+        "order": "RemoteNavTripOrderReplace",
         "order_number": 0
       },
       "hex": "1203aa0300"
@@ -47,7 +47,7 @@
       "payload": {
         "lat": -33.875,
         "lon": 151.25,
-        "order": "REMOTE_NAV_TRIP_ORDER_UNKNOWN",
+        "order": "RemoteNavTripOrderReplace",
         "order_number": 0
       },
       "hex": "1215aa0312090000000000f040c0110000000000e86240"
@@ -62,7 +62,7 @@
       "payload": {
         "lat": 90.0,
         "lon": 180.0,
-        "order": "REMOTE_NAV_TRIP_ORDER_UNKNOWN",
+        "order": "RemoteNavTripOrderReplace",
         "order_number": 0
       },
       "hex": "1215aa0312090000000000805640110000000000806640"

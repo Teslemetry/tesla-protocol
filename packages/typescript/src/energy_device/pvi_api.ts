@@ -278,7 +278,7 @@ export interface PVInverterLifetimeStats {
 }
 
 export interface PVMeterInterface {
-  neurio: NeurioMeterInterface | undefined;
+  neurio?: NeurioMeterInterface | undefined;
 }
 
 export interface PVGridCodeConfig {

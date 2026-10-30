@@ -190,8 +190,8 @@ export interface SystemUpdate {
 export interface AcceptedPackage {
   packageId: number;
   packageSignature: Uint8Array;
-  uploadEndpoint: string;
-  willAttemptDownload: boolean;
+  uploadEndpoint?: string | undefined;
+  willAttemptDownload?: boolean | undefined;
 }
 
 export interface LocallyAvailablePackage {
@@ -615,7 +615,12 @@ export const SystemUpdate: MessageFns<SystemUpdate> = {
 };
 
 function createBaseAcceptedPackage(): AcceptedPackage {
-  return { packageId: 0, packageSignature: new Uint8Array(0), uploadEndpoint: "", willAttemptDownload: false };
+  return {
+    packageId: 0,
+    packageSignature: new Uint8Array(0),
+    uploadEndpoint: undefined,
+    willAttemptDownload: undefined,
+  };
 }
 
 export const AcceptedPackage: MessageFns<AcceptedPackage> = {
@@ -626,10 +631,10 @@ export const AcceptedPackage: MessageFns<AcceptedPackage> = {
     if (message.packageSignature.length !== 0) {
       writer.uint32(18).bytes(message.packageSignature);
     }
-    if (message.uploadEndpoint !== "") {
+    if (message.uploadEndpoint !== undefined) {
       writer.uint32(26).string(message.uploadEndpoint);
     }
-    if (message.willAttemptDownload !== false) {
+    if (message.willAttemptDownload !== undefined) {
       writer.uint32(32).bool(message.willAttemptDownload);
     }
     return writer;
@@ -687,8 +692,10 @@ export const AcceptedPackage: MessageFns<AcceptedPackage> = {
     return {
       packageId: isSet(object.packageId) ? globalThis.Number(object.packageId) : 0,
       packageSignature: isSet(object.packageSignature) ? bytesFromBase64(object.packageSignature) : new Uint8Array(0),
-      uploadEndpoint: isSet(object.uploadEndpoint) ? globalThis.String(object.uploadEndpoint) : "",
-      willAttemptDownload: isSet(object.willAttemptDownload) ? globalThis.Boolean(object.willAttemptDownload) : false,
+      uploadEndpoint: isSet(object.uploadEndpoint) ? globalThis.String(object.uploadEndpoint) : undefined,
+      willAttemptDownload: isSet(object.willAttemptDownload)
+        ? globalThis.Boolean(object.willAttemptDownload)
+        : undefined,
     };
   },
 
@@ -716,8 +723,8 @@ export const AcceptedPackage: MessageFns<AcceptedPackage> = {
     const message = createBaseAcceptedPackage();
     message.packageId = object.packageId ?? 0;
     message.packageSignature = object.packageSignature ?? new Uint8Array(0);
-    message.uploadEndpoint = object.uploadEndpoint ?? "";
-    message.willAttemptDownload = object.willAttemptDownload ?? false;
+    message.uploadEndpoint = object.uploadEndpoint ?? undefined;
+    message.willAttemptDownload = object.willAttemptDownload ?? undefined;
     return message;
   },
 };

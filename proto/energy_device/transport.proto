@@ -20,6 +20,8 @@ import "filestore_api.proto";
 import "graphql_api.proto";
 import "registration_api.proto";
 import "supercharger_api.proto";
+import "wmsa_api.proto";
+import "sm_api.proto";
 
 enum DeliveryChannel {
   DELIVERY_CHANNEL_INVALID        = 0;
@@ -31,12 +33,6 @@ enum DeliveryChannel {
 enum TeslaService {
   TESLA_SERVICE_INVALID = 0;
   TESLA_SERVICE_COMMAND = 1;
-}
-
-enum LocalParticipant {
-  LOCAL_PARTICIPANT_INVALID   = 0;
-  LOCAL_PARTICIPANT_INSTALLER = 1;
-  LOCAL_PARTICIPANT_CUSTOMER  = 2;
 }
 
 enum ExternalAuthType {
@@ -82,8 +78,6 @@ message MessageEnvelope {
   DeliveryChannel delivery_channel = 1;
   Participant sender               = 2;
   Participant recipient            = 3;
-  // 13 (wmsa) and 14 (sm) carry payloads whose message types this repo does not publish.
-  reserved 13, 14;
   oneof payload {
     CommonMessages common               = 4;
     TEGMessages teg                     = 5;
@@ -93,6 +87,8 @@ message MessageEnvelope {
     NeurioMeterMessages neuriometer     = 9;
     EnergySiteNetMessages energysitenet = 10;
     IntraSiteMessages intrasite         = 11;
+    WMSAMessages wmsa = 13 [deprecated = true];  // older device firmware only
+    SMMessages sm = 14 [deprecated = true];  // older device firmware only
     AuthorizationMessages authorization = 12;
     FileStoreMessages filestore         = 15;
     GraphQLMessages graphql             = 16;
