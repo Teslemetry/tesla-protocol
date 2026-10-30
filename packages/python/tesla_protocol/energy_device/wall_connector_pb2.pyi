@@ -835,11 +835,11 @@ class WCAPIGetConfigResponse(_message.Message):
     wifi_config: _networking_pb2.WifiConfig
     wifi: _networking_pb2.NetworkInterface
     meters: _containers.RepeatedCompositeFieldContainer[WCMeterInterface]
-    charge_schedule: WCChargeScheduleConfig
+    charge_schedule: WCChargeScheduleConfigStatus
     ocpp_settings: WCOcppSettings
     vehicle_to_home: WCVehicleToHomeConfig
     time_source: WCTimeSource
-    def __init__(self, settings: _Optional[_Union[WCSettings, _Mapping]] = ..., wifi_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]] = ..., wifi: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]] = ..., meters: _Optional[_Iterable[_Union[WCMeterInterface, _Mapping]]] = ..., charge_schedule: _Optional[_Union[WCChargeScheduleConfig, _Mapping]] = ..., ocpp_settings: _Optional[_Union[WCOcppSettings, _Mapping]] = ..., vehicle_to_home: _Optional[_Union[WCVehicleToHomeConfig, _Mapping]] = ..., time_source: _Optional[_Union[WCTimeSource, str]] = ...) -> None: ...
+    def __init__(self, settings: _Optional[_Union[WCSettings, _Mapping]] = ..., wifi_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]] = ..., wifi: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]] = ..., meters: _Optional[_Iterable[_Union[WCMeterInterface, _Mapping]]] = ..., charge_schedule: _Optional[_Union[WCChargeScheduleConfigStatus, _Mapping]] = ..., ocpp_settings: _Optional[_Union[WCOcppSettings, _Mapping]] = ..., vehicle_to_home: _Optional[_Union[WCVehicleToHomeConfig, _Mapping]] = ..., time_source: _Optional[_Union[WCTimeSource, str]] = ...) -> None: ...
 
 class WCAPIConfigureSettingsRequest(_message.Message):
     __slots__ = ("settings",)
@@ -1201,9 +1201,9 @@ class WCAPIRegisterCommercialResponse(_message.Message):
     __slots__ = ("failure", "response")
     FAILURE_FIELD_NUMBER: _ClassVar[int]
     RESPONSE_FIELD_NUMBER: _ClassVar[int]
-    failure: int
+    failure: _registration_api_pb2.RegistrationFailure
     response: _registration_api_pb2.RegistrationResponse
-    def __init__(self, failure: _Optional[int] = ..., response: _Optional[_Union[_registration_api_pb2.RegistrationResponse, _Mapping]] = ...) -> None: ...
+    def __init__(self, failure: _Optional[_Union[_registration_api_pb2.RegistrationFailure, str]] = ..., response: _Optional[_Union[_registration_api_pb2.RegistrationResponse, _Mapping]] = ...) -> None: ...
 
 class WCAPIPushPowershareCommandRequest(_message.Message):
     __slots__ = ("site_vehicle_request", "site_evse_request", "inverter_config", "ttl_seconds")

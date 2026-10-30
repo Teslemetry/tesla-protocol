@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package tesla.proto.energy.command.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energy/command/v1";
+option java_package = "com.tesla.generated.energy.command.v1";
+option java_outer_classname = "EnergyCommand";
+
+import "common_api.proto";
+import "teg_api.proto";
+import "wall_connector.proto";
+import "pvi_api.proto";
+import "neurio_meter_api.proto";
+import "energy_site_net.proto";
+import "authorization_api.proto";
+import "filestore_api.proto";
+import "graphql_api.proto";
+import "supercharger_api.proto";
+
+// Energy device command envelope: one energy_device message family per call.
+
+message DeviceResponseTimeout {
+  string description = 1;
+}
+
+message EnergyDeviceMessage {
+  tesla.proto.energy_device.v1.CommonMessages common = 1;
+  tesla.proto.energy_device.v1.TEGMessages teg = 2;
+  tesla.proto.energy_device.v1.WCMessages wc = 3;
+  tesla.proto.energy_device.v1.PVIMessages pvi = 4;
+  tesla.proto.energy_device.v1.NeurioMeterMessages neuriometer = 5;
+  tesla.proto.energy_device.v1.EnergySiteNetMessages energysitenet = 6;
+  tesla.proto.energy_device.v1.AuthorizationMessages authorization = 8;
+  tesla.proto.energy_device.v1.FileStoreMessages filestore = 11;
+  ServerMessages server = 12;
+  tesla.proto.energy_device.v1.GraphQLMessages graphql = 13;
+  tesla.proto.energy_device.v1.SuperchargerMessages supercharger = 14;
+}
+
+message ServerMessages {
+  DeviceResponseTimeout timeout = 1;
+}

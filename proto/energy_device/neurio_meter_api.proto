@@ -67,7 +67,7 @@ enum NeurioCompatibleMeterType {
 }
 
 message NeurioCTConfig {
-  int32 location                = 1;
+  MeterCTLocation location                = 1;
   float real_power_scale_factor = 2;
 }
 
@@ -177,4 +177,15 @@ message NeurioMeterMessages {
     NeurioMeterAPISetNeurioCtTypeRequest set_neurio_ct_type_request     = 11;
     NeurioMeterAPISetNeurioCtTypeResponse set_neurio_ct_type_response   = 12;
   }
+}
+
+enum MeterCTLocation {
+  METER_CT_LOCATION_INVALID = 0;
+  METER_CT_LOCATION_NONE = 1;
+  METER_CT_LOCATION_SITE = 2;
+  METER_CT_LOCATION_LOAD = 3;
+  METER_CT_LOCATION_BATTERY = 4;
+  METER_CT_LOCATION_SOLAR = 5;
+  METER_CT_LOCATION_SOLAR_RGM = 6;
+  METER_CT_LOCATION_CONDUCTOR = 7;
 }

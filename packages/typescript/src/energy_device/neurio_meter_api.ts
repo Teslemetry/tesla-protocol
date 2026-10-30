@@ -379,8 +379,77 @@ export function neurioCompatibleMeterTypeToJSON(object: NeurioCompatibleMeterTyp
   }
 }
 
+export enum MeterCTLocation {
+  METER_CT_LOCATION_INVALID = 0,
+  METER_CT_LOCATION_NONE = 1,
+  METER_CT_LOCATION_SITE = 2,
+  METER_CT_LOCATION_LOAD = 3,
+  METER_CT_LOCATION_BATTERY = 4,
+  METER_CT_LOCATION_SOLAR = 5,
+  METER_CT_LOCATION_SOLAR_RGM = 6,
+  METER_CT_LOCATION_CONDUCTOR = 7,
+  UNRECOGNIZED = -1,
+}
+
+export function meterCTLocationFromJSON(object: any): MeterCTLocation {
+  switch (object) {
+    case 0:
+    case "METER_CT_LOCATION_INVALID":
+      return MeterCTLocation.METER_CT_LOCATION_INVALID;
+    case 1:
+    case "METER_CT_LOCATION_NONE":
+      return MeterCTLocation.METER_CT_LOCATION_NONE;
+    case 2:
+    case "METER_CT_LOCATION_SITE":
+      return MeterCTLocation.METER_CT_LOCATION_SITE;
+    case 3:
+    case "METER_CT_LOCATION_LOAD":
+      return MeterCTLocation.METER_CT_LOCATION_LOAD;
+    case 4:
+    case "METER_CT_LOCATION_BATTERY":
+      return MeterCTLocation.METER_CT_LOCATION_BATTERY;
+    case 5:
+    case "METER_CT_LOCATION_SOLAR":
+      return MeterCTLocation.METER_CT_LOCATION_SOLAR;
+    case 6:
+    case "METER_CT_LOCATION_SOLAR_RGM":
+      return MeterCTLocation.METER_CT_LOCATION_SOLAR_RGM;
+    case 7:
+    case "METER_CT_LOCATION_CONDUCTOR":
+      return MeterCTLocation.METER_CT_LOCATION_CONDUCTOR;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return MeterCTLocation.UNRECOGNIZED;
+  }
+}
+
+export function meterCTLocationToJSON(object: MeterCTLocation): string {
+  switch (object) {
+    case MeterCTLocation.METER_CT_LOCATION_INVALID:
+      return "METER_CT_LOCATION_INVALID";
+    case MeterCTLocation.METER_CT_LOCATION_NONE:
+      return "METER_CT_LOCATION_NONE";
+    case MeterCTLocation.METER_CT_LOCATION_SITE:
+      return "METER_CT_LOCATION_SITE";
+    case MeterCTLocation.METER_CT_LOCATION_LOAD:
+      return "METER_CT_LOCATION_LOAD";
+    case MeterCTLocation.METER_CT_LOCATION_BATTERY:
+      return "METER_CT_LOCATION_BATTERY";
+    case MeterCTLocation.METER_CT_LOCATION_SOLAR:
+      return "METER_CT_LOCATION_SOLAR";
+    case MeterCTLocation.METER_CT_LOCATION_SOLAR_RGM:
+      return "METER_CT_LOCATION_SOLAR_RGM";
+    case MeterCTLocation.METER_CT_LOCATION_CONDUCTOR:
+      return "METER_CT_LOCATION_CONDUCTOR";
+    case MeterCTLocation.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface NeurioCTConfig {
-  location: number;
+  location: MeterCTLocation;
   realPowerScaleFactor: number;
 }
 
@@ -516,7 +585,7 @@ export const NeurioCTConfig: MessageFns<NeurioCTConfig> = {
             break;
           }
 
-          message.location = reader.int32();
+          message.location = reader.int32() as any;
           continue;
         }
         case 2: {
@@ -538,7 +607,7 @@ export const NeurioCTConfig: MessageFns<NeurioCTConfig> = {
 
   fromJSON(object: any): NeurioCTConfig {
     return {
-      location: isSet(object.location) ? globalThis.Number(object.location) : 0,
+      location: isSet(object.location) ? meterCTLocationFromJSON(object.location) : 0,
       realPowerScaleFactor: isSet(object.realPowerScaleFactor) ? globalThis.Number(object.realPowerScaleFactor) : 0,
     };
   },
@@ -546,7 +615,7 @@ export const NeurioCTConfig: MessageFns<NeurioCTConfig> = {
   toJSON(message: NeurioCTConfig): unknown {
     const obj: any = {};
     if (message.location !== undefined) {
-      obj.location = Math.round(message.location);
+      obj.location = meterCTLocationToJSON(message.location);
     }
     if (message.realPowerScaleFactor !== undefined) {
       obj.realPowerScaleFactor = message.realPowerScaleFactor;

@@ -44,8 +44,8 @@ class GridComplianceStatus(_message.Message):
     GRID_STATE_FIELD_NUMBER: _ClassVar[int]
     QUALIFYING_TIME_REMAINING_S_FIELD_NUMBER: _ClassVar[int]
     grid_state: GridState
-    qualifying_time_remaining_s: _wrappers_pb2.FloatValue
-    def __init__(self, grid_state: _Optional[_Union[GridState, str]] = ..., qualifying_time_remaining_s: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ...) -> None: ...
+    qualifying_time_remaining_s: _wrappers_pb2.UInt32Value
+    def __init__(self, grid_state: _Optional[_Union[GridState, str]] = ..., qualifying_time_remaining_s: _Optional[_Union[_wrappers_pb2.UInt32Value, _Mapping]] = ...) -> None: ...
 
 class InstACMeasurement(_message.Message):
     __slots__ = ("voltage_vrms", "frequency_hz", "current_arms", "real_power_w", "reactive_power_var", "apparent_power_va")

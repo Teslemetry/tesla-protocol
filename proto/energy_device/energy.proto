@@ -30,7 +30,7 @@ message AccumulatedEnergy {
 
 message GridComplianceStatus {
   GridState grid_state                                    = 1;
-  google.protobuf.FloatValue qualifying_time_remaining_s = 2;
+  google.protobuf.UInt32Value qualifying_time_remaining_s = 2;
 }
 
 message InstACMeasurement {
@@ -48,9 +48,9 @@ message InstDCMeasurement {
 }
 
 message AlertLog {
-  optional uint64 data = 1;
+  optional fixed64 data = 1;
 }
 
 message AlertMatrix {
-  optional uint64 data = 1;
+  optional fixed64 data = 1;
 }

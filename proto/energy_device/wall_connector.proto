@@ -267,17 +267,16 @@ message WCVitals {
 }
 
 message WCLifetimeStats {
-  reserved 1, 2;
-  uint64 uptime_s                   = 3;
-  uint32 alert_count                = 4;
-  uint32 contactor_cycles           = 5;
-  uint32 contactor_cycles_loaded    = 6;
-  uint32 connector_cycles           = 7;
-  uint32 thermal_foldbacks          = 8;
-  float avg_startup_temp_c          = 9;
-  uint32 charge_starts              = 10;
-  uint64 charging_time_s            = 11;
-  AccumulatedEnergy charging_energy = 12;
+  uint64 uptime_s                   = 1;
+  uint32 alert_count                = 2;
+  uint32 contactor_cycles           = 3;
+  uint32 contactor_cycles_loaded    = 4;
+  uint32 connector_cycles           = 5;
+  uint32 thermal_foldbacks          = 6;
+  float avg_startup_temp_c          = 7;
+  uint32 charge_starts              = 8;
+  uint64 charging_time_s            = 9;
+  AccumulatedEnergy charging_energy = 10;
 }
 
 message WCLoadSharingFixedLimitConfig {
@@ -289,8 +288,10 @@ message WCLoadSharingConductorLimitConfig {
 }
 
 message WCLoadSharingSettings {
-  WCLoadSharingFixedLimitConfig fixed_limit         = 1;
-  WCLoadSharingConductorLimitConfig conductor_limit = 2;
+  oneof network_limit {
+    WCLoadSharingFixedLimitConfig fixed_limit         = 1;
+    WCLoadSharingConductorLimitConfig conductor_limit = 2;
+  }
 }
 
 message WCLoadSharingLimits {
@@ -304,7 +305,9 @@ message WCLoadSharingNetworkStatus {
 message WCLoadSharingConfig {
   uint32 version                            = 1;
   repeated Din participant_dins             = 2;
-  WCLoadSharingFixedLimitConfig fixed_limit = 3;
+  oneof network_limit {
+    WCLoadSharingFixedLimitConfig fixed_limit = 3;
+  }
   WCLoadSharingSettings settings            = 4;
   bool charging_enabled                     = 5;
 }
@@ -319,15 +322,19 @@ message WCOperationalSettingsConfig {
 }
 
 message WCMeterInterface {
-  NeurioMeterInterface neurio = 1;
+  oneof meter_interface {
+    NeurioMeterInterface neurio = 1;
+  }
 }
 
 message WCDryContactConfig {
   bool enabled                           = 1;
   WCDryContactDefaultState default_state = 2;
-  bool disable_charging                  = 3;
-  uint32 max_current_amps                = 4;
-  bool germany_14a                       = 5;
+  oneof control_behavior {
+    bool disable_charging                  = 3;
+    uint32 max_current_amps                = 4;
+    bool germany_14a                       = 5;
+  }
 }
 
 message WCTimeZoneTransition {
@@ -505,7 +512,7 @@ message WCAPIGetConfigResponse {
   WifiConfig wifi_config                 = 2;
   NetworkInterface wifi                  = 3;
   repeated WCMeterInterface meters       = 4;
-  WCChargeScheduleConfig charge_schedule = 5;
+  WCChargeScheduleConfigStatus charge_schedule = 5;
   WCOcppSettings ocpp_settings           = 6;
   WCVehicleToHomeConfig vehicle_to_home  = 7;
   WCTimeSource time_source               = 8;
@@ -749,7 +756,7 @@ message WCAPIRegisterCommercialRequest {
 }
 
 message WCAPIRegisterCommercialResponse {
-  int32 failure                 = 1;
+  RegistrationFailure failure                 = 1;
   RegistrationResponse response = 2;
 }
 

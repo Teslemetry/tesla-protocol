@@ -89,7 +89,7 @@ message EcuFirmwareUpdateEcuResult {
 }
 
 message EcuFirmwareUpdateInProgress {
-  map<string, EcuFirmwareUpdateNodeProgress> default = 1;
+  map<string, EcuFirmwareUpdateNodeProgress> node_progresses = 1;
 }
 
 message EcuFirmwareUpdateNodeProgress {
@@ -100,7 +100,7 @@ message EcuFirmwareUpdateNodeProgress {
 
 message EcuFirmwareUpdateResult {
   EcuFirmwareUpdateStatus system_update_status = 1;
-  map<string, EcuFirmwareUpdateAttempts> default = 2;
+  map<string, EcuFirmwareUpdateAttempts> ecu_update_results = 2;
 }
 
 message EcuFirmwareUpdateStatus {
@@ -134,7 +134,7 @@ message SuperchargerAPIGetDcMetersCommissioningRequest {
 
 message SuperchargerAPIGetDcMetersCommissioningResponse {
   repeated DcMeterCommissioningStatus dc_meters = 1;
-  int32 error = 2;  // may be an enum; values not yet known
+  DcMeterCommissioningError error = 2;
 }
 
 message SuperchargerAPIGetEcuFirmwareUpdateProgressRequest {
@@ -220,4 +220,10 @@ message SuperchargerMessages {
 message VerifoneKiosk {
   string serial_number = 1;
   string subject_key_identifer = 2;
+}
+
+enum DcMeterCommissioningError {
+  DC_METER_COMMISSIONING_ERROR_INVALID = 0;
+  DC_METER_COMMISSIONING_ERROR_UNAVAILABLE = 1;
+  DC_METER_COMMISSIONING_ERROR_TIMEOUT = 2;
 }

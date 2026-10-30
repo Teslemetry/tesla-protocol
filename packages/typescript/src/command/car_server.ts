@@ -272,6 +272,45 @@ export function vehicleDataFieldsToJSON(object: VehicleDataFields): string {
   }
 }
 
+export enum RemoteNavTripOrderE {
+  RemoteNavTripOrderReplace = 0,
+  RemoteNavTripOrderPrepend = 1,
+  RemoteNavTripOrderAppend = 2,
+  UNRECOGNIZED = -1,
+}
+
+export function remoteNavTripOrderEFromJSON(object: any): RemoteNavTripOrderE {
+  switch (object) {
+    case 0:
+    case "RemoteNavTripOrderReplace":
+      return RemoteNavTripOrderE.RemoteNavTripOrderReplace;
+    case 1:
+    case "RemoteNavTripOrderPrepend":
+      return RemoteNavTripOrderE.RemoteNavTripOrderPrepend;
+    case 2:
+    case "RemoteNavTripOrderAppend":
+      return RemoteNavTripOrderE.RemoteNavTripOrderAppend;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return RemoteNavTripOrderE.UNRECOGNIZED;
+  }
+}
+
+export function remoteNavTripOrderEToJSON(object: RemoteNavTripOrderE): string {
+  switch (object) {
+    case RemoteNavTripOrderE.RemoteNavTripOrderReplace:
+      return "RemoteNavTripOrderReplace";
+    case RemoteNavTripOrderE.RemoteNavTripOrderPrepend:
+      return "RemoteNavTripOrderPrepend";
+    case RemoteNavTripOrderE.RemoteNavTripOrderAppend:
+      return "RemoteNavTripOrderAppend";
+    case RemoteNavTripOrderE.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
 export interface Action {
   vehicleAction?: VehicleAction | undefined;
 }
@@ -1985,62 +2024,14 @@ export interface StreamMessage {
 
 export interface NavigationRequest {
   destination: string;
-  order: number;
+  /** TESLEMETRY-EXT */
+  order: RemoteNavTripOrderE;
 }
 
 export interface NavigationSuperchargerRequest {
   /** Supercharger location, identified as in Superchargers.id. */
   id: number;
-  remoteNavTripOrder: NavigationSuperchargerRequest_RemoteNavTripOrder;
-}
-
-export enum NavigationSuperchargerRequest_RemoteNavTripOrder {
-  REMOTE_NAV_TRIP_ORDER_UNKNOWN = 0,
-  REMOTE_NAV_TRIP_ORDER_REPLACE = 1,
-  REMOTE_NAV_TRIP_ORDER_PREPEND = 2,
-  REMOTE_NAV_TRIP_ORDER_APPEND = 3,
-  UNRECOGNIZED = -1,
-}
-
-export function navigationSuperchargerRequest_RemoteNavTripOrderFromJSON(
-  object: any,
-): NavigationSuperchargerRequest_RemoteNavTripOrder {
-  switch (object) {
-    case 0:
-    case "REMOTE_NAV_TRIP_ORDER_UNKNOWN":
-      return NavigationSuperchargerRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_UNKNOWN;
-    case 1:
-    case "REMOTE_NAV_TRIP_ORDER_REPLACE":
-      return NavigationSuperchargerRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_REPLACE;
-    case 2:
-    case "REMOTE_NAV_TRIP_ORDER_PREPEND":
-      return NavigationSuperchargerRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_PREPEND;
-    case 3:
-    case "REMOTE_NAV_TRIP_ORDER_APPEND":
-      return NavigationSuperchargerRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_APPEND;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return NavigationSuperchargerRequest_RemoteNavTripOrder.UNRECOGNIZED;
-  }
-}
-
-export function navigationSuperchargerRequest_RemoteNavTripOrderToJSON(
-  object: NavigationSuperchargerRequest_RemoteNavTripOrder,
-): string {
-  switch (object) {
-    case NavigationSuperchargerRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_UNKNOWN:
-      return "REMOTE_NAV_TRIP_ORDER_UNKNOWN";
-    case NavigationSuperchargerRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_REPLACE:
-      return "REMOTE_NAV_TRIP_ORDER_REPLACE";
-    case NavigationSuperchargerRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_PREPEND:
-      return "REMOTE_NAV_TRIP_ORDER_PREPEND";
-    case NavigationSuperchargerRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_APPEND:
-      return "REMOTE_NAV_TRIP_ORDER_APPEND";
-    case NavigationSuperchargerRequest_RemoteNavTripOrder.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
+  remoteNavTripOrder: RemoteNavTripOrderE;
 }
 
 export interface UiSetUpcomingCalendarEntries {
@@ -2129,52 +2120,7 @@ export interface PseudonymSyncRequest {
 export interface NavigationGpsRequest {
   lat: number;
   lon: number;
-  order: NavigationGpsRequest_RemoteNavTripOrder;
-}
-
-export enum NavigationGpsRequest_RemoteNavTripOrder {
-  REMOTE_NAV_TRIP_ORDER_UNKNOWN = 0,
-  REMOTE_NAV_TRIP_ORDER_REPLACE = 1,
-  REMOTE_NAV_TRIP_ORDER_PREPEND = 2,
-  REMOTE_NAV_TRIP_ORDER_APPEND = 3,
-  UNRECOGNIZED = -1,
-}
-
-export function navigationGpsRequest_RemoteNavTripOrderFromJSON(object: any): NavigationGpsRequest_RemoteNavTripOrder {
-  switch (object) {
-    case 0:
-    case "REMOTE_NAV_TRIP_ORDER_UNKNOWN":
-      return NavigationGpsRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_UNKNOWN;
-    case 1:
-    case "REMOTE_NAV_TRIP_ORDER_REPLACE":
-      return NavigationGpsRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_REPLACE;
-    case 2:
-    case "REMOTE_NAV_TRIP_ORDER_PREPEND":
-      return NavigationGpsRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_PREPEND;
-    case 3:
-    case "REMOTE_NAV_TRIP_ORDER_APPEND":
-      return NavigationGpsRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_APPEND;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return NavigationGpsRequest_RemoteNavTripOrder.UNRECOGNIZED;
-  }
-}
-
-export function navigationGpsRequest_RemoteNavTripOrderToJSON(object: NavigationGpsRequest_RemoteNavTripOrder): string {
-  switch (object) {
-    case NavigationGpsRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_UNKNOWN:
-      return "REMOTE_NAV_TRIP_ORDER_UNKNOWN";
-    case NavigationGpsRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_REPLACE:
-      return "REMOTE_NAV_TRIP_ORDER_REPLACE";
-    case NavigationGpsRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_PREPEND:
-      return "REMOTE_NAV_TRIP_ORDER_PREPEND";
-    case NavigationGpsRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_APPEND:
-      return "REMOTE_NAV_TRIP_ORDER_APPEND";
-    case NavigationGpsRequest_RemoteNavTripOrder.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
+  order: RemoteNavTripOrderE;
 }
 
 /**
@@ -2672,56 +2618,7 @@ export interface NavigationGpsDestinationRequest {
   lat: number;
   lon: number;
   destination: string;
-  order: NavigationGpsDestinationRequest_RemoteNavTripOrder;
-}
-
-export enum NavigationGpsDestinationRequest_RemoteNavTripOrder {
-  REMOTE_NAV_TRIP_ORDER_UNKNOWN = 0,
-  REMOTE_NAV_TRIP_ORDER_REPLACE = 1,
-  REMOTE_NAV_TRIP_ORDER_PREPEND = 2,
-  REMOTE_NAV_TRIP_ORDER_APPEND = 3,
-  UNRECOGNIZED = -1,
-}
-
-export function navigationGpsDestinationRequest_RemoteNavTripOrderFromJSON(
-  object: any,
-): NavigationGpsDestinationRequest_RemoteNavTripOrder {
-  switch (object) {
-    case 0:
-    case "REMOTE_NAV_TRIP_ORDER_UNKNOWN":
-      return NavigationGpsDestinationRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_UNKNOWN;
-    case 1:
-    case "REMOTE_NAV_TRIP_ORDER_REPLACE":
-      return NavigationGpsDestinationRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_REPLACE;
-    case 2:
-    case "REMOTE_NAV_TRIP_ORDER_PREPEND":
-      return NavigationGpsDestinationRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_PREPEND;
-    case 3:
-    case "REMOTE_NAV_TRIP_ORDER_APPEND":
-      return NavigationGpsDestinationRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_APPEND;
-    case -1:
-    case "UNRECOGNIZED":
-    default:
-      return NavigationGpsDestinationRequest_RemoteNavTripOrder.UNRECOGNIZED;
-  }
-}
-
-export function navigationGpsDestinationRequest_RemoteNavTripOrderToJSON(
-  object: NavigationGpsDestinationRequest_RemoteNavTripOrder,
-): string {
-  switch (object) {
-    case NavigationGpsDestinationRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_UNKNOWN:
-      return "REMOTE_NAV_TRIP_ORDER_UNKNOWN";
-    case NavigationGpsDestinationRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_REPLACE:
-      return "REMOTE_NAV_TRIP_ORDER_REPLACE";
-    case NavigationGpsDestinationRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_PREPEND:
-      return "REMOTE_NAV_TRIP_ORDER_PREPEND";
-    case NavigationGpsDestinationRequest_RemoteNavTripOrder.REMOTE_NAV_TRIP_ORDER_APPEND:
-      return "REMOTE_NAV_TRIP_ORDER_APPEND";
-    case NavigationGpsDestinationRequest_RemoteNavTripOrder.UNRECOGNIZED:
-    default:
-      return "UNRECOGNIZED";
-  }
+  order: RemoteNavTripOrderE;
 }
 
 export interface ParentalControlsClearPinAction {
@@ -16603,7 +16500,7 @@ export const NavigationRequest: MessageFns<NavigationRequest> = {
             break;
           }
 
-          message.order = reader.int32();
+          message.order = reader.int32() as any;
           continue;
         }
       }
@@ -16618,7 +16515,7 @@ export const NavigationRequest: MessageFns<NavigationRequest> = {
   fromJSON(object: any): NavigationRequest {
     return {
       destination: isSet(object.destination) ? globalThis.String(object.destination) : "",
-      order: isSet(object.order) ? globalThis.Number(object.order) : 0,
+      order: isSet(object.order) ? remoteNavTripOrderEFromJSON(object.order) : 0,
     };
   },
 
@@ -16628,7 +16525,7 @@ export const NavigationRequest: MessageFns<NavigationRequest> = {
       obj.destination = message.destination;
     }
     if (message.order !== undefined) {
-      obj.order = Math.round(message.order);
+      obj.order = remoteNavTripOrderEToJSON(message.order);
     }
     return obj;
   },
@@ -16694,9 +16591,7 @@ export const NavigationSuperchargerRequest: MessageFns<NavigationSuperchargerReq
   fromJSON(object: any): NavigationSuperchargerRequest {
     return {
       id: isSet(object.id) ? globalThis.Number(object.id) : 0,
-      remoteNavTripOrder: isSet(object.remoteNavTripOrder)
-        ? navigationSuperchargerRequest_RemoteNavTripOrderFromJSON(object.remoteNavTripOrder)
-        : 0,
+      remoteNavTripOrder: isSet(object.remoteNavTripOrder) ? remoteNavTripOrderEFromJSON(object.remoteNavTripOrder) : 0,
     };
   },
 
@@ -16706,7 +16601,7 @@ export const NavigationSuperchargerRequest: MessageFns<NavigationSuperchargerReq
       obj.id = Math.round(message.id);
     }
     if (message.remoteNavTripOrder !== undefined) {
-      obj.remoteNavTripOrder = navigationSuperchargerRequest_RemoteNavTripOrderToJSON(message.remoteNavTripOrder);
+      obj.remoteNavTripOrder = remoteNavTripOrderEToJSON(message.remoteNavTripOrder);
     }
     return obj;
   },
@@ -17936,7 +17831,7 @@ export const NavigationGpsRequest: MessageFns<NavigationGpsRequest> = {
     return {
       lat: isSet(object.lat) ? globalThis.Number(object.lat) : 0,
       lon: isSet(object.lon) ? globalThis.Number(object.lon) : 0,
-      order: isSet(object.order) ? navigationGpsRequest_RemoteNavTripOrderFromJSON(object.order) : 0,
+      order: isSet(object.order) ? remoteNavTripOrderEFromJSON(object.order) : 0,
     };
   },
 
@@ -17949,7 +17844,7 @@ export const NavigationGpsRequest: MessageFns<NavigationGpsRequest> = {
       obj.lon = message.lon;
     }
     if (message.order !== undefined) {
-      obj.order = navigationGpsRequest_RemoteNavTripOrderToJSON(message.order);
+      obj.order = remoteNavTripOrderEToJSON(message.order);
     }
     return obj;
   },
@@ -22097,7 +21992,7 @@ export const NavigationGpsDestinationRequest: MessageFns<NavigationGpsDestinatio
       lat: isSet(object.lat) ? globalThis.Number(object.lat) : 0,
       lon: isSet(object.lon) ? globalThis.Number(object.lon) : 0,
       destination: isSet(object.destination) ? globalThis.String(object.destination) : "",
-      order: isSet(object.order) ? navigationGpsDestinationRequest_RemoteNavTripOrderFromJSON(object.order) : 0,
+      order: isSet(object.order) ? remoteNavTripOrderEFromJSON(object.order) : 0,
     };
   },
 
@@ -22113,7 +22008,7 @@ export const NavigationGpsDestinationRequest: MessageFns<NavigationGpsDestinatio
       obj.destination = message.destination;
     }
     if (message.order !== undefined) {
-      obj.order = navigationGpsDestinationRequest_RemoteNavTripOrderToJSON(message.order);
+      obj.order = remoteNavTripOrderEToJSON(message.order);
     }
     return obj;
   },

@@ -923,21 +923,21 @@ message StreamMessage {
 
 message NavigationRequest {
   string destination = 1;
-  int32 order = 2;
+  RemoteNavTripOrder_E order = 2;  // TESLEMETRY-EXT
+}
+
+enum RemoteNavTripOrder_E {
+  RemoteNavTripOrderReplace = 0;
+  RemoteNavTripOrderPrepend = 1;
+  RemoteNavTripOrderAppend = 2;
 }
 
 message NavigationSuperchargerRequest {
   // The trip order lives at tag 2, so the name stays blocked here, see AGENTS.md.
   reserved "order";
-  enum RemoteNavTripOrder {
-    REMOTE_NAV_TRIP_ORDER_UNKNOWN = 0;
-    REMOTE_NAV_TRIP_ORDER_REPLACE = 1;
-    REMOTE_NAV_TRIP_ORDER_PREPEND = 2;
-    REMOTE_NAV_TRIP_ORDER_APPEND = 3;
-  }
   // Supercharger location, identified as in Superchargers.id.
   int64 id = 1;
-  RemoteNavTripOrder remote_nav_trip_order = 2;
+  RemoteNavTripOrder_E remote_nav_trip_order = 2;
 }
 
 message UiSetUpcomingCalendarEntries {
@@ -1015,15 +1015,9 @@ message PseudonymSyncRequest {
 }
 
 message NavigationGpsRequest {
-  enum RemoteNavTripOrder {
-    REMOTE_NAV_TRIP_ORDER_UNKNOWN = 0;
-    REMOTE_NAV_TRIP_ORDER_REPLACE = 1;
-    REMOTE_NAV_TRIP_ORDER_PREPEND = 2;
-    REMOTE_NAV_TRIP_ORDER_APPEND = 3;
-  }
   double lat = 1;
   double lon = 2;
-  RemoteNavTripOrder order = 3;
+  RemoteNavTripOrder_E order = 3;
 }
 // ===== TESLEMETRY-EXT END =====
 
@@ -1328,14 +1322,7 @@ message NavigationGpsDestinationRequest {
   double lon = 2;
   string destination = 3;
 
-  enum RemoteNavTripOrder {
-    REMOTE_NAV_TRIP_ORDER_UNKNOWN = 0;
-    REMOTE_NAV_TRIP_ORDER_REPLACE = 1;
-    REMOTE_NAV_TRIP_ORDER_PREPEND = 2;
-    REMOTE_NAV_TRIP_ORDER_APPEND = 3;
-  }
-
-  RemoteNavTripOrder order = 4;
+  RemoteNavTripOrder_E order = 4;
 }
 // ===== TESLEMETRY-EXT END =====
 

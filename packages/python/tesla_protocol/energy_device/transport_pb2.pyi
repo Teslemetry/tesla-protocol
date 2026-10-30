@@ -12,6 +12,8 @@ from tesla_protocol.energy_device import filestore_api_pb2 as _filestore_api_pb2
 from tesla_protocol.energy_device import graphql_api_pb2 as _graphql_api_pb2
 from tesla_protocol.energy_device import registration_api_pb2 as _registration_api_pb2
 from tesla_protocol.energy_device import supercharger_api_pb2 as _supercharger_api_pb2
+from tesla_protocol.energy_device import wmsa_api_pb2 as _wmsa_api_pb2
+from tesla_protocol.energy_device import sm_api_pb2 as _sm_api_pb2
 from google.protobuf.internal import enum_type_wrapper as _enum_type_wrapper
 from google.protobuf import descriptor as _descriptor
 from google.protobuf import message as _message
@@ -32,12 +34,6 @@ class TeslaService(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     TESLA_SERVICE_INVALID: _ClassVar[TeslaService]
     TESLA_SERVICE_COMMAND: _ClassVar[TeslaService]
 
-class LocalParticipant(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
-    __slots__ = ()
-    LOCAL_PARTICIPANT_INVALID: _ClassVar[LocalParticipant]
-    LOCAL_PARTICIPANT_INSTALLER: _ClassVar[LocalParticipant]
-    LOCAL_PARTICIPANT_CUSTOMER: _ClassVar[LocalParticipant]
-
 class ExternalAuthType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     EXTERNAL_AUTH_TYPE_INVALID: _ClassVar[ExternalAuthType]
@@ -50,9 +46,6 @@ DELIVERY_CHANNEL_HERMES_COMMAND: DeliveryChannel
 DELIVERY_CHANNEL_BLE: DeliveryChannel
 TESLA_SERVICE_INVALID: TeslaService
 TESLA_SERVICE_COMMAND: TeslaService
-LOCAL_PARTICIPANT_INVALID: LocalParticipant
-LOCAL_PARTICIPANT_INSTALLER: LocalParticipant
-LOCAL_PARTICIPANT_CUSTOMER: LocalParticipant
 EXTERNAL_AUTH_TYPE_INVALID: ExternalAuthType
 EXTERNAL_AUTH_TYPE_PRESENCE: ExternalAuthType
 EXTERNAL_AUTH_TYPE_MTLS: ExternalAuthType
@@ -81,10 +74,10 @@ class Participant(_message.Message):
     PROXIED_DEVICE_FIELD_NUMBER: _ClassVar[int]
     din: str
     tesla_service: TeslaService
-    local: LocalParticipant
+    local: _local_auth_api_pb2.LocalParticipant
     authorized_client: _authorization_types_pb2.AuthorizedClientType
     proxied_device: ProxiedDevice
-    def __init__(self, din: _Optional[str] = ..., tesla_service: _Optional[_Union[TeslaService, str]] = ..., local: _Optional[_Union[LocalParticipant, str]] = ..., authorized_client: _Optional[_Union[_authorization_types_pb2.AuthorizedClientType, str]] = ..., proxied_device: _Optional[_Union[ProxiedDevice, _Mapping]] = ...) -> None: ...
+    def __init__(self, din: _Optional[str] = ..., tesla_service: _Optional[_Union[TeslaService, str]] = ..., local: _Optional[_Union[_local_auth_api_pb2.LocalParticipant, str]] = ..., authorized_client: _Optional[_Union[_authorization_types_pb2.AuthorizedClientType, str]] = ..., proxied_device: _Optional[_Union[ProxiedDevice, _Mapping]] = ...) -> None: ...
 
 class ProxiedDevice(_message.Message):
     __slots__ = ("proxy_din", "target_din")
@@ -103,7 +96,7 @@ class RegistrationPayload(_message.Message):
     def __init__(self, customer_registration_info: _Optional[bytes] = ..., nonce: _Optional[bytes] = ...) -> None: ...
 
 class MessageEnvelope(_message.Message):
-    __slots__ = ("delivery_channel", "sender", "recipient", "common", "teg", "wc", "pvi", "localauth", "neuriometer", "energysitenet", "intrasite", "authorization", "filestore", "graphql", "supercharger", "registration")
+    __slots__ = ("delivery_channel", "sender", "recipient", "common", "teg", "wc", "pvi", "localauth", "neuriometer", "energysitenet", "intrasite", "wmsa", "sm", "authorization", "filestore", "graphql", "supercharger", "registration")
     DELIVERY_CHANNEL_FIELD_NUMBER: _ClassVar[int]
     SENDER_FIELD_NUMBER: _ClassVar[int]
     RECIPIENT_FIELD_NUMBER: _ClassVar[int]
@@ -115,6 +108,8 @@ class MessageEnvelope(_message.Message):
     NEURIOMETER_FIELD_NUMBER: _ClassVar[int]
     ENERGYSITENET_FIELD_NUMBER: _ClassVar[int]
     INTRASITE_FIELD_NUMBER: _ClassVar[int]
+    WMSA_FIELD_NUMBER: _ClassVar[int]
+    SM_FIELD_NUMBER: _ClassVar[int]
     AUTHORIZATION_FIELD_NUMBER: _ClassVar[int]
     FILESTORE_FIELD_NUMBER: _ClassVar[int]
     GRAPHQL_FIELD_NUMBER: _ClassVar[int]
@@ -131,9 +126,11 @@ class MessageEnvelope(_message.Message):
     neuriometer: _neurio_meter_api_pb2.NeurioMeterMessages
     energysitenet: _energy_site_net_pb2.EnergySiteNetMessages
     intrasite: _intra_site_api_pb2.IntraSiteMessages
+    wmsa: _wmsa_api_pb2.WMSAMessages
+    sm: _sm_api_pb2.SMMessages
     authorization: _authorization_api_pb2.AuthorizationMessages
     filestore: _filestore_api_pb2.FileStoreMessages
     graphql: _graphql_api_pb2.GraphQLMessages
     supercharger: _supercharger_api_pb2.SuperchargerMessages
     registration: _registration_api_pb2.RegistrationMessages
-    def __init__(self, delivery_channel: _Optional[_Union[DeliveryChannel, str]] = ..., sender: _Optional[_Union[Participant, _Mapping]] = ..., recipient: _Optional[_Union[Participant, _Mapping]] = ..., common: _Optional[_Union[_common_api_pb2.CommonMessages, _Mapping]] = ..., teg: _Optional[_Union[_teg_api_pb2.TEGMessages, _Mapping]] = ..., wc: _Optional[_Union[_wall_connector_pb2.WCMessages, _Mapping]] = ..., pvi: _Optional[_Union[_pvi_api_pb2.PVIMessages, _Mapping]] = ..., localauth: _Optional[_Union[_local_auth_api_pb2.LocalAuthMessages, _Mapping]] = ..., neuriometer: _Optional[_Union[_neurio_meter_api_pb2.NeurioMeterMessages, _Mapping]] = ..., energysitenet: _Optional[_Union[_energy_site_net_pb2.EnergySiteNetMessages, _Mapping]] = ..., intrasite: _Optional[_Union[_intra_site_api_pb2.IntraSiteMessages, _Mapping]] = ..., authorization: _Optional[_Union[_authorization_api_pb2.AuthorizationMessages, _Mapping]] = ..., filestore: _Optional[_Union[_filestore_api_pb2.FileStoreMessages, _Mapping]] = ..., graphql: _Optional[_Union[_graphql_api_pb2.GraphQLMessages, _Mapping]] = ..., supercharger: _Optional[_Union[_supercharger_api_pb2.SuperchargerMessages, _Mapping]] = ..., registration: _Optional[_Union[_registration_api_pb2.RegistrationMessages, _Mapping]] = ...) -> None: ...
+    def __init__(self, delivery_channel: _Optional[_Union[DeliveryChannel, str]] = ..., sender: _Optional[_Union[Participant, _Mapping]] = ..., recipient: _Optional[_Union[Participant, _Mapping]] = ..., common: _Optional[_Union[_common_api_pb2.CommonMessages, _Mapping]] = ..., teg: _Optional[_Union[_teg_api_pb2.TEGMessages, _Mapping]] = ..., wc: _Optional[_Union[_wall_connector_pb2.WCMessages, _Mapping]] = ..., pvi: _Optional[_Union[_pvi_api_pb2.PVIMessages, _Mapping]] = ..., localauth: _Optional[_Union[_local_auth_api_pb2.LocalAuthMessages, _Mapping]] = ..., neuriometer: _Optional[_Union[_neurio_meter_api_pb2.NeurioMeterMessages, _Mapping]] = ..., energysitenet: _Optional[_Union[_energy_site_net_pb2.EnergySiteNetMessages, _Mapping]] = ..., intrasite: _Optional[_Union[_intra_site_api_pb2.IntraSiteMessages, _Mapping]] = ..., wmsa: _Optional[_Union[_wmsa_api_pb2.WMSAMessages, _Mapping]] = ..., sm: _Optional[_Union[_sm_api_pb2.SMMessages, _Mapping]] = ..., authorization: _Optional[_Union[_authorization_api_pb2.AuthorizationMessages, _Mapping]] = ..., filestore: _Optional[_Union[_filestore_api_pb2.FileStoreMessages, _Mapping]] = ..., graphql: _Optional[_Union[_graphql_api_pb2.GraphQLMessages, _Mapping]] = ..., supercharger: _Optional[_Union[_supercharger_api_pb2.SuperchargerMessages, _Mapping]] = ..., registration: _Optional[_Union[_registration_api_pb2.RegistrationMessages, _Mapping]] = ...) -> None: ...

@@ -39,7 +39,6 @@ proto/                  source of truth (the only hand-edited artifacts)
 ├── command/            vehicle-command protos + session.proto
 ├── telemetry/          fleet-telemetry protos (upstream verbatim)
 ├── energy_device/      TEG gateway local-API protos
-├── energy_command/     energy command identifiers
 ├── teslapower/         Powerwall local-API proto
 ├── charging/           EV charge-session metering/billing ("STEM") protos
 └── dashcam/            TeslaCam/Sentry video SEI metadata proto

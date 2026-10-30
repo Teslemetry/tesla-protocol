@@ -65,6 +65,17 @@ class NeurioCompatibleMeterType(int, metaclass=_enum_type_wrapper.EnumTypeWrappe
     NEURIO_COMPATIBLE_METER_TYPE_INVALID: _ClassVar[NeurioCompatibleMeterType]
     NEURIO_COMPATIBLE_METER_TYPE_NEURIO: _ClassVar[NeurioCompatibleMeterType]
     NEURIO_COMPATIBLE_METER_TYPE_TRM: _ClassVar[NeurioCompatibleMeterType]
+
+class MeterCTLocation(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    METER_CT_LOCATION_INVALID: _ClassVar[MeterCTLocation]
+    METER_CT_LOCATION_NONE: _ClassVar[MeterCTLocation]
+    METER_CT_LOCATION_SITE: _ClassVar[MeterCTLocation]
+    METER_CT_LOCATION_LOAD: _ClassVar[MeterCTLocation]
+    METER_CT_LOCATION_BATTERY: _ClassVar[MeterCTLocation]
+    METER_CT_LOCATION_SOLAR: _ClassVar[MeterCTLocation]
+    METER_CT_LOCATION_SOLAR_RGM: _ClassVar[MeterCTLocation]
+    METER_CT_LOCATION_CONDUCTOR: _ClassVar[MeterCTLocation]
 POWER_TYPE_INVALID: PowerType
 POWER_TYPE_AC_1_PHASE: PowerType
 POWER_TYPE_AC_3_PHASE: PowerType
@@ -102,14 +113,22 @@ NEURIO_CT_CONFIG_REQUEST_STATUS_FAILED_HTTP: NeurioCtConfigRequestStatus
 NEURIO_COMPATIBLE_METER_TYPE_INVALID: NeurioCompatibleMeterType
 NEURIO_COMPATIBLE_METER_TYPE_NEURIO: NeurioCompatibleMeterType
 NEURIO_COMPATIBLE_METER_TYPE_TRM: NeurioCompatibleMeterType
+METER_CT_LOCATION_INVALID: MeterCTLocation
+METER_CT_LOCATION_NONE: MeterCTLocation
+METER_CT_LOCATION_SITE: MeterCTLocation
+METER_CT_LOCATION_LOAD: MeterCTLocation
+METER_CT_LOCATION_BATTERY: MeterCTLocation
+METER_CT_LOCATION_SOLAR: MeterCTLocation
+METER_CT_LOCATION_SOLAR_RGM: MeterCTLocation
+METER_CT_LOCATION_CONDUCTOR: MeterCTLocation
 
 class NeurioCTConfig(_message.Message):
     __slots__ = ("location", "real_power_scale_factor")
     LOCATION_FIELD_NUMBER: _ClassVar[int]
     REAL_POWER_SCALE_FACTOR_FIELD_NUMBER: _ClassVar[int]
-    location: int
+    location: MeterCTLocation
     real_power_scale_factor: float
-    def __init__(self, location: _Optional[int] = ..., real_power_scale_factor: _Optional[float] = ...) -> None: ...
+    def __init__(self, location: _Optional[_Union[MeterCTLocation, str]] = ..., real_power_scale_factor: _Optional[float] = ...) -> None: ...
 
 class NeurioCTReading(_message.Message):
     __slots__ = ("real_power_w", "scaled_real_power_w", "current_amps")

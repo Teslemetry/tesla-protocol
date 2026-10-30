@@ -42,7 +42,11 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           if git cat-file -e origin/main:buf.yaml 2>/dev/null; then
-            pnpm exec buf breaking --against '.git#branch=origin/main'
+            # Temporary: this release drops the energy_command module, and buf
+            # refuses to compare inputs with different module counts unless
+            # main is read with this branch's module list. Delete the flag
+            # together with buf.yaml's temporary ignore_only block.
+            pnpm exec buf breaking --against '.git#branch=origin/main' --against-config buf.yaml
           else
             echo "no buf.yaml on main yet - skipping"
           fi

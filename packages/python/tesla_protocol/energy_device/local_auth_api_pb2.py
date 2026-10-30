@@ -25,7 +25,7 @@ _sym_db = _symbol_database.Default()
 from tesla_protocol.energy_device import networking_pb2 as tesla__protocol_dot_energy__device_dot_networking__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n1tesla_protocol/energy_device/local_auth_api.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\x1a-tesla_protocol/energy_device/networking.proto\"$\n\"LocalAuthAPIRequiredFactorsRequest\"I\n#LocalAuthAPIRequiredFactorsResponse\x12\x10\n\x08password\x18\x01 \x01(\x08\x12\x10\n\x08presence\x18\x02 \x01(\x08\"\x8b\x01\n\x18LocalAuthAPILoginRequest\x12\x13\n\x0bparticipant\x18\x01 \x01(\x05\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12K\n\x08password\x18\x03 \x01(\x0b\x32\x39.tesla_protocol.tesla.proto.energy_device.v1.WifiPassword\"i\n\x19LocalAuthAPILoginResponse\x12L\n\x06result\x18\x01 \x01(\x0e\x32<.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthResult\"\x1b\n\x19LocalAuthAPILogoutRequest\"\x1c\n\x1aLocalAuthAPILogoutResponse\"$\n\"LocalAuthAPICheckAuthStatusRequest\"s\n#LocalAuthAPICheckAuthStatusResponse\x12L\n\x06result\x18\x01 \x01(\x0e\x32<.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthResult\"\x80\x07\n\x11LocalAuthMessages\x12s\n\x18required_factors_request\x18\x01 \x01(\x0b\x32O.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPIRequiredFactorsRequestH\x00\x12u\n\x19required_factors_response\x18\x02 \x01(\x0b\x32P.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPIRequiredFactorsResponseH\x00\x12^\n\rlogin_request\x18\x03 \x01(\x0b\x32\x45.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPILoginRequestH\x00\x12`\n\x0elogin_response\x18\x04 \x01(\x0b\x32\x46.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPILoginResponseH\x00\x12`\n\x0elogout_request\x18\x05 \x01(\x0b\x32\x46.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPILogoutRequestH\x00\x12\x62\n\x0flogout_response\x18\x06 \x01(\x0b\x32G.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPILogoutResponseH\x00\x12t\n\x19\x63heck_auth_status_request\x18\x07 \x01(\x0b\x32O.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPICheckAuthStatusRequestH\x00\x12v\n\x1a\x63heck_auth_status_response\x18\x08 \x01(\x0b\x32P.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPICheckAuthStatusResponseH\x00\x42\t\n\x07message*\x80\x02\n\x0fLocalAuthResult\x12\x1d\n\x19LOCAL_AUTH_RESULT_INVALID\x10\x00\x12\x1d\n\x19LOCAL_AUTH_RESULT_SUCCESS\x10\x01\x12(\n$LOCAL_AUTH_RESULT_INVALID_PARAMETERS\x10\x02\x12&\n\"LOCAL_AUTH_RESULT_INVALID_PASSWORD\x10\x03\x12-\n)LOCAL_AUTH_RESULT_PRESENCE_PROOF_REQUIRED\x10\x04\x12.\n*LOCAL_AUTH_RESULT_PRESENCE_PROOF_TIMED_OUT\x10\x05\x42\x80\x01\n$com.tesla.generated.energy_device.v1B\x0cLocalAuthApiZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n1tesla_protocol/energy_device/local_auth_api.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\x1a-tesla_protocol/energy_device/networking.proto\"$\n\"LocalAuthAPIRequiredFactorsRequest\"I\n#LocalAuthAPIRequiredFactorsResponse\x12\x10\n\x08password\x18\x01 \x01(\x08\x12\x10\n\x08presence\x18\x02 \x01(\x08\"\xca\x01\n\x18LocalAuthAPILoginRequest\x12R\n\x0bparticipant\x18\x01 \x01(\x0e\x32=.tesla_protocol.tesla.proto.energy_device.v1.LocalParticipant\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12K\n\x08password\x18\x03 \x01(\x0b\x32\x39.tesla_protocol.tesla.proto.energy_device.v1.WifiPassword\"i\n\x19LocalAuthAPILoginResponse\x12L\n\x06result\x18\x01 \x01(\x0e\x32<.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthResult\"\x1b\n\x19LocalAuthAPILogoutRequest\"\x1c\n\x1aLocalAuthAPILogoutResponse\"$\n\"LocalAuthAPICheckAuthStatusRequest\"s\n#LocalAuthAPICheckAuthStatusResponse\x12L\n\x06result\x18\x01 \x01(\x0e\x32<.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthResult\"\x80\x07\n\x11LocalAuthMessages\x12s\n\x18required_factors_request\x18\x01 \x01(\x0b\x32O.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPIRequiredFactorsRequestH\x00\x12u\n\x19required_factors_response\x18\x02 \x01(\x0b\x32P.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPIRequiredFactorsResponseH\x00\x12^\n\rlogin_request\x18\x03 \x01(\x0b\x32\x45.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPILoginRequestH\x00\x12`\n\x0elogin_response\x18\x04 \x01(\x0b\x32\x46.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPILoginResponseH\x00\x12`\n\x0elogout_request\x18\x05 \x01(\x0b\x32\x46.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPILogoutRequestH\x00\x12\x62\n\x0flogout_response\x18\x06 \x01(\x0b\x32G.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPILogoutResponseH\x00\x12t\n\x19\x63heck_auth_status_request\x18\x07 \x01(\x0b\x32O.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPICheckAuthStatusRequestH\x00\x12v\n\x1a\x63heck_auth_status_response\x18\x08 \x01(\x0b\x32P.tesla_protocol.tesla.proto.energy_device.v1.LocalAuthAPICheckAuthStatusResponseH\x00\x42\t\n\x07message*r\n\x10LocalParticipant\x12\x1d\n\x19LOCAL_PARTICIPANT_INVALID\x10\x00\x12\x1f\n\x1bLOCAL_PARTICIPANT_INSTALLER\x10\x01\x12\x1e\n\x1aLOCAL_PARTICIPANT_CUSTOMER\x10\x02*\x80\x02\n\x0fLocalAuthResult\x12\x1d\n\x19LOCAL_AUTH_RESULT_INVALID\x10\x00\x12\x1d\n\x19LOCAL_AUTH_RESULT_SUCCESS\x10\x01\x12(\n$LOCAL_AUTH_RESULT_INVALID_PARAMETERS\x10\x02\x12&\n\"LOCAL_AUTH_RESULT_INVALID_PASSWORD\x10\x03\x12-\n)LOCAL_AUTH_RESULT_PRESENCE_PROOF_REQUIRED\x10\x04\x12.\n*LOCAL_AUTH_RESULT_PRESENCE_PROOF_TIMED_OUT\x10\x05\x42\x80\x01\n$com.tesla.generated.energy_device.v1B\x0cLocalAuthApiZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,24 +33,26 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'tesla_protocol.energy_devic
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n$com.tesla.generated.energy_device.v1B\014LocalAuthApiZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1'
-  _globals['_LOCALAUTHRESULT']._serialized_start=1621
-  _globals['_LOCALAUTHRESULT']._serialized_end=1877
+  _globals['_LOCALPARTICIPANT']._serialized_start=1683
+  _globals['_LOCALPARTICIPANT']._serialized_end=1797
+  _globals['_LOCALAUTHRESULT']._serialized_start=1800
+  _globals['_LOCALAUTHRESULT']._serialized_end=2056
   _globals['_LOCALAUTHAPIREQUIREDFACTORSREQUEST']._serialized_start=145
   _globals['_LOCALAUTHAPIREQUIREDFACTORSREQUEST']._serialized_end=181
   _globals['_LOCALAUTHAPIREQUIREDFACTORSRESPONSE']._serialized_start=183
   _globals['_LOCALAUTHAPIREQUIREDFACTORSRESPONSE']._serialized_end=256
   _globals['_LOCALAUTHAPILOGINREQUEST']._serialized_start=259
-  _globals['_LOCALAUTHAPILOGINREQUEST']._serialized_end=398
-  _globals['_LOCALAUTHAPILOGINRESPONSE']._serialized_start=400
-  _globals['_LOCALAUTHAPILOGINRESPONSE']._serialized_end=505
-  _globals['_LOCALAUTHAPILOGOUTREQUEST']._serialized_start=507
-  _globals['_LOCALAUTHAPILOGOUTREQUEST']._serialized_end=534
-  _globals['_LOCALAUTHAPILOGOUTRESPONSE']._serialized_start=536
-  _globals['_LOCALAUTHAPILOGOUTRESPONSE']._serialized_end=564
-  _globals['_LOCALAUTHAPICHECKAUTHSTATUSREQUEST']._serialized_start=566
-  _globals['_LOCALAUTHAPICHECKAUTHSTATUSREQUEST']._serialized_end=602
-  _globals['_LOCALAUTHAPICHECKAUTHSTATUSRESPONSE']._serialized_start=604
-  _globals['_LOCALAUTHAPICHECKAUTHSTATUSRESPONSE']._serialized_end=719
-  _globals['_LOCALAUTHMESSAGES']._serialized_start=722
-  _globals['_LOCALAUTHMESSAGES']._serialized_end=1618
+  _globals['_LOCALAUTHAPILOGINREQUEST']._serialized_end=461
+  _globals['_LOCALAUTHAPILOGINRESPONSE']._serialized_start=463
+  _globals['_LOCALAUTHAPILOGINRESPONSE']._serialized_end=568
+  _globals['_LOCALAUTHAPILOGOUTREQUEST']._serialized_start=570
+  _globals['_LOCALAUTHAPILOGOUTREQUEST']._serialized_end=597
+  _globals['_LOCALAUTHAPILOGOUTRESPONSE']._serialized_start=599
+  _globals['_LOCALAUTHAPILOGOUTRESPONSE']._serialized_end=627
+  _globals['_LOCALAUTHAPICHECKAUTHSTATUSREQUEST']._serialized_start=629
+  _globals['_LOCALAUTHAPICHECKAUTHSTATUSREQUEST']._serialized_end=665
+  _globals['_LOCALAUTHAPICHECKAUTHSTATUSRESPONSE']._serialized_start=667
+  _globals['_LOCALAUTHAPICHECKAUTHSTATUSRESPONSE']._serialized_end=782
+  _globals['_LOCALAUTHMESSAGES']._serialized_start=785
+  _globals['_LOCALAUTHMESSAGES']._serialized_end=1681
 # @@protoc_insertion_point(module_scope)

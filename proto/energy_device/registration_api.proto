@@ -196,7 +196,9 @@ message DeviceInfo {
   string din = 1;
   FirmwareVersion firmware_version = 2;
   DeviceType device_type = 3;
-  TEGDeviceType teg_device_type = 100;
+  oneof device_sub_type {
+    TEGDeviceType teg_device_type = 100;
+  }
 }
 
 message InstallationInfo {

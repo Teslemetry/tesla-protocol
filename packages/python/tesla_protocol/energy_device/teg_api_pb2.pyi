@@ -39,6 +39,12 @@ class CanvasSiteStatus(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     CANVAS_SITE_STATUS_IS_CANVAS: _ClassVar[CanvasSiteStatus]
     CANVAS_SITE_STATUS_NOT_CANVAS: _ClassVar[CanvasSiteStatus]
     CANVAS_SITE_STATUS_NOT_FOUND: _ClassVar[CanvasSiteStatus]
+
+class TEGRegistrationFailure(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    TEG_REGISTRATION_FAILURE_INVALID: _ClassVar[TEGRegistrationFailure]
+    TEG_REGISTRATION_FAILURE_DEVICES: _ClassVar[TEGRegistrationFailure]
+    TEG_REGISTRATION_FAILURE_NETWORK: _ClassVar[TEGRegistrationFailure]
 TEG_ISLAND_MODE_INVALID: TEGIslandMode
 TEG_ISLAND_MODE_AUTO_ACTIVE: TEGIslandMode
 TEG_ISLAND_MODE_READY: TEGIslandMode
@@ -56,6 +62,9 @@ CANVAS_SITE_STATUS_INVALID: CanvasSiteStatus
 CANVAS_SITE_STATUS_IS_CANVAS: CanvasSiteStatus
 CANVAS_SITE_STATUS_NOT_CANVAS: CanvasSiteStatus
 CANVAS_SITE_STATUS_NOT_FOUND: CanvasSiteStatus
+TEG_REGISTRATION_FAILURE_INVALID: TEGRegistrationFailure
+TEG_REGISTRATION_FAILURE_DEVICES: TEGRegistrationFailure
+TEG_REGISTRATION_FAILURE_NETWORK: TEGRegistrationFailure
 
 class TEGSettings(_message.Message):
     __slots__ = ()
@@ -191,9 +200,9 @@ class TEGAPIRegisterResponse(_message.Message):
     __slots__ = ("failure", "registration_response")
     FAILURE_FIELD_NUMBER: _ClassVar[int]
     REGISTRATION_RESPONSE_FIELD_NUMBER: _ClassVar[int]
-    failure: int
+    failure: _registration_api_pb2.RegistrationFailure
     registration_response: _registration_api_pb2.RegistrationResponse
-    def __init__(self, failure: _Optional[int] = ..., registration_response: _Optional[_Union[_registration_api_pb2.RegistrationResponse, _Mapping]] = ...) -> None: ...
+    def __init__(self, failure: _Optional[_Union[_registration_api_pb2.RegistrationFailure, str]] = ..., registration_response: _Optional[_Union[_registration_api_pb2.RegistrationResponse, _Mapping]] = ...) -> None: ...
 
 class TEGAPITriggerPowerwall2PhaseDetectionRequest(_message.Message):
     __slots__ = ("powerwalls",)
@@ -354,14 +363,14 @@ class ControlEventSchedulingInfo(_message.Message):
     def __init__(self, start_time: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., duration_seconds: _Optional[int] = ..., priority: _Optional[int] = ...) -> None: ...
 
 class BackupEvent(_message.Message):
-    __slots__ = ("id", "name", "sheduling_info")
+    __slots__ = ("id", "name", "scheduling_info")
     ID_FIELD_NUMBER: _ClassVar[int]
     NAME_FIELD_NUMBER: _ClassVar[int]
-    SHEDULING_INFO_FIELD_NUMBER: _ClassVar[int]
+    SCHEDULING_INFO_FIELD_NUMBER: _ClassVar[int]
     id: str
     name: str
-    sheduling_info: ControlEventSchedulingInfo
-    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., sheduling_info: _Optional[_Union[ControlEventSchedulingInfo, _Mapping]] = ...) -> None: ...
+    scheduling_info: ControlEventSchedulingInfo
+    def __init__(self, id: _Optional[str] = ..., name: _Optional[str] = ..., scheduling_info: _Optional[_Union[ControlEventSchedulingInfo, _Mapping]] = ...) -> None: ...
 
 class ManualBackupEvent(_message.Message):
     __slots__ = ("scheduling_info",)
@@ -638,10 +647,10 @@ class ControllableDeviceProgram_Schedule(_message.Message):
     START_FIELD_NUMBER: _ClassVar[int]
     END_FIELD_NUMBER: _ClassVar[int]
     EXPIRY_FIELD_NUMBER: _ClassVar[int]
-    start: _timestamp_pb2.Timestamp
-    end: _timestamp_pb2.Timestamp
-    expiry: _timestamp_pb2.Timestamp
-    def __init__(self, start: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., end: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ..., expiry: _Optional[_Union[datetime.datetime, _timestamp_pb2.Timestamp, _Mapping]] = ...) -> None: ...
+    start: ControllableDeviceProgram_Schedule_Boundary
+    end: ControllableDeviceProgram_Schedule_Boundary
+    expiry: ControllableDeviceProgram_Schedule_Boundary
+    def __init__(self, start: _Optional[_Union[ControllableDeviceProgram_Schedule_Boundary, _Mapping]] = ..., end: _Optional[_Union[ControllableDeviceProgram_Schedule_Boundary, _Mapping]] = ..., expiry: _Optional[_Union[ControllableDeviceProgram_Schedule_Boundary, _Mapping]] = ...) -> None: ...
 
 class ControllableDeviceProgram(_message.Message):
     __slots__ = ("key", "settings", "schedule")

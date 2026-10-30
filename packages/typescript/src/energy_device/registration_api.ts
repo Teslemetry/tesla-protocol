@@ -713,7 +713,7 @@ export interface DeviceInfo {
   din: string;
   firmwareVersion: FirmwareVersion | undefined;
   deviceType: DeviceType;
-  tegDeviceType: TEGDeviceType;
+  tegDeviceType?: TEGDeviceType | undefined;
 }
 
 export interface InstallationInfo {
@@ -2295,7 +2295,7 @@ export const DeviceDetail: MessageFns<DeviceDetail> = {
 };
 
 function createBaseDeviceInfo(): DeviceInfo {
-  return { din: "", firmwareVersion: undefined, deviceType: 0, tegDeviceType: 0 };
+  return { din: "", firmwareVersion: undefined, deviceType: 0, tegDeviceType: undefined };
 }
 
 export const DeviceInfo: MessageFns<DeviceInfo> = {
@@ -2309,7 +2309,7 @@ export const DeviceInfo: MessageFns<DeviceInfo> = {
     if (message.deviceType !== 0) {
       writer.uint32(24).int32(message.deviceType);
     }
-    if (message.tegDeviceType !== 0) {
+    if (message.tegDeviceType !== undefined) {
       writer.uint32(800).int32(message.tegDeviceType);
     }
     return writer;
@@ -2368,7 +2368,7 @@ export const DeviceInfo: MessageFns<DeviceInfo> = {
       din: isSet(object.din) ? globalThis.String(object.din) : "",
       firmwareVersion: isSet(object.firmwareVersion) ? FirmwareVersion.fromJSON(object.firmwareVersion) : undefined,
       deviceType: isSet(object.deviceType) ? deviceTypeFromJSON(object.deviceType) : 0,
-      tegDeviceType: isSet(object.tegDeviceType) ? tEGDeviceTypeFromJSON(object.tegDeviceType) : 0,
+      tegDeviceType: isSet(object.tegDeviceType) ? tEGDeviceTypeFromJSON(object.tegDeviceType) : undefined,
     };
   },
 
@@ -2399,7 +2399,7 @@ export const DeviceInfo: MessageFns<DeviceInfo> = {
       ? FirmwareVersion.fromPartial(object.firmwareVersion)
       : undefined;
     message.deviceType = object.deviceType ?? 0;
-    message.tegDeviceType = object.tegDeviceType ?? 0;
+    message.tegDeviceType = object.tegDeviceType ?? undefined;
     return message;
   },
 };

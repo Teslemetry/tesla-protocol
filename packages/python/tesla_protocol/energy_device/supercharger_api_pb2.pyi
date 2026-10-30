@@ -35,6 +35,12 @@ class SetDcMeterCommissionedError(int, metaclass=_enum_type_wrapper.EnumTypeWrap
     SET_DC_METER_COMMISSIONED_ERROR_UNAVAILABLE: _ClassVar[SetDcMeterCommissionedError]
     SET_DC_METER_COMMISSIONED_ERROR_SECURITY_UNLOCK_FAILED: _ClassVar[SetDcMeterCommissionedError]
     SET_DC_METER_COMMISSIONED_ERROR_WRITE_FAILED: _ClassVar[SetDcMeterCommissionedError]
+
+class DcMeterCommissioningError(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    DC_METER_COMMISSIONING_ERROR_INVALID: _ClassVar[DcMeterCommissioningError]
+    DC_METER_COMMISSIONING_ERROR_UNAVAILABLE: _ClassVar[DcMeterCommissioningError]
+    DC_METER_COMMISSIONING_ERROR_TIMEOUT: _ClassVar[DcMeterCommissioningError]
 CONNECTED_KIOSK_ERROR_INVALID: ConnectedKioskError
 CONNECTED_KIOSK_ERROR_SITEMANAGER_STARTED: ConnectedKioskError
 CONNECTED_KIOSK_ERROR_UNEXPECTED_ERROR: ConnectedKioskError
@@ -54,6 +60,9 @@ SET_DC_METER_COMMISSIONED_ERROR_DC_METER_NOT_INSTALLED: SetDcMeterCommissionedEr
 SET_DC_METER_COMMISSIONED_ERROR_UNAVAILABLE: SetDcMeterCommissionedError
 SET_DC_METER_COMMISSIONED_ERROR_SECURITY_UNLOCK_FAILED: SetDcMeterCommissionedError
 SET_DC_METER_COMMISSIONED_ERROR_WRITE_FAILED: SetDcMeterCommissionedError
+DC_METER_COMMISSIONING_ERROR_INVALID: DcMeterCommissioningError
+DC_METER_COMMISSIONING_ERROR_UNAVAILABLE: DcMeterCommissioningError
+DC_METER_COMMISSIONING_ERROR_TIMEOUT: DcMeterCommissioningError
 
 class ConnectedKiosk(_message.Message):
     __slots__ = ("verifone_kiosk",)
@@ -136,17 +145,17 @@ class EcuFirmwareUpdateEcuResult(_message.Message):
     def __init__(self, ecu_name: _Optional[str] = ..., module_update_results: _Optional[_Iterable[_Union[EcuFirmwareModuleUpdateResult, _Mapping]]] = ...) -> None: ...
 
 class EcuFirmwareUpdateInProgress(_message.Message):
-    __slots__ = ("default",)
-    class DefaultEntry(_message.Message):
+    __slots__ = ("node_progresses",)
+    class NodeProgressesEntry(_message.Message):
         __slots__ = ("key", "value")
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
         key: str
         value: EcuFirmwareUpdateNodeProgress
         def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[EcuFirmwareUpdateNodeProgress, _Mapping]] = ...) -> None: ...
-    DEFAULT_FIELD_NUMBER: _ClassVar[int]
-    default: _containers.MessageMap[str, EcuFirmwareUpdateNodeProgress]
-    def __init__(self, default: _Optional[_Mapping[str, EcuFirmwareUpdateNodeProgress]] = ...) -> None: ...
+    NODE_PROGRESSES_FIELD_NUMBER: _ClassVar[int]
+    node_progresses: _containers.MessageMap[str, EcuFirmwareUpdateNodeProgress]
+    def __init__(self, node_progresses: _Optional[_Mapping[str, EcuFirmwareUpdateNodeProgress]] = ...) -> None: ...
 
 class EcuFirmwareUpdateNodeProgress(_message.Message):
     __slots__ = ("node_path", "stage", "message")
@@ -159,8 +168,8 @@ class EcuFirmwareUpdateNodeProgress(_message.Message):
     def __init__(self, node_path: _Optional[str] = ..., stage: _Optional[_Union[EcuFirmwareUpdateStage, str]] = ..., message: _Optional[str] = ...) -> None: ...
 
 class EcuFirmwareUpdateResult(_message.Message):
-    __slots__ = ("system_update_status", "default")
-    class DefaultEntry(_message.Message):
+    __slots__ = ("system_update_status", "ecu_update_results")
+    class EcuUpdateResultsEntry(_message.Message):
         __slots__ = ("key", "value")
         KEY_FIELD_NUMBER: _ClassVar[int]
         VALUE_FIELD_NUMBER: _ClassVar[int]
@@ -168,10 +177,10 @@ class EcuFirmwareUpdateResult(_message.Message):
         value: EcuFirmwareUpdateAttempts
         def __init__(self, key: _Optional[str] = ..., value: _Optional[_Union[EcuFirmwareUpdateAttempts, _Mapping]] = ...) -> None: ...
     SYSTEM_UPDATE_STATUS_FIELD_NUMBER: _ClassVar[int]
-    DEFAULT_FIELD_NUMBER: _ClassVar[int]
+    ECU_UPDATE_RESULTS_FIELD_NUMBER: _ClassVar[int]
     system_update_status: EcuFirmwareUpdateStatus
-    default: _containers.MessageMap[str, EcuFirmwareUpdateAttempts]
-    def __init__(self, system_update_status: _Optional[_Union[EcuFirmwareUpdateStatus, _Mapping]] = ..., default: _Optional[_Mapping[str, EcuFirmwareUpdateAttempts]] = ...) -> None: ...
+    ecu_update_results: _containers.MessageMap[str, EcuFirmwareUpdateAttempts]
+    def __init__(self, system_update_status: _Optional[_Union[EcuFirmwareUpdateStatus, _Mapping]] = ..., ecu_update_results: _Optional[_Mapping[str, EcuFirmwareUpdateAttempts]] = ...) -> None: ...
 
 class EcuFirmwareUpdateStatus(_message.Message):
     __slots__ = ("pass_", "fail")
@@ -222,8 +231,8 @@ class SuperchargerAPIGetDcMetersCommissioningResponse(_message.Message):
     DC_METERS_FIELD_NUMBER: _ClassVar[int]
     ERROR_FIELD_NUMBER: _ClassVar[int]
     dc_meters: _containers.RepeatedCompositeFieldContainer[DcMeterCommissioningStatus]
-    error: int
-    def __init__(self, dc_meters: _Optional[_Iterable[_Union[DcMeterCommissioningStatus, _Mapping]]] = ..., error: _Optional[int] = ...) -> None: ...
+    error: DcMeterCommissioningError
+    def __init__(self, dc_meters: _Optional[_Iterable[_Union[DcMeterCommissioningStatus, _Mapping]]] = ..., error: _Optional[_Union[DcMeterCommissioningError, str]] = ...) -> None: ...
 
 class SuperchargerAPIGetEcuFirmwareUpdateProgressRequest(_message.Message):
     __slots__ = ()
