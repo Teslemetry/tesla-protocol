@@ -22,9 +22,15 @@ import { Duration } from "./google/protobuf/duration.js";
 import { StringValue } from "./google/protobuf/wrappers.js";
 import {
   CellularEID,
+  CellularProfileType,
+  cellularProfileTypeFromJSON,
+  cellularProfileTypeToJSON,
   NetworkInterface,
   NetworkInterfaceIPv4Config,
   WifiConfig,
+  WifiConfigureResult,
+  wifiConfigureResultFromJSON,
+  wifiConfigureResultToJSON,
   WifiNetwork,
   WifiNetworkSecurityType,
   wifiNetworkSecurityTypeFromJSON,
@@ -32,6 +38,9 @@ import {
 } from "./networking.js";
 import {
   AssetSiteUuidOfDeviceResponse,
+  RegistrationFailure,
+  registrationFailureFromJSON,
+  registrationFailureToJSON,
   RegistrationRequest,
   RegistrationResponse,
   SiteSuggestionRequest,
@@ -113,7 +122,7 @@ export interface CommonAPIConfigureWifiWithEncryptedPasswordRequest {
 export interface CommonAPIConfigureWifiWithEncryptedPasswordResponse {
   wifiConfig: WifiConfig | undefined;
   wifi: NetworkInterface | undefined;
-  result: number;
+  result: WifiConfigureResult;
 }
 
 export interface CommonAPICheckForUpdateRequest {
@@ -158,7 +167,7 @@ export interface CommonAPIGetCellularInfoRequest {
 
 export interface CommonAPIGetCellularInfoResponse {
   eid: CellularEID | undefined;
-  supportedProfiles: number[];
+  supportedProfiles: CellularProfileType[];
 }
 
 export interface CommonAPIConfigureEthernetRequest {
@@ -252,8 +261,7 @@ export interface CommonAPIRegisterRequest {
 }
 
 export interface CommonAPIRegisterResponse {
-  /** may be an enum; values not yet known */
-  failure: number;
+  failure: RegistrationFailure;
   response: RegistrationResponse | undefined;
 }
 
@@ -1500,7 +1508,7 @@ export const CommonAPIConfigureWifiWithEncryptedPasswordResponse: MessageFns<
             break;
           }
 
-          message.result = reader.int32();
+          message.result = reader.int32() as any;
           continue;
         }
       }
@@ -1516,7 +1524,7 @@ export const CommonAPIConfigureWifiWithEncryptedPasswordResponse: MessageFns<
     return {
       wifiConfig: isSet(object.wifiConfig) ? WifiConfig.fromJSON(object.wifiConfig) : undefined,
       wifi: isSet(object.wifi) ? NetworkInterface.fromJSON(object.wifi) : undefined,
-      result: isSet(object.result) ? globalThis.Number(object.result) : 0,
+      result: isSet(object.result) ? wifiConfigureResultFromJSON(object.result) : 0,
     };
   },
 
@@ -1529,7 +1537,7 @@ export const CommonAPIConfigureWifiWithEncryptedPasswordResponse: MessageFns<
       obj.wifi = NetworkInterface.toJSON(message.wifi);
     }
     if (message.result !== undefined) {
-      obj.result = Math.round(message.result);
+      obj.result = wifiConfigureResultToJSON(message.result);
     }
     return obj;
   },
@@ -2202,7 +2210,7 @@ export const CommonAPIGetCellularInfoResponse: MessageFns<CommonAPIGetCellularIn
         }
         case 2: {
           if (tag === 16) {
-            message.supportedProfiles.push(reader.int32());
+            message.supportedProfiles.push(reader.int32() as any);
 
             continue;
           }
@@ -2210,7 +2218,7 @@ export const CommonAPIGetCellularInfoResponse: MessageFns<CommonAPIGetCellularIn
           if (tag === 18) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.supportedProfiles.push(reader.int32());
+              message.supportedProfiles.push(reader.int32() as any);
             }
 
             continue;
@@ -2231,7 +2239,7 @@ export const CommonAPIGetCellularInfoResponse: MessageFns<CommonAPIGetCellularIn
     return {
       eid: isSet(object.eid) ? CellularEID.fromJSON(object.eid) : undefined,
       supportedProfiles: globalThis.Array.isArray(object?.supportedProfiles)
-        ? object.supportedProfiles.map((e: any) => globalThis.Number(e))
+        ? object.supportedProfiles.map((e: any) => cellularProfileTypeFromJSON(e))
         : [],
     };
   },
@@ -2242,7 +2250,7 @@ export const CommonAPIGetCellularInfoResponse: MessageFns<CommonAPIGetCellularIn
       obj.eid = CellularEID.toJSON(message.eid);
     }
     if (message.supportedProfiles?.length) {
-      obj.supportedProfiles = message.supportedProfiles.map((e) => Math.round(e));
+      obj.supportedProfiles = message.supportedProfiles.map((e) => cellularProfileTypeToJSON(e));
     }
     return obj;
   },
@@ -3758,7 +3766,7 @@ export const CommonAPIRegisterResponse: MessageFns<CommonAPIRegisterResponse> = 
             break;
           }
 
-          message.failure = reader.int32();
+          message.failure = reader.int32() as any;
           continue;
         }
         case 2: {
@@ -3780,7 +3788,7 @@ export const CommonAPIRegisterResponse: MessageFns<CommonAPIRegisterResponse> = 
 
   fromJSON(object: any): CommonAPIRegisterResponse {
     return {
-      failure: isSet(object.failure) ? globalThis.Number(object.failure) : 0,
+      failure: isSet(object.failure) ? registrationFailureFromJSON(object.failure) : 0,
       response: isSet(object.response) ? RegistrationResponse.fromJSON(object.response) : undefined,
     };
   },
@@ -3788,7 +3796,7 @@ export const CommonAPIRegisterResponse: MessageFns<CommonAPIRegisterResponse> = 
   toJSON(message: CommonAPIRegisterResponse): unknown {
     const obj: any = {};
     if (message.failure !== undefined) {
-      obj.failure = Math.round(message.failure);
+      obj.failure = registrationFailureToJSON(message.failure);
     }
     if (message.response !== undefined) {
       obj.response = RegistrationResponse.toJSON(message.response);

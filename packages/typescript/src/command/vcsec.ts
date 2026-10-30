@@ -1887,7 +1887,7 @@ export interface VehicleStatus {
     | DetailedClosureStatus
     | undefined;
   /** TESLEMETRY-EXT */
-  uiDesire: UIDesireE;
+  UIDesire: UIDesireE;
   /** TESLEMETRY-EXT */
   gear: GearE;
   /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
@@ -4908,7 +4908,7 @@ function createBaseVehicleStatus(): VehicleStatus {
     vehicleSleepStatus: 0,
     userPresence: 0,
     detailedClosureStatus: undefined,
-    uiDesire: 0,
+    UIDesire: 0,
     gear: 0,
     keyLocationStatus: undefined,
   };
@@ -4931,8 +4931,8 @@ export const VehicleStatus: MessageFns<VehicleStatus> = {
     if (message.detailedClosureStatus !== undefined) {
       DetailedClosureStatus.encode(message.detailedClosureStatus, writer.uint32(42).fork()).join();
     }
-    if (message.uiDesire !== 0) {
-      writer.uint32(48).int32(message.uiDesire);
+    if (message.UIDesire !== 0) {
+      writer.uint32(48).int32(message.UIDesire);
     }
     if (message.gear !== 0) {
       writer.uint32(56).int32(message.gear);
@@ -4995,7 +4995,7 @@ export const VehicleStatus: MessageFns<VehicleStatus> = {
             break;
           }
 
-          message.uiDesire = reader.int32() as any;
+          message.UIDesire = reader.int32() as any;
           continue;
         }
         case 7: {
@@ -5032,7 +5032,7 @@ export const VehicleStatus: MessageFns<VehicleStatus> = {
       detailedClosureStatus: isSet(object.detailedClosureStatus)
         ? DetailedClosureStatus.fromJSON(object.detailedClosureStatus)
         : undefined,
-      uiDesire: isSet(object.uiDesire) ? uIDesireEFromJSON(object.uiDesire) : 0,
+      UIDesire: isSet(object.UIDesire) ? uIDesireEFromJSON(object.UIDesire) : 0,
       gear: isSet(object.gear) ? gearEFromJSON(object.gear) : 0,
       keyLocationStatus: isSet(object.keyLocationStatus)
         ? KeyLocationStatus.fromJSON(object.keyLocationStatus)
@@ -5057,8 +5057,8 @@ export const VehicleStatus: MessageFns<VehicleStatus> = {
     if (message.detailedClosureStatus !== undefined) {
       obj.detailedClosureStatus = DetailedClosureStatus.toJSON(message.detailedClosureStatus);
     }
-    if (message.uiDesire !== undefined) {
-      obj.uiDesire = uIDesireEToJSON(message.uiDesire);
+    if (message.UIDesire !== undefined) {
+      obj.UIDesire = uIDesireEToJSON(message.UIDesire);
     }
     if (message.gear !== undefined) {
       obj.gear = gearEToJSON(message.gear);
@@ -5084,7 +5084,7 @@ export const VehicleStatus: MessageFns<VehicleStatus> = {
       (object.detailedClosureStatus !== undefined && object.detailedClosureStatus !== null)
         ? DetailedClosureStatus.fromPartial(object.detailedClosureStatus)
         : undefined;
-    message.uiDesire = object.uiDesire ?? 0;
+    message.UIDesire = object.UIDesire ?? 0;
     message.gear = object.gear ?? 0;
     message.keyLocationStatus = (object.keyLocationStatus !== undefined && object.keyLocationStatus !== null)
       ? KeyLocationStatus.fromPartial(object.keyLocationStatus)

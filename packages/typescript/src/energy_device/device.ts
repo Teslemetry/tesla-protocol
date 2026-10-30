@@ -189,6 +189,9 @@ export enum TEGDeviceType {
   TEG_DEVICE_TYPE_TEG_PVI = 8,
   TEG_DEVICE_TYPE_TACO_GATEWAY3V = 9,
   TEG_DEVICE_TYPE_TACO_WALLBOX = 10,
+  TEG_DEVICE_TYPE_TULIP = 11,
+  TEG_DEVICE_TYPE_DYNAMO = 12,
+  TEG_DEVICE_TYPE_SMC_SUPERCHARGER = 13,
   UNRECOGNIZED = -1,
 }
 
@@ -227,6 +230,15 @@ export function tEGDeviceTypeFromJSON(object: any): TEGDeviceType {
     case 10:
     case "TEG_DEVICE_TYPE_TACO_WALLBOX":
       return TEGDeviceType.TEG_DEVICE_TYPE_TACO_WALLBOX;
+    case 11:
+    case "TEG_DEVICE_TYPE_TULIP":
+      return TEGDeviceType.TEG_DEVICE_TYPE_TULIP;
+    case 12:
+    case "TEG_DEVICE_TYPE_DYNAMO":
+      return TEGDeviceType.TEG_DEVICE_TYPE_DYNAMO;
+    case 13:
+    case "TEG_DEVICE_TYPE_SMC_SUPERCHARGER":
+      return TEGDeviceType.TEG_DEVICE_TYPE_SMC_SUPERCHARGER;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -258,46 +270,91 @@ export function tEGDeviceTypeToJSON(object: TEGDeviceType): string {
       return "TEG_DEVICE_TYPE_TACO_GATEWAY3V";
     case TEGDeviceType.TEG_DEVICE_TYPE_TACO_WALLBOX:
       return "TEG_DEVICE_TYPE_TACO_WALLBOX";
+    case TEGDeviceType.TEG_DEVICE_TYPE_TULIP:
+      return "TEG_DEVICE_TYPE_TULIP";
+    case TEGDeviceType.TEG_DEVICE_TYPE_DYNAMO:
+      return "TEG_DEVICE_TYPE_DYNAMO";
+    case TEGDeviceType.TEG_DEVICE_TYPE_SMC_SUPERCHARGER:
+      return "TEG_DEVICE_TYPE_SMC_SUPERCHARGER";
     case TEGDeviceType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
 }
 
-export enum iPMDeviceType {
+export enum IPMDeviceType {
   IPM_DEVICE_TYPE_INVALID = 0,
   IPM_DEVICE_TYPE_POWERPACK3 = 1,
   IPM_DEVICE_TYPE_SUPERCHARGER4 = 2,
+  IPM_DEVICE_TYPE_MEGACHARGER = 3,
   UNRECOGNIZED = -1,
 }
 
-export function iPMDeviceTypeFromJSON(object: any): iPMDeviceType {
+export function iPMDeviceTypeFromJSON(object: any): IPMDeviceType {
   switch (object) {
     case 0:
     case "IPM_DEVICE_TYPE_INVALID":
-      return iPMDeviceType.IPM_DEVICE_TYPE_INVALID;
+      return IPMDeviceType.IPM_DEVICE_TYPE_INVALID;
     case 1:
     case "IPM_DEVICE_TYPE_POWERPACK3":
-      return iPMDeviceType.IPM_DEVICE_TYPE_POWERPACK3;
+      return IPMDeviceType.IPM_DEVICE_TYPE_POWERPACK3;
     case 2:
     case "IPM_DEVICE_TYPE_SUPERCHARGER4":
-      return iPMDeviceType.IPM_DEVICE_TYPE_SUPERCHARGER4;
+      return IPMDeviceType.IPM_DEVICE_TYPE_SUPERCHARGER4;
+    case 3:
+    case "IPM_DEVICE_TYPE_MEGACHARGER":
+      return IPMDeviceType.IPM_DEVICE_TYPE_MEGACHARGER;
     case -1:
     case "UNRECOGNIZED":
     default:
-      return iPMDeviceType.UNRECOGNIZED;
+      return IPMDeviceType.UNRECOGNIZED;
   }
 }
 
-export function iPMDeviceTypeToJSON(object: iPMDeviceType): string {
+export function iPMDeviceTypeToJSON(object: IPMDeviceType): string {
   switch (object) {
-    case iPMDeviceType.IPM_DEVICE_TYPE_INVALID:
+    case IPMDeviceType.IPM_DEVICE_TYPE_INVALID:
       return "IPM_DEVICE_TYPE_INVALID";
-    case iPMDeviceType.IPM_DEVICE_TYPE_POWERPACK3:
+    case IPMDeviceType.IPM_DEVICE_TYPE_POWERPACK3:
       return "IPM_DEVICE_TYPE_POWERPACK3";
-    case iPMDeviceType.IPM_DEVICE_TYPE_SUPERCHARGER4:
+    case IPMDeviceType.IPM_DEVICE_TYPE_SUPERCHARGER4:
       return "IPM_DEVICE_TYPE_SUPERCHARGER4";
-    case iPMDeviceType.UNRECOGNIZED:
+    case IPMDeviceType.IPM_DEVICE_TYPE_MEGACHARGER:
+      return "IPM_DEVICE_TYPE_MEGACHARGER";
+    case IPMDeviceType.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+export enum BranchCircuitDeviceType {
+  BRANCH_CIRCUIT_DEVICE_TYPE_INVALID = 0,
+  BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER = 1,
+  UNRECOGNIZED = -1,
+}
+
+export function branchCircuitDeviceTypeFromJSON(object: any): BranchCircuitDeviceType {
+  switch (object) {
+    case 0:
+    case "BRANCH_CIRCUIT_DEVICE_TYPE_INVALID":
+      return BranchCircuitDeviceType.BRANCH_CIRCUIT_DEVICE_TYPE_INVALID;
+    case 1:
+    case "BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER":
+      return BranchCircuitDeviceType.BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return BranchCircuitDeviceType.UNRECOGNIZED;
+  }
+}
+
+export function branchCircuitDeviceTypeToJSON(object: BranchCircuitDeviceType): string {
+  switch (object) {
+    case BranchCircuitDeviceType.BRANCH_CIRCUIT_DEVICE_TYPE_INVALID:
+      return "BRANCH_CIRCUIT_DEVICE_TYPE_INVALID";
+    case BranchCircuitDeviceType.BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER:
+      return "BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER";
+    case BranchCircuitDeviceType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
@@ -334,7 +391,7 @@ export interface DeviceSignedPayload {
 
 export interface EncryptedMessage {
   cipher: Cipher;
-  cipherText: Uint8Array;
+  ciphertext: Uint8Array;
 }
 
 function createBaseDin(): Din {
@@ -778,7 +835,7 @@ export const DeviceSignedPayload: MessageFns<DeviceSignedPayload> = {
 };
 
 function createBaseEncryptedMessage(): EncryptedMessage {
-  return { cipher: 0, cipherText: new Uint8Array(0) };
+  return { cipher: 0, ciphertext: new Uint8Array(0) };
 }
 
 export const EncryptedMessage: MessageFns<EncryptedMessage> = {
@@ -786,8 +843,8 @@ export const EncryptedMessage: MessageFns<EncryptedMessage> = {
     if (message.cipher !== 0) {
       writer.uint32(8).int32(message.cipher);
     }
-    if (message.cipherText.length !== 0) {
-      writer.uint32(18).bytes(message.cipherText);
+    if (message.ciphertext.length !== 0) {
+      writer.uint32(18).bytes(message.ciphertext);
     }
     return writer;
   },
@@ -812,7 +869,7 @@ export const EncryptedMessage: MessageFns<EncryptedMessage> = {
             break;
           }
 
-          message.cipherText = reader.bytes();
+          message.ciphertext = reader.bytes();
           continue;
         }
       }
@@ -827,7 +884,7 @@ export const EncryptedMessage: MessageFns<EncryptedMessage> = {
   fromJSON(object: any): EncryptedMessage {
     return {
       cipher: isSet(object.cipher) ? cipherFromJSON(object.cipher) : 0,
-      cipherText: isSet(object.cipherText) ? bytesFromBase64(object.cipherText) : new Uint8Array(0),
+      ciphertext: isSet(object.ciphertext) ? bytesFromBase64(object.ciphertext) : new Uint8Array(0),
     };
   },
 
@@ -836,8 +893,8 @@ export const EncryptedMessage: MessageFns<EncryptedMessage> = {
     if (message.cipher !== undefined) {
       obj.cipher = cipherToJSON(message.cipher);
     }
-    if (message.cipherText !== undefined) {
-      obj.cipherText = base64FromBytes(message.cipherText);
+    if (message.ciphertext !== undefined) {
+      obj.ciphertext = base64FromBytes(message.ciphertext);
     }
     return obj;
   },
@@ -848,7 +905,7 @@ export const EncryptedMessage: MessageFns<EncryptedMessage> = {
   fromPartial<I extends Exact<DeepPartial<EncryptedMessage>, I>>(object: I): EncryptedMessage {
     const message = createBaseEncryptedMessage();
     message.cipher = object.cipher ?? 0;
-    message.cipherText = object.cipherText ?? new Uint8Array(0);
+    message.ciphertext = object.ciphertext ?? new Uint8Array(0);
     return message;
   },
 };

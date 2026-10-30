@@ -24,14 +24,18 @@ enum GenericError_E
 }
 
 // ===== TESLEMETRY-EXT BEGIN =====
-// UNCONFIRMED: not yet confirmed on a live vehicle; names not recovered.
+// UNCONFIRMED: not yet confirmed on a live vehicle.
 message KeyNotFoundContext {
-    bytes  public_key = 1;
-    uint32 handle     = 2;
+    oneof key {
+        bytes  publicKey = 1;
+        uint32 slot      = 2;
+    }
 }
 // ===== TESLEMETRY-EXT END =====
 
 message NominalError {
     GenericError_E  genericError = 1;
-    KeyNotFoundContext keyNotFoundContext = 8;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle; name not recovered
+    oneof context {  // TESLEMETRY-EXT
+        KeyNotFoundContext keyNotFound = 8;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    }
 }

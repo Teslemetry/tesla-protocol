@@ -44,12 +44,21 @@ class TEGDeviceType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     TEG_DEVICE_TYPE_TEG_PVI: _ClassVar[TEGDeviceType]
     TEG_DEVICE_TYPE_TACO_GATEWAY3V: _ClassVar[TEGDeviceType]
     TEG_DEVICE_TYPE_TACO_WALLBOX: _ClassVar[TEGDeviceType]
+    TEG_DEVICE_TYPE_TULIP: _ClassVar[TEGDeviceType]
+    TEG_DEVICE_TYPE_DYNAMO: _ClassVar[TEGDeviceType]
+    TEG_DEVICE_TYPE_SMC_SUPERCHARGER: _ClassVar[TEGDeviceType]
 
-class iPMDeviceType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+class IPMDeviceType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
-    IPM_DEVICE_TYPE_INVALID: _ClassVar[iPMDeviceType]
-    IPM_DEVICE_TYPE_POWERPACK3: _ClassVar[iPMDeviceType]
-    IPM_DEVICE_TYPE_SUPERCHARGER4: _ClassVar[iPMDeviceType]
+    IPM_DEVICE_TYPE_INVALID: _ClassVar[IPMDeviceType]
+    IPM_DEVICE_TYPE_POWERPACK3: _ClassVar[IPMDeviceType]
+    IPM_DEVICE_TYPE_SUPERCHARGER4: _ClassVar[IPMDeviceType]
+    IPM_DEVICE_TYPE_MEGACHARGER: _ClassVar[IPMDeviceType]
+
+class BranchCircuitDeviceType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    BRANCH_CIRCUIT_DEVICE_TYPE_INVALID: _ClassVar[BranchCircuitDeviceType]
+    BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER: _ClassVar[BranchCircuitDeviceType]
 DEVICE_TYPE_INVALID: DeviceType
 DEVICE_TYPE_GEN3WC: DeviceType
 DEVICE_TYPE_PVCOM: DeviceType
@@ -75,9 +84,15 @@ TEG_DEVICE_TYPE_TACO_POWERWALL3: TEGDeviceType
 TEG_DEVICE_TYPE_TEG_PVI: TEGDeviceType
 TEG_DEVICE_TYPE_TACO_GATEWAY3V: TEGDeviceType
 TEG_DEVICE_TYPE_TACO_WALLBOX: TEGDeviceType
-IPM_DEVICE_TYPE_INVALID: iPMDeviceType
-IPM_DEVICE_TYPE_POWERPACK3: iPMDeviceType
-IPM_DEVICE_TYPE_SUPERCHARGER4: iPMDeviceType
+TEG_DEVICE_TYPE_TULIP: TEGDeviceType
+TEG_DEVICE_TYPE_DYNAMO: TEGDeviceType
+TEG_DEVICE_TYPE_SMC_SUPERCHARGER: TEGDeviceType
+IPM_DEVICE_TYPE_INVALID: IPMDeviceType
+IPM_DEVICE_TYPE_POWERPACK3: IPMDeviceType
+IPM_DEVICE_TYPE_SUPERCHARGER4: IPMDeviceType
+IPM_DEVICE_TYPE_MEGACHARGER: IPMDeviceType
+BRANCH_CIRCUIT_DEVICE_TYPE_INVALID: BranchCircuitDeviceType
+BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER: BranchCircuitDeviceType
 
 class Din(_message.Message):
     __slots__ = ("value",)
@@ -126,9 +141,9 @@ class DeviceSignedPayload(_message.Message):
     def __init__(self, payload: _Optional[bytes] = ..., device_signature_type: _Optional[_Union[DeviceSignatureType, str]] = ..., signature: _Optional[bytes] = ..., device_cert_format: _Optional[_Union[DeviceCertFormat, str]] = ..., device_cert: _Optional[bytes] = ...) -> None: ...
 
 class EncryptedMessage(_message.Message):
-    __slots__ = ("cipher", "cipher_text")
+    __slots__ = ("cipher", "ciphertext")
     CIPHER_FIELD_NUMBER: _ClassVar[int]
-    CIPHER_TEXT_FIELD_NUMBER: _ClassVar[int]
+    CIPHERTEXT_FIELD_NUMBER: _ClassVar[int]
     cipher: Cipher
-    cipher_text: bytes
-    def __init__(self, cipher: _Optional[_Union[Cipher, str]] = ..., cipher_text: _Optional[bytes] = ...) -> None: ...
+    ciphertext: bytes
+    def __init__(self, cipher: _Optional[_Union[Cipher, str]] = ..., ciphertext: _Optional[bytes] = ...) -> None: ...

@@ -24,7 +24,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)tesla_protocol/energy_device/device.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\"\x14\n\x03\x44in\x12\r\n\x05value\x18\x01 \x01(\t\"3\n\x05\x45\x63uId\x12\x13\n\x0bpart_number\x18\x01 \x01(\t\x12\x15\n\rserial_number\x18\x02 \x01(\t\"\x14\n\x03VIN\x12\r\n\x05value\x18\x01 \x01(\t\"\x1c\n\x0bUUIDv4Bytes\x12\r\n\x05value\x18\x01 \x01(\x0c\"\x16\n\x06UUIDv4\x12\x0c\n\x04text\x18\x01 \x01(\t\"\x8a\x02\n\x13\x44\x65viceSignedPayload\x12\x0f\n\x07payload\x18\x01 \x01(\x0c\x12_\n\x15\x64\x65vice_signature_type\x18\x02 \x01(\x0e\x32@.tesla_protocol.tesla.proto.energy_device.v1.DeviceSignatureType\x12\x11\n\tsignature\x18\x03 \x01(\x0c\x12Y\n\x12\x64\x65vice_cert_format\x18\x04 \x01(\x0e\x32=.tesla_protocol.tesla.proto.energy_device.v1.DeviceCertFormat\x12\x13\n\x0b\x64\x65vice_cert\x18\x05 \x01(\x0c\"l\n\x10\x45ncryptedMessage\x12\x43\n\x06\x63ipher\x18\x01 \x01(\x0e\x32\x33.tesla_protocol.tesla.proto.energy_device.v1.Cipher\x12\x13\n\x0b\x63ipher_text\x18\x02 \x01(\x0c*\xb9\x01\n\nDeviceType\x12\x17\n\x13\x44\x45VICE_TYPE_INVALID\x10\x00\x12\x16\n\x12\x44\x45VICE_TYPE_GEN3WC\x10\x01\x12\x15\n\x11\x44\x45VICE_TYPE_PVCOM\x10\x02\x12\x13\n\x0f\x44\x45VICE_TYPE_MSA\x10\x03\x12\x1e\n\x1a\x44\x45VICE_TYPE_SITECONTROLLER\x10\x04\x12\x19\n\x15\x44\x45VICE_TYPE_MEGAPUTER\x10\x05\x12\x13\n\x0f\x44\x45VICE_TYPE_IPM\x10\x06*j\n\x10\x44\x65viceCertFormat\x12\x1e\n\x1a\x44\x45VICE_CERT_FORMAT_INVALID\x10\x00\x12\x1a\n\x16\x44\x45VICE_CERT_FORMAT_DER\x10\x01\x12\x1a\n\x16\x44\x45VICE_CERT_FORMAT_PEM\x10\x02*e\n\x13\x44\x65viceSignatureType\x12!\n\x1d\x44\x45VICE_SIGNATURE_TYPE_INVALID\x10\x00\x12+\n\'DEVICE_SIGNATURE_TYPE_SHA256_ECDSA_ASN1\x10\x01*8\n\x06\x43ipher\x12\x12\n\x0e\x43IPHER_INVALID\x10\x00\x12\x1a\n\x16\x43IPHER_RSA_OAEP_SHA256\x10\x02*\xfb\x02\n\rTEGDeviceType\x12\x1b\n\x17TEG_DEVICE_TYPE_INVALID\x10\x00\x12\x17\n\x13TEG_DEVICE_TYPE_SMC\x10\x01\x12 \n\x1cTEG_DEVICE_TYPE_HEC_GATEWAY1\x10\x02\x12 \n\x1cTEG_DEVICE_TYPE_TEG_GATEWAY2\x10\x03\x12%\n!TEG_DEVICE_TYPE_TEG_POWERWALLPLUS\x10\x04\x12\x1b\n\x17TEG_DEVICE_TYPE_TEG_MP1\x10\x05\x12$\n TEG_DEVICE_TYPE_TEG_SUPERCHARGER\x10\x06\x12#\n\x1fTEG_DEVICE_TYPE_TACO_POWERWALL3\x10\x07\x12\x1b\n\x17TEG_DEVICE_TYPE_TEG_PVI\x10\x08\x12\"\n\x1eTEG_DEVICE_TYPE_TACO_GATEWAY3V\x10\t\x12 \n\x1cTEG_DEVICE_TYPE_TACO_WALLBOX\x10\n*o\n\riPMDeviceType\x12\x1b\n\x17IPM_DEVICE_TYPE_INVALID\x10\x00\x12\x1e\n\x1aIPM_DEVICE_TYPE_POWERPACK3\x10\x01\x12!\n\x1dIPM_DEVICE_TYPE_SUPERCHARGER4\x10\x02\x42z\n$com.tesla.generated.energy_device.v1B\x06\x44\x65viceZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n)tesla_protocol/energy_device/device.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\"\x14\n\x03\x44in\x12\r\n\x05value\x18\x01 \x01(\t\"3\n\x05\x45\x63uId\x12\x13\n\x0bpart_number\x18\x01 \x01(\t\x12\x15\n\rserial_number\x18\x02 \x01(\t\"\x14\n\x03VIN\x12\r\n\x05value\x18\x01 \x01(\t\"\x1c\n\x0bUUIDv4Bytes\x12\r\n\x05value\x18\x01 \x01(\x0c\"\x16\n\x06UUIDv4\x12\x0c\n\x04text\x18\x01 \x01(\t\"\x8a\x02\n\x13\x44\x65viceSignedPayload\x12\x0f\n\x07payload\x18\x01 \x01(\x0c\x12_\n\x15\x64\x65vice_signature_type\x18\x02 \x01(\x0e\x32@.tesla_protocol.tesla.proto.energy_device.v1.DeviceSignatureType\x12\x11\n\tsignature\x18\x03 \x01(\x0c\x12Y\n\x12\x64\x65vice_cert_format\x18\x04 \x01(\x0e\x32=.tesla_protocol.tesla.proto.energy_device.v1.DeviceCertFormat\x12\x13\n\x0b\x64\x65vice_cert\x18\x05 \x01(\x0c\"k\n\x10\x45ncryptedMessage\x12\x43\n\x06\x63ipher\x18\x01 \x01(\x0e\x32\x33.tesla_protocol.tesla.proto.energy_device.v1.Cipher\x12\x12\n\nciphertext\x18\x02 \x01(\x0c*\xb9\x01\n\nDeviceType\x12\x17\n\x13\x44\x45VICE_TYPE_INVALID\x10\x00\x12\x16\n\x12\x44\x45VICE_TYPE_GEN3WC\x10\x01\x12\x15\n\x11\x44\x45VICE_TYPE_PVCOM\x10\x02\x12\x13\n\x0f\x44\x45VICE_TYPE_MSA\x10\x03\x12\x1e\n\x1a\x44\x45VICE_TYPE_SITECONTROLLER\x10\x04\x12\x19\n\x15\x44\x45VICE_TYPE_MEGAPUTER\x10\x05\x12\x13\n\x0f\x44\x45VICE_TYPE_IPM\x10\x06*j\n\x10\x44\x65viceCertFormat\x12\x1e\n\x1a\x44\x45VICE_CERT_FORMAT_INVALID\x10\x00\x12\x1a\n\x16\x44\x45VICE_CERT_FORMAT_DER\x10\x01\x12\x1a\n\x16\x44\x45VICE_CERT_FORMAT_PEM\x10\x02*e\n\x13\x44\x65viceSignatureType\x12!\n\x1d\x44\x45VICE_SIGNATURE_TYPE_INVALID\x10\x00\x12+\n\'DEVICE_SIGNATURE_TYPE_SHA256_ECDSA_ASN1\x10\x01*8\n\x06\x43ipher\x12\x12\n\x0e\x43IPHER_INVALID\x10\x00\x12\x1a\n\x16\x43IPHER_RSA_OAEP_SHA256\x10\x02*\xd8\x03\n\rTEGDeviceType\x12\x1b\n\x17TEG_DEVICE_TYPE_INVALID\x10\x00\x12\x17\n\x13TEG_DEVICE_TYPE_SMC\x10\x01\x12 \n\x1cTEG_DEVICE_TYPE_HEC_GATEWAY1\x10\x02\x12 \n\x1cTEG_DEVICE_TYPE_TEG_GATEWAY2\x10\x03\x12%\n!TEG_DEVICE_TYPE_TEG_POWERWALLPLUS\x10\x04\x12\x1b\n\x17TEG_DEVICE_TYPE_TEG_MP1\x10\x05\x12$\n TEG_DEVICE_TYPE_TEG_SUPERCHARGER\x10\x06\x12#\n\x1fTEG_DEVICE_TYPE_TACO_POWERWALL3\x10\x07\x12\x1b\n\x17TEG_DEVICE_TYPE_TEG_PVI\x10\x08\x12\"\n\x1eTEG_DEVICE_TYPE_TACO_GATEWAY3V\x10\t\x12 \n\x1cTEG_DEVICE_TYPE_TACO_WALLBOX\x10\n\x12\x19\n\x15TEG_DEVICE_TYPE_TULIP\x10\x0b\x12\x1a\n\x16TEG_DEVICE_TYPE_DYNAMO\x10\x0c\x12$\n TEG_DEVICE_TYPE_SMC_SUPERCHARGER\x10\r*\x90\x01\n\rIPMDeviceType\x12\x1b\n\x17IPM_DEVICE_TYPE_INVALID\x10\x00\x12\x1e\n\x1aIPM_DEVICE_TYPE_POWERPACK3\x10\x01\x12!\n\x1dIPM_DEVICE_TYPE_SUPERCHARGER4\x10\x02\x12\x1f\n\x1bIPM_DEVICE_TYPE_MEGACHARGER\x10\x03*o\n\x17\x42ranchCircuitDeviceType\x12&\n\"BRANCH_CIRCUIT_DEVICE_TYPE_INVALID\x10\x00\x12,\n(BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER\x10\x01\x42z\n$com.tesla.generated.energy_device.v1B\x06\x44\x65viceZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -32,18 +32,20 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'tesla_protocol.energy_devic
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n$com.tesla.generated.energy_device.v1B\006DeviceZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1'
-  _globals['_DEVICETYPE']._serialized_start=621
-  _globals['_DEVICETYPE']._serialized_end=806
-  _globals['_DEVICECERTFORMAT']._serialized_start=808
-  _globals['_DEVICECERTFORMAT']._serialized_end=914
-  _globals['_DEVICESIGNATURETYPE']._serialized_start=916
-  _globals['_DEVICESIGNATURETYPE']._serialized_end=1017
-  _globals['_CIPHER']._serialized_start=1019
-  _globals['_CIPHER']._serialized_end=1075
-  _globals['_TEGDEVICETYPE']._serialized_start=1078
-  _globals['_TEGDEVICETYPE']._serialized_end=1457
-  _globals['_IPMDEVICETYPE']._serialized_start=1459
-  _globals['_IPMDEVICETYPE']._serialized_end=1570
+  _globals['_DEVICETYPE']._serialized_start=620
+  _globals['_DEVICETYPE']._serialized_end=805
+  _globals['_DEVICECERTFORMAT']._serialized_start=807
+  _globals['_DEVICECERTFORMAT']._serialized_end=913
+  _globals['_DEVICESIGNATURETYPE']._serialized_start=915
+  _globals['_DEVICESIGNATURETYPE']._serialized_end=1016
+  _globals['_CIPHER']._serialized_start=1018
+  _globals['_CIPHER']._serialized_end=1074
+  _globals['_TEGDEVICETYPE']._serialized_start=1077
+  _globals['_TEGDEVICETYPE']._serialized_end=1549
+  _globals['_IPMDEVICETYPE']._serialized_start=1552
+  _globals['_IPMDEVICETYPE']._serialized_end=1696
+  _globals['_BRANCHCIRCUITDEVICETYPE']._serialized_start=1698
+  _globals['_BRANCHCIRCUITDEVICETYPE']._serialized_end=1809
   _globals['_DIN']._serialized_start=90
   _globals['_DIN']._serialized_end=110
   _globals['_ECUID']._serialized_start=112
@@ -57,5 +59,5 @@ if not _descriptor._USE_C_DESCRIPTORS:
   _globals['_DEVICESIGNEDPAYLOAD']._serialized_start=242
   _globals['_DEVICESIGNEDPAYLOAD']._serialized_end=508
   _globals['_ENCRYPTEDMESSAGE']._serialized_start=510
-  _globals['_ENCRYPTEDMESSAGE']._serialized_end=618
+  _globals['_ENCRYPTEDMESSAGE']._serialized_end=617
 # @@protoc_insertion_point(module_scope)

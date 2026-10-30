@@ -45,6 +45,10 @@ class Session_Info_Status(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     SESSION_INFO_STATUS_OK: _ClassVar[Session_Info_Status]
     SESSION_INFO_STATUS_KEY_NOT_ON_WHITELIST: _ClassVar[Session_Info_Status]
     SESSION_INFO_STATUS_INVALID_HANDLE: _ClassVar[Session_Info_Status]
+
+class SessionInfoFlags(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SESSION_INFO_FLAG_SUPPORTS_DETACHED_ENCRYPTION: _ClassVar[SessionInfoFlags]
 TAG_SIGNATURE_TYPE: Tag
 TAG_DOMAIN: Tag
 TAG_PERSONALIZATION: Tag
@@ -73,6 +77,7 @@ IDENTIFIEDKEY_ROOT_KEY: IdentifiedKey
 SESSION_INFO_STATUS_OK: Session_Info_Status
 SESSION_INFO_STATUS_KEY_NOT_ON_WHITELIST: Session_Info_Status
 SESSION_INFO_STATUS_INVALID_HANDLE: Session_Info_Status
+SESSION_INFO_FLAG_SUPPORTS_DETACHED_ENCRYPTION: SessionInfoFlags
 
 class KeyIdentity(_message.Message):
     __slots__ = ("public_key", "handle", "identified_key")

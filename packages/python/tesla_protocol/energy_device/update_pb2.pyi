@@ -78,17 +78,17 @@ class SystemUpdate(_message.Message):
     LAST_UPDATE_RESULT_FIELD_NUMBER: _ClassVar[int]
     SERVER_STAGED_PACKAGES_FIELD_NUMBER: _ClassVar[int]
     IS_SIDELOADING_FIELD_NUMBER: _ClassVar[int]
-    handshake_result: int
-    update_status: int
+    handshake_result: UpdateHandshakeResult
+    update_status: UpdateStatus
     server_staged_version: FirmwareVersion
     total_bytes: int
     bytes_offset: int
     estimated_bytes_per_second: int
     last_handshake_timestamp: int
-    last_update_result: int
+    last_update_result: LastUpdateResult
     server_staged_packages: _containers.RepeatedCompositeFieldContainer[ServerStagedPackage]
     is_sideloading: bool
-    def __init__(self, handshake_result: _Optional[int] = ..., update_status: _Optional[int] = ..., server_staged_version: _Optional[_Union[FirmwareVersion, _Mapping]] = ..., total_bytes: _Optional[int] = ..., bytes_offset: _Optional[int] = ..., estimated_bytes_per_second: _Optional[int] = ..., last_handshake_timestamp: _Optional[int] = ..., last_update_result: _Optional[int] = ..., server_staged_packages: _Optional[_Iterable[_Union[ServerStagedPackage, _Mapping]]] = ..., is_sideloading: _Optional[bool] = ...) -> None: ...
+    def __init__(self, handshake_result: _Optional[_Union[UpdateHandshakeResult, str]] = ..., update_status: _Optional[_Union[UpdateStatus, str]] = ..., server_staged_version: _Optional[_Union[FirmwareVersion, _Mapping]] = ..., total_bytes: _Optional[int] = ..., bytes_offset: _Optional[int] = ..., estimated_bytes_per_second: _Optional[int] = ..., last_handshake_timestamp: _Optional[int] = ..., last_update_result: _Optional[_Union[LastUpdateResult, str]] = ..., server_staged_packages: _Optional[_Iterable[_Union[ServerStagedPackage, _Mapping]]] = ..., is_sideloading: _Optional[bool] = ...) -> None: ...
 
 class AcceptedPackage(_message.Message):
     __slots__ = ("package_id", "package_signature", "upload_endpoint", "will_attempt_download")

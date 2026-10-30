@@ -347,7 +347,7 @@
         "python": "packages/python/tesla_protocol/command"
       },
       "messages": 377,
-      "enums": 113,
+      "enums": 114,
       "fields": 1974,
       "files": [
         {
@@ -9598,22 +9598,24 @@
               "fields": [
                 {
                   "number": 1,
-                  "name": "public_key",
+                  "name": "publicKey",
                   "type": "TYPE_BYTES",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
-                  "oneof": null
+                  "oneof": "key"
                 },
                 {
                   "number": 2,
-                  "name": "handle",
+                  "name": "slot",
                   "type": "TYPE_UINT32",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
-                  "oneof": null
+                  "oneof": "key"
                 }
               ],
-              "oneofs": [],
+              "oneofs": [
+                "key"
+              ],
               "reserved_ranges": [],
               "reserved_names": [],
               "nested_messages": [],
@@ -9633,14 +9635,16 @@
                 },
                 {
                   "number": 8,
-                  "name": "keyNotFoundContext",
+                  "name": "keyNotFound",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".Errors.KeyNotFoundContext",
                   "label": "LABEL_OPTIONAL",
-                  "oneof": null
+                  "oneof": "context"
                 }
               ],
-              "oneofs": [],
+              "oneofs": [
+                "context"
+              ],
               "reserved_ranges": [],
               "reserved_names": [],
               "nested_messages": [],
@@ -10643,6 +10647,18 @@
                 {
                   "number": 2,
                   "name": "SESSION_INFO_STATUS_INVALID_HANDLE"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".Signatures.SessionInfoFlags",
+              "name": "SessionInfoFlags",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "SESSION_INFO_FLAG_SUPPORTS_DETACHED_ENCRYPTION"
                 }
               ],
               "reserved_ranges": [],
@@ -12286,7 +12302,7 @@
                 },
                 {
                   "number": 6,
-                  "name": "uiDesire",
+                  "name": "UIDesire",
                   "type": "TYPE_ENUM",
                   "type_name": ".VCSEC.UIDesire_E",
                   "label": "LABEL_OPTIONAL",
@@ -26015,9 +26031,9 @@
         "typescript": "packages/typescript/src/energy_device",
         "python": "packages/python/tesla_protocol/energy_device"
       },
-      "messages": 524,
-      "enums": 104,
-      "fields": 1241,
+      "messages": 532,
+      "enums": 108,
+      "fields": 1256,
       "files": [
         {
           "package": "tesla.proto.energy_device.v1",
@@ -27049,8 +27065,8 @@
                 {
                   "number": 3,
                   "name": "result",
-                  "type": "TYPE_INT32",
-                  "type_name": null,
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.WifiConfigureResult",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 }
@@ -27245,8 +27261,8 @@
                 {
                   "number": 2,
                   "name": "supported_profiles",
-                  "type": "TYPE_INT32",
-                  "type_name": null,
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.CellularProfileType",
                   "label": "LABEL_REPEATED",
                   "oneof": null
                 }
@@ -27719,8 +27735,8 @@
                 {
                   "number": 1,
                   "name": "failure",
-                  "type": "TYPE_INT32",
-                  "type_name": null,
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.RegistrationFailure",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
@@ -28404,7 +28420,7 @@
                 },
                 {
                   "number": 2,
-                  "name": "cipher_text",
+                  "name": "ciphertext",
                   "type": "TYPE_BYTES",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -28554,14 +28570,26 @@
                 {
                   "number": 10,
                   "name": "TEG_DEVICE_TYPE_TACO_WALLBOX"
+                },
+                {
+                  "number": 11,
+                  "name": "TEG_DEVICE_TYPE_TULIP"
+                },
+                {
+                  "number": 12,
+                  "name": "TEG_DEVICE_TYPE_DYNAMO"
+                },
+                {
+                  "number": 13,
+                  "name": "TEG_DEVICE_TYPE_SMC_SUPERCHARGER"
                 }
               ],
               "reserved_ranges": [],
               "reserved_names": []
             },
             {
-              "fqn": ".tesla.proto.energy_device.v1.iPMDeviceType",
-              "name": "iPMDeviceType",
+              "fqn": ".tesla.proto.energy_device.v1.IPMDeviceType",
+              "name": "IPMDeviceType",
               "values": [
                 {
                   "number": 0,
@@ -28574,6 +28602,26 @@
                 {
                   "number": 2,
                   "name": "IPM_DEVICE_TYPE_SUPERCHARGER4"
+                },
+                {
+                  "number": 3,
+                  "name": "IPM_DEVICE_TYPE_MEGACHARGER"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.BranchCircuitDeviceType",
+              "name": "BranchCircuitDeviceType",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "BRANCH_CIRCUIT_DEVICE_TYPE_INVALID"
+                },
+                {
+                  "number": 1,
+                  "name": "BRANCH_CIRCUIT_DEVICE_TYPE_SMART_BREAKER"
                 }
               ],
               "reserved_ranges": [],
@@ -28638,7 +28686,7 @@
                 },
                 {
                   "number": 2,
-                  "name": "qualifiying_time_remaining_s",
+                  "name": "qualifying_time_remaining_s",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".google.protobuf.FloatValue",
                   "label": "LABEL_OPTIONAL",
@@ -31311,7 +31359,7 @@
                 },
                 {
                   "number": 2,
-                  "name": "rssiValue",
+                  "name": "rssi_value",
                   "type": "TYPE_SINT32",
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
@@ -31327,7 +31375,7 @@
                 },
                 {
                   "number": 4,
-                  "name": "securityType",
+                  "name": "security_type",
                   "type": "TYPE_ENUM",
                   "type_name": ".tesla.proto.energy_device.v1.WifiNetworkSecurityType",
                   "label": "LABEL_OPTIONAL",
@@ -34211,6 +34259,7 @@
             "device.proto",
             "google/protobuf/timestamp.proto",
             "google/protobuf/wrappers.proto",
+            "neurio_meter_api.proto",
             "update.proto"
           ],
           "messages": [
@@ -34250,6 +34299,25 @@
               "nested_enums": []
             },
             {
+              "fqn": ".tesla.proto.energy_device.v1.AssetSiteDetailsRequest",
+              "name": "AssetSiteDetailsRequest",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "installer_tesla_auth_bearer_token",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
               "fqn": ".tesla.proto.energy_device.v1.AssetSiteDetailsResponse",
               "name": "AssetSiteDetailsResponse",
               "fields": [
@@ -34262,6 +34330,16 @@
                   "oneof": null
                 }
               ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.AssetSiteUuidOfDeviceRequest",
+              "name": "AssetSiteUuidOfDeviceRequest",
+              "fields": [],
               "oneofs": [],
               "reserved_ranges": [],
               "reserved_names": [],
@@ -34401,16 +34479,16 @@
                 {
                   "number": 9,
                   "name": "power_type",
-                  "type": "TYPE_INT32",
-                  "type_name": null,
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.PowerType",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
                 {
                   "number": 10,
                   "name": "connector_type",
-                  "type": "TYPE_INT32",
-                  "type_name": null,
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.ConnectorType",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
@@ -34505,6 +34583,25 @@
                   "name": "family_name",
                   "type": "TYPE_STRING",
                   "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.CustomerRegistrationInfo",
+              "name": "CustomerRegistrationInfo",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "customer_id",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.UUIDv4",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 }
@@ -34645,6 +34742,16 @@
               "nested_enums": []
             },
             {
+              "fqn": ".tesla.proto.energy_device.v1.DeactivateDeviceResponse",
+              "name": "DeactivateDeviceResponse",
+              "fields": [],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
               "fqn": ".tesla.proto.energy_device.v1.DeviceDetail",
               "name": "DeviceDetail",
               "fields": [
@@ -34669,6 +34776,57 @@
                   "name": "din",
                   "type": "TYPE_STRING",
                   "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 4,
+                  "name": "teg_device_type",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.TEGDeviceType",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.DeviceInfo",
+              "name": "DeviceInfo",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "din",
+                  "type": "TYPE_STRING",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "firmware_version",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.FirmwareVersion",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 3,
+                  "name": "device_type",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.DeviceType",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 100,
+                  "name": "teg_device_type",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.TEGDeviceType",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 }
@@ -34828,7 +34986,7 @@
                   "name": "site_relationship_type",
                   "type": "TYPE_ENUM",
                   "type_name": ".tesla.proto.energy_device.v1.RegistrationSiteRelationshipType",
-                  "label": "LABEL_OPTIONAL",
+                  "label": "LABEL_REPEATED",
                   "oneof": null
                 }
               ],
@@ -34931,8 +35089,8 @@
                 {
                   "number": 1,
                   "name": "failure",
-                  "type": "TYPE_INT32",
-                  "type_name": null,
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.RegistrationFailure",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
@@ -35247,6 +35405,49 @@
                   "type_name": ".tesla.proto.energy_device.v1.PartnerInfo",
                   "label": "LABEL_REPEATED",
                   "oneof": null
+                },
+                {
+                  "number": 12,
+                  "name": "market_type",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.MarketType",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 13,
+                  "name": "potential_site_uuid",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".google.protobuf.StringValue",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.RegistrationRequestWithPartDetails",
+              "name": "RegistrationRequestWithPartDetails",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "registration_request",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.RegistrationRequest",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "part_details",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.PartDetail",
+                  "label": "LABEL_REPEATED",
+                  "oneof": null
                 }
               ],
               "oneofs": [],
@@ -35286,6 +35487,33 @@
                 {
                   "number": 4,
                   "name": "asset_site_id",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".google.protobuf.StringValue",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.SiteInfo",
+              "name": "SiteInfo",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "site_address",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.CustomerSiteAddress",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "warp_site_name",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".google.protobuf.StringValue",
                   "label": "LABEL_OPTIONAL",
@@ -35429,6 +35657,33 @@
                   "type": "TYPE_MESSAGE",
                   "type_name": ".google.protobuf.StringValue",
                   "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                }
+              ],
+              "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.WCCommercialRegistrationRequestWithPartDetails",
+              "name": "WCCommercialRegistrationRequestWithPartDetails",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "registration_request",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.WCCommercialRegistrationRequest",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": null
+                },
+                {
+                  "number": 2,
+                  "name": "part_details",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".tesla.proto.energy_device.v1.PartDetail",
+                  "label": "LABEL_REPEATED",
                   "oneof": null
                 }
               ],
@@ -35599,6 +35854,10 @@
                 {
                   "number": 6,
                   "name": "REGISTRATION_DEVICE_TYPE_POWERWALL_3_EXPANSION"
+                },
+                {
+                  "number": 7,
+                  "name": "REGISTRATION_DEVICE_TYPE_OPTIMUS_CHARGER"
                 }
               ],
               "reserved_ranges": [],
@@ -35703,6 +35962,66 @@
                 {
                   "number": 2,
                   "name": "WC_LOAD_SHARING_TYPE_FOLLOWER"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.MarketType",
+              "name": "MarketType",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "MARKET_TYPE_INVALID"
+                },
+                {
+                  "number": 1,
+                  "name": "MARKET_TYPE_COMMERCIAL"
+                },
+                {
+                  "number": 2,
+                  "name": "MARKET_TYPE_RESIDENTIAL"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.RegistrationFailure",
+              "name": "RegistrationFailure",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "REGISTRATION_FAILURE_INVALID"
+                },
+                {
+                  "number": 1,
+                  "name": "REGISTRATION_FAILURE_DEVICES"
+                },
+                {
+                  "number": 2,
+                  "name": "REGISTRATION_FAILURE_NETWORK"
+                }
+              ],
+              "reserved_ranges": [],
+              "reserved_names": []
+            },
+            {
+              "fqn": ".tesla.proto.energy_device.v1.SiteRegistrationStatus",
+              "name": "SiteRegistrationStatus",
+              "values": [
+                {
+                  "number": 0,
+                  "name": "SITE_REGISTRATION_STATUS_INVALID"
+                },
+                {
+                  "number": 1,
+                  "name": "SITE_REGISTRATION_STATUS_REGISTERED"
+                },
+                {
+                  "number": 2,
+                  "name": "SITE_REGISTRATION_STATUS_ABANDONED"
                 }
               ],
               "reserved_ranges": [],
@@ -40654,16 +40973,16 @@
                 {
                   "number": 1,
                   "name": "handshake_result",
-                  "type": "TYPE_INT32",
-                  "type_name": null,
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.UpdateHandshakeResult",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
                 {
                   "number": 2,
                   "name": "update_status",
-                  "type": "TYPE_INT32",
-                  "type_name": null,
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.UpdateStatus",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
@@ -40710,8 +41029,8 @@
                 {
                   "number": 8,
                   "name": "last_update_result",
-                  "type": "TYPE_INT32",
-                  "type_name": null,
+                  "type": "TYPE_ENUM",
+                  "type_name": ".tesla.proto.energy_device.v1.LastUpdateResult",
                   "label": "LABEL_OPTIONAL",
                   "oneof": null
                 },
@@ -51820,9 +52139,9 @@
   "totals": {
     "source_files": 41,
     "groups": 7,
-    "messages": 1019,
-    "enums": 271,
-    "fields": 3588
+    "messages": 1027,
+    "enums": 276,
+    "fields": 3603
   },
   "registration": {
     "consistent": true,

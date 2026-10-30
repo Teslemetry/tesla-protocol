@@ -748,7 +748,7 @@ class ActiveKey(_message.Message):
     def __init__(self, activeKey: _Optional[_Union[KeyIdentifier, _Mapping]] = ...) -> None: ...
 
 class VehicleStatus(_message.Message):
-    __slots__ = ("closureStatuses", "vehicleLockState", "vehicleSleepStatus", "userPresence", "detailedClosureStatus", "uiDesire", "gear", "keyLocationStatus")
+    __slots__ = ("closureStatuses", "vehicleLockState", "vehicleSleepStatus", "userPresence", "detailedClosureStatus", "UIDesire", "gear", "keyLocationStatus")
     CLOSURESTATUSES_FIELD_NUMBER: _ClassVar[int]
     VEHICLELOCKSTATE_FIELD_NUMBER: _ClassVar[int]
     VEHICLESLEEPSTATUS_FIELD_NUMBER: _ClassVar[int]
@@ -762,10 +762,10 @@ class VehicleStatus(_message.Message):
     vehicleSleepStatus: VehicleSleepStatus_E
     userPresence: UserPresence_E
     detailedClosureStatus: DetailedClosureStatus
-    uiDesire: UIDesire_E
+    UIDesire: UIDesire_E
     gear: Gear_E
     keyLocationStatus: KeyLocationStatus
-    def __init__(self, closureStatuses: _Optional[_Union[ClosureStatuses, _Mapping]] = ..., vehicleLockState: _Optional[_Union[VehicleLockState_E, str]] = ..., vehicleSleepStatus: _Optional[_Union[VehicleSleepStatus_E, str]] = ..., userPresence: _Optional[_Union[UserPresence_E, str]] = ..., detailedClosureStatus: _Optional[_Union[DetailedClosureStatus, _Mapping]] = ..., uiDesire: _Optional[_Union[UIDesire_E, str]] = ..., gear: _Optional[_Union[Gear_E, str]] = ..., keyLocationStatus: _Optional[_Union[KeyLocationStatus, _Mapping]] = ...) -> None: ...
+    def __init__(self, closureStatuses: _Optional[_Union[ClosureStatuses, _Mapping]] = ..., vehicleLockState: _Optional[_Union[VehicleLockState_E, str]] = ..., vehicleSleepStatus: _Optional[_Union[VehicleSleepStatus_E, str]] = ..., userPresence: _Optional[_Union[UserPresence_E, str]] = ..., detailedClosureStatus: _Optional[_Union[DetailedClosureStatus, _Mapping]] = ..., UIDesire: _Optional[_Union[UIDesire_E, str]] = ..., gear: _Optional[_Union[Gear_E, str]] = ..., keyLocationStatus: _Optional[_Union[KeyLocationStatus, _Mapping]] = ...) -> None: ...
 
 class FromVCSECMessage(_message.Message):
     __slots__ = ("vehicleStatus", "authenticationRequest", "commandStatus", "personalizationInformation", "whitelistInfo", "whitelistEntryInfo", "capabilities", "keyStatusInfo", "activeKey", "nominalError")

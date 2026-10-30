@@ -130,8 +130,8 @@ class CommonAPIConfigureWifiWithEncryptedPasswordResponse(_message.Message):
     RESULT_FIELD_NUMBER: _ClassVar[int]
     wifi_config: _networking_pb2.WifiConfig
     wifi: _networking_pb2.NetworkInterface
-    result: int
-    def __init__(self, wifi_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]] = ..., wifi: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]] = ..., result: _Optional[int] = ...) -> None: ...
+    result: _networking_pb2.WifiConfigureResult
+    def __init__(self, wifi_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]] = ..., wifi: _Optional[_Union[_networking_pb2.NetworkInterface, _Mapping]] = ..., result: _Optional[_Union[_networking_pb2.WifiConfigureResult, str]] = ...) -> None: ...
 
 class CommonAPICheckForUpdateRequest(_message.Message):
     __slots__ = ("download_if_available",)
@@ -196,8 +196,8 @@ class CommonAPIGetCellularInfoResponse(_message.Message):
     EID_FIELD_NUMBER: _ClassVar[int]
     SUPPORTED_PROFILES_FIELD_NUMBER: _ClassVar[int]
     eid: _networking_pb2.CellularEID
-    supported_profiles: _containers.RepeatedScalarFieldContainer[int]
-    def __init__(self, eid: _Optional[_Union[_networking_pb2.CellularEID, _Mapping]] = ..., supported_profiles: _Optional[_Iterable[int]] = ...) -> None: ...
+    supported_profiles: _containers.RepeatedScalarFieldContainer[_networking_pb2.CellularProfileType]
+    def __init__(self, eid: _Optional[_Union[_networking_pb2.CellularEID, _Mapping]] = ..., supported_profiles: _Optional[_Iterable[_Union[_networking_pb2.CellularProfileType, str]]] = ...) -> None: ...
 
 class CommonAPIConfigureEthernetRequest(_message.Message):
     __slots__ = ("ipv4_config",)
@@ -343,9 +343,9 @@ class CommonAPIRegisterResponse(_message.Message):
     __slots__ = ("failure", "response")
     FAILURE_FIELD_NUMBER: _ClassVar[int]
     RESPONSE_FIELD_NUMBER: _ClassVar[int]
-    failure: int
+    failure: _registration_api_pb2.RegistrationFailure
     response: _registration_api_pb2.RegistrationResponse
-    def __init__(self, failure: _Optional[int] = ..., response: _Optional[_Union[_registration_api_pb2.RegistrationResponse, _Mapping]] = ...) -> None: ...
+    def __init__(self, failure: _Optional[_Union[_registration_api_pb2.RegistrationFailure, str]] = ..., response: _Optional[_Union[_registration_api_pb2.RegistrationResponse, _Mapping]] = ...) -> None: ...
 
 class CommonAPIRetrieveSiteUuidRequest(_message.Message):
     __slots__ = ()

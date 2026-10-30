@@ -87,7 +87,7 @@ message CommonAPIConfigureWifiWithEncryptedPasswordRequest {
 message CommonAPIConfigureWifiWithEncryptedPasswordResponse {
   WifiConfig wifi_config = 1;
   NetworkInterface wifi  = 2;
-  int32 result           = 3;
+  WifiConfigureResult result = 3;
 }
 
 message CommonAPICheckForUpdateRequest {
@@ -132,7 +132,7 @@ message CommonAPIGetCellularInfoRequest {
 
 message CommonAPIGetCellularInfoResponse {
   CellularEID eid                   = 1;
-  repeated int32 supported_profiles = 2;
+  repeated CellularProfileType supported_profiles = 2;
 }
 
 message CommonAPIConfigureEthernetRequest {
@@ -226,7 +226,7 @@ message CommonAPIRegisterRequest {
 }
 
 message CommonAPIRegisterResponse {
-  int32 failure = 1;  // may be an enum; values not yet known
+  RegistrationFailure failure = 1;
   RegistrationResponse response = 2;
 }
 
