@@ -431,7 +431,7 @@ export interface TEGAPIEnsureCertificateResponse {
 export interface ControlEventSchedulingInfo {
   startTime: Date | undefined;
   durationSeconds: number;
-  priority: number;
+  priority: string;
 }
 
 export interface BackupEvent {
@@ -4195,7 +4195,7 @@ export const TEGAPIEnsureCertificateResponse: MessageFns<TEGAPIEnsureCertificate
 };
 
 function createBaseControlEventSchedulingInfo(): ControlEventSchedulingInfo {
-  return { startTime: undefined, durationSeconds: 0, priority: 0 };
+  return { startTime: undefined, durationSeconds: 0, priority: "0" };
 }
 
 export const ControlEventSchedulingInfo: MessageFns<ControlEventSchedulingInfo> = {
@@ -4206,7 +4206,7 @@ export const ControlEventSchedulingInfo: MessageFns<ControlEventSchedulingInfo> 
     if (message.durationSeconds !== 0) {
       writer.uint32(16).uint32(message.durationSeconds);
     }
-    if (message.priority !== 0) {
+    if (message.priority !== "0") {
       writer.uint32(24).uint64(message.priority);
     }
     return writer;
@@ -4240,7 +4240,7 @@ export const ControlEventSchedulingInfo: MessageFns<ControlEventSchedulingInfo> 
             break;
           }
 
-          message.priority = longToNumber(reader.uint64());
+          message.priority = reader.uint64().toString();
           continue;
         }
       }
@@ -4256,7 +4256,7 @@ export const ControlEventSchedulingInfo: MessageFns<ControlEventSchedulingInfo> 
     return {
       startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
       durationSeconds: isSet(object.durationSeconds) ? globalThis.Number(object.durationSeconds) : 0,
-      priority: isSet(object.priority) ? globalThis.Number(object.priority) : 0,
+      priority: isSet(object.priority) ? globalThis.String(object.priority) : "0",
     };
   },
 
@@ -4269,7 +4269,7 @@ export const ControlEventSchedulingInfo: MessageFns<ControlEventSchedulingInfo> 
       obj.durationSeconds = Math.round(message.durationSeconds);
     }
     if (message.priority !== undefined) {
-      obj.priority = Math.round(message.priority);
+      obj.priority = globalThis.String(message.priority);
     }
     return obj;
   },
@@ -4281,7 +4281,7 @@ export const ControlEventSchedulingInfo: MessageFns<ControlEventSchedulingInfo> 
     const message = createBaseControlEventSchedulingInfo();
     message.startTime = object.startTime ?? undefined;
     message.durationSeconds = object.durationSeconds ?? 0;
-    message.priority = object.priority ?? 0;
+    message.priority = object.priority ?? "0";
     return message;
   },
 };
@@ -10201,17 +10201,6 @@ function fromJsonTimestamp(o: any): Date {
   } else {
     return fromTimestamp(Timestamp.fromJSON(o));
   }
-}
-
-function longToNumber(int64: { toString(): string }): number {
-  const num = globalThis.Number(int64.toString());
-  if (num > globalThis.Number.MAX_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
-  }
-  if (num < globalThis.Number.MIN_SAFE_INTEGER) {
-    throw new globalThis.Error("Value is smaller than Number.MIN_SAFE_INTEGER");
-  }
-  return num;
 }
 
 function isSet(value: any): boolean {

@@ -1,0 +1,215 @@
+{
+  "description": "Golden wire-format fixtures for energy_device MessageEnvelope over the Powerwall local v1r endpoint. Request cases are the serialized envelopes a reference client sends for each energy method (DIN 1232100-00-E--TG000000000000, clock frozen at 1800000000); a method that sends two messages lists both, in order. The reply case is a TEGAPIGetBackupEventsResponse whose manual backup event has ControlEventSchedulingInfo.priority = 2^64 - 1, the priority a max-backup event is scheduled at; it must decode without loss, which is why TypeScript types the field as a decimal string. Consumed identically by the TypeScript and Python test suites: both decoders must reach payload_case and both encoders must re-encode to the same bytes. canonical_hex, where present, is the canonical proto3 re-encoding of hex: the reference client writes a default-valued scalar explicitly, which neither generated encoder preserves.",
+  "message": "tesla.proto.energy_device.v1.MessageEnvelope",
+  "cases": [
+    {
+      "name": "get_firmware_details",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0801120218011a1e0a1c313233323130302d30302d452d2d544730303030303030303030303022021200",
+          "payload_case": "common.get_system_info_request"
+        }
+      ]
+    },
+    {
+      "name": "get_config",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030307a110a0f0801120b636f6e6669672e6a736f6e",
+          "payload_case": "filestore.read_file_request"
+        }
+      ]
+    },
+    {
+      "name": "set_backup_reserve_20",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030307a110a0f0801120b636f6e6669672e6a736f6e",
+          "payload_case": "filestore.read_file_request"
+        },
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030307a91012a8e01080112680a0b636f6e6669672e6a736f6ea206587b2264656661756c745f7265616c5f6d6f6465223a202273656c665f636f6e73756d7074696f6e222c2022736974655f696e666f223a207b226261636b75705f726573657276655f70657263656e74223a2032342e307d7d1a205c47cbd1335e7f8b184cdf40d5d7ddde3456e4b4611299645141e5035ebc8b3b",
+          "payload_case": "filestore.update_file_request"
+        }
+      ]
+    },
+    {
+      "name": "go_off_grid",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a061a0408061001",
+          "payload_case": "teg.set_island_mode_request"
+        }
+      ]
+    },
+    {
+      "name": "reconnect_grid",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a061a0408011000",
+          "payload_case": "teg.set_island_mode_request",
+          "canonical_hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a041a020801"
+        }
+      ]
+    },
+    {
+      "name": "trigger_islanding",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a022a00",
+          "payload_case": "teg.trigger_islanding_black_start_request"
+        }
+      ]
+    },
+    {
+      "name": "dispatch_500W_30s",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a10aa020d120b090000000000407f40101e",
+          "payload_case": "teg.dispatch_battery_power_request"
+        }
+      ]
+    },
+    {
+      "name": "dispatch_-500W_30s",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a10aa020d120b090000000000407fc0101e",
+          "payload_case": "teg.dispatch_battery_power_request"
+        }
+      ]
+    },
+    {
+      "name": "resume",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a05aa02020a00",
+          "payload_case": "teg.dispatch_battery_power_request"
+        }
+      ]
+    },
+    {
+      "name": "schedule_max_backup_7200",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a03fa0200",
+          "payload_case": "teg.cancel_manual_backup_event_request"
+        },
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a1bea02180a160a060880a4a7da0610a03818ffffffffffffffffff01",
+          "payload_case": "teg.schedule_manual_backup_event_request",
+          "scheduling_info": {
+            "start_time_seconds": 1800000000,
+            "duration_seconds": 7200,
+            "priority": "18446744073709551615"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cancel_max_backup",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a03fa0200",
+          "payload_case": "teg.cancel_manual_backup_event_request"
+        }
+      ]
+    },
+    {
+      "name": "get_backup_events",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a038a0300",
+          "payload_case": "teg.get_backup_events_request"
+        }
+      ]
+    },
+    {
+      "name": "list_authorized_clients",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d544730303030303030303030303062022a00",
+          "payload_case": "authorization.list_authorized_clients_request"
+        }
+      ]
+    },
+    {
+      "name": "remove_authorized_client",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d544730303030303030303030303062071a050a03010203",
+          "payload_case": "authorization.remove_authorized_client_request"
+        }
+      ]
+    },
+    {
+      "name": "delay_battery_calibration_24",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a05da04020818",
+          "payload_case": "teg.delay_battery_calibration_request"
+        }
+      ]
+    },
+    {
+      "name": "get_battery_calibration_delay_status",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a03ea0400",
+          "payload_case": "teg.get_delay_battery_calibration_status_request"
+        }
+      ]
+    },
+    {
+      "name": "get_controllable_device_programs",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a03fa0400",
+          "payload_case": "teg.get_controllable_device_programs_request"
+        }
+      ]
+    },
+    {
+      "name": "configure_ocpp",
+      "direction": "request",
+      "messages": [
+        {
+          "hex": "0802120220011a1e0a1c313233323130302d30302d452d2d54473030303030303030303030302a1faa031c0a1a7773733a2f2f6578616d706c652e696e76616c69642f6f637070",
+          "payload_case": "teg.configure_ocpp_request"
+        }
+      ]
+    },
+    {
+      "name": "get_backup_events_reply_max_priority",
+      "direction": "reply",
+      "messages": [
+        {
+          "hex": "0802121e0a1c313233323130302d30302d452d2d54473030303030303030303030301a0220012a1d92031a0a180a160a060880a4a7da0610a03818ffffffffffffffffff01",
+          "payload_case": "teg.get_backup_events_response",
+          "scheduling_info": {
+            "start_time_seconds": 1800000000,
+            "duration_seconds": 7200,
+            "priority": "18446744073709551615"
+          }
+        }
+      ]
+    }
+  ]
+}
