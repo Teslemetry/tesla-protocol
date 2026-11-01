@@ -236,7 +236,7 @@ message TEGAPIEnsureCertificateResponse {
 message ControlEventSchedulingInfo {
   google.protobuf.Timestamp start_time = 1;
   uint32 duration_seconds              = 2;
-  uint64 priority                      = 3;
+  uint64 priority                      = 3 [jstype = JS_STRING];
 }
 
 message BackupEvent {

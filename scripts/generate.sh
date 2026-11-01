@@ -19,7 +19,7 @@ fi
 
 PROTOC="$VENV/bin/python -m grpc_tools.protoc"
 TS_PLUGIN="$PWD/node_modules/.bin/protoc-gen-ts_proto"
-TS_OPTS="emitDefaultValues=json-methods,importSuffix=.js"
+TS_OPTS="emitDefaultValues=json-methods,importSuffix=.js,useJsTypeOverride=true"
 TS_OUT=packages/typescript/src
 PY_PKG=packages/python/tesla_protocol
 
