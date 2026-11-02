@@ -321,6 +321,9 @@ export enum Field {
   LifetimeDcChargeEnergyKwh = 276,
   /** SemiVehicleMassKg - Semi-truck only */
   SemiVehicleMassKg = 277,
+  SelfDrivingSoftwareVersion = 278,
+  /** SemiTrailerLatched - Semi-truck only */
+  SemiTrailerLatched = 279,
   UNRECOGNIZED = -1,
 }
 
@@ -1160,6 +1163,12 @@ export function fieldFromJSON(object: any): Field {
     case 277:
     case "SemiVehicleMassKg":
       return Field.SemiVehicleMassKg;
+    case 278:
+    case "SelfDrivingSoftwareVersion":
+      return Field.SelfDrivingSoftwareVersion;
+    case 279:
+    case "SemiTrailerLatched":
+      return Field.SemiTrailerLatched;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -1725,6 +1734,10 @@ export function fieldToJSON(object: Field): string {
       return "LifetimeDcChargeEnergyKwh";
     case Field.SemiVehicleMassKg:
       return "SemiVehicleMassKg";
+    case Field.SelfDrivingSoftwareVersion:
+      return "SelfDrivingSoftwareVersion";
+    case Field.SemiTrailerLatched:
+      return "SemiTrailerLatched";
     case Field.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

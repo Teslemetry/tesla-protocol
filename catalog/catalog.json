@@ -53735,6 +53735,14 @@
                 {
                   "number": 277,
                   "name": "SemiVehicleMassKg"
+                },
+                {
+                  "number": 278,
+                  "name": "SelfDrivingSoftwareVersion"
+                },
+                {
+                  "number": 279,
+                  "name": "SemiTrailerLatched"
                 }
               ],
               "reserved_ranges": [],
