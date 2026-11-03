@@ -1,5 +1,11 @@
 # @teslemetry/tesla-protocol
 
+## 6.2.0
+
+### Minor Changes
+
+- deb0f76: Add telemetry `Field` values `SelfDrivingSoftwareVersion` (278) and `SemiTrailerLatched` (279, Semi-truck only), first available in firmware 2026.44.3.
+
 ## 6.1.0
 
 ### Minor Changes
