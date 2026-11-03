@@ -290,6 +290,8 @@ class Field(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     RollingResistanceCoefficient: _ClassVar[Field]
     LifetimeDcChargeEnergyKwh: _ClassVar[Field]
     SemiVehicleMassKg: _ClassVar[Field]
+    SelfDrivingSoftwareVersion: _ClassVar[Field]
+    SemiTrailerLatched: _ClassVar[Field]
 
 class ChargingState(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -969,6 +971,8 @@ AutomaticEmergencyBrakingState: Field
 RollingResistanceCoefficient: Field
 LifetimeDcChargeEnergyKwh: Field
 SemiVehicleMassKg: Field
+SelfDrivingSoftwareVersion: Field
+SemiTrailerLatched: Field
 ChargeStateUnknown: ChargingState
 ChargeStateDisconnected: ChargingState
 ChargeStateNoPower: ChargingState
