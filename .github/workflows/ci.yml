@@ -26,6 +26,11 @@ jobs:
         with:
           python-version: "3.13"
 
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go/go.mod
+          cache-dependency-path: go/go.sum
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
@@ -83,6 +88,15 @@ jobs:
 
       - name: Golden fixture tests (Python)
         run: PYTHONPATH=packages/python .venv/bin/python -m unittest discover -s packages/python/tests
+
+      - name: go vet
+        run: go -C go vet ./...
+
+      - name: Build Go module
+        run: go -C go build ./...
+
+      - name: Golden fixture tests (Go)
+        run: go -C go test ./...
 
       - name: Build Python distribution
         run: .venv/bin/python -m build --outdir packages/python/dist packages/python

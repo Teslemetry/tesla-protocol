@@ -28,6 +28,11 @@ jobs:
 
       - uses: pnpm/action-setup@v4
 
+      - uses: actions/setup-go@v5 # pnpm run generate builds protoc-gen-go
+        with:
+          go-version-file: go/go.mod
+          cache-dependency-path: go/go.sum
+
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
@@ -85,3 +90,41 @@ jobs:
         with:
           packages-dir: packages/python/dist
           skip-existing: true # idempotent re-runs / partial-failure recovery
+
+  # Go modules publish by git tag: go/vX.Y.Z on the same merge SHA marks the
+  # go/ module at the version npm and PyPI just shipped.
+  publish-go:
+    name: Publish Go module tag
+    needs: [ci, release]
+    if: needs.release.outputs.published == 'true'
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: write # push the go/vX.Y.Z tag
+    steps:
+      - uses: actions/checkout@v4 # same merge SHA: versions already bumped
+
+      - name: Tag go/vX.Y.Z
+        id: tag
+        run: |
+          version="$(node -p 'require("./packages/typescript/package.json").version')"
+          tag="go/v$version"
+          echo "tag=$tag" >> "$GITHUB_OUTPUT"
+          echo "module=$(sed -n 's/^module //p' go/go.mod)@v$version" >> "$GITHUB_OUTPUT"
+          if git ls-remote --exit-code --tags origin "refs/tags/$tag" >/dev/null; then
+            echo "$tag already pushed"  # idempotent re-runs
+          else
+            git tag "$tag" "$GITHUB_SHA"
+            git push origin "refs/tags/$tag"
+          fi
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: go/go.mod
+          cache: false
+
+      - name: Fetch through the Go module proxy
+        run: go list -m "${{ steps.tag.outputs.module }}"
+        working-directory: ${{ runner.temp }}
+        env:
+          GOPROXY: https://proxy.golang.org
