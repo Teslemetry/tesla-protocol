@@ -2,12 +2,13 @@
 
 Teslemetry-maintained protobuf definitions for Tesla's vehicle-command,
 fleet-telemetry and energy device protocols - the single source of truth
-behind two packages published in lockstep:
+behind three packages published in lockstep:
 
 | Package | Registry | Install |
 | --- | --- | --- |
 | [`@teslemetry/tesla-protocol`](https://www.npmjs.com/package/@teslemetry/tesla-protocol) | npm | `npm install @teslemetry/tesla-protocol` |
 | [`tesla-protocol`](https://pypi.org/project/tesla-protocol/) | PyPI | `pip install tesla-protocol` |
+| [`github.com/Teslemetry/tesla-protocol/go/v6`](https://pkg.go.dev/github.com/Teslemetry/tesla-protocol/go/v6) | Go modules | `go get github.com/Teslemetry/tesla-protocol/go/v6` |
 
 The command and telemetry protos track Tesla's public repositories
 ([`teslamotors/vehicle-command`](https://github.com/teslamotors/vehicle-command),
@@ -32,6 +33,22 @@ from tesla_protocol.command import car_server_pb2
 from tesla_protocol.telemetry import vehicle_data_pb2
 ```
 
+Go ([protoc-gen-go](https://pkg.go.dev/google.golang.org/protobuf/cmd/protoc-gen-go)
+output, one package per proto group; `command` has one package per proto
+package):
+
+```go
+import (
+	"github.com/Teslemetry/tesla-protocol/go/v6/command/carserver"
+	"github.com/Teslemetry/tesla-protocol/go/v6/telemetry"
+)
+```
+
+Python and Go register every file as `tesla_protocol/<group>/<file>.proto` and
+every package as `tesla_protocol.<package>` (e.g. `tesla_protocol.CarServer`),
+so they load alongside another library's copy of Tesla's protos without a
+registry conflict. Wire bytes are unchanged.
+
 ## Layout
 
 ```
@@ -44,11 +61,13 @@ proto/                  source of truth (the only hand-edited artifacts)
 └── dashcam/            TeslaCam/Sentry video SEI metadata proto
 packages/typescript/    @teslemetry/tesla-protocol (generated, committed)
 packages/python/        tesla-protocol (generated, committed)
+go/                     github.com/Teslemetry/tesla-protocol/go/vN (generated, committed)
 ```
 
 ## Contributing
 
-1. Edit `proto/`, then regenerate both packages: `pnpm install && pnpm generate`
+1. Edit `proto/`, then regenerate all three packages: `pnpm install && pnpm generate`
+   (needs Python 3, Node and Go)
 2. Regenerate the surface catalog: `.venv/bin/python scripts/build_catalog.py`
    (see `catalog/SUMMARY.md` for the current inventory; full detail in
    `catalog/catalog.json`)
@@ -58,15 +77,17 @@ packages/python/        tesla-protocol (generated, committed)
    consistency.
 
 Releases: merging a PR with changesets makes the release workflow open a
-single Version PR that bumps `package.json` and `pyproject.toml` together;
-merging that publishes both packages via OIDC trusted publishing (npm and
-PyPI attestations, no stored tokens).
+single Version PR that bumps `package.json` and `pyproject.toml` together
+(and the Go module path's `/vN` suffix on a major bump); merging that
+publishes the npm and PyPI packages via OIDC trusted publishing (npm and
+PyPI attestations, no stored tokens), then pushes the `go/vX.Y.Z` tag that
+publishes the Go module.
 
-Both publish jobs run under the `production` GitHub environment, which gates
+All three publish jobs run under the `production` GitHub environment, which gates
 on a required reviewer approving the exact SHA that the `ci` job (reused from
 `ci.yml`) has already validated - approval cannot happen before that check is
-green because both jobs declare `needs: ci`/`needs: [ci, release]`. GitHub
-only asks for approval once per workflow run even though two jobs reference
+green because every job declares `needs: ci`/`needs: [ci, release]`. GitHub
+only asks for approval once per workflow run even though three jobs reference
 `production`.
 
 If a publish run is interrupted (cancelled, runner failure, transient
@@ -80,6 +101,8 @@ recovery path - no manual registry cleanup is needed:
 - **PyPI leg**: `pypa/gh-action-pypi-publish` runs with `skip-existing: true`,
   so re-running `publish-pypi` after a version already uploaded skips it
   instead of failing on a duplicate-file error.
+- **Go leg**: `publish-go` skips the tag push when `go/vX.Y.Z` already exists,
+  so re-running it only re-fetches the version through the Go module proxy.
 
 ## Credits
 
