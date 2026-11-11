@@ -124,7 +124,16 @@ jobs:
           cache: false
 
       - name: Fetch through the Go module proxy
-        run: go list -m "${{ steps.tag.outputs.module }}"
+        # The proxy fetches a cold module on first request and can time out
+        # before it finishes; it serves the module shortly after, so retry.
+        run: |
+          for attempt in 1 2 3 4 5; do
+            go list -m "${{ steps.tag.outputs.module }}" && exit 0
+            [ "$attempt" -lt 5 ] || break
+            echo "attempt $attempt failed; retrying in $((attempt * 15))s"
+            sleep $((attempt * 15))
+          done
+          exit 1
         working-directory: ${{ runner.temp }}
         env:
           GOPROXY: https://proxy.golang.org
