@@ -3,8 +3,8 @@
   "upstreams": {
     "vehicle-command": {
       "repo": "teslamotors/vehicle-command",
-      "commit": "4c2143a5def65f6499b9048045581c56904901c6",
-      "fetched": "2026-07-22",
+      "commit": "0a582da430c4aca6d397fb6cbed5b4d6bb380125",
+      "fetched": "2026-11-09",
       "pathPrefix": "pkg/protocol/protobuf",
       "localDir": "proto/command",
       "files": {
@@ -13,7 +13,7 @@
         "errors.proto": "2fb79b0867c9e3b33b55879478741561ddc9de030c68bdb075206f2ee443d932",
         "keys.proto": "1628c14e1779cd6cf6a87dcceb79f4f7152ec5067d402fbc4990c45b78241b80",
         "managed_charging.proto": "87c96a0dbff365e516a00c03f2f523c03e69bec5e15d6d62add350d590e1fa05",
-        "signatures.proto": "84b16dc0ea5e4334ae4387e6aaadf443dc39005ec702a920976e2e95a914dcab",
+        "signatures.proto": "f97c4427b954b0169f043116a21211d7b80b67caa03360d7c0deb7c31abbd73d",
         "universal_message.proto": "110ac4372e3ebdfe94191de857832302d75717fc105820b9f391dbc68e31979f",
         "vcsec.proto": "3825cd6a149880ef3d833e928c5efced93e62a98a788773cfc5a51bb7feaf323",
         "vehicle.proto": "dd9d05478495af3fa4810e57c80c4236dbe8e45ba3e051d8716f1a3fd3fad9a8"
