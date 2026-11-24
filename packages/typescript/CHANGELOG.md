@@ -1,5 +1,11 @@
 # @teslemetry/tesla-protocol
 
+## 6.3.1
+
+### Patch Changes
+
+- 046bcea: Add telemetry `Field` value `SemiCruiseActive` (280, Semi-truck V2 only), first available in firmware 2026.38.300.
+
 ## 6.3.0
 
 ### Minor Changes
