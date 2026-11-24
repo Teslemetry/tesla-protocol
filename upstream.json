@@ -21,14 +21,14 @@
     },
     "fleet-telemetry": {
       "repo": "teslamotors/fleet-telemetry",
-      "commit": "69261a82635ade82954b905a8cb8a2cea959efd8",
-      "fetched": "2026-11-03",
+      "commit": "6689adb831691b1de211b4aa8220babf7309f31c",
+      "fetched": "2026-11-25",
       "pathPrefix": "protos",
       "localDir": "proto/telemetry",
       "files": {
         "vehicle_alert.proto": "3599c68b5f8f19805fe89a4a0f4a6dca754e87600eb614577ec01cbd8b0b2cde",
         "vehicle_connectivity.proto": "c961a3c529d640c4ccd1709630c2647bc2b13e63eba33fd2077ef555eed49f0d",
-        "vehicle_data.proto": "efa60a850338949cd4b585f2650b2542ec1fdb50e92d5f1c2c84041f48aa5b24",
+        "vehicle_data.proto": "98d4f1e0ed85a505df9e9a89df2f3500adcb8f84779c7489cdfe0e7c55fbb38b",
         "vehicle_error.proto": "11704aa26e79ad99262b1f2bf351924efb60dcf43e3a7fa4a3f4392289e3f842",
         "vehicle_metric.proto": "785b815519e135f3fa79ff4a9713cc40a3c7f71bec10fa05d67f6ad8a85b9f8b"
       }
