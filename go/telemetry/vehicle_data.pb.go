@@ -312,6 +312,7 @@ const (
 	Field_SemiVehicleMassKg                         Field = 277 // Semi-truck only
 	Field_SelfDrivingSoftwareVersion                Field = 278
 	Field_SemiTrailerLatched                        Field = 279 // Semi-truck only
+	Field_SemiCruiseActive                          Field = 280 // Semi-truck V2 only
 )
 
 // Enum value maps for Field.
@@ -597,6 +598,7 @@ var (
 		277: "SemiVehicleMassKg",
 		278: "SelfDrivingSoftwareVersion",
 		279: "SemiTrailerLatched",
+		280: "SemiCruiseActive",
 	}
 	Field_value = map[string]int32{
 		"Unknown":                                   0,
@@ -879,6 +881,7 @@ var (
 		"SemiVehicleMassKg":                         277,
 		"SelfDrivingSoftwareVersion":                278,
 		"SemiTrailerLatched":                        279,
+		"SemiCruiseActive":                          280,
 	}
 )
 
@@ -5002,7 +5005,7 @@ const file_tesla_protocol_telemetry_vehicle_data_proto_rawDesc = "" +
 	"\n" +
 	"created_at\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\tcreatedAt\x12\x10\n" +
 	"\x03vin\x18\x03 \x01(\tR\x03vin\x12\x1b\n" +
-	"\tis_resend\x18\x04 \x01(\bR\bisResend*\xa04\n" +
+	"\tis_resend\x18\x04 \x01(\bR\bisResend*\xb74\n" +
 	"\x05Field\x12\v\n" +
 	"\aUnknown\x10\x00\x12\r\n" +
 	"\tDriveRail\x10\x01\x12\x0f\n" +
@@ -5295,7 +5298,8 @@ const file_tesla_protocol_telemetry_vehicle_data_proto_rawDesc = "" +
 	"\x19LifetimeDcChargeEnergyKwh\x10\x94\x02\x12\x16\n" +
 	"\x11SemiVehicleMassKg\x10\x95\x02\x12\x1f\n" +
 	"\x1aSelfDrivingSoftwareVersion\x10\x96\x02\x12\x17\n" +
-	"\x12SemiTrailerLatched\x10\x97\x02*\xbf\x01\n" +
+	"\x12SemiTrailerLatched\x10\x97\x02\x12\x15\n" +
+	"\x10SemiCruiseActive\x10\x98\x02*\xbf\x01\n" +
 	"\rChargingState\x12\x16\n" +
 	"\x12ChargeStateUnknown\x10\x00\x12\x1b\n" +
 	"\x17ChargeStateDisconnected\x10\x01\x12\x16\n" +

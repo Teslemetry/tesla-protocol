@@ -53743,6 +53743,10 @@
                 {
                   "number": 279,
                   "name": "SemiTrailerLatched"
+                },
+                {
+                  "number": 280,
+                  "name": "SemiCruiseActive"
                 }
               ],
               "reserved_ranges": [],

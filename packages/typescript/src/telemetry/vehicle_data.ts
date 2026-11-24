@@ -324,6 +324,8 @@ export enum Field {
   SelfDrivingSoftwareVersion = 278,
   /** SemiTrailerLatched - Semi-truck only */
   SemiTrailerLatched = 279,
+  /** SemiCruiseActive - Semi-truck V2 only */
+  SemiCruiseActive = 280,
   UNRECOGNIZED = -1,
 }
 
@@ -1169,6 +1171,9 @@ export function fieldFromJSON(object: any): Field {
     case 279:
     case "SemiTrailerLatched":
       return Field.SemiTrailerLatched;
+    case 280:
+    case "SemiCruiseActive":
+      return Field.SemiCruiseActive;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -1738,6 +1743,8 @@ export function fieldToJSON(object: Field): string {
       return "SelfDrivingSoftwareVersion";
     case Field.SemiTrailerLatched:
       return "SemiTrailerLatched";
+    case Field.SemiCruiseActive:
+      return "SemiCruiseActive";
     case Field.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
