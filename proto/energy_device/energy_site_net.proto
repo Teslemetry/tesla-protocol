@@ -63,11 +63,19 @@ message EnergySiteNetDevice {
   Din din                                     = 1;
   WifiConfig wifi_ap_config                   = 2;
   repeated IntraSiteServiceType service_types = 3;
+  DeviceType device_type                      = 4;  // UNCONFIRMED: not yet confirmed on a live device
+  oneof device_sub_type {
+    TEGDeviceType teg_device_type = 100;  // UNCONFIRMED: not yet confirmed on a live device
+  }
 }
 
 message EnergySiteNetRecentlyAddedDevice {
   Din din                            = 1;
   EnergySiteNetAdditionStatus status = 2;
+  DeviceType device_type             = 3;  // UNCONFIRMED: not yet confirmed on a live device
+  oneof device_sub_type {
+    TEGDeviceType teg_device_type = 100;  // UNCONFIRMED: not yet confirmed on a live device
+  }
 }
 
 message EnergySiteNetRecentlyRemovedDevice {

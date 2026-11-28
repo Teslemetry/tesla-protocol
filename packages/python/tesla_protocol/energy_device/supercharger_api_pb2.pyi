@@ -201,14 +201,16 @@ class EcuFirmwareUpdateStatusPass(_message.Message):
     def __init__(self) -> None: ...
 
 class PayterPostStatus(_message.Message):
-    __slots__ = ("post_index", "serial_number", "activated")
+    __slots__ = ("post_index", "serial_number", "activated", "is_connected")
     POST_INDEX_FIELD_NUMBER: _ClassVar[int]
     SERIAL_NUMBER_FIELD_NUMBER: _ClassVar[int]
     ACTIVATED_FIELD_NUMBER: _ClassVar[int]
+    IS_CONNECTED_FIELD_NUMBER: _ClassVar[int]
     post_index: int
     serial_number: str
     activated: bool
-    def __init__(self, post_index: _Optional[int] = ..., serial_number: _Optional[str] = ..., activated: _Optional[bool] = ...) -> None: ...
+    is_connected: bool
+    def __init__(self, post_index: _Optional[int] = ..., serial_number: _Optional[str] = ..., activated: _Optional[bool] = ..., is_connected: _Optional[bool] = ...) -> None: ...
 
 class SuperchargerAPIGetConnectedKiosksRequest(_message.Message):
     __slots__ = ()
@@ -320,8 +322,26 @@ class SuperchargerAPIUpdateFollowersResponse(_message.Message):
     __slots__ = ()
     def __init__(self) -> None: ...
 
+class EcuTarget(_message.Message):
+    __slots__ = ("daryl_node_path",)
+    DARYL_NODE_PATH_FIELD_NUMBER: _ClassVar[int]
+    daryl_node_path: str
+    def __init__(self, daryl_node_path: _Optional[str] = ...) -> None: ...
+
+class SuperchargerAPITriggerEcuFirmwareUpdateRequest(_message.Message):
+    __slots__ = ("ecu_target", "app_only")
+    ECU_TARGET_FIELD_NUMBER: _ClassVar[int]
+    APP_ONLY_FIELD_NUMBER: _ClassVar[int]
+    ecu_target: EcuTarget
+    app_only: bool
+    def __init__(self, ecu_target: _Optional[_Union[EcuTarget, _Mapping]] = ..., app_only: _Optional[bool] = ...) -> None: ...
+
+class SuperchargerAPITriggerEcuFirmwareUpdateResponse(_message.Message):
+    __slots__ = ()
+    def __init__(self) -> None: ...
+
 class SuperchargerMessages(_message.Message):
-    __slots__ = ("unlock_magic_dock_request", "unlock_magic_dock_response", "get_connected_kiosks_request", "get_connected_kiosks_response", "get_verifone_kiosk_device_ids_request", "get_verifone_kiosk_device_ids_response", "update_followers_request", "update_followers_response", "get_dc_meters_commissioning_request", "get_dc_meters_commissioning_response", "set_dc_meter_commissioned_request", "set_dc_meter_commissioned_response", "odin_command_request", "odin_command_response", "get_payter_post_status_request", "get_payter_post_status_response", "get_ecu_firmware_update_progress_request", "get_ecu_firmware_update_progress_response")
+    __slots__ = ("unlock_magic_dock_request", "unlock_magic_dock_response", "get_connected_kiosks_request", "get_connected_kiosks_response", "get_verifone_kiosk_device_ids_request", "get_verifone_kiosk_device_ids_response", "update_followers_request", "update_followers_response", "get_dc_meters_commissioning_request", "get_dc_meters_commissioning_response", "set_dc_meter_commissioned_request", "set_dc_meter_commissioned_response", "odin_command_request", "odin_command_response", "get_payter_post_status_request", "get_payter_post_status_response", "get_ecu_firmware_update_progress_request", "get_ecu_firmware_update_progress_response", "trigger_ecu_firmware_update_request", "trigger_ecu_firmware_update_response")
     UNLOCK_MAGIC_DOCK_REQUEST_FIELD_NUMBER: _ClassVar[int]
     UNLOCK_MAGIC_DOCK_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     GET_CONNECTED_KIOSKS_REQUEST_FIELD_NUMBER: _ClassVar[int]
@@ -340,6 +360,8 @@ class SuperchargerMessages(_message.Message):
     GET_PAYTER_POST_STATUS_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     GET_ECU_FIRMWARE_UPDATE_PROGRESS_REQUEST_FIELD_NUMBER: _ClassVar[int]
     GET_ECU_FIRMWARE_UPDATE_PROGRESS_RESPONSE_FIELD_NUMBER: _ClassVar[int]
+    TRIGGER_ECU_FIRMWARE_UPDATE_REQUEST_FIELD_NUMBER: _ClassVar[int]
+    TRIGGER_ECU_FIRMWARE_UPDATE_RESPONSE_FIELD_NUMBER: _ClassVar[int]
     unlock_magic_dock_request: SuperchargerAPIUnlockMagicDockRequest
     unlock_magic_dock_response: SuperchargerAPIUnlockMagicDockResponse
     get_connected_kiosks_request: SuperchargerAPIGetConnectedKiosksRequest
@@ -358,7 +380,9 @@ class SuperchargerMessages(_message.Message):
     get_payter_post_status_response: SuperchargerAPIGetPayterPostStatusResponse
     get_ecu_firmware_update_progress_request: SuperchargerAPIGetEcuFirmwareUpdateProgressRequest
     get_ecu_firmware_update_progress_response: SuperchargerAPIGetEcuFirmwareUpdateProgressResponse
-    def __init__(self, unlock_magic_dock_request: _Optional[_Union[SuperchargerAPIUnlockMagicDockRequest, _Mapping]] = ..., unlock_magic_dock_response: _Optional[_Union[SuperchargerAPIUnlockMagicDockResponse, _Mapping]] = ..., get_connected_kiosks_request: _Optional[_Union[SuperchargerAPIGetConnectedKiosksRequest, _Mapping]] = ..., get_connected_kiosks_response: _Optional[_Union[SuperchargerAPIGetConnectedKiosksResponse, _Mapping]] = ..., get_verifone_kiosk_device_ids_request: _Optional[_Union[SuperchargerAPIGetVerifoneKioskDeviceIdsRequest, _Mapping]] = ..., get_verifone_kiosk_device_ids_response: _Optional[_Union[SuperchargerAPIGetVerifoneKioskDeviceIdsResponse, _Mapping]] = ..., update_followers_request: _Optional[_Union[SuperchargerAPIUpdateFollowersRequest, _Mapping]] = ..., update_followers_response: _Optional[_Union[SuperchargerAPIUpdateFollowersResponse, _Mapping]] = ..., get_dc_meters_commissioning_request: _Optional[_Union[SuperchargerAPIGetDcMetersCommissioningRequest, _Mapping]] = ..., get_dc_meters_commissioning_response: _Optional[_Union[SuperchargerAPIGetDcMetersCommissioningResponse, _Mapping]] = ..., set_dc_meter_commissioned_request: _Optional[_Union[SuperchargerAPISetDcMeterCommissionedRequest, _Mapping]] = ..., set_dc_meter_commissioned_response: _Optional[_Union[SuperchargerAPISetDcMeterCommissionedResponse, _Mapping]] = ..., odin_command_request: _Optional[_Union[SuperchargerAPIOdinCommandRequest, _Mapping]] = ..., odin_command_response: _Optional[_Union[SuperchargerAPIOdinCommandResponse, _Mapping]] = ..., get_payter_post_status_request: _Optional[_Union[SuperchargerAPIGetPayterPostStatusRequest, _Mapping]] = ..., get_payter_post_status_response: _Optional[_Union[SuperchargerAPIGetPayterPostStatusResponse, _Mapping]] = ..., get_ecu_firmware_update_progress_request: _Optional[_Union[SuperchargerAPIGetEcuFirmwareUpdateProgressRequest, _Mapping]] = ..., get_ecu_firmware_update_progress_response: _Optional[_Union[SuperchargerAPIGetEcuFirmwareUpdateProgressResponse, _Mapping]] = ...) -> None: ...
+    trigger_ecu_firmware_update_request: SuperchargerAPITriggerEcuFirmwareUpdateRequest
+    trigger_ecu_firmware_update_response: SuperchargerAPITriggerEcuFirmwareUpdateResponse
+    def __init__(self, unlock_magic_dock_request: _Optional[_Union[SuperchargerAPIUnlockMagicDockRequest, _Mapping]] = ..., unlock_magic_dock_response: _Optional[_Union[SuperchargerAPIUnlockMagicDockResponse, _Mapping]] = ..., get_connected_kiosks_request: _Optional[_Union[SuperchargerAPIGetConnectedKiosksRequest, _Mapping]] = ..., get_connected_kiosks_response: _Optional[_Union[SuperchargerAPIGetConnectedKiosksResponse, _Mapping]] = ..., get_verifone_kiosk_device_ids_request: _Optional[_Union[SuperchargerAPIGetVerifoneKioskDeviceIdsRequest, _Mapping]] = ..., get_verifone_kiosk_device_ids_response: _Optional[_Union[SuperchargerAPIGetVerifoneKioskDeviceIdsResponse, _Mapping]] = ..., update_followers_request: _Optional[_Union[SuperchargerAPIUpdateFollowersRequest, _Mapping]] = ..., update_followers_response: _Optional[_Union[SuperchargerAPIUpdateFollowersResponse, _Mapping]] = ..., get_dc_meters_commissioning_request: _Optional[_Union[SuperchargerAPIGetDcMetersCommissioningRequest, _Mapping]] = ..., get_dc_meters_commissioning_response: _Optional[_Union[SuperchargerAPIGetDcMetersCommissioningResponse, _Mapping]] = ..., set_dc_meter_commissioned_request: _Optional[_Union[SuperchargerAPISetDcMeterCommissionedRequest, _Mapping]] = ..., set_dc_meter_commissioned_response: _Optional[_Union[SuperchargerAPISetDcMeterCommissionedResponse, _Mapping]] = ..., odin_command_request: _Optional[_Union[SuperchargerAPIOdinCommandRequest, _Mapping]] = ..., odin_command_response: _Optional[_Union[SuperchargerAPIOdinCommandResponse, _Mapping]] = ..., get_payter_post_status_request: _Optional[_Union[SuperchargerAPIGetPayterPostStatusRequest, _Mapping]] = ..., get_payter_post_status_response: _Optional[_Union[SuperchargerAPIGetPayterPostStatusResponse, _Mapping]] = ..., get_ecu_firmware_update_progress_request: _Optional[_Union[SuperchargerAPIGetEcuFirmwareUpdateProgressRequest, _Mapping]] = ..., get_ecu_firmware_update_progress_response: _Optional[_Union[SuperchargerAPIGetEcuFirmwareUpdateProgressResponse, _Mapping]] = ..., trigger_ecu_firmware_update_request: _Optional[_Union[SuperchargerAPITriggerEcuFirmwareUpdateRequest, _Mapping]] = ..., trigger_ecu_firmware_update_response: _Optional[_Union[SuperchargerAPITriggerEcuFirmwareUpdateResponse, _Mapping]] = ...) -> None: ...
 
 class VerifoneKiosk(_message.Message):
     __slots__ = ("serial_number", "subject_key_identifer")

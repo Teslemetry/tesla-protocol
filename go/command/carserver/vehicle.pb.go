@@ -1324,6 +1324,113 @@ func (ChargeState_PowershareStopReason) EnumDescriptor() ([]byte, []int) {
 	return file_tesla_protocol_command_vehicle_proto_rawDescGZIP(), []int{9, 7}
 }
 
+type ChargeState_ManualPreconStatus int32
+
+const (
+	ChargeState_ManualPreconStatusUnknown ChargeState_ManualPreconStatus = 0
+	ChargeState_ManualPreconStatusIdle    ChargeState_ManualPreconStatus = 1
+	ChargeState_ManualPreconStatusHeating ChargeState_ManualPreconStatus = 2
+	ChargeState_ManualPreconStatusKeepHot ChargeState_ManualPreconStatus = 3
+)
+
+// Enum value maps for ChargeState_ManualPreconStatus.
+var (
+	ChargeState_ManualPreconStatus_name = map[int32]string{
+		0: "ManualPreconStatusUnknown",
+		1: "ManualPreconStatusIdle",
+		2: "ManualPreconStatusHeating",
+		3: "ManualPreconStatusKeepHot",
+	}
+	ChargeState_ManualPreconStatus_value = map[string]int32{
+		"ManualPreconStatusUnknown": 0,
+		"ManualPreconStatusIdle":    1,
+		"ManualPreconStatusHeating": 2,
+		"ManualPreconStatusKeepHot": 3,
+	}
+)
+
+func (x ChargeState_ManualPreconStatus) Enum() *ChargeState_ManualPreconStatus {
+	p := new(ChargeState_ManualPreconStatus)
+	*p = x
+	return p
+}
+
+func (x ChargeState_ManualPreconStatus) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ChargeState_ManualPreconStatus) Descriptor() protoreflect.EnumDescriptor {
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[16].Descriptor()
+}
+
+func (ChargeState_ManualPreconStatus) Type() protoreflect.EnumType {
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[16]
+}
+
+func (x ChargeState_ManualPreconStatus) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ChargeState_ManualPreconStatus.Descriptor instead.
+func (ChargeState_ManualPreconStatus) EnumDescriptor() ([]byte, []int) {
+	return file_tesla_protocol_command_vehicle_proto_rawDescGZIP(), []int{9, 8}
+}
+
+type ChargeState_EcosystemChargeMode int32
+
+const (
+	ChargeState_EcosystemChargeModeUnknown                  ChargeState_EcosystemChargeMode = 0
+	ChargeState_EcosystemChargeModeNone                     ChargeState_EcosystemChargeMode = 1
+	ChargeState_EcosystemChargeModeSmartCharging            ChargeState_EcosystemChargeMode = 2
+	ChargeState_EcosystemChargeModeSmartChargingFaulted     ChargeState_EcosystemChargeMode = 3
+	ChargeState_EcosystemChargeModeSmartChargingFaultedLong ChargeState_EcosystemChargeMode = 4
+)
+
+// Enum value maps for ChargeState_EcosystemChargeMode.
+var (
+	ChargeState_EcosystemChargeMode_name = map[int32]string{
+		0: "EcosystemChargeModeUnknown",
+		1: "EcosystemChargeModeNone",
+		2: "EcosystemChargeModeSmartCharging",
+		3: "EcosystemChargeModeSmartChargingFaulted",
+		4: "EcosystemChargeModeSmartChargingFaultedLong",
+	}
+	ChargeState_EcosystemChargeMode_value = map[string]int32{
+		"EcosystemChargeModeUnknown":                  0,
+		"EcosystemChargeModeNone":                     1,
+		"EcosystemChargeModeSmartCharging":            2,
+		"EcosystemChargeModeSmartChargingFaulted":     3,
+		"EcosystemChargeModeSmartChargingFaultedLong": 4,
+	}
+)
+
+func (x ChargeState_EcosystemChargeMode) Enum() *ChargeState_EcosystemChargeMode {
+	p := new(ChargeState_EcosystemChargeMode)
+	*p = x
+	return p
+}
+
+func (x ChargeState_EcosystemChargeMode) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (ChargeState_EcosystemChargeMode) Descriptor() protoreflect.EnumDescriptor {
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[17].Descriptor()
+}
+
+func (ChargeState_EcosystemChargeMode) Type() protoreflect.EnumType {
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[17]
+}
+
+func (x ChargeState_EcosystemChargeMode) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use ChargeState_EcosystemChargeMode.Descriptor instead.
+func (ChargeState_EcosystemChargeMode) EnumDescriptor() ([]byte, []int) {
+	return file_tesla_protocol_command_vehicle_proto_rawDescGZIP(), []int{9, 9}
+}
+
 type ClimateState_HvacAutoRequest int32
 
 const (
@@ -1354,11 +1461,11 @@ func (x ClimateState_HvacAutoRequest) String() string {
 }
 
 func (ClimateState_HvacAutoRequest) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[16].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[18].Descriptor()
 }
 
 func (ClimateState_HvacAutoRequest) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[16]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[18]
 }
 
 func (x ClimateState_HvacAutoRequest) Number() protoreflect.EnumNumber {
@@ -1403,11 +1510,11 @@ func (x ClimateState_CabinOverheatProtection_E) String() string {
 }
 
 func (ClimateState_CabinOverheatProtection_E) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[17].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[19].Descriptor()
 }
 
 func (ClimateState_CabinOverheatProtection_E) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[17]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[19]
 }
 
 func (x ClimateState_CabinOverheatProtection_E) Number() protoreflect.EnumNumber {
@@ -1455,11 +1562,11 @@ func (x ClimateState_SeatHeaterLevel_E) String() string {
 }
 
 func (ClimateState_SeatHeaterLevel_E) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[18].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[20].Descriptor()
 }
 
 func (ClimateState_SeatHeaterLevel_E) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[18]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[20]
 }
 
 func (x ClimateState_SeatHeaterLevel_E) Number() protoreflect.EnumNumber {
@@ -1507,11 +1614,11 @@ func (x ClimateState_SeatCoolingLevel_E) String() string {
 }
 
 func (ClimateState_SeatCoolingLevel_E) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[19].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[21].Descriptor()
 }
 
 func (ClimateState_SeatCoolingLevel_E) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[19]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[21]
 }
 
 func (x ClimateState_SeatCoolingLevel_E) Number() protoreflect.EnumNumber {
@@ -1559,11 +1666,11 @@ func (x ClimateState_CopActivationTemp) String() string {
 }
 
 func (ClimateState_CopActivationTemp) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[20].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[22].Descriptor()
 }
 
 func (ClimateState_CopActivationTemp) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[20]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[22]
 }
 
 func (x ClimateState_CopActivationTemp) Number() protoreflect.EnumNumber {
@@ -1620,11 +1727,11 @@ func (x ClimateState_COPNotRunningReason) String() string {
 }
 
 func (ClimateState_COPNotRunningReason) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[21].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[23].Descriptor()
 }
 
 func (ClimateState_COPNotRunningReason) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[21]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[23]
 }
 
 func (x ClimateState_COPNotRunningReason) Number() protoreflect.EnumNumber {
@@ -1678,11 +1785,11 @@ func (x ClimateState_DogModeState) String() string {
 }
 
 func (ClimateState_DogModeState) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[22].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[24].Descriptor()
 }
 
 func (ClimateState_DogModeState) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[22]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[24]
 }
 
 func (x ClimateState_DogModeState) Number() protoreflect.EnumNumber {
@@ -1724,11 +1831,11 @@ func (x GuiSettings_TirePressureUnit) String() string {
 }
 
 func (GuiSettings_TirePressureUnit) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[23].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[25].Descriptor()
 }
 
 func (GuiSettings_TirePressureUnit) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[23]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[25]
 }
 
 func (x GuiSettings_TirePressureUnit) Number() protoreflect.EnumNumber {
@@ -1776,11 +1883,11 @@ func (x VehicleConfig_AuxParkLamps_E) String() string {
 }
 
 func (VehicleConfig_AuxParkLamps_E) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[24].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[26].Descriptor()
 }
 
 func (VehicleConfig_AuxParkLamps_E) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[24]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[26]
 }
 
 func (x VehicleConfig_AuxParkLamps_E) Number() protoreflect.EnumNumber {
@@ -1822,11 +1929,11 @@ func (x VehicleConfig_BadgingMaterialType) String() string {
 }
 
 func (VehicleConfig_BadgingMaterialType) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[25].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[27].Descriptor()
 }
 
 func (VehicleConfig_BadgingMaterialType) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[25]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[27]
 }
 
 func (x VehicleConfig_BadgingMaterialType) Number() protoreflect.EnumNumber {
@@ -1868,11 +1975,11 @@ func (x VehicleConfig_BedLightingType) String() string {
 }
 
 func (VehicleConfig_BedLightingType) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[26].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[28].Descriptor()
 }
 
 func (VehicleConfig_BedLightingType) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[26]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[28]
 }
 
 func (x VehicleConfig_BedLightingType) Number() protoreflect.EnumNumber {
@@ -1917,11 +2024,11 @@ func (x VehicleConfig_DrivetrainType) String() string {
 }
 
 func (VehicleConfig_DrivetrainType) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[27].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[29].Descriptor()
 }
 
 func (VehicleConfig_DrivetrainType) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[27]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[29]
 }
 
 func (x VehicleConfig_DrivetrainType) Number() protoreflect.EnumNumber {
@@ -1966,11 +2073,11 @@ func (x VehicleConfig_FrontFasciaCameraType) String() string {
 }
 
 func (VehicleConfig_FrontFasciaCameraType) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[28].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[30].Descriptor()
 }
 
 func (VehicleConfig_FrontFasciaCameraType) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[28]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[30]
 }
 
 func (x VehicleConfig_FrontFasciaCameraType) Number() protoreflect.EnumNumber {
@@ -2024,11 +2131,11 @@ func (x VehicleConfig_HeadlampType_E) String() string {
 }
 
 func (VehicleConfig_HeadlampType_E) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[29].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[31].Descriptor()
 }
 
 func (VehicleConfig_HeadlampType_E) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[29]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[31]
 }
 
 func (x VehicleConfig_HeadlampType_E) Number() protoreflect.EnumNumber {
@@ -2070,11 +2177,11 @@ func (x VehicleConfig_InteriorUpperTrimType) String() string {
 }
 
 func (VehicleConfig_InteriorUpperTrimType) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[30].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[32].Descriptor()
 }
 
 func (VehicleConfig_InteriorUpperTrimType) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[30]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[32]
 }
 
 func (x VehicleConfig_InteriorUpperTrimType) Number() protoreflect.EnumNumber {
@@ -2122,11 +2229,11 @@ func (x VehicleConfig_RearLightHardwareVariant) String() string {
 }
 
 func (VehicleConfig_RearLightHardwareVariant) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[31].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[33].Descriptor()
 }
 
 func (VehicleConfig_RearLightHardwareVariant) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[31]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[33]
 }
 
 func (x VehicleConfig_RearLightHardwareVariant) Number() protoreflect.EnumNumber {
@@ -2171,11 +2278,11 @@ func (x VehicleConfig_RearLightType) String() string {
 }
 
 func (VehicleConfig_RearLightType) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[32].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[34].Descriptor()
 }
 
 func (VehicleConfig_RearLightType) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[32]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[34]
 }
 
 func (x VehicleConfig_RearLightType) Number() protoreflect.EnumNumber {
@@ -2220,11 +2327,11 @@ func (x VehicleConfig_SeatTrimType) String() string {
 }
 
 func (VehicleConfig_SeatTrimType) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[33].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[35].Descriptor()
 }
 
 func (VehicleConfig_SeatTrimType) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[33]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[35]
 }
 
 func (x VehicleConfig_SeatTrimType) Number() protoreflect.EnumNumber {
@@ -2269,11 +2376,11 @@ func (x VehicleConfig_TurnIndicatorControlType) String() string {
 }
 
 func (VehicleConfig_TurnIndicatorControlType) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[34].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[36].Descriptor()
 }
 
 func (VehicleConfig_TurnIndicatorControlType) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[34]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[36]
 }
 
 func (x VehicleConfig_TurnIndicatorControlType) Number() protoreflect.EnumNumber {
@@ -2321,11 +2428,11 @@ func (x SohState_WarrantyServiceResult) String() string {
 }
 
 func (SohState_WarrantyServiceResult) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_command_vehicle_proto_enumTypes[35].Descriptor()
+	return file_tesla_protocol_command_vehicle_proto_enumTypes[37].Descriptor()
 }
 
 func (SohState_WarrantyServiceResult) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_command_vehicle_proto_enumTypes[35]
+	return &file_tesla_protocol_command_vehicle_proto_enumTypes[37]
 }
 
 func (x SohState_WarrantyServiceResult) Number() protoreflect.EnumNumber {
@@ -5784,6 +5891,22 @@ type ChargeState struct {
 	//
 	//	*ChargeState_ShouldHideRangeInfo
 	OptionalShouldHideRangeInfo isChargeState_OptionalShouldHideRangeInfo `protobuf_oneof:"optional_should_hide_range_info"`
+	// Types that are valid to be assigned to OptionalManualPreconSupported:
+	//
+	//	*ChargeState_ManualPreconSupported
+	OptionalManualPreconSupported isChargeState_OptionalManualPreconSupported `protobuf_oneof:"optional_manual_precon_supported"`
+	// Types that are valid to be assigned to OptionalManualPreconAllowed:
+	//
+	//	*ChargeState_ManualPreconAllowed
+	OptionalManualPreconAllowed isChargeState_OptionalManualPreconAllowed `protobuf_oneof:"optional_manual_precon_allowed"`
+	// Types that are valid to be assigned to OptionalManualPreconStatus:
+	//
+	//	*ChargeState_ManualPreconStatus_
+	OptionalManualPreconStatus isChargeState_OptionalManualPreconStatus `protobuf_oneof:"optional_manual_precon_status"`
+	// Types that are valid to be assigned to OptionalEcosystemChargeMode:
+	//
+	//	*ChargeState_EcosystemChargeMode_
+	OptionalEcosystemChargeMode isChargeState_OptionalEcosystemChargeMode `protobuf_oneof:"optional_ecosystem_charge_mode"`
 	unknownFields               protoimpl.UnknownFields
 	sizeCache                   protoimpl.SizeCache
 }
@@ -7175,6 +7298,70 @@ func (x *ChargeState) GetShouldHideRangeInfo() bool {
 	return false
 }
 
+func (x *ChargeState) GetOptionalManualPreconSupported() isChargeState_OptionalManualPreconSupported {
+	if x != nil {
+		return x.OptionalManualPreconSupported
+	}
+	return nil
+}
+
+func (x *ChargeState) GetManualPreconSupported() bool {
+	if x != nil {
+		if x, ok := x.OptionalManualPreconSupported.(*ChargeState_ManualPreconSupported); ok {
+			return x.ManualPreconSupported
+		}
+	}
+	return false
+}
+
+func (x *ChargeState) GetOptionalManualPreconAllowed() isChargeState_OptionalManualPreconAllowed {
+	if x != nil {
+		return x.OptionalManualPreconAllowed
+	}
+	return nil
+}
+
+func (x *ChargeState) GetManualPreconAllowed() bool {
+	if x != nil {
+		if x, ok := x.OptionalManualPreconAllowed.(*ChargeState_ManualPreconAllowed); ok {
+			return x.ManualPreconAllowed
+		}
+	}
+	return false
+}
+
+func (x *ChargeState) GetOptionalManualPreconStatus() isChargeState_OptionalManualPreconStatus {
+	if x != nil {
+		return x.OptionalManualPreconStatus
+	}
+	return nil
+}
+
+func (x *ChargeState) GetManualPreconStatus() ChargeState_ManualPreconStatus {
+	if x != nil {
+		if x, ok := x.OptionalManualPreconStatus.(*ChargeState_ManualPreconStatus_); ok {
+			return x.ManualPreconStatus
+		}
+	}
+	return ChargeState_ManualPreconStatusUnknown
+}
+
+func (x *ChargeState) GetOptionalEcosystemChargeMode() isChargeState_OptionalEcosystemChargeMode {
+	if x != nil {
+		return x.OptionalEcosystemChargeMode
+	}
+	return nil
+}
+
+func (x *ChargeState) GetEcosystemChargeMode() ChargeState_EcosystemChargeMode {
+	if x != nil {
+		if x, ok := x.OptionalEcosystemChargeMode.(*ChargeState_EcosystemChargeMode_); ok {
+			return x.EcosystemChargeMode
+		}
+	}
+	return ChargeState_EcosystemChargeModeUnknown
+}
+
 type isChargeState_OptionalChargeLimitSoc interface {
 	isChargeState_OptionalChargeLimitSoc()
 }
@@ -7981,6 +8168,46 @@ type ChargeState_ShouldHideRangeInfo struct {
 }
 
 func (*ChargeState_ShouldHideRangeInfo) isChargeState_OptionalShouldHideRangeInfo() {}
+
+type isChargeState_OptionalManualPreconSupported interface {
+	isChargeState_OptionalManualPreconSupported()
+}
+
+type ChargeState_ManualPreconSupported struct {
+	ManualPreconSupported bool `protobuf:"varint,731429,opt,name=manual_precon_supported,json=manualPreconSupported,proto3,oneof"`
+}
+
+func (*ChargeState_ManualPreconSupported) isChargeState_OptionalManualPreconSupported() {}
+
+type isChargeState_OptionalManualPreconAllowed interface {
+	isChargeState_OptionalManualPreconAllowed()
+}
+
+type ChargeState_ManualPreconAllowed struct {
+	ManualPreconAllowed bool `protobuf:"varint,731430,opt,name=manual_precon_allowed,json=manualPreconAllowed,proto3,oneof"`
+}
+
+func (*ChargeState_ManualPreconAllowed) isChargeState_OptionalManualPreconAllowed() {}
+
+type isChargeState_OptionalManualPreconStatus interface {
+	isChargeState_OptionalManualPreconStatus()
+}
+
+type ChargeState_ManualPreconStatus_ struct {
+	ManualPreconStatus ChargeState_ManualPreconStatus `protobuf:"varint,731431,opt,name=manual_precon_status,json=manualPreconStatus,proto3,enum=tesla_protocol.CarServer.ChargeState_ManualPreconStatus,oneof"`
+}
+
+func (*ChargeState_ManualPreconStatus_) isChargeState_OptionalManualPreconStatus() {}
+
+type isChargeState_OptionalEcosystemChargeMode interface {
+	isChargeState_OptionalEcosystemChargeMode()
+}
+
+type ChargeState_EcosystemChargeMode_ struct {
+	EcosystemChargeMode ChargeState_EcosystemChargeMode `protobuf:"varint,732457,opt,name=ecosystem_charge_mode,json=ecosystemChargeMode,proto3,enum=tesla_protocol.CarServer.ChargeState_EcosystemChargeMode,oneof"`
+}
+
+func (*ChargeState_EcosystemChargeMode_) isChargeState_OptionalEcosystemChargeMode() {}
 
 type ManagedChargingState struct {
 	state              protoimpl.MessageState `protogen:"open.v1"`
@@ -31632,7 +31859,7 @@ const file_tesla_protocol_command_vehicle_proto_rawDesc = "" +
 	"#optional_fsd_total_miles_this_monthB\x1a\n" +
 	"\x18optional_fsd_streak_daysB\x1f\n" +
 	"\x1doptional_rainbow_road_enabledB\x15\n" +
-	"\x13optional_fsd_activeJ\x04\b\x05\x10\x06J\x04\b\x06\x10\a\"\xaf^\n" +
+	"\x13optional_fsd_activeJ\x04\b\x05\x10\x06J\x04\b\x06\x10\a\"\xf8d\n" +
 	"\vChargeState\x12Z\n" +
 	"\x0echarging_state\x18\x01 \x01(\v23.tesla_protocol.CarServer.ChargeState.ChargingStateR\rchargingState\x12]\n" +
 	"\x11fast_charger_type\x18\x02 \x01(\v21.tesla_protocol.CarServer.ChargeState.ChargerTypeR\x0ffastChargerType\x12`\n" +
@@ -31726,7 +31953,11 @@ const file_tesla_protocol_command_vehicle_proto_rawDesc = "" +
 	"\x18low_power_mode_forced_on\x18\xc0\x01 \x01(\bHLR\x14lowPowerModeForcedOn\x124\n" +
 	"\x14convenience_features\x18\xc1\x01 \x01(\rHMR\x13convenienceFeatures\x12<\n" +
 	"\x19keep_accessory_power_mode\x18\xc2\x01 \x01(\bHNR\x16keepAccessoryPowerMode\x126\n" +
-	"\x16should_hide_range_info\x18\xc6\x01 \x01(\bHOR\x13shouldHideRangeInfo\x1a\x9d\x02\n" +
+	"\x16should_hide_range_info\x18\xc6\x01 \x01(\bHOR\x13shouldHideRangeInfo\x12:\n" +
+	"\x17manual_precon_supported\x18\xa5\xd2, \x01(\bHPR\x15manualPreconSupported\x126\n" +
+	"\x15manual_precon_allowed\x18\xa6\xd2, \x01(\bHQR\x13manualPreconAllowed\x12n\n" +
+	"\x14manual_precon_status\x18\xa7\xd2, \x01(\x0e28.tesla_protocol.CarServer.ChargeState.ManualPreconStatusHRR\x12manualPreconStatus\x12q\n" +
+	"\x15ecosystem_charge_mode\x18\xa9\xda, \x01(\x0e29.tesla_protocol.CarServer.ChargeState.EcosystemChargeModeHSR\x13ecosystemChargeMode\x1a\x9d\x02\n" +
 	"\tCableType\x122\n" +
 	"\x03SNA\x18\x01 \x01(\v2\x1e.tesla_protocol.CarServer.VoidH\x00R\x03SNA\x122\n" +
 	"\x03IEC\x18\x02 \x01(\v2\x1e.tesla_protocol.CarServer.VoidH\x00R\x03IEC\x122\n" +
@@ -31814,7 +32045,18 @@ const file_tesla_protocol_command_vehicle_proto_rawDesc = "" +
 	" PowershareStopReasonReconnecting\x10\x05\x12&\n" +
 	"\"PowershareStopReasonAuthentication\x10\x06\x12'\n" +
 	"#PowershareStopReasonAdapterUpdating\x10\a\x123\n" +
-	"/PowershareStopReasonAdapterInitializationFailed\x10\bB\x1b\n" +
+	"/PowershareStopReasonAdapterInitializationFailed\x10\b\"\x8d\x01\n" +
+	"\x12ManualPreconStatus\x12\x1d\n" +
+	"\x19ManualPreconStatusUnknown\x10\x00\x12\x1a\n" +
+	"\x16ManualPreconStatusIdle\x10\x01\x12\x1d\n" +
+	"\x19ManualPreconStatusHeating\x10\x02\x12\x1d\n" +
+	"\x19ManualPreconStatusKeepHot\x10\x03\"\xd6\x01\n" +
+	"\x13EcosystemChargeMode\x12\x1e\n" +
+	"\x1aEcosystemChargeModeUnknown\x10\x00\x12\x1b\n" +
+	"\x17EcosystemChargeModeNone\x10\x01\x12$\n" +
+	" EcosystemChargeModeSmartCharging\x10\x02\x12+\n" +
+	"'EcosystemChargeModeSmartChargingFaulted\x10\x03\x12/\n" +
+	"+EcosystemChargeModeSmartChargingFaultedLong\x10\x04B\x1b\n" +
 	"\x19optional_charge_limit_socB\x1f\n" +
 	"\x1doptional_charge_limit_soc_stdB\x1f\n" +
 	"\x1doptional_charge_limit_soc_minB\x1f\n" +
@@ -31894,7 +32136,11 @@ const file_tesla_protocol_command_vehicle_proto_rawDesc = "" +
 	"!optional_low_power_mode_forced_onB\x1f\n" +
 	"\x1doptional_convenience_featuresB$\n" +
 	"\"optional_keep_accessory_power_modeB!\n" +
-	"\x1foptional_should_hide_range_infoJ\x04\b\b\x10\tJ\x04\b*\x10+J\x04\b+\x10,J\x04\b\v\x10\fJ\x04\b\f\x10\rJ\x04\b\r\x10\x0eJ\x04\b\x0e\x10\x0fJ\x04\b\x0f\x10\x10J\x04\b\x10\x10\x11J\x04\b\x11\x10\x12J\x04\b\x12\x10\x13J\x04\b\x13\x10\x14J\x04\b\x14\x10\x15J\x04\b\x15\x10\x16J\x04\b\x16\x10\x17J\x04\b\x17\x10\x18J\x04\b\x19\x10\x1aJ\x04\b\x1a\x10\x1bJ\x04\b\x1b\x10\x1cJ\x04\b\x1d\x10\x1eJ\x04\b\x1e\x10\x1fJ\x04\b \x10!J\x04\b!\x10\"J\x04\b\"\x10#J\x04\b$\x10%J\x04\b%\x10&J\x04\b&\x10'J\x04\b'\x10(J\x04\b(\x10)J\x04\b)\x10*J\x04\b/\x100J\x04\b0\x101J\x04\b1\x102J\x04\b2\x103J\x04\b3\x104J\x04\b4\x105J\x04\b5\x106J\x04\b6\x107J\x04\b7\x108J\x04\b8\x109\"\x96\x03\n" +
+	"\x1foptional_should_hide_range_infoB\"\n" +
+	" optional_manual_precon_supportedB \n" +
+	"\x1eoptional_manual_precon_allowedB\x1f\n" +
+	"\x1doptional_manual_precon_statusB \n" +
+	"\x1eoptional_ecosystem_charge_modeJ\x04\b\b\x10\tJ\x04\b*\x10+J\x04\b+\x10,J\x04\b\v\x10\fJ\x04\b\f\x10\rJ\x04\b\r\x10\x0eJ\x04\b\x0e\x10\x0fJ\x04\b\x0f\x10\x10J\x04\b\x10\x10\x11J\x04\b\x11\x10\x12J\x04\b\x12\x10\x13J\x04\b\x13\x10\x14J\x04\b\x14\x10\x15J\x04\b\x15\x10\x16J\x04\b\x16\x10\x17J\x04\b\x17\x10\x18J\x04\b\x19\x10\x1aJ\x04\b\x1a\x10\x1bJ\x04\b\x1b\x10\x1cJ\x04\b\x1d\x10\x1eJ\x04\b\x1e\x10\x1fJ\x04\b \x10!J\x04\b!\x10\"J\x04\b\"\x10#J\x04\b$\x10%J\x04\b%\x10&J\x04\b&\x10'J\x04\b'\x10(J\x04\b(\x10)J\x04\b)\x10*J\x04\b/\x100J\x04\b0\x101J\x04\b1\x102J\x04\b2\x103J\x04\b3\x104J\x04\b4\x105J\x04\b5\x106J\x04\b6\x107J\x04\b7\x108J\x04\b8\x109\"\x96\x03\n" +
 	"\x14ManagedChargingState\x12_\n" +
 	"\x15charge_on_solar_state\x18\x01 \x01(\v2,.tesla_protocol.CarServer.ChargeOnSolarStateR\x12chargeOnSolarState\x12>\n" +
 	"\x1bcharge_on_solar_gateway_din\x18\x02 \x01(\tH\x00R\x17chargeOnSolarGatewayDin\x127\n" +
@@ -33651,7 +33897,7 @@ func file_tesla_protocol_command_vehicle_proto_rawDescGZIP() []byte {
 	return file_tesla_protocol_command_vehicle_proto_rawDescData
 }
 
-var file_tesla_protocol_command_vehicle_proto_enumTypes = make([]protoimpl.EnumInfo, 36)
+var file_tesla_protocol_command_vehicle_proto_enumTypes = make([]protoimpl.EnumInfo, 38)
 var file_tesla_protocol_command_vehicle_proto_msgTypes = make([]protoimpl.MessageInfo, 94)
 var file_tesla_protocol_command_vehicle_proto_goTypes = []any{
 	(AutopilotBase)(0),                               // 0: tesla_protocol.CarServer.AutopilotBase
@@ -33670,739 +33916,743 @@ var file_tesla_protocol_command_vehicle_proto_goTypes = []any{
 	(ChargeState_PowershareStatus)(0),                // 13: tesla_protocol.CarServer.ChargeState.PowershareStatus
 	(ChargeState_PowershareType)(0),                  // 14: tesla_protocol.CarServer.ChargeState.PowershareType
 	(ChargeState_PowershareStopReason)(0),            // 15: tesla_protocol.CarServer.ChargeState.PowershareStopReason
-	(ClimateState_HvacAutoRequest)(0),                // 16: tesla_protocol.CarServer.ClimateState.HvacAutoRequest
-	(ClimateState_CabinOverheatProtection_E)(0),      // 17: tesla_protocol.CarServer.ClimateState.CabinOverheatProtection_E
-	(ClimateState_SeatHeaterLevel_E)(0),              // 18: tesla_protocol.CarServer.ClimateState.SeatHeaterLevel_E
-	(ClimateState_SeatCoolingLevel_E)(0),             // 19: tesla_protocol.CarServer.ClimateState.SeatCoolingLevel_E
-	(ClimateState_CopActivationTemp)(0),              // 20: tesla_protocol.CarServer.ClimateState.CopActivationTemp
-	(ClimateState_COPNotRunningReason)(0),            // 21: tesla_protocol.CarServer.ClimateState.COPNotRunningReason
-	(ClimateState_DogModeState)(0),                   // 22: tesla_protocol.CarServer.ClimateState.DogModeState
-	(GuiSettings_TirePressureUnit)(0),                // 23: tesla_protocol.CarServer.GuiSettings.TirePressureUnit
-	(VehicleConfig_AuxParkLamps_E)(0),                // 24: tesla_protocol.CarServer.VehicleConfig.AuxParkLamps_E
-	(VehicleConfig_BadgingMaterialType)(0),           // 25: tesla_protocol.CarServer.VehicleConfig.BadgingMaterialType
-	(VehicleConfig_BedLightingType)(0),               // 26: tesla_protocol.CarServer.VehicleConfig.BedLightingType
-	(VehicleConfig_DrivetrainType)(0),                // 27: tesla_protocol.CarServer.VehicleConfig.DrivetrainType
-	(VehicleConfig_FrontFasciaCameraType)(0),         // 28: tesla_protocol.CarServer.VehicleConfig.FrontFasciaCameraType
-	(VehicleConfig_HeadlampType_E)(0),                // 29: tesla_protocol.CarServer.VehicleConfig.HeadlampType_E
-	(VehicleConfig_InteriorUpperTrimType)(0),         // 30: tesla_protocol.CarServer.VehicleConfig.InteriorUpperTrimType
-	(VehicleConfig_RearLightHardwareVariant)(0),      // 31: tesla_protocol.CarServer.VehicleConfig.RearLightHardwareVariant
-	(VehicleConfig_RearLightType)(0),                 // 32: tesla_protocol.CarServer.VehicleConfig.RearLightType
-	(VehicleConfig_SeatTrimType)(0),                  // 33: tesla_protocol.CarServer.VehicleConfig.SeatTrimType
-	(VehicleConfig_TurnIndicatorControlType)(0),      // 34: tesla_protocol.CarServer.VehicleConfig.TurnIndicatorControlType
-	(SohState_WarrantyServiceResult)(0),              // 35: tesla_protocol.CarServer.SohState.WarrantyServiceResult
-	(*VehicleData)(nil),                              // 36: tesla_protocol.CarServer.VehicleData
-	(*ClosuresState)(nil),                            // 37: tesla_protocol.CarServer.ClosuresState
-	(*ChargeScheduleState)(nil),                      // 38: tesla_protocol.CarServer.ChargeScheduleState
-	(*PreconditioningScheduleState)(nil),             // 39: tesla_protocol.CarServer.PreconditioningScheduleState
-	(*SpeedLimitMode)(nil),                           // 40: tesla_protocol.CarServer.SpeedLimitMode
-	(*ParentalControlsSettings)(nil),                 // 41: tesla_protocol.CarServer.ParentalControlsSettings
-	(*ParentalControlsState)(nil),                    // 42: tesla_protocol.CarServer.ParentalControlsState
-	(*SoftwareUpdateState)(nil),                      // 43: tesla_protocol.CarServer.SoftwareUpdateState
-	(*DriveState)(nil),                               // 44: tesla_protocol.CarServer.DriveState
-	(*ChargeState)(nil),                              // 45: tesla_protocol.CarServer.ChargeState
-	(*ManagedChargingState)(nil),                     // 46: tesla_protocol.CarServer.ManagedChargingState
-	(*ChargeOnSolarState)(nil),                       // 47: tesla_protocol.CarServer.ChargeOnSolarState
-	(*ChargeOnSolarStateNotAllowed)(nil),             // 48: tesla_protocol.CarServer.ChargeOnSolarStateNotAllowed
-	(*ChargeOnSolarStateNoChargeRecommended)(nil),    // 49: tesla_protocol.CarServer.ChargeOnSolarStateNoChargeRecommended
-	(*ChargeOnSolarStateChargingOnExcessSolar)(nil),  // 50: tesla_protocol.CarServer.ChargeOnSolarStateChargingOnExcessSolar
-	(*ChargeOnSolarStateChargingOnAnything)(nil),     // 51: tesla_protocol.CarServer.ChargeOnSolarStateChargingOnAnything
-	(*ChargeOnSolarStateUserDisabled)(nil),           // 52: tesla_protocol.CarServer.ChargeOnSolarStateUserDisabled
-	(*ChargeOnSolarStateWaitingForServer)(nil),       // 53: tesla_protocol.CarServer.ChargeOnSolarStateWaitingForServer
-	(*ChargeOnSolarStateError)(nil),                  // 54: tesla_protocol.CarServer.ChargeOnSolarStateError
-	(*ChargeOnSolarStateUserStopped)(nil),            // 55: tesla_protocol.CarServer.ChargeOnSolarStateUserStopped
-	(*LocationState)(nil),                            // 56: tesla_protocol.CarServer.LocationState
-	(*VehicleState)(nil),                             // 57: tesla_protocol.CarServer.VehicleState
-	(*CurrentVehicleState)(nil),                      // 58: tesla_protocol.CarServer.CurrentVehicleState
-	(*DashcamUtils)(nil),                             // 59: tesla_protocol.CarServer.DashcamUtils
-	(*AutoparkStyle)(nil),                            // 60: tesla_protocol.CarServer.AutoparkStyle
-	(*AutoparkVersion)(nil),                          // 61: tesla_protocol.CarServer.AutoparkVersion
-	(*AutoparkState)(nil),                            // 62: tesla_protocol.CarServer.AutoparkState
-	(*SpoilerState)(nil),                             // 63: tesla_protocol.CarServer.SpoilerState
-	(*LegacyMediaState)(nil),                         // 64: tesla_protocol.CarServer.LegacyMediaState
-	(*LegacyMediaInfo)(nil),                          // 65: tesla_protocol.CarServer.LegacyMediaInfo
-	(*ClimateState)(nil),                             // 66: tesla_protocol.CarServer.ClimateState
-	(*TirePressureState)(nil),                        // 67: tesla_protocol.CarServer.TirePressureState
-	(*MediaState)(nil),                               // 68: tesla_protocol.CarServer.MediaState
-	(*MediaDetailState)(nil),                         // 69: tesla_protocol.CarServer.MediaDetailState
-	(*ShiftState)(nil),                               // 70: tesla_protocol.CarServer.ShiftState
-	(*VehicleBadging)(nil),                           // 71: tesla_protocol.CarServer.VehicleBadging
-	(*CarTrim)(nil),                                  // 72: tesla_protocol.CarServer.CarTrim
-	(*SunRoofType)(nil),                              // 73: tesla_protocol.CarServer.SunRoofType
-	(*WheelType)(nil),                                // 74: tesla_protocol.CarServer.WheelType
-	(*SpoilerType)(nil),                              // 75: tesla_protocol.CarServer.SpoilerType
-	(*RoofColor)(nil),                                // 76: tesla_protocol.CarServer.RoofColor
-	(*ExteriorColor)(nil),                            // 77: tesla_protocol.CarServer.ExteriorColor
-	(*RearSeatHeaters)(nil),                          // 78: tesla_protocol.CarServer.RearSeatHeaters
-	(*SeatType)(nil),                                 // 79: tesla_protocol.CarServer.SeatType
-	(*RearSeatType)(nil),                             // 80: tesla_protocol.CarServer.RearSeatType
-	(*ThirdRowSeatType)(nil),                         // 81: tesla_protocol.CarServer.ThirdRowSeatType
-	(*ChargePortType)(nil),                           // 82: tesla_protocol.CarServer.ChargePortType
-	(*RearDriveUnit)(nil),                            // 83: tesla_protocol.CarServer.RearDriveUnit
-	(*EfficiencyPackage)(nil),                        // 84: tesla_protocol.CarServer.EfficiencyPackage
-	(*GuiSettings)(nil),                              // 85: tesla_protocol.CarServer.GuiSettings
-	(*VehicleConfig)(nil),                            // 86: tesla_protocol.CarServer.VehicleConfig
-	(*ParkedAccessoryState)(nil),                     // 87: tesla_protocol.CarServer.ParkedAccessoryState
-	(*SohState)(nil),                                 // 88: tesla_protocol.CarServer.SohState
-	(*AlertState)(nil),                               // 89: tesla_protocol.CarServer.AlertState
-	(*LightShowOption)(nil),                          // 90: tesla_protocol.CarServer.LightShowOption
-	(*LightShowSettings)(nil),                        // 91: tesla_protocol.CarServer.LightShowSettings
-	(*LightShowState)(nil),                           // 92: tesla_protocol.CarServer.LightShowState
-	(*VehicleImageData)(nil),                         // 93: tesla_protocol.CarServer.VehicleImageData
-	(*VehicleImage)(nil),                             // 94: tesla_protocol.CarServer.VehicleImage
-	(*VehicleImageState)(nil),                        // 95: tesla_protocol.CarServer.VehicleImageState
-	(*SuspensionState)(nil),                          // 96: tesla_protocol.CarServer.SuspensionState
-	(*ChildPresenceDetectionState)(nil),              // 97: tesla_protocol.CarServer.ChildPresenceDetectionState
-	(*DisplayState)(nil),                             // 98: tesla_protocol.CarServer.DisplayState
-	(*VehicleDetailState)(nil),                       // 99: tesla_protocol.CarServer.VehicleDetailState
-	(*KeepOnAccessoryPortsState)(nil),                // 100: tesla_protocol.CarServer.KeepOnAccessoryPortsState
-	(*ClosuresState_SunRoofState)(nil),               // 101: tesla_protocol.CarServer.ClosuresState.SunRoofState
-	(*ClosuresState_DisplayState)(nil),               // 102: tesla_protocol.CarServer.ClosuresState.DisplayState
-	(*ClosuresState_SentryModeState)(nil),            // 103: tesla_protocol.CarServer.ClosuresState.SentryModeState
-	(*SoftwareUpdateState_SoftwareUpdateStatus)(nil), // 104: tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus
-	(*DriveState_FsdMonthlyMileage)(nil),             // 105: tesla_protocol.CarServer.DriveState.FsdMonthlyMileage
-	(*DriveState_FsdLast7DaysUsage)(nil),             // 106: tesla_protocol.CarServer.DriveState.FsdLast7DaysUsage
-	(*ChargeState_CableType)(nil),                    // 107: tesla_protocol.CarServer.ChargeState.CableType
-	(*ChargeState_ChargerType)(nil),                  // 108: tesla_protocol.CarServer.ChargeState.ChargerType
-	(*ChargeState_ChargingState)(nil),                // 109: tesla_protocol.CarServer.ChargeState.ChargingState
-	(*ChargeState_ChargerBrand)(nil),                 // 110: tesla_protocol.CarServer.ChargeState.ChargerBrand
-	(*LocationState_GPSCoordinateType)(nil),          // 111: tesla_protocol.CarServer.LocationState.GPSCoordinateType
-	(*VehicleState_GuestMode)(nil),                   // 112: tesla_protocol.CarServer.VehicleState.GuestMode
-	(*ClimateState_ClimateKeeperMode)(nil),           // 113: tesla_protocol.CarServer.ClimateState.ClimateKeeperMode
-	(*ClimateState_DefrostMode)(nil),                 // 114: tesla_protocol.CarServer.ClimateState.DefrostMode
-	(*GuiSettings_SpeedUnit)(nil),                    // 115: tesla_protocol.CarServer.GuiSettings.SpeedUnit
-	(*GuiSettings_TemperatureUnit)(nil),              // 116: tesla_protocol.CarServer.GuiSettings.TemperatureUnit
-	(*GuiSettings_ChargeRateUnit)(nil),               // 117: tesla_protocol.CarServer.GuiSettings.ChargeRateUnit
-	(*GuiSettings_RangeDisplay)(nil),                 // 118: tesla_protocol.CarServer.GuiSettings.RangeDisplay
-	(*VehicleConfig_CarType)(nil),                    // 119: tesla_protocol.CarServer.VehicleConfig.CarType
-	(*VehicleConfig_DriverAssist)(nil),               // 120: tesla_protocol.CarServer.VehicleConfig.DriverAssist
-	(*VehicleConfig_PerformancePackage)(nil),         // 121: tesla_protocol.CarServer.VehicleConfig.PerformancePackage
-	(*VehicleConfig_FrontDriveUnit)(nil),             // 122: tesla_protocol.CarServer.VehicleConfig.FrontDriveUnit
-	(*VehicleConfig_SteeringWheelType)(nil),          // 123: tesla_protocol.CarServer.VehicleConfig.SteeringWheelType
-	(*VehicleConfig_InteriorTrimType)(nil),           // 124: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType
-	(*VehicleConfig_ExteriorTrimType)(nil),           // 125: tesla_protocol.CarServer.VehicleConfig.ExteriorTrimType
-	(*SohState_SohTestPhase)(nil),                    // 126: tesla_protocol.CarServer.SohState.SohTestPhase
-	(*SohState_SohTestEndMode)(nil),                  // 127: tesla_protocol.CarServer.SohState.SohTestEndMode
-	(*SohState_SohTestState)(nil),                    // 128: tesla_protocol.CarServer.SohState.SohTestState
-	(*SohState_SohResult)(nil),                       // 129: tesla_protocol.CarServer.SohState.SohResult
-	(vcsec.ClosureState_E)(0),                        // 130: tesla_protocol.VCSEC.ClosureState_E
-	(*timestamppb.Timestamp)(nil),                    // 131: google.protobuf.Timestamp
-	(*ChargeSchedule)(nil),                           // 132: tesla_protocol.CarServer.ChargeSchedule
-	(*PreconditionSchedule)(nil),                     // 133: tesla_protocol.CarServer.PreconditionSchedule
-	(*LatLong)(nil),                                  // 134: tesla_protocol.CarServer.LatLong
-	(*ChargePortLatchState)(nil),                     // 135: tesla_protocol.CarServer.ChargePortLatchState
-	(*PreconditioningTimes)(nil),                     // 136: tesla_protocol.CarServer.PreconditioningTimes
-	(*OffPeakChargingTimes)(nil),                     // 137: tesla_protocol.CarServer.OffPeakChargingTimes
-	(managedcharging.ChargeOnSolarNoChargeReason)(0), // 138: tesla_protocol.ManagedCharging.ChargeOnSolarNoChargeReason
-	(GtwDiagLevel)(0),                                // 139: tesla_protocol.CarServer.GtwDiagLevel
-	(*Void)(nil),                                     // 140: tesla_protocol.CarServer.Void
-	(MediaPlaybackStatus)(0),                         // 141: tesla_protocol.CarServer.MediaPlaybackStatus
-	(StwHeatLevel)(0),                                // 142: tesla_protocol.CarServer.StwHeatLevel
-	(RearSeatHeaterType)(0),                          // 143: tesla_protocol.CarServer.RearSeatHeaterType
-	(FasciaType)(0),                                  // 144: tesla_protocol.CarServer.FasciaType
-	(AccessoryLightbarType)(0),                       // 145: tesla_protocol.CarServer.AccessoryLightbarType
-	(ChassisType)(0),                                 // 146: tesla_protocol.CarServer.ChassisType
-	(ZoneLightRequest)(0),                            // 147: tesla_protocol.CarServer.ZoneLightRequest
-	(*ChargingAlert)(nil),                            // 148: tesla_protocol.CarServer.ChargingAlert
-	(*SuspensionLevelObj)(nil),                       // 149: tesla_protocol.CarServer.SuspensionLevelObj
-	(SuspensionLevel)(0),                             // 150: tesla_protocol.CarServer.SuspensionLevel
-	(SuspensionActuationState)(0),                    // 151: tesla_protocol.CarServer.SuspensionActuationState
+	(ChargeState_ManualPreconStatus)(0),              // 16: tesla_protocol.CarServer.ChargeState.ManualPreconStatus
+	(ChargeState_EcosystemChargeMode)(0),             // 17: tesla_protocol.CarServer.ChargeState.EcosystemChargeMode
+	(ClimateState_HvacAutoRequest)(0),                // 18: tesla_protocol.CarServer.ClimateState.HvacAutoRequest
+	(ClimateState_CabinOverheatProtection_E)(0),      // 19: tesla_protocol.CarServer.ClimateState.CabinOverheatProtection_E
+	(ClimateState_SeatHeaterLevel_E)(0),              // 20: tesla_protocol.CarServer.ClimateState.SeatHeaterLevel_E
+	(ClimateState_SeatCoolingLevel_E)(0),             // 21: tesla_protocol.CarServer.ClimateState.SeatCoolingLevel_E
+	(ClimateState_CopActivationTemp)(0),              // 22: tesla_protocol.CarServer.ClimateState.CopActivationTemp
+	(ClimateState_COPNotRunningReason)(0),            // 23: tesla_protocol.CarServer.ClimateState.COPNotRunningReason
+	(ClimateState_DogModeState)(0),                   // 24: tesla_protocol.CarServer.ClimateState.DogModeState
+	(GuiSettings_TirePressureUnit)(0),                // 25: tesla_protocol.CarServer.GuiSettings.TirePressureUnit
+	(VehicleConfig_AuxParkLamps_E)(0),                // 26: tesla_protocol.CarServer.VehicleConfig.AuxParkLamps_E
+	(VehicleConfig_BadgingMaterialType)(0),           // 27: tesla_protocol.CarServer.VehicleConfig.BadgingMaterialType
+	(VehicleConfig_BedLightingType)(0),               // 28: tesla_protocol.CarServer.VehicleConfig.BedLightingType
+	(VehicleConfig_DrivetrainType)(0),                // 29: tesla_protocol.CarServer.VehicleConfig.DrivetrainType
+	(VehicleConfig_FrontFasciaCameraType)(0),         // 30: tesla_protocol.CarServer.VehicleConfig.FrontFasciaCameraType
+	(VehicleConfig_HeadlampType_E)(0),                // 31: tesla_protocol.CarServer.VehicleConfig.HeadlampType_E
+	(VehicleConfig_InteriorUpperTrimType)(0),         // 32: tesla_protocol.CarServer.VehicleConfig.InteriorUpperTrimType
+	(VehicleConfig_RearLightHardwareVariant)(0),      // 33: tesla_protocol.CarServer.VehicleConfig.RearLightHardwareVariant
+	(VehicleConfig_RearLightType)(0),                 // 34: tesla_protocol.CarServer.VehicleConfig.RearLightType
+	(VehicleConfig_SeatTrimType)(0),                  // 35: tesla_protocol.CarServer.VehicleConfig.SeatTrimType
+	(VehicleConfig_TurnIndicatorControlType)(0),      // 36: tesla_protocol.CarServer.VehicleConfig.TurnIndicatorControlType
+	(SohState_WarrantyServiceResult)(0),              // 37: tesla_protocol.CarServer.SohState.WarrantyServiceResult
+	(*VehicleData)(nil),                              // 38: tesla_protocol.CarServer.VehicleData
+	(*ClosuresState)(nil),                            // 39: tesla_protocol.CarServer.ClosuresState
+	(*ChargeScheduleState)(nil),                      // 40: tesla_protocol.CarServer.ChargeScheduleState
+	(*PreconditioningScheduleState)(nil),             // 41: tesla_protocol.CarServer.PreconditioningScheduleState
+	(*SpeedLimitMode)(nil),                           // 42: tesla_protocol.CarServer.SpeedLimitMode
+	(*ParentalControlsSettings)(nil),                 // 43: tesla_protocol.CarServer.ParentalControlsSettings
+	(*ParentalControlsState)(nil),                    // 44: tesla_protocol.CarServer.ParentalControlsState
+	(*SoftwareUpdateState)(nil),                      // 45: tesla_protocol.CarServer.SoftwareUpdateState
+	(*DriveState)(nil),                               // 46: tesla_protocol.CarServer.DriveState
+	(*ChargeState)(nil),                              // 47: tesla_protocol.CarServer.ChargeState
+	(*ManagedChargingState)(nil),                     // 48: tesla_protocol.CarServer.ManagedChargingState
+	(*ChargeOnSolarState)(nil),                       // 49: tesla_protocol.CarServer.ChargeOnSolarState
+	(*ChargeOnSolarStateNotAllowed)(nil),             // 50: tesla_protocol.CarServer.ChargeOnSolarStateNotAllowed
+	(*ChargeOnSolarStateNoChargeRecommended)(nil),    // 51: tesla_protocol.CarServer.ChargeOnSolarStateNoChargeRecommended
+	(*ChargeOnSolarStateChargingOnExcessSolar)(nil),  // 52: tesla_protocol.CarServer.ChargeOnSolarStateChargingOnExcessSolar
+	(*ChargeOnSolarStateChargingOnAnything)(nil),     // 53: tesla_protocol.CarServer.ChargeOnSolarStateChargingOnAnything
+	(*ChargeOnSolarStateUserDisabled)(nil),           // 54: tesla_protocol.CarServer.ChargeOnSolarStateUserDisabled
+	(*ChargeOnSolarStateWaitingForServer)(nil),       // 55: tesla_protocol.CarServer.ChargeOnSolarStateWaitingForServer
+	(*ChargeOnSolarStateError)(nil),                  // 56: tesla_protocol.CarServer.ChargeOnSolarStateError
+	(*ChargeOnSolarStateUserStopped)(nil),            // 57: tesla_protocol.CarServer.ChargeOnSolarStateUserStopped
+	(*LocationState)(nil),                            // 58: tesla_protocol.CarServer.LocationState
+	(*VehicleState)(nil),                             // 59: tesla_protocol.CarServer.VehicleState
+	(*CurrentVehicleState)(nil),                      // 60: tesla_protocol.CarServer.CurrentVehicleState
+	(*DashcamUtils)(nil),                             // 61: tesla_protocol.CarServer.DashcamUtils
+	(*AutoparkStyle)(nil),                            // 62: tesla_protocol.CarServer.AutoparkStyle
+	(*AutoparkVersion)(nil),                          // 63: tesla_protocol.CarServer.AutoparkVersion
+	(*AutoparkState)(nil),                            // 64: tesla_protocol.CarServer.AutoparkState
+	(*SpoilerState)(nil),                             // 65: tesla_protocol.CarServer.SpoilerState
+	(*LegacyMediaState)(nil),                         // 66: tesla_protocol.CarServer.LegacyMediaState
+	(*LegacyMediaInfo)(nil),                          // 67: tesla_protocol.CarServer.LegacyMediaInfo
+	(*ClimateState)(nil),                             // 68: tesla_protocol.CarServer.ClimateState
+	(*TirePressureState)(nil),                        // 69: tesla_protocol.CarServer.TirePressureState
+	(*MediaState)(nil),                               // 70: tesla_protocol.CarServer.MediaState
+	(*MediaDetailState)(nil),                         // 71: tesla_protocol.CarServer.MediaDetailState
+	(*ShiftState)(nil),                               // 72: tesla_protocol.CarServer.ShiftState
+	(*VehicleBadging)(nil),                           // 73: tesla_protocol.CarServer.VehicleBadging
+	(*CarTrim)(nil),                                  // 74: tesla_protocol.CarServer.CarTrim
+	(*SunRoofType)(nil),                              // 75: tesla_protocol.CarServer.SunRoofType
+	(*WheelType)(nil),                                // 76: tesla_protocol.CarServer.WheelType
+	(*SpoilerType)(nil),                              // 77: tesla_protocol.CarServer.SpoilerType
+	(*RoofColor)(nil),                                // 78: tesla_protocol.CarServer.RoofColor
+	(*ExteriorColor)(nil),                            // 79: tesla_protocol.CarServer.ExteriorColor
+	(*RearSeatHeaters)(nil),                          // 80: tesla_protocol.CarServer.RearSeatHeaters
+	(*SeatType)(nil),                                 // 81: tesla_protocol.CarServer.SeatType
+	(*RearSeatType)(nil),                             // 82: tesla_protocol.CarServer.RearSeatType
+	(*ThirdRowSeatType)(nil),                         // 83: tesla_protocol.CarServer.ThirdRowSeatType
+	(*ChargePortType)(nil),                           // 84: tesla_protocol.CarServer.ChargePortType
+	(*RearDriveUnit)(nil),                            // 85: tesla_protocol.CarServer.RearDriveUnit
+	(*EfficiencyPackage)(nil),                        // 86: tesla_protocol.CarServer.EfficiencyPackage
+	(*GuiSettings)(nil),                              // 87: tesla_protocol.CarServer.GuiSettings
+	(*VehicleConfig)(nil),                            // 88: tesla_protocol.CarServer.VehicleConfig
+	(*ParkedAccessoryState)(nil),                     // 89: tesla_protocol.CarServer.ParkedAccessoryState
+	(*SohState)(nil),                                 // 90: tesla_protocol.CarServer.SohState
+	(*AlertState)(nil),                               // 91: tesla_protocol.CarServer.AlertState
+	(*LightShowOption)(nil),                          // 92: tesla_protocol.CarServer.LightShowOption
+	(*LightShowSettings)(nil),                        // 93: tesla_protocol.CarServer.LightShowSettings
+	(*LightShowState)(nil),                           // 94: tesla_protocol.CarServer.LightShowState
+	(*VehicleImageData)(nil),                         // 95: tesla_protocol.CarServer.VehicleImageData
+	(*VehicleImage)(nil),                             // 96: tesla_protocol.CarServer.VehicleImage
+	(*VehicleImageState)(nil),                        // 97: tesla_protocol.CarServer.VehicleImageState
+	(*SuspensionState)(nil),                          // 98: tesla_protocol.CarServer.SuspensionState
+	(*ChildPresenceDetectionState)(nil),              // 99: tesla_protocol.CarServer.ChildPresenceDetectionState
+	(*DisplayState)(nil),                             // 100: tesla_protocol.CarServer.DisplayState
+	(*VehicleDetailState)(nil),                       // 101: tesla_protocol.CarServer.VehicleDetailState
+	(*KeepOnAccessoryPortsState)(nil),                // 102: tesla_protocol.CarServer.KeepOnAccessoryPortsState
+	(*ClosuresState_SunRoofState)(nil),               // 103: tesla_protocol.CarServer.ClosuresState.SunRoofState
+	(*ClosuresState_DisplayState)(nil),               // 104: tesla_protocol.CarServer.ClosuresState.DisplayState
+	(*ClosuresState_SentryModeState)(nil),            // 105: tesla_protocol.CarServer.ClosuresState.SentryModeState
+	(*SoftwareUpdateState_SoftwareUpdateStatus)(nil), // 106: tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus
+	(*DriveState_FsdMonthlyMileage)(nil),             // 107: tesla_protocol.CarServer.DriveState.FsdMonthlyMileage
+	(*DriveState_FsdLast7DaysUsage)(nil),             // 108: tesla_protocol.CarServer.DriveState.FsdLast7DaysUsage
+	(*ChargeState_CableType)(nil),                    // 109: tesla_protocol.CarServer.ChargeState.CableType
+	(*ChargeState_ChargerType)(nil),                  // 110: tesla_protocol.CarServer.ChargeState.ChargerType
+	(*ChargeState_ChargingState)(nil),                // 111: tesla_protocol.CarServer.ChargeState.ChargingState
+	(*ChargeState_ChargerBrand)(nil),                 // 112: tesla_protocol.CarServer.ChargeState.ChargerBrand
+	(*LocationState_GPSCoordinateType)(nil),          // 113: tesla_protocol.CarServer.LocationState.GPSCoordinateType
+	(*VehicleState_GuestMode)(nil),                   // 114: tesla_protocol.CarServer.VehicleState.GuestMode
+	(*ClimateState_ClimateKeeperMode)(nil),           // 115: tesla_protocol.CarServer.ClimateState.ClimateKeeperMode
+	(*ClimateState_DefrostMode)(nil),                 // 116: tesla_protocol.CarServer.ClimateState.DefrostMode
+	(*GuiSettings_SpeedUnit)(nil),                    // 117: tesla_protocol.CarServer.GuiSettings.SpeedUnit
+	(*GuiSettings_TemperatureUnit)(nil),              // 118: tesla_protocol.CarServer.GuiSettings.TemperatureUnit
+	(*GuiSettings_ChargeRateUnit)(nil),               // 119: tesla_protocol.CarServer.GuiSettings.ChargeRateUnit
+	(*GuiSettings_RangeDisplay)(nil),                 // 120: tesla_protocol.CarServer.GuiSettings.RangeDisplay
+	(*VehicleConfig_CarType)(nil),                    // 121: tesla_protocol.CarServer.VehicleConfig.CarType
+	(*VehicleConfig_DriverAssist)(nil),               // 122: tesla_protocol.CarServer.VehicleConfig.DriverAssist
+	(*VehicleConfig_PerformancePackage)(nil),         // 123: tesla_protocol.CarServer.VehicleConfig.PerformancePackage
+	(*VehicleConfig_FrontDriveUnit)(nil),             // 124: tesla_protocol.CarServer.VehicleConfig.FrontDriveUnit
+	(*VehicleConfig_SteeringWheelType)(nil),          // 125: tesla_protocol.CarServer.VehicleConfig.SteeringWheelType
+	(*VehicleConfig_InteriorTrimType)(nil),           // 126: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType
+	(*VehicleConfig_ExteriorTrimType)(nil),           // 127: tesla_protocol.CarServer.VehicleConfig.ExteriorTrimType
+	(*SohState_SohTestPhase)(nil),                    // 128: tesla_protocol.CarServer.SohState.SohTestPhase
+	(*SohState_SohTestEndMode)(nil),                  // 129: tesla_protocol.CarServer.SohState.SohTestEndMode
+	(*SohState_SohTestState)(nil),                    // 130: tesla_protocol.CarServer.SohState.SohTestState
+	(*SohState_SohResult)(nil),                       // 131: tesla_protocol.CarServer.SohState.SohResult
+	(vcsec.ClosureState_E)(0),                        // 132: tesla_protocol.VCSEC.ClosureState_E
+	(*timestamppb.Timestamp)(nil),                    // 133: google.protobuf.Timestamp
+	(*ChargeSchedule)(nil),                           // 134: tesla_protocol.CarServer.ChargeSchedule
+	(*PreconditionSchedule)(nil),                     // 135: tesla_protocol.CarServer.PreconditionSchedule
+	(*LatLong)(nil),                                  // 136: tesla_protocol.CarServer.LatLong
+	(*ChargePortLatchState)(nil),                     // 137: tesla_protocol.CarServer.ChargePortLatchState
+	(*PreconditioningTimes)(nil),                     // 138: tesla_protocol.CarServer.PreconditioningTimes
+	(*OffPeakChargingTimes)(nil),                     // 139: tesla_protocol.CarServer.OffPeakChargingTimes
+	(managedcharging.ChargeOnSolarNoChargeReason)(0), // 140: tesla_protocol.ManagedCharging.ChargeOnSolarNoChargeReason
+	(GtwDiagLevel)(0),                                // 141: tesla_protocol.CarServer.GtwDiagLevel
+	(*Void)(nil),                                     // 142: tesla_protocol.CarServer.Void
+	(MediaPlaybackStatus)(0),                         // 143: tesla_protocol.CarServer.MediaPlaybackStatus
+	(StwHeatLevel)(0),                                // 144: tesla_protocol.CarServer.StwHeatLevel
+	(RearSeatHeaterType)(0),                          // 145: tesla_protocol.CarServer.RearSeatHeaterType
+	(FasciaType)(0),                                  // 146: tesla_protocol.CarServer.FasciaType
+	(AccessoryLightbarType)(0),                       // 147: tesla_protocol.CarServer.AccessoryLightbarType
+	(ChassisType)(0),                                 // 148: tesla_protocol.CarServer.ChassisType
+	(ZoneLightRequest)(0),                            // 149: tesla_protocol.CarServer.ZoneLightRequest
+	(*ChargingAlert)(nil),                            // 150: tesla_protocol.CarServer.ChargingAlert
+	(*SuspensionLevelObj)(nil),                       // 151: tesla_protocol.CarServer.SuspensionLevelObj
+	(SuspensionLevel)(0),                             // 152: tesla_protocol.CarServer.SuspensionLevel
+	(SuspensionActuationState)(0),                    // 153: tesla_protocol.CarServer.SuspensionActuationState
 }
 var file_tesla_protocol_command_vehicle_proto_depIdxs = []int32{
-	85,  // 0: tesla_protocol.CarServer.VehicleData.gui_settings:type_name -> tesla_protocol.CarServer.GuiSettings
-	45,  // 1: tesla_protocol.CarServer.VehicleData.charge_state:type_name -> tesla_protocol.CarServer.ChargeState
-	66,  // 2: tesla_protocol.CarServer.VehicleData.climate_state:type_name -> tesla_protocol.CarServer.ClimateState
-	44,  // 3: tesla_protocol.CarServer.VehicleData.drive_state:type_name -> tesla_protocol.CarServer.DriveState
-	57,  // 4: tesla_protocol.CarServer.VehicleData.legacy_vehicle_state:type_name -> tesla_protocol.CarServer.VehicleState
-	86,  // 5: tesla_protocol.CarServer.VehicleData.vehicle_config:type_name -> tesla_protocol.CarServer.VehicleConfig
-	56,  // 6: tesla_protocol.CarServer.VehicleData.location_state:type_name -> tesla_protocol.CarServer.LocationState
-	37,  // 7: tesla_protocol.CarServer.VehicleData.closures_state:type_name -> tesla_protocol.CarServer.ClosuresState
-	87,  // 8: tesla_protocol.CarServer.VehicleData.parked_accessory_state:type_name -> tesla_protocol.CarServer.ParkedAccessoryState
-	38,  // 9: tesla_protocol.CarServer.VehicleData.charge_schedule_state:type_name -> tesla_protocol.CarServer.ChargeScheduleState
-	39,  // 10: tesla_protocol.CarServer.VehicleData.preconditioning_schedule_state:type_name -> tesla_protocol.CarServer.PreconditioningScheduleState
-	88,  // 11: tesla_protocol.CarServer.VehicleData.soh_state:type_name -> tesla_protocol.CarServer.SohState
-	58,  // 12: tesla_protocol.CarServer.VehicleData.vehicle_state:type_name -> tesla_protocol.CarServer.CurrentVehicleState
-	67,  // 13: tesla_protocol.CarServer.VehicleData.tire_pressure_state:type_name -> tesla_protocol.CarServer.TirePressureState
-	68,  // 14: tesla_protocol.CarServer.VehicleData.media_state:type_name -> tesla_protocol.CarServer.MediaState
-	69,  // 15: tesla_protocol.CarServer.VehicleData.media_detail_state:type_name -> tesla_protocol.CarServer.MediaDetailState
-	99,  // 16: tesla_protocol.CarServer.VehicleData.vehicle_detail_state:type_name -> tesla_protocol.CarServer.VehicleDetailState
-	43,  // 17: tesla_protocol.CarServer.VehicleData.software_update_state:type_name -> tesla_protocol.CarServer.SoftwareUpdateState
-	42,  // 18: tesla_protocol.CarServer.VehicleData.parental_controls_state:type_name -> tesla_protocol.CarServer.ParentalControlsState
-	89,  // 19: tesla_protocol.CarServer.VehicleData.alert_state:type_name -> tesla_protocol.CarServer.AlertState
-	92,  // 20: tesla_protocol.CarServer.VehicleData.light_show_state:type_name -> tesla_protocol.CarServer.LightShowState
-	95,  // 21: tesla_protocol.CarServer.VehicleData.vehicle_image_state:type_name -> tesla_protocol.CarServer.VehicleImageState
-	96,  // 22: tesla_protocol.CarServer.VehicleData.suspension_state:type_name -> tesla_protocol.CarServer.SuspensionState
-	97,  // 23: tesla_protocol.CarServer.VehicleData.child_presence_detection_state:type_name -> tesla_protocol.CarServer.ChildPresenceDetectionState
-	98,  // 24: tesla_protocol.CarServer.VehicleData.display_state:type_name -> tesla_protocol.CarServer.DisplayState
-	100, // 25: tesla_protocol.CarServer.VehicleData.keep_on_accessory_ports_state:type_name -> tesla_protocol.CarServer.KeepOnAccessoryPortsState
-	101, // 26: tesla_protocol.CarServer.ClosuresState.sun_roof_state:type_name -> tesla_protocol.CarServer.ClosuresState.SunRoofState
-	102, // 27: tesla_protocol.CarServer.ClosuresState.center_display_state:type_name -> tesla_protocol.CarServer.ClosuresState.DisplayState
-	103, // 28: tesla_protocol.CarServer.ClosuresState.sentry_mode_state:type_name -> tesla_protocol.CarServer.ClosuresState.SentryModeState
-	40,  // 29: tesla_protocol.CarServer.ClosuresState.speed_limit_mode:type_name -> tesla_protocol.CarServer.SpeedLimitMode
-	130, // 30: tesla_protocol.CarServer.ClosuresState.tonneau_state:type_name -> tesla_protocol.VCSEC.ClosureState_E
-	131, // 31: tesla_protocol.CarServer.ClosuresState.timestamp:type_name -> google.protobuf.Timestamp
-	132, // 32: tesla_protocol.CarServer.ChargeScheduleState.charge_schedules:type_name -> tesla_protocol.CarServer.ChargeSchedule
-	132, // 33: tesla_protocol.CarServer.ChargeScheduleState.charge_schedule_window:type_name -> tesla_protocol.CarServer.ChargeSchedule
-	131, // 34: tesla_protocol.CarServer.ChargeScheduleState.timestamp:type_name -> google.protobuf.Timestamp
-	133, // 35: tesla_protocol.CarServer.PreconditioningScheduleState.precondition_schedules:type_name -> tesla_protocol.CarServer.PreconditionSchedule
-	133, // 36: tesla_protocol.CarServer.PreconditioningScheduleState.preconditioning_schedule_window:type_name -> tesla_protocol.CarServer.PreconditionSchedule
-	131, // 37: tesla_protocol.CarServer.PreconditioningScheduleState.timestamp:type_name -> google.protobuf.Timestamp
-	131, // 38: tesla_protocol.CarServer.ParentalControlsState.timestamp:type_name -> google.protobuf.Timestamp
-	41,  // 39: tesla_protocol.CarServer.ParentalControlsState.parental_controls_settings:type_name -> tesla_protocol.CarServer.ParentalControlsSettings
-	104, // 40: tesla_protocol.CarServer.SoftwareUpdateState.status:type_name -> tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus
-	131, // 41: tesla_protocol.CarServer.SoftwareUpdateState.timestamp:type_name -> google.protobuf.Timestamp
-	70,  // 42: tesla_protocol.CarServer.DriveState.shift_state:type_name -> tesla_protocol.CarServer.ShiftState
-	131, // 43: tesla_protocol.CarServer.DriveState.timestamp:type_name -> google.protobuf.Timestamp
-	131, // 44: tesla_protocol.CarServer.DriveState.last_traffic_update:type_name -> google.protobuf.Timestamp
-	134, // 45: tesla_protocol.CarServer.DriveState.active_route_coordinates:type_name -> tesla_protocol.CarServer.LatLong
-	105, // 46: tesla_protocol.CarServer.DriveState.fsd_monthly_history:type_name -> tesla_protocol.CarServer.DriveState.FsdMonthlyMileage
-	106, // 47: tesla_protocol.CarServer.DriveState.fsd_last_7_days_usage:type_name -> tesla_protocol.CarServer.DriveState.FsdLast7DaysUsage
-	109, // 48: tesla_protocol.CarServer.ChargeState.charging_state:type_name -> tesla_protocol.CarServer.ChargeState.ChargingState
-	108, // 49: tesla_protocol.CarServer.ChargeState.fast_charger_type:type_name -> tesla_protocol.CarServer.ChargeState.ChargerType
-	110, // 50: tesla_protocol.CarServer.ChargeState.fast_charger_brand:type_name -> tesla_protocol.CarServer.ChargeState.ChargerBrand
-	107, // 51: tesla_protocol.CarServer.ChargeState.conn_charge_cable:type_name -> tesla_protocol.CarServer.ChargeState.CableType
-	131, // 52: tesla_protocol.CarServer.ChargeState.scheduled_departure_time:type_name -> google.protobuf.Timestamp
-	135, // 53: tesla_protocol.CarServer.ChargeState.charge_port_latch:type_name -> tesla_protocol.CarServer.ChargePortLatchState
-	131, // 54: tesla_protocol.CarServer.ChargeState.timestamp:type_name -> google.protobuf.Timestamp
-	136, // 55: tesla_protocol.CarServer.ChargeState.preconditioning_times:type_name -> tesla_protocol.CarServer.PreconditioningTimes
-	137, // 56: tesla_protocol.CarServer.ChargeState.off_peak_charging_times:type_name -> tesla_protocol.CarServer.OffPeakChargingTimes
+	87,  // 0: tesla_protocol.CarServer.VehicleData.gui_settings:type_name -> tesla_protocol.CarServer.GuiSettings
+	47,  // 1: tesla_protocol.CarServer.VehicleData.charge_state:type_name -> tesla_protocol.CarServer.ChargeState
+	68,  // 2: tesla_protocol.CarServer.VehicleData.climate_state:type_name -> tesla_protocol.CarServer.ClimateState
+	46,  // 3: tesla_protocol.CarServer.VehicleData.drive_state:type_name -> tesla_protocol.CarServer.DriveState
+	59,  // 4: tesla_protocol.CarServer.VehicleData.legacy_vehicle_state:type_name -> tesla_protocol.CarServer.VehicleState
+	88,  // 5: tesla_protocol.CarServer.VehicleData.vehicle_config:type_name -> tesla_protocol.CarServer.VehicleConfig
+	58,  // 6: tesla_protocol.CarServer.VehicleData.location_state:type_name -> tesla_protocol.CarServer.LocationState
+	39,  // 7: tesla_protocol.CarServer.VehicleData.closures_state:type_name -> tesla_protocol.CarServer.ClosuresState
+	89,  // 8: tesla_protocol.CarServer.VehicleData.parked_accessory_state:type_name -> tesla_protocol.CarServer.ParkedAccessoryState
+	40,  // 9: tesla_protocol.CarServer.VehicleData.charge_schedule_state:type_name -> tesla_protocol.CarServer.ChargeScheduleState
+	41,  // 10: tesla_protocol.CarServer.VehicleData.preconditioning_schedule_state:type_name -> tesla_protocol.CarServer.PreconditioningScheduleState
+	90,  // 11: tesla_protocol.CarServer.VehicleData.soh_state:type_name -> tesla_protocol.CarServer.SohState
+	60,  // 12: tesla_protocol.CarServer.VehicleData.vehicle_state:type_name -> tesla_protocol.CarServer.CurrentVehicleState
+	69,  // 13: tesla_protocol.CarServer.VehicleData.tire_pressure_state:type_name -> tesla_protocol.CarServer.TirePressureState
+	70,  // 14: tesla_protocol.CarServer.VehicleData.media_state:type_name -> tesla_protocol.CarServer.MediaState
+	71,  // 15: tesla_protocol.CarServer.VehicleData.media_detail_state:type_name -> tesla_protocol.CarServer.MediaDetailState
+	101, // 16: tesla_protocol.CarServer.VehicleData.vehicle_detail_state:type_name -> tesla_protocol.CarServer.VehicleDetailState
+	45,  // 17: tesla_protocol.CarServer.VehicleData.software_update_state:type_name -> tesla_protocol.CarServer.SoftwareUpdateState
+	44,  // 18: tesla_protocol.CarServer.VehicleData.parental_controls_state:type_name -> tesla_protocol.CarServer.ParentalControlsState
+	91,  // 19: tesla_protocol.CarServer.VehicleData.alert_state:type_name -> tesla_protocol.CarServer.AlertState
+	94,  // 20: tesla_protocol.CarServer.VehicleData.light_show_state:type_name -> tesla_protocol.CarServer.LightShowState
+	97,  // 21: tesla_protocol.CarServer.VehicleData.vehicle_image_state:type_name -> tesla_protocol.CarServer.VehicleImageState
+	98,  // 22: tesla_protocol.CarServer.VehicleData.suspension_state:type_name -> tesla_protocol.CarServer.SuspensionState
+	99,  // 23: tesla_protocol.CarServer.VehicleData.child_presence_detection_state:type_name -> tesla_protocol.CarServer.ChildPresenceDetectionState
+	100, // 24: tesla_protocol.CarServer.VehicleData.display_state:type_name -> tesla_protocol.CarServer.DisplayState
+	102, // 25: tesla_protocol.CarServer.VehicleData.keep_on_accessory_ports_state:type_name -> tesla_protocol.CarServer.KeepOnAccessoryPortsState
+	103, // 26: tesla_protocol.CarServer.ClosuresState.sun_roof_state:type_name -> tesla_protocol.CarServer.ClosuresState.SunRoofState
+	104, // 27: tesla_protocol.CarServer.ClosuresState.center_display_state:type_name -> tesla_protocol.CarServer.ClosuresState.DisplayState
+	105, // 28: tesla_protocol.CarServer.ClosuresState.sentry_mode_state:type_name -> tesla_protocol.CarServer.ClosuresState.SentryModeState
+	42,  // 29: tesla_protocol.CarServer.ClosuresState.speed_limit_mode:type_name -> tesla_protocol.CarServer.SpeedLimitMode
+	132, // 30: tesla_protocol.CarServer.ClosuresState.tonneau_state:type_name -> tesla_protocol.VCSEC.ClosureState_E
+	133, // 31: tesla_protocol.CarServer.ClosuresState.timestamp:type_name -> google.protobuf.Timestamp
+	134, // 32: tesla_protocol.CarServer.ChargeScheduleState.charge_schedules:type_name -> tesla_protocol.CarServer.ChargeSchedule
+	134, // 33: tesla_protocol.CarServer.ChargeScheduleState.charge_schedule_window:type_name -> tesla_protocol.CarServer.ChargeSchedule
+	133, // 34: tesla_protocol.CarServer.ChargeScheduleState.timestamp:type_name -> google.protobuf.Timestamp
+	135, // 35: tesla_protocol.CarServer.PreconditioningScheduleState.precondition_schedules:type_name -> tesla_protocol.CarServer.PreconditionSchedule
+	135, // 36: tesla_protocol.CarServer.PreconditioningScheduleState.preconditioning_schedule_window:type_name -> tesla_protocol.CarServer.PreconditionSchedule
+	133, // 37: tesla_protocol.CarServer.PreconditioningScheduleState.timestamp:type_name -> google.protobuf.Timestamp
+	133, // 38: tesla_protocol.CarServer.ParentalControlsState.timestamp:type_name -> google.protobuf.Timestamp
+	43,  // 39: tesla_protocol.CarServer.ParentalControlsState.parental_controls_settings:type_name -> tesla_protocol.CarServer.ParentalControlsSettings
+	106, // 40: tesla_protocol.CarServer.SoftwareUpdateState.status:type_name -> tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus
+	133, // 41: tesla_protocol.CarServer.SoftwareUpdateState.timestamp:type_name -> google.protobuf.Timestamp
+	72,  // 42: tesla_protocol.CarServer.DriveState.shift_state:type_name -> tesla_protocol.CarServer.ShiftState
+	133, // 43: tesla_protocol.CarServer.DriveState.timestamp:type_name -> google.protobuf.Timestamp
+	133, // 44: tesla_protocol.CarServer.DriveState.last_traffic_update:type_name -> google.protobuf.Timestamp
+	136, // 45: tesla_protocol.CarServer.DriveState.active_route_coordinates:type_name -> tesla_protocol.CarServer.LatLong
+	107, // 46: tesla_protocol.CarServer.DriveState.fsd_monthly_history:type_name -> tesla_protocol.CarServer.DriveState.FsdMonthlyMileage
+	108, // 47: tesla_protocol.CarServer.DriveState.fsd_last_7_days_usage:type_name -> tesla_protocol.CarServer.DriveState.FsdLast7DaysUsage
+	111, // 48: tesla_protocol.CarServer.ChargeState.charging_state:type_name -> tesla_protocol.CarServer.ChargeState.ChargingState
+	110, // 49: tesla_protocol.CarServer.ChargeState.fast_charger_type:type_name -> tesla_protocol.CarServer.ChargeState.ChargerType
+	112, // 50: tesla_protocol.CarServer.ChargeState.fast_charger_brand:type_name -> tesla_protocol.CarServer.ChargeState.ChargerBrand
+	109, // 51: tesla_protocol.CarServer.ChargeState.conn_charge_cable:type_name -> tesla_protocol.CarServer.ChargeState.CableType
+	133, // 52: tesla_protocol.CarServer.ChargeState.scheduled_departure_time:type_name -> google.protobuf.Timestamp
+	137, // 53: tesla_protocol.CarServer.ChargeState.charge_port_latch:type_name -> tesla_protocol.CarServer.ChargePortLatchState
+	133, // 54: tesla_protocol.CarServer.ChargeState.timestamp:type_name -> google.protobuf.Timestamp
+	138, // 55: tesla_protocol.CarServer.ChargeState.preconditioning_times:type_name -> tesla_protocol.CarServer.PreconditioningTimes
+	139, // 56: tesla_protocol.CarServer.ChargeState.off_peak_charging_times:type_name -> tesla_protocol.CarServer.OffPeakChargingTimes
 	8,   // 57: tesla_protocol.CarServer.ChargeState.scheduled_charging_mode:type_name -> tesla_protocol.CarServer.ChargeState.ScheduledChargingMode
 	9,   // 58: tesla_protocol.CarServer.ChargeState.charge_port_color:type_name -> tesla_protocol.CarServer.ChargeState.ChargePortColor_E
 	10,  // 59: tesla_protocol.CarServer.ChargeState.charge_limit_reason:type_name -> tesla_protocol.CarServer.ChargeState.ChargeLimitReason
-	46,  // 60: tesla_protocol.CarServer.ChargeState.managed_charging_state:type_name -> tesla_protocol.CarServer.ManagedChargingState
+	48,  // 60: tesla_protocol.CarServer.ChargeState.managed_charging_state:type_name -> tesla_protocol.CarServer.ManagedChargingState
 	11,  // 61: tesla_protocol.CarServer.ChargeState.outlet_state:type_name -> tesla_protocol.CarServer.ChargeState.OutletState
 	12,  // 62: tesla_protocol.CarServer.ChargeState.power_feed_state:type_name -> tesla_protocol.CarServer.ChargeState.PowerFeedState
 	14,  // 63: tesla_protocol.CarServer.ChargeState.powershare_type:type_name -> tesla_protocol.CarServer.ChargeState.PowershareType
 	13,  // 64: tesla_protocol.CarServer.ChargeState.powershare_status:type_name -> tesla_protocol.CarServer.ChargeState.PowershareStatus
 	15,  // 65: tesla_protocol.CarServer.ChargeState.powershare_stop_reason:type_name -> tesla_protocol.CarServer.ChargeState.PowershareStopReason
-	134, // 66: tesla_protocol.CarServer.ChargeState.home_location:type_name -> tesla_protocol.CarServer.LatLong
-	134, // 67: tesla_protocol.CarServer.ChargeState.work_location:type_name -> tesla_protocol.CarServer.LatLong
-	131, // 68: tesla_protocol.CarServer.ChargeState.paid_session_start_time:type_name -> google.protobuf.Timestamp
-	47,  // 69: tesla_protocol.CarServer.ManagedChargingState.charge_on_solar_state:type_name -> tesla_protocol.CarServer.ChargeOnSolarState
-	48,  // 70: tesla_protocol.CarServer.ChargeOnSolarState.not_allowed:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateNotAllowed
-	49,  // 71: tesla_protocol.CarServer.ChargeOnSolarState.no_charge_recommended:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateNoChargeRecommended
-	50,  // 72: tesla_protocol.CarServer.ChargeOnSolarState.charging_on_excess_solar:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateChargingOnExcessSolar
-	51,  // 73: tesla_protocol.CarServer.ChargeOnSolarState.charging_on_anything:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateChargingOnAnything
-	52,  // 74: tesla_protocol.CarServer.ChargeOnSolarState.user_disabled:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateUserDisabled
-	53,  // 75: tesla_protocol.CarServer.ChargeOnSolarState.waiting_for_server:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateWaitingForServer
-	54,  // 76: tesla_protocol.CarServer.ChargeOnSolarState.error:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateError
-	55,  // 77: tesla_protocol.CarServer.ChargeOnSolarState.user_stopped:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateUserStopped
-	138, // 78: tesla_protocol.CarServer.ChargeOnSolarStateNoChargeRecommended.reason:type_name -> tesla_protocol.ManagedCharging.ChargeOnSolarNoChargeReason
-	111, // 79: tesla_protocol.CarServer.LocationState.native_type:type_name -> tesla_protocol.CarServer.LocationState.GPSCoordinateType
-	131, // 80: tesla_protocol.CarServer.LocationState.timestamp:type_name -> google.protobuf.Timestamp
-	60,  // 81: tesla_protocol.CarServer.VehicleState.autopark_style:type_name -> tesla_protocol.CarServer.AutoparkStyle
-	63,  // 82: tesla_protocol.CarServer.VehicleState.active_spoiler_state:type_name -> tesla_protocol.CarServer.SpoilerState
-	43,  // 83: tesla_protocol.CarServer.VehicleState.software_update_state:type_name -> tesla_protocol.CarServer.SoftwareUpdateState
-	64,  // 84: tesla_protocol.CarServer.VehicleState.legacy_media_state:type_name -> tesla_protocol.CarServer.LegacyMediaState
-	131, // 85: tesla_protocol.CarServer.VehicleState.timestamp:type_name -> google.protobuf.Timestamp
-	61,  // 86: tesla_protocol.CarServer.VehicleState.autopark_version:type_name -> tesla_protocol.CarServer.AutoparkVersion
-	62,  // 87: tesla_protocol.CarServer.VehicleState.autopark_state:type_name -> tesla_protocol.CarServer.AutoparkState
-	131, // 88: tesla_protocol.CarServer.VehicleState.tpms_last_seen_pressure_time_fl:type_name -> google.protobuf.Timestamp
-	131, // 89: tesla_protocol.CarServer.VehicleState.tpms_last_seen_pressure_time_fr:type_name -> google.protobuf.Timestamp
-	131, // 90: tesla_protocol.CarServer.VehicleState.tpms_last_seen_pressure_time_rl:type_name -> google.protobuf.Timestamp
-	131, // 91: tesla_protocol.CarServer.VehicleState.tpms_last_seen_pressure_time_rr:type_name -> google.protobuf.Timestamp
-	65,  // 92: tesla_protocol.CarServer.VehicleState.legacy_media_info:type_name -> tesla_protocol.CarServer.LegacyMediaInfo
-	112, // 93: tesla_protocol.CarServer.VehicleState.guestMode:type_name -> tesla_protocol.CarServer.VehicleState.GuestMode
-	139, // 94: tesla_protocol.CarServer.VehicleState.gtw_diag_level:type_name -> tesla_protocol.CarServer.GtwDiagLevel
-	41,  // 95: tesla_protocol.CarServer.VehicleState.parental_controls_settings:type_name -> tesla_protocol.CarServer.ParentalControlsSettings
-	2,   // 96: tesla_protocol.CarServer.VehicleState.dashcam_state:type_name -> tesla_protocol.CarServer.DashCamState
-	131, // 97: tesla_protocol.CarServer.CurrentVehicleState.timestamp:type_name -> google.protobuf.Timestamp
-	60,  // 98: tesla_protocol.CarServer.CurrentVehicleState.autopark_style:type_name -> tesla_protocol.CarServer.AutoparkStyle
-	63,  // 99: tesla_protocol.CarServer.CurrentVehicleState.active_spoiler_state:type_name -> tesla_protocol.CarServer.SpoilerState
-	61,  // 100: tesla_protocol.CarServer.CurrentVehicleState.autopark_version:type_name -> tesla_protocol.CarServer.AutoparkVersion
-	62,  // 101: tesla_protocol.CarServer.CurrentVehicleState.autopark_state:type_name -> tesla_protocol.CarServer.AutoparkState
-	2,   // 102: tesla_protocol.CarServer.CurrentVehicleState.dashcam_state:type_name -> tesla_protocol.CarServer.DashCamState
-	112, // 103: tesla_protocol.CarServer.CurrentVehicleState.guest_mode:type_name -> tesla_protocol.CarServer.VehicleState.GuestMode
-	139, // 104: tesla_protocol.CarServer.CurrentVehicleState.gtw_diag_level:type_name -> tesla_protocol.CarServer.GtwDiagLevel
-	59,  // 105: tesla_protocol.CarServer.CurrentVehicleState.dashcam_utils:type_name -> tesla_protocol.CarServer.DashcamUtils
-	140, // 106: tesla_protocol.CarServer.AutoparkStyle.Deadman:type_name -> tesla_protocol.CarServer.Void
-	140, // 107: tesla_protocol.CarServer.AutoparkStyle.Standard:type_name -> tesla_protocol.CarServer.Void
-	140, // 108: tesla_protocol.CarServer.AutoparkVersion.Version2:type_name -> tesla_protocol.CarServer.Void
-	140, // 109: tesla_protocol.CarServer.AutoparkVersion.Version3:type_name -> tesla_protocol.CarServer.Void
-	140, // 110: tesla_protocol.CarServer.AutoparkVersion.Version4:type_name -> tesla_protocol.CarServer.Void
-	140, // 111: tesla_protocol.CarServer.AutoparkState.Standby:type_name -> tesla_protocol.CarServer.Void
-	140, // 112: tesla_protocol.CarServer.AutoparkState.Unavailable:type_name -> tesla_protocol.CarServer.Void
-	140, // 113: tesla_protocol.CarServer.AutoparkState.Ready:type_name -> tesla_protocol.CarServer.Void
-	140, // 114: tesla_protocol.CarServer.AutoparkState.ActiveForward:type_name -> tesla_protocol.CarServer.Void
-	140, // 115: tesla_protocol.CarServer.AutoparkState.ActiveReverse:type_name -> tesla_protocol.CarServer.Void
-	140, // 116: tesla_protocol.CarServer.AutoparkState.Disabled:type_name -> tesla_protocol.CarServer.Void
-	140, // 117: tesla_protocol.CarServer.AutoparkState.Panic:type_name -> tesla_protocol.CarServer.Void
-	140, // 118: tesla_protocol.CarServer.AutoparkState.Preparing:type_name -> tesla_protocol.CarServer.Void
-	140, // 119: tesla_protocol.CarServer.AutoparkState.Aborting:type_name -> tesla_protocol.CarServer.Void
-	140, // 120: tesla_protocol.CarServer.AutoparkState.Paused:type_name -> tesla_protocol.CarServer.Void
-	140, // 121: tesla_protocol.CarServer.AutoparkState.Resuming:type_name -> tesla_protocol.CarServer.Void
-	140, // 122: tesla_protocol.CarServer.AutoparkState.OpeningGate:type_name -> tesla_protocol.CarServer.Void
-	140, // 123: tesla_protocol.CarServer.SpoilerState.Unknown:type_name -> tesla_protocol.CarServer.Void
-	140, // 124: tesla_protocol.CarServer.SpoilerState.Retracted:type_name -> tesla_protocol.CarServer.Void
-	140, // 125: tesla_protocol.CarServer.SpoilerState.Extended:type_name -> tesla_protocol.CarServer.Void
-	140, // 126: tesla_protocol.CarServer.SpoilerState.Fault:type_name -> tesla_protocol.CarServer.Void
-	141, // 127: tesla_protocol.CarServer.LegacyMediaInfo.media_playback_status:type_name -> tesla_protocol.CarServer.MediaPlaybackStatus
-	4,   // 128: tesla_protocol.CarServer.LegacyMediaInfo.now_playing_source:type_name -> tesla_protocol.CarServer.MediaSourceType
-	113, // 129: tesla_protocol.CarServer.ClimateState.climate_keeper_mode:type_name -> tesla_protocol.CarServer.ClimateState.ClimateKeeperMode
-	131, // 130: tesla_protocol.CarServer.ClimateState.timestamp:type_name -> google.protobuf.Timestamp
-	114, // 131: tesla_protocol.CarServer.ClimateState.defrost_mode:type_name -> tesla_protocol.CarServer.ClimateState.DefrostMode
-	17,  // 132: tesla_protocol.CarServer.ClimateState.cabin_overheat_protection:type_name -> tesla_protocol.CarServer.ClimateState.CabinOverheatProtection_E
-	20,  // 133: tesla_protocol.CarServer.ClimateState.cop_activation_temperature:type_name -> tesla_protocol.CarServer.ClimateState.CopActivationTemp
-	142, // 134: tesla_protocol.CarServer.ClimateState.steering_wheel_heat_level:type_name -> tesla_protocol.CarServer.StwHeatLevel
-	16,  // 135: tesla_protocol.CarServer.ClimateState.hvac_auto_request:type_name -> tesla_protocol.CarServer.ClimateState.HvacAutoRequest
-	21,  // 136: tesla_protocol.CarServer.ClimateState.cop_not_running_reason:type_name -> tesla_protocol.CarServer.ClimateState.COPNotRunningReason
-	22,  // 137: tesla_protocol.CarServer.ClimateState.dog_mode_state:type_name -> tesla_protocol.CarServer.ClimateState.DogModeState
-	131, // 138: tesla_protocol.CarServer.TirePressureState.timestamp:type_name -> google.protobuf.Timestamp
-	131, // 139: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_fl:type_name -> google.protobuf.Timestamp
-	131, // 140: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_fr:type_name -> google.protobuf.Timestamp
-	131, // 141: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_rl:type_name -> google.protobuf.Timestamp
-	131, // 142: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_rr:type_name -> google.protobuf.Timestamp
-	131, // 143: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re1_l0:type_name -> google.protobuf.Timestamp
-	131, // 144: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re1_l1:type_name -> google.protobuf.Timestamp
-	131, // 145: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re1_r0:type_name -> google.protobuf.Timestamp
-	131, // 146: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re1_r1:type_name -> google.protobuf.Timestamp
-	131, // 147: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re2_l0:type_name -> google.protobuf.Timestamp
-	131, // 148: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re2_l1:type_name -> google.protobuf.Timestamp
-	131, // 149: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re2_r0:type_name -> google.protobuf.Timestamp
-	131, // 150: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re2_r1:type_name -> google.protobuf.Timestamp
-	131, // 151: tesla_protocol.CarServer.MediaState.timestamp:type_name -> google.protobuf.Timestamp
-	4,   // 152: tesla_protocol.CarServer.MediaState.now_playing_source:type_name -> tesla_protocol.CarServer.MediaSourceType
-	141, // 153: tesla_protocol.CarServer.MediaState.media_playback_status:type_name -> tesla_protocol.CarServer.MediaPlaybackStatus
-	131, // 154: tesla_protocol.CarServer.MediaDetailState.timestamp:type_name -> google.protobuf.Timestamp
-	3,   // 155: tesla_protocol.CarServer.MediaDetailState.recent_theater_source:type_name -> tesla_protocol.CarServer.TheaterSource
-	140, // 156: tesla_protocol.CarServer.ShiftState.Invalid:type_name -> tesla_protocol.CarServer.Void
-	140, // 157: tesla_protocol.CarServer.ShiftState.P:type_name -> tesla_protocol.CarServer.Void
-	140, // 158: tesla_protocol.CarServer.ShiftState.R:type_name -> tesla_protocol.CarServer.Void
-	140, // 159: tesla_protocol.CarServer.ShiftState.N:type_name -> tesla_protocol.CarServer.Void
-	140, // 160: tesla_protocol.CarServer.ShiftState.D:type_name -> tesla_protocol.CarServer.Void
-	140, // 161: tesla_protocol.CarServer.ShiftState.SNA:type_name -> tesla_protocol.CarServer.Void
-	140, // 162: tesla_protocol.CarServer.VehicleBadging.Base:type_name -> tesla_protocol.CarServer.Void
-	140, // 163: tesla_protocol.CarServer.VehicleBadging.Founder:type_name -> tesla_protocol.CarServer.Void
-	140, // 164: tesla_protocol.CarServer.VehicleBadging.Signature:type_name -> tesla_protocol.CarServer.Void
-	140, // 165: tesla_protocol.CarServer.VehicleBadging.Performance:type_name -> tesla_protocol.CarServer.Void
-	140, // 166: tesla_protocol.CarServer.VehicleBadging.LaunchSeries:type_name -> tesla_protocol.CarServer.Void
-	140, // 167: tesla_protocol.CarServer.VehicleBadging.SignatureSeries:type_name -> tesla_protocol.CarServer.Void
-	140, // 168: tesla_protocol.CarServer.CarTrim.Trim40:type_name -> tesla_protocol.CarServer.Void
-	140, // 169: tesla_protocol.CarServer.CarTrim.OBSOLETETrim50:type_name -> tesla_protocol.CarServer.Void
-	140, // 170: tesla_protocol.CarServer.CarTrim.OBSOLETETrim50D:type_name -> tesla_protocol.CarServer.Void
-	140, // 171: tesla_protocol.CarServer.CarTrim.Trim60:type_name -> tesla_protocol.CarServer.Void
-	140, // 172: tesla_protocol.CarServer.CarTrim.Trim60D:type_name -> tesla_protocol.CarServer.Void
-	140, // 173: tesla_protocol.CarServer.CarTrim.Trim70:type_name -> tesla_protocol.CarServer.Void
-	140, // 174: tesla_protocol.CarServer.CarTrim.Trim70D:type_name -> tesla_protocol.CarServer.Void
-	140, // 175: tesla_protocol.CarServer.CarTrim.Trim75:type_name -> tesla_protocol.CarServer.Void
-	140, // 176: tesla_protocol.CarServer.CarTrim.Trim75D:type_name -> tesla_protocol.CarServer.Void
-	140, // 177: tesla_protocol.CarServer.CarTrim.TrimP75D:type_name -> tesla_protocol.CarServer.Void
-	140, // 178: tesla_protocol.CarServer.CarTrim.Trim85:type_name -> tesla_protocol.CarServer.Void
-	140, // 179: tesla_protocol.CarServer.CarTrim.TrimP85:type_name -> tesla_protocol.CarServer.Void
-	140, // 180: tesla_protocol.CarServer.CarTrim.TrimP85Plus:type_name -> tesla_protocol.CarServer.Void
-	140, // 181: tesla_protocol.CarServer.CarTrim.Trim85D:type_name -> tesla_protocol.CarServer.Void
-	140, // 182: tesla_protocol.CarServer.CarTrim.TrimP85D:type_name -> tesla_protocol.CarServer.Void
-	140, // 183: tesla_protocol.CarServer.CarTrim.Trim90:type_name -> tesla_protocol.CarServer.Void
-	140, // 184: tesla_protocol.CarServer.CarTrim.TrimP90:type_name -> tesla_protocol.CarServer.Void
-	140, // 185: tesla_protocol.CarServer.CarTrim.TrimP90Plus:type_name -> tesla_protocol.CarServer.Void
-	140, // 186: tesla_protocol.CarServer.CarTrim.Trim90D:type_name -> tesla_protocol.CarServer.Void
-	140, // 187: tesla_protocol.CarServer.CarTrim.TrimP90D:type_name -> tesla_protocol.CarServer.Void
-	140, // 188: tesla_protocol.CarServer.CarTrim.Trim100:type_name -> tesla_protocol.CarServer.Void
-	140, // 189: tesla_protocol.CarServer.CarTrim.TrimP100:type_name -> tesla_protocol.CarServer.Void
-	140, // 190: tesla_protocol.CarServer.CarTrim.Trim100D:type_name -> tesla_protocol.CarServer.Void
-	140, // 191: tesla_protocol.CarServer.CarTrim.TrimP100D:type_name -> tesla_protocol.CarServer.Void
-	140, // 192: tesla_protocol.CarServer.CarTrim.Trim50:type_name -> tesla_protocol.CarServer.Void
-	140, // 193: tesla_protocol.CarServer.CarTrim.Trim50D:type_name -> tesla_protocol.CarServer.Void
-	140, // 194: tesla_protocol.CarServer.CarTrim.Trim62:type_name -> tesla_protocol.CarServer.Void
-	140, // 195: tesla_protocol.CarServer.CarTrim.Trim62D:type_name -> tesla_protocol.CarServer.Void
-	140, // 196: tesla_protocol.CarServer.CarTrim.Trim74:type_name -> tesla_protocol.CarServer.Void
-	140, // 197: tesla_protocol.CarServer.CarTrim.Trim74D:type_name -> tesla_protocol.CarServer.Void
-	140, // 198: tesla_protocol.CarServer.CarTrim.TrimP74D:type_name -> tesla_protocol.CarServer.Void
-	140, // 199: tesla_protocol.CarServer.CarTrim.TrimDefault:type_name -> tesla_protocol.CarServer.Void
-	140, // 200: tesla_protocol.CarServer.CarTrim.TrimCyberbeast:type_name -> tesla_protocol.CarServer.Void
-	140, // 201: tesla_protocol.CarServer.CarTrim.TrimInvalid:type_name -> tesla_protocol.CarServer.Void
-	140, // 202: tesla_protocol.CarServer.SunRoofType.None_:type_name -> tesla_protocol.CarServer.Void
-	140, // 203: tesla_protocol.CarServer.SunRoofType.Gen1:type_name -> tesla_protocol.CarServer.Void
-	140, // 204: tesla_protocol.CarServer.SunRoofType.Gen2:type_name -> tesla_protocol.CarServer.Void
-	140, // 205: tesla_protocol.CarServer.WheelType.Unknown:type_name -> tesla_protocol.CarServer.Void
-	140, // 206: tesla_protocol.CarServer.WheelType.ZeroG20Gunpowder:type_name -> tesla_protocol.CarServer.Void
-	140, // 207: tesla_protocol.CarServer.WheelType.Pinwheel18:type_name -> tesla_protocol.CarServer.Void
-	140, // 208: tesla_protocol.CarServer.WheelType.Pinwheel18CapKit:type_name -> tesla_protocol.CarServer.Void
-	140, // 209: tesla_protocol.CarServer.WheelType.Stiletto19:type_name -> tesla_protocol.CarServer.Void
-	140, // 210: tesla_protocol.CarServer.WheelType.Stiletto20:type_name -> tesla_protocol.CarServer.Void
-	140, // 211: tesla_protocol.CarServer.WheelType.Stiletto20DarkStaggered:type_name -> tesla_protocol.CarServer.Void
-	140, // 212: tesla_protocol.CarServer.WheelType.Stiletto20DarkSquare:type_name -> tesla_protocol.CarServer.Void
-	140, // 213: tesla_protocol.CarServer.WheelType.Gemini19Square:type_name -> tesla_protocol.CarServer.Void
-	140, // 214: tesla_protocol.CarServer.WheelType.Gemini19Staggered:type_name -> tesla_protocol.CarServer.Void
-	140, // 215: tesla_protocol.CarServer.WheelType.Induction20Black:type_name -> tesla_protocol.CarServer.Void
-	140, // 216: tesla_protocol.CarServer.WheelType.UberTurbine21Black:type_name -> tesla_protocol.CarServer.Void
-	140, // 217: tesla_protocol.CarServer.WheelType.Apollo19:type_name -> tesla_protocol.CarServer.Void
-	140, // 218: tesla_protocol.CarServer.WheelType.Apollo19CapKit:type_name -> tesla_protocol.CarServer.Void
-	140, // 219: tesla_protocol.CarServer.WheelType.ZeroG19Gunpowder:type_name -> tesla_protocol.CarServer.Void
-	140, // 220: tesla_protocol.CarServer.WheelType.Cardenio19:type_name -> tesla_protocol.CarServer.Void
-	140, // 221: tesla_protocol.CarServer.WheelType.Default:type_name -> tesla_protocol.CarServer.Void
-	140, // 222: tesla_protocol.CarServer.WheelType.NewTurbine22Black:type_name -> tesla_protocol.CarServer.Void
-	140, // 223: tesla_protocol.CarServer.WheelType.Cyberstream:type_name -> tesla_protocol.CarServer.Void
-	140, // 224: tesla_protocol.CarServer.WheelType.Arachnid21:type_name -> tesla_protocol.CarServer.Void
-	140, // 225: tesla_protocol.CarServer.WheelType.Base19:type_name -> tesla_protocol.CarServer.Void
-	140, // 226: tesla_protocol.CarServer.WheelType.Silver21:type_name -> tesla_protocol.CarServer.Void
-	140, // 227: tesla_protocol.CarServer.WheelType.Charcoal21:type_name -> tesla_protocol.CarServer.Void
-	140, // 228: tesla_protocol.CarServer.WheelType.Silver21Euro:type_name -> tesla_protocol.CarServer.Void
-	140, // 229: tesla_protocol.CarServer.WheelType.Aero19:type_name -> tesla_protocol.CarServer.Void
-	140, // 230: tesla_protocol.CarServer.WheelType.Charcoal21Euro:type_name -> tesla_protocol.CarServer.Void
-	140, // 231: tesla_protocol.CarServer.WheelType.Super21Gray:type_name -> tesla_protocol.CarServer.Void
-	140, // 232: tesla_protocol.CarServer.WheelType.Super21Silver:type_name -> tesla_protocol.CarServer.Void
-	140, // 233: tesla_protocol.CarServer.WheelType.Turbine19:type_name -> tesla_protocol.CarServer.Void
-	140, // 234: tesla_protocol.CarServer.WheelType.Turbine19Dark:type_name -> tesla_protocol.CarServer.Void
-	140, // 235: tesla_protocol.CarServer.WheelType.AeroTurbine19:type_name -> tesla_protocol.CarServer.Void
-	140, // 236: tesla_protocol.CarServer.WheelType.AeroTurbine19Black:type_name -> tesla_protocol.CarServer.Void
-	140, // 237: tesla_protocol.CarServer.WheelType.Helix20:type_name -> tesla_protocol.CarServer.Void
-	140, // 238: tesla_protocol.CarServer.WheelType.AeroTurbine20:type_name -> tesla_protocol.CarServer.Void
-	140, // 239: tesla_protocol.CarServer.WheelType.Turbine22:type_name -> tesla_protocol.CarServer.Void
-	140, // 240: tesla_protocol.CarServer.WheelType.Cyclone19Dark:type_name -> tesla_protocol.CarServer.Void
-	140, // 241: tesla_protocol.CarServer.WheelType.AeroTurbine20Dark:type_name -> tesla_protocol.CarServer.Void
-	140, // 242: tesla_protocol.CarServer.WheelType.Turbine22Dark:type_name -> tesla_protocol.CarServer.Void
-	140, // 243: tesla_protocol.CarServer.WheelType.Arachnid21Silver:type_name -> tesla_protocol.CarServer.Void
-	140, // 244: tesla_protocol.CarServer.WheelType.Arachnid21Black:type_name -> tesla_protocol.CarServer.Void
-	140, // 245: tesla_protocol.CarServer.WheelType.Arachnid21Grey:type_name -> tesla_protocol.CarServer.Void
-	140, // 246: tesla_protocol.CarServer.WheelType.Slipstream20Carbon:type_name -> tesla_protocol.CarServer.Void
-	140, // 247: tesla_protocol.CarServer.WheelType.Slipstream20Dark:type_name -> tesla_protocol.CarServer.Void
-	140, // 248: tesla_protocol.CarServer.WheelType.Slipstream19Carbon:type_name -> tesla_protocol.CarServer.Void
-	140, // 249: tesla_protocol.CarServer.WheelType.TwinTurbine21Silver:type_name -> tesla_protocol.CarServer.Void
-	140, // 250: tesla_protocol.CarServer.WheelType.TwinTurbine21Carbon:type_name -> tesla_protocol.CarServer.Void
-	140, // 251: tesla_protocol.CarServer.WheelType.Tempest19SonicSilver:type_name -> tesla_protocol.CarServer.Void
-	140, // 252: tesla_protocol.CarServer.WheelType.PinwheelRefresh18:type_name -> tesla_protocol.CarServer.Void
-	140, // 253: tesla_protocol.CarServer.WheelType.StilettoRefresh19:type_name -> tesla_protocol.CarServer.Void
-	140, // 254: tesla_protocol.CarServer.WheelType.UberTurbine20Gunpowder:type_name -> tesla_protocol.CarServer.Void
-	140, // 255: tesla_protocol.CarServer.WheelType.Glider18:type_name -> tesla_protocol.CarServer.Void
-	140, // 256: tesla_protocol.CarServer.WheelType.Helix19:type_name -> tesla_protocol.CarServer.Void
-	140, // 257: tesla_protocol.CarServer.WheelType.Wishbone20Staggered:type_name -> tesla_protocol.CarServer.Void
-	140, // 258: tesla_protocol.CarServer.WheelType.CtBase20:type_name -> tesla_protocol.CarServer.Void
-	140, // 259: tesla_protocol.CarServer.WheelType.CtPremium20:type_name -> tesla_protocol.CarServer.Void
-	140, // 260: tesla_protocol.CarServer.WheelType.CtBase18:type_name -> tesla_protocol.CarServer.Void
-	140, // 261: tesla_protocol.CarServer.WheelType.Apollo19MetallicShadow:type_name -> tesla_protocol.CarServer.Void
-	140, // 262: tesla_protocol.CarServer.WheelType.Wishbone19Staggered:type_name -> tesla_protocol.CarServer.Void
-	140, // 263: tesla_protocol.CarServer.WheelType.Crossflow19:type_name -> tesla_protocol.CarServer.Void
-	140, // 264: tesla_protocol.CarServer.WheelType.HelixV220:type_name -> tesla_protocol.CarServer.Void
-	140, // 265: tesla_protocol.CarServer.WheelType.Standard19:type_name -> tesla_protocol.CarServer.Void
-	140, // 266: tesla_protocol.CarServer.WheelType.Halo22:type_name -> tesla_protocol.CarServer.Void
-	140, // 267: tesla_protocol.CarServer.WheelType.Riptide20:type_name -> tesla_protocol.CarServer.Void
-	140, // 268: tesla_protocol.CarServer.WheelType.Cypress21:type_name -> tesla_protocol.CarServer.Void
-	140, // 269: tesla_protocol.CarServer.WheelType.MachinaV219:type_name -> tesla_protocol.CarServer.Void
-	140, // 270: tesla_protocol.CarServer.WheelType.ArachnidV221:type_name -> tesla_protocol.CarServer.Void
-	140, // 271: tesla_protocol.CarServer.WheelType.E4118:type_name -> tesla_protocol.CarServer.Void
-	140, // 272: tesla_protocol.CarServer.WheelType.D5018:type_name -> tesla_protocol.CarServer.Void
-	140, // 273: tesla_protocol.CarServer.WheelType.HelixV220Dark:type_name -> tesla_protocol.CarServer.Void
-	140, // 274: tesla_protocol.CarServer.WheelType.UberHelix20:type_name -> tesla_protocol.CarServer.Void
-	140, // 275: tesla_protocol.CarServer.SpoilerType.None_:type_name -> tesla_protocol.CarServer.Void
-	140, // 276: tesla_protocol.CarServer.SpoilerType.Passive:type_name -> tesla_protocol.CarServer.Void
-	140, // 277: tesla_protocol.CarServer.SpoilerType.Active:type_name -> tesla_protocol.CarServer.Void
-	140, // 278: tesla_protocol.CarServer.RoofColor.None_:type_name -> tesla_protocol.CarServer.Void
-	140, // 279: tesla_protocol.CarServer.RoofColor.Glass:type_name -> tesla_protocol.CarServer.Void
-	140, // 280: tesla_protocol.CarServer.RoofColor.Black:type_name -> tesla_protocol.CarServer.Void
-	140, // 281: tesla_protocol.CarServer.RoofColor.Colored:type_name -> tesla_protocol.CarServer.Void
-	140, // 282: tesla_protocol.CarServer.ExteriorColor.Unknown:type_name -> tesla_protocol.CarServer.Void
-	140, // 283: tesla_protocol.CarServer.ExteriorColor.RedMulticoat:type_name -> tesla_protocol.CarServer.Void
-	140, // 284: tesla_protocol.CarServer.ExteriorColor.SolidBlack:type_name -> tesla_protocol.CarServer.Void
-	140, // 285: tesla_protocol.CarServer.ExteriorColor.SilverMetallic:type_name -> tesla_protocol.CarServer.Void
-	140, // 286: tesla_protocol.CarServer.ExteriorColor.MidnightSilver:type_name -> tesla_protocol.CarServer.Void
-	140, // 287: tesla_protocol.CarServer.ExteriorColor.DeepBlue:type_name -> tesla_protocol.CarServer.Void
-	140, // 288: tesla_protocol.CarServer.ExteriorColor.PearlWhite:type_name -> tesla_protocol.CarServer.Void
-	140, // 289: tesla_protocol.CarServer.ExteriorColor.DefaultColor:type_name -> tesla_protocol.CarServer.Void
-	140, // 290: tesla_protocol.CarServer.ExteriorColor.Black:type_name -> tesla_protocol.CarServer.Void
-	140, // 291: tesla_protocol.CarServer.ExteriorColor.White:type_name -> tesla_protocol.CarServer.Void
-	140, // 292: tesla_protocol.CarServer.ExteriorColor.Silver:type_name -> tesla_protocol.CarServer.Void
-	140, // 293: tesla_protocol.CarServer.ExteriorColor.Grey:type_name -> tesla_protocol.CarServer.Void
-	140, // 294: tesla_protocol.CarServer.ExteriorColor.Blue:type_name -> tesla_protocol.CarServer.Void
-	140, // 295: tesla_protocol.CarServer.ExteriorColor.Green:type_name -> tesla_protocol.CarServer.Void
-	140, // 296: tesla_protocol.CarServer.ExteriorColor.Brown:type_name -> tesla_protocol.CarServer.Void
-	140, // 297: tesla_protocol.CarServer.ExteriorColor.Pearl:type_name -> tesla_protocol.CarServer.Void
-	140, // 298: tesla_protocol.CarServer.ExteriorColor.SigRed:type_name -> tesla_protocol.CarServer.Void
-	140, // 299: tesla_protocol.CarServer.ExteriorColor.Red:type_name -> tesla_protocol.CarServer.Void
-	140, // 300: tesla_protocol.CarServer.ExteriorColor.SteelGrey:type_name -> tesla_protocol.CarServer.Void
-	140, // 301: tesla_protocol.CarServer.ExteriorColor.MetallicBlack:type_name -> tesla_protocol.CarServer.Void
-	140, // 302: tesla_protocol.CarServer.ExteriorColor.TitaniumCopper:type_name -> tesla_protocol.CarServer.Void
-	140, // 303: tesla_protocol.CarServer.ExteriorColor.SignatureBlue:type_name -> tesla_protocol.CarServer.Void
-	140, // 304: tesla_protocol.CarServer.ExteriorColor.MidnightCherryRed:type_name -> tesla_protocol.CarServer.Void
-	140, // 305: tesla_protocol.CarServer.ExteriorColor.Quicksilver:type_name -> tesla_protocol.CarServer.Void
-	140, // 306: tesla_protocol.CarServer.ExteriorColor.UltraRed:type_name -> tesla_protocol.CarServer.Void
-	140, // 307: tesla_protocol.CarServer.ExteriorColor.StealthGrey:type_name -> tesla_protocol.CarServer.Void
-	140, // 308: tesla_protocol.CarServer.ExteriorColor.LunarSilver:type_name -> tesla_protocol.CarServer.Void
-	140, // 309: tesla_protocol.CarServer.ExteriorColor.GlacierBlue:type_name -> tesla_protocol.CarServer.Void
-	140, // 310: tesla_protocol.CarServer.ExteriorColor.DiamondBlack:type_name -> tesla_protocol.CarServer.Void
-	140, // 311: tesla_protocol.CarServer.ExteriorColor.FrostBlue:type_name -> tesla_protocol.CarServer.Void
-	140, // 312: tesla_protocol.CarServer.ExteriorColor.SilkRoadSilver:type_name -> tesla_protocol.CarServer.Void
-	140, // 313: tesla_protocol.CarServer.ExteriorColor.MarineBlue:type_name -> tesla_protocol.CarServer.Void
-	140, // 314: tesla_protocol.CarServer.ExteriorColor.GarnetRed:type_name -> tesla_protocol.CarServer.Void
-	140, // 315: tesla_protocol.CarServer.ExteriorColor.CoastalBlue:type_name -> tesla_protocol.CarServer.Void
-	140, // 316: tesla_protocol.CarServer.RearSeatHeaters.None_:type_name -> tesla_protocol.CarServer.Void
-	140, // 317: tesla_protocol.CarServer.RearSeatHeaters.Base:type_name -> tesla_protocol.CarServer.Void
-	140, // 318: tesla_protocol.CarServer.RearSeatHeaters.Executive:type_name -> tesla_protocol.CarServer.Void
-	140, // 319: tesla_protocol.CarServer.RearSeatHeaters.Gentherm:type_name -> tesla_protocol.CarServer.Void
-	140, // 320: tesla_protocol.CarServer.RearSeatHeaters.BaseModelX:type_name -> tesla_protocol.CarServer.Void
-	140, // 321: tesla_protocol.CarServer.SeatType.Base:type_name -> tesla_protocol.CarServer.Void
-	140, // 322: tesla_protocol.CarServer.SeatType.Recaro:type_name -> tesla_protocol.CarServer.Void
-	140, // 323: tesla_protocol.CarServer.SeatType.TeslaMsGen1:type_name -> tesla_protocol.CarServer.Void
-	140, // 324: tesla_protocol.CarServer.RearSeatType.Base:type_name -> tesla_protocol.CarServer.Void
-	140, // 325: tesla_protocol.CarServer.RearSeatType.Recaro:type_name -> tesla_protocol.CarServer.Void
-	140, // 326: tesla_protocol.CarServer.RearSeatType.Executive:type_name -> tesla_protocol.CarServer.Void
-	140, // 327: tesla_protocol.CarServer.RearSeatType.TwoSeat:type_name -> tesla_protocol.CarServer.Void
-	140, // 328: tesla_protocol.CarServer.RearSeatType.FoldFlat:type_name -> tesla_protocol.CarServer.Void
-	140, // 329: tesla_protocol.CarServer.RearSeatType.FoldFlatMotorized:type_name -> tesla_protocol.CarServer.Void
-	140, // 330: tesla_protocol.CarServer.RearSeatType.TwoSeatConsole:type_name -> tesla_protocol.CarServer.Void
-	140, // 331: tesla_protocol.CarServer.RearSeatType.FoldFlatTwoMotor:type_name -> tesla_protocol.CarServer.Void
-	140, // 332: tesla_protocol.CarServer.RearSeatType.FoldFlatTwoMotorHall:type_name -> tesla_protocol.CarServer.Void
-	140, // 333: tesla_protocol.CarServer.RearSeatType.FoldFlatHallBuckles:type_name -> tesla_protocol.CarServer.Void
-	140, // 334: tesla_protocol.CarServer.ThirdRowSeatType.None_:type_name -> tesla_protocol.CarServer.Void
-	140, // 335: tesla_protocol.CarServer.ThirdRowSeatType.FuturisFoldFlat:type_name -> tesla_protocol.CarServer.Void
-	140, // 336: tesla_protocol.CarServer.ThirdRowSeatType.FuturisNoFoldFlat:type_name -> tesla_protocol.CarServer.Void
-	140, // 337: tesla_protocol.CarServer.ThirdRowSeatType.FlatFold:type_name -> tesla_protocol.CarServer.Void
-	140, // 338: tesla_protocol.CarServer.ChargePortType.US:type_name -> tesla_protocol.CarServer.Void
-	140, // 339: tesla_protocol.CarServer.ChargePortType.EU:type_name -> tesla_protocol.CarServer.Void
-	140, // 340: tesla_protocol.CarServer.ChargePortType.GB:type_name -> tesla_protocol.CarServer.Void
-	140, // 341: tesla_protocol.CarServer.ChargePortType.CCS:type_name -> tesla_protocol.CarServer.Void
-	140, // 342: tesla_protocol.CarServer.RearDriveUnit.None_:type_name -> tesla_protocol.CarServer.Void
-	140, // 343: tesla_protocol.CarServer.RearDriveUnit.LargeRear:type_name -> tesla_protocol.CarServer.Void
-	140, // 344: tesla_protocol.CarServer.RearDriveUnit.SmallRear:type_name -> tesla_protocol.CarServer.Void
-	140, // 345: tesla_protocol.CarServer.RearDriveUnit.PM216MOSFET:type_name -> tesla_protocol.CarServer.Void
-	140, // 346: tesla_protocol.CarServer.RearDriveUnit.PM216IGBT:type_name -> tesla_protocol.CarServer.Void
-	140, // 347: tesla_protocol.CarServer.RearDriveUnit.CorianderSingle:type_name -> tesla_protocol.CarServer.Void
-	140, // 348: tesla_protocol.CarServer.RearDriveUnit.CorianderDual:type_name -> tesla_protocol.CarServer.Void
-	140, // 349: tesla_protocol.CarServer.RearDriveUnit.PermanentMagnet:type_name -> tesla_protocol.CarServer.Void
-	140, // 350: tesla_protocol.CarServer.RearDriveUnit.InductionDual:type_name -> tesla_protocol.CarServer.Void
-	140, // 351: tesla_protocol.CarServer.EfficiencyPackage.Default:type_name -> tesla_protocol.CarServer.Void
-	140, // 352: tesla_protocol.CarServer.EfficiencyPackage.M3SRPlus2020:type_name -> tesla_protocol.CarServer.Void
-	140, // 353: tesla_protocol.CarServer.EfficiencyPackage.M3LR2020:type_name -> tesla_protocol.CarServer.Void
-	140, // 354: tesla_protocol.CarServer.EfficiencyPackage.M3LRPerformance2020:type_name -> tesla_protocol.CarServer.Void
-	140, // 355: tesla_protocol.CarServer.EfficiencyPackage.M3SRPlus2020Q4GFSH:type_name -> tesla_protocol.CarServer.Void
-	140, // 356: tesla_protocol.CarServer.EfficiencyPackage.MY2020:type_name -> tesla_protocol.CarServer.Void
-	140, // 357: tesla_protocol.CarServer.EfficiencyPackage.M32021:type_name -> tesla_protocol.CarServer.Void
-	140, // 358: tesla_protocol.CarServer.EfficiencyPackage.MY2021:type_name -> tesla_protocol.CarServer.Void
-	140, // 359: tesla_protocol.CarServer.EfficiencyPackage.SX2020:type_name -> tesla_protocol.CarServer.Void
-	140, // 360: tesla_protocol.CarServer.EfficiencyPackage.S2:type_name -> tesla_protocol.CarServer.Void
-	140, // 361: tesla_protocol.CarServer.EfficiencyPackage.SX2020H2:type_name -> tesla_protocol.CarServer.Void
-	140, // 362: tesla_protocol.CarServer.EfficiencyPackage.M3SRPlus2021Q3GFSH:type_name -> tesla_protocol.CarServer.Void
-	140, // 363: tesla_protocol.CarServer.EfficiencyPackage.M3SRPlus2021Q3Fremont:type_name -> tesla_protocol.CarServer.Void
-	140, // 364: tesla_protocol.CarServer.EfficiencyPackage.MYSRPlus2021Q3GFSH:type_name -> tesla_protocol.CarServer.Void
-	140, // 365: tesla_protocol.CarServer.EfficiencyPackage.MYSRPlus2022Q1TX:type_name -> tesla_protocol.CarServer.Void
-	140, // 366: tesla_protocol.CarServer.EfficiencyPackage.MYRWDEU2022:type_name -> tesla_protocol.CarServer.Void
-	140, // 367: tesla_protocol.CarServer.EfficiencyPackage.M3Poppyseed2024:type_name -> tesla_protocol.CarServer.Void
-	140, // 368: tesla_protocol.CarServer.EfficiencyPackage.M32023GFSHExport:type_name -> tesla_protocol.CarServer.Void
-	140, // 369: tesla_protocol.CarServer.EfficiencyPackage.MY2023GFSHExport:type_name -> tesla_protocol.CarServer.Void
-	140, // 370: tesla_protocol.CarServer.EfficiencyPackage.MY2024:type_name -> tesla_protocol.CarServer.Void
-	140, // 371: tesla_protocol.CarServer.EfficiencyPackage.MS2024:type_name -> tesla_protocol.CarServer.Void
-	140, // 372: tesla_protocol.CarServer.EfficiencyPackage.MX2024:type_name -> tesla_protocol.CarServer.Void
-	140, // 373: tesla_protocol.CarServer.EfficiencyPackage.MY2023SRRWD:type_name -> tesla_protocol.CarServer.Void
-	140, // 374: tesla_protocol.CarServer.EfficiencyPackage.MY2024C:type_name -> tesla_protocol.CarServer.Void
-	140, // 375: tesla_protocol.CarServer.EfficiencyPackage.MY2024GFSHExportSRRWD:type_name -> tesla_protocol.CarServer.Void
-	140, // 376: tesla_protocol.CarServer.EfficiencyPackage.M3Poppyseed2024C:type_name -> tesla_protocol.CarServer.Void
-	140, // 377: tesla_protocol.CarServer.EfficiencyPackage.M32025:type_name -> tesla_protocol.CarServer.Void
-	140, // 378: tesla_protocol.CarServer.EfficiencyPackage.MY2025:type_name -> tesla_protocol.CarServer.Void
-	140, // 379: tesla_protocol.CarServer.EfficiencyPackage.M32025B:type_name -> tesla_protocol.CarServer.Void
-	140, // 380: tesla_protocol.CarServer.EfficiencyPackage.MY2025B:type_name -> tesla_protocol.CarServer.Void
-	140, // 381: tesla_protocol.CarServer.EfficiencyPackage.MS2025:type_name -> tesla_protocol.CarServer.Void
-	140, // 382: tesla_protocol.CarServer.EfficiencyPackage.MX2025:type_name -> tesla_protocol.CarServer.Void
-	140, // 383: tesla_protocol.CarServer.EfficiencyPackage.MYRefresh2025ROW:type_name -> tesla_protocol.CarServer.Void
-	140, // 384: tesla_protocol.CarServer.EfficiencyPackage.MYStandard2025:type_name -> tesla_protocol.CarServer.Void
-	140, // 385: tesla_protocol.CarServer.EfficiencyPackage.MYRefresh2025CN:type_name -> tesla_protocol.CarServer.Void
-	140, // 386: tesla_protocol.CarServer.EfficiencyPackage.MS2026:type_name -> tesla_protocol.CarServer.Void
-	140, // 387: tesla_protocol.CarServer.EfficiencyPackage.MX2026:type_name -> tesla_protocol.CarServer.Void
-	140, // 388: tesla_protocol.CarServer.EfficiencyPackage.MY2025M53:type_name -> tesla_protocol.CarServer.Void
-	140, // 389: tesla_protocol.CarServer.EfficiencyPackage.M32025M53:type_name -> tesla_protocol.CarServer.Void
-	140, // 390: tesla_protocol.CarServer.EfficiencyPackage.MY2025CNPlus:type_name -> tesla_protocol.CarServer.Void
-	140, // 391: tesla_protocol.CarServer.EfficiencyPackage.MS2026B:type_name -> tesla_protocol.CarServer.Void
-	140, // 392: tesla_protocol.CarServer.EfficiencyPackage.M32026B:type_name -> tesla_protocol.CarServer.Void
-	140, // 393: tesla_protocol.CarServer.EfficiencyPackage.MY2026US:type_name -> tesla_protocol.CarServer.Void
-	115, // 394: tesla_protocol.CarServer.GuiSettings.gui_distance_units:type_name -> tesla_protocol.CarServer.GuiSettings.SpeedUnit
-	116, // 395: tesla_protocol.CarServer.GuiSettings.gui_temperature_units:type_name -> tesla_protocol.CarServer.GuiSettings.TemperatureUnit
-	117, // 396: tesla_protocol.CarServer.GuiSettings.gui_charge_rate_units:type_name -> tesla_protocol.CarServer.GuiSettings.ChargeRateUnit
-	118, // 397: tesla_protocol.CarServer.GuiSettings.gui_range_display:type_name -> tesla_protocol.CarServer.GuiSettings.RangeDisplay
-	131, // 398: tesla_protocol.CarServer.GuiSettings.timestamp:type_name -> google.protobuf.Timestamp
-	23,  // 399: tesla_protocol.CarServer.GuiSettings.gui_tirepressure_units:type_name -> tesla_protocol.CarServer.GuiSettings.TirePressureUnit
-	71,  // 400: tesla_protocol.CarServer.VehicleConfig.car_special_type:type_name -> tesla_protocol.CarServer.VehicleBadging
-	72,  // 401: tesla_protocol.CarServer.VehicleConfig.car_trim:type_name -> tesla_protocol.CarServer.CarTrim
-	119, // 402: tesla_protocol.CarServer.VehicleConfig.car_type:type_name -> tesla_protocol.CarServer.VehicleConfig.CarType
-	73,  // 403: tesla_protocol.CarServer.VehicleConfig.sun_roof_installed:type_name -> tesla_protocol.CarServer.SunRoofType
-	74,  // 404: tesla_protocol.CarServer.VehicleConfig.wheel_type:type_name -> tesla_protocol.CarServer.WheelType
-	75,  // 405: tesla_protocol.CarServer.VehicleConfig.spoiler_type:type_name -> tesla_protocol.CarServer.SpoilerType
-	76,  // 406: tesla_protocol.CarServer.VehicleConfig.roof_color:type_name -> tesla_protocol.CarServer.RoofColor
-	77,  // 407: tesla_protocol.CarServer.VehicleConfig.exterior_color:type_name -> tesla_protocol.CarServer.ExteriorColor
-	78,  // 408: tesla_protocol.CarServer.VehicleConfig.rear_seat_heaters:type_name -> tesla_protocol.CarServer.RearSeatHeaters
-	79,  // 409: tesla_protocol.CarServer.VehicleConfig.seat_type:type_name -> tesla_protocol.CarServer.SeatType
-	80,  // 410: tesla_protocol.CarServer.VehicleConfig.rear_seat_type:type_name -> tesla_protocol.CarServer.RearSeatType
-	81,  // 411: tesla_protocol.CarServer.VehicleConfig.third_row_seat_type:type_name -> tesla_protocol.CarServer.ThirdRowSeatType
-	82,  // 412: tesla_protocol.CarServer.VehicleConfig.charge_port_type:type_name -> tesla_protocol.CarServer.ChargePortType
-	131, // 413: tesla_protocol.CarServer.VehicleConfig.timestamp:type_name -> google.protobuf.Timestamp
-	124, // 414: tesla_protocol.CarServer.VehicleConfig.interior_trim_type:type_name -> tesla_protocol.CarServer.VehicleConfig.InteriorTrimType
-	120, // 415: tesla_protocol.CarServer.VehicleConfig.driver_assist:type_name -> tesla_protocol.CarServer.VehicleConfig.DriverAssist
-	121, // 416: tesla_protocol.CarServer.VehicleConfig.performance_package:type_name -> tesla_protocol.CarServer.VehicleConfig.PerformancePackage
-	122, // 417: tesla_protocol.CarServer.VehicleConfig.front_drive_unit:type_name -> tesla_protocol.CarServer.VehicleConfig.FrontDriveUnit
-	83,  // 418: tesla_protocol.CarServer.VehicleConfig.rear_drive_unit:type_name -> tesla_protocol.CarServer.RearDriveUnit
-	84,  // 419: tesla_protocol.CarServer.VehicleConfig.efficiency_package:type_name -> tesla_protocol.CarServer.EfficiencyPackage
-	125, // 420: tesla_protocol.CarServer.VehicleConfig.exterior_trim_type:type_name -> tesla_protocol.CarServer.VehicleConfig.ExteriorTrimType
-	123, // 421: tesla_protocol.CarServer.VehicleConfig.steering_wheel_type:type_name -> tesla_protocol.CarServer.VehicleConfig.SteeringWheelType
-	29,  // 422: tesla_protocol.CarServer.VehicleConfig.headlamp_type:type_name -> tesla_protocol.CarServer.VehicleConfig.HeadlampType_E
-	24,  // 423: tesla_protocol.CarServer.VehicleConfig.aux_park_lamps:type_name -> tesla_protocol.CarServer.VehicleConfig.AuxParkLamps_E
-	32,  // 424: tesla_protocol.CarServer.VehicleConfig.rearlight_type:type_name -> tesla_protocol.CarServer.VehicleConfig.RearLightType
-	143, // 425: tesla_protocol.CarServer.VehicleConfig.rear_seat_heater_type:type_name -> tesla_protocol.CarServer.RearSeatHeaterType
-	144, // 426: tesla_protocol.CarServer.VehicleConfig.fascia_type:type_name -> tesla_protocol.CarServer.FasciaType
-	145, // 427: tesla_protocol.CarServer.VehicleConfig.accessory_lightbar_type:type_name -> tesla_protocol.CarServer.AccessoryLightbarType
-	33,  // 428: tesla_protocol.CarServer.VehicleConfig.seat_trim_type:type_name -> tesla_protocol.CarServer.VehicleConfig.SeatTrimType
-	27,  // 429: tesla_protocol.CarServer.VehicleConfig.drivetrain_type:type_name -> tesla_protocol.CarServer.VehicleConfig.DrivetrainType
-	146, // 430: tesla_protocol.CarServer.VehicleConfig.chassis_type:type_name -> tesla_protocol.CarServer.ChassisType
-	28,  // 431: tesla_protocol.CarServer.VehicleConfig.front_fascia_camera_type:type_name -> tesla_protocol.CarServer.VehicleConfig.FrontFasciaCameraType
-	34,  // 432: tesla_protocol.CarServer.VehicleConfig.turn_indicator_control_type:type_name -> tesla_protocol.CarServer.VehicleConfig.TurnIndicatorControlType
-	30,  // 433: tesla_protocol.CarServer.VehicleConfig.interior_upper_trim_type:type_name -> tesla_protocol.CarServer.VehicleConfig.InteriorUpperTrimType
-	25,  // 434: tesla_protocol.CarServer.VehicleConfig.badging_material_type:type_name -> tesla_protocol.CarServer.VehicleConfig.BadgingMaterialType
-	26,  // 435: tesla_protocol.CarServer.VehicleConfig.bed_lighting_type:type_name -> tesla_protocol.CarServer.VehicleConfig.BedLightingType
-	31,  // 436: tesla_protocol.CarServer.VehicleConfig.rear_light_hardware_variant:type_name -> tesla_protocol.CarServer.VehicleConfig.RearLightHardwareVariant
-	0,   // 437: tesla_protocol.CarServer.VehicleConfig.autopilot_base:type_name -> tesla_protocol.CarServer.AutopilotBase
-	1,   // 438: tesla_protocol.CarServer.VehicleConfig.autopilot_override_state:type_name -> tesla_protocol.CarServer.AutopilotOverrideState
-	147, // 439: tesla_protocol.CarServer.ParkedAccessoryState.front_zone_light_request:type_name -> tesla_protocol.CarServer.ZoneLightRequest
-	147, // 440: tesla_protocol.CarServer.ParkedAccessoryState.rear_zone_light_request:type_name -> tesla_protocol.CarServer.ZoneLightRequest
-	131, // 441: tesla_protocol.CarServer.ParkedAccessoryState.timestamp:type_name -> google.protobuf.Timestamp
-	128, // 442: tesla_protocol.CarServer.SohState.soh_test_state:type_name -> tesla_protocol.CarServer.SohState.SohTestState
-	127, // 443: tesla_protocol.CarServer.SohState.soh_test_end_mode:type_name -> tesla_protocol.CarServer.SohState.SohTestEndMode
-	129, // 444: tesla_protocol.CarServer.SohState.soh_result:type_name -> tesla_protocol.CarServer.SohState.SohResult
-	131, // 445: tesla_protocol.CarServer.SohState.timestamp:type_name -> google.protobuf.Timestamp
-	148, // 446: tesla_protocol.CarServer.AlertState.charging_alerts:type_name -> tesla_protocol.CarServer.ChargingAlert
-	131, // 447: tesla_protocol.CarServer.AlertState.timestamp:type_name -> google.protobuf.Timestamp
-	90,  // 448: tesla_protocol.CarServer.LightShowSettings.light_show_options:type_name -> tesla_protocol.CarServer.LightShowOption
-	131, // 449: tesla_protocol.CarServer.LightShowState.timestamp:type_name -> google.protobuf.Timestamp
-	91,  // 450: tesla_protocol.CarServer.LightShowState.light_show_settings:type_name -> tesla_protocol.CarServer.LightShowSettings
-	93,  // 451: tesla_protocol.CarServer.VehicleImage.asset_data:type_name -> tesla_protocol.CarServer.VehicleImageData
-	5,   // 452: tesla_protocol.CarServer.VehicleImage.image_type:type_name -> tesla_protocol.CarServer.VehicleImageStateType
-	94,  // 453: tesla_protocol.CarServer.VehicleImageState.vehicle_images:type_name -> tesla_protocol.CarServer.VehicleImage
-	131, // 454: tesla_protocol.CarServer.VehicleImageState.timestamp:type_name -> google.protobuf.Timestamp
-	149, // 455: tesla_protocol.CarServer.SuspensionState.allowed_levels:type_name -> tesla_protocol.CarServer.SuspensionLevelObj
-	150, // 456: tesla_protocol.CarServer.SuspensionState.current_level:type_name -> tesla_protocol.CarServer.SuspensionLevel
-	150, // 457: tesla_protocol.CarServer.SuspensionState.target_level:type_name -> tesla_protocol.CarServer.SuspensionLevel
-	151, // 458: tesla_protocol.CarServer.SuspensionState.movement_state:type_name -> tesla_protocol.CarServer.SuspensionActuationState
-	149, // 459: tesla_protocol.CarServer.SuspensionState.level_options:type_name -> tesla_protocol.CarServer.SuspensionLevelObj
-	131, // 460: tesla_protocol.CarServer.SuspensionState.timestamp:type_name -> google.protobuf.Timestamp
-	131, // 461: tesla_protocol.CarServer.ChildPresenceDetectionState.timestamp:type_name -> google.protobuf.Timestamp
-	131, // 462: tesla_protocol.CarServer.DisplayState.timestamp:type_name -> google.protobuf.Timestamp
-	131, // 463: tesla_protocol.CarServer.VehicleDetailState.timestamp:type_name -> google.protobuf.Timestamp
-	6,   // 464: tesla_protocol.CarServer.KeepOnAccessoryPortsState.keep_on_cabin_12v_port_request:type_name -> tesla_protocol.CarServer.KeepOnAccessoryPortRequest
-	6,   // 465: tesla_protocol.CarServer.KeepOnAccessoryPortsState.keep_on_cabin_48v_port_request:type_name -> tesla_protocol.CarServer.KeepOnAccessoryPortRequest
-	131, // 466: tesla_protocol.CarServer.KeepOnAccessoryPortsState.timestamp:type_name -> google.protobuf.Timestamp
-	140, // 467: tesla_protocol.CarServer.ClosuresState.SunRoofState.Unknown:type_name -> tesla_protocol.CarServer.Void
-	140, // 468: tesla_protocol.CarServer.ClosuresState.SunRoofState.Calibrating:type_name -> tesla_protocol.CarServer.Void
-	140, // 469: tesla_protocol.CarServer.ClosuresState.SunRoofState.Closed:type_name -> tesla_protocol.CarServer.Void
-	140, // 470: tesla_protocol.CarServer.ClosuresState.SunRoofState.Open:type_name -> tesla_protocol.CarServer.Void
-	140, // 471: tesla_protocol.CarServer.ClosuresState.SunRoofState.Moving:type_name -> tesla_protocol.CarServer.Void
-	140, // 472: tesla_protocol.CarServer.ClosuresState.SunRoofState.Vent:type_name -> tesla_protocol.CarServer.Void
-	140, // 473: tesla_protocol.CarServer.ClosuresState.DisplayState.Off:type_name -> tesla_protocol.CarServer.Void
-	140, // 474: tesla_protocol.CarServer.ClosuresState.DisplayState.Dim:type_name -> tesla_protocol.CarServer.Void
-	140, // 475: tesla_protocol.CarServer.ClosuresState.DisplayState.Accessory:type_name -> tesla_protocol.CarServer.Void
-	140, // 476: tesla_protocol.CarServer.ClosuresState.DisplayState.On:type_name -> tesla_protocol.CarServer.Void
-	140, // 477: tesla_protocol.CarServer.ClosuresState.DisplayState.Driving:type_name -> tesla_protocol.CarServer.Void
-	140, // 478: tesla_protocol.CarServer.ClosuresState.DisplayState.Charging:type_name -> tesla_protocol.CarServer.Void
-	140, // 479: tesla_protocol.CarServer.ClosuresState.DisplayState.Lock:type_name -> tesla_protocol.CarServer.Void
-	140, // 480: tesla_protocol.CarServer.ClosuresState.DisplayState.Sentry:type_name -> tesla_protocol.CarServer.Void
-	140, // 481: tesla_protocol.CarServer.ClosuresState.DisplayState.Dog:type_name -> tesla_protocol.CarServer.Void
-	140, // 482: tesla_protocol.CarServer.ClosuresState.DisplayState.Entertainment:type_name -> tesla_protocol.CarServer.Void
-	140, // 483: tesla_protocol.CarServer.ClosuresState.SentryModeState.Off:type_name -> tesla_protocol.CarServer.Void
-	140, // 484: tesla_protocol.CarServer.ClosuresState.SentryModeState.Idle:type_name -> tesla_protocol.CarServer.Void
-	140, // 485: tesla_protocol.CarServer.ClosuresState.SentryModeState.Armed:type_name -> tesla_protocol.CarServer.Void
-	140, // 486: tesla_protocol.CarServer.ClosuresState.SentryModeState.Aware:type_name -> tesla_protocol.CarServer.Void
-	140, // 487: tesla_protocol.CarServer.ClosuresState.SentryModeState.Panic:type_name -> tesla_protocol.CarServer.Void
-	140, // 488: tesla_protocol.CarServer.ClosuresState.SentryModeState.Quiet:type_name -> tesla_protocol.CarServer.Void
-	140, // 489: tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus.Unknown:type_name -> tesla_protocol.CarServer.Void
-	140, // 490: tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus.Installing:type_name -> tesla_protocol.CarServer.Void
-	140, // 491: tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus.Scheduled:type_name -> tesla_protocol.CarServer.Void
-	140, // 492: tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus.Available:type_name -> tesla_protocol.CarServer.Void
-	140, // 493: tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus.DownloadingWifiWait:type_name -> tesla_protocol.CarServer.Void
-	140, // 494: tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus.Downloading:type_name -> tesla_protocol.CarServer.Void
-	140, // 495: tesla_protocol.CarServer.ChargeState.CableType.SNA:type_name -> tesla_protocol.CarServer.Void
-	140, // 496: tesla_protocol.CarServer.ChargeState.CableType.IEC:type_name -> tesla_protocol.CarServer.Void
-	140, // 497: tesla_protocol.CarServer.ChargeState.CableType.SAE:type_name -> tesla_protocol.CarServer.Void
-	140, // 498: tesla_protocol.CarServer.ChargeState.CableType.GB_AC:type_name -> tesla_protocol.CarServer.Void
-	140, // 499: tesla_protocol.CarServer.ChargeState.CableType.GB_DC:type_name -> tesla_protocol.CarServer.Void
-	140, // 500: tesla_protocol.CarServer.ChargeState.ChargerType.SNA:type_name -> tesla_protocol.CarServer.Void
-	140, // 501: tesla_protocol.CarServer.ChargeState.ChargerType.Supercharger:type_name -> tesla_protocol.CarServer.Void
-	140, // 502: tesla_protocol.CarServer.ChargeState.ChargerType.Chademo:type_name -> tesla_protocol.CarServer.Void
-	140, // 503: tesla_protocol.CarServer.ChargeState.ChargerType.Gb:type_name -> tesla_protocol.CarServer.Void
-	140, // 504: tesla_protocol.CarServer.ChargeState.ChargerType.ACSingleWireCAN:type_name -> tesla_protocol.CarServer.Void
-	140, // 505: tesla_protocol.CarServer.ChargeState.ChargerType.Combo:type_name -> tesla_protocol.CarServer.Void
-	140, // 506: tesla_protocol.CarServer.ChargeState.ChargerType.MCSingleWireCAN:type_name -> tesla_protocol.CarServer.Void
-	140, // 507: tesla_protocol.CarServer.ChargeState.ChargerType.Other:type_name -> tesla_protocol.CarServer.Void
-	140, // 508: tesla_protocol.CarServer.ChargeState.ChargerType.Tesla:type_name -> tesla_protocol.CarServer.Void
-	140, // 509: tesla_protocol.CarServer.ChargeState.ChargingState.Unknown:type_name -> tesla_protocol.CarServer.Void
-	140, // 510: tesla_protocol.CarServer.ChargeState.ChargingState.Disconnected:type_name -> tesla_protocol.CarServer.Void
-	140, // 511: tesla_protocol.CarServer.ChargeState.ChargingState.NoPower:type_name -> tesla_protocol.CarServer.Void
-	140, // 512: tesla_protocol.CarServer.ChargeState.ChargingState.Starting:type_name -> tesla_protocol.CarServer.Void
-	140, // 513: tesla_protocol.CarServer.ChargeState.ChargingState.Charging:type_name -> tesla_protocol.CarServer.Void
-	140, // 514: tesla_protocol.CarServer.ChargeState.ChargingState.Complete:type_name -> tesla_protocol.CarServer.Void
-	140, // 515: tesla_protocol.CarServer.ChargeState.ChargingState.Stopped:type_name -> tesla_protocol.CarServer.Void
-	140, // 516: tesla_protocol.CarServer.ChargeState.ChargingState.Calibrating:type_name -> tesla_protocol.CarServer.Void
-	140, // 517: tesla_protocol.CarServer.ChargeState.ChargerBrand.Tesla:type_name -> tesla_protocol.CarServer.Void
-	140, // 518: tesla_protocol.CarServer.ChargeState.ChargerBrand.SNA:type_name -> tesla_protocol.CarServer.Void
-	140, // 519: tesla_protocol.CarServer.LocationState.GPSCoordinateType.GCJ:type_name -> tesla_protocol.CarServer.Void
-	140, // 520: tesla_protocol.CarServer.LocationState.GPSCoordinateType.WGS:type_name -> tesla_protocol.CarServer.Void
-	140, // 521: tesla_protocol.CarServer.ClimateState.ClimateKeeperMode.Unknown:type_name -> tesla_protocol.CarServer.Void
-	140, // 522: tesla_protocol.CarServer.ClimateState.ClimateKeeperMode.Off:type_name -> tesla_protocol.CarServer.Void
-	140, // 523: tesla_protocol.CarServer.ClimateState.ClimateKeeperMode.On:type_name -> tesla_protocol.CarServer.Void
-	140, // 524: tesla_protocol.CarServer.ClimateState.ClimateKeeperMode.Dog:type_name -> tesla_protocol.CarServer.Void
-	140, // 525: tesla_protocol.CarServer.ClimateState.ClimateKeeperMode.Party:type_name -> tesla_protocol.CarServer.Void
-	140, // 526: tesla_protocol.CarServer.ClimateState.DefrostMode.Off:type_name -> tesla_protocol.CarServer.Void
-	140, // 527: tesla_protocol.CarServer.ClimateState.DefrostMode.Normal:type_name -> tesla_protocol.CarServer.Void
-	140, // 528: tesla_protocol.CarServer.ClimateState.DefrostMode.Max:type_name -> tesla_protocol.CarServer.Void
-	140, // 529: tesla_protocol.CarServer.GuiSettings.SpeedUnit.KilometersPerHour:type_name -> tesla_protocol.CarServer.Void
-	140, // 530: tesla_protocol.CarServer.GuiSettings.SpeedUnit.MilesPerHour:type_name -> tesla_protocol.CarServer.Void
-	140, // 531: tesla_protocol.CarServer.GuiSettings.TemperatureUnit.TemperatureF:type_name -> tesla_protocol.CarServer.Void
-	140, // 532: tesla_protocol.CarServer.GuiSettings.TemperatureUnit.TemperatureC:type_name -> tesla_protocol.CarServer.Void
-	140, // 533: tesla_protocol.CarServer.GuiSettings.ChargeRateUnit.Invalid:type_name -> tesla_protocol.CarServer.Void
-	140, // 534: tesla_protocol.CarServer.GuiSettings.ChargeRateUnit.KilometersPerHour:type_name -> tesla_protocol.CarServer.Void
-	140, // 535: tesla_protocol.CarServer.GuiSettings.ChargeRateUnit.MilesPerHour:type_name -> tesla_protocol.CarServer.Void
-	140, // 536: tesla_protocol.CarServer.GuiSettings.ChargeRateUnit.KW:type_name -> tesla_protocol.CarServer.Void
-	140, // 537: tesla_protocol.CarServer.GuiSettings.RangeDisplay.Ideal:type_name -> tesla_protocol.CarServer.Void
-	140, // 538: tesla_protocol.CarServer.GuiSettings.RangeDisplay.Rated:type_name -> tesla_protocol.CarServer.Void
-	140, // 539: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeModelS:type_name -> tesla_protocol.CarServer.Void
-	140, // 540: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeModelX:type_name -> tesla_protocol.CarServer.Void
-	140, // 541: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeModelS2:type_name -> tesla_protocol.CarServer.Void
-	140, // 542: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeModel3:type_name -> tesla_protocol.CarServer.Void
-	140, // 543: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeModelY:type_name -> tesla_protocol.CarServer.Void
-	140, // 544: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeSemiTruck:type_name -> tesla_protocol.CarServer.Void
-	140, // 545: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeLychee:type_name -> tesla_protocol.CarServer.Void
-	140, // 546: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeTamarind:type_name -> tesla_protocol.CarServer.Void
-	140, // 547: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeCybertruck:type_name -> tesla_protocol.CarServer.Void
-	140, // 548: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeSemiTruckV2:type_name -> tesla_protocol.CarServer.Void
-	140, // 549: tesla_protocol.CarServer.VehicleConfig.DriverAssist.None_:type_name -> tesla_protocol.CarServer.Void
-	140, // 550: tesla_protocol.CarServer.VehicleConfig.DriverAssist.MonoCam:type_name -> tesla_protocol.CarServer.Void
-	140, // 551: tesla_protocol.CarServer.VehicleConfig.DriverAssist.ParkerPascal:type_name -> tesla_protocol.CarServer.Void
-	140, // 552: tesla_protocol.CarServer.VehicleConfig.DriverAssist.ParkerPascal25:type_name -> tesla_protocol.CarServer.Void
-	140, // 553: tesla_protocol.CarServer.VehicleConfig.DriverAssist.TeslaAP3:type_name -> tesla_protocol.CarServer.Void
-	140, // 554: tesla_protocol.CarServer.VehicleConfig.PerformancePackage.None_:type_name -> tesla_protocol.CarServer.Void
-	140, // 555: tesla_protocol.CarServer.VehicleConfig.PerformancePackage.Base:type_name -> tesla_protocol.CarServer.Void
-	140, // 556: tesla_protocol.CarServer.VehicleConfig.PerformancePackage.Performance:type_name -> tesla_protocol.CarServer.Void
-	140, // 557: tesla_protocol.CarServer.VehicleConfig.PerformancePackage.BasePlus:type_name -> tesla_protocol.CarServer.Void
-	140, // 558: tesla_protocol.CarServer.VehicleConfig.FrontDriveUnit.NoneOrSmall:type_name -> tesla_protocol.CarServer.Void
-	140, // 559: tesla_protocol.CarServer.VehicleConfig.FrontDriveUnit.PermanentMagnet:type_name -> tesla_protocol.CarServer.Void
-	140, // 560: tesla_protocol.CarServer.VehicleConfig.SteeringWheelType.Unknown:type_name -> tesla_protocol.CarServer.Void
-	140, // 561: tesla_protocol.CarServer.VehicleConfig.SteeringWheelType.Round:type_name -> tesla_protocol.CarServer.Void
-	140, // 562: tesla_protocol.CarServer.VehicleConfig.SteeringWheelType.Yoke:type_name -> tesla_protocol.CarServer.Void
-	140, // 563: tesla_protocol.CarServer.VehicleConfig.SteeringWheelType.Squircle:type_name -> tesla_protocol.CarServer.Void
-	140, // 564: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.UNKNOWN:type_name -> tesla_protocol.CarServer.Void
-	140, // 565: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.BLACK:type_name -> tesla_protocol.CarServer.Void
-	140, // 566: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.WHITE:type_name -> tesla_protocol.CarServer.Void
-	140, // 567: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.BLACKCONSOLE2:type_name -> tesla_protocol.CarServer.Void
-	140, // 568: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.WHITECONSOLE2:type_name -> tesla_protocol.CarServer.Void
-	140, // 569: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.ALLBLACK:type_name -> tesla_protocol.CarServer.Void
-	140, // 570: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.BLACKANDWHITE:type_name -> tesla_protocol.CarServer.Void
-	140, // 571: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.CREAM:type_name -> tesla_protocol.CarServer.Void
-	140, // 572: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.WALNUTCREAM:type_name -> tesla_protocol.CarServer.Void
-	140, // 573: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.WALNUTWHITE:type_name -> tesla_protocol.CarServer.Void
-	140, // 574: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.EBONYBLACK:type_name -> tesla_protocol.CarServer.Void
-	140, // 575: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.CARBONCREAM:type_name -> tesla_protocol.CarServer.Void
-	140, // 576: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.CARBONWHITE:type_name -> tesla_protocol.CarServer.Void
-	140, // 577: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.CARBONBLACK:type_name -> tesla_protocol.CarServer.Void
-	140, // 578: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.TACTICALGREY:type_name -> tesla_protocol.CarServer.Void
-	140, // 579: tesla_protocol.CarServer.VehicleConfig.ExteriorTrimType.UNKNOWN:type_name -> tesla_protocol.CarServer.Void
-	140, // 580: tesla_protocol.CarServer.VehicleConfig.ExteriorTrimType.STANDARDCHROME:type_name -> tesla_protocol.CarServer.Void
-	140, // 581: tesla_protocol.CarServer.VehicleConfig.ExteriorTrimType.SATINBLACK:type_name -> tesla_protocol.CarServer.Void
-	140, // 582: tesla_protocol.CarServer.SohState.SohTestPhase.Discharge:type_name -> tesla_protocol.CarServer.Void
-	140, // 583: tesla_protocol.CarServer.SohState.SohTestPhase.DischargeRest:type_name -> tesla_protocol.CarServer.Void
-	140, // 584: tesla_protocol.CarServer.SohState.SohTestPhase.Charge:type_name -> tesla_protocol.CarServer.Void
-	140, // 585: tesla_protocol.CarServer.SohState.SohTestPhase.ChargeRest:type_name -> tesla_protocol.CarServer.Void
-	140, // 586: tesla_protocol.CarServer.SohState.SohTestEndMode.Complete:type_name -> tesla_protocol.CarServer.Void
-	140, // 587: tesla_protocol.CarServer.SohState.SohTestEndMode.Failed:type_name -> tesla_protocol.CarServer.Void
-	126, // 588: tesla_protocol.CarServer.SohState.SohTestState.soh_test_phase:type_name -> tesla_protocol.CarServer.SohState.SohTestPhase
-	35,  // 589: tesla_protocol.CarServer.SohState.SohResult.soh_health_result:type_name -> tesla_protocol.CarServer.SohState.WarrantyServiceResult
-	590, // [590:590] is the sub-list for method output_type
-	590, // [590:590] is the sub-list for method input_type
-	590, // [590:590] is the sub-list for extension type_name
-	590, // [590:590] is the sub-list for extension extendee
-	0,   // [0:590] is the sub-list for field type_name
+	136, // 66: tesla_protocol.CarServer.ChargeState.home_location:type_name -> tesla_protocol.CarServer.LatLong
+	136, // 67: tesla_protocol.CarServer.ChargeState.work_location:type_name -> tesla_protocol.CarServer.LatLong
+	133, // 68: tesla_protocol.CarServer.ChargeState.paid_session_start_time:type_name -> google.protobuf.Timestamp
+	16,  // 69: tesla_protocol.CarServer.ChargeState.manual_precon_status:type_name -> tesla_protocol.CarServer.ChargeState.ManualPreconStatus
+	17,  // 70: tesla_protocol.CarServer.ChargeState.ecosystem_charge_mode:type_name -> tesla_protocol.CarServer.ChargeState.EcosystemChargeMode
+	49,  // 71: tesla_protocol.CarServer.ManagedChargingState.charge_on_solar_state:type_name -> tesla_protocol.CarServer.ChargeOnSolarState
+	50,  // 72: tesla_protocol.CarServer.ChargeOnSolarState.not_allowed:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateNotAllowed
+	51,  // 73: tesla_protocol.CarServer.ChargeOnSolarState.no_charge_recommended:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateNoChargeRecommended
+	52,  // 74: tesla_protocol.CarServer.ChargeOnSolarState.charging_on_excess_solar:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateChargingOnExcessSolar
+	53,  // 75: tesla_protocol.CarServer.ChargeOnSolarState.charging_on_anything:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateChargingOnAnything
+	54,  // 76: tesla_protocol.CarServer.ChargeOnSolarState.user_disabled:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateUserDisabled
+	55,  // 77: tesla_protocol.CarServer.ChargeOnSolarState.waiting_for_server:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateWaitingForServer
+	56,  // 78: tesla_protocol.CarServer.ChargeOnSolarState.error:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateError
+	57,  // 79: tesla_protocol.CarServer.ChargeOnSolarState.user_stopped:type_name -> tesla_protocol.CarServer.ChargeOnSolarStateUserStopped
+	140, // 80: tesla_protocol.CarServer.ChargeOnSolarStateNoChargeRecommended.reason:type_name -> tesla_protocol.ManagedCharging.ChargeOnSolarNoChargeReason
+	113, // 81: tesla_protocol.CarServer.LocationState.native_type:type_name -> tesla_protocol.CarServer.LocationState.GPSCoordinateType
+	133, // 82: tesla_protocol.CarServer.LocationState.timestamp:type_name -> google.protobuf.Timestamp
+	62,  // 83: tesla_protocol.CarServer.VehicleState.autopark_style:type_name -> tesla_protocol.CarServer.AutoparkStyle
+	65,  // 84: tesla_protocol.CarServer.VehicleState.active_spoiler_state:type_name -> tesla_protocol.CarServer.SpoilerState
+	45,  // 85: tesla_protocol.CarServer.VehicleState.software_update_state:type_name -> tesla_protocol.CarServer.SoftwareUpdateState
+	66,  // 86: tesla_protocol.CarServer.VehicleState.legacy_media_state:type_name -> tesla_protocol.CarServer.LegacyMediaState
+	133, // 87: tesla_protocol.CarServer.VehicleState.timestamp:type_name -> google.protobuf.Timestamp
+	63,  // 88: tesla_protocol.CarServer.VehicleState.autopark_version:type_name -> tesla_protocol.CarServer.AutoparkVersion
+	64,  // 89: tesla_protocol.CarServer.VehicleState.autopark_state:type_name -> tesla_protocol.CarServer.AutoparkState
+	133, // 90: tesla_protocol.CarServer.VehicleState.tpms_last_seen_pressure_time_fl:type_name -> google.protobuf.Timestamp
+	133, // 91: tesla_protocol.CarServer.VehicleState.tpms_last_seen_pressure_time_fr:type_name -> google.protobuf.Timestamp
+	133, // 92: tesla_protocol.CarServer.VehicleState.tpms_last_seen_pressure_time_rl:type_name -> google.protobuf.Timestamp
+	133, // 93: tesla_protocol.CarServer.VehicleState.tpms_last_seen_pressure_time_rr:type_name -> google.protobuf.Timestamp
+	67,  // 94: tesla_protocol.CarServer.VehicleState.legacy_media_info:type_name -> tesla_protocol.CarServer.LegacyMediaInfo
+	114, // 95: tesla_protocol.CarServer.VehicleState.guestMode:type_name -> tesla_protocol.CarServer.VehicleState.GuestMode
+	141, // 96: tesla_protocol.CarServer.VehicleState.gtw_diag_level:type_name -> tesla_protocol.CarServer.GtwDiagLevel
+	43,  // 97: tesla_protocol.CarServer.VehicleState.parental_controls_settings:type_name -> tesla_protocol.CarServer.ParentalControlsSettings
+	2,   // 98: tesla_protocol.CarServer.VehicleState.dashcam_state:type_name -> tesla_protocol.CarServer.DashCamState
+	133, // 99: tesla_protocol.CarServer.CurrentVehicleState.timestamp:type_name -> google.protobuf.Timestamp
+	62,  // 100: tesla_protocol.CarServer.CurrentVehicleState.autopark_style:type_name -> tesla_protocol.CarServer.AutoparkStyle
+	65,  // 101: tesla_protocol.CarServer.CurrentVehicleState.active_spoiler_state:type_name -> tesla_protocol.CarServer.SpoilerState
+	63,  // 102: tesla_protocol.CarServer.CurrentVehicleState.autopark_version:type_name -> tesla_protocol.CarServer.AutoparkVersion
+	64,  // 103: tesla_protocol.CarServer.CurrentVehicleState.autopark_state:type_name -> tesla_protocol.CarServer.AutoparkState
+	2,   // 104: tesla_protocol.CarServer.CurrentVehicleState.dashcam_state:type_name -> tesla_protocol.CarServer.DashCamState
+	114, // 105: tesla_protocol.CarServer.CurrentVehicleState.guest_mode:type_name -> tesla_protocol.CarServer.VehicleState.GuestMode
+	141, // 106: tesla_protocol.CarServer.CurrentVehicleState.gtw_diag_level:type_name -> tesla_protocol.CarServer.GtwDiagLevel
+	61,  // 107: tesla_protocol.CarServer.CurrentVehicleState.dashcam_utils:type_name -> tesla_protocol.CarServer.DashcamUtils
+	142, // 108: tesla_protocol.CarServer.AutoparkStyle.Deadman:type_name -> tesla_protocol.CarServer.Void
+	142, // 109: tesla_protocol.CarServer.AutoparkStyle.Standard:type_name -> tesla_protocol.CarServer.Void
+	142, // 110: tesla_protocol.CarServer.AutoparkVersion.Version2:type_name -> tesla_protocol.CarServer.Void
+	142, // 111: tesla_protocol.CarServer.AutoparkVersion.Version3:type_name -> tesla_protocol.CarServer.Void
+	142, // 112: tesla_protocol.CarServer.AutoparkVersion.Version4:type_name -> tesla_protocol.CarServer.Void
+	142, // 113: tesla_protocol.CarServer.AutoparkState.Standby:type_name -> tesla_protocol.CarServer.Void
+	142, // 114: tesla_protocol.CarServer.AutoparkState.Unavailable:type_name -> tesla_protocol.CarServer.Void
+	142, // 115: tesla_protocol.CarServer.AutoparkState.Ready:type_name -> tesla_protocol.CarServer.Void
+	142, // 116: tesla_protocol.CarServer.AutoparkState.ActiveForward:type_name -> tesla_protocol.CarServer.Void
+	142, // 117: tesla_protocol.CarServer.AutoparkState.ActiveReverse:type_name -> tesla_protocol.CarServer.Void
+	142, // 118: tesla_protocol.CarServer.AutoparkState.Disabled:type_name -> tesla_protocol.CarServer.Void
+	142, // 119: tesla_protocol.CarServer.AutoparkState.Panic:type_name -> tesla_protocol.CarServer.Void
+	142, // 120: tesla_protocol.CarServer.AutoparkState.Preparing:type_name -> tesla_protocol.CarServer.Void
+	142, // 121: tesla_protocol.CarServer.AutoparkState.Aborting:type_name -> tesla_protocol.CarServer.Void
+	142, // 122: tesla_protocol.CarServer.AutoparkState.Paused:type_name -> tesla_protocol.CarServer.Void
+	142, // 123: tesla_protocol.CarServer.AutoparkState.Resuming:type_name -> tesla_protocol.CarServer.Void
+	142, // 124: tesla_protocol.CarServer.AutoparkState.OpeningGate:type_name -> tesla_protocol.CarServer.Void
+	142, // 125: tesla_protocol.CarServer.SpoilerState.Unknown:type_name -> tesla_protocol.CarServer.Void
+	142, // 126: tesla_protocol.CarServer.SpoilerState.Retracted:type_name -> tesla_protocol.CarServer.Void
+	142, // 127: tesla_protocol.CarServer.SpoilerState.Extended:type_name -> tesla_protocol.CarServer.Void
+	142, // 128: tesla_protocol.CarServer.SpoilerState.Fault:type_name -> tesla_protocol.CarServer.Void
+	143, // 129: tesla_protocol.CarServer.LegacyMediaInfo.media_playback_status:type_name -> tesla_protocol.CarServer.MediaPlaybackStatus
+	4,   // 130: tesla_protocol.CarServer.LegacyMediaInfo.now_playing_source:type_name -> tesla_protocol.CarServer.MediaSourceType
+	115, // 131: tesla_protocol.CarServer.ClimateState.climate_keeper_mode:type_name -> tesla_protocol.CarServer.ClimateState.ClimateKeeperMode
+	133, // 132: tesla_protocol.CarServer.ClimateState.timestamp:type_name -> google.protobuf.Timestamp
+	116, // 133: tesla_protocol.CarServer.ClimateState.defrost_mode:type_name -> tesla_protocol.CarServer.ClimateState.DefrostMode
+	19,  // 134: tesla_protocol.CarServer.ClimateState.cabin_overheat_protection:type_name -> tesla_protocol.CarServer.ClimateState.CabinOverheatProtection_E
+	22,  // 135: tesla_protocol.CarServer.ClimateState.cop_activation_temperature:type_name -> tesla_protocol.CarServer.ClimateState.CopActivationTemp
+	144, // 136: tesla_protocol.CarServer.ClimateState.steering_wheel_heat_level:type_name -> tesla_protocol.CarServer.StwHeatLevel
+	18,  // 137: tesla_protocol.CarServer.ClimateState.hvac_auto_request:type_name -> tesla_protocol.CarServer.ClimateState.HvacAutoRequest
+	23,  // 138: tesla_protocol.CarServer.ClimateState.cop_not_running_reason:type_name -> tesla_protocol.CarServer.ClimateState.COPNotRunningReason
+	24,  // 139: tesla_protocol.CarServer.ClimateState.dog_mode_state:type_name -> tesla_protocol.CarServer.ClimateState.DogModeState
+	133, // 140: tesla_protocol.CarServer.TirePressureState.timestamp:type_name -> google.protobuf.Timestamp
+	133, // 141: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_fl:type_name -> google.protobuf.Timestamp
+	133, // 142: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_fr:type_name -> google.protobuf.Timestamp
+	133, // 143: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_rl:type_name -> google.protobuf.Timestamp
+	133, // 144: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_rr:type_name -> google.protobuf.Timestamp
+	133, // 145: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re1_l0:type_name -> google.protobuf.Timestamp
+	133, // 146: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re1_l1:type_name -> google.protobuf.Timestamp
+	133, // 147: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re1_r0:type_name -> google.protobuf.Timestamp
+	133, // 148: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re1_r1:type_name -> google.protobuf.Timestamp
+	133, // 149: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re2_l0:type_name -> google.protobuf.Timestamp
+	133, // 150: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re2_l1:type_name -> google.protobuf.Timestamp
+	133, // 151: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re2_r0:type_name -> google.protobuf.Timestamp
+	133, // 152: tesla_protocol.CarServer.TirePressureState.tpms_last_seen_pressure_time_re2_r1:type_name -> google.protobuf.Timestamp
+	133, // 153: tesla_protocol.CarServer.MediaState.timestamp:type_name -> google.protobuf.Timestamp
+	4,   // 154: tesla_protocol.CarServer.MediaState.now_playing_source:type_name -> tesla_protocol.CarServer.MediaSourceType
+	143, // 155: tesla_protocol.CarServer.MediaState.media_playback_status:type_name -> tesla_protocol.CarServer.MediaPlaybackStatus
+	133, // 156: tesla_protocol.CarServer.MediaDetailState.timestamp:type_name -> google.protobuf.Timestamp
+	3,   // 157: tesla_protocol.CarServer.MediaDetailState.recent_theater_source:type_name -> tesla_protocol.CarServer.TheaterSource
+	142, // 158: tesla_protocol.CarServer.ShiftState.Invalid:type_name -> tesla_protocol.CarServer.Void
+	142, // 159: tesla_protocol.CarServer.ShiftState.P:type_name -> tesla_protocol.CarServer.Void
+	142, // 160: tesla_protocol.CarServer.ShiftState.R:type_name -> tesla_protocol.CarServer.Void
+	142, // 161: tesla_protocol.CarServer.ShiftState.N:type_name -> tesla_protocol.CarServer.Void
+	142, // 162: tesla_protocol.CarServer.ShiftState.D:type_name -> tesla_protocol.CarServer.Void
+	142, // 163: tesla_protocol.CarServer.ShiftState.SNA:type_name -> tesla_protocol.CarServer.Void
+	142, // 164: tesla_protocol.CarServer.VehicleBadging.Base:type_name -> tesla_protocol.CarServer.Void
+	142, // 165: tesla_protocol.CarServer.VehicleBadging.Founder:type_name -> tesla_protocol.CarServer.Void
+	142, // 166: tesla_protocol.CarServer.VehicleBadging.Signature:type_name -> tesla_protocol.CarServer.Void
+	142, // 167: tesla_protocol.CarServer.VehicleBadging.Performance:type_name -> tesla_protocol.CarServer.Void
+	142, // 168: tesla_protocol.CarServer.VehicleBadging.LaunchSeries:type_name -> tesla_protocol.CarServer.Void
+	142, // 169: tesla_protocol.CarServer.VehicleBadging.SignatureSeries:type_name -> tesla_protocol.CarServer.Void
+	142, // 170: tesla_protocol.CarServer.CarTrim.Trim40:type_name -> tesla_protocol.CarServer.Void
+	142, // 171: tesla_protocol.CarServer.CarTrim.OBSOLETETrim50:type_name -> tesla_protocol.CarServer.Void
+	142, // 172: tesla_protocol.CarServer.CarTrim.OBSOLETETrim50D:type_name -> tesla_protocol.CarServer.Void
+	142, // 173: tesla_protocol.CarServer.CarTrim.Trim60:type_name -> tesla_protocol.CarServer.Void
+	142, // 174: tesla_protocol.CarServer.CarTrim.Trim60D:type_name -> tesla_protocol.CarServer.Void
+	142, // 175: tesla_protocol.CarServer.CarTrim.Trim70:type_name -> tesla_protocol.CarServer.Void
+	142, // 176: tesla_protocol.CarServer.CarTrim.Trim70D:type_name -> tesla_protocol.CarServer.Void
+	142, // 177: tesla_protocol.CarServer.CarTrim.Trim75:type_name -> tesla_protocol.CarServer.Void
+	142, // 178: tesla_protocol.CarServer.CarTrim.Trim75D:type_name -> tesla_protocol.CarServer.Void
+	142, // 179: tesla_protocol.CarServer.CarTrim.TrimP75D:type_name -> tesla_protocol.CarServer.Void
+	142, // 180: tesla_protocol.CarServer.CarTrim.Trim85:type_name -> tesla_protocol.CarServer.Void
+	142, // 181: tesla_protocol.CarServer.CarTrim.TrimP85:type_name -> tesla_protocol.CarServer.Void
+	142, // 182: tesla_protocol.CarServer.CarTrim.TrimP85Plus:type_name -> tesla_protocol.CarServer.Void
+	142, // 183: tesla_protocol.CarServer.CarTrim.Trim85D:type_name -> tesla_protocol.CarServer.Void
+	142, // 184: tesla_protocol.CarServer.CarTrim.TrimP85D:type_name -> tesla_protocol.CarServer.Void
+	142, // 185: tesla_protocol.CarServer.CarTrim.Trim90:type_name -> tesla_protocol.CarServer.Void
+	142, // 186: tesla_protocol.CarServer.CarTrim.TrimP90:type_name -> tesla_protocol.CarServer.Void
+	142, // 187: tesla_protocol.CarServer.CarTrim.TrimP90Plus:type_name -> tesla_protocol.CarServer.Void
+	142, // 188: tesla_protocol.CarServer.CarTrim.Trim90D:type_name -> tesla_protocol.CarServer.Void
+	142, // 189: tesla_protocol.CarServer.CarTrim.TrimP90D:type_name -> tesla_protocol.CarServer.Void
+	142, // 190: tesla_protocol.CarServer.CarTrim.Trim100:type_name -> tesla_protocol.CarServer.Void
+	142, // 191: tesla_protocol.CarServer.CarTrim.TrimP100:type_name -> tesla_protocol.CarServer.Void
+	142, // 192: tesla_protocol.CarServer.CarTrim.Trim100D:type_name -> tesla_protocol.CarServer.Void
+	142, // 193: tesla_protocol.CarServer.CarTrim.TrimP100D:type_name -> tesla_protocol.CarServer.Void
+	142, // 194: tesla_protocol.CarServer.CarTrim.Trim50:type_name -> tesla_protocol.CarServer.Void
+	142, // 195: tesla_protocol.CarServer.CarTrim.Trim50D:type_name -> tesla_protocol.CarServer.Void
+	142, // 196: tesla_protocol.CarServer.CarTrim.Trim62:type_name -> tesla_protocol.CarServer.Void
+	142, // 197: tesla_protocol.CarServer.CarTrim.Trim62D:type_name -> tesla_protocol.CarServer.Void
+	142, // 198: tesla_protocol.CarServer.CarTrim.Trim74:type_name -> tesla_protocol.CarServer.Void
+	142, // 199: tesla_protocol.CarServer.CarTrim.Trim74D:type_name -> tesla_protocol.CarServer.Void
+	142, // 200: tesla_protocol.CarServer.CarTrim.TrimP74D:type_name -> tesla_protocol.CarServer.Void
+	142, // 201: tesla_protocol.CarServer.CarTrim.TrimDefault:type_name -> tesla_protocol.CarServer.Void
+	142, // 202: tesla_protocol.CarServer.CarTrim.TrimCyberbeast:type_name -> tesla_protocol.CarServer.Void
+	142, // 203: tesla_protocol.CarServer.CarTrim.TrimInvalid:type_name -> tesla_protocol.CarServer.Void
+	142, // 204: tesla_protocol.CarServer.SunRoofType.None_:type_name -> tesla_protocol.CarServer.Void
+	142, // 205: tesla_protocol.CarServer.SunRoofType.Gen1:type_name -> tesla_protocol.CarServer.Void
+	142, // 206: tesla_protocol.CarServer.SunRoofType.Gen2:type_name -> tesla_protocol.CarServer.Void
+	142, // 207: tesla_protocol.CarServer.WheelType.Unknown:type_name -> tesla_protocol.CarServer.Void
+	142, // 208: tesla_protocol.CarServer.WheelType.ZeroG20Gunpowder:type_name -> tesla_protocol.CarServer.Void
+	142, // 209: tesla_protocol.CarServer.WheelType.Pinwheel18:type_name -> tesla_protocol.CarServer.Void
+	142, // 210: tesla_protocol.CarServer.WheelType.Pinwheel18CapKit:type_name -> tesla_protocol.CarServer.Void
+	142, // 211: tesla_protocol.CarServer.WheelType.Stiletto19:type_name -> tesla_protocol.CarServer.Void
+	142, // 212: tesla_protocol.CarServer.WheelType.Stiletto20:type_name -> tesla_protocol.CarServer.Void
+	142, // 213: tesla_protocol.CarServer.WheelType.Stiletto20DarkStaggered:type_name -> tesla_protocol.CarServer.Void
+	142, // 214: tesla_protocol.CarServer.WheelType.Stiletto20DarkSquare:type_name -> tesla_protocol.CarServer.Void
+	142, // 215: tesla_protocol.CarServer.WheelType.Gemini19Square:type_name -> tesla_protocol.CarServer.Void
+	142, // 216: tesla_protocol.CarServer.WheelType.Gemini19Staggered:type_name -> tesla_protocol.CarServer.Void
+	142, // 217: tesla_protocol.CarServer.WheelType.Induction20Black:type_name -> tesla_protocol.CarServer.Void
+	142, // 218: tesla_protocol.CarServer.WheelType.UberTurbine21Black:type_name -> tesla_protocol.CarServer.Void
+	142, // 219: tesla_protocol.CarServer.WheelType.Apollo19:type_name -> tesla_protocol.CarServer.Void
+	142, // 220: tesla_protocol.CarServer.WheelType.Apollo19CapKit:type_name -> tesla_protocol.CarServer.Void
+	142, // 221: tesla_protocol.CarServer.WheelType.ZeroG19Gunpowder:type_name -> tesla_protocol.CarServer.Void
+	142, // 222: tesla_protocol.CarServer.WheelType.Cardenio19:type_name -> tesla_protocol.CarServer.Void
+	142, // 223: tesla_protocol.CarServer.WheelType.Default:type_name -> tesla_protocol.CarServer.Void
+	142, // 224: tesla_protocol.CarServer.WheelType.NewTurbine22Black:type_name -> tesla_protocol.CarServer.Void
+	142, // 225: tesla_protocol.CarServer.WheelType.Cyberstream:type_name -> tesla_protocol.CarServer.Void
+	142, // 226: tesla_protocol.CarServer.WheelType.Arachnid21:type_name -> tesla_protocol.CarServer.Void
+	142, // 227: tesla_protocol.CarServer.WheelType.Base19:type_name -> tesla_protocol.CarServer.Void
+	142, // 228: tesla_protocol.CarServer.WheelType.Silver21:type_name -> tesla_protocol.CarServer.Void
+	142, // 229: tesla_protocol.CarServer.WheelType.Charcoal21:type_name -> tesla_protocol.CarServer.Void
+	142, // 230: tesla_protocol.CarServer.WheelType.Silver21Euro:type_name -> tesla_protocol.CarServer.Void
+	142, // 231: tesla_protocol.CarServer.WheelType.Aero19:type_name -> tesla_protocol.CarServer.Void
+	142, // 232: tesla_protocol.CarServer.WheelType.Charcoal21Euro:type_name -> tesla_protocol.CarServer.Void
+	142, // 233: tesla_protocol.CarServer.WheelType.Super21Gray:type_name -> tesla_protocol.CarServer.Void
+	142, // 234: tesla_protocol.CarServer.WheelType.Super21Silver:type_name -> tesla_protocol.CarServer.Void
+	142, // 235: tesla_protocol.CarServer.WheelType.Turbine19:type_name -> tesla_protocol.CarServer.Void
+	142, // 236: tesla_protocol.CarServer.WheelType.Turbine19Dark:type_name -> tesla_protocol.CarServer.Void
+	142, // 237: tesla_protocol.CarServer.WheelType.AeroTurbine19:type_name -> tesla_protocol.CarServer.Void
+	142, // 238: tesla_protocol.CarServer.WheelType.AeroTurbine19Black:type_name -> tesla_protocol.CarServer.Void
+	142, // 239: tesla_protocol.CarServer.WheelType.Helix20:type_name -> tesla_protocol.CarServer.Void
+	142, // 240: tesla_protocol.CarServer.WheelType.AeroTurbine20:type_name -> tesla_protocol.CarServer.Void
+	142, // 241: tesla_protocol.CarServer.WheelType.Turbine22:type_name -> tesla_protocol.CarServer.Void
+	142, // 242: tesla_protocol.CarServer.WheelType.Cyclone19Dark:type_name -> tesla_protocol.CarServer.Void
+	142, // 243: tesla_protocol.CarServer.WheelType.AeroTurbine20Dark:type_name -> tesla_protocol.CarServer.Void
+	142, // 244: tesla_protocol.CarServer.WheelType.Turbine22Dark:type_name -> tesla_protocol.CarServer.Void
+	142, // 245: tesla_protocol.CarServer.WheelType.Arachnid21Silver:type_name -> tesla_protocol.CarServer.Void
+	142, // 246: tesla_protocol.CarServer.WheelType.Arachnid21Black:type_name -> tesla_protocol.CarServer.Void
+	142, // 247: tesla_protocol.CarServer.WheelType.Arachnid21Grey:type_name -> tesla_protocol.CarServer.Void
+	142, // 248: tesla_protocol.CarServer.WheelType.Slipstream20Carbon:type_name -> tesla_protocol.CarServer.Void
+	142, // 249: tesla_protocol.CarServer.WheelType.Slipstream20Dark:type_name -> tesla_protocol.CarServer.Void
+	142, // 250: tesla_protocol.CarServer.WheelType.Slipstream19Carbon:type_name -> tesla_protocol.CarServer.Void
+	142, // 251: tesla_protocol.CarServer.WheelType.TwinTurbine21Silver:type_name -> tesla_protocol.CarServer.Void
+	142, // 252: tesla_protocol.CarServer.WheelType.TwinTurbine21Carbon:type_name -> tesla_protocol.CarServer.Void
+	142, // 253: tesla_protocol.CarServer.WheelType.Tempest19SonicSilver:type_name -> tesla_protocol.CarServer.Void
+	142, // 254: tesla_protocol.CarServer.WheelType.PinwheelRefresh18:type_name -> tesla_protocol.CarServer.Void
+	142, // 255: tesla_protocol.CarServer.WheelType.StilettoRefresh19:type_name -> tesla_protocol.CarServer.Void
+	142, // 256: tesla_protocol.CarServer.WheelType.UberTurbine20Gunpowder:type_name -> tesla_protocol.CarServer.Void
+	142, // 257: tesla_protocol.CarServer.WheelType.Glider18:type_name -> tesla_protocol.CarServer.Void
+	142, // 258: tesla_protocol.CarServer.WheelType.Helix19:type_name -> tesla_protocol.CarServer.Void
+	142, // 259: tesla_protocol.CarServer.WheelType.Wishbone20Staggered:type_name -> tesla_protocol.CarServer.Void
+	142, // 260: tesla_protocol.CarServer.WheelType.CtBase20:type_name -> tesla_protocol.CarServer.Void
+	142, // 261: tesla_protocol.CarServer.WheelType.CtPremium20:type_name -> tesla_protocol.CarServer.Void
+	142, // 262: tesla_protocol.CarServer.WheelType.CtBase18:type_name -> tesla_protocol.CarServer.Void
+	142, // 263: tesla_protocol.CarServer.WheelType.Apollo19MetallicShadow:type_name -> tesla_protocol.CarServer.Void
+	142, // 264: tesla_protocol.CarServer.WheelType.Wishbone19Staggered:type_name -> tesla_protocol.CarServer.Void
+	142, // 265: tesla_protocol.CarServer.WheelType.Crossflow19:type_name -> tesla_protocol.CarServer.Void
+	142, // 266: tesla_protocol.CarServer.WheelType.HelixV220:type_name -> tesla_protocol.CarServer.Void
+	142, // 267: tesla_protocol.CarServer.WheelType.Standard19:type_name -> tesla_protocol.CarServer.Void
+	142, // 268: tesla_protocol.CarServer.WheelType.Halo22:type_name -> tesla_protocol.CarServer.Void
+	142, // 269: tesla_protocol.CarServer.WheelType.Riptide20:type_name -> tesla_protocol.CarServer.Void
+	142, // 270: tesla_protocol.CarServer.WheelType.Cypress21:type_name -> tesla_protocol.CarServer.Void
+	142, // 271: tesla_protocol.CarServer.WheelType.MachinaV219:type_name -> tesla_protocol.CarServer.Void
+	142, // 272: tesla_protocol.CarServer.WheelType.ArachnidV221:type_name -> tesla_protocol.CarServer.Void
+	142, // 273: tesla_protocol.CarServer.WheelType.E4118:type_name -> tesla_protocol.CarServer.Void
+	142, // 274: tesla_protocol.CarServer.WheelType.D5018:type_name -> tesla_protocol.CarServer.Void
+	142, // 275: tesla_protocol.CarServer.WheelType.HelixV220Dark:type_name -> tesla_protocol.CarServer.Void
+	142, // 276: tesla_protocol.CarServer.WheelType.UberHelix20:type_name -> tesla_protocol.CarServer.Void
+	142, // 277: tesla_protocol.CarServer.SpoilerType.None_:type_name -> tesla_protocol.CarServer.Void
+	142, // 278: tesla_protocol.CarServer.SpoilerType.Passive:type_name -> tesla_protocol.CarServer.Void
+	142, // 279: tesla_protocol.CarServer.SpoilerType.Active:type_name -> tesla_protocol.CarServer.Void
+	142, // 280: tesla_protocol.CarServer.RoofColor.None_:type_name -> tesla_protocol.CarServer.Void
+	142, // 281: tesla_protocol.CarServer.RoofColor.Glass:type_name -> tesla_protocol.CarServer.Void
+	142, // 282: tesla_protocol.CarServer.RoofColor.Black:type_name -> tesla_protocol.CarServer.Void
+	142, // 283: tesla_protocol.CarServer.RoofColor.Colored:type_name -> tesla_protocol.CarServer.Void
+	142, // 284: tesla_protocol.CarServer.ExteriorColor.Unknown:type_name -> tesla_protocol.CarServer.Void
+	142, // 285: tesla_protocol.CarServer.ExteriorColor.RedMulticoat:type_name -> tesla_protocol.CarServer.Void
+	142, // 286: tesla_protocol.CarServer.ExteriorColor.SolidBlack:type_name -> tesla_protocol.CarServer.Void
+	142, // 287: tesla_protocol.CarServer.ExteriorColor.SilverMetallic:type_name -> tesla_protocol.CarServer.Void
+	142, // 288: tesla_protocol.CarServer.ExteriorColor.MidnightSilver:type_name -> tesla_protocol.CarServer.Void
+	142, // 289: tesla_protocol.CarServer.ExteriorColor.DeepBlue:type_name -> tesla_protocol.CarServer.Void
+	142, // 290: tesla_protocol.CarServer.ExteriorColor.PearlWhite:type_name -> tesla_protocol.CarServer.Void
+	142, // 291: tesla_protocol.CarServer.ExteriorColor.DefaultColor:type_name -> tesla_protocol.CarServer.Void
+	142, // 292: tesla_protocol.CarServer.ExteriorColor.Black:type_name -> tesla_protocol.CarServer.Void
+	142, // 293: tesla_protocol.CarServer.ExteriorColor.White:type_name -> tesla_protocol.CarServer.Void
+	142, // 294: tesla_protocol.CarServer.ExteriorColor.Silver:type_name -> tesla_protocol.CarServer.Void
+	142, // 295: tesla_protocol.CarServer.ExteriorColor.Grey:type_name -> tesla_protocol.CarServer.Void
+	142, // 296: tesla_protocol.CarServer.ExteriorColor.Blue:type_name -> tesla_protocol.CarServer.Void
+	142, // 297: tesla_protocol.CarServer.ExteriorColor.Green:type_name -> tesla_protocol.CarServer.Void
+	142, // 298: tesla_protocol.CarServer.ExteriorColor.Brown:type_name -> tesla_protocol.CarServer.Void
+	142, // 299: tesla_protocol.CarServer.ExteriorColor.Pearl:type_name -> tesla_protocol.CarServer.Void
+	142, // 300: tesla_protocol.CarServer.ExteriorColor.SigRed:type_name -> tesla_protocol.CarServer.Void
+	142, // 301: tesla_protocol.CarServer.ExteriorColor.Red:type_name -> tesla_protocol.CarServer.Void
+	142, // 302: tesla_protocol.CarServer.ExteriorColor.SteelGrey:type_name -> tesla_protocol.CarServer.Void
+	142, // 303: tesla_protocol.CarServer.ExteriorColor.MetallicBlack:type_name -> tesla_protocol.CarServer.Void
+	142, // 304: tesla_protocol.CarServer.ExteriorColor.TitaniumCopper:type_name -> tesla_protocol.CarServer.Void
+	142, // 305: tesla_protocol.CarServer.ExteriorColor.SignatureBlue:type_name -> tesla_protocol.CarServer.Void
+	142, // 306: tesla_protocol.CarServer.ExteriorColor.MidnightCherryRed:type_name -> tesla_protocol.CarServer.Void
+	142, // 307: tesla_protocol.CarServer.ExteriorColor.Quicksilver:type_name -> tesla_protocol.CarServer.Void
+	142, // 308: tesla_protocol.CarServer.ExteriorColor.UltraRed:type_name -> tesla_protocol.CarServer.Void
+	142, // 309: tesla_protocol.CarServer.ExteriorColor.StealthGrey:type_name -> tesla_protocol.CarServer.Void
+	142, // 310: tesla_protocol.CarServer.ExteriorColor.LunarSilver:type_name -> tesla_protocol.CarServer.Void
+	142, // 311: tesla_protocol.CarServer.ExteriorColor.GlacierBlue:type_name -> tesla_protocol.CarServer.Void
+	142, // 312: tesla_protocol.CarServer.ExteriorColor.DiamondBlack:type_name -> tesla_protocol.CarServer.Void
+	142, // 313: tesla_protocol.CarServer.ExteriorColor.FrostBlue:type_name -> tesla_protocol.CarServer.Void
+	142, // 314: tesla_protocol.CarServer.ExteriorColor.SilkRoadSilver:type_name -> tesla_protocol.CarServer.Void
+	142, // 315: tesla_protocol.CarServer.ExteriorColor.MarineBlue:type_name -> tesla_protocol.CarServer.Void
+	142, // 316: tesla_protocol.CarServer.ExteriorColor.GarnetRed:type_name -> tesla_protocol.CarServer.Void
+	142, // 317: tesla_protocol.CarServer.ExteriorColor.CoastalBlue:type_name -> tesla_protocol.CarServer.Void
+	142, // 318: tesla_protocol.CarServer.RearSeatHeaters.None_:type_name -> tesla_protocol.CarServer.Void
+	142, // 319: tesla_protocol.CarServer.RearSeatHeaters.Base:type_name -> tesla_protocol.CarServer.Void
+	142, // 320: tesla_protocol.CarServer.RearSeatHeaters.Executive:type_name -> tesla_protocol.CarServer.Void
+	142, // 321: tesla_protocol.CarServer.RearSeatHeaters.Gentherm:type_name -> tesla_protocol.CarServer.Void
+	142, // 322: tesla_protocol.CarServer.RearSeatHeaters.BaseModelX:type_name -> tesla_protocol.CarServer.Void
+	142, // 323: tesla_protocol.CarServer.SeatType.Base:type_name -> tesla_protocol.CarServer.Void
+	142, // 324: tesla_protocol.CarServer.SeatType.Recaro:type_name -> tesla_protocol.CarServer.Void
+	142, // 325: tesla_protocol.CarServer.SeatType.TeslaMsGen1:type_name -> tesla_protocol.CarServer.Void
+	142, // 326: tesla_protocol.CarServer.RearSeatType.Base:type_name -> tesla_protocol.CarServer.Void
+	142, // 327: tesla_protocol.CarServer.RearSeatType.Recaro:type_name -> tesla_protocol.CarServer.Void
+	142, // 328: tesla_protocol.CarServer.RearSeatType.Executive:type_name -> tesla_protocol.CarServer.Void
+	142, // 329: tesla_protocol.CarServer.RearSeatType.TwoSeat:type_name -> tesla_protocol.CarServer.Void
+	142, // 330: tesla_protocol.CarServer.RearSeatType.FoldFlat:type_name -> tesla_protocol.CarServer.Void
+	142, // 331: tesla_protocol.CarServer.RearSeatType.FoldFlatMotorized:type_name -> tesla_protocol.CarServer.Void
+	142, // 332: tesla_protocol.CarServer.RearSeatType.TwoSeatConsole:type_name -> tesla_protocol.CarServer.Void
+	142, // 333: tesla_protocol.CarServer.RearSeatType.FoldFlatTwoMotor:type_name -> tesla_protocol.CarServer.Void
+	142, // 334: tesla_protocol.CarServer.RearSeatType.FoldFlatTwoMotorHall:type_name -> tesla_protocol.CarServer.Void
+	142, // 335: tesla_protocol.CarServer.RearSeatType.FoldFlatHallBuckles:type_name -> tesla_protocol.CarServer.Void
+	142, // 336: tesla_protocol.CarServer.ThirdRowSeatType.None_:type_name -> tesla_protocol.CarServer.Void
+	142, // 337: tesla_protocol.CarServer.ThirdRowSeatType.FuturisFoldFlat:type_name -> tesla_protocol.CarServer.Void
+	142, // 338: tesla_protocol.CarServer.ThirdRowSeatType.FuturisNoFoldFlat:type_name -> tesla_protocol.CarServer.Void
+	142, // 339: tesla_protocol.CarServer.ThirdRowSeatType.FlatFold:type_name -> tesla_protocol.CarServer.Void
+	142, // 340: tesla_protocol.CarServer.ChargePortType.US:type_name -> tesla_protocol.CarServer.Void
+	142, // 341: tesla_protocol.CarServer.ChargePortType.EU:type_name -> tesla_protocol.CarServer.Void
+	142, // 342: tesla_protocol.CarServer.ChargePortType.GB:type_name -> tesla_protocol.CarServer.Void
+	142, // 343: tesla_protocol.CarServer.ChargePortType.CCS:type_name -> tesla_protocol.CarServer.Void
+	142, // 344: tesla_protocol.CarServer.RearDriveUnit.None_:type_name -> tesla_protocol.CarServer.Void
+	142, // 345: tesla_protocol.CarServer.RearDriveUnit.LargeRear:type_name -> tesla_protocol.CarServer.Void
+	142, // 346: tesla_protocol.CarServer.RearDriveUnit.SmallRear:type_name -> tesla_protocol.CarServer.Void
+	142, // 347: tesla_protocol.CarServer.RearDriveUnit.PM216MOSFET:type_name -> tesla_protocol.CarServer.Void
+	142, // 348: tesla_protocol.CarServer.RearDriveUnit.PM216IGBT:type_name -> tesla_protocol.CarServer.Void
+	142, // 349: tesla_protocol.CarServer.RearDriveUnit.CorianderSingle:type_name -> tesla_protocol.CarServer.Void
+	142, // 350: tesla_protocol.CarServer.RearDriveUnit.CorianderDual:type_name -> tesla_protocol.CarServer.Void
+	142, // 351: tesla_protocol.CarServer.RearDriveUnit.PermanentMagnet:type_name -> tesla_protocol.CarServer.Void
+	142, // 352: tesla_protocol.CarServer.RearDriveUnit.InductionDual:type_name -> tesla_protocol.CarServer.Void
+	142, // 353: tesla_protocol.CarServer.EfficiencyPackage.Default:type_name -> tesla_protocol.CarServer.Void
+	142, // 354: tesla_protocol.CarServer.EfficiencyPackage.M3SRPlus2020:type_name -> tesla_protocol.CarServer.Void
+	142, // 355: tesla_protocol.CarServer.EfficiencyPackage.M3LR2020:type_name -> tesla_protocol.CarServer.Void
+	142, // 356: tesla_protocol.CarServer.EfficiencyPackage.M3LRPerformance2020:type_name -> tesla_protocol.CarServer.Void
+	142, // 357: tesla_protocol.CarServer.EfficiencyPackage.M3SRPlus2020Q4GFSH:type_name -> tesla_protocol.CarServer.Void
+	142, // 358: tesla_protocol.CarServer.EfficiencyPackage.MY2020:type_name -> tesla_protocol.CarServer.Void
+	142, // 359: tesla_protocol.CarServer.EfficiencyPackage.M32021:type_name -> tesla_protocol.CarServer.Void
+	142, // 360: tesla_protocol.CarServer.EfficiencyPackage.MY2021:type_name -> tesla_protocol.CarServer.Void
+	142, // 361: tesla_protocol.CarServer.EfficiencyPackage.SX2020:type_name -> tesla_protocol.CarServer.Void
+	142, // 362: tesla_protocol.CarServer.EfficiencyPackage.S2:type_name -> tesla_protocol.CarServer.Void
+	142, // 363: tesla_protocol.CarServer.EfficiencyPackage.SX2020H2:type_name -> tesla_protocol.CarServer.Void
+	142, // 364: tesla_protocol.CarServer.EfficiencyPackage.M3SRPlus2021Q3GFSH:type_name -> tesla_protocol.CarServer.Void
+	142, // 365: tesla_protocol.CarServer.EfficiencyPackage.M3SRPlus2021Q3Fremont:type_name -> tesla_protocol.CarServer.Void
+	142, // 366: tesla_protocol.CarServer.EfficiencyPackage.MYSRPlus2021Q3GFSH:type_name -> tesla_protocol.CarServer.Void
+	142, // 367: tesla_protocol.CarServer.EfficiencyPackage.MYSRPlus2022Q1TX:type_name -> tesla_protocol.CarServer.Void
+	142, // 368: tesla_protocol.CarServer.EfficiencyPackage.MYRWDEU2022:type_name -> tesla_protocol.CarServer.Void
+	142, // 369: tesla_protocol.CarServer.EfficiencyPackage.M3Poppyseed2024:type_name -> tesla_protocol.CarServer.Void
+	142, // 370: tesla_protocol.CarServer.EfficiencyPackage.M32023GFSHExport:type_name -> tesla_protocol.CarServer.Void
+	142, // 371: tesla_protocol.CarServer.EfficiencyPackage.MY2023GFSHExport:type_name -> tesla_protocol.CarServer.Void
+	142, // 372: tesla_protocol.CarServer.EfficiencyPackage.MY2024:type_name -> tesla_protocol.CarServer.Void
+	142, // 373: tesla_protocol.CarServer.EfficiencyPackage.MS2024:type_name -> tesla_protocol.CarServer.Void
+	142, // 374: tesla_protocol.CarServer.EfficiencyPackage.MX2024:type_name -> tesla_protocol.CarServer.Void
+	142, // 375: tesla_protocol.CarServer.EfficiencyPackage.MY2023SRRWD:type_name -> tesla_protocol.CarServer.Void
+	142, // 376: tesla_protocol.CarServer.EfficiencyPackage.MY2024C:type_name -> tesla_protocol.CarServer.Void
+	142, // 377: tesla_protocol.CarServer.EfficiencyPackage.MY2024GFSHExportSRRWD:type_name -> tesla_protocol.CarServer.Void
+	142, // 378: tesla_protocol.CarServer.EfficiencyPackage.M3Poppyseed2024C:type_name -> tesla_protocol.CarServer.Void
+	142, // 379: tesla_protocol.CarServer.EfficiencyPackage.M32025:type_name -> tesla_protocol.CarServer.Void
+	142, // 380: tesla_protocol.CarServer.EfficiencyPackage.MY2025:type_name -> tesla_protocol.CarServer.Void
+	142, // 381: tesla_protocol.CarServer.EfficiencyPackage.M32025B:type_name -> tesla_protocol.CarServer.Void
+	142, // 382: tesla_protocol.CarServer.EfficiencyPackage.MY2025B:type_name -> tesla_protocol.CarServer.Void
+	142, // 383: tesla_protocol.CarServer.EfficiencyPackage.MS2025:type_name -> tesla_protocol.CarServer.Void
+	142, // 384: tesla_protocol.CarServer.EfficiencyPackage.MX2025:type_name -> tesla_protocol.CarServer.Void
+	142, // 385: tesla_protocol.CarServer.EfficiencyPackage.MYRefresh2025ROW:type_name -> tesla_protocol.CarServer.Void
+	142, // 386: tesla_protocol.CarServer.EfficiencyPackage.MYStandard2025:type_name -> tesla_protocol.CarServer.Void
+	142, // 387: tesla_protocol.CarServer.EfficiencyPackage.MYRefresh2025CN:type_name -> tesla_protocol.CarServer.Void
+	142, // 388: tesla_protocol.CarServer.EfficiencyPackage.MS2026:type_name -> tesla_protocol.CarServer.Void
+	142, // 389: tesla_protocol.CarServer.EfficiencyPackage.MX2026:type_name -> tesla_protocol.CarServer.Void
+	142, // 390: tesla_protocol.CarServer.EfficiencyPackage.MY2025M53:type_name -> tesla_protocol.CarServer.Void
+	142, // 391: tesla_protocol.CarServer.EfficiencyPackage.M32025M53:type_name -> tesla_protocol.CarServer.Void
+	142, // 392: tesla_protocol.CarServer.EfficiencyPackage.MY2025CNPlus:type_name -> tesla_protocol.CarServer.Void
+	142, // 393: tesla_protocol.CarServer.EfficiencyPackage.MS2026B:type_name -> tesla_protocol.CarServer.Void
+	142, // 394: tesla_protocol.CarServer.EfficiencyPackage.M32026B:type_name -> tesla_protocol.CarServer.Void
+	142, // 395: tesla_protocol.CarServer.EfficiencyPackage.MY2026US:type_name -> tesla_protocol.CarServer.Void
+	117, // 396: tesla_protocol.CarServer.GuiSettings.gui_distance_units:type_name -> tesla_protocol.CarServer.GuiSettings.SpeedUnit
+	118, // 397: tesla_protocol.CarServer.GuiSettings.gui_temperature_units:type_name -> tesla_protocol.CarServer.GuiSettings.TemperatureUnit
+	119, // 398: tesla_protocol.CarServer.GuiSettings.gui_charge_rate_units:type_name -> tesla_protocol.CarServer.GuiSettings.ChargeRateUnit
+	120, // 399: tesla_protocol.CarServer.GuiSettings.gui_range_display:type_name -> tesla_protocol.CarServer.GuiSettings.RangeDisplay
+	133, // 400: tesla_protocol.CarServer.GuiSettings.timestamp:type_name -> google.protobuf.Timestamp
+	25,  // 401: tesla_protocol.CarServer.GuiSettings.gui_tirepressure_units:type_name -> tesla_protocol.CarServer.GuiSettings.TirePressureUnit
+	73,  // 402: tesla_protocol.CarServer.VehicleConfig.car_special_type:type_name -> tesla_protocol.CarServer.VehicleBadging
+	74,  // 403: tesla_protocol.CarServer.VehicleConfig.car_trim:type_name -> tesla_protocol.CarServer.CarTrim
+	121, // 404: tesla_protocol.CarServer.VehicleConfig.car_type:type_name -> tesla_protocol.CarServer.VehicleConfig.CarType
+	75,  // 405: tesla_protocol.CarServer.VehicleConfig.sun_roof_installed:type_name -> tesla_protocol.CarServer.SunRoofType
+	76,  // 406: tesla_protocol.CarServer.VehicleConfig.wheel_type:type_name -> tesla_protocol.CarServer.WheelType
+	77,  // 407: tesla_protocol.CarServer.VehicleConfig.spoiler_type:type_name -> tesla_protocol.CarServer.SpoilerType
+	78,  // 408: tesla_protocol.CarServer.VehicleConfig.roof_color:type_name -> tesla_protocol.CarServer.RoofColor
+	79,  // 409: tesla_protocol.CarServer.VehicleConfig.exterior_color:type_name -> tesla_protocol.CarServer.ExteriorColor
+	80,  // 410: tesla_protocol.CarServer.VehicleConfig.rear_seat_heaters:type_name -> tesla_protocol.CarServer.RearSeatHeaters
+	81,  // 411: tesla_protocol.CarServer.VehicleConfig.seat_type:type_name -> tesla_protocol.CarServer.SeatType
+	82,  // 412: tesla_protocol.CarServer.VehicleConfig.rear_seat_type:type_name -> tesla_protocol.CarServer.RearSeatType
+	83,  // 413: tesla_protocol.CarServer.VehicleConfig.third_row_seat_type:type_name -> tesla_protocol.CarServer.ThirdRowSeatType
+	84,  // 414: tesla_protocol.CarServer.VehicleConfig.charge_port_type:type_name -> tesla_protocol.CarServer.ChargePortType
+	133, // 415: tesla_protocol.CarServer.VehicleConfig.timestamp:type_name -> google.protobuf.Timestamp
+	126, // 416: tesla_protocol.CarServer.VehicleConfig.interior_trim_type:type_name -> tesla_protocol.CarServer.VehicleConfig.InteriorTrimType
+	122, // 417: tesla_protocol.CarServer.VehicleConfig.driver_assist:type_name -> tesla_protocol.CarServer.VehicleConfig.DriverAssist
+	123, // 418: tesla_protocol.CarServer.VehicleConfig.performance_package:type_name -> tesla_protocol.CarServer.VehicleConfig.PerformancePackage
+	124, // 419: tesla_protocol.CarServer.VehicleConfig.front_drive_unit:type_name -> tesla_protocol.CarServer.VehicleConfig.FrontDriveUnit
+	85,  // 420: tesla_protocol.CarServer.VehicleConfig.rear_drive_unit:type_name -> tesla_protocol.CarServer.RearDriveUnit
+	86,  // 421: tesla_protocol.CarServer.VehicleConfig.efficiency_package:type_name -> tesla_protocol.CarServer.EfficiencyPackage
+	127, // 422: tesla_protocol.CarServer.VehicleConfig.exterior_trim_type:type_name -> tesla_protocol.CarServer.VehicleConfig.ExteriorTrimType
+	125, // 423: tesla_protocol.CarServer.VehicleConfig.steering_wheel_type:type_name -> tesla_protocol.CarServer.VehicleConfig.SteeringWheelType
+	31,  // 424: tesla_protocol.CarServer.VehicleConfig.headlamp_type:type_name -> tesla_protocol.CarServer.VehicleConfig.HeadlampType_E
+	26,  // 425: tesla_protocol.CarServer.VehicleConfig.aux_park_lamps:type_name -> tesla_protocol.CarServer.VehicleConfig.AuxParkLamps_E
+	34,  // 426: tesla_protocol.CarServer.VehicleConfig.rearlight_type:type_name -> tesla_protocol.CarServer.VehicleConfig.RearLightType
+	145, // 427: tesla_protocol.CarServer.VehicleConfig.rear_seat_heater_type:type_name -> tesla_protocol.CarServer.RearSeatHeaterType
+	146, // 428: tesla_protocol.CarServer.VehicleConfig.fascia_type:type_name -> tesla_protocol.CarServer.FasciaType
+	147, // 429: tesla_protocol.CarServer.VehicleConfig.accessory_lightbar_type:type_name -> tesla_protocol.CarServer.AccessoryLightbarType
+	35,  // 430: tesla_protocol.CarServer.VehicleConfig.seat_trim_type:type_name -> tesla_protocol.CarServer.VehicleConfig.SeatTrimType
+	29,  // 431: tesla_protocol.CarServer.VehicleConfig.drivetrain_type:type_name -> tesla_protocol.CarServer.VehicleConfig.DrivetrainType
+	148, // 432: tesla_protocol.CarServer.VehicleConfig.chassis_type:type_name -> tesla_protocol.CarServer.ChassisType
+	30,  // 433: tesla_protocol.CarServer.VehicleConfig.front_fascia_camera_type:type_name -> tesla_protocol.CarServer.VehicleConfig.FrontFasciaCameraType
+	36,  // 434: tesla_protocol.CarServer.VehicleConfig.turn_indicator_control_type:type_name -> tesla_protocol.CarServer.VehicleConfig.TurnIndicatorControlType
+	32,  // 435: tesla_protocol.CarServer.VehicleConfig.interior_upper_trim_type:type_name -> tesla_protocol.CarServer.VehicleConfig.InteriorUpperTrimType
+	27,  // 436: tesla_protocol.CarServer.VehicleConfig.badging_material_type:type_name -> tesla_protocol.CarServer.VehicleConfig.BadgingMaterialType
+	28,  // 437: tesla_protocol.CarServer.VehicleConfig.bed_lighting_type:type_name -> tesla_protocol.CarServer.VehicleConfig.BedLightingType
+	33,  // 438: tesla_protocol.CarServer.VehicleConfig.rear_light_hardware_variant:type_name -> tesla_protocol.CarServer.VehicleConfig.RearLightHardwareVariant
+	0,   // 439: tesla_protocol.CarServer.VehicleConfig.autopilot_base:type_name -> tesla_protocol.CarServer.AutopilotBase
+	1,   // 440: tesla_protocol.CarServer.VehicleConfig.autopilot_override_state:type_name -> tesla_protocol.CarServer.AutopilotOverrideState
+	149, // 441: tesla_protocol.CarServer.ParkedAccessoryState.front_zone_light_request:type_name -> tesla_protocol.CarServer.ZoneLightRequest
+	149, // 442: tesla_protocol.CarServer.ParkedAccessoryState.rear_zone_light_request:type_name -> tesla_protocol.CarServer.ZoneLightRequest
+	133, // 443: tesla_protocol.CarServer.ParkedAccessoryState.timestamp:type_name -> google.protobuf.Timestamp
+	130, // 444: tesla_protocol.CarServer.SohState.soh_test_state:type_name -> tesla_protocol.CarServer.SohState.SohTestState
+	129, // 445: tesla_protocol.CarServer.SohState.soh_test_end_mode:type_name -> tesla_protocol.CarServer.SohState.SohTestEndMode
+	131, // 446: tesla_protocol.CarServer.SohState.soh_result:type_name -> tesla_protocol.CarServer.SohState.SohResult
+	133, // 447: tesla_protocol.CarServer.SohState.timestamp:type_name -> google.protobuf.Timestamp
+	150, // 448: tesla_protocol.CarServer.AlertState.charging_alerts:type_name -> tesla_protocol.CarServer.ChargingAlert
+	133, // 449: tesla_protocol.CarServer.AlertState.timestamp:type_name -> google.protobuf.Timestamp
+	92,  // 450: tesla_protocol.CarServer.LightShowSettings.light_show_options:type_name -> tesla_protocol.CarServer.LightShowOption
+	133, // 451: tesla_protocol.CarServer.LightShowState.timestamp:type_name -> google.protobuf.Timestamp
+	93,  // 452: tesla_protocol.CarServer.LightShowState.light_show_settings:type_name -> tesla_protocol.CarServer.LightShowSettings
+	95,  // 453: tesla_protocol.CarServer.VehicleImage.asset_data:type_name -> tesla_protocol.CarServer.VehicleImageData
+	5,   // 454: tesla_protocol.CarServer.VehicleImage.image_type:type_name -> tesla_protocol.CarServer.VehicleImageStateType
+	96,  // 455: tesla_protocol.CarServer.VehicleImageState.vehicle_images:type_name -> tesla_protocol.CarServer.VehicleImage
+	133, // 456: tesla_protocol.CarServer.VehicleImageState.timestamp:type_name -> google.protobuf.Timestamp
+	151, // 457: tesla_protocol.CarServer.SuspensionState.allowed_levels:type_name -> tesla_protocol.CarServer.SuspensionLevelObj
+	152, // 458: tesla_protocol.CarServer.SuspensionState.current_level:type_name -> tesla_protocol.CarServer.SuspensionLevel
+	152, // 459: tesla_protocol.CarServer.SuspensionState.target_level:type_name -> tesla_protocol.CarServer.SuspensionLevel
+	153, // 460: tesla_protocol.CarServer.SuspensionState.movement_state:type_name -> tesla_protocol.CarServer.SuspensionActuationState
+	151, // 461: tesla_protocol.CarServer.SuspensionState.level_options:type_name -> tesla_protocol.CarServer.SuspensionLevelObj
+	133, // 462: tesla_protocol.CarServer.SuspensionState.timestamp:type_name -> google.protobuf.Timestamp
+	133, // 463: tesla_protocol.CarServer.ChildPresenceDetectionState.timestamp:type_name -> google.protobuf.Timestamp
+	133, // 464: tesla_protocol.CarServer.DisplayState.timestamp:type_name -> google.protobuf.Timestamp
+	133, // 465: tesla_protocol.CarServer.VehicleDetailState.timestamp:type_name -> google.protobuf.Timestamp
+	6,   // 466: tesla_protocol.CarServer.KeepOnAccessoryPortsState.keep_on_cabin_12v_port_request:type_name -> tesla_protocol.CarServer.KeepOnAccessoryPortRequest
+	6,   // 467: tesla_protocol.CarServer.KeepOnAccessoryPortsState.keep_on_cabin_48v_port_request:type_name -> tesla_protocol.CarServer.KeepOnAccessoryPortRequest
+	133, // 468: tesla_protocol.CarServer.KeepOnAccessoryPortsState.timestamp:type_name -> google.protobuf.Timestamp
+	142, // 469: tesla_protocol.CarServer.ClosuresState.SunRoofState.Unknown:type_name -> tesla_protocol.CarServer.Void
+	142, // 470: tesla_protocol.CarServer.ClosuresState.SunRoofState.Calibrating:type_name -> tesla_protocol.CarServer.Void
+	142, // 471: tesla_protocol.CarServer.ClosuresState.SunRoofState.Closed:type_name -> tesla_protocol.CarServer.Void
+	142, // 472: tesla_protocol.CarServer.ClosuresState.SunRoofState.Open:type_name -> tesla_protocol.CarServer.Void
+	142, // 473: tesla_protocol.CarServer.ClosuresState.SunRoofState.Moving:type_name -> tesla_protocol.CarServer.Void
+	142, // 474: tesla_protocol.CarServer.ClosuresState.SunRoofState.Vent:type_name -> tesla_protocol.CarServer.Void
+	142, // 475: tesla_protocol.CarServer.ClosuresState.DisplayState.Off:type_name -> tesla_protocol.CarServer.Void
+	142, // 476: tesla_protocol.CarServer.ClosuresState.DisplayState.Dim:type_name -> tesla_protocol.CarServer.Void
+	142, // 477: tesla_protocol.CarServer.ClosuresState.DisplayState.Accessory:type_name -> tesla_protocol.CarServer.Void
+	142, // 478: tesla_protocol.CarServer.ClosuresState.DisplayState.On:type_name -> tesla_protocol.CarServer.Void
+	142, // 479: tesla_protocol.CarServer.ClosuresState.DisplayState.Driving:type_name -> tesla_protocol.CarServer.Void
+	142, // 480: tesla_protocol.CarServer.ClosuresState.DisplayState.Charging:type_name -> tesla_protocol.CarServer.Void
+	142, // 481: tesla_protocol.CarServer.ClosuresState.DisplayState.Lock:type_name -> tesla_protocol.CarServer.Void
+	142, // 482: tesla_protocol.CarServer.ClosuresState.DisplayState.Sentry:type_name -> tesla_protocol.CarServer.Void
+	142, // 483: tesla_protocol.CarServer.ClosuresState.DisplayState.Dog:type_name -> tesla_protocol.CarServer.Void
+	142, // 484: tesla_protocol.CarServer.ClosuresState.DisplayState.Entertainment:type_name -> tesla_protocol.CarServer.Void
+	142, // 485: tesla_protocol.CarServer.ClosuresState.SentryModeState.Off:type_name -> tesla_protocol.CarServer.Void
+	142, // 486: tesla_protocol.CarServer.ClosuresState.SentryModeState.Idle:type_name -> tesla_protocol.CarServer.Void
+	142, // 487: tesla_protocol.CarServer.ClosuresState.SentryModeState.Armed:type_name -> tesla_protocol.CarServer.Void
+	142, // 488: tesla_protocol.CarServer.ClosuresState.SentryModeState.Aware:type_name -> tesla_protocol.CarServer.Void
+	142, // 489: tesla_protocol.CarServer.ClosuresState.SentryModeState.Panic:type_name -> tesla_protocol.CarServer.Void
+	142, // 490: tesla_protocol.CarServer.ClosuresState.SentryModeState.Quiet:type_name -> tesla_protocol.CarServer.Void
+	142, // 491: tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus.Unknown:type_name -> tesla_protocol.CarServer.Void
+	142, // 492: tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus.Installing:type_name -> tesla_protocol.CarServer.Void
+	142, // 493: tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus.Scheduled:type_name -> tesla_protocol.CarServer.Void
+	142, // 494: tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus.Available:type_name -> tesla_protocol.CarServer.Void
+	142, // 495: tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus.DownloadingWifiWait:type_name -> tesla_protocol.CarServer.Void
+	142, // 496: tesla_protocol.CarServer.SoftwareUpdateState.SoftwareUpdateStatus.Downloading:type_name -> tesla_protocol.CarServer.Void
+	142, // 497: tesla_protocol.CarServer.ChargeState.CableType.SNA:type_name -> tesla_protocol.CarServer.Void
+	142, // 498: tesla_protocol.CarServer.ChargeState.CableType.IEC:type_name -> tesla_protocol.CarServer.Void
+	142, // 499: tesla_protocol.CarServer.ChargeState.CableType.SAE:type_name -> tesla_protocol.CarServer.Void
+	142, // 500: tesla_protocol.CarServer.ChargeState.CableType.GB_AC:type_name -> tesla_protocol.CarServer.Void
+	142, // 501: tesla_protocol.CarServer.ChargeState.CableType.GB_DC:type_name -> tesla_protocol.CarServer.Void
+	142, // 502: tesla_protocol.CarServer.ChargeState.ChargerType.SNA:type_name -> tesla_protocol.CarServer.Void
+	142, // 503: tesla_protocol.CarServer.ChargeState.ChargerType.Supercharger:type_name -> tesla_protocol.CarServer.Void
+	142, // 504: tesla_protocol.CarServer.ChargeState.ChargerType.Chademo:type_name -> tesla_protocol.CarServer.Void
+	142, // 505: tesla_protocol.CarServer.ChargeState.ChargerType.Gb:type_name -> tesla_protocol.CarServer.Void
+	142, // 506: tesla_protocol.CarServer.ChargeState.ChargerType.ACSingleWireCAN:type_name -> tesla_protocol.CarServer.Void
+	142, // 507: tesla_protocol.CarServer.ChargeState.ChargerType.Combo:type_name -> tesla_protocol.CarServer.Void
+	142, // 508: tesla_protocol.CarServer.ChargeState.ChargerType.MCSingleWireCAN:type_name -> tesla_protocol.CarServer.Void
+	142, // 509: tesla_protocol.CarServer.ChargeState.ChargerType.Other:type_name -> tesla_protocol.CarServer.Void
+	142, // 510: tesla_protocol.CarServer.ChargeState.ChargerType.Tesla:type_name -> tesla_protocol.CarServer.Void
+	142, // 511: tesla_protocol.CarServer.ChargeState.ChargingState.Unknown:type_name -> tesla_protocol.CarServer.Void
+	142, // 512: tesla_protocol.CarServer.ChargeState.ChargingState.Disconnected:type_name -> tesla_protocol.CarServer.Void
+	142, // 513: tesla_protocol.CarServer.ChargeState.ChargingState.NoPower:type_name -> tesla_protocol.CarServer.Void
+	142, // 514: tesla_protocol.CarServer.ChargeState.ChargingState.Starting:type_name -> tesla_protocol.CarServer.Void
+	142, // 515: tesla_protocol.CarServer.ChargeState.ChargingState.Charging:type_name -> tesla_protocol.CarServer.Void
+	142, // 516: tesla_protocol.CarServer.ChargeState.ChargingState.Complete:type_name -> tesla_protocol.CarServer.Void
+	142, // 517: tesla_protocol.CarServer.ChargeState.ChargingState.Stopped:type_name -> tesla_protocol.CarServer.Void
+	142, // 518: tesla_protocol.CarServer.ChargeState.ChargingState.Calibrating:type_name -> tesla_protocol.CarServer.Void
+	142, // 519: tesla_protocol.CarServer.ChargeState.ChargerBrand.Tesla:type_name -> tesla_protocol.CarServer.Void
+	142, // 520: tesla_protocol.CarServer.ChargeState.ChargerBrand.SNA:type_name -> tesla_protocol.CarServer.Void
+	142, // 521: tesla_protocol.CarServer.LocationState.GPSCoordinateType.GCJ:type_name -> tesla_protocol.CarServer.Void
+	142, // 522: tesla_protocol.CarServer.LocationState.GPSCoordinateType.WGS:type_name -> tesla_protocol.CarServer.Void
+	142, // 523: tesla_protocol.CarServer.ClimateState.ClimateKeeperMode.Unknown:type_name -> tesla_protocol.CarServer.Void
+	142, // 524: tesla_protocol.CarServer.ClimateState.ClimateKeeperMode.Off:type_name -> tesla_protocol.CarServer.Void
+	142, // 525: tesla_protocol.CarServer.ClimateState.ClimateKeeperMode.On:type_name -> tesla_protocol.CarServer.Void
+	142, // 526: tesla_protocol.CarServer.ClimateState.ClimateKeeperMode.Dog:type_name -> tesla_protocol.CarServer.Void
+	142, // 527: tesla_protocol.CarServer.ClimateState.ClimateKeeperMode.Party:type_name -> tesla_protocol.CarServer.Void
+	142, // 528: tesla_protocol.CarServer.ClimateState.DefrostMode.Off:type_name -> tesla_protocol.CarServer.Void
+	142, // 529: tesla_protocol.CarServer.ClimateState.DefrostMode.Normal:type_name -> tesla_protocol.CarServer.Void
+	142, // 530: tesla_protocol.CarServer.ClimateState.DefrostMode.Max:type_name -> tesla_protocol.CarServer.Void
+	142, // 531: tesla_protocol.CarServer.GuiSettings.SpeedUnit.KilometersPerHour:type_name -> tesla_protocol.CarServer.Void
+	142, // 532: tesla_protocol.CarServer.GuiSettings.SpeedUnit.MilesPerHour:type_name -> tesla_protocol.CarServer.Void
+	142, // 533: tesla_protocol.CarServer.GuiSettings.TemperatureUnit.TemperatureF:type_name -> tesla_protocol.CarServer.Void
+	142, // 534: tesla_protocol.CarServer.GuiSettings.TemperatureUnit.TemperatureC:type_name -> tesla_protocol.CarServer.Void
+	142, // 535: tesla_protocol.CarServer.GuiSettings.ChargeRateUnit.Invalid:type_name -> tesla_protocol.CarServer.Void
+	142, // 536: tesla_protocol.CarServer.GuiSettings.ChargeRateUnit.KilometersPerHour:type_name -> tesla_protocol.CarServer.Void
+	142, // 537: tesla_protocol.CarServer.GuiSettings.ChargeRateUnit.MilesPerHour:type_name -> tesla_protocol.CarServer.Void
+	142, // 538: tesla_protocol.CarServer.GuiSettings.ChargeRateUnit.KW:type_name -> tesla_protocol.CarServer.Void
+	142, // 539: tesla_protocol.CarServer.GuiSettings.RangeDisplay.Ideal:type_name -> tesla_protocol.CarServer.Void
+	142, // 540: tesla_protocol.CarServer.GuiSettings.RangeDisplay.Rated:type_name -> tesla_protocol.CarServer.Void
+	142, // 541: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeModelS:type_name -> tesla_protocol.CarServer.Void
+	142, // 542: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeModelX:type_name -> tesla_protocol.CarServer.Void
+	142, // 543: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeModelS2:type_name -> tesla_protocol.CarServer.Void
+	142, // 544: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeModel3:type_name -> tesla_protocol.CarServer.Void
+	142, // 545: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeModelY:type_name -> tesla_protocol.CarServer.Void
+	142, // 546: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeSemiTruck:type_name -> tesla_protocol.CarServer.Void
+	142, // 547: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeLychee:type_name -> tesla_protocol.CarServer.Void
+	142, // 548: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeTamarind:type_name -> tesla_protocol.CarServer.Void
+	142, // 549: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeCybertruck:type_name -> tesla_protocol.CarServer.Void
+	142, // 550: tesla_protocol.CarServer.VehicleConfig.CarType.CarTypeSemiTruckV2:type_name -> tesla_protocol.CarServer.Void
+	142, // 551: tesla_protocol.CarServer.VehicleConfig.DriverAssist.None_:type_name -> tesla_protocol.CarServer.Void
+	142, // 552: tesla_protocol.CarServer.VehicleConfig.DriverAssist.MonoCam:type_name -> tesla_protocol.CarServer.Void
+	142, // 553: tesla_protocol.CarServer.VehicleConfig.DriverAssist.ParkerPascal:type_name -> tesla_protocol.CarServer.Void
+	142, // 554: tesla_protocol.CarServer.VehicleConfig.DriverAssist.ParkerPascal25:type_name -> tesla_protocol.CarServer.Void
+	142, // 555: tesla_protocol.CarServer.VehicleConfig.DriverAssist.TeslaAP3:type_name -> tesla_protocol.CarServer.Void
+	142, // 556: tesla_protocol.CarServer.VehicleConfig.PerformancePackage.None_:type_name -> tesla_protocol.CarServer.Void
+	142, // 557: tesla_protocol.CarServer.VehicleConfig.PerformancePackage.Base:type_name -> tesla_protocol.CarServer.Void
+	142, // 558: tesla_protocol.CarServer.VehicleConfig.PerformancePackage.Performance:type_name -> tesla_protocol.CarServer.Void
+	142, // 559: tesla_protocol.CarServer.VehicleConfig.PerformancePackage.BasePlus:type_name -> tesla_protocol.CarServer.Void
+	142, // 560: tesla_protocol.CarServer.VehicleConfig.FrontDriveUnit.NoneOrSmall:type_name -> tesla_protocol.CarServer.Void
+	142, // 561: tesla_protocol.CarServer.VehicleConfig.FrontDriveUnit.PermanentMagnet:type_name -> tesla_protocol.CarServer.Void
+	142, // 562: tesla_protocol.CarServer.VehicleConfig.SteeringWheelType.Unknown:type_name -> tesla_protocol.CarServer.Void
+	142, // 563: tesla_protocol.CarServer.VehicleConfig.SteeringWheelType.Round:type_name -> tesla_protocol.CarServer.Void
+	142, // 564: tesla_protocol.CarServer.VehicleConfig.SteeringWheelType.Yoke:type_name -> tesla_protocol.CarServer.Void
+	142, // 565: tesla_protocol.CarServer.VehicleConfig.SteeringWheelType.Squircle:type_name -> tesla_protocol.CarServer.Void
+	142, // 566: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.UNKNOWN:type_name -> tesla_protocol.CarServer.Void
+	142, // 567: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.BLACK:type_name -> tesla_protocol.CarServer.Void
+	142, // 568: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.WHITE:type_name -> tesla_protocol.CarServer.Void
+	142, // 569: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.BLACKCONSOLE2:type_name -> tesla_protocol.CarServer.Void
+	142, // 570: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.WHITECONSOLE2:type_name -> tesla_protocol.CarServer.Void
+	142, // 571: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.ALLBLACK:type_name -> tesla_protocol.CarServer.Void
+	142, // 572: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.BLACKANDWHITE:type_name -> tesla_protocol.CarServer.Void
+	142, // 573: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.CREAM:type_name -> tesla_protocol.CarServer.Void
+	142, // 574: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.WALNUTCREAM:type_name -> tesla_protocol.CarServer.Void
+	142, // 575: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.WALNUTWHITE:type_name -> tesla_protocol.CarServer.Void
+	142, // 576: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.EBONYBLACK:type_name -> tesla_protocol.CarServer.Void
+	142, // 577: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.CARBONCREAM:type_name -> tesla_protocol.CarServer.Void
+	142, // 578: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.CARBONWHITE:type_name -> tesla_protocol.CarServer.Void
+	142, // 579: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.CARBONBLACK:type_name -> tesla_protocol.CarServer.Void
+	142, // 580: tesla_protocol.CarServer.VehicleConfig.InteriorTrimType.TACTICALGREY:type_name -> tesla_protocol.CarServer.Void
+	142, // 581: tesla_protocol.CarServer.VehicleConfig.ExteriorTrimType.UNKNOWN:type_name -> tesla_protocol.CarServer.Void
+	142, // 582: tesla_protocol.CarServer.VehicleConfig.ExteriorTrimType.STANDARDCHROME:type_name -> tesla_protocol.CarServer.Void
+	142, // 583: tesla_protocol.CarServer.VehicleConfig.ExteriorTrimType.SATINBLACK:type_name -> tesla_protocol.CarServer.Void
+	142, // 584: tesla_protocol.CarServer.SohState.SohTestPhase.Discharge:type_name -> tesla_protocol.CarServer.Void
+	142, // 585: tesla_protocol.CarServer.SohState.SohTestPhase.DischargeRest:type_name -> tesla_protocol.CarServer.Void
+	142, // 586: tesla_protocol.CarServer.SohState.SohTestPhase.Charge:type_name -> tesla_protocol.CarServer.Void
+	142, // 587: tesla_protocol.CarServer.SohState.SohTestPhase.ChargeRest:type_name -> tesla_protocol.CarServer.Void
+	142, // 588: tesla_protocol.CarServer.SohState.SohTestEndMode.Complete:type_name -> tesla_protocol.CarServer.Void
+	142, // 589: tesla_protocol.CarServer.SohState.SohTestEndMode.Failed:type_name -> tesla_protocol.CarServer.Void
+	128, // 590: tesla_protocol.CarServer.SohState.SohTestState.soh_test_phase:type_name -> tesla_protocol.CarServer.SohState.SohTestPhase
+	37,  // 591: tesla_protocol.CarServer.SohState.SohResult.soh_health_result:type_name -> tesla_protocol.CarServer.SohState.WarrantyServiceResult
+	592, // [592:592] is the sub-list for method output_type
+	592, // [592:592] is the sub-list for method input_type
+	592, // [592:592] is the sub-list for extension type_name
+	592, // [592:592] is the sub-list for extension extendee
+	0,   // [0:592] is the sub-list for field type_name
 }
 
 func init() { file_tesla_protocol_command_vehicle_proto_init() }
@@ -34589,6 +34839,10 @@ func file_tesla_protocol_command_vehicle_proto_init() {
 		(*ChargeState_ConvenienceFeatures)(nil),
 		(*ChargeState_KeepAccessoryPowerMode)(nil),
 		(*ChargeState_ShouldHideRangeInfo)(nil),
+		(*ChargeState_ManualPreconSupported)(nil),
+		(*ChargeState_ManualPreconAllowed)(nil),
+		(*ChargeState_ManualPreconStatus_)(nil),
+		(*ChargeState_EcosystemChargeMode_)(nil),
 	}
 	file_tesla_protocol_command_vehicle_proto_msgTypes[10].OneofWrappers = []any{
 		(*ManagedChargingState_ChargeOnSolarGatewayDin)(nil),
@@ -35521,7 +35775,7 @@ func file_tesla_protocol_command_vehicle_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tesla_protocol_command_vehicle_proto_rawDesc), len(file_tesla_protocol_command_vehicle_proto_rawDesc)),
-			NumEnums:      36,
+			NumEnums:      38,
 			NumMessages:   94,
 			NumExtensions: 0,
 			NumServices:   0,

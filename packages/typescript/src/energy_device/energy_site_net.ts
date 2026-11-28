@@ -338,11 +338,19 @@ export interface EnergySiteNetDevice {
   din: Din | undefined;
   wifiApConfig: WifiConfig | undefined;
   serviceTypes: IntraSiteServiceType[];
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  deviceType: DeviceType;
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  tegDeviceType?: TEGDeviceType | undefined;
 }
 
 export interface EnergySiteNetRecentlyAddedDevice {
   din: Din | undefined;
   status: EnergySiteNetAdditionStatus;
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  deviceType: DeviceType;
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  tegDeviceType?: TEGDeviceType | undefined;
 }
 
 export interface EnergySiteNetRecentlyRemovedDevice {
@@ -403,7 +411,7 @@ export interface EnergySiteNetMessages {
 }
 
 function createBaseEnergySiteNetDevice(): EnergySiteNetDevice {
-  return { din: undefined, wifiApConfig: undefined, serviceTypes: [] };
+  return { din: undefined, wifiApConfig: undefined, serviceTypes: [], deviceType: 0, tegDeviceType: undefined };
 }
 
 export const EnergySiteNetDevice: MessageFns<EnergySiteNetDevice> = {
@@ -419,6 +427,12 @@ export const EnergySiteNetDevice: MessageFns<EnergySiteNetDevice> = {
       writer.int32(v);
     }
     writer.join();
+    if (message.deviceType !== 0) {
+      writer.uint32(32).int32(message.deviceType);
+    }
+    if (message.tegDeviceType !== undefined) {
+      writer.uint32(800).int32(message.tegDeviceType);
+    }
     return writer;
   },
 
@@ -463,6 +477,22 @@ export const EnergySiteNetDevice: MessageFns<EnergySiteNetDevice> = {
 
           break;
         }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.deviceType = reader.int32() as any;
+          continue;
+        }
+        case 100: {
+          if (tag !== 800) {
+            break;
+          }
+
+          message.tegDeviceType = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -479,6 +509,8 @@ export const EnergySiteNetDevice: MessageFns<EnergySiteNetDevice> = {
       serviceTypes: globalThis.Array.isArray(object?.serviceTypes)
         ? object.serviceTypes.map((e: any) => intraSiteServiceTypeFromJSON(e))
         : [],
+      deviceType: isSet(object.deviceType) ? deviceTypeFromJSON(object.deviceType) : 0,
+      tegDeviceType: isSet(object.tegDeviceType) ? tEGDeviceTypeFromJSON(object.tegDeviceType) : undefined,
     };
   },
 
@@ -493,6 +525,12 @@ export const EnergySiteNetDevice: MessageFns<EnergySiteNetDevice> = {
     if (message.serviceTypes?.length) {
       obj.serviceTypes = message.serviceTypes.map((e) => intraSiteServiceTypeToJSON(e));
     }
+    if (message.deviceType !== undefined) {
+      obj.deviceType = deviceTypeToJSON(message.deviceType);
+    }
+    if (message.tegDeviceType !== undefined) {
+      obj.tegDeviceType = tEGDeviceTypeToJSON(message.tegDeviceType);
+    }
     return obj;
   },
 
@@ -506,12 +544,14 @@ export const EnergySiteNetDevice: MessageFns<EnergySiteNetDevice> = {
       ? WifiConfig.fromPartial(object.wifiApConfig)
       : undefined;
     message.serviceTypes = object.serviceTypes?.map((e) => e) || [];
+    message.deviceType = object.deviceType ?? 0;
+    message.tegDeviceType = object.tegDeviceType ?? undefined;
     return message;
   },
 };
 
 function createBaseEnergySiteNetRecentlyAddedDevice(): EnergySiteNetRecentlyAddedDevice {
-  return { din: undefined, status: 0 };
+  return { din: undefined, status: 0, deviceType: 0, tegDeviceType: undefined };
 }
 
 export const EnergySiteNetRecentlyAddedDevice: MessageFns<EnergySiteNetRecentlyAddedDevice> = {
@@ -521,6 +561,12 @@ export const EnergySiteNetRecentlyAddedDevice: MessageFns<EnergySiteNetRecentlyA
     }
     if (message.status !== 0) {
       writer.uint32(16).int32(message.status);
+    }
+    if (message.deviceType !== 0) {
+      writer.uint32(24).int32(message.deviceType);
+    }
+    if (message.tegDeviceType !== undefined) {
+      writer.uint32(800).int32(message.tegDeviceType);
     }
     return writer;
   },
@@ -548,6 +594,22 @@ export const EnergySiteNetRecentlyAddedDevice: MessageFns<EnergySiteNetRecentlyA
           message.status = reader.int32() as any;
           continue;
         }
+        case 3: {
+          if (tag !== 24) {
+            break;
+          }
+
+          message.deviceType = reader.int32() as any;
+          continue;
+        }
+        case 100: {
+          if (tag !== 800) {
+            break;
+          }
+
+          message.tegDeviceType = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -561,6 +623,8 @@ export const EnergySiteNetRecentlyAddedDevice: MessageFns<EnergySiteNetRecentlyA
     return {
       din: isSet(object.din) ? Din.fromJSON(object.din) : undefined,
       status: isSet(object.status) ? energySiteNetAdditionStatusFromJSON(object.status) : 0,
+      deviceType: isSet(object.deviceType) ? deviceTypeFromJSON(object.deviceType) : 0,
+      tegDeviceType: isSet(object.tegDeviceType) ? tEGDeviceTypeFromJSON(object.tegDeviceType) : undefined,
     };
   },
 
@@ -571,6 +635,12 @@ export const EnergySiteNetRecentlyAddedDevice: MessageFns<EnergySiteNetRecentlyA
     }
     if (message.status !== undefined) {
       obj.status = energySiteNetAdditionStatusToJSON(message.status);
+    }
+    if (message.deviceType !== undefined) {
+      obj.deviceType = deviceTypeToJSON(message.deviceType);
+    }
+    if (message.tegDeviceType !== undefined) {
+      obj.tegDeviceType = tEGDeviceTypeToJSON(message.tegDeviceType);
     }
     return obj;
   },
@@ -586,6 +656,8 @@ export const EnergySiteNetRecentlyAddedDevice: MessageFns<EnergySiteNetRecentlyA
     const message = createBaseEnergySiteNetRecentlyAddedDevice();
     message.din = (object.din !== undefined && object.din !== null) ? Din.fromPartial(object.din) : undefined;
     message.status = object.status ?? 0;
+    message.deviceType = object.deviceType ?? 0;
+    message.tegDeviceType = object.tegDeviceType ?? undefined;
     return message;
   },
 };

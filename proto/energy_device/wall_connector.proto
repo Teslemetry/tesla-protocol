@@ -277,6 +277,7 @@ message WCLifetimeStats {
   uint32 charge_starts              = 8;
   uint64 charging_time_s            = 9;
   AccumulatedEnergy charging_energy = 10;
+  AccumulatedEnergy discharging_energy = 11;  // UNCONFIRMED: not yet confirmed on a live device
 }
 
 message WCLoadSharingFixedLimitConfig {
@@ -749,6 +750,8 @@ message WCAPIPushSmartChargingCommandRequest {
 }
 
 message WCAPIPushSmartChargingCommandResponse {
+  UUIDv4Bytes plug_session_uuid = 1;  // UNCONFIRMED: not yet confirmed on a live device
+  uint32 num_active_phases      = 2;  // UNCONFIRMED: not yet confirmed on a live device
 }
 
 message WCAPIRegisterCommercialRequest {

@@ -327,10 +327,15 @@ func (IntraSiteServiceType) EnumDescriptor() ([]byte, []int) {
 }
 
 type EnergySiteNetDevice struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	Din           *Din                   `protobuf:"bytes,1,opt,name=din,proto3" json:"din,omitempty"`
-	WifiApConfig  *WifiConfig            `protobuf:"bytes,2,opt,name=wifi_ap_config,json=wifiApConfig,proto3" json:"wifi_ap_config,omitempty"`
-	ServiceTypes  []IntraSiteServiceType `protobuf:"varint,3,rep,packed,name=service_types,json=serviceTypes,proto3,enum=tesla_protocol.tesla.proto.energy_device.v1.IntraSiteServiceType" json:"service_types,omitempty"`
+	state        protoimpl.MessageState `protogen:"open.v1"`
+	Din          *Din                   `protobuf:"bytes,1,opt,name=din,proto3" json:"din,omitempty"`
+	WifiApConfig *WifiConfig            `protobuf:"bytes,2,opt,name=wifi_ap_config,json=wifiApConfig,proto3" json:"wifi_ap_config,omitempty"`
+	ServiceTypes []IntraSiteServiceType `protobuf:"varint,3,rep,packed,name=service_types,json=serviceTypes,proto3,enum=tesla_protocol.tesla.proto.energy_device.v1.IntraSiteServiceType" json:"service_types,omitempty"`
+	DeviceType   DeviceType             `protobuf:"varint,4,opt,name=device_type,json=deviceType,proto3,enum=tesla_protocol.tesla.proto.energy_device.v1.DeviceType" json:"device_type,omitempty"` // UNCONFIRMED: not yet confirmed on a live device
+	// Types that are valid to be assigned to DeviceSubType:
+	//
+	//	*EnergySiteNetDevice_TegDeviceType
+	DeviceSubType isEnergySiteNetDevice_DeviceSubType `protobuf_oneof:"device_sub_type"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -386,10 +391,48 @@ func (x *EnergySiteNetDevice) GetServiceTypes() []IntraSiteServiceType {
 	return nil
 }
 
+func (x *EnergySiteNetDevice) GetDeviceType() DeviceType {
+	if x != nil {
+		return x.DeviceType
+	}
+	return DeviceType_DEVICE_TYPE_INVALID
+}
+
+func (x *EnergySiteNetDevice) GetDeviceSubType() isEnergySiteNetDevice_DeviceSubType {
+	if x != nil {
+		return x.DeviceSubType
+	}
+	return nil
+}
+
+func (x *EnergySiteNetDevice) GetTegDeviceType() TEGDeviceType {
+	if x != nil {
+		if x, ok := x.DeviceSubType.(*EnergySiteNetDevice_TegDeviceType); ok {
+			return x.TegDeviceType
+		}
+	}
+	return TEGDeviceType_TEG_DEVICE_TYPE_INVALID
+}
+
+type isEnergySiteNetDevice_DeviceSubType interface {
+	isEnergySiteNetDevice_DeviceSubType()
+}
+
+type EnergySiteNetDevice_TegDeviceType struct {
+	TegDeviceType TEGDeviceType `protobuf:"varint,100,opt,name=teg_device_type,json=tegDeviceType,proto3,enum=tesla_protocol.tesla.proto.energy_device.v1.TEGDeviceType,oneof"` // UNCONFIRMED: not yet confirmed on a live device
+}
+
+func (*EnergySiteNetDevice_TegDeviceType) isEnergySiteNetDevice_DeviceSubType() {}
+
 type EnergySiteNetRecentlyAddedDevice struct {
-	state         protoimpl.MessageState      `protogen:"open.v1"`
-	Din           *Din                        `protobuf:"bytes,1,opt,name=din,proto3" json:"din,omitempty"`
-	Status        EnergySiteNetAdditionStatus `protobuf:"varint,2,opt,name=status,proto3,enum=tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAdditionStatus" json:"status,omitempty"`
+	state      protoimpl.MessageState      `protogen:"open.v1"`
+	Din        *Din                        `protobuf:"bytes,1,opt,name=din,proto3" json:"din,omitempty"`
+	Status     EnergySiteNetAdditionStatus `protobuf:"varint,2,opt,name=status,proto3,enum=tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAdditionStatus" json:"status,omitempty"`
+	DeviceType DeviceType                  `protobuf:"varint,3,opt,name=device_type,json=deviceType,proto3,enum=tesla_protocol.tesla.proto.energy_device.v1.DeviceType" json:"device_type,omitempty"` // UNCONFIRMED: not yet confirmed on a live device
+	// Types that are valid to be assigned to DeviceSubType:
+	//
+	//	*EnergySiteNetRecentlyAddedDevice_TegDeviceType
+	DeviceSubType isEnergySiteNetRecentlyAddedDevice_DeviceSubType `protobuf_oneof:"device_sub_type"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -436,6 +479,40 @@ func (x *EnergySiteNetRecentlyAddedDevice) GetStatus() EnergySiteNetAdditionStat
 		return x.Status
 	}
 	return EnergySiteNetAdditionStatus_ENERGY_SITE_NET_ADDITION_STATUS_INVALID
+}
+
+func (x *EnergySiteNetRecentlyAddedDevice) GetDeviceType() DeviceType {
+	if x != nil {
+		return x.DeviceType
+	}
+	return DeviceType_DEVICE_TYPE_INVALID
+}
+
+func (x *EnergySiteNetRecentlyAddedDevice) GetDeviceSubType() isEnergySiteNetRecentlyAddedDevice_DeviceSubType {
+	if x != nil {
+		return x.DeviceSubType
+	}
+	return nil
+}
+
+func (x *EnergySiteNetRecentlyAddedDevice) GetTegDeviceType() TEGDeviceType {
+	if x != nil {
+		if x, ok := x.DeviceSubType.(*EnergySiteNetRecentlyAddedDevice_TegDeviceType); ok {
+			return x.TegDeviceType
+		}
+	}
+	return TEGDeviceType_TEG_DEVICE_TYPE_INVALID
+}
+
+type isEnergySiteNetRecentlyAddedDevice_DeviceSubType interface {
+	isEnergySiteNetRecentlyAddedDevice_DeviceSubType()
+}
+
+type EnergySiteNetRecentlyAddedDevice_TegDeviceType struct {
+	TegDeviceType TEGDeviceType `protobuf:"varint,100,opt,name=teg_device_type,json=tegDeviceType,proto3,enum=tesla_protocol.tesla.proto.energy_device.v1.TEGDeviceType,oneof"` // UNCONFIRMED: not yet confirmed on a live device
+}
+
+func (*EnergySiteNetRecentlyAddedDevice_TegDeviceType) isEnergySiteNetRecentlyAddedDevice_DeviceSubType() {
 }
 
 type EnergySiteNetRecentlyRemovedDevice struct {
@@ -1080,14 +1157,22 @@ var File_tesla_protocol_energy_device_energy_site_net_proto protoreflect.FileDes
 
 const file_tesla_protocol_energy_device_energy_site_net_proto_rawDesc = "" +
 	"\n" +
-	"2tesla_protocol/energy_device/energy_site_net.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\x1a)tesla_protocol/energy_device/device.proto\x1a-tesla_protocol/energy_device/networking.proto\"\xa0\x02\n" +
+	"2tesla_protocol/energy_device/energy_site_net.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\x1a)tesla_protocol/energy_device/device.proto\x1a-tesla_protocol/energy_device/networking.proto\"\xf3\x03\n" +
 	"\x13EnergySiteNetDevice\x12B\n" +
 	"\x03din\x18\x01 \x01(\v20.tesla_protocol.tesla.proto.energy_device.v1.DinR\x03din\x12]\n" +
 	"\x0ewifi_ap_config\x18\x02 \x01(\v27.tesla_protocol.tesla.proto.energy_device.v1.WifiConfigR\fwifiApConfig\x12f\n" +
-	"\rservice_types\x18\x03 \x03(\x0e2A.tesla_protocol.tesla.proto.energy_device.v1.IntraSiteServiceTypeR\fserviceTypes\"\xc8\x01\n" +
+	"\rservice_types\x18\x03 \x03(\x0e2A.tesla_protocol.tesla.proto.energy_device.v1.IntraSiteServiceTypeR\fserviceTypes\x12X\n" +
+	"\vdevice_type\x18\x04 \x01(\x0e27.tesla_protocol.tesla.proto.energy_device.v1.DeviceTypeR\n" +
+	"deviceType\x12d\n" +
+	"\x0fteg_device_type\x18d \x01(\x0e2:.tesla_protocol.tesla.proto.energy_device.v1.TEGDeviceTypeH\x00R\rtegDeviceTypeB\x11\n" +
+	"\x0fdevice_sub_type\"\x9b\x03\n" +
 	" EnergySiteNetRecentlyAddedDevice\x12B\n" +
 	"\x03din\x18\x01 \x01(\v20.tesla_protocol.tesla.proto.energy_device.v1.DinR\x03din\x12`\n" +
-	"\x06status\x18\x02 \x01(\x0e2H.tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAdditionStatusR\x06status\"\xc9\x01\n" +
+	"\x06status\x18\x02 \x01(\x0e2H.tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAdditionStatusR\x06status\x12X\n" +
+	"\vdevice_type\x18\x03 \x01(\x0e27.tesla_protocol.tesla.proto.energy_device.v1.DeviceTypeR\n" +
+	"deviceType\x12d\n" +
+	"\x0fteg_device_type\x18d \x01(\x0e2:.tesla_protocol.tesla.proto.energy_device.v1.TEGDeviceTypeH\x00R\rtegDeviceTypeB\x11\n" +
+	"\x0fdevice_sub_type\"\xc9\x01\n" +
 	"\"EnergySiteNetRecentlyRemovedDevice\x12B\n" +
 	"\x03din\x18\x01 \x01(\v20.tesla_protocol.tesla.proto.energy_device.v1.DinR\x03din\x12_\n" +
 	"\x06status\x18\x02 \x01(\x0e2G.tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRemovalStatusR\x06status\"\xb1\x03\n" +
@@ -1212,39 +1297,43 @@ var file_tesla_protocol_energy_device_energy_site_net_proto_depIdxs = []int32{
 	17, // 0: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetDevice.din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
 	18, // 1: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetDevice.wifi_ap_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WifiConfig
 	4,  // 2: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetDevice.service_types:type_name -> tesla_protocol.tesla.proto.energy_device.v1.IntraSiteServiceType
-	17, // 3: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyAddedDevice.din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
-	0,  // 4: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyAddedDevice.status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAdditionStatus
-	17, // 5: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyRemovedDevice.din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
-	3,  // 6: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyRemovedDevice.status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRemovalStatus
-	17, // 7: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetUnpairedDevice.din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
-	2,  // 8: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetUnpairedDevice.pair_status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetPairStatus
-	19, // 9: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetUnpairedDevice.device_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.DeviceType
-	20, // 10: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetUnpairedDevice.teg_device_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGDeviceType
-	5,  // 11: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetConfig.devices:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetDevice
-	6,  // 12: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetConfig.recently_added:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyAddedDevice
-	7,  // 13: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetConfig.recently_removed:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyRemovedDevice
-	8,  // 14: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetConfig.unpaired_devices:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetUnpairedDevice
-	5,  // 15: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIAddDeviceRequest.device:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetDevice
-	1,  // 16: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIAddDeviceRequest.network_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetNetworkType
-	6,  // 17: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIAddDeviceResponse.recently_added:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyAddedDevice
-	17, // 18: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIRemoveDeviceRequest.din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
-	1,  // 19: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIRemoveDeviceRequest.network_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetNetworkType
-	4,  // 20: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIRemoveDeviceRequest.service_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.IntraSiteServiceType
-	7,  // 21: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIRemoveDeviceResponse.recently_removed:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyRemovedDevice
-	1,  // 22: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIGetConfigRequest.network_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetNetworkType
-	9,  // 23: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIGetConfigResponse.config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetConfig
-	1,  // 24: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIGetConfigResponse.network_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetNetworkType
-	10, // 25: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetMessages.add_device_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIAddDeviceRequest
-	11, // 26: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetMessages.add_device_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIAddDeviceResponse
-	12, // 27: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetMessages.remove_device_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIRemoveDeviceRequest
-	13, // 28: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetMessages.remove_device_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIRemoveDeviceResponse
-	14, // 29: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetMessages.get_config_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIGetConfigRequest
-	15, // 30: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetMessages.get_config_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIGetConfigResponse
-	31, // [31:31] is the sub-list for method output_type
-	31, // [31:31] is the sub-list for method input_type
-	31, // [31:31] is the sub-list for extension type_name
-	31, // [31:31] is the sub-list for extension extendee
-	0,  // [0:31] is the sub-list for field type_name
+	19, // 3: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetDevice.device_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.DeviceType
+	20, // 4: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetDevice.teg_device_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGDeviceType
+	17, // 5: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyAddedDevice.din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
+	0,  // 6: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyAddedDevice.status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAdditionStatus
+	19, // 7: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyAddedDevice.device_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.DeviceType
+	20, // 8: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyAddedDevice.teg_device_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGDeviceType
+	17, // 9: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyRemovedDevice.din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
+	3,  // 10: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyRemovedDevice.status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRemovalStatus
+	17, // 11: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetUnpairedDevice.din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
+	2,  // 12: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetUnpairedDevice.pair_status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetPairStatus
+	19, // 13: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetUnpairedDevice.device_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.DeviceType
+	20, // 14: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetUnpairedDevice.teg_device_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGDeviceType
+	5,  // 15: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetConfig.devices:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetDevice
+	6,  // 16: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetConfig.recently_added:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyAddedDevice
+	7,  // 17: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetConfig.recently_removed:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyRemovedDevice
+	8,  // 18: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetConfig.unpaired_devices:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetUnpairedDevice
+	5,  // 19: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIAddDeviceRequest.device:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetDevice
+	1,  // 20: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIAddDeviceRequest.network_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetNetworkType
+	6,  // 21: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIAddDeviceResponse.recently_added:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyAddedDevice
+	17, // 22: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIRemoveDeviceRequest.din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
+	1,  // 23: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIRemoveDeviceRequest.network_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetNetworkType
+	4,  // 24: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIRemoveDeviceRequest.service_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.IntraSiteServiceType
+	7,  // 25: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIRemoveDeviceResponse.recently_removed:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetRecentlyRemovedDevice
+	1,  // 26: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIGetConfigRequest.network_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetNetworkType
+	9,  // 27: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIGetConfigResponse.config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetConfig
+	1,  // 28: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIGetConfigResponse.network_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetNetworkType
+	10, // 29: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetMessages.add_device_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIAddDeviceRequest
+	11, // 30: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetMessages.add_device_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIAddDeviceResponse
+	12, // 31: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetMessages.remove_device_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIRemoveDeviceRequest
+	13, // 32: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetMessages.remove_device_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIRemoveDeviceResponse
+	14, // 33: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetMessages.get_config_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIGetConfigRequest
+	15, // 34: tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetMessages.get_config_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EnergySiteNetAPIGetConfigResponse
+	35, // [35:35] is the sub-list for method output_type
+	35, // [35:35] is the sub-list for method input_type
+	35, // [35:35] is the sub-list for extension type_name
+	35, // [35:35] is the sub-list for extension extendee
+	0,  // [0:35] is the sub-list for field type_name
 }
 
 func init() { file_tesla_protocol_energy_device_energy_site_net_proto_init() }
@@ -1254,6 +1343,12 @@ func file_tesla_protocol_energy_device_energy_site_net_proto_init() {
 	}
 	file_tesla_protocol_energy_device_device_proto_init()
 	file_tesla_protocol_energy_device_networking_proto_init()
+	file_tesla_protocol_energy_device_energy_site_net_proto_msgTypes[0].OneofWrappers = []any{
+		(*EnergySiteNetDevice_TegDeviceType)(nil),
+	}
+	file_tesla_protocol_energy_device_energy_site_net_proto_msgTypes[1].OneofWrappers = []any{
+		(*EnergySiteNetRecentlyAddedDevice_TegDeviceType)(nil),
+	}
 	file_tesla_protocol_energy_device_energy_site_net_proto_msgTypes[11].OneofWrappers = []any{
 		(*EnergySiteNetMessages_AddDeviceRequest)(nil),
 		(*EnergySiteNetMessages_AddDeviceResponse)(nil),

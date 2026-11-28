@@ -442,7 +442,7 @@ class WCVitals(_message.Message):
     def __init__(self, uptime_s: _Optional[int] = ..., alerts: _Optional[_Iterable[int]] = ..., contactor_closed: _Optional[bool] = ..., vehicle_connected: _Optional[bool] = ..., pcba_temp_c: _Optional[float] = ..., handle_temp_c: _Optional[float] = ..., mcu_temp_c: _Optional[float] = ..., input_thermopile_v: _Optional[float] = ..., prox_v: _Optional[float] = ..., pilot_high_v: _Optional[float] = ..., pilot_low_v: _Optional[float] = ..., session_duration_s: _Optional[int] = ..., session_energy: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]] = ..., ac_measurement_grid: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]] = ..., ac_measurement_vehicle: _Optional[_Union[_energy_pb2.InstACMeasurement, _Mapping]] = ..., ground_resistance_ohms: _Optional[float] = ..., line1_earth_vrms: _Optional[float] = ..., neutral_earth_vrms: _Optional[float] = ..., fault_status: _Optional[_Union[WCFaultStatusState, str]] = ..., recent_fault_status_latched_alerts: _Optional[_Iterable[_Union[WCFaultStatusLatchedAlert, _Mapping]]] = ..., vin: _Optional[_Union[_device_pb2.VIN, _Mapping]] = ..., instantaneous_power_watts: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ..., scheduled_charging_status: _Optional[_Union[WCChargeScheduleChargingStatus, str]] = ..., instantaneous_line_current: _Optional[_Union[_wrappers_pb2.FloatValue, _Mapping]] = ..., ocpp_status: _Optional[_Union[WCOcppStatus, str]] = ..., evse_not_ready_reasons: _Optional[_Iterable[_Union[WCEvseNotReadyReason, str]]] = ..., powershare_session_state: _Optional[_Union[WCPowershareSessionState, str]] = ..., dry_contact_control_state: _Optional[_Union[WCDryContactControlState, str]] = ..., smart_charging_reason: _Optional[_Union[WCSmartChargingReason, str]] = ...) -> None: ...
 
 class WCLifetimeStats(_message.Message):
-    __slots__ = ("uptime_s", "alert_count", "contactor_cycles", "contactor_cycles_loaded", "connector_cycles", "thermal_foldbacks", "avg_startup_temp_c", "charge_starts", "charging_time_s", "charging_energy")
+    __slots__ = ("uptime_s", "alert_count", "contactor_cycles", "contactor_cycles_loaded", "connector_cycles", "thermal_foldbacks", "avg_startup_temp_c", "charge_starts", "charging_time_s", "charging_energy", "discharging_energy")
     UPTIME_S_FIELD_NUMBER: _ClassVar[int]
     ALERT_COUNT_FIELD_NUMBER: _ClassVar[int]
     CONTACTOR_CYCLES_FIELD_NUMBER: _ClassVar[int]
@@ -453,6 +453,7 @@ class WCLifetimeStats(_message.Message):
     CHARGE_STARTS_FIELD_NUMBER: _ClassVar[int]
     CHARGING_TIME_S_FIELD_NUMBER: _ClassVar[int]
     CHARGING_ENERGY_FIELD_NUMBER: _ClassVar[int]
+    DISCHARGING_ENERGY_FIELD_NUMBER: _ClassVar[int]
     uptime_s: int
     alert_count: int
     contactor_cycles: int
@@ -463,7 +464,8 @@ class WCLifetimeStats(_message.Message):
     charge_starts: int
     charging_time_s: int
     charging_energy: _energy_pb2.AccumulatedEnergy
-    def __init__(self, uptime_s: _Optional[int] = ..., alert_count: _Optional[int] = ..., contactor_cycles: _Optional[int] = ..., contactor_cycles_loaded: _Optional[int] = ..., connector_cycles: _Optional[int] = ..., thermal_foldbacks: _Optional[int] = ..., avg_startup_temp_c: _Optional[float] = ..., charge_starts: _Optional[int] = ..., charging_time_s: _Optional[int] = ..., charging_energy: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]] = ...) -> None: ...
+    discharging_energy: _energy_pb2.AccumulatedEnergy
+    def __init__(self, uptime_s: _Optional[int] = ..., alert_count: _Optional[int] = ..., contactor_cycles: _Optional[int] = ..., contactor_cycles_loaded: _Optional[int] = ..., connector_cycles: _Optional[int] = ..., thermal_foldbacks: _Optional[int] = ..., avg_startup_temp_c: _Optional[float] = ..., charge_starts: _Optional[int] = ..., charging_time_s: _Optional[int] = ..., charging_energy: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]] = ..., discharging_energy: _Optional[_Union[_energy_pb2.AccumulatedEnergy, _Mapping]] = ...) -> None: ...
 
 class WCLoadSharingFixedLimitConfig(_message.Message):
     __slots__ = ("network_limit_amps",)
@@ -1188,8 +1190,12 @@ class WCAPIPushSmartChargingCommandRequest(_message.Message):
     def __init__(self, command: _Optional[_Union[WCSmartChargingCommand, _Mapping]] = ...) -> None: ...
 
 class WCAPIPushSmartChargingCommandResponse(_message.Message):
-    __slots__ = ()
-    def __init__(self) -> None: ...
+    __slots__ = ("plug_session_uuid", "num_active_phases")
+    PLUG_SESSION_UUID_FIELD_NUMBER: _ClassVar[int]
+    NUM_ACTIVE_PHASES_FIELD_NUMBER: _ClassVar[int]
+    plug_session_uuid: _device_pb2.UUIDv4Bytes
+    num_active_phases: int
+    def __init__(self, plug_session_uuid: _Optional[_Union[_device_pb2.UUIDv4Bytes, _Mapping]] = ..., num_active_phases: _Optional[int] = ...) -> None: ...
 
 class WCAPIRegisterCommercialRequest(_message.Message):
     __slots__ = ("request",)

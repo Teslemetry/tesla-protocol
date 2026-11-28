@@ -12,6 +12,7 @@ import {
   authorizedClientTypeFromJSON,
   authorizedClientTypeToJSON,
 } from "./authorization_types.js";
+import { BLEMessages } from "./ble_api.js";
 import { CommonMessages } from "./common_api.js";
 import { EnergySiteNetMessages } from "./energy_site_net.js";
 import { FileStoreMessages } from "./filestore_api.js";
@@ -217,7 +218,11 @@ export interface MessageEnvelope {
   filestore?: FileStoreMessages | undefined;
   graphql?: GraphQLMessages | undefined;
   supercharger?: SuperchargerMessages | undefined;
-  registration?: RegistrationMessages | undefined;
+  registration?:
+    | RegistrationMessages
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  ble?: BLEMessages | undefined;
 }
 
 function createBaseExternalAuth(): ExternalAuth {
@@ -664,6 +669,7 @@ function createBaseMessageEnvelope(): MessageEnvelope {
     graphql: undefined,
     supercharger: undefined,
     registration: undefined,
+    ble: undefined,
   };
 }
 
@@ -722,6 +728,9 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
     }
     if (message.registration !== undefined) {
       RegistrationMessages.encode(message.registration, writer.uint32(146).fork()).join();
+    }
+    if (message.ble !== undefined) {
+      BLEMessages.encode(message.ble, writer.uint32(154).fork()).join();
     }
     return writer;
   },
@@ -877,6 +886,14 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
           message.registration = RegistrationMessages.decode(reader, reader.uint32());
           continue;
         }
+        case 19: {
+          if (tag !== 154) {
+            break;
+          }
+
+          message.ble = BLEMessages.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -906,6 +923,7 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
       graphql: isSet(object.graphql) ? GraphQLMessages.fromJSON(object.graphql) : undefined,
       supercharger: isSet(object.supercharger) ? SuperchargerMessages.fromJSON(object.supercharger) : undefined,
       registration: isSet(object.registration) ? RegistrationMessages.fromJSON(object.registration) : undefined,
+      ble: isSet(object.ble) ? BLEMessages.fromJSON(object.ble) : undefined,
     };
   },
 
@@ -965,6 +983,9 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
     if (message.registration !== undefined) {
       obj.registration = RegistrationMessages.toJSON(message.registration);
     }
+    if (message.ble !== undefined) {
+      obj.ble = BLEMessages.toJSON(message.ble);
+    }
     return obj;
   },
 
@@ -1017,6 +1038,7 @@ export const MessageEnvelope: MessageFns<MessageEnvelope> = {
     message.registration = (object.registration !== undefined && object.registration !== null)
       ? RegistrationMessages.fromPartial(object.registration)
       : undefined;
+    message.ble = (object.ble !== undefined && object.ble !== null) ? BLEMessages.fromPartial(object.ble) : undefined;
     return message;
   },
 };

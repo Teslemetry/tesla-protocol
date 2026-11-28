@@ -545,6 +545,7 @@ type MessageEnvelope struct {
 	//	*MessageEnvelope_Graphql
 	//	*MessageEnvelope_Supercharger
 	//	*MessageEnvelope_Registration
+	//	*MessageEnvelope_Ble
 	Payload       isMessageEnvelope_Payload `protobuf_oneof:"payload"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -745,6 +746,15 @@ func (x *MessageEnvelope) GetRegistration() *RegistrationMessages {
 	return nil
 }
 
+func (x *MessageEnvelope) GetBle() *BLEMessages {
+	if x != nil {
+		if x, ok := x.Payload.(*MessageEnvelope_Ble); ok {
+			return x.Ble
+		}
+	}
+	return nil
+}
+
 type isMessageEnvelope_Payload interface {
 	isMessageEnvelope_Payload()
 }
@@ -811,6 +821,10 @@ type MessageEnvelope_Registration struct {
 	Registration *RegistrationMessages `protobuf:"bytes,18,opt,name=registration,proto3,oneof"`
 }
 
+type MessageEnvelope_Ble struct {
+	Ble *BLEMessages `protobuf:"bytes,19,opt,name=ble,proto3,oneof"` // UNCONFIRMED: not yet confirmed on a live device
+}
+
 func (*MessageEnvelope_Common) isMessageEnvelope_Payload() {}
 
 func (*MessageEnvelope_Teg) isMessageEnvelope_Payload() {}
@@ -841,11 +855,13 @@ func (*MessageEnvelope_Supercharger) isMessageEnvelope_Payload() {}
 
 func (*MessageEnvelope_Registration) isMessageEnvelope_Payload() {}
 
+func (*MessageEnvelope_Ble) isMessageEnvelope_Payload() {}
+
 var File_tesla_protocol_energy_device_transport_proto protoreflect.FileDescriptor
 
 const file_tesla_protocol_energy_device_transport_proto_rawDesc = "" +
 	"\n" +
-	",tesla_protocol/energy_device/transport.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\x1a6tesla_protocol/energy_device/authorization_types.proto\x1a4tesla_protocol/energy_device/authorization_api.proto\x1a-tesla_protocol/energy_device/common_api.proto\x1a*tesla_protocol/energy_device/teg_api.proto\x1a1tesla_protocol/energy_device/wall_connector.proto\x1a*tesla_protocol/energy_device/pvi_api.proto\x1a1tesla_protocol/energy_device/local_auth_api.proto\x1a3tesla_protocol/energy_device/neurio_meter_api.proto\x1a2tesla_protocol/energy_device/energy_site_net.proto\x1a1tesla_protocol/energy_device/intra_site_api.proto\x1a0tesla_protocol/energy_device/filestore_api.proto\x1a.tesla_protocol/energy_device/graphql_api.proto\x1a3tesla_protocol/energy_device/registration_api.proto\x1a3tesla_protocol/energy_device/supercharger_api.proto\x1a+tesla_protocol/energy_device/wmsa_api.proto\x1a)tesla_protocol/energy_device/sm_api.proto\"a\n" +
+	",tesla_protocol/energy_device/transport.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\x1a6tesla_protocol/energy_device/authorization_types.proto\x1a4tesla_protocol/energy_device/authorization_api.proto\x1a-tesla_protocol/energy_device/common_api.proto\x1a*tesla_protocol/energy_device/teg_api.proto\x1a1tesla_protocol/energy_device/wall_connector.proto\x1a*tesla_protocol/energy_device/pvi_api.proto\x1a1tesla_protocol/energy_device/local_auth_api.proto\x1a3tesla_protocol/energy_device/neurio_meter_api.proto\x1a2tesla_protocol/energy_device/energy_site_net.proto\x1a1tesla_protocol/energy_device/intra_site_api.proto\x1a0tesla_protocol/energy_device/filestore_api.proto\x1a.tesla_protocol/energy_device/graphql_api.proto\x1a3tesla_protocol/energy_device/registration_api.proto\x1a3tesla_protocol/energy_device/supercharger_api.proto\x1a+tesla_protocol/energy_device/wmsa_api.proto\x1a)tesla_protocol/energy_device/sm_api.proto\x1a*tesla_protocol/energy_device/ble_api.proto\"a\n" +
 	"\fExternalAuth\x12Q\n" +
 	"\x04type\x18\x01 \x01(\x0e2=.tesla_protocol.tesla.proto.energy_device.v1.ExternalAuthTypeR\x04type\"\x92\x01\n" +
 	"\fAuthEnvelope\x12\x18\n" +
@@ -865,7 +881,7 @@ const file_tesla_protocol_energy_device_transport_proto_rawDesc = "" +
 	"target_din\x18\x02 \x01(\tR\ttargetDin\"i\n" +
 	"\x13RegistrationPayload\x12<\n" +
 	"\x1acustomer_registration_info\x18\x01 \x01(\fR\x18customerRegistrationInfo\x12\x14\n" +
-	"\x05nonce\x18\x02 \x01(\fR\x05nonce\"\x9b\r\n" +
+	"\x05nonce\x18\x02 \x01(\fR\x05nonce\"\xe9\r\n" +
 	"\x0fMessageEnvelope\x12g\n" +
 	"\x10delivery_channel\x18\x01 \x01(\x0e2<.tesla_protocol.tesla.proto.energy_device.v1.DeliveryChannelR\x0fdeliveryChannel\x12P\n" +
 	"\x06sender\x18\x02 \x01(\v28.tesla_protocol.tesla.proto.energy_device.v1.ParticipantR\x06sender\x12V\n" +
@@ -885,7 +901,8 @@ const file_tesla_protocol_energy_device_transport_proto_rawDesc = "" +
 	"\tfilestore\x18\x0f \x01(\v2>.tesla_protocol.tesla.proto.energy_device.v1.FileStoreMessagesH\x00R\tfilestore\x12X\n" +
 	"\agraphql\x18\x10 \x01(\v2<.tesla_protocol.tesla.proto.energy_device.v1.GraphQLMessagesH\x00R\agraphql\x12g\n" +
 	"\fsupercharger\x18\x11 \x01(\v2A.tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessagesH\x00R\fsupercharger\x12g\n" +
-	"\fregistration\x18\x12 \x01(\v2A.tesla_protocol.tesla.proto.energy_device.v1.RegistrationMessagesH\x00R\fregistrationB\t\n" +
+	"\fregistration\x18\x12 \x01(\v2A.tesla_protocol.tesla.proto.energy_device.v1.RegistrationMessagesH\x00R\fregistration\x12L\n" +
+	"\x03ble\x18\x13 \x01(\v28.tesla_protocol.tesla.proto.energy_device.v1.BLEMessagesH\x00R\x03bleB\t\n" +
 	"\apayload*\x90\x01\n" +
 	"\x0fDeliveryChannel\x12\x1c\n" +
 	"\x18DELIVERY_CHANNEL_INVALID\x10\x00\x12 \n" +
@@ -943,6 +960,7 @@ var file_tesla_protocol_energy_device_transport_proto_goTypes = []any{
 	(*GraphQLMessages)(nil),       // 23: tesla_protocol.tesla.proto.energy_device.v1.GraphQLMessages
 	(*SuperchargerMessages)(nil),  // 24: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages
 	(*RegistrationMessages)(nil),  // 25: tesla_protocol.tesla.proto.energy_device.v1.RegistrationMessages
+	(*BLEMessages)(nil),           // 26: tesla_protocol.tesla.proto.energy_device.v1.BLEMessages
 }
 var file_tesla_protocol_energy_device_transport_proto_depIdxs = []int32{
 	2,  // 0: tesla_protocol.tesla.proto.energy_device.v1.ExternalAuth.type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ExternalAuthType
@@ -969,11 +987,12 @@ var file_tesla_protocol_energy_device_transport_proto_depIdxs = []int32{
 	23, // 21: tesla_protocol.tesla.proto.energy_device.v1.MessageEnvelope.graphql:type_name -> tesla_protocol.tesla.proto.energy_device.v1.GraphQLMessages
 	24, // 22: tesla_protocol.tesla.proto.energy_device.v1.MessageEnvelope.supercharger:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages
 	25, // 23: tesla_protocol.tesla.proto.energy_device.v1.MessageEnvelope.registration:type_name -> tesla_protocol.tesla.proto.energy_device.v1.RegistrationMessages
-	24, // [24:24] is the sub-list for method output_type
-	24, // [24:24] is the sub-list for method input_type
-	24, // [24:24] is the sub-list for extension type_name
-	24, // [24:24] is the sub-list for extension extendee
-	0,  // [0:24] is the sub-list for field type_name
+	26, // 24: tesla_protocol.tesla.proto.energy_device.v1.MessageEnvelope.ble:type_name -> tesla_protocol.tesla.proto.energy_device.v1.BLEMessages
+	25, // [25:25] is the sub-list for method output_type
+	25, // [25:25] is the sub-list for method input_type
+	25, // [25:25] is the sub-list for extension type_name
+	25, // [25:25] is the sub-list for extension extendee
+	0,  // [0:25] is the sub-list for field type_name
 }
 
 func init() { file_tesla_protocol_energy_device_transport_proto_init() }
@@ -997,6 +1016,7 @@ func file_tesla_protocol_energy_device_transport_proto_init() {
 	file_tesla_protocol_energy_device_supercharger_api_proto_init()
 	file_tesla_protocol_energy_device_wmsa_api_proto_init()
 	file_tesla_protocol_energy_device_sm_api_proto_init()
+	file_tesla_protocol_energy_device_ble_api_proto_init()
 	file_tesla_protocol_energy_device_transport_proto_msgTypes[1].OneofWrappers = []any{
 		(*AuthEnvelope_ExternalAuth)(nil),
 	}
@@ -1023,6 +1043,7 @@ func file_tesla_protocol_energy_device_transport_proto_init() {
 		(*MessageEnvelope_Graphql)(nil),
 		(*MessageEnvelope_Supercharger)(nil),
 		(*MessageEnvelope_Registration)(nil),
+		(*MessageEnvelope_Ble)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{

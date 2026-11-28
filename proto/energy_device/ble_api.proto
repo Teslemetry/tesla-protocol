@@ -1,0 +1,95 @@
+syntax = "proto3";
+
+package tesla.proto.energy_device.v1;
+
+option go_package = "github.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1";
+option java_package = "com.tesla.generated.energy_device.v1";
+option java_outer_classname = "BleApi";
+
+import "authorization_types.proto";
+import "device.proto";
+
+// Pairs a client key with a device over BLE.
+// UNCONFIRMED: not yet confirmed on a live device.
+message NFCProofOfPresence {
+  bytes client_public_key          = 1;
+  bytes nfc_nonce                  = 2;
+  bytes nonce_proof                = 3;
+  AuthorizedKeyType key_type       = 4;
+  repeated AuthorizationRole roles = 5;
+  AuthorizedClientType client_type = 6;
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message NFCAck {
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message SPAKE2PlusClientHello {
+  bytes client_public_key          = 1;
+  bytes client_public_share        = 2;
+  SPAKE2PlusProfile profile        = 3;
+  AuthorizedKeyType key_type       = 4;
+  repeated AuthorizationRole roles = 5;
+  AuthorizedClientType client_type = 6;
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message SPAKE2PlusServerHello {
+  bytes server_public_share = 1;
+  bytes server_confirmation = 2;
+  UUIDv4Bytes session_uuid  = 3;
+  SPAKE2PlusProfile profile = 5;
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message SPAKE2PlusConfirmRequest {
+  bytes client_confirmation = 1;
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message SPAKE2PlusConfirmAck {
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message ResumeRequest {
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message ResumeAck {
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message DeviceAttestation {
+  repeated bytes cert_chain = 1;
+  bytes signature           = 2;
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message BLEAPIPairRequest {
+  oneof step {
+    NFCProofOfPresence nfc                       = 1;
+    SPAKE2PlusClientHello spake2_plus_hello      = 2;
+    SPAKE2PlusConfirmRequest spake2_plus_confirm = 3;
+    ResumeRequest resume                         = 4;
+  }
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message BLEAPIPairResponse {
+  DeviceAttestation attestation = 1;
+  oneof step {
+    NFCAck nfc                               = 2;
+    SPAKE2PlusServerHello spake2_plus_hello  = 3;
+    SPAKE2PlusConfirmAck spake2_plus_confirm = 4;
+    ResumeAck resume                         = 5;
+  }
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message BLEMessages {
+  oneof message {
+    BLEAPIPairRequest pair_request   = 1;
+    BLEAPIPairResponse pair_response = 2;
+  }
+}

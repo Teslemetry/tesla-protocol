@@ -1,5 +1,6 @@
 from . import authorization_api_pb2
 from . import authorization_types_pb2
+from . import ble_api_pb2
 from . import common_api_pb2
 from . import device_pb2
 from . import energy_command_pb2

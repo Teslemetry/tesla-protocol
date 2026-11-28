@@ -25,9 +25,10 @@ const (
 type AuthorizationRole int32
 
 const (
-	AuthorizationRole_AUTHORIZATION_ROLE_INVALID  AuthorizationRole = 0
-	AuthorizationRole_AUTHORIZATION_ROLE_CUSTOMER AuthorizationRole = 1
-	AuthorizationRole_AUTHORIZATION_ROLE_VEHICLE  AuthorizationRole = 2
+	AuthorizationRole_AUTHORIZATION_ROLE_INVALID   AuthorizationRole = 0
+	AuthorizationRole_AUTHORIZATION_ROLE_CUSTOMER  AuthorizationRole = 1
+	AuthorizationRole_AUTHORIZATION_ROLE_VEHICLE   AuthorizationRole = 2
+	AuthorizationRole_AUTHORIZATION_ROLE_INSTALLER AuthorizationRole = 3 // UNCONFIRMED: not yet confirmed on a live device
 )
 
 // Enum value maps for AuthorizationRole.
@@ -36,11 +37,13 @@ var (
 		0: "AUTHORIZATION_ROLE_INVALID",
 		1: "AUTHORIZATION_ROLE_CUSTOMER",
 		2: "AUTHORIZATION_ROLE_VEHICLE",
+		3: "AUTHORIZATION_ROLE_INSTALLER",
 	}
 	AuthorizationRole_value = map[string]int32{
-		"AUTHORIZATION_ROLE_INVALID":  0,
-		"AUTHORIZATION_ROLE_CUSTOMER": 1,
-		"AUTHORIZATION_ROLE_VEHICLE":  2,
+		"AUTHORIZATION_ROLE_INVALID":   0,
+		"AUTHORIZATION_ROLE_CUSTOMER":  1,
+		"AUTHORIZATION_ROLE_VEHICLE":   2,
+		"AUTHORIZATION_ROLE_INSTALLER": 3,
 	}
 )
 
@@ -77,6 +80,7 @@ const (
 	AuthorizedClientType_AUTHORIZED_CLIENT_TYPE_INVALID             AuthorizedClientType = 0
 	AuthorizedClientType_AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP AuthorizedClientType = 1
 	AuthorizedClientType_AUTHORIZED_CLIENT_TYPE_VEHICLE             AuthorizedClientType = 2
+	AuthorizedClientType_AUTHORIZED_CLIENT_TYPE_INSTALLER_APP       AuthorizedClientType = 3 // UNCONFIRMED: not yet confirmed on a live device
 )
 
 // Enum value maps for AuthorizedClientType.
@@ -85,11 +89,13 @@ var (
 		0: "AUTHORIZED_CLIENT_TYPE_INVALID",
 		1: "AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP",
 		2: "AUTHORIZED_CLIENT_TYPE_VEHICLE",
+		3: "AUTHORIZED_CLIENT_TYPE_INSTALLER_APP",
 	}
 	AuthorizedClientType_value = map[string]int32{
 		"AUTHORIZED_CLIENT_TYPE_INVALID":             0,
 		"AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP": 1,
 		"AUTHORIZED_CLIENT_TYPE_VEHICLE":             2,
+		"AUTHORIZED_CLIENT_TYPE_INSTALLER_APP":       3,
 	}
 )
 
@@ -118,6 +124,53 @@ func (x AuthorizedClientType) Number() protoreflect.EnumNumber {
 // Deprecated: Use AuthorizedClientType.Descriptor instead.
 func (AuthorizedClientType) EnumDescriptor() ([]byte, []int) {
 	return file_tesla_protocol_energy_device_authorization_types_proto_rawDescGZIP(), []int{1}
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+type SPAKE2PlusProfile int32
+
+const (
+	SPAKE2PlusProfile_SPAKE2_PLUS_PROFILE_INVALID     SPAKE2PlusProfile = 0
+	SPAKE2PlusProfile_SPAKE2_PLUS_PROFILE_P256_SHA256 SPAKE2PlusProfile = 1
+)
+
+// Enum value maps for SPAKE2PlusProfile.
+var (
+	SPAKE2PlusProfile_name = map[int32]string{
+		0: "SPAKE2_PLUS_PROFILE_INVALID",
+		1: "SPAKE2_PLUS_PROFILE_P256_SHA256",
+	}
+	SPAKE2PlusProfile_value = map[string]int32{
+		"SPAKE2_PLUS_PROFILE_INVALID":     0,
+		"SPAKE2_PLUS_PROFILE_P256_SHA256": 1,
+	}
+)
+
+func (x SPAKE2PlusProfile) Enum() *SPAKE2PlusProfile {
+	p := new(SPAKE2PlusProfile)
+	*p = x
+	return p
+}
+
+func (x SPAKE2PlusProfile) String() string {
+	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
+}
+
+func (SPAKE2PlusProfile) Descriptor() protoreflect.EnumDescriptor {
+	return file_tesla_protocol_energy_device_authorization_types_proto_enumTypes[2].Descriptor()
+}
+
+func (SPAKE2PlusProfile) Type() protoreflect.EnumType {
+	return &file_tesla_protocol_energy_device_authorization_types_proto_enumTypes[2]
+}
+
+func (x SPAKE2PlusProfile) Number() protoreflect.EnumNumber {
+	return protoreflect.EnumNumber(x)
+}
+
+// Deprecated: Use SPAKE2PlusProfile.Descriptor instead.
+func (SPAKE2PlusProfile) EnumDescriptor() ([]byte, []int) {
+	return file_tesla_protocol_energy_device_authorization_types_proto_rawDescGZIP(), []int{2}
 }
 
 type AuthorizedKeyType int32
@@ -153,11 +206,11 @@ func (x AuthorizedKeyType) String() string {
 }
 
 func (AuthorizedKeyType) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_energy_device_authorization_types_proto_enumTypes[2].Descriptor()
+	return file_tesla_protocol_energy_device_authorization_types_proto_enumTypes[3].Descriptor()
 }
 
 func (AuthorizedKeyType) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_energy_device_authorization_types_proto_enumTypes[2]
+	return &file_tesla_protocol_energy_device_authorization_types_proto_enumTypes[3]
 }
 
 func (x AuthorizedKeyType) Number() protoreflect.EnumNumber {
@@ -166,7 +219,7 @@ func (x AuthorizedKeyType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use AuthorizedKeyType.Descriptor instead.
 func (AuthorizedKeyType) EnumDescriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_authorization_types_proto_rawDescGZIP(), []int{2}
+	return file_tesla_protocol_energy_device_authorization_types_proto_rawDescGZIP(), []int{3}
 }
 
 type AuthorizedState int32
@@ -208,11 +261,11 @@ func (x AuthorizedState) String() string {
 }
 
 func (AuthorizedState) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_energy_device_authorization_types_proto_enumTypes[3].Descriptor()
+	return file_tesla_protocol_energy_device_authorization_types_proto_enumTypes[4].Descriptor()
 }
 
 func (AuthorizedState) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_energy_device_authorization_types_proto_enumTypes[3]
+	return &file_tesla_protocol_energy_device_authorization_types_proto_enumTypes[4]
 }
 
 func (x AuthorizedState) Number() protoreflect.EnumNumber {
@@ -221,7 +274,7 @@ func (x AuthorizedState) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use AuthorizedState.Descriptor instead.
 func (AuthorizedState) EnumDescriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_authorization_types_proto_rawDescGZIP(), []int{3}
+	return file_tesla_protocol_energy_device_authorization_types_proto_rawDescGZIP(), []int{4}
 }
 
 type AuthorizedVerificationType int32
@@ -263,11 +316,11 @@ func (x AuthorizedVerificationType) String() string {
 }
 
 func (AuthorizedVerificationType) Descriptor() protoreflect.EnumDescriptor {
-	return file_tesla_protocol_energy_device_authorization_types_proto_enumTypes[4].Descriptor()
+	return file_tesla_protocol_energy_device_authorization_types_proto_enumTypes[5].Descriptor()
 }
 
 func (AuthorizedVerificationType) Type() protoreflect.EnumType {
-	return &file_tesla_protocol_energy_device_authorization_types_proto_enumTypes[4]
+	return &file_tesla_protocol_energy_device_authorization_types_proto_enumTypes[5]
 }
 
 func (x AuthorizedVerificationType) Number() protoreflect.EnumNumber {
@@ -276,7 +329,7 @@ func (x AuthorizedVerificationType) Number() protoreflect.EnumNumber {
 
 // Deprecated: Use AuthorizedVerificationType.Descriptor instead.
 func (AuthorizedVerificationType) EnumDescriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_authorization_types_proto_rawDescGZIP(), []int{4}
+	return file_tesla_protocol_energy_device_authorization_types_proto_rawDescGZIP(), []int{5}
 }
 
 type AuthorizationRecord struct {
@@ -417,15 +470,20 @@ const file_tesla_protocol_energy_device_authorization_types_proto_rawDesc = "" +
 	"\x18authorized_by_public_key\x18\n" +
 	" \x01(\fH\x01R\x15authorizedByPublicKey\x88\x01\x01B\r\n" +
 	"\v_identifierB\x1b\n" +
-	"\x19_authorized_by_public_key*t\n" +
+	"\x19_authorized_by_public_key*\x96\x01\n" +
 	"\x11AuthorizationRole\x12\x1e\n" +
 	"\x1aAUTHORIZATION_ROLE_INVALID\x10\x00\x12\x1f\n" +
 	"\x1bAUTHORIZATION_ROLE_CUSTOMER\x10\x01\x12\x1e\n" +
-	"\x1aAUTHORIZATION_ROLE_VEHICLE\x10\x02*\x8e\x01\n" +
+	"\x1aAUTHORIZATION_ROLE_VEHICLE\x10\x02\x12 \n" +
+	"\x1cAUTHORIZATION_ROLE_INSTALLER\x10\x03*\xb8\x01\n" +
 	"\x14AuthorizedClientType\x12\"\n" +
 	"\x1eAUTHORIZED_CLIENT_TYPE_INVALID\x10\x00\x12.\n" +
 	"*AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP\x10\x01\x12\"\n" +
-	"\x1eAUTHORIZED_CLIENT_TYPE_VEHICLE\x10\x02*n\n" +
+	"\x1eAUTHORIZED_CLIENT_TYPE_VEHICLE\x10\x02\x12(\n" +
+	"$AUTHORIZED_CLIENT_TYPE_INSTALLER_APP\x10\x03*Y\n" +
+	"\x11SPAKE2PlusProfile\x12\x1f\n" +
+	"\x1bSPAKE2_PLUS_PROFILE_INVALID\x10\x00\x12#\n" +
+	"\x1fSPAKE2_PLUS_PROFILE_P256_SHA256\x10\x01*n\n" +
 	"\x11AuthorizedKeyType\x12\x1f\n" +
 	"\x1bAUTHORIZED_KEY_TYPE_INVALID\x10\x00\x12\x1b\n" +
 	"\x17AUTHORIZED_KEY_TYPE_RSA\x10\x01\x12\x1b\n" +
@@ -456,24 +514,25 @@ func file_tesla_protocol_energy_device_authorization_types_proto_rawDescGZIP() [
 	return file_tesla_protocol_energy_device_authorization_types_proto_rawDescData
 }
 
-var file_tesla_protocol_energy_device_authorization_types_proto_enumTypes = make([]protoimpl.EnumInfo, 5)
+var file_tesla_protocol_energy_device_authorization_types_proto_enumTypes = make([]protoimpl.EnumInfo, 6)
 var file_tesla_protocol_energy_device_authorization_types_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_tesla_protocol_energy_device_authorization_types_proto_goTypes = []any{
 	(AuthorizationRole)(0),          // 0: tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRole
 	(AuthorizedClientType)(0),       // 1: tesla_protocol.tesla.proto.energy_device.v1.AuthorizedClientType
-	(AuthorizedKeyType)(0),          // 2: tesla_protocol.tesla.proto.energy_device.v1.AuthorizedKeyType
-	(AuthorizedState)(0),            // 3: tesla_protocol.tesla.proto.energy_device.v1.AuthorizedState
-	(AuthorizedVerificationType)(0), // 4: tesla_protocol.tesla.proto.energy_device.v1.AuthorizedVerificationType
-	(*AuthorizationRecord)(nil),     // 5: tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRecord
-	(*timestamppb.Timestamp)(nil),   // 6: google.protobuf.Timestamp
+	(SPAKE2PlusProfile)(0),          // 2: tesla_protocol.tesla.proto.energy_device.v1.SPAKE2PlusProfile
+	(AuthorizedKeyType)(0),          // 3: tesla_protocol.tesla.proto.energy_device.v1.AuthorizedKeyType
+	(AuthorizedState)(0),            // 4: tesla_protocol.tesla.proto.energy_device.v1.AuthorizedState
+	(AuthorizedVerificationType)(0), // 5: tesla_protocol.tesla.proto.energy_device.v1.AuthorizedVerificationType
+	(*AuthorizationRecord)(nil),     // 6: tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRecord
+	(*timestamppb.Timestamp)(nil),   // 7: google.protobuf.Timestamp
 }
 var file_tesla_protocol_energy_device_authorization_types_proto_depIdxs = []int32{
 	1, // 0: tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRecord.type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.AuthorizedClientType
-	2, // 1: tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRecord.key_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.AuthorizedKeyType
+	3, // 1: tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRecord.key_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.AuthorizedKeyType
 	0, // 2: tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRecord.roles:type_name -> tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRole
-	3, // 3: tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRecord.state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.AuthorizedState
-	4, // 4: tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRecord.verification:type_name -> tesla_protocol.tesla.proto.energy_device.v1.AuthorizedVerificationType
-	6, // 5: tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRecord.added_time:type_name -> google.protobuf.Timestamp
+	4, // 3: tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRecord.state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.AuthorizedState
+	5, // 4: tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRecord.verification:type_name -> tesla_protocol.tesla.proto.energy_device.v1.AuthorizedVerificationType
+	7, // 5: tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRecord.added_time:type_name -> google.protobuf.Timestamp
 	6, // [6:6] is the sub-list for method output_type
 	6, // [6:6] is the sub-list for method input_type
 	6, // [6:6] is the sub-list for extension type_name
@@ -492,7 +551,7 @@ func file_tesla_protocol_energy_device_authorization_types_proto_init() {
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tesla_protocol_energy_device_authorization_types_proto_rawDesc), len(file_tesla_protocol_energy_device_authorization_types_proto_rawDesc)),
-			NumEnums:      5,
+			NumEnums:      6,
 			NumMessages:   1,
 			NumExtensions: 0,
 			NumServices:   0,

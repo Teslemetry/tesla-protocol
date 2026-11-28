@@ -414,12 +414,36 @@ export interface TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD {
 export interface TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy {
 }
 
+/** UNCONFIRMED: not yet confirmed on a live device. */
+export interface TEGAPIEnsureCertificateRequestCSIPAusgrid {
+}
+
+/** UNCONFIRMED: not yet confirmed on a live device. */
+export interface TEGAPIEnsureCertificateRequestCSIPEndeavour {
+}
+
+/** UNCONFIRMED: not yet confirmed on a live device. */
+export interface TEGAPIEnsureCertificateRequestCSIPEssential {
+}
+
 export interface TEGAPIEnsureCertificateRequest {
   forceRenew: boolean;
   csipSouthAustraliaPowerNetworks?: TEGAPIEnsureCertificateRequestCSIPSouthAustraliaPowerNetworks | undefined;
   csipCitipowerPowercorUnited?: TEGAPIEnsureCertificateRequestCSIPCitiPowerPowercorUnited | undefined;
   csipAusnet?: TEGAPIEnsureCertificateRequestCSIPAusNet | undefined;
-  csipJemena?: TEGAPIEnsureCertificateRequestCSIPJemena | undefined;
+  csipJemena?:
+    | TEGAPIEnsureCertificateRequestCSIPJemena
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  csipAusgrid?:
+    | TEGAPIEnsureCertificateRequestCSIPAusgrid
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  csipEndeavour?:
+    | TEGAPIEnsureCertificateRequestCSIPEndeavour
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  csipEssential?: TEGAPIEnsureCertificateRequestCSIPEssential | undefined;
   csipEnergexErgonEnergyQld: TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD | undefined;
   csipWesternPowerSynergy: TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy | undefined;
 }
@@ -865,6 +889,14 @@ export interface TEGAPIRetrieveSiteSuggestionResponse {
   response: SiteSuggestionResponse | undefined;
 }
 
+/** UNCONFIRMED: not yet confirmed on a live device. */
+export interface TEGAPIDelayBatteryMatingRequest {
+}
+
+/** UNCONFIRMED: not yet confirmed on a live device. */
+export interface TEGAPIDelayBatteryMatingResponse {
+}
+
 export interface TEGMessages {
   getConfigRequest?: TEGAPIGetConfigRequest | undefined;
   getConfigResponse?: TEGAPIGetConfigResponse | undefined;
@@ -951,7 +983,15 @@ export interface TEGMessages {
   deleteControllableDeviceProgramsRequest?: TEGAPIDeleteControllableDeviceProgramsRequest | undefined;
   deleteControllableDeviceProgramsResponse?: TEGAPIDeleteControllableDeviceProgramsResponse | undefined;
   clearPowerwall3LockoutAlertsRequest?: TEGAPIClearPowerwall3LockoutAlertsRequest | undefined;
-  clearPowerwall3LockoutAlertsResponse?: TEGAPIClearPowerwall3LockoutAlertsResponse | undefined;
+  clearPowerwall3LockoutAlertsResponse?:
+    | TEGAPIClearPowerwall3LockoutAlertsResponse
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  delayBatteryMatingRequest?:
+    | TEGAPIDelayBatteryMatingRequest
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  delayBatteryMatingResponse?: TEGAPIDelayBatteryMatingResponse | undefined;
 }
 
 function createBaseTEGSettings(): TEGSettings {
@@ -3906,6 +3946,147 @@ export const TEGAPIEnsureCertificateRequestCSIPWesternPowerSynergy: MessageFns<
   },
 };
 
+function createBaseTEGAPIEnsureCertificateRequestCSIPAusgrid(): TEGAPIEnsureCertificateRequestCSIPAusgrid {
+  return {};
+}
+
+export const TEGAPIEnsureCertificateRequestCSIPAusgrid: MessageFns<TEGAPIEnsureCertificateRequestCSIPAusgrid> = {
+  encode(_: TEGAPIEnsureCertificateRequestCSIPAusgrid, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIEnsureCertificateRequestCSIPAusgrid {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPAusgrid();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIEnsureCertificateRequestCSIPAusgrid {
+    return {};
+  },
+
+  toJSON(_: TEGAPIEnsureCertificateRequestCSIPAusgrid): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPAusgrid>, I>>(
+    base?: I,
+  ): TEGAPIEnsureCertificateRequestCSIPAusgrid {
+    return TEGAPIEnsureCertificateRequestCSIPAusgrid.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPAusgrid>, I>>(
+    _: I,
+  ): TEGAPIEnsureCertificateRequestCSIPAusgrid {
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPAusgrid();
+    return message;
+  },
+};
+
+function createBaseTEGAPIEnsureCertificateRequestCSIPEndeavour(): TEGAPIEnsureCertificateRequestCSIPEndeavour {
+  return {};
+}
+
+export const TEGAPIEnsureCertificateRequestCSIPEndeavour: MessageFns<TEGAPIEnsureCertificateRequestCSIPEndeavour> = {
+  encode(_: TEGAPIEnsureCertificateRequestCSIPEndeavour, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIEnsureCertificateRequestCSIPEndeavour {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPEndeavour();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIEnsureCertificateRequestCSIPEndeavour {
+    return {};
+  },
+
+  toJSON(_: TEGAPIEnsureCertificateRequestCSIPEndeavour): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPEndeavour>, I>>(
+    base?: I,
+  ): TEGAPIEnsureCertificateRequestCSIPEndeavour {
+    return TEGAPIEnsureCertificateRequestCSIPEndeavour.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPEndeavour>, I>>(
+    _: I,
+  ): TEGAPIEnsureCertificateRequestCSIPEndeavour {
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPEndeavour();
+    return message;
+  },
+};
+
+function createBaseTEGAPIEnsureCertificateRequestCSIPEssential(): TEGAPIEnsureCertificateRequestCSIPEssential {
+  return {};
+}
+
+export const TEGAPIEnsureCertificateRequestCSIPEssential: MessageFns<TEGAPIEnsureCertificateRequestCSIPEssential> = {
+  encode(_: TEGAPIEnsureCertificateRequestCSIPEssential, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIEnsureCertificateRequestCSIPEssential {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPEssential();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIEnsureCertificateRequestCSIPEssential {
+    return {};
+  },
+
+  toJSON(_: TEGAPIEnsureCertificateRequestCSIPEssential): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPEssential>, I>>(
+    base?: I,
+  ): TEGAPIEnsureCertificateRequestCSIPEssential {
+    return TEGAPIEnsureCertificateRequestCSIPEssential.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIEnsureCertificateRequestCSIPEssential>, I>>(
+    _: I,
+  ): TEGAPIEnsureCertificateRequestCSIPEssential {
+    const message = createBaseTEGAPIEnsureCertificateRequestCSIPEssential();
+    return message;
+  },
+};
+
 function createBaseTEGAPIEnsureCertificateRequest(): TEGAPIEnsureCertificateRequest {
   return {
     forceRenew: false,
@@ -3913,6 +4094,9 @@ function createBaseTEGAPIEnsureCertificateRequest(): TEGAPIEnsureCertificateRequ
     csipCitipowerPowercorUnited: undefined,
     csipAusnet: undefined,
     csipJemena: undefined,
+    csipAusgrid: undefined,
+    csipEndeavour: undefined,
+    csipEssential: undefined,
     csipEnergexErgonEnergyQld: undefined,
     csipWesternPowerSynergy: undefined,
   };
@@ -3940,6 +4124,15 @@ export const TEGAPIEnsureCertificateRequest: MessageFns<TEGAPIEnsureCertificateR
     }
     if (message.csipJemena !== undefined) {
       TEGAPIEnsureCertificateRequestCSIPJemena.encode(message.csipJemena, writer.uint32(42).fork()).join();
+    }
+    if (message.csipAusgrid !== undefined) {
+      TEGAPIEnsureCertificateRequestCSIPAusgrid.encode(message.csipAusgrid, writer.uint32(66).fork()).join();
+    }
+    if (message.csipEndeavour !== undefined) {
+      TEGAPIEnsureCertificateRequestCSIPEndeavour.encode(message.csipEndeavour, writer.uint32(74).fork()).join();
+    }
+    if (message.csipEssential !== undefined) {
+      TEGAPIEnsureCertificateRequestCSIPEssential.encode(message.csipEssential, writer.uint32(82).fork()).join();
     }
     if (message.csipEnergexErgonEnergyQld !== undefined) {
       TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD.encode(
@@ -4007,6 +4200,30 @@ export const TEGAPIEnsureCertificateRequest: MessageFns<TEGAPIEnsureCertificateR
           message.csipJemena = TEGAPIEnsureCertificateRequestCSIPJemena.decode(reader, reader.uint32());
           continue;
         }
+        case 8: {
+          if (tag !== 66) {
+            break;
+          }
+
+          message.csipAusgrid = TEGAPIEnsureCertificateRequestCSIPAusgrid.decode(reader, reader.uint32());
+          continue;
+        }
+        case 9: {
+          if (tag !== 74) {
+            break;
+          }
+
+          message.csipEndeavour = TEGAPIEnsureCertificateRequestCSIPEndeavour.decode(reader, reader.uint32());
+          continue;
+        }
+        case 10: {
+          if (tag !== 82) {
+            break;
+          }
+
+          message.csipEssential = TEGAPIEnsureCertificateRequestCSIPEssential.decode(reader, reader.uint32());
+          continue;
+        }
         case 6: {
           if (tag !== 50) {
             break;
@@ -4053,6 +4270,15 @@ export const TEGAPIEnsureCertificateRequest: MessageFns<TEGAPIEnsureCertificateR
       csipJemena: isSet(object.csipJemena)
         ? TEGAPIEnsureCertificateRequestCSIPJemena.fromJSON(object.csipJemena)
         : undefined,
+      csipAusgrid: isSet(object.csipAusgrid)
+        ? TEGAPIEnsureCertificateRequestCSIPAusgrid.fromJSON(object.csipAusgrid)
+        : undefined,
+      csipEndeavour: isSet(object.csipEndeavour)
+        ? TEGAPIEnsureCertificateRequestCSIPEndeavour.fromJSON(object.csipEndeavour)
+        : undefined,
+      csipEssential: isSet(object.csipEssential)
+        ? TEGAPIEnsureCertificateRequestCSIPEssential.fromJSON(object.csipEssential)
+        : undefined,
       csipEnergexErgonEnergyQld: isSet(object.csipEnergexErgonEnergyQld)
         ? TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD.fromJSON(object.csipEnergexErgonEnergyQld)
         : undefined,
@@ -4082,6 +4308,15 @@ export const TEGAPIEnsureCertificateRequest: MessageFns<TEGAPIEnsureCertificateR
     }
     if (message.csipJemena !== undefined) {
       obj.csipJemena = TEGAPIEnsureCertificateRequestCSIPJemena.toJSON(message.csipJemena);
+    }
+    if (message.csipAusgrid !== undefined) {
+      obj.csipAusgrid = TEGAPIEnsureCertificateRequestCSIPAusgrid.toJSON(message.csipAusgrid);
+    }
+    if (message.csipEndeavour !== undefined) {
+      obj.csipEndeavour = TEGAPIEnsureCertificateRequestCSIPEndeavour.toJSON(message.csipEndeavour);
+    }
+    if (message.csipEssential !== undefined) {
+      obj.csipEssential = TEGAPIEnsureCertificateRequestCSIPEssential.toJSON(message.csipEssential);
     }
     if (message.csipEnergexErgonEnergyQld !== undefined) {
       obj.csipEnergexErgonEnergyQld = TEGAPIEnsureCertificateRequestCSIPEnergexErgonEnergyQLD.toJSON(
@@ -4119,6 +4354,15 @@ export const TEGAPIEnsureCertificateRequest: MessageFns<TEGAPIEnsureCertificateR
       : undefined;
     message.csipJemena = (object.csipJemena !== undefined && object.csipJemena !== null)
       ? TEGAPIEnsureCertificateRequestCSIPJemena.fromPartial(object.csipJemena)
+      : undefined;
+    message.csipAusgrid = (object.csipAusgrid !== undefined && object.csipAusgrid !== null)
+      ? TEGAPIEnsureCertificateRequestCSIPAusgrid.fromPartial(object.csipAusgrid)
+      : undefined;
+    message.csipEndeavour = (object.csipEndeavour !== undefined && object.csipEndeavour !== null)
+      ? TEGAPIEnsureCertificateRequestCSIPEndeavour.fromPartial(object.csipEndeavour)
+      : undefined;
+    message.csipEssential = (object.csipEssential !== undefined && object.csipEssential !== null)
+      ? TEGAPIEnsureCertificateRequestCSIPEssential.fromPartial(object.csipEssential)
       : undefined;
     message.csipEnergexErgonEnergyQld =
       (object.csipEnergexErgonEnergyQld !== undefined && object.csipEnergexErgonEnergyQld !== null)
@@ -7745,6 +7989,96 @@ export const TEGAPIRetrieveSiteSuggestionResponse: MessageFns<TEGAPIRetrieveSite
   },
 };
 
+function createBaseTEGAPIDelayBatteryMatingRequest(): TEGAPIDelayBatteryMatingRequest {
+  return {};
+}
+
+export const TEGAPIDelayBatteryMatingRequest: MessageFns<TEGAPIDelayBatteryMatingRequest> = {
+  encode(_: TEGAPIDelayBatteryMatingRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIDelayBatteryMatingRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIDelayBatteryMatingRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIDelayBatteryMatingRequest {
+    return {};
+  },
+
+  toJSON(_: TEGAPIDelayBatteryMatingRequest): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIDelayBatteryMatingRequest>, I>>(base?: I): TEGAPIDelayBatteryMatingRequest {
+    return TEGAPIDelayBatteryMatingRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIDelayBatteryMatingRequest>, I>>(_: I): TEGAPIDelayBatteryMatingRequest {
+    const message = createBaseTEGAPIDelayBatteryMatingRequest();
+    return message;
+  },
+};
+
+function createBaseTEGAPIDelayBatteryMatingResponse(): TEGAPIDelayBatteryMatingResponse {
+  return {};
+}
+
+export const TEGAPIDelayBatteryMatingResponse: MessageFns<TEGAPIDelayBatteryMatingResponse> = {
+  encode(_: TEGAPIDelayBatteryMatingResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): TEGAPIDelayBatteryMatingResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseTEGAPIDelayBatteryMatingResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): TEGAPIDelayBatteryMatingResponse {
+    return {};
+  },
+
+  toJSON(_: TEGAPIDelayBatteryMatingResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<TEGAPIDelayBatteryMatingResponse>, I>>(
+    base?: I,
+  ): TEGAPIDelayBatteryMatingResponse {
+    return TEGAPIDelayBatteryMatingResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<TEGAPIDelayBatteryMatingResponse>, I>>(
+    _: I,
+  ): TEGAPIDelayBatteryMatingResponse {
+    const message = createBaseTEGAPIDelayBatteryMatingResponse();
+    return message;
+  },
+};
+
 function createBaseTEGMessages(): TEGMessages {
   return {
     getConfigRequest: undefined,
@@ -7833,6 +8167,8 @@ function createBaseTEGMessages(): TEGMessages {
     deleteControllableDeviceProgramsResponse: undefined,
     clearPowerwall3LockoutAlertsRequest: undefined,
     clearPowerwall3LockoutAlertsResponse: undefined,
+    delayBatteryMatingRequest: undefined,
+    delayBatteryMatingResponse: undefined,
   };
 }
 
@@ -8249,6 +8585,12 @@ export const TEGMessages: MessageFns<TEGMessages> = {
         message.clearPowerwall3LockoutAlertsResponse,
         writer.uint32(690).fork(),
       ).join();
+    }
+    if (message.delayBatteryMatingRequest !== undefined) {
+      TEGAPIDelayBatteryMatingRequest.encode(message.delayBatteryMatingRequest, writer.uint32(698).fork()).join();
+    }
+    if (message.delayBatteryMatingResponse !== undefined) {
+      TEGAPIDelayBatteryMatingResponse.encode(message.delayBatteryMatingResponse, writer.uint32(706).fork()).join();
     }
     return writer;
   },
@@ -9104,6 +9446,22 @@ export const TEGMessages: MessageFns<TEGMessages> = {
           );
           continue;
         }
+        case 87: {
+          if (tag !== 698) {
+            break;
+          }
+
+          message.delayBatteryMatingRequest = TEGAPIDelayBatteryMatingRequest.decode(reader, reader.uint32());
+          continue;
+        }
+        case 88: {
+          if (tag !== 706) {
+            break;
+          }
+
+          message.delayBatteryMatingResponse = TEGAPIDelayBatteryMatingResponse.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -9376,6 +9734,12 @@ export const TEGMessages: MessageFns<TEGMessages> = {
         : undefined,
       clearPowerwall3LockoutAlertsResponse: isSet(object.clearPowerwall3LockoutAlertsResponse)
         ? TEGAPIClearPowerwall3LockoutAlertsResponse.fromJSON(object.clearPowerwall3LockoutAlertsResponse)
+        : undefined,
+      delayBatteryMatingRequest: isSet(object.delayBatteryMatingRequest)
+        ? TEGAPIDelayBatteryMatingRequest.fromJSON(object.delayBatteryMatingRequest)
+        : undefined,
+      delayBatteryMatingResponse: isSet(object.delayBatteryMatingResponse)
+        ? TEGAPIDelayBatteryMatingResponse.fromJSON(object.delayBatteryMatingResponse)
         : undefined,
     };
   },
@@ -9762,6 +10126,12 @@ export const TEGMessages: MessageFns<TEGMessages> = {
         message.clearPowerwall3LockoutAlertsResponse,
       );
     }
+    if (message.delayBatteryMatingRequest !== undefined) {
+      obj.delayBatteryMatingRequest = TEGAPIDelayBatteryMatingRequest.toJSON(message.delayBatteryMatingRequest);
+    }
+    if (message.delayBatteryMatingResponse !== undefined) {
+      obj.delayBatteryMatingResponse = TEGAPIDelayBatteryMatingResponse.toJSON(message.delayBatteryMatingResponse);
+    }
     return obj;
   },
 
@@ -10139,6 +10509,14 @@ export const TEGMessages: MessageFns<TEGMessages> = {
       (object.clearPowerwall3LockoutAlertsResponse !== undefined &&
           object.clearPowerwall3LockoutAlertsResponse !== null)
         ? TEGAPIClearPowerwall3LockoutAlertsResponse.fromPartial(object.clearPowerwall3LockoutAlertsResponse)
+        : undefined;
+    message.delayBatteryMatingRequest =
+      (object.delayBatteryMatingRequest !== undefined && object.delayBatteryMatingRequest !== null)
+        ? TEGAPIDelayBatteryMatingRequest.fromPartial(object.delayBatteryMatingRequest)
+        : undefined;
+    message.delayBatteryMatingResponse =
+      (object.delayBatteryMatingResponse !== undefined && object.delayBatteryMatingResponse !== null)
+        ? TEGAPIDelayBatteryMatingResponse.fromPartial(object.delayBatteryMatingResponse)
         : undefined;
     return message;
   },

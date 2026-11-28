@@ -384,6 +384,21 @@ message ChargeState {
         PowershareStopReasonAdapterInitializationFailed = 8;  // TESLEMETRY-EXT
     }
 
+    enum ManualPreconStatus {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+        ManualPreconStatusUnknown = 0;
+        ManualPreconStatusIdle = 1;
+        ManualPreconStatusHeating = 2;
+        ManualPreconStatusKeepHot = 3;
+    }
+
+    enum EcosystemChargeMode {  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+        EcosystemChargeModeUnknown = 0;
+        EcosystemChargeModeNone = 1;
+        EcosystemChargeModeSmartCharging = 2;
+        EcosystemChargeModeSmartChargingFaulted = 3;
+        EcosystemChargeModeSmartChargingFaultedLong = 4;
+    }
+
     ChargingState charging_state = 1;
     ChargerType   fast_charger_type = 2;
     ChargerBrand  fast_charger_brand = 3;
@@ -499,6 +514,10 @@ message ChargeState {
     oneof optional_convenience_features { uint32 convenience_features = 193; }  // TESLEMETRY-EXT
     oneof optional_keep_accessory_power_mode { bool keep_accessory_power_mode = 194; }  // TESLEMETRY-EXT
     oneof optional_should_hide_range_info { bool should_hide_range_info = 198; }  // TESLEMETRY-EXT
+    oneof optional_manual_precon_supported { bool manual_precon_supported = 731429; }  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_manual_precon_allowed { bool manual_precon_allowed = 731430; }  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_manual_precon_status { ManualPreconStatus manual_precon_status = 731431; }  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    oneof optional_ecosystem_charge_mode { EcosystemChargeMode ecosystem_charge_mode = 732457; }  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     reserved 11;  // TESLEMETRY-EXT obsolete: batteryRangeOBSOLETE (float)
     reserved 12;  // TESLEMETRY-EXT obsolete: estBatteryRangeOBSOLETE (float)
     reserved 13;  // TESLEMETRY-EXT obsolete: idealBatteryRangeOBSOLETE (float)

@@ -168,6 +168,7 @@ message VehicleAction {
     SetDeckLightAction setDeckLightAction = 698038;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     SetKeepOnCabin12vPortAction setKeepOnCabin12vPortAction = 721262;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
     SetKeepOnCabin48vPortAction setKeepOnCabin48vPortAction = 721263;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+    ManualPreconditioningAction manualPreconditioningAction = 731429;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
   }
   // Asks the vehicle not to send the routine success reply to this action.  // TESLEMETRY-EXT
   bool dropNominalSuccessResponses = 185;  // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
@@ -1517,5 +1518,14 @@ message SetKeepOnCabin12vPortAction {
 // UNCONFIRMED: not yet confirmed on a live vehicle.
 message SetKeepOnCabin48vPortAction {
   KeepOnAccessoryPortRequest keepOnMode = 1;
+}
+
+// Starts or stops battery preconditioning for fast charging.
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+message ManualPreconditioningAction {
+  oneof manual_preconditioning_action {
+    Void start = 1;
+    Void stop = 2;
+  }
 }
 // ===== TESLEMETRY-EXT END =====

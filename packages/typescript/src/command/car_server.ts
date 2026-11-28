@@ -689,6 +689,10 @@ export interface VehicleAction {
   setKeepOnCabin48vPortAction?:
     | SetKeepOnCabin48vPortAction
     | undefined;
+  /** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+  manualPreconditioningAction?:
+    | ManualPreconditioningAction
+    | undefined;
   /** Asks the vehicle not to send the routine success reply to this action.  // TESLEMETRY-EXT */
   dropNominalSuccessResponses: boolean;
 }
@@ -3110,6 +3114,15 @@ export interface SetKeepOnCabin48vPortAction {
   keepOnMode: KeepOnAccessoryPortRequest;
 }
 
+/**
+ * Starts or stops battery preconditioning for fast charging.
+ * UNCONFIRMED: not yet confirmed on a live vehicle.
+ */
+export interface ManualPreconditioningAction {
+  start?: Void | undefined;
+  stop?: Void | undefined;
+}
+
 function createBaseAction(): Action {
   return { vehicleAction: undefined };
 }
@@ -3309,6 +3322,7 @@ function createBaseVehicleAction(): VehicleAction {
     setDeckLightAction: undefined,
     setKeepOnCabin12vPortAction: undefined,
     setKeepOnCabin48vPortAction: undefined,
+    manualPreconditioningAction: undefined,
     dropNominalSuccessResponses: false,
   };
 }
@@ -3769,6 +3783,9 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     }
     if (message.setKeepOnCabin48vPortAction !== undefined) {
       SetKeepOnCabin48vPortAction.encode(message.setKeepOnCabin48vPortAction, writer.uint32(5770106).fork()).join();
+    }
+    if (message.manualPreconditioningAction !== undefined) {
+      ManualPreconditioningAction.encode(message.manualPreconditioningAction, writer.uint32(5851434).fork()).join();
     }
     if (message.dropNominalSuccessResponses !== false) {
       writer.uint32(1480).bool(message.dropNominalSuccessResponses);
@@ -4921,6 +4938,14 @@ export const VehicleAction: MessageFns<VehicleAction> = {
           message.setKeepOnCabin48vPortAction = SetKeepOnCabin48vPortAction.decode(reader, reader.uint32());
           continue;
         }
+        case 731429: {
+          if (tag !== 5851434) {
+            break;
+          }
+
+          message.manualPreconditioningAction = ManualPreconditioningAction.decode(reader, reader.uint32());
+          continue;
+        }
         case 185: {
           if (tag !== 1480) {
             break;
@@ -5322,6 +5347,9 @@ export const VehicleAction: MessageFns<VehicleAction> = {
         : undefined,
       setKeepOnCabin48vPortAction: isSet(object.setKeepOnCabin48vPortAction)
         ? SetKeepOnCabin48vPortAction.fromJSON(object.setKeepOnCabin48vPortAction)
+        : undefined,
+      manualPreconditioningAction: isSet(object.manualPreconditioningAction)
+        ? ManualPreconditioningAction.fromJSON(object.manualPreconditioningAction)
         : undefined,
       dropNominalSuccessResponses: isSet(object.dropNominalSuccessResponses)
         ? globalThis.Boolean(object.dropNominalSuccessResponses)
@@ -5817,6 +5845,9 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     }
     if (message.setKeepOnCabin48vPortAction !== undefined) {
       obj.setKeepOnCabin48vPortAction = SetKeepOnCabin48vPortAction.toJSON(message.setKeepOnCabin48vPortAction);
+    }
+    if (message.manualPreconditioningAction !== undefined) {
+      obj.manualPreconditioningAction = ManualPreconditioningAction.toJSON(message.manualPreconditioningAction);
     }
     if (message.dropNominalSuccessResponses !== undefined) {
       obj.dropNominalSuccessResponses = message.dropNominalSuccessResponses;
@@ -6341,6 +6372,10 @@ export const VehicleAction: MessageFns<VehicleAction> = {
     message.setKeepOnCabin48vPortAction =
       (object.setKeepOnCabin48vPortAction !== undefined && object.setKeepOnCabin48vPortAction !== null)
         ? SetKeepOnCabin48vPortAction.fromPartial(object.setKeepOnCabin48vPortAction)
+        : undefined;
+    message.manualPreconditioningAction =
+      (object.manualPreconditioningAction !== undefined && object.manualPreconditioningAction !== null)
+        ? ManualPreconditioningAction.fromPartial(object.manualPreconditioningAction)
         : undefined;
     message.dropNominalSuccessResponses = object.dropNominalSuccessResponses ?? false;
     return message;
@@ -24052,6 +24087,82 @@ export const SetKeepOnCabin48vPortAction: MessageFns<SetKeepOnCabin48vPortAction
   fromPartial<I extends Exact<DeepPartial<SetKeepOnCabin48vPortAction>, I>>(object: I): SetKeepOnCabin48vPortAction {
     const message = createBaseSetKeepOnCabin48vPortAction();
     message.keepOnMode = object.keepOnMode ?? 0;
+    return message;
+  },
+};
+
+function createBaseManualPreconditioningAction(): ManualPreconditioningAction {
+  return { start: undefined, stop: undefined };
+}
+
+export const ManualPreconditioningAction: MessageFns<ManualPreconditioningAction> = {
+  encode(message: ManualPreconditioningAction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.start !== undefined) {
+      Void.encode(message.start, writer.uint32(10).fork()).join();
+    }
+    if (message.stop !== undefined) {
+      Void.encode(message.stop, writer.uint32(18).fork()).join();
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): ManualPreconditioningAction {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseManualPreconditioningAction();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.start = Void.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 18) {
+            break;
+          }
+
+          message.stop = Void.decode(reader, reader.uint32());
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): ManualPreconditioningAction {
+    return {
+      start: isSet(object.start) ? Void.fromJSON(object.start) : undefined,
+      stop: isSet(object.stop) ? Void.fromJSON(object.stop) : undefined,
+    };
+  },
+
+  toJSON(message: ManualPreconditioningAction): unknown {
+    const obj: any = {};
+    if (message.start !== undefined) {
+      obj.start = Void.toJSON(message.start);
+    }
+    if (message.stop !== undefined) {
+      obj.stop = Void.toJSON(message.stop);
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<ManualPreconditioningAction>, I>>(base?: I): ManualPreconditioningAction {
+    return ManualPreconditioningAction.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<ManualPreconditioningAction>, I>>(object: I): ManualPreconditioningAction {
+    const message = createBaseManualPreconditioningAction();
+    message.start = (object.start !== undefined && object.start !== null) ? Void.fromPartial(object.start) : undefined;
+    message.stop = (object.stop !== undefined && object.stop !== null) ? Void.fromPartial(object.stop) : undefined;
     return message;
   },
 };

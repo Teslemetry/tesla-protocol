@@ -25,7 +25,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import timestamp_pb2 as google_dot_protobuf_dot_timestamp__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n6tesla_protocol/energy_device/authorization_types.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf8\x04\n\x13\x41uthorizationRecord\x12O\n\x04type\x18\x01 \x01(\x0e\x32\x41.tesla_protocol.tesla.proto.energy_device.v1.AuthorizedClientType\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12P\n\x08key_type\x18\x03 \x01(\x0e\x32>.tesla_protocol.tesla.proto.energy_device.v1.AuthorizedKeyType\x12\x12\n\npublic_key\x18\x04 \x01(\x0c\x12M\n\x05roles\x18\x05 \x03(\x0e\x32>.tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRole\x12K\n\x05state\x18\x06 \x01(\x0e\x32<.tesla_protocol.tesla.proto.energy_device.v1.AuthorizedState\x12]\n\x0cverification\x18\x07 \x01(\x0e\x32G.tesla_protocol.tesla.proto.energy_device.v1.AuthorizedVerificationType\x12.\n\nadded_time\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x17\n\nidentifier\x18\t \x01(\tH\x00\x88\x01\x01\x12%\n\x18\x61uthorized_by_public_key\x18\n \x01(\x0cH\x01\x88\x01\x01\x42\r\n\x0b_identifierB\x1b\n\x19_authorized_by_public_key*t\n\x11\x41uthorizationRole\x12\x1e\n\x1a\x41UTHORIZATION_ROLE_INVALID\x10\x00\x12\x1f\n\x1b\x41UTHORIZATION_ROLE_CUSTOMER\x10\x01\x12\x1e\n\x1a\x41UTHORIZATION_ROLE_VEHICLE\x10\x02*\x8e\x01\n\x14\x41uthorizedClientType\x12\"\n\x1e\x41UTHORIZED_CLIENT_TYPE_INVALID\x10\x00\x12.\n*AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP\x10\x01\x12\"\n\x1e\x41UTHORIZED_CLIENT_TYPE_VEHICLE\x10\x02*n\n\x11\x41uthorizedKeyType\x12\x1f\n\x1b\x41UTHORIZED_KEY_TYPE_INVALID\x10\x00\x12\x1b\n\x17\x41UTHORIZED_KEY_TYPE_RSA\x10\x01\x12\x1b\n\x17\x41UTHORIZED_KEY_TYPE_ECC\x10\x02*\xca\x01\n\x0f\x41uthorizedState\x12\x1c\n\x18\x41UTHORIZED_STATE_INVALID\x10\x00\x12)\n%AUTHORIZED_STATE_PENDING_VERIFICATION\x10\x01\x12\x31\n-AUTHORIZED_STATE_PENDING_VERIFICATION_TIMEOUT\x10\x02\x12\x1d\n\x19\x41UTHORIZED_STATE_VERIFIED\x10\x03\x12\x1c\n\x18\x41UTHORIZED_STATE_REMOVED\x10\x04*\xf7\x01\n\x1a\x41uthorizedVerificationType\x12(\n$AUTHORIZED_VERIFICATION_TYPE_INVALID\x10\x00\x12/\n+AUTHORIZED_VERIFICATION_TYPE_PRESENCE_PROOF\x10\x01\x12$\n AUTHORIZED_VERIFICATION_TYPE_BLE\x10\x02\x12\'\n#AUTHORIZED_VERIFICATION_TYPE_SIGNED\x10\x03\x12/\n+AUTHORIZED_VERIFICATION_TYPE_HERMES_COMMAND\x10\x04\x42\x86\x01\n$com.tesla.generated.energy_device.v1B\x12\x41uthorizationTypesZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1b\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n6tesla_protocol/energy_device/authorization_types.proto\x12+tesla_protocol.tesla.proto.energy_device.v1\x1a\x1fgoogle/protobuf/timestamp.proto\"\xf8\x04\n\x13\x41uthorizationRecord\x12O\n\x04type\x18\x01 \x01(\x0e\x32\x41.tesla_protocol.tesla.proto.energy_device.v1.AuthorizedClientType\x12\x13\n\x0b\x64\x65scription\x18\x02 \x01(\t\x12P\n\x08key_type\x18\x03 \x01(\x0e\x32>.tesla_protocol.tesla.proto.energy_device.v1.AuthorizedKeyType\x12\x12\n\npublic_key\x18\x04 \x01(\x0c\x12M\n\x05roles\x18\x05 \x03(\x0e\x32>.tesla_protocol.tesla.proto.energy_device.v1.AuthorizationRole\x12K\n\x05state\x18\x06 \x01(\x0e\x32<.tesla_protocol.tesla.proto.energy_device.v1.AuthorizedState\x12]\n\x0cverification\x18\x07 \x01(\x0e\x32G.tesla_protocol.tesla.proto.energy_device.v1.AuthorizedVerificationType\x12.\n\nadded_time\x18\x08 \x01(\x0b\x32\x1a.google.protobuf.Timestamp\x12\x17\n\nidentifier\x18\t \x01(\tH\x00\x88\x01\x01\x12%\n\x18\x61uthorized_by_public_key\x18\n \x01(\x0cH\x01\x88\x01\x01\x42\r\n\x0b_identifierB\x1b\n\x19_authorized_by_public_key*\x96\x01\n\x11\x41uthorizationRole\x12\x1e\n\x1a\x41UTHORIZATION_ROLE_INVALID\x10\x00\x12\x1f\n\x1b\x41UTHORIZATION_ROLE_CUSTOMER\x10\x01\x12\x1e\n\x1a\x41UTHORIZATION_ROLE_VEHICLE\x10\x02\x12 \n\x1c\x41UTHORIZATION_ROLE_INSTALLER\x10\x03*\xb8\x01\n\x14\x41uthorizedClientType\x12\"\n\x1e\x41UTHORIZED_CLIENT_TYPE_INVALID\x10\x00\x12.\n*AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP\x10\x01\x12\"\n\x1e\x41UTHORIZED_CLIENT_TYPE_VEHICLE\x10\x02\x12(\n$AUTHORIZED_CLIENT_TYPE_INSTALLER_APP\x10\x03*Y\n\x11SPAKE2PlusProfile\x12\x1f\n\x1bSPAKE2_PLUS_PROFILE_INVALID\x10\x00\x12#\n\x1fSPAKE2_PLUS_PROFILE_P256_SHA256\x10\x01*n\n\x11\x41uthorizedKeyType\x12\x1f\n\x1b\x41UTHORIZED_KEY_TYPE_INVALID\x10\x00\x12\x1b\n\x17\x41UTHORIZED_KEY_TYPE_RSA\x10\x01\x12\x1b\n\x17\x41UTHORIZED_KEY_TYPE_ECC\x10\x02*\xca\x01\n\x0f\x41uthorizedState\x12\x1c\n\x18\x41UTHORIZED_STATE_INVALID\x10\x00\x12)\n%AUTHORIZED_STATE_PENDING_VERIFICATION\x10\x01\x12\x31\n-AUTHORIZED_STATE_PENDING_VERIFICATION_TIMEOUT\x10\x02\x12\x1d\n\x19\x41UTHORIZED_STATE_VERIFIED\x10\x03\x12\x1c\n\x18\x41UTHORIZED_STATE_REMOVED\x10\x04*\xf7\x01\n\x1a\x41uthorizedVerificationType\x12(\n$AUTHORIZED_VERIFICATION_TYPE_INVALID\x10\x00\x12/\n+AUTHORIZED_VERIFICATION_TYPE_PRESENCE_PROOF\x10\x01\x12$\n AUTHORIZED_VERIFICATION_TYPE_BLE\x10\x02\x12\'\n#AUTHORIZED_VERIFICATION_TYPE_SIGNED\x10\x03\x12/\n+AUTHORIZED_VERIFICATION_TYPE_HERMES_COMMAND\x10\x04\x42\x86\x01\n$com.tesla.generated.energy_device.v1B\x12\x41uthorizationTypesZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1b\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -33,16 +33,18 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'tesla_protocol.energy_devic
 if not _descriptor._USE_C_DESCRIPTORS:
   _globals['DESCRIPTOR']._loaded_options = None
   _globals['DESCRIPTOR']._serialized_options = b'\n$com.tesla.generated.energy_device.v1B\022AuthorizationTypesZJgithub.com/teslamotors/energy_device/pkg/protocol/protobuf/energydevice/v1'
-  _globals['_AUTHORIZATIONROLE']._serialized_start=771
-  _globals['_AUTHORIZATIONROLE']._serialized_end=887
-  _globals['_AUTHORIZEDCLIENTTYPE']._serialized_start=890
-  _globals['_AUTHORIZEDCLIENTTYPE']._serialized_end=1032
-  _globals['_AUTHORIZEDKEYTYPE']._serialized_start=1034
-  _globals['_AUTHORIZEDKEYTYPE']._serialized_end=1144
-  _globals['_AUTHORIZEDSTATE']._serialized_start=1147
-  _globals['_AUTHORIZEDSTATE']._serialized_end=1349
-  _globals['_AUTHORIZEDVERIFICATIONTYPE']._serialized_start=1352
-  _globals['_AUTHORIZEDVERIFICATIONTYPE']._serialized_end=1599
+  _globals['_AUTHORIZATIONROLE']._serialized_start=772
+  _globals['_AUTHORIZATIONROLE']._serialized_end=922
+  _globals['_AUTHORIZEDCLIENTTYPE']._serialized_start=925
+  _globals['_AUTHORIZEDCLIENTTYPE']._serialized_end=1109
+  _globals['_SPAKE2PLUSPROFILE']._serialized_start=1111
+  _globals['_SPAKE2PLUSPROFILE']._serialized_end=1200
+  _globals['_AUTHORIZEDKEYTYPE']._serialized_start=1202
+  _globals['_AUTHORIZEDKEYTYPE']._serialized_end=1312
+  _globals['_AUTHORIZEDSTATE']._serialized_start=1315
+  _globals['_AUTHORIZEDSTATE']._serialized_end=1517
+  _globals['_AUTHORIZEDVERIFICATIONTYPE']._serialized_start=1520
+  _globals['_AUTHORIZEDVERIFICATIONTYPE']._serialized_end=1767
   _globals['_AUTHORIZATIONRECORD']._serialized_start=137
   _globals['_AUTHORIZATIONRECORD']._serialized_end=769
 # @@protoc_insertion_point(module_scope)
