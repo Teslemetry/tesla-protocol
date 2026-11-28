@@ -317,6 +317,8 @@ export interface PayterPostStatus {
   postIndex: number;
   serialNumber: string;
   activated: boolean;
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  isConnected: boolean;
 }
 
 export interface SuperchargerAPIGetConnectedKiosksRequest {
@@ -392,6 +394,21 @@ export interface SuperchargerAPIUpdateFollowersRequest {
 export interface SuperchargerAPIUpdateFollowersResponse {
 }
 
+/** UNCONFIRMED: not yet confirmed on a live device. */
+export interface EcuTarget {
+  darylNodePath: string;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live device. */
+export interface SuperchargerAPITriggerEcuFirmwareUpdateRequest {
+  ecuTarget: EcuTarget | undefined;
+  appOnly: boolean;
+}
+
+/** UNCONFIRMED: not yet confirmed on a live device. */
+export interface SuperchargerAPITriggerEcuFirmwareUpdateResponse {
+}
+
 export interface SuperchargerMessages {
   unlockMagicDockRequest?: SuperchargerAPIUnlockMagicDockRequest | undefined;
   unlockMagicDockResponse?: SuperchargerAPIUnlockMagicDockResponse | undefined;
@@ -410,7 +427,15 @@ export interface SuperchargerMessages {
   getPayterPostStatusRequest?: SuperchargerAPIGetPayterPostStatusRequest | undefined;
   getPayterPostStatusResponse?: SuperchargerAPIGetPayterPostStatusResponse | undefined;
   getEcuFirmwareUpdateProgressRequest?: SuperchargerAPIGetEcuFirmwareUpdateProgressRequest | undefined;
-  getEcuFirmwareUpdateProgressResponse?: SuperchargerAPIGetEcuFirmwareUpdateProgressResponse | undefined;
+  getEcuFirmwareUpdateProgressResponse?:
+    | SuperchargerAPIGetEcuFirmwareUpdateProgressResponse
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  triggerEcuFirmwareUpdateRequest?:
+    | SuperchargerAPITriggerEcuFirmwareUpdateRequest
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  triggerEcuFirmwareUpdateResponse?: SuperchargerAPITriggerEcuFirmwareUpdateResponse | undefined;
 }
 
 export interface VerifoneKiosk {
@@ -1845,7 +1870,7 @@ export const EcuFirmwareUpdateStatusPass: MessageFns<EcuFirmwareUpdateStatusPass
 };
 
 function createBasePayterPostStatus(): PayterPostStatus {
-  return { postIndex: 0, serialNumber: "", activated: false };
+  return { postIndex: 0, serialNumber: "", activated: false, isConnected: false };
 }
 
 export const PayterPostStatus: MessageFns<PayterPostStatus> = {
@@ -1858,6 +1883,9 @@ export const PayterPostStatus: MessageFns<PayterPostStatus> = {
     }
     if (message.activated !== false) {
       writer.uint32(24).bool(message.activated);
+    }
+    if (message.isConnected !== false) {
+      writer.uint32(32).bool(message.isConnected);
     }
     return writer;
   },
@@ -1893,6 +1921,14 @@ export const PayterPostStatus: MessageFns<PayterPostStatus> = {
           message.activated = reader.bool();
           continue;
         }
+        case 4: {
+          if (tag !== 32) {
+            break;
+          }
+
+          message.isConnected = reader.bool();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -1907,6 +1943,7 @@ export const PayterPostStatus: MessageFns<PayterPostStatus> = {
       postIndex: isSet(object.postIndex) ? globalThis.Number(object.postIndex) : 0,
       serialNumber: isSet(object.serialNumber) ? globalThis.String(object.serialNumber) : "",
       activated: isSet(object.activated) ? globalThis.Boolean(object.activated) : false,
+      isConnected: isSet(object.isConnected) ? globalThis.Boolean(object.isConnected) : false,
     };
   },
 
@@ -1921,6 +1958,9 @@ export const PayterPostStatus: MessageFns<PayterPostStatus> = {
     if (message.activated !== undefined) {
       obj.activated = message.activated;
     }
+    if (message.isConnected !== undefined) {
+      obj.isConnected = message.isConnected;
+    }
     return obj;
   },
 
@@ -1932,6 +1972,7 @@ export const PayterPostStatus: MessageFns<PayterPostStatus> = {
     message.postIndex = object.postIndex ?? 0;
     message.serialNumber = object.serialNumber ?? "";
     message.activated = object.activated ?? false;
+    message.isConnected = object.isConnected ?? false;
     return message;
   },
 };
@@ -3136,6 +3177,200 @@ export const SuperchargerAPIUpdateFollowersResponse: MessageFns<SuperchargerAPIU
   },
 };
 
+function createBaseEcuTarget(): EcuTarget {
+  return { darylNodePath: "" };
+}
+
+export const EcuTarget: MessageFns<EcuTarget> = {
+  encode(message: EcuTarget, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.darylNodePath !== "") {
+      writer.uint32(10).string(message.darylNodePath);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): EcuTarget {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseEcuTarget();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.darylNodePath = reader.string();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): EcuTarget {
+    return { darylNodePath: isSet(object.darylNodePath) ? globalThis.String(object.darylNodePath) : "" };
+  },
+
+  toJSON(message: EcuTarget): unknown {
+    const obj: any = {};
+    if (message.darylNodePath !== undefined) {
+      obj.darylNodePath = message.darylNodePath;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<EcuTarget>, I>>(base?: I): EcuTarget {
+    return EcuTarget.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<EcuTarget>, I>>(object: I): EcuTarget {
+    const message = createBaseEcuTarget();
+    message.darylNodePath = object.darylNodePath ?? "";
+    return message;
+  },
+};
+
+function createBaseSuperchargerAPITriggerEcuFirmwareUpdateRequest(): SuperchargerAPITriggerEcuFirmwareUpdateRequest {
+  return { ecuTarget: undefined, appOnly: false };
+}
+
+export const SuperchargerAPITriggerEcuFirmwareUpdateRequest: MessageFns<
+  SuperchargerAPITriggerEcuFirmwareUpdateRequest
+> = {
+  encode(
+    message: SuperchargerAPITriggerEcuFirmwareUpdateRequest,
+    writer: BinaryWriter = new BinaryWriter(),
+  ): BinaryWriter {
+    if (message.ecuTarget !== undefined) {
+      EcuTarget.encode(message.ecuTarget, writer.uint32(10).fork()).join();
+    }
+    if (message.appOnly !== false) {
+      writer.uint32(16).bool(message.appOnly);
+    }
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SuperchargerAPITriggerEcuFirmwareUpdateRequest {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSuperchargerAPITriggerEcuFirmwareUpdateRequest();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.ecuTarget = EcuTarget.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.appOnly = reader.bool();
+          continue;
+        }
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(object: any): SuperchargerAPITriggerEcuFirmwareUpdateRequest {
+    return {
+      ecuTarget: isSet(object.ecuTarget) ? EcuTarget.fromJSON(object.ecuTarget) : undefined,
+      appOnly: isSet(object.appOnly) ? globalThis.Boolean(object.appOnly) : false,
+    };
+  },
+
+  toJSON(message: SuperchargerAPITriggerEcuFirmwareUpdateRequest): unknown {
+    const obj: any = {};
+    if (message.ecuTarget !== undefined) {
+      obj.ecuTarget = EcuTarget.toJSON(message.ecuTarget);
+    }
+    if (message.appOnly !== undefined) {
+      obj.appOnly = message.appOnly;
+    }
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SuperchargerAPITriggerEcuFirmwareUpdateRequest>, I>>(
+    base?: I,
+  ): SuperchargerAPITriggerEcuFirmwareUpdateRequest {
+    return SuperchargerAPITriggerEcuFirmwareUpdateRequest.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SuperchargerAPITriggerEcuFirmwareUpdateRequest>, I>>(
+    object: I,
+  ): SuperchargerAPITriggerEcuFirmwareUpdateRequest {
+    const message = createBaseSuperchargerAPITriggerEcuFirmwareUpdateRequest();
+    message.ecuTarget = (object.ecuTarget !== undefined && object.ecuTarget !== null)
+      ? EcuTarget.fromPartial(object.ecuTarget)
+      : undefined;
+    message.appOnly = object.appOnly ?? false;
+    return message;
+  },
+};
+
+function createBaseSuperchargerAPITriggerEcuFirmwareUpdateResponse(): SuperchargerAPITriggerEcuFirmwareUpdateResponse {
+  return {};
+}
+
+export const SuperchargerAPITriggerEcuFirmwareUpdateResponse: MessageFns<
+  SuperchargerAPITriggerEcuFirmwareUpdateResponse
+> = {
+  encode(_: SuperchargerAPITriggerEcuFirmwareUpdateResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    return writer;
+  },
+
+  decode(input: BinaryReader | Uint8Array, length?: number): SuperchargerAPITriggerEcuFirmwareUpdateResponse {
+    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const end = length === undefined ? reader.len : reader.pos + length;
+    const message = createBaseSuperchargerAPITriggerEcuFirmwareUpdateResponse();
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+      }
+      if ((tag & 7) === 4 || tag === 0) {
+        break;
+      }
+      reader.skip(tag & 7);
+    }
+    return message;
+  },
+
+  fromJSON(_: any): SuperchargerAPITriggerEcuFirmwareUpdateResponse {
+    return {};
+  },
+
+  toJSON(_: SuperchargerAPITriggerEcuFirmwareUpdateResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  create<I extends Exact<DeepPartial<SuperchargerAPITriggerEcuFirmwareUpdateResponse>, I>>(
+    base?: I,
+  ): SuperchargerAPITriggerEcuFirmwareUpdateResponse {
+    return SuperchargerAPITriggerEcuFirmwareUpdateResponse.fromPartial(base ?? ({} as any));
+  },
+  fromPartial<I extends Exact<DeepPartial<SuperchargerAPITriggerEcuFirmwareUpdateResponse>, I>>(
+    _: I,
+  ): SuperchargerAPITriggerEcuFirmwareUpdateResponse {
+    const message = createBaseSuperchargerAPITriggerEcuFirmwareUpdateResponse();
+    return message;
+  },
+};
+
 function createBaseSuperchargerMessages(): SuperchargerMessages {
   return {
     unlockMagicDockRequest: undefined,
@@ -3156,6 +3391,8 @@ function createBaseSuperchargerMessages(): SuperchargerMessages {
     getPayterPostStatusResponse: undefined,
     getEcuFirmwareUpdateProgressRequest: undefined,
     getEcuFirmwareUpdateProgressResponse: undefined,
+    triggerEcuFirmwareUpdateRequest: undefined,
+    triggerEcuFirmwareUpdateResponse: undefined,
   };
 }
 
@@ -3241,6 +3478,18 @@ export const SuperchargerMessages: MessageFns<SuperchargerMessages> = {
       SuperchargerAPIGetEcuFirmwareUpdateProgressResponse.encode(
         message.getEcuFirmwareUpdateProgressResponse,
         writer.uint32(146).fork(),
+      ).join();
+    }
+    if (message.triggerEcuFirmwareUpdateRequest !== undefined) {
+      SuperchargerAPITriggerEcuFirmwareUpdateRequest.encode(
+        message.triggerEcuFirmwareUpdateRequest,
+        writer.uint32(154).fork(),
+      ).join();
+    }
+    if (message.triggerEcuFirmwareUpdateResponse !== undefined) {
+      SuperchargerAPITriggerEcuFirmwareUpdateResponse.encode(
+        message.triggerEcuFirmwareUpdateResponse,
+        writer.uint32(162).fork(),
       ).join();
     }
     return writer;
@@ -3430,6 +3679,28 @@ export const SuperchargerMessages: MessageFns<SuperchargerMessages> = {
           );
           continue;
         }
+        case 19: {
+          if (tag !== 154) {
+            break;
+          }
+
+          message.triggerEcuFirmwareUpdateRequest = SuperchargerAPITriggerEcuFirmwareUpdateRequest.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
+        case 20: {
+          if (tag !== 162) {
+            break;
+          }
+
+          message.triggerEcuFirmwareUpdateResponse = SuperchargerAPITriggerEcuFirmwareUpdateResponse.decode(
+            reader,
+            reader.uint32(),
+          );
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -3494,6 +3765,12 @@ export const SuperchargerMessages: MessageFns<SuperchargerMessages> = {
         : undefined,
       getEcuFirmwareUpdateProgressResponse: isSet(object.getEcuFirmwareUpdateProgressResponse)
         ? SuperchargerAPIGetEcuFirmwareUpdateProgressResponse.fromJSON(object.getEcuFirmwareUpdateProgressResponse)
+        : undefined,
+      triggerEcuFirmwareUpdateRequest: isSet(object.triggerEcuFirmwareUpdateRequest)
+        ? SuperchargerAPITriggerEcuFirmwareUpdateRequest.fromJSON(object.triggerEcuFirmwareUpdateRequest)
+        : undefined,
+      triggerEcuFirmwareUpdateResponse: isSet(object.triggerEcuFirmwareUpdateResponse)
+        ? SuperchargerAPITriggerEcuFirmwareUpdateResponse.fromJSON(object.triggerEcuFirmwareUpdateResponse)
         : undefined,
     };
   },
@@ -3578,6 +3855,16 @@ export const SuperchargerMessages: MessageFns<SuperchargerMessages> = {
         message.getEcuFirmwareUpdateProgressResponse,
       );
     }
+    if (message.triggerEcuFirmwareUpdateRequest !== undefined) {
+      obj.triggerEcuFirmwareUpdateRequest = SuperchargerAPITriggerEcuFirmwareUpdateRequest.toJSON(
+        message.triggerEcuFirmwareUpdateRequest,
+      );
+    }
+    if (message.triggerEcuFirmwareUpdateResponse !== undefined) {
+      obj.triggerEcuFirmwareUpdateResponse = SuperchargerAPITriggerEcuFirmwareUpdateResponse.toJSON(
+        message.triggerEcuFirmwareUpdateResponse,
+      );
+    }
     return obj;
   },
 
@@ -3656,6 +3943,14 @@ export const SuperchargerMessages: MessageFns<SuperchargerMessages> = {
       (object.getEcuFirmwareUpdateProgressResponse !== undefined &&
           object.getEcuFirmwareUpdateProgressResponse !== null)
         ? SuperchargerAPIGetEcuFirmwareUpdateProgressResponse.fromPartial(object.getEcuFirmwareUpdateProgressResponse)
+        : undefined;
+    message.triggerEcuFirmwareUpdateRequest =
+      (object.triggerEcuFirmwareUpdateRequest !== undefined && object.triggerEcuFirmwareUpdateRequest !== null)
+        ? SuperchargerAPITriggerEcuFirmwareUpdateRequest.fromPartial(object.triggerEcuFirmwareUpdateRequest)
+        : undefined;
+    message.triggerEcuFirmwareUpdateResponse =
+      (object.triggerEcuFirmwareUpdateResponse !== undefined && object.triggerEcuFirmwareUpdateResponse !== null)
+        ? SuperchargerAPITriggerEcuFirmwareUpdateResponse.fromPartial(object.triggerEcuFirmwareUpdateResponse)
         : undefined;
     return message;
   },

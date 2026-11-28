@@ -95,22 +95,30 @@ INTRA_SITE_SERVICE_TYPE_WC_LOAD_SHARING_FOLLOWER: IntraSiteServiceType
 INTRA_SITE_SERVICE_TYPE_WC_CURRENT_CONTROL: IntraSiteServiceType
 
 class EnergySiteNetDevice(_message.Message):
-    __slots__ = ("din", "wifi_ap_config", "service_types")
+    __slots__ = ("din", "wifi_ap_config", "service_types", "device_type", "teg_device_type")
     DIN_FIELD_NUMBER: _ClassVar[int]
     WIFI_AP_CONFIG_FIELD_NUMBER: _ClassVar[int]
     SERVICE_TYPES_FIELD_NUMBER: _ClassVar[int]
+    DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
+    TEG_DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
     din: _device_pb2.Din
     wifi_ap_config: _networking_pb2.WifiConfig
     service_types: _containers.RepeatedScalarFieldContainer[IntraSiteServiceType]
-    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]] = ..., wifi_ap_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]] = ..., service_types: _Optional[_Iterable[_Union[IntraSiteServiceType, str]]] = ...) -> None: ...
+    device_type: _device_pb2.DeviceType
+    teg_device_type: _device_pb2.TEGDeviceType
+    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]] = ..., wifi_ap_config: _Optional[_Union[_networking_pb2.WifiConfig, _Mapping]] = ..., service_types: _Optional[_Iterable[_Union[IntraSiteServiceType, str]]] = ..., device_type: _Optional[_Union[_device_pb2.DeviceType, str]] = ..., teg_device_type: _Optional[_Union[_device_pb2.TEGDeviceType, str]] = ...) -> None: ...
 
 class EnergySiteNetRecentlyAddedDevice(_message.Message):
-    __slots__ = ("din", "status")
+    __slots__ = ("din", "status", "device_type", "teg_device_type")
     DIN_FIELD_NUMBER: _ClassVar[int]
     STATUS_FIELD_NUMBER: _ClassVar[int]
+    DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
+    TEG_DEVICE_TYPE_FIELD_NUMBER: _ClassVar[int]
     din: _device_pb2.Din
     status: EnergySiteNetAdditionStatus
-    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]] = ..., status: _Optional[_Union[EnergySiteNetAdditionStatus, str]] = ...) -> None: ...
+    device_type: _device_pb2.DeviceType
+    teg_device_type: _device_pb2.TEGDeviceType
+    def __init__(self, din: _Optional[_Union[_device_pb2.Din, _Mapping]] = ..., status: _Optional[_Union[EnergySiteNetAdditionStatus, str]] = ..., device_type: _Optional[_Union[_device_pb2.DeviceType, str]] = ..., teg_device_type: _Optional[_Union[_device_pb2.TEGDeviceType, str]] = ...) -> None: ...
 
 class EnergySiteNetRecentlyRemovedDevice(_message.Message):
     __slots__ = ("din", "status")

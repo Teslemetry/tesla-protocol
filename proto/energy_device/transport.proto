@@ -22,6 +22,7 @@ import "registration_api.proto";
 import "supercharger_api.proto";
 import "wmsa_api.proto";
 import "sm_api.proto";
+import "ble_api.proto";
 
 enum DeliveryChannel {
   DELIVERY_CHANNEL_INVALID        = 0;
@@ -94,5 +95,6 @@ message MessageEnvelope {
     GraphQLMessages graphql             = 16;
     SuperchargerMessages supercharger   = 17;
     RegistrationMessages registration   = 18;
+    BLEMessages ble                     = 19;  // UNCONFIRMED: not yet confirmed on a live device
   }
 }

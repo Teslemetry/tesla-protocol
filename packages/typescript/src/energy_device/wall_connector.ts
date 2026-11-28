@@ -1434,7 +1434,11 @@ export interface WCLifetimeStats {
   avgStartupTempC: number;
   chargeStarts: number;
   chargingTimeS: number;
-  chargingEnergy: AccumulatedEnergy | undefined;
+  chargingEnergy:
+    | AccumulatedEnergy
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  dischargingEnergy: AccumulatedEnergy | undefined;
 }
 
 export interface WCLoadSharingFixedLimitConfig {
@@ -1898,6 +1902,12 @@ export interface WCAPIPushSmartChargingCommandRequest {
 }
 
 export interface WCAPIPushSmartChargingCommandResponse {
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  plugSessionUuid:
+    | UUIDv4Bytes
+    | undefined;
+  /** UNCONFIRMED: not yet confirmed on a live device */
+  numActivePhases: number;
 }
 
 export interface WCAPIRegisterCommercialRequest {
@@ -2669,6 +2679,7 @@ function createBaseWCLifetimeStats(): WCLifetimeStats {
     chargeStarts: 0,
     chargingTimeS: 0,
     chargingEnergy: undefined,
+    dischargingEnergy: undefined,
   };
 }
 
@@ -2703,6 +2714,9 @@ export const WCLifetimeStats: MessageFns<WCLifetimeStats> = {
     }
     if (message.chargingEnergy !== undefined) {
       AccumulatedEnergy.encode(message.chargingEnergy, writer.uint32(82).fork()).join();
+    }
+    if (message.dischargingEnergy !== undefined) {
+      AccumulatedEnergy.encode(message.dischargingEnergy, writer.uint32(90).fork()).join();
     }
     return writer;
   },
@@ -2794,6 +2808,14 @@ export const WCLifetimeStats: MessageFns<WCLifetimeStats> = {
           message.chargingEnergy = AccumulatedEnergy.decode(reader, reader.uint32());
           continue;
         }
+        case 11: {
+          if (tag !== 90) {
+            break;
+          }
+
+          message.dischargingEnergy = AccumulatedEnergy.decode(reader, reader.uint32());
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -2815,6 +2837,9 @@ export const WCLifetimeStats: MessageFns<WCLifetimeStats> = {
       chargeStarts: isSet(object.chargeStarts) ? globalThis.Number(object.chargeStarts) : 0,
       chargingTimeS: isSet(object.chargingTimeS) ? globalThis.Number(object.chargingTimeS) : 0,
       chargingEnergy: isSet(object.chargingEnergy) ? AccumulatedEnergy.fromJSON(object.chargingEnergy) : undefined,
+      dischargingEnergy: isSet(object.dischargingEnergy)
+        ? AccumulatedEnergy.fromJSON(object.dischargingEnergy)
+        : undefined,
     };
   },
 
@@ -2850,6 +2875,9 @@ export const WCLifetimeStats: MessageFns<WCLifetimeStats> = {
     if (message.chargingEnergy !== undefined) {
       obj.chargingEnergy = AccumulatedEnergy.toJSON(message.chargingEnergy);
     }
+    if (message.dischargingEnergy !== undefined) {
+      obj.dischargingEnergy = AccumulatedEnergy.toJSON(message.dischargingEnergy);
+    }
     return obj;
   },
 
@@ -2869,6 +2897,9 @@ export const WCLifetimeStats: MessageFns<WCLifetimeStats> = {
     message.chargingTimeS = object.chargingTimeS ?? 0;
     message.chargingEnergy = (object.chargingEnergy !== undefined && object.chargingEnergy !== null)
       ? AccumulatedEnergy.fromPartial(object.chargingEnergy)
+      : undefined;
+    message.dischargingEnergy = (object.dischargingEnergy !== undefined && object.dischargingEnergy !== null)
+      ? AccumulatedEnergy.fromPartial(object.dischargingEnergy)
       : undefined;
     return message;
   },
@@ -10233,11 +10264,17 @@ export const WCAPIPushSmartChargingCommandRequest: MessageFns<WCAPIPushSmartChar
 };
 
 function createBaseWCAPIPushSmartChargingCommandResponse(): WCAPIPushSmartChargingCommandResponse {
-  return {};
+  return { plugSessionUuid: undefined, numActivePhases: 0 };
 }
 
 export const WCAPIPushSmartChargingCommandResponse: MessageFns<WCAPIPushSmartChargingCommandResponse> = {
-  encode(_: WCAPIPushSmartChargingCommandResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(message: WCAPIPushSmartChargingCommandResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+    if (message.plugSessionUuid !== undefined) {
+      UUIDv4Bytes.encode(message.plugSessionUuid, writer.uint32(10).fork()).join();
+    }
+    if (message.numActivePhases !== 0) {
+      writer.uint32(16).uint32(message.numActivePhases);
+    }
     return writer;
   },
 
@@ -10248,6 +10285,22 @@ export const WCAPIPushSmartChargingCommandResponse: MessageFns<WCAPIPushSmartCha
     while (reader.pos < end) {
       const tag = reader.uint32();
       switch (tag >>> 3) {
+        case 1: {
+          if (tag !== 10) {
+            break;
+          }
+
+          message.plugSessionUuid = UUIDv4Bytes.decode(reader, reader.uint32());
+          continue;
+        }
+        case 2: {
+          if (tag !== 16) {
+            break;
+          }
+
+          message.numActivePhases = reader.uint32();
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -10257,12 +10310,21 @@ export const WCAPIPushSmartChargingCommandResponse: MessageFns<WCAPIPushSmartCha
     return message;
   },
 
-  fromJSON(_: any): WCAPIPushSmartChargingCommandResponse {
-    return {};
+  fromJSON(object: any): WCAPIPushSmartChargingCommandResponse {
+    return {
+      plugSessionUuid: isSet(object.plugSessionUuid) ? UUIDv4Bytes.fromJSON(object.plugSessionUuid) : undefined,
+      numActivePhases: isSet(object.numActivePhases) ? globalThis.Number(object.numActivePhases) : 0,
+    };
   },
 
-  toJSON(_: WCAPIPushSmartChargingCommandResponse): unknown {
+  toJSON(message: WCAPIPushSmartChargingCommandResponse): unknown {
     const obj: any = {};
+    if (message.plugSessionUuid !== undefined) {
+      obj.plugSessionUuid = UUIDv4Bytes.toJSON(message.plugSessionUuid);
+    }
+    if (message.numActivePhases !== undefined) {
+      obj.numActivePhases = Math.round(message.numActivePhases);
+    }
     return obj;
   },
 
@@ -10272,9 +10334,13 @@ export const WCAPIPushSmartChargingCommandResponse: MessageFns<WCAPIPushSmartCha
     return WCAPIPushSmartChargingCommandResponse.fromPartial(base ?? ({} as any));
   },
   fromPartial<I extends Exact<DeepPartial<WCAPIPushSmartChargingCommandResponse>, I>>(
-    _: I,
+    object: I,
   ): WCAPIPushSmartChargingCommandResponse {
     const message = createBaseWCAPIPushSmartChargingCommandResponse();
+    message.plugSessionUuid = (object.plugSessionUuid !== undefined && object.plugSessionUuid !== null)
+      ? UUIDv4Bytes.fromPartial(object.plugSessionUuid)
+      : undefined;
+    message.numActivePhases = object.numActivePhases ?? 0;
     return message;
   },
 };

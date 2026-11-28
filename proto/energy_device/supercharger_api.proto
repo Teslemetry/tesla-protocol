@@ -119,6 +119,7 @@ message PayterPostStatus {
   uint32 post_index = 1;
   string serial_number = 2;
   bool activated = 3;
+  bool is_connected = 4;  // UNCONFIRMED: not yet confirmed on a live device
 }
 
 message SuperchargerAPIGetConnectedKiosksRequest {
@@ -194,6 +195,21 @@ message SuperchargerAPIUpdateFollowersRequest {
 message SuperchargerAPIUpdateFollowersResponse {
 }
 
+// UNCONFIRMED: not yet confirmed on a live device.
+message EcuTarget {
+  string daryl_node_path = 1;
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message SuperchargerAPITriggerEcuFirmwareUpdateRequest {
+  EcuTarget ecu_target = 1;
+  bool app_only = 2;
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message SuperchargerAPITriggerEcuFirmwareUpdateResponse {
+}
+
 message SuperchargerMessages {
   oneof message {
     SuperchargerAPIUnlockMagicDockRequest unlock_magic_dock_request = 1;
@@ -214,6 +230,8 @@ message SuperchargerMessages {
     SuperchargerAPIGetPayterPostStatusResponse get_payter_post_status_response = 16;
     SuperchargerAPIGetEcuFirmwareUpdateProgressRequest get_ecu_firmware_update_progress_request = 17;
     SuperchargerAPIGetEcuFirmwareUpdateProgressResponse get_ecu_firmware_update_progress_response = 18;
+    SuperchargerAPITriggerEcuFirmwareUpdateRequest trigger_ecu_firmware_update_request = 19;  // UNCONFIRMED: not yet confirmed on a live device
+    SuperchargerAPITriggerEcuFirmwareUpdateResponse trigger_ecu_firmware_update_response = 20;  // UNCONFIRMED: not yet confirmed on a live device
   }
 }
 

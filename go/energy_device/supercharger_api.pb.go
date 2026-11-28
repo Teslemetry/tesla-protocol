@@ -1061,6 +1061,7 @@ type PayterPostStatus struct {
 	PostIndex     uint32                 `protobuf:"varint,1,opt,name=post_index,json=postIndex,proto3" json:"post_index,omitempty"`
 	SerialNumber  string                 `protobuf:"bytes,2,opt,name=serial_number,json=serialNumber,proto3" json:"serial_number,omitempty"`
 	Activated     bool                   `protobuf:"varint,3,opt,name=activated,proto3" json:"activated,omitempty"`
+	IsConnected   bool                   `protobuf:"varint,4,opt,name=is_connected,json=isConnected,proto3" json:"is_connected,omitempty"` // UNCONFIRMED: not yet confirmed on a live device
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -1112,6 +1113,13 @@ func (x *PayterPostStatus) GetSerialNumber() string {
 func (x *PayterPostStatus) GetActivated() bool {
 	if x != nil {
 		return x.Activated
+	}
+	return false
+}
+
+func (x *PayterPostStatus) GetIsConnected() bool {
+	if x != nil {
+		return x.IsConnected
 	}
 	return false
 }
@@ -1916,6 +1924,141 @@ func (*SuperchargerAPIUpdateFollowersResponse) Descriptor() ([]byte, []int) {
 	return file_tesla_protocol_energy_device_supercharger_api_proto_rawDescGZIP(), []int{34}
 }
 
+// UNCONFIRMED: not yet confirmed on a live device.
+type EcuTarget struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DarylNodePath string                 `protobuf:"bytes,1,opt,name=daryl_node_path,json=darylNodePath,proto3" json:"daryl_node_path,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *EcuTarget) Reset() {
+	*x = EcuTarget{}
+	mi := &file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[35]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *EcuTarget) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*EcuTarget) ProtoMessage() {}
+
+func (x *EcuTarget) ProtoReflect() protoreflect.Message {
+	mi := &file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[35]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use EcuTarget.ProtoReflect.Descriptor instead.
+func (*EcuTarget) Descriptor() ([]byte, []int) {
+	return file_tesla_protocol_energy_device_supercharger_api_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *EcuTarget) GetDarylNodePath() string {
+	if x != nil {
+		return x.DarylNodePath
+	}
+	return ""
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+type SuperchargerAPITriggerEcuFirmwareUpdateRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	EcuTarget     *EcuTarget             `protobuf:"bytes,1,opt,name=ecu_target,json=ecuTarget,proto3" json:"ecu_target,omitempty"`
+	AppOnly       bool                   `protobuf:"varint,2,opt,name=app_only,json=appOnly,proto3" json:"app_only,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SuperchargerAPITriggerEcuFirmwareUpdateRequest) Reset() {
+	*x = SuperchargerAPITriggerEcuFirmwareUpdateRequest{}
+	mi := &file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[36]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SuperchargerAPITriggerEcuFirmwareUpdateRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SuperchargerAPITriggerEcuFirmwareUpdateRequest) ProtoMessage() {}
+
+func (x *SuperchargerAPITriggerEcuFirmwareUpdateRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[36]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SuperchargerAPITriggerEcuFirmwareUpdateRequest.ProtoReflect.Descriptor instead.
+func (*SuperchargerAPITriggerEcuFirmwareUpdateRequest) Descriptor() ([]byte, []int) {
+	return file_tesla_protocol_energy_device_supercharger_api_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *SuperchargerAPITriggerEcuFirmwareUpdateRequest) GetEcuTarget() *EcuTarget {
+	if x != nil {
+		return x.EcuTarget
+	}
+	return nil
+}
+
+func (x *SuperchargerAPITriggerEcuFirmwareUpdateRequest) GetAppOnly() bool {
+	if x != nil {
+		return x.AppOnly
+	}
+	return false
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+type SuperchargerAPITriggerEcuFirmwareUpdateResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *SuperchargerAPITriggerEcuFirmwareUpdateResponse) Reset() {
+	*x = SuperchargerAPITriggerEcuFirmwareUpdateResponse{}
+	mi := &file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[37]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *SuperchargerAPITriggerEcuFirmwareUpdateResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*SuperchargerAPITriggerEcuFirmwareUpdateResponse) ProtoMessage() {}
+
+func (x *SuperchargerAPITriggerEcuFirmwareUpdateResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[37]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use SuperchargerAPITriggerEcuFirmwareUpdateResponse.ProtoReflect.Descriptor instead.
+func (*SuperchargerAPITriggerEcuFirmwareUpdateResponse) Descriptor() ([]byte, []int) {
+	return file_tesla_protocol_energy_device_supercharger_api_proto_rawDescGZIP(), []int{37}
+}
+
 type SuperchargerMessages struct {
 	state protoimpl.MessageState `protogen:"open.v1"`
 	// Types that are valid to be assigned to Message:
@@ -1938,6 +2081,8 @@ type SuperchargerMessages struct {
 	//	*SuperchargerMessages_GetPayterPostStatusResponse
 	//	*SuperchargerMessages_GetEcuFirmwareUpdateProgressRequest
 	//	*SuperchargerMessages_GetEcuFirmwareUpdateProgressResponse
+	//	*SuperchargerMessages_TriggerEcuFirmwareUpdateRequest
+	//	*SuperchargerMessages_TriggerEcuFirmwareUpdateResponse
 	Message       isSuperchargerMessages_Message `protobuf_oneof:"message"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -1945,7 +2090,7 @@ type SuperchargerMessages struct {
 
 func (x *SuperchargerMessages) Reset() {
 	*x = SuperchargerMessages{}
-	mi := &file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[35]
+	mi := &file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[38]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -1957,7 +2102,7 @@ func (x *SuperchargerMessages) String() string {
 func (*SuperchargerMessages) ProtoMessage() {}
 
 func (x *SuperchargerMessages) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[35]
+	mi := &file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[38]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1970,7 +2115,7 @@ func (x *SuperchargerMessages) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use SuperchargerMessages.ProtoReflect.Descriptor instead.
 func (*SuperchargerMessages) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_supercharger_api_proto_rawDescGZIP(), []int{35}
+	return file_tesla_protocol_energy_device_supercharger_api_proto_rawDescGZIP(), []int{38}
 }
 
 func (x *SuperchargerMessages) GetMessage() isSuperchargerMessages_Message {
@@ -2142,6 +2287,24 @@ func (x *SuperchargerMessages) GetGetEcuFirmwareUpdateProgressResponse() *Superc
 	return nil
 }
 
+func (x *SuperchargerMessages) GetTriggerEcuFirmwareUpdateRequest() *SuperchargerAPITriggerEcuFirmwareUpdateRequest {
+	if x != nil {
+		if x, ok := x.Message.(*SuperchargerMessages_TriggerEcuFirmwareUpdateRequest); ok {
+			return x.TriggerEcuFirmwareUpdateRequest
+		}
+	}
+	return nil
+}
+
+func (x *SuperchargerMessages) GetTriggerEcuFirmwareUpdateResponse() *SuperchargerAPITriggerEcuFirmwareUpdateResponse {
+	if x != nil {
+		if x, ok := x.Message.(*SuperchargerMessages_TriggerEcuFirmwareUpdateResponse); ok {
+			return x.TriggerEcuFirmwareUpdateResponse
+		}
+	}
+	return nil
+}
+
 type isSuperchargerMessages_Message interface {
 	isSuperchargerMessages_Message()
 }
@@ -2218,6 +2381,14 @@ type SuperchargerMessages_GetEcuFirmwareUpdateProgressResponse struct {
 	GetEcuFirmwareUpdateProgressResponse *SuperchargerAPIGetEcuFirmwareUpdateProgressResponse `protobuf:"bytes,18,opt,name=get_ecu_firmware_update_progress_response,json=getEcuFirmwareUpdateProgressResponse,proto3,oneof"`
 }
 
+type SuperchargerMessages_TriggerEcuFirmwareUpdateRequest struct {
+	TriggerEcuFirmwareUpdateRequest *SuperchargerAPITriggerEcuFirmwareUpdateRequest `protobuf:"bytes,19,opt,name=trigger_ecu_firmware_update_request,json=triggerEcuFirmwareUpdateRequest,proto3,oneof"` // UNCONFIRMED: not yet confirmed on a live device
+}
+
+type SuperchargerMessages_TriggerEcuFirmwareUpdateResponse struct {
+	TriggerEcuFirmwareUpdateResponse *SuperchargerAPITriggerEcuFirmwareUpdateResponse `protobuf:"bytes,20,opt,name=trigger_ecu_firmware_update_response,json=triggerEcuFirmwareUpdateResponse,proto3,oneof"` // UNCONFIRMED: not yet confirmed on a live device
+}
+
 func (*SuperchargerMessages_UnlockMagicDockRequest) isSuperchargerMessages_Message() {}
 
 func (*SuperchargerMessages_UnlockMagicDockResponse) isSuperchargerMessages_Message() {}
@@ -2254,6 +2425,10 @@ func (*SuperchargerMessages_GetEcuFirmwareUpdateProgressRequest) isSuperchargerM
 
 func (*SuperchargerMessages_GetEcuFirmwareUpdateProgressResponse) isSuperchargerMessages_Message() {}
 
+func (*SuperchargerMessages_TriggerEcuFirmwareUpdateRequest) isSuperchargerMessages_Message() {}
+
+func (*SuperchargerMessages_TriggerEcuFirmwareUpdateResponse) isSuperchargerMessages_Message() {}
+
 type VerifoneKiosk struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	SerialNumber        string                 `protobuf:"bytes,1,opt,name=serial_number,json=serialNumber,proto3" json:"serial_number,omitempty"`
@@ -2264,7 +2439,7 @@ type VerifoneKiosk struct {
 
 func (x *VerifoneKiosk) Reset() {
 	*x = VerifoneKiosk{}
-	mi := &file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[36]
+	mi := &file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[39]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2276,7 +2451,7 @@ func (x *VerifoneKiosk) String() string {
 func (*VerifoneKiosk) ProtoMessage() {}
 
 func (x *VerifoneKiosk) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[36]
+	mi := &file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[39]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2289,7 +2464,7 @@ func (x *VerifoneKiosk) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use VerifoneKiosk.ProtoReflect.Descriptor instead.
 func (*VerifoneKiosk) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_supercharger_api_proto_rawDescGZIP(), []int{36}
+	return file_tesla_protocol_energy_device_supercharger_api_proto_rawDescGZIP(), []int{39}
 }
 
 func (x *VerifoneKiosk) GetSerialNumber() string {
@@ -2362,12 +2537,13 @@ const file_tesla_protocol_energy_device_supercharger_api_proto_rawDesc = "" +
 	"\x04fail\x18\x03 \x01(\v2H.tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateStatusFailR\x04fail\"5\n" +
 	"\x1bEcuFirmwareUpdateStatusFail\x12\x16\n" +
 	"\x06reason\x18\x01 \x01(\tR\x06reason\"\x1d\n" +
-	"\x1bEcuFirmwareUpdateStatusPass\"t\n" +
+	"\x1bEcuFirmwareUpdateStatusPass\"\x97\x01\n" +
 	"\x10PayterPostStatus\x12\x1d\n" +
 	"\n" +
 	"post_index\x18\x01 \x01(\rR\tpostIndex\x12#\n" +
 	"\rserial_number\x18\x02 \x01(\tR\fserialNumber\x12\x1c\n" +
-	"\tactivated\x18\x03 \x01(\bR\tactivated\"*\n" +
+	"\tactivated\x18\x03 \x01(\bR\tactivated\x12!\n" +
+	"\fis_connected\x18\x04 \x01(\bR\visConnected\"*\n" +
 	"(SuperchargerAPIGetConnectedKiosksRequest\"\xeb\x01\n" +
 	")SuperchargerAPIGetConnectedKiosksResponse\x12V\n" +
 	"\x05error\x18\x01 \x01(\x0e2@.tesla_protocol.tesla.proto.energy_device.v1.ConnectedKioskErrorR\x05error\x12f\n" +
@@ -2407,7 +2583,14 @@ const file_tesla_protocol_energy_device_supercharger_api_proto_rawDesc = "" +
 	"&SuperchargerAPIUnlockMagicDockResponse\";\n" +
 	"%SuperchargerAPIUpdateFollowersRequest\x12\x12\n" +
 	"\x04dins\x18\x01 \x03(\tR\x04dins\"(\n" +
-	"&SuperchargerAPIUpdateFollowersResponse\"\x86\x17\n" +
+	"&SuperchargerAPIUpdateFollowersResponse\"3\n" +
+	"\tEcuTarget\x12&\n" +
+	"\x0fdaryl_node_path\x18\x01 \x01(\tR\rdarylNodePath\"\xa2\x01\n" +
+	".SuperchargerAPITriggerEcuFirmwareUpdateRequest\x12U\n" +
+	"\n" +
+	"ecu_target\x18\x01 \x01(\v26.tesla_protocol.tesla.proto.energy_device.v1.EcuTargetR\tecuTarget\x12\x19\n" +
+	"\bapp_only\x18\x02 \x01(\bR\aappOnly\"1\n" +
+	"/SuperchargerAPITriggerEcuFirmwareUpdateResponse\"\xe5\x19\n" +
 	"\x14SuperchargerMessages\x12\x8f\x01\n" +
 	"\x19unlock_magic_dock_request\x18\x01 \x01(\v2R.tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIUnlockMagicDockRequestH\x00R\x16unlockMagicDockRequest\x12\x92\x01\n" +
 	"\x1aunlock_magic_dock_response\x18\x02 \x01(\v2S.tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIUnlockMagicDockResponseH\x00R\x17unlockMagicDockResponse\x12\x98\x01\n" +
@@ -2427,7 +2610,9 @@ const file_tesla_protocol_energy_device_supercharger_api_proto_rawDesc = "" +
 	"\x1eget_payter_post_status_request\x18\x0f \x01(\v2V.tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetPayterPostStatusRequestH\x00R\x1agetPayterPostStatusRequest\x12\x9f\x01\n" +
 	"\x1fget_payter_post_status_response\x18\x10 \x01(\v2W.tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetPayterPostStatusResponseH\x00R\x1bgetPayterPostStatusResponse\x12\xb8\x01\n" +
 	"(get_ecu_firmware_update_progress_request\x18\x11 \x01(\v2_.tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetEcuFirmwareUpdateProgressRequestH\x00R#getEcuFirmwareUpdateProgressRequest\x12\xbb\x01\n" +
-	")get_ecu_firmware_update_progress_response\x18\x12 \x01(\v2`.tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetEcuFirmwareUpdateProgressResponseH\x00R$getEcuFirmwareUpdateProgressResponseB\t\n" +
+	")get_ecu_firmware_update_progress_response\x18\x12 \x01(\v2`.tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetEcuFirmwareUpdateProgressResponseH\x00R$getEcuFirmwareUpdateProgressResponse\x12\xab\x01\n" +
+	"#trigger_ecu_firmware_update_request\x18\x13 \x01(\v2[.tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPITriggerEcuFirmwareUpdateRequestH\x00R\x1ftriggerEcuFirmwareUpdateRequest\x12\xae\x01\n" +
+	"$trigger_ecu_firmware_update_response\x18\x14 \x01(\v2\\.tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPITriggerEcuFirmwareUpdateResponseH\x00R triggerEcuFirmwareUpdateResponseB\t\n" +
 	"\amessage\"h\n" +
 	"\rVerifoneKiosk\x12#\n" +
 	"\rserial_number\x18\x01 \x01(\tR\fserialNumber\x122\n" +
@@ -2473,7 +2658,7 @@ func file_tesla_protocol_energy_device_supercharger_api_proto_rawDescGZIP() []by
 }
 
 var file_tesla_protocol_energy_device_supercharger_api_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
-var file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes = make([]protoimpl.MessageInfo, 39)
+var file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes = make([]protoimpl.MessageInfo, 42)
 var file_tesla_protocol_energy_device_supercharger_api_proto_goTypes = []any{
 	(ConnectedKioskError)(0),                                    // 0: tesla_protocol.tesla.proto.energy_device.v1.ConnectedKioskError
 	(EcuFirmwareUpdateStage)(0),                                 // 1: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateStage
@@ -2514,33 +2699,36 @@ var file_tesla_protocol_energy_device_supercharger_api_proto_goTypes = []any{
 	(*SuperchargerAPIUnlockMagicDockResponse)(nil),              // 36: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIUnlockMagicDockResponse
 	(*SuperchargerAPIUpdateFollowersRequest)(nil),               // 37: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIUpdateFollowersRequest
 	(*SuperchargerAPIUpdateFollowersResponse)(nil),              // 38: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIUpdateFollowersResponse
-	(*SuperchargerMessages)(nil),                                // 39: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages
-	(*VerifoneKiosk)(nil),                                       // 40: tesla_protocol.tesla.proto.energy_device.v1.VerifoneKiosk
-	nil,                                                         // 41: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateInProgress.NodeProgressesEntry
-	nil,                                                         // 42: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateResult.EcuUpdateResultsEntry
-	(*wrapperspb.BoolValue)(nil),                                // 43: google.protobuf.BoolValue
-	(*wrapperspb.StringValue)(nil),                              // 44: google.protobuf.StringValue
+	(*EcuTarget)(nil),                                           // 39: tesla_protocol.tesla.proto.energy_device.v1.EcuTarget
+	(*SuperchargerAPITriggerEcuFirmwareUpdateRequest)(nil),      // 40: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPITriggerEcuFirmwareUpdateRequest
+	(*SuperchargerAPITriggerEcuFirmwareUpdateResponse)(nil),     // 41: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPITriggerEcuFirmwareUpdateResponse
+	(*SuperchargerMessages)(nil),                                // 42: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages
+	(*VerifoneKiosk)(nil),                                       // 43: tesla_protocol.tesla.proto.energy_device.v1.VerifoneKiosk
+	nil,                                                         // 44: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateInProgress.NodeProgressesEntry
+	nil,                                                         // 45: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateResult.EcuUpdateResultsEntry
+	(*wrapperspb.BoolValue)(nil),                                // 46: google.protobuf.BoolValue
+	(*wrapperspb.StringValue)(nil),                              // 47: google.protobuf.StringValue
 }
 var file_tesla_protocol_energy_device_supercharger_api_proto_depIdxs = []int32{
-	40, // 0: tesla_protocol.tesla.proto.energy_device.v1.ConnectedKiosk.verifone_kiosk:type_name -> tesla_protocol.tesla.proto.energy_device.v1.VerifoneKiosk
-	43, // 1: tesla_protocol.tesla.proto.energy_device.v1.DcMeterCommissioningStatus.installed:type_name -> google.protobuf.BoolValue
-	43, // 2: tesla_protocol.tesla.proto.energy_device.v1.DcMeterCommissioningStatus.commissioned:type_name -> google.protobuf.BoolValue
+	43, // 0: tesla_protocol.tesla.proto.energy_device.v1.ConnectedKiosk.verifone_kiosk:type_name -> tesla_protocol.tesla.proto.energy_device.v1.VerifoneKiosk
+	46, // 1: tesla_protocol.tesla.proto.energy_device.v1.DcMeterCommissioningStatus.installed:type_name -> google.protobuf.BoolValue
+	46, // 2: tesla_protocol.tesla.proto.energy_device.v1.DcMeterCommissioningStatus.commissioned:type_name -> google.protobuf.BoolValue
 	8,  // 3: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateResult.module_update_status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatus
 	10, // 4: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatus.pass_:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusPass
 	9,  // 5: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatus.fail:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusFail
 	11, // 6: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatus.skipped:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusSkipped
-	44, // 7: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusFail.reason:type_name -> google.protobuf.StringValue
-	44, // 8: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusFail.pre_update_version:type_name -> google.protobuf.StringValue
-	44, // 9: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusFail.post_update_version:type_name -> google.protobuf.StringValue
-	44, // 10: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusPass.pre_update_version:type_name -> google.protobuf.StringValue
-	44, // 11: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusPass.post_update_version:type_name -> google.protobuf.StringValue
-	44, // 12: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusSkipped.reason:type_name -> google.protobuf.StringValue
+	47, // 7: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusFail.reason:type_name -> google.protobuf.StringValue
+	47, // 8: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusFail.pre_update_version:type_name -> google.protobuf.StringValue
+	47, // 9: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusFail.post_update_version:type_name -> google.protobuf.StringValue
+	47, // 10: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusPass.pre_update_version:type_name -> google.protobuf.StringValue
+	47, // 11: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusPass.post_update_version:type_name -> google.protobuf.StringValue
+	47, // 12: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateStatusSkipped.reason:type_name -> google.protobuf.StringValue
 	13, // 13: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateAttempts.attempts:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateEcuResult
 	7,  // 14: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateEcuResult.module_update_results:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareModuleUpdateResult
-	41, // 15: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateInProgress.node_progresses:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateInProgress.NodeProgressesEntry
+	44, // 15: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateInProgress.node_progresses:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateInProgress.NodeProgressesEntry
 	1,  // 16: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateNodeProgress.stage:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateStage
 	17, // 17: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateResult.system_update_status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateStatus
-	42, // 18: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateResult.ecu_update_results:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateResult.EcuUpdateResultsEntry
+	45, // 18: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateResult.ecu_update_results:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateResult.EcuUpdateResultsEntry
 	19, // 19: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateStatus.pass_:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateStatusPass
 	18, // 20: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateStatus.fail:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateStatusFail
 	0,  // 21: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetConnectedKiosksResponse.error:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ConnectedKioskError
@@ -2552,31 +2740,34 @@ var file_tesla_protocol_energy_device_supercharger_api_proto_depIdxs = []int32{
 	20, // 27: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetPayterPostStatusResponse.payter_devices:type_name -> tesla_protocol.tesla.proto.energy_device.v1.PayterPostStatus
 	6,  // 28: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetVerifoneKioskDeviceIdsResponse.device_ids:type_name -> tesla_protocol.tesla.proto.energy_device.v1.DeviceIDAndSerialNumber
 	2,  // 29: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPISetDcMeterCommissionedResponse.error:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SetDcMeterCommissionedError
-	35, // 30: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.unlock_magic_dock_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIUnlockMagicDockRequest
-	36, // 31: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.unlock_magic_dock_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIUnlockMagicDockResponse
-	21, // 32: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_connected_kiosks_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetConnectedKiosksRequest
-	22, // 33: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_connected_kiosks_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetConnectedKiosksResponse
-	29, // 34: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_verifone_kiosk_device_ids_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetVerifoneKioskDeviceIdsRequest
-	30, // 35: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_verifone_kiosk_device_ids_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetVerifoneKioskDeviceIdsResponse
-	37, // 36: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.update_followers_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIUpdateFollowersRequest
-	38, // 37: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.update_followers_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIUpdateFollowersResponse
-	23, // 38: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_dc_meters_commissioning_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetDcMetersCommissioningRequest
-	24, // 39: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_dc_meters_commissioning_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetDcMetersCommissioningResponse
-	33, // 40: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.set_dc_meter_commissioned_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPISetDcMeterCommissionedRequest
-	34, // 41: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.set_dc_meter_commissioned_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPISetDcMeterCommissionedResponse
-	31, // 42: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.odin_command_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIOdinCommandRequest
-	32, // 43: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.odin_command_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIOdinCommandResponse
-	27, // 44: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_payter_post_status_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetPayterPostStatusRequest
-	28, // 45: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_payter_post_status_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetPayterPostStatusResponse
-	25, // 46: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_ecu_firmware_update_progress_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetEcuFirmwareUpdateProgressRequest
-	26, // 47: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_ecu_firmware_update_progress_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetEcuFirmwareUpdateProgressResponse
-	15, // 48: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateInProgress.NodeProgressesEntry.value:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateNodeProgress
-	12, // 49: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateResult.EcuUpdateResultsEntry.value:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateAttempts
-	50, // [50:50] is the sub-list for method output_type
-	50, // [50:50] is the sub-list for method input_type
-	50, // [50:50] is the sub-list for extension type_name
-	50, // [50:50] is the sub-list for extension extendee
-	0,  // [0:50] is the sub-list for field type_name
+	39, // 30: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPITriggerEcuFirmwareUpdateRequest.ecu_target:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuTarget
+	35, // 31: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.unlock_magic_dock_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIUnlockMagicDockRequest
+	36, // 32: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.unlock_magic_dock_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIUnlockMagicDockResponse
+	21, // 33: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_connected_kiosks_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetConnectedKiosksRequest
+	22, // 34: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_connected_kiosks_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetConnectedKiosksResponse
+	29, // 35: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_verifone_kiosk_device_ids_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetVerifoneKioskDeviceIdsRequest
+	30, // 36: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_verifone_kiosk_device_ids_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetVerifoneKioskDeviceIdsResponse
+	37, // 37: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.update_followers_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIUpdateFollowersRequest
+	38, // 38: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.update_followers_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIUpdateFollowersResponse
+	23, // 39: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_dc_meters_commissioning_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetDcMetersCommissioningRequest
+	24, // 40: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_dc_meters_commissioning_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetDcMetersCommissioningResponse
+	33, // 41: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.set_dc_meter_commissioned_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPISetDcMeterCommissionedRequest
+	34, // 42: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.set_dc_meter_commissioned_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPISetDcMeterCommissionedResponse
+	31, // 43: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.odin_command_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIOdinCommandRequest
+	32, // 44: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.odin_command_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIOdinCommandResponse
+	27, // 45: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_payter_post_status_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetPayterPostStatusRequest
+	28, // 46: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_payter_post_status_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetPayterPostStatusResponse
+	25, // 47: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_ecu_firmware_update_progress_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetEcuFirmwareUpdateProgressRequest
+	26, // 48: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.get_ecu_firmware_update_progress_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPIGetEcuFirmwareUpdateProgressResponse
+	40, // 49: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.trigger_ecu_firmware_update_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPITriggerEcuFirmwareUpdateRequest
+	41, // 50: tesla_protocol.tesla.proto.energy_device.v1.SuperchargerMessages.trigger_ecu_firmware_update_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SuperchargerAPITriggerEcuFirmwareUpdateResponse
+	15, // 51: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateInProgress.NodeProgressesEntry.value:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateNodeProgress
+	12, // 52: tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateResult.EcuUpdateResultsEntry.value:type_name -> tesla_protocol.tesla.proto.energy_device.v1.EcuFirmwareUpdateAttempts
+	53, // [53:53] is the sub-list for method output_type
+	53, // [53:53] is the sub-list for method input_type
+	53, // [53:53] is the sub-list for extension type_name
+	53, // [53:53] is the sub-list for extension extendee
+	0,  // [0:53] is the sub-list for field type_name
 }
 
 func init() { file_tesla_protocol_energy_device_supercharger_api_proto_init() }
@@ -2584,7 +2775,7 @@ func file_tesla_protocol_energy_device_supercharger_api_proto_init() {
 	if File_tesla_protocol_energy_device_supercharger_api_proto != nil {
 		return
 	}
-	file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[35].OneofWrappers = []any{
+	file_tesla_protocol_energy_device_supercharger_api_proto_msgTypes[38].OneofWrappers = []any{
 		(*SuperchargerMessages_UnlockMagicDockRequest)(nil),
 		(*SuperchargerMessages_UnlockMagicDockResponse)(nil),
 		(*SuperchargerMessages_GetConnectedKiosksRequest)(nil),
@@ -2603,6 +2794,8 @@ func file_tesla_protocol_energy_device_supercharger_api_proto_init() {
 		(*SuperchargerMessages_GetPayterPostStatusResponse)(nil),
 		(*SuperchargerMessages_GetEcuFirmwareUpdateProgressRequest)(nil),
 		(*SuperchargerMessages_GetEcuFirmwareUpdateProgressResponse)(nil),
+		(*SuperchargerMessages_TriggerEcuFirmwareUpdateRequest)(nil),
+		(*SuperchargerMessages_TriggerEcuFirmwareUpdateResponse)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -2610,7 +2803,7 @@ func file_tesla_protocol_energy_device_supercharger_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tesla_protocol_energy_device_supercharger_api_proto_rawDesc), len(file_tesla_protocol_energy_device_supercharger_api_proto_rawDesc)),
 			NumEnums:      4,
-			NumMessages:   39,
+			NumMessages:   42,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

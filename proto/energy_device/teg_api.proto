@@ -217,6 +217,18 @@ message TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLD {
 message TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy {
 }
 
+// UNCONFIRMED: not yet confirmed on a live device.
+message TEGAPIEnsureCertificateRequest_CSIPAusgrid {
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message TEGAPIEnsureCertificateRequest_CSIPEndeavour {
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message TEGAPIEnsureCertificateRequest_CSIPEssential {
+}
+
 message TEGAPIEnsureCertificateRequest {
   bool force_renew                                                                                  = 1;
   oneof certificate_type {
@@ -224,6 +236,9 @@ message TEGAPIEnsureCertificateRequest {
     TEGAPIEnsureCertificateRequest_CSIPCitiPowerPowercorUnited csip_citipower_powercor_united          = 3;
     TEGAPIEnsureCertificateRequest_CSIPAusNet csip_ausnet                                              = 4;
     TEGAPIEnsureCertificateRequest_CSIPJemena csip_jemena                                              = 5;
+    TEGAPIEnsureCertificateRequest_CSIPAusgrid csip_ausgrid                                            = 8;  // UNCONFIRMED: not yet confirmed on a live device
+    TEGAPIEnsureCertificateRequest_CSIPEndeavour csip_endeavour                                        = 9;  // UNCONFIRMED: not yet confirmed on a live device
+    TEGAPIEnsureCertificateRequest_CSIPEssential csip_essential                                        = 10;  // UNCONFIRMED: not yet confirmed on a live device
   }
   TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLD csip_energex_ergon_energy_qld             = 6;
   TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy csip_western_power_synergy                  = 7;
@@ -487,6 +502,14 @@ message TEGAPIRetrieveSiteSuggestionResponse {
   SiteSuggestionResponse response = 1;
 }
 
+// UNCONFIRMED: not yet confirmed on a live device.
+message TEGAPIDelayBatteryMatingRequest {
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+message TEGAPIDelayBatteryMatingResponse {
+}
+
 message TEGMessages {
   oneof message {
     TEGAPIGetConfigRequest get_config_request                                                              = 1;
@@ -575,6 +598,8 @@ message TEGMessages {
     TEGAPIDeleteControllableDeviceProgramsResponse delete_controllable_device_programs_response            = 84;
     TEGAPIClearPowerwall3LockoutAlertsRequest clear_powerwall3_lockout_alerts_request                       = 85;
     TEGAPIClearPowerwall3LockoutAlertsResponse clear_powerwall3_lockout_alerts_response                     = 86;
+    TEGAPIDelayBatteryMatingRequest delay_battery_mating_request                                            = 87;  // UNCONFIRMED: not yet confirmed on a live device
+    TEGAPIDelayBatteryMatingResponse delay_battery_mating_response                                          = 88;  // UNCONFIRMED: not yet confirmed on a live device
   }
 }
 

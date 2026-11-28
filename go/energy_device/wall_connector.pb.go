@@ -1775,6 +1775,7 @@ type WCLifetimeStats struct {
 	ChargeStarts          uint32                 `protobuf:"varint,8,opt,name=charge_starts,json=chargeStarts,proto3" json:"charge_starts,omitempty"`
 	ChargingTimeS         uint64                 `protobuf:"varint,9,opt,name=charging_time_s,json=chargingTimeS,proto3" json:"charging_time_s,omitempty"`
 	ChargingEnergy        *AccumulatedEnergy     `protobuf:"bytes,10,opt,name=charging_energy,json=chargingEnergy,proto3" json:"charging_energy,omitempty"`
+	DischargingEnergy     *AccumulatedEnergy     `protobuf:"bytes,11,opt,name=discharging_energy,json=dischargingEnergy,proto3" json:"discharging_energy,omitempty"` // UNCONFIRMED: not yet confirmed on a live device
 	unknownFields         protoimpl.UnknownFields
 	sizeCache             protoimpl.SizeCache
 }
@@ -1875,6 +1876,13 @@ func (x *WCLifetimeStats) GetChargingTimeS() uint64 {
 func (x *WCLifetimeStats) GetChargingEnergy() *AccumulatedEnergy {
 	if x != nil {
 		return x.ChargingEnergy
+	}
+	return nil
+}
+
+func (x *WCLifetimeStats) GetDischargingEnergy() *AccumulatedEnergy {
+	if x != nil {
+		return x.DischargingEnergy
 	}
 	return nil
 }
@@ -6840,9 +6848,11 @@ func (x *WCAPIPushSmartChargingCommandRequest) GetCommand() *WCSmartChargingComm
 }
 
 type WCAPIPushSmartChargingCommandResponse struct {
-	state         protoimpl.MessageState `protogen:"open.v1"`
-	unknownFields protoimpl.UnknownFields
-	sizeCache     protoimpl.SizeCache
+	state           protoimpl.MessageState `protogen:"open.v1"`
+	PlugSessionUuid *UUIDv4Bytes           `protobuf:"bytes,1,opt,name=plug_session_uuid,json=plugSessionUuid,proto3" json:"plug_session_uuid,omitempty"`  // UNCONFIRMED: not yet confirmed on a live device
+	NumActivePhases uint32                 `protobuf:"varint,2,opt,name=num_active_phases,json=numActivePhases,proto3" json:"num_active_phases,omitempty"` // UNCONFIRMED: not yet confirmed on a live device
+	unknownFields   protoimpl.UnknownFields
+	sizeCache       protoimpl.SizeCache
 }
 
 func (x *WCAPIPushSmartChargingCommandResponse) Reset() {
@@ -6873,6 +6883,20 @@ func (x *WCAPIPushSmartChargingCommandResponse) ProtoReflect() protoreflect.Mess
 // Deprecated: Use WCAPIPushSmartChargingCommandResponse.ProtoReflect.Descriptor instead.
 func (*WCAPIPushSmartChargingCommandResponse) Descriptor() ([]byte, []int) {
 	return file_tesla_protocol_energy_device_wall_connector_proto_rawDescGZIP(), []int{101}
+}
+
+func (x *WCAPIPushSmartChargingCommandResponse) GetPlugSessionUuid() *UUIDv4Bytes {
+	if x != nil {
+		return x.PlugSessionUuid
+	}
+	return nil
+}
+
+func (x *WCAPIPushSmartChargingCommandResponse) GetNumActivePhases() uint32 {
+	if x != nil {
+		return x.NumActivePhases
+	}
+	return 0
 }
 
 type WCAPIRegisterCommercialRequest struct {
@@ -8238,7 +8262,7 @@ const file_tesla_protocol_energy_device_wall_connector_proto_rawDesc = "" +
 	"\x16evse_not_ready_reasons\x18\x1a \x03(\x0e2A.tesla_protocol.tesla.proto.energy_device.v1.WCEvseNotReadyReasonR\x13evseNotReadyReasons\x12\x7f\n" +
 	"\x18powershare_session_state\x18\x1b \x01(\x0e2E.tesla_protocol.tesla.proto.energy_device.v1.WCPowershareSessionStateR\x16powershareSessionState\x12\x80\x01\n" +
 	"\x19dry_contact_control_state\x18\x1c \x01(\x0e2E.tesla_protocol.tesla.proto.energy_device.v1.WCDryContactControlStateR\x16dryContactControlState\x12v\n" +
-	"\x15smart_charging_reason\x18\x1d \x01(\x0e2B.tesla_protocol.tesla.proto.energy_device.v1.WCSmartChargingReasonR\x13smartChargingReason\"\xeb\x03\n" +
+	"\x15smart_charging_reason\x18\x1d \x01(\x0e2B.tesla_protocol.tesla.proto.energy_device.v1.WCSmartChargingReasonR\x13smartChargingReason\"\xda\x04\n" +
 	"\x0fWCLifetimeStats\x12\x19\n" +
 	"\buptime_s\x18\x01 \x01(\x04R\auptimeS\x12\x1f\n" +
 	"\valert_count\x18\x02 \x01(\rR\n" +
@@ -8251,7 +8275,8 @@ const file_tesla_protocol_energy_device_wall_connector_proto_rawDesc = "" +
 	"\rcharge_starts\x18\b \x01(\rR\fchargeStarts\x12&\n" +
 	"\x0fcharging_time_s\x18\t \x01(\x04R\rchargingTimeS\x12g\n" +
 	"\x0fcharging_energy\x18\n" +
-	" \x01(\v2>.tesla_protocol.tesla.proto.energy_device.v1.AccumulatedEnergyR\x0echargingEnergy\"M\n" +
+	" \x01(\v2>.tesla_protocol.tesla.proto.energy_device.v1.AccumulatedEnergyR\x0echargingEnergy\x12m\n" +
+	"\x12discharging_energy\x18\v \x01(\v2>.tesla_protocol.tesla.proto.energy_device.v1.AccumulatedEnergyR\x11dischargingEnergy\"M\n" +
 	"\x1dWCLoadSharingFixedLimitConfig\x12,\n" +
 	"\x12network_limit_amps\x18\x01 \x01(\rR\x10networkLimitAmps\"U\n" +
 	"!WCLoadSharingConductorLimitConfig\x120\n" +
@@ -8541,8 +8566,10 @@ const file_tesla_protocol_energy_device_wall_connector_proto_rawDesc = "" +
 	"\x11charge_disallowed\x18\x02 \x01(\bR\x10chargeDisallowed\x12\x83\x01\n" +
 	"\x1atarget_charge_power_params\x18\x03 \x01(\v2F.tesla_protocol.tesla.proto.energy_device.v1.WCTargetChargePowerParamsR\x17targetChargePowerParams\"\x85\x01\n" +
 	"$WCAPIPushSmartChargingCommandRequest\x12]\n" +
-	"\acommand\x18\x01 \x01(\v2C.tesla_protocol.tesla.proto.energy_device.v1.WCSmartChargingCommandR\acommand\"'\n" +
-	"%WCAPIPushSmartChargingCommandResponse\"\x88\x01\n" +
+	"\acommand\x18\x01 \x01(\v2C.tesla_protocol.tesla.proto.energy_device.v1.WCSmartChargingCommandR\acommand\"\xb9\x01\n" +
+	"%WCAPIPushSmartChargingCommandResponse\x12d\n" +
+	"\x11plug_session_uuid\x18\x01 \x01(\v28.tesla_protocol.tesla.proto.energy_device.v1.UUIDv4BytesR\x0fplugSessionUuid\x12*\n" +
+	"\x11num_active_phases\x18\x02 \x01(\rR\x0fnumActivePhases\"\x88\x01\n" +
 	"\x1eWCAPIRegisterCommercialRequest\x12f\n" +
 	"\arequest\x18\x01 \x01(\v2L.tesla_protocol.tesla.proto.energy_device.v1.WCCommercialRegistrationRequestR\arequest\"\xdc\x01\n" +
 	"\x1fWCAPIRegisterCommercialResponse\x12Z\n" +
@@ -8973,178 +9000,180 @@ var file_tesla_protocol_energy_device_wall_connector_proto_depIdxs = []int32{
 	14,  // 13: tesla_protocol.tesla.proto.energy_device.v1.WCVitals.dry_contact_control_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCDryContactControlState
 	22,  // 14: tesla_protocol.tesla.proto.energy_device.v1.WCVitals.smart_charging_reason:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCSmartChargingReason
 	133, // 15: tesla_protocol.tesla.proto.energy_device.v1.WCLifetimeStats.charging_energy:type_name -> tesla_protocol.tesla.proto.energy_device.v1.AccumulatedEnergy
-	28,  // 16: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingSettings.fixed_limit:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingFixedLimitConfig
-	29,  // 17: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingSettings.conductor_limit:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingConductorLimitConfig
-	7,   // 18: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkStatus.network_charging_inhibitors:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkChargingInhibitor
-	137, // 19: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingConfig.participant_dins:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
-	28,  // 20: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingConfig.fixed_limit:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingFixedLimitConfig
-	30,  // 21: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingConfig.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingSettings
-	8,   // 22: tesla_protocol.tesla.proto.energy_device.v1.WCPpuConfig.session_reporting_mode:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCPpuSessionReportingMode
-	17,  // 23: tesla_protocol.tesla.proto.energy_device.v1.WCOperationalSettingsConfig.operational_mode:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOperationalMode
-	138, // 24: tesla_protocol.tesla.proto.energy_device.v1.WCMeterInterface.neurio:type_name -> tesla_protocol.tesla.proto.energy_device.v1.NeurioMeterInterface
-	15,  // 25: tesla_protocol.tesla.proto.energy_device.v1.WCDryContactConfig.default_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCDryContactDefaultState
-	132, // 26: tesla_protocol.tesla.proto.energy_device.v1.WCTimeZoneTransition.timestamp:type_name -> google.protobuf.Timestamp
-	38,  // 27: tesla_protocol.tesla.proto.energy_device.v1.WCTimeZoneInfo.transitions:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTimeZoneTransition
-	39,  // 28: tesla_protocol.tesla.proto.energy_device.v1.WCTimeZone.time_zone_info:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTimeZoneInfo
-	40,  // 29: tesla_protocol.tesla.proto.energy_device.v1.WCMIDConfig.time_zone:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTimeZone
-	6,   // 30: tesla_protocol.tesla.proto.energy_device.v1.WCSettings.gmi_mode:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCGroundMonitorMode
-	11,  // 31: tesla_protocol.tesla.proto.energy_device.v1.WCSettings.third_party_vehicle_mode:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCThirdPartyVehicleMode
-	33,  // 32: tesla_protocol.tesla.proto.energy_device.v1.WCSettings.load_sharing_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingConfig
-	37,  // 33: tesla_protocol.tesla.proto.energy_device.v1.WCSettings.dry_contact:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCDryContactConfig
-	41,  // 34: tesla_protocol.tesla.proto.energy_device.v1.WCSettings.mid_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCMIDConfig
-	137, // 35: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingDeviceEntry.din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
-	46,  // 36: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingDeviceEntry.leader_command:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingLeaderCommand
-	45,  // 37: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingDeviceEntry.follower_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingFollowerState
-	48,  // 38: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkState.devices:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingDeviceEntry
-	47,  // 39: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkState.leader_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingLeaderState
-	30,  // 40: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkState.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingSettings
-	32,  // 41: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkState.status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkStatus
-	31,  // 42: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkState.limits:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingLimits
-	135, // 43: tesla_protocol.tesla.proto.energy_device.v1.WCAccessControlEntry.vin:type_name -> tesla_protocol.tesla.proto.energy_device.v1.VIN
-	10,  // 44: tesla_protocol.tesla.proto.energy_device.v1.WCAccessControlEntry.model:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTeslaVehicleModel
-	9,   // 45: tesla_protocol.tesla.proto.energy_device.v1.WCAccessControlEntry.drive_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTeslaVehicleDriveType
-	52,  // 46: tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleDayTimePeriods.time_periods:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleTimePeriod
-	53,  // 47: tesla_protocol.tesla.proto.energy_device.v1.WCChargeSchedule.day_time_periods:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleDayTimePeriods
-	54,  // 48: tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfig.schedule:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeSchedule
-	55,  // 49: tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfig.delay:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleDelay
-	56,  // 50: tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfigStatus.config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfig
-	1,   // 51: tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfigStatus.error:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfigError
-	24,  // 52: tesla_protocol.tesla.proto.energy_device.v1.WCChargeCommand.charging_command:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargingCommand
-	19,  // 53: tesla_protocol.tesla.proto.energy_device.v1.WCOcppSettings.version:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppVersion
-	20,  // 54: tesla_protocol.tesla.proto.energy_device.v1.WCOcppSettings.security_profile:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppSecurityProfile
-	21,  // 55: tesla_protocol.tesla.proto.energy_device.v1.WCOcppSettings.scope:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppScope
-	60,  // 56: tesla_protocol.tesla.proto.energy_device.v1.WCOcppAuthorizationList.auth_data:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppAuthorizationData
-	137, // 57: tesla_protocol.tesla.proto.energy_device.v1.WCVehicleToHomeConfig.site_controller_din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
-	26,  // 58: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetVitalsResponse.vitals:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCVitals
-	27,  // 59: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetLifetimeStatsResponse.lifetime_stats:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLifetimeStats
-	42,  // 60: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCSettings
-	139, // 61: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.wifi_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WifiConfig
-	140, // 62: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.wifi:type_name -> tesla_protocol.tesla.proto.energy_device.v1.NetworkInterface
-	36,  // 63: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.meters:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCMeterInterface
-	57,  // 64: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.charge_schedule:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfigStatus
-	59,  // 65: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.ocpp_settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppSettings
-	62,  // 66: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.vehicle_to_home:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCVehicleToHomeConfig
-	16,  // 67: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.time_source:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTimeSource
-	42,  // 68: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureSettingsRequest.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCSettings
-	42,  // 69: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureSettingsResponse.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCSettings
-	43,  // 70: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetSystemInfoResponse.genealogy:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCGenealogy
-	44,  // 71: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetSystemInfoResponse.compliance_crcs:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ComplianceCRC32
-	49,  // 72: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetLoadSharingNetworkStateResponse.network_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkState
-	45,  // 73: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingFollowerStateRequest.follower_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingFollowerState
-	47,  // 74: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingFollowerStateResponse.leader_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingLeaderState
-	46,  // 75: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingFollowerStateResponse.leader_command:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingLeaderCommand
-	47,  // 76: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingLeaderCommandRequest.leader_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingLeaderState
-	46,  // 77: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingLeaderCommandRequest.leader_command:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingLeaderCommand
-	45,  // 78: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingLeaderCommandResponse.follower_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingFollowerState
-	30,  // 79: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureLoadSharingSettingsRequest.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingSettings
-	30,  // 80: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureLoadSharingSettingsResponse.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingSettings
-	33,  // 81: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingConfigRequest.load_sharing_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingConfig
-	34,  // 82: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigurePpuSettingsRequest.ppu_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCPpuConfig
-	34,  // 83: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigurePpuSettingsResponse.ppu_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCPpuConfig
-	34,  // 84: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetPpuSettingsResponse.ppu_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCPpuConfig
-	35,  // 85: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOperationalSettingsRequest.operational_settings_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOperationalSettingsConfig
-	35,  // 86: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOperationalSettingsResponse.operational_settings_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOperationalSettingsConfig
-	35,  // 87: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOperationalSettingsResponse.operational_settings_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOperationalSettingsConfig
-	50,  // 88: tesla_protocol.tesla.proto.energy_device.v1.WCAPISetProvisionalOperationalParamsRequest.prov_op_params:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCProvisionalOperationalParams
-	50,  // 89: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetProvisionalOperationalParamsResponse.prov_op_params:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCProvisionalOperationalParams
-	51,  // 90: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetAccessControlSettingsResponse.entries:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAccessControlEntry
-	4,   // 91: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureAccessControlSettingsRequest.operation:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCConfigureAccessControlOperation
-	135, // 92: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureAccessControlSettingsRequest.vin:type_name -> tesla_protocol.tesla.proto.energy_device.v1.VIN
-	51,  // 93: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureAccessControlSettingsResponse.entries:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAccessControlEntry
-	141, // 94: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushPpuAuthorizationStateRequest.auth_uuid:type_name -> tesla_protocol.tesla.proto.energy_device.v1.UUIDv4Bytes
-	56,  // 95: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureChargeScheduleRequest.config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfig
-	40,  // 96: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureChargeScheduleRequest.time_zone:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTimeZone
-	3,   // 97: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureChargeScheduleResponse.error:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleError
-	11,  // 98: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureThirdPartyVehicleModeRequest.third_party_vehicle_mode:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCThirdPartyVehicleMode
-	58,  // 99: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushChargeCommandRequest.charge_command:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeCommand
-	137, // 100: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureHomeSiteControllerRequest.din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
-	62,  // 101: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureHomeSiteControllerRequest.config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCVehicleToHomeConfig
-	62,  // 102: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureHomeSiteControllerResponse.config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCVehicleToHomeConfig
-	59,  // 103: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOcppSettingsRequest.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppSettings
-	59,  // 104: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOcppSettingsResponse.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppSettings
-	13,  // 105: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOcppSettingsResponse.status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppStatus
-	18,  // 106: tesla_protocol.tesla.proto.energy_device.v1.WCAPISetOcppSecurityParameterRequest.security_parameter_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppSecurityParameterType
-	13,  // 107: tesla_protocol.tesla.proto.energy_device.v1.WCAPISetOcppSecurityParameterResponse.status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppStatus
-	18,  // 108: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOcppSecurityParameterRequest.security_parameter_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppSecurityParameterType
-	18,  // 109: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOcppSecurityParameterResponse.security_parameter_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppSecurityParameterType
-	61,  // 110: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOcppLocalAuthListResponse.auth_list:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppAuthorizationList
-	136, // 111: tesla_protocol.tesla.proto.energy_device.v1.WCTargetChargePowerParams.max_charge_power_w:type_name -> google.protobuf.FloatValue
-	123, // 112: tesla_protocol.tesla.proto.energy_device.v1.WCSmartChargingCommand.target_charge_power_params:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTargetChargePowerParams
-	124, // 113: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushSmartChargingCommandRequest.command:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCSmartChargingCommand
-	142, // 114: tesla_protocol.tesla.proto.energy_device.v1.WCAPIRegisterCommercialRequest.request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCCommercialRegistrationRequest
-	143, // 115: tesla_protocol.tesla.proto.energy_device.v1.WCAPIRegisterCommercialResponse.failure:type_name -> tesla_protocol.tesla.proto.energy_device.v1.RegistrationFailure
-	144, // 116: tesla_protocol.tesla.proto.energy_device.v1.WCAPIRegisterCommercialResponse.response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.RegistrationResponse
-	63,  // 117: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_vitals_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetVitalsRequest
-	64,  // 118: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_vitals_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetVitalsResponse
-	65,  // 119: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_lifetime_stats_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetLifetimeStatsRequest
-	66,  // 120: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_lifetime_stats_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetLifetimeStatsResponse
-	67,  // 121: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_config_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigRequest
-	68,  // 122: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_config_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse
-	69,  // 123: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureSettingsRequest
-	70,  // 124: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureSettingsResponse
-	71,  // 125: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_system_info_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetSystemInfoRequest
-	72,  // 126: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_system_info_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetSystemInfoResponse
-	73,  // 127: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_load_sharing_network_state_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetLoadSharingNetworkStateRequest
-	74,  // 128: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_load_sharing_network_state_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetLoadSharingNetworkStateResponse
-	75,  // 129: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_load_sharing_follower_state_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingFollowerStateRequest
-	76,  // 130: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_load_sharing_follower_state_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingFollowerStateResponse
-	77,  // 131: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_load_sharing_leader_command_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingLeaderCommandRequest
-	78,  // 132: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_load_sharing_leader_command_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingLeaderCommandResponse
-	79,  // 133: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.set_load_sharing_network_operation_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPISetLoadSharingNetworkOperationRequest
-	80,  // 134: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.set_load_sharing_network_operation_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPISetLoadSharingNetworkOperationResponse
-	81,  // 135: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_load_sharing_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureLoadSharingSettingsRequest
-	82,  // 136: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_load_sharing_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureLoadSharingSettingsResponse
-	85,  // 137: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_ppu_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigurePpuSettingsRequest
-	86,  // 138: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_ppu_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigurePpuSettingsResponse
-	87,  // 139: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_ppu_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetPpuSettingsRequest
-	88,  // 140: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_ppu_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetPpuSettingsResponse
-	93,  // 141: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.set_provisional_operational_params_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPISetProvisionalOperationalParamsRequest
-	94,  // 142: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.set_provisional_operational_params_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPISetProvisionalOperationalParamsResponse
-	95,  // 143: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_provisional_operational_params_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetProvisionalOperationalParamsRequest
-	96,  // 144: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_provisional_operational_params_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetProvisionalOperationalParamsResponse
-	97,  // 145: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_access_control_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetAccessControlSettingsRequest
-	98,  // 146: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_access_control_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetAccessControlSettingsResponse
-	99,  // 147: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_access_control_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureAccessControlSettingsRequest
-	100, // 148: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_access_control_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureAccessControlSettingsResponse
-	101, // 149: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_recent_vehicles_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetRecentVehiclesRequest
-	102, // 150: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_recent_vehicles_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetRecentVehiclesResponse
-	103, // 151: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_ppu_authorization_state_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushPpuAuthorizationStateRequest
-	104, // 152: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_ppu_authorization_state_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushPpuAuthorizationStateResponse
-	105, // 153: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_charge_schedule_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureChargeScheduleRequest
-	106, // 154: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_charge_schedule_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureChargeScheduleResponse
-	109, // 155: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_charge_command_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushChargeCommandRequest
-	110, // 156: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_charge_command_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushChargeCommandResponse
-	107, // 157: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_third_party_vehicle_mode_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureThirdPartyVehicleModeRequest
-	108, // 158: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_third_party_vehicle_mode_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureThirdPartyVehicleModeResponse
-	111, // 159: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_home_site_controller_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureHomeSiteControllerRequest
-	112, // 160: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_home_site_controller_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureHomeSiteControllerResponse
-	113, // 161: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_ocpp_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOcppSettingsRequest
-	114, // 162: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_ocpp_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOcppSettingsResponse
-	115, // 163: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.set_ocpp_security_parameter_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPISetOcppSecurityParameterRequest
-	116, // 164: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.set_ocpp_security_parameter_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPISetOcppSecurityParameterResponse
-	117, // 165: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_ocpp_security_parameter_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOcppSecurityParameterRequest
-	118, // 166: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_ocpp_security_parameter_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOcppSecurityParameterResponse
-	89,  // 167: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_operational_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOperationalSettingsRequest
-	90,  // 168: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_operational_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOperationalSettingsResponse
-	91,  // 169: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_operational_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOperationalSettingsRequest
-	92,  // 170: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_operational_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOperationalSettingsResponse
-	121, // 171: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_country_code_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureCountryCodeSettingsRequest
-	122, // 172: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_country_code_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureCountryCodeSettingsResponse
-	83,  // 173: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_load_sharing_config_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingConfigRequest
-	84,  // 174: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_load_sharing_config_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingConfigResponse
-	125, // 175: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_smart_charging_command_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushSmartChargingCommandRequest
-	126, // 176: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_smart_charging_command_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushSmartChargingCommandResponse
-	127, // 177: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.register_commercial_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIRegisterCommercialRequest
-	128, // 178: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.register_commercial_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIRegisterCommercialResponse
-	119, // 179: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_ocpp_local_auth_list_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOcppLocalAuthListRequest
-	120, // 180: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_ocpp_local_auth_list_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOcppLocalAuthListResponse
-	129, // 181: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_powershare_command_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushPowershareCommandRequest
-	130, // 182: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_powershare_command_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushPowershareCommandResponse
-	183, // [183:183] is the sub-list for method output_type
-	183, // [183:183] is the sub-list for method input_type
-	183, // [183:183] is the sub-list for extension type_name
-	183, // [183:183] is the sub-list for extension extendee
-	0,   // [0:183] is the sub-list for field type_name
+	133, // 16: tesla_protocol.tesla.proto.energy_device.v1.WCLifetimeStats.discharging_energy:type_name -> tesla_protocol.tesla.proto.energy_device.v1.AccumulatedEnergy
+	28,  // 17: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingSettings.fixed_limit:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingFixedLimitConfig
+	29,  // 18: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingSettings.conductor_limit:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingConductorLimitConfig
+	7,   // 19: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkStatus.network_charging_inhibitors:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkChargingInhibitor
+	137, // 20: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingConfig.participant_dins:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
+	28,  // 21: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingConfig.fixed_limit:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingFixedLimitConfig
+	30,  // 22: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingConfig.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingSettings
+	8,   // 23: tesla_protocol.tesla.proto.energy_device.v1.WCPpuConfig.session_reporting_mode:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCPpuSessionReportingMode
+	17,  // 24: tesla_protocol.tesla.proto.energy_device.v1.WCOperationalSettingsConfig.operational_mode:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOperationalMode
+	138, // 25: tesla_protocol.tesla.proto.energy_device.v1.WCMeterInterface.neurio:type_name -> tesla_protocol.tesla.proto.energy_device.v1.NeurioMeterInterface
+	15,  // 26: tesla_protocol.tesla.proto.energy_device.v1.WCDryContactConfig.default_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCDryContactDefaultState
+	132, // 27: tesla_protocol.tesla.proto.energy_device.v1.WCTimeZoneTransition.timestamp:type_name -> google.protobuf.Timestamp
+	38,  // 28: tesla_protocol.tesla.proto.energy_device.v1.WCTimeZoneInfo.transitions:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTimeZoneTransition
+	39,  // 29: tesla_protocol.tesla.proto.energy_device.v1.WCTimeZone.time_zone_info:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTimeZoneInfo
+	40,  // 30: tesla_protocol.tesla.proto.energy_device.v1.WCMIDConfig.time_zone:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTimeZone
+	6,   // 31: tesla_protocol.tesla.proto.energy_device.v1.WCSettings.gmi_mode:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCGroundMonitorMode
+	11,  // 32: tesla_protocol.tesla.proto.energy_device.v1.WCSettings.third_party_vehicle_mode:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCThirdPartyVehicleMode
+	33,  // 33: tesla_protocol.tesla.proto.energy_device.v1.WCSettings.load_sharing_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingConfig
+	37,  // 34: tesla_protocol.tesla.proto.energy_device.v1.WCSettings.dry_contact:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCDryContactConfig
+	41,  // 35: tesla_protocol.tesla.proto.energy_device.v1.WCSettings.mid_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCMIDConfig
+	137, // 36: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingDeviceEntry.din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
+	46,  // 37: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingDeviceEntry.leader_command:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingLeaderCommand
+	45,  // 38: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingDeviceEntry.follower_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingFollowerState
+	48,  // 39: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkState.devices:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingDeviceEntry
+	47,  // 40: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkState.leader_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingLeaderState
+	30,  // 41: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkState.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingSettings
+	32,  // 42: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkState.status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkStatus
+	31,  // 43: tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkState.limits:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingLimits
+	135, // 44: tesla_protocol.tesla.proto.energy_device.v1.WCAccessControlEntry.vin:type_name -> tesla_protocol.tesla.proto.energy_device.v1.VIN
+	10,  // 45: tesla_protocol.tesla.proto.energy_device.v1.WCAccessControlEntry.model:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTeslaVehicleModel
+	9,   // 46: tesla_protocol.tesla.proto.energy_device.v1.WCAccessControlEntry.drive_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTeslaVehicleDriveType
+	52,  // 47: tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleDayTimePeriods.time_periods:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleTimePeriod
+	53,  // 48: tesla_protocol.tesla.proto.energy_device.v1.WCChargeSchedule.day_time_periods:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleDayTimePeriods
+	54,  // 49: tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfig.schedule:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeSchedule
+	55,  // 50: tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfig.delay:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleDelay
+	56,  // 51: tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfigStatus.config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfig
+	1,   // 52: tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfigStatus.error:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfigError
+	24,  // 53: tesla_protocol.tesla.proto.energy_device.v1.WCChargeCommand.charging_command:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargingCommand
+	19,  // 54: tesla_protocol.tesla.proto.energy_device.v1.WCOcppSettings.version:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppVersion
+	20,  // 55: tesla_protocol.tesla.proto.energy_device.v1.WCOcppSettings.security_profile:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppSecurityProfile
+	21,  // 56: tesla_protocol.tesla.proto.energy_device.v1.WCOcppSettings.scope:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppScope
+	60,  // 57: tesla_protocol.tesla.proto.energy_device.v1.WCOcppAuthorizationList.auth_data:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppAuthorizationData
+	137, // 58: tesla_protocol.tesla.proto.energy_device.v1.WCVehicleToHomeConfig.site_controller_din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
+	26,  // 59: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetVitalsResponse.vitals:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCVitals
+	27,  // 60: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetLifetimeStatsResponse.lifetime_stats:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLifetimeStats
+	42,  // 61: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCSettings
+	139, // 62: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.wifi_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WifiConfig
+	140, // 63: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.wifi:type_name -> tesla_protocol.tesla.proto.energy_device.v1.NetworkInterface
+	36,  // 64: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.meters:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCMeterInterface
+	57,  // 65: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.charge_schedule:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfigStatus
+	59,  // 66: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.ocpp_settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppSettings
+	62,  // 67: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.vehicle_to_home:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCVehicleToHomeConfig
+	16,  // 68: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse.time_source:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTimeSource
+	42,  // 69: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureSettingsRequest.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCSettings
+	42,  // 70: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureSettingsResponse.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCSettings
+	43,  // 71: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetSystemInfoResponse.genealogy:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCGenealogy
+	44,  // 72: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetSystemInfoResponse.compliance_crcs:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ComplianceCRC32
+	49,  // 73: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetLoadSharingNetworkStateResponse.network_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingNetworkState
+	45,  // 74: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingFollowerStateRequest.follower_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingFollowerState
+	47,  // 75: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingFollowerStateResponse.leader_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingLeaderState
+	46,  // 76: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingFollowerStateResponse.leader_command:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingLeaderCommand
+	47,  // 77: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingLeaderCommandRequest.leader_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingLeaderState
+	46,  // 78: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingLeaderCommandRequest.leader_command:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingLeaderCommand
+	45,  // 79: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingLeaderCommandResponse.follower_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingFollowerState
+	30,  // 80: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureLoadSharingSettingsRequest.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingSettings
+	30,  // 81: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureLoadSharingSettingsResponse.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingSettings
+	33,  // 82: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingConfigRequest.load_sharing_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCLoadSharingConfig
+	34,  // 83: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigurePpuSettingsRequest.ppu_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCPpuConfig
+	34,  // 84: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigurePpuSettingsResponse.ppu_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCPpuConfig
+	34,  // 85: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetPpuSettingsResponse.ppu_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCPpuConfig
+	35,  // 86: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOperationalSettingsRequest.operational_settings_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOperationalSettingsConfig
+	35,  // 87: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOperationalSettingsResponse.operational_settings_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOperationalSettingsConfig
+	35,  // 88: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOperationalSettingsResponse.operational_settings_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOperationalSettingsConfig
+	50,  // 89: tesla_protocol.tesla.proto.energy_device.v1.WCAPISetProvisionalOperationalParamsRequest.prov_op_params:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCProvisionalOperationalParams
+	50,  // 90: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetProvisionalOperationalParamsResponse.prov_op_params:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCProvisionalOperationalParams
+	51,  // 91: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetAccessControlSettingsResponse.entries:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAccessControlEntry
+	4,   // 92: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureAccessControlSettingsRequest.operation:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCConfigureAccessControlOperation
+	135, // 93: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureAccessControlSettingsRequest.vin:type_name -> tesla_protocol.tesla.proto.energy_device.v1.VIN
+	51,  // 94: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureAccessControlSettingsResponse.entries:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAccessControlEntry
+	141, // 95: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushPpuAuthorizationStateRequest.auth_uuid:type_name -> tesla_protocol.tesla.proto.energy_device.v1.UUIDv4Bytes
+	56,  // 96: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureChargeScheduleRequest.config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleConfig
+	40,  // 97: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureChargeScheduleRequest.time_zone:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTimeZone
+	3,   // 98: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureChargeScheduleResponse.error:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeScheduleError
+	11,  // 99: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureThirdPartyVehicleModeRequest.third_party_vehicle_mode:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCThirdPartyVehicleMode
+	58,  // 100: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushChargeCommandRequest.charge_command:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCChargeCommand
+	137, // 101: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureHomeSiteControllerRequest.din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
+	62,  // 102: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureHomeSiteControllerRequest.config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCVehicleToHomeConfig
+	62,  // 103: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureHomeSiteControllerResponse.config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCVehicleToHomeConfig
+	59,  // 104: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOcppSettingsRequest.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppSettings
+	59,  // 105: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOcppSettingsResponse.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppSettings
+	13,  // 106: tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOcppSettingsResponse.status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppStatus
+	18,  // 107: tesla_protocol.tesla.proto.energy_device.v1.WCAPISetOcppSecurityParameterRequest.security_parameter_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppSecurityParameterType
+	13,  // 108: tesla_protocol.tesla.proto.energy_device.v1.WCAPISetOcppSecurityParameterResponse.status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppStatus
+	18,  // 109: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOcppSecurityParameterRequest.security_parameter_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppSecurityParameterType
+	18,  // 110: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOcppSecurityParameterResponse.security_parameter_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppSecurityParameterType
+	61,  // 111: tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOcppLocalAuthListResponse.auth_list:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCOcppAuthorizationList
+	136, // 112: tesla_protocol.tesla.proto.energy_device.v1.WCTargetChargePowerParams.max_charge_power_w:type_name -> google.protobuf.FloatValue
+	123, // 113: tesla_protocol.tesla.proto.energy_device.v1.WCSmartChargingCommand.target_charge_power_params:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCTargetChargePowerParams
+	124, // 114: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushSmartChargingCommandRequest.command:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCSmartChargingCommand
+	141, // 115: tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushSmartChargingCommandResponse.plug_session_uuid:type_name -> tesla_protocol.tesla.proto.energy_device.v1.UUIDv4Bytes
+	142, // 116: tesla_protocol.tesla.proto.energy_device.v1.WCAPIRegisterCommercialRequest.request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCCommercialRegistrationRequest
+	143, // 117: tesla_protocol.tesla.proto.energy_device.v1.WCAPIRegisterCommercialResponse.failure:type_name -> tesla_protocol.tesla.proto.energy_device.v1.RegistrationFailure
+	144, // 118: tesla_protocol.tesla.proto.energy_device.v1.WCAPIRegisterCommercialResponse.response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.RegistrationResponse
+	63,  // 119: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_vitals_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetVitalsRequest
+	64,  // 120: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_vitals_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetVitalsResponse
+	65,  // 121: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_lifetime_stats_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetLifetimeStatsRequest
+	66,  // 122: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_lifetime_stats_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetLifetimeStatsResponse
+	67,  // 123: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_config_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigRequest
+	68,  // 124: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_config_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetConfigResponse
+	69,  // 125: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureSettingsRequest
+	70,  // 126: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureSettingsResponse
+	71,  // 127: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_system_info_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetSystemInfoRequest
+	72,  // 128: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_system_info_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetSystemInfoResponse
+	73,  // 129: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_load_sharing_network_state_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetLoadSharingNetworkStateRequest
+	74,  // 130: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_load_sharing_network_state_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetLoadSharingNetworkStateResponse
+	75,  // 131: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_load_sharing_follower_state_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingFollowerStateRequest
+	76,  // 132: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_load_sharing_follower_state_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingFollowerStateResponse
+	77,  // 133: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_load_sharing_leader_command_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingLeaderCommandRequest
+	78,  // 134: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_load_sharing_leader_command_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingLeaderCommandResponse
+	79,  // 135: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.set_load_sharing_network_operation_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPISetLoadSharingNetworkOperationRequest
+	80,  // 136: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.set_load_sharing_network_operation_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPISetLoadSharingNetworkOperationResponse
+	81,  // 137: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_load_sharing_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureLoadSharingSettingsRequest
+	82,  // 138: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_load_sharing_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureLoadSharingSettingsResponse
+	85,  // 139: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_ppu_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigurePpuSettingsRequest
+	86,  // 140: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_ppu_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigurePpuSettingsResponse
+	87,  // 141: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_ppu_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetPpuSettingsRequest
+	88,  // 142: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_ppu_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetPpuSettingsResponse
+	93,  // 143: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.set_provisional_operational_params_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPISetProvisionalOperationalParamsRequest
+	94,  // 144: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.set_provisional_operational_params_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPISetProvisionalOperationalParamsResponse
+	95,  // 145: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_provisional_operational_params_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetProvisionalOperationalParamsRequest
+	96,  // 146: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_provisional_operational_params_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetProvisionalOperationalParamsResponse
+	97,  // 147: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_access_control_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetAccessControlSettingsRequest
+	98,  // 148: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_access_control_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetAccessControlSettingsResponse
+	99,  // 149: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_access_control_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureAccessControlSettingsRequest
+	100, // 150: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_access_control_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureAccessControlSettingsResponse
+	101, // 151: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_recent_vehicles_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetRecentVehiclesRequest
+	102, // 152: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_recent_vehicles_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetRecentVehiclesResponse
+	103, // 153: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_ppu_authorization_state_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushPpuAuthorizationStateRequest
+	104, // 154: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_ppu_authorization_state_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushPpuAuthorizationStateResponse
+	105, // 155: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_charge_schedule_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureChargeScheduleRequest
+	106, // 156: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_charge_schedule_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureChargeScheduleResponse
+	109, // 157: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_charge_command_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushChargeCommandRequest
+	110, // 158: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_charge_command_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushChargeCommandResponse
+	107, // 159: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_third_party_vehicle_mode_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureThirdPartyVehicleModeRequest
+	108, // 160: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_third_party_vehicle_mode_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureThirdPartyVehicleModeResponse
+	111, // 161: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_home_site_controller_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureHomeSiteControllerRequest
+	112, // 162: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_home_site_controller_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureHomeSiteControllerResponse
+	113, // 163: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_ocpp_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOcppSettingsRequest
+	114, // 164: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_ocpp_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOcppSettingsResponse
+	115, // 165: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.set_ocpp_security_parameter_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPISetOcppSecurityParameterRequest
+	116, // 166: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.set_ocpp_security_parameter_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPISetOcppSecurityParameterResponse
+	117, // 167: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_ocpp_security_parameter_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOcppSecurityParameterRequest
+	118, // 168: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_ocpp_security_parameter_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOcppSecurityParameterResponse
+	89,  // 169: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_operational_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOperationalSettingsRequest
+	90,  // 170: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_operational_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureOperationalSettingsResponse
+	91,  // 171: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_operational_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOperationalSettingsRequest
+	92,  // 172: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_operational_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOperationalSettingsResponse
+	121, // 173: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_country_code_settings_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureCountryCodeSettingsRequest
+	122, // 174: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.configure_country_code_settings_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIConfigureCountryCodeSettingsResponse
+	83,  // 175: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_load_sharing_config_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingConfigRequest
+	84,  // 176: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_load_sharing_config_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushLoadSharingConfigResponse
+	125, // 177: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_smart_charging_command_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushSmartChargingCommandRequest
+	126, // 178: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_smart_charging_command_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushSmartChargingCommandResponse
+	127, // 179: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.register_commercial_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIRegisterCommercialRequest
+	128, // 180: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.register_commercial_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIRegisterCommercialResponse
+	119, // 181: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_ocpp_local_auth_list_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOcppLocalAuthListRequest
+	120, // 182: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.get_ocpp_local_auth_list_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIGetOcppLocalAuthListResponse
+	129, // 183: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_powershare_command_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushPowershareCommandRequest
+	130, // 184: tesla_protocol.tesla.proto.energy_device.v1.WCMessages.push_powershare_command_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WCAPIPushPowershareCommandResponse
+	185, // [185:185] is the sub-list for method output_type
+	185, // [185:185] is the sub-list for method input_type
+	185, // [185:185] is the sub-list for extension type_name
+	185, // [185:185] is the sub-list for extension extendee
+	0,   // [0:185] is the sub-list for field type_name
 }
 
 func init() { file_tesla_protocol_energy_device_wall_connector_proto_init() }

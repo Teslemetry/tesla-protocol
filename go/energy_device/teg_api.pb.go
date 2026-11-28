@@ -291,7 +291,7 @@ func (x ControllableDeviceProgram_Key_Priority) Number() protoreflect.EnumNumber
 
 // Deprecated: Use ControllableDeviceProgram_Key_Priority.Descriptor instead.
 func (ControllableDeviceProgram_Key_Priority) EnumDescriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{91, 0}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{94, 0}
 }
 
 type ControllableDeviceProgram_Settings_ContactorState int32
@@ -340,7 +340,7 @@ func (x ControllableDeviceProgram_Settings_ContactorState) Number() protoreflect
 
 // Deprecated: Use ControllableDeviceProgram_Settings_ContactorState.Descriptor instead.
 func (ControllableDeviceProgram_Settings_ContactorState) EnumDescriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{92, 0}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{95, 0}
 }
 
 type ControllableDeviceProgram_Schedule_Boundary_StaticCondition int32
@@ -389,7 +389,7 @@ func (x ControllableDeviceProgram_Schedule_Boundary_StaticCondition) Number() pr
 
 // Deprecated: Use ControllableDeviceProgram_Schedule_Boundary_StaticCondition.Descriptor instead.
 func (ControllableDeviceProgram_Schedule_Boundary_StaticCondition) EnumDescriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{93, 0}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{96, 0}
 }
 
 type ControllableDeviceProgram_Schedule_Boundary_IslandingState int32
@@ -438,7 +438,7 @@ func (x ControllableDeviceProgram_Schedule_Boundary_IslandingState) Number() pro
 
 // Deprecated: Use ControllableDeviceProgram_Schedule_Boundary_IslandingState.Descriptor instead.
 func (ControllableDeviceProgram_Schedule_Boundary_IslandingState) EnumDescriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{93, 1}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{96, 1}
 }
 
 type ControllableDeviceProgram_Schedule_Boundary_StateOfEnergy int32
@@ -487,7 +487,7 @@ func (x ControllableDeviceProgram_Schedule_Boundary_StateOfEnergy) Number() prot
 
 // Deprecated: Use ControllableDeviceProgram_Schedule_Boundary_StateOfEnergy.Descriptor instead.
 func (ControllableDeviceProgram_Schedule_Boundary_StateOfEnergy) EnumDescriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{93, 2}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{96, 2}
 }
 
 type TEGSettings struct {
@@ -2629,6 +2629,117 @@ func (*TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy) Descriptor() ([]b
 	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{52}
 }
 
+// UNCONFIRMED: not yet confirmed on a live device.
+type TEGAPIEnsureCertificateRequest_CSIPAusgrid struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TEGAPIEnsureCertificateRequest_CSIPAusgrid) Reset() {
+	*x = TEGAPIEnsureCertificateRequest_CSIPAusgrid{}
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[53]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TEGAPIEnsureCertificateRequest_CSIPAusgrid) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TEGAPIEnsureCertificateRequest_CSIPAusgrid) ProtoMessage() {}
+
+func (x *TEGAPIEnsureCertificateRequest_CSIPAusgrid) ProtoReflect() protoreflect.Message {
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[53]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TEGAPIEnsureCertificateRequest_CSIPAusgrid.ProtoReflect.Descriptor instead.
+func (*TEGAPIEnsureCertificateRequest_CSIPAusgrid) Descriptor() ([]byte, []int) {
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{53}
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+type TEGAPIEnsureCertificateRequest_CSIPEndeavour struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TEGAPIEnsureCertificateRequest_CSIPEndeavour) Reset() {
+	*x = TEGAPIEnsureCertificateRequest_CSIPEndeavour{}
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[54]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TEGAPIEnsureCertificateRequest_CSIPEndeavour) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TEGAPIEnsureCertificateRequest_CSIPEndeavour) ProtoMessage() {}
+
+func (x *TEGAPIEnsureCertificateRequest_CSIPEndeavour) ProtoReflect() protoreflect.Message {
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[54]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TEGAPIEnsureCertificateRequest_CSIPEndeavour.ProtoReflect.Descriptor instead.
+func (*TEGAPIEnsureCertificateRequest_CSIPEndeavour) Descriptor() ([]byte, []int) {
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{54}
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+type TEGAPIEnsureCertificateRequest_CSIPEssential struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TEGAPIEnsureCertificateRequest_CSIPEssential) Reset() {
+	*x = TEGAPIEnsureCertificateRequest_CSIPEssential{}
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[55]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TEGAPIEnsureCertificateRequest_CSIPEssential) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TEGAPIEnsureCertificateRequest_CSIPEssential) ProtoMessage() {}
+
+func (x *TEGAPIEnsureCertificateRequest_CSIPEssential) ProtoReflect() protoreflect.Message {
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[55]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TEGAPIEnsureCertificateRequest_CSIPEssential.ProtoReflect.Descriptor instead.
+func (*TEGAPIEnsureCertificateRequest_CSIPEssential) Descriptor() ([]byte, []int) {
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{55}
+}
+
 type TEGAPIEnsureCertificateRequest struct {
 	state      protoimpl.MessageState `protogen:"open.v1"`
 	ForceRenew bool                   `protobuf:"varint,1,opt,name=force_renew,json=forceRenew,proto3" json:"force_renew,omitempty"`
@@ -2638,6 +2749,9 @@ type TEGAPIEnsureCertificateRequest struct {
 	//	*TEGAPIEnsureCertificateRequest_CsipCitipowerPowercorUnited
 	//	*TEGAPIEnsureCertificateRequest_CsipAusnet
 	//	*TEGAPIEnsureCertificateRequest_CsipJemena
+	//	*TEGAPIEnsureCertificateRequest_CsipAusgrid
+	//	*TEGAPIEnsureCertificateRequest_CsipEndeavour
+	//	*TEGAPIEnsureCertificateRequest_CsipEssential
 	CertificateType           isTEGAPIEnsureCertificateRequest_CertificateType          `protobuf_oneof:"certificate_type"`
 	CsipEnergexErgonEnergyQld *TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLD `protobuf:"bytes,6,opt,name=csip_energex_ergon_energy_qld,json=csipEnergexErgonEnergyQld,proto3" json:"csip_energex_ergon_energy_qld,omitempty"`
 	CsipWesternPowerSynergy   *TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy   `protobuf:"bytes,7,opt,name=csip_western_power_synergy,json=csipWesternPowerSynergy,proto3" json:"csip_western_power_synergy,omitempty"`
@@ -2647,7 +2761,7 @@ type TEGAPIEnsureCertificateRequest struct {
 
 func (x *TEGAPIEnsureCertificateRequest) Reset() {
 	*x = TEGAPIEnsureCertificateRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[53]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[56]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2659,7 +2773,7 @@ func (x *TEGAPIEnsureCertificateRequest) String() string {
 func (*TEGAPIEnsureCertificateRequest) ProtoMessage() {}
 
 func (x *TEGAPIEnsureCertificateRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[53]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[56]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2672,7 +2786,7 @@ func (x *TEGAPIEnsureCertificateRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TEGAPIEnsureCertificateRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIEnsureCertificateRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{53}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{56}
 }
 
 func (x *TEGAPIEnsureCertificateRequest) GetForceRenew() bool {
@@ -2725,6 +2839,33 @@ func (x *TEGAPIEnsureCertificateRequest) GetCsipJemena() *TEGAPIEnsureCertificat
 	return nil
 }
 
+func (x *TEGAPIEnsureCertificateRequest) GetCsipAusgrid() *TEGAPIEnsureCertificateRequest_CSIPAusgrid {
+	if x != nil {
+		if x, ok := x.CertificateType.(*TEGAPIEnsureCertificateRequest_CsipAusgrid); ok {
+			return x.CsipAusgrid
+		}
+	}
+	return nil
+}
+
+func (x *TEGAPIEnsureCertificateRequest) GetCsipEndeavour() *TEGAPIEnsureCertificateRequest_CSIPEndeavour {
+	if x != nil {
+		if x, ok := x.CertificateType.(*TEGAPIEnsureCertificateRequest_CsipEndeavour); ok {
+			return x.CsipEndeavour
+		}
+	}
+	return nil
+}
+
+func (x *TEGAPIEnsureCertificateRequest) GetCsipEssential() *TEGAPIEnsureCertificateRequest_CSIPEssential {
+	if x != nil {
+		if x, ok := x.CertificateType.(*TEGAPIEnsureCertificateRequest_CsipEssential); ok {
+			return x.CsipEssential
+		}
+	}
+	return nil
+}
+
 func (x *TEGAPIEnsureCertificateRequest) GetCsipEnergexErgonEnergyQld() *TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLD {
 	if x != nil {
 		return x.CsipEnergexErgonEnergyQld
@@ -2759,6 +2900,18 @@ type TEGAPIEnsureCertificateRequest_CsipJemena struct {
 	CsipJemena *TEGAPIEnsureCertificateRequest_CSIPJemena `protobuf:"bytes,5,opt,name=csip_jemena,json=csipJemena,proto3,oneof"`
 }
 
+type TEGAPIEnsureCertificateRequest_CsipAusgrid struct {
+	CsipAusgrid *TEGAPIEnsureCertificateRequest_CSIPAusgrid `protobuf:"bytes,8,opt,name=csip_ausgrid,json=csipAusgrid,proto3,oneof"` // UNCONFIRMED: not yet confirmed on a live device
+}
+
+type TEGAPIEnsureCertificateRequest_CsipEndeavour struct {
+	CsipEndeavour *TEGAPIEnsureCertificateRequest_CSIPEndeavour `protobuf:"bytes,9,opt,name=csip_endeavour,json=csipEndeavour,proto3,oneof"` // UNCONFIRMED: not yet confirmed on a live device
+}
+
+type TEGAPIEnsureCertificateRequest_CsipEssential struct {
+	CsipEssential *TEGAPIEnsureCertificateRequest_CSIPEssential `protobuf:"bytes,10,opt,name=csip_essential,json=csipEssential,proto3,oneof"` // UNCONFIRMED: not yet confirmed on a live device
+}
+
 func (*TEGAPIEnsureCertificateRequest_CsipSouthAustraliaPowerNetworks) isTEGAPIEnsureCertificateRequest_CertificateType() {
 }
 
@@ -2771,6 +2924,15 @@ func (*TEGAPIEnsureCertificateRequest_CsipAusnet) isTEGAPIEnsureCertificateReque
 func (*TEGAPIEnsureCertificateRequest_CsipJemena) isTEGAPIEnsureCertificateRequest_CertificateType() {
 }
 
+func (*TEGAPIEnsureCertificateRequest_CsipAusgrid) isTEGAPIEnsureCertificateRequest_CertificateType() {
+}
+
+func (*TEGAPIEnsureCertificateRequest_CsipEndeavour) isTEGAPIEnsureCertificateRequest_CertificateType() {
+}
+
+func (*TEGAPIEnsureCertificateRequest_CsipEssential) isTEGAPIEnsureCertificateRequest_CertificateType() {
+}
+
 type TEGAPIEnsureCertificateResponse struct {
 	state             protoimpl.MessageState `protogen:"open.v1"`
 	CertificateExists bool                   `protobuf:"varint,1,opt,name=certificate_exists,json=certificateExists,proto3" json:"certificate_exists,omitempty"`
@@ -2780,7 +2942,7 @@ type TEGAPIEnsureCertificateResponse struct {
 
 func (x *TEGAPIEnsureCertificateResponse) Reset() {
 	*x = TEGAPIEnsureCertificateResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[54]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[57]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2792,7 +2954,7 @@ func (x *TEGAPIEnsureCertificateResponse) String() string {
 func (*TEGAPIEnsureCertificateResponse) ProtoMessage() {}
 
 func (x *TEGAPIEnsureCertificateResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[54]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[57]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2805,7 +2967,7 @@ func (x *TEGAPIEnsureCertificateResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TEGAPIEnsureCertificateResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIEnsureCertificateResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{54}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *TEGAPIEnsureCertificateResponse) GetCertificateExists() bool {
@@ -2826,7 +2988,7 @@ type ControlEventSchedulingInfo struct {
 
 func (x *ControlEventSchedulingInfo) Reset() {
 	*x = ControlEventSchedulingInfo{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[55]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[58]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2838,7 +3000,7 @@ func (x *ControlEventSchedulingInfo) String() string {
 func (*ControlEventSchedulingInfo) ProtoMessage() {}
 
 func (x *ControlEventSchedulingInfo) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[55]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[58]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2851,7 +3013,7 @@ func (x *ControlEventSchedulingInfo) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ControlEventSchedulingInfo.ProtoReflect.Descriptor instead.
 func (*ControlEventSchedulingInfo) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{55}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *ControlEventSchedulingInfo) GetStartTime() *timestamppb.Timestamp {
@@ -2886,7 +3048,7 @@ type BackupEvent struct {
 
 func (x *BackupEvent) Reset() {
 	*x = BackupEvent{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[56]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[59]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2898,7 +3060,7 @@ func (x *BackupEvent) String() string {
 func (*BackupEvent) ProtoMessage() {}
 
 func (x *BackupEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[56]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[59]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2911,7 +3073,7 @@ func (x *BackupEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use BackupEvent.ProtoReflect.Descriptor instead.
 func (*BackupEvent) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{56}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{59}
 }
 
 func (x *BackupEvent) GetId() string {
@@ -2944,7 +3106,7 @@ type ManualBackupEvent struct {
 
 func (x *ManualBackupEvent) Reset() {
 	*x = ManualBackupEvent{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[57]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[60]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2956,7 +3118,7 @@ func (x *ManualBackupEvent) String() string {
 func (*ManualBackupEvent) ProtoMessage() {}
 
 func (x *ManualBackupEvent) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[57]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[60]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2969,7 +3131,7 @@ func (x *ManualBackupEvent) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ManualBackupEvent.ProtoReflect.Descriptor instead.
 func (*ManualBackupEvent) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{57}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *ManualBackupEvent) GetSchedulingInfo() *ControlEventSchedulingInfo {
@@ -2988,7 +3150,7 @@ type TEGAPIScheduleManualBackupEventRequest struct {
 
 func (x *TEGAPIScheduleManualBackupEventRequest) Reset() {
 	*x = TEGAPIScheduleManualBackupEventRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[58]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[61]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3000,7 +3162,7 @@ func (x *TEGAPIScheduleManualBackupEventRequest) String() string {
 func (*TEGAPIScheduleManualBackupEventRequest) ProtoMessage() {}
 
 func (x *TEGAPIScheduleManualBackupEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[58]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[61]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3013,7 +3175,7 @@ func (x *TEGAPIScheduleManualBackupEventRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use TEGAPIScheduleManualBackupEventRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIScheduleManualBackupEventRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{58}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{61}
 }
 
 func (x *TEGAPIScheduleManualBackupEventRequest) GetSchedulingInfo() *ControlEventSchedulingInfo {
@@ -3031,7 +3193,7 @@ type TEGAPIScheduleManualBackupEventResponse struct {
 
 func (x *TEGAPIScheduleManualBackupEventResponse) Reset() {
 	*x = TEGAPIScheduleManualBackupEventResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[59]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[62]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3043,7 +3205,7 @@ func (x *TEGAPIScheduleManualBackupEventResponse) String() string {
 func (*TEGAPIScheduleManualBackupEventResponse) ProtoMessage() {}
 
 func (x *TEGAPIScheduleManualBackupEventResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[59]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[62]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3056,7 +3218,7 @@ func (x *TEGAPIScheduleManualBackupEventResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use TEGAPIScheduleManualBackupEventResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIScheduleManualBackupEventResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{59}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{62}
 }
 
 type TEGAPICancelManualBackupEventRequest struct {
@@ -3067,7 +3229,7 @@ type TEGAPICancelManualBackupEventRequest struct {
 
 func (x *TEGAPICancelManualBackupEventRequest) Reset() {
 	*x = TEGAPICancelManualBackupEventRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[60]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[63]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3079,7 +3241,7 @@ func (x *TEGAPICancelManualBackupEventRequest) String() string {
 func (*TEGAPICancelManualBackupEventRequest) ProtoMessage() {}
 
 func (x *TEGAPICancelManualBackupEventRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[60]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[63]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3092,7 +3254,7 @@ func (x *TEGAPICancelManualBackupEventRequest) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use TEGAPICancelManualBackupEventRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPICancelManualBackupEventRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{60}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{63}
 }
 
 type TEGAPICancelManualBackupEventResponse struct {
@@ -3103,7 +3265,7 @@ type TEGAPICancelManualBackupEventResponse struct {
 
 func (x *TEGAPICancelManualBackupEventResponse) Reset() {
 	*x = TEGAPICancelManualBackupEventResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[61]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[64]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3115,7 +3277,7 @@ func (x *TEGAPICancelManualBackupEventResponse) String() string {
 func (*TEGAPICancelManualBackupEventResponse) ProtoMessage() {}
 
 func (x *TEGAPICancelManualBackupEventResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[61]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[64]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3128,7 +3290,7 @@ func (x *TEGAPICancelManualBackupEventResponse) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use TEGAPICancelManualBackupEventResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPICancelManualBackupEventResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{61}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{64}
 }
 
 type TEGAPIGetBackupEventsRequest struct {
@@ -3139,7 +3301,7 @@ type TEGAPIGetBackupEventsRequest struct {
 
 func (x *TEGAPIGetBackupEventsRequest) Reset() {
 	*x = TEGAPIGetBackupEventsRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[62]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[65]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3151,7 +3313,7 @@ func (x *TEGAPIGetBackupEventsRequest) String() string {
 func (*TEGAPIGetBackupEventsRequest) ProtoMessage() {}
 
 func (x *TEGAPIGetBackupEventsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[62]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[65]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3164,7 +3326,7 @@ func (x *TEGAPIGetBackupEventsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TEGAPIGetBackupEventsRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIGetBackupEventsRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{62}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{65}
 }
 
 type TEGAPIGetBackupEventsResponse struct {
@@ -3177,7 +3339,7 @@ type TEGAPIGetBackupEventsResponse struct {
 
 func (x *TEGAPIGetBackupEventsResponse) Reset() {
 	*x = TEGAPIGetBackupEventsResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[63]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[66]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3189,7 +3351,7 @@ func (x *TEGAPIGetBackupEventsResponse) String() string {
 func (*TEGAPIGetBackupEventsResponse) ProtoMessage() {}
 
 func (x *TEGAPIGetBackupEventsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[63]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[66]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3202,7 +3364,7 @@ func (x *TEGAPIGetBackupEventsResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TEGAPIGetBackupEventsResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIGetBackupEventsResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{63}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{66}
 }
 
 func (x *TEGAPIGetBackupEventsResponse) GetManualBackupEvent() *ManualBackupEvent {
@@ -3227,7 +3389,7 @@ type CsmsPropertiesRequest struct {
 
 func (x *CsmsPropertiesRequest) Reset() {
 	*x = CsmsPropertiesRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[64]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[67]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3239,7 +3401,7 @@ func (x *CsmsPropertiesRequest) String() string {
 func (*CsmsPropertiesRequest) ProtoMessage() {}
 
 func (x *CsmsPropertiesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[64]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[67]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3252,7 +3414,7 @@ func (x *CsmsPropertiesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CsmsPropertiesRequest.ProtoReflect.Descriptor instead.
 func (*CsmsPropertiesRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{64}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{67}
 }
 
 type CsmsProperties struct {
@@ -3266,7 +3428,7 @@ type CsmsProperties struct {
 
 func (x *CsmsProperties) Reset() {
 	*x = CsmsProperties{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[65]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[68]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3278,7 +3440,7 @@ func (x *CsmsProperties) String() string {
 func (*CsmsProperties) ProtoMessage() {}
 
 func (x *CsmsProperties) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[65]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[68]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3291,7 +3453,7 @@ func (x *CsmsProperties) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CsmsProperties.ProtoReflect.Descriptor instead.
 func (*CsmsProperties) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{65}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{68}
 }
 
 func (x *CsmsProperties) GetCsmsRootCa() []byte {
@@ -3325,7 +3487,7 @@ type CsmsPropertiesResponse struct {
 
 func (x *CsmsPropertiesResponse) Reset() {
 	*x = CsmsPropertiesResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[66]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[69]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3337,7 +3499,7 @@ func (x *CsmsPropertiesResponse) String() string {
 func (*CsmsPropertiesResponse) ProtoMessage() {}
 
 func (x *CsmsPropertiesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[66]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[69]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3350,7 +3512,7 @@ func (x *CsmsPropertiesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CsmsPropertiesResponse.ProtoReflect.Descriptor instead.
 func (*CsmsPropertiesResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{66}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{69}
 }
 
 func (x *CsmsPropertiesResponse) GetCanvasSiteStatus() CanvasSiteStatus {
@@ -3376,7 +3538,7 @@ type TEGAPIGetCsmsPropertiesRequest struct {
 
 func (x *TEGAPIGetCsmsPropertiesRequest) Reset() {
 	*x = TEGAPIGetCsmsPropertiesRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[67]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[70]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3388,7 +3550,7 @@ func (x *TEGAPIGetCsmsPropertiesRequest) String() string {
 func (*TEGAPIGetCsmsPropertiesRequest) ProtoMessage() {}
 
 func (x *TEGAPIGetCsmsPropertiesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[67]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[70]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3401,7 +3563,7 @@ func (x *TEGAPIGetCsmsPropertiesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TEGAPIGetCsmsPropertiesRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIGetCsmsPropertiesRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{67}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{70}
 }
 
 func (x *TEGAPIGetCsmsPropertiesRequest) GetRequest() *CsmsPropertiesRequest {
@@ -3420,7 +3582,7 @@ type TEGAPIGetCsmsPropertiesResponse struct {
 
 func (x *TEGAPIGetCsmsPropertiesResponse) Reset() {
 	*x = TEGAPIGetCsmsPropertiesResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[68]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[71]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3432,7 +3594,7 @@ func (x *TEGAPIGetCsmsPropertiesResponse) String() string {
 func (*TEGAPIGetCsmsPropertiesResponse) ProtoMessage() {}
 
 func (x *TEGAPIGetCsmsPropertiesResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[68]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[71]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3445,7 +3607,7 @@ func (x *TEGAPIGetCsmsPropertiesResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TEGAPIGetCsmsPropertiesResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIGetCsmsPropertiesResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{68}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{71}
 }
 
 func (x *TEGAPIGetCsmsPropertiesResponse) GetResponse() *CsmsPropertiesResponse {
@@ -3464,7 +3626,7 @@ type TEGAPIConfigureOcppRequest struct {
 
 func (x *TEGAPIConfigureOcppRequest) Reset() {
 	*x = TEGAPIConfigureOcppRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[69]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[72]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3476,7 +3638,7 @@ func (x *TEGAPIConfigureOcppRequest) String() string {
 func (*TEGAPIConfigureOcppRequest) ProtoMessage() {}
 
 func (x *TEGAPIConfigureOcppRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[69]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[72]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3489,7 +3651,7 @@ func (x *TEGAPIConfigureOcppRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TEGAPIConfigureOcppRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIConfigureOcppRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{69}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{72}
 }
 
 func (x *TEGAPIConfigureOcppRequest) GetCsmsBaseUrl() string {
@@ -3507,7 +3669,7 @@ type TEGAPIConfigureOcppResponse struct {
 
 func (x *TEGAPIConfigureOcppResponse) Reset() {
 	*x = TEGAPIConfigureOcppResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[70]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[73]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3519,7 +3681,7 @@ func (x *TEGAPIConfigureOcppResponse) String() string {
 func (*TEGAPIConfigureOcppResponse) ProtoMessage() {}
 
 func (x *TEGAPIConfigureOcppResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[70]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[73]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3532,7 +3694,7 @@ func (x *TEGAPIConfigureOcppResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TEGAPIConfigureOcppResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIConfigureOcppResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{70}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{73}
 }
 
 type TEGAPIStartProtectionTripSelfTestRequest struct {
@@ -3550,7 +3712,7 @@ type TEGAPIStartProtectionTripSelfTestRequest struct {
 
 func (x *TEGAPIStartProtectionTripSelfTestRequest) Reset() {
 	*x = TEGAPIStartProtectionTripSelfTestRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[71]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[74]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3562,7 +3724,7 @@ func (x *TEGAPIStartProtectionTripSelfTestRequest) String() string {
 func (*TEGAPIStartProtectionTripSelfTestRequest) ProtoMessage() {}
 
 func (x *TEGAPIStartProtectionTripSelfTestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[71]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[74]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3575,7 +3737,7 @@ func (x *TEGAPIStartProtectionTripSelfTestRequest) ProtoReflect() protoreflect.M
 
 // Deprecated: Use TEGAPIStartProtectionTripSelfTestRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIStartProtectionTripSelfTestRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{71}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{74}
 }
 
 func (x *TEGAPIStartProtectionTripSelfTestRequest) GetTestsToRun() []string {
@@ -3635,7 +3797,7 @@ type TEGAPIStartProtectionTripSelfTestResponse struct {
 
 func (x *TEGAPIStartProtectionTripSelfTestResponse) Reset() {
 	*x = TEGAPIStartProtectionTripSelfTestResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[72]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[75]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3647,7 +3809,7 @@ func (x *TEGAPIStartProtectionTripSelfTestResponse) String() string {
 func (*TEGAPIStartProtectionTripSelfTestResponse) ProtoMessage() {}
 
 func (x *TEGAPIStartProtectionTripSelfTestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[72]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[75]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3660,7 +3822,7 @@ func (x *TEGAPIStartProtectionTripSelfTestResponse) ProtoReflect() protoreflect.
 
 // Deprecated: Use TEGAPIStartProtectionTripSelfTestResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIStartProtectionTripSelfTestResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{72}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{75}
 }
 
 type TEGAPIStopProtectionTripSelfTestRequest struct {
@@ -3671,7 +3833,7 @@ type TEGAPIStopProtectionTripSelfTestRequest struct {
 
 func (x *TEGAPIStopProtectionTripSelfTestRequest) Reset() {
 	*x = TEGAPIStopProtectionTripSelfTestRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[73]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[76]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3683,7 +3845,7 @@ func (x *TEGAPIStopProtectionTripSelfTestRequest) String() string {
 func (*TEGAPIStopProtectionTripSelfTestRequest) ProtoMessage() {}
 
 func (x *TEGAPIStopProtectionTripSelfTestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[73]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[76]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3696,7 +3858,7 @@ func (x *TEGAPIStopProtectionTripSelfTestRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use TEGAPIStopProtectionTripSelfTestRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIStopProtectionTripSelfTestRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{73}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{76}
 }
 
 type TEGAPIStopProtectionTripSelfTestResponse struct {
@@ -3707,7 +3869,7 @@ type TEGAPIStopProtectionTripSelfTestResponse struct {
 
 func (x *TEGAPIStopProtectionTripSelfTestResponse) Reset() {
 	*x = TEGAPIStopProtectionTripSelfTestResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[74]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[77]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3719,7 +3881,7 @@ func (x *TEGAPIStopProtectionTripSelfTestResponse) String() string {
 func (*TEGAPIStopProtectionTripSelfTestResponse) ProtoMessage() {}
 
 func (x *TEGAPIStopProtectionTripSelfTestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[74]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[77]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3732,7 +3894,7 @@ func (x *TEGAPIStopProtectionTripSelfTestResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use TEGAPIStopProtectionTripSelfTestResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIStopProtectionTripSelfTestResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{74}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{77}
 }
 
 type TEGAPIProvisionEatonSmartBreakerRequest struct {
@@ -3748,7 +3910,7 @@ type TEGAPIProvisionEatonSmartBreakerRequest struct {
 
 func (x *TEGAPIProvisionEatonSmartBreakerRequest) Reset() {
 	*x = TEGAPIProvisionEatonSmartBreakerRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[75]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[78]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3760,7 +3922,7 @@ func (x *TEGAPIProvisionEatonSmartBreakerRequest) String() string {
 func (*TEGAPIProvisionEatonSmartBreakerRequest) ProtoMessage() {}
 
 func (x *TEGAPIProvisionEatonSmartBreakerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[75]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[78]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3773,7 +3935,7 @@ func (x *TEGAPIProvisionEatonSmartBreakerRequest) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use TEGAPIProvisionEatonSmartBreakerRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIProvisionEatonSmartBreakerRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{75}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{78}
 }
 
 func (x *TEGAPIProvisionEatonSmartBreakerRequest) GetDeviceId() string {
@@ -3819,7 +3981,7 @@ type TEGAPIProvisionEatonSmartBreakerResponse struct {
 
 func (x *TEGAPIProvisionEatonSmartBreakerResponse) Reset() {
 	*x = TEGAPIProvisionEatonSmartBreakerResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[76]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[79]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3831,7 +3993,7 @@ func (x *TEGAPIProvisionEatonSmartBreakerResponse) String() string {
 func (*TEGAPIProvisionEatonSmartBreakerResponse) ProtoMessage() {}
 
 func (x *TEGAPIProvisionEatonSmartBreakerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[76]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[79]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3844,7 +4006,7 @@ func (x *TEGAPIProvisionEatonSmartBreakerResponse) ProtoReflect() protoreflect.M
 
 // Deprecated: Use TEGAPIProvisionEatonSmartBreakerResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIProvisionEatonSmartBreakerResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{76}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{79}
 }
 
 type TEGAPIIdentifyEatonSmartBreakerRequest struct {
@@ -3856,7 +4018,7 @@ type TEGAPIIdentifyEatonSmartBreakerRequest struct {
 
 func (x *TEGAPIIdentifyEatonSmartBreakerRequest) Reset() {
 	*x = TEGAPIIdentifyEatonSmartBreakerRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[77]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[80]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3868,7 +4030,7 @@ func (x *TEGAPIIdentifyEatonSmartBreakerRequest) String() string {
 func (*TEGAPIIdentifyEatonSmartBreakerRequest) ProtoMessage() {}
 
 func (x *TEGAPIIdentifyEatonSmartBreakerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[77]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[80]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3881,7 +4043,7 @@ func (x *TEGAPIIdentifyEatonSmartBreakerRequest) ProtoReflect() protoreflect.Mes
 
 // Deprecated: Use TEGAPIIdentifyEatonSmartBreakerRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIIdentifyEatonSmartBreakerRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{77}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{80}
 }
 
 func (x *TEGAPIIdentifyEatonSmartBreakerRequest) GetDeviceId() string {
@@ -3899,7 +4061,7 @@ type TEGAPIIdentifyEatonSmartBreakerResponse struct {
 
 func (x *TEGAPIIdentifyEatonSmartBreakerResponse) Reset() {
 	*x = TEGAPIIdentifyEatonSmartBreakerResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[78]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[81]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3911,7 +4073,7 @@ func (x *TEGAPIIdentifyEatonSmartBreakerResponse) String() string {
 func (*TEGAPIIdentifyEatonSmartBreakerResponse) ProtoMessage() {}
 
 func (x *TEGAPIIdentifyEatonSmartBreakerResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[78]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[81]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3924,7 +4086,7 @@ func (x *TEGAPIIdentifyEatonSmartBreakerResponse) ProtoReflect() protoreflect.Me
 
 // Deprecated: Use TEGAPIIdentifyEatonSmartBreakerResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIIdentifyEatonSmartBreakerResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{78}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{81}
 }
 
 type TEGAPITriggerPvacFanSelfTestRequest struct {
@@ -3936,7 +4098,7 @@ type TEGAPITriggerPvacFanSelfTestRequest struct {
 
 func (x *TEGAPITriggerPvacFanSelfTestRequest) Reset() {
 	*x = TEGAPITriggerPvacFanSelfTestRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[79]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[82]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3948,7 +4110,7 @@ func (x *TEGAPITriggerPvacFanSelfTestRequest) String() string {
 func (*TEGAPITriggerPvacFanSelfTestRequest) ProtoMessage() {}
 
 func (x *TEGAPITriggerPvacFanSelfTestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[79]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[82]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3961,7 +4123,7 @@ func (x *TEGAPITriggerPvacFanSelfTestRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use TEGAPITriggerPvacFanSelfTestRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPITriggerPvacFanSelfTestRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{79}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{82}
 }
 
 func (x *TEGAPITriggerPvacFanSelfTestRequest) GetBeid() uint32 {
@@ -3979,7 +4141,7 @@ type TEGAPITriggerPvacFanSelfTestResponse struct {
 
 func (x *TEGAPITriggerPvacFanSelfTestResponse) Reset() {
 	*x = TEGAPITriggerPvacFanSelfTestResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[80]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[83]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3991,7 +4153,7 @@ func (x *TEGAPITriggerPvacFanSelfTestResponse) String() string {
 func (*TEGAPITriggerPvacFanSelfTestResponse) ProtoMessage() {}
 
 func (x *TEGAPITriggerPvacFanSelfTestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[80]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[83]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4004,7 +4166,7 @@ func (x *TEGAPITriggerPvacFanSelfTestResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use TEGAPITriggerPvacFanSelfTestResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPITriggerPvacFanSelfTestResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{80}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{83}
 }
 
 type TEGAPIProxyPrepareRegistrationPayloadRequest struct {
@@ -4017,7 +4179,7 @@ type TEGAPIProxyPrepareRegistrationPayloadRequest struct {
 
 func (x *TEGAPIProxyPrepareRegistrationPayloadRequest) Reset() {
 	*x = TEGAPIProxyPrepareRegistrationPayloadRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[81]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[84]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4029,7 +4191,7 @@ func (x *TEGAPIProxyPrepareRegistrationPayloadRequest) String() string {
 func (*TEGAPIProxyPrepareRegistrationPayloadRequest) ProtoMessage() {}
 
 func (x *TEGAPIProxyPrepareRegistrationPayloadRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[81]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[84]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4042,7 +4204,7 @@ func (x *TEGAPIProxyPrepareRegistrationPayloadRequest) ProtoReflect() protorefle
 
 // Deprecated: Use TEGAPIProxyPrepareRegistrationPayloadRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIProxyPrepareRegistrationPayloadRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{81}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{84}
 }
 
 func (x *TEGAPIProxyPrepareRegistrationPayloadRequest) GetRequest() *CommonAPIPrepareRegistrationPayloadRequest {
@@ -4068,7 +4230,7 @@ type TEGAPIProxyPrepareRegistrationPayloadResponse struct {
 
 func (x *TEGAPIProxyPrepareRegistrationPayloadResponse) Reset() {
 	*x = TEGAPIProxyPrepareRegistrationPayloadResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[82]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[85]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4080,7 +4242,7 @@ func (x *TEGAPIProxyPrepareRegistrationPayloadResponse) String() string {
 func (*TEGAPIProxyPrepareRegistrationPayloadResponse) ProtoMessage() {}
 
 func (x *TEGAPIProxyPrepareRegistrationPayloadResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[82]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[85]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4093,7 +4255,7 @@ func (x *TEGAPIProxyPrepareRegistrationPayloadResponse) ProtoReflect() protorefl
 
 // Deprecated: Use TEGAPIProxyPrepareRegistrationPayloadResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIProxyPrepareRegistrationPayloadResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{82}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{85}
 }
 
 func (x *TEGAPIProxyPrepareRegistrationPayloadResponse) GetResponse() *CommonAPIPrepareRegistrationPayloadResponse {
@@ -4111,7 +4273,7 @@ type TEGAPITriggerWallboxVehicleAbsentSelfTestRequest struct {
 
 func (x *TEGAPITriggerWallboxVehicleAbsentSelfTestRequest) Reset() {
 	*x = TEGAPITriggerWallboxVehicleAbsentSelfTestRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[83]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[86]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4123,7 +4285,7 @@ func (x *TEGAPITriggerWallboxVehicleAbsentSelfTestRequest) String() string {
 func (*TEGAPITriggerWallboxVehicleAbsentSelfTestRequest) ProtoMessage() {}
 
 func (x *TEGAPITriggerWallboxVehicleAbsentSelfTestRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[83]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[86]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4136,7 +4298,7 @@ func (x *TEGAPITriggerWallboxVehicleAbsentSelfTestRequest) ProtoReflect() protor
 
 // Deprecated: Use TEGAPITriggerWallboxVehicleAbsentSelfTestRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPITriggerWallboxVehicleAbsentSelfTestRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{83}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{86}
 }
 
 type TEGAPITriggerWallboxVehicleAbsentSelfTestResponse struct {
@@ -4147,7 +4309,7 @@ type TEGAPITriggerWallboxVehicleAbsentSelfTestResponse struct {
 
 func (x *TEGAPITriggerWallboxVehicleAbsentSelfTestResponse) Reset() {
 	*x = TEGAPITriggerWallboxVehicleAbsentSelfTestResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[84]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[87]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4159,7 +4321,7 @@ func (x *TEGAPITriggerWallboxVehicleAbsentSelfTestResponse) String() string {
 func (*TEGAPITriggerWallboxVehicleAbsentSelfTestResponse) ProtoMessage() {}
 
 func (x *TEGAPITriggerWallboxVehicleAbsentSelfTestResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[84]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[87]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4172,7 +4334,7 @@ func (x *TEGAPITriggerWallboxVehicleAbsentSelfTestResponse) ProtoReflect() proto
 
 // Deprecated: Use TEGAPITriggerWallboxVehicleAbsentSelfTestResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPITriggerWallboxVehicleAbsentSelfTestResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{84}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{87}
 }
 
 type TEGAPICustomerResetRequest struct {
@@ -4183,7 +4345,7 @@ type TEGAPICustomerResetRequest struct {
 
 func (x *TEGAPICustomerResetRequest) Reset() {
 	*x = TEGAPICustomerResetRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[85]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[88]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4195,7 +4357,7 @@ func (x *TEGAPICustomerResetRequest) String() string {
 func (*TEGAPICustomerResetRequest) ProtoMessage() {}
 
 func (x *TEGAPICustomerResetRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[85]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[88]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4208,7 +4370,7 @@ func (x *TEGAPICustomerResetRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TEGAPICustomerResetRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPICustomerResetRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{85}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{88}
 }
 
 type TEGAPICustomerResetResponse struct {
@@ -4219,7 +4381,7 @@ type TEGAPICustomerResetResponse struct {
 
 func (x *TEGAPICustomerResetResponse) Reset() {
 	*x = TEGAPICustomerResetResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[86]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[89]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4231,7 +4393,7 @@ func (x *TEGAPICustomerResetResponse) String() string {
 func (*TEGAPICustomerResetResponse) ProtoMessage() {}
 
 func (x *TEGAPICustomerResetResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[86]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[89]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4244,7 +4406,7 @@ func (x *TEGAPICustomerResetResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TEGAPICustomerResetResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPICustomerResetResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{86}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{89}
 }
 
 type TEGAPIDelayBatteryCalibrationRequest struct {
@@ -4256,7 +4418,7 @@ type TEGAPIDelayBatteryCalibrationRequest struct {
 
 func (x *TEGAPIDelayBatteryCalibrationRequest) Reset() {
 	*x = TEGAPIDelayBatteryCalibrationRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[87]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[90]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4268,7 +4430,7 @@ func (x *TEGAPIDelayBatteryCalibrationRequest) String() string {
 func (*TEGAPIDelayBatteryCalibrationRequest) ProtoMessage() {}
 
 func (x *TEGAPIDelayBatteryCalibrationRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[87]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[90]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4281,7 +4443,7 @@ func (x *TEGAPIDelayBatteryCalibrationRequest) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use TEGAPIDelayBatteryCalibrationRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIDelayBatteryCalibrationRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{87}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{90}
 }
 
 func (x *TEGAPIDelayBatteryCalibrationRequest) GetDelayHours() uint32 {
@@ -4299,7 +4461,7 @@ type TEGAPIDelayBatteryCalibrationResponse struct {
 
 func (x *TEGAPIDelayBatteryCalibrationResponse) Reset() {
 	*x = TEGAPIDelayBatteryCalibrationResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[88]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[91]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4311,7 +4473,7 @@ func (x *TEGAPIDelayBatteryCalibrationResponse) String() string {
 func (*TEGAPIDelayBatteryCalibrationResponse) ProtoMessage() {}
 
 func (x *TEGAPIDelayBatteryCalibrationResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[88]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[91]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4324,7 +4486,7 @@ func (x *TEGAPIDelayBatteryCalibrationResponse) ProtoReflect() protoreflect.Mess
 
 // Deprecated: Use TEGAPIDelayBatteryCalibrationResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIDelayBatteryCalibrationResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{88}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{91}
 }
 
 type TEGAPIGetDelayBatteryCalibrationStatusRequest struct {
@@ -4335,7 +4497,7 @@ type TEGAPIGetDelayBatteryCalibrationStatusRequest struct {
 
 func (x *TEGAPIGetDelayBatteryCalibrationStatusRequest) Reset() {
 	*x = TEGAPIGetDelayBatteryCalibrationStatusRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[89]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[92]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4347,7 +4509,7 @@ func (x *TEGAPIGetDelayBatteryCalibrationStatusRequest) String() string {
 func (*TEGAPIGetDelayBatteryCalibrationStatusRequest) ProtoMessage() {}
 
 func (x *TEGAPIGetDelayBatteryCalibrationStatusRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[89]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[92]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4360,7 +4522,7 @@ func (x *TEGAPIGetDelayBatteryCalibrationStatusRequest) ProtoReflect() protorefl
 
 // Deprecated: Use TEGAPIGetDelayBatteryCalibrationStatusRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIGetDelayBatteryCalibrationStatusRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{89}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{92}
 }
 
 type TEGAPIGetDelayBatteryCalibrationStatusResponse struct {
@@ -4374,7 +4536,7 @@ type TEGAPIGetDelayBatteryCalibrationStatusResponse struct {
 
 func (x *TEGAPIGetDelayBatteryCalibrationStatusResponse) Reset() {
 	*x = TEGAPIGetDelayBatteryCalibrationStatusResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[90]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[93]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4386,7 +4548,7 @@ func (x *TEGAPIGetDelayBatteryCalibrationStatusResponse) String() string {
 func (*TEGAPIGetDelayBatteryCalibrationStatusResponse) ProtoMessage() {}
 
 func (x *TEGAPIGetDelayBatteryCalibrationStatusResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[90]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[93]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4399,7 +4561,7 @@ func (x *TEGAPIGetDelayBatteryCalibrationStatusResponse) ProtoReflect() protoref
 
 // Deprecated: Use TEGAPIGetDelayBatteryCalibrationStatusResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIGetDelayBatteryCalibrationStatusResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{90}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{93}
 }
 
 func (x *TEGAPIGetDelayBatteryCalibrationStatusResponse) GetCalibrationDelaysLeft() uint32 {
@@ -4433,7 +4595,7 @@ type ControllableDeviceProgram_Key struct {
 
 func (x *ControllableDeviceProgram_Key) Reset() {
 	*x = ControllableDeviceProgram_Key{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[91]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[94]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4445,7 +4607,7 @@ func (x *ControllableDeviceProgram_Key) String() string {
 func (*ControllableDeviceProgram_Key) ProtoMessage() {}
 
 func (x *ControllableDeviceProgram_Key) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[91]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[94]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4458,7 +4620,7 @@ func (x *ControllableDeviceProgram_Key) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ControllableDeviceProgram_Key.ProtoReflect.Descriptor instead.
 func (*ControllableDeviceProgram_Key) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{91}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{94}
 }
 
 func (x *ControllableDeviceProgram_Key) GetDeviceId() string {
@@ -4484,7 +4646,7 @@ type ControllableDeviceProgram_Settings struct {
 
 func (x *ControllableDeviceProgram_Settings) Reset() {
 	*x = ControllableDeviceProgram_Settings{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[92]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[95]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4496,7 +4658,7 @@ func (x *ControllableDeviceProgram_Settings) String() string {
 func (*ControllableDeviceProgram_Settings) ProtoMessage() {}
 
 func (x *ControllableDeviceProgram_Settings) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[92]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[95]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4509,7 +4671,7 @@ func (x *ControllableDeviceProgram_Settings) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ControllableDeviceProgram_Settings.ProtoReflect.Descriptor instead.
 func (*ControllableDeviceProgram_Settings) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{92}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{95}
 }
 
 func (x *ControllableDeviceProgram_Settings) GetContactorState() ControllableDeviceProgram_Settings_ContactorState {
@@ -4531,7 +4693,7 @@ type ControllableDeviceProgram_Schedule_Boundary struct {
 
 func (x *ControllableDeviceProgram_Schedule_Boundary) Reset() {
 	*x = ControllableDeviceProgram_Schedule_Boundary{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[93]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[96]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4543,7 +4705,7 @@ func (x *ControllableDeviceProgram_Schedule_Boundary) String() string {
 func (*ControllableDeviceProgram_Schedule_Boundary) ProtoMessage() {}
 
 func (x *ControllableDeviceProgram_Schedule_Boundary) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[93]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[96]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4556,7 +4718,7 @@ func (x *ControllableDeviceProgram_Schedule_Boundary) ProtoReflect() protoreflec
 
 // Deprecated: Use ControllableDeviceProgram_Schedule_Boundary.ProtoReflect.Descriptor instead.
 func (*ControllableDeviceProgram_Schedule_Boundary) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{93}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{96}
 }
 
 func (x *ControllableDeviceProgram_Schedule_Boundary) GetStaticCondition() ControllableDeviceProgram_Schedule_Boundary_StaticCondition {
@@ -4598,7 +4760,7 @@ type ControllableDeviceProgram_Schedule struct {
 
 func (x *ControllableDeviceProgram_Schedule) Reset() {
 	*x = ControllableDeviceProgram_Schedule{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[94]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[97]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4610,7 +4772,7 @@ func (x *ControllableDeviceProgram_Schedule) String() string {
 func (*ControllableDeviceProgram_Schedule) ProtoMessage() {}
 
 func (x *ControllableDeviceProgram_Schedule) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[94]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[97]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4623,7 +4785,7 @@ func (x *ControllableDeviceProgram_Schedule) ProtoReflect() protoreflect.Message
 
 // Deprecated: Use ControllableDeviceProgram_Schedule.ProtoReflect.Descriptor instead.
 func (*ControllableDeviceProgram_Schedule) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{94}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{97}
 }
 
 func (x *ControllableDeviceProgram_Schedule) GetStart() *ControllableDeviceProgram_Schedule_Boundary {
@@ -4658,7 +4820,7 @@ type ControllableDeviceProgram struct {
 
 func (x *ControllableDeviceProgram) Reset() {
 	*x = ControllableDeviceProgram{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[95]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[98]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4670,7 +4832,7 @@ func (x *ControllableDeviceProgram) String() string {
 func (*ControllableDeviceProgram) ProtoMessage() {}
 
 func (x *ControllableDeviceProgram) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[95]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[98]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4683,7 +4845,7 @@ func (x *ControllableDeviceProgram) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ControllableDeviceProgram.ProtoReflect.Descriptor instead.
 func (*ControllableDeviceProgram) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{95}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{98}
 }
 
 func (x *ControllableDeviceProgram) GetKey() *ControllableDeviceProgram_Key {
@@ -4716,7 +4878,7 @@ type TEGAPIGetControllableDeviceProgramsRequest struct {
 
 func (x *TEGAPIGetControllableDeviceProgramsRequest) Reset() {
 	*x = TEGAPIGetControllableDeviceProgramsRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[96]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[99]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4728,7 +4890,7 @@ func (x *TEGAPIGetControllableDeviceProgramsRequest) String() string {
 func (*TEGAPIGetControllableDeviceProgramsRequest) ProtoMessage() {}
 
 func (x *TEGAPIGetControllableDeviceProgramsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[96]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[99]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4741,7 +4903,7 @@ func (x *TEGAPIGetControllableDeviceProgramsRequest) ProtoReflect() protoreflect
 
 // Deprecated: Use TEGAPIGetControllableDeviceProgramsRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIGetControllableDeviceProgramsRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{96}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{99}
 }
 
 func (x *TEGAPIGetControllableDeviceProgramsRequest) GetDeviceIds() []string {
@@ -4761,7 +4923,7 @@ type TEGAPIGetControllableDeviceProgramsResponse struct {
 
 func (x *TEGAPIGetControllableDeviceProgramsResponse) Reset() {
 	*x = TEGAPIGetControllableDeviceProgramsResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[97]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[100]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4773,7 +4935,7 @@ func (x *TEGAPIGetControllableDeviceProgramsResponse) String() string {
 func (*TEGAPIGetControllableDeviceProgramsResponse) ProtoMessage() {}
 
 func (x *TEGAPIGetControllableDeviceProgramsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[97]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[100]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4786,7 +4948,7 @@ func (x *TEGAPIGetControllableDeviceProgramsResponse) ProtoReflect() protoreflec
 
 // Deprecated: Use TEGAPIGetControllableDeviceProgramsResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIGetControllableDeviceProgramsResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{97}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{100}
 }
 
 func (x *TEGAPIGetControllableDeviceProgramsResponse) GetActivePrograms() []*ControllableDeviceProgram {
@@ -4812,7 +4974,7 @@ type TEGAPIUpdateControllableDeviceProgramsRequest struct {
 
 func (x *TEGAPIUpdateControllableDeviceProgramsRequest) Reset() {
 	*x = TEGAPIUpdateControllableDeviceProgramsRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[98]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[101]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4824,7 +4986,7 @@ func (x *TEGAPIUpdateControllableDeviceProgramsRequest) String() string {
 func (*TEGAPIUpdateControllableDeviceProgramsRequest) ProtoMessage() {}
 
 func (x *TEGAPIUpdateControllableDeviceProgramsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[98]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[101]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4837,7 +4999,7 @@ func (x *TEGAPIUpdateControllableDeviceProgramsRequest) ProtoReflect() protorefl
 
 // Deprecated: Use TEGAPIUpdateControllableDeviceProgramsRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIUpdateControllableDeviceProgramsRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{98}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{101}
 }
 
 func (x *TEGAPIUpdateControllableDeviceProgramsRequest) GetUpdatedPrograms() []*ControllableDeviceProgram {
@@ -4855,7 +5017,7 @@ type TEGAPIUpdateControllableDeviceProgramsResponse struct {
 
 func (x *TEGAPIUpdateControllableDeviceProgramsResponse) Reset() {
 	*x = TEGAPIUpdateControllableDeviceProgramsResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[99]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[102]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4867,7 +5029,7 @@ func (x *TEGAPIUpdateControllableDeviceProgramsResponse) String() string {
 func (*TEGAPIUpdateControllableDeviceProgramsResponse) ProtoMessage() {}
 
 func (x *TEGAPIUpdateControllableDeviceProgramsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[99]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[102]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4880,7 +5042,7 @@ func (x *TEGAPIUpdateControllableDeviceProgramsResponse) ProtoReflect() protoref
 
 // Deprecated: Use TEGAPIUpdateControllableDeviceProgramsResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIUpdateControllableDeviceProgramsResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{99}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{102}
 }
 
 type TEGAPIDeleteControllableDeviceProgramsRequest struct {
@@ -4892,7 +5054,7 @@ type TEGAPIDeleteControllableDeviceProgramsRequest struct {
 
 func (x *TEGAPIDeleteControllableDeviceProgramsRequest) Reset() {
 	*x = TEGAPIDeleteControllableDeviceProgramsRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[100]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[103]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4904,7 +5066,7 @@ func (x *TEGAPIDeleteControllableDeviceProgramsRequest) String() string {
 func (*TEGAPIDeleteControllableDeviceProgramsRequest) ProtoMessage() {}
 
 func (x *TEGAPIDeleteControllableDeviceProgramsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[100]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[103]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4917,7 +5079,7 @@ func (x *TEGAPIDeleteControllableDeviceProgramsRequest) ProtoReflect() protorefl
 
 // Deprecated: Use TEGAPIDeleteControllableDeviceProgramsRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIDeleteControllableDeviceProgramsRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{100}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{103}
 }
 
 func (x *TEGAPIDeleteControllableDeviceProgramsRequest) GetDeletionKeys() []string {
@@ -4935,7 +5097,7 @@ type TEGAPIDeleteControllableDeviceProgramsResponse struct {
 
 func (x *TEGAPIDeleteControllableDeviceProgramsResponse) Reset() {
 	*x = TEGAPIDeleteControllableDeviceProgramsResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[101]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[104]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4947,7 +5109,7 @@ func (x *TEGAPIDeleteControllableDeviceProgramsResponse) String() string {
 func (*TEGAPIDeleteControllableDeviceProgramsResponse) ProtoMessage() {}
 
 func (x *TEGAPIDeleteControllableDeviceProgramsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[101]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[104]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4960,7 +5122,7 @@ func (x *TEGAPIDeleteControllableDeviceProgramsResponse) ProtoReflect() protoref
 
 // Deprecated: Use TEGAPIDeleteControllableDeviceProgramsResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIDeleteControllableDeviceProgramsResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{101}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{104}
 }
 
 type TEGAPIClearPowerwall3LockoutAlertsRequest struct {
@@ -4972,7 +5134,7 @@ type TEGAPIClearPowerwall3LockoutAlertsRequest struct {
 
 func (x *TEGAPIClearPowerwall3LockoutAlertsRequest) Reset() {
 	*x = TEGAPIClearPowerwall3LockoutAlertsRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[102]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[105]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -4984,7 +5146,7 @@ func (x *TEGAPIClearPowerwall3LockoutAlertsRequest) String() string {
 func (*TEGAPIClearPowerwall3LockoutAlertsRequest) ProtoMessage() {}
 
 func (x *TEGAPIClearPowerwall3LockoutAlertsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[102]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[105]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -4997,7 +5159,7 @@ func (x *TEGAPIClearPowerwall3LockoutAlertsRequest) ProtoReflect() protoreflect.
 
 // Deprecated: Use TEGAPIClearPowerwall3LockoutAlertsRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIClearPowerwall3LockoutAlertsRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{102}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{105}
 }
 
 func (x *TEGAPIClearPowerwall3LockoutAlertsRequest) GetDin() string {
@@ -5015,7 +5177,7 @@ type TEGAPIClearPowerwall3LockoutAlertsResponse struct {
 
 func (x *TEGAPIClearPowerwall3LockoutAlertsResponse) Reset() {
 	*x = TEGAPIClearPowerwall3LockoutAlertsResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[103]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[106]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5027,7 +5189,7 @@ func (x *TEGAPIClearPowerwall3LockoutAlertsResponse) String() string {
 func (*TEGAPIClearPowerwall3LockoutAlertsResponse) ProtoMessage() {}
 
 func (x *TEGAPIClearPowerwall3LockoutAlertsResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[103]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[106]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5040,7 +5202,7 @@ func (x *TEGAPIClearPowerwall3LockoutAlertsResponse) ProtoReflect() protoreflect
 
 // Deprecated: Use TEGAPIClearPowerwall3LockoutAlertsResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIClearPowerwall3LockoutAlertsResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{103}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{106}
 }
 
 type TEGAPIRetrieveSiteUuidRequest struct {
@@ -5051,7 +5213,7 @@ type TEGAPIRetrieveSiteUuidRequest struct {
 
 func (x *TEGAPIRetrieveSiteUuidRequest) Reset() {
 	*x = TEGAPIRetrieveSiteUuidRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[104]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[107]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5063,7 +5225,7 @@ func (x *TEGAPIRetrieveSiteUuidRequest) String() string {
 func (*TEGAPIRetrieveSiteUuidRequest) ProtoMessage() {}
 
 func (x *TEGAPIRetrieveSiteUuidRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[104]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[107]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5076,7 +5238,7 @@ func (x *TEGAPIRetrieveSiteUuidRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TEGAPIRetrieveSiteUuidRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIRetrieveSiteUuidRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{104}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{107}
 }
 
 type TEGAPIRetrieveSiteUuidResponse struct {
@@ -5088,7 +5250,7 @@ type TEGAPIRetrieveSiteUuidResponse struct {
 
 func (x *TEGAPIRetrieveSiteUuidResponse) Reset() {
 	*x = TEGAPIRetrieveSiteUuidResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[105]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[108]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5100,7 +5262,7 @@ func (x *TEGAPIRetrieveSiteUuidResponse) String() string {
 func (*TEGAPIRetrieveSiteUuidResponse) ProtoMessage() {}
 
 func (x *TEGAPIRetrieveSiteUuidResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[105]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[108]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5113,7 +5275,7 @@ func (x *TEGAPIRetrieveSiteUuidResponse) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TEGAPIRetrieveSiteUuidResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIRetrieveSiteUuidResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{105}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{108}
 }
 
 func (x *TEGAPIRetrieveSiteUuidResponse) GetResponse() *AssetSiteUuidOfDeviceResponse {
@@ -5132,7 +5294,7 @@ type TEGAPIRetrieveSiteSuggestionRequest struct {
 
 func (x *TEGAPIRetrieveSiteSuggestionRequest) Reset() {
 	*x = TEGAPIRetrieveSiteSuggestionRequest{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[106]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[109]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5144,7 +5306,7 @@ func (x *TEGAPIRetrieveSiteSuggestionRequest) String() string {
 func (*TEGAPIRetrieveSiteSuggestionRequest) ProtoMessage() {}
 
 func (x *TEGAPIRetrieveSiteSuggestionRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[106]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[109]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5157,7 +5319,7 @@ func (x *TEGAPIRetrieveSiteSuggestionRequest) ProtoReflect() protoreflect.Messag
 
 // Deprecated: Use TEGAPIRetrieveSiteSuggestionRequest.ProtoReflect.Descriptor instead.
 func (*TEGAPIRetrieveSiteSuggestionRequest) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{106}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{109}
 }
 
 func (x *TEGAPIRetrieveSiteSuggestionRequest) GetRequest() *SiteSuggestionRequest {
@@ -5176,7 +5338,7 @@ type TEGAPIRetrieveSiteSuggestionResponse struct {
 
 func (x *TEGAPIRetrieveSiteSuggestionResponse) Reset() {
 	*x = TEGAPIRetrieveSiteSuggestionResponse{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[107]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[110]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5188,7 +5350,7 @@ func (x *TEGAPIRetrieveSiteSuggestionResponse) String() string {
 func (*TEGAPIRetrieveSiteSuggestionResponse) ProtoMessage() {}
 
 func (x *TEGAPIRetrieveSiteSuggestionResponse) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[107]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[110]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5201,7 +5363,7 @@ func (x *TEGAPIRetrieveSiteSuggestionResponse) ProtoReflect() protoreflect.Messa
 
 // Deprecated: Use TEGAPIRetrieveSiteSuggestionResponse.ProtoReflect.Descriptor instead.
 func (*TEGAPIRetrieveSiteSuggestionResponse) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{107}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{110}
 }
 
 func (x *TEGAPIRetrieveSiteSuggestionResponse) GetResponse() *SiteSuggestionResponse {
@@ -5209,6 +5371,80 @@ func (x *TEGAPIRetrieveSiteSuggestionResponse) GetResponse() *SiteSuggestionResp
 		return x.Response
 	}
 	return nil
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+type TEGAPIDelayBatteryMatingRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TEGAPIDelayBatteryMatingRequest) Reset() {
+	*x = TEGAPIDelayBatteryMatingRequest{}
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[111]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TEGAPIDelayBatteryMatingRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TEGAPIDelayBatteryMatingRequest) ProtoMessage() {}
+
+func (x *TEGAPIDelayBatteryMatingRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[111]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TEGAPIDelayBatteryMatingRequest.ProtoReflect.Descriptor instead.
+func (*TEGAPIDelayBatteryMatingRequest) Descriptor() ([]byte, []int) {
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{111}
+}
+
+// UNCONFIRMED: not yet confirmed on a live device.
+type TEGAPIDelayBatteryMatingResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *TEGAPIDelayBatteryMatingResponse) Reset() {
+	*x = TEGAPIDelayBatteryMatingResponse{}
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[112]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *TEGAPIDelayBatteryMatingResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*TEGAPIDelayBatteryMatingResponse) ProtoMessage() {}
+
+func (x *TEGAPIDelayBatteryMatingResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[112]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use TEGAPIDelayBatteryMatingResponse.ProtoReflect.Descriptor instead.
+func (*TEGAPIDelayBatteryMatingResponse) Descriptor() ([]byte, []int) {
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{112}
 }
 
 type TEGMessages struct {
@@ -5301,6 +5537,8 @@ type TEGMessages struct {
 	//	*TEGMessages_DeleteControllableDeviceProgramsResponse
 	//	*TEGMessages_ClearPowerwall3LockoutAlertsRequest
 	//	*TEGMessages_ClearPowerwall3LockoutAlertsResponse
+	//	*TEGMessages_DelayBatteryMatingRequest
+	//	*TEGMessages_DelayBatteryMatingResponse
 	Message       isTEGMessages_Message `protobuf_oneof:"message"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
@@ -5308,7 +5546,7 @@ type TEGMessages struct {
 
 func (x *TEGMessages) Reset() {
 	*x = TEGMessages{}
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[108]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[113]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -5320,7 +5558,7 @@ func (x *TEGMessages) String() string {
 func (*TEGMessages) ProtoMessage() {}
 
 func (x *TEGMessages) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[108]
+	mi := &file_tesla_protocol_energy_device_teg_api_proto_msgTypes[113]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -5333,7 +5571,7 @@ func (x *TEGMessages) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TEGMessages.ProtoReflect.Descriptor instead.
 func (*TEGMessages) Descriptor() ([]byte, []int) {
-	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{108}
+	return file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP(), []int{113}
 }
 
 func (x *TEGMessages) GetMessage() isTEGMessages_Message {
@@ -6117,6 +6355,24 @@ func (x *TEGMessages) GetClearPowerwall3LockoutAlertsResponse() *TEGAPIClearPowe
 	return nil
 }
 
+func (x *TEGMessages) GetDelayBatteryMatingRequest() *TEGAPIDelayBatteryMatingRequest {
+	if x != nil {
+		if x, ok := x.Message.(*TEGMessages_DelayBatteryMatingRequest); ok {
+			return x.DelayBatteryMatingRequest
+		}
+	}
+	return nil
+}
+
+func (x *TEGMessages) GetDelayBatteryMatingResponse() *TEGAPIDelayBatteryMatingResponse {
+	if x != nil {
+		if x, ok := x.Message.(*TEGMessages_DelayBatteryMatingResponse); ok {
+			return x.DelayBatteryMatingResponse
+		}
+	}
+	return nil
+}
+
 type isTEGMessages_Message interface {
 	isTEGMessages_Message()
 }
@@ -6465,6 +6721,14 @@ type TEGMessages_ClearPowerwall3LockoutAlertsResponse struct {
 	ClearPowerwall3LockoutAlertsResponse *TEGAPIClearPowerwall3LockoutAlertsResponse `protobuf:"bytes,86,opt,name=clear_powerwall3_lockout_alerts_response,json=clearPowerwall3LockoutAlertsResponse,proto3,oneof"`
 }
 
+type TEGMessages_DelayBatteryMatingRequest struct {
+	DelayBatteryMatingRequest *TEGAPIDelayBatteryMatingRequest `protobuf:"bytes,87,opt,name=delay_battery_mating_request,json=delayBatteryMatingRequest,proto3,oneof"` // UNCONFIRMED: not yet confirmed on a live device
+}
+
+type TEGMessages_DelayBatteryMatingResponse struct {
+	DelayBatteryMatingResponse *TEGAPIDelayBatteryMatingResponse `protobuf:"bytes,88,opt,name=delay_battery_mating_response,json=delayBatteryMatingResponse,proto3,oneof"` // UNCONFIRMED: not yet confirmed on a live device
+}
+
 func (*TEGMessages_GetConfigRequest) isTEGMessages_Message() {}
 
 func (*TEGMessages_GetConfigResponse) isTEGMessages_Message() {}
@@ -6637,6 +6901,10 @@ func (*TEGMessages_ClearPowerwall3LockoutAlertsRequest) isTEGMessages_Message() 
 
 func (*TEGMessages_ClearPowerwall3LockoutAlertsResponse) isTEGMessages_Message() {}
 
+func (*TEGMessages_DelayBatteryMatingRequest) isTEGMessages_Message() {}
+
+func (*TEGMessages_DelayBatteryMatingResponse) isTEGMessages_Message() {}
+
 var File_tesla_protocol_energy_device_teg_api_proto protoreflect.FileDescriptor
 
 const file_tesla_protocol_energy_device_teg_api_proto_rawDesc = "" +
@@ -6727,7 +6995,10 @@ const file_tesla_protocol_energy_device_teg_api_proto_rawDesc = "" +
 	")TEGAPIEnsureCertificateRequest_CSIPAusNet\"+\n" +
 	")TEGAPIEnsureCertificateRequest_CSIPJemena\":\n" +
 	"8TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLD\"8\n" +
-	"6TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy\"\x87\b\n" +
+	"6TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy\",\n" +
+	"*TEGAPIEnsureCertificateRequest_CSIPAusgrid\".\n" +
+	",TEGAPIEnsureCertificateRequest_CSIPEndeavour\".\n" +
+	",TEGAPIEnsureCertificateRequest_CSIPEssential\"\x8f\v\n" +
 	"\x1eTEGAPIEnsureCertificateRequest\x12\x1f\n" +
 	"\vforce_renew\x18\x01 \x01(\bR\n" +
 	"forceRenew\x12\xbb\x01\n" +
@@ -6736,7 +7007,11 @@ const file_tesla_protocol_energy_device_teg_api_proto_rawDesc = "" +
 	"\vcsip_ausnet\x18\x04 \x01(\v2V.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPAusNetH\x00R\n" +
 	"csipAusnet\x12y\n" +
 	"\vcsip_jemena\x18\x05 \x01(\v2V.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPJemenaH\x00R\n" +
-	"csipJemena\x12\xa7\x01\n" +
+	"csipJemena\x12|\n" +
+	"\fcsip_ausgrid\x18\b \x01(\v2W.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPAusgridH\x00R\vcsipAusgrid\x12\x82\x01\n" +
+	"\x0ecsip_endeavour\x18\t \x01(\v2Y.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPEndeavourH\x00R\rcsipEndeavour\x12\x82\x01\n" +
+	"\x0ecsip_essential\x18\n" +
+	" \x01(\v2Y.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPEssentialH\x00R\rcsipEssential\x12\xa7\x01\n" +
 	"\x1dcsip_energex_ergon_energy_qld\x18\x06 \x01(\v2e.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLDR\x19csipEnergexErgonEnergyQld\x12\xa0\x01\n" +
 	"\x1acsip_western_power_synergy\x18\a \x01(\v2c.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergyR\x17csipWesternPowerSynergyB\x12\n" +
 	"\x10certificate_type\"P\n" +
@@ -6882,7 +7157,9 @@ const file_tesla_protocol_energy_device_teg_api_proto_rawDesc = "" +
 	"#TEGAPIRetrieveSiteSuggestionRequest\x12\\\n" +
 	"\arequest\x18\x01 \x01(\v2B.tesla_protocol.tesla.proto.energy_device.v1.SiteSuggestionRequestR\arequest\"\x87\x01\n" +
 	"$TEGAPIRetrieveSiteSuggestionResponse\x12_\n" +
-	"\bresponse\x18\x01 \x01(\v2C.tesla_protocol.tesla.proto.energy_device.v1.SiteSuggestionResponseR\bresponse\"\xb5o\n" +
+	"\bresponse\x18\x01 \x01(\v2C.tesla_protocol.tesla.proto.energy_device.v1.SiteSuggestionResponseR\bresponse\"!\n" +
+	"\x1fTEGAPIDelayBatteryMatingRequest\"\"\n" +
+	" TEGAPIDelayBatteryMatingResponse\"\xdcq\n" +
 	"\vTEGMessages\x12s\n" +
 	"\x12get_config_request\x18\x01 \x01(\v2C.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigRequestH\x00R\x10getConfigRequest\x12v\n" +
 	"\x13get_config_response\x18\x02 \x01(\v2D.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigResponseH\x00R\x11getConfigResponse\x12\x80\x01\n" +
@@ -6970,7 +7247,9 @@ const file_tesla_protocol_energy_device_teg_api_proto_rawDesc = "" +
 	"+delete_controllable_device_programs_request\x18S \x01(\v2Z.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDeleteControllableDeviceProgramsRequestH\x00R'deleteControllableDeviceProgramsRequest\x12\xbd\x01\n" +
 	",delete_controllable_device_programs_response\x18T \x01(\v2[.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDeleteControllableDeviceProgramsResponseH\x00R(deleteControllableDeviceProgramsResponse\x12\xae\x01\n" +
 	"'clear_powerwall3_lockout_alerts_request\x18U \x01(\v2V.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearPowerwall3LockoutAlertsRequestH\x00R#clearPowerwall3LockoutAlertsRequest\x12\xb1\x01\n" +
-	"(clear_powerwall3_lockout_alerts_response\x18V \x01(\v2W.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearPowerwall3LockoutAlertsResponseH\x00R$clearPowerwall3LockoutAlertsResponseB\t\n" +
+	"(clear_powerwall3_lockout_alerts_response\x18V \x01(\v2W.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearPowerwall3LockoutAlertsResponseH\x00R$clearPowerwall3LockoutAlertsResponse\x12\x8f\x01\n" +
+	"\x1cdelay_battery_mating_request\x18W \x01(\v2L.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDelayBatteryMatingRequestH\x00R\x19delayBatteryMatingRequest\x12\x92\x01\n" +
+	"\x1ddelay_battery_mating_response\x18X \x01(\v2M.tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDelayBatteryMatingResponseH\x00R\x1adelayBatteryMatingResponseB\t\n" +
 	"\amessage*\xf3\x01\n" +
 	"\rTEGIslandMode\x12\x1b\n" +
 	"\x17TEG_ISLAND_MODE_INVALID\x10\x00\x12\x1f\n" +
@@ -7011,7 +7290,7 @@ func file_tesla_protocol_energy_device_teg_api_proto_rawDescGZIP() []byte {
 }
 
 var file_tesla_protocol_energy_device_teg_api_proto_enumTypes = make([]protoimpl.EnumInfo, 9)
-var file_tesla_protocol_energy_device_teg_api_proto_msgTypes = make([]protoimpl.MessageInfo, 109)
+var file_tesla_protocol_energy_device_teg_api_proto_msgTypes = make([]protoimpl.MessageInfo, 114)
 var file_tesla_protocol_energy_device_teg_api_proto_goTypes = []any{
 	(TEGIslandMode)(0),                                                     // 0: tesla_protocol.tesla.proto.energy_device.v1.TEGIslandMode
 	(TEGSetIslandModeResult)(0),                                            // 1: tesla_protocol.tesla.proto.energy_device.v1.TEGSetIslandModeResult
@@ -7075,221 +7354,231 @@ var file_tesla_protocol_energy_device_teg_api_proto_goTypes = []any{
 	(*TEGAPIEnsureCertificateRequest_CSIPJemena)(nil),                      // 59: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPJemena
 	(*TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLD)(nil),       // 60: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLD
 	(*TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy)(nil),         // 61: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy
-	(*TEGAPIEnsureCertificateRequest)(nil),                                 // 62: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest
-	(*TEGAPIEnsureCertificateResponse)(nil),                                // 63: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateResponse
-	(*ControlEventSchedulingInfo)(nil),                                     // 64: tesla_protocol.tesla.proto.energy_device.v1.ControlEventSchedulingInfo
-	(*BackupEvent)(nil),                                                    // 65: tesla_protocol.tesla.proto.energy_device.v1.BackupEvent
-	(*ManualBackupEvent)(nil),                                              // 66: tesla_protocol.tesla.proto.energy_device.v1.ManualBackupEvent
-	(*TEGAPIScheduleManualBackupEventRequest)(nil),                         // 67: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIScheduleManualBackupEventRequest
-	(*TEGAPIScheduleManualBackupEventResponse)(nil),                        // 68: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIScheduleManualBackupEventResponse
-	(*TEGAPICancelManualBackupEventRequest)(nil),                           // 69: tesla_protocol.tesla.proto.energy_device.v1.TEGAPICancelManualBackupEventRequest
-	(*TEGAPICancelManualBackupEventResponse)(nil),                          // 70: tesla_protocol.tesla.proto.energy_device.v1.TEGAPICancelManualBackupEventResponse
-	(*TEGAPIGetBackupEventsRequest)(nil),                                   // 71: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetBackupEventsRequest
-	(*TEGAPIGetBackupEventsResponse)(nil),                                  // 72: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetBackupEventsResponse
-	(*CsmsPropertiesRequest)(nil),                                          // 73: tesla_protocol.tesla.proto.energy_device.v1.CsmsPropertiesRequest
-	(*CsmsProperties)(nil),                                                 // 74: tesla_protocol.tesla.proto.energy_device.v1.CsmsProperties
-	(*CsmsPropertiesResponse)(nil),                                         // 75: tesla_protocol.tesla.proto.energy_device.v1.CsmsPropertiesResponse
-	(*TEGAPIGetCsmsPropertiesRequest)(nil),                                 // 76: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetCsmsPropertiesRequest
-	(*TEGAPIGetCsmsPropertiesResponse)(nil),                                // 77: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetCsmsPropertiesResponse
-	(*TEGAPIConfigureOcppRequest)(nil),                                     // 78: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIConfigureOcppRequest
-	(*TEGAPIConfigureOcppResponse)(nil),                                    // 79: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIConfigureOcppResponse
-	(*TEGAPIStartProtectionTripSelfTestRequest)(nil),                       // 80: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartProtectionTripSelfTestRequest
-	(*TEGAPIStartProtectionTripSelfTestResponse)(nil),                      // 81: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartProtectionTripSelfTestResponse
-	(*TEGAPIStopProtectionTripSelfTestRequest)(nil),                        // 82: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStopProtectionTripSelfTestRequest
-	(*TEGAPIStopProtectionTripSelfTestResponse)(nil),                       // 83: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStopProtectionTripSelfTestResponse
-	(*TEGAPIProvisionEatonSmartBreakerRequest)(nil),                        // 84: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProvisionEatonSmartBreakerRequest
-	(*TEGAPIProvisionEatonSmartBreakerResponse)(nil),                       // 85: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProvisionEatonSmartBreakerResponse
-	(*TEGAPIIdentifyEatonSmartBreakerRequest)(nil),                         // 86: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIIdentifyEatonSmartBreakerRequest
-	(*TEGAPIIdentifyEatonSmartBreakerResponse)(nil),                        // 87: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIIdentifyEatonSmartBreakerResponse
-	(*TEGAPITriggerPvacFanSelfTestRequest)(nil),                            // 88: tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPvacFanSelfTestRequest
-	(*TEGAPITriggerPvacFanSelfTestResponse)(nil),                           // 89: tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPvacFanSelfTestResponse
-	(*TEGAPIProxyPrepareRegistrationPayloadRequest)(nil),                   // 90: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProxyPrepareRegistrationPayloadRequest
-	(*TEGAPIProxyPrepareRegistrationPayloadResponse)(nil),                  // 91: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProxyPrepareRegistrationPayloadResponse
-	(*TEGAPITriggerWallboxVehicleAbsentSelfTestRequest)(nil),               // 92: tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerWallboxVehicleAbsentSelfTestRequest
-	(*TEGAPITriggerWallboxVehicleAbsentSelfTestResponse)(nil),              // 93: tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerWallboxVehicleAbsentSelfTestResponse
-	(*TEGAPICustomerResetRequest)(nil),                                     // 94: tesla_protocol.tesla.proto.energy_device.v1.TEGAPICustomerResetRequest
-	(*TEGAPICustomerResetResponse)(nil),                                    // 95: tesla_protocol.tesla.proto.energy_device.v1.TEGAPICustomerResetResponse
-	(*TEGAPIDelayBatteryCalibrationRequest)(nil),                           // 96: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDelayBatteryCalibrationRequest
-	(*TEGAPIDelayBatteryCalibrationResponse)(nil),                          // 97: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDelayBatteryCalibrationResponse
-	(*TEGAPIGetDelayBatteryCalibrationStatusRequest)(nil),                  // 98: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetDelayBatteryCalibrationStatusRequest
-	(*TEGAPIGetDelayBatteryCalibrationStatusResponse)(nil),                 // 99: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetDelayBatteryCalibrationStatusResponse
-	(*ControllableDeviceProgram_Key)(nil),                                  // 100: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Key
-	(*ControllableDeviceProgram_Settings)(nil),                             // 101: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Settings
-	(*ControllableDeviceProgram_Schedule_Boundary)(nil),                    // 102: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary
-	(*ControllableDeviceProgram_Schedule)(nil),                             // 103: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule
-	(*ControllableDeviceProgram)(nil),                                      // 104: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram
-	(*TEGAPIGetControllableDeviceProgramsRequest)(nil),                     // 105: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetControllableDeviceProgramsRequest
-	(*TEGAPIGetControllableDeviceProgramsResponse)(nil),                    // 106: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetControllableDeviceProgramsResponse
-	(*TEGAPIUpdateControllableDeviceProgramsRequest)(nil),                  // 107: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIUpdateControllableDeviceProgramsRequest
-	(*TEGAPIUpdateControllableDeviceProgramsResponse)(nil),                 // 108: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIUpdateControllableDeviceProgramsResponse
-	(*TEGAPIDeleteControllableDeviceProgramsRequest)(nil),                  // 109: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDeleteControllableDeviceProgramsRequest
-	(*TEGAPIDeleteControllableDeviceProgramsResponse)(nil),                 // 110: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDeleteControllableDeviceProgramsResponse
-	(*TEGAPIClearPowerwall3LockoutAlertsRequest)(nil),                      // 111: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearPowerwall3LockoutAlertsRequest
-	(*TEGAPIClearPowerwall3LockoutAlertsResponse)(nil),                     // 112: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearPowerwall3LockoutAlertsResponse
-	(*TEGAPIRetrieveSiteUuidRequest)(nil),                                  // 113: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteUuidRequest
-	(*TEGAPIRetrieveSiteUuidResponse)(nil),                                 // 114: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteUuidResponse
-	(*TEGAPIRetrieveSiteSuggestionRequest)(nil),                            // 115: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteSuggestionRequest
-	(*TEGAPIRetrieveSiteSuggestionResponse)(nil),                           // 116: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteSuggestionResponse
-	(*TEGMessages)(nil),                                                    // 117: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages
-	(*WifiConfig)(nil),                                                     // 118: tesla_protocol.tesla.proto.energy_device.v1.WifiConfig
-	(*NetworkInterface)(nil),                                               // 119: tesla_protocol.tesla.proto.energy_device.v1.NetworkInterface
-	(DeviceType)(0),                                                        // 120: tesla_protocol.tesla.proto.energy_device.v1.DeviceType
-	(*RegistrationRequest)(nil),                                            // 121: tesla_protocol.tesla.proto.energy_device.v1.RegistrationRequest
-	(RegistrationFailure)(0),                                               // 122: tesla_protocol.tesla.proto.energy_device.v1.RegistrationFailure
-	(*RegistrationResponse)(nil),                                           // 123: tesla_protocol.tesla.proto.energy_device.v1.RegistrationResponse
-	(*timestamppb.Timestamp)(nil),                                          // 124: google.protobuf.Timestamp
-	(*CommonAPIPrepareRegistrationPayloadRequest)(nil),                     // 125: tesla_protocol.tesla.proto.energy_device.v1.CommonAPIPrepareRegistrationPayloadRequest
-	(*Din)(nil), // 126: tesla_protocol.tesla.proto.energy_device.v1.Din
-	(*CommonAPIPrepareRegistrationPayloadResponse)(nil), // 127: tesla_protocol.tesla.proto.energy_device.v1.CommonAPIPrepareRegistrationPayloadResponse
-	(*AssetSiteUuidOfDeviceResponse)(nil),               // 128: tesla_protocol.tesla.proto.energy_device.v1.AssetSiteUuidOfDeviceResponse
-	(*SiteSuggestionRequest)(nil),                       // 129: tesla_protocol.tesla.proto.energy_device.v1.SiteSuggestionRequest
-	(*SiteSuggestionResponse)(nil),                      // 130: tesla_protocol.tesla.proto.energy_device.v1.SiteSuggestionResponse
+	(*TEGAPIEnsureCertificateRequest_CSIPAusgrid)(nil),                     // 62: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPAusgrid
+	(*TEGAPIEnsureCertificateRequest_CSIPEndeavour)(nil),                   // 63: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPEndeavour
+	(*TEGAPIEnsureCertificateRequest_CSIPEssential)(nil),                   // 64: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPEssential
+	(*TEGAPIEnsureCertificateRequest)(nil),                                 // 65: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest
+	(*TEGAPIEnsureCertificateResponse)(nil),                                // 66: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateResponse
+	(*ControlEventSchedulingInfo)(nil),                                     // 67: tesla_protocol.tesla.proto.energy_device.v1.ControlEventSchedulingInfo
+	(*BackupEvent)(nil),                                                    // 68: tesla_protocol.tesla.proto.energy_device.v1.BackupEvent
+	(*ManualBackupEvent)(nil),                                              // 69: tesla_protocol.tesla.proto.energy_device.v1.ManualBackupEvent
+	(*TEGAPIScheduleManualBackupEventRequest)(nil),                         // 70: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIScheduleManualBackupEventRequest
+	(*TEGAPIScheduleManualBackupEventResponse)(nil),                        // 71: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIScheduleManualBackupEventResponse
+	(*TEGAPICancelManualBackupEventRequest)(nil),                           // 72: tesla_protocol.tesla.proto.energy_device.v1.TEGAPICancelManualBackupEventRequest
+	(*TEGAPICancelManualBackupEventResponse)(nil),                          // 73: tesla_protocol.tesla.proto.energy_device.v1.TEGAPICancelManualBackupEventResponse
+	(*TEGAPIGetBackupEventsRequest)(nil),                                   // 74: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetBackupEventsRequest
+	(*TEGAPIGetBackupEventsResponse)(nil),                                  // 75: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetBackupEventsResponse
+	(*CsmsPropertiesRequest)(nil),                                          // 76: tesla_protocol.tesla.proto.energy_device.v1.CsmsPropertiesRequest
+	(*CsmsProperties)(nil),                                                 // 77: tesla_protocol.tesla.proto.energy_device.v1.CsmsProperties
+	(*CsmsPropertiesResponse)(nil),                                         // 78: tesla_protocol.tesla.proto.energy_device.v1.CsmsPropertiesResponse
+	(*TEGAPIGetCsmsPropertiesRequest)(nil),                                 // 79: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetCsmsPropertiesRequest
+	(*TEGAPIGetCsmsPropertiesResponse)(nil),                                // 80: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetCsmsPropertiesResponse
+	(*TEGAPIConfigureOcppRequest)(nil),                                     // 81: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIConfigureOcppRequest
+	(*TEGAPIConfigureOcppResponse)(nil),                                    // 82: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIConfigureOcppResponse
+	(*TEGAPIStartProtectionTripSelfTestRequest)(nil),                       // 83: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartProtectionTripSelfTestRequest
+	(*TEGAPIStartProtectionTripSelfTestResponse)(nil),                      // 84: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartProtectionTripSelfTestResponse
+	(*TEGAPIStopProtectionTripSelfTestRequest)(nil),                        // 85: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStopProtectionTripSelfTestRequest
+	(*TEGAPIStopProtectionTripSelfTestResponse)(nil),                       // 86: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStopProtectionTripSelfTestResponse
+	(*TEGAPIProvisionEatonSmartBreakerRequest)(nil),                        // 87: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProvisionEatonSmartBreakerRequest
+	(*TEGAPIProvisionEatonSmartBreakerResponse)(nil),                       // 88: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProvisionEatonSmartBreakerResponse
+	(*TEGAPIIdentifyEatonSmartBreakerRequest)(nil),                         // 89: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIIdentifyEatonSmartBreakerRequest
+	(*TEGAPIIdentifyEatonSmartBreakerResponse)(nil),                        // 90: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIIdentifyEatonSmartBreakerResponse
+	(*TEGAPITriggerPvacFanSelfTestRequest)(nil),                            // 91: tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPvacFanSelfTestRequest
+	(*TEGAPITriggerPvacFanSelfTestResponse)(nil),                           // 92: tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPvacFanSelfTestResponse
+	(*TEGAPIProxyPrepareRegistrationPayloadRequest)(nil),                   // 93: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProxyPrepareRegistrationPayloadRequest
+	(*TEGAPIProxyPrepareRegistrationPayloadResponse)(nil),                  // 94: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProxyPrepareRegistrationPayloadResponse
+	(*TEGAPITriggerWallboxVehicleAbsentSelfTestRequest)(nil),               // 95: tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerWallboxVehicleAbsentSelfTestRequest
+	(*TEGAPITriggerWallboxVehicleAbsentSelfTestResponse)(nil),              // 96: tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerWallboxVehicleAbsentSelfTestResponse
+	(*TEGAPICustomerResetRequest)(nil),                                     // 97: tesla_protocol.tesla.proto.energy_device.v1.TEGAPICustomerResetRequest
+	(*TEGAPICustomerResetResponse)(nil),                                    // 98: tesla_protocol.tesla.proto.energy_device.v1.TEGAPICustomerResetResponse
+	(*TEGAPIDelayBatteryCalibrationRequest)(nil),                           // 99: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDelayBatteryCalibrationRequest
+	(*TEGAPIDelayBatteryCalibrationResponse)(nil),                          // 100: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDelayBatteryCalibrationResponse
+	(*TEGAPIGetDelayBatteryCalibrationStatusRequest)(nil),                  // 101: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetDelayBatteryCalibrationStatusRequest
+	(*TEGAPIGetDelayBatteryCalibrationStatusResponse)(nil),                 // 102: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetDelayBatteryCalibrationStatusResponse
+	(*ControllableDeviceProgram_Key)(nil),                                  // 103: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Key
+	(*ControllableDeviceProgram_Settings)(nil),                             // 104: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Settings
+	(*ControllableDeviceProgram_Schedule_Boundary)(nil),                    // 105: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary
+	(*ControllableDeviceProgram_Schedule)(nil),                             // 106: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule
+	(*ControllableDeviceProgram)(nil),                                      // 107: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram
+	(*TEGAPIGetControllableDeviceProgramsRequest)(nil),                     // 108: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetControllableDeviceProgramsRequest
+	(*TEGAPIGetControllableDeviceProgramsResponse)(nil),                    // 109: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetControllableDeviceProgramsResponse
+	(*TEGAPIUpdateControllableDeviceProgramsRequest)(nil),                  // 110: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIUpdateControllableDeviceProgramsRequest
+	(*TEGAPIUpdateControllableDeviceProgramsResponse)(nil),                 // 111: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIUpdateControllableDeviceProgramsResponse
+	(*TEGAPIDeleteControllableDeviceProgramsRequest)(nil),                  // 112: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDeleteControllableDeviceProgramsRequest
+	(*TEGAPIDeleteControllableDeviceProgramsResponse)(nil),                 // 113: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDeleteControllableDeviceProgramsResponse
+	(*TEGAPIClearPowerwall3LockoutAlertsRequest)(nil),                      // 114: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearPowerwall3LockoutAlertsRequest
+	(*TEGAPIClearPowerwall3LockoutAlertsResponse)(nil),                     // 115: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearPowerwall3LockoutAlertsResponse
+	(*TEGAPIRetrieveSiteUuidRequest)(nil),                                  // 116: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteUuidRequest
+	(*TEGAPIRetrieveSiteUuidResponse)(nil),                                 // 117: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteUuidResponse
+	(*TEGAPIRetrieveSiteSuggestionRequest)(nil),                            // 118: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteSuggestionRequest
+	(*TEGAPIRetrieveSiteSuggestionResponse)(nil),                           // 119: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteSuggestionResponse
+	(*TEGAPIDelayBatteryMatingRequest)(nil),                                // 120: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDelayBatteryMatingRequest
+	(*TEGAPIDelayBatteryMatingResponse)(nil),                               // 121: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDelayBatteryMatingResponse
+	(*TEGMessages)(nil),                                                    // 122: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages
+	(*WifiConfig)(nil),                                                     // 123: tesla_protocol.tesla.proto.energy_device.v1.WifiConfig
+	(*NetworkInterface)(nil),                                               // 124: tesla_protocol.tesla.proto.energy_device.v1.NetworkInterface
+	(DeviceType)(0),                                                        // 125: tesla_protocol.tesla.proto.energy_device.v1.DeviceType
+	(*RegistrationRequest)(nil),                                            // 126: tesla_protocol.tesla.proto.energy_device.v1.RegistrationRequest
+	(RegistrationFailure)(0),                                               // 127: tesla_protocol.tesla.proto.energy_device.v1.RegistrationFailure
+	(*RegistrationResponse)(nil),                                           // 128: tesla_protocol.tesla.proto.energy_device.v1.RegistrationResponse
+	(*timestamppb.Timestamp)(nil),                                          // 129: google.protobuf.Timestamp
+	(*CommonAPIPrepareRegistrationPayloadRequest)(nil),                     // 130: tesla_protocol.tesla.proto.energy_device.v1.CommonAPIPrepareRegistrationPayloadRequest
+	(*Din)(nil), // 131: tesla_protocol.tesla.proto.energy_device.v1.Din
+	(*CommonAPIPrepareRegistrationPayloadResponse)(nil), // 132: tesla_protocol.tesla.proto.energy_device.v1.CommonAPIPrepareRegistrationPayloadResponse
+	(*AssetSiteUuidOfDeviceResponse)(nil),               // 133: tesla_protocol.tesla.proto.energy_device.v1.AssetSiteUuidOfDeviceResponse
+	(*SiteSuggestionRequest)(nil),                       // 134: tesla_protocol.tesla.proto.energy_device.v1.SiteSuggestionRequest
+	(*SiteSuggestionResponse)(nil),                      // 135: tesla_protocol.tesla.proto.energy_device.v1.SiteSuggestionResponse
 }
 var file_tesla_protocol_energy_device_teg_api_proto_depIdxs = []int32{
 	9,   // 0: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigResponse.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGSettings
-	118, // 1: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigResponse.wifi_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WifiConfig
-	119, // 2: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigResponse.wifi:type_name -> tesla_protocol.tesla.proto.energy_device.v1.NetworkInterface
-	119, // 3: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigResponse.eth:type_name -> tesla_protocol.tesla.proto.energy_device.v1.NetworkInterface
-	119, // 4: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigResponse.gsm:type_name -> tesla_protocol.tesla.proto.energy_device.v1.NetworkInterface
-	120, // 5: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigResponse.device_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.DeviceType
+	123, // 1: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigResponse.wifi_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WifiConfig
+	124, // 2: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigResponse.wifi:type_name -> tesla_protocol.tesla.proto.energy_device.v1.NetworkInterface
+	124, // 3: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigResponse.eth:type_name -> tesla_protocol.tesla.proto.energy_device.v1.NetworkInterface
+	124, // 4: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigResponse.gsm:type_name -> tesla_protocol.tesla.proto.energy_device.v1.NetworkInterface
+	125, // 5: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigResponse.device_type:type_name -> tesla_protocol.tesla.proto.energy_device.v1.DeviceType
 	0,   // 6: tesla_protocol.tesla.proto.energy_device.v1.TEGAPISetIslandModeRequest.mode:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGIslandMode
 	1,   // 7: tesla_protocol.tesla.proto.energy_device.v1.TEGAPISetIslandModeResponse.result:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGSetIslandModeResult
 	27,  // 8: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDispatchBatteryPowerRequest.resume_device_mode:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDispatchBatteryPowerRequest_ResumeDeviceOperatingMode
 	28,  // 9: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDispatchBatteryPowerRequest.real_power:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDispatchBatteryPowerRequest_RealPowerCommand
-	121, // 10: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRegisterRequest.registration_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.RegistrationRequest
-	122, // 11: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRegisterResponse.failure:type_name -> tesla_protocol.tesla.proto.energy_device.v1.RegistrationFailure
-	123, // 12: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRegisterResponse.registration_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.RegistrationResponse
+	126, // 10: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRegisterRequest.registration_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.RegistrationRequest
+	127, // 11: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRegisterResponse.failure:type_name -> tesla_protocol.tesla.proto.energy_device.v1.RegistrationFailure
+	128, // 12: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRegisterResponse.registration_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.RegistrationResponse
 	10,  // 13: tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPowerwall2PhaseDetectionRequest.powerwalls:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Powerwall2PhaseDetectionParameters
-	118, // 14: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetWifiConfigWithCredentialsResponse.wifi_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WifiConfig
+	123, // 14: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetWifiConfigWithCredentialsResponse.wifi_config:type_name -> tesla_protocol.tesla.proto.energy_device.v1.WifiConfig
 	51,  // 15: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDisableBatteriesRequest.battery_disable_requests:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDisableBatteriesRequest_BatteryDisableRequest
 	56,  // 16: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest.csip_south_australia_power_networks:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPSouthAustraliaPowerNetworks
 	57,  // 17: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest.csip_citipower_powercor_united:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPCitiPowerPowercorUnited
 	58,  // 18: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest.csip_ausnet:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPAusNet
 	59,  // 19: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest.csip_jemena:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPJemena
-	60,  // 20: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest.csip_energex_ergon_energy_qld:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLD
-	61,  // 21: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest.csip_western_power_synergy:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy
-	124, // 22: tesla_protocol.tesla.proto.energy_device.v1.ControlEventSchedulingInfo.start_time:type_name -> google.protobuf.Timestamp
-	64,  // 23: tesla_protocol.tesla.proto.energy_device.v1.BackupEvent.scheduling_info:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControlEventSchedulingInfo
-	64,  // 24: tesla_protocol.tesla.proto.energy_device.v1.ManualBackupEvent.scheduling_info:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControlEventSchedulingInfo
-	64,  // 25: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIScheduleManualBackupEventRequest.scheduling_info:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControlEventSchedulingInfo
-	66,  // 26: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetBackupEventsResponse.manual_backup_event:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ManualBackupEvent
-	65,  // 27: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetBackupEventsResponse.backup_events:type_name -> tesla_protocol.tesla.proto.energy_device.v1.BackupEvent
-	2,   // 28: tesla_protocol.tesla.proto.energy_device.v1.CsmsPropertiesResponse.canvas_site_status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.CanvasSiteStatus
-	74,  // 29: tesla_protocol.tesla.proto.energy_device.v1.CsmsPropertiesResponse.csms_properties:type_name -> tesla_protocol.tesla.proto.energy_device.v1.CsmsProperties
-	73,  // 30: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetCsmsPropertiesRequest.request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.CsmsPropertiesRequest
-	75,  // 31: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetCsmsPropertiesResponse.response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.CsmsPropertiesResponse
-	125, // 32: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProxyPrepareRegistrationPayloadRequest.request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.CommonAPIPrepareRegistrationPayloadRequest
-	126, // 33: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProxyPrepareRegistrationPayloadRequest.target_din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
-	127, // 34: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProxyPrepareRegistrationPayloadResponse.response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.CommonAPIPrepareRegistrationPayloadResponse
-	4,   // 35: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Key.priority:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Key.Priority
-	5,   // 36: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Settings.contactor_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Settings.ContactorState
-	6,   // 37: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary.static_condition:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary.StaticCondition
-	124, // 38: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary.timestamp:type_name -> google.protobuf.Timestamp
-	7,   // 39: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary.islanding_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary.IslandingState
-	8,   // 40: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary.state_of_energy:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary.StateOfEnergy
-	102, // 41: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule.start:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary
-	102, // 42: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule.end:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary
-	102, // 43: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule.expiry:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary
-	100, // 44: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram.key:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Key
-	101, // 45: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Settings
-	103, // 46: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram.schedule:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule
-	104, // 47: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetControllableDeviceProgramsResponse.active_programs:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram
-	104, // 48: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetControllableDeviceProgramsResponse.inactive_programs:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram
-	104, // 49: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIUpdateControllableDeviceProgramsRequest.updated_programs:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram
-	128, // 50: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteUuidResponse.response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.AssetSiteUuidOfDeviceResponse
-	129, // 51: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteSuggestionRequest.request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SiteSuggestionRequest
-	130, // 52: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteSuggestionResponse.response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SiteSuggestionResponse
-	11,  // 53: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_config_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigRequest
-	12,  // 54: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_config_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigResponse
-	13,  // 55: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.set_island_mode_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPISetIslandModeRequest
-	14,  // 56: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.set_island_mode_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPISetIslandModeResponse
-	15,  // 57: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_islanding_black_start_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerIslandingBlackStartRequest
-	16,  // 58: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_islanding_black_start_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerIslandingBlackStartResponse
-	17,  // 59: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_asset_manifest_upload_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerAssetManifestUploadRequest
-	18,  // 60: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_asset_manifest_upload_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerAssetManifestUploadResponse
-	19,  // 61: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_powerwall2_enumeration_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPowerwall2EnumerationRequest
-	20,  // 62: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_powerwall2_enumeration_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPowerwall2EnumerationResponse
-	21,  // 63: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_es_can_firmware_update_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerEsCanFirmwareUpdateRequest
-	22,  // 64: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_es_can_firmware_update_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerEsCanFirmwareUpdateResponse
-	33,  // 65: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.register_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRegisterRequest
-	34,  // 66: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.register_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRegisterResponse
-	35,  // 67: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_powerwall2_phase_detection_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPowerwall2PhaseDetectionRequest
-	36,  // 68: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_powerwall2_phase_detection_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPowerwall2PhaseDetectionResponse
-	37,  // 69: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.reset_powerwall2_phase_detection_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIResetPowerwall2PhaseDetectionRequest
-	38,  // 70: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.reset_powerwall2_phase_detection_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIResetPowerwall2PhaseDetectionResponse
-	39,  // 71: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.force_wifi_scan_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIForceWifiScanRequest
-	40,  // 72: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.force_wifi_scan_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIForceWifiScanResponse
-	41,  // 73: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.start_powerwall2_inverter_self_tests_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartPowerwall2InverterSelfTestsRequest
-	42,  // 74: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.start_powerwall2_inverter_self_tests_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartPowerwall2InverterSelfTestsResponse
-	43,  // 75: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.stop_powerwall2_inverter_self_tests_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStopPowerwall2InverterSelfTestsRequest
-	44,  // 76: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.stop_powerwall2_inverter_self_tests_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStopPowerwall2InverterSelfTestsResponse
-	45,  // 77: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.start_powerwall2_bubble_shed_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartPowerwall2BubbleShedRequest
-	46,  // 78: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.start_powerwall2_bubble_shed_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartPowerwall2BubbleShedResponse
-	47,  // 79: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.clear_solar_inverter_alerts_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearSolarInverterAlertsRequest
-	48,  // 80: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.clear_solar_inverter_alerts_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearSolarInverterAlertsResponse
-	49,  // 81: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_wifi_config_with_credentials_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetWifiConfigWithCredentialsRequest
-	50,  // 82: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_wifi_config_with_credentials_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetWifiConfigWithCredentialsResponse
-	52,  // 83: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.disable_batteries_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDisableBatteriesRequest
-	53,  // 84: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.disable_batteries_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDisableBatteriesResponse
-	23,  // 85: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_p_w3_can_firmware_update_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPW3CanFirmwareUpdateRequest
-	24,  // 86: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_p_w3_can_firmware_update_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPW3CanFirmwareUpdateResponse
-	25,  // 87: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_powerwall3_enumeration_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPowerwall3EnumerationRequest
-	26,  // 88: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_powerwall3_enumeration_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPowerwall3EnumerationResponse
-	29,  // 89: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.dispatch_battery_power_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDispatchBatteryPowerRequest
-	30,  // 90: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.dispatch_battery_power_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDispatchBatteryPowerResponse
-	31,  // 91: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.detect_wired_meters_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDetectWiredMetersRequest
-	32,  // 92: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.detect_wired_meters_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDetectWiredMetersResponse
-	54,  // 93: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.bypass_battery_soe_adjustment_constraints_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIBypassBatterySoeAdjustmentConstraintsRequest
-	55,  // 94: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.bypass_battery_soe_adjustment_constraints_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIBypassBatterySoeAdjustmentConstraintsResponse
-	62,  // 95: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.ensure_certificate_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest
-	63,  // 96: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.ensure_certificate_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateResponse
-	67,  // 97: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.schedule_manual_backup_event_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIScheduleManualBackupEventRequest
-	68,  // 98: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.schedule_manual_backup_event_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIScheduleManualBackupEventResponse
-	69,  // 99: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.cancel_manual_backup_event_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPICancelManualBackupEventRequest
-	70,  // 100: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.cancel_manual_backup_event_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPICancelManualBackupEventResponse
-	71,  // 101: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_backup_events_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetBackupEventsRequest
-	72,  // 102: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_backup_events_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetBackupEventsResponse
-	76,  // 103: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_csms_properties_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetCsmsPropertiesRequest
-	77,  // 104: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_csms_properties_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetCsmsPropertiesResponse
-	78,  // 105: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.configure_ocpp_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIConfigureOcppRequest
-	79,  // 106: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.configure_ocpp_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIConfigureOcppResponse
-	113, // 107: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.retrieve_site_uuid_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteUuidRequest
-	114, // 108: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.retrieve_site_uuid_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteUuidResponse
-	115, // 109: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.retrieve_site_suggestion_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteSuggestionRequest
-	116, // 110: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.retrieve_site_suggestion_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteSuggestionResponse
-	80,  // 111: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.start_protection_trip_self_test_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartProtectionTripSelfTestRequest
-	81,  // 112: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.start_protection_trip_self_test_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartProtectionTripSelfTestResponse
-	82,  // 113: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.stop_protection_trip_self_test_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStopProtectionTripSelfTestRequest
-	83,  // 114: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.stop_protection_trip_self_test_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStopProtectionTripSelfTestResponse
-	84,  // 115: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.provision_eaton_smart_breaker_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProvisionEatonSmartBreakerRequest
-	85,  // 116: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.provision_eaton_smart_breaker_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProvisionEatonSmartBreakerResponse
-	86,  // 117: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.identify_eaton_smart_breaker_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIIdentifyEatonSmartBreakerRequest
-	87,  // 118: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.identify_eaton_smart_breaker_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIIdentifyEatonSmartBreakerResponse
-	88,  // 119: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_pvac_fan_self_test_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPvacFanSelfTestRequest
-	89,  // 120: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_pvac_fan_self_test_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPvacFanSelfTestResponse
-	90,  // 121: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.proxy_prepare_registration_payload_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProxyPrepareRegistrationPayloadRequest
-	91,  // 122: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.proxy_prepare_registration_payload_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProxyPrepareRegistrationPayloadResponse
-	92,  // 123: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_wallbox_vehicle_absent_self_test_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerWallboxVehicleAbsentSelfTestRequest
-	93,  // 124: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_wallbox_vehicle_absent_self_test_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerWallboxVehicleAbsentSelfTestResponse
-	94,  // 125: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.customer_reset_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPICustomerResetRequest
-	95,  // 126: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.customer_reset_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPICustomerResetResponse
-	96,  // 127: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.delay_battery_calibration_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDelayBatteryCalibrationRequest
-	97,  // 128: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.delay_battery_calibration_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDelayBatteryCalibrationResponse
-	98,  // 129: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_delay_battery_calibration_status_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetDelayBatteryCalibrationStatusRequest
-	99,  // 130: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_delay_battery_calibration_status_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetDelayBatteryCalibrationStatusResponse
-	105, // 131: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_controllable_device_programs_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetControllableDeviceProgramsRequest
-	106, // 132: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_controllable_device_programs_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetControllableDeviceProgramsResponse
-	107, // 133: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.update_controllable_device_programs_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIUpdateControllableDeviceProgramsRequest
-	108, // 134: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.update_controllable_device_programs_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIUpdateControllableDeviceProgramsResponse
-	109, // 135: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.delete_controllable_device_programs_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDeleteControllableDeviceProgramsRequest
-	110, // 136: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.delete_controllable_device_programs_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDeleteControllableDeviceProgramsResponse
-	111, // 137: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.clear_powerwall3_lockout_alerts_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearPowerwall3LockoutAlertsRequest
-	112, // 138: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.clear_powerwall3_lockout_alerts_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearPowerwall3LockoutAlertsResponse
-	139, // [139:139] is the sub-list for method output_type
-	139, // [139:139] is the sub-list for method input_type
-	139, // [139:139] is the sub-list for extension type_name
-	139, // [139:139] is the sub-list for extension extendee
-	0,   // [0:139] is the sub-list for field type_name
+	62,  // 20: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest.csip_ausgrid:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPAusgrid
+	63,  // 21: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest.csip_endeavour:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPEndeavour
+	64,  // 22: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest.csip_essential:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPEssential
+	60,  // 23: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest.csip_energex_ergon_energy_qld:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPEnergexErgonEnergyQLD
+	61,  // 24: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest.csip_western_power_synergy:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest_CSIPWesternPowerSynergy
+	129, // 25: tesla_protocol.tesla.proto.energy_device.v1.ControlEventSchedulingInfo.start_time:type_name -> google.protobuf.Timestamp
+	67,  // 26: tesla_protocol.tesla.proto.energy_device.v1.BackupEvent.scheduling_info:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControlEventSchedulingInfo
+	67,  // 27: tesla_protocol.tesla.proto.energy_device.v1.ManualBackupEvent.scheduling_info:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControlEventSchedulingInfo
+	67,  // 28: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIScheduleManualBackupEventRequest.scheduling_info:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControlEventSchedulingInfo
+	69,  // 29: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetBackupEventsResponse.manual_backup_event:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ManualBackupEvent
+	68,  // 30: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetBackupEventsResponse.backup_events:type_name -> tesla_protocol.tesla.proto.energy_device.v1.BackupEvent
+	2,   // 31: tesla_protocol.tesla.proto.energy_device.v1.CsmsPropertiesResponse.canvas_site_status:type_name -> tesla_protocol.tesla.proto.energy_device.v1.CanvasSiteStatus
+	77,  // 32: tesla_protocol.tesla.proto.energy_device.v1.CsmsPropertiesResponse.csms_properties:type_name -> tesla_protocol.tesla.proto.energy_device.v1.CsmsProperties
+	76,  // 33: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetCsmsPropertiesRequest.request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.CsmsPropertiesRequest
+	78,  // 34: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetCsmsPropertiesResponse.response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.CsmsPropertiesResponse
+	130, // 35: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProxyPrepareRegistrationPayloadRequest.request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.CommonAPIPrepareRegistrationPayloadRequest
+	131, // 36: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProxyPrepareRegistrationPayloadRequest.target_din:type_name -> tesla_protocol.tesla.proto.energy_device.v1.Din
+	132, // 37: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProxyPrepareRegistrationPayloadResponse.response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.CommonAPIPrepareRegistrationPayloadResponse
+	4,   // 38: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Key.priority:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Key.Priority
+	5,   // 39: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Settings.contactor_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Settings.ContactorState
+	6,   // 40: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary.static_condition:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary.StaticCondition
+	129, // 41: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary.timestamp:type_name -> google.protobuf.Timestamp
+	7,   // 42: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary.islanding_state:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary.IslandingState
+	8,   // 43: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary.state_of_energy:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary.StateOfEnergy
+	105, // 44: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule.start:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary
+	105, // 45: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule.end:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary
+	105, // 46: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule.expiry:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule_Boundary
+	103, // 47: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram.key:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Key
+	104, // 48: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram.settings:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Settings
+	106, // 49: tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram.schedule:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram_Schedule
+	107, // 50: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetControllableDeviceProgramsResponse.active_programs:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram
+	107, // 51: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetControllableDeviceProgramsResponse.inactive_programs:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram
+	107, // 52: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIUpdateControllableDeviceProgramsRequest.updated_programs:type_name -> tesla_protocol.tesla.proto.energy_device.v1.ControllableDeviceProgram
+	133, // 53: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteUuidResponse.response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.AssetSiteUuidOfDeviceResponse
+	134, // 54: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteSuggestionRequest.request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SiteSuggestionRequest
+	135, // 55: tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteSuggestionResponse.response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.SiteSuggestionResponse
+	11,  // 56: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_config_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigRequest
+	12,  // 57: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_config_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetConfigResponse
+	13,  // 58: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.set_island_mode_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPISetIslandModeRequest
+	14,  // 59: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.set_island_mode_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPISetIslandModeResponse
+	15,  // 60: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_islanding_black_start_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerIslandingBlackStartRequest
+	16,  // 61: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_islanding_black_start_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerIslandingBlackStartResponse
+	17,  // 62: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_asset_manifest_upload_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerAssetManifestUploadRequest
+	18,  // 63: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_asset_manifest_upload_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerAssetManifestUploadResponse
+	19,  // 64: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_powerwall2_enumeration_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPowerwall2EnumerationRequest
+	20,  // 65: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_powerwall2_enumeration_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPowerwall2EnumerationResponse
+	21,  // 66: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_es_can_firmware_update_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerEsCanFirmwareUpdateRequest
+	22,  // 67: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_es_can_firmware_update_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerEsCanFirmwareUpdateResponse
+	33,  // 68: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.register_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRegisterRequest
+	34,  // 69: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.register_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRegisterResponse
+	35,  // 70: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_powerwall2_phase_detection_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPowerwall2PhaseDetectionRequest
+	36,  // 71: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_powerwall2_phase_detection_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPowerwall2PhaseDetectionResponse
+	37,  // 72: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.reset_powerwall2_phase_detection_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIResetPowerwall2PhaseDetectionRequest
+	38,  // 73: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.reset_powerwall2_phase_detection_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIResetPowerwall2PhaseDetectionResponse
+	39,  // 74: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.force_wifi_scan_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIForceWifiScanRequest
+	40,  // 75: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.force_wifi_scan_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIForceWifiScanResponse
+	41,  // 76: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.start_powerwall2_inverter_self_tests_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartPowerwall2InverterSelfTestsRequest
+	42,  // 77: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.start_powerwall2_inverter_self_tests_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartPowerwall2InverterSelfTestsResponse
+	43,  // 78: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.stop_powerwall2_inverter_self_tests_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStopPowerwall2InverterSelfTestsRequest
+	44,  // 79: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.stop_powerwall2_inverter_self_tests_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStopPowerwall2InverterSelfTestsResponse
+	45,  // 80: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.start_powerwall2_bubble_shed_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartPowerwall2BubbleShedRequest
+	46,  // 81: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.start_powerwall2_bubble_shed_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartPowerwall2BubbleShedResponse
+	47,  // 82: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.clear_solar_inverter_alerts_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearSolarInverterAlertsRequest
+	48,  // 83: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.clear_solar_inverter_alerts_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearSolarInverterAlertsResponse
+	49,  // 84: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_wifi_config_with_credentials_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetWifiConfigWithCredentialsRequest
+	50,  // 85: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_wifi_config_with_credentials_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetWifiConfigWithCredentialsResponse
+	52,  // 86: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.disable_batteries_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDisableBatteriesRequest
+	53,  // 87: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.disable_batteries_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDisableBatteriesResponse
+	23,  // 88: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_p_w3_can_firmware_update_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPW3CanFirmwareUpdateRequest
+	24,  // 89: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_p_w3_can_firmware_update_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPW3CanFirmwareUpdateResponse
+	25,  // 90: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_powerwall3_enumeration_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPowerwall3EnumerationRequest
+	26,  // 91: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_powerwall3_enumeration_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPowerwall3EnumerationResponse
+	29,  // 92: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.dispatch_battery_power_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDispatchBatteryPowerRequest
+	30,  // 93: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.dispatch_battery_power_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDispatchBatteryPowerResponse
+	31,  // 94: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.detect_wired_meters_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDetectWiredMetersRequest
+	32,  // 95: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.detect_wired_meters_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDetectWiredMetersResponse
+	54,  // 96: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.bypass_battery_soe_adjustment_constraints_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIBypassBatterySoeAdjustmentConstraintsRequest
+	55,  // 97: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.bypass_battery_soe_adjustment_constraints_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIBypassBatterySoeAdjustmentConstraintsResponse
+	65,  // 98: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.ensure_certificate_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateRequest
+	66,  // 99: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.ensure_certificate_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIEnsureCertificateResponse
+	70,  // 100: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.schedule_manual_backup_event_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIScheduleManualBackupEventRequest
+	71,  // 101: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.schedule_manual_backup_event_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIScheduleManualBackupEventResponse
+	72,  // 102: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.cancel_manual_backup_event_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPICancelManualBackupEventRequest
+	73,  // 103: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.cancel_manual_backup_event_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPICancelManualBackupEventResponse
+	74,  // 104: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_backup_events_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetBackupEventsRequest
+	75,  // 105: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_backup_events_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetBackupEventsResponse
+	79,  // 106: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_csms_properties_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetCsmsPropertiesRequest
+	80,  // 107: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_csms_properties_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetCsmsPropertiesResponse
+	81,  // 108: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.configure_ocpp_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIConfigureOcppRequest
+	82,  // 109: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.configure_ocpp_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIConfigureOcppResponse
+	116, // 110: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.retrieve_site_uuid_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteUuidRequest
+	117, // 111: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.retrieve_site_uuid_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteUuidResponse
+	118, // 112: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.retrieve_site_suggestion_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteSuggestionRequest
+	119, // 113: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.retrieve_site_suggestion_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIRetrieveSiteSuggestionResponse
+	83,  // 114: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.start_protection_trip_self_test_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartProtectionTripSelfTestRequest
+	84,  // 115: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.start_protection_trip_self_test_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStartProtectionTripSelfTestResponse
+	85,  // 116: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.stop_protection_trip_self_test_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStopProtectionTripSelfTestRequest
+	86,  // 117: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.stop_protection_trip_self_test_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIStopProtectionTripSelfTestResponse
+	87,  // 118: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.provision_eaton_smart_breaker_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProvisionEatonSmartBreakerRequest
+	88,  // 119: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.provision_eaton_smart_breaker_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProvisionEatonSmartBreakerResponse
+	89,  // 120: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.identify_eaton_smart_breaker_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIIdentifyEatonSmartBreakerRequest
+	90,  // 121: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.identify_eaton_smart_breaker_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIIdentifyEatonSmartBreakerResponse
+	91,  // 122: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_pvac_fan_self_test_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPvacFanSelfTestRequest
+	92,  // 123: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_pvac_fan_self_test_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerPvacFanSelfTestResponse
+	93,  // 124: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.proxy_prepare_registration_payload_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProxyPrepareRegistrationPayloadRequest
+	94,  // 125: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.proxy_prepare_registration_payload_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIProxyPrepareRegistrationPayloadResponse
+	95,  // 126: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_wallbox_vehicle_absent_self_test_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerWallboxVehicleAbsentSelfTestRequest
+	96,  // 127: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.trigger_wallbox_vehicle_absent_self_test_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPITriggerWallboxVehicleAbsentSelfTestResponse
+	97,  // 128: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.customer_reset_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPICustomerResetRequest
+	98,  // 129: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.customer_reset_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPICustomerResetResponse
+	99,  // 130: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.delay_battery_calibration_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDelayBatteryCalibrationRequest
+	100, // 131: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.delay_battery_calibration_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDelayBatteryCalibrationResponse
+	101, // 132: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_delay_battery_calibration_status_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetDelayBatteryCalibrationStatusRequest
+	102, // 133: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_delay_battery_calibration_status_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetDelayBatteryCalibrationStatusResponse
+	108, // 134: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_controllable_device_programs_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetControllableDeviceProgramsRequest
+	109, // 135: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.get_controllable_device_programs_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIGetControllableDeviceProgramsResponse
+	110, // 136: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.update_controllable_device_programs_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIUpdateControllableDeviceProgramsRequest
+	111, // 137: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.update_controllable_device_programs_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIUpdateControllableDeviceProgramsResponse
+	112, // 138: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.delete_controllable_device_programs_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDeleteControllableDeviceProgramsRequest
+	113, // 139: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.delete_controllable_device_programs_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDeleteControllableDeviceProgramsResponse
+	114, // 140: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.clear_powerwall3_lockout_alerts_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearPowerwall3LockoutAlertsRequest
+	115, // 141: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.clear_powerwall3_lockout_alerts_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIClearPowerwall3LockoutAlertsResponse
+	120, // 142: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.delay_battery_mating_request:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDelayBatteryMatingRequest
+	121, // 143: tesla_protocol.tesla.proto.energy_device.v1.TEGMessages.delay_battery_mating_response:type_name -> tesla_protocol.tesla.proto.energy_device.v1.TEGAPIDelayBatteryMatingResponse
+	144, // [144:144] is the sub-list for method output_type
+	144, // [144:144] is the sub-list for method input_type
+	144, // [144:144] is the sub-list for extension type_name
+	144, // [144:144] is the sub-list for extension extendee
+	0,   // [0:144] is the sub-list for field type_name
 }
 
 func init() { file_tesla_protocol_energy_device_teg_api_proto_init() }
@@ -7305,13 +7594,16 @@ func file_tesla_protocol_energy_device_teg_api_proto_init() {
 		(*TEGAPIDispatchBatteryPowerRequest_ResumeDeviceMode)(nil),
 		(*TEGAPIDispatchBatteryPowerRequest_RealPower)(nil),
 	}
-	file_tesla_protocol_energy_device_teg_api_proto_msgTypes[53].OneofWrappers = []any{
+	file_tesla_protocol_energy_device_teg_api_proto_msgTypes[56].OneofWrappers = []any{
 		(*TEGAPIEnsureCertificateRequest_CsipSouthAustraliaPowerNetworks)(nil),
 		(*TEGAPIEnsureCertificateRequest_CsipCitipowerPowercorUnited)(nil),
 		(*TEGAPIEnsureCertificateRequest_CsipAusnet)(nil),
 		(*TEGAPIEnsureCertificateRequest_CsipJemena)(nil),
+		(*TEGAPIEnsureCertificateRequest_CsipAusgrid)(nil),
+		(*TEGAPIEnsureCertificateRequest_CsipEndeavour)(nil),
+		(*TEGAPIEnsureCertificateRequest_CsipEssential)(nil),
 	}
-	file_tesla_protocol_energy_device_teg_api_proto_msgTypes[108].OneofWrappers = []any{
+	file_tesla_protocol_energy_device_teg_api_proto_msgTypes[113].OneofWrappers = []any{
 		(*TEGMessages_GetConfigRequest)(nil),
 		(*TEGMessages_GetConfigResponse)(nil),
 		(*TEGMessages_SetIslandModeRequest)(nil),
@@ -7398,6 +7690,8 @@ func file_tesla_protocol_energy_device_teg_api_proto_init() {
 		(*TEGMessages_DeleteControllableDeviceProgramsResponse)(nil),
 		(*TEGMessages_ClearPowerwall3LockoutAlertsRequest)(nil),
 		(*TEGMessages_ClearPowerwall3LockoutAlertsResponse)(nil),
+		(*TEGMessages_DelayBatteryMatingRequest)(nil),
+		(*TEGMessages_DelayBatteryMatingResponse)(nil),
 	}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
@@ -7405,7 +7699,7 @@ func file_tesla_protocol_energy_device_teg_api_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tesla_protocol_energy_device_teg_api_proto_rawDesc), len(file_tesla_protocol_energy_device_teg_api_proto_rawDesc)),
 			NumEnums:      9,
-			NumMessages:   109,
+			NumMessages:   114,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

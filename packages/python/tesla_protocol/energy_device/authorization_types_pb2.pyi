@@ -24,6 +24,11 @@ class AuthorizedClientType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     AUTHORIZED_CLIENT_TYPE_VEHICLE: _ClassVar[AuthorizedClientType]
     AUTHORIZED_CLIENT_TYPE_INSTALLER_APP: _ClassVar[AuthorizedClientType]
 
+class SPAKE2PlusProfile(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
+    __slots__ = ()
+    SPAKE2_PLUS_PROFILE_INVALID: _ClassVar[SPAKE2PlusProfile]
+    SPAKE2_PLUS_PROFILE_P256_SHA256: _ClassVar[SPAKE2PlusProfile]
+
 class AuthorizedKeyType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     AUTHORIZED_KEY_TYPE_INVALID: _ClassVar[AuthorizedKeyType]
@@ -53,6 +58,8 @@ AUTHORIZED_CLIENT_TYPE_INVALID: AuthorizedClientType
 AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP: AuthorizedClientType
 AUTHORIZED_CLIENT_TYPE_VEHICLE: AuthorizedClientType
 AUTHORIZED_CLIENT_TYPE_INSTALLER_APP: AuthorizedClientType
+SPAKE2_PLUS_PROFILE_INVALID: SPAKE2PlusProfile
+SPAKE2_PLUS_PROFILE_P256_SHA256: SPAKE2PlusProfile
 AUTHORIZED_KEY_TYPE_INVALID: AuthorizedKeyType
 AUTHORIZED_KEY_TYPE_RSA: AuthorizedKeyType
 AUTHORIZED_KEY_TYPE_ECC: AuthorizedKeyType
