@@ -1703,6 +1703,7 @@ type VehicleAction struct {
 	//	*VehicleAction_SetDeckLightAction
 	//	*VehicleAction_SetKeepOnCabin12VPortAction
 	//	*VehicleAction_SetKeepOnCabin48VPortAction
+	//	*VehicleAction_ManualPreconditioningAction
 	VehicleActionMsg isVehicleAction_VehicleActionMsg `protobuf_oneof:"vehicle_action_msg"`
 	// Asks the vehicle not to send the routine success reply to this action.  // TESLEMETRY-EXT
 	DropNominalSuccessResponses bool `protobuf:"varint,185,opt,name=dropNominalSuccessResponses,proto3" json:"dropNominalSuccessResponses,omitempty"` // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
@@ -2980,6 +2981,15 @@ func (x *VehicleAction) GetSetKeepOnCabin48VPortAction() *SetKeepOnCabin48VPortA
 	return nil
 }
 
+func (x *VehicleAction) GetManualPreconditioningAction() *ManualPreconditioningAction {
+	if x != nil {
+		if x, ok := x.VehicleActionMsg.(*VehicleAction_ManualPreconditioningAction); ok {
+			return x.ManualPreconditioningAction
+		}
+	}
+	return nil
+}
+
 func (x *VehicleAction) GetDropNominalSuccessResponses() bool {
 	if x != nil {
 		return x.DropNominalSuccessResponses
@@ -3541,6 +3551,10 @@ type VehicleAction_SetKeepOnCabin48VPortAction struct {
 	SetKeepOnCabin48VPortAction *SetKeepOnCabin48VPortAction `protobuf:"bytes,721263,opt,name=setKeepOnCabin48vPortAction,proto3,oneof"` // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
 }
 
+type VehicleAction_ManualPreconditioningAction struct {
+	ManualPreconditioningAction *ManualPreconditioningAction `protobuf:"bytes,731429,opt,name=manualPreconditioningAction,proto3,oneof"` // TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle
+}
+
 func (*VehicleAction_GetVehicleData) isVehicleAction_VehicleActionMsg() {}
 
 func (*VehicleAction_RemoteStartDrive) isVehicleAction_VehicleActionMsg() {}
@@ -3815,6 +3829,8 @@ func (*VehicleAction_SetDeckLightAction) isVehicleAction_VehicleActionMsg() {}
 func (*VehicleAction_SetKeepOnCabin12VPortAction) isVehicleAction_VehicleActionMsg() {}
 
 func (*VehicleAction_SetKeepOnCabin48VPortAction) isVehicleAction_VehicleActionMsg() {}
+
+func (*VehicleAction_ManualPreconditioningAction) isVehicleAction_VehicleActionMsg() {}
 
 type GetVehicleData struct {
 	state                           protoimpl.MessageState           `protogen:"open.v1"`
@@ -14405,6 +14421,92 @@ func (x *SetKeepOnCabin48VPortAction) GetKeepOnMode() KeepOnAccessoryPortRequest
 	return KeepOnAccessoryPortRequest_KeepOnAccessoryPortRequest_Off
 }
 
+// Starts or stops battery preconditioning for fast charging.
+// UNCONFIRMED: not yet confirmed on a live vehicle.
+type ManualPreconditioningAction struct {
+	state protoimpl.MessageState `protogen:"open.v1"`
+	// Types that are valid to be assigned to ManualPreconditioningAction:
+	//
+	//	*ManualPreconditioningAction_Start
+	//	*ManualPreconditioningAction_Stop
+	ManualPreconditioningAction isManualPreconditioningAction_ManualPreconditioningAction `protobuf_oneof:"manual_preconditioning_action"`
+	unknownFields               protoimpl.UnknownFields
+	sizeCache                   protoimpl.SizeCache
+}
+
+func (x *ManualPreconditioningAction) Reset() {
+	*x = ManualPreconditioningAction{}
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[199]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ManualPreconditioningAction) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ManualPreconditioningAction) ProtoMessage() {}
+
+func (x *ManualPreconditioningAction) ProtoReflect() protoreflect.Message {
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[199]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ManualPreconditioningAction.ProtoReflect.Descriptor instead.
+func (*ManualPreconditioningAction) Descriptor() ([]byte, []int) {
+	return file_tesla_protocol_command_car_server_proto_rawDescGZIP(), []int{199}
+}
+
+func (x *ManualPreconditioningAction) GetManualPreconditioningAction() isManualPreconditioningAction_ManualPreconditioningAction {
+	if x != nil {
+		return x.ManualPreconditioningAction
+	}
+	return nil
+}
+
+func (x *ManualPreconditioningAction) GetStart() *Void {
+	if x != nil {
+		if x, ok := x.ManualPreconditioningAction.(*ManualPreconditioningAction_Start); ok {
+			return x.Start
+		}
+	}
+	return nil
+}
+
+func (x *ManualPreconditioningAction) GetStop() *Void {
+	if x != nil {
+		if x, ok := x.ManualPreconditioningAction.(*ManualPreconditioningAction_Stop); ok {
+			return x.Stop
+		}
+	}
+	return nil
+}
+
+type isManualPreconditioningAction_ManualPreconditioningAction interface {
+	isManualPreconditioningAction_ManualPreconditioningAction()
+}
+
+type ManualPreconditioningAction_Start struct {
+	Start *Void `protobuf:"bytes,1,opt,name=start,proto3,oneof"`
+}
+
+type ManualPreconditioningAction_Stop struct {
+	Stop *Void `protobuf:"bytes,2,opt,name=stop,proto3,oneof"`
+}
+
+func (*ManualPreconditioningAction_Start) isManualPreconditioningAction_ManualPreconditioningAction() {
+}
+
+func (*ManualPreconditioningAction_Stop) isManualPreconditioningAction_ManualPreconditioningAction() {
+}
+
 // UNCONFIRMED: not yet confirmed on a live vehicle. Both fields carry an
 // encrypted envelope whose message type this repo does not publish.
 type DogModeLiveActivityData_DogModeImageData struct {
@@ -14417,7 +14519,7 @@ type DogModeLiveActivityData_DogModeImageData struct {
 
 func (x *DogModeLiveActivityData_DogModeImageData) Reset() {
 	*x = DogModeLiveActivityData_DogModeImageData{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[199]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[200]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14429,7 +14531,7 @@ func (x *DogModeLiveActivityData_DogModeImageData) String() string {
 func (*DogModeLiveActivityData_DogModeImageData) ProtoMessage() {}
 
 func (x *DogModeLiveActivityData_DogModeImageData) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[199]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[200]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14469,7 +14571,7 @@ type NavigationRouteResponse_TrafficDetail struct {
 
 func (x *NavigationRouteResponse_TrafficDetail) Reset() {
 	*x = NavigationRouteResponse_TrafficDetail{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[200]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[201]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14481,7 +14583,7 @@ func (x *NavigationRouteResponse_TrafficDetail) String() string {
 func (*NavigationRouteResponse_TrafficDetail) ProtoMessage() {}
 
 func (x *NavigationRouteResponse_TrafficDetail) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[200]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[201]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14540,7 +14642,7 @@ type HvacSeatHeaterActions_HvacSeatHeaterAction struct {
 
 func (x *HvacSeatHeaterActions_HvacSeatHeaterAction) Reset() {
 	*x = HvacSeatHeaterActions_HvacSeatHeaterAction{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[201]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[202]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14552,7 +14654,7 @@ func (x *HvacSeatHeaterActions_HvacSeatHeaterAction) String() string {
 func (*HvacSeatHeaterActions_HvacSeatHeaterAction) ProtoMessage() {}
 
 func (x *HvacSeatHeaterActions_HvacSeatHeaterAction) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[201]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[202]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14840,7 +14942,7 @@ type HvacSeatCoolerActions_HvacSeatCoolerAction struct {
 
 func (x *HvacSeatCoolerActions_HvacSeatCoolerAction) Reset() {
 	*x = HvacSeatCoolerActions_HvacSeatCoolerAction{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[202]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[203]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14852,7 +14954,7 @@ func (x *HvacSeatCoolerActions_HvacSeatCoolerAction) String() string {
 func (*HvacSeatCoolerActions_HvacSeatCoolerAction) ProtoMessage() {}
 
 func (x *HvacSeatCoolerActions_HvacSeatCoolerAction) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[202]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[203]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14896,7 +14998,7 @@ type HvacTemperatureAdjustmentAction_Temperature struct {
 
 func (x *HvacTemperatureAdjustmentAction_Temperature) Reset() {
 	*x = HvacTemperatureAdjustmentAction_Temperature{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[203]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[204]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -14908,7 +15010,7 @@ func (x *HvacTemperatureAdjustmentAction_Temperature) String() string {
 func (*HvacTemperatureAdjustmentAction_Temperature) ProtoMessage() {}
 
 func (x *HvacTemperatureAdjustmentAction_Temperature) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[203]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[204]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -14998,7 +15100,7 @@ type HvacTemperatureAdjustmentAction_HvacTemperatureZone struct {
 
 func (x *HvacTemperatureAdjustmentAction_HvacTemperatureZone) Reset() {
 	*x = HvacTemperatureAdjustmentAction_HvacTemperatureZone{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[204]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[205]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15010,7 +15112,7 @@ func (x *HvacTemperatureAdjustmentAction_HvacTemperatureZone) String() string {
 func (*HvacTemperatureAdjustmentAction_HvacTemperatureZone) ProtoMessage() {}
 
 func (x *HvacTemperatureAdjustmentAction_HvacTemperatureZone) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[204]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[205]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15111,7 +15213,7 @@ type AutoSeatClimateAction_CarSeat struct {
 
 func (x *AutoSeatClimateAction_CarSeat) Reset() {
 	*x = AutoSeatClimateAction_CarSeat{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[205]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[206]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15123,7 +15225,7 @@ func (x *AutoSeatClimateAction_CarSeat) String() string {
 func (*AutoSeatClimateAction_CarSeat) ProtoMessage() {}
 
 func (x *AutoSeatClimateAction_CarSeat) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[205]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[206]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15163,7 +15265,7 @@ type VehicleDataSubscription_PiiKeyRequest struct {
 
 func (x *VehicleDataSubscription_PiiKeyRequest) Reset() {
 	*x = VehicleDataSubscription_PiiKeyRequest{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[206]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[207]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15175,7 +15277,7 @@ func (x *VehicleDataSubscription_PiiKeyRequest) String() string {
 func (*VehicleDataSubscription_PiiKeyRequest) ProtoMessage() {}
 
 func (x *VehicleDataSubscription_PiiKeyRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[206]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[207]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15212,7 +15314,7 @@ type SetRateTariffRequest_TOUPeriod struct {
 
 func (x *SetRateTariffRequest_TOUPeriod) Reset() {
 	*x = SetRateTariffRequest_TOUPeriod{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[207]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[208]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15224,7 +15326,7 @@ func (x *SetRateTariffRequest_TOUPeriod) String() string {
 func (*SetRateTariffRequest_TOUPeriod) ProtoMessage() {}
 
 func (x *SetRateTariffRequest_TOUPeriod) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[207]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[208]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15294,7 +15396,7 @@ type SetRateTariffRequest_TOUPeriods struct {
 
 func (x *SetRateTariffRequest_TOUPeriods) Reset() {
 	*x = SetRateTariffRequest_TOUPeriods{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[208]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[209]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15306,7 +15408,7 @@ func (x *SetRateTariffRequest_TOUPeriods) String() string {
 func (*SetRateTariffRequest_TOUPeriods) ProtoMessage() {}
 
 func (x *SetRateTariffRequest_TOUPeriods) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[208]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[209]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15363,7 +15465,7 @@ type SetRateTariffRequest_Season struct {
 
 func (x *SetRateTariffRequest_Season) Reset() {
 	*x = SetRateTariffRequest_Season{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[209]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[210]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15375,7 +15477,7 @@ func (x *SetRateTariffRequest_Season) String() string {
 func (*SetRateTariffRequest_Season) ProtoMessage() {}
 
 func (x *SetRateTariffRequest_Season) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[209]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[210]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15439,7 +15541,7 @@ type SetRateTariffRequest_Seasons struct {
 
 func (x *SetRateTariffRequest_Seasons) Reset() {
 	*x = SetRateTariffRequest_Seasons{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[210]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[211]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15451,7 +15553,7 @@ func (x *SetRateTariffRequest_Seasons) String() string {
 func (*SetRateTariffRequest_Seasons) ProtoMessage() {}
 
 func (x *SetRateTariffRequest_Seasons) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[210]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[211]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15511,7 +15613,7 @@ type SetRateTariffRequest_FixedCharge struct {
 
 func (x *SetRateTariffRequest_FixedCharge) Reset() {
 	*x = SetRateTariffRequest_FixedCharge{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[211]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[212]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15523,7 +15625,7 @@ func (x *SetRateTariffRequest_FixedCharge) String() string {
 func (*SetRateTariffRequest_FixedCharge) ProtoMessage() {}
 
 func (x *SetRateTariffRequest_FixedCharge) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[211]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[212]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15559,7 +15661,7 @@ type SetRateTariffRequest_RateBand struct {
 
 func (x *SetRateTariffRequest_RateBand) Reset() {
 	*x = SetRateTariffRequest_RateBand{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[212]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[213]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15571,7 +15673,7 @@ func (x *SetRateTariffRequest_RateBand) String() string {
 func (*SetRateTariffRequest_RateBand) ProtoMessage() {}
 
 func (x *SetRateTariffRequest_RateBand) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[212]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[213]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15632,7 +15734,7 @@ type SetRateTariffRequest_DailyCharge struct {
 
 func (x *SetRateTariffRequest_DailyCharge) Reset() {
 	*x = SetRateTariffRequest_DailyCharge{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[213]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[214]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15644,7 +15746,7 @@ func (x *SetRateTariffRequest_DailyCharge) String() string {
 func (*SetRateTariffRequest_DailyCharge) ProtoMessage() {}
 
 func (x *SetRateTariffRequest_DailyCharge) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[213]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[214]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15688,7 +15790,7 @@ type SetRateTariffRequest_Charges struct {
 
 func (x *SetRateTariffRequest_Charges) Reset() {
 	*x = SetRateTariffRequest_Charges{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[214]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[215]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15700,7 +15802,7 @@ func (x *SetRateTariffRequest_Charges) String() string {
 func (*SetRateTariffRequest_Charges) ProtoMessage() {}
 
 func (x *SetRateTariffRequest_Charges) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[214]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[215]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15780,7 +15882,7 @@ type SetRateTariffRequest_Tariff struct {
 
 func (x *SetRateTariffRequest_Tariff) Reset() {
 	*x = SetRateTariffRequest_Tariff{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[215]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[216]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15792,7 +15894,7 @@ func (x *SetRateTariffRequest_Tariff) String() string {
 func (*SetRateTariffRequest_Tariff) ProtoMessage() {}
 
 func (x *SetRateTariffRequest_Tariff) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[215]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[216]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15909,7 +16011,7 @@ type NavigationWaypointsRequest_TripPlanOptions struct {
 
 func (x *NavigationWaypointsRequest_TripPlanOptions) Reset() {
 	*x = NavigationWaypointsRequest_TripPlanOptions{}
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[216]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[217]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -15921,7 +16023,7 @@ func (x *NavigationWaypointsRequest_TripPlanOptions) String() string {
 func (*NavigationWaypointsRequest_TripPlanOptions) ProtoMessage() {}
 
 func (x *NavigationWaypointsRequest_TripPlanOptions) ProtoReflect() protoreflect.Message {
-	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[216]
+	mi := &file_tesla_protocol_command_car_server_proto_msgTypes[217]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -15959,7 +16061,7 @@ const file_tesla_protocol_command_car_server_proto_rawDesc = "" +
 	"\x06Action\x12O\n" +
 	"\rvehicleAction\x18\x02 \x01(\v2'.tesla_protocol.CarServer.VehicleActionH\x00R\rvehicleActionB\f\n" +
 	"\n" +
-	"action_msgJ\x04\b\x03\x10\x06J\x04\b\x06\x10\t\"\xb0}\n" +
+	"action_msgJ\x04\b\x03\x10\x06J\x04\b\x06\x10\t\"\xad~\n" +
 	"\rVehicleAction\x12R\n" +
 	"\x0egetVehicleData\x18\x01 \x01(\v2(.tesla_protocol.CarServer.GetVehicleDataH\x00R\x0egetVehicleData\x12X\n" +
 	"\x10remoteStartDrive\x18\x02 \x01(\v2*.tesla_protocol.CarServer.RemoteStartDriveH\x00R\x10remoteStartDrive\x12a\n" +
@@ -16098,7 +16200,8 @@ const file_tesla_protocol_command_car_server_proto_rawDesc = "" +
 	" drivingSetCruiseSpeedLimitAction\x18\xa1\xaf* \x01(\v2:.tesla_protocol.CarServer.DrivingSetCruiseSpeedLimitActionH\x00R drivingSetCruiseSpeedLimitAction\x12`\n" +
 	"\x12setDeckLightAction\x18\xb6\xcd* \x01(\v2,.tesla_protocol.CarServer.SetDeckLightActionH\x00R\x12setDeckLightAction\x12{\n" +
 	"\x1bsetKeepOnCabin12vPortAction\x18\xee\x82, \x01(\v25.tesla_protocol.CarServer.SetKeepOnCabin12vPortActionH\x00R\x1bsetKeepOnCabin12vPortAction\x12{\n" +
-	"\x1bsetKeepOnCabin48vPortAction\x18\xef\x82, \x01(\v25.tesla_protocol.CarServer.SetKeepOnCabin48vPortActionH\x00R\x1bsetKeepOnCabin48vPortAction\x12A\n" +
+	"\x1bsetKeepOnCabin48vPortAction\x18\xef\x82, \x01(\v25.tesla_protocol.CarServer.SetKeepOnCabin48vPortActionH\x00R\x1bsetKeepOnCabin48vPortAction\x12{\n" +
+	"\x1bmanualPreconditioningAction\x18\xa5\xd2, \x01(\v25.tesla_protocol.CarServer.ManualPreconditioningActionH\x00R\x1bmanualPreconditioningAction\x12A\n" +
 	"\x1bdropNominalSuccessResponses\x18\xb9\x01 \x01(\bR\x1bdropNominalSuccessResponsesB\x14\n" +
 	"\x12vehicle_action_msgJ\x04\b\v\x10\fJ\x04\b<\x10=J\x04\bL\x10M\"\xd7\x13\n" +
 	"\x0eGetVehicleData\x12P\n" +
@@ -16967,7 +17070,11 @@ const file_tesla_protocol_command_car_server_proto_rawDesc = "" +
 	"\x1bSetKeepOnCabin48vPortAction\x12T\n" +
 	"\n" +
 	"keepOnMode\x18\x01 \x01(\x0e24.tesla_protocol.CarServer.KeepOnAccessoryPortRequestR\n" +
-	"keepOnMode*F\n" +
+	"keepOnMode\"\xac\x01\n" +
+	"\x1bManualPreconditioningAction\x126\n" +
+	"\x05start\x18\x01 \x01(\v2\x1e.tesla_protocol.CarServer.VoidH\x00R\x05start\x124\n" +
+	"\x04stop\x18\x02 \x01(\v2\x1e.tesla_protocol.CarServer.VoidH\x00R\x04stopB\x1f\n" +
+	"\x1dmanual_preconditioning_action*F\n" +
 	"\x11OperationStatus_E\x12\x16\n" +
 	"\x12OPERATIONSTATUS_OK\x10\x00\x12\x19\n" +
 	"\x15OPERATIONSTATUS_ERROR\x10\x01*\x8b\x05\n" +
@@ -17019,7 +17126,7 @@ func file_tesla_protocol_command_car_server_proto_rawDescGZIP() []byte {
 }
 
 var file_tesla_protocol_command_car_server_proto_enumTypes = make([]protoimpl.EnumInfo, 27)
-var file_tesla_protocol_command_car_server_proto_msgTypes = make([]protoimpl.MessageInfo, 217)
+var file_tesla_protocol_command_car_server_proto_msgTypes = make([]protoimpl.MessageInfo, 218)
 var file_tesla_protocol_command_car_server_proto_goTypes = []any{
 	(OperationStatus_E)(0),                                              // 0: tesla_protocol.CarServer.OperationStatus_E
 	(VehicleDataFields)(0),                                              // 1: tesla_protocol.CarServer.VehicleDataFields
@@ -17247,42 +17354,43 @@ var file_tesla_protocol_command_car_server_proto_goTypes = []any{
 	(*SetDeckLightAction)(nil),                                  // 223: tesla_protocol.CarServer.SetDeckLightAction
 	(*SetKeepOnCabin12VPortAction)(nil),                         // 224: tesla_protocol.CarServer.SetKeepOnCabin12vPortAction
 	(*SetKeepOnCabin48VPortAction)(nil),                         // 225: tesla_protocol.CarServer.SetKeepOnCabin48vPortAction
-	(*DogModeLiveActivityData_DogModeImageData)(nil),            // 226: tesla_protocol.CarServer.DogModeLiveActivityData.DogModeImageData
-	(*NavigationRouteResponse_TrafficDetail)(nil),               // 227: tesla_protocol.CarServer.NavigationRouteResponse.TrafficDetail
-	(*HvacSeatHeaterActions_HvacSeatHeaterAction)(nil),          // 228: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction
-	(*HvacSeatCoolerActions_HvacSeatCoolerAction)(nil),          // 229: tesla_protocol.CarServer.HvacSeatCoolerActions.HvacSeatCoolerAction
-	(*HvacTemperatureAdjustmentAction_Temperature)(nil),         // 230: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.Temperature
-	(*HvacTemperatureAdjustmentAction_HvacTemperatureZone)(nil), // 231: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.HvacTemperatureZone
-	(*AutoSeatClimateAction_CarSeat)(nil),                       // 232: tesla_protocol.CarServer.AutoSeatClimateAction.CarSeat
-	(*VehicleDataSubscription_PiiKeyRequest)(nil),               // 233: tesla_protocol.CarServer.VehicleDataSubscription.PiiKeyRequest
-	(*SetRateTariffRequest_TOUPeriod)(nil),                      // 234: tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriod
-	(*SetRateTariffRequest_TOUPeriods)(nil),                     // 235: tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriods
-	(*SetRateTariffRequest_Season)(nil),                         // 236: tesla_protocol.CarServer.SetRateTariffRequest.Season
-	(*SetRateTariffRequest_Seasons)(nil),                        // 237: tesla_protocol.CarServer.SetRateTariffRequest.Seasons
-	(*SetRateTariffRequest_FixedCharge)(nil),                    // 238: tesla_protocol.CarServer.SetRateTariffRequest.FixedCharge
-	(*SetRateTariffRequest_RateBand)(nil),                       // 239: tesla_protocol.CarServer.SetRateTariffRequest.RateBand
-	(*SetRateTariffRequest_DailyCharge)(nil),                    // 240: tesla_protocol.CarServer.SetRateTariffRequest.DailyCharge
-	(*SetRateTariffRequest_Charges)(nil),                        // 241: tesla_protocol.CarServer.SetRateTariffRequest.Charges
-	(*SetRateTariffRequest_Tariff)(nil),                         // 242: tesla_protocol.CarServer.SetRateTariffRequest.Tariff
-	(*NavigationWaypointsRequest_TripPlanOptions)(nil),          // 243: tesla_protocol.CarServer.NavigationWaypointsRequest.TripPlanOptions
-	(*VehicleState_GuestMode)(nil),                              // 244: tesla_protocol.CarServer.VehicleState.GuestMode
-	(*ChargeSchedule)(nil),                                      // 245: tesla_protocol.CarServer.ChargeSchedule
-	(*PreconditionSchedule)(nil),                                // 246: tesla_protocol.CarServer.PreconditionSchedule
-	(VehicleImageStateType)(0),                                  // 247: tesla_protocol.CarServer.VehicleImageStateType
-	(*timestamppb.Timestamp)(nil),                               // 248: google.protobuf.Timestamp
-	(ClimateState_DogModeState)(0),                              // 249: tesla_protocol.CarServer.ClimateState.DogModeState
-	(*VehicleData)(nil),                                         // 250: tesla_protocol.CarServer.VehicleData
-	(*signatures.SessionInfo)(nil),                              // 251: tesla_protocol.Signatures.SessionInfo
-	(keys.Role)(0),                                              // 252: tesla_protocol.Keys.Role
-	(vcsec.KeyFormFactor)(0),                                    // 253: tesla_protocol.VCSEC.KeyFormFactor
-	(*Void)(nil),                                                // 254: tesla_protocol.CarServer.Void
-	(*LatLong)(nil),                                             // 255: tesla_protocol.CarServer.LatLong
-	(MediaPlaybackStatus)(0),                                    // 256: tesla_protocol.CarServer.MediaPlaybackStatus
-	(*PreconditioningTimes)(nil),                                // 257: tesla_protocol.CarServer.PreconditioningTimes
-	(*OffPeakChargingTimes)(nil),                                // 258: tesla_protocol.CarServer.OffPeakChargingTimes
-	(ClimateState_CopActivationTemp)(0),                         // 259: tesla_protocol.CarServer.ClimateState.CopActivationTemp
-	(StwHeatLevel)(0),                                           // 260: tesla_protocol.CarServer.StwHeatLevel
-	(KeepOnAccessoryPortRequest)(0),                             // 261: tesla_protocol.CarServer.KeepOnAccessoryPortRequest
+	(*ManualPreconditioningAction)(nil),                         // 226: tesla_protocol.CarServer.ManualPreconditioningAction
+	(*DogModeLiveActivityData_DogModeImageData)(nil),            // 227: tesla_protocol.CarServer.DogModeLiveActivityData.DogModeImageData
+	(*NavigationRouteResponse_TrafficDetail)(nil),               // 228: tesla_protocol.CarServer.NavigationRouteResponse.TrafficDetail
+	(*HvacSeatHeaterActions_HvacSeatHeaterAction)(nil),          // 229: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction
+	(*HvacSeatCoolerActions_HvacSeatCoolerAction)(nil),          // 230: tesla_protocol.CarServer.HvacSeatCoolerActions.HvacSeatCoolerAction
+	(*HvacTemperatureAdjustmentAction_Temperature)(nil),         // 231: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.Temperature
+	(*HvacTemperatureAdjustmentAction_HvacTemperatureZone)(nil), // 232: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.HvacTemperatureZone
+	(*AutoSeatClimateAction_CarSeat)(nil),                       // 233: tesla_protocol.CarServer.AutoSeatClimateAction.CarSeat
+	(*VehicleDataSubscription_PiiKeyRequest)(nil),               // 234: tesla_protocol.CarServer.VehicleDataSubscription.PiiKeyRequest
+	(*SetRateTariffRequest_TOUPeriod)(nil),                      // 235: tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriod
+	(*SetRateTariffRequest_TOUPeriods)(nil),                     // 236: tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriods
+	(*SetRateTariffRequest_Season)(nil),                         // 237: tesla_protocol.CarServer.SetRateTariffRequest.Season
+	(*SetRateTariffRequest_Seasons)(nil),                        // 238: tesla_protocol.CarServer.SetRateTariffRequest.Seasons
+	(*SetRateTariffRequest_FixedCharge)(nil),                    // 239: tesla_protocol.CarServer.SetRateTariffRequest.FixedCharge
+	(*SetRateTariffRequest_RateBand)(nil),                       // 240: tesla_protocol.CarServer.SetRateTariffRequest.RateBand
+	(*SetRateTariffRequest_DailyCharge)(nil),                    // 241: tesla_protocol.CarServer.SetRateTariffRequest.DailyCharge
+	(*SetRateTariffRequest_Charges)(nil),                        // 242: tesla_protocol.CarServer.SetRateTariffRequest.Charges
+	(*SetRateTariffRequest_Tariff)(nil),                         // 243: tesla_protocol.CarServer.SetRateTariffRequest.Tariff
+	(*NavigationWaypointsRequest_TripPlanOptions)(nil),          // 244: tesla_protocol.CarServer.NavigationWaypointsRequest.TripPlanOptions
+	(*VehicleState_GuestMode)(nil),                              // 245: tesla_protocol.CarServer.VehicleState.GuestMode
+	(*ChargeSchedule)(nil),                                      // 246: tesla_protocol.CarServer.ChargeSchedule
+	(*PreconditionSchedule)(nil),                                // 247: tesla_protocol.CarServer.PreconditionSchedule
+	(VehicleImageStateType)(0),                                  // 248: tesla_protocol.CarServer.VehicleImageStateType
+	(*timestamppb.Timestamp)(nil),                               // 249: google.protobuf.Timestamp
+	(ClimateState_DogModeState)(0),                              // 250: tesla_protocol.CarServer.ClimateState.DogModeState
+	(*VehicleData)(nil),                                         // 251: tesla_protocol.CarServer.VehicleData
+	(*signatures.SessionInfo)(nil),                              // 252: tesla_protocol.Signatures.SessionInfo
+	(keys.Role)(0),                                              // 253: tesla_protocol.Keys.Role
+	(vcsec.KeyFormFactor)(0),                                    // 254: tesla_protocol.VCSEC.KeyFormFactor
+	(*Void)(nil),                                                // 255: tesla_protocol.CarServer.Void
+	(*LatLong)(nil),                                             // 256: tesla_protocol.CarServer.LatLong
+	(MediaPlaybackStatus)(0),                                    // 257: tesla_protocol.CarServer.MediaPlaybackStatus
+	(*PreconditioningTimes)(nil),                                // 258: tesla_protocol.CarServer.PreconditioningTimes
+	(*OffPeakChargingTimes)(nil),                                // 259: tesla_protocol.CarServer.OffPeakChargingTimes
+	(ClimateState_CopActivationTemp)(0),                         // 260: tesla_protocol.CarServer.ClimateState.CopActivationTemp
+	(StwHeatLevel)(0),                                           // 261: tesla_protocol.CarServer.StwHeatLevel
+	(KeepOnAccessoryPortRequest)(0),                             // 262: tesla_protocol.CarServer.KeepOnAccessoryPortRequest
 }
 var file_tesla_protocol_command_car_server_proto_depIdxs = []int32{
 	28,  // 0: tesla_protocol.CarServer.Action.vehicleAction:type_name -> tesla_protocol.CarServer.VehicleAction
@@ -17347,7 +17455,7 @@ var file_tesla_protocol_command_car_server_proto_depIdxs = []int32{
 	134, // 59: tesla_protocol.CarServer.VehicleAction.chargePortDoorOpen:type_name -> tesla_protocol.CarServer.ChargePortDoorOpen
 	157, // 60: tesla_protocol.CarServer.VehicleAction.bluetoothClassicPairingRequest:type_name -> tesla_protocol.CarServer.BluetoothClassicPairingRequest
 	135, // 61: tesla_protocol.CarServer.VehicleAction.boomboxAction:type_name -> tesla_protocol.CarServer.BoomboxAction
-	244, // 62: tesla_protocol.CarServer.VehicleAction.guestModeAction:type_name -> tesla_protocol.CarServer.VehicleState.GuestMode
+	245, // 62: tesla_protocol.CarServer.VehicleAction.guestModeAction:type_name -> tesla_protocol.CarServer.VehicleState.GuestMode
 	136, // 63: tesla_protocol.CarServer.VehicleAction.setCopTempAction:type_name -> tesla_protocol.CarServer.SetCopTempAction
 	158, // 64: tesla_protocol.CarServer.VehicleAction.addManagedChargingSiteRequest:type_name -> tesla_protocol.CarServer.AddManagedChargingSiteRequest
 	162, // 65: tesla_protocol.CarServer.VehicleAction.removeManagedChargingSiteRequest:type_name -> tesla_protocol.CarServer.RemoveManagedChargingSiteRequest
@@ -17378,9 +17486,9 @@ var file_tesla_protocol_command_car_server_proto_depIdxs = []int32{
 	186, // 90: tesla_protocol.CarServer.VehicleAction.setTentModeRequestAction:type_name -> tesla_protocol.CarServer.SetTentModeRequestAction
 	187, // 91: tesla_protocol.CarServer.VehicleAction.setFrontZoneLightRequestAction:type_name -> tesla_protocol.CarServer.SetZoneLightRequestAction
 	187, // 92: tesla_protocol.CarServer.VehicleAction.setRearZoneLightRequestAction:type_name -> tesla_protocol.CarServer.SetZoneLightRequestAction
-	245, // 93: tesla_protocol.CarServer.VehicleAction.addChargeScheduleAction:type_name -> tesla_protocol.CarServer.ChargeSchedule
+	246, // 93: tesla_protocol.CarServer.VehicleAction.addChargeScheduleAction:type_name -> tesla_protocol.CarServer.ChargeSchedule
 	127, // 94: tesla_protocol.CarServer.VehicleAction.removeChargeScheduleAction:type_name -> tesla_protocol.CarServer.RemoveChargeScheduleAction
-	246, // 95: tesla_protocol.CarServer.VehicleAction.addPreconditionScheduleAction:type_name -> tesla_protocol.CarServer.PreconditionSchedule
+	247, // 95: tesla_protocol.CarServer.VehicleAction.addPreconditionScheduleAction:type_name -> tesla_protocol.CarServer.PreconditionSchedule
 	130, // 96: tesla_protocol.CarServer.VehicleAction.removePreconditionScheduleAction:type_name -> tesla_protocol.CarServer.RemovePreconditionScheduleAction
 	188, // 97: tesla_protocol.CarServer.VehicleAction.setLightbarBrightnessAction:type_name -> tesla_protocol.CarServer.SetLightbarBrightnessAction
 	189, // 98: tesla_protocol.CarServer.VehicleAction.setLightbarMiddleAction:type_name -> tesla_protocol.CarServer.SetLightbarMiddleAction
@@ -17423,221 +17531,224 @@ var file_tesla_protocol_command_car_server_proto_depIdxs = []int32{
 	223, // 135: tesla_protocol.CarServer.VehicleAction.setDeckLightAction:type_name -> tesla_protocol.CarServer.SetDeckLightAction
 	224, // 136: tesla_protocol.CarServer.VehicleAction.setKeepOnCabin12vPortAction:type_name -> tesla_protocol.CarServer.SetKeepOnCabin12vPortAction
 	225, // 137: tesla_protocol.CarServer.VehicleAction.setKeepOnCabin48vPortAction:type_name -> tesla_protocol.CarServer.SetKeepOnCabin48vPortAction
-	30,  // 138: tesla_protocol.CarServer.GetVehicleData.getGuiSettings:type_name -> tesla_protocol.CarServer.GetGuiSettings
-	57,  // 139: tesla_protocol.CarServer.GetVehicleData.getChargeState:type_name -> tesla_protocol.CarServer.GetChargeState
-	58,  // 140: tesla_protocol.CarServer.GetVehicleData.getClimateState:type_name -> tesla_protocol.CarServer.GetClimateState
-	59,  // 141: tesla_protocol.CarServer.GetVehicleData.getDriveState:type_name -> tesla_protocol.CarServer.GetDriveState
-	32,  // 142: tesla_protocol.CarServer.GetVehicleData.getLegacyVehicleState:type_name -> tesla_protocol.CarServer.GetLegacyVehicleState
-	33,  // 143: tesla_protocol.CarServer.GetVehicleData.getVehicleConfig:type_name -> tesla_protocol.CarServer.GetVehicleConfig
-	60,  // 144: tesla_protocol.CarServer.GetVehicleData.getLocationState:type_name -> tesla_protocol.CarServer.GetLocationState
-	61,  // 145: tesla_protocol.CarServer.GetVehicleData.getClosuresState:type_name -> tesla_protocol.CarServer.GetClosuresState
-	36,  // 146: tesla_protocol.CarServer.GetVehicleData.getParkedAccessoryState:type_name -> tesla_protocol.CarServer.GetParkedAccessoryState
-	62,  // 147: tesla_protocol.CarServer.GetVehicleData.getChargeScheduleState:type_name -> tesla_protocol.CarServer.GetChargeScheduleState
-	63,  // 148: tesla_protocol.CarServer.GetVehicleData.getPreconditioningScheduleState:type_name -> tesla_protocol.CarServer.GetPreconditioningScheduleState
-	34,  // 149: tesla_protocol.CarServer.GetVehicleData.getSohState:type_name -> tesla_protocol.CarServer.GetSohState
-	35,  // 150: tesla_protocol.CarServer.GetVehicleData.getVehicleDetailState:type_name -> tesla_protocol.CarServer.GetVehicleDetailState
-	53,  // 151: tesla_protocol.CarServer.GetVehicleData.getTirePressureState:type_name -> tesla_protocol.CarServer.GetTirePressureState
-	54,  // 152: tesla_protocol.CarServer.GetVehicleData.getMediaState:type_name -> tesla_protocol.CarServer.GetMediaState
-	55,  // 153: tesla_protocol.CarServer.GetVehicleData.getMediaDetailState:type_name -> tesla_protocol.CarServer.GetMediaDetailState
-	56,  // 154: tesla_protocol.CarServer.GetVehicleData.getSoftwareUpdateState:type_name -> tesla_protocol.CarServer.GetSoftwareUpdateState
-	37,  // 155: tesla_protocol.CarServer.GetVehicleData.getVehicleState:type_name -> tesla_protocol.CarServer.GetVehicleState
-	64,  // 156: tesla_protocol.CarServer.GetVehicleData.getParentalControlsState:type_name -> tesla_protocol.CarServer.GetParentalControlsState
-	38,  // 157: tesla_protocol.CarServer.GetVehicleData.getAlertState:type_name -> tesla_protocol.CarServer.GetAlertState
-	39,  // 158: tesla_protocol.CarServer.GetVehicleData.getLightShowState:type_name -> tesla_protocol.CarServer.GetLightShowState
-	40,  // 159: tesla_protocol.CarServer.GetVehicleData.getVehicleImageState:type_name -> tesla_protocol.CarServer.GetVehicleImageState
-	41,  // 160: tesla_protocol.CarServer.GetVehicleData.getSuspensionState:type_name -> tesla_protocol.CarServer.GetSuspensionState
-	42,  // 161: tesla_protocol.CarServer.GetVehicleData.getChildPresenceDetectionState:type_name -> tesla_protocol.CarServer.GetChildPresenceDetectionState
-	43,  // 162: tesla_protocol.CarServer.GetVehicleData.getDisplayState:type_name -> tesla_protocol.CarServer.GetDisplayState
-	31,  // 163: tesla_protocol.CarServer.GetVehicleData.getKeepOnAccessoryPortsState:type_name -> tesla_protocol.CarServer.GetKeepOnAccessoryPortsState
-	45,  // 164: tesla_protocol.CarServer.GetVehicleImageState.imageRequests:type_name -> tesla_protocol.CarServer.VehicleImageRequest
-	3,   // 165: tesla_protocol.CarServer.VehicleImageRequest.dataType:type_name -> tesla_protocol.CarServer.VehicleImageRequest.Type
-	247, // 166: tesla_protocol.CarServer.VehicleImageRequest.imageType:type_name -> tesla_protocol.CarServer.VehicleImageStateType
-	44,  // 167: tesla_protocol.CarServer.VehicleImageRequest.chunkRequest:type_name -> tesla_protocol.CarServer.VehicleImageDataChunkRequest
-	247, // 168: tesla_protocol.CarServer.MobileImageUploadParams.imageType:type_name -> tesla_protocol.CarServer.VehicleImageStateType
-	47,  // 169: tesla_protocol.CarServer.PrepareMobileUploadAction.uploadParams:type_name -> tesla_protocol.CarServer.MobileUploadParams
-	46,  // 170: tesla_protocol.CarServer.PrepareMobileUploadAction.imageParams:type_name -> tesla_protocol.CarServer.MobileImageUploadParams
-	4,   // 171: tesla_protocol.CarServer.PrepareMobileUploadResponse.status:type_name -> tesla_protocol.CarServer.PrepareMobileUploadResponse.Status
-	5,   // 172: tesla_protocol.CarServer.PutMobileUploadChunkResponse.status:type_name -> tesla_protocol.CarServer.PutMobileUploadChunkResponse.Status
-	6,   // 173: tesla_protocol.CarServer.DogModeLiveActivityData.disabledReason:type_name -> tesla_protocol.CarServer.DogModeLiveActivityData.DisabledReason
-	226, // 174: tesla_protocol.CarServer.DogModeLiveActivityData.interiorImage:type_name -> tesla_protocol.CarServer.DogModeLiveActivityData.DogModeImageData
-	248, // 175: tesla_protocol.CarServer.DogModeLiveActivityData.timestamp:type_name -> google.protobuf.Timestamp
-	249, // 176: tesla_protocol.CarServer.DogModeLiveActivityData.faultState:type_name -> tesla_protocol.CarServer.ClimateState.DogModeState
-	21,  // 177: tesla_protocol.CarServer.DogModeLiveActivityData.temperatureUnit:type_name -> tesla_protocol.CarServer.SetTemperatureUnitAction.Unit
-	85,  // 178: tesla_protocol.CarServer.Response.actionStatus:type_name -> tesla_protocol.CarServer.ActionStatus
-	250, // 179: tesla_protocol.CarServer.Response.vehicleData:type_name -> tesla_protocol.CarServer.VehicleData
-	251, // 180: tesla_protocol.CarServer.Response.getSessionInfoResponse:type_name -> tesla_protocol.Signatures.SessionInfo
-	141, // 181: tesla_protocol.CarServer.Response.streamMessage:type_name -> tesla_protocol.CarServer.StreamMessage
-	100, // 182: tesla_protocol.CarServer.Response.getNearbyChargingSites:type_name -> tesla_protocol.CarServer.NearbyChargingSites
-	67,  // 183: tesla_protocol.CarServer.Response.vehicleDataSubscriptionResponse:type_name -> tesla_protocol.CarServer.VehicleDataSubscriptionResponse
-	68,  // 184: tesla_protocol.CarServer.Response.vitalsSubscriptionResponse:type_name -> tesla_protocol.CarServer.VitalsSubscriptionResponse
-	121, // 185: tesla_protocol.CarServer.Response.ping:type_name -> tesla_protocol.CarServer.Ping
-	69,  // 186: tesla_protocol.CarServer.Response.piiKeyResponse:type_name -> tesla_protocol.CarServer.PiiKeyResponse
-	70,  // 187: tesla_protocol.CarServer.Response.pseudonymSyncResponse:type_name -> tesla_protocol.CarServer.PseudonymSyncResponse
-	84,  // 188: tesla_protocol.CarServer.Response.getRateTariffResponse:type_name -> tesla_protocol.CarServer.GetRateTariffResponse
-	71,  // 189: tesla_protocol.CarServer.Response.navigationRouteResponse:type_name -> tesla_protocol.CarServer.NavigationRouteResponse
-	72,  // 190: tesla_protocol.CarServer.Response.getManagedChargingSitesResponse:type_name -> tesla_protocol.CarServer.GetManagedChargingSitesResponse
-	169, // 191: tesla_protocol.CarServer.Response.getChargeOnSolarFeatureResponse:type_name -> tesla_protocol.CarServer.GetChargeOnSolarFeatureResponse
-	75,  // 192: tesla_protocol.CarServer.Response.addManagedChargingSiteResponse:type_name -> tesla_protocol.CarServer.AddManagedChargingSiteResponse
-	78,  // 193: tesla_protocol.CarServer.Response.getMessagesResponse:type_name -> tesla_protocol.CarServer.GetMessagesResponse
-	80,  // 194: tesla_protocol.CarServer.Response.getLocalProfilesResponse:type_name -> tesla_protocol.CarServer.GetLocalProfilesResponse
-	82,  // 195: tesla_protocol.CarServer.Response.keysInfoResponse:type_name -> tesla_protocol.CarServer.KeysInfoResponse
-	83,  // 196: tesla_protocol.CarServer.Response.bandwidthTestResponse:type_name -> tesla_protocol.CarServer.BandwidthTestResponse
-	49,  // 197: tesla_protocol.CarServer.Response.prepareMobileUploadResponse:type_name -> tesla_protocol.CarServer.PrepareMobileUploadResponse
-	51,  // 198: tesla_protocol.CarServer.Response.putMobileUploadChunkResponse:type_name -> tesla_protocol.CarServer.PutMobileUploadChunkResponse
-	69,  // 199: tesla_protocol.CarServer.VehicleDataSubscriptionResponse.pii_key_response:type_name -> tesla_protocol.CarServer.PiiKeyResponse
-	248, // 200: tesla_protocol.CarServer.PiiKeyResponse.pii_key_expiration:type_name -> google.protobuf.Timestamp
-	248, // 201: tesla_protocol.CarServer.PiiKeyResponse.subscriber_public_key_expiration:type_name -> google.protobuf.Timestamp
-	227, // 202: tesla_protocol.CarServer.NavigationRouteResponse.traffic_detail:type_name -> tesla_protocol.CarServer.NavigationRouteResponse.TrafficDetail
-	159, // 203: tesla_protocol.CarServer.GetManagedChargingSitesResponse.sites:type_name -> tesla_protocol.CarServer.ManagedChargingSite
-	73,  // 204: tesla_protocol.CarServer.AddManagedChargingSiteResponse.added_or_updated:type_name -> tesla_protocol.CarServer.ManagedChargingSiteAddedOrUpdated
-	74,  // 205: tesla_protocol.CarServer.AddManagedChargingSiteResponse.existing_site_nearby:type_name -> tesla_protocol.CarServer.ExistingManagedChargingSiteNearby
-	76,  // 206: tesla_protocol.CarServer.MobileAppMessage.request_tesla_auth_command:type_name -> tesla_protocol.CarServer.RequestTeslaAuthCommand
-	77,  // 207: tesla_protocol.CarServer.GetMessagesResponse.mobile_app_messages:type_name -> tesla_protocol.CarServer.MobileAppMessage
-	79,  // 208: tesla_protocol.CarServer.GetLocalProfilesResponse.profiles:type_name -> tesla_protocol.CarServer.Profile
-	248, // 209: tesla_protocol.CarServer.KeyInfo.last_seen:type_name -> google.protobuf.Timestamp
-	252, // 210: tesla_protocol.CarServer.KeyInfo.role:type_name -> tesla_protocol.Keys.Role
-	253, // 211: tesla_protocol.CarServer.KeyInfo.form_factor:type_name -> tesla_protocol.VCSEC.KeyFormFactor
-	81,  // 212: tesla_protocol.CarServer.KeysInfoResponse.keys_info:type_name -> tesla_protocol.CarServer.KeyInfo
-	153, // 213: tesla_protocol.CarServer.GetRateTariffResponse.tariff_document:type_name -> tesla_protocol.CarServer.SetRateTariffRequest
-	237, // 214: tesla_protocol.CarServer.GetRateTariffResponse.seasons:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Seasons
-	242, // 215: tesla_protocol.CarServer.GetRateTariffResponse.tariff:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Tariff
-	0,   // 216: tesla_protocol.CarServer.ActionStatus.result:type_name -> tesla_protocol.CarServer.OperationStatus_E
-	86,  // 217: tesla_protocol.CarServer.ActionStatus.result_reason:type_name -> tesla_protocol.CarServer.ResultReason
-	254, // 218: tesla_protocol.CarServer.ChargingStartStopAction.unknown:type_name -> tesla_protocol.CarServer.Void
-	254, // 219: tesla_protocol.CarServer.ChargingStartStopAction.start:type_name -> tesla_protocol.CarServer.Void
-	254, // 220: tesla_protocol.CarServer.ChargingStartStopAction.start_standard:type_name -> tesla_protocol.CarServer.Void
-	254, // 221: tesla_protocol.CarServer.ChargingStartStopAction.start_max_range:type_name -> tesla_protocol.CarServer.Void
-	254, // 222: tesla_protocol.CarServer.ChargingStartStopAction.stop:type_name -> tesla_protocol.CarServer.Void
-	228, // 223: tesla_protocol.CarServer.HvacSeatHeaterActions.hvacSeatHeaterAction:type_name -> tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction
-	229, // 224: tesla_protocol.CarServer.HvacSeatCoolerActions.hvacSeatCoolerAction:type_name -> tesla_protocol.CarServer.HvacSeatCoolerActions.HvacSeatCoolerAction
-	10,  // 225: tesla_protocol.CarServer.HvacSetPreconditioningMaxAction.manual_override_mode:type_name -> tesla_protocol.CarServer.HvacSetPreconditioningMaxAction.ManualOverrideMode_E
-	230, // 226: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.level:type_name -> tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.Temperature
-	231, // 227: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.hvac_temperature_zone:type_name -> tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.HvacTemperatureZone
-	248, // 228: tesla_protocol.CarServer.NearbyChargingSites.timestamp:type_name -> google.protobuf.Timestamp
-	101, // 229: tesla_protocol.CarServer.NearbyChargingSites.destination_charging:type_name -> tesla_protocol.CarServer.DestinationCharging
-	102, // 230: tesla_protocol.CarServer.NearbyChargingSites.superchargers:type_name -> tesla_protocol.CarServer.Superchargers
-	255, // 231: tesla_protocol.CarServer.DestinationCharging.location:type_name -> tesla_protocol.CarServer.LatLong
-	255, // 232: tesla_protocol.CarServer.Superchargers.location:type_name -> tesla_protocol.CarServer.LatLong
-	256, // 233: tesla_protocol.CarServer.MediaPlayAction.media_playback_status:type_name -> tesla_protocol.CarServer.MediaPlaybackStatus
-	254, // 234: tesla_protocol.CarServer.VehicleControlSunroofOpenCloseAction.vent:type_name -> tesla_protocol.CarServer.Void
-	254, // 235: tesla_protocol.CarServer.VehicleControlSunroofOpenCloseAction.close:type_name -> tesla_protocol.CarServer.Void
-	254, // 236: tesla_protocol.CarServer.VehicleControlSunroofOpenCloseAction.open:type_name -> tesla_protocol.CarServer.Void
-	255, // 237: tesla_protocol.CarServer.VehicleControlTriggerHomelinkAction.location:type_name -> tesla_protocol.CarServer.LatLong
-	254, // 238: tesla_protocol.CarServer.VehicleControlWindowAction.unknown:type_name -> tesla_protocol.CarServer.Void
-	254, // 239: tesla_protocol.CarServer.VehicleControlWindowAction.vent:type_name -> tesla_protocol.CarServer.Void
-	254, // 240: tesla_protocol.CarServer.VehicleControlWindowAction.close:type_name -> tesla_protocol.CarServer.Void
-	232, // 241: tesla_protocol.CarServer.AutoSeatClimateAction.carseat:type_name -> tesla_protocol.CarServer.AutoSeatClimateAction.CarSeat
-	248, // 242: tesla_protocol.CarServer.Ping.local_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 243: tesla_protocol.CarServer.Ping.last_remote_timestamp:type_name -> google.protobuf.Timestamp
-	257, // 244: tesla_protocol.CarServer.ScheduledDepartureAction.preconditioning_times:type_name -> tesla_protocol.CarServer.PreconditioningTimes
-	258, // 245: tesla_protocol.CarServer.ScheduledDepartureAction.off_peak_charging_times:type_name -> tesla_protocol.CarServer.OffPeakChargingTimes
-	12,  // 246: tesla_protocol.CarServer.HvacClimateKeeperAction.ClimateKeeperAction:type_name -> tesla_protocol.CarServer.HvacClimateKeeperAction.ClimateKeeperAction_E
-	13,  // 247: tesla_protocol.CarServer.HvacClimateKeeperAction.manual_override_mode:type_name -> tesla_protocol.CarServer.HvacClimateKeeperAction.ManualOverrideMode_E
-	259, // 248: tesla_protocol.CarServer.SetCopTempAction.copActivationTemp:type_name -> tesla_protocol.CarServer.ClimateState.CopActivationTemp
-	2,   // 249: tesla_protocol.CarServer.NavigationRequest.order:type_name -> tesla_protocol.CarServer.RemoteNavTripOrder_E
-	2,   // 250: tesla_protocol.CarServer.NavigationSuperchargerRequest.remote_nav_trip_order:type_name -> tesla_protocol.CarServer.RemoteNavTripOrder_E
-	233, // 251: tesla_protocol.CarServer.VehicleDataSubscription.pii_key_request:type_name -> tesla_protocol.CarServer.VehicleDataSubscription.PiiKeyRequest
-	248, // 252: tesla_protocol.CarServer.VehicleDataAck.charge_state_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 253: tesla_protocol.CarServer.VehicleDataAck.climate_state_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 254: tesla_protocol.CarServer.VehicleDataAck.closures_state_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 255: tesla_protocol.CarServer.VehicleDataAck.drive_state_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 256: tesla_protocol.CarServer.VehicleDataAck.gui_settings_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 257: tesla_protocol.CarServer.VehicleDataAck.location_state_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 258: tesla_protocol.CarServer.VehicleDataAck.vehicle_config_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 259: tesla_protocol.CarServer.VehicleDataAck.vehicle_state_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 260: tesla_protocol.CarServer.VehicleDataAck.parked_accessory_state_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 261: tesla_protocol.CarServer.VehicleDataAck.charge_schedule_state_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 262: tesla_protocol.CarServer.VehicleDataAck.preconditioning_schedule_state_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 263: tesla_protocol.CarServer.VehicleDataAck.alert_state_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 264: tesla_protocol.CarServer.VehicleDataAck.suspension_state_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 265: tesla_protocol.CarServer.VehicleDataAck.display_state_timestamp:type_name -> google.protobuf.Timestamp
-	248, // 266: tesla_protocol.CarServer.PiiKeyRequest.pii_key_expiration:type_name -> google.protobuf.Timestamp
-	2,   // 267: tesla_protocol.CarServer.NavigationGpsRequest.order:type_name -> tesla_protocol.CarServer.RemoteNavTripOrder_E
-	240, // 268: tesla_protocol.CarServer.SetRateTariffRequest.daily_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.DailyCharge
-	241, // 269: tesla_protocol.CarServer.SetRateTariffRequest.demand_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Charges
-	241, // 270: tesla_protocol.CarServer.SetRateTariffRequest.daily_demand_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Charges
-	241, // 271: tesla_protocol.CarServer.SetRateTariffRequest.energy_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Charges
-	237, // 272: tesla_protocol.CarServer.SetRateTariffRequest.seasons:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Seasons
-	242, // 273: tesla_protocol.CarServer.SetRateTariffRequest.tariff:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Tariff
-	159, // 274: tesla_protocol.CarServer.AddManagedChargingSiteRequest.site:type_name -> tesla_protocol.CarServer.ManagedChargingSite
-	160, // 275: tesla_protocol.CarServer.ManagedChargingSite.manager_type:type_name -> tesla_protocol.CarServer.ManagerType
-	255, // 276: tesla_protocol.CarServer.ManagedChargingSite.lat_lon:type_name -> tesla_protocol.CarServer.LatLong
-	161, // 277: tesla_protocol.CarServer.ManagerType.site_controller:type_name -> tesla_protocol.CarServer.SiteController
-	260, // 278: tesla_protocol.CarServer.StwHeatLevelAction.stw_heat_level:type_name -> tesla_protocol.CarServer.StwHeatLevel
-	170, // 279: tesla_protocol.CarServer.UpdateChargeOnSolarFeatureRequest.charge_on_solar:type_name -> tesla_protocol.CarServer.ChargeOnSolarFeature
-	170, // 280: tesla_protocol.CarServer.GetChargeOnSolarFeatureResponse.charge_on_solar:type_name -> tesla_protocol.CarServer.ChargeOnSolarFeature
-	14,  // 281: tesla_protocol.CarServer.SetOutletsOnOffAction.outlet_request:type_name -> tesla_protocol.CarServer.SetOutletsOnOffAction.OutletRequest
-	15,  // 282: tesla_protocol.CarServer.SetPowerFeedOnOffAction.power_feed_request:type_name -> tesla_protocol.CarServer.SetPowerFeedOnOffAction.PowerFeedRequest
-	243, // 283: tesla_protocol.CarServer.NavigationWaypointsRequest.trip_plan_options:type_name -> tesla_protocol.CarServer.NavigationWaypointsRequest.TripPlanOptions
-	16,  // 284: tesla_protocol.CarServer.SetPowershareFeatureAction.powershare_feature_request:type_name -> tesla_protocol.CarServer.SetPowershareFeatureAction.PowershareFeatureRequest
-	17,  // 285: tesla_protocol.CarServer.SetPowershareRequestAction.powershare_request:type_name -> tesla_protocol.CarServer.SetPowershareRequestAction.PowershareRequest
-	18,  // 286: tesla_protocol.CarServer.SetZoneLightRequestAction.zone_light_request:type_name -> tesla_protocol.CarServer.SetZoneLightRequestAction.ZoneLightRequest
-	2,   // 287: tesla_protocol.CarServer.NavigationGpsDestinationRequest.order:type_name -> tesla_protocol.CarServer.RemoteNavTripOrder_E
-	19,  // 288: tesla_protocol.CarServer.ParentalControlsEnableSettingsAction.setting:type_name -> tesla_protocol.CarServer.ParentalControlsEnableSettingsAction.ParentalControlsSetting_E
-	20,  // 289: tesla_protocol.CarServer.SetSuspensionLevelAction.suspension_level:type_name -> tesla_protocol.CarServer.SetSuspensionLevelAction.SuspensionLevel
-	21,  // 290: tesla_protocol.CarServer.SetTemperatureUnitAction.unit:type_name -> tesla_protocol.CarServer.SetTemperatureUnitAction.Unit
-	22,  // 291: tesla_protocol.CarServer.SetDistanceUnitAction.unit:type_name -> tesla_protocol.CarServer.SetDistanceUnitAction.Unit
-	23,  // 292: tesla_protocol.CarServer.SetTimeDisplayFormatAction.format:type_name -> tesla_protocol.CarServer.SetTimeDisplayFormatAction.Format
-	24,  // 293: tesla_protocol.CarServer.SetTirePressureUnitAction.unit:type_name -> tesla_protocol.CarServer.SetTirePressureUnitAction.Unit
-	25,  // 294: tesla_protocol.CarServer.SetEnergyDisplayFormatAction.format:type_name -> tesla_protocol.CarServer.SetEnergyDisplayFormatAction.Format
-	22,  // 295: tesla_protocol.CarServer.PhoneUnitPreferences.distance_unit:type_name -> tesla_protocol.CarServer.SetDistanceUnitAction.Unit
-	21,  // 296: tesla_protocol.CarServer.PhoneUnitPreferences.temperature_unit:type_name -> tesla_protocol.CarServer.SetTemperatureUnitAction.Unit
-	26,  // 297: tesla_protocol.CarServer.SetPhoneSettingPreferencesAction.font_size:type_name -> tesla_protocol.CarServer.SetPhoneSettingPreferencesAction.FontSize
-	218, // 298: tesla_protocol.CarServer.SetPhoneSettingPreferencesAction.unit_preferences:type_name -> tesla_protocol.CarServer.PhoneUnitPreferences
-	261, // 299: tesla_protocol.CarServer.SetKeepOnCabin12vPortAction.keepOnMode:type_name -> tesla_protocol.CarServer.KeepOnAccessoryPortRequest
-	261, // 300: tesla_protocol.CarServer.SetKeepOnCabin48vPortAction.keepOnMode:type_name -> tesla_protocol.CarServer.KeepOnAccessoryPortRequest
-	7,   // 301: tesla_protocol.CarServer.NavigationRouteResponse.TrafficDetail.traffic_status:type_name -> tesla_protocol.CarServer.NavigationRouteResponse.TrafficStatus
-	254, // 302: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.SEAT_HEATER_UNKNOWN:type_name -> tesla_protocol.CarServer.Void
-	254, // 303: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.SEAT_HEATER_OFF:type_name -> tesla_protocol.CarServer.Void
-	254, // 304: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.SEAT_HEATER_LOW:type_name -> tesla_protocol.CarServer.Void
-	254, // 305: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.SEAT_HEATER_MED:type_name -> tesla_protocol.CarServer.Void
-	254, // 306: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.SEAT_HEATER_HIGH:type_name -> tesla_protocol.CarServer.Void
-	254, // 307: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_UNKNOWN:type_name -> tesla_protocol.CarServer.Void
-	254, // 308: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_FRONT_LEFT:type_name -> tesla_protocol.CarServer.Void
-	254, // 309: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_FRONT_RIGHT:type_name -> tesla_protocol.CarServer.Void
-	254, // 310: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_REAR_LEFT:type_name -> tesla_protocol.CarServer.Void
-	254, // 311: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_REAR_LEFT_BACK:type_name -> tesla_protocol.CarServer.Void
-	254, // 312: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_REAR_CENTER:type_name -> tesla_protocol.CarServer.Void
-	254, // 313: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_REAR_RIGHT:type_name -> tesla_protocol.CarServer.Void
-	254, // 314: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_REAR_RIGHT_BACK:type_name -> tesla_protocol.CarServer.Void
-	254, // 315: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_THIRD_ROW_LEFT:type_name -> tesla_protocol.CarServer.Void
-	254, // 316: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_THIRD_ROW_RIGHT:type_name -> tesla_protocol.CarServer.Void
-	8,   // 317: tesla_protocol.CarServer.HvacSeatCoolerActions.HvacSeatCoolerAction.seat_cooler_level:type_name -> tesla_protocol.CarServer.HvacSeatCoolerActions.HvacSeatCoolerLevel_E
-	9,   // 318: tesla_protocol.CarServer.HvacSeatCoolerActions.HvacSeatCoolerAction.seat_position:type_name -> tesla_protocol.CarServer.HvacSeatCoolerActions.HvacSeatCoolerPosition_E
-	254, // 319: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.Temperature.TEMP_UNKNOWN:type_name -> tesla_protocol.CarServer.Void
-	254, // 320: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.Temperature.TEMP_MIN:type_name -> tesla_protocol.CarServer.Void
-	254, // 321: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.Temperature.TEMP_MAX:type_name -> tesla_protocol.CarServer.Void
-	254, // 322: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.HvacTemperatureZone.TEMP_ZONE_UNKNOWN:type_name -> tesla_protocol.CarServer.Void
-	254, // 323: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.HvacTemperatureZone.TEMP_ZONE_FRONT_LEFT:type_name -> tesla_protocol.CarServer.Void
-	254, // 324: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.HvacTemperatureZone.TEMP_ZONE_FRONT_RIGHT:type_name -> tesla_protocol.CarServer.Void
-	254, // 325: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.HvacTemperatureZone.TEMP_ZONE_REAR:type_name -> tesla_protocol.CarServer.Void
-	11,  // 326: tesla_protocol.CarServer.AutoSeatClimateAction.CarSeat.seat_position:type_name -> tesla_protocol.CarServer.AutoSeatClimateAction.AutoSeatPosition_E
-	234, // 327: tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriods.ON_PEAK:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriod
-	234, // 328: tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriods.PARTIAL_PEAK:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriod
-	234, // 329: tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriods.OFF_PEAK:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriod
-	234, // 330: tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriods.SUPER_OFF_PEAK:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriod
-	235, // 331: tesla_protocol.CarServer.SetRateTariffRequest.Season.tou_periods:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriods
-	236, // 332: tesla_protocol.CarServer.SetRateTariffRequest.Seasons.Summer:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Season
-	236, // 333: tesla_protocol.CarServer.SetRateTariffRequest.Seasons.Winter:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Season
-	236, // 334: tesla_protocol.CarServer.SetRateTariffRequest.Seasons.Season3:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Season
-	236, // 335: tesla_protocol.CarServer.SetRateTariffRequest.Seasons.Season4:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Season
-	236, // 336: tesla_protocol.CarServer.SetRateTariffRequest.Seasons.Season5:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Season
-	238, // 337: tesla_protocol.CarServer.SetRateTariffRequest.Charges.ALL:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.FixedCharge
-	239, // 338: tesla_protocol.CarServer.SetRateTariffRequest.Charges.Summer:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.RateBand
-	239, // 339: tesla_protocol.CarServer.SetRateTariffRequest.Charges.Winter:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.RateBand
-	239, // 340: tesla_protocol.CarServer.SetRateTariffRequest.Charges.Season3:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.RateBand
-	239, // 341: tesla_protocol.CarServer.SetRateTariffRequest.Charges.Season4:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.RateBand
-	239, // 342: tesla_protocol.CarServer.SetRateTariffRequest.Charges.Season5:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.RateBand
-	240, // 343: tesla_protocol.CarServer.SetRateTariffRequest.Tariff.daily_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.DailyCharge
-	241, // 344: tesla_protocol.CarServer.SetRateTariffRequest.Tariff.demand_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Charges
-	241, // 345: tesla_protocol.CarServer.SetRateTariffRequest.Tariff.daily_demand_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Charges
-	241, // 346: tesla_protocol.CarServer.SetRateTariffRequest.Tariff.energy_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Charges
-	237, // 347: tesla_protocol.CarServer.SetRateTariffRequest.Tariff.seasons:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Seasons
-	348, // [348:348] is the sub-list for method output_type
-	348, // [348:348] is the sub-list for method input_type
-	348, // [348:348] is the sub-list for extension type_name
-	348, // [348:348] is the sub-list for extension extendee
-	0,   // [0:348] is the sub-list for field type_name
+	226, // 138: tesla_protocol.CarServer.VehicleAction.manualPreconditioningAction:type_name -> tesla_protocol.CarServer.ManualPreconditioningAction
+	30,  // 139: tesla_protocol.CarServer.GetVehicleData.getGuiSettings:type_name -> tesla_protocol.CarServer.GetGuiSettings
+	57,  // 140: tesla_protocol.CarServer.GetVehicleData.getChargeState:type_name -> tesla_protocol.CarServer.GetChargeState
+	58,  // 141: tesla_protocol.CarServer.GetVehicleData.getClimateState:type_name -> tesla_protocol.CarServer.GetClimateState
+	59,  // 142: tesla_protocol.CarServer.GetVehicleData.getDriveState:type_name -> tesla_protocol.CarServer.GetDriveState
+	32,  // 143: tesla_protocol.CarServer.GetVehicleData.getLegacyVehicleState:type_name -> tesla_protocol.CarServer.GetLegacyVehicleState
+	33,  // 144: tesla_protocol.CarServer.GetVehicleData.getVehicleConfig:type_name -> tesla_protocol.CarServer.GetVehicleConfig
+	60,  // 145: tesla_protocol.CarServer.GetVehicleData.getLocationState:type_name -> tesla_protocol.CarServer.GetLocationState
+	61,  // 146: tesla_protocol.CarServer.GetVehicleData.getClosuresState:type_name -> tesla_protocol.CarServer.GetClosuresState
+	36,  // 147: tesla_protocol.CarServer.GetVehicleData.getParkedAccessoryState:type_name -> tesla_protocol.CarServer.GetParkedAccessoryState
+	62,  // 148: tesla_protocol.CarServer.GetVehicleData.getChargeScheduleState:type_name -> tesla_protocol.CarServer.GetChargeScheduleState
+	63,  // 149: tesla_protocol.CarServer.GetVehicleData.getPreconditioningScheduleState:type_name -> tesla_protocol.CarServer.GetPreconditioningScheduleState
+	34,  // 150: tesla_protocol.CarServer.GetVehicleData.getSohState:type_name -> tesla_protocol.CarServer.GetSohState
+	35,  // 151: tesla_protocol.CarServer.GetVehicleData.getVehicleDetailState:type_name -> tesla_protocol.CarServer.GetVehicleDetailState
+	53,  // 152: tesla_protocol.CarServer.GetVehicleData.getTirePressureState:type_name -> tesla_protocol.CarServer.GetTirePressureState
+	54,  // 153: tesla_protocol.CarServer.GetVehicleData.getMediaState:type_name -> tesla_protocol.CarServer.GetMediaState
+	55,  // 154: tesla_protocol.CarServer.GetVehicleData.getMediaDetailState:type_name -> tesla_protocol.CarServer.GetMediaDetailState
+	56,  // 155: tesla_protocol.CarServer.GetVehicleData.getSoftwareUpdateState:type_name -> tesla_protocol.CarServer.GetSoftwareUpdateState
+	37,  // 156: tesla_protocol.CarServer.GetVehicleData.getVehicleState:type_name -> tesla_protocol.CarServer.GetVehicleState
+	64,  // 157: tesla_protocol.CarServer.GetVehicleData.getParentalControlsState:type_name -> tesla_protocol.CarServer.GetParentalControlsState
+	38,  // 158: tesla_protocol.CarServer.GetVehicleData.getAlertState:type_name -> tesla_protocol.CarServer.GetAlertState
+	39,  // 159: tesla_protocol.CarServer.GetVehicleData.getLightShowState:type_name -> tesla_protocol.CarServer.GetLightShowState
+	40,  // 160: tesla_protocol.CarServer.GetVehicleData.getVehicleImageState:type_name -> tesla_protocol.CarServer.GetVehicleImageState
+	41,  // 161: tesla_protocol.CarServer.GetVehicleData.getSuspensionState:type_name -> tesla_protocol.CarServer.GetSuspensionState
+	42,  // 162: tesla_protocol.CarServer.GetVehicleData.getChildPresenceDetectionState:type_name -> tesla_protocol.CarServer.GetChildPresenceDetectionState
+	43,  // 163: tesla_protocol.CarServer.GetVehicleData.getDisplayState:type_name -> tesla_protocol.CarServer.GetDisplayState
+	31,  // 164: tesla_protocol.CarServer.GetVehicleData.getKeepOnAccessoryPortsState:type_name -> tesla_protocol.CarServer.GetKeepOnAccessoryPortsState
+	45,  // 165: tesla_protocol.CarServer.GetVehicleImageState.imageRequests:type_name -> tesla_protocol.CarServer.VehicleImageRequest
+	3,   // 166: tesla_protocol.CarServer.VehicleImageRequest.dataType:type_name -> tesla_protocol.CarServer.VehicleImageRequest.Type
+	248, // 167: tesla_protocol.CarServer.VehicleImageRequest.imageType:type_name -> tesla_protocol.CarServer.VehicleImageStateType
+	44,  // 168: tesla_protocol.CarServer.VehicleImageRequest.chunkRequest:type_name -> tesla_protocol.CarServer.VehicleImageDataChunkRequest
+	248, // 169: tesla_protocol.CarServer.MobileImageUploadParams.imageType:type_name -> tesla_protocol.CarServer.VehicleImageStateType
+	47,  // 170: tesla_protocol.CarServer.PrepareMobileUploadAction.uploadParams:type_name -> tesla_protocol.CarServer.MobileUploadParams
+	46,  // 171: tesla_protocol.CarServer.PrepareMobileUploadAction.imageParams:type_name -> tesla_protocol.CarServer.MobileImageUploadParams
+	4,   // 172: tesla_protocol.CarServer.PrepareMobileUploadResponse.status:type_name -> tesla_protocol.CarServer.PrepareMobileUploadResponse.Status
+	5,   // 173: tesla_protocol.CarServer.PutMobileUploadChunkResponse.status:type_name -> tesla_protocol.CarServer.PutMobileUploadChunkResponse.Status
+	6,   // 174: tesla_protocol.CarServer.DogModeLiveActivityData.disabledReason:type_name -> tesla_protocol.CarServer.DogModeLiveActivityData.DisabledReason
+	227, // 175: tesla_protocol.CarServer.DogModeLiveActivityData.interiorImage:type_name -> tesla_protocol.CarServer.DogModeLiveActivityData.DogModeImageData
+	249, // 176: tesla_protocol.CarServer.DogModeLiveActivityData.timestamp:type_name -> google.protobuf.Timestamp
+	250, // 177: tesla_protocol.CarServer.DogModeLiveActivityData.faultState:type_name -> tesla_protocol.CarServer.ClimateState.DogModeState
+	21,  // 178: tesla_protocol.CarServer.DogModeLiveActivityData.temperatureUnit:type_name -> tesla_protocol.CarServer.SetTemperatureUnitAction.Unit
+	85,  // 179: tesla_protocol.CarServer.Response.actionStatus:type_name -> tesla_protocol.CarServer.ActionStatus
+	251, // 180: tesla_protocol.CarServer.Response.vehicleData:type_name -> tesla_protocol.CarServer.VehicleData
+	252, // 181: tesla_protocol.CarServer.Response.getSessionInfoResponse:type_name -> tesla_protocol.Signatures.SessionInfo
+	141, // 182: tesla_protocol.CarServer.Response.streamMessage:type_name -> tesla_protocol.CarServer.StreamMessage
+	100, // 183: tesla_protocol.CarServer.Response.getNearbyChargingSites:type_name -> tesla_protocol.CarServer.NearbyChargingSites
+	67,  // 184: tesla_protocol.CarServer.Response.vehicleDataSubscriptionResponse:type_name -> tesla_protocol.CarServer.VehicleDataSubscriptionResponse
+	68,  // 185: tesla_protocol.CarServer.Response.vitalsSubscriptionResponse:type_name -> tesla_protocol.CarServer.VitalsSubscriptionResponse
+	121, // 186: tesla_protocol.CarServer.Response.ping:type_name -> tesla_protocol.CarServer.Ping
+	69,  // 187: tesla_protocol.CarServer.Response.piiKeyResponse:type_name -> tesla_protocol.CarServer.PiiKeyResponse
+	70,  // 188: tesla_protocol.CarServer.Response.pseudonymSyncResponse:type_name -> tesla_protocol.CarServer.PseudonymSyncResponse
+	84,  // 189: tesla_protocol.CarServer.Response.getRateTariffResponse:type_name -> tesla_protocol.CarServer.GetRateTariffResponse
+	71,  // 190: tesla_protocol.CarServer.Response.navigationRouteResponse:type_name -> tesla_protocol.CarServer.NavigationRouteResponse
+	72,  // 191: tesla_protocol.CarServer.Response.getManagedChargingSitesResponse:type_name -> tesla_protocol.CarServer.GetManagedChargingSitesResponse
+	169, // 192: tesla_protocol.CarServer.Response.getChargeOnSolarFeatureResponse:type_name -> tesla_protocol.CarServer.GetChargeOnSolarFeatureResponse
+	75,  // 193: tesla_protocol.CarServer.Response.addManagedChargingSiteResponse:type_name -> tesla_protocol.CarServer.AddManagedChargingSiteResponse
+	78,  // 194: tesla_protocol.CarServer.Response.getMessagesResponse:type_name -> tesla_protocol.CarServer.GetMessagesResponse
+	80,  // 195: tesla_protocol.CarServer.Response.getLocalProfilesResponse:type_name -> tesla_protocol.CarServer.GetLocalProfilesResponse
+	82,  // 196: tesla_protocol.CarServer.Response.keysInfoResponse:type_name -> tesla_protocol.CarServer.KeysInfoResponse
+	83,  // 197: tesla_protocol.CarServer.Response.bandwidthTestResponse:type_name -> tesla_protocol.CarServer.BandwidthTestResponse
+	49,  // 198: tesla_protocol.CarServer.Response.prepareMobileUploadResponse:type_name -> tesla_protocol.CarServer.PrepareMobileUploadResponse
+	51,  // 199: tesla_protocol.CarServer.Response.putMobileUploadChunkResponse:type_name -> tesla_protocol.CarServer.PutMobileUploadChunkResponse
+	69,  // 200: tesla_protocol.CarServer.VehicleDataSubscriptionResponse.pii_key_response:type_name -> tesla_protocol.CarServer.PiiKeyResponse
+	249, // 201: tesla_protocol.CarServer.PiiKeyResponse.pii_key_expiration:type_name -> google.protobuf.Timestamp
+	249, // 202: tesla_protocol.CarServer.PiiKeyResponse.subscriber_public_key_expiration:type_name -> google.protobuf.Timestamp
+	228, // 203: tesla_protocol.CarServer.NavigationRouteResponse.traffic_detail:type_name -> tesla_protocol.CarServer.NavigationRouteResponse.TrafficDetail
+	159, // 204: tesla_protocol.CarServer.GetManagedChargingSitesResponse.sites:type_name -> tesla_protocol.CarServer.ManagedChargingSite
+	73,  // 205: tesla_protocol.CarServer.AddManagedChargingSiteResponse.added_or_updated:type_name -> tesla_protocol.CarServer.ManagedChargingSiteAddedOrUpdated
+	74,  // 206: tesla_protocol.CarServer.AddManagedChargingSiteResponse.existing_site_nearby:type_name -> tesla_protocol.CarServer.ExistingManagedChargingSiteNearby
+	76,  // 207: tesla_protocol.CarServer.MobileAppMessage.request_tesla_auth_command:type_name -> tesla_protocol.CarServer.RequestTeslaAuthCommand
+	77,  // 208: tesla_protocol.CarServer.GetMessagesResponse.mobile_app_messages:type_name -> tesla_protocol.CarServer.MobileAppMessage
+	79,  // 209: tesla_protocol.CarServer.GetLocalProfilesResponse.profiles:type_name -> tesla_protocol.CarServer.Profile
+	249, // 210: tesla_protocol.CarServer.KeyInfo.last_seen:type_name -> google.protobuf.Timestamp
+	253, // 211: tesla_protocol.CarServer.KeyInfo.role:type_name -> tesla_protocol.Keys.Role
+	254, // 212: tesla_protocol.CarServer.KeyInfo.form_factor:type_name -> tesla_protocol.VCSEC.KeyFormFactor
+	81,  // 213: tesla_protocol.CarServer.KeysInfoResponse.keys_info:type_name -> tesla_protocol.CarServer.KeyInfo
+	153, // 214: tesla_protocol.CarServer.GetRateTariffResponse.tariff_document:type_name -> tesla_protocol.CarServer.SetRateTariffRequest
+	238, // 215: tesla_protocol.CarServer.GetRateTariffResponse.seasons:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Seasons
+	243, // 216: tesla_protocol.CarServer.GetRateTariffResponse.tariff:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Tariff
+	0,   // 217: tesla_protocol.CarServer.ActionStatus.result:type_name -> tesla_protocol.CarServer.OperationStatus_E
+	86,  // 218: tesla_protocol.CarServer.ActionStatus.result_reason:type_name -> tesla_protocol.CarServer.ResultReason
+	255, // 219: tesla_protocol.CarServer.ChargingStartStopAction.unknown:type_name -> tesla_protocol.CarServer.Void
+	255, // 220: tesla_protocol.CarServer.ChargingStartStopAction.start:type_name -> tesla_protocol.CarServer.Void
+	255, // 221: tesla_protocol.CarServer.ChargingStartStopAction.start_standard:type_name -> tesla_protocol.CarServer.Void
+	255, // 222: tesla_protocol.CarServer.ChargingStartStopAction.start_max_range:type_name -> tesla_protocol.CarServer.Void
+	255, // 223: tesla_protocol.CarServer.ChargingStartStopAction.stop:type_name -> tesla_protocol.CarServer.Void
+	229, // 224: tesla_protocol.CarServer.HvacSeatHeaterActions.hvacSeatHeaterAction:type_name -> tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction
+	230, // 225: tesla_protocol.CarServer.HvacSeatCoolerActions.hvacSeatCoolerAction:type_name -> tesla_protocol.CarServer.HvacSeatCoolerActions.HvacSeatCoolerAction
+	10,  // 226: tesla_protocol.CarServer.HvacSetPreconditioningMaxAction.manual_override_mode:type_name -> tesla_protocol.CarServer.HvacSetPreconditioningMaxAction.ManualOverrideMode_E
+	231, // 227: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.level:type_name -> tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.Temperature
+	232, // 228: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.hvac_temperature_zone:type_name -> tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.HvacTemperatureZone
+	249, // 229: tesla_protocol.CarServer.NearbyChargingSites.timestamp:type_name -> google.protobuf.Timestamp
+	101, // 230: tesla_protocol.CarServer.NearbyChargingSites.destination_charging:type_name -> tesla_protocol.CarServer.DestinationCharging
+	102, // 231: tesla_protocol.CarServer.NearbyChargingSites.superchargers:type_name -> tesla_protocol.CarServer.Superchargers
+	256, // 232: tesla_protocol.CarServer.DestinationCharging.location:type_name -> tesla_protocol.CarServer.LatLong
+	256, // 233: tesla_protocol.CarServer.Superchargers.location:type_name -> tesla_protocol.CarServer.LatLong
+	257, // 234: tesla_protocol.CarServer.MediaPlayAction.media_playback_status:type_name -> tesla_protocol.CarServer.MediaPlaybackStatus
+	255, // 235: tesla_protocol.CarServer.VehicleControlSunroofOpenCloseAction.vent:type_name -> tesla_protocol.CarServer.Void
+	255, // 236: tesla_protocol.CarServer.VehicleControlSunroofOpenCloseAction.close:type_name -> tesla_protocol.CarServer.Void
+	255, // 237: tesla_protocol.CarServer.VehicleControlSunroofOpenCloseAction.open:type_name -> tesla_protocol.CarServer.Void
+	256, // 238: tesla_protocol.CarServer.VehicleControlTriggerHomelinkAction.location:type_name -> tesla_protocol.CarServer.LatLong
+	255, // 239: tesla_protocol.CarServer.VehicleControlWindowAction.unknown:type_name -> tesla_protocol.CarServer.Void
+	255, // 240: tesla_protocol.CarServer.VehicleControlWindowAction.vent:type_name -> tesla_protocol.CarServer.Void
+	255, // 241: tesla_protocol.CarServer.VehicleControlWindowAction.close:type_name -> tesla_protocol.CarServer.Void
+	233, // 242: tesla_protocol.CarServer.AutoSeatClimateAction.carseat:type_name -> tesla_protocol.CarServer.AutoSeatClimateAction.CarSeat
+	249, // 243: tesla_protocol.CarServer.Ping.local_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 244: tesla_protocol.CarServer.Ping.last_remote_timestamp:type_name -> google.protobuf.Timestamp
+	258, // 245: tesla_protocol.CarServer.ScheduledDepartureAction.preconditioning_times:type_name -> tesla_protocol.CarServer.PreconditioningTimes
+	259, // 246: tesla_protocol.CarServer.ScheduledDepartureAction.off_peak_charging_times:type_name -> tesla_protocol.CarServer.OffPeakChargingTimes
+	12,  // 247: tesla_protocol.CarServer.HvacClimateKeeperAction.ClimateKeeperAction:type_name -> tesla_protocol.CarServer.HvacClimateKeeperAction.ClimateKeeperAction_E
+	13,  // 248: tesla_protocol.CarServer.HvacClimateKeeperAction.manual_override_mode:type_name -> tesla_protocol.CarServer.HvacClimateKeeperAction.ManualOverrideMode_E
+	260, // 249: tesla_protocol.CarServer.SetCopTempAction.copActivationTemp:type_name -> tesla_protocol.CarServer.ClimateState.CopActivationTemp
+	2,   // 250: tesla_protocol.CarServer.NavigationRequest.order:type_name -> tesla_protocol.CarServer.RemoteNavTripOrder_E
+	2,   // 251: tesla_protocol.CarServer.NavigationSuperchargerRequest.remote_nav_trip_order:type_name -> tesla_protocol.CarServer.RemoteNavTripOrder_E
+	234, // 252: tesla_protocol.CarServer.VehicleDataSubscription.pii_key_request:type_name -> tesla_protocol.CarServer.VehicleDataSubscription.PiiKeyRequest
+	249, // 253: tesla_protocol.CarServer.VehicleDataAck.charge_state_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 254: tesla_protocol.CarServer.VehicleDataAck.climate_state_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 255: tesla_protocol.CarServer.VehicleDataAck.closures_state_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 256: tesla_protocol.CarServer.VehicleDataAck.drive_state_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 257: tesla_protocol.CarServer.VehicleDataAck.gui_settings_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 258: tesla_protocol.CarServer.VehicleDataAck.location_state_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 259: tesla_protocol.CarServer.VehicleDataAck.vehicle_config_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 260: tesla_protocol.CarServer.VehicleDataAck.vehicle_state_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 261: tesla_protocol.CarServer.VehicleDataAck.parked_accessory_state_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 262: tesla_protocol.CarServer.VehicleDataAck.charge_schedule_state_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 263: tesla_protocol.CarServer.VehicleDataAck.preconditioning_schedule_state_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 264: tesla_protocol.CarServer.VehicleDataAck.alert_state_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 265: tesla_protocol.CarServer.VehicleDataAck.suspension_state_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 266: tesla_protocol.CarServer.VehicleDataAck.display_state_timestamp:type_name -> google.protobuf.Timestamp
+	249, // 267: tesla_protocol.CarServer.PiiKeyRequest.pii_key_expiration:type_name -> google.protobuf.Timestamp
+	2,   // 268: tesla_protocol.CarServer.NavigationGpsRequest.order:type_name -> tesla_protocol.CarServer.RemoteNavTripOrder_E
+	241, // 269: tesla_protocol.CarServer.SetRateTariffRequest.daily_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.DailyCharge
+	242, // 270: tesla_protocol.CarServer.SetRateTariffRequest.demand_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Charges
+	242, // 271: tesla_protocol.CarServer.SetRateTariffRequest.daily_demand_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Charges
+	242, // 272: tesla_protocol.CarServer.SetRateTariffRequest.energy_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Charges
+	238, // 273: tesla_protocol.CarServer.SetRateTariffRequest.seasons:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Seasons
+	243, // 274: tesla_protocol.CarServer.SetRateTariffRequest.tariff:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Tariff
+	159, // 275: tesla_protocol.CarServer.AddManagedChargingSiteRequest.site:type_name -> tesla_protocol.CarServer.ManagedChargingSite
+	160, // 276: tesla_protocol.CarServer.ManagedChargingSite.manager_type:type_name -> tesla_protocol.CarServer.ManagerType
+	256, // 277: tesla_protocol.CarServer.ManagedChargingSite.lat_lon:type_name -> tesla_protocol.CarServer.LatLong
+	161, // 278: tesla_protocol.CarServer.ManagerType.site_controller:type_name -> tesla_protocol.CarServer.SiteController
+	261, // 279: tesla_protocol.CarServer.StwHeatLevelAction.stw_heat_level:type_name -> tesla_protocol.CarServer.StwHeatLevel
+	170, // 280: tesla_protocol.CarServer.UpdateChargeOnSolarFeatureRequest.charge_on_solar:type_name -> tesla_protocol.CarServer.ChargeOnSolarFeature
+	170, // 281: tesla_protocol.CarServer.GetChargeOnSolarFeatureResponse.charge_on_solar:type_name -> tesla_protocol.CarServer.ChargeOnSolarFeature
+	14,  // 282: tesla_protocol.CarServer.SetOutletsOnOffAction.outlet_request:type_name -> tesla_protocol.CarServer.SetOutletsOnOffAction.OutletRequest
+	15,  // 283: tesla_protocol.CarServer.SetPowerFeedOnOffAction.power_feed_request:type_name -> tesla_protocol.CarServer.SetPowerFeedOnOffAction.PowerFeedRequest
+	244, // 284: tesla_protocol.CarServer.NavigationWaypointsRequest.trip_plan_options:type_name -> tesla_protocol.CarServer.NavigationWaypointsRequest.TripPlanOptions
+	16,  // 285: tesla_protocol.CarServer.SetPowershareFeatureAction.powershare_feature_request:type_name -> tesla_protocol.CarServer.SetPowershareFeatureAction.PowershareFeatureRequest
+	17,  // 286: tesla_protocol.CarServer.SetPowershareRequestAction.powershare_request:type_name -> tesla_protocol.CarServer.SetPowershareRequestAction.PowershareRequest
+	18,  // 287: tesla_protocol.CarServer.SetZoneLightRequestAction.zone_light_request:type_name -> tesla_protocol.CarServer.SetZoneLightRequestAction.ZoneLightRequest
+	2,   // 288: tesla_protocol.CarServer.NavigationGpsDestinationRequest.order:type_name -> tesla_protocol.CarServer.RemoteNavTripOrder_E
+	19,  // 289: tesla_protocol.CarServer.ParentalControlsEnableSettingsAction.setting:type_name -> tesla_protocol.CarServer.ParentalControlsEnableSettingsAction.ParentalControlsSetting_E
+	20,  // 290: tesla_protocol.CarServer.SetSuspensionLevelAction.suspension_level:type_name -> tesla_protocol.CarServer.SetSuspensionLevelAction.SuspensionLevel
+	21,  // 291: tesla_protocol.CarServer.SetTemperatureUnitAction.unit:type_name -> tesla_protocol.CarServer.SetTemperatureUnitAction.Unit
+	22,  // 292: tesla_protocol.CarServer.SetDistanceUnitAction.unit:type_name -> tesla_protocol.CarServer.SetDistanceUnitAction.Unit
+	23,  // 293: tesla_protocol.CarServer.SetTimeDisplayFormatAction.format:type_name -> tesla_protocol.CarServer.SetTimeDisplayFormatAction.Format
+	24,  // 294: tesla_protocol.CarServer.SetTirePressureUnitAction.unit:type_name -> tesla_protocol.CarServer.SetTirePressureUnitAction.Unit
+	25,  // 295: tesla_protocol.CarServer.SetEnergyDisplayFormatAction.format:type_name -> tesla_protocol.CarServer.SetEnergyDisplayFormatAction.Format
+	22,  // 296: tesla_protocol.CarServer.PhoneUnitPreferences.distance_unit:type_name -> tesla_protocol.CarServer.SetDistanceUnitAction.Unit
+	21,  // 297: tesla_protocol.CarServer.PhoneUnitPreferences.temperature_unit:type_name -> tesla_protocol.CarServer.SetTemperatureUnitAction.Unit
+	26,  // 298: tesla_protocol.CarServer.SetPhoneSettingPreferencesAction.font_size:type_name -> tesla_protocol.CarServer.SetPhoneSettingPreferencesAction.FontSize
+	218, // 299: tesla_protocol.CarServer.SetPhoneSettingPreferencesAction.unit_preferences:type_name -> tesla_protocol.CarServer.PhoneUnitPreferences
+	262, // 300: tesla_protocol.CarServer.SetKeepOnCabin12vPortAction.keepOnMode:type_name -> tesla_protocol.CarServer.KeepOnAccessoryPortRequest
+	262, // 301: tesla_protocol.CarServer.SetKeepOnCabin48vPortAction.keepOnMode:type_name -> tesla_protocol.CarServer.KeepOnAccessoryPortRequest
+	255, // 302: tesla_protocol.CarServer.ManualPreconditioningAction.start:type_name -> tesla_protocol.CarServer.Void
+	255, // 303: tesla_protocol.CarServer.ManualPreconditioningAction.stop:type_name -> tesla_protocol.CarServer.Void
+	7,   // 304: tesla_protocol.CarServer.NavigationRouteResponse.TrafficDetail.traffic_status:type_name -> tesla_protocol.CarServer.NavigationRouteResponse.TrafficStatus
+	255, // 305: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.SEAT_HEATER_UNKNOWN:type_name -> tesla_protocol.CarServer.Void
+	255, // 306: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.SEAT_HEATER_OFF:type_name -> tesla_protocol.CarServer.Void
+	255, // 307: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.SEAT_HEATER_LOW:type_name -> tesla_protocol.CarServer.Void
+	255, // 308: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.SEAT_HEATER_MED:type_name -> tesla_protocol.CarServer.Void
+	255, // 309: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.SEAT_HEATER_HIGH:type_name -> tesla_protocol.CarServer.Void
+	255, // 310: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_UNKNOWN:type_name -> tesla_protocol.CarServer.Void
+	255, // 311: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_FRONT_LEFT:type_name -> tesla_protocol.CarServer.Void
+	255, // 312: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_FRONT_RIGHT:type_name -> tesla_protocol.CarServer.Void
+	255, // 313: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_REAR_LEFT:type_name -> tesla_protocol.CarServer.Void
+	255, // 314: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_REAR_LEFT_BACK:type_name -> tesla_protocol.CarServer.Void
+	255, // 315: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_REAR_CENTER:type_name -> tesla_protocol.CarServer.Void
+	255, // 316: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_REAR_RIGHT:type_name -> tesla_protocol.CarServer.Void
+	255, // 317: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_REAR_RIGHT_BACK:type_name -> tesla_protocol.CarServer.Void
+	255, // 318: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_THIRD_ROW_LEFT:type_name -> tesla_protocol.CarServer.Void
+	255, // 319: tesla_protocol.CarServer.HvacSeatHeaterActions.HvacSeatHeaterAction.CAR_SEAT_THIRD_ROW_RIGHT:type_name -> tesla_protocol.CarServer.Void
+	8,   // 320: tesla_protocol.CarServer.HvacSeatCoolerActions.HvacSeatCoolerAction.seat_cooler_level:type_name -> tesla_protocol.CarServer.HvacSeatCoolerActions.HvacSeatCoolerLevel_E
+	9,   // 321: tesla_protocol.CarServer.HvacSeatCoolerActions.HvacSeatCoolerAction.seat_position:type_name -> tesla_protocol.CarServer.HvacSeatCoolerActions.HvacSeatCoolerPosition_E
+	255, // 322: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.Temperature.TEMP_UNKNOWN:type_name -> tesla_protocol.CarServer.Void
+	255, // 323: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.Temperature.TEMP_MIN:type_name -> tesla_protocol.CarServer.Void
+	255, // 324: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.Temperature.TEMP_MAX:type_name -> tesla_protocol.CarServer.Void
+	255, // 325: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.HvacTemperatureZone.TEMP_ZONE_UNKNOWN:type_name -> tesla_protocol.CarServer.Void
+	255, // 326: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.HvacTemperatureZone.TEMP_ZONE_FRONT_LEFT:type_name -> tesla_protocol.CarServer.Void
+	255, // 327: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.HvacTemperatureZone.TEMP_ZONE_FRONT_RIGHT:type_name -> tesla_protocol.CarServer.Void
+	255, // 328: tesla_protocol.CarServer.HvacTemperatureAdjustmentAction.HvacTemperatureZone.TEMP_ZONE_REAR:type_name -> tesla_protocol.CarServer.Void
+	11,  // 329: tesla_protocol.CarServer.AutoSeatClimateAction.CarSeat.seat_position:type_name -> tesla_protocol.CarServer.AutoSeatClimateAction.AutoSeatPosition_E
+	235, // 330: tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriods.ON_PEAK:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriod
+	235, // 331: tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriods.PARTIAL_PEAK:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriod
+	235, // 332: tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriods.OFF_PEAK:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriod
+	235, // 333: tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriods.SUPER_OFF_PEAK:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriod
+	236, // 334: tesla_protocol.CarServer.SetRateTariffRequest.Season.tou_periods:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.TOUPeriods
+	237, // 335: tesla_protocol.CarServer.SetRateTariffRequest.Seasons.Summer:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Season
+	237, // 336: tesla_protocol.CarServer.SetRateTariffRequest.Seasons.Winter:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Season
+	237, // 337: tesla_protocol.CarServer.SetRateTariffRequest.Seasons.Season3:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Season
+	237, // 338: tesla_protocol.CarServer.SetRateTariffRequest.Seasons.Season4:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Season
+	237, // 339: tesla_protocol.CarServer.SetRateTariffRequest.Seasons.Season5:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Season
+	239, // 340: tesla_protocol.CarServer.SetRateTariffRequest.Charges.ALL:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.FixedCharge
+	240, // 341: tesla_protocol.CarServer.SetRateTariffRequest.Charges.Summer:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.RateBand
+	240, // 342: tesla_protocol.CarServer.SetRateTariffRequest.Charges.Winter:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.RateBand
+	240, // 343: tesla_protocol.CarServer.SetRateTariffRequest.Charges.Season3:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.RateBand
+	240, // 344: tesla_protocol.CarServer.SetRateTariffRequest.Charges.Season4:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.RateBand
+	240, // 345: tesla_protocol.CarServer.SetRateTariffRequest.Charges.Season5:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.RateBand
+	241, // 346: tesla_protocol.CarServer.SetRateTariffRequest.Tariff.daily_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.DailyCharge
+	242, // 347: tesla_protocol.CarServer.SetRateTariffRequest.Tariff.demand_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Charges
+	242, // 348: tesla_protocol.CarServer.SetRateTariffRequest.Tariff.daily_demand_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Charges
+	242, // 349: tesla_protocol.CarServer.SetRateTariffRequest.Tariff.energy_charges:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Charges
+	238, // 350: tesla_protocol.CarServer.SetRateTariffRequest.Tariff.seasons:type_name -> tesla_protocol.CarServer.SetRateTariffRequest.Seasons
+	351, // [351:351] is the sub-list for method output_type
+	351, // [351:351] is the sub-list for method input_type
+	351, // [351:351] is the sub-list for extension type_name
+	351, // [351:351] is the sub-list for extension extendee
+	0,   // [0:351] is the sub-list for field type_name
 }
 
 func init() { file_tesla_protocol_command_car_server_proto_init() }
@@ -17788,6 +17899,7 @@ func file_tesla_protocol_command_car_server_proto_init() {
 		(*VehicleAction_SetDeckLightAction)(nil),
 		(*VehicleAction_SetKeepOnCabin12VPortAction)(nil),
 		(*VehicleAction_SetKeepOnCabin48VPortAction)(nil),
+		(*VehicleAction_ManualPreconditioningAction)(nil),
 	}
 	file_tesla_protocol_command_car_server_proto_msgTypes[39].OneofWrappers = []any{
 		(*Response_VehicleData)(nil),
@@ -17837,7 +17949,11 @@ func file_tesla_protocol_command_car_server_proto_init() {
 		(*VehicleControlWindowAction_Vent)(nil),
 		(*VehicleControlWindowAction_Close)(nil),
 	}
-	file_tesla_protocol_command_car_server_proto_msgTypes[201].OneofWrappers = []any{
+	file_tesla_protocol_command_car_server_proto_msgTypes[199].OneofWrappers = []any{
+		(*ManualPreconditioningAction_Start)(nil),
+		(*ManualPreconditioningAction_Stop)(nil),
+	}
+	file_tesla_protocol_command_car_server_proto_msgTypes[202].OneofWrappers = []any{
 		(*HvacSeatHeaterActions_HvacSeatHeaterAction_SEAT_HEATER_UNKNOWN)(nil),
 		(*HvacSeatHeaterActions_HvacSeatHeaterAction_SEAT_HEATER_OFF)(nil),
 		(*HvacSeatHeaterActions_HvacSeatHeaterAction_SEAT_HEATER_LOW)(nil),
@@ -17854,12 +17970,12 @@ func file_tesla_protocol_command_car_server_proto_init() {
 		(*HvacSeatHeaterActions_HvacSeatHeaterAction_CAR_SEAT_THIRD_ROW_LEFT)(nil),
 		(*HvacSeatHeaterActions_HvacSeatHeaterAction_CAR_SEAT_THIRD_ROW_RIGHT)(nil),
 	}
-	file_tesla_protocol_command_car_server_proto_msgTypes[203].OneofWrappers = []any{
+	file_tesla_protocol_command_car_server_proto_msgTypes[204].OneofWrappers = []any{
 		(*HvacTemperatureAdjustmentAction_Temperature_TEMP_UNKNOWN)(nil),
 		(*HvacTemperatureAdjustmentAction_Temperature_TEMP_MIN)(nil),
 		(*HvacTemperatureAdjustmentAction_Temperature_TEMP_MAX)(nil),
 	}
-	file_tesla_protocol_command_car_server_proto_msgTypes[204].OneofWrappers = []any{
+	file_tesla_protocol_command_car_server_proto_msgTypes[205].OneofWrappers = []any{
 		(*HvacTemperatureAdjustmentAction_HvacTemperatureZone_TEMP_ZONE_UNKNOWN)(nil),
 		(*HvacTemperatureAdjustmentAction_HvacTemperatureZone_TEMP_ZONE_FRONT_LEFT)(nil),
 		(*HvacTemperatureAdjustmentAction_HvacTemperatureZone_TEMP_ZONE_FRONT_RIGHT)(nil),
@@ -17871,7 +17987,7 @@ func file_tesla_protocol_command_car_server_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_tesla_protocol_command_car_server_proto_rawDesc), len(file_tesla_protocol_command_car_server_proto_rawDesc)),
 			NumEnums:      27,
-			NumMessages:   217,
+			NumMessages:   218,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

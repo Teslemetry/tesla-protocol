@@ -1636,6 +1636,10 @@ export interface ChargeState {
   convenienceFeatures?: number | undefined;
   keepAccessoryPowerMode?: boolean | undefined;
   shouldHideRangeInfo?: boolean | undefined;
+  manualPreconSupported?: boolean | undefined;
+  manualPreconAllowed?: boolean | undefined;
+  manualPreconStatus?: ChargeState_ManualPreconStatus | undefined;
+  ecosystemChargeMode?: ChargeState_EcosystemChargeMode | undefined;
 }
 
 export enum ChargeState_ScheduledChargingMode {
@@ -2094,6 +2098,104 @@ export function chargeState_PowershareStopReasonToJSON(object: ChargeState_Power
     case ChargeState_PowershareStopReason.PowershareStopReasonAdapterInitializationFailed:
       return "PowershareStopReasonAdapterInitializationFailed";
     case ChargeState_PowershareStopReason.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum ChargeState_ManualPreconStatus {
+  ManualPreconStatusUnknown = 0,
+  ManualPreconStatusIdle = 1,
+  ManualPreconStatusHeating = 2,
+  ManualPreconStatusKeepHot = 3,
+  UNRECOGNIZED = -1,
+}
+
+export function chargeState_ManualPreconStatusFromJSON(object: any): ChargeState_ManualPreconStatus {
+  switch (object) {
+    case 0:
+    case "ManualPreconStatusUnknown":
+      return ChargeState_ManualPreconStatus.ManualPreconStatusUnknown;
+    case 1:
+    case "ManualPreconStatusIdle":
+      return ChargeState_ManualPreconStatus.ManualPreconStatusIdle;
+    case 2:
+    case "ManualPreconStatusHeating":
+      return ChargeState_ManualPreconStatus.ManualPreconStatusHeating;
+    case 3:
+    case "ManualPreconStatusKeepHot":
+      return ChargeState_ManualPreconStatus.ManualPreconStatusKeepHot;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ChargeState_ManualPreconStatus.UNRECOGNIZED;
+  }
+}
+
+export function chargeState_ManualPreconStatusToJSON(object: ChargeState_ManualPreconStatus): string {
+  switch (object) {
+    case ChargeState_ManualPreconStatus.ManualPreconStatusUnknown:
+      return "ManualPreconStatusUnknown";
+    case ChargeState_ManualPreconStatus.ManualPreconStatusIdle:
+      return "ManualPreconStatusIdle";
+    case ChargeState_ManualPreconStatus.ManualPreconStatusHeating:
+      return "ManualPreconStatusHeating";
+    case ChargeState_ManualPreconStatus.ManualPreconStatusKeepHot:
+      return "ManualPreconStatusKeepHot";
+    case ChargeState_ManualPreconStatus.UNRECOGNIZED:
+    default:
+      return "UNRECOGNIZED";
+  }
+}
+
+/** TESLEMETRY-EXT UNCONFIRMED: not yet confirmed on a live vehicle */
+export enum ChargeState_EcosystemChargeMode {
+  EcosystemChargeModeUnknown = 0,
+  EcosystemChargeModeNone = 1,
+  EcosystemChargeModeSmartCharging = 2,
+  EcosystemChargeModeSmartChargingFaulted = 3,
+  EcosystemChargeModeSmartChargingFaultedLong = 4,
+  UNRECOGNIZED = -1,
+}
+
+export function chargeState_EcosystemChargeModeFromJSON(object: any): ChargeState_EcosystemChargeMode {
+  switch (object) {
+    case 0:
+    case "EcosystemChargeModeUnknown":
+      return ChargeState_EcosystemChargeMode.EcosystemChargeModeUnknown;
+    case 1:
+    case "EcosystemChargeModeNone":
+      return ChargeState_EcosystemChargeMode.EcosystemChargeModeNone;
+    case 2:
+    case "EcosystemChargeModeSmartCharging":
+      return ChargeState_EcosystemChargeMode.EcosystemChargeModeSmartCharging;
+    case 3:
+    case "EcosystemChargeModeSmartChargingFaulted":
+      return ChargeState_EcosystemChargeMode.EcosystemChargeModeSmartChargingFaulted;
+    case 4:
+    case "EcosystemChargeModeSmartChargingFaultedLong":
+      return ChargeState_EcosystemChargeMode.EcosystemChargeModeSmartChargingFaultedLong;
+    case -1:
+    case "UNRECOGNIZED":
+    default:
+      return ChargeState_EcosystemChargeMode.UNRECOGNIZED;
+  }
+}
+
+export function chargeState_EcosystemChargeModeToJSON(object: ChargeState_EcosystemChargeMode): string {
+  switch (object) {
+    case ChargeState_EcosystemChargeMode.EcosystemChargeModeUnknown:
+      return "EcosystemChargeModeUnknown";
+    case ChargeState_EcosystemChargeMode.EcosystemChargeModeNone:
+      return "EcosystemChargeModeNone";
+    case ChargeState_EcosystemChargeMode.EcosystemChargeModeSmartCharging:
+      return "EcosystemChargeModeSmartCharging";
+    case ChargeState_EcosystemChargeMode.EcosystemChargeModeSmartChargingFaulted:
+      return "EcosystemChargeModeSmartChargingFaulted";
+    case ChargeState_EcosystemChargeMode.EcosystemChargeModeSmartChargingFaultedLong:
+      return "EcosystemChargeModeSmartChargingFaultedLong";
+    case ChargeState_EcosystemChargeMode.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
   }
@@ -8121,6 +8223,10 @@ function createBaseChargeState(): ChargeState {
     convenienceFeatures: undefined,
     keepAccessoryPowerMode: undefined,
     shouldHideRangeInfo: undefined,
+    manualPreconSupported: undefined,
+    manualPreconAllowed: undefined,
+    manualPreconStatus: undefined,
+    ecosystemChargeMode: undefined,
   };
 }
 
@@ -8398,6 +8504,18 @@ export const ChargeState: MessageFns<ChargeState> = {
     }
     if (message.shouldHideRangeInfo !== undefined) {
       writer.uint32(1584).bool(message.shouldHideRangeInfo);
+    }
+    if (message.manualPreconSupported !== undefined) {
+      writer.uint32(5851432).bool(message.manualPreconSupported);
+    }
+    if (message.manualPreconAllowed !== undefined) {
+      writer.uint32(5851440).bool(message.manualPreconAllowed);
+    }
+    if (message.manualPreconStatus !== undefined) {
+      writer.uint32(5851448).int32(message.manualPreconStatus);
+    }
+    if (message.ecosystemChargeMode !== undefined) {
+      writer.uint32(5859656).int32(message.ecosystemChargeMode);
     }
     return writer;
   },
@@ -9137,6 +9255,38 @@ export const ChargeState: MessageFns<ChargeState> = {
           message.shouldHideRangeInfo = reader.bool();
           continue;
         }
+        case 731429: {
+          if (tag !== 5851432) {
+            break;
+          }
+
+          message.manualPreconSupported = reader.bool();
+          continue;
+        }
+        case 731430: {
+          if (tag !== 5851440) {
+            break;
+          }
+
+          message.manualPreconAllowed = reader.bool();
+          continue;
+        }
+        case 731431: {
+          if (tag !== 5851448) {
+            break;
+          }
+
+          message.manualPreconStatus = reader.int32() as any;
+          continue;
+        }
+        case 732457: {
+          if (tag !== 5859656) {
+            break;
+          }
+
+          message.ecosystemChargeMode = reader.int32() as any;
+          continue;
+        }
       }
       if ((tag & 7) === 4 || tag === 0) {
         break;
@@ -9350,6 +9500,18 @@ export const ChargeState: MessageFns<ChargeState> = {
         : undefined,
       shouldHideRangeInfo: isSet(object.shouldHideRangeInfo)
         ? globalThis.Boolean(object.shouldHideRangeInfo)
+        : undefined,
+      manualPreconSupported: isSet(object.manualPreconSupported)
+        ? globalThis.Boolean(object.manualPreconSupported)
+        : undefined,
+      manualPreconAllowed: isSet(object.manualPreconAllowed)
+        ? globalThis.Boolean(object.manualPreconAllowed)
+        : undefined,
+      manualPreconStatus: isSet(object.manualPreconStatus)
+        ? chargeState_ManualPreconStatusFromJSON(object.manualPreconStatus)
+        : undefined,
+      ecosystemChargeMode: isSet(object.ecosystemChargeMode)
+        ? chargeState_EcosystemChargeModeFromJSON(object.ecosystemChargeMode)
         : undefined,
     };
   },
@@ -9629,6 +9791,18 @@ export const ChargeState: MessageFns<ChargeState> = {
     if (message.shouldHideRangeInfo !== undefined) {
       obj.shouldHideRangeInfo = message.shouldHideRangeInfo;
     }
+    if (message.manualPreconSupported !== undefined) {
+      obj.manualPreconSupported = message.manualPreconSupported;
+    }
+    if (message.manualPreconAllowed !== undefined) {
+      obj.manualPreconAllowed = message.manualPreconAllowed;
+    }
+    if (message.manualPreconStatus !== undefined) {
+      obj.manualPreconStatus = chargeState_ManualPreconStatusToJSON(message.manualPreconStatus);
+    }
+    if (message.ecosystemChargeMode !== undefined) {
+      obj.ecosystemChargeMode = chargeState_EcosystemChargeModeToJSON(message.ecosystemChargeMode);
+    }
     return obj;
   },
 
@@ -9748,6 +9922,10 @@ export const ChargeState: MessageFns<ChargeState> = {
     message.convenienceFeatures = object.convenienceFeatures ?? undefined;
     message.keepAccessoryPowerMode = object.keepAccessoryPowerMode ?? undefined;
     message.shouldHideRangeInfo = object.shouldHideRangeInfo ?? undefined;
+    message.manualPreconSupported = object.manualPreconSupported ?? undefined;
+    message.manualPreconAllowed = object.manualPreconAllowed ?? undefined;
+    message.manualPreconStatus = object.manualPreconStatus ?? undefined;
+    message.ecosystemChargeMode = object.ecosystemChargeMode ?? undefined;
     return message;
   },
 };

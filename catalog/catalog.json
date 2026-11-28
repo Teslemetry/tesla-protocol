@@ -346,9 +346,9 @@
         "typescript": "packages/typescript/src/command",
         "python": "packages/python/tesla_protocol/command"
       },
-      "messages": 436,
-      "enums": 157,
-      "fields": 2215,
+      "messages": 437,
+      "enums": 159,
+      "fields": 2222,
       "files": [
         {
           "package": "CarServer",
@@ -1488,6 +1488,14 @@
                   "name": "setKeepOnCabin48vPortAction",
                   "type": "TYPE_MESSAGE",
                   "type_name": ".CarServer.SetKeepOnCabin48vPortAction",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "vehicle_action_msg"
+                },
+                {
+                  "number": 731429,
+                  "name": "manualPreconditioningAction",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.ManualPreconditioningAction",
                   "label": "LABEL_OPTIONAL",
                   "oneof": "vehicle_action_msg"
                 },
@@ -8180,6 +8188,35 @@
                 }
               ],
               "oneofs": [],
+              "reserved_ranges": [],
+              "reserved_names": [],
+              "nested_messages": [],
+              "nested_enums": []
+            },
+            {
+              "fqn": ".CarServer.ManualPreconditioningAction",
+              "name": "ManualPreconditioningAction",
+              "fields": [
+                {
+                  "number": 1,
+                  "name": "start",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "manual_preconditioning_action"
+                },
+                {
+                  "number": 2,
+                  "name": "stop",
+                  "type": "TYPE_MESSAGE",
+                  "type_name": ".CarServer.Void",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "manual_preconditioning_action"
+                }
+              ],
+              "oneofs": [
+                "manual_preconditioning_action"
+              ],
               "reserved_ranges": [],
               "reserved_names": [],
               "nested_messages": [],
@@ -19759,6 +19796,38 @@
                   "type_name": null,
                   "label": "LABEL_OPTIONAL",
                   "oneof": "optional_should_hide_range_info"
+                },
+                {
+                  "number": 731429,
+                  "name": "manual_precon_supported",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_manual_precon_supported"
+                },
+                {
+                  "number": 731430,
+                  "name": "manual_precon_allowed",
+                  "type": "TYPE_BOOL",
+                  "type_name": null,
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_manual_precon_allowed"
+                },
+                {
+                  "number": 731431,
+                  "name": "manual_precon_status",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.ChargeState.ManualPreconStatus",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_manual_precon_status"
+                },
+                {
+                  "number": 732457,
+                  "name": "ecosystem_charge_mode",
+                  "type": "TYPE_ENUM",
+                  "type_name": ".CarServer.ChargeState.EcosystemChargeMode",
+                  "label": "LABEL_OPTIONAL",
+                  "oneof": "optional_ecosystem_charge_mode"
                 }
               ],
               "oneofs": [
@@ -19841,7 +19910,11 @@
                 "optional_low_power_mode_forced_on",
                 "optional_convenience_features",
                 "optional_keep_accessory_power_mode",
-                "optional_should_hide_range_info"
+                "optional_should_hide_range_info",
+                "optional_manual_precon_supported",
+                "optional_manual_precon_allowed",
+                "optional_manual_precon_status",
+                "optional_ecosystem_charge_mode"
               ],
               "reserved_ranges": [
                 [
@@ -20500,6 +20573,58 @@
                     {
                       "number": 8,
                       "name": "PowershareStopReasonAdapterInitializationFailed"
+                    }
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": []
+                },
+                {
+                  "fqn": ".CarServer.ChargeState.ManualPreconStatus",
+                  "name": "ManualPreconStatus",
+                  "values": [
+                    {
+                      "number": 0,
+                      "name": "ManualPreconStatusUnknown"
+                    },
+                    {
+                      "number": 1,
+                      "name": "ManualPreconStatusIdle"
+                    },
+                    {
+                      "number": 2,
+                      "name": "ManualPreconStatusHeating"
+                    },
+                    {
+                      "number": 3,
+                      "name": "ManualPreconStatusKeepHot"
+                    }
+                  ],
+                  "reserved_ranges": [],
+                  "reserved_names": []
+                },
+                {
+                  "fqn": ".CarServer.ChargeState.EcosystemChargeMode",
+                  "name": "EcosystemChargeMode",
+                  "values": [
+                    {
+                      "number": 0,
+                      "name": "EcosystemChargeModeUnknown"
+                    },
+                    {
+                      "number": 1,
+                      "name": "EcosystemChargeModeNone"
+                    },
+                    {
+                      "number": 2,
+                      "name": "EcosystemChargeModeSmartCharging"
+                    },
+                    {
+                      "number": 3,
+                      "name": "EcosystemChargeModeSmartChargingFaulted"
+                    },
+                    {
+                      "number": 4,
+                      "name": "EcosystemChargeModeSmartChargingFaultedLong"
                     }
                   ],
                   "reserved_ranges": [],
@@ -31198,6 +31323,10 @@
                 {
                   "number": 2,
                   "name": "AUTHORIZATION_ROLE_VEHICLE"
+                },
+                {
+                  "number": 3,
+                  "name": "AUTHORIZATION_ROLE_INSTALLER"
                 }
               ],
               "reserved_ranges": [],
@@ -31218,6 +31347,10 @@
                 {
                   "number": 2,
                   "name": "AUTHORIZED_CLIENT_TYPE_VEHICLE"
+                },
+                {
+                  "number": 3,
+                  "name": "AUTHORIZED_CLIENT_TYPE_INSTALLER_APP"
                 }
               ],
               "reserved_ranges": [],
@@ -58367,9 +58500,9 @@
   "totals": {
     "source_files": 45,
     "groups": 6,
-    "messages": 1115,
-    "enums": 325,
-    "fields": 3972
+    "messages": 1116,
+    "enums": 327,
+    "fields": 3979
   },
   "registration": {
     "consistent": true,

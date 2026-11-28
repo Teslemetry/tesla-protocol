@@ -25,9 +25,10 @@ const (
 type AuthorizationRole int32
 
 const (
-	AuthorizationRole_AUTHORIZATION_ROLE_INVALID  AuthorizationRole = 0
-	AuthorizationRole_AUTHORIZATION_ROLE_CUSTOMER AuthorizationRole = 1
-	AuthorizationRole_AUTHORIZATION_ROLE_VEHICLE  AuthorizationRole = 2
+	AuthorizationRole_AUTHORIZATION_ROLE_INVALID   AuthorizationRole = 0
+	AuthorizationRole_AUTHORIZATION_ROLE_CUSTOMER  AuthorizationRole = 1
+	AuthorizationRole_AUTHORIZATION_ROLE_VEHICLE   AuthorizationRole = 2
+	AuthorizationRole_AUTHORIZATION_ROLE_INSTALLER AuthorizationRole = 3
 )
 
 // Enum value maps for AuthorizationRole.
@@ -36,11 +37,13 @@ var (
 		0: "AUTHORIZATION_ROLE_INVALID",
 		1: "AUTHORIZATION_ROLE_CUSTOMER",
 		2: "AUTHORIZATION_ROLE_VEHICLE",
+		3: "AUTHORIZATION_ROLE_INSTALLER",
 	}
 	AuthorizationRole_value = map[string]int32{
-		"AUTHORIZATION_ROLE_INVALID":  0,
-		"AUTHORIZATION_ROLE_CUSTOMER": 1,
-		"AUTHORIZATION_ROLE_VEHICLE":  2,
+		"AUTHORIZATION_ROLE_INVALID":   0,
+		"AUTHORIZATION_ROLE_CUSTOMER":  1,
+		"AUTHORIZATION_ROLE_VEHICLE":   2,
+		"AUTHORIZATION_ROLE_INSTALLER": 3,
 	}
 )
 
@@ -77,6 +80,7 @@ const (
 	AuthorizedClientType_AUTHORIZED_CLIENT_TYPE_INVALID             AuthorizedClientType = 0
 	AuthorizedClientType_AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP AuthorizedClientType = 1
 	AuthorizedClientType_AUTHORIZED_CLIENT_TYPE_VEHICLE             AuthorizedClientType = 2
+	AuthorizedClientType_AUTHORIZED_CLIENT_TYPE_INSTALLER_APP       AuthorizedClientType = 3
 )
 
 // Enum value maps for AuthorizedClientType.
@@ -85,11 +89,13 @@ var (
 		0: "AUTHORIZED_CLIENT_TYPE_INVALID",
 		1: "AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP",
 		2: "AUTHORIZED_CLIENT_TYPE_VEHICLE",
+		3: "AUTHORIZED_CLIENT_TYPE_INSTALLER_APP",
 	}
 	AuthorizedClientType_value = map[string]int32{
 		"AUTHORIZED_CLIENT_TYPE_INVALID":             0,
 		"AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP": 1,
 		"AUTHORIZED_CLIENT_TYPE_VEHICLE":             2,
+		"AUTHORIZED_CLIENT_TYPE_INSTALLER_APP":       3,
 	}
 )
 
@@ -417,15 +423,17 @@ const file_tesla_protocol_energy_device_authorization_types_proto_rawDesc = "" +
 	"\x18authorized_by_public_key\x18\n" +
 	" \x01(\fH\x01R\x15authorizedByPublicKey\x88\x01\x01B\r\n" +
 	"\v_identifierB\x1b\n" +
-	"\x19_authorized_by_public_key*t\n" +
+	"\x19_authorized_by_public_key*\x96\x01\n" +
 	"\x11AuthorizationRole\x12\x1e\n" +
 	"\x1aAUTHORIZATION_ROLE_INVALID\x10\x00\x12\x1f\n" +
 	"\x1bAUTHORIZATION_ROLE_CUSTOMER\x10\x01\x12\x1e\n" +
-	"\x1aAUTHORIZATION_ROLE_VEHICLE\x10\x02*\x8e\x01\n" +
+	"\x1aAUTHORIZATION_ROLE_VEHICLE\x10\x02\x12 \n" +
+	"\x1cAUTHORIZATION_ROLE_INSTALLER\x10\x03*\xb8\x01\n" +
 	"\x14AuthorizedClientType\x12\"\n" +
 	"\x1eAUTHORIZED_CLIENT_TYPE_INVALID\x10\x00\x12.\n" +
 	"*AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP\x10\x01\x12\"\n" +
-	"\x1eAUTHORIZED_CLIENT_TYPE_VEHICLE\x10\x02*n\n" +
+	"\x1eAUTHORIZED_CLIENT_TYPE_VEHICLE\x10\x02\x12(\n" +
+	"$AUTHORIZED_CLIENT_TYPE_INSTALLER_APP\x10\x03*n\n" +
 	"\x11AuthorizedKeyType\x12\x1f\n" +
 	"\x1bAUTHORIZED_KEY_TYPE_INVALID\x10\x00\x12\x1b\n" +
 	"\x17AUTHORIZED_KEY_TYPE_RSA\x10\x01\x12\x1b\n" +

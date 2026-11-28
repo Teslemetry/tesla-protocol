@@ -14,6 +14,7 @@ export enum AuthorizationRole {
   AUTHORIZATION_ROLE_INVALID = 0,
   AUTHORIZATION_ROLE_CUSTOMER = 1,
   AUTHORIZATION_ROLE_VEHICLE = 2,
+  AUTHORIZATION_ROLE_INSTALLER = 3,
   UNRECOGNIZED = -1,
 }
 
@@ -28,6 +29,9 @@ export function authorizationRoleFromJSON(object: any): AuthorizationRole {
     case 2:
     case "AUTHORIZATION_ROLE_VEHICLE":
       return AuthorizationRole.AUTHORIZATION_ROLE_VEHICLE;
+    case 3:
+    case "AUTHORIZATION_ROLE_INSTALLER":
+      return AuthorizationRole.AUTHORIZATION_ROLE_INSTALLER;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -43,6 +47,8 @@ export function authorizationRoleToJSON(object: AuthorizationRole): string {
       return "AUTHORIZATION_ROLE_CUSTOMER";
     case AuthorizationRole.AUTHORIZATION_ROLE_VEHICLE:
       return "AUTHORIZATION_ROLE_VEHICLE";
+    case AuthorizationRole.AUTHORIZATION_ROLE_INSTALLER:
+      return "AUTHORIZATION_ROLE_INSTALLER";
     case AuthorizationRole.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";
@@ -53,6 +59,7 @@ export enum AuthorizedClientType {
   AUTHORIZED_CLIENT_TYPE_INVALID = 0,
   AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP = 1,
   AUTHORIZED_CLIENT_TYPE_VEHICLE = 2,
+  AUTHORIZED_CLIENT_TYPE_INSTALLER_APP = 3,
   UNRECOGNIZED = -1,
 }
 
@@ -67,6 +74,9 @@ export function authorizedClientTypeFromJSON(object: any): AuthorizedClientType 
     case 2:
     case "AUTHORIZED_CLIENT_TYPE_VEHICLE":
       return AuthorizedClientType.AUTHORIZED_CLIENT_TYPE_VEHICLE;
+    case 3:
+    case "AUTHORIZED_CLIENT_TYPE_INSTALLER_APP":
+      return AuthorizedClientType.AUTHORIZED_CLIENT_TYPE_INSTALLER_APP;
     case -1:
     case "UNRECOGNIZED":
     default:
@@ -82,6 +92,8 @@ export function authorizedClientTypeToJSON(object: AuthorizedClientType): string
       return "AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP";
     case AuthorizedClientType.AUTHORIZED_CLIENT_TYPE_VEHICLE:
       return "AUTHORIZED_CLIENT_TYPE_VEHICLE";
+    case AuthorizedClientType.AUTHORIZED_CLIENT_TYPE_INSTALLER_APP:
+      return "AUTHORIZED_CLIENT_TYPE_INSTALLER_APP";
     case AuthorizedClientType.UNRECOGNIZED:
     default:
       return "UNRECOGNIZED";

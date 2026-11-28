@@ -15,12 +15,14 @@ class AuthorizationRole(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     AUTHORIZATION_ROLE_INVALID: _ClassVar[AuthorizationRole]
     AUTHORIZATION_ROLE_CUSTOMER: _ClassVar[AuthorizationRole]
     AUTHORIZATION_ROLE_VEHICLE: _ClassVar[AuthorizationRole]
+    AUTHORIZATION_ROLE_INSTALLER: _ClassVar[AuthorizationRole]
 
 class AuthorizedClientType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
     AUTHORIZED_CLIENT_TYPE_INVALID: _ClassVar[AuthorizedClientType]
     AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP: _ClassVar[AuthorizedClientType]
     AUTHORIZED_CLIENT_TYPE_VEHICLE: _ClassVar[AuthorizedClientType]
+    AUTHORIZED_CLIENT_TYPE_INSTALLER_APP: _ClassVar[AuthorizedClientType]
 
 class AuthorizedKeyType(int, metaclass=_enum_type_wrapper.EnumTypeWrapper):
     __slots__ = ()
@@ -46,9 +48,11 @@ class AuthorizedVerificationType(int, metaclass=_enum_type_wrapper.EnumTypeWrapp
 AUTHORIZATION_ROLE_INVALID: AuthorizationRole
 AUTHORIZATION_ROLE_CUSTOMER: AuthorizationRole
 AUTHORIZATION_ROLE_VEHICLE: AuthorizationRole
+AUTHORIZATION_ROLE_INSTALLER: AuthorizationRole
 AUTHORIZED_CLIENT_TYPE_INVALID: AuthorizedClientType
 AUTHORIZED_CLIENT_TYPE_CUSTOMER_MOBILE_APP: AuthorizedClientType
 AUTHORIZED_CLIENT_TYPE_VEHICLE: AuthorizedClientType
+AUTHORIZED_CLIENT_TYPE_INSTALLER_APP: AuthorizedClientType
 AUTHORIZED_KEY_TYPE_INVALID: AuthorizedKeyType
 AUTHORIZED_KEY_TYPE_RSA: AuthorizedKeyType
 AUTHORIZED_KEY_TYPE_ECC: AuthorizedKeyType
